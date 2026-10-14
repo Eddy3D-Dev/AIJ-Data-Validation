@@ -258,12 +258,12 @@ CASES = {
             "coordinate_scale_applied": 0.001,
         },
         "people": {
-            "data_collectors": ["see the data paper"],
-            "editors_distributors": ["Yoshihide Tominaga (Niigata Institute of Technology)", "Hideki Kikumoto (The University of Tokyo)", "Tsubasa Okaze (Institute of Science Tokyo)"],
-            "contact": None,
+            "data_collectors": ["Yoshihide Tominaga (Niigata Institute of Technology)"],
+            "editors_distributors": ["Hideki Kikumoto (The University of Tokyo)", "Tsubasa Okaze (Institute of Science Tokyo)"],
+            "contact": "Yoshihide Tominaga <tominaga@abe.niit.ac.jp>",
         },
-        "doi": None,
-        "doi_note": "Case D ships here without its Zenodo readme; the DOI is given in the data paper.",
+        "doi": "10.5281/zenodo.15402668",
+        "doi_note": "The case folder ships without the Zenodo record's readme and CSVs; they are mirrored byte for byte under clean/sources/zenodo_caseD/ (people and DOI from that readme and the data paper's reference 50).",
         "citation_requested": "Kikumoto, H. et al. (2026). Japan Architectural Review 9(1), e70083, section 3.4.",
         "inflow_fit": {
             "method": "log law, kappa = 0.41, least squares on the workbook's 13-point profile (z = 5 ... 1200 mm); two windows, because the measurement plane z/H = 0.02 sits below the 0.02 ... 2H window used for Cases A and B",

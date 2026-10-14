@@ -75,7 +75,21 @@ The cleaned table has **2560 rows** over **80 distinct points**; columns `point_
 
 ## Validation
 
-**No validation has been run for this case yet.** Nothing on this page is a claim about it. Engine status: openfoam12-realizableKE pending, openlb pending, fluidx3d pending, ml-surrogate pending.
+### Eddy3D ML wind surrogate (pedestrian height)
+
+| | Vs/U(15.9 m), 16 WD, bc + ac | after construction | after − before | after, lattice cut at ±250 m | wind reversed (control) |
+|---|---|---|---|---|---|
+| **R** | +0.433 | +0.425 | +0.399 | +0.230 | +0.425 |
+| **FAC2** | 0.225 | 0.284 | 0.234 | 0.836 | 0.284 |
+| **FB** | +0.996 | +0.853 | +0.077 | +0.053 | +0.853 |
+| **hit rate** | 0.082 | 0.105 | 0.312 | 0.388 | 0.105 |
+| **n** | 2560 | 1280 | 1280 | 1280 | 1280 |
+
+velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot_aij_ml.py.
+
+![aij_ml_agreement.png]({{ '/assets/aij_ml_agreement.png' | relative_url }})
+
+How to read these is on the [Validation]({{ '/validation/' | relative_url }}) page.
 
 ## API
 
