@@ -1,7 +1,7 @@
 {
  "schema_version": "1.0.0",
- "generated_from": "1b55a75375bd2f3846f8cd991ca836ff1cb7da6a",
- "generated_at": "2026-10-14T13:30:58+00:00",
+ "generated_from": "63356f3e38b6be936d226825ba58af2c0ed3c2ed",
+ "generated_at": "2026-10-14T13:52:29+00:00",
  "licence": "CC BY 4.0",
  "id": "A",
  "slug": "case-a",
@@ -275,12 +275,12 @@
  },
  "validation": {
   "endpoint": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/validation.json",
-  "status": "validated",
+  "status": "scored",
   "engines": {
-   "openfoam12-realizableKE": "validated",
-   "openlb": "pending",
-   "fluidx3d": "pending",
-   "ml-surrogate": "n/a"
+   "openfoam12-realizableKE": "scored",
+   "openlb": "running",
+   "fluidx3d": "running",
+   "ml-surrogate": "scored"
   }
  },
  "gotchas": [

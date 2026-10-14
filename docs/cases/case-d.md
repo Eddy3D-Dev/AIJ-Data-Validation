@@ -80,7 +80,21 @@ Unmeasured cells (null): U 234, V 234, W 234, uu 234, vv 234, ww 234, k 234, Vs 
 
 ## Validation
 
-**No validation has been run for this case yet.** Nothing on this page is a claim about it. Engine status: openfoam12-realizableKE pending, openlb pending, fluidx3d pending, ml-surrogate pending.
+### Eddy3D ML wind surrogate (pedestrian height)
+
+| | Vs, thermistor, 3 WD | \|U\|, split fibre, WD 0 | Vs, WD 0, lattice cut at ±250 m | wind reversed (control) |
+|---|---|---|---|---|
+| **R** | +0.325 | +0.587 | +0.220 | +0.492 |
+| **FAC2** | 0.343 | 0.515 | 0.636 | 0.470 |
+| **FB** | +0.673 | +0.231 | +0.489 | +0.555 |
+| **hit rate** | 0.167 | 0.242 | 0.273 | 0.197 |
+| **n** | 198 | 33 | 66 | 66 |
+
+velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot_aij_ml.py.
+
+![aij_ml_agreement.png]({{ '/assets/aij_ml_agreement.png' | relative_url }})
+
+How to read these is on the [Validation]({{ '/validation/' | relative_url }}) page.
 
 ## API
 
@@ -95,8 +109,8 @@ Unmeasured cells (null): U 234, V 234, W 234, uu 234, vv 234, ww 234, k 234, Vs 
 
 ## Attribution
 
-- Data collectors: see the data paper
-- Editors and distributors: Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
-- DOI: Case D ships here without its Zenodo readme; the DOI is given in the data paper.
+- Data collectors: Yoshihide Tominaga (Niigata Institute of Technology)
+- Editors and distributors: Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
+- DOI: [10.5281/zenodo.15402668](https://doi.org/10.5281/zenodo.15402668)
 - Citation requested: Kikumoto, H. et al. (2026). Japan Architectural Review 9(1), e70083, section 3.4.
 - Licence: CC BY 4.0

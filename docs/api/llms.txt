@@ -6,7 +6,7 @@
 Base URL: https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api
 Fallback (raw files from the repository): https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/main/docs/api
 Repository: https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ
-Schema version: 1.0.0. Data commit: 1b55a75375bd2f3846f8cd991ca836ff1cb7da6a. Generated: 2026-10-14T13:30:58+00:00.
+Schema version: 1.0.0. Data commit: 63356f3e38b6be936d226825ba58af2c0ed3c2ed. Generated: 2026-10-14T13:52:29+00:00.
 Licence: CC BY 4.0 — the data belongs to its collectors; cite the benchmark and the per-case papers.
 
 ## How to use this
@@ -19,8 +19,11 @@ Licence: CC BY 4.0 — the data belongs to its collectors; cite the benchmark an
 5. GET cases/{id}/geometry.stl — ASCII STL in metres, outward normals, origin at the building / array centre,
    +x along the wind at WD = 0 (Cases A-D). Case E keeps its geographic frame (+x east, +y north, full-scale metres).
    geometry.json lists the boxes where the geometry IS boxes (A, B, C, D), so you need not parse the STL at all.
-6. GET cases/{id}/validation.json — Eddy3D scores per engine. An EMPTY results list means no validation exists
-   for that case: do not infer one. Today only Cases A and B carry results (OpenFOAM 12, realizable k-epsilon).
+6. GET cases/{id}/validation.json — Eddy3D scores per engine and configuration, with a `headline` map naming
+   the scores to quote. An engine whose status is not "scored" has NO result for that case: do not infer one.
+   "scored" means a run exists, not that it agrees — read the numbers. Status today: A: openfoam12-realizableKE scored, openlb running, fluidx3d running, ml-surrogate scored; B: openfoam12-realizableKE scored, openlb running, fluidx3d running, ml-surrogate scored; C: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate scored; D: openfoam12-realizableKE running, openlb pending, fluidx3d pending, ml-surrogate scored; E: openfoam12-realizableKE running, openlb pending, fluidx3d pending, ml-surrogate scored.
+7. All geometry at once: GET geometry.json (every STL with its case, configuration, units, frame and sha256)
+   or geometry.zip. Each STL stays in its own case's frame and units; they are NOT one scene.
 
 ## Endpoints
 
@@ -33,16 +36,18 @@ Licence: CC BY 4.0 — the data belongs to its collectors; cite the benchmark an
 - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/{id}/geometry.stl — cleaned ASCII STL of the default configuration, metres, outward normals
 - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/{id}/geometry_{configuration}.stl — the other configurations' STLs (C: 0D, 1D; E: bc)
 - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/{id}/validation.json — Eddy3D validation scores per engine (empty list where none has been run) with figure URLs
+- https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/geometry.json — every STL of every case in one list: case, configuration, units, frame, bounding box, triangles, sha256, URL
+- https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/geometry.zip — every STL in one archive (each file stays in its own case's frame and units: they are not one scene)
 - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/openapi.json — OpenAPI 3.1 description of these GETs
 - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/llms.txt — plain-text entry point for agents
 
 ## Cases
 
-- A: Case A — 1:1:2 building. Isolated 1:1:2 building, velocity field (split-fibre hot wire). 186 rows, 186 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k. Engines: openfoam12-realizableKE validated, openlb pending, fluidx3d pending, ml-surrogate n/a.
-- B: Case B — 1:4:4 slab. Isolated 1:4:4 slab, velocity field (split-fibre hot wire). 224 rows, 224 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k. Engines: openfoam12-realizableKE validated, openlb pending, fluidx3d pending, ml-surrogate n/a.
-- C: Case C — 3 × 3 block array. 3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestrian-height scalar speed (thermistor), 3 wind directions. 1080 rows, 120 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, Vs. Engines: openfoam12-realizableKE pending, openlb pending, fluidx3d pending, ml-surrogate pending.
-- D: Case D — high-rise among city blocks. 1:1:4 tower in a regular array of 82 low blocks, pedestrian-height scalar speed (thermistor, 3 wind directions) plus a 33-point split-fibre velocity field at WD = 0. 267 rows, 78 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, Vs. Engines: openfoam12-realizableKE pending, openlb pending, fluidx3d pending, ml-surrogate pending.
-- E: Case E — Niigata district. Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 m mid-rises; pedestrian-height velocity ratio (thermistor), 16 wind directions. 2560 rows, 80 points, columns point_id, config, instrument, wind_direction, wind_direction_deg, x, y, z, velocity_ratio. Engines: openfoam12-realizableKE pending, openlb pending, fluidx3d pending, ml-surrogate pending.
+- A: Case A — 1:1:2 building. Isolated 1:1:2 building, velocity field (split-fibre hot wire). 186 rows, 186 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k. Engines: openfoam12-realizableKE scored, openlb running, fluidx3d running, ml-surrogate scored.
+- B: Case B — 1:4:4 slab. Isolated 1:4:4 slab, velocity field (split-fibre hot wire). 224 rows, 224 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k. Engines: openfoam12-realizableKE scored, openlb running, fluidx3d running, ml-surrogate scored.
+- C: Case C — 3 × 3 block array. 3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestrian-height scalar speed (thermistor), 3 wind directions. 1080 rows, 120 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, Vs. Engines: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate scored.
+- D: Case D — high-rise among city blocks. 1:1:4 tower in a regular array of 82 low blocks, pedestrian-height scalar speed (thermistor, 3 wind directions) plus a 33-point split-fibre velocity field at WD = 0. 267 rows, 78 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, Vs. Engines: openfoam12-realizableKE running, openlb pending, fluidx3d pending, ml-surrogate scored.
+- E: Case E — Niigata district. Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 m mid-rises; pedestrian-height velocity ratio (thermistor), 16 wind directions. 2560 rows, 80 points, columns point_id, config, instrument, wind_direction, wind_direction_deg, x, y, z, velocity_ratio. Engines: openfoam12-realizableKE running, openlb pending, fluidx3d pending, ml-surrogate scored.
 
 ## Gotchas that silently corrupt a comparison
 
@@ -71,12 +76,17 @@ Licence: CC BY 4.0 — the data belongs to its collectors; cite the benchmark an
 - [E] Do not take the measurement coordinates from the 3dm's 'probes' layer: its 80 spheres sit a median 2.31 m (max 21 m) from the workbook's points, which are authoritative (all 80 fall in open space, min 0.83 m from a building edge).
 - [E] The measured quantity is a scalar (thermistor) speed; a RANS |U| is biased low against it in a dense canopy. The construction signal (ac - bc) is largest for SW (mean |d| 0.2155) and smallest for SSE (0.093).
 
-## Validation method (Cases A and B)
+## Validation method
 
 Each case is solved through Eddy3D's production case writer (build-case -> run -> probe), not a hand-built
 OpenFOAM case; the probe sits at exactly the tunnel's measurement coordinates. Scores are normalised by U_H
-(k by U_H^2); hit rate uses D = 0.25, W = 0.05 U_H. FAC2 is harsh by construction on sign-changing V and W;
-read R and hit rate there. The lateral sign of Case B is corrected before scoring.
+(k by U_H^2; Case E by U at 15.9 m); hit rate uses D = 0.25, W = 0.05 in those units. FAC2 is harsh by
+construction on sign-changing V and W; read R and hit rate there. The lateral sign of Case B is corrected
+before scoring. Cases C-E measure an omnidirectional SCALAR speed (thermistor): the model is scored as
+sqrt(|U|^2 + 2k) and as |U|, the two ends of the bracket the measurement must fall in.
+The ML surrogate predicts |U|/U_ref at 1.8 m; each case is scaled so its measurement plane lands there.
+On the full prediction window it does not respond to the wind direction at all (reversing the wind changes
+the field by < 1e-4 U_ref) — its scores grade the geometry it was given, not a wind it was told.
 
 ## Cite
 

@@ -1,7 +1,7 @@
 {
  "schema_version": "1.0.0",
- "generated_from": "1b55a75375bd2f3846f8cd991ca836ff1cb7da6a",
- "generated_at": "2026-10-14T13:30:58+00:00",
+ "generated_from": "63356f3e38b6be936d226825ba58af2c0ed3c2ed",
+ "generated_at": "2026-10-14T13:52:29+00:00",
  "licence": "CC BY 4.0",
  "id": "D",
  "slug": "case-d",
@@ -262,12 +262,12 @@
  },
  "validation": {
   "endpoint": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/validation.json",
-  "status": "pending",
+  "status": "scored",
   "engines": {
-   "openfoam12-realizableKE": "pending",
+   "openfoam12-realizableKE": "running",
    "openlb": "pending",
    "fluidx3d": "pending",
-   "ml-surrogate": "pending"
+   "ml-surrogate": "scored"
   }
  },
  "gotchas": [
@@ -280,17 +280,16 @@
  ],
  "people": {
   "data_collectors": [
-   "see the data paper"
+   "Yoshihide Tominaga (Niigata Institute of Technology)"
   ],
   "editors_distributors": [
-   "Yoshihide Tominaga (Niigata Institute of Technology)",
    "Hideki Kikumoto (The University of Tokyo)",
    "Tsubasa Okaze (Institute of Science Tokyo)"
   ],
-  "contact": null
+  "contact": "Yoshihide Tominaga <tominaga@abe.niit.ac.jp>"
  },
- "doi": null,
- "doi_note": "Case D ships here without its Zenodo readme; the DOI is given in the data paper.",
+ "doi": "10.5281/zenodo.15402668",
+ "doi_note": "The case folder ships without the Zenodo record's readme and CSVs; they are mirrored byte for byte under clean/sources/zenodo_caseD/ (people and DOI from that readme and the data paper's reference 50).",
  "citation_requested": "Kikumoto, H. et al. (2026). Japan Architectural Review 9(1), e70083, section 3.4.",
  "files_in_repository": {
   "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/CaseD_cleaned",

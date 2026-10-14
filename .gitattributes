@@ -12,3 +12,5 @@ clean/** text=auto eol=lf
 # clean/sources/ mirrors files from Zenodo byte for byte (SHA256SUMS.txt beside them): no
 # end-of-line conversion may touch them, on checkin or on checkout.
 clean/sources/** -text
+# ...except archives, which are binary wherever they live (docs/api/geometry.zip).
+*.zip binary

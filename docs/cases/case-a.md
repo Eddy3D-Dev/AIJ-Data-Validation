@@ -68,18 +68,37 @@ The cleaned table has **186 rows** over **186 distinct points**; columns `point_
 
 ## Validation
 
-**openfoam12-realizableKE** — solved time 3000, scale 1:100, 186 points; reattachment length L_r/H = 1.49. U by U_H, k by U_H^2 (the benchmark's own convention); hit rate D = 0.25, W = 0.05 U_H.
+### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor)
 
-| | velocity.U | velocity.V | velocity.W | k |
+Reattachment length L_r/H = 1.49.
+
+| | U | V | W | k |
 |---|---|---|---|---|
 | **R** | +0.955 | +0.961 | +0.708 | +0.480 |
 | **FAC2** | 0.817 | 0.349 | 0.398 | 0.667 |
 | **FB** | +0.185 | -0.207 | -1.501 | +0.478 |
 | **hit rate** | 0.586 | 0.892 | 0.801 | 0.177 |
+| **n** | 186 | 186 | 186 | 186 |
 
-![agreement]({{ '/assets/aij_agreement.png' | relative_url }})
+velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Reproduce: Eddy3D fixture TestAijCaseAContainerE2E; figures validation/plot_aij.py.
 
-![profiles]({{ '/assets/aij_profiles.png' | relative_url }})
+### Eddy3D ML wind surrogate (pedestrian height)
+
+| | \|U\| (z = 0.01 m plane) | \|U\|, lattice cut at ±250 m | wind reversed (control) |
+|---|---|---|---|
+| **R** | -0.125 | +0.434 | -0.125 |
+| **FAC2** | 0.262 | 0.615 | 0.262 |
+| **FB** | +0.772 | +0.401 | +0.772 |
+| **hit rate** | 0.092 | 0.338 | 0.092 |
+| **n** | 65 | 65 | 65 |
+
+velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot_aij_ml.py.
+
+![aij_agreement.png]({{ '/assets/aij_agreement.png' | relative_url }})
+
+![aij_profiles.png]({{ '/assets/aij_profiles.png' | relative_url }})
+
+![aij_ml_agreement.png]({{ '/assets/aij_ml_agreement.png' | relative_url }})
 
 How to read these is on the [Validation]({{ '/validation/' | relative_url }}) page.
 
