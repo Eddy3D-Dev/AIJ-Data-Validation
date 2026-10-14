@@ -60,7 +60,7 @@ symmetry convention.
 
 ## Case D
 
-- All the data lives in `CaseD(Highrise+Blocks).xls`, a BIFF8 workbook (xlrd 2.x reads it; openpyxl cannot).
+- All the data lives in `LF_caseD.xls`, a BIFF8 workbook (xlrd 2.x reads it; openpyxl cannot).
   Coordinates are millimetres.
 - The shipped `BD_caseD.stl` is dirty: 1572 facets, 576 duplicates, all 83 roofs wound inward (signed volume
   0.011159 m³ against the true 0.021477 m³). The API's `geometry.stl` is rebuilt from the 83 shells' boxes: 996
@@ -88,7 +88,7 @@ symmetry convention.
   `RS_caseE.csv` is the workbook rounded to two decimals, and `BD_caseE.stl` is model scale (×250), not
   watertight (5,253 open edges), with point 50 at (−45.5, −45.0) 0.17 m inside one of its walls (2.06 m clear in
   the 3dm). Everything served here is extracted from the workbook and the 3dm.
-- `CaseE(Niigata).3dm` is **full-scale metres**; `MP_caseE.png` is drawn at model scale (±0.8 m). Use layers
+- `case-e.3dm` is **full-scale metres**; `MP_caseE.png` is drawn at model scale (±0.8 m). Use layers
   `buildings` and `buildings_new_construction`; the map plate on the Japanese-named layer, the terrain plates and
   `probes` are not buildings. 475 of the 503 building shells are wound inward in the 3dm; the API's STLs are flipped
   outward.

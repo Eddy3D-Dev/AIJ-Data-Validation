@@ -45,7 +45,7 @@ Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 
 
 ## Reference data
 
-Source in this repository: `Case E_cleaned/CaseE(Niigata).xls` (approach flow: `Case E_cleaned/CaseE(Niigata).xls [sheet Inflow]`).
+Source in this repository: `case-e/LF_caseE.xls` (approach flow: `case-e/LF_caseE.xls [sheet Inflow]`).
 
 The cleaned table has **2560 rows** over **80 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction`, `wind_direction_deg`, `x`, `y`, `z`, `velocity_ratio`.
 
@@ -69,7 +69,7 @@ The cleaned table has **2560 rows** over **80 distinct points**; columns `point_
 - The velocity ratio is normalised by the inflow velocity at 15.9 m (= 3.935 m/s), NOT by U_H and NOT by UR = 7.8 m/s. A prior Eddy3D comparison in the folder divided by the wrong reference and came out low by a factor of 2.048 (FAC2 0.338 -> 0.863 once rescaled, R unchanged at 0.661).
 - All 2560 published ratios are integer multiples of 0.0198204 (55 distinct levels): the data's own resolution is +/-0.0099, 3.1 % of the median value and about 10 % at the lowest points.
 - The readme describes AF_caseE.csv, RS_caseE.csv and BD_caseE.stl, but this repository holds only the .3dm, .ghx, .xls and the MP drawing; everything here is extracted from the workbook and the 3dm.
-- CaseE(Niigata).3dm is FULL-SCALE metres (MP_caseE.png is drawn at model scale, +/-0.8 m). Use layers 'buildings' (5,015 meshes, before construction) and 'buildings_new_construction' (3 prisms); exclude the map plate on the Japanese-named general layer, the terrain plates (the site is flat) and 'probes'.
+- case-e.3dm is FULL-SCALE metres (MP_caseE.png is drawn at model scale, +/-0.8 m). Use layers 'buildings' (5,015 meshes, before construction) and 'buildings_new_construction' (3 prisms); exclude the map plate on the Japanese-named general layer, the terrain plates (the site is flat) and 'probes'.
 - Do not take the measurement coordinates from the 3dm's 'probes' layer: its 80 spheres sit a median 2.31 m (max 21 m) from the workbook's points, which are authoritative (all 80 fall in open space, min 0.83 m from a building edge).
 - The measured quantity is a scalar (thermistor) speed; a RANS |U| is biased low against it in a dense canopy. The construction signal (ac - bc) is largest for SW (mean |d| 0.2155) and smallest for SSE (0.093).
 

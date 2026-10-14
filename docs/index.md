@@ -41,6 +41,6 @@ running on A and B. Anything not marked scored is not a claim.
 ## Licence and attribution
 
 The measurement data belongs to its collectors and distributors, named per case (CC BY 4.0). Cite the AIJ UWE
-benchmark — Kikumoto et al. (2026), *Comprehensive Experimental Database for Validating CFD Simulations in Urban
-Environments*, Japan Architectural Review 9(1) e70083, [doi:10.1002/2475-8876.70083](https://doi.org/10.1002/2475-8876.70083)
+benchmark — Kikumoto et al. (2026), *Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan*,
+Japan Architectural Review 9(1) e70083, [doi:10.1002/2475-8876.70083](https://doi.org/10.1002/2475-8876.70083)
 — and each case's dataset and requested citation, linked on its case page.

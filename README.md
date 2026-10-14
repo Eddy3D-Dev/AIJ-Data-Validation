@@ -21,11 +21,11 @@ and one frame per case, cleaned STL geometry in metres, and the validation score
 
 | Case | Configuration | Measurements | Reference file |
 |---|---|---|---|
-| A | 1:1:2 building, b = 0.08 m, H = 0.16 m, Re_H ≈ 24,000 | 186 points, U/V/W/k | `Case_A_cleaned/RS-caseA.csv` |
-| B | 1:4:4 slab, 0.05 × 0.20 × 0.20 m, Re_H ≈ 72,000 | 224 points, U/V/W/k | `Case_B_cleaned/RS_caseB.csv` |
-| C | 3 × 3 block array, centre building at 0D / 1D / 2D | 1080 points, pedestrian height | `CaseC_cleaned/RS_caseC.csv` |
-| D | High-rise among blocks | see `CaseD_cleaned/` | `CaseD(Highrise+Blocks).xls` |
-| E | Niigata district, 1:250, pre/post high-rise | pedestrian height | `Case E_cleaned/CaseE(Niigata).xls` |
+| A | 1:1:2 building, b = 0.08 m, H = 0.16 m, Re_H ≈ 24,000 | 186 points, U/V/W/k | `case-a/RS-caseA.csv` |
+| B | 1:4:4 slab, 0.05 × 0.20 × 0.20 m, Re_H ≈ 72,000 | 224 points, U/V/W/k | `case-b/RS_caseB.csv` |
+| C | 3 × 3 block array, centre building at 0D / 1D / 2D | 1080 points, pedestrian height | `case-c/RS_caseC.csv` |
+| D | High-rise among blocks | see `case-d/` | `LF_caseD.xls` |
+| E | Niigata district, 1:250, pre/post high-rise | pedestrian height | `case-e/LF_caseE.xls` |
 
 Sources and instrumentation are documented per case in each folder's `readme_case*.md` and in the data paper,
 [Kikumoto et al. (2026)](https://doi.org/10.1002/2475-8876.70083), which is included here; each case's Zenodo
@@ -56,7 +56,7 @@ Technical Research Institute, Shimizu Corporation, Tokyo. Data collectors: Takes
 Tokyo) and Kazuki Hibi (Numerical Flow Design); DOI
 [10.5281/zenodo.15050147](https://doi.org/10.5281/zenodo.15050147).
 
-**Reference data.** `Case_A_cleaned/RS-caseA.csv` — `No., x(m), y(m), z(m), U, V, W, u_rms, v_rms, w_rms, k`;
+**Reference data.** `case-a/RS-caseA.csv` — `No., x(m), y(m), z(m), U, V, W, u_rms, v_rms, w_rms, k`;
 186 points on the vertical centre plane y/b = 0 and the horizontal planes z/b = 0.125 and 1.25. Coordinates are
 **metres**, velocities m/s, turbulence as **rms** values. Approach flow in `AF_caseA.csv` (24 heights,
 z = 0.005 … 0.6 m, with u/v/w rms and k). Point layouts: `MP-y_caseA.png`, `MP-z_caseA.png`. Frame: +x
@@ -101,7 +101,7 @@ high, centred on the origin. Re_H ≈ 72,000 on H and U_H = 5.133 m/s. Hot-wire 
 point. Tunnel: Niigata Institute of Technology, Kashiwazaki. Data collector: Yoshihide Tominaga; DOI
 [10.5281/zenodo.15401455](https://doi.org/10.5281/zenodo.15401455).
 
-**Reference data.** `Case_B_cleaned/RS_caseB.csv` — `No., x[mm], y[mm], z[mm], U, V, W, <u'2>, <v'2>, <w'2>, k`;
+**Reference data.** `case-b/RS_caseB.csv` — `No., x[mm], y[mm], z[mm], U, V, W, <u'2>, <v'2>, <w'2>, k`;
 224 points on the vertical centre plane y/H = 0 and the horizontal plane z/H = 1/16. Coordinates are
 **millimetres**, velocities m/s, turbulence as **variances**. Approach flow in `AF_caseB.csv` (12 heights,
 z = 0.005 … 1.0 m, with a 1/4-power fit column). Point layouts: `MP-y_caseB.png`, `MP-z_caseB.png`. Frame: +x
@@ -149,7 +149,7 @@ Nonomura (Yamato University); DOI [10.5281/zenodo.15401791](https://doi.org/10.5
 The 0.40 m pitch is read from `MP-z-caseC.png` and Figure 3 of the data paper; the 120-point grid alone (49 absent
 nodes of a 13 × 13 lattice = the nine footprints) bounds the pitch to (0.35, 0.40].
 
-**Reference data.** `CaseC_cleaned/RS_caseC.csv` — `No., WD (deg.), CB, x (m), y (m), z (m), Vs (m/s),` (note
+**Reference data.** `case-c/RS_caseC.csv` — `No., WD (deg.), CB, x (m), y (m), z (m), Vs (m/s),` (note
 the trailing comma: an empty 8th column). 1080 rows = 3 WD × 3 CB × 120 points; coordinates **metres** (range
 ±0.30), z = 0.02 throughout; `CB` is **text** (`0D`/`1D`/`2D`). Point numbers run 4 … 132 with gaps at 34–37, 46,
 55, 100–102 (1, 2, 3 are below the range). Approach flow in `AF_caseC.csv` (16 heights, z = 0.01 … 1.2 m, U and
@@ -238,7 +238,7 @@ in the data paper). This folder ships without the record's readme and CSVs; they
 their SHA-256 sums, under [`clean/sources/zenodo_caseD/`](clean/sources/zenodo_caseD/), and the CSVs match the
 workbook to 4 × 10⁻¹⁶.
 
-**Reference data.** Everything is inside `CaseD_cleaned/CaseD(Highrise+Blocks).xls`, a genuine OLE2/BIFF8
+**Reference data.** Everything is inside `case-d/LF_caseD.xls`, a genuine OLE2/BIFF8
 workbook (xlrd 2.x reads it; openpyxl cannot): sheets `Geometry&Points`, `Inflow` (13 heights, z = 5 … 1200 mm,
 U and k), `Results (Exp_S)` (split fibre) and `Results (Exp_T)` (thermistor; unmeasured cells are `-`).
 Coordinates are **millimetres**; the API serves metres. Frame: +x streamwise at WD = 0 (the 0° thermistor field
@@ -248,7 +248,7 @@ and 45° is **+x toward +y, read from Figure 4 of the data paper** — the array
 the data cannot settle it. `BD_caseD.stl` is the geometry: 83 closed shells in model metres, but **dirty** (1572
 facets, 576 duplicates, all 83 roofs wound inward, signed volume 0.011159 m³ against the true 0.021477 m³); the
 API's `geometry.stl` is rebuilt from the shells' boxes (996 facets, watertight, 0.021477 m³). The DXF adds nothing
-over the STL. `Eddy3D vs AIJ.xlsx` is a prior attempt that scores R = +0.096 against the thermistor — a frame or
+over the STL. `case-d-eddy3d-prior-comparison.xlsx` is a prior attempt that scores R = +0.096 against the thermistor — a frame or
 geometry error, not a validation.
 
 **Inflow fit** (log law, κ = 0.41, two windows because the measurement plane z/H = 0.02 sits below the A/B
@@ -297,8 +297,8 @@ Tunnel: Niigata Institute of Technology; data collector: Yoshihide Tominaga; DOI
 [10.5281/zenodo.15429017](https://doi.org/10.5281/zenodo.15429017).
 
 **Reference data.** The readme describes `AF_caseE.csv`, `RS_caseE.csv` and `BD_caseE.stl`, but this folder
-holds only `CaseE(Niigata).3dm`, `CaseE(Niigata).ghx`, `CaseE(Niigata).xls`, `MP_caseE.png` and a prior
-`Eddy3D vs AIJ.xlsx`; the Zenodo record's files are mirrored byte for byte under
+holds only `case-e.3dm`, `case-e.ghx`, `LF_caseE.xls`, `MP_caseE.png` and a prior
+`case-e-eddy3d-prior-comparison.xlsx`; the Zenodo record's files are mirrored byte for byte under
 [`clean/sources/zenodo_caseE/`](clean/sources/zenodo_caseE/). The workbook is cell-identical to Zenodo's, and
 Zenodo's `RS_caseE.csv` is the workbook rounded to two decimals, so the cleaned release uses the workbook. The
 official `BD_caseE.stl` is at model scale (×250), not watertight (5,253 open edges), and point 50 at
@@ -316,8 +316,8 @@ puts 18 of them inside buildings, so the frame is verified. Do not take coordina
 
 **Normalisation and resolution.** All 2560 ratios are integer multiples of 0.0198204, which pins the normalising
 velocity at U(15.9 m) = 0.504531 × UR = 3.935 m/s (linear interpolation of the published profile gives 3.929) and
-the data's resolution at ±0.0099 — 3.1 % of the median and ~10 % at the lowest points. The prior `Eddy3D vs
-AIJ.xlsx` (after construction, wind from N) is low by a least-squares factor of 2.048, i.e. it divided by the wrong
+the data's resolution at ±0.0099 — 3.1 % of the median and ~10 % at the lowest points. The prior
+`case-e-eddy3d-prior-comparison.xlsx` (after construction, wind from N) is low by a least-squares factor of 2.048, i.e. it divided by the wrong
 reference; rescaled, its FAC2 goes 0.338 → 0.863 with R unchanged at 0.661.
 
 **Inflow.** A log law does not fit this 250 m boundary layer (5.3–9.4 % max error over the relevant heights, and
@@ -553,6 +553,44 @@ Regenerate with `pip install xlrd rhino3dm matplotlib && python scripts/build_ap
 </details>
 
 <details>
+<summary><b>Repository layout and file names</b> · what is where, the naming rule, what was renamed</summary>
+
+| Folder | Contents |
+|---|---|
+| `case-a/` … `case-e/` | each case as published on Zenodo, plus the repository's own working files for it |
+| `clean/` | the cleaned re-release of all five cases in one schema, rebuilt by `clean/build.py`; `clean/sources/` mirrors the Zenodo files the case folders lack |
+| `validation/` | Eddy3D's scores (`results/`), the figures, the scripts that draw them, and the geometry renders |
+| `docs/` | the Jekyll site; `docs/api/` is the static API, generated by `scripts/build_api.py` |
+| `papers/` | the benchmark's papers |
+| `scripts/` | the API builder and the shared data reader |
+
+**Naming rule.** A file the AIJ published keeps **exactly its Zenodo name**, irregularities included
+(`RS-caseA.csv` but `RS_caseB.csv`, `LF-caseC.xls` but `LF_caseB.xls`, `MP-z-caseC.png`): those names are what
+the readmes, the Zenodo records and the data paper refer to, and renaming them would break that trail. Every file
+in a case folder was checked against its Zenodo record (MD5): the images, readmes, STL and the A and B workbooks are
+byte-identical; the CSVs are identical but for line endings, except `RS_caseC.csv`, whose values are identical but
+which carries trailing empty columns from a re-save; the C, D and E workbooks are re-saved but cell-identical. The
+repository's own files are `case-x[-description].ext` in lower case; folders are `case-a` … `case-e`, as the site
+names the cases; papers are `author-year-title.pdf`.
+
+**Renamed on 2026-10-14** (history follows every file; `git log --follow` works):
+
+| Was | Now | Why |
+|---|---|---|
+| `Case_A_cleaned/`, `Case_B_cleaned/`, `CaseC_cleaned/`, `CaseD_cleaned/`, `Case E_cleaned/` | `case-a/` … `case-e/` | one pattern, no space |
+| `CaseD_cleaned/CaseD(Highrise+Blocks).xls` | `case-d/LF_caseD.xls` | cell-identical to Zenodo's `LF_caseD.xls` |
+| `Case E_cleaned/CaseE(Niigata).xls` | `case-e/LF_caseE.xls` | cell-identical to Zenodo's `LF_caseE.xls` |
+| `Case E_cleaned/readme_caseE_cleaned.md` | `case-e/readme_caseE.md` | byte-identical to Zenodo's `readme_caseE.md` |
+| `CaseC_cleaned/CaseC.ghx` | `case-c/case-c.ghx` | the repository's own Grasshopper definition |
+| `CaseD_cleaned/CaseD.ghx`, `CaseD(Highrise+Blocks).dxf` | `case-d/case-d.ghx`, `case-d/case-d.dxf` | the repository's own files |
+| `Case E_cleaned/CaseE(Niigata).3dm`, `CaseE(Niigata).ghx` | `case-e/case-e.3dm`, `case-e/case-e.ghx` | the repository's own files |
+| `CaseD_cleaned/Eddy3D vs AIJ.xlsx`, `Case E_cleaned/Eddy3D vs AIJ.xlsx` | `case-d/case-d-eddy3d-prior-comparison.xlsx`, `case-e/case-e-eddy3d-prior-comparison.xlsx` | the earlier Eddy3D comparisons, named for what they are |
+| `Japan Architectural Review - 2026 - Kikumoto - … Urban.pdf` | `papers/kikumoto-2026-experimental-database-cfd-urban-wind-environment.pdf` | author-year-title |
+| `1-s2.0-S0167610508000445-main.pdf` | `papers/tominaga-2008-aij-guidelines-cfd-pedestrian-wind-environment.pdf` | author-year-title |
+
+</details>
+
+<details>
 <summary><b>Cite</b> · licence and attribution</summary>
 
 The measurements belong to their collectors, and the benchmark is edited and distributed by Yoshihide Tominaga,
@@ -563,8 +601,8 @@ and the case's original study:
 
 **The benchmark**
 
-- Kikumoto, H., Tominaga, Y., Okaze, T. et al. (2026). Comprehensive Experimental Database for Validating CFD
-  Simulations in Urban Environments. *Japan Architectural Review* 9(1), e70083.
+- Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026).
+  Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. *Japan Architectural Review* 9(1), e70083.
   [doi:10.1002/2475-8876.70083](https://doi.org/10.1002/2475-8876.70083)
 - Tominaga, Y., Mochida, A., Yoshie, R., Kataoka, H., Nozu, T., Yoshikawa, M., Shirasawa, T. (2008). AIJ guidelines
   for practical applications of CFD to pedestrian wind environment around buildings. *Journal of Wind Engineering

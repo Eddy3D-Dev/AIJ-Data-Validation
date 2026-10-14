@@ -109,11 +109,11 @@ legacy-workbook and WD = 45° symmetry checks all go red (negative control run 2
 - The 0° thermistor field is an **exact** y-mirror (33 pairs, ΔVs = 0): half was measured and mirrored, so only 33 of 66 values are independent. The array is exactly y-symmetric, so the **22.5°/45° rotation sense is undecidable from the data**; the sense in `directions.csv` is `unverified` (`QUESTIONS.md` Q2).
 - The published `BD_caseD.stl` has 576 duplicate facets and all 83 roofs wound inward (signed volume half the true one); `geometry.stl` here is the 83 boxes, watertight, analytic volume.
 - The measurement plane z/H = 0.02 sits below the 0.02…2H window a log law is usually fitted over; the two fits in `manifest.json` differ by 5× in z₀ and by 20 points in U at the plane. A log-law inlet cannot be right at both the plane and aloft; the inlet k implied by atmBoundaryLayer (0.39–0.65 m²/s²) is below the tunnel's 0.53–0.75.
-- The repository's `Eddy3D vs AIJ.xlsx` is a prior attempt at R = +0.10 against the thermistor — a frame or geometry error, not a result.
+- The repository's `case-d/case-d-eddy3d-prior-comparison.xlsx` is a prior attempt at R = +0.10 against the thermistor — a frame or geometry error, not a result.
 
 **E (provisional geometry — see manifest `status_note`)**
 - Coordinates are **full-scale metres**, +x east, +y north, origin at the centre of the area; wind directions are compass FROM-directions (N blows toward −y). z = 2 m (0.008 m model).
-- The ratio is normalised by **U(15.9 m) = 3.935 m/s** (the Niigata met-station height), not by U_H and not by UR = 7.8 m/s. Divide by UR and every prediction is low by 1.98×; the repository's prior `Eddy3D vs AIJ.xlsx` did exactly that.
+- The ratio is normalised by **U(15.9 m) = 3.935 m/s** (the Niigata met-station height), not by U_H and not by UR = 7.8 m/s. Divide by UR and every prediction is low by 1.98×; the repository's prior `case-e/case-e-eddy3d-prior-comparison.xlsx` did exactly that.
 - **Quantised:** every ratio is a multiple of 0.0198204 (55 levels); resolution ±0.0099 = 3 % of the median, 10 % of the smallest values. Any bar tighter than one quantum measures the publisher's rounding. Zenodo's `RS_caseE.csv` is the workbook rounded further, to 2 dp; this release uses the workbook.
 - The official `BD_caseE.stl` (now in `sources/zenodo_caseE/`) is **model scale** (×250 here), **not watertight** (5,253 open edges), after-construction only. The before-construction geometry here is an Eddy3D reconstruction from the 3dm with no published source.
 - **Point 50 at (−45.5, −45.0) is 0.17 m inside a wall of the official STL** and 2.06 m clear in the 3dm; the other 79 are in open space in both (recorded as a warning in `checks.json`; `QUESTIONS.md` Q3). A probe at point 50 against the official STL will fail or read inside a building.
@@ -134,7 +134,7 @@ legacy-workbook and WD = 45° symmetry checks all go red (negative control run 2
 
 ## 6. Cite
 
-- Kikumoto, H., Tominaga, Y., Okaze, T. et al. (2026). *Comprehensive Experimental Database for Validating CFD Simulations in Urban Environments.* Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083
+- Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). *Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan.* Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083
 - Per case: A 10.5281/zenodo.15050147 (Meng & Hibi 1998) · B 10.5281/zenodo.15401455 (Miyazaki & Tominaga 2003) · C 10.5281/zenodo.15401791 (Nonomura et al. 2003) · D 10.5281/zenodo.15402668 · E 10.5281/zenodo.15429017 — requested citations in `manifest.json → cases.<id>.citation_requested`.
 - Tominaga, Y. et al. (2008). *AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings.* JWEIA 96, 1749–1761.
 

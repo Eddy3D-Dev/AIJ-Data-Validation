@@ -45,7 +45,7 @@ nav_order: 3
 
 ## Reference data
 
-Source in this repository: `CaseC_cleaned/RS_caseC.csv` (approach flow: `CaseC_cleaned/AF_caseC.csv`).
+Source in this repository: `case-c/RS_caseC.csv` (approach flow: `case-c/AF_caseC.csv`).
 
 The cleaned table has **1080 rows** over **120 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `Vs`.
 
