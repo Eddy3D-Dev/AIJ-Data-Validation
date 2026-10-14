@@ -45,14 +45,15 @@ STATUS_MEANING = {
     "scored": "a validation run exists and its scores are in cases/{id}/validation.json; whether it agrees is in the numbers",
     "running": "the solve is in progress; no scores yet",
     "pending": "not run yet",
-    "not comparable": "the engine cannot produce the measured quantity at the measured location (the reason is in the README)",
+    "not comparable": ("the engine cannot produce the measured quantity at the measured location at a resolution this "
+                       "hardware runs; the measurement behind that is in the README"),
 }
 ENGINE_STATUS = {
-    "A": {"openfoam12-realizableKE": "scored", "openlb": "running", "fluidx3d": "running", "ml-surrogate": "scored"},
-    "B": {"openfoam12-realizableKE": "scored", "openlb": "running", "fluidx3d": "running", "ml-surrogate": "scored"},
-    "C": {"openfoam12-realizableKE": "scored", "openlb": "pending", "fluidx3d": "pending", "ml-surrogate": "scored"},
-    "D": {"openfoam12-realizableKE": "running", "openlb": "pending", "fluidx3d": "pending", "ml-surrogate": "scored"},
-    "E": {"openfoam12-realizableKE": "running", "openlb": "pending", "fluidx3d": "pending", "ml-surrogate": "scored"},
+    "A": {"openfoam12-realizableKE": "scored", "openlb": "scored", "fluidx3d": "running", "ml-surrogate": "scored"},
+    "B": {"openfoam12-realizableKE": "scored", "openlb": "scored", "fluidx3d": "running", "ml-surrogate": "scored"},
+    "C": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "pending", "ml-surrogate": "scored"},
+    "D": {"openfoam12-realizableKE": "running", "openlb": "not comparable", "fluidx3d": "pending", "ml-surrogate": "scored"},
+    "E": {"openfoam12-realizableKE": "running", "openlb": "not comparable", "fluidx3d": "pending", "ml-surrogate": "scored"},
 }
 
 # Every validation run whose results.json is snapshotted in validation/results/: which case, engine and
@@ -70,6 +71,12 @@ RUNS = [
        ["aij_caseC_agreement.png", "aij_caseC_map.png"],
        f"Eddy3D fixture TestAijCaseC{cb}ContainerE2E; figures validation/plot_aij_caseC.py "
        "(per-point pairs in validation/results/caseC_openfoam12_realizableKE_pairs.csv)") for cb in ("0D", "1D", "2D")],
+    *[(case, "openlb", None, f"case{case}_openlb.json",
+       {"U": "velocity.U", "U, points ≥ 2 dx": "velocity.U.aboveTwoCells", "V": "velocity.V", "W": "velocity.W",
+        "k (resolved)": "k.resolved", "V, lateral sign flipped (control)": "control.V.lateralSignFlipped"},
+       ["aij_engines_agreement.png"],
+       f"Eddy3D fixture TestAijCase{case}OpenLbContainerE2E (OpenLB eddy3dWind, CPU image, dx = 1.6 m); "
+       "figure validation/plot_aij_engines.py") for case in ("A", "B")],
     ("A", "ml-surrogate", None, "caseA_ml.json",
      {"|U| (z = 0.01 m plane)": "speed.vectorMagnitude", "|U|, lattice cut at ±250 m": "halfExtent250.forward",
       "wind reversed (control)": "negativeControl.reversedWind"},

@@ -38,14 +38,14 @@ it agrees is in the numbers and their reading. Anything not marked scored is not
 | | A | B | C | D | E |
 |---|---|---|---|---|---|
 | OpenFOAM 12, realizable k-ε | scored | scored | scored, 9 configurations | solving | solving |
-| OpenLB | running | running | pending | pending | pending |
+| OpenLB | scored | scored | not comparable at dx = 1.6 m | not comparable at dx = 1.6 m | not comparable at dx = 1.6 m |
 | FluidX3D | running | running | pending | pending | pending |
 | ML surrogate (Yel-2.0) | scored | scored | scored | scored | scored |
 
 ---
 
 <details>
-<summary><b>Case A — 1:1:2 building</b> · 186 points, U/V/W/k · scored: OpenFOAM 12, ML</summary>
+<summary><b>Case A — 1:1:2 building</b> · 186 points, U/V/W/k · scored: OpenFOAM 12, OpenLB, ML</summary>
 
 <p><img src="validation/geometry/geom_caseA.png" width="60%" alt="Case A geometry"></p>
 
@@ -85,6 +85,9 @@ mean (mean measured W is ~0.01 m/s) — read R = +0.71 instead. Figures and the 
 prediction height: |U|/U_H FB +0.77, FAC2 0.26, R −0.13, hit rate 0.09 — and its prediction does not change
 when the wind is reversed. See *ML surrogate* under *Validation method*.
 
+**OpenLB** at dx = 1.6 m (H/10): U/U_H R +0.76, FAC2 0.43 over all 186 points, FAC2 0.65 over the 121 at least two
+cells above its no-slip floor; a nearly steady solve with a 3.39 H wake. See *every engine on the same points*.
+
 **API.** [`cases/A.json`](docs/api/cases/A.json) · [`points.json`](docs/api/cases/A/points.json) /
 [`points.csv`](docs/api/cases/A/points.csv) (variances uu = u_rms² so A and B share one column meaning) ·
 [`geometry.stl`](docs/api/cases/A/geometry.stl) (1 box, 12 triangles) · [`validation.json`](docs/api/cases/A/validation.json)
@@ -92,7 +95,7 @@ when the wind is reversed. See *ML surrogate* under *Validation method*.
 </details>
 
 <details>
-<summary><b>Case B — 1:4:4 slab</b> · 224 points, U/V/W/k · scored: OpenFOAM 12, ML</summary>
+<summary><b>Case B — 1:4:4 slab</b> · 224 points, U/V/W/k · scored: OpenFOAM 12, OpenLB, ML</summary>
 
 <p><img src="validation/geometry/geom_caseB.png" width="60%" alt="Case B geometry"></p>
 
@@ -127,6 +130,9 @@ the tunnel measures small non-zero values.
 
 **ML surrogate (Yel-2.0)** on the 122 points of the z = H/16 plane, scaled ×144: |U|/U_H FB +0.82, FAC2 0.36,
 R −0.24, hit rate 0.17. See *ML surrogate* under *Validation method*.
+
+**OpenLB** at dx = 1.6 m (H/12.5): U/U_H R +0.79, FAC2 0.38 over all 224 points, FAC2 0.64 and R +0.90 over the 95
+at least two cells above its floor; its wake sits about H/2 downstream of the tunnel's.
 
 **API.** [`cases/B.json`](docs/api/cases/B.json) · [`points.json`](docs/api/cases/B/points.json) /
 [`points.csv`](docs/api/cases/B/points.csv) (metres, V sign unified) · [`geometry.stl`](docs/api/cases/B/geometry.stl)
@@ -389,6 +395,44 @@ building, offset per station. The model follows the measured profile closely abo
 in the recovering wake; the near-ground deficit immediately behind the building is where the
 closure does least well.
 
+### Cases A and B — every engine on the same points
+
+![Measured vs modelled U and V, Cases A and B, one row per engine](validation/aij_engines_agreement.png)
+
+OpenLB (Eddy3D's `eddy3dWind`: Smagorinsky, third-order regularised D3Q19, CPU image) solved the same two
+experiments with the same fitted inflow and probed the same measured points, at dx = 1.6 m — H/10 for A, H/12.5
+for B, 1.3 and 2.6 million cells, 1.8 h and 4.1 h on four threads. That is a smoke resolution: H/20 costs about
+16 times the cell-steps on this image.
+
+| case · quantity | n | FAC2 | FB | q | R | OpenFOAM FAC2 / q / R |
+|---|---|---|---|---|---|---|
+| A · U/U_H, all points | 186 | 0.43 | +0.40 | 0.37 | 0.76 | 0.82 / 0.59 / 0.96 |
+| A · U/U_H, points ≥ 2 cells above the floor | 121 | 0.65 | +0.17 | 0.56 | 0.81 | — |
+| A · V/U_H | 186 | 0.17 | — | 0.62 | 0.65 | 0.35 / 0.89 / 0.96 |
+| A · W/U_H | 186 | 0.12 | — | 0.59 | 0.54 | 0.40 / 0.80 / 0.71 |
+| B · U/U_H, all points | 224 | 0.38 | +0.28 | 0.29 | 0.79 | 0.70 / 0.56 / 0.96 |
+| B · U/U_H, points ≥ 2 cells above the floor | 95 | 0.64 | −0.07 | 0.52 | 0.90 | — |
+| B · V/U_H | 224 | 0.13 | — | 0.55 | 0.83 | 0.28 / 0.61 / 0.91 |
+| B · W/U_H | 224 | 0.24 | — | 0.65 | 0.77 | 0.54 / 0.81 / 0.93 |
+
+Reading these:
+
+- **The flat band of near-zero model U in the OpenLB row is the floor.** OpenLB meets the ground with a plain
+  no-slip (bounce-back) wall and carries the roughness only in the inlet profile; in the undisturbed column at
+  the windward face its U is 0.29 of the inlet log law one cell up, 0.69 at two, 0.95 at three and 1.02–1.07
+  from four. Case A's lowest plane sits 0.6 cells up, so above two cells FAC2 rises to 0.65 and FB falls to +0.17.
+- **The solve is nearly steady.** The resolved k is 0.7 % (A) and 10 % (B) of the measured one: a steady
+  log-law inflow at H/10 resolves almost no turbulence, so k is not compared, and with nothing to entrain the
+  wakes run long (A: L_r = 3.39 H against OpenFOAM's 1.49) or displaced (B: its field fits best sampled H/2
+  downstream).
+- **Its frame is right:** with the lateral sign flipped V's R becomes −0.65 (A) and −0.83 (B), and U scrambled
+  across the points drops R to 0.10.
+- Each number above was reproduced from the solver's own probe output against the original Zenodo CSVs (largest
+  difference 1 × 10⁻¹⁵).
+- At this spacing Case B first crashed: OpenLB's STL reader segfaults when lattice nodes sit exactly on its
+  octree planes. Eddy3D now moves such a lattice by 10⁻⁴ dx (`LBMCaseXml`), with a regression test that fails
+  without the move.
+
 ### ML surrogate
 
 ![Measured vs predicted, ML surrogate, Cases A–E](validation/aij_ml_agreement.png)
@@ -439,7 +483,8 @@ tunnel's there. Cases C–E all measure in that layer.
 
 ### Reproducing the figures
 
-`validation/plot_aij.py` (Cases A and B), `validation/plot_aij_caseC.py` and `validation/plot_aij_ml.py`
+`validation/plot_aij.py` (Cases A and B), `validation/plot_aij_engines.py` (A and B, every engine),
+`validation/plot_aij_caseC.py` and `validation/plot_aij_ml.py`
 (UltraPlot) build the figures. The Eddy3D fixtures are `TestAijCaseAContainerE2E`, `TestAijCaseBContainerE2E`,
 `TestAijCaseC{0D,1D,2D}ContainerE2E` and, for the ML surrogate, `Outdoor.ML.Tests/TestAijSurrogateE2E`. Their
 `results.json` files are snapshotted in `validation/results/` and served unchanged by the API, with the per-point
@@ -450,14 +495,26 @@ pairs beside them, so the figures rebuild from this repository alone.
 | | A | B | C | D | E |
 |---|---|---|---|---|---|
 | OpenFOAM 12, realizable k-ε | scored | scored | scored | solving | solving |
-| OpenLB | running | running | pending | pending | pending |
+| OpenLB | scored | scored | not comparable at dx = 1.6 m | not comparable at dx = 1.6 m | not comparable at dx = 1.6 m |
 | FluidX3D | running | running | pending | pending | pending |
 | ML surrogate | scored | scored | scored | scored | scored |
 
-Both lattice-Boltzmann engines meet the ground with a plain no-slip (bounce-back) wall and carry the roughness only
-in the inlet profile. On an empty domain at the finest lattice FluidX3D fits on the GPU, the flow at Case A's
-lowest plane arrives 42 % below the fitted log law. Cases C–E measure *only* in that layer, so whether either engine
-can be scored on them is being measured on the A and B runs before anything is claimed.
+**Why OpenLB is not scored on C–E — measured, not assumed.** Cases C, D and E measure only at pedestrian height,
+and a point is scoreable on OpenLB only once it sits three to four cells above its no-slip floor. On the A and B
+runs at dx = 1.6 m, read in the undisturbed column at the heights the other cases measure at:
+
+| the other case's height | cells above the floor | U / inlet log law (A run, B run) |
+|---|---|---|
+| Case D, z/H = 0.02 | below the first fluid node | 0.11, 0.13 — no prediction |
+| Case C, z = 0.1 D | 1–1.25 | 0.29, 0.40 |
+| Case E, 2 m among ~6 m buildings (z/H ≈ 0.33) | 3.3–4.1 | 1.00, 1.06 |
+
+A 2 m pedestrian plane therefore needs dx ≤ 0.5 m: 3.2 times finer in every direction, about 33 times the cells
+and 105 times the cell-steps over the same domain — and the Case C array and the Niigata district are larger
+domains than Case A's. This CPU image does not run that in useful time.
+That is a statement about this resolution and this machine; a GPU run at dx ≤ 0.5 m would decide it. FluidX3D has
+the same kind of floor: on an empty domain at the finest lattice that fits on the GPU, the flow at Case A's lowest
+plane arrives 42 % below the fitted log law; its own measurement at the C–E heights is pending.
 
 </details>
 

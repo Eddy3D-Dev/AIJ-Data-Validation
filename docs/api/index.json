@@ -1,7 +1,7 @@
 {
  "schema_version": "1.0.0",
- "generated_from": "8cfdf9dca3f9eb33fcd98cb5352e9b2597bdbf83",
- "generated_at": "2026-10-14T14:04:09+00:00",
+ "generated_from": "bd91a73ae1702977e54b622a4cf50bcf9788f4e5",
+ "generated_at": "2026-10-14T18:22:53+00:00",
  "licence": "CC BY 4.0",
  "name": "AIJ UWE benchmark — cleaned data API",
  "description": "Static JSON/CSV/STL endpoints for the Architectural Institute of Japan Urban Wind Environment benchmark (Cases A-E) and Eddy3D's validation against it. Every file is a plain HTTP GET; nothing is computed on request.",
@@ -12,7 +12,7 @@
  "site": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ",
  "versions": {
   "schema": "1.0.0",
-  "data_commit": "8cfdf9dca3f9eb33fcd98cb5352e9b2597bdbf83",
+  "data_commit": "bd91a73ae1702977e54b622a4cf50bcf9788f4e5",
   "clean_manifest": "1.0.0"
  },
  "endpoints": [

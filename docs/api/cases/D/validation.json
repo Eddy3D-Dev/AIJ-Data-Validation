@@ -1,7 +1,7 @@
 {
  "schema_version": "1.0.0",
- "generated_from": "8cfdf9dca3f9eb33fcd98cb5352e9b2597bdbf83",
- "generated_at": "2026-10-14T14:04:09+00:00",
+ "generated_from": "bd91a73ae1702977e54b622a4cf50bcf9788f4e5",
+ "generated_at": "2026-10-14T18:22:53+00:00",
  "licence": "CC BY 4.0",
  "case": "D",
  "title": "Case D — high-rise among city blocks",
@@ -10,7 +10,7 @@
   "scored": "a validation run exists and its scores are in cases/{id}/validation.json; whether it agrees is in the numbers",
   "running": "the solve is in progress; no scores yet",
   "pending": "not run yet",
-  "not comparable": "the engine cannot produce the measured quantity at the measured location (the reason is in the README)"
+  "not comparable": "the engine cannot produce the measured quantity at the measured location at a resolution this hardware runs; the measurement behind that is in the README"
  },
  "engines": [
   {
@@ -19,7 +19,7 @@
   },
   {
    "engine": "openlb",
-   "status": "pending"
+   "status": "not comparable"
   },
   {
    "engine": "fluidx3d",
