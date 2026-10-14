@@ -97,6 +97,44 @@ the tunnel's turntable: the array turns with WD, the domain does not — ~310,00
 - An independent re-scoring from the probe files and the original `RS_caseC.csv` reproduces every number (largest
   difference 9 × 10⁻¹⁶).
 
+## Cases A and B — every engine on the same points
+
+![Measured vs modelled U and V, Cases A and B, one row per engine]({{ '/assets/aij_engines_agreement.png' | relative_url }})
+
+OpenLB (Eddy3D's `eddy3dWind`: Smagorinsky, third-order regularised D3Q19, CPU image) solved the same two
+experiments with the same fitted inflow and probed the same measured points, at dx = 1.6 m — H/10 for A, H/12.5
+for B, 1.3 and 2.6 million cells, 1.8 h and 4.1 h on four threads. That is a smoke resolution: H/20 costs about
+16 times the cell-steps on this image.
+
+| case · quantity | n | FAC2 | FB | q | R | OpenFOAM FAC2 / q / R |
+|---|---|---|---|---|---|---|
+| A · U/U_H, all points | 186 | 0.43 | +0.40 | 0.37 | 0.76 | 0.82 / 0.59 / 0.96 |
+| A · U/U_H, points ≥ 2 cells above the floor | 121 | 0.65 | +0.17 | 0.56 | 0.81 | — |
+| A · V/U_H | 186 | 0.17 | — | 0.62 | 0.65 | 0.35 / 0.89 / 0.96 |
+| A · W/U_H | 186 | 0.12 | — | 0.59 | 0.54 | 0.40 / 0.80 / 0.71 |
+| B · U/U_H, all points | 224 | 0.38 | +0.28 | 0.29 | 0.79 | 0.70 / 0.56 / 0.96 |
+| B · U/U_H, points ≥ 2 cells above the floor | 95 | 0.64 | −0.07 | 0.52 | 0.90 | — |
+| B · V/U_H | 224 | 0.13 | — | 0.55 | 0.83 | 0.28 / 0.61 / 0.91 |
+| B · W/U_H | 224 | 0.24 | — | 0.65 | 0.77 | 0.54 / 0.81 / 0.93 |
+
+Reading these:
+
+- **The flat band of near-zero model U in the OpenLB row is the floor.** OpenLB meets the ground with a plain
+  no-slip (bounce-back) wall and carries the roughness only in the inlet profile; in the undisturbed column at
+  the windward face its U is 0.29 of the inlet log law one cell up, 0.69 at two, 0.95 at three and 1.02–1.07
+  from four. Case A's lowest plane sits 0.6 cells up, so above two cells FAC2 rises to 0.65 and FB falls to +0.17.
+- **The solve is nearly steady.** The resolved k is 0.7 % (A) and 10 % (B) of the measured one: a steady
+  log-law inflow at H/10 resolves almost no turbulence, so k is not compared, and with nothing to entrain the
+  wakes run long (A: L_r = 3.39 H against OpenFOAM's 1.49) or displaced (B: its field fits best sampled H/2
+  downstream).
+- **Its frame is right:** with the lateral sign flipped V's R becomes −0.65 (A) and −0.83 (B), and U scrambled
+  across the points drops R to 0.10.
+- Each number above was reproduced from the solver's own probe output against the original Zenodo CSVs (largest
+  difference 1 × 10⁻¹⁵).
+- At this spacing Case B first crashed: OpenLB's STL reader segfaults when lattice nodes sit exactly on its
+  octree planes. Eddy3D now moves such a lattice by 10⁻⁴ dx (`LBMCaseXml`), with a regression test that fails
+  without the move.
+
 ## ML surrogate
 
 ![Measured vs predicted, ML surrogate, Cases A–E]({{ '/assets/aij_ml_agreement.png' | relative_url }})
@@ -149,14 +187,26 @@ snapshotted in `validation/results/` with the per-point pairs beside them, and s
 | | A | B | C | D | E |
 |---|---|---|---|---|---|
 | OpenFOAM 12, realizable k-ε | scored | scored | scored | solving | solving |
-| OpenLB | running | running | pending | pending | pending |
+| OpenLB | scored | scored | not comparable at dx = 1.6 m | not comparable at dx = 1.6 m | not comparable at dx = 1.6 m |
 | FluidX3D | running | running | pending | pending | pending |
 | ML surrogate | scored | scored | scored | scored | scored |
 
-Both lattice-Boltzmann engines meet the ground with a plain no-slip (bounce-back) wall and carry the roughness only
-in the inlet profile. On an empty domain at the finest lattice FluidX3D fits on the GPU, the flow at Case A's lowest
-plane arrives 42 % below the fitted log law. Cases C–E measure *only* in that layer, so whether either engine can be
-scored on them is being measured on the A and B runs before anything is claimed.
+**Why OpenLB is not scored on C–E — measured, not assumed.** Cases C, D and E measure only at pedestrian height,
+and a point is scoreable on OpenLB only once it sits three to four cells above its no-slip floor. On the A and B
+runs at dx = 1.6 m, read in the undisturbed column at the heights the other cases measure at:
+
+| the other case's height | cells above the floor | U / inlet log law (A run, B run) |
+|---|---|---|
+| Case D, z/H = 0.02 | below the first fluid node | 0.11, 0.13 — no prediction |
+| Case C, z = 0.1 D | 1–1.25 | 0.29, 0.40 |
+| Case E, 2 m among ~6 m buildings (z/H ≈ 0.33) | 3.3–4.1 | 1.00, 1.06 |
+
+A 2 m pedestrian plane therefore needs dx ≤ 0.5 m: 3.2 times finer in every direction, about 33 times the cells
+and 105 times the cell-steps over the same domain — and the Case C array and the Niigata district are larger
+domains than Case A's. This CPU image does not run that in useful time.
+That is a statement about this resolution and this machine; a GPU run at dx ≤ 0.5 m would decide it. FluidX3D has
+the same kind of floor: on an empty domain at the finest lattice that fits on the GPU, the flow at Case A's lowest
+plane arrives 42 % below the fitted log law; its own measurement at the C–E heights is pending.
 
 Two things that shape the C/D/E validations, both measured on the data rather than assumed:
 

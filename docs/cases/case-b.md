@@ -83,6 +83,20 @@ Reattachment length L_r/H = 3.27.
 
 velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Reproduce: Eddy3D fixture TestAijCaseBContainerE2E; figures validation/plot_aij.py.
 
+### OpenLB (Eddy3D LBM)
+
+Reattachment length L_r/H = 2.71.
+
+| | U | U, points ≥ 2 dx | V | W | k (resolved) | V, lateral sign flipped (control) |
+|---|---|---|---|---|---|---|
+| **R** | +0.790 | +0.900 | +0.831 | +0.774 | +0.486 | -0.831 |
+| **FAC2** | 0.375 | 0.642 | 0.129 | 0.237 | 0.045 | 0.138 |
+| **FB** | +0.280 | -0.072 | +1.392 | +0.376 | +1.641 | +2.873 |
+| **hit rate** | 0.290 | 0.516 | 0.549 | 0.652 | 0.004 | 0.491 |
+| **n** | 224 | 95 | 224 | 224 | 224 | 224 |
+
+velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Reproduce: Eddy3D fixture TestAijCaseBOpenLbContainerE2E (OpenLB eddy3dWind, CPU image, dx = 1.6 m); figure validation/plot_aij_engines.py.
+
 ### Eddy3D ML wind surrogate (pedestrian height)
 
 | | \|U\| (z = H/16 plane) | \|U\|, lattice cut at ±250 m | wind reversed (control) |
@@ -98,6 +112,8 @@ velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15
 ![aij_agreement.png]({{ '/assets/aij_agreement.png' | relative_url }})
 
 ![aij_profiles.png]({{ '/assets/aij_profiles.png' | relative_url }})
+
+![aij_engines_agreement.png]({{ '/assets/aij_engines_agreement.png' | relative_url }})
 
 ![aij_ml_agreement.png]({{ '/assets/aij_ml_agreement.png' | relative_url }})
 
