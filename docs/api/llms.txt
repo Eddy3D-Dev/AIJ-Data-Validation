@@ -6,7 +6,7 @@
 Base URL: https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api
 Fallback (raw files from the repository): https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/main/docs/api
 Repository: https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ
-Schema version: 1.0.0. Data commit: 4fb5e6e9093d5b925f977d4e0502d8c881fec52d. Generated: 2026-10-14T03:54:23+00:00.
+Schema version: 1.0.0. Data commit: 1b55a75375bd2f3846f8cd991ca836ff1cb7da6a. Generated: 2026-10-14T13:30:58+00:00.
 Licence: CC BY 4.0 — the data belongs to its collectors; cite the benchmark and the per-case papers.
 
 ## How to use this

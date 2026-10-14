@@ -49,7 +49,7 @@ Source in this repository: `CaseD_cleaned/CaseD(Highrise+Blocks).xls` (approach 
 
 The cleaned table has **267 rows** over **78 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `Vs`.
 
-Unmeasured cells (null): U 234, V 234, W 234, uu 234, vv 234, ww 234, k 234, Vs 36.
+Unmeasured cells (null): U 234, V 234, W 234, uu 234, vv 234, ww 234, k 234, Vs 69.
 
 | configuration | points |
 |---|---|
