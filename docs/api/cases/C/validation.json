@@ -1,7 +1,7 @@
 {
  "schema_version": "1.0.0",
- "generated_from": "63356f3e38b6be936d226825ba58af2c0ed3c2ed",
- "generated_at": "2026-10-14T13:52:29+00:00",
+ "generated_from": "8cfdf9dca3f9eb33fcd98cb5352e9b2597bdbf83",
+ "generated_at": "2026-10-14T14:04:09+00:00",
  "licence": "CC BY 4.0",
  "case": "C",
  "title": "Case C — 3 × 3 block array",
@@ -285,7 +285,7 @@
    "reproduce": "Eddy3D fixture TestAijCaseC0DContainerE2E; figures validation/plot_aij_caseC.py (per-point pairs in validation/results/caseC_openfoam12_realizableKE_pairs.csv)",
    "source_file": "validation/results/caseC_openfoam12_realizableKE_0D.json",
    "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseC_openfoam12_realizableKE_0D.json",
-   "reference_string": "Nonomura, Y., Kobayashi, N., Tominaga, Y. & Mochida, A. (2003) JAWE 95, 83-84, doi:10.14887/jaweam.2003.0.41.0; AIJ UWE Benchmark Dataset Case C, Zenodo doi:10.5281/zenodo.15401791 (CC BY 4.0); Kikumoto, H. et al. (2026) Japan Architectural Review 9(1) e70083, doi:10.1002/2475-8876.70083"
+   "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   },
   {
    "engine": "openfoam12-realizableKE",
@@ -541,7 +541,7 @@
    "reproduce": "Eddy3D fixture TestAijCaseC1DContainerE2E; figures validation/plot_aij_caseC.py (per-point pairs in validation/results/caseC_openfoam12_realizableKE_pairs.csv)",
    "source_file": "validation/results/caseC_openfoam12_realizableKE_1D.json",
    "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseC_openfoam12_realizableKE_1D.json",
-   "reference_string": "Nonomura, Y., Kobayashi, N., Tominaga, Y. & Mochida, A. (2003) JAWE 95, 83-84, doi:10.14887/jaweam.2003.0.41.0; AIJ UWE Benchmark Dataset Case C, Zenodo doi:10.5281/zenodo.15401791 (CC BY 4.0); Kikumoto, H. et al. (2026) Japan Architectural Review 9(1) e70083, doi:10.1002/2475-8876.70083"
+   "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   },
   {
    "engine": "openfoam12-realizableKE",
@@ -797,7 +797,7 @@
    "reproduce": "Eddy3D fixture TestAijCaseC2DContainerE2E; figures validation/plot_aij_caseC.py (per-point pairs in validation/results/caseC_openfoam12_realizableKE_pairs.csv)",
    "source_file": "validation/results/caseC_openfoam12_realizableKE_2D.json",
    "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseC_openfoam12_realizableKE_2D.json",
-   "reference_string": "Nonomura, Y., Kobayashi, N., Tominaga, Y. & Mochida, A. (2003) JAWE 95, 83-84, doi:10.14887/jaweam.2003.0.41.0; AIJ UWE Benchmark Dataset Case C, Zenodo doi:10.5281/zenodo.15401791 (CC BY 4.0); Kikumoto, H. et al. (2026) Japan Architectural Review 9(1) e70083, doi:10.1002/2475-8876.70083"
+   "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   },
   {
    "engine": "ml-surrogate",
@@ -1021,7 +1021,7 @@
    "reproduce": "Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot_aij_ml.py",
    "source_file": "validation/results/caseC_ml.json",
    "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseC_ml.json",
-   "reference_string": "Nonomura et al. (2003); AIJ UWE Benchmark Dataset Case C; Kikumoto et al. (2026) Japan Architectural Review"
+   "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   }
  ],
  "note": null

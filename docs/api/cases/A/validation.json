@@ -1,7 +1,7 @@
 {
  "schema_version": "1.0.0",
- "generated_from": "63356f3e38b6be936d226825ba58af2c0ed3c2ed",
- "generated_at": "2026-10-14T13:52:29+00:00",
+ "generated_from": "8cfdf9dca3f9eb33fcd98cb5352e9b2597bdbf83",
+ "generated_at": "2026-10-14T14:04:09+00:00",
  "licence": "CC BY 4.0",
  "case": "A",
  "title": "Case A — 1:1:2 building",
@@ -129,7 +129,7 @@
    "reproduce": "Eddy3D fixture TestAijCaseAContainerE2E; figures validation/plot_aij.py",
    "source_file": "validation/results/caseA_openfoam12_realizableKE.json",
    "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseA_openfoam12_realizableKE.json",
-   "reference_string": "Ishihara, T. & Hibi, K.; AIJ UWE Benchmark Dataset Case A; Kikumoto et al. (2026) Japan Architectural Review, Comprehensive Experimental Database for Validating CFD Simulations in Urban Environments"
+   "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   },
   {
    "engine": "ml-surrogate",
@@ -255,7 +255,7 @@
    "reproduce": "Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot_aij_ml.py",
    "source_file": "validation/results/caseA_ml.json",
    "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseA_ml.json",
-   "reference_string": "Ishihara, T. & Hibi, K.; AIJ UWE Benchmark Dataset Case A; Kikumoto et al. (2026) Japan Architectural Review"
+   "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   }
  ],
  "note": null

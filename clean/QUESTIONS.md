@@ -34,7 +34,7 @@ measured, +y or −y?)
 ## Q3 — Case E: the sensor frame against the two geometries (Tominaga)
 
 1. Point 50 at (−45.5, −45.0) m lies **0.17 m inside a building wall of the official `BD_caseE.stl`**
-   (roof at 6.75 m) and 2.06 m clear of the nearest wall in `CaseE(Niigata).3dm`. The other 79 points
+   (roof at 6.75 m) and 2.06 m clear of the nearest wall in `case-e.3dm`. The other 79 points
    are in open space in both files (median 4.9 m from the nearest vertex). The two files are
    different triangulations of the district (official: 227 shells, 60,101 triangles, 5,253 open
    edges, bbox ±198 m after ×250; the 3dm: 5,015 meshes, bbox −201.5…203 m). Which is the

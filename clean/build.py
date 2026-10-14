@@ -5,8 +5,8 @@
     python clean/build.py --check    # re-run the checks against what is on disk, build nothing
 
 Inputs (never modified):
-    Case_A_cleaned/, Case_B_cleaned/, CaseC_cleaned/   the Zenodo files as cloned
-    CaseD_cleaned/, Case E_cleaned/                      the clone's workbooks / 3dm (cross-checks only)
+    case-a/, case-b/, case-c/   the Zenodo files as cloned
+    case-d/, case-e/                      the clone's workbooks / 3dm (cross-checks only)
     clean/sources/zenodo_caseD/, clean/sources/zenodo_caseE/
                                                         the official Zenodo files the clone lacks
                                                         (SHA256SUMS.txt beside them; see manifest provenance)
@@ -380,23 +380,23 @@ def interp_log(z, U, zq):
 # --------------------------------------------------------------------------------------------- case facts (from the readmes / data paper; verified in the checks)
 
 CASES = {
-    "A": {"title": "Case A — flow around a 1:1:2 building", "folder": "Case_A_cleaned", "zenodo_concept": "10.5281/zenodo.15050147", "zenodo_version": "10.5281/zenodo.15050148",
+    "A": {"title": "Case A — flow around a 1:1:2 building", "folder": "case-a", "zenodo_concept": "10.5281/zenodo.15050147", "zenodo_version": "10.5281/zenodo.15050148",
           "b": 0.08, "H": 0.16, "U_H_stated": 4.49, "Re_H": 24000, "scale": None,
           "contact": "Takeshi Ishihara <ishihara@bridge.t.u-tokyo.ac.jp>", "collectors": ["Takeshi Ishihara (The University of Tokyo)", "Kazuki Hibi (Numerical Flow Design)"],
           "citation": "Meng, Y., & Hibi, K. (1998). Turbulent measurements of the flow field around a high-rise building. J. Wind Eng. JAWE 76, 55-64. https://doi.org/10.5359/jawe.1998.76_55"},
-    "B": {"title": "Case B — flow around a 1:4:4 slab", "folder": "Case_B_cleaned", "zenodo_concept": "10.5281/zenodo.15401455", "zenodo_version": "10.5281/zenodo.15401456",
+    "B": {"title": "Case B — flow around a 1:4:4 slab", "folder": "case-b", "zenodo_concept": "10.5281/zenodo.15401455", "zenodo_version": "10.5281/zenodo.15401456",
           "depth": 0.05, "width": 0.20, "H": 0.20, "U_H_stated": 5.1, "Re_H": 72000, "scale": None,
           "contact": "Yoshihide Tominaga <tominaga@abe.niit.ac.jp>", "collectors": ["Yoshihide Tominaga (Niigata Institute of Technology)"],
           "citation": "Miyazaki, T., Tominaga, Y. (2003). Wind tunnel experiment on flow field around a building model with a scale ratio of 4:4:1 placed within the surface boundary layer. Proc. Annual Meeting of Hokuriku Chapter, AIJ, 201-204 (in Japanese). https://www.aij.or.jp/paper/detail.html?productId=313933"},
-    "C": {"title": "Case C — flow within a 3 x 3 array of blocks", "folder": "CaseC_cleaned", "zenodo_concept": "10.5281/zenodo.15401791", "zenodo_version": "10.5281/zenodo.15401792",
+    "C": {"title": "Case C — flow within a 3 x 3 array of blocks", "folder": "case-c", "zenodo_concept": "10.5281/zenodo.15401791", "zenodo_version": "10.5281/zenodo.15401792",
           "D": 0.20, "pitch": 0.40, "U_H_stated": 3.65, "Re_H": 52000, "scale": None,
           "contact": "Yoshitami Nonomura <nonomura.yoshitami@yamato-u.ac.jp>", "collectors": ["Yoshitami Nonomura (Yamato University)"],
           "citation": "Nonomura, Y., Kobayashi, N., Tominaga, Y., Mochida, A. (2003). The cross comparison of CFD results for flow field around building models (part 3). Japan Association for Wind Engineering 95, 83-84 (in Japanese). https://doi.org/10.14887/jaweam.2003.0.41.0"},
-    "D": {"title": "Case D — flow around a high-rise building in city blocks", "folder": "CaseD_cleaned", "zenodo_concept": "10.5281/zenodo.15402668", "zenodo_version": "10.5281/zenodo.15402669",
+    "D": {"title": "Case D — flow around a high-rise building in city blocks", "folder": "case-d", "zenodo_concept": "10.5281/zenodo.15402668", "zenodo_version": "10.5281/zenodo.15402669",
           "H": 0.25, "U_H_stated": 6.65, "Re_H": 110000, "scale": 400,
           "contact": "Yoshihide Tominaga <tominaga@abe.niit.ac.jp>", "collectors": ["Yoshihide Tominaga (Niigata Institute of Technology)"],
-          "citation": "Kikumoto, H., Tominaga, Y., Okaze, T. et al. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Environments. Japan Architectural Review 9(1), e70083, section 3.4. https://doi.org/10.1002/2475-8876.70083"},
-    "E": {"title": "Case E — flow within an actual urban area in Niigata", "folder": "Case E_cleaned", "zenodo_concept": "10.5281/zenodo.15429017", "zenodo_version": "10.5281/zenodo.15429018",
+          "citation": "Kikumoto, H., Okaze, T., Yoshie, R. et al. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083, section 3.4. https://doi.org/10.1002/2475-8876.70083"},
+    "E": {"title": "Case E — flow within an actual urban area in Niigata", "folder": "case-e", "zenodo_concept": "10.5281/zenodo.15429017", "zenodo_version": "10.5281/zenodo.15429018",
           "ZR": 250.0, "UR": 7.8, "z_ref": 15.9, "Re": 17000, "scale": 250,
           "contact": "Yoshihide Tominaga <tominaga@abe.niit.ac.jp>", "collectors": ["Yoshihide Tominaga (Niigata Institute of Technology)"],
           "citation": "Tominaga, Y., Mochida, A., Yoshie, R., Kataoka, H., Nozu, T., Yoshikawa, M., Shirasawa, T. (2008). AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings. JWEIA 96, 1749-1761. https://doi.org/10.1016/j.jweia.2008.02.058"},
@@ -883,7 +883,7 @@ def build_E(prov):
     c = "E"
     ze = os.path.join(SRC, "zenodo_caseE")
     lf, rs, af, stl = (os.path.join(ze, n) for n in ("LF_caseE.xls", "RS_caseE.csv", "AF_caseE.csv", "BD_caseE.stl"))
-    dm = os.path.join(REPO, CASES[c]["folder"], "CaseE(Niigata).3dm")
+    dm = os.path.join(REPO, CASES[c]["folder"], "case-e.3dm")
     prov[c] = [lf, rs, af, stl, os.path.join(ze, "readme_caseE.md"), os.path.join(ze, "MP_caseE.png"), dm]
     wb = xls(lf)
     g = wb.sheet_by_name("Geometry&Points")
@@ -903,7 +903,7 @@ def build_E(prov):
             for i, name in enumerate(COMPASS):
                 out.append(row(case_id=c, instrument="thermistor", config=state, point_id=int(no), wind_direction=name, wind_direction_deg=i * 22.5,
                                x=x, y=y, z=2.0, velocity_ratio=num(sh.cell_value(r, 2 + i))))
-    log("[E] source: LF_caseE.xls (Zenodo; byte-identical cells to the clone's CaseE(Niigata).xls) — it carries the velocity ratios at full precision, while RS_caseE.csv rounds them to 2 dp (checked below). Coordinates: 'Geometry&Points' sheet, 'm in actual scale, origin: centre of the reproducing area'; z = 2.0 m full scale (0.008 m model) from the readme")
+    log("[E] source: LF_caseE.xls (Zenodo; byte-identical cells to the clone's LF_caseE.xls) — it carries the velocity ratios at full precision, while RS_caseE.csv rounds them to 2 dp (checked below). Coordinates: 'Geometry&Points' sheet, 'm in actual scale, origin: centre of the reproducing area'; z = 2.0 m full scale (0.008 m model) from the readme")
     log("[E] transform: wide sheets (80 rows x 16 compass columns x 2 states) -> long rows; compass name -> wind_direction_deg = 22.5 * index (N = 0, clockwise); no numeric change")
     pts = pd.DataFrame(out, columns=POINT_COLUMNS)
 
@@ -921,10 +921,10 @@ def build_E(prov):
     ac3, sh_ac, fl_ac = orient_outward(mesh_3dm(dm, "ac"))
     bc3, sh_bc, fl_bc = orient_outward(mesh_3dm(dm, "bc"))
     s_ac, s_bc = stl_stats(ac3), stl_stats(bc3)
-    log(f"[E] geometry (Eddy3D-derived): CaseE(Niigata).3dm layers 'buildings' (+ 'buildings_new_construction'): ac {s_ac}, {fl_ac}/{sh_ac} shells flipped outward; bc {s_bc}, {fl_bc}/{sh_bc} flipped")
+    log(f"[E] geometry (Eddy3D-derived): case-e.3dm layers 'buildings' (+ 'buildings_new_construction'): ac {s_ac}, {fl_ac}/{sh_ac} shells flipped outward; bc {s_bc}, {fl_bc}/{sh_bc} flipped")
     geo = [("ac", None, off_full, f"official BD_caseE.stl (Zenodo) scaled x{CASES[c]['scale']} from model to full-scale metres; {s_off['triangles']} triangles, {s_off['edges_boundary']} boundary edges (not watertight as published)"),
-           ("ac_3dm", None, ac3, "Eddy3D-side reconstruction from CaseE(Niigata).3dm, layers 'buildings' + 'buildings_new_construction', shells oriented outward"),
-           ("bc_3dm", None, bc3, "Eddy3D-side reconstruction of the BEFORE-construction state from CaseE(Niigata).3dm, layer 'buildings' only (the sites of A, B, C are empty on that layer); no published source exists for this state")]
+           ("ac_3dm", None, ac3, "Eddy3D-side reconstruction from case-e.3dm, layers 'buildings' + 'buildings_new_construction', shells oriented outward"),
+           ("bc_3dm", None, bc3, "Eddy3D-side reconstruction of the BEFORE-construction state from case-e.3dm, layer 'buildings' only (the sites of A, B, C are empty on that layer); no published source exists for this state")]
 
     # ---- checks
     check(c, "row_count_80_x_16_x_2", len(pts) == 2560 and pts.point_id.nunique() == 80, rows=len(pts), points=int(pts.point_id.nunique()))
@@ -1163,7 +1163,7 @@ def build():
     manifest = {
         "name": "AIJ UWE benchmark — cleaned release, Cases A-E", "version": RELEASE_VERSION, "schema_version": SCHEMA_VERSION,
         "licence": {"data": "CC BY 4.0", "url": "https://creativecommons.org/licenses/by/4.0/", "note": "The measurement data belongs to its collectors and distributors, named per case. Cite the benchmark paper and each case's requested citation."},
-        "cite": {"benchmark": "Kikumoto, H., Tominaga, Y., Okaze, T. et al. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Environments. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083",
+        "cite": {"benchmark": "Kikumoto, H., Okaze, T., Yoshie, R. et al. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083",
                  "guidelines": "Tominaga, Y. et al. (2008). AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings. JWEIA 96, 1749-1761. https://doi.org/10.1016/j.jweia.2008.02.058"},
         "built_by": "clean/build.py (deterministic; re-run to regenerate; checks.json carries the validity checks, build.log every transform)",
         "schema": "SCHEMA.md", "readme": "README.md", "open_questions": "QUESTIONS.md",

@@ -39,7 +39,7 @@
    "configuration": "ac_3dm",
    "file": "cases/E/geometry_ac_3dm.stl",
    "format": "ASCII STL, LF, metres, same frame as points.csv",
-   "source": "Eddy3D-side reconstruction from CaseE(Niigata).3dm, layers 'buildings' + 'buildings_new_construction', shells oriented outward",
+   "source": "Eddy3D-side reconstruction from case-e.3dm, layers 'buildings' + 'buildings_new_construction', shells oriented outward",
    "stats": {
     "triangles": 8436,
     "bbox_min": [
@@ -64,7 +64,7 @@
    "configuration": "bc_3dm",
    "file": "cases/E/geometry_bc_3dm.stl",
    "format": "ASCII STL, LF, metres, same frame as points.csv",
-   "source": "Eddy3D-side reconstruction of the BEFORE-construction state from CaseE(Niigata).3dm, layer 'buildings' only (the sites of A, B, C are empty on that layer); no published source exists for this state",
+   "source": "Eddy3D-side reconstruction of the BEFORE-construction state from case-e.3dm, layer 'buildings' only (the sites of A, B, C are empty on that layer); no published source exists for this state",
    "stats": {
     "triangles": 8400,
     "bbox_min": [

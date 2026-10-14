@@ -45,7 +45,7 @@ nav_order: 4
 
 ## Reference data
 
-Source in this repository: `CaseD_cleaned/CaseD(Highrise+Blocks).xls` (approach flow: `CaseD_cleaned/CaseD(Highrise+Blocks).xls [sheet Inflow]`).
+Source in this repository: `case-d/LF_caseD.xls` (approach flow: `case-d/LF_caseD.xls [sheet Inflow]`).
 
 The cleaned table has **267 rows** over **78 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `Vs`.
 
@@ -71,12 +71,12 @@ Unmeasured cells (null): U 234, V 234, W 234, uu 234, vv 234, ww 234, k 234, Vs 
 
 ## Things to know before comparing
 
-- All of Case D's data lives in CaseD(Highrise+Blocks).xls, a genuine OLE2/BIFF8 workbook (read it with xlrd 2.x; openpyxl cannot). Sheets: 'Geometry&Points', 'Inflow', 'Results (Exp_S)' (split fibre, WD = 0), 'Results (Exp_T)' (thermistor, 0 / 22.5 / 45 deg).
+- All of Case D's data lives in LF_caseD.xls, a genuine OLE2/BIFF8 workbook (read it with xlrd 2.x; openpyxl cannot). Sheets: 'Geometry&Points', 'Inflow', 'Results (Exp_S)' (split fibre, WD = 0), 'Results (Exp_T)' (thermistor, 0 / 22.5 / 45 deg).
 - Coordinates are millimetres in the workbook; the API serves metres.
 - The shipped BD_caseD.stl is dirty: 1572 facets of which 576 are duplicates, and all 83 roofs are wound inward (signed volume 0.011159 m^3 against the true 0.021477 m^3). The API's geometry.stl is rebuilt from the 83 shells' bounding boxes: 996 facets, watertight, volume 0.021477 m^3.
 - The thermistor reads a SCALAR speed. Over the 33 points where both instruments overlap at WD = 0, the ratio of mean thermistor speed to mean |U| is 1.342 (the mean of the per-point ratios is 1.50). sqrt(|U|^2 + 2k) from the split-fibre data matches the thermistor to FB +0.058, R 0.947; |U| alone to FB +0.292, R 0.872.
 - Unmeasured thermistor cells are '-' in the workbook (null here). At WD = 0 the 66 measured values are 33 exact mirror pairs, so only 33 are independent; at 22.5 and 45 deg all 66 are independent.
-- A prior Eddy3D comparison kept in the folder ('Eddy3D vs AIJ.xlsx') scores R = +0.096 against the thermistor: a frame or geometry error, not a closure result. It is not a validation.
+- A prior Eddy3D comparison kept in the folder (case-d-eddy3d-prior-comparison.xlsx) scores R = +0.096 against the thermistor: a frame or geometry error, not a closure result. It is not a validation.
 
 ## Validation
 

@@ -279,7 +279,8 @@ def validation_entries(case):
             "reproduce": reproduce,
             "source_file": f"validation/results/{name}",
             "source_url": f"{REPO_URL}/blob/main/validation/results/{name}",
-            "reference_string": res.get("reference"),
+            # The benchmark's citation from one place, not the fixture's free-text reference line.
+            "cite": D.CITATION["benchmark"],
         })
     return out
 
