@@ -18,6 +18,12 @@ coordinates live in it. **Question:** is the y axis of `RS_caseC.csv` the one in
 mirror? Equivalently: for WD = 45°, does the wind come from the (−x, +y) quadrant or the (−x, −y)
 quadrant of the CSV coordinates?
 
+*Update 2026-10-14 — a second, independent line of evidence.* Eddy3D solved all nine configurations
+(OpenFOAM 12, realizable k-ε) and scored the 120 points both ways on the same solutions: in the CSV's
+sense R = 0.83–0.91 at 22.5° and 45°; in Figure 3's sense (the y mirror) R = −0.33 … +0.03. A RANS
+solution knows nothing about the CSV's convention, so the data's own symmetry and the physics now agree;
+the question stays open only for the collector's word on Figure 3.
+
 ## Q2 — Case D: rotation sense for 22.5° and 45° (Tominaga)
 
 The 83-block array is exactly symmetric under y → −y, so a wind at +θ and one at −θ give exact mirror
