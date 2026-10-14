@@ -53,7 +53,7 @@ ENGINE_STATUS = {
     "B": {"openfoam12-realizableKE": "scored", "openlb": "scored", "fluidx3d": "running", "ml-surrogate": "scored"},
     "C": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "pending", "ml-surrogate": "scored"},
     "D": {"openfoam12-realizableKE": "running", "openlb": "not comparable", "fluidx3d": "pending", "ml-surrogate": "scored"},
-    "E": {"openfoam12-realizableKE": "running", "openlb": "not comparable", "fluidx3d": "pending", "ml-surrogate": "scored"},
+    "E": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "pending", "ml-surrogate": "scored"},
 }
 
 # Every validation run whose results.json is snapshotted in validation/results/: which case, engine and
@@ -77,6 +77,12 @@ RUNS = [
        ["aij_engines_agreement.png"],
        f"Eddy3D fixture TestAijCase{case}OpenLbContainerE2E (OpenLB eddy3dWind, CPU image, dx = 1.6 m); "
        "figure validation/plot_aij_engines.py") for case in ("A", "B")],
+    ("E", "openfoam12-realizableKE", "SW", "caseE_openfoam12_realizableKE.json",
+     {"before, √(|U|²+2k)": "vr.bc.SW.rms", "before, |U|": "vr.bc.SW.Umag", "after, √(|U|²+2k)": "vr.ac.SW.rms",
+      "after, |U|": "vr.ac.SW.Umag", "no-construction ceiling control": "noConstruction.SW"},
+     ["aij_caseE_agreement.png", "aij_caseE_map.png"],
+     "Eddy3D fixture TestAijCaseEContainerE2E (EDDY3D_AIJ_E_DIRECTIONS=SW, tabulated inlet); figures "
+     "validation/plot_aij_caseE.py (per-point pairs in validation/results/caseE_openfoam12_realizableKE_pairs.csv)"),
     ("A", "ml-surrogate", None, "caseA_ml.json",
      {"|U| (z = 0.01 m plane)": "speed.vectorMagnitude", "|U|, lattice cut at ±250 m": "halfExtent250.forward",
       "wind reversed (control)": "negativeControl.reversedWind"},

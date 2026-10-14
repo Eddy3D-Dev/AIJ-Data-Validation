@@ -75,6 +75,18 @@ The cleaned table has **2560 rows** over **80 distinct points**; columns `point_
 
 ## Validation
 
+### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor) — configuration SW
+
+| | before, √(\|U\|²+2k) | before, \|U\| | after, √(\|U\|²+2k) | after, \|U\| | no-construction ceiling control |
+|---|---|---|---|---|---|
+| **R** | +0.688 | +0.692 | +0.845 | +0.835 | +0.099 |
+| **FAC2** | 0.950 | 0.787 | 0.887 | 0.738 | 0.787 |
+| **FB** | +0.124 | +0.266 | +0.226 | +0.341 | +0.368 |
+| **hit rate** | 0.613 | 0.412 | 0.475 | 0.300 | 0.350 |
+| **n** | 80 | 80 | 80 | 80 | 80 |
+
+velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Reproduce: Eddy3D fixture TestAijCaseEContainerE2E (EDDY3D_AIJ_E_DIRECTIONS=SW, tabulated inlet); figures validation/plot_aij_caseE.py (per-point pairs in validation/results/caseE_openfoam12_realizableKE_pairs.csv).
+
 ### Eddy3D ML wind surrogate (pedestrian height)
 
 | | Vs/U(15.9 m), 16 WD, bc + ac | after construction | after − before | after, lattice cut at ±250 m | wind reversed (control) |
@@ -86,6 +98,10 @@ The cleaned table has **2560 rows** over **80 distinct points**; columns `point_
 | **n** | 2560 | 1280 | 1280 | 1280 | 1280 |
 
 velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot_aij_ml.py.
+
+![aij_caseE_agreement.png]({{ '/assets/aij_caseE_agreement.png' | relative_url }})
+
+![aij_caseE_map.png]({{ '/assets/aij_caseE_map.png' | relative_url }})
 
 ![aij_ml_agreement.png]({{ '/assets/aij_ml_agreement.png' | relative_url }})
 

@@ -114,7 +114,7 @@ with io.open(SCORES, encoding="utf-8") as f:
     scores = json.load(f)
 
 # ----------------------------------------------------------------------------- figure 1
-fig, axs = uplt.subplots(nrows=1, ncols=3, refwidth=2.0, refaspect=1, share=False, wspace=2.8)
+fig, axs = uplt.subplots(nrows=1, ncols=3, refwidth=2.0, refaspect=1, share=False, wspace=4.2)
 for i, (state, title) in enumerate(STATES):
     ax = axs[i]
     pts = pairs[state]

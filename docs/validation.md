@@ -97,6 +97,30 @@ the tunnel's turntable: the array turns with WD, the domain does not — ~310,00
 - An independent re-scoring from the probe files and the original `RS_caseC.csv` reproduces every number (largest
   difference 9 × 10⁻¹⁶).
 
+## Case E — the Niigata district, wind from SW
+
+Before and after the construction of a 60 m tower and two 18 m blocks, each state on a 504 m-radius cylinder
+(about one million cells, 2 m at the buildings), the tunnel's own profile imposed as a table
+(`wind.inlet: "manual"`), the model's speed over its own solved U(15.9 m).
+
+![Case E, measured vs modelled, before, after and the change]({{ '/assets/aij_caseE_agreement.png' | relative_url }})
+
+| | FAC2 | FB | q | R |
+|---|---|---|---|---|
+| before · √(\|U\|²+2k) | 0.95 | +0.12 | 0.61 | 0.69 |
+| before · \|U\| | 0.79 | +0.27 | 0.41 | 0.69 |
+| after · √(\|U\|²+2k) | 0.89 | +0.23 | 0.47 | 0.85 |
+| after · \|U\| | 0.74 | +0.34 | 0.30 | 0.84 |
+| ceiling control: the tunnel's *before*, scored as a model of its *after* | 0.79 | +0.37 | 0.35 | 0.10 |
+
+![Case E, where the model is slow or fast]({{ '/assets/aij_caseE_map.png' | relative_url }})
+
+The construction change (after − before), in which inflow, closure and instrument biases largely cancel, has
+R = 0.84, the sign right at 75 % of the points where the tunnel resolved a change, and about 60 % of the measured
+size — far above the control that ignores the construction. The absolute ratios are low because the approach
+column near the ground decays over the fetch (0.41 and 0.79 of the imposed table at 1.25 m and 2.5 m), and the
+measurement height, 2 m, sits in that layer.
+
 ## Cases A and B — every engine on the same points
 
 ![Measured vs modelled U and V, Cases A and B, one row per engine]({{ '/assets/aij_engines_agreement.png' | relative_url }})
@@ -152,7 +176,8 @@ settings as the OpenFOAM rows.
 | C · Vs/U_H, 9 configurations | 1080 | +0.67 | 0.44 | +0.21 | 0.18 | √(\|U\|²+2k): FB +0.18, FAC2 0.93, R +0.87, hit rate 0.69 |
 | D · Vs/U_H, thermistor, 3 WD | 198 | +0.67 | 0.34 | +0.33 | 0.17 | solving |
 | D · \|U\|/U_H, split fibre, WD 0 | 33 | +0.23 | 0.52 | +0.59 | 0.24 | solving |
-| E · Vs/U(15.9 m), 16 WD, before + after | 2560 | +1.00 | 0.22 | +0.43 | 0.08 | solving |
+| E · Vs/U(15.9 m), 16 WD, before + after | 2560 | +1.00 | 0.22 | +0.43 | 0.08 | — |
+| E · the same, SW only (both states) | 160 | +1.07 | 0.20 | +0.53 | 0.04 | \|U\|: FB +0.31, FAC2 0.76, R +0.81, hit rate 0.36 |
 
 **It predicts roughly half the tunnel's speed everywhere, and it does not respond to the wind direction.** Reversing
 the wind changes the predicted field by at most 1 × 10⁻⁴ U_ref over all 254,016 cells, in every case: the network
@@ -186,7 +211,7 @@ snapshotted in `validation/results/` with the per-point pairs beside them, and s
 
 | | A | B | C | D | E |
 |---|---|---|---|---|---|
-| OpenFOAM 12, realizable k-ε | scored | scored | scored | solving | solving |
+| OpenFOAM 12, realizable k-ε | scored | scored | scored | solving | scored, SW |
 | OpenLB | scored | scored | not comparable at dx = 1.6 m | not comparable at dx = 1.6 m | not comparable at dx = 1.6 m |
 | FluidX3D | running | running | pending | pending | pending |
 | ML surrogate | scored | scored | scored | scored | scored |

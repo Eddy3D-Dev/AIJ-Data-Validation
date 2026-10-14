@@ -37,7 +37,7 @@ it agrees is in the numbers and their reading. Anything not marked scored is not
 
 | | A | B | C | D | E |
 |---|---|---|---|---|---|
-| OpenFOAM 12, realizable k-ε | scored | scored | scored, 9 configurations | solving | solving |
+| OpenFOAM 12, realizable k-ε | scored | scored | scored, 9 configurations | solving | scored, SW |
 | OpenLB | scored | scored | not comparable at dx = 1.6 m | not comparable at dx = 1.6 m | not comparable at dx = 1.6 m |
 | FluidX3D | running | running | pending | pending | pending |
 | ML surrogate (Yel-2.0) | scored | scored | scored | scored | scored |
@@ -290,7 +290,7 @@ quantity it predicts. See *ML surrogate* under *Validation method*.
 </details>
 
 <details>
-<summary><b>Case E — Niigata district</b> · 80 points × 16 directions × before/after, velocity ratio · scored: ML; OpenFOAM solving</summary>
+<summary><b>Case E — Niigata district</b> · 80 points × 16 directions × before/after, velocity ratio · scored: OpenFOAM 12 (SW), ML</summary>
 
 <p><img src="validation/geometry/geom_caseE.png" width="60%" alt="Case E geometry"></p>
 
@@ -331,10 +331,36 @@ every fit overshoots U(15.9 m) by 4–7 %); power-law exponents are 0.158 (groun
 A tabulated inlet is the honest choice. The construction signal is large: mean (ac − bc) = +0.097, largest for
 SW (mean |Δ| 0.2155) and smallest for SSE (0.093).
 
-**Validation.** OpenFOAM 12 is **solving** SW — the direction with the largest construction signal — before and
-after construction: about 990,000 cells per state on a 500 m-radius cylinder, the measured profile imposed through
-a tabulated inlet that Eddy3D's CLI gained for this case (`wind.inlet: "manual"`). Nothing here is a claim about it
-yet. The ML surrogate (scaled ×0.9 so 2 m sits at 1.8 m) scores FB +1.00, FAC2 0.22, R +0.43, hit rate 0.08 over
+**Validation (OpenFOAM 12, realizable k-ε), wind from SW** — the direction with the largest construction signal —
+before and after construction: 986,540 and 1,006,090 cells on a 504 m-radius cylinder (4 m cells to 80 m, 2 m at the
+buildings), the workbook's measured profile imposed through a tabulated inlet that Eddy3D's CLI gained for this
+case (`wind.inlet: "manual"`), 2000 iterations. The model's speed is divided by its own solved U(15.9 m), which
+arrives at 0.998 of the imposed value in both states.
+
+![Case E, measured vs modelled, before, after and the change](validation/aij_caseE_agreement.png)
+
+| | FAC2 | FB | q | R |
+|---|---|---|---|---|
+| before · √(\|U\|²+2k) | 0.95 | +0.12 | 0.61 | 0.69 |
+| before · \|U\| | 0.79 | +0.27 | 0.41 | 0.69 |
+| after · √(\|U\|²+2k) | 0.89 | +0.23 | 0.47 | 0.85 |
+| after · \|U\| | 0.74 | +0.34 | 0.30 | 0.84 |
+| ceiling control: the tunnel's *before*, scored as a model of its *after* | 0.79 | +0.37 | 0.35 | 0.10 |
+
+![Case E, where the model is slow or fast](validation/aij_caseE_map.png)
+
+- **The construction change is the result to read.** After − before at the 80 points, the quantity in which inflow,
+  closure and instrument biases largely cancel: R = 0.84, the sign right at 57 of the 76 points where the tunnel
+  resolved a change (0.75), the mean change 0.09 modelled against 0.16 measured. The model puts the speed-up and
+  the shelter of the new buildings where the tunnel measured them, at about 60 % of their size — and far above
+  the control that ignores the construction (R 0.10).
+- **The absolute ratios are low, and the inflow says why.** The approach column at the workbook's two lowest
+  heights (1.25 m and 2.5 m) reads 0.41 and 0.79 of the imposed table, 0.98–1.04 from 5 m up: the near-ground
+  profile decays over the fetch, as in Case C, and the measurement height (2 m) sits in that layer.
+- SW is one of 16 directions; the others are one environment variable away and cost about 3.5 h per state each
+  on this machine.
+
+The ML surrogate (scaled ×0.9 so 2 m sits at 1.8 m) scores FB +1.00, FAC2 0.22, R +0.43, hit rate 0.08 over
 all 2560 values; on the change the construction makes (after − before, 1280 pairs) it has the sign right at 67 %
 of the 863 pairs the tunnel resolves (|Δ| > 0.05). See *ML surrogate* under *Validation method*.
 
@@ -450,7 +476,8 @@ U_H with each case's approach-flow file. The scores use the same metric code and
 | C · Vs/U_H, 9 configurations | 1080 | +0.67 | 0.44 | +0.21 | 0.18 | √(\|U\|²+2k): FB +0.18, FAC2 0.93, R +0.87, hit rate 0.69 |
 | D · Vs/U_H, thermistor, 3 WD | 198 | +0.67 | 0.34 | +0.33 | 0.17 | solving |
 | D · \|U\|/U_H, split fibre, WD 0 | 33 | +0.23 | 0.52 | +0.59 | 0.24 | solving |
-| E · Vs/U(15.9 m), 16 WD, before + after | 2560 | +1.00 | 0.22 | +0.43 | 0.08 | solving |
+| E · Vs/U(15.9 m), 16 WD, before + after | 2560 | +1.00 | 0.22 | +0.43 | 0.08 | — |
+| E · the same, SW only (both states) | 160 | +1.07 | 0.20 | +0.53 | 0.04 | \|U\|: FB +0.31, FAC2 0.76, R +0.81, hit rate 0.36 |
 
 **It predicts roughly half the tunnel's speed everywhere** (FB +0.67 … +1.00 on the thermistor cases), and
 **it does not respond to the wind direction**. Reversing the wind (θ + 180°) changes the predicted field by at most
@@ -479,14 +506,15 @@ Fitted to each case's own approach-flow file rather than assumed (Cases C–E: i
 
 The inlet is not the whole story near the ground: in Case C the approach flow that reaches the array is 17 % slower
 than the tunnel's at the probe height (z = 0.1 D) although it matches at z = D, and its k is under half the
-tunnel's there. Cases C–E all measure in that layer.
+tunnel's there; in Case E, with the tunnel's own profile imposed as a table, the approach column is 0.41 and 0.79
+of it at 1.25 m and 2.5 m and right from 5 m up. Cases C–E all measure in that layer.
 
 ### Reproducing the figures
 
 `validation/plot_aij.py` (Cases A and B), `validation/plot_aij_engines.py` (A and B, every engine),
-`validation/plot_aij_caseC.py` and `validation/plot_aij_ml.py`
+`validation/plot_aij_caseC.py`, `validation/plot_aij_caseE.py` and `validation/plot_aij_ml.py`
 (UltraPlot) build the figures. The Eddy3D fixtures are `TestAijCaseAContainerE2E`, `TestAijCaseBContainerE2E`,
-`TestAijCaseC{0D,1D,2D}ContainerE2E` and, for the ML surrogate, `Outdoor.ML.Tests/TestAijSurrogateE2E`. Their
+`TestAijCaseC{0D,1D,2D}ContainerE2E`, `TestAijCaseEContainerE2E` and, for the ML surrogate, `Outdoor.ML.Tests/TestAijSurrogateE2E`. Their
 `results.json` files are snapshotted in `validation/results/` and served unchanged by the API, with the per-point
 pairs beside them, so the figures rebuild from this repository alone.
 
@@ -494,7 +522,7 @@ pairs beside them, so the figures rebuild from this repository alone.
 
 | | A | B | C | D | E |
 |---|---|---|---|---|---|
-| OpenFOAM 12, realizable k-ε | scored | scored | scored | solving | solving |
+| OpenFOAM 12, realizable k-ε | scored | scored | scored | solving | scored, SW |
 | OpenLB | scored | scored | not comparable at dx = 1.6 m | not comparable at dx = 1.6 m | not comparable at dx = 1.6 m |
 | FluidX3D | running | running | pending | pending | pending |
 | ML surrogate | scored | scored | scored | scored | scored |
