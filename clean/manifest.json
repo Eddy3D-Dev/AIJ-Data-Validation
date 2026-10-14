@@ -256,14 +256,14 @@
    "provenance": [
     {
      "path": "Case_A_cleaned/RS-caseA.csv",
-     "sha256": "acfb5996d49ce710cca6d0c15df9a0bfb25d3e5eddfbc832ae35a7b6ed242658",
-     "bytes": 11424,
+     "sha256": "f7e3c2479ef4edb07731ee41c47b12b68e3e10f021c429ec9c9dddda3e8781ad",
+     "bytes": 11237,
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "Case_A_cleaned/AF_caseA.csv",
-     "sha256": "bc3e117139a7d4352ae38aa9ea996c84e1b4dbde6ba88a015b3ea4821d98f140",
-     "bytes": 908,
+     "sha256": "f626460853d87954215edffc36df79a4525fdd9488943b35a4b9d8ef9b3ae972",
+     "bytes": 883,
      "origin": "repository clone of the Zenodo record"
     },
     {
@@ -274,8 +274,8 @@
     },
     {
      "path": "Case_A_cleaned/readme_caseA.md",
-     "sha256": "a38f17a736a773e84511c82dc8d7e89e90f78b7b5d3b05462dae10cd4b3bf537",
-     "bytes": 4185,
+     "sha256": "8f97de6045b69bf4269be142029717b2f4be0718f269a70ae6b362314b7dd0da",
+     "bytes": 4068,
      "origin": "repository clone of the Zenodo record"
     }
    ],
@@ -426,14 +426,14 @@
    "provenance": [
     {
      "path": "Case_B_cleaned/RS_caseB.csv",
-     "sha256": "7e9f54c3cdf231d2db9d0ce7c625adf0f50821f07a860920a406727b93801f99",
-     "bytes": 13163,
+     "sha256": "3b12e6955e2681fcab0591deaf960c5833e47b8fc4a42b1ba0a44007309ac4b8",
+     "bytes": 12938,
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "Case_B_cleaned/AF_caseB.csv",
-     "sha256": "506d55d6b79087c57fb8015650a1dbb586eb4e2955d60ff7767828d3e46b1f03",
-     "bytes": 556,
+     "sha256": "c775a3fb8de1abb9598593c47a5e6646d020864132742048b0c2d549840b22fc",
+     "bytes": 543,
      "origin": "repository clone of the Zenodo record"
     },
     {
@@ -444,8 +444,8 @@
     },
     {
      "path": "Case_B_cleaned/readme_caseB.md",
-     "sha256": "1e0cc36577f7ba494c397eeabb08264313fed92332b7599c0e03529335b57a12",
-     "bytes": 4217,
+     "sha256": "dae340cabc7a347f4790a082a4877ca6dde011c13833db193b6fb3c203e531a8",
+     "bytes": 4108,
      "origin": "repository clone of the Zenodo record"
     }
    ],
@@ -726,14 +726,14 @@
    "provenance": [
     {
      "path": "CaseC_cleaned/RS_caseC.csv",
-     "sha256": "378884baeb11d7ca5417e9fa760ad43ceb830bf44edffe91a29dd16d1f673789",
-     "bytes": 34250,
+     "sha256": "e10e08551e700442ee5e117de76afc93b1b386b1e70df62aeeadde2cf0eced8d",
+     "bytes": 33169,
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "CaseC_cleaned/AF_caseC.csv",
-     "sha256": "e533d15458f241f868f8718f961df62b0ec28b0b86b9b1c942a1fa19b09c9c28",
-     "bytes": 302,
+     "sha256": "0d100e7051414afb4e9b46a4ed84237566d2276d09dbb45e11e3610b5820792c",
+     "bytes": 285,
      "origin": "repository clone of the Zenodo record"
     },
     {
@@ -744,8 +744,8 @@
     },
     {
      "path": "CaseC_cleaned/readme_caseC.md",
-     "sha256": "a12ca9518cd6b008fa0ccc8acbf1fea553b542cc531d7b9284993e9e01b1ad15",
-     "bytes": 4184,
+     "sha256": "b5c3dfa1ee1095324ae520cdb0e8d6b4eb7632b9a834b96b5d627a0fe1f3381f",
+     "bytes": 4070,
      "origin": "repository clone of the Zenodo record"
     }
    ],
