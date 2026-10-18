@@ -402,11 +402,11 @@
  "case-l.png": {
   "height": 800,
   "master": "/assets/geometry/case-l.png",
-  "master_bytes": 2263616,
+  "master_bytes": 2263625,
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-l.png",
-  "web_bytes": 302559,
+  "web_bytes": 302555,
   "width": 1600
  },
  "case-m-layout.png": {
