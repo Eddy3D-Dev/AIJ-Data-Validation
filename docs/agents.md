@@ -61,7 +61,8 @@ names in `$schema`.
 - Send a descriptive `User-Agent`. The site's CDN rejects Python `urllib`'s default one and some AI crawlers with
   HTTP 403. If you are refused anyway, `fallback_base_url` serves byte-identical files from the repository.
 - Quote `data_version` with any number you report: it identifies exactly the data the number came from.
+- Cite the release you pinned and quote its version: `cite.api` in that release's `index.json`.
 
 ## Cite
 
-How to cite the benchmark, each case's dataset and this repository is on the [About and cite]({{ '/about/' | relative_url }}) page. Each case's own requested citation and Zenodo DOI are also in `/api/cases/{id}.json` (`citation_requested`, `doi`).
+The API: `cite.api` in `/api/index.json` (`apa`, `bibtex`, `csl_json`). A case's dataset: `citation` and `doi` in `/api/cases/{id}.json`. The same citations, with the data paper's, are on the [About and cite]({{ '/about/#cite' | relative_url }}) page.

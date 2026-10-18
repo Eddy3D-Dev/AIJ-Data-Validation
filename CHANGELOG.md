@@ -15,6 +15,10 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api-reference/#versioning-and-changes).
 
+## [Unreleased]
+
+Added: `cite.api` in `index.json`, `citation` in `cases/{id}.json`; suggested citations on the site and in the README; `CITATION.cff` cites this dataset; `.zenodo.json`.
+
 ## [3.0.1] - 2026-10-18
 
 ### Fixed

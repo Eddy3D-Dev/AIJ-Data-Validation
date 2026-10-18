@@ -58,6 +58,8 @@ curl -s -A "aij-client/1.0" $BASE/index.json | jq '.versions'          # release
 curl -s -A "aij-client/1.0" $BASE/cases/B.json | jq '.points.csv.url'  # .../api/3.0.0/cases/B/points.csv?v=...
 ```
 
+Cite the API with `cite.api` in `index.json` or the [About page]({{ '/about/#cite' | relative_url }}).
+
 **To find the releases, and to learn the base URL of one,** `GET /api/versions.json`:
 
 ```bash
