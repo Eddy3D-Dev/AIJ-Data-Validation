@@ -124,3 +124,27 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 - DOI: [10.5281/zenodo.15429017](https://doi.org/10.5281/zenodo.15429017)
 - Citation requested: Tominaga, Y. et al. (2008). AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings. JWEIA 96, 1749-1761. <https://doi.org/10.1016/j.jweia.2008.02.058>
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case E (Niigata): Wind Tunnel Experiment for Flow within an Actual Urban Area in Niigata [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15429017
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_e,
+  author    = "Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case E (Niigata): Wind Tunnel Experiment for Flow within an Actual Urban Area in Niigata}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15429017",
+  url       = "https://doi.org/10.5281/zenodo.15429017",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).

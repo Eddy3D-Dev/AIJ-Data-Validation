@@ -194,6 +194,10 @@
  "doi": "10.5281/zenodo.15589666",
  "doi_note": "The readme and the data paper name this one DOI; no separate version DOI is stated.",
  "citation_requested": "Kurotani, Y., Kiyota, N., Kobayashi, S. (2001). Windbreak effect of Tsuijimatsu in Izumo Part. 2. Summaries of technical papers of Annual Meeting, Architectural Institute of Japan, D-2 Environmental engineering II, 745-746 (in Japanese).",
+ "citation": {
+  "apa": "Kurotani, Y., Kiyota, N., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case G (Tree): Field Observation for Flow behind Tree Belt [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15589666",
+  "bibtex": "@misc{aijuwe_case_g,\n  author    = \"Kurotani, Yasuo and Kiyota, Nobuyoshi and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa\",\n  title     = \"{AIJ UWE Benchmark Dataset -- Case G (Tree): Field Observation for Flow behind Tree Belt}\",\n  year      = \"2025\",\n  publisher = \"Zenodo\",\n  doi       = \"10.5281/zenodo.15589666\",\n  url       = \"https://doi.org/10.5281/zenodo.15589666\",\n  note      = \"Data set\"\n}"
+ },
  "files_in_repository": {
   "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/raw/cases/case-g",
   "reference": "raw/cases/case-g/RS_caseG.csv",

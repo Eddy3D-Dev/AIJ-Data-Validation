@@ -639,6 +639,10 @@
  "doi": "10.5281/zenodo.15487857",
  "doi_note": null,
  "citation_requested": "Tachibana, T., Yoshie, R., Nakayama, S., Kishida, T., Miyashita, K., Sasaki, R. (2022). Comparison between field measurement and wind tunnel experiments of gas dispersion in an urban area and verification of similarity law. Journal of Wind Engineering 47(3), 39-52 (in Japanese). http://dx.doi.org/10.5359/jwe.47.39",
+ "citation": {
+  "apa": "Yoshie, R., Tachibana, T., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case M (TPU): Wind Tunnel Experiment and Field Observation for Flow and Dispersion within TPU Campus [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15487857",
+  "bibtex": "@misc{aijuwe_case_m,\n  author    = \"Yoshie, Ryuichiro and Tachibana, Takumi and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa\",\n  title     = \"{AIJ UWE Benchmark Dataset -- Case M (TPU): Wind Tunnel Experiment and Field Observation for Flow and Dispersion within TPU Campus}\",\n  year      = \"2025\",\n  publisher = \"Zenodo\",\n  doi       = \"10.5281/zenodo.15487857\",\n  url       = \"https://doi.org/10.5281/zenodo.15487857\",\n  note      = \"Data set\"\n}"
+ },
  "files_in_repository": {
   "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/raw/cases/case-m",
   "reference": "raw/cases/case-m/RS-WT_caseM.csv",

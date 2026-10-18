@@ -126,3 +126,27 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 - DOI: [10.5281/zenodo.15589666](https://doi.org/10.5281/zenodo.15589666)
 - Citation requested: Kurotani, Y., Kiyota, N., Kobayashi, S. (2001). Windbreak effect of Tsuijimatsu in Izumo Part. 2. Summaries of technical papers of Annual Meeting, Architectural Institute of Japan, D-2 Environmental engineering II, 745-746 (in Japanese).
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Kurotani, Y., Kiyota, N., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case G (Tree): Field Observation for Flow behind Tree Belt [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15589666
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_g,
+  author    = "Kurotani, Yasuo and Kiyota, Nobuyoshi and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case G (Tree): Field Observation for Flow behind Tree Belt}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15589666",
+  url       = "https://doi.org/10.5281/zenodo.15589666",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).

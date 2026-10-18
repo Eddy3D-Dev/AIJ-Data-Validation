@@ -20,7 +20,9 @@ copy of each, which the pages and the README embed, linked to its master), docs/
 the include docs/_includes/figure.html), the figure blocks of README.md (between its <!--fig ...--> markers), docs/cases/<slug>.md and
 docs/cases/<slug>/{data,validation}.md (three pages per case), docs/_includes/{case-gallery,cases-table,
 cases-frames,validation-matrix,known-issues-fm,api-changelog}.md, docs/_includes/{version-label,dataset-jsonld}.html and
-docs/llms.txt. Every JSON document names its JSON Schema in `$schema`; the schemas are in scripts/api_schemas.py
+docs/llms.txt. The citations (scripts/citation.py) go into index.json `cite.api`, cases/{id}.json `citation`, the include
+docs/_includes/cite.md, the Cite section of every Data page, the <!--cite--> block of README.md, CITATION.cff and
+.zenodo.json. Every JSON document names its JSON Schema in `$schema`; the schemas are in scripts/api_schemas.py
 and are enforced here before anything is reported OK.
 
 The API is served twice, by the same code. Each release is a frozen copy of the whole API under docs/api/<release>/
@@ -49,6 +51,7 @@ import zipfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import aijdata as D  # noqa: E402
 import api_schemas as S  # noqa: E402
+import citation as C  # noqa: E402
 import page_prose as P  # noqa: E402
 import release as R  # noqa: E402
 
@@ -63,8 +66,8 @@ FIGURES = os.path.join(REPO, "validation", "figures")
 FIGURE_INFO = {}                       # file name -> what a page needs to embed the figure; filled by copy_assets()
 RESULTS_DIR = os.path.join(REPO, "validation", "results")
 
-REPO_URL = "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ"
-SITE = "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ"
+REPO_URL = C.REPO_URL
+SITE = C.SITE
 LIVE_BASE = SITE + "/api"         # the unversioned alias: always the newest release
 RAW_BASE = "https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/main/docs/api"
 SCHEMA_VERSION = "2.3.0"
@@ -168,6 +171,8 @@ CACHING = ("GitHub Pages sends JSON with a 10-minute max-age and CSV and ZIP fil
            "downloads against `sha256`.")
 
 CASE_SPAN = f"{D.CASE_IDS[0]}-{D.CASE_IDS[-1]}"   # "A-M"
+if f"Cases {CASE_SPAN}:" not in C.TITLE:
+    raise SystemExit(f"scripts/citation.py TITLE names other cases than {CASE_SPAN}")
 
 ENGINES = [
     {"id": "openfoam12-realizableKE", "name": "OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor)", "kind": "RANS"},
@@ -715,10 +720,10 @@ COLUMN_MEANING = {
 
 # (path, media type, schema name or None, description); the order is the order of index.json and openapi.json.
 ENDPOINTS = [
-    ("index.json", "application/json", "index", "every endpoint and file with its size and SHA-256, versions, compatibility policy, changelog, licence, citation"),
+    ("index.json", "application/json", "index", "every endpoint and file with its size and SHA-256, versions, compatibility policy, changelog, licence, how to cite the API (cite.api)"),
     ("versions.json", "application/json", "versions", "every release, newest first: version, date, status (latest or superseded), schema and data version, base URL, tag, changelog; always at the unversioned /api/ path"),
     ("cases.json", "application/json", "cases", "every case: id, title, frame, units, counts, engine status, links"),
-    ("cases/{id}.json", "application/json", "case", "one case in full: configurations, frame, units, inflow fit and approach-flow profile, point-table summary, geometry files, validation status, known data issues, attribution"),
+    ("cases/{id}.json", "application/json", "case", "one case in full: configurations, frame, units, inflow fit and approach-flow profile, point-table summary, geometry files, validation status, known data issues, attribution, citation of the case's dataset"),
     ("cases/{id}/points.json", "application/json", "points", "the cleaned measurement table: SI units, one frame, null where not measured"),
     ("cases/{id}/points.csv", "text/csv", None, "the same table as CSV (empty cell = not measured)"),
     ("cases/{id}/approach_flow.csv", "text/csv", None, "the measured approach-flow profile: z (m), U (m/s), and k (m^2/s^2) or u_rms (m/s) where published; Case G's U and k are dimensionless (U/Ub, k/Ub^2)"),
@@ -739,6 +744,11 @@ MEDIA_TYPES = {".json": "application/json", ".csv": "text/csv", ".stl": "model/s
 
 WRITTEN = set()          # every file this build wrote into the current tree (relative); anything else there is stale
 DATA_VERSION = None      # set once the data files are written
+
+
+def release_citation():
+    """The release the citations name: VERSION, its date in CHANGELOG.md and this build's data version."""
+    return C.Release(RELEASE, RELEASE_DATE, DATA_VERSION)
 
 
 # ----------------------------------------------------------------------------- trees
@@ -1192,6 +1202,7 @@ def write_case_documents(case, d):
         "known_issues": meta["known_issues"],
         "people": meta["people"], "doi": meta["doi"], "doi_note": meta.get("doi_note"),
         "citation_requested": meta["citation_requested"],
+        "citation": C.case(case, meta),
         "files_in_repository": {"folder": f"{REPO_URL}/tree/main/{meta['folder']}", "reference": meta["reference_file"],
                                 "approach_flow": meta["approach_flow_file"], "readme": meta["readme"]},
         "render": render_url(case),
@@ -1429,6 +1440,7 @@ def llms_text(percase):
         f"- {D.CITATION['benchmark']}",
         f"- {D.CITATION['guidelines']}",
         "- Each case's own requested citation and Zenodo DOI are in cases/{id}.json.",
+        "- Cite the API: cite.api in index.json",
         "",
     ]
     return "\n".join(walk)
@@ -1441,7 +1453,8 @@ def write_dataset_jsonld(percase):
     dataset = {
         "@context": "https://schema.org",
         "@type": "Dataset",
-        "name": f"AIJ UWE, Cases {CASE_SPAN}: cleaned wind-tunnel and field data",
+        "name": C.TITLE,
+        "identifier": C.pinned_url(RELEASE),
         "description": ("Wind-tunnel and field reference data of the Architectural Institute of Japan Urban Wind Environment (UWE) "
                         f"benchmark, Cases {CASE_SPAN}: isolated buildings and arrays of blocks and cubes, a high-rise among city "
                         "blocks, districts of Niigata, Shinjuku and Atsugi, a tree belt, and tracer-gas dispersion around buildings and cube "
@@ -1476,6 +1489,24 @@ def write_dataset_jsonld(percase):
     with io.open(os.path.join(DOCS, "_includes", "dataset-jsonld.html"), "w", encoding="utf-8", newline="\n") as f:
         f.write("<!-- Generated by scripts/build_api.py (write_dataset_jsonld). -->\n"
                 f'<script type="application/ld+json">\n{body}\n</script>\n')
+
+
+def write_citation_files():
+    """The citations that are not part of the API: docs/_includes/cite.md, the <!--cite--> block of README.md, CITATION.cff
+    and .zenodo.json, all rendered by scripts/citation.py for this release."""
+    rel = release_citation()
+    with io.open(os.path.join(DOCS, "_includes", "cite.md"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(C.site_include(rel))
+    path = os.path.join(REPO, "README.md")
+    with io.open(path, encoding="utf-8", newline="") as f:
+        text = f.read()
+    new = C.readme_with_cite(text, rel)
+    if new != text:
+        with io.open(path, "w", encoding="utf-8", newline="\n") as f:
+            f.write(new)
+    for name, body in (("CITATION.cff", C.cff(rel, D.CASES)), (".zenodo.json", C.zenodo_json(D.CASES))):
+        with io.open(os.path.join(REPO, name), "w", encoding="utf-8", newline="\n") as f:
+            f.write(body)
 
 
 def write_changelog_include():
@@ -1546,7 +1577,7 @@ def write_index():
         "case_ids": D.CASE_IDS,
         "files": [download(rel) for rel in files],
         "license_detail": D.LICENSE,
-        "cite": D.CITATION,
+        "cite": {"api": C.api(release_citation()), **D.CITATION},
         "agents": {
             "start_here": url("llms.txt"),
             "pin_a_version": f"GET {endpoint_url('versions.json')} and use the base_url of the release you want; paths are the same in every release",
@@ -2279,8 +2310,8 @@ def _case_data_page(case, meta, p):
         L.append(f"- DOI: [{meta['doi']}](https://doi.org/{meta['doi']})")
     elif meta.get("doi_note"):
         L.append(f"- DOI: {_esc(meta['doi_note'])}")
-    L += [f"- Citation requested: {_esc(meta['citation_requested'])}", "- Licence: CC BY 4.0"]
-    return L
+    L += [f"- Citation requested: {_esc(meta['citation_requested'])}", "- Licence: CC BY 4.0", ""]
+    return L + C.case_section(case, meta)
 
 
 def _and_join(names):
@@ -2460,6 +2491,8 @@ def _read(root, rel):
 def _link_problem(sv, base, root, on_disk, index):
     """Why a URL a tree's document gives is wrong, or None. Inside a tree every URL stays in the tree; the registry
     (versions.json) is the one file outside it, and the latest alias may name its release's frozen copy."""
+    if sv.startswith(LIVE_BASE + "/") and sv.endswith("/"):
+        sv = sv.rstrip("/")      # the root of a tree, as the citation of a release gives it
     if sv == base or "{" in sv or not (sv == LIVE_BASE or sv.startswith(LIVE_BASE + "/")):
         return None
     if sv == f"{LIVE_BASE}/versions.json":
@@ -2592,7 +2625,7 @@ def verify_tree(root, base, strict_assets):
 
 # Header fields and lines a release tree and the alias legitimately word differently (they name themselves).
 TREE_SPECIFIC_INDEX = {"tree", "fallback_note"}
-SAME_IN_BOTH_INDEXES = ("release", "release_base_url", "versions_url")
+SAME_IN_BOTH_INDEXES = ("release", "release_base_url", "versions_url", "cite")
 
 
 def _alias_form(text):
@@ -2739,6 +2772,8 @@ def verify():
     problems += [f"[alias vs release] {p}" for p in verify_alias_matches_release()]
     problems += [f"[registry] {p}" for p in verify_registry()]
     problems += [f"[web copies] {p}" for p in verify_web()]
+    import check_citation
+    problems += [f"[citation] {p}" for p in check_citation.check(REPO)]
     if _read(DOCS, "llms.txt") != _read(API_ROOT, "llms.txt"):
         problems.append("docs/llms.txt and docs/api/llms.txt differ")
     return problems
@@ -2788,6 +2823,7 @@ def build():
     percase = build_tree()
     write_dataset_jsonld(percase)       # the home page describes this release by its frozen addresses
     write_changelog_include()
+    write_citation_files()              # the About include, the README block, CITATION.cff and .zenodo.json
     build_pages(percase)
     use_tree("latest")
     build_tree()

@@ -338,11 +338,67 @@
   "cite": {
    "type": "object",
    "required": [
+    "api",
     "benchmark"
    ],
    "properties": {
     "benchmark": {
      "type": "string"
+    },
+    "guidelines": {
+     "type": "string"
+    },
+    "per_case": {
+     "type": "string"
+    },
+    "api": {
+     "type": "object",
+     "required": [
+      "title",
+      "version",
+      "url",
+      "release_url",
+      "doi",
+      "apa",
+      "bibtex",
+      "csl_json"
+     ],
+     "properties": {
+      "title": {
+       "type": "string"
+      },
+      "version": {
+       "type": "string",
+       "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+      },
+      "url": {
+       "type": "string",
+       "format": "uri",
+       "description": "the pinned address of this release's API: the address to cite"
+      },
+      "release_url": {
+       "type": "string",
+       "format": "uri",
+       "description": "the release's page in the repository"
+      },
+      "doi": {
+       "type": [
+        "string",
+        "null"
+       ],
+       "description": "the DOI of the release's Zenodo record; null until one exists"
+      },
+      "apa": {
+       "type": "string"
+      },
+      "bibtex": {
+       "type": "string"
+      },
+      "csl_json": {
+       "type": "object",
+       "description": "the same citation as a CSL-JSON item"
+      }
+     }
     }
    }
   }
