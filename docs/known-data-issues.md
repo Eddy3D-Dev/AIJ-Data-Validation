@@ -8,17 +8,7 @@ redirect_from:
 
 # Known issues in the published data files
 
-Each item below changes the result of a comparison if it is not accounted for.
-
-- The cleaned tables served by the API apply the corrections (units, signs, frames); the raw files in the repository do not.
-- Each case's Data page repeats its own list.
-
-<details markdown="block">
-<summary>Data notes: how the issues were found</summary>
-
-All of these were found by scoring or measuring the files rather than reading them.
-
-</details>
+The cleaned tables served by the API apply the corrections (units, signs, frames); the raw files in the repository do not. Do not apply the corrections again to the published files.
 
 <details open markdown="block">
   <summary>
@@ -37,14 +27,7 @@ All of these were found by scoring or measuring the files rather than reading th
 > Cases C, D and E, and the tunnel part of Case F, measure with thermistor anemometers: an *omnidirectional scalar*
 > speed, not |mean velocity vector|. The data paper suggests comparing √(|U|² + 2k) as a conservative correction.
 > Case D, over the 33 points both instruments share: thermistor / |U| = 1.34, as a ratio of means.
-
-<details markdown="block">
-<summary>Interpretation: thermistor speed against RANS |U|</summary>
-
-A RANS |U| is biased low against the thermistor speed, most where the flow is sheltered and turbulent. Case D's
-split-fibre data measures the gap directly.
-
-</details>
+> Compare the bracket |U| ≤ Vs ≤ √(|U|² + 2k).
 
 {: .warning-title }
 > Each case has its own frame and unit
@@ -52,7 +35,7 @@ split-fibre data measures the gap directly.
 > A–D and H–L: model-scale metres, +x along the wind at WD = 0.
 > E, F, G and M: full-scale metres. E and F: +x east, +y north, meteorological (from-) directions. G: +x downwind.
 > M: +x north, +y west. In F and M the heights are above the tunnel floor, not the ground.
-> `frame` in `/api/cases/{id}.json` states it. Read it before any number.
+> `frame` in `/api/cases/{id}.json` states it.
 
 {: .warning-title }
 > Concentrations are normalised per case
@@ -65,17 +48,9 @@ split-fibre data measures the gap directly.
 
 ## Case A
 
-- V is positive toward +y.
+- V is positive toward +y (V = −2.893 m/s at (−0.040, −0.050, 0.010), just outside the y < 0 flank).
 - Coordinates are metres; turbulence columns are rms values. The API serves variances (uu = u_rms²) so A and B share
   one column meaning.
-
-<details markdown="block">
-<summary>Data notes: sign of V in Case A</summary>
-
-V = −2.893 m/s at (−0.040, −0.050, 0.010), just outside the y < 0 flank, where the flow must deflect away from the
-centreline.
-
-</details>
 
 ## Case B
 
@@ -86,7 +61,7 @@ centreline.
   the origin; points are published on the y ≤ 0 half by the tunnel's symmetry convention.
 
 <details markdown="block">
-<summary>Data notes: Case B sign of V and geometry source</summary>
+<summary>Data notes: Cases A and B, sign of V and geometry source</summary>
 
 Just outside the windward side face the flow must deflect away from the centreline, toward −y on the y < 0 flank.
 
@@ -133,39 +108,26 @@ figure's sense it falls to −0.33 … +0.03.
   0.011159 m³ against the true 0.021477 m³). The API's `geometry.stl` is rebuilt from the 83 shells' boxes: 996
   facets, watertight, volume 0.021477 m³.
 - Unmeasured thermistor cells are `-` (null in the API). At WD = 0 the 66 measured values are 33 exact mirror pairs.
-- The data do not fix the rotation sense for 22.5° and 45° (the array is exactly y-mirror symmetric). This release
-  rotates +x toward +y, following Figure 4 of the data paper.
+- The data do not fix the rotation sense for 22.5° and 45° (the array is exactly y-mirror symmetric, so +θ and −θ give
+  exact mirror fields). This release rotates +x toward +y, following Figure 4 of the data paper. Solved Eddy3D fields
+  score R 0.80 (22.5°) and 0.85 (45°) in that sense, 0.40 and 0.17 mirrored.
+- All 78 points lie outside every block and inside the array; shifting the cloud by 12.5 mm (5 m full scale) in x or y
+  puts two points inside a block.
 - The Zenodo record ([10.5281/zenodo.15402668](https://doi.org/10.5281/zenodo.15402668)) also ships CSVs: unmeasured
   is −999.9 there, and `RS-S_caseD.csv`'s z header is the full-width character `ｚ`. They match the workbook to
   4 × 10⁻¹⁶; the repository mirrors them under `clean/sources/zenodo_caseD/`.
-- A prior Eddy3D comparison kept in the folder scores R = +0.096 against the thermistor.
-
-<details markdown="block">
-<summary>Data notes: rotation sense at 22.5° and 45°</summary>
-
-The array is exactly y-mirror symmetric, so +θ and −θ give exact mirror fields. The choice (+x toward +y) rests on
-Figure 4 of the data paper, and solved Eddy3D fields corroborate it at both headings: R 0.80 (22.5°) and 0.85 (45°)
-in that sense, 0.40 and 0.17 mirrored.
-
-</details>
-
-<details markdown="block">
-<summary>Data notes: sensor coordinates and the prior comparison</summary>
-
-The sensor coordinates and the geometry agree: every one of the 78 points is outside every block and inside the array,
-and shifting the cloud by 12.5 mm (5 m full scale) in x or y puts two points inside a block.
-
-The prior comparison's R = +0.096 is a frame or geometry error, not a validation.
-
-</details>
+- `case-d-eddy3d-prior-comparison.xlsx` (kept in the folder) scores R = +0.096 against the thermistor; the cause is a
+  frame or geometry error. Do not use it as a validation.
 
 ## Case E
 
 - The velocity ratio is normalised by the inflow velocity at 15.9 m (the Niigata meteorological station height):
-  U(15.9 m) = 0.504531 × UR = 3.935 m/s with UR = 7.8 m/s at ZR = 250 m. The reference is not U_H and not UR. A prior
-  comparison in the folder divided by the wrong reference and came out low by a factor of 2.048.
+  U(15.9 m) = 0.504531 × UR = 3.935 m/s with UR = 7.8 m/s at ZR = 250 m. The reference is neither U_H nor UR.
+- `case-e-eddy3d-prior-comparison.xlsx` (kept in the folder) divided by the wrong reference and is low by a factor of
+  2.048.
 - All 2560 published ratios are integer multiples of 0.0198204 (55 distinct levels): the data's own resolution is
-  ±0.0099, 3.1 % of the median and about 10 % at the lowest points.
+  ±0.0099, 3.1 % of the median and about 10 % at the lowest points. A tolerance below one quantum (0.0198204) is below
+  the data's resolution.
 - The readme describes `AF_caseE.csv`, `RS_caseE.csv` and `BD_caseE.stl`; the case folder holds only the `.3dm`,
   `.ghx`, `.xls` and the MP drawing. The Zenodo files are mirrored under `clean/sources/zenodo_caseE/`:
   `RS_caseE.csv` is the workbook rounded to two decimals, and `BD_caseE.stl` is model scale (×250), not
@@ -176,12 +138,5 @@ The prior comparison's R = +0.096 is a frame or geometry error, not a validation
   buildings. 475 of the 503 building shells are wound inward in the 3dm; the API's STLs are flipped outward.
 - Do not take measurement coordinates from the `probes` layer: its spheres sit a median 2.31 m (max 21 m) from the
   workbook's points, which are authoritative.
-
-<details markdown="block">
-<summary>Interpretation: resolution of the ratios</summary>
-
-No bar tighter than one quantum (0.0198204) means anything.
-
-</details>
 
 {% include known-issues-fm.md %}
