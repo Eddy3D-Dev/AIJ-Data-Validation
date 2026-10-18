@@ -18,6 +18,14 @@ so CI can rebuild and diff. Inputs:
 Outputs: docs/api/** (the API), docs/assets/{figures,geometry}/, docs/cases/*.md, docs/_includes/
 {case-gallery.md, dataset-jsonld.html} and docs/llms.txt. Every JSON document names its JSON Schema in
 `$schema`; the schemas are in scripts/api_schemas.py and are enforced here before anything is reported OK.
+
+The API is served twice, by the same code. Each release is a frozen copy of the whole API under docs/api/<release>/
+(<release> is VERSION), every URL inside it pointing back into it; docs/api/ itself is the latest alias, the same
+files addressed without the release. docs/api/versions.json, the one file that belongs to neither, lists every
+release. A build rewrites the copy of VERSION and the alias and never touches another release's copy (released
+copies are immutable: scripts/release.py check compares them with their tags). A release from before the layout
+(LEGACY_RELEASES) is not regenerated. verify() checks every tree on its own, that the alias is the newest release
+file for file, and the registry.
 """
 from __future__ import annotations
 
@@ -27,6 +35,7 @@ import hashlib
 import io
 import json
 import os
+import re
 import shutil
 import sys
 import zipfile
@@ -38,21 +47,52 @@ import release as R  # noqa: E402
 
 REPO = D.REPO
 DOCS = os.path.join(REPO, "docs")
-API = os.path.join(DOCS, "api")
+API_ROOT = os.path.join(DOCS, "api")   # the latest alias, versions.json, and one frozen <release>/ tree per release
 ASSETS = os.path.join(DOCS, "assets")
 FIGURES = os.path.join(REPO, "validation", "figures")
 RESULTS_DIR = os.path.join(REPO, "validation", "results")
 
 REPO_URL = "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ"
 SITE = "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ"
-API_BASE = SITE + "/api"
+LIVE_BASE = SITE + "/api"         # the unversioned alias: always the newest release
 RAW_BASE = "https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/main/docs/api"
-SCHEMA_VERSION = "2.2.0"
+SCHEMA_VERSION = "2.3.0"
 RELEASE = R.version()             # the repository's release (VERSION); the API names it, it does not set it
 RELEASE_DATE = R.release_date()
-RELEASE_BASE = RAW_BASE.replace("/main/", f"/v{RELEASE}/")   # the same files, frozen at the release tag
+PINNED_BASE = f"{LIVE_BASE}/{RELEASE}"   # this release, frozen: nothing under it changes once the release is tagged
+RELEASE_BASE = f"{RAW_BASE.replace('/main/', f'/v{RELEASE}/')}/{RELEASE}"   # the same frozen files, raw, at the tag
+
+# Releases that predate the versioned layout. They are never regenerated. Their tree under docs/api/<release>/ is
+# the tag's files with only their addresses rewritten (scripts/host_release.py); without one, the registry lists the
+# tag and its raw files instead. Both values are the ones the release's own docs/api/index.json carries
+# (git show v2.0.0:docs/api/index.json).
+LEGACY_RELEASES = {
+    "2.0.0": {"schema_version": "2.2.0", "data_version": "5af8c81571e452c1925b3efe58c698908066f64886eba5efd9b2f0348ecdc019"},
+}
+
+# State of the tree being written (see use_tree): build() writes the release tree, then the latest alias.
+TREE = None              # "release" | "latest"
+API = None               # the tree's directory
+API_BASE = None          # the URL every document in the tree uses for its own files
+FALLBACK_BASE = None     # the same tree, raw from the repository
 
 CHANGELOG = [
+    {"version": "2.3.0", "date": "2026-10-18", "changes": [
+        "Added: release-numbered paths. Every release is a frozen copy of the whole API under `/api/<release>/` (for example "
+        "`/api/3.0.0/index.json`, `/api/3.0.0/cases/F.json`). Every URL inside a copy points into the same copy, so a client "
+        "that starts there never leaves it, and nothing under it changes once the release is tagged. The unversioned "
+        "`/api/` paths are unchanged and always equal the newest release (the `latest` alias).",
+        "Added: `/api/versions.json` (schema `versions`), the list of every release, newest first: version, date, status "
+        "(`latest` or `superseded`), schema_version, data_version, base_url, tag, release page and changelog. Release 2.0.0 "
+        "predates the layout and is not regenerated: `/api/2.0.0/` holds the files of its tag byte for byte, with only their "
+        "own addresses rewritten into the copy (scripts/host_release.py derives it and the release check re-derives it).",
+        "Added to index.json: `tree` (`release` in a frozen copy, `latest` in the alias), `release_base_url` (the frozen copy "
+        "of `versions.release`; equal to `base_url` inside that copy) and `versions_url`. In a frozen copy `base_url` and "
+        "`fallback_base_url` name that copy, and `release.base_url` (the raw files at the release tag) now ends in the "
+        "release number; paths below it are unchanged.",
+        "Why MINOR: nothing is renamed or removed. Every unversioned URL and field keeps its meaning; the layout, a "
+        "document, a schema and three index.json fields are additions.",
+    ]},
     {"version": "2.2.0", "date": "2026-10-18", "changes": [
         "Added: `versions.release`, the semantic version of the published data and API (the repository's VERSION; "
         "tag vX.Y.Z; rules in CHANGELOG.md), and `release` with its date, tag, release page and `base_url`, the raw "
@@ -80,14 +120,16 @@ CHANGELOG = [
         "Added: schemas/{name}.schema.json, the JSON Schema (draft 2020-12) of every document, named by its `$schema` and "
         "embedded in openapi.json.",
         "Added: `run_id` on every validation result; geometry renders and captions in geometry.json.",
-        "Added: download URLs carry ?v=<SHA-256 prefix>, so a changed file has a new URL and no cache serves a stale copy.",
+        "Added: download URLs carry `?v=<SHA-256 prefix>`, so a changed file has a new URL and no cache serves a stale copy.",
         "Added: /llms.txt at the site root, and schema.org Dataset metadata on the home page.",
     ]},
     {"version": "1.0.0", "date": "2026-10-14", "changes": ["First release."]},
 ]
 COMPATIBILITY = ("Semantic versioning, twice. `versions.release` versions what is served (MAJOR: a file, field or "
                  "column renamed or removed, or a unit or frame changed; MINOR: something added; PATCH: a value "
-                 "corrected), and every release is a tag whose files never change: `release.base_url`. "
+                 "corrected). Every release is also a frozen copy of the whole API under `/api/<release>/` whose files never "
+                 "change (`release_base_url`; all releases in versions.json), and the unversioned /api/ paths always equal "
+                 "the newest release: pin an analysis to a release by using that release's base URL. "
                  "`schema_version` versions this JSON contract: within a major version it only adds new fields, "
                  "endpoints and runs, clients must ignore fields they do not know, and a field is renamed or removed "
                  "only in a new major version, which the changelog names. `data_version` is a fingerprint, not a "
@@ -291,6 +333,7 @@ COLUMN_MEANING = {
 # (path, media type, schema name or None, description); the order is the order of index.json and openapi.json.
 ENDPOINTS = [
     ("index.json", "application/json", "index", "every endpoint and file with its size and SHA-256, versions, compatibility policy, changelog, licence, citation"),
+    ("versions.json", "application/json", "versions", "every release, newest first: version, date, status (latest or superseded), schema and data version, base URL, tag, changelog; always at the unversioned /api/ path"),
     ("cases.json", "application/json", "cases", "the five cases: id, title, frame, units, counts, engine status, links"),
     ("cases/{id}.json", "application/json", "case", "one case in full: configurations, frame, units, inflow fit and approach-flow profile, point-table summary, geometry files, validation status, known data issues, attribution"),
     ("cases/{id}/points.json", "application/json", "points", "the cleaned measurement table: SI units, one frame, null where not measured"),
@@ -308,10 +351,49 @@ ENDPOINTS = [
     ("openapi.json", "application/json", None, "OpenAPI 3.1 description of every endpoint"),
     ("llms.txt", "text/plain", None, "plain-text entry point for agents"),
 ]
+ROOT_ENDPOINTS = {"versions.json"}   # served once, at the unversioned /api/ path, not inside any tree
 MEDIA_TYPES = {".json": "application/json", ".csv": "text/csv", ".stl": "model/stl", ".zip": "application/zip", ".txt": "text/plain"}
 
-WRITTEN = set()          # every file this build wrote under docs/api/ (relative); anything else there is stale
+WRITTEN = set()          # every file this build wrote into the current tree (relative); anything else there is stale
 DATA_VERSION = None      # set once the data files are written
+
+
+# ----------------------------------------------------------------------------- trees
+
+def is_release_dir(name):
+    """docs/api/<name>/ is a frozen release tree if <name> is a MAJOR.MINOR.PATCH version."""
+    return bool(R.SEMVER.match(name))
+
+
+def release_dirs():
+    """The versions that have a frozen tree under docs/api/, oldest first."""
+    names = [n for n in os.listdir(API_ROOT) if is_release_dir(n) and os.path.isdir(os.path.join(API_ROOT, n))]
+    return sorted(names, key=R.parse)
+
+
+def tree_files(root):
+    """Relative paths of every file in a tree. The alias's root also holds the frozen trees and versions.json, which
+    belong to no tree's file list."""
+    out = set()
+    for dirpath, dirs, names in os.walk(root):
+        if os.path.abspath(dirpath) == API_ROOT:
+            dirs[:] = [d for d in dirs if not is_release_dir(d)]
+            names = [n for n in names if n not in ROOT_ENDPOINTS]
+        out.update(os.path.relpath(os.path.join(dirpath, n), root).replace(os.sep, "/") for n in names)
+    return out
+
+
+def use_tree(kind):
+    """Point every writer at one tree: the frozen copy docs/api/<release>/ or the latest alias docs/api/. The two
+    are built by the same code, so they differ only in the address each document gives its own files."""
+    global TREE, API, API_BASE, FALLBACK_BASE, WRITTEN
+    WRITTEN = set()
+    TREE = kind
+    if kind == "release":
+        API, API_BASE, FALLBACK_BASE = os.path.join(API_ROOT, RELEASE), PINNED_BASE, RELEASE_BASE
+    else:
+        API, API_BASE, FALLBACK_BASE = API_ROOT, LIVE_BASE, RAW_BASE
+    os.makedirs(API, exist_ok=True)
 
 
 # ----------------------------------------------------------------------------- files and URLs
@@ -320,8 +402,12 @@ def url(rel):
     return f"{API_BASE}/{rel}"
 
 
+def schema_url_in(base, name):
+    return f"{base}/schemas/{name}.schema.json"
+
+
 def schema_url(name):
-    return f"{API_BASE}/schemas/{name}.schema.json"
+    return schema_url_in(API_BASE, name)
 
 
 def render_url(case, configuration=None):
@@ -329,8 +415,8 @@ def render_url(case, configuration=None):
     return f"{SITE}/assets/geometry/{D.render_file(case, configuration)}"
 
 
-def _sha256(rel):
-    with io.open(os.path.join(API, rel), "rb") as f:
+def _sha256(rel, root=None):
+    with io.open(os.path.join(root or API, rel), "rb") as f:
         body = f.read()
     return hashlib.sha256(body).hexdigest(), len(body)
 
@@ -465,6 +551,9 @@ def write_archive(data):
     archive whose members already equal the current STLs is kept as it is: its bytes then depend on the
     geometry alone, and a rebuild on any platform reproduces the committed file."""
     rel = "geometry.zip"
+    if TREE == "latest":   # the alias holds the release tree's archive itself, so the two cannot differ by a zlib
+        shutil.copyfile(os.path.join(API_ROOT, RELEASE, rel), _target(rel))
+        return rel
     members = []
     for case in D.CASE_IDS:
         for g in data[case]["geometry"]:
@@ -782,7 +871,7 @@ def write_openapi():
               "description": "the file's SHA-256 prefix, as in the URLs the JSON documents give; ignored by the server, it keeps caches from serving a stale copy"},
     }
     op_ids = {
-        "index.json": ("getIndex", "discovery"), "cases.json": ("listCases", "cases"), "cases/{id}.json": ("getCase", "cases"),
+        "index.json": ("getIndex", "discovery"), "versions.json": ("getVersions", "discovery"), "cases.json": ("listCases", "cases"), "cases/{id}.json": ("getCase", "cases"),
         "cases/{id}/points.json": ("getPoints", "points"), "cases/{id}/points.csv": ("getPointsCsv", "points"),
         "cases/{id}/approach_flow.csv": ("getApproachFlowCsv", "points"),
         "cases/{id}/geometry.json": ("getGeometry", "geometry"), "cases/{id}/geometry.stl": ("getGeometryStl", "geometry"),
@@ -816,6 +905,8 @@ def write_openapi():
         if ps:
             op["parameters"] = ps
         paths["/" + path] = {"get": op}
+        if path in ROOT_ENDPOINTS:   # one home, whichever tree this document is in: say so, or a release tree's server would 404
+            paths["/" + path]["servers"] = [{"url": LIVE_BASE, "description": "the unversioned alias; versions.json is not copied into release trees"}]
     components = {names[n]: {k: v for k, v in s.items() if k not in ("$schema", "$id")} for n, s in S.DOCUMENTS.items()}
     doc = {
         "openapi": "3.1.0",
@@ -825,7 +916,8 @@ def write_openapi():
                  "description": ("Static files, one GET each; nothing is computed on request. Lengths in metres, velocities in "
                                  "m/s, variances and k in m^2/s^2, in one frame per case. " + COMPATIBILITY + " " + CACHING),
                  "license": {"name": D.LICENSE["name"], "identifier": D.LICENSE["spdx"]}},
-        "servers": [{"url": API_BASE}, {"url": RAW_BASE, "description": "the same files, raw from the repository (fallback)"}],
+        "servers": [{"url": API_BASE, "description": ("release " + RELEASE + ", frozen" if TREE == "release" else "the latest release")},
+                    {"url": FALLBACK_BASE, "description": "the same files, raw from the repository (fallback)"}],
         "tags": [{"name": "discovery", "description": "where everything is"}, {"name": "cases", "description": "the five cases"},
                  {"name": "points", "description": "measurement tables"}, {"name": "geometry", "description": "STL geometry"},
                  {"name": "validation", "description": "Eddy3D's scores and the per-point pairs behind them"}],
@@ -843,9 +935,13 @@ def llms_text(percase):
         "> benchmark, Cases A-E, cleaned into one schema, plus Eddy3D's validation against it. Static files, plain GET.",
         "",
         f"Base URL: {API_BASE}",
-        f"Fallback (raw files from the repository): {RAW_BASE}",
+        f"Fallback (raw files from the repository): {FALLBACK_BASE}",
         f"Repository: {REPO_URL}",
-        f"Release: {RELEASE} ({RELEASE_DATE}); its files, frozen: {RELEASE_BASE}",
+        f"Release: {RELEASE} ({RELEASE_DATE}). " + (
+            "This is the frozen copy of that release: its files never change and every URL below stays inside it."
+            if TREE == "release" else
+            f"This is the latest alias, which always equals the newest release; the frozen copy of {RELEASE} is {PINNED_BASE}."),
+        f"All releases: {endpoint_url('versions.json')}",
         f"API schema version: {SCHEMA_VERSION}. Data version (SHA-256 of the served data): {DATA_VERSION}.",
         "Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark and the per-case papers.",
         "",
@@ -870,13 +966,16 @@ def llms_text(percase):
         "   every endpoint. Download URLs carry ?v=<SHA-256 prefix>: use the URLs the documents give, not hand-built ones.",
         "9. Send a descriptive User-Agent: the site's CDN answers HTTP 403 to Python urllib's default one and to some AI",
         "   crawlers. If you are refused, the fallback URL above serves byte-identical files from the repository.",
+        "10. To make a result reproducible, pin the release: GET versions.json, take the base_url of the release you used,",
+        "   and fetch every path below from it instead of from the unversioned base. A release's files never change, and",
+        "   every URL inside its documents points back into it. Quote the release number with any number you report.",
         "",
         "## Endpoints",
         "",
     ]
     for p, _, _, d in ENDPOINTS:
         if "{" not in p:
-            walk.append(f"- {API_BASE}/{p} — {d}")
+            walk.append(f"- {endpoint_url(p)} — {d}")
             continue
         # A template is not a URL to fetch: name it as a path and list the files it stands for.
         walk.append(f"- {p} (base URL + path, one file per value) — {d}:")
@@ -961,6 +1060,9 @@ def write_changelog_include():
     """docs/_includes/api-changelog.md: the changelog index.json serves, as Markdown for the API page."""
     L = ["<!-- Generated by scripts/build_api.py from CHANGELOG. -->", ""]
     for entry in CHANGELOG:
+        for c in entry["changes"]:   # the text is Markdown here and plain text in index.json: a bare <word> would open an HTML tag
+            if re.search(r"<[A-Za-z/!?]", re.sub(r"`[^`]*`", "", c)):
+                raise SystemExit(f"CHANGELOG {entry['version']}: put the text with a '<' in `code` so Markdown does not read it as HTML: {c[:80]}")
         L += [f"### {entry['version']} ({entry['date']})", ""] + [f"- {c}" for c in entry["changes"]] + [""]
     with io.open(os.path.join(DOCS, "_includes", "api-changelog.md"), "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(L))
@@ -968,7 +1070,6 @@ def write_changelog_include():
 
 def expand(template):
     """The files a templated path stands for: every file this build wrote that the template matches."""
-    import re
     rx = re.compile("^" + re.sub(r"\\\{[a-z]+\\\}", "[^/]+", re.escape(template)) + "$")
     return sorted(r for r in WRITTEN | {"index.json"} if rx.match(r))
 
@@ -986,20 +1087,30 @@ def endpoint_entry(path, media, schema, description):
     if "{" in path:
         entry.update({"templated": True, "urls": [link(rel) for rel in expand(path)]})
     else:
-        entry.update({"templated": False, "url": url(path)})
+        entry.update({"templated": False, "url": endpoint_url(path)})
     return entry
 
 
+def endpoint_url(path):
+    """Where a single-file endpoint is served: inside the tree, except the registry, which has one home."""
+    return f"{LIVE_BASE}/{path}" if path in ROOT_ENDPOINTS else url(path)
+
+
 def write_index():
-    """Last: index.json lists every other file under docs/api/ with its size and SHA-256."""
+    """Last: index.json lists every other file of the tree with its size and SHA-256."""
     files = sorted(WRITTEN - {"index.json"})
     write_json("index.json", "index", {
         "name": "AIJ UWE benchmark — cleaned data API",
         "description": ("Static JSON/CSV/STL endpoints for the Architectural Institute of Japan Urban Wind Environment "
                         "benchmark (Cases A-E) and Eddy3D's validation against it. Every file is a plain HTTP GET; nothing is computed on request."),
         "base_url": API_BASE,
-        "fallback_base_url": RAW_BASE,
-        "fallback_note": "the same files, served raw from the repository's main branch (use when the Pages site is not reachable)",
+        "tree": TREE,
+        "release_base_url": PINNED_BASE,
+        "versions_url": endpoint_url("versions.json"),
+        "fallback_base_url": FALLBACK_BASE,
+        "fallback_note": (f"the same files, served raw from the repository at the tag v{RELEASE}, which never moves (use when "
+                          "the Pages site is not reachable)" if TREE == "release" else
+                          "the same files, served raw from the repository's main branch (use when the Pages site is not reachable)"),
         "repository": REPO_URL, "site": SITE,
         "versions": {"release": RELEASE, "schema": SCHEMA_VERSION, "data": DATA_VERSION,
                      "clean_manifest": (D.clean_manifest() or {}).get("version")},
@@ -1016,6 +1127,7 @@ def write_index():
         "cite": D.CITATION,
         "agents": {
             "start_here": url("llms.txt"),
+            "pin_a_version": f"GET {endpoint_url('versions.json')} and use the base_url of the release you want; paths are the same in every release",
             "walk": ["GET index.json", "GET cases.json and pick an id", "GET cases/{id}.json for frame, units and known_issues",
                      "GET cases/{id}/points.json (SI units, one frame) and cases/{id}/geometry.stl (metres)",
                      "GET validation.json or cases/{id}/validation.json before quoting any Eddy3D score; an engine that is not 'scored' has no result"],
@@ -1024,18 +1136,78 @@ def write_index():
 
 
 def remove_stale():
-    """Delete anything under docs/api/ this build did not write (a renamed or retired file)."""
-    for root, _, names in os.walk(API):
-        for n in names:
-            rel = os.path.relpath(os.path.join(root, n), API).replace(os.sep, "/")
-            if rel not in WRITTEN:
-                os.remove(os.path.join(root, n))
-                print("removed stale", rel)
-    for root, dirs, _ in sorted(os.walk(API), key=lambda t: -len(t[0])):
-        for d in dirs:
-            p = os.path.join(root, d)
-            if not os.listdir(p):
-                os.rmdir(p)
+    """Delete anything in the current tree this build did not write (a renamed or retired file). Other releases'
+    frozen trees and versions.json belong to no tree and are never touched."""
+    for rel in sorted(tree_files(API) - WRITTEN):
+        os.remove(os.path.join(API, rel))
+        print("removed stale", os.path.relpath(os.path.join(API, rel), API_ROOT).replace(os.sep, "/"))
+    dirs_below = []
+    for root, dirs, _ in os.walk(API):
+        if root == API_ROOT:
+            dirs[:] = [d for d in dirs if not is_release_dir(d)]
+        dirs_below += [os.path.join(root, d) for d in dirs]
+    for p in sorted(dirs_below, key=len, reverse=True):
+        if not os.listdir(p):
+            os.rmdir(p)
+
+
+# ----------------------------------------------------------------------------- the registry of releases
+
+def release_record(v):
+    """One entry of versions.json. A release with a tree under docs/api/ is described by that tree's own index.json;
+    one without (a release from before the layout) by its tag and what LEGACY_RELEASES records."""
+    date = R.release_date(v)
+    if not date:
+        raise SystemExit(f"CHANGELOG.md has no dated section for {v}, which versions.json lists")
+    base = f"{LIVE_BASE}/{v}"
+    raw_tag = RAW_BASE.replace("/main/", f"/v{v}/")
+    rec = {"version": v, "date": date, "status": None}
+    tree_index = os.path.join(API_ROOT, v, "index.json")
+    if os.path.isfile(tree_index):
+        with io.open(tree_index, encoding="utf-8") as f:
+            idx = json.load(f)
+        hosted_later = v in LEGACY_RELEASES   # put there by scripts/host_release.py, so it is on main, not in the tag
+        rec.update({"schema_version": idx["versions"]["schema"], "data_version": idx["versions"]["data"],
+                    "base_url": base, "index_url": f"{base}/index.json",
+                    "fallback_base_url": f"{RAW_BASE}/{v}" if hosted_later else f"{raw_tag}/{v}", "self_contained": True})
+        if hosted_later:
+            rec["note"] = (f"Released before the versioned layout and hosted here afterwards by scripts/host_release.py: the files of "
+                           f"tag v{v}, byte for byte, with only their own addresses rewritten into this copy. The raw files at the tag "
+                           f"(release.base_url in this copy's index.json) are the originals.")
+    else:
+        rec.update({**LEGACY_RELEASES[v], "base_url": raw_tag, "index_url": f"{raw_tag}/index.json", "fallback_base_url": None,
+                    "self_contained": False,
+                    "note": ("Released before the versioned layout and not regenerated: base_url is the raw files at the release "
+                             "tag. Its documents link to the live /api/ paths, not back into base_url, so fetch its files by the "
+                             "paths in its index.json instead of following those links.")})
+    rec.update({"tag": f"v{v}", "tag_url": f"{REPO_URL}/releases/tag/v{v}", "changelog_url": f"{REPO_URL}/blob/v{v}/CHANGELOG.md"})
+    return rec
+
+
+def versions_document(data_version):
+    """versions.json: every release newest first. A pure function of docs/api/'s frozen trees, CHANGELOG.md and
+    LEGACY_RELEASES, so verify() can rebuild it and compare."""
+    found = sorted({*LEGACY_RELEASES, *release_dirs(), RELEASE}, key=R.parse, reverse=True)
+    if found[0] != RELEASE:
+        raise SystemExit(f"VERSION {RELEASE} is older than {found[0]}, which has a release tree: versions only move forward")
+    records = [release_record(v) for v in found]
+    for i, rec in enumerate(records):
+        rec["status"] = "latest" if i == 0 else "superseded"
+    return {
+        "$schema": schema_url_in(LIVE_BASE, "versions"), "schema_version": SCHEMA_VERSION, "data_version": data_version,
+        "license": D.LICENSE["spdx"],
+        "description": ("Every release of the data and API, newest first. The unversioned /api/ paths serve `latest`. To pin an "
+                        "analysis to a release, fetch its files from its `base_url` instead (the paths are those of its "
+                        "index.json): a release's files never change. `data_version` is the latest release's."),
+        "latest": RELEASE, "latest_base_url": LIVE_BASE, "versions": records,
+    }
+
+
+def write_versions(data_version):
+    """docs/api/versions.json: one registry, served from the unversioned root only (it changes at every release, so no
+    frozen tree can hold it)."""
+    with io.open(os.path.join(API_ROOT, "versions.json"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(dump(versions_document(data_version)))
 
 
 # ----------------------------------------------------------------------------- assets
@@ -1261,7 +1433,8 @@ def build_pages(percase):
 
 # ----------------------------------------------------------------------------- verify
 
-TEMPLATED_URL = __import__("re").compile(r"https?://[^\s\"'<>]*\{[^\s\"'<>]*")
+TEMPLATED_URL = re.compile(r"https?://[^\s\"'<>]*\{[^\s\"'<>]*")
+API_URL = re.compile(r"https://sustainableurbansystems\.com/[^\s\"'<>)]*?/api(?:/[^\s\"'<>)]*)?")
 
 
 def _strings(obj):
@@ -1275,26 +1448,50 @@ def _strings(obj):
         yield obj
 
 
-def verify():
-    """Everything a client relies on, checked against the files on disk."""
+def _read(root, rel):
+    with io.open(os.path.join(root, rel), encoding="utf-8") as f:
+        return f.read()
+
+
+def _link_problem(sv, base, root, on_disk, index):
+    """Why a URL a tree's document gives is wrong, or None. Inside a tree every URL stays in the tree; the registry
+    (versions.json) is the one file outside it, and the latest alias may name its release's frozen copy."""
+    if sv == base or "{" in sv or not (sv == LIVE_BASE or sv.startswith(LIVE_BASE + "/")):
+        return None
+    if sv == f"{LIVE_BASE}/versions.json":
+        return None if os.path.isfile(os.path.join(API_ROOT, "versions.json")) else "link to versions.json, which does not exist"
+    if base == LIVE_BASE and sv == f"{LIVE_BASE}/{index['versions']['release']}":
+        return None if os.path.isdir(os.path.join(API_ROOT, index["versions"]["release"])) else f"names {sv}, which does not exist"
+    if not sv.startswith(base + "/"):
+        return f"link {sv} leaves the tree (it must start with {base}/)"
+    rel_t, _, query = sv[len(base) + 1:].partition("?v=")
+    if rel_t not in on_disk:
+        return f"link to {rel_t}, which does not exist"
+    if query and _sha256(rel_t, root)[0][:12] != query:
+        return f"link to {rel_t} carries a stale ?v={query}"
+    return None
+
+
+def verify_tree(root, base, strict_assets):
+    """One tree (the latest alias or a frozen release), checked on its own: the file list against index.json, every
+    document against the schema it names, every link, openapi.json, the data files and the archive."""
     problems = []
-    try:
-        import jsonschema
-        from openapi_spec_validator import validate as validate_openapi
-    except ImportError as e:  # the contract is not optional
-        return [f"{e.name} is not installed: pip install --require-hashes -r requirements.lock"]
+    import jsonschema
+    from openapi_spec_validator import validate as validate_openapi
 
     def load(rel):
-        with io.open(os.path.join(API, rel), encoding="utf-8") as f:
-            return json.load(f)
+        return json.loads(_read(root, rel))
 
-    on_disk = set()
-    for root, _, names in os.walk(API):
-        for n in names:
-            on_disk.add(os.path.relpath(os.path.join(root, n), API).replace(os.sep, "/"))
+    on_disk = tree_files(root)
+    index = load("index.json")
+    if index["base_url"] != base:
+        problems.append(f"index.json base_url is {index['base_url']}, this tree is served at {base}")
+    if index.get("tree") is not None and index["tree"] != ("latest" if base == LIVE_BASE else "release"):
+        problems.append(f"index.json says tree={index['tree']}")
+    if base != LIVE_BASE and index["versions"]["release"] != os.path.basename(root):
+        problems.append(f"the tree {os.path.basename(root)}/ holds release {index['versions']['release']}")
 
     # index.json: lists every other file, with the right size and hash
-    index = load("index.json")
     listed = {f["path"]: f for f in index["files"]}
     for rel in sorted(on_disk - {"index.json"} - set(listed)):
         problems.append(f"{rel} is served but not listed in index.json")
@@ -1302,48 +1499,51 @@ def verify():
         if rel not in on_disk:
             problems.append(f"index.json lists {rel}, which does not exist")
             continue
-        sha, n = _sha256(rel)
+        sha, n = _sha256(rel, root)
         if (sha, n) != (f["sha256"], f["bytes"]):
             problems.append(f"index.json size/hash of {rel} disagree with the file")
 
     # schemas: valid themselves, and every document valid against the one it names
     schemas = {}
     for rel in sorted(r for r in on_disk if r.startswith("schemas/")):
-        s = load(rel)
-        jsonschema.Draft202012Validator.check_schema(s)
-        schemas[s["$id"]] = s
+        sc = load(rel)
+        jsonschema.Draft202012Validator.check_schema(sc)
+        schemas[sc["$id"]] = sc
     versions = set()
     for rel in sorted(r for r in on_disk if r.endswith(".json") and not r.startswith("schemas/") and r != "openapi.json"):
-        doc = load(rel)
-        s = schemas.get(doc.get("$schema"))
-        if s is None:
+        try:
+            doc = load(rel)
+        except ValueError as e:
+            problems.append(f"{rel}: not valid JSON ({str(e)[:80]})")
+            continue
+        sc = schemas.get(doc.get("$schema"))
+        if sc is None:
             problems.append(f"{rel}: $schema {doc.get('$schema')} is not a published schema")
             continue
-        for err in jsonschema.Draft202012Validator(s).iter_errors(doc):
+        for err in jsonschema.Draft202012Validator(sc).iter_errors(doc):
             problems.append(f"{rel}: {'/'.join(str(p) for p in err.absolute_path)}: {err.message[:160]}")
         versions.add((doc.get("schema_version"), doc.get("data_version")))
-        # every link into the API resolves, and a ?v= is the file's current hash prefix
+        # every link into the API resolves inside the tree, and a ?v= is the file's current hash prefix
         for sv in _strings(doc):
-            if not sv.startswith(API_BASE + "/") or "{" in sv:
-                continue
-            rel_t, _, query = sv[len(API_BASE) + 1:].partition("?v=")
-            if rel_t not in on_disk:
-                problems.append(f"{rel}: link to {rel_t}, which does not exist")
-            elif query and _sha256(rel_t)[0][:12] != query:
-                problems.append(f"{rel}: link to {rel_t} carries a stale ?v={query}")
-            if sv.startswith(SITE + "/assets/"):
-                pass
-        for sv in _strings(doc):
-            if sv.startswith(SITE + "/assets/") and not os.path.isfile(os.path.join(DOCS, sv[len(SITE) + 1:])):
+            bad = _link_problem(sv, base, root, on_disk, index)
+            if bad:
+                problems.append(f"{rel}: {bad}")
+            # Site assets (figures, renders) are not part of a release's frozen files: only the current build's must exist.
+            if strict_assets and sv.startswith(SITE + "/assets/") and not os.path.isfile(os.path.join(DOCS, sv[len(SITE) + 1:])):
                 problems.append(f"{rel}: link to site asset {sv[len(SITE) + 1:]}, which does not exist")
     if len(versions) != 1:
         problems.append(f"documents disagree on schema/data version: {sorted(versions)}")
 
-    # A URI template is not a URL: no served file may offer one where a link is expected.
+    # A URI template is not a URL; and a text file may not send a reader out of its tree.
     for rel in sorted(r for r in on_disk if r.endswith((".json", ".txt"))):
-        with io.open(os.path.join(API, rel), encoding="utf-8") as f:
-            for bad in TEMPLATED_URL.findall(f.read()):
-                problems.append(f"{rel}: {bad} is a URI template, not a URL to follow")
+        text = _read(root, rel)
+        for bad in TEMPLATED_URL.findall(text):
+            problems.append(f"{rel}: {bad} is a URI template, not a URL to follow")
+        if rel.endswith(".txt"):
+            for u in sorted(set(API_URL.findall(text))):
+                bad = _link_problem(u.rstrip(".,;"), base, root, on_disk, index)
+                if bad:
+                    problems.append(f"{rel}: {bad}")
 
     # openapi.json: a valid OpenAPI 3.1 document whose paths exist
     oa = load("openapi.json")
@@ -1353,57 +1553,169 @@ def verify():
         problems.append(f"openapi.json is not valid OpenAPI: {str(e)[:300]}")
     for p in oa["paths"]:
         pattern = p.lstrip("/")
-        if "{" not in pattern:
+        if pattern in ROOT_ENDPOINTS:
+            if not os.path.isfile(os.path.join(API_ROOT, pattern)):
+                problems.append(f"openapi path {p} has no file")
+        elif "{" not in pattern:
             if pattern not in on_disk:
                 problems.append(f"openapi path {p} has no file")
-            continue
-        import re
-        rx = re.compile("^" + re.sub(r"\\\{[a-z]+\\\}", "[^/]+", re.escape(pattern)) + "$")
-        if not any(rx.match(r) for r in on_disk):
-            problems.append(f"openapi path {p} matches no file")
+        else:
+            rx = re.compile("^" + re.sub(r"\\\{[a-z]+\\\}", "[^/]+", re.escape(pattern)) + "$")
+            if not any(rx.match(r) for r in on_disk):
+                problems.append(f"openapi path {p} matches no file")
 
     # content checks
-    for case in D.CASE_IDS:
+    for case in index["case_ids"]:
         pj = load(f"cases/{case}/points.json")
-        with io.open(os.path.join(API, f"cases/{case}/points.csv"), encoding="utf-8", newline="") as f:
+        with io.open(os.path.join(root, f"cases/{case}/points.csv"), encoding="utf-8", newline="") as f:
             n_csv = sum(1 for _ in csv.reader(f)) - 1
         if pj["n"] != len(pj["points"]) or pj["n"] != n_csv:
             problems.append(f"case {case}: points.json n={pj['n']} rows={len(pj['points'])} csv={n_csv}")
         gj = load(f"cases/{case}/geometry.json")
         for g in gj["files"]:
-            if D.stl_stats(D.read_ascii_stl(os.path.join(API, g["path"])))["triangles"] != g["stats"]["triangles"]:
+            if D.stl_stats(D.read_ascii_stl(os.path.join(root, g["path"])))["triangles"] != g["stats"]["triangles"]:
                 problems.append(f"case {case}: {g['path']} triangle count disagrees with geometry.json")
     gall = load("geometry.json")
-    with zipfile.ZipFile(os.path.join(API, "geometry.zip")) as z:
+    with zipfile.ZipFile(os.path.join(root, "geometry.zip")) as z:
         names = set(z.namelist())
         for it in gall["files"]:
             if it["archive_name"] not in names or hashlib.sha256(z.read(it["archive_name"])).hexdigest() != it["sha256"]:
                 problems.append(f"geometry.zip lacks {it['archive_name']} or holds different bytes")
         if len(names) != len(gall["files"]):
             problems.append(f"geometry.zip holds {len(names)} files, geometry.json lists {len(gall['files'])}")
-    with io.open(os.path.join(DOCS, "llms.txt"), encoding="utf-8") as a, io.open(os.path.join(API, "llms.txt"), encoding="utf-8") as b:
-        if a.read() != b.read():
-            problems.append("docs/llms.txt and docs/api/llms.txt differ")
+    return problems
+
+
+# Header fields and lines a release tree and the alias legitimately word differently (they name themselves).
+TREE_SPECIFIC_INDEX = {"tree", "fallback_note"}
+SAME_IN_BOTH_INDEXES = ("release", "release_base_url", "versions_url")
+
+
+def _alias_form(text):
+    """The text of a release-tree file with its frozen addresses replaced by the alias's."""
+    return text.replace(PINNED_BASE, LIVE_BASE).replace(RELEASE_BASE, RAW_BASE)
+
+
+def _normal(obj):
+    """A parsed release-tree document with its addresses in the alias's form."""
+    return json.loads(_alias_form(json.dumps(obj, ensure_ascii=False)))
+
+
+def verify_alias_matches_release():
+    """The alias is the newest release: file for file, the same bytes, except that a document names its own tree."""
+    problems = []
+    rel_root = os.path.join(API_ROOT, RELEASE)
+    a_files, r_files = tree_files(API_ROOT), tree_files(rel_root)
+    for rel in sorted(a_files ^ r_files):
+        problems.append(f"{rel} is in only the {'alias' if rel in a_files else 'release ' + RELEASE + ' tree'}")
+    for rel in sorted(a_files & r_files):
+        with io.open(os.path.join(API_ROOT, rel), "rb") as f:
+            a = f.read()
+        with io.open(os.path.join(rel_root, rel), "rb") as f:
+            r = f.read()
+        if rel.endswith((".csv", ".stl", ".zip")):
+            if a != r:
+                problems.append(f"{rel} differs between the alias and release {RELEASE}")
+        elif rel == "index.json":
+            ia, ir = json.loads(a), json.loads(r)
+            # the fields that name the release and the registry read the same in both trees; the rest is re-addressed
+            for k in SAME_IN_BOTH_INDEXES:
+                if ia.get(k) != ir.get(k):
+                    problems.append(f"index.json `{k}` differs between the alias and release {RELEASE}")
+                ia.pop(k, None), ir.pop(k, None)
+            ir = _normal(ir)
+            for d in (ia, ir):
+                for k in TREE_SPECIFIC_INDEX:
+                    d.pop(k, None)
+                # a JSON file's hash and size follow its own addresses, so only the other files' entries must agree
+                d["files"] = [f for f in d["files"] if not f["path"].endswith((".json", ".txt"))]
+            if ia != ir:
+                problems.append(f"index.json of the alias and of release {RELEASE} disagree beyond their own addresses: "
+                                + ", ".join(k for k in sorted(set(ia) | set(ir)) if ia.get(k) != ir.get(k)))
+        elif rel == "openapi.json":
+            ia, ir = json.loads(a), _normal(json.loads(r))
+            ia.pop("servers"), ir.pop("servers")
+            if ia != ir:
+                problems.append(f"openapi.json of the alias and of release {RELEASE} disagree beyond their servers")
+        elif rel == "llms.txt":
+            ta, tr = a.decode("utf-8"), _alias_form(r.decode("utf-8"))
+            if ta[ta.index("\n## "):] != tr[tr.index("\n## "):]:
+                problems.append(f"llms.txt of the alias and of release {RELEASE} disagree below their headers")
+        elif _normal(json.loads(r)) != json.loads(a):
+            problems.append(f"{rel} of the alias and of release {RELEASE} differ beyond their addresses")
+    return problems
+
+
+def verify_registry():
+    """versions.json against the schema it names, and against a fresh rebuild of it from the trees on disk."""
+    import jsonschema
+    problems = []
+    path = os.path.join(API_ROOT, "versions.json")
+    if not os.path.isfile(path):
+        return ["versions.json does not exist"]
+    text = _read(API_ROOT, "versions.json")
+    doc = json.loads(text)
+    schema = json.loads(_read(API_ROOT, "schemas/versions.schema.json"))
+    for err in jsonschema.Draft202012Validator(schema).iter_errors(doc):
+        problems.append(f"versions.json: {'/'.join(str(p) for p in err.absolute_path)}: {err.message[:160]}")
+    index = json.loads(_read(API_ROOT, "index.json"))
+    if index["versions"]["release"] != RELEASE:
+        problems.append(f"the alias holds release {index['versions']['release']}, VERSION is {RELEASE}")
+    for v in release_dirs():
+        if not R.release_date(v):
+            problems.append(f"docs/api/{v}/ is a release tree, but CHANGELOG.md has no dated section for {v}")
+    if problems:
+        return problems
+    try:
+        expected = dump(versions_document(index["data_version"]))
+    except SystemExit as e:   # an unreleasable state (a tree newer than VERSION): a problem to report, not a crash
+        return [str(e)]
+    if text != expected:
+        problems.append("versions.json is not what the release trees, CHANGELOG.md and LEGACY_RELEASES give; rebuild it")
+    return problems
+
+
+def verify():
+    """Everything a client relies on, checked against the files on disk: the latest alias, every frozen release tree,
+    that the alias is the newest release, and the registry that lists them."""
+    try:
+        import jsonschema  # noqa: F401
+        from openapi_spec_validator import validate as validate_openapi  # noqa: F401
+    except ImportError as e:  # the contract is not optional
+        return [f"{e.name} is not installed: pip install --require-hashes -r requirements.lock"]
+    problems = []
+    dirs = release_dirs()
+    if RELEASE not in dirs:
+        return [f"docs/api/{RELEASE}/, the tree of the current release, does not exist; run scripts/build_api.py"]
+    for label, root, base, strict in [("alias", API_ROOT, LIVE_BASE, True)] + [
+            (f"release {v}", os.path.join(API_ROOT, v), f"{LIVE_BASE}/{v}", v == RELEASE) for v in dirs]:
+        problems += [f"[{label}] {p}" for p in verify_tree(root, base, strict)]
+    problems += [f"[alias vs release] {p}" for p in verify_alias_matches_release()]
+    problems += [f"[registry] {p}" for p in verify_registry()]
+    if _read(DOCS, "llms.txt") != _read(API_ROOT, "llms.txt"):
+        problems.append("docs/llms.txt and docs/api/llms.txt differ")
     return problems
 
 
 # ----------------------------------------------------------------------------- main
 
-def build():
+def build_tree():
+    """Write the tree selected by use_tree(): the data files, then the JSON documents, then its index. Returns what
+    the site's generated pages need."""
     global DATA_VERSION
-    os.makedirs(API, exist_ok=True)
-    check_runs_registry()
-    copy_assets()
     # Phase 1: the data files. Their hashes define data_version, which every JSON document carries.
     data = {case: write_data(case) for case in D.CASE_IDS}
     write_archive(data)
-    DATA_VERSION = compute_data_version()
-    # Phase 2: the JSON documents, the site's generated pages, and the index of it all.
+    dv = compute_data_version()
+    if DATA_VERSION not in (None, dv):
+        raise SystemExit(f"the two trees disagree on data_version ({DATA_VERSION} vs {dv})")
+    DATA_VERSION = dv
+    # Phase 2: the JSON documents and the index of it all.
     percase = {}
     for case in D.CASE_IDS:
         percase[case] = write_case_documents(case, data[case])
         g = data[case]["geometry"]
-        print(f"case {case}: {percase[case]['summ']['rows']} rows from {data[case]['src']}; geometry "
+        print(f"[{TREE}] case {case}: {percase[case]['summ']['rows']} rows from {data[case]['src']}; geometry "
               f"{[(x['configuration'], x['stats']['triangles'], x['stats']['watertight']) for x in g]}; "
               f"{len(percase[case]['results'])} validation result(s)")
     write_cases_index(percase)
@@ -1411,15 +1723,29 @@ def build():
     write_validation_summary(percase)
     write_schemas()
     write_openapi()
-    text = llms_text(percase)
-    write_text("llms.txt", text)
-    with io.open(os.path.join(DOCS, "llms.txt"), "w", encoding="utf-8", newline="\n") as f:
-        f.write(text)
-    write_dataset_jsonld(percase)
-    write_changelog_include()
-    build_pages(percase)
+    write_text("llms.txt", llms_text(percase))
     write_index()
     remove_stale()
+    return percase
+
+
+def build():
+    if RELEASE in LEGACY_RELEASES:
+        raise SystemExit(f"VERSION {RELEASE} predates the versioned layout and is not regenerated; set VERSION to the next release")
+    os.makedirs(API_ROOT, exist_ok=True)
+    check_runs_registry()
+    copy_assets()
+    # The frozen copy of this release first, then the latest alias, which is the same files addressed without the release.
+    use_tree("release")
+    percase = build_tree()
+    write_dataset_jsonld(percase)       # the home page describes this release by its frozen addresses
+    write_changelog_include()
+    build_pages(percase)
+    use_tree("latest")
+    build_tree()
+    with io.open(os.path.join(DOCS, "llms.txt"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(_read(API_ROOT, "llms.txt"))
+    write_versions(DATA_VERSION)
     print("data_version", DATA_VERSION)
 
 

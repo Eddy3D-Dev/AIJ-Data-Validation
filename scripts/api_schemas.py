@@ -76,14 +76,23 @@ def _doc(name, title, description, required, properties):
 
 DOCUMENTS = {
     "index": _doc("index", "API index", "Every endpoint and file, versions, compatibility policy, changelog, licence and citation.",
-                  ["name", "base_url", "versions", "endpoints", "case_ids", "files", "changelog", "cite"], {
+                  ["name", "base_url", "tree", "release_base_url", "versions_url", "versions", "endpoints", "case_ids",
+                   "files", "changelog", "cite"], {
         "name": {"type": "string"}, "description": {"type": "string"},
-        "base_url": URL, "fallback_base_url": URL, "repository": URL, "site": URL,
+        "base_url": dict(URL, description="the root of this tree: every URL in the tree's documents starts with it"),
+        "tree": {"enum": ["release", "latest"],
+                 "description": ("'release': a frozen copy of one release under `/api/<release>/`, which never changes; "
+                                 "'latest': the unversioned `/api/` alias, which always equals the newest release")},
+        "release_base_url": dict(URL, description=("the frozen copy of `versions.release`: equal to base_url in a release "
+                                                   "tree, the pinned address of this release in the latest alias")),
+        "versions_url": dict(URL, description="versions.json, the list of every release (always at the unversioned /api/ path)"),
+        "fallback_base_url": URL, "fallback_note": {"type": "string"}, "repository": URL, "site": URL,
         "versions": obj(["release", "schema", "data"], {"release": SEMVER, "schema": SEMVER, "data": SHA256,
                                                      "clean_manifest": STR_OR_NULL}),
         "release": obj(["version", "date", "tag", "url", "base_url", "changelog"], {
             "version": SEMVER, "date": {"type": "string", "format": "date"}, "tag": {"type": "string", "pattern": r"^v\d+\.\d+\.\d+$"},
-            "url": URL, "base_url": URL, "changelog": URL}),
+            "url": URL, "base_url": dict(URL, description="the raw files of this release's frozen copy, at the release tag"),
+            "changelog": URL}),
         "compatibility": {"type": "string"}, "caching": {"type": "string"},
         "changelog": arr(obj(["version", "date", "changes"], {
             "version": {"type": "string"}, "date": {"type": "string", "format": "date"}, "changes": arr({"type": "string"})})),
@@ -101,6 +110,24 @@ DOCUMENTS = {
         "files": arr(DOWNLOAD),
         "license_detail": obj(["spdx", "url"], {"spdx": {"type": "string"}, "name": {"type": "string"}, "url": URL, "note": {"type": "string"}}),
         "cite": obj(["benchmark"], {"benchmark": {"type": "string"}}),
+    }),
+    "versions": _doc("versions", "Release list", "Every release of the data and API, newest first, with the address of its files.",
+                     ["latest", "latest_base_url", "versions"], {
+        "description": {"type": "string"},
+        "latest": dict(SEMVER, description="the newest release; the unversioned /api/ paths equal it"),
+        "latest_base_url": dict(URL, description="the unversioned alias of the newest release"),
+        "versions": arr(obj(["version", "date", "status", "schema_version", "data_version", "base_url", "index_url",
+                             "self_contained", "tag", "tag_url", "changelog_url"], {
+            "version": SEMVER, "date": {"type": "string", "format": "date"},
+            "status": {"enum": ["latest", "superseded"]},
+            "schema_version": {"type": "string", "pattern": r"^\d+\.\d+\.\d+$"}, "data_version": SHA256,
+            "base_url": dict(URL, description="where this release's files are frozen: GET base_url + a path from its index.json"),
+            "index_url": dict(URL, description="the index.json of this release"),
+            "fallback_base_url": {"type": ["string", "null"], "format": "uri"},
+            "self_contained": {"type": "boolean",
+                               "description": "true if every URL inside this release's documents points back into base_url"},
+            "note": {"type": "string"},
+            "tag": {"type": "string", "pattern": r"^v\d+\.\d+\.\d+$"}, "tag_url": URL, "changelog_url": URL}), minItems=1),
     }),
     "cases": _doc("cases", "Case list", "The five cases with their frame, units, counts, engine status and links.", ["cases"], {
         "cases": arr(obj(["id", "slug", "title", "frame", "units", "counts", "engines", "links"], {

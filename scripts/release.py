@@ -45,7 +45,12 @@ SURFACE = ["docs/api", "clean"]
 NOT_SURFACE = ["clean/build.py", "clean/build.log", "clean/README.md", "clean/SCHEMA.md", "clean/QUESTIONS.md",
                "clean/sources"]
 
-# The release archive: the served data with what is needed to cite and read it.
+# docs/api/<release>/ is the frozen copy of one release: the same files as the unversioned docs/api/ at that release,
+# addressed by the release number. A new release adds a whole one; that is a copy, not new served content.
+RELEASE_TREE = re.compile(r"^docs/api/(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)/")
+
+# The release archive: the served data with what is needed to cite and read it. It carries the unversioned docs/api/,
+# which at the release equals the frozen copy; the frozen copies stay out so that an archive does not repeat them.
 ARCHIVE_FILES = ["VERSION", "CHANGELOG.md", "CITATION.cff", "README.md"]
 ARCHIVE_TREES = ["clean", "docs/api"]
 ARCHIVE_SKIP = ["clean/build.py", "clean/sources"]
@@ -111,11 +116,7 @@ def latest_tag():
 
 def surface_changes(tag):
     """[(status, path)] of the served files between the tag and the working tree (renames as delete + add)."""
-    spec = SURFACE + [f":(exclude){p}" for p in NOT_SURFACE]
-    r = git("diff", "--name-status", "--no-renames", tag, "--", *spec)
-    if r.returncode:
-        raise SystemExit(f"git diff against {tag} failed: {r.stderr.strip()}")
-    return [tuple(line.split("\t", 1)) for line in r.stdout.splitlines() if line.strip()]
+    return surface_diff(tag, SURFACE + [f":(exclude){p}" for p in NOT_SURFACE])
 
 
 def required_level(tag, changes):
@@ -124,7 +125,7 @@ def required_level(tag, changes):
     for status, path in changes:
         if status.startswith("D"):
             return "major", f"{path} was removed or renamed"
-        if status.startswith("A") and LEVELS.index(need) < 1:
+        if status.startswith("A") and LEVELS.index(need) < 1 and not RELEASE_TREE.match(path):
             need, why = "minor", f"{path} was added"
         if status.startswith("M") and path.endswith(".csv"):
             old = git("show", f"{tag}:{path}").stdout.split("\n", 1)[0].strip()
@@ -143,6 +144,50 @@ def required_level(tag, changes):
         if n[1] > o[1] and LEVELS.index(need) < 1:
             need, why = "minor", f"the API schema added to its contract ({'.'.join(map(str, o))} -> {'.'.join(map(str, n))})"
     return need, why
+
+
+def frozen_trees():
+    """The versions that have a frozen copy of the API under docs/api/."""
+    api = os.path.join(REPO, "docs", "api")
+    return sorted((n for n in os.listdir(api) if SEMVER.match(n) and os.path.isdir(os.path.join(api, n))), key=parse)
+
+
+def check_frozen_trees(v, errors):
+    """docs/api/<release>/ exists for VERSION, and every other one is an untouched copy of a tagged release."""
+    trees = frozen_trees()
+    if v not in trees:
+        errors.append(f"docs/api/{v}/ (the frozen copy of the API for {v}) is missing; run scripts/build_api.py")
+    for t in trees:
+        index_path = os.path.join(REPO, "docs", "api", t, "index.json")
+        if not os.path.isfile(index_path):
+            errors.append(f"docs/api/{t}/index.json is missing")
+            continue
+        with io.open(index_path, encoding="utf-8") as f:
+            held = json.load(f)["versions"]["release"]
+        if held != t:
+            errors.append(f"docs/api/{t}/ holds release {held}")
+        if t == v:
+            continue
+        if parse(t) > parse(v):
+            errors.append(f"docs/api/{t}/ is newer than VERSION {v}")
+        elif not git("rev-parse", "-q", "--verify", f"refs/tags/v{t}").stdout.strip():
+            errors.append(f"docs/api/{t}/ is the frozen copy of {t}, which is not tagged v{t}; only VERSION's own copy may exist before its release")
+        elif git("ls-tree", "-d", f"v{t}", f"docs/api/{t}").stdout.strip():
+            # a copy made at the release itself must still be what the tag holds; one hosted later (see
+            # scripts/host_release.py) is not in the tag and is checked by the script that wrote it
+            moved = surface_diff(f"v{t}", [f"docs/api/{t}"])
+            if moved:
+                errors.append(f"docs/api/{t}/ is frozen at v{t} but differs from the tag ({len(moved)} file(s), e.g. {moved[0][1]})")
+        else:
+            import host_release   # a release hosted afterwards: it must be exactly what the tag gives, addresses aside
+            errors += host_release.check(t)
+
+
+def surface_diff(tag, paths):
+    r = git("diff", "--name-status", "--no-renames", tag, "--", *paths)
+    if r.returncode:
+        raise SystemExit(f"git diff against {tag} failed: {r.stderr.strip()}")
+    return [tuple(line.split("\t", 1)) for line in r.stdout.splitlines() if line.strip()]
 
 
 def check():
@@ -176,6 +221,7 @@ def check():
     with io.open(os.path.join(REPO, "clean", "manifest.json"), encoding="utf-8") as f:
         if json.load(f).get("version") != v:
             errors.append(f"clean/manifest.json: version is not {v}; run clean/build.py")
+    check_frozen_trees(v, errors)
 
     tag = latest_tag()
     if tag is None:
@@ -229,7 +275,7 @@ def _members():
             dirs.sort()
             for name in files:
                 rel = os.path.relpath(os.path.join(root, name), REPO).replace(os.sep, "/")
-                if not any(rel == s or rel.startswith(s + "/") for s in ARCHIVE_SKIP):
+                if not any(rel == s or rel.startswith(s + "/") for s in ARCHIVE_SKIP) and not RELEASE_TREE.match(rel):
                     paths.append(rel)
     return sorted(paths)
 
