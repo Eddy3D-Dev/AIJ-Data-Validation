@@ -26,22 +26,24 @@ import os
 import sys
 
 import numpy as np
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt  # noqa: E402
-from matplotlib.collections import PolyCollection  # noqa: E402
+import ultraplot as uplt
+from matplotlib.collections import PolyCollection
+from matplotlib.colors import to_rgb
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, os.pardir, "scripts"))
 import aijdata as D  # noqa: E402
+import plotstyle as ps  # noqa: E402
 
-OUT = os.path.join(HERE, "figures", "geometry")
+OUT = os.path.join(ps.FIGURES, "geometry")
 
-WIND = "#eb6834"
-GRID = "#dcdcd9"
-BODY = np.array([0.66, 0.68, 0.72])         # neutral massing, shaded per face
-ACCENT = np.array([0.165, 0.471, 0.839])    # the subject of the case (#2a78d6)
-EDGE = "#ffffff"
+# Colours from plotstyle.py, so a render matches the figures: the subject is ultraplot's blue, the context is
+# neutral grey, the wind is vermillion.
+WIND = ps.VERMILLION
+GRID = ps.FOOTPRINT
+BODY = np.array(to_rgb(ps.FOOTPRINT_FOCUS))   # neutral massing, shaded per face
+ACCENT = np.array(to_rgb(ps.BLUE))            # the subject of the case
+EDGE = ps.SURFACE
 
 # One camera for every case. The azimuth is negative so that +x (the wind at WD = 0) runs left to right on
 # screen while the camera stands on the -x side: the windward face is the one you see.
@@ -184,12 +186,11 @@ def decorate(ax, case, lo, hi):
         s = 1 / math.sqrt(2)
         cx, cy = lo[0] + 10, lo[1] + 10
         arrow(ax, (cx - 60 * s, cy - 60 * s, 6), (cx, cy, 6), "wind from SW")
-        arrow(ax, (hi[0] + 15, hi[1] - 70, 0), (hi[0] + 15, hi[1] - 10, 0), "N", colour="#5c5c5a")
+        arrow(ax, (hi[0] + 15, hi[1] - 70, 0), (hi[0] + 15, hi[1] - 10, 0), "N", colour=ps.REFERENCE)
 
 
 ASPECT = 2.0   # every render is 2:1, so a row of them lines up and so do their captions
-SIZE_IN = (8.0, 4.0)
-DPI = 160      # 1280 x 640 px
+SIZE_IN = (8.0, 4.0)   # inches; at ps.DPI (1200) that is 9600 x 4800 px
 
 
 def _limits(figs):
@@ -217,7 +218,7 @@ def render_case(case):
     lo, hi = allv.min(axis=0), allv.max(axis=0)
     figs = []
     for cfg, groups, edges in configs:
-        fig = plt.figure(figsize=SIZE_IN)
+        fig = uplt.figure(figsize=SIZE_IN)
         ax = fig.add_axes((0, 0, 1, 1))
         decorate(ax, case, lo, hi)
         draw(ax, groups, edges)
@@ -231,14 +232,14 @@ def render_case(case):
         ax.set_xlim(*xl)
         ax.set_ylim(*yl)
         name = D.render_file(case, cfg)
-        fig.savefig(os.path.join(OUT, name), dpi=DPI, facecolor="#ffffff")
-        plt.close(fig)
+        ps.save(fig, name, directory=OUT)
+        uplt.close(fig)
         written.append(name)
     return written
 
 
 if __name__ == "__main__":
-    os.makedirs(OUT, exist_ok=True)
+    ps.apply()
     cube = merge_coplanar(boxes_tris([{"min": [0, 0, 0], "max": [1, 1, 1]}]))
     assert len(cube) == 6 and all(len(q) == 4 for q in cube), "a unit cube must merge to six quads"
     for c in D.CASE_IDS:
