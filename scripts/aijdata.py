@@ -391,6 +391,18 @@ CASES = {
 
 CASE_IDS = ["A", "B", "C", "D", "E"]
 
+# Cases J-L: one module each (CASE entry, geometry, approach flow). They are cleaned (clean/) and rendered
+# (validation/render_geometry.py) but not in CASE_IDS, which is what build_api.py serves: promote them there once the API
+# knows their engines, gallery captions, expected bounding box and runs. D.load_points reads clean/ for them.
+import aij_case_j, aij_case_k, aij_case_l  # noqa: E402
+
+_PLUGINS = {m.CASE["id"]: m for m in (aij_case_j, aij_case_k, aij_case_l)}
+NEW_CASE_IDS = list(_PLUGINS)
+for _id, _m in _PLUGINS.items():
+    CASES[_id] = _m.CASE
+    DEFAULT_CONFIGURATION[_id] = _m.DEFAULT_CONFIGURATION
+    RENDER_CAPTIONS.update(_m.RENDER_CAPTIONS)
+
 
 # ----------------------------------------------------------------------------- helpers
 
@@ -631,6 +643,8 @@ def load_points(case):
 def load_approach_flow(case):
     """Rows of {z, U, k, ...} in metres and m/s, straight from each case's own profile."""
     meta = CASES[case]
+    if case in _PLUGINS:
+        return _PLUGINS[case].load_approach_flow(case)
     if case in ("A", "B", "C"):
         header, rows = _read_csv(os.path.join(REPO, meta["approach_flow_file"]))
         idx = {n: i for i, n in enumerate(header)}
@@ -862,6 +876,8 @@ def orient_outward(tris, tol=1e-4):
 
 def case_geometry(case):
     """[(name, tris, boxes_or_None, note)] for a case — one entry per configuration."""
+    if case in _PLUGINS:
+        return _PLUGINS[case].geometry(case)
     if case in BOX_GEOMETRY:
         out = []
         for cfg, boxes in BOX_GEOMETRY[case].items():

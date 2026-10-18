@@ -132,6 +132,16 @@ def arrow(ax, start, end, label, colour=WIND):
     ax.text(p[0][0], p[0][1], label + "  ", color=colour, fontsize=11, ha="right", va="center")
 
 
+def source(ax, points):
+    """The floor tracer source: a ring for a point source, a line for a line source. Drawn over the buildings, so a source
+    behind one (Case J) shows through it; the ring is open to say so."""
+    p, _ = project(points)
+    if len(p) == 1:
+        ax.plot(p[:, 0], p[:, 1], "o", mfc="white", mec=WIND, mew=2.2, ms=9, zorder=5)
+    else:
+        ax.plot(p[:, 0], p[:, 1], color=WIND, lw=3.0, solid_capstyle="butt", zorder=5)
+
+
 def boxes_tris(boxes):
     return np.array([t for b in boxes for t in D.box_tris(b["min"], b["max"])], float)
 
@@ -141,7 +151,7 @@ def scene(case):
     out = []
     for cfg, tris, boxes, _ in D.case_geometry(case):
         tris = np.asarray(tris, float)
-        if case in ("A", "B"):
+        if case in ("A", "B", "J"):
             groups = [(tris, ACCENT)]
         elif case == "C":
             centre = [b for b in boxes if abs(b["min"][0] + b["max"][0]) < 1e-9 and abs(b["min"][1] + b["max"][1]) < 1e-9]
@@ -178,6 +188,18 @@ def decorate(ax, case, lo, hi):
     elif case == "D":
         ground_grid(ax, lo[0] - 0.1, hi[0] + 0.1, lo[1] - 0.1, hi[1] + 0.1, 0.2)
         arrow(ax, (lo[0] - 0.32, 0, 0.03), (lo[0] - 0.08, 0, 0.03), "wind, WD = 0°")
+    elif case == "J":
+        ground_grid(ax, -0.24, 0.36, -0.2, 0.2, 0.04)
+        arrow(ax, (-0.30, 0, 0.02), (-0.12, 0, 0.02), "wind")
+        source(ax, [(0.04, 0.0, 0.0)])
+    elif case == "K":
+        ground_grid(ax, -0.5, 0.8, -0.6, 0.6, 0.12)
+        arrow(ax, (-0.85, 0, 0.03), (-0.55, 0, 0.03), "wind")
+        source(ax, [(-0.15, 0.0, 0.0)])
+    elif case == "L":
+        ground_grid(ax, -1.1, 0.8, -0.6, 0.6, 0.12)
+        arrow(ax, (-1.5, 0, 0.03), (-1.15, 0, 0.03), "wind")
+        source(ax, [(-0.15, -0.51, 0.0), (-0.15, 0.51, 0.0)])
     else:
         ground_grid(ax, lo[0], hi[0], lo[1], hi[1], 50)
         # Geographic frame: +x east, +y north. The scored direction is SW, so the arrow comes from the SW.
@@ -241,5 +263,5 @@ if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     cube = merge_coplanar(boxes_tris([{"min": [0, 0, 0], "max": [1, 1, 1]}]))
     assert len(cube) == 6 and all(len(q) == 4 for q in cube), "a unit cube must merge to six quads"
-    for c in D.CASE_IDS:
+    for c in D.CASE_IDS + D.NEW_CASE_IDS:
         print(c, render_case(c))
