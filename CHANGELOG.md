@@ -45,16 +45,13 @@ Additive: new figures, fields and citation endpoints, and fixes. The API schema 
   slivers (0.45 m² together) on building roofs and is closed the same way (21 added triangles). The bounding box starts at z = −1 m.
 - `BD_caseL.stl`, as published, has the two bottom triangles of each of its 126 cubes wound inward (Known data issues); the served
   `geometry.stl` is the 126 boxes and was never affected.
-- Removed boilerplate wording from the API descriptions and from `llms.txt`.
-- `status_meaning.scored` reads "a validation run exists and its scores are in cases/{id}/validation.json"; the site and the README carry the same definition.
-- The `notes` of the runs in `validation.json` of Cases F, G, J, K, L and M state their facts directly. Case G's notes begin with the calibration statement (LAD and Cd are not in the dataset); Case M's notes keep the probe precision (seven significant digits; no c\* value moved by more than 0.003 against a six-decimal probe) and drop the account of a first solve killed for memory (exit 137). The controls text of Case M says that 14 of the 15 turned points lie in the fluid.
-- The wind-direction texts of Cases D, E, F and M and the known-issue texts of Cases D and F read as plain statements; no value changed.
-- `clean/manifest.json`: the Case E log-law note reads "appropriate choice". The geometry index no longer says the STL files are "deliberately" not one scene.
+- Wording of the API descriptions and `llms.txt`, of the `notes` of the runs in `validation.json` (Cases F, G, J, K, L and M), of the wind-direction texts
+  (Cases D, E, F and M) and of the known-issue texts (Cases D and F); no value changed. `status_meaning.scored` reads "a validation run exists and its scores are in cases/{id}/validation.json".
+- Case M's `notes` state the probe precision: seven significant digits, no c\* value moved by more than 0.003 against a six-decimal probe. Its controls text says that 14 of the 15 turned points lie in the fluid.
 
 ### Changed
 
 - The title reads "AIJ UWE" in `index.json`, `openapi.json`, `llms.txt` and the Dataset JSON-LD. The licence note is one line, "Data: Kikumoto et al. (2026), CC BY 4.0. Collectors per case in cases/{id}.json.", and `clean/manifest.json` carries "Data: Kikumoto et al. (2026), CC BY 4.0. Collectors and requested citation per case."
-- Run history moved out of the pages into this line: Eddy3D's test of Case M asserted the near/far ordering of c\* before the first solve and now records it; Case B's first OpenLB run crashed on the STL reader fault described on the OpenLB page, and a regression test fails without the lattice move.
 
 ## [3.0.0] - 2026-10-18
 
@@ -123,7 +120,7 @@ The point table gained columns, which is why this release is MAJOR.
 - The site is rebuilt on Just the Docs: search, a navigation hierarchy, and three pages per case (the case, its reference
   data, its validation). `scripts/check_markdown.py` checks that every Markdown file of the repository and every generated
   page renders the same on GitHub and in Jekyll, and runs in the build.
-- Every figure is drawn in one colour-blind-safe style (UltraPlot) and written at 1200 dpi.
+- Every figure is drawn in one colour-blind-safe style (UltraPlot).
 
 ### Changed (compatible)
 
@@ -162,11 +159,9 @@ These change no served byte.
   Zenodo records (CC BY 4.0). Their text files are stored with LF line endings, like those of Cases A to E
   (`.gitattributes`): 23 of the Zenodo originals (22 CSV files and the STL of Case L) use CRLF, and the MD5 check against the
   records was made on those CRLF originals, so a stored copy matches its record only after converting back to CRLF.
-- Every figure and geometry render is still drawn and served at 1200 dpi (`docs/assets/figures/`, `docs/assets/geometry/`; the API's `figures`
-  and `render` entries point there). The site pages and the README now embed a 1600 px copy (`docs/assets/web/`, written by
-  `scripts/build_api.py`, byte-identical on every build) with `width`, `height` and `loading="lazy"`, and link it to the 1200 dpi
-  original, named with its size. Image bytes on the home page: 18.9 MB before, 2.1 MB after; distinct images in the README: 66.7 MB
-  before, 8.6 MB after.
+- The site pages and the README embed a 1600 px copy of each figure (`docs/assets/web/`, written by `scripts/build_api.py`,
+  byte-identical on every build) with `width`, `height` and `loading="lazy"`, and link it to the full-size figure
+  (`docs/assets/figures/`, `docs/assets/geometry/`; the API's `figures` and `render` entries point there).
 - No PDFs are stored: the data paper (Kikumoto et al. 2026) and the AIJ guidelines paper (Tominaga et al. 2008) are cited
   and linked by DOI in `papers/README.md`. The Elsevier PDF of the guidelines paper (all rights reserved, removed from the tree in
   2.0.0) was also purged from the repository's git history, which rewrote the commits up to the 2.0.0 tag: a clone made

@@ -15,7 +15,7 @@ Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> 
 
 ## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration 0D
 
-Quantity: Vs (thermistor) scored against sqrt(|U|^2 + 2k) \[scalar\] and |U| \[vector\]; both normalised by U\_H = U(z = D) = 3.654 m/s.
+Quantity: Vs (thermistor) scored against sqrt(\|U\|^2 + 2k) \[scalar\] and \|U\| \[vector\]; both normalised by U\_H = U(z = D) = 3.654 m/s.
 
 | Score | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|
@@ -32,7 +32,7 @@ Quantity: Vs (thermistor) scored against sqrt(|U|^2 + 2k) \[scalar\] and |U| \[v
 
 ## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration 1D
 
-Quantity: Vs (thermistor) scored against sqrt(|U|^2 + 2k) \[scalar\] and |U| \[vector\]; both normalised by U\_H = U(z = D) = 3.654 m/s.
+Quantity: Vs (thermistor) scored against sqrt(\|U\|^2 + 2k) \[scalar\] and \|U\| \[vector\]; both normalised by U\_H = U(z = D) = 3.654 m/s.
 
 | Score | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|
@@ -49,7 +49,7 @@ Quantity: Vs (thermistor) scored against sqrt(|U|^2 + 2k) \[scalar\] and |U| \[v
 
 ## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration 2D
 
-Quantity: Vs (thermistor) scored against sqrt(|U|^2 + 2k) \[scalar\] and |U| \[vector\]; both normalised by U\_H = U(z = D) = 3.654 m/s.
+Quantity: Vs (thermistor) scored against sqrt(\|U\|^2 + 2k) \[scalar\] and \|U\| \[vector\]; both normalised by U\_H = U(z = D) = 3.654 m/s.
 
 | Score | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|

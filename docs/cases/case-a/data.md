@@ -117,7 +117,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Attribution
 
-- Data collected by Takeshi Ishihara (The University of Tokyo) and Kazuki Hibi (Numerical Flow Design), 1998.
+- Data collected by Takeshi Ishihara (The University of Tokyo) and Kazuki Hibi (Numerical Flow Design).
 - Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15050147](https://doi.org/10.5281/zenodo.15050147)
 - Citation requested: Meng, Y., & Hibi, K. (1998). Turbulent measurements of the flow field around a high-rise building. Journal of Wind Engineering, JAWE, 76, 55-64. <https://doi.org/10.5359/jawe.1998.76_55>

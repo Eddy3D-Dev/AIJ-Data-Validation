@@ -30,8 +30,8 @@ Scores: [Validation]({{ '/validation/' | relative_url }}).
 - **R**: Pearson correlation of measured and modelled values.
 - **FAC2**: fraction of pairs with 0.5 ≤ p/o ≤ 2 (o measured, p modelled; the ratio carries the sign for a signed component). For concentration, a pair with both values at or below the detection limit also counts.
 - **FB**: fractional bias 2(ō − p̄)/(ō + p̄), positive when the model is low. Undefined (shown as —) for a signed component unless the measured and modelled means are both positive; R, FAC2, the hit rate and the counts stay.
-- **Hit rate**: fraction of pairs with |p − o| ≤ W or |p − o|/|o| ≤ D, with D = 0.25. W is 0.05 U_H for a velocity component and the detection limit for concentration; k has no W.
-- **NMSE** = mean((o − p)²)/(ō p̄); **NAD** = mean(|o − p|)/(ō + p̄); **MG** = exp(mean(ln o − ln p)); **VG** = exp(mean((ln o − ln p)²)). They are in the API's `validation.json`, with the FB, NMSE and NAD rule above.
+- **Hit rate**: fraction of pairs with \|p − o\| ≤ W or \|p − o\|/\|o\| ≤ D, with D = 0.25. W is 0.05 U_H for a velocity component and the detection limit for concentration; k has no W.
+- **NMSE** = mean((o − p)²)/(ō p̄); **NAD** = mean(\|o − p\|)/(ō + p̄); **MG** = exp(mean(ln o − ln p)); **VG** = exp(mean((ln o − ln p)²)). They are in the API's `validation.json`, with the FB, NMSE and NAD rule above.
 - **Detection limit** (concentration): one limit, 10⁻³ of the largest measured value. It sets W of the hit rate and the both-below rule of FAC2, and floors the values in MG and VG.
 - FB, FAC2, NMSE, NAD, MG and VG follow Chang & Hanna (2004); the hit rate follows VDI 3783-9.
 

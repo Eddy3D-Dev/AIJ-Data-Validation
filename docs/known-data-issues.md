@@ -84,9 +84,9 @@ The geometry was not inferred from the CSV extents.
   centre grid nodes are still absent although the ground there is free.
 - The CSV and Figure 3 of the data paper disagree on the sense of the WD rotation. This release keeps the CSV frame:
   WD rotates the wind from +x toward −y. WD = 0 is not affected.
-- 24 of the 120 points sit exactly on a building face plane (|x| = 0.30 or |y| = 0.30), in the gap between blocks.
+- 24 of the 120 points sit exactly on a building face plane (\|x\| = 0.30 or \|y\| = 0.30), in the gap between blocks.
 - The 0.40 m pitch is read from the drawing and the paper (street = D); the point grid alone bounds it to (0.35, 0.40].
-- Repeatability floor from the mirror-symmetric pairs: mean |ΔVs| 0.088–0.137 m/s (0.024–0.038 U_H).
+- Repeatability floor from the mirror-symmetric pairs: mean \|ΔVs\| 0.088–0.137 m/s (0.024–0.038 U_H).
 
 <details markdown="block">
 <summary>Data notes: Sense of the WD rotation</summary>
@@ -143,7 +143,7 @@ figure's sense it falls to −0.33 … +0.03.
   <summary>Data notes: Case E geometry</summary>
 
 - 546 of the 548 bodies of the after-construction mesh (543 of 545 before construction) have triangles wound against their neighbours; a body is a set of triangles joined through edges that exactly two triangles use.
-- 475 of the 503 building shells (478 of 506 after construction) are wound inward in the 3dm. The earlier build reversed whole shells by signed volume; a shell wound partly inward stays inconsistent after that, and a viewer that culls back faces draws its reversed triangles as missing walls.
+- 475 of the 503 building shells (478 of 506 after construction) are wound inward in the 3dm. A viewer that culls back faces draws the reversed triangles of a shell wound partly inward as missing walls.
 - Every building is now wound consistently (each edge is traversed once in each direction) with a positive volume: 545 closed bodies after construction, 542 before, the smallest 4.125 m³.
 - One wall that two buildings share (4.27 m × 3 m, x 3.5 to 7.5 m, y −76.5 to −75 m) is modelled twice, once per building, with different diagonals, so the copies never joined their buildings. The 4 triangles of both copies are removed and the two buildings are one body.
 - 11 edges where two separate buildings touch (15 before the wall is removed) are counted as `body_contacts`; each building still sees them as ordinary two-triangle edges, so a contact does not open a body.

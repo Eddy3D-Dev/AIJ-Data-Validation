@@ -121,7 +121,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Attribution
 
-- Data collected by Yasuo Kurotani (Shimane University) and Nobuyoshi Kiyota (Hiroshima Institute of Technology), 2001.
+- Data collected by Yasuo Kurotani (Shimane University) and Nobuyoshi Kiyota (Hiroshima Institute of Technology).
 - Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15589666](https://doi.org/10.5281/zenodo.15589666)
 - Citation requested: Kurotani, Y., Kiyota, N., Kobayashi, S. (2001). Windbreak effect of Tsuijimatsu in Izumo Part. 2. Summaries of technical papers of Annual Meeting, Architectural Institute of Japan, D-2 Environmental engineering II, 745-746 (in Japanese).

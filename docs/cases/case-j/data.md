@@ -140,7 +140,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Attribution
 
-- Data collected by Ryuichiro Yoshie (Tokyo Polytechnic University), Hideyuki Tanaka (Takenaka Corporation) and Tsuyoshi Kobayashi (Tokyo Polytechnic University), 2016.
+- Data collected by Ryuichiro Yoshie (Tokyo Polytechnic University), Hideyuki Tanaka (Takenaka Corporation) and Tsuyoshi Kobayashi (Tokyo Polytechnic University).
 - Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15447887](https://doi.org/10.5281/zenodo.15447887)
 - Citation requested: Yoshie, R. (2016). Wind Tunnel Experiment and Large Eddy Simulation of Pollutant/Thermal Dispersion in Non-isothermal Turbulent Boundary Layer. Adv Environ Wind Eng, 167-196. <https://doi.org/10.1007/978-4-431-55912-2_9>

@@ -1837,8 +1837,8 @@ def _config_part(k, v):
 
 
 def _esc(text):
-    """Plain text from the data, safe in Markdown on GitHub and in kramdown: emphasis, HTML and link characters are
-    backslash-escaped, and a Liquid delimiter (which the site build would try to run) stops the build."""
+    """Plain text from the data, safe in Markdown on GitHub and in kramdown: emphasis, HTML, link and pipe characters are
+    backslash-escaped (a line with a bare pipe is a table to kramdown), and a Liquid delimiter (which the site build would try to run) stops the build."""
     text = str(text)
     if "{{" in text or "{%" in text:
         raise SystemExit(f"a Liquid delimiter in text that becomes a page: {text[:80]!r}")
@@ -1848,15 +1848,15 @@ def _esc(text):
             url, tail = re.match(r"(.*?)([.,;:]*)$", piece).groups()
             out.append(f"<{url}>" + tail)
             continue
-        for ch in "\\*_<>[]'\"":              # quotes too: kramdown's smart quotes turn '-' into two opening quotes
+        for ch in "\\*_<>[]|'\"":             # quotes too: kramdown's smart quotes turn '-' into two opening quotes
             piece = piece.replace(ch, "\\" + ch)
         out.append(piece)
     return "".join(out)
 
 
 def _cell(text):
-    """_esc, and the pipe that would end a table cell."""
-    return _esc(text).replace("|", "\\|")
+    """A table cell's text: _esc, which also escapes the pipe that would end the cell."""
+    return _esc(text)
 
 
 def _md_value(v, sink=None):
@@ -2364,10 +2364,8 @@ def _and_join(names):
 
 
 def _collected_by(meta):
-    """'Data collected by <names>, <year>.' The year is the one in the requested citation, unless the names already carry one."""
-    names = _and_join(meta["people"]["data_collectors"])
-    year = re.search(r"\((\d{4})\)", meta["citation_requested"])
-    return f"Data collected by {_esc(names)}" + (f", {year.group(1)}" if year and not re.search(r"\d{4}", names) else "") + "."
+    """'Data collected by <names>.' The sources give no year of collection: the year of the requested citation is a publication year."""
+    return f"Data collected by {_esc(_and_join(meta['people']['data_collectors']))}."
 
 
 def _score_table(e):
