@@ -19,7 +19,7 @@ Data: Kikumoto et al. (2026), CC BY 4.0. Collectors per case on each Data page.
 
 {% include cite.md %}
 
-This repository: [`CITATION.cff`](https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/CITATION.cff) is what GitHub's *Cite this repository* button reads.
+This repository: [`CITATION.cff`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/CITATION.cff) is what GitHub's *Cite this repository* button reads.
 
 ## Licence
 
@@ -35,11 +35,11 @@ Every release is a tag whose files never change, and it rebuilds byte for byte f
 - CI fails if a byte differs from what is committed, or if served content changed without the version moving.
 
 The [versions page]({{ '/api-reference/versions/' | relative_url }}) says what each number promises and lists the changes. The
-[changelog](https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/CHANGELOG.md)
+[changelog](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/CHANGELOG.md)
 has every release.
 
 ## Where the files are
 
-The [repository](https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ)
+The [repository](https://github.com/Eddy3D-Dev/AIJ-Data-Validation)
 holds the files as published by their collectors (`raw/`; text files with LF line endings, see the README), the cleaned tables (`clean/`), the validation
 snapshots and figures (`validation/`), and the build scripts. Its README describes each folder.

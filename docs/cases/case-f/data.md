@@ -56,7 +56,7 @@ description: "Case F — Shinjuku district: configuration, frame and units, refe
 
 ## Reference data
 
-Source in this repository: `raw/cases/case-f/RS-WT_caseF.csv` (approach flow: `raw/cases/case-f/AF_caseF.csv`).
+Source in this repository: [`raw/cases/case-f/RS-WT_caseF.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-f/RS-WT_caseF.csv) (approach flow: [`raw/cases/case-f/AF_caseF.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-f/AF_caseF.csv)).
 
 The cleaned table has **472 rows** over **13 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction`, `wind_direction_deg`, `x`, `y`, `z`, `velocity_ratio`, `campaign`, `velocity_ratio_sd`.
 

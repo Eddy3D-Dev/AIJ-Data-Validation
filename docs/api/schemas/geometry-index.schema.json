@@ -1,6 +1,6 @@
 {
  "$schema": "https://json-schema.org/draft/2020-12/schema",
- "$id": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/geometry-index.schema.json",
+ "$id": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/geometry-index.schema.json",
  "title": "All geometry",
  "description": "Every STL of every case in one list, and the archive that holds them.",
  "type": "object",

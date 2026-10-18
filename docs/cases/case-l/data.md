@@ -59,7 +59,7 @@ description: "Case L — 9 x 14 cube array, line source, non-isothermal: configu
 
 ## Reference data
 
-Source in this repository: `raw/cases/case-l/RS_caseL.csv` (approach flow: `raw/cases/case-l/AF_caseL.csv`).
+Source in this repository: [`raw/cases/case-l/RS_caseL.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-l/RS_caseL.csv) (approach flow: [`raw/cases/case-l/AF_caseL.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-l/AF_caseL.csv)).
 
 The cleaned table has **344 rows** over **344 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `campaign`, `uv`, `uw`, `C`, `c_rms`, `concentration_ratio`, `T`, `T_rms`, `uc`, `vc`, `wc`, `uT`, `vT`, `wT`.
 

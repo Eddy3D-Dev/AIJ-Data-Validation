@@ -1,9 +1,9 @@
-# CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ
+# AIJ-Data-Validation
 
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Fsustainableurbansystems.com%2FCFD-Test-Cases-Architectural-Institute-of-Japan-AIJ%2F&label=website&up_message=online&down_message=offline)](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/)
-[![Release](https://img.shields.io/github/v/release/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ?label=release&sort=semver)](https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/releases)
-[![API schema](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fsustainableurbansystems.com%2FCFD-Test-Cases-Architectural-Institute-of-Japan-AIJ%2Fapi%2Findex.json&query=%24.schema_version&label=API%20schema&color=blue)](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api-reference/)
-[![Build](https://img.shields.io/github/actions/workflow/status/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/pages.yml?branch=main&label=build)](https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/actions/workflows/pages.yml)
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Feddy3d-dev.github.io%2FAIJ-Data-Validation%2F&label=website&up_message=online&down_message=offline)](https://eddy3d-dev.github.io/AIJ-Data-Validation/)
+[![Release](https://img.shields.io/github/v/release/Eddy3D-Dev/AIJ-Data-Validation?label=release&sort=semver)](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/releases)
+[![API schema](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Feddy3d-dev.github.io%2FAIJ-Data-Validation%2Fapi%2Findex.json&query=%24.schema_version&label=API%20schema&color=blue)](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/)
+[![Build](https://img.shields.io/github/actions/workflow/status/Eddy3D-Dev/AIJ-Data-Validation/pages.yml?branch=main&label=build)](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/actions/workflows/pages.yml)
 [![Data licence: CC BY 4.0](https://img.shields.io/badge/data%20licence-CC%20BY%204.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
 [![Data paper](https://img.shields.io/badge/data%20paper-10.1002%2F2475--8876.70083-informational)](https://doi.org/10.1002/2475-8876.70083)
 
@@ -37,8 +37,8 @@ Validation data from the AIJ (Architectural Institute of Japan) benchmark cases�
 </tr>
 </table>
 
-- **Site:** <https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/>
-- **API:** [`/api/index.json`](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/index.json) · [`/api/llms.txt`](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/llms.txt) for agents · [OpenAPI](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/openapi.json) (the same files are in [`docs/api/`](docs/api/)); every release is also frozen under `/api/<release>/`, listed in [`/api/versions.json`](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/versions.json)
+- **Site:** <https://eddy3d-dev.github.io/AIJ-Data-Validation/>
+- **API:** [`/api/index.json`](https://eddy3d-dev.github.io/AIJ-Data-Validation/api/index.json) · [`/api/llms.txt`](https://eddy3d-dev.github.io/AIJ-Data-Validation/api/llms.txt) for agents · [OpenAPI](https://eddy3d-dev.github.io/AIJ-Data-Validation/api/openapi.json) (the same files are in [`docs/api/`](docs/api/)); every release is also frozen under `/api/<release>/`, listed in [`/api/versions.json`](https://eddy3d-dev.github.io/AIJ-Data-Validation/api/versions.json)
 - **Release:** [v3.1.0](CHANGELOG.md), rebuilt byte for byte from its tag (see *Versions, releases and reproducing them*)
 
 ## Cite
@@ -48,19 +48,19 @@ Validation data from the AIJ (Architectural Institute of Japan) benchmark cases�
 **API, APA**
 
 ```text
-Sustainable Urban Systems Lab. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.1.0) [Data set]. https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.1.0/index.json
+Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.1.1) [Data set]. Sustainable Urban Systems Lab. https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.1/index.json
 ```
 
 **API, BibTeX**
 
 ```bibtex
-@misc{aijuwe_api_3_1_0,
-  author    = "{Sustainable Urban Systems Lab}",
+@misc{aijuwe_api_3_1_1,
+  author    = "Karadag, Ilker and Kastner, Patrick",
   title     = "{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}",
   year      = "2026",
-  version   = "3.1.0",
+  version   = "3.1.1",
   publisher = "Sustainable Urban Systems Lab",
-  url       = "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.1.0/index.json",
+  url       = "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.1/index.json",
   note      = "Data set; data version be415e94ac63"
 }
 ```
@@ -74,19 +74,19 @@ Cases: each case's dataset DOI is on its Data page and in `/api/cases/{id}.json`
 
 | Case | Configuration | Measurements | Reference file |
 |---|---|---|---|
-| A | 1:1:2 building, b = 0.08 m, H = 0.16 m, Re_H ≈ 24,000 | 186 points, U/V/W/k | `raw/cases/case-a/RS-caseA.csv` |
-| B | 1:4:4 slab, 0.05 × 0.20 × 0.20 m, Re_H ≈ 72,000 | 224 points, U/V/W/k | `raw/cases/case-b/RS_caseB.csv` |
-| C | 3 × 3 block array, centre building at 0D / 1D / 2D | 1080 points, pedestrian height | `raw/cases/case-c/RS_caseC.csv` |
-| D | High-rise among blocks | see `raw/cases/case-d/` | `raw/cases/case-d/LF_caseD.xls` |
-| E | Niigata district, 1:250, pre/post high-rise | pedestrian height | `raw/cases/case-e/LF_caseE.xls` |
-| F | Shinjuku sub-centre, Tokyo, 1:800 tunnel and field, November 1978 | 472 velocity ratios at 13 points: tunnel at 5, 9 and 20 m and field cup anemometers | `raw/cases/case-f/RS-WT_caseF.csv` |
-| G | Tree belt (Tsuiji-matsu), field observation, 74 m × 2 m × 7 m | 28 points, U/U_H and k/U_H² | `raw/cases/case-g/RS_caseG.csv` |
-| H | 1:1:2 building with a floor point source (ethylene) | 876 points, velocity and concentration | `raw/cases/case-h/RS_caseH.csv` |
-| I | Cube with a roof point source (ethane) | 91 LDV points and 539 concentration points | `raw/cases/case-i/RS-w_caseI.csv` |
-| J | 1:1:2 building with a floor source, non-isothermal | 444 points, velocity, temperature, concentration, fluxes | `raw/cases/case-j/RS_caseJ.csv` |
-| K | 9 × 9 cube array, point source | 203 points, velocity and concentration | `raw/cases/case-k/RS_caseK.csv` |
-| L | 14 × 9 cube array, line source, non-isothermal | 344 points, velocity, temperature, concentration, fluxes | `raw/cases/case-l/RS_caseL.csv` |
-| M | TPU Atsugi campus, 1:600 tunnel and field tracer release | 330 rows: tunnel velocity and concentration, 18 field runs | `raw/cases/case-m/RS-WT_caseM.csv` |
+| A | 1:1:2 building, b = 0.08 m, H = 0.16 m, Re_H ≈ 24,000 | 186 points, U/V/W/k | [`raw/cases/case-a/RS-caseA.csv`](raw/cases/case-a/RS-caseA.csv) |
+| B | 1:4:4 slab, 0.05 × 0.20 × 0.20 m, Re_H ≈ 72,000 | 224 points, U/V/W/k | [`raw/cases/case-b/RS_caseB.csv`](raw/cases/case-b/RS_caseB.csv) |
+| C | 3 × 3 block array, centre building at 0D / 1D / 2D | 1080 points, pedestrian height | [`raw/cases/case-c/RS_caseC.csv`](raw/cases/case-c/RS_caseC.csv) |
+| D | High-rise among blocks | see [`raw/cases/case-d/`](raw/cases/case-d/) | [`raw/cases/case-d/LF_caseD.xls`](raw/cases/case-d/LF_caseD.xls) |
+| E | Niigata district, 1:250, pre/post high-rise | pedestrian height | [`raw/cases/case-e/LF_caseE.xls`](raw/cases/case-e/LF_caseE.xls) |
+| F | Shinjuku sub-centre, Tokyo, 1:800 tunnel and field, November 1978 | 472 velocity ratios at 13 points: tunnel at 5, 9 and 20 m and field cup anemometers | [`raw/cases/case-f/RS-WT_caseF.csv`](raw/cases/case-f/RS-WT_caseF.csv) |
+| G | Tree belt (Tsuiji-matsu), field observation, 74 m × 2 m × 7 m | 28 points, U/U_H and k/U_H² | [`raw/cases/case-g/RS_caseG.csv`](raw/cases/case-g/RS_caseG.csv) |
+| H | 1:1:2 building with a floor point source (ethylene) | 876 points, velocity and concentration | [`raw/cases/case-h/RS_caseH.csv`](raw/cases/case-h/RS_caseH.csv) |
+| I | Cube with a roof point source (ethane) | 91 LDV points and 539 concentration points | [`raw/cases/case-i/RS-w_caseI.csv`](raw/cases/case-i/RS-w_caseI.csv) |
+| J | 1:1:2 building with a floor source, non-isothermal | 444 points, velocity, temperature, concentration, fluxes | [`raw/cases/case-j/RS_caseJ.csv`](raw/cases/case-j/RS_caseJ.csv) |
+| K | 9 × 9 cube array, point source | 203 points, velocity and concentration | [`raw/cases/case-k/RS_caseK.csv`](raw/cases/case-k/RS_caseK.csv) |
+| L | 14 × 9 cube array, line source, non-isothermal | 344 points, velocity, temperature, concentration, fluxes | [`raw/cases/case-l/RS_caseL.csv`](raw/cases/case-l/RS_caseL.csv) |
+| M | TPU Atsugi campus, 1:600 tunnel and field tracer release | 330 rows: tunnel velocity and concentration, 18 field runs | [`raw/cases/case-m/RS-WT_caseM.csv`](raw/cases/case-m/RS-WT_caseM.csv) |
 
 Sources and instrumentation are documented per case in each folder's `readme_case*.md` and in the data paper,
 [Kikumoto et al. (2026)](https://doi.org/10.1002/2475-8876.70083); each case's Zenodo record is linked in its section.
@@ -578,7 +578,7 @@ of the 863 pairs the tunnel resolves (|Δ| > 0.05). Method: *ML surrogate* under
 
 **What it is.** Shinjuku sub-centre, Tokyo, November 1978: 1:800 tunnel (thermistor, 5 / 9 / 20 m) and a year of field cup anemometers; velocity ratio to the 500 m wind, 12 tunnel and 16 field directions.
 
-**Reference data.** `raw/cases/case-f/RS-WT_caseF.csv` (approach flow `raw/cases/case-f/AF_caseF.csv`); the cleaned table `clean/cases/F/points.csv` has 472 rows over 13 points, columns `point_id`, `config`, `instrument`, `wind_direction`, `wind_direction_deg`, `x`, `y`, `z`, `velocity_ratio`, `campaign`, `velocity_ratio_sd`.
+**Reference data.** [`raw/cases/case-f/RS-WT_caseF.csv`](raw/cases/case-f/RS-WT_caseF.csv) (approach flow [`raw/cases/case-f/AF_caseF.csv`](raw/cases/case-f/AF_caseF.csv)); the cleaned table [`clean/cases/F/points.csv`](clean/cases/F/points.csv) has 472 rows over 13 points, columns `point_id`, `config`, `instrument`, `wind_direction`, `wind_direction_deg`, `x`, `y`, `z`, `velocity_ratio`, `campaign`, `velocity_ratio_sd`.
 
 **Frame.** Origin: centre of the reproduced district, tunnel floor plane. x: +x EAST (full-scale metres). y: +y NORTH (compass rose in MP_caseF.png). z: +z up from the TUNNEL FLOOR; the readme's rule is ground = z - 10 m (the STL's terrain under the points is at z = 5 m).
 
@@ -604,7 +604,7 @@ The pattern follows the tunnel and the field in both frames and the level depend
 model of the tunnel can be expected to reach. The solved field's R 0.935 with the NNW column and R 0.077 with the SSE
 column corroborate reading the direction labels as the direction the wind comes from, at this direction.
 
-Full reading: [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-fm/).
+Full reading: [Cases F and M](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/cases-fm/).
 
 </details>
 
@@ -612,7 +612,7 @@ Full reading: [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases
 
 <!--fig name="case-f-openfoam-agreement.png" alt="Case F, measured vs modelled speed" width="800"--><a href="validation/figures/case-f-openfoam-agreement.png"><img src="docs/assets/web/case-f-openfoam-agreement.png" width="800" height="475" loading="lazy" alt="Case F, measured vs modelled speed"></a><!--/fig-->
 
-**Known issues.** 11 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/F.json`](docs/api/cases/F.json).
+**Known issues.** 11 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/F.json`](docs/api/cases/F.json).
 
 **API.** [`cases/F.json`](docs/api/cases/F.json) · [`points.json`](docs/api/cases/F/points.json) / [`points.csv`](docs/api/cases/F/points.csv) · [`geometry.stl`](docs/api/cases/F/geometry.stl) (56,250 triangles, closed with a 1 m base slab) · [`validation.json`](docs/api/cases/F/validation.json)
 
@@ -626,7 +626,7 @@ Full reading: [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases
 
 **What it is.** Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m × 2 m × 7 m with a 1.2 m gap below): normalised mean speed and k at 28 points on the centre section (sonic anemometers).
 
-**Reference data.** `raw/cases/case-g/RS_caseG.csv` (approach flow `raw/cases/case-g/AF_caseG.csv`); the cleaned table `clean/cases/G/points.csv` has 28 rows over 28 points, columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `velocity_ratio`, `campaign`, `k_ratio`.
+**Reference data.** [`raw/cases/case-g/RS_caseG.csv`](raw/cases/case-g/RS_caseG.csv) (approach flow [`raw/cases/case-g/AF_caseG.csv`](raw/cases/case-g/AF_caseG.csv)); the cleaned table [`clean/cases/G/points.csv`](clean/cases/G/points.csv) has 28 rows over 28 points, columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `velocity_ratio`, `campaign`, `k_ratio`.
 
 **Frame.** Origin: the leeward face of the tree belt at ground level, on the vertical section through the belt's centre. x: +x downwind: the belt occupies x in [-2, 0] m, the measurement lines lie behind it at x = 1.75 ... 35 m. y: +y along the belt (y in [-37, 37] m); every point is on y = 0. z: +z up; the belt spans z in [1.2, 7] m; points at z = 1.5, 3, 4.5, 6 m.
 
@@ -651,7 +651,7 @@ distance behind the belt; the model's falls.
   crown's mean U/U_H is 0.554 against 0.478 measured.
 - Drag changes the level of the mean speed and leaves the pattern (R) where it was.
 
-Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-gk/).
+Full reading: [Cases G and K](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/cases-gk/).
 
 </details>
 
@@ -659,7 +659,7 @@ Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases
 
 <!--fig name="case-g-openfoam-sweep.png" alt="Case G, measured vs modelled, drag sweep" width="800"--><a href="validation/figures/case-g-openfoam-sweep.png"><img src="docs/assets/web/case-g-openfoam-sweep.png" width="800" height="380" loading="lazy" alt="Case G, measured vs modelled, drag sweep"></a><!--/fig-->
 
-**Known issues.** 6 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/G.json`](docs/api/cases/G.json).
+**Known issues.** 6 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/G.json`](docs/api/cases/G.json).
 
 **API.** [`cases/G.json`](docs/api/cases/G.json) · [`points.json`](docs/api/cases/G/points.json) / [`points.csv`](docs/api/cases/G/points.csv) · [`geometry.stl`](docs/api/cases/G/geometry.stl) (1 box, 12 triangles) · [`validation.json`](docs/api/cases/G/validation.json)
 
@@ -673,7 +673,7 @@ Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases
 
 **What it is.** Isolated 1:1:2 building with an ethylene point source on the floor behind it: velocity (split-fibre hot wire) and concentration (hydrocarbon analyser) at 876 points.
 
-**Reference data.** `raw/cases/case-h/RS_caseH.csv` (approach flow `raw/cases/case-h/AF_caseH.csv`); the cleaned table `clean/cases/H/points.csv` has 1,652 rows over 876 points, columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `campaign`, `C`, `c_rms`, `concentration_ratio`.
+**Reference data.** [`raw/cases/case-h/RS_caseH.csv`](raw/cases/case-h/RS_caseH.csv) (approach flow [`raw/cases/case-h/AF_caseH.csv`](raw/cases/case-h/AF_caseH.csv)); the cleaned table [`clean/cases/H/points.csv`](clean/cases/H/points.csv) has 1,652 rows over 876 points, columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `campaign`, `C`, `c_rms`, `concentration_ratio`.
 
 **Frame.** Origin: the centre of the building's leeward face on the ground plane. x: +x streamwise (the wind blows toward +x); the building spans x in [-0.1, 0]; points at x = -0.2 ... 0.4 m. y: +y lateral; the building spans y in [-0.05, 0.05]; the z = 1/16 H plane covers y in [-0.2, 0.2]. z: +z up; roof at z = 0.2 m; points at z = 0.01 ... 0.3 m.
 
@@ -696,7 +696,7 @@ Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases
 - The concentration is well correlated and over-predicted at every Schmidt number (FB −0.60 to −0.93).
 - FAC2 on V and W is low by construction, and W's FB is a near-zero mean.
 
-Full reading: [Cases H and I](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-hi/).
+Full reading: [Cases H and I](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/cases-hi/).
 
 </details>
 
@@ -704,7 +704,7 @@ Full reading: [Cases H and I](https://sustainableurbansystems.com/CFD-Test-Cases
 
 <!--fig name="cases-hi-openfoam-agreement.png" alt="Cases H and I, measured vs modelled" width="800"--><a href="validation/figures/cases-hi-openfoam-agreement.png"><img src="docs/assets/web/cases-hi-openfoam-agreement.png" width="800" height="450" loading="lazy" alt="Cases H and I, measured vs modelled"></a><!--/fig-->
 
-**Known issues.** 7 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/H.json`](docs/api/cases/H.json).
+**Known issues.** 7 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/H.json`](docs/api/cases/H.json).
 
 **API.** [`cases/H.json`](docs/api/cases/H.json) · [`points.json`](docs/api/cases/H/points.json) / [`points.csv`](docs/api/cases/H/points.csv) · [`geometry.stl`](docs/api/cases/H/geometry.stl) (1 box, 12 triangles) · [`validation.json`](docs/api/cases/H/validation.json)
 
@@ -718,7 +718,7 @@ Full reading: [Cases H and I](https://sustainableurbansystems.com/CFD-Test-Cases
 
 **What it is.** Isolated cube with an ethane point source at the centre of its roof: velocity (laser Doppler, 91 points) and concentration (hydrocarbon analyser, 539 points).
 
-**Reference data.** `raw/cases/case-i/RS-w_caseI.csv` (approach flow `raw/cases/case-i/AF_caseI.csv`); the cleaned table `clean/cases/I/points.csv` has 630 rows over 630 points, columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `k`, `campaign`, `C`, `concentration_ratio`.
+**Reference data.** [`raw/cases/case-i/RS-w_caseI.csv`](raw/cases/case-i/RS-w_caseI.csv) (approach flow [`raw/cases/case-i/AF_caseI.csv`](raw/cases/case-i/AF_caseI.csv)); the cleaned table [`clean/cases/I/points.csv`](clean/cases/I/points.csv) has 630 rows over 630 points, columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `k`, `campaign`, `C`, `concentration_ratio`.
 
 **Frame.** Origin: the centre of the cube on the ground plane. x: +x streamwise (the wind blows toward +x); the cube spans x in [-0.05, 0.05]; wind points x = -0.15 ... 0.25 m, concentration points x = 0.065 ... 2.7 m. y: +y lateral; the cube spans y in [-0.05, 0.05]; concentration points reach |y| = 0.44 m on the ground. z: +z up; roof at z = 0.1 m; the outlet at (0, 0, 0.1).
 
@@ -744,7 +744,7 @@ k-ε closures, 0.40 under k-ω SST; c\* R at Sct 0.5 0.96, 0.94 and 0.47. Reatta
 - Mean velocity does not separate the closures; k does, and so does the concentration.
 - This ranks three closures on one cube and one mesh.
 
-Full reading: [Cases H and I](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-hi/).
+Full reading: [Cases H and I](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/cases-hi/).
 
 </details>
 
@@ -752,7 +752,7 @@ Full reading: [Cases H and I](https://sustainableurbansystems.com/CFD-Test-Cases
 
 <!--fig name="case-i-openfoam-closures.png" alt="Case I under three turbulence closures" width="800"--><a href="validation/figures/case-i-openfoam-closures.png"><img src="docs/assets/web/case-i-openfoam-closures.png" width="800" height="796" loading="lazy" alt="Case I under three turbulence closures"></a><!--/fig-->
 
-**Known issues.** 8 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/I.json`](docs/api/cases/I.json).
+**Known issues.** 8 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/I.json`](docs/api/cases/I.json).
 
 **API.** [`cases/I.json`](docs/api/cases/I.json) · [`points.json`](docs/api/cases/I/points.json) / [`points.csv`](docs/api/cases/I/points.csv) · [`geometry.stl`](docs/api/cases/I/geometry.stl) (1 box, 12 triangles) · [`validation.json`](docs/api/cases/I/validation.json)
 
@@ -766,7 +766,7 @@ Full reading: [Cases H and I](https://sustainableurbansystems.com/CFD-Test-Cases
 
 **What it is.** Isolated 1:1:2 building with a floor tracer source in an unstably stratified boundary layer: velocity, temperature, tracer concentration and their turbulent fluxes at 444 points on three planes.
 
-**Reference data.** `raw/cases/case-j/RS_caseJ.csv` (approach flow `raw/cases/case-j/AF_caseJ.csv`); the cleaned table `clean/cases/J/points.csv` has 444 rows over 444 points, columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `campaign`, `C`, `c_rms`, `concentration_ratio`, `T`, `T_rms`, `uT`, `vT`, `wT`.
+**Reference data.** [`raw/cases/case-j/RS_caseJ.csv`](raw/cases/case-j/RS_caseJ.csv) (approach flow [`raw/cases/case-j/AF_caseJ.csv`](raw/cases/case-j/AF_caseJ.csv)); the cleaned table [`clean/cases/J/points.csv`](clean/cases/J/points.csv) has 444 rows over 444 points, columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `campaign`, `C`, `c_rms`, `concentration_ratio`, `T`, `T_rms`, `uT`, `vT`, `wT`.
 
 **Frame.** Origin: the building's leeward (downwind) wall centre on the ground; x = 0 is the leeward wall. x: +x streamwise (the wind blows toward +x); the building spans x in [-0.08, 0]; the floor source is at x = +0.04. y: +y lateral; the building spans y in [-0.04, 0.04]; the z/H = 0.025 plane is measured on the y <= 0 side only. z: +z up; roof at z = 0.16; heated floor at z = 0.
 
@@ -794,7 +794,7 @@ than the tunnel by 3.5 K on average (3.6 K under bKε).
 - The tracer's bias changes sign with the Schmidt number.
 - The two closures differ little in the flow and more in the tracer.
 
-Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-jl/).
+Full reading: [Cases J and L](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/cases-jl/).
 
 </details>
 
@@ -802,7 +802,7 @@ Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases
 
 <!--fig name="case-j-umf-agreement.png" alt="Case J, measured vs modelled, two closures" width="800"--><a href="validation/figures/case-j-umf-agreement.png"><img src="docs/assets/web/case-j-umf-agreement.png" width="800" height="448" loading="lazy" alt="Case J, measured vs modelled, two closures"></a><!--/fig-->
 
-**Known issues.** 10 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/J.json`](docs/api/cases/J.json).
+**Known issues.** 10 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/J.json`](docs/api/cases/J.json).
 
 **API.** [`cases/J.json`](docs/api/cases/J.json) · [`points.json`](docs/api/cases/J/points.json) / [`points.csv`](docs/api/cases/J/points.csv) · [`geometry.stl`](docs/api/cases/J/geometry.stl) (1 box, 12 triangles) · [`validation.json`](docs/api/cases/J/validation.json)
 
@@ -816,7 +816,7 @@ Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases
 
 **What it is.** 9 x 9 array of 0.06 m cubes with a tracer point source on the floor between rows 2 and 3: velocity and tracer concentration at 203 points in the streets and over the first rows.
 
-**Reference data.** `raw/cases/case-k/RS_caseK.csv` (approach flow `raw/cases/case-k/AF_caseK.csv`); the cleaned table `clean/cases/K/points.csv` has 203 rows over 203 points, columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `campaign`, `C`, `c_rms`, `concentration_ratio`.
+**Reference data.** [`raw/cases/case-k/RS_caseK.csv`](raw/cases/case-k/RS_caseK.csv) (approach flow [`raw/cases/case-k/AF_caseK.csv`](raw/cases/case-k/AF_caseK.csv)); the cleaned table [`clean/cases/K/points.csv`](clean/cases/K/points.csv) has 203 rows over 203 points, columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `campaign`, `C`, `c_rms`, `concentration_ratio`.
 
 **Frame.** Origin: bottom centre of the windward wall of the 4th row of the central column: x = 0 is that wall, y = 0 the centre line of the central column. x: +x streamwise (the wind blows toward +x); row k spans x in [0.12 (k-4), 0.12 (k-4) + 0.06], so the array spans x in [-0.36, 0.66]. y: +y lateral; column centres at y = 0, +-0.12, ... +-0.48 (the array spans y in [-0.51, 0.51]). z: +z up; cube tops at z = 0.06.
 
@@ -845,7 +845,7 @@ The four points within one cube height of the source are 3.7 to 5.1 times the me
   near-source points follows from the model's source: a zone of four cells (0.75 m across) where the tunnel's outlet is
   5 mm.
 
-Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-gk/).
+Full reading: [Cases G and K](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/cases-gk/).
 
 </details>
 
@@ -853,7 +853,7 @@ Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases
 
 <!--fig name="case-k-openfoam-agreement.png" alt="Case K, measured vs modelled" width="800"--><a href="validation/figures/case-k-openfoam-agreement.png"><img src="docs/assets/web/case-k-openfoam-agreement.png" width="800" height="407" loading="lazy" alt="Case K, measured vs modelled"></a><!--/fig-->
 
-**Known issues.** 9 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/K.json`](docs/api/cases/K.json).
+**Known issues.** 9 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/K.json`](docs/api/cases/K.json).
 
 **API.** [`cases/K.json`](docs/api/cases/K.json) · [`points.json`](docs/api/cases/K/points.json) / [`points.csv`](docs/api/cases/K/points.csv) · [`geometry.stl`](docs/api/cases/K/geometry.stl) (1 box, 972 triangles) · [`validation.json`](docs/api/cases/K/validation.json)
 
@@ -867,7 +867,7 @@ Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases
 
 **What it is.** 14 rows by 9 columns of 0.06 m cubes with a tracer line source on the floor across the tunnel, in an unstably stratified boundary layer: velocity, temperature, concentration and their fluxes at 344 points in the streets and over the roofs.
 
-**Reference data.** `raw/cases/case-l/RS_caseL.csv` (approach flow `raw/cases/case-l/AF_caseL.csv`); the cleaned table `clean/cases/L/points.csv` has 344 rows over 344 points, columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `campaign`, `uv`, `uw`, `C`, `c_rms`, `concentration_ratio`, `T`, `T_rms`, `uc`, `vc`, `wc`, `uT`, `vT`, `wT`.
+**Reference data.** [`raw/cases/case-l/RS_caseL.csv`](raw/cases/case-l/RS_caseL.csv) (approach flow [`raw/cases/case-l/AF_caseL.csv`](raw/cases/case-l/AF_caseL.csv)); the cleaned table [`clean/cases/L/points.csv`](clean/cases/L/points.csv) has 344 rows over 344 points, columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `campaign`, `uv`, `uw`, `C`, `c_rms`, `concentration_ratio`, `T`, `T_rms`, `uc`, `vc`, `wc`, `uT`, `vT`, `wT`.
 
 **Frame.** Origin: bottom centre of the windward wall of the 9th row (of 14) of the central column: x = 0 is that wall, y = 0 the centre line of the central column. x: +x streamwise (the wind blows toward +x); row k spans x in [0.12 (k-9), 0.12 (k-9) + 0.06], so the array spans x in [-0.96, 0.66]. y: +y lateral; column centres at y = 0, +-0.12, ... +-0.48 (the array spans y in [-0.51, 0.51]). z: +z up from the model floor; cube tops at z = 0.06; heated floor at z = 0.
 
@@ -895,7 +895,7 @@ than the tunnel by 1.2 K on average.
 - V and W carry no pattern; k is low (R 0.15).
 - The tracer is correlated (R 0.75 to 0.80) and high (FB −0.50 to −0.73).
 
-Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-jl/).
+Full reading: [Cases J and L](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/cases-jl/).
 
 </details>
 
@@ -903,7 +903,7 @@ Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases
 
 <!--fig name="case-l-umf-agreement.png" alt="Case L, measured vs modelled" width="800"--><a href="validation/figures/case-l-umf-agreement.png"><img src="docs/assets/web/case-l-umf-agreement.png" width="800" height="450" loading="lazy" alt="Case L, measured vs modelled"></a><!--/fig-->
 
-**Known issues.** 10 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/L.json`](docs/api/cases/L.json).
+**Known issues.** 10 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/L.json`](docs/api/cases/L.json).
 
 **API.** [`cases/L.json`](docs/api/cases/L.json) · [`points.json`](docs/api/cases/L/points.json) / [`points.csv`](docs/api/cases/L/points.csv) · [`geometry.stl`](docs/api/cases/L/geometry.stl) (1 box, 1,512 triangles) · [`validation.json`](docs/api/cases/L/validation.json)
 
@@ -917,7 +917,7 @@ Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases
 
 **What it is.** Tracer-gas release on the Tokyo Polytechnic University Atsugi campus: 1:600 tunnel (velocity at 180°, ethylene concentration at 175°, 180° and 185°) and 18 field runs with PMCH, 15 points 3 m above ground.
 
-**Reference data.** `raw/cases/case-m/RS-WT_caseM.csv` (approach flow `raw/cases/case-m/AF_caseM.csv`); the cleaned table `clean/cases/M/points.csv` has 330 rows over 15 points, columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `campaign`, `run`, `C`, `c_rms`, `concentration_ratio`.
+**Reference data.** [`raw/cases/case-m/RS-WT_caseM.csv`](raw/cases/case-m/RS-WT_caseM.csv) (approach flow [`raw/cases/case-m/AF_caseM.csv`](raw/cases/case-m/AF_caseM.csv)); the cleaned table [`clean/cases/M/points.csv`](clean/cases/M/points.csv) has 330 rows over 15 points, columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `campaign`, `run`, `C`, `c_rms`, `concentration_ratio`.
 
 **Frame.** Origin: centre of the tunnel turntable on the floor plane (ground surface there at z = 33.07 m). x: +x NORTH (full-scale metres). y: +y WEST (compass rose of MP_caseM.png: N at +x, W at +y); the frame is right-handed. z: +z up from the TUNNEL FLOOR; the campus ground lies at z ~ 32 m.
 
@@ -948,7 +948,7 @@ Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases
 - The mirrored points score better than the real points: the modelled plume is displaced sideways against the tunnel's.
 - The mean streamwise velocity is low while the magnitude is close.
 
-Full reading: [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-fm/).
+Full reading: [Cases F and M](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/cases-fm/).
 
 </details>
 
@@ -956,7 +956,7 @@ Full reading: [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases
 
 <!--fig name="case-m-openfoam-agreement.png" alt="Case M, measured vs modelled velocity and concentration" width="800"--><a href="validation/figures/case-m-openfoam-agreement.png"><img src="docs/assets/web/case-m-openfoam-agreement.png" width="800" height="434" loading="lazy" alt="Case M, measured vs modelled velocity and concentration"></a><!--/fig-->
 
-**Known issues.** 10 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/M.json`](docs/api/cases/M.json).
+**Known issues.** 10 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/M.json`](docs/api/cases/M.json).
 
 **API.** [`cases/M.json`](docs/api/cases/M.json) · [`points.json`](docs/api/cases/M/points.json) / [`points.csv`](docs/api/cases/M/points.csv) · [`geometry.stl`](docs/api/cases/M/geometry.stl) (43,950 triangles, closed with a 1 m base slab) · [`validation.json`](docs/api/cases/M/validation.json)
 
@@ -1284,7 +1284,7 @@ Cases C to E (each case's section above carries the detail):
    (QUESTIONS.md Q2); solved fields score R 0.80 and 0.85 in that sense at 22.5° and 45°, 0.40 and 0.17 mirrored.
    Every sensor point is outside every block, and a 12.5 mm shift is detected.
 6. **Case E's velocity ratio is normalised by U(15.9 m) = 3.935 m/s**, not U_H or UR; the data is quantised at
-   0.0198; the CSV/STL the readme names are absent from this folder (mirrored from Zenodo under `clean/sources/`;
+   0.0198; the CSV/STL the readme names are absent from this folder (mirrored from Zenodo under [`clean/sources/`](clean/sources/);
    its STL is model scale, not watertight, and has point 50 inside a wall); the `probes` layer of the `.3dm` is
    not the measurement coordinates — the workbook's are, unchanged, in the `.3dm`'s own frame.
 7. **Cases F to M each carry their own list** (six to ten items each), in the case's section above, on the site's
@@ -1301,8 +1301,8 @@ The cleaned tables served by the API apply the unit, sign and frame corrections;
 <summary><b>API</b> · static endpoints for scripts and agents</summary>
 
 Every endpoint is a file under `docs/api/`, generated by `scripts/build_api.py` and served by GitHub Pages at
-`https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/…` (and raw from this
-repository at `https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/main/docs/api/…`).
+`https://eddy3d-dev.github.io/AIJ-Data-Validation/api/…` (and raw from this
+repository at `https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/main/docs/api/…`).
 Plain GET, CORS-open. Every JSON document opens with `$schema` (its JSON Schema), `schema_version` (the API version,
 now 2.4.0), `data_version` (a SHA-256 of the served data, which changes only when the data does) and `license`
 (`CC-BY-4.0`). Every file to download is given as `{url, path, media_type, bytes, sha256}`, and its URL carries
@@ -1333,7 +1333,7 @@ example are on the site's API page.
 | `GET /api/llms.txt` | the agent entry point, plain text (also at the site root, `/llms.txt`) |
 
 ```bash
-BASE=https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api
+BASE=https://eddy3d-dev.github.io/AIJ-Data-Validation/api
 curl -s $BASE/validation.json | jq '.cases[] | {case, engines: [.engines[] | {engine, status}]}'
 curl -s $BASE/cases/B.json | jq '{frame, units, known_issues}'
 curl -s -o caseB.csv "$(curl -s $BASE/cases/B.json | jq -r '.points.csv.url')"
@@ -1359,8 +1359,8 @@ unregistered snapshot stops the build). The changes from 1.0.0 are in `index.jso
 
 | Folder | Contents |
 |---|---|
-| `raw/cases/case-a/` … `case-m/` | each case as published on Zenodo, plus the repository's own working files for it (`raw/` is what was published, `clean/` what this repository re-releases) |
-| `clean/` | the cleaned re-release of all thirteen cases in one schema, rebuilt by `clean/build.py`; `clean/sources/` mirrors the Zenodo files the case folders lack |
+| [`raw/cases/case-a/`](raw/cases/case-a/) … `case-m/` | each case as published on Zenodo, plus the repository's own working files for it (`raw/` is what was published, `clean/` what this repository re-releases) |
+| `clean/` | the cleaned re-release of all thirteen cases in one schema, rebuilt by [`clean/build.py`](clean/build.py); [`clean/sources/`](clean/sources/) mirrors the Zenodo files the case folders lack |
 | `validation/` | Eddy3D's scores and per-point pairs (`results/`), the figures (`figures/`, geometry renders in `figures/geometry/`), and the scripts that draw them (`plot_*.py`, `render_geometry.py`; dependencies in `requirements.txt`) |
 | `docs/` | the Jekyll site; `docs/api/` is the static API (the latest alias, `versions.json`, and one frozen `docs/api/<release>/` per release), generated by `scripts/build_api.py`, as are `docs/cases/` and the generated includes |
 | `papers/` | `papers/README.md` only: the papers are cited and linked by DOI; no PDFs are stored in this repository |
@@ -1377,7 +1377,7 @@ which carries trailing empty columns from a re-save; the C, D and E workbooks ar
 to M follow the same rule: their text files are stored with LF line endings (`.gitattributes`), while 23 of the Zenodo
 originals (22 CSV files and the STL of Case L) use CRLF, and the MD5 check against those records was made on the CRLF
 originals, so a stored copy matches its record only after converting back to CRLF. The
-repository's own files are `case-x[-description].ext` in lower case; folders are `raw/cases/case-a` … `case-e`, as the
+repository's own files are `case-x[-description].ext` in lower case; folders are [`raw/cases/case-a`](raw/cases/case-a) … `case-e`, as the
 site names the cases (`/cases/case-a/`).
 
 **Renamed on 2026-10-14** (history follows every file; `git log --follow` works):
@@ -1399,7 +1399,7 @@ site names the cases (`/cases/case-a/`).
 
 | Was | Now | Why |
 |---|---|---|
-| `case-a/` … `case-e/` | `raw/cases/case-a/` … `case-e/` | one folder for what the AIJ published, next to `clean/` for what this repository re-releases; every case, A to M, lands there |
+| `case-a/` … `case-e/` | [`raw/cases/case-a/`](raw/cases/case-a/) … `case-e/` | one folder for what the AIJ published, next to `clean/` for what this repository re-releases; every case, A to M, lands there |
 
 **Renamed on 2026-10-15:**
 
@@ -1417,8 +1417,8 @@ site names the cases (`/cases/case-a/`).
 <summary><b>Versions, releases and reproducing them</b> · what a version number promises, and how to rebuild any release byte for byte</summary>
 
 **One version for what this repository serves.** [`VERSION`](VERSION) holds it; [`CHANGELOG.md`](CHANGELOG.md)
-lists every release; `CITATION.cff`, `clean/manifest.json` and the API (`versions.release` and `release` in
-[`/api/index.json`](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/index.json)) carry the same number. It follows Semantic Versioning with the rules of the
+lists every release; `CITATION.cff`, [`clean/manifest.json`](clean/manifest.json) and the API (`versions.release` and `release` in
+[`/api/index.json`](https://eddy3d-dev.github.io/AIJ-Data-Validation/api/index.json)) carry the same number. It follows Semantic Versioning with the rules of the
 [Data Package version recipe](https://datapackage.org/recipes/data-package-version/), applied to the API under
 `docs/api/` and the cleaned tables under `clean/`:
 
@@ -1432,7 +1432,7 @@ Documentation, figures and tooling that change no served byte need no release. C
 the served files with the last release tag and fails a change that does not move `VERSION` by at least the level
 the change needs (a removed file or a changed CSV header needs MAJOR; an added file MINOR; anything else PATCH).
 When `VERSION` moves on `main` and the site has deployed, CI tags the commit `vX.Y.Z` and publishes a
-[GitHub Release](https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/releases)
+[GitHub Release](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/releases)
 with the changelog section, `aij-uwe-vX.Y.Z.tar.gz` (the cleaned tables, the API, the changelog and the citation)
 and its `SHA256SUMS`. A tag is never moved, so the release's frozen copy of the API (`/api/<release>/`, and the same
 files raw at that tag, `release.base_url` in `index.json`) identifies one content forever; `data_version`, a SHA-256 of the served data, is the fingerprint to quote with a
@@ -1444,8 +1444,8 @@ in a container image pinned by digest ([`scripts/BUILD_IMAGE`](scripts/BUILD_IMA
 ([`requirements.lock`](requirements.lock), compiled from [`requirements.txt`](requirements.txt)):
 
 ```bash
-git clone https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ
-cd CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ
+git clone https://github.com/Eddy3D-Dev/AIJ-Data-Validation
+cd AIJ-Data-Validation
 git checkout v2.0.0                     # any release tag
 docker run --rm -v "$PWD:/w" -w /w "$(cat scripts/BUILD_IMAGE)" bash scripts/build_all.sh
 git status --porcelain                  # empty: every byte matches the release
@@ -1466,6 +1466,6 @@ are not part of this rebuild: their results and per-point values are committed a
 
 Data: Kikumoto et al. (2026), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The benchmark is edited and
 distributed by Yoshihide Tominaga, Hideki Kikumoto and Tsubasa Okaze; collectors per case are on each Data page and in `/api/cases/{id}.json`.
-Cleaning in `clean/` and validation scores: Eddy3D ([github.com/SustainableUrbanSystemsLab](https://github.com/SustainableUrbanSystemsLab)).
+Cleaning in `clean/` and validation scores: Eddy3D ([github.com/Eddy3D-Dev](https://github.com/Eddy3D-Dev)).
 
 </details>

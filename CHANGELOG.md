@@ -13,7 +13,19 @@ what this repository serves (the API under `docs/api/` and the cleaned tables un
 Documentation, figures and tooling that change no served byte need no release. `VERSION` holds the number;
 CI fails a change to the served files that does not move it by at least the level the change needs, and tags
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
-`schema_version`, with its changelog in `index.json` and on the [API page](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api-reference/#versioning-and-changes).
+`schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
+
+## [3.1.1] - 2026-10-18
+
+Metadata only; no value changed. The repository and the site moved to <https://github.com/Eddy3D-Dev/AIJ-Data-Validation>.
+
+### Changed
+
+- The site is <https://eddy3d-dev.github.io/AIJ-Data-Validation/>: every URL in the served files (`index.json`, `openapi.json`, `llms.txt`, the case and
+  validation documents, the Dataset JSON-LD) names it, and the pinned address of a release is
+  `https://eddy3d-dev.github.io/AIJ-Data-Validation/api/<release>/index.json`. The frozen trees of 2.0.0 to 3.1.0 keep the addresses they were tagged with.
+- The suggested citation of the API (`cite.api` in `index.json`, `CITATION.cff`, `.zenodo.json`, the site and the README) names Ilker Karadag and
+  Patrick Kastner as authors and the Sustainable Urban Systems Lab as publisher.
 
 ## [3.1.0] - 2026-10-18
 
@@ -27,7 +39,7 @@ Additive: new figures, fields and citation endpoints, and fixes. The API schema 
 - `cite.api` in `index.json` and `citation` in `cases/{id}.json`; suggested citations on the site and in the README; `CITATION.cff` cites this
   dataset (the data paper, the AIJ guidelines and the Zenodo record of each case are its references); `.zenodo.json`.
   `scripts/citation.py` renders all of them and `scripts/check_citation.py` checks them. The pinned address of a release is
-  `https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/<release>/index.json`.
+  `https://eddy3d-dev.github.io/AIJ-Data-Validation/api/<release>/index.json`.
 - `bodies`, `body_contacts`, `inconsistent_triangles` and `min_body_volume` in the `stats` of `geometry.json` and in the geometry index,
   beside `edges_boundary`; `watertight` is true when every body is closed, consistently wound and positive in volume.
   `scripts/check_geometry.py` parses every served and cleaned STL and fails the build on an open, inconsistently wound or inward body, a

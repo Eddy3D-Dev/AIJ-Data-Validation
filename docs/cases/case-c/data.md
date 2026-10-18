@@ -62,7 +62,7 @@ Checked three ways on the data: y -\> -y is a symmetry, the x \<= -0.25 band is 
 
 ## Reference data
 
-Source in this repository: `raw/cases/case-c/RS_caseC.csv` (approach flow: `raw/cases/case-c/AF_caseC.csv`).
+Source in this repository: [`raw/cases/case-c/RS_caseC.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-c/RS_caseC.csv) (approach flow: [`raw/cases/case-c/AF_caseC.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-c/AF_caseC.csv)).
 
 The cleaned table has **1,080 rows** over **120 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `Vs`, `campaign`.
 

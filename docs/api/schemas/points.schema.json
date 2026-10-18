@@ -1,6 +1,6 @@
 {
  "$schema": "https://json-schema.org/draft/2020-12/schema",
- "$id": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/points.schema.json",
+ "$id": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/points.schema.json",
  "title": "Point table",
  "description": "The cleaned measurement table of one case: SI units, one frame, null where not measured.",
  "type": "object",

@@ -3,11 +3,11 @@
 > Wind-tunnel and field reference data from the Architectural Institute of Japan Urban Wind Environment (UWE)
 > benchmark, Cases A-M, cleaned into one schema, plus Eddy3D's validation against it. Static files, plain GET.
 
-Base URL: https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api
-Fallback (raw files from the repository): https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/main/docs/api
-Repository: https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ
-Release: 3.1.0 (2026-10-18). This is the latest alias, which always equals the newest release; the frozen copy of 3.1.0 is https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.1.0.
-All releases: https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/versions.json
+Base URL: https://eddy3d-dev.github.io/AIJ-Data-Validation/api
+Fallback (raw files from the repository): https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/main/docs/api
+Repository: https://github.com/Eddy3D-Dev/AIJ-Data-Validation
+Release: 3.1.1 (2026-10-18). This is the latest alias, which always equals the newest release; the frozen copy of 3.1.1 is https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.1.
+All releases: https://eddy3d-dev.github.io/AIJ-Data-Validation/api/versions.json
 API schema version: 2.4.0. Data version (SHA-256 of the served data): be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52.
 Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and requested citation of each case are in cases/{id}.json.
 
@@ -38,152 +38,152 @@ Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and reques
 
 ## Endpoints
 
-- https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/index.json — every endpoint and file with its size and SHA-256, versions, compatibility policy, changelog, licence, how to cite the API (cite.api)
-- https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/versions.json — every release, newest first: version, date, status (latest or superseded), schema and data version, base URL, tag, changelog; always at the unversioned /api/ path
-- https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases.json — every case: id, title, frame, units, counts, engine status, links
+- https://eddy3d-dev.github.io/AIJ-Data-Validation/api/index.json — every endpoint and file with its size and SHA-256, versions, compatibility policy, changelog, licence, how to cite the API (cite.api)
+- https://eddy3d-dev.github.io/AIJ-Data-Validation/api/versions.json — every release, newest first: version, date, status (latest or superseded), schema and data version, base URL, tag, changelog; always at the unversioned /api/ path
+- https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases.json — every case: id, title, frame, units, counts, engine status, links
 - cases/{id}.json (base URL + path, one file per value) — one case in full: configurations, frame, units, inflow fit and approach-flow profile, point-table summary, geometry files, validation status, known data issues, attribution, citation of the case's dataset:
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M.json
 - cases/{id}/points.json (base URL + path, one file per value) — the cleaned measurement table: SI units, one frame, null where not measured:
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/points.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/points.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/points.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/points.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/points.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/points.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/points.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/points.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/points.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/points.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/points.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/points.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/points.json
 - cases/{id}/points.csv (base URL + path, one file per value) — the same table as CSV (empty cell = not measured):
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/points.csv?v=a46201996b22
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/points.csv?v=dec97c21217a
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/points.csv?v=7448f0ceae37
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/points.csv?v=596246341e73
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/points.csv?v=e6e89432e706
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/points.csv?v=09b109e58dd3
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/points.csv?v=914883bf7fec
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/points.csv?v=ef5fafc61b8e
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/points.csv?v=2864fee9eb19
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/points.csv?v=444b7aaa1791
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/points.csv?v=8708f3251861
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/points.csv?v=b575fe11d107
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/points.csv?v=8d32dc8f762b
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/points.csv?v=a46201996b22
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/points.csv?v=dec97c21217a
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/points.csv?v=7448f0ceae37
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/points.csv?v=596246341e73
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/points.csv?v=e6e89432e706
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/points.csv?v=09b109e58dd3
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/points.csv?v=914883bf7fec
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/points.csv?v=ef5fafc61b8e
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/points.csv?v=2864fee9eb19
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/points.csv?v=444b7aaa1791
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/points.csv?v=8708f3251861
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/points.csv?v=b575fe11d107
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/points.csv?v=8d32dc8f762b
 - cases/{id}/approach_flow.csv (base URL + path, one file per value) — the measured approach-flow profile: z (m), U (m/s), and k (m^2/s^2) or u_rms (m/s) where published; Case G's U and k are dimensionless (U/Ub, k/Ub^2):
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/approach_flow.csv?v=2f3b37fa8e43
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/approach_flow.csv?v=126a620f5698
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/approach_flow.csv?v=98849731e877
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/approach_flow.csv?v=c8239428b9b9
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/approach_flow.csv?v=4971944cd8e9
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/approach_flow.csv?v=66aefe558a82
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/approach_flow.csv?v=45a11857cdf9
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/approach_flow.csv?v=ce516d4054a5
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/approach_flow.csv?v=8c9a2fa1669a
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/approach_flow.csv?v=076668c06f1c
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/approach_flow.csv?v=5d197b5001ba
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/approach_flow.csv?v=c428993827d4
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/approach_flow.csv?v=0042caa39493
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/approach_flow.csv?v=2f3b37fa8e43
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/approach_flow.csv?v=126a620f5698
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/approach_flow.csv?v=98849731e877
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/approach_flow.csv?v=c8239428b9b9
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/approach_flow.csv?v=4971944cd8e9
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/approach_flow.csv?v=66aefe558a82
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/approach_flow.csv?v=45a11857cdf9
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/approach_flow.csv?v=ce516d4054a5
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/approach_flow.csv?v=8c9a2fa1669a
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/approach_flow.csv?v=076668c06f1c
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/approach_flow.csv?v=5d197b5001ba
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/approach_flow.csv?v=c428993827d4
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/approach_flow.csv?v=0042caa39493
 - cases/{id}/geometry.json (base URL + path, one file per value) — the case's STL files with statistics, renders, and the boxes where the geometry is boxes:
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/geometry.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/geometry.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/geometry.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/geometry.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/geometry.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/geometry.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/geometry.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/geometry.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/geometry.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/geometry.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/geometry.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/geometry.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/geometry.json
 - cases/{id}/geometry.stl (base URL + path, one file per value) — cleaned ASCII STL of the default configuration: metres, case frame, outward normals:
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/geometry.stl?v=89acdfbbff84
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/geometry.stl?v=e6de70eeb17d
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/geometry.stl?v=b8c31c57c453
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/geometry.stl?v=531895531271
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/geometry.stl?v=c29624fdae6d
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/geometry.stl?v=8799740aa324
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/geometry.stl?v=09d23c794155
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/geometry.stl?v=4836687efff9
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/geometry.stl?v=ff61cbb22798
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/geometry.stl?v=1bd33d8d3531
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/geometry.stl?v=f0f8a3adfa29
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/geometry.stl?v=20864bc75187
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/geometry.stl?v=e4e0a2044536
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/geometry.stl?v=89acdfbbff84
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/geometry.stl?v=e6de70eeb17d
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry.stl?v=b8c31c57c453
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/geometry.stl?v=531895531271
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/geometry.stl?v=c29624fdae6d
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/geometry.stl?v=8799740aa324
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/geometry.stl?v=09d23c794155
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/geometry.stl?v=4836687efff9
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/geometry.stl?v=ff61cbb22798
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/geometry.stl?v=1bd33d8d3531
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/geometry.stl?v=f0f8a3adfa29
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/geometry.stl?v=20864bc75187
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/geometry.stl?v=e4e0a2044536
 - cases/{id}/geometry_{configuration}.stl (base URL + path, one file per value) — the other configurations' STLs (C: 0D, 1D; E: bc, before construction):
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/geometry_0D.stl?v=0f08bcd4dd6b
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/geometry_1D.stl?v=ac92c8ed427c
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/geometry_bc.stl?v=9b944d97a817
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry_0D.stl?v=0f08bcd4dd6b
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry_1D.stl?v=ac92c8ed427c
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/geometry_bc.stl?v=9b944d97a817
 - cases/{id}/validation.json (base URL + path, one file per value) — Eddy3D's scores per engine and run, with figures and the per-point pairs:
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/validation.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/validation.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/validation.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/validation.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/validation.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/validation.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/validation.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/validation.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/validation.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/validation.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/validation.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/validation.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/validation.json
 - cases/{id}/pairs/{engine}.csv (base URL + path, one file per value) — per-point measured and modelled values of one engine's runs on the case (columns described by the result's pairs_columns):
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/pairs/fluidx3d.csv?v=fb16be8c5800
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/pairs/ml-surrogate.csv?v=6177f32a94f4
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/pairs/openfoam12-realizableKE.csv?v=0695411d68cf
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/pairs/openlb.csv?v=974bf65cfd71
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/pairs/fluidx3d.csv?v=c4af803fd09e
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/pairs/ml-surrogate.csv?v=eb9a9c3970e7
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/pairs/openfoam12-realizableKE.csv?v=9f7c10ff5544
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/pairs/openlb.csv?v=9b2950d76b99
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/pairs/ml-surrogate.csv?v=6a2b60658913
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/pairs/openfoam12-realizableKE.csv?v=f3d2b649b543
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/pairs/ml-surrogate.csv?v=9dd71c9ce66b
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/pairs/openfoam12-realizableKE.csv?v=fab4f6f21ad5
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/pairs/ml-surrogate.csv?v=90b71f5762aa
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/pairs/openfoam12-realizableKE.csv?v=fa16bc3bcd62
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/pairs/openfoam12-realizableKE.csv?v=e81e010859e6
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/pairs/openfoam12-realizableKE.csv?v=915d369f503f
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/pairs/openfoam12-kEpsilon.csv?v=6e6ba0f446e8
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/pairs/openfoam12-kOmegaSST.csv?v=549a7aa4117e
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/pairs/openfoam12-realizableKE.csv?v=d1bafd9c68e2
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/pairs/umf-buoyantKEpsilon.csv?v=87ba413bfa96
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/pairs/umf-realizableKE.csv?v=cb34fb5fc9c7
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/pairs/openfoam12-realizableKE.csv?v=746a236c4635
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/pairs/umf-realizableKE.csv?v=a0aedc557c46
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27
-- https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/validation.json — every case and engine in one table: status, runs, headline scores
-- https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/geometry.json — every STL of every case in one list: case, configuration, units, frame, bounding box, size, SHA-256
-- https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/geometry.zip — every STL in one archive (each keeps its own case's frame and units: they are not one scene)
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/pairs/fluidx3d.csv?v=fb16be8c5800
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/pairs/ml-surrogate.csv?v=6177f32a94f4
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/pairs/openfoam12-realizableKE.csv?v=0695411d68cf
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/pairs/openlb.csv?v=974bf65cfd71
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/pairs/fluidx3d.csv?v=c4af803fd09e
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/pairs/ml-surrogate.csv?v=eb9a9c3970e7
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/pairs/openfoam12-realizableKE.csv?v=9f7c10ff5544
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/pairs/openlb.csv?v=9b2950d76b99
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/pairs/ml-surrogate.csv?v=6a2b60658913
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/pairs/openfoam12-realizableKE.csv?v=f3d2b649b543
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/pairs/ml-surrogate.csv?v=9dd71c9ce66b
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/pairs/openfoam12-realizableKE.csv?v=fab4f6f21ad5
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/pairs/ml-surrogate.csv?v=90b71f5762aa
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/pairs/openfoam12-realizableKE.csv?v=fa16bc3bcd62
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/pairs/openfoam12-realizableKE.csv?v=e81e010859e6
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/pairs/openfoam12-realizableKE.csv?v=915d369f503f
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/pairs/openfoam12-kEpsilon.csv?v=6e6ba0f446e8
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/pairs/openfoam12-kOmegaSST.csv?v=549a7aa4117e
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/pairs/openfoam12-realizableKE.csv?v=d1bafd9c68e2
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/pairs/umf-buoyantKEpsilon.csv?v=87ba413bfa96
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/pairs/umf-realizableKE.csv?v=cb34fb5fc9c7
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/pairs/openfoam12-realizableKE.csv?v=746a236c4635
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/pairs/umf-realizableKE.csv?v=a0aedc557c46
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27
+- https://eddy3d-dev.github.io/AIJ-Data-Validation/api/validation.json — every case and engine in one table: status, runs, headline scores
+- https://eddy3d-dev.github.io/AIJ-Data-Validation/api/geometry.json — every STL of every case in one list: case, configuration, units, frame, bounding box, size, SHA-256
+- https://eddy3d-dev.github.io/AIJ-Data-Validation/api/geometry.zip — every STL in one archive (each keeps its own case's frame and units: they are not one scene)
 - schemas/{name}.schema.json (base URL + path, one file per value) — the JSON Schema (draft 2020-12) of each JSON document:
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/case.schema.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/cases.schema.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/geometry-index.schema.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/geometry.schema.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/index.schema.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/points.schema.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/validation-summary.schema.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/validation.schema.json
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/versions.schema.json
-- https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/openapi.json — OpenAPI 3.1 description of every endpoint
-- https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/llms.txt — plain-text entry point for agents
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/case.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/cases.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/geometry-index.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/geometry.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/index.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/points.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation-summary.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/versions.schema.json
+- https://eddy3d-dev.github.io/AIJ-Data-Validation/api/openapi.json — OpenAPI 3.1 description of every endpoint
+- https://eddy3d-dev.github.io/AIJ-Data-Validation/api/llms.txt — plain-text entry point for agents
 
 ## Cases
 

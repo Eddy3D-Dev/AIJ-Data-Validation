@@ -53,7 +53,7 @@ description: "Case B — 1:4:4 slab: configuration, frame and units, reference d
 
 ## Reference data
 
-Source in this repository: `raw/cases/case-b/RS_caseB.csv` (approach flow: `raw/cases/case-b/AF_caseB.csv`).
+Source in this repository: [`raw/cases/case-b/RS_caseB.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-b/RS_caseB.csv) (approach flow: [`raw/cases/case-b/AF_caseB.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-b/AF_caseB.csv)).
 
 The cleaned table has **224 rows** over **224 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `campaign`.
 

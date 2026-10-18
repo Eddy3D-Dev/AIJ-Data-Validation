@@ -4,7 +4,12 @@
   "upload_type": "dataset",
   "creators": [
     {
-      "name": "Sustainable Urban Systems Lab"
+      "name": "Karadag, Ilker",
+      "affiliation": "Sustainable Urban Systems Lab"
+    },
+    {
+      "name": "Kastner, Patrick",
+      "affiliation": "Sustainable Urban Systems Lab"
     }
   ],
   "license": "cc-by-4.0",

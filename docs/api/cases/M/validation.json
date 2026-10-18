@@ -1,5 +1,5 @@
 {
- "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/validation.schema.json",
+ "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation.schema.json",
  "schema_version": "2.4.0",
  "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
@@ -319,20 +319,20 @@
    },
    "figures": [
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-m-layout.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-layout.png",
      "caption": "Case M, measurement points: A near field, within 100 m of the release point; B mid field, 100 to 300 m from the release point; C far field, beyond 300 m. Positions in metres, full scale. Star: release point; R: reference point; dotted circles: 100 m and 300 m from the release point."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-m-openfoam-agreement.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-openfoam-agreement.png",
      "caption": "Case M, OpenFOAM 12 (realizable k-ε), WD 180: measured against modelled U, V, W and k over the tunnel's U_R and the solved speed at the mast, and the dimensionless concentration c* = C/c0 at turbulent Schmidt numbers 0.3, 0.5 and 0.7 (log axes show the positive pairs within eight decades only); the last panel is the tunnel's own WD 175 and WD 185 against its WD 180, the noise floor of a single heading. Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-m-openfoam-plan.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-openfoam-plan.png",
      "caption": "Case M, OpenFOAM 12, WD 180: log₁₀ of c* at the 15 points on the plan of the campus (north up; the arrow is the wind), the tunnel and the three Schmidt numbers on one scale; a point below 10⁻³ (or zero) is open. The star is the gas source and the square the reference mast."
     }
    ],
    "pairs": {
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27",
     "path": "cases/M/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 7915,
@@ -341,7 +341,7 @@
    "pairs_columns": "point_id (the tunnel's); x, y, z in m (the release's frame, full scale: x north, y west, z above the tunnel floor); U, V, W, speed (the magnitude of the velocity vector) and k at WD 180, measured (_meas: the cleaned workbook values over the tunnel's U_R = 4.08 m/s, k over U_R^2) and modelled (_model: over the solved speed at the reference mast, 4.686 m/s; U is the case's +y, V = -U_x, W = U_z); cstar_meas, the measured C/c0 at WD 180 (c0 = 132.514 ppm), cstar_wd175 and cstar_wd185, the same at the tunnel's neighbouring headings, and cstar_sct03 / _sct05 / _sct07, the modelled c* = c U_R H_R^2 / Q (H_R = 40.8 m, Q = 1 kg/s) for turbulent Schmidt numbers 0.3, 0.5 and 0.7; cstar_<sct>_turned180 and cstar_<sct>_mirrored, the model's c* at the 15 points turned 180 degrees about the source and mirrored across the plume axis (3 m above the ground or a roof there; empty where the control point is not in the fluid); cstar_field_geomean, _min and _max, the field campaign's geometric mean, minimum and maximum of c* over its 10 runs within 10 degrees of 180 at 3 m/s or more (each run's own U_R and q, H_R = 41 m)",
    "reproduce": "Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseMContainerE2E (WD 180, the default) (TPU Atsugi campus, 1:600, tunnel WD 180, turbulent Schmidt number 0.3; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 1,394,053 cells, solved 2026-10-18); figures validation/plot_cases_fm_openfoam.py; scores recomputed from the pairs by validation/dispersion_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`",
    "source_file": "validation/results/caseM_openfoam12_realizableKE_sct03.json",
-   "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseM_openfoam12_realizableKE_sct03.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseM_openfoam12_realizableKE_sct03.json",
    "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   },
   {
@@ -632,20 +632,20 @@
    },
    "figures": [
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-m-layout.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-layout.png",
      "caption": "Case M, measurement points: A near field, within 100 m of the release point; B mid field, 100 to 300 m from the release point; C far field, beyond 300 m. Positions in metres, full scale. Star: release point; R: reference point; dotted circles: 100 m and 300 m from the release point."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-m-openfoam-agreement.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-openfoam-agreement.png",
      "caption": "Case M, OpenFOAM 12 (realizable k-ε), WD 180: measured against modelled U, V, W and k over the tunnel's U_R and the solved speed at the mast, and the dimensionless concentration c* = C/c0 at turbulent Schmidt numbers 0.3, 0.5 and 0.7 (log axes show the positive pairs within eight decades only); the last panel is the tunnel's own WD 175 and WD 185 against its WD 180, the noise floor of a single heading. Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-m-openfoam-plan.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-openfoam-plan.png",
      "caption": "Case M, OpenFOAM 12, WD 180: log₁₀ of c* at the 15 points on the plan of the campus (north up; the arrow is the wind), the tunnel and the three Schmidt numbers on one scale; a point below 10⁻³ (or zero) is open. The star is the gas source and the square the reference mast."
     }
    ],
    "pairs": {
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27",
     "path": "cases/M/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 7915,
@@ -654,7 +654,7 @@
    "pairs_columns": "point_id (the tunnel's); x, y, z in m (the release's frame, full scale: x north, y west, z above the tunnel floor); U, V, W, speed (the magnitude of the velocity vector) and k at WD 180, measured (_meas: the cleaned workbook values over the tunnel's U_R = 4.08 m/s, k over U_R^2) and modelled (_model: over the solved speed at the reference mast, 4.686 m/s; U is the case's +y, V = -U_x, W = U_z); cstar_meas, the measured C/c0 at WD 180 (c0 = 132.514 ppm), cstar_wd175 and cstar_wd185, the same at the tunnel's neighbouring headings, and cstar_sct03 / _sct05 / _sct07, the modelled c* = c U_R H_R^2 / Q (H_R = 40.8 m, Q = 1 kg/s) for turbulent Schmidt numbers 0.3, 0.5 and 0.7; cstar_<sct>_turned180 and cstar_<sct>_mirrored, the model's c* at the 15 points turned 180 degrees about the source and mirrored across the plume axis (3 m above the ground or a roof there; empty where the control point is not in the fluid); cstar_field_geomean, _min and _max, the field campaign's geometric mean, minimum and maximum of c* over its 10 runs within 10 degrees of 180 at 3 m/s or more (each run's own U_R and q, H_R = 41 m)",
    "reproduce": "Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseMContainerE2E (WD 180, the default) (TPU Atsugi campus, 1:600, tunnel WD 180, turbulent Schmidt number 0.5; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 1,394,053 cells, solved 2026-10-18); figures validation/plot_cases_fm_openfoam.py; scores recomputed from the pairs by validation/dispersion_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`",
    "source_file": "validation/results/caseM_openfoam12_realizableKE_sct05.json",
-   "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseM_openfoam12_realizableKE_sct05.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseM_openfoam12_realizableKE_sct05.json",
    "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   },
   {
@@ -945,20 +945,20 @@
    },
    "figures": [
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-m-layout.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-layout.png",
      "caption": "Case M, measurement points: A near field, within 100 m of the release point; B mid field, 100 to 300 m from the release point; C far field, beyond 300 m. Positions in metres, full scale. Star: release point; R: reference point; dotted circles: 100 m and 300 m from the release point."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-m-openfoam-agreement.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-openfoam-agreement.png",
      "caption": "Case M, OpenFOAM 12 (realizable k-ε), WD 180: measured against modelled U, V, W and k over the tunnel's U_R and the solved speed at the mast, and the dimensionless concentration c* = C/c0 at turbulent Schmidt numbers 0.3, 0.5 and 0.7 (log axes show the positive pairs within eight decades only); the last panel is the tunnel's own WD 175 and WD 185 against its WD 180, the noise floor of a single heading. Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-m-openfoam-plan.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-openfoam-plan.png",
      "caption": "Case M, OpenFOAM 12, WD 180: log₁₀ of c* at the 15 points on the plan of the campus (north up; the arrow is the wind), the tunnel and the three Schmidt numbers on one scale; a point below 10⁻³ (or zero) is open. The star is the gas source and the square the reference mast."
     }
    ],
    "pairs": {
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27",
     "path": "cases/M/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 7915,
@@ -967,7 +967,7 @@
    "pairs_columns": "point_id (the tunnel's); x, y, z in m (the release's frame, full scale: x north, y west, z above the tunnel floor); U, V, W, speed (the magnitude of the velocity vector) and k at WD 180, measured (_meas: the cleaned workbook values over the tunnel's U_R = 4.08 m/s, k over U_R^2) and modelled (_model: over the solved speed at the reference mast, 4.686 m/s; U is the case's +y, V = -U_x, W = U_z); cstar_meas, the measured C/c0 at WD 180 (c0 = 132.514 ppm), cstar_wd175 and cstar_wd185, the same at the tunnel's neighbouring headings, and cstar_sct03 / _sct05 / _sct07, the modelled c* = c U_R H_R^2 / Q (H_R = 40.8 m, Q = 1 kg/s) for turbulent Schmidt numbers 0.3, 0.5 and 0.7; cstar_<sct>_turned180 and cstar_<sct>_mirrored, the model's c* at the 15 points turned 180 degrees about the source and mirrored across the plume axis (3 m above the ground or a roof there; empty where the control point is not in the fluid); cstar_field_geomean, _min and _max, the field campaign's geometric mean, minimum and maximum of c* over its 10 runs within 10 degrees of 180 at 3 m/s or more (each run's own U_R and q, H_R = 41 m)",
    "reproduce": "Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseMContainerE2E (WD 180, the default) (TPU Atsugi campus, 1:600, tunnel WD 180, turbulent Schmidt number 0.7; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 1,394,053 cells, solved 2026-10-18); figures validation/plot_cases_fm_openfoam.py; scores recomputed from the pairs by validation/dispersion_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`",
    "source_file": "validation/results/caseM_openfoam12_realizableKE_sct07.json",
-   "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseM_openfoam12_realizableKE_sct07.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseM_openfoam12_realizableKE_sct07.json",
    "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   }
  ],

@@ -3,12 +3,15 @@ cff-version: 1.2.0
 message: "The dataset below is this API release; its references are the data paper, the AIJ guidelines and one Zenodo dataset per case."
 type: dataset
 title: "AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API"
-version: "3.1.0"
+version: "3.1.1"
 date-released: "2026-10-18"
 authors:
-  - name: "Sustainable Urban Systems Lab"
-repository-code: "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ"
-url: "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.1.0/index.json"
+      - family-names: "Karadag"
+        given-names: "Ilker"
+      - family-names: "Kastner"
+        given-names: "Patrick"
+repository-code: "https://github.com/Eddy3D-Dev/AIJ-Data-Validation"
+url: "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.1/index.json"
 license: CC-BY-4.0
 abstract: "Cleaned wind-tunnel and field data of the AIJ Urban Wind Environment benchmark, Cases A-M, with their geometry and Eddy3D's validation scores, served as static JSON, CSV and STL files."
 keywords:

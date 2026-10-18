@@ -82,7 +82,7 @@ RESULTS_DIR = os.path.join(REPO, "validation", "results")
 REPO_URL = C.REPO_URL
 SITE = C.SITE
 LIVE_BASE = SITE + "/api"         # the unversioned alias: always the newest release
-RAW_BASE = "https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/main/docs/api"
+RAW_BASE = "https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/main/docs/api"
 SCHEMA_VERSION = "2.4.0"
 RELEASE = R.version()             # the repository's release (VERSION); the API names it, it does not set it
 RELEASE_DATE = R.release_date()
@@ -2305,7 +2305,8 @@ def _case_data_page(case, meta, p):
     L += [""] + _sections(sink)
     af = meta.get("approach_flow_file")
     L += ["## Reference data", "",
-          f"Source in this repository: `{meta['reference_file']}`" + (f" (approach flow: `{af}`)" if af else "") + ".", "",
+          f"Source in this repository: [`{meta['reference_file']}`]({REPO_URL}/blob/main/{meta['reference_file']})"
+          + (f" (approach flow: [`{af}`]({REPO_URL}/blob/main/{af}))" if af else "") + ".", "",
           f"The cleaned table has **{summ['rows']:,} rows** over **{summ['distinct_points']:,} distinct points**; "
           f"columns `{'`, `'.join(summ['columns'])}`.", ""]
     if summ["nulls"]:
@@ -2512,7 +2513,7 @@ def build_pages(percase):
 # ----------------------------------------------------------------------------- verify
 
 TEMPLATED_URL = re.compile(r"https?://[^\s\"'<>]*\{[^\s\"'<>]*")
-API_URL = re.compile(r"https://sustainableurbansystems\.com/[^\s\"'<>)]*?/api(?:/[^\s\"'<>)]*)?")
+API_URL = re.compile(r"https://(?:eddy3d-dev\.github\.io|sustainableurbansystems\.com)/[^\s\"'<>)]*?/api(?:/[^\s\"'<>)]*)?")
 
 
 def _strings(obj):
@@ -2796,6 +2797,14 @@ def verify_web():
     return problems
 
 
+LEGACY_SITE = "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ"   # where releases up to 3.1.0 were tagged
+
+
+def release_base(v):
+    """The address a frozen release tree names inside itself: the releases up to 3.1.0 were tagged while the site lived at LEGACY_SITE."""
+    return f"{LEGACY_SITE}/api/{v}" if tuple(int(x) for x in v.split(".")) <= (3, 1, 0) else f"{LIVE_BASE}/{v}"
+
+
 def verify():
     """Everything a client relies on, checked against the files on disk: the latest alias, every frozen release tree,
     that the alias is the newest release, and the registry that lists them."""
@@ -2809,7 +2818,7 @@ def verify():
     if RELEASE not in dirs:
         return [f"docs/api/{RELEASE}/, the tree of the current release, does not exist; run scripts/build_api.py"]
     for label, root, base, strict in [("alias", API_ROOT, LIVE_BASE, True)] + [
-            (f"release {v}", os.path.join(API_ROOT, v), f"{LIVE_BASE}/{v}", v == RELEASE) for v in dirs]:
+            (f"release {v}", os.path.join(API_ROOT, v), release_base(v), v == RELEASE) for v in dirs]:
         problems += [f"[{label}] {p}" for p in verify_tree(root, base, strict)]
     problems += [f"[alias vs release] {p}" for p in verify_alias_matches_release()]
     problems += [f"[registry] {p}" for p in verify_registry()]

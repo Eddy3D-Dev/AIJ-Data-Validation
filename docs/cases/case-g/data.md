@@ -57,7 +57,7 @@ description: "Case G — flow behind a tree belt: configuration, frame and units
 
 ## Reference data
 
-Source in this repository: `raw/cases/case-g/RS_caseG.csv` (approach flow: `raw/cases/case-g/AF_caseG.csv`).
+Source in this repository: [`raw/cases/case-g/RS_caseG.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-g/RS_caseG.csv) (approach flow: [`raw/cases/case-g/AF_caseG.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-g/AF_caseG.csv)).
 
 The cleaned table has **28 rows** over **28 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `velocity_ratio`, `campaign`, `k_ratio`.
 

@@ -1,7 +1,7 @@
 title: AIJ UWE
 description: Validation data from the AIJ (Architectural Institute of Japan) benchmark cases—cleaned and packaged as an API.
-url: "https://sustainableurbansystems.com"
-baseurl: "/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ"
+url: "https://eddy3d-dev.github.io"
+baseurl: "/AIJ-Data-Validation"
 
 # GitHub's Jekyll build: remote theme (pinned to a release, so a new theme version cannot change the site by
 # itself), whitelisted plugins only, no build step beyond Jekyll.
@@ -32,9 +32,9 @@ search:
 
 # aux_links are written to the page as they are, so they carry the baseurl themselves.
 aux_links:
-  "API": "/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api-reference/"
-  "Releases": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/releases"
-  "Repository": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ"
+  "API": "/AIJ-Data-Validation/api-reference/"
+  "Releases": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/releases"
+  "Repository": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation"
 
 nav_external_links:
   - title: "Data paper (DOI)"
