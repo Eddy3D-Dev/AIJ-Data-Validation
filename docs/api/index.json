@@ -7,25 +7,25 @@
  "description": "Static JSON/CSV/STL endpoints for the Architectural Institute of Japan Urban Wind Environment benchmark (Cases A-M) and Eddy3D's validation against it. Every file is a plain HTTP GET; nothing is computed on request.",
  "base_url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api",
  "tree": "latest",
- "release_base_url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2",
+ "release_base_url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.3",
  "versions_url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/versions.json",
  "fallback_base_url": "https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/main/docs/api",
  "fallback_note": "the same files, served raw from the repository's main branch (use when the Pages site is not reachable)",
  "repository": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation",
  "site": "https://eddy3d-dev.github.io/AIJ-Data-Validation",
  "versions": {
-  "release": "3.1.2",
+  "release": "3.1.3",
   "schema": "2.4.0",
   "data": "6c8b16ff73fa45f1aae99db9c2299e63d3fff6602e06a47434ddc86424661be7",
-  "clean_manifest": "3.1.2"
+  "clean_manifest": "3.1.3"
  },
  "release": {
-  "version": "3.1.2",
+  "version": "3.1.3",
   "date": "2026-10-18",
-  "tag": "v3.1.2",
-  "url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/releases/tag/v3.1.2",
-  "base_url": "https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/v3.1.2/docs/api/3.1.2",
-  "changelog": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/v3.1.2/CHANGELOG.md"
+  "tag": "v3.1.3",
+  "url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/releases/tag/v3.1.3",
+  "base_url": "https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/v3.1.3/docs/api/3.1.3",
+  "changelog": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/v3.1.3/CHANGELOG.md"
  },
  "compatibility": "Semantic versioning, twice. `versions.release` versions what is served (MAJOR: a file, field or column renamed or removed, or a unit or frame changed; MINOR: something added; PATCH: a value corrected). Every release is also a frozen copy of the whole API under `/api/<release>/` whose files never change (`release_base_url`; all releases in versions.json), and the unversioned /api/ paths always equal the newest release: pin an analysis to a release by using that release's base URL. `schema_version` versions this JSON contract: within a major version it only adds new fields, endpoints and runs, clients must ignore fields they do not know, and a field is renamed or removed only in a new major version, which the changelog names. `data_version` is a fingerprint: the SHA-256 of the served data.",
  "caching": "GitHub Pages sends JSON with a 10-minute max-age and CSV and ZIP files with a 186-day max-age. Every download URL therefore carries ?v=<first 12 hex digits of the file's SHA-256>: the server ignores the query, and a changed file gets a new URL. Fetch the JSON documents for the current URLs; check downloads against `sha256`.",
@@ -1267,11 +1267,11 @@
    "sha256": "9ed663e1d97cd167b478dd1ec8cb96689362b39b4efecb95cdd00b9b3dbcae40"
   },
   {
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/llms.txt?v=641754843671",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/llms.txt?v=d1c441688bbb",
    "path": "llms.txt",
    "media_type": "text/plain",
    "bytes": 45855,
-   "sha256": "64175484367136d6046f3950bf8df7ec384be397606c49844fff75d097895171"
+   "sha256": "d1c441688bbb7e2f59e2102ceaf74312a968d161e5e2ffc6601224f9ceee0065"
   },
   {
    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/openapi.json?v=d7e7d5cf2db9",
@@ -1360,14 +1360,14 @@
  "cite": {
   "api": {
    "title": "AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API",
-   "version": "3.1.2",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/index.json",
-   "release_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/releases/tag/v3.1.2",
+   "version": "3.1.3",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.3/index.json",
+   "release_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/releases/tag/v3.1.3",
    "doi": null,
-   "apa": "Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.1.2) [Data set]. Sustainable Urban Systems Lab. https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/index.json",
-   "bibtex": "@misc{aijuwe_api_3_1_2,\n  author    = \"Karadag, Ilker and Kastner, Patrick\",\n  title     = \"{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}\",\n  year      = \"2026\",\n  version   = \"3.1.2\",\n  publisher = \"Sustainable Urban Systems Lab\",\n  url       = \"https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/index.json\",\n  note      = \"Data set; data version 6c8b16ff73fa\"\n}",
+   "apa": "Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.1.3) [Data set]. Sustainable Urban Systems Lab. https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.3/index.json",
+   "bibtex": "@misc{aijuwe_api_3_1_3,\n  author    = \"Karadag, Ilker and Kastner, Patrick\",\n  title     = \"{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}\",\n  year      = \"2026\",\n  version   = \"3.1.3\",\n  publisher = \"Sustainable Urban Systems Lab\",\n  url       = \"https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.3/index.json\",\n  note      = \"Data set; data version 6c8b16ff73fa\"\n}",
    "csl_json": {
-    "id": "aijuwe-api-3.1.2",
+    "id": "aijuwe-api-3.1.3",
     "type": "dataset",
     "title": "AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API",
     "author": [
@@ -1389,9 +1389,9 @@
       ]
      ]
     },
-    "version": "3.1.2",
+    "version": "3.1.3",
     "publisher": "Sustainable Urban Systems Lab",
-    "URL": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/index.json",
+    "URL": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.3/index.json",
     "note": "Data version 6c8b16ff73fa"
    }
   },

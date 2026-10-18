@@ -273,7 +273,7 @@ Box geometry, `geometry.stl` and its boxes in `geometry.json`: G the belt's 2 ×
 
 ## Cases J, K, L — frames, reference values, extra files
 
-The three Tokyo Polytechnic University cases (J: 1:1:2 building, K: 9 x 9 cube array, L: 14 x 9 cube array; K and L
+The three Tokyo Polytechnic University cases (J: 1:1:2 building, K: 9 x 9 cube array, L: 9 x 14 cube array (14 rows along x, 9 across y); K and L
 with a tracer source on the floor, J and L in an unstably stratified boundary layer). One wind direction each
 (`wind_direction_deg` = 0, flow toward +x, `directions.csv` status `settled`), one instrument (`split_fibre`: the
 velocity probe; temperature was read with a cold wire and concentration with a hydrocarbon analyser beside it),
@@ -332,6 +332,6 @@ streamwise station (J: x = −0.4 m, K: −0.493 m, L: −0.4 m).
 |---|---|---|
 | J | `geometry.stl` | the readme's stated dimensions: one box 0.08 × 0.08 × 0.16 m, leeward wall at the origin; 12 triangles, watertight |
 | K | `geometry.stl` | 81 cubes of 0.06 m on a 0.12 m pitch (9 rows from x = −0.36, 9 columns centred on y = 0): generated, because no STL is published. The pitch is read from `MP-y_caseK.png` / `MP-z_caseK.png`; the 203 points bound it to 0.11 – 0.14 m (no point lies inside a cube only between them) and the source position (x = −0.15 m, between rows 2 and 3) to 0.105 – 0.15 m. 972 triangles, watertight |
-| L | `geometry.stl` | the 126 closed shells of the published `BD_caseL.stl` ('buildings' solid: 1,512 triangles, no open edge, no duplicates; the two bottom triangles of each cube are wound inward) reduced to their boxes, which equal the 14 × 9 grid of 0.06 m cubes on a 0.12 m pitch to 1e-9. The 'line_source' solid (a flat patch 0.04 m × 1.02 m at x = −0.15 m, z = 0) is not a building and is described in `geometry.json` / the frame, not served as a wall |
+| L | `geometry.stl` | the 126 closed shells of the published `BD_caseL.stl` ('buildings' solid: 1,512 triangles, no open edge, no duplicates; the two bottom triangles of each cube are wound inward) reduced to their boxes, which equal the grid of 14 rows along x by 9 columns across y of 0.06 m cubes on a 0.12 m pitch to 1e-9. The 'line_source' solid (a flat patch 0.04 m × 1.02 m at x = −0.15 m, z = 0) is not a building and is described in `geometry.json` / the frame, not served as a wall |
 
 All model scale; no source states a model:full-scale ratio, so the case frame is the model one.
