@@ -212,11 +212,11 @@
  "case-f.png": {
   "height": 800,
   "master": "/assets/geometry/case-f.png",
-  "master_bytes": 1860982,
+  "master_bytes": 2041676,
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-f.png",
-  "web_bytes": 214777,
+  "web_bytes": 280192,
   "width": 1600
  },
  "case-g-layout.png": {
@@ -402,11 +402,11 @@
  "case-l.png": {
   "height": 800,
   "master": "/assets/geometry/case-l.png",
-  "master_bytes": 2263625,
+  "master_bytes": 2263616,
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-l.png",
-  "web_bytes": 302555,
+  "web_bytes": 302559,
   "width": 1600
  },
  "case-m-layout.png": {
@@ -442,11 +442,11 @@
  "case-m.png": {
   "height": 800,
   "master": "/assets/geometry/case-m.png",
-  "master_bytes": 1803164,
+  "master_bytes": 2276258,
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-m.png",
-  "web_bytes": 190787,
+  "web_bytes": 274958,
   "width": 1600
  },
  "cases-ab-engine-comparison.png": {
