@@ -79,6 +79,8 @@
        "openfoam12-realizableKE",
        "openfoam12-kEpsilon",
        "openfoam12-kOmegaSST",
+       "umf-realizableKE",
+       "umf-buoyantKEpsilon",
        "openlb",
        "fluidx3d",
        "ml-surrogate"
@@ -118,6 +120,8 @@
        "openfoam12-realizableKE",
        "openfoam12-kEpsilon",
        "openfoam12-kOmegaSST",
+       "umf-realizableKE",
+       "umf-buoyantKEpsilon",
        "openlb",
        "fluidx3d",
        "ml-surrogate"
@@ -137,6 +141,12 @@
      },
      "normalisation": {
       "type": "string"
+     },
+     "notes": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
      },
      "headline": {
       "type": "object",

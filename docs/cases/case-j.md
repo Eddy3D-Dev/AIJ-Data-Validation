@@ -33,11 +33,21 @@ Isolated 1:1:2 building with a floor tracer source in an unstably stratified bou
 
 ## Agreement with the tunnel
 
-**No validation has been run for this case yet.** Nothing on this page is a claim about it. Eddy3D's fixture for this case is written and its solves are queued; no result exists yet. Engine status: OpenFOAM 12 <span class="label label-yellow status">pending</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
+| Engine | Status | R | FAC2 |
+|---|---|---|---|
+| OpenFOAM 12 | <span class="label label-yellow status">pending</span> | — | — |
+| UMF | <span class="label label-green status">scored</span> | +0.32 … +0.92 | 0.29 … 1.00 |
+| UMF buoyantKEpsilon | <span class="label label-green status">scored</span> | +0.36 … +0.92 | 0.29 … 1.00 |
+| OpenLB | <span class="label label-yellow status">pending</span> | — | — |
+| FluidX3D | <span class="label label-yellow status">pending</span> | — | — |
+| ML surrogate | <span class="label label-yellow status">pending</span> | — | — |
+{: .scores }
+
+R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: every score, its figures and its reading are on the [Validation page]({{ '/cases/case-j/validation/' | relative_url }}).
 
 {: .warning-title }
 > Before you compare
 >
 > The cleaned table is in SI units and one frame, with this case's corrections applied once; do not apply them again to the published files.
 >
-> - 9 known issues in the published files are listed under [Known data issues]({{ '/cases/case-j/data/' | relative_url }}#known-data-issues).
+> - 10 known issues in the published files are listed under [Known data issues]({{ '/cases/case-j/data/' | relative_url }}#known-data-issues).

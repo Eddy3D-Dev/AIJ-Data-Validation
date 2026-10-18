@@ -33,7 +33,15 @@ description: "9 x 9 array of 0.06 m cubes with a tracer point source on the floo
 
 ## Agreement with the tunnel
 
-**No validation has been run for this case yet.** Nothing on this page is a claim about it. Eddy3D's fixture for this case is written and its solves are queued; no result exists yet. Engine status: OpenFOAM 12 <span class="label label-yellow status">pending</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
+| Engine | Status | R | FAC2 |
+|---|---|---|---|
+| OpenFOAM 12 | <span class="label label-green status">scored</span> | -0.15 … +0.96 | 0.04 … 0.80 |
+| OpenLB | <span class="label label-yellow status">pending</span> | — | — |
+| FluidX3D | <span class="label label-yellow status">pending</span> | — | — |
+| ML surrogate | <span class="label label-yellow status">pending</span> | — | — |
+{: .scores }
+
+R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: every score, its figures and its reading are on the [Validation page]({{ '/cases/case-k/validation/' | relative_url }}).
 
 {: .warning-title }
 > Before you compare

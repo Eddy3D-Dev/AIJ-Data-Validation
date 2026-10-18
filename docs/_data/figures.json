@@ -153,6 +153,28 @@
   "web_bytes": 216473,
   "width": 1600
  },
+ "case-g-openfoam-stations.png": {
+  "height": 666,
+  "master": "/assets/figures/case-g-openfoam-stations.png",
+  "master_bytes": 1158273,
+  "master_height": 4608,
+  "master_width": 11064,
+  "mb": "1.2",
+  "web": "/assets/web/case-g-openfoam-stations.png",
+  "web_bytes": 215045,
+  "width": 1600
+ },
+ "case-g-openfoam-sweep.png": {
+  "height": 736,
+  "master": "/assets/figures/case-g-openfoam-sweep.png",
+  "master_bytes": 3269661,
+  "master_height": 6048,
+  "master_width": 13152,
+  "mb": "3.3",
+  "web": "/assets/web/case-g-openfoam-sweep.png",
+  "web_bytes": 379587,
+  "width": 1600
+ },
  "case-g.png": {
   "height": 800,
   "master": "/assets/geometry/case-g.png",
@@ -197,6 +219,28 @@
   "web_bytes": 82635,
   "width": 1600
  },
+ "case-j-umf-agreement.png": {
+  "height": 896,
+  "master": "/assets/figures/case-j-umf-agreement.png",
+  "master_bytes": 5681672,
+  "master_height": 6864,
+  "master_width": 12252,
+  "mb": "5.7",
+  "web": "/assets/web/case-j-umf-agreement.png",
+  "web_bytes": 525058,
+  "width": 1600
+ },
+ "case-j-umf-tracer.png": {
+  "height": 1045,
+  "master": "/assets/figures/case-j-umf-tracer.png",
+  "master_bytes": 4301130,
+  "master_height": 6804,
+  "master_width": 10416,
+  "mb": "4.3",
+  "web": "/assets/web/case-j-umf-tracer.png",
+  "web_bytes": 527954,
+  "width": 1600
+ },
  "case-j.png": {
   "height": 800,
   "master": "/assets/geometry/case-j.png",
@@ -208,6 +252,17 @@
   "web_bytes": 93686,
   "width": 1600
  },
+ "case-k-openfoam-agreement.png": {
+  "height": 989,
+  "master": "/assets/figures/case-k-openfoam-agreement.png",
+  "master_bytes": 3591074,
+  "master_height": 7272,
+  "master_width": 11760,
+  "mb": "3.6",
+  "web": "/assets/web/case-k-openfoam-agreement.png",
+  "web_bytes": 393637,
+  "width": 1600
+ },
  "case-k.png": {
   "height": 800,
   "master": "/assets/geometry/case-k.png",
@@ -217,6 +272,17 @@
   "mb": "2.0",
   "web": "/assets/web/case-k.png",
   "web_bytes": 230302,
+  "width": 1600
+ },
+ "case-l-umf-agreement.png": {
+  "height": 900,
+  "master": "/assets/figures/case-l-umf-agreement.png",
+  "master_bytes": 5327623,
+  "master_height": 6792,
+  "master_width": 12072,
+  "mb": "5.3",
+  "web": "/assets/web/case-l-umf-agreement.png",
+  "web_bytes": 525987,
   "width": 1600
  },
  "case-l.png": {

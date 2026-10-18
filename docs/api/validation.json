@@ -1,7 +1,7 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/validation-summary.schema.json",
  "schema_version": "2.3.0",
- "data_version": "eb01c1bfc4272848d68fe9913f82781fe85d4e53c90f7a747185a7c3603093bd",
+ "data_version": "cef1af2b7f12fd73ff1bfbdcd3d8ee4952d9460f14350bd5479d514aa1baa837",
  "license": "CC-BY-4.0",
  "description": "Every case and engine in one table. 'scored' means a run exists, not that it agrees: read the scores. Headline scores are the ones to quote; every score, the figures and the per-point pairs are in each case's validation.json.",
  "engines": [
@@ -18,6 +18,16 @@
   {
    "id": "openfoam12-kOmegaSST",
    "name": "OpenFOAM 12, k-omega SST (Eddy3D Outdoor)",
+   "kind": "RANS"
+  },
+  {
+   "id": "umf-realizableKE",
+   "name": "urbanMicroclimateFoam, realizable k-epsilon (Eddy3D Outdoor+)",
+   "kind": "RANS"
+  },
+  {
+   "id": "umf-buoyantKEpsilon",
+   "name": "urbanMicroclimateFoam, buoyantKEpsilon (Eddy3D Outdoor+)",
    "kind": "RANS"
   },
   {
@@ -1057,8 +1067,264 @@
    "engines": [
     {
      "engine": "openfoam12-realizableKE",
-     "status": "pending",
-     "runs": []
+     "status": "scored",
+     "runs": [
+      {
+       "run_id": "G.openfoam12-realizableKE.open-field",
+       "configuration": "open-field",
+       "headline": [
+        {
+         "label": "|U|/U(7 m) (control: no belt)",
+         "score": "score.U.ownApproach",
+         "Count": 28,
+         "R": 0.29964646258343886,
+         "Fac2": 0.4642857142857143,
+         "Fb": -0.6591131739183347,
+         "HitRate": 0.0
+        },
+        {
+         "label": "√(|U|²+2k)/U(7 m) (control: no belt)",
+         "score": "score.rms.ownApproach",
+         "Count": 28,
+         "R": 0.27801432378229246,
+         "Fac2": 0.35714285714285715,
+         "Fb": -0.6810837256180358,
+         "HitRate": 0.0
+        },
+        {
+         "label": "k/U(7 m)² (control: no belt)",
+         "score": "score.k.ownApproach",
+         "Count": 28,
+         "R": -0.08677991398329171,
+         "Fac2": 0.7142857142857143,
+         "Fb": 0.3001884021074352,
+         "HitRate": 0.25
+        },
+        {
+         "label": "|U|/U_H, imposed (control: no belt)",
+         "score": "score.U.imposedUH",
+         "Count": 28,
+         "R": 0.2996464625834386,
+         "Fac2": 0.5714285714285714,
+         "Fb": -0.6451183608381248,
+         "HitRate": 0.0
+        },
+        {
+         "label": "√(|U|²+2k)/U_H, imposed (control: no belt)",
+         "score": "score.rms.imposedUH",
+         "Count": 28,
+         "R": 0.2780143237822922,
+         "Fac2": 0.4642857142857143,
+         "Fb": -0.6672032862662364,
+         "HitRate": 0.0
+        }
+       ]
+      },
+      {
+       "run_id": "G.openfoam12-realizableKE.pine",
+       "configuration": "pine",
+       "headline": [
+        {
+         "label": "|U|/U(7 m)",
+         "score": "score.U.ownApproach",
+         "Count": 28,
+         "R": 0.5033057279199129,
+         "Fac2": 1.0,
+         "Fb": -0.42462030052406863,
+         "HitRate": 0.03571428571428571
+        },
+        {
+         "label": "√(|U|²+2k)/U(7 m)",
+         "score": "score.rms.ownApproach",
+         "Count": 28,
+         "R": 0.49118540669096433,
+         "Fac2": 1.0,
+         "Fb": -0.4696622871981703,
+         "HitRate": 0.0
+        },
+        {
+         "label": "k/U(7 m)²",
+         "score": "score.k.ownApproach",
+         "Count": 28,
+         "R": 0.21334535956990947,
+         "Fac2": 0.7142857142857143,
+         "Fb": 0.138210974364727,
+         "HitRate": 0.14285714285714285
+        },
+        {
+         "label": "|U|/U_H, imposed",
+         "score": "score.U.imposedUH",
+         "Count": 28,
+         "R": 0.503305727919913,
+         "Fac2": 1.0,
+         "Fb": -0.4066550741437099,
+         "HitRate": 0.03571428571428571
+        },
+        {
+         "label": "√(|U|²+2k)/U_H, imposed",
+         "score": "score.rms.imposedUH",
+         "Count": 28,
+         "R": 0.4911854066909643,
+         "Fac2": 1.0,
+         "Fb": -0.45188274490175734,
+         "HitRate": 0.03571428571428571
+        }
+       ]
+      },
+      {
+       "run_id": "G.openfoam12-realizableKE.conifer",
+       "configuration": "conifer",
+       "headline": [
+        {
+         "label": "|U|/U(7 m)",
+         "score": "score.U.ownApproach",
+         "Count": 28,
+         "R": 0.4892597610426796,
+         "Fac2": 1.0,
+         "Fb": -0.24752470718223316,
+         "HitRate": 0.2857142857142857
+        },
+        {
+         "label": "√(|U|²+2k)/U(7 m)",
+         "score": "score.rms.ownApproach",
+         "Count": 28,
+         "R": 0.5035606635769263,
+         "Fac2": 1.0,
+         "Fb": -0.32885579257959185,
+         "HitRate": 0.07142857142857142
+        },
+        {
+         "label": "k/U(7 m)²",
+         "score": "score.k.ownApproach",
+         "Count": 28,
+         "R": 0.2775728493928461,
+         "Fac2": 0.75,
+         "Fb": -0.08960558096095216,
+         "HitRate": 0.17857142857142858
+        },
+        {
+         "label": "|U|/U_H, imposed",
+         "score": "score.U.imposedUH",
+         "Count": 28,
+         "R": 0.48925976104267954,
+         "Fac2": 1.0,
+         "Fb": -0.2269651587830836,
+         "HitRate": 0.4642857142857143
+        },
+        {
+         "label": "√(|U|²+2k)/U_H, imposed",
+         "score": "score.rms.imposedUH",
+         "Count": 28,
+         "R": 0.5035606635769262,
+         "Fac2": 1.0,
+         "Fb": -0.30853230998754705,
+         "HitRate": 0.14285714285714285
+        }
+       ]
+      },
+      {
+       "run_id": "G.openfoam12-realizableKE.screen",
+       "configuration": "screen",
+       "headline": [
+        {
+         "label": "|U|/U(7 m)",
+         "score": "score.U.ownApproach",
+         "Count": 28,
+         "R": 0.45934760808457936,
+         "Fac2": 1.0,
+         "Fb": -0.14830750466666973,
+         "HitRate": 0.8571428571428571
+        },
+        {
+         "label": "√(|U|²+2k)/U(7 m)",
+         "score": "score.rms.ownApproach",
+         "Count": 28,
+         "R": 0.4721715958944426,
+         "Fac2": 1.0,
+         "Fb": -0.25837926845693093,
+         "HitRate": 0.25
+        },
+        {
+         "label": "k/U(7 m)²",
+         "score": "score.k.ownApproach",
+         "Count": 28,
+         "R": 0.23394772023983137,
+         "Fac2": 0.6785714285714286,
+         "Fb": -0.20629912239836773,
+         "HitRate": 0.21428571428571427
+        },
+        {
+         "label": "|U|/U_H, imposed",
+         "score": "score.U.imposedUH",
+         "Count": 28,
+         "R": 0.4593476080845795,
+         "Fac2": 1.0,
+         "Fb": -0.1264433904334295,
+         "HitRate": 0.8928571428571429
+        },
+        {
+         "label": "√(|U|²+2k)/U_H, imposed",
+         "score": "score.rms.imposedUH",
+         "Count": 28,
+         "R": 0.47217159589444235,
+         "Fac2": 1.0,
+         "Fb": -0.23674810596292592,
+         "HitRate": 0.32142857142857145
+        }
+       ]
+      },
+      {
+       "run_id": "G.openfoam12-realizableKE.half-belt-conifer",
+       "configuration": "half-belt-conifer",
+       "headline": [
+        {
+         "label": "|U|/U(7 m)",
+         "score": "score.U.ownApproach",
+         "Count": 28,
+         "R": 0.46776157895671755,
+         "Fac2": 1.0,
+         "Fb": -0.20219128610455636,
+         "HitRate": 0.6071428571428571
+        },
+        {
+         "label": "√(|U|²+2k)/U(7 m)",
+         "score": "score.rms.ownApproach",
+         "Count": 28,
+         "R": 0.4691574221294099,
+         "Fac2": 1.0,
+         "Fb": -0.2903454913693221,
+         "HitRate": 0.17857142857142858
+        },
+        {
+         "label": "k/U(7 m)²",
+         "score": "score.k.ownApproach",
+         "Count": 28,
+         "R": 0.2280138652372011,
+         "Fac2": 0.75,
+         "Fb": -0.08082705855716833,
+         "HitRate": 0.17857142857142858
+        },
+        {
+         "label": "|U|/U_H, imposed",
+         "score": "score.U.imposedUH",
+         "Count": 28,
+         "R": 0.46776157895671744,
+         "Fac2": 1.0,
+         "Fb": -0.1778860633647695,
+         "HitRate": 0.75
+        },
+        {
+         "label": "√(|U|²+2k)/U_H, imposed",
+         "score": "score.rms.imposedUH",
+         "Count": 28,
+         "R": 0.46915742212941,
+         "Fac2": 1.0,
+         "Fb": -0.2662938047808257,
+         "HitRate": 0.2857142857142857
+        }
+       ]
+      }
+     ]
     },
     {
      "engine": "openlb",
@@ -1432,6 +1698,246 @@
      "runs": []
     },
     {
+     "engine": "umf-realizableKE",
+     "status": "scored",
+     "runs": [
+      {
+       "run_id": "J.umf-realizableKE",
+       "configuration": null,
+       "headline": [
+        {
+         "label": "U",
+         "score": "velocity.U",
+         "Count": 443,
+         "R": 0.9205599393412182,
+         "Fac2": 0.7313769751693002,
+         "Fb": 0.19262585821601944,
+         "HitRate": 0.5733634311512416
+        },
+        {
+         "label": "V",
+         "score": "velocity.V",
+         "Count": 443,
+         "R": 0.8659023341505809,
+         "Fac2": 0.4492099322799097,
+         "Fb": null,
+         "HitRate": 0.5259593679458239
+        },
+        {
+         "label": "W",
+         "score": "velocity.W",
+         "Count": 443,
+         "R": 0.8404117163913691,
+         "Fac2": 0.28893905191873587,
+         "Fb": null,
+         "HitRate": 0.5959367945823928
+        },
+        {
+         "label": "k",
+         "score": "k",
+         "Count": 443,
+         "R": 0.32241174654405025,
+         "Fac2": 0.5575620767494357,
+         "Fb": -0.03371801278562604,
+         "HitRate": 0.17832957110609482
+        },
+        {
+         "label": "θ, floor-referenced temperature",
+         "score": "theta",
+         "Count": 443,
+         "R": 0.9220995659005651,
+         "Fac2": 1.0,
+         "Fb": 0.12039120276524524,
+         "HitRate": 0.8171557562076749
+        },
+        {
+         "label": "c*, Sct 0.3",
+         "score": "cstar.c_sct03",
+         "Count": 443,
+         "R": 0.9188512415033993,
+         "Fac2": 0.8577878103837472,
+         "Fb": 0.06483152380611304,
+         "HitRate": 0.7155756207674944
+        },
+        {
+         "label": "c*, Sct 0.5",
+         "score": "cstar.c_sct05",
+         "Count": 443,
+         "R": 0.9052229081960137,
+         "Fac2": 0.8465011286681715,
+         "Fb": -0.16214614305480252,
+         "HitRate": 0.708803611738149
+        },
+        {
+         "label": "c*, Sct 0.7",
+         "score": "cstar.c_sct07",
+         "Count": 443,
+         "R": 0.8958272372565786,
+         "Fac2": 0.8284424379232506,
+         "Fb": -0.2562845881391941,
+         "HitRate": 0.6862302483069977
+        },
+        {
+         "label": "c*, Sct 0.3, without the near-source points",
+         "score": "farFromSource.cstar.c_sct03",
+         "Count": 416,
+         "R": 0.874237162339755,
+         "Fac2": 0.7596153846153846,
+         "Fb": 0.24001616464539272,
+         "HitRate": 0.5697115384615384
+        },
+        {
+         "label": "c*, Sct 0.5, without the near-source points",
+         "score": "farFromSource.cstar.c_sct05",
+         "Count": 416,
+         "R": 0.8599473616087105,
+         "Fac2": 0.7524038461538461,
+         "Fb": 0.06685029283771801,
+         "HitRate": 0.5673076923076923
+        },
+        {
+         "label": "c*, Sct 0.7, without the near-source points",
+         "score": "farFromSource.cstar.c_sct07",
+         "Count": 416,
+         "R": 0.8481734008294459,
+         "Fac2": 0.7283653846153846,
+         "Fb": 0.024946819188583186,
+         "HitRate": 0.5649038461538461
+        },
+        {
+         "label": "U, y-symmetric ceiling (control)",
+         "score": "velocity.U.symmetryCeiling",
+         "Count": 346,
+         "R": 0.9933545268975019,
+         "Fac2": 0.9710982658959537,
+         "Fb": 0.0,
+         "HitRate": 0.9248554913294798
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "engine": "umf-buoyantKEpsilon",
+     "status": "scored",
+     "runs": [
+      {
+       "run_id": "J.umf-buoyantKEpsilon",
+       "configuration": null,
+       "headline": [
+        {
+         "label": "U",
+         "score": "velocity.U",
+         "Count": 443,
+         "R": 0.9242717846496826,
+         "Fac2": 0.7607223476297968,
+         "Fb": 0.16668444003941063,
+         "HitRate": 0.6072234762979684
+        },
+        {
+         "label": "V",
+         "score": "velocity.V",
+         "Count": 443,
+         "R": 0.9009404571571202,
+         "Fac2": 0.44243792325056436,
+         "Fb": null,
+         "HitRate": 0.5395033860045146
+        },
+        {
+         "label": "W",
+         "score": "velocity.W",
+         "Count": 443,
+         "R": 0.8485699211630099,
+         "Fac2": 0.28893905191873587,
+         "Fb": null,
+         "HitRate": 0.5869074492099323
+        },
+        {
+         "label": "k",
+         "score": "k",
+         "Count": 443,
+         "R": 0.3596683315024821,
+         "Fac2": 0.582392776523702,
+         "Fb": -0.08821277280869937,
+         "HitRate": 0.2076749435665914
+        },
+        {
+         "label": "θ, floor-referenced temperature",
+         "score": "theta",
+         "Count": 443,
+         "R": 0.9197423957035031,
+         "Fac2": 0.9977426636568849,
+         "Fb": 0.12652167120047367,
+         "HitRate": 0.8058690744920993
+        },
+        {
+         "label": "c*, Sct 0.3",
+         "score": "cstar.c_sct03",
+         "Count": 443,
+         "R": 0.8935537415833977,
+         "Fac2": 0.8690744920993227,
+         "Fb": -0.04993914803932305,
+         "HitRate": 0.6975169300225733
+        },
+        {
+         "label": "c*, Sct 0.5",
+         "score": "cstar.c_sct05",
+         "Count": 443,
+         "R": 0.8688765571333089,
+         "Fac2": 0.8397291196388262,
+         "Fb": -0.27448271108950867,
+         "HitRate": 0.6749435665914221
+        },
+        {
+         "label": "c*, Sct 0.7",
+         "score": "cstar.c_sct07",
+         "Count": 443,
+         "R": 0.8517405064857566,
+         "Fac2": 0.8058690744920993,
+         "Fb": -0.3796219561142995,
+         "HitRate": 0.6410835214446953
+        },
+        {
+         "label": "c*, Sct 0.3, without the near-source points",
+         "score": "farFromSource.cstar.c_sct03",
+         "Count": 416,
+         "R": 0.8289649485777866,
+         "Fac2": 0.7572115384615384,
+         "Fb": 0.05245533439208446,
+         "HitRate": 0.5408653846153846
+        },
+        {
+         "label": "c*, Sct 0.5, without the near-source points",
+         "score": "farFromSource.cstar.c_sct05",
+         "Count": 416,
+         "R": 0.7884683659147077,
+         "Fac2": 0.7307692307692307,
+         "Fb": -0.1928591717784094,
+         "HitRate": 0.5384615384615384
+        },
+        {
+         "label": "c*, Sct 0.7, without the near-source points",
+         "score": "farFromSource.cstar.c_sct07",
+         "Count": 416,
+         "R": 0.7552112445461256,
+         "Fac2": 0.7091346153846154,
+         "Fb": -0.2917708995866546,
+         "HitRate": 0.5192307692307693
+        },
+        {
+         "label": "U, y-symmetric ceiling (control)",
+         "score": "velocity.U.symmetryCeiling",
+         "Count": 346,
+         "R": 0.9933545268975019,
+         "Fac2": 0.9710982658959537,
+         "Fb": 0.0,
+         "HitRate": 0.9248554913294798
+        }
+       ]
+      }
+     ]
+    },
+    {
      "engine": "openlb",
      "status": "pending",
      "runs": []
@@ -1455,8 +1961,123 @@
    "engines": [
     {
      "engine": "openfoam12-realizableKE",
-     "status": "pending",
-     "runs": []
+     "status": "scored",
+     "runs": [
+      {
+       "run_id": "K.openfoam12-realizableKE",
+       "configuration": null,
+       "headline": [
+        {
+         "label": "U",
+         "score": "velocity.U",
+         "Count": 203,
+         "R": 0.9576383854297579,
+         "Fac2": 0.5862068965517241,
+         "Fb": 0.5937395598343191,
+         "HitRate": 0.12315270935960591
+        },
+        {
+         "label": "V",
+         "score": "velocity.V",
+         "Count": 203,
+         "R": -0.15107937072600455,
+         "Fac2": 0.054187192118226604,
+         "Fb": null,
+         "HitRate": 0.9014778325123153
+        },
+        {
+         "label": "W",
+         "score": "velocity.W",
+         "Count": 203,
+         "R": 0.5732951867603229,
+         "Fac2": 0.14285714285714285,
+         "Fb": null,
+         "HitRate": 0.6847290640394089
+        },
+        {
+         "label": "k",
+         "score": "k",
+         "Count": 203,
+         "R": 0.3299337640295526,
+         "Fac2": 0.04433497536945813,
+         "Fb": 1.2008848442559428,
+         "HitRate": 0.0049261083743842365
+        },
+        {
+         "label": "c*, Sct 0.3",
+         "score": "cstar.c_sct03",
+         "Count": 203,
+         "R": 0.9526807023222933,
+         "Fac2": 0.7931034482758621,
+         "Fb": -0.6900055388345232,
+         "HitRate": 0.458128078817734
+        },
+        {
+         "label": "c*, Sct 0.5",
+         "score": "cstar.c_sct05",
+         "Count": 203,
+         "R": 0.9511787296378696,
+         "Fac2": 0.6847290640394089,
+         "Fb": -0.8751738257289661,
+         "HitRate": 0.1625615763546798
+        },
+        {
+         "label": "c*, Sct 0.7",
+         "score": "cstar.c_sct07",
+         "Count": 203,
+         "R": 0.9503986680311767,
+         "Fac2": 0.39408866995073893,
+         "Fb": -0.9825686329366048,
+         "HitRate": 0.09852216748768473
+        },
+        {
+         "label": "c*, Sct 0.3, without the 4 near-source points",
+         "score": "cstar.c_sct03.excludingNearSource",
+         "Count": 199,
+         "R": 0.9234725979531578,
+         "Fac2": 0.7989949748743719,
+         "Fb": -0.21806059356225826,
+         "HitRate": 0.46733668341708545
+        },
+        {
+         "label": "c*, Sct 0.5, without the 4 near-source points",
+         "score": "cstar.c_sct05.excludingNearSource",
+         "Count": 199,
+         "R": 0.9412572343518282,
+         "Fac2": 0.6984924623115578,
+         "Fb": -0.43022882951722086,
+         "HitRate": 0.16080402010050251
+        },
+        {
+         "label": "c*, Sct 0.7, without the 4 near-source points",
+         "score": "cstar.c_sct07.excludingNearSource",
+         "Count": 199,
+         "R": 0.9225058042892941,
+         "Fac2": 0.4020100502512563,
+         "Fb": -0.5605154843379265,
+         "HitRate": 0.10050251256281408
+        },
+        {
+         "label": "U, y-symmetric ceiling (control)",
+         "score": "velocity.U.symmetryCeiling",
+         "Count": 203,
+         "R": 0.9997849977488011,
+         "Fac2": 1.0,
+         "Fb": 0.0,
+         "HitRate": 1.0
+        },
+        {
+         "label": "c*, y-symmetric ceiling (control)",
+         "score": "cstar.symmetryCeiling",
+         "Count": 203,
+         "R": 0.9971347551186672,
+         "Fac2": 0.9950738916256158,
+         "Fb": 1.483626337218668e-16,
+         "HitRate": 0.7931034482758621
+        }
+       ]
+      }
+     ]
     },
     {
      "engine": "openlb",
@@ -1484,6 +2105,189 @@
      "engine": "openfoam12-realizableKE",
      "status": "pending",
      "runs": []
+    },
+    {
+     "engine": "umf-realizableKE",
+     "status": "scored",
+     "runs": [
+      {
+       "run_id": "L.umf-realizableKE",
+       "configuration": null,
+       "headline": [
+        {
+         "label": "U",
+         "score": "velocity.U",
+         "Count": 344,
+         "R": 0.9183925532735684,
+         "Fac2": 0.6075581395348837,
+         "Fb": 0.26799836659366505,
+         "HitRate": 0.5058139534883721
+        },
+        {
+         "label": "V",
+         "score": "velocity.V",
+         "Count": 344,
+         "R": -0.036734145109296276,
+         "Fac2": 0.29069767441860467,
+         "Fb": -0.7949782165196513,
+         "HitRate": 0.747093023255814
+        },
+        {
+         "label": "W",
+         "score": "velocity.W",
+         "Count": 344,
+         "R": -0.02691012962189831,
+         "Fac2": 0.18313953488372092,
+         "Fb": null,
+         "HitRate": 0.7616279069767442
+        },
+        {
+         "label": "|U|",
+         "score": "speed",
+         "Count": 344,
+         "R": 0.8982321093836898,
+         "Fac2": 0.6744186046511628,
+         "Fb": 0.20577668436783556,
+         "HitRate": 0.5145348837209303
+        },
+        {
+         "label": "k",
+         "score": "k",
+         "Count": 344,
+         "R": 0.14526091265263746,
+         "Fac2": 0.5843023255813954,
+         "Fb": 0.6352332965919344,
+         "HitRate": 0.2441860465116279
+        },
+        {
+         "label": "θ, floor-referenced temperature",
+         "score": "theta",
+         "Count": 344,
+         "R": 0.9361695630164703,
+         "Fac2": 1.0,
+         "Fb": 0.04867852899412356,
+         "HitRate": 0.9854651162790697
+        },
+        {
+         "label": "c*, Sct 0.3",
+         "score": "cstar.c_sct03",
+         "Count": 344,
+         "R": 0.7979416877720235,
+         "Fac2": 0.7587209302325582,
+         "Fb": -0.49807000344159413,
+         "HitRate": 0.4680232558139535
+        },
+        {
+         "label": "c*, Sct 0.5",
+         "score": "cstar.c_sct05",
+         "Count": 344,
+         "R": 0.7664762164584292,
+         "Fac2": 0.6831395348837209,
+         "Fb": -0.6487656611073018,
+         "HitRate": 0.3866279069767442
+        },
+        {
+         "label": "c*, Sct 0.7",
+         "score": "cstar.c_sct07",
+         "Count": 344,
+         "R": 0.7459062231257593,
+         "Fac2": 0.6017441860465116,
+         "Fb": -0.7313378163153867,
+         "HitRate": 0.35755813953488375
+        },
+        {
+         "label": "U, points at or above 30 mm",
+         "score": "comparable.velocity.U",
+         "Count": 242,
+         "R": 0.902141596976761,
+         "Fac2": 0.7975206611570248,
+         "Fb": 0.14685056971075924,
+         "HitRate": 0.6694214876033058
+        },
+        {
+         "label": "k, points at or above 30 mm",
+         "score": "comparable.k",
+         "Count": 242,
+         "R": 0.46783586818842304,
+         "Fac2": 0.8016528925619835,
+         "Fb": 0.3640367082650701,
+         "HitRate": 0.34297520661157027
+        },
+        {
+         "label": "θ, points at or above 30 mm",
+         "score": "comparable.theta",
+         "Count": 242,
+         "R": 0.9442053495570806,
+         "Fac2": 1.0,
+         "Fb": 0.040629541128047,
+         "HitRate": 1.0
+        },
+        {
+         "label": "c*, Sct 0.3, points at or above 30 mm",
+         "score": "comparable.cstar.c_sct03",
+         "Count": 242,
+         "R": 0.814283315206368,
+         "Fac2": 0.7148760330578512,
+         "Fb": -0.4945839730957858,
+         "HitRate": 0.4297520661157025
+        },
+        {
+         "label": "c*, Sct 0.5, points at or above 30 mm",
+         "score": "comparable.cstar.c_sct05",
+         "Count": 242,
+         "R": 0.8213960915051673,
+         "Fac2": 0.6363636363636364,
+         "Fb": -0.5827242739674976,
+         "HitRate": 0.3512396694214876
+        },
+        {
+         "label": "c*, Sct 0.7, points at or above 30 mm",
+         "score": "comparable.cstar.c_sct07",
+         "Count": 242,
+         "R": 0.8164213400800303,
+         "Fac2": 0.5413223140495868,
+         "Fb": -0.6243983721911616,
+         "HitRate": 0.30165289256198347
+        },
+        {
+         "label": "V, lateral sign flipped (control)",
+         "score": "control.V.flippedSign",
+         "Count": 344,
+         "R": 0.036734145109296276,
+         "Fac2": 0.11046511627906977,
+         "Fb": null,
+         "HitRate": 0.6947674418604651
+        },
+        {
+         "label": "U, approach column alone (control)",
+         "score": "control.U.approachOnly",
+         "Count": 344,
+         "R": 0.8610325216913209,
+         "Fac2": 0.8459302325581395,
+         "Fb": -0.20540678428364245,
+         "HitRate": 0.5988372093023255
+        },
+        {
+         "label": "θ, approach column alone (control)",
+         "score": "control.theta.approachOnly",
+         "Count": 344,
+         "R": 0.925304438627012,
+         "Fac2": 1.0,
+         "Fb": -0.11742802573455385,
+         "HitRate": 0.8372093023255814
+        },
+        {
+         "label": "U, y-symmetric ceiling (control)",
+         "score": "velocity.U.symmetryCeiling",
+         "Count": 292,
+         "R": 0.9840763700111405,
+         "Fac2": 0.9863013698630136,
+         "Fb": 1.752062790018714e-16,
+         "HitRate": 0.8595890410958904
+        }
+       ]
+      }
+     ]
     },
     {
      "engine": "openlb",
