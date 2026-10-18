@@ -256,7 +256,7 @@ def fixture_control(root):
                 got[f"region.{name}.U"] = DM.velocity((u / uh)[sel], (col(pw_, "U") / uh)[sel])
                 got[f"region.{name}.k"] = DM.turbulence((k / uh ** 2)[sel], (col(pw_, "k") / uh ** 2)[sel])
         for key, mine in got.items():
-            assert DM.same(mine, fx[key]), (stem(case, closure), key, {m: (mine[m], fx[key][m]) for m in mine if not DM.same({m: mine[m]}, {m: fx[key][m]})})
+            assert DM.same(mine, fx[key], fixture=True), (stem(case, closure), key, {m: (mine[m], fx[key][m]) for m in mine if not DM.same({m: mine[m]}, {m: fx[key][m]})})
         print(f"fixture control {stem(case, closure)}: {len(got)} scores reproduced from the raw CSVs and the fixture's probes")
 
 
@@ -269,7 +269,7 @@ def parity(root):
             mine = json.load(f)
         for key in ("velocity.U", "velocity.W", "k", "cstar.c_sct05"):
             a, b = fx[key], mine[key]
-            print(f"{stem(case, closure)} {key}: R {a['R']:+.4f} -> {b['R']:+.4f}  FAC2 {a['Fac2']:.4f} -> {b['Fac2']:.4f}  FB {a['Fb']:+.4f} -> {b['Fb']:+.4f}  n {a['Count']} -> {b['Count']}")
+            print(f"{stem(case, closure)} {key}: R {a['R']:+.4f} -> {b['R']:+.4f}  FAC2 {a['Fac2']:.4f} -> {b['Fac2']:.4f}  FB {a['Fb']:+.4f} -> {'n/a' if b['Fb'] is None else format(b['Fb'], '+.4f')}  n {a['Count']} -> {b['Count']}")
 
 
 def check_results_match_pairs():
@@ -319,7 +319,8 @@ def panel(ax, o, p, log=False, xlab=None, ylab=None):
 
 
 def stats_text(m, n_shown=None, extra=""):
-    t = f"R {m['R']:+.2f}\nFAC2 {m['Fac2']:.2f}\nFB {m['Fb']:+.2f}\nn {m['Count']}"
+    fb = "n/a" if m["Fb"] is None else f"{m['Fb']:+.2f}"      # undefined when the signed means differ in sign (dispersion_metrics.py)
+    t = f"R {m['R']:+.2f}\nFAC2 {m['Fac2']:.2f}\nFB {fb}\nn {m['Count']}"
     if n_shown is not None and n_shown != m["Count"]:
         t += f" ({n_shown} shown)"
     return t + extra
