@@ -7,8 +7,18 @@ description: "OpenLB and FluidX3D against the tunnel for Cases A and B, and the 
 ---
 
 # OpenLB and FluidX3D
+{: .no_toc }
 
 Eddy3D's two lattice-Boltzmann engines were scored on Cases A and B, on the same points as OpenFOAM 12. They are not scored on Cases C to E; the measurements behind that are below.
+
+<details open markdown="block">
+  <summary>
+    Contents
+  </summary>
+  {: .text-delta }
+1. TOC
+{:toc}
+</details>
 
 ## Cases A and B, every engine on the same points
 

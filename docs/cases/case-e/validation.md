@@ -43,14 +43,4 @@ velocities by U\_H, k by U\_H^2 (the benchmark's own convention; Case E by U at 
 
 ## Figures
 
-<figure class="figure">
-<img src="{{ '/assets/figures/case-e-openfoam-agreement.png' | relative_url }}" alt="Case E, OpenFOAM 12, wind from SW: measured velocity ratio against the modelled √(|U|²+2k)/U_ref (filled) and |U|/U_ref (hollow), before and after construction, and the change the construction makes.">
-<figcaption><strong>Figure 1.</strong> Case E, OpenFOAM 12, wind from SW: measured velocity ratio against the modelled √(|U|²+2k)/U_ref (filled) and |U|/U_ref (hollow), before and after construction, and the change the construction makes.</figcaption>
-</figure>
-
-<figure class="figure">
-<img src="{{ '/assets/figures/case-e-openfoam-bias-map.png' | relative_url }}" alt="Case E, OpenFOAM 12, wind from SW: log₂(model / tunnel) of the scalar speed at the 80 points on the plan of the district, before and after construction.">
-<figcaption><strong>Figure 2.</strong> Case E, OpenFOAM 12, wind from SW: log₂(model / tunnel) of the scalar speed at the 80 points on the plan of the district, before and after construction.</figcaption>
-</figure>
-
-The figure for all cases together (Eddy3D ML surrogate (Yel-2.0)) is on [the ML surrogate page]({{ '/validation/ml-surrogate/' | relative_url }}).
+The figures for these runs are shown once, beside their reading: [Case E (OpenFOAM)]({{ '/validation/case-e/' | relative_url }}); [ML surrogate]({{ '/validation/ml-surrogate/' | relative_url }}).

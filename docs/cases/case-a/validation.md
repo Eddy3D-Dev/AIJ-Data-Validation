@@ -73,19 +73,4 @@ velocities by U\_H, k by U\_H^2 (the benchmark's own convention; Case E by U at 
 
 ## Figures
 
-<figure class="figure">
-<img src="{{ '/assets/figures/cases-ab-openfoam-agreement.png' | relative_url }}" alt="Cases A and B, OpenFOAM 12 (realizable k-ε): measured against modelled U, V, W and k at every measured point, normalised by U_H, with the 1:1 line and the factor-of-two band.">
-<figcaption><strong>Figure 1.</strong> Cases A and B, OpenFOAM 12 (realizable k-ε): measured against modelled U, V, W and k at every measured point, normalised by U_H, with the 1:1 line and the factor-of-two band.</figcaption>
-</figure>
-
-<figure class="figure">
-<img src="{{ '/assets/figures/cases-ab-openfoam-profiles.png' | relative_url }}" alt="Cases A and B, OpenFOAM 12: centre-plane vertical profiles of U/U_H at the measurement stations, measured points against the modelled line.">
-<figcaption><strong>Figure 2.</strong> Cases A and B, OpenFOAM 12: centre-plane vertical profiles of U/U_H at the measurement stations, measured points against the modelled line.</figcaption>
-</figure>
-
-<figure class="figure">
-<img src="{{ '/assets/figures/cases-ab-engine-comparison.png' | relative_url }}" alt="Cases A and B, every engine on the same points: measured against modelled U/U_H and V/U_H, one row per engine (OpenFOAM 12; OpenLB at dx = 1.6 m; FluidX3D at H/64). FluidX3D is scored on the filled points, the heights where its empty-domain control holds the imposed log law; the hollow points near the ground are excluded.">
-<figcaption><strong>Figure 3.</strong> Cases A and B, every engine on the same points: measured against modelled U/U_H and V/U_H, one row per engine (OpenFOAM 12; OpenLB at dx = 1.6 m; FluidX3D at H/64). FluidX3D is scored on the filled points, the heights where its empty-domain control holds the imposed log law; the hollow points near the ground are excluded.</figcaption>
-</figure>
-
-The figure for all cases together (Eddy3D ML surrogate (Yel-2.0)) is on [the ML surrogate page]({{ '/validation/ml-surrogate/' | relative_url }}).
+The figures for these runs are shown once, beside their reading: [Cases A and B (OpenFOAM)]({{ '/validation/cases-ab/' | relative_url }}); [OpenLB and FluidX3D]({{ '/validation/engines/' | relative_url }}); [ML surrogate]({{ '/validation/ml-surrogate/' | relative_url }}).

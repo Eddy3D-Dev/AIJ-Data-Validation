@@ -47,9 +47,4 @@ velocities by U\_H, k by U\_H^2 (the benchmark's own convention; Case E by U at 
 
 ## Figures
 
-<figure class="figure">
-<img src="{{ '/assets/figures/case-d-openfoam-agreement.png' | relative_url }}" alt="Case D, OpenFOAM 12, wind directions 0°, 22.5° and 45°: measured thermistor Vs/U_H against the modelled √(|U|²+2k)/U_H (filled) and |U|/U_H (hollow), and the split-fibre |U| against the modelled |U| at 0°. At 0° the 66 thermistor points are 33 mirror pairs.">
-<figcaption><strong>Figure 1.</strong> Case D, OpenFOAM 12, wind directions 0°, 22.5° and 45°: measured thermistor Vs/U_H against the modelled √(|U|²+2k)/U_H (filled) and |U|/U_H (hollow), and the split-fibre |U| against the modelled |U| at 0°. At 0° the 66 thermistor points are 33 mirror pairs.</figcaption>
-</figure>
-
-The figure for all cases together (Eddy3D ML surrogate (Yel-2.0)) is on [the ML surrogate page]({{ '/validation/ml-surrogate/' | relative_url }}).
+The figures for these runs are shown once, beside their reading: [Case D (OpenFOAM)]({{ '/validation/case-d/' | relative_url }}); [ML surrogate]({{ '/validation/ml-surrogate/' | relative_url }}).
