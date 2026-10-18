@@ -222,3 +222,93 @@ gives 3.94 m/s against U_R = 4.08 m/s measured at R above the model.
 The frame used here is +x north, +y west with WD the direction the wind comes from (the compass rose of `MP_caseM.png` and the plume's
 lateral shift with WD in the tunnel and the field agree). Please confirm that WD_R of the field runs and WD of the tunnel are the same
 meteorological direction, and that the sign of V in `RS-WT_caseM.csv` is positive toward +y (west).
+
+## Cases G, H and I
+
+Numbered per case (QG, QH, QI) so that the notes of this release's cleaning of Cases G, H and I stay together. What each check measured
+is in `checks.json` (the check names are given). Contacts: G and I Tominaga, H Yoshie (`manifest.json → cases.<id>.contact`).
+
+### QG1 — Case G: which heights were measured behind the belt? (Kurotani, Kiyota)
+
+`readme_caseG.md` lists the heights of the measurement behind the tree belt as 1.5, 3.0, 6.0 and 9.0 m, the same as the approach flow's.
+`RS_caseG.csv`, `LF_caseG.xls`, `MP-y_caseG.png` and section 3.7 of the data paper all have 1.5, 3, 4.5 and 6 m (check
+`heights_are_1.5_3_4.5_6_as_the_paper_and_the_drawing_say`). This release follows the four sources that agree. **Question:** is 4.5 m
+the fourth anemometer's height on the movable tower, and was nothing measured at 9 m behind the belt?
+
+### QG2 — Case G: the turbulence of the approach flow against the lee (Kurotani, Kiyota)
+
+`AF_caseG.csv` gives k/Ub² = 0.20-0.28 (120 min, 28 Dec 2000, four heights up to 9 m). Converted to the table's normalisation
+(k/UH², UH/Ub = 0.946) that is 0.26-0.31 at 1.5-6 m. Behind the belt, five tree heights downwind (x = 35 m), `RS_caseG.csv` has k/UH²
+= 0.040, 0.043, 0.054 and 0.072: 3 to 8 times lower at every height, although a windbreak's wake should not be quieter than the wind
+it breaks (check `far_lee_turbulence_recovers_to_at_least_half_the_approach_flow`, a documented warning). The two records are two
+days apart (28 and 26 Dec 2000) and 120 against 10 minutes. **Question:** are the two k comparable (same definition: all three
+components? same detrending and averaging time?), or should the approach profile not be used to set a CFD inlet's turbulence?
+Also, `Uxyz` is called 'mean scalar velocity': is it |mean vector| or the mean of the instantaneous speed?
+
+### QG3 — Case G: the wind direction and UH (Kurotani, Kiyota)
+
+The readme says each line is normalised by the mean speed at 7 m "during the measurement period"; no value in m/s, no wind direction
+and no angle to the belt's normal is published, and the measurement lines are one-dimensional (y = 0). **Question:** what were UH
+(seven lines) and the wind direction relative to the belt's normal? This release states the direction as `unverified` in
+`directions.csv`.
+
+### QG4 — Case G: an absolute Ub, and the canopy (Kurotani, Kiyota)
+
+The workbook's `Geometry` sheet carries the Guidebook's inflow note: `U(z) = Ub (z/Hb)^0.22`, `K = 3.02 [m2/s2]`. If K is the k at 9 m,
+Ub = sqrt(3.02 / 0.20) = 3.89 m/s (check `workbook_inflow_K_is_3.02_and_implies_Ub_3.9_ms`); this is derived here, not published.
+**Question:** is that the intended reading? And: the data paper gives a shading rate of 81 % after pruning; is a leaf-area-density or a
+drag-coefficient profile of the trimmed belt on record for canopy models?
+
+### QH1 — Case H: the sign of V on the vertical plane (Yoshie)
+
+At the 40 points the `y=0H` sheet shares with the horizontal-plane sheets, U, W, k and C agree to the last digit and **V has the
+opposite sign** (0.00206 against -0.00206; check `vertical_plane_V_is_the_exact_negative_of_the_horizontal_planes_V_at_the_shared_points`,
+`max |V1 + V2| = 0`). The horizontal planes' V has the sign of y upwind of the building (flow diverging around it: check
+`lateral_sign_V_positive_toward_plus_y`) and is continuous with its neighbours at y = +/-25 mm (r = +0.66; the vertical plane's is
+-0.66, 14 points). This release multiplies the 207 velocity rows of point numbers 1-220 by -1, so V is positive toward +y everywhere.
+**Question:** is V on the vertical plane (`y=0H`, `RS_caseH.csv` point numbers 1-220) positive toward -y?
+
+### QH2 — Case H: which file is the data? (Yoshie)
+
+1. On the z/H = 1/2 and 1/4 planes (and in the approach profile) `RS_caseH.csv`'s U, V, W are the workbook's ratios rounded to 0.01 and then
+   multiplied by uH = 3.226 m/s, a 0.032 m/s grid (check `csv_velocity_on_the_z_0.5H_and_z_0.25H_planes_is_the_ratio_rounded_to_0.01_then_scaled`:
+   632 values differ from the exact ones by more than the 2 dp rounding, by up to 0.021 m/s); on the other two planes the CSV is the
+   exact ratio x uH to 2 dp. This release takes the workbook. Is the workbook the authoritative precision?
+2. The y = 0, z = 0.1 m line (13 locations with velocity, 13 with concentration) is in two sheets and appears twice in the CSV (point
+   numbers 18 & 221, 31 & 231, ...), identical once V's sign is aligned: one record or two runs? The CSV drops the same duplicate
+   on the 1/4 and 1/16 planes (29 workbook rows) but keeps it on the 1/2 plane.
+3. The workbook's z/H = 1/16 sheet labels 19 concentration-only rows x = 400 mm; the CSV, and every other plane, put the
+   concentration line at x = 380 mm and the velocity line at x = 400 mm. A labelling slip in the workbook (read as 380 here)? Why are the
+   two lines 20 mm apart?
+
+### QH3 — Case H: the concentration baseline, uH and c0 (Yoshie)
+
+Upwind of the building, where the true concentration is zero, the analyser reads +/-0.1 ppm (median |c| 0.12, mean +0.067) and 97 of 826
+values are negative, down to -0.83 ppm (check `upwind_concentration_is_the_analyser_offset_not_tracer`). **Question:** is the baseline
+subtracted, and what detection limit or floor do you recommend for geometric statistics (MG, VG)? Also: the workbook's `<c>/Co`
+column divides by 45.1773 ppm, its parameter sheet says c0 = 45.1798 ppm (uH = 3.226) and the paper 45.2: which c0 is intended (the
+difference is 0.006 %)? And the workbook's `inflow` sheet labels its z column `z(mm)` but holds metres.
+
+### QI1 — Case I: the release rate (Kondo, Mutou, Hori)
+
+The paper says "10 % ethane was released at 6.67e-6 m3/s" and c0 = q/(UH H²) = 39.2 ppm. With q = 6.67e-6 m³/s, c0 would be 392 ppm;
+39.2 ppm needs the ethane flow, 10 % of 400 cc/min = 6.67e-7 m³/s (check `c0_is_the_ethane_flow_over_UH_H2`; the workbook's 39.2235
+is 666.8/17). **Question:** is 6.67e-6 m³/s the total (mixture) flow and 6.67e-7 m³/s the ethane flow, as this release reads it?
+
+### QI2 — Case I: what was measured on the y = 0 plane? (Kondo, Mutou)
+
+V at the 53 y = 0 wind points is 1e-9 ... 4e-6 m/s in the workbook (and 0 in the CSV) against 0.02 ... 0.39 m/s at the 38 off-plane
+points (check `V_on_the_y0_plane_is_numerically_zero_not_measured`). An LDA's noise is 1e-2 m/s, so these look like symmetry values.
+This release sets them to NaN. **Question:** was V measured on the y = 0 plane (a 3-component LDA), or is it a symmetry fill? How is
+the TKE built (2 or 3 components)? Only k is published, not the variances.
+
+### QI3 — Case I: UH, the inflow and the repeats (Kondo, Mutou)
+
+1. The workbook normalises the points by UH = 1.7 m/s and its inflow sheet by 1.697 m/s (U(0.1 m), 0.18 % apart).
+2. The paper says the approach flow follows a 1/7 power law; the workbook's (z/H)^(1/7) column is within 4.6 % of the profile but the
+   least-squares index over z = 0.02 ... 0.2 m is 0.115 (check `approach_profile_follows_the_1_over_7_power_law_within_5_percent`). Which
+   is the intended inflow?
+3. 13 ground-centreline locations (x, 0, 0) are in both the y = 0 and the z = 0 concentration plane; the two values differ by up to 8.5 %
+   (mean 2.5 %). Two runs? The wind CSV drops the four duplicated wind points (identical copies); the concentration CSV keeps its 13.
+4. Every concentration is a multiple of 0.1 ppm: the analyser's resolution, or a rounding of the published file? A 0.4 ppm value carries
+   +/-12 % of it.

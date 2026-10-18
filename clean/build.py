@@ -425,11 +425,11 @@ CASES = {
 }
 EDITORS = ["Yoshihide Tominaga (Niigata Institute of Technology)", "Hideki Kikumoto (The University of Tokyo)", "Tsubasa Okaze (Institute of Science Tokyo)"]
 
-# Cases F and M: one module each (clean/case_<x>.py) with META (this table's entry), build(B, prov) and directions(B, pts).
-import case_f, case_m  # noqa: E402  (clean/ is sys.path[0] when this file is run)
-MODULES = {"F": case_f, "M": case_m}
+# Cases F-M: one module each (clean/case_<x>.py) with META (this table's entry), build(B, prov) and directions(B, pts).
+import case_f, case_g, case_h, case_i, case_m  # noqa: E402  (clean/ is sys.path[0] when this file is run)
+MODULES = {"F": case_f, "G": case_g, "H": case_h, "I": case_i, "M": case_m}
 CASES.update({k: m.META for k, m in MODULES.items()})
-FULL_SCALE = {"E", "F", "M"}   # cases whose frame is in full-scale metres
+FULL_SCALE = {"E", "F", "G", "M"}   # cases whose frame is in full-scale metres
 
 
 def row(**kw):
@@ -1181,6 +1181,7 @@ def build():
                       "directions_csv": f"cases/{case}/directions.csv", "geometry_json": f"cases/{case}/geometry.json",
                       "geometry": [g["file"] for g in gfiles]},
             "columns_present": cols_present, "counts": counts,
+            **({"normalisation": n} if (n := (extra or {}).get("normalisation") or meta.get("normalisation")) else {}),   # the case module's extra, else its META
             "configurations": dirs[["config", "instrument", "wind_direction_deg", "wind_direction", "rows", "measured", "status"]].to_dict("records"),
             "frame": frame, "transform_from_published": transform, "inflow": inflow,
             "geometry_summary": [{"configuration": g["configuration"], "file": g["file"], "triangles": g["stats"]["triangles"], "watertight": g["stats"]["watertight"], "bbox_min": g["stats"]["bbox_min"], "bbox_max": g["stats"]["bbox_max"], "boxes": g.get("box_count")} for g in gfiles],
@@ -1189,8 +1190,6 @@ def build():
             "known_issues": (extra or {}).get("known_issues", {}),
             "extra_measurements": {k: v for k, v in (extra or {}).items() if k not in ("known_issues", "normalisation")},
         }
-        if extra and "normalisation" in extra:
-            manifest_cases[case]["normalisation"] = extra["normalisation"]
     big = pd.concat(all_pts, ignore_index=True)
     write_csv(os.path.join(HERE, "points.csv"), big)
     write_parquet(os.path.join(HERE, "points.parquet"), big, UNITS)

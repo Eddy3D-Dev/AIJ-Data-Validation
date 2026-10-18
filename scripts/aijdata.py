@@ -392,12 +392,11 @@ CASES = {
 
 CASE_IDS = ["A", "B", "C", "D", "E"]
 
-# Cases F and M: one module each (scripts/aij_case_<x>.py) with CASE, DEFAULT_CONFIGURATION, RENDER_CAPTIONS,
-# geometry(D, case) and approach_flow(D, case). They are cleaned and rendered but not yet served by the API:
-# EXTRA_CASE_IDS joins CASE_IDS when build_api.py learns them.
-import aij_case_f, aij_case_m  # noqa: E402
-_EXTRA = {"F": aij_case_f, "M": aij_case_m}
-EXTRA_CASE_IDS = list(_EXTRA)
+# Cases F-M: one module each (scripts/aij_case_<x>.py) with CASE, DEFAULT_CONFIGURATION, RENDER_CAPTIONS,
+# geometry(D, case) and approach_flow(D, case). The point tables come from clean/ (load_points).
+import aij_case_f, aij_case_g, aij_case_h, aij_case_i, aij_case_m  # noqa: E402
+_EXTRA = {"F": aij_case_f, "G": aij_case_g, "H": aij_case_h, "I": aij_case_i, "M": aij_case_m}
+CASE_IDS.extend(_EXTRA)
 CASES.update({k: m.CASE for k, m in _EXTRA.items()})
 DEFAULT_CONFIGURATION.update({k: m.DEFAULT_CONFIGURATION for k, m in _EXTRA.items()})
 for _m in _EXTRA.values():

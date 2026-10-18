@@ -1,0 +1,2 @@
+case_id,config,instrument,wind_direction_deg,wind_direction,flow_dir_x,flow_dir_y,rows,measured,sense_basis,status
+G,default,sonic_anemometer,0,,1,0,28,28,"definition: the readme puts the measurement lines BEHIND the belt, on +x of its leeward face (MP_caseG.png); the field wind direction relative to the belt normal is not published",unverified — field data: the angle between the wind and the belt normal is not published (QUESTIONS.md QG3)

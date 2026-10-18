@@ -164,6 +164,8 @@ def scene(case):
         elif case == "F":
             tall = tris[:, :, 2].max(axis=1) > 100.0          # the high-rise group (full-scale metres)
             groups = [(tris[~tall], BODY), (tris[tall], ACCENT)]
+        elif case in ("G", "H", "I"):     # one body, the subject of the case
+            groups = [(tris, ACCENT)]
         else:
             groups = [(tris, BODY)]
         out.append((cfg, groups, "seal" if case in ("F", "M") else case != "E"))
@@ -199,6 +201,15 @@ def decorate(ax, case, lo, hi):
         # Frame: +x north, +y west; WD = 180 deg blows toward +x, so the arrow runs along +x from the upwind (-x) side.
         ground_grid(ax, lo[0], hi[0], lo[1], hi[1], 100)
         arrow(ax, (lo[0] - 320, 0, 40), (lo[0] - 60, 0, 40), "wind, WD = 180°")
+    elif case == "G":
+        ground_grid(ax, -14, 14, -46, 46, 10)
+        arrow(ax, (-17, 0, 0.3), (-6, 0, 0.3), "wind")
+    elif case == "H":
+        ground_grid(ax, -0.20, 0.30, -0.15, 0.15, 0.05)
+        arrow(ax, (-0.28, 0, 0.02), (-0.14, 0, 0.02), "wind")
+    elif case == "I":
+        ground_grid(ax, -0.15, 0.25, -0.15, 0.15, 0.05)
+        arrow(ax, (-0.23, 0, 0.02), (-0.11, 0, 0.02), "wind")
     else:
         ground_grid(ax, lo[0], hi[0], lo[1], hi[1], 50)
         # Geographic frame: +x east, +y north. The scored direction is SW, so the arrow comes from the SW.
@@ -261,5 +272,5 @@ if __name__ == "__main__":
     ps.apply()
     cube = merge_coplanar(boxes_tris([{"min": [0, 0, 0], "max": [1, 1, 1]}]))
     assert len(cube) == 6 and all(len(q) == 4 for q in cube), "a unit cube must merge to six quads"
-    for c in D.CASE_IDS + D.EXTRA_CASE_IDS:
+    for c in D.CASE_IDS:
         print(c, render_case(c))
