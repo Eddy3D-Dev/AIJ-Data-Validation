@@ -17,7 +17,7 @@ Shinjuku sub-centre, Tokyo, November 1978: 1:800 tunnel (thermistor, 5 / 9 / 20 
 
 <figure class="figure render">
 <a href="{{ '/assets/geometry/case-f.png' | relative_url }}"><img src="{{ '/assets/web/case-f.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case F — Shinjuku district"></a>
-<figcaption>Shinjuku sub-centre, November 1978: terrain and buildings of the 1:800 model over a disc of 725 m radius (full-scale metres); north is +y, the towers over 100 m are blue.<br><a class="original" href="{{ '/assets/geometry/case-f.png' | relative_url }}">1200 dpi original, 1.9 MB</a></figcaption>
+<figcaption>Shinjuku sub-centre, November 1978: terrain and buildings of the 1:800 model over a disc of 725 m radius (full-scale metres); north is +y, the towers over 100 m are blue.</figcaption>
 </figure>
 
 ## At a glance
@@ -30,28 +30,22 @@ Shinjuku sub-centre, Tokyo, November 1978: 1:800 tunnel (thermistor, 5 / 9 / 20 
 | Wind directions | N, NNE, NE, ENE, SE, SSE, S, SSW, SW, WNW, NW, NNW |
 | Measured | 472 rows over 13 points: velocity\_ratio, velocity\_ratio\_sd |
 
-## Agreement with the tunnel
+## Validation
 
-| Engine | Status | R | FAC2 |
-|---|---|---|---|
-| OpenFOAM 12 | <span class="label label-green status">scored</span> | +0.79 … +1.00 | 0.85 … 1.00 |
-| OpenLB | <span class="label label-yellow status">pending</span> | — | — |
-| FluidX3D | <span class="label label-yellow status">pending</span> | — | — |
-| ML surrogate | <span class="label label-yellow status">pending</span> | — | — |
+| Engine | Status | Compared with | R (range) | FAC2 (range) |
+|---|---|---|---|---|
+| OpenFOAM 12 | <span class="label label-green status">scored</span> | Wind tunnel | +0.79 … +1.00 | 0.85 … 1.00 |
+| OpenFOAM 12 | <span class="label label-green status">scored</span> | Field | +0.86 … +0.89 | 0.85 … 1.00 |
+| OpenLB | <span class="label label-yellow status">pending</span> | — | — | — |
+| FluidX3D | <span class="label label-yellow status">pending</span> | — | — | — |
+| ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
 
 {: .warning-title }
 > Before you compare
 >
-> - The cleaned table is in SI units and one frame, with this case's corrections applied once.
+> - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
 > - Origin: centre of the reproduced district, tunnel floor plane. Length unit: m (FULL scale).
 > - The published coordinates are multiplied by 800 in the cleaned table (`coordinate_scale_applied`).
-> - Wind direction: compass FROM-direction (N = 0, E = 90): N blows toward -y; flow\_dir = (-sin WD, -cos WD). Not stated by the sources. At NNW corroborated by a solved field (status \'corroborated by a solved field\'; the other directions stay \'unverified\').
+> - Wind direction: compass FROM-direction (N = 0, E = 90), so N blows toward -y; flow\_dir = (-sin WD, -cos WD). Not stated by the sources; supported by the reference-building choice and by upwind roughness, and at NNW by a solved field (status \'corroborated by a solved field\'; the other directions stay \'unverified\').
 > - 11 known issues in the published files are listed under [Known data issues]({{ '/cases/case-f/data/' | relative_url }}#known-data-issues).
-
-<details markdown="block">
-<summary>Interpretation: Using the cleaned table</summary>
-
-Do not apply the corrections again to the published files.
-
-</details>

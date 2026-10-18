@@ -1,4 +1,4 @@
-# AIJ UWE benchmark — cleaned data API
+# AIJ UWE — cleaned data API
 
 > Wind-tunnel and field reference data from the Architectural Institute of Japan Urban Wind Environment (UWE)
 > benchmark, Cases A-M, cleaned into one schema, plus Eddy3D's validation against it. Static files, plain GET.
@@ -9,7 +9,7 @@ Repository: https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Archite
 Release: 3.0.1 (2026-10-18). This is the latest alias, which always equals the newest release; the frozen copy of 3.0.1 is https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.1.
 All releases: https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/versions.json
 API schema version: 2.3.0. Data version (SHA-256 of the served data): a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d.
-Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark and the per-case papers.
+Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and requested citation of each case are in cases/{id}.json.
 
 ## How to use this
 
@@ -215,12 +215,12 @@ Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark an
 - [C] 24 of the 120 points sit exactly on a building face plane (|x| = 0.30 or |y| = 0.30) in the open gap between two blocks: legitimate fluid points, but a probe's cell lookup is delicate there.
 - [C] Point numbers 1, 2, 3, 34, 35, 36, 37, 46, 55, 100, 101, 102 do not occur (No. runs 4 ... 132 with nine interior gaps).
 - [C] Experimental repeatability, from the mirror-symmetric point pairs: mean |dVs| 0.088-0.137 m/s (0.024-0.038 U_H).
-- [D] All of Case D's data lives in LF_caseD.xls, a genuine OLE2/BIFF8 workbook (read it with xlrd 2.x; openpyxl cannot). Sheets: 'Geometry&Points', 'Inflow', 'Results (Exp_S)' (split fibre, WD = 0), 'Results (Exp_T)' (thermistor, 0 / 22.5 / 45 deg).
+- [D] All of Case D's data lives in LF_caseD.xls, an OLE2/BIFF8 workbook (read it with xlrd 2.x; openpyxl cannot). Sheets: 'Geometry&Points', 'Inflow', 'Results (Exp_S)' (split fibre, WD = 0), 'Results (Exp_T)' (thermistor, 0 / 22.5 / 45 deg).
 - [D] Coordinates are millimetres in the workbook; the API serves metres.
-- [D] The shipped BD_caseD.stl is dirty: 1572 facets of which 576 are duplicates, and all 83 roofs are wound inward (signed volume 0.011159 m^3 against the true 0.021477 m^3). The API's geometry.stl is rebuilt from the 83 shells' bounding boxes: 996 facets, watertight, volume 0.021477 m^3.
+- [D] The shipped BD_caseD.stl has 1572 facets of which 576 are duplicates, and all 83 roofs are wound inward (signed volume 0.011159 m^3 against the true 0.021477 m^3). The API's geometry.stl is rebuilt from the 83 shells' bounding boxes: 996 facets, watertight, volume 0.021477 m^3.
 - [D] The thermistor reads a SCALAR speed. Over the 33 points where both instruments overlap at WD = 0, the ratio of mean thermistor speed to mean |U| is 1.342 (the mean of the per-point ratios is 1.50). sqrt(|U|^2 + 2k) from the split-fibre data matches the thermistor to FB +0.058, R 0.947; |U| alone to FB +0.292, R 0.872.
 - [D] Unmeasured thermistor cells are '-' in the workbook (null here). At WD = 0 the 66 measured values are 33 exact mirror pairs, so only 33 are independent; at 22.5 and 45 deg all 66 are independent.
-- [D] A prior Eddy3D comparison kept in the folder (case-d-eddy3d-prior-comparison.xlsx) scores R = +0.096 against the thermistor: a frame or geometry error, not a closure result. It is not a validation.
+- [D] A prior Eddy3D comparison kept in the folder (case-d-eddy3d-prior-comparison.xlsx) scores R = +0.096 against the thermistor. The score comes from a frame or geometry error; do not use it as a validation.
 - [E] The velocity ratio is normalised by the inflow velocity at 15.9 m (= 3.935 m/s), NOT by U_H and NOT by UR = 7.8 m/s. A prior Eddy3D comparison in the folder divided by the wrong reference and came out low by a factor of 2.048 (FAC2 0.338 -> 0.863 once rescaled, R unchanged at 0.661).
 - [E] All 2560 published ratios are integer multiples of 0.0198204 (55 distinct levels): the data's own resolution is +/-0.0099, 3.1 % of the median value and about 10 % at the lowest points.
 - [E] The readme describes AF_caseE.csv, RS_caseE.csv and BD_caseE.stl, but this repository holds only the .3dm, .ghx, .xls and the MP drawing; everything here is extracted from the workbook and the 3dm.
@@ -237,7 +237,7 @@ Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark an
 - [F] One tunnel value (point 8, SW, 9 m: 0.474) has no counterpart in the workbook's results sheet, and the flat 'Sheet1' table has 0.63 there.
 - [F] Field anemometer heights above the tunnel floor are 13 - 21 m (3 - 11 m above ground by the readme's rule); the data paper says 3 - 9 m, so points 13 and 14 (11 m) disagree.
 - [F] The thermistor reads a SCALAR speed and the cup anemometer a 10-minute mean: a RANS |U| is biased low against both.
-- [F] The files do not say whether a wind direction names where the wind comes from. The cleaned tables read it as the direction the wind comes from (N = 0, E = 90) and a solved field corroborates that at NNW: Eddy3D's OpenFOAM 12 run for the wind from NNW correlates R 0.935 with the tunnel's 9 m column labelled NNW and R 0.077 with its column labelled SSE, the opposite wind (clean/QUESTIONS.md QF9); the other directions are not solved and stay unverified.
+- [F] The files do not say whether a wind direction names where the wind comes from. The cleaned tables read it as the direction the wind comes from (N = 0, E = 90). At NNW a solved field supports that reading: Eddy3D's OpenFOAM 12 run for the wind from NNW correlates R 0.935 with the tunnel's 9 m column labelled NNW and R 0.077 with its column labelled SSE, the opposite wind (clean/QUESTIONS.md QF9); the other directions are not solved and stay unverified.
 - [G] FIELD data: full-scale metres, no model, and nothing in m/s. The table carries U/UH (velocity_ratio) and k/UH^2 (k_ratio), UH = the mean speed at 7 m during each period; the approach-flow table carries U/Ub and k/Ub^2 (Ub = U at 9 m) in its U and k columns, which are dimensionless here.
 - [G] The readme lists the heights of the lee measurement as 1.5, 3.0, 6.0, 9.0 m; the table, the workbook, the drawing and the data paper have 1.5, 3, 4.5, 6 m.
 - [G] The tree belt is a POROUS canopy (shading rate 81 % after pruning), not a solid body: the served geometry is its 2 m × 74 m × 7 m envelope with the 1.2 m gap, and a solver needs a canopy (drag) model, not a wall.
@@ -300,15 +300,15 @@ Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark an
 
 ## Validation method
 
-Each case is solved through Eddy3D's production case writer (build-case -> run -> probe), not a hand-built
-OpenFOAM case; the probe sits at exactly the tunnel's measurement coordinates. Scores are normalised by U_H
+Each case is solved through Eddy3D's production case writer (build-case -> run -> probe); the probe sits at
+exactly the tunnel's measurement coordinates. Scores are normalised by U_H
 (k by U_H^2; Case E by U at 15.9 m); hit rate uses D = 0.25, W = 0.05 in those units. FAC2 is harsh by
-construction on sign-changing V and W; read R and hit rate there. The lateral sign of Case B is corrected
+construction on sign-changing V and W, where R and hit rate are the usable scores. The lateral sign of Case B is corrected
 before scoring. Cases C-E measure an omnidirectional SCALAR speed (thermistor): the model is scored as
 sqrt(|U|^2 + 2k) and as |U|, the two ends of the bracket the measurement must fall in.
 The ML surrogate predicts |U|/U_ref at 1.8 m; each case is scaled so its measurement plane lands there.
 On the full prediction window it does not respond to the wind direction at all (reversing the wind changes
-the field by < 1e-4 U_ref) — its scores grade the geometry it was given, not a wind it was told.
+the field by < 1e-4 U_ref), so its scores grade the geometry it was given.
 
 ## Cite
 

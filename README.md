@@ -14,27 +14,27 @@ and one frame per case, cleaned STL geometry in metres, and the validation score
 
 <table>
 <tr>
-<td valign="top"><!--fig name="case-a.png" alt="Case A — 1:1:2 building" width="270" label="0"--><a href="validation/figures/geometry/case-a.png" title="1200 dpi original, 0.8 MB"><img src="docs/assets/web/case-a.png" width="270" height="135" loading="lazy" alt="Case A — 1:1:2 building"></a><!--/fig--><br><b>Case A</b> — 1:1:2 building<br><sub>186 points · U, V, W, k</sub></td>
-<td valign="top"><!--fig name="case-b.png" alt="Case B — 1:4:4 slab" width="270" label="0"--><a href="validation/figures/geometry/case-b.png" title="1200 dpi original, 0.8 MB"><img src="docs/assets/web/case-b.png" width="270" height="135" loading="lazy" alt="Case B — 1:4:4 slab"></a><!--/fig--><br><b>Case B</b> — 1:4:4 slab<br><sub>224 points · U, V, W, k</sub></td>
-<td valign="top"><!--fig name="case-c-2d.png" alt="Case C — 3 × 3 block array" width="270" label="0"--><a href="validation/figures/geometry/case-c-2d.png" title="1200 dpi original, 0.9 MB"><img src="docs/assets/web/case-c-2d.png" width="270" height="135" loading="lazy" alt="Case C — 3 × 3 block array"></a><!--/fig--><br><b>Case C</b> — 3 × 3 block array<br><sub>1,080 scalar speeds · 9 configurations (2D shown)</sub></td>
+<td valign="top"><!--fig name="case-a.png" alt="Case A — 1:1:2 building" width="270"--><a href="validation/figures/geometry/case-a.png"><img src="docs/assets/web/case-a.png" width="270" height="135" loading="lazy" alt="Case A — 1:1:2 building"></a><!--/fig--><br><b>Case A</b> — 1:1:2 building<br><sub>186 points · U, V, W, k</sub></td>
+<td valign="top"><!--fig name="case-b.png" alt="Case B — 1:4:4 slab" width="270"--><a href="validation/figures/geometry/case-b.png"><img src="docs/assets/web/case-b.png" width="270" height="135" loading="lazy" alt="Case B — 1:4:4 slab"></a><!--/fig--><br><b>Case B</b> — 1:4:4 slab<br><sub>224 points · U, V, W, k</sub></td>
+<td valign="top"><!--fig name="case-c-2d.png" alt="Case C — 3 × 3 block array" width="270"--><a href="validation/figures/geometry/case-c-2d.png"><img src="docs/assets/web/case-c-2d.png" width="270" height="135" loading="lazy" alt="Case C — 3 × 3 block array"></a><!--/fig--><br><b>Case C</b> — 3 × 3 block array<br><sub>1,080 scalar speeds · 9 configurations (2D shown)</sub></td>
 </tr>
 <tr>
-<td valign="top"><!--fig name="case-d.png" alt="Case D — high-rise among city blocks" width="270" label="0"--><a href="validation/figures/geometry/case-d.png" title="1200 dpi original, 2.2 MB"><img src="docs/assets/web/case-d.png" width="270" height="135" loading="lazy" alt="Case D — high-rise among city blocks"></a><!--/fig--><br><b>Case D</b> — high-rise among city blocks<br><sub>78 points × 3 directions · 33 velocity points</sub></td>
-<td valign="top"><!--fig name="case-e-after.png" alt="Case E — Niigata district" width="270" label="0"--><a href="validation/figures/geometry/case-e-after.png" title="1200 dpi original, 2.2 MB"><img src="docs/assets/web/case-e-after.png" width="270" height="135" loading="lazy" alt="Case E — Niigata district"></a><!--/fig--><br><b>Case E</b> — Niigata district<br><sub>80 points × 16 directions · before and after (after shown)</sub></td>
-<td valign="top"><!--fig name="case-f.png" alt="Case F — Shinjuku district" width="270" label="0"--><a href="validation/figures/geometry/case-f.png" title="1200 dpi original, 1.9 MB"><img src="docs/assets/web/case-f.png" width="270" height="135" loading="lazy" alt="Case F — Shinjuku district"></a><!--/fig--><br><b>Case F</b> — Shinjuku district<br><sub>472 velocity ratios · tunnel at three heights and the field</sub></td>
+<td valign="top"><!--fig name="case-d.png" alt="Case D — high-rise among city blocks" width="270"--><a href="validation/figures/geometry/case-d.png"><img src="docs/assets/web/case-d.png" width="270" height="135" loading="lazy" alt="Case D — high-rise among city blocks"></a><!--/fig--><br><b>Case D</b> — high-rise among city blocks<br><sub>78 points × 3 directions · 33 velocity points</sub></td>
+<td valign="top"><!--fig name="case-e-after.png" alt="Case E — Niigata district" width="270"--><a href="validation/figures/geometry/case-e-after.png"><img src="docs/assets/web/case-e-after.png" width="270" height="135" loading="lazy" alt="Case E — Niigata district"></a><!--/fig--><br><b>Case E</b> — Niigata district<br><sub>80 points × 16 directions · before and after (after shown)</sub></td>
+<td valign="top"><!--fig name="case-f.png" alt="Case F — Shinjuku district" width="270"--><a href="validation/figures/geometry/case-f.png"><img src="docs/assets/web/case-f.png" width="270" height="135" loading="lazy" alt="Case F — Shinjuku district"></a><!--/fig--><br><b>Case F</b> — Shinjuku district<br><sub>472 velocity ratios · tunnel at three heights and the field</sub></td>
 </tr>
 <tr>
-<td valign="top"><!--fig name="case-g.png" alt="Case G — flow behind a tree belt" width="270" label="0"--><a href="validation/figures/geometry/case-g.png" title="1200 dpi original, 0.7 MB"><img src="docs/assets/web/case-g.png" width="270" height="135" loading="lazy" alt="Case G — flow behind a tree belt"></a><!--/fig--><br><b>Case G</b> — flow behind a tree belt<br><sub>28 points · field, U/U_H and k/U_H²</sub></td>
-<td valign="top"><!--fig name="case-h.png" alt="Case H — 1:1:2 building, floor source" width="270" label="0"--><a href="validation/figures/geometry/case-h.png" title="1200 dpi original, 0.9 MB"><img src="docs/assets/web/case-h.png" width="270" height="135" loading="lazy" alt="Case H — 1:1:2 building, floor source"></a><!--/fig--><br><b>Case H</b> — 1:1:2 building, floor source<br><sub>1,652 rows · velocity and concentration</sub></td>
-<td valign="top"><!--fig name="case-i.png" alt="Case I — cube, roof source" width="270" label="0"--><a href="validation/figures/geometry/case-i.png" title="1200 dpi original, 1.0 MB"><img src="docs/assets/web/case-i.png" width="270" height="135" loading="lazy" alt="Case I — cube, roof source"></a><!--/fig--><br><b>Case I</b> — cube, roof source<br><sub>630 rows · LDV velocity and concentration</sub></td>
+<td valign="top"><!--fig name="case-g.png" alt="Case G — flow behind a tree belt" width="270"--><a href="validation/figures/geometry/case-g.png"><img src="docs/assets/web/case-g.png" width="270" height="135" loading="lazy" alt="Case G — flow behind a tree belt"></a><!--/fig--><br><b>Case G</b> — flow behind a tree belt<br><sub>28 points · field, U/U_H and k/U_H²</sub></td>
+<td valign="top"><!--fig name="case-h.png" alt="Case H — 1:1:2 building, floor source" width="270"--><a href="validation/figures/geometry/case-h.png"><img src="docs/assets/web/case-h.png" width="270" height="135" loading="lazy" alt="Case H — 1:1:2 building, floor source"></a><!--/fig--><br><b>Case H</b> — 1:1:2 building, floor source<br><sub>1,652 rows · velocity and concentration</sub></td>
+<td valign="top"><!--fig name="case-i.png" alt="Case I — cube, roof source" width="270"--><a href="validation/figures/geometry/case-i.png"><img src="docs/assets/web/case-i.png" width="270" height="135" loading="lazy" alt="Case I — cube, roof source"></a><!--/fig--><br><b>Case I</b> — cube, roof source<br><sub>630 rows · LDV velocity and concentration</sub></td>
 </tr>
 <tr>
-<td valign="top"><!--fig name="case-j.png" alt="Case J — 1:1:2 building, non-isothermal" width="270" label="0"--><a href="validation/figures/geometry/case-j.png" title="1200 dpi original, 1.4 MB"><img src="docs/assets/web/case-j.png" width="270" height="135" loading="lazy" alt="Case J — 1:1:2 building, non-isothermal"></a><!--/fig--><br><b>Case J</b> — 1:1:2 building, non-isothermal<br><sub>444 rows · velocity, temperature, concentration, fluxes</sub></td>
-<td valign="top"><!--fig name="case-k.png" alt="Case K — 9 × 9 cube array, point source" width="270" label="0"--><a href="validation/figures/geometry/case-k.png" title="1200 dpi original, 2.0 MB"><img src="docs/assets/web/case-k.png" width="270" height="135" loading="lazy" alt="Case K — 9 × 9 cube array, point source"></a><!--/fig--><br><b>Case K</b> — 9 × 9 cube array, point source<br><sub>203 rows · velocity and concentration</sub></td>
-<td valign="top"><!--fig name="case-l.png" alt="Case L — 9 × 14 cube array, line source, non-isothermal" width="270" label="0"--><a href="validation/figures/geometry/case-l.png" title="1200 dpi original, 2.3 MB"><img src="docs/assets/web/case-l.png" width="270" height="135" loading="lazy" alt="Case L — 9 × 14 cube array, line source, non-isothermal"></a><!--/fig--><br><b>Case L</b> — 9 × 14 cube array, line source, non-isothermal<br><sub>344 rows · velocity, temperature, concentration, fluxes</sub></td>
+<td valign="top"><!--fig name="case-j.png" alt="Case J — 1:1:2 building, non-isothermal" width="270"--><a href="validation/figures/geometry/case-j.png"><img src="docs/assets/web/case-j.png" width="270" height="135" loading="lazy" alt="Case J — 1:1:2 building, non-isothermal"></a><!--/fig--><br><b>Case J</b> — 1:1:2 building, non-isothermal<br><sub>444 rows · velocity, temperature, concentration, fluxes</sub></td>
+<td valign="top"><!--fig name="case-k.png" alt="Case K — 9 × 9 cube array, point source" width="270"--><a href="validation/figures/geometry/case-k.png"><img src="docs/assets/web/case-k.png" width="270" height="135" loading="lazy" alt="Case K — 9 × 9 cube array, point source"></a><!--/fig--><br><b>Case K</b> — 9 × 9 cube array, point source<br><sub>203 rows · velocity and concentration</sub></td>
+<td valign="top"><!--fig name="case-l.png" alt="Case L — 9 × 14 cube array, line source, non-isothermal" width="270"--><a href="validation/figures/geometry/case-l.png"><img src="docs/assets/web/case-l.png" width="270" height="135" loading="lazy" alt="Case L — 9 × 14 cube array, line source, non-isothermal"></a><!--/fig--><br><b>Case L</b> — 9 × 14 cube array, line source, non-isothermal<br><sub>344 rows · velocity, temperature, concentration, fluxes</sub></td>
 </tr>
 <tr>
-<td valign="top"><!--fig name="case-m.png" alt="Case M — TPU Atsugi campus" width="270" label="0"--><a href="validation/figures/geometry/case-m.png" title="1200 dpi original, 1.8 MB"><img src="docs/assets/web/case-m.png" width="270" height="135" loading="lazy" alt="Case M — TPU Atsugi campus"></a><!--/fig--><br><b>Case M</b> — TPU Atsugi campus<br><sub>330 rows · tunnel and field concentration</sub></td>
+<td valign="top"><!--fig name="case-m.png" alt="Case M — TPU Atsugi campus" width="270"--><a href="validation/figures/geometry/case-m.png"><img src="docs/assets/web/case-m.png" width="270" height="135" loading="lazy" alt="Case M — TPU Atsugi campus"></a><!--/fig--><br><b>Case M</b> — TPU Atsugi campus<br><sub>330 rows · tunnel and field concentration</sub></td>
 <td></td>
 <td></td>
 </tr>
@@ -94,7 +94,7 @@ is low.
 <details>
 <summary><b>Case A — 1:1:2 building</b> · 186 points, U/V/W/k · scored: OpenFOAM 12, OpenLB, FluidX3D, ML</summary>
 
-<p><!--fig name="case-a.png" alt="Case A geometry" width="700"--><a href="validation/figures/geometry/case-a.png"><img src="docs/assets/web/case-a.png" width="700" height="350" loading="lazy" alt="Case A geometry"></a><br><sub><a href="validation/figures/geometry/case-a.png">1200 dpi original, 0.8 MB</a></sub><!--/fig--><br>
+<p><!--fig name="case-a.png" alt="Case A geometry" width="700"--><a href="validation/figures/geometry/case-a.png"><img src="docs/assets/web/case-a.png" width="700" height="350" loading="lazy" alt="Case A geometry"></a><!--/fig--><br>
 <em>Isolated 1:1:2 building, b = 0.08 m, H = 0.16 m (model scale); the wind blows along +x.</em></p>
 
 **Configuration.** A 1:1:2 (width : depth : height) prism, b = 0.08 m, H = 2b = 0.16 m, centred on the origin.
@@ -154,7 +154,7 @@ log law.
 <details>
 <summary><b>Case B — 1:4:4 slab</b> · 224 points, U/V/W/k · scored: OpenFOAM 12, OpenLB, FluidX3D, ML</summary>
 
-<p><!--fig name="case-b.png" alt="Case B geometry" width="700"--><a href="validation/figures/geometry/case-b.png"><img src="docs/assets/web/case-b.png" width="700" height="350" loading="lazy" alt="Case B geometry"></a><br><sub><a href="validation/figures/geometry/case-b.png">1200 dpi original, 0.8 MB</a></sub><!--/fig--><br>
+<p><!--fig name="case-b.png" alt="Case B geometry" width="700"--><a href="validation/figures/geometry/case-b.png"><img src="docs/assets/web/case-b.png" width="700" height="350" loading="lazy" alt="Case B geometry"></a><!--/fig--><br>
 <em>Isolated 1:4:4 slab, 0.05 m along the wind, 0.20 m across, 0.20 m tall (model scale); the wind blows along +x.</em></p>
 
 **Configuration.** A 1:4:4 (depth : width : height) slab, 0.05 m deep (along the wind) × 0.20 m wide × 0.20 m
@@ -214,9 +214,9 @@ log law.
 
 <table>
 <tr>
-<td valign="top"><!--fig name="case-c-0d.png" alt="Case C, 0D" width="270" label="0"--><a href="validation/figures/geometry/case-c-0d.png" title="1200 dpi original, 0.9 MB"><img src="docs/assets/web/case-c-0d.png" width="270" height="135" loading="lazy" alt="Case C, 0D"></a><!--/fig--><br><sub>0D: the centre block removed.</sub></td>
-<td valign="top"><!--fig name="case-c-1d.png" alt="Case C, 1D" width="270" label="0"--><a href="validation/figures/geometry/case-c-1d.png" title="1200 dpi original, 0.9 MB"><img src="docs/assets/web/case-c-1d.png" width="270" height="135" loading="lazy" alt="Case C, 1D"></a><!--/fig--><br><sub>1D: the centre block as tall as its neighbours, D = 0.20 m.</sub></td>
-<td valign="top"><!--fig name="case-c-2d.png" alt="Case C, 2D" width="270" label="0"--><a href="validation/figures/geometry/case-c-2d.png" title="1200 dpi original, 0.9 MB"><img src="docs/assets/web/case-c-2d.png" width="270" height="135" loading="lazy" alt="Case C, 2D"></a><!--/fig--><br><sub>2D: the centre block twice as tall, 2D = 0.40 m.</sub></td>
+<td valign="top"><!--fig name="case-c-0d.png" alt="Case C, 0D" width="270"--><a href="validation/figures/geometry/case-c-0d.png"><img src="docs/assets/web/case-c-0d.png" width="270" height="135" loading="lazy" alt="Case C, 0D"></a><!--/fig--><br><sub>0D: the centre block removed.</sub></td>
+<td valign="top"><!--fig name="case-c-1d.png" alt="Case C, 1D" width="270"--><a href="validation/figures/geometry/case-c-1d.png"><img src="docs/assets/web/case-c-1d.png" width="270" height="135" loading="lazy" alt="Case C, 1D"></a><!--/fig--><br><sub>1D: the centre block as tall as its neighbours, D = 0.20 m.</sub></td>
+<td valign="top"><!--fig name="case-c-2d.png" alt="Case C, 2D" width="270"--><a href="validation/figures/geometry/case-c-2d.png"><img src="docs/assets/web/case-c-2d.png" width="270" height="135" loading="lazy" alt="Case C, 2D"></a><!--/fig--><br><sub>2D: the centre block twice as tall, 2D = 0.40 m.</sub></td>
 </tr>
 </table>
 
@@ -277,7 +277,7 @@ windward street's pedestrian speed over 0D while the leeward street moves little
 3000 iterations per direction, the 120 probes at exactly the tunnel's coordinates. Scored against Vs/U_H as
 √(|U|² + 2k) (headline) and as |U|; hit rate D = 0.25, W = 0.05 U_H.
 
-<!--fig name="case-c-openfoam-agreement.png" alt="Case C, measured vs modelled, nine configurations" width="800"--><a href="validation/figures/case-c-openfoam-agreement.png"><img src="docs/assets/web/case-c-openfoam-agreement.png" width="800" height="798" loading="lazy" alt="Case C, measured vs modelled, nine configurations"></a><br><sub><a href="validation/figures/case-c-openfoam-agreement.png">1200 dpi original, 5.6 MB</a></sub><!--/fig-->
+<!--fig name="case-c-openfoam-agreement.png" alt="Case C, measured vs modelled, nine configurations" width="800"--><a href="validation/figures/case-c-openfoam-agreement.png"><img src="docs/assets/web/case-c-openfoam-agreement.png" width="800" height="798" loading="lazy" alt="Case C, measured vs modelled, nine configurations"></a><!--/fig-->
 
 | centre block | WD | R | FAC2 | FB | hit rate | \|U\| alone: FB / R |
 |---|---|---|---|---|---|---|
@@ -291,7 +291,7 @@ windward street's pedestrian speed over 0D while the leeward street moves little
 | 2D | 22.5° | +0.906 | 0.983 | +0.091 | 0.875 | +0.240 / +0.894 |
 | 2D | 45° | +0.909 | 0.958 | +0.103 | 0.883 | +0.243 / +0.912 |
 
-<!--fig name="case-c-openfoam-bias-map.png" alt="Case C, where the model is slow or fast" width="800"--><a href="validation/figures/case-c-openfoam-bias-map.png"><img src="docs/assets/web/case-c-openfoam-bias-map.png" width="800" height="882" loading="lazy" alt="Case C, where the model is slow or fast"></a><br><sub><a href="validation/figures/case-c-openfoam-bias-map.png">1200 dpi original, 4.0 MB</a></sub><!--/fig-->
+<!--fig name="case-c-openfoam-bias-map.png" alt="Case C, where the model is slow or fast" width="800"--><a href="validation/figures/case-c-openfoam-bias-map.png"><img src="docs/assets/web/case-c-openfoam-bias-map.png" width="800" height="882" loading="lazy" alt="Case C, where the model is slow or fast"></a><!--/fig-->
 
 Per-point pairs:
 [`validation/results/caseC_openfoam12_realizableKE_pairs.csv`](validation/results/caseC_openfoam12_realizableKE_pairs.csv)
@@ -330,7 +330,7 @@ FB +0.67, FAC2 0.44, R +0.21, hit rate 0.18. Method: *ML surrogate* under *Valid
 <details>
 <summary><b>Case D — high-rise among city blocks</b> · 78 points × 3 directions (thermistor) + 33 points U/V/W/k · scored: OpenFOAM 12 (WD 0°, 22.5° and 45°), ML</summary>
 
-<p><!--fig name="case-d.png" alt="Case D geometry" width="700"--><a href="validation/figures/geometry/case-d.png"><img src="docs/assets/web/case-d.png" width="700" height="350" loading="lazy" alt="Case D geometry"></a><br><sub><a href="validation/figures/geometry/case-d.png">1200 dpi original, 2.2 MB</a></sub><!--/fig--><br>
+<p><!--fig name="case-d.png" alt="Case D geometry" width="700"--><a href="validation/figures/geometry/case-d.png"><img src="docs/assets/web/case-d.png" width="700" height="350" loading="lazy" alt="Case D geometry"></a><!--/fig--><br>
 <em>A 0.25 m tower (blue) among 82 low blocks over 1.40 m × 1.35 m (1:400 model scale); the arrow is WD = 0°.</em></p>
 
 **Configuration.** One 1:1:4 tower, 0.25H × 0.25H × H = 62.5 × 62.5 × 250 mm, replacing the centre block of a
@@ -386,7 +386,7 @@ the array; shifting the cloud by 12.5 mm (5 m full scale) puts points 27 and 28 
 8 cores beside a production campaign. 3.6 million cells at 1:400 on a cylinder domain,
 3000 iterations; the last iteration's initial residuals are below 4 × 10⁻³.
 
-<!--fig name="case-d-openfoam-agreement.png" alt="Case D, measured vs modelled" width="800"--><a href="validation/figures/case-d-openfoam-agreement.png"><img src="docs/assets/web/case-d-openfoam-agreement.png" width="800" height="266" loading="lazy" alt="Case D, measured vs modelled"></a><br><sub><a href="validation/figures/case-d-openfoam-agreement.png">1200 dpi original, 2.6 MB</a></sub><!--/fig-->
+<!--fig name="case-d-openfoam-agreement.png" alt="Case D, measured vs modelled" width="800"--><a href="validation/figures/case-d-openfoam-agreement.png"><img src="docs/assets/web/case-d-openfoam-agreement.png" width="800" height="266" loading="lazy" alt="Case D, measured vs modelled"></a><!--/fig-->
 
 | | n | FAC2 | FB | q | R |
 |---|---|---|---|---|---|
@@ -441,8 +441,8 @@ on the thermistor plane (198 points, 3 directions) and FB +0.23, FAC2 0.52, R +0
 
 <table>
 <tr>
-<td valign="top"><!--fig name="case-e-before.png" alt="Case E, bc" width="410" label="0"--><a href="validation/figures/geometry/case-e-before.png" title="1200 dpi original, 2.3 MB"><img src="docs/assets/web/case-e-before.png" width="410" height="205" loading="lazy" alt="Case E, bc"></a><!--/fig--><br><sub>Before construction: the existing district, about 400 m across (full scale).</sub></td>
-<td valign="top"><!--fig name="case-e-after.png" alt="Case E, ac" width="410" label="0"--><a href="validation/figures/geometry/case-e-after.png" title="1200 dpi original, 2.2 MB"><img src="docs/assets/web/case-e-after.png" width="410" height="205" loading="lazy" alt="Case E, ac"></a><!--/fig--><br><sub>After construction: the 60 m high-rise and the two 18 m mid-rises (blue) added.</sub></td>
+<td valign="top"><!--fig name="case-e-before.png" alt="Case E, bc" width="410"--><a href="validation/figures/geometry/case-e-before.png"><img src="docs/assets/web/case-e-before.png" width="410" height="205" loading="lazy" alt="Case E, bc"></a><!--/fig--><br><sub>Before construction: the existing district, about 400 m across (full scale).</sub></td>
+<td valign="top"><!--fig name="case-e-after.png" alt="Case E, ac" width="410"--><a href="validation/figures/geometry/case-e-after.png"><img src="docs/assets/web/case-e-after.png" width="410" height="205" loading="lazy" alt="Case E, ac"></a><!--/fig--><br><sub>After construction: the 60 m high-rise and the two 18 m mid-rises (blue) added.</sub></td>
 </tr>
 </table>
 
@@ -498,7 +498,7 @@ buildings), the workbook's measured profile imposed through a tabulated inlet th
 case (`wind.inlet: "manual"`), 2000 iterations. The model's speed is divided by its own solved U(15.9 m), which
 arrives at 0.998 of the imposed value in both states.
 
-<!--fig name="case-e-openfoam-agreement.png" alt="Case E, measured vs modelled, before, after and the change" width="800"--><a href="validation/figures/case-e-openfoam-agreement.png"><img src="docs/assets/web/case-e-openfoam-agreement.png" width="800" height="338" loading="lazy" alt="Case E, measured vs modelled, before, after and the change"></a><br><sub><a href="validation/figures/case-e-openfoam-agreement.png">1200 dpi original, 2.4 MB</a></sub><!--/fig-->
+<!--fig name="case-e-openfoam-agreement.png" alt="Case E, measured vs modelled, before, after and the change" width="800"--><a href="validation/figures/case-e-openfoam-agreement.png"><img src="docs/assets/web/case-e-openfoam-agreement.png" width="800" height="338" loading="lazy" alt="Case E, measured vs modelled, before, after and the change"></a><!--/fig-->
 
 | | FAC2 | FB | q | R |
 |---|---|---|---|---|
@@ -508,7 +508,7 @@ arrives at 0.998 of the imposed value in both states.
 | after · \|U\| | 0.74 | +0.34 | 0.30 | 0.84 |
 | ceiling control: the tunnel's *before*, scored as a model of its *after* | 0.79 | +0.37 | 0.35 | 0.10 |
 
-<!--fig name="case-e-openfoam-bias-map.png" alt="Case E, where the model is slow or fast" width="800"--><a href="validation/figures/case-e-openfoam-bias-map.png"><img src="docs/assets/web/case-e-openfoam-bias-map.png" width="800" height="467" loading="lazy" alt="Case E, where the model is slow or fast"></a><br><sub><a href="validation/figures/case-e-openfoam-bias-map.png">1200 dpi original, 3.6 MB</a></sub><!--/fig-->
+<!--fig name="case-e-openfoam-bias-map.png" alt="Case E, where the model is slow or fast" width="800"--><a href="validation/figures/case-e-openfoam-bias-map.png"><img src="docs/assets/web/case-e-openfoam-bias-map.png" width="800" height="467" loading="lazy" alt="Case E, where the model is slow or fast"></a><!--/fig-->
 
 - After − before at the 80 points: R = 0.84, the sign right at 57 of the 76 points where the tunnel resolved a change
   (0.75), the mean change 0.09 modelled against 0.16 measured. The control that ignores the construction scores R 0.10.
@@ -545,7 +545,7 @@ of the 863 pairs the tunnel resolves (|Δ| > 0.05). Method: *ML surrogate* under
 <details>
 <summary><b>Case F — Shinjuku district</b> · 472 ratios at 13 points · scored: OpenFOAM 12 (wind from NNW, two vertical frames)</summary>
 
-<p><!--fig name="case-f.png" alt="Case F geometry" width="700"--><a href="validation/figures/geometry/case-f.png"><img src="docs/assets/web/case-f.png" width="700" height="350" loading="lazy" alt="Case F geometry"></a><br><sub><a href="validation/figures/geometry/case-f.png">1200 dpi original, 1.9 MB</a></sub><!--/fig--><br>
+<p><!--fig name="case-f.png" alt="Case F geometry" width="700"--><a href="validation/figures/geometry/case-f.png"><img src="docs/assets/web/case-f.png" width="700" height="350" loading="lazy" alt="Case F geometry"></a><!--/fig--><br>
 <em>Shinjuku sub-centre, November 1978: terrain and buildings of the 1:800 model over a disc of 725 m radius (full-scale metres); north is +y, the towers over 100 m are blue.</em></p>
 
 **What it is.** Shinjuku sub-centre, Tokyo, November 1978: 1:800 tunnel (thermistor, 5 / 9 / 20 m) and a year of field cup anemometers; velocity ratio to the 500 m wind, 12 tunnel and 16 field directions.
@@ -580,7 +580,7 @@ Full reading: [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
-<!--fig name="case-f-openfoam-agreement.png" alt="Case F, measured vs modelled speed" width="800"--><a href="validation/figures/case-f-openfoam-agreement.png"><img src="docs/assets/web/case-f-openfoam-agreement.png" width="800" height="475" loading="lazy" alt="Case F, measured vs modelled speed"></a><br><sub><a href="validation/figures/case-f-openfoam-agreement.png">1200 dpi original, 3.2 MB</a></sub><!--/fig-->
+<!--fig name="case-f-openfoam-agreement.png" alt="Case F, measured vs modelled speed" width="800"--><a href="validation/figures/case-f-openfoam-agreement.png"><img src="docs/assets/web/case-f-openfoam-agreement.png" width="800" height="475" loading="lazy" alt="Case F, measured vs modelled speed"></a><!--/fig-->
 
 **Known issues.** 11 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/F.json`](docs/api/cases/F.json).
 
@@ -591,7 +591,7 @@ Full reading: [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases
 <details>
 <summary><b>Case G — flow behind a tree belt</b> · 28 points, U/U_H and k/U_H² · scored: OpenFOAM 12 (a drag sweep)</summary>
 
-<p><!--fig name="case-g.png" alt="Case G geometry" width="700"--><a href="validation/figures/geometry/case-g.png"><img src="docs/assets/web/case-g.png" width="700" height="350" loading="lazy" alt="Case G geometry"></a><br><sub><a href="validation/figures/geometry/case-g.png">1200 dpi original, 0.7 MB</a></sub><!--/fig--><br>
+<p><!--fig name="case-g.png" alt="Case G geometry" width="700"--><a href="validation/figures/geometry/case-g.png"><img src="docs/assets/web/case-g.png" width="700" height="350" loading="lazy" alt="Case G geometry"></a><!--/fig--><br>
 <em>The Tsuiji-matsu tree belt, 2 m × 74 m × 7 m with a 1.2 m gap below (full scale; shown as its envelope — a porous canopy, not a solid body); the wind blows along +x and the measurements are behind the belt.</em></p>
 
 **What it is.** Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m × 2 m × 7 m with a 1.2 m gap below): normalised mean speed and k at 28 points on the centre section (sonic anemometers).
@@ -625,7 +625,7 @@ Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
-<!--fig name="case-g-openfoam-sweep.png" alt="Case G, measured vs modelled, drag sweep" width="800"--><a href="validation/figures/case-g-openfoam-sweep.png"><img src="docs/assets/web/case-g-openfoam-sweep.png" width="800" height="368" loading="lazy" alt="Case G, measured vs modelled, drag sweep"></a><br><sub><a href="validation/figures/case-g-openfoam-sweep.png">1200 dpi original, 3.3 MB</a></sub><!--/fig-->
+<!--fig name="case-g-openfoam-sweep.png" alt="Case G, measured vs modelled, drag sweep" width="800"--><a href="validation/figures/case-g-openfoam-sweep.png"><img src="docs/assets/web/case-g-openfoam-sweep.png" width="800" height="368" loading="lazy" alt="Case G, measured vs modelled, drag sweep"></a><!--/fig-->
 
 **Known issues.** 6 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/G.json`](docs/api/cases/G.json).
 
@@ -636,7 +636,7 @@ Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases
 <details>
 <summary><b>Case H — 1:1:2 building with a floor point source</b> · 1,652 rows, velocity and concentration · scored: OpenFOAM 12</summary>
 
-<p><!--fig name="case-h.png" alt="Case H geometry" width="700"--><a href="validation/figures/geometry/case-h.png"><img src="docs/assets/web/case-h.png" width="700" height="350" loading="lazy" alt="Case H geometry"></a><br><sub><a href="validation/figures/geometry/case-h.png">1200 dpi original, 0.9 MB</a></sub><!--/fig--><br>
+<p><!--fig name="case-h.png" alt="Case H geometry" width="700"--><a href="validation/figures/geometry/case-h.png"><img src="docs/assets/web/case-h.png" width="700" height="350" loading="lazy" alt="Case H geometry"></a><!--/fig--><br>
 <em>Isolated 1:1:2 building, 0.10 m × 0.10 m × 0.20 m (model scale); the wind blows along +x. The tracer comes from a 4 mm floor hole 0.25 H behind the leeward face (not drawn).</em></p>
 
 **What it is.** Isolated 1:1:2 building with an ethylene point source on the floor behind it: velocity (split-fibre hot wire) and concentration (hydrocarbon analyser) at 876 points.
@@ -668,7 +668,7 @@ Full reading: [Cases H and I](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
-<!--fig name="cases-hi-openfoam-agreement.png" alt="Cases H and I, measured vs modelled" width="800"--><a href="validation/figures/cases-hi-openfoam-agreement.png"><img src="docs/assets/web/cases-hi-openfoam-agreement.png" width="800" height="423" loading="lazy" alt="Cases H and I, measured vs modelled"></a><br><sub><a href="validation/figures/cases-hi-openfoam-agreement.png">1200 dpi original, 5.6 MB</a></sub><!--/fig-->
+<!--fig name="cases-hi-openfoam-agreement.png" alt="Cases H and I, measured vs modelled" width="800"--><a href="validation/figures/cases-hi-openfoam-agreement.png"><img src="docs/assets/web/cases-hi-openfoam-agreement.png" width="800" height="423" loading="lazy" alt="Cases H and I, measured vs modelled"></a><!--/fig-->
 
 **Known issues.** 7 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/H.json`](docs/api/cases/H.json).
 
@@ -679,7 +679,7 @@ Full reading: [Cases H and I](https://sustainableurbansystems.com/CFD-Test-Cases
 <details>
 <summary><b>Case I — cube with a roof point source</b> · 630 rows, velocity and concentration · scored: OpenFOAM 12 (three closures)</summary>
 
-<p><!--fig name="case-i.png" alt="Case I geometry" width="700"--><a href="validation/figures/geometry/case-i.png"><img src="docs/assets/web/case-i.png" width="700" height="350" loading="lazy" alt="Case I geometry"></a><br><sub><a href="validation/figures/geometry/case-i.png">1200 dpi original, 1.0 MB</a></sub><!--/fig--><br>
+<p><!--fig name="case-i.png" alt="Case I geometry" width="700"--><a href="validation/figures/geometry/case-i.png"><img src="docs/assets/web/case-i.png" width="700" height="350" loading="lazy" alt="Case I geometry"></a><!--/fig--><br>
 <em>Isolated cube, 0.10 m on a side (model scale); the wind blows along +x. The tracer is released from a 6 mm outlet at the centre of the roof (not drawn).</em></p>
 
 **What it is.** Isolated cube with an ethane point source at the centre of its roof: velocity (laser Doppler, 91 points) and concentration (hydrocarbon analyser, 539 points).
@@ -714,7 +714,7 @@ Full reading: [Cases H and I](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
-<!--fig name="case-i-openfoam-closures.png" alt="Case I under three turbulence closures" width="800"--><a href="validation/figures/case-i-openfoam-closures.png"><img src="docs/assets/web/case-i-openfoam-closures.png" width="800" height="779" loading="lazy" alt="Case I under three turbulence closures"></a><br><sub><a href="validation/figures/case-i-openfoam-closures.png">1200 dpi original, 5.0 MB</a></sub><!--/fig-->
+<!--fig name="case-i-openfoam-closures.png" alt="Case I under three turbulence closures" width="800"--><a href="validation/figures/case-i-openfoam-closures.png"><img src="docs/assets/web/case-i-openfoam-closures.png" width="800" height="779" loading="lazy" alt="Case I under three turbulence closures"></a><!--/fig-->
 
 **Known issues.** 8 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/I.json`](docs/api/cases/I.json).
 
@@ -725,7 +725,7 @@ Full reading: [Cases H and I](https://sustainableurbansystems.com/CFD-Test-Cases
 <details>
 <summary><b>Case J — 1:1:2 building, non-isothermal</b> · 444 rows, velocity, temperature, concentration, fluxes · scored: UMF (two closures)</summary>
 
-<p><!--fig name="case-j.png" alt="Case J geometry" width="700"--><a href="validation/figures/geometry/case-j.png"><img src="docs/assets/web/case-j.png" width="700" height="350" loading="lazy" alt="Case J geometry"></a><br><sub><a href="validation/figures/geometry/case-j.png">1200 dpi original, 1.4 MB</a></sub><!--/fig--><br>
+<p><!--fig name="case-j.png" alt="Case J geometry" width="700"--><a href="validation/figures/geometry/case-j.png"><img src="docs/assets/web/case-j.png" width="700" height="350" loading="lazy" alt="Case J geometry"></a><!--/fig--><br>
 <em>Isolated 1:1:2 building, b = 0.08 m, H = 0.16 m (model scale); the orange ring marks the floor tracer source, 0.25 H behind the building (seen through it); the wind blows along +x.</em></p>
 
 **What it is.** Isolated 1:1:2 building with a floor tracer source in an unstably stratified boundary layer: velocity, temperature, tracer concentration and their turbulent fluxes at 444 points on three planes.
@@ -762,7 +762,7 @@ Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
-<!--fig name="case-j-umf-agreement.png" alt="Case J, measured vs modelled, two closures" width="800"--><a href="validation/figures/case-j-umf-agreement.png"><img src="docs/assets/web/case-j-umf-agreement.png" width="800" height="448" loading="lazy" alt="Case J, measured vs modelled, two closures"></a><br><sub><a href="validation/figures/case-j-umf-agreement.png">1200 dpi original, 5.7 MB</a></sub><!--/fig-->
+<!--fig name="case-j-umf-agreement.png" alt="Case J, measured vs modelled, two closures" width="800"--><a href="validation/figures/case-j-umf-agreement.png"><img src="docs/assets/web/case-j-umf-agreement.png" width="800" height="448" loading="lazy" alt="Case J, measured vs modelled, two closures"></a><!--/fig-->
 
 **Known issues.** 10 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/J.json`](docs/api/cases/J.json).
 
@@ -773,7 +773,7 @@ Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases
 <details>
 <summary><b>Case K — 9 x 9 cube array, point source</b> · 203 rows, velocity and concentration · scored: OpenFOAM 12</summary>
 
-<p><!--fig name="case-k.png" alt="Case K geometry" width="700"--><a href="validation/figures/geometry/case-k.png"><img src="docs/assets/web/case-k.png" width="700" height="350" loading="lazy" alt="Case K geometry"></a><br><sub><a href="validation/figures/geometry/case-k.png">1200 dpi original, 2.0 MB</a></sub><!--/fig--><br>
+<p><!--fig name="case-k.png" alt="Case K geometry" width="700"--><a href="validation/figures/geometry/case-k.png"><img src="docs/assets/web/case-k.png" width="700" height="350" loading="lazy" alt="Case K geometry"></a><!--/fig--><br>
 <em>9 x 9 array of 0.06 m cubes on a 0.12 m pitch (model scale); the orange ring marks the floor tracer source between rows 2 and 3; the wind blows along +x.</em></p>
 
 **What it is.** 9 x 9 array of 0.06 m cubes with a tracer point source on the floor between rows 2 and 3: velocity and tracer concentration at 203 points in the streets and over the first rows.
@@ -810,7 +810,7 @@ Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
-<!--fig name="case-k-openfoam-agreement.png" alt="Case K, measured vs modelled" width="800"--><a href="validation/figures/case-k-openfoam-agreement.png"><img src="docs/assets/web/case-k-openfoam-agreement.png" width="800" height="494" loading="lazy" alt="Case K, measured vs modelled"></a><br><sub><a href="validation/figures/case-k-openfoam-agreement.png">1200 dpi original, 3.6 MB</a></sub><!--/fig-->
+<!--fig name="case-k-openfoam-agreement.png" alt="Case K, measured vs modelled" width="800"--><a href="validation/figures/case-k-openfoam-agreement.png"><img src="docs/assets/web/case-k-openfoam-agreement.png" width="800" height="494" loading="lazy" alt="Case K, measured vs modelled"></a><!--/fig-->
 
 **Known issues.** 9 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/K.json`](docs/api/cases/K.json).
 
@@ -821,7 +821,7 @@ Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases
 <details>
 <summary><b>Case L — 9 x 14 cube array, line source, non-isothermal</b> · 344 rows, velocity, temperature, concentration, fluxes · scored: UMF</summary>
 
-<p><!--fig name="case-l.png" alt="Case L geometry" width="700"--><a href="validation/figures/geometry/case-l.png"><img src="docs/assets/web/case-l.png" width="700" height="350" loading="lazy" alt="Case L geometry"></a><br><sub><a href="validation/figures/geometry/case-l.png">1200 dpi original, 2.3 MB</a></sub><!--/fig--><br>
+<p><!--fig name="case-l.png" alt="Case L geometry" width="700"--><a href="validation/figures/geometry/case-l.png"><img src="docs/assets/web/case-l.png" width="700" height="350" loading="lazy" alt="Case L geometry"></a><!--/fig--><br>
 <em>14 x 9 array of 0.06 m cubes on a 0.12 m pitch (model scale); the orange line is the floor tracer source between rows 7 and 8; the wind blows along +x.</em></p>
 
 **What it is.** 14 rows by 9 columns of 0.06 m cubes with a tracer line source on the floor across the tunnel, in an unstably stratified boundary layer: velocity, temperature, concentration and their fluxes at 344 points in the streets and over the roofs.
@@ -858,7 +858,7 @@ Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
-<!--fig name="case-l-umf-agreement.png" alt="Case L, measured vs modelled" width="800"--><a href="validation/figures/case-l-umf-agreement.png"><img src="docs/assets/web/case-l-umf-agreement.png" width="800" height="450" loading="lazy" alt="Case L, measured vs modelled"></a><br><sub><a href="validation/figures/case-l-umf-agreement.png">1200 dpi original, 5.3 MB</a></sub><!--/fig-->
+<!--fig name="case-l-umf-agreement.png" alt="Case L, measured vs modelled" width="800"--><a href="validation/figures/case-l-umf-agreement.png"><img src="docs/assets/web/case-l-umf-agreement.png" width="800" height="450" loading="lazy" alt="Case L, measured vs modelled"></a><!--/fig-->
 
 **Known issues.** 9 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/L.json`](docs/api/cases/L.json).
 
@@ -869,7 +869,7 @@ Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases
 <details>
 <summary><b>Case M — TPU Atsugi campus</b> · 330 rows, tunnel and field · scored: OpenFOAM 12 (WD 180, three Schmidt numbers)</summary>
 
-<p><!--fig name="case-m.png" alt="Case M geometry" width="700"--><a href="validation/figures/geometry/case-m.png"><img src="docs/assets/web/case-m.png" width="700" height="350" loading="lazy" alt="Case M geometry"></a><br><sub><a href="validation/figures/geometry/case-m.png">1200 dpi original, 1.8 MB</a></sub><!--/fig--><br>
+<p><!--fig name="case-m.png" alt="Case M geometry" width="700"--><a href="validation/figures/geometry/case-m.png"><img src="docs/assets/web/case-m.png" width="700" height="350" loading="lazy" alt="Case M geometry"></a><!--/fig--><br>
 <em>TPU Atsugi campus: terrain and buildings of the 1:600 model (full-scale metres, 1080 m by 720 m); the arrow is the wind at WD = 180°, blowing toward +x (north).</em></p>
 
 **What it is.** Tracer-gas release on the Tokyo Polytechnic University Atsugi campus: 1:600 tunnel (velocity at 180°, ethylene concentration at 175°, 180° and 185°) and 18 field runs with PMCH, 15 points 3 m above ground.
@@ -911,7 +911,7 @@ Full reading: [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
-<!--fig name="case-m-openfoam-agreement.png" alt="Case M, measured vs modelled velocity and concentration" width="800"--><a href="validation/figures/case-m-openfoam-agreement.png"><img src="docs/assets/web/case-m-openfoam-agreement.png" width="800" height="422" loading="lazy" alt="Case M, measured vs modelled velocity and concentration"></a><br><sub><a href="validation/figures/case-m-openfoam-agreement.png">1200 dpi original, 2.9 MB</a></sub><!--/fig-->
+<!--fig name="case-m-openfoam-agreement.png" alt="Case M, measured vs modelled velocity and concentration" width="800"--><a href="validation/figures/case-m-openfoam-agreement.png"><img src="docs/assets/web/case-m-openfoam-agreement.png" width="800" height="422" loading="lazy" alt="Case M, measured vs modelled velocity and concentration"></a><!--/fig-->
 
 **Known issues.** 10 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/M.json`](docs/api/cases/M.json).
 
@@ -931,7 +931,7 @@ in its own section above.
 
 ### Cases A and B — measured against modelled
 
-<!--fig name="cases-ab-openfoam-agreement.png" alt="Measured vs modelled, Cases A and B" width="800"--><a href="validation/figures/cases-ab-openfoam-agreement.png"><img src="docs/assets/web/cases-ab-openfoam-agreement.png" width="800" height="430" loading="lazy" alt="Measured vs modelled, Cases A and B"></a><br><sub><a href="validation/figures/cases-ab-openfoam-agreement.png">1200 dpi original, 3.4 MB</a></sub><!--/fig-->
+<!--fig name="cases-ab-openfoam-agreement.png" alt="Measured vs modelled, Cases A and B" width="800"--><a href="validation/figures/cases-ab-openfoam-agreement.png"><img src="docs/assets/web/cases-ab-openfoam-agreement.png" width="800" height="430" loading="lazy" alt="Measured vs modelled, Cases A and B"></a><!--/fig-->
 
 Measured against modelled for each quantity, with the 1:1 line and, where the quantity does not
 change sign, the factor-of-two band.
@@ -963,7 +963,7 @@ Reattachment length behind the building: **L_r/H = 1.49** (Case A), **3.27** (Ca
 
 ### Cases A and B — centre-plane profiles
 
-<!--fig name="cases-ab-openfoam-profiles.png" alt="Centre-plane profiles, Cases A and B" width="800"--><a href="validation/figures/cases-ab-openfoam-profiles.png"><img src="docs/assets/web/cases-ab-openfoam-profiles.png" width="800" height="417" loading="lazy" alt="Centre-plane profiles, Cases A and B"></a><br><sub><a href="validation/figures/cases-ab-openfoam-profiles.png">1200 dpi original, 1.0 MB</a></sub><!--/fig-->
+<!--fig name="cases-ab-openfoam-profiles.png" alt="Centre-plane profiles, Cases A and B" width="800"--><a href="validation/figures/cases-ab-openfoam-profiles.png"><img src="docs/assets/web/cases-ab-openfoam-profiles.png" width="800" height="417" loading="lazy" alt="Centre-plane profiles, Cases A and B"></a><!--/fig-->
 
 Vertical profiles of U/U_H on the centre plane at the first three measured stations behind the building, offset per
 station.
@@ -978,7 +978,7 @@ immediately behind the building is where the closure does least well.
 
 ### Cases A and B — every engine on the same points
 
-<!--fig name="cases-ab-engine-comparison.png" alt="Measured vs modelled U and V, Cases A and B, one row per engine" width="800"--><a href="validation/figures/cases-ab-engine-comparison.png"><img src="docs/assets/web/cases-ab-engine-comparison.png" width="800" height="595" loading="lazy" alt="Measured vs modelled U and V, Cases A and B, one row per engine"></a><br><sub><a href="validation/figures/cases-ab-engine-comparison.png">1200 dpi original, 5.1 MB</a></sub><!--/fig-->
+<!--fig name="cases-ab-engine-comparison.png" alt="Measured vs modelled U and V, Cases A and B, one row per engine" width="800"--><a href="validation/figures/cases-ab-engine-comparison.png"><img src="docs/assets/web/cases-ab-engine-comparison.png" width="800" height="595" loading="lazy" alt="Measured vs modelled U and V, Cases A and B, one row per engine"></a><!--/fig-->
 
 OpenLB (Eddy3D's `eddy3dWind`: Smagorinsky, third-order regularised D3Q19, CPU image) solved the same two
 experiments with the same fitted inflow and probed the same measured points, at dx = 1.6 m (H/10 for A, H/12.5 for B),
@@ -1054,7 +1054,7 @@ and 88 of Case B's 224.
 
 ### ML surrogate
 
-<!--fig name="ml-surrogate-agreement.png" alt="Measured vs predicted, ML surrogate, Cases A–E" width="800"--><a href="validation/figures/ml-surrogate-agreement.png"><img src="docs/assets/web/ml-surrogate-agreement.png" width="800" height="626" loading="lazy" alt="Measured vs predicted, ML surrogate, Cases A–E"></a><br><sub><a href="validation/figures/ml-surrogate-agreement.png">1200 dpi original, 5.4 MB</a></sub><!--/fig-->
+<!--fig name="ml-surrogate-agreement.png" alt="Measured vs predicted, ML surrogate, Cases A–E" width="800"--><a href="validation/figures/ml-surrogate-agreement.png"><img src="docs/assets/web/ml-surrogate-agreement.png" width="800" height="626" loading="lazy" alt="Measured vs predicted, ML surrogate, Cases A–E"></a><!--/fig-->
 
 Eddy3D's Wind Predictor (the public `Yel-2.0` network) predicts |U_mean|/U_ref at one height, 1.8 m. Each case is
 therefore scaled so its measurement plane lands there (A ×180, B ×144, C ×90, D ×360, E ×0.9), its buildings are

@@ -17,7 +17,7 @@ description: "3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestr
 
 | | | |
 |---|---|---|
-| <a href="{{ '/assets/geometry/case-c-0d.png' | relative_url }}"><img src="{{ '/assets/web/case-c-0d.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case C — 3 × 3 block array, 0D"></a><br><span class="caption">0D: the centre block removed.<br><a class="original" href="{{ '/assets/geometry/case-c-0d.png' | relative_url }}">1200 dpi original, 0.9 MB</a></span> | <a href="{{ '/assets/geometry/case-c-1d.png' | relative_url }}"><img src="{{ '/assets/web/case-c-1d.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case C — 3 × 3 block array, 1D"></a><br><span class="caption">1D: the centre block as tall as its neighbours, D = 0.20 m.<br><a class="original" href="{{ '/assets/geometry/case-c-1d.png' | relative_url }}">1200 dpi original, 0.9 MB</a></span> | <a href="{{ '/assets/geometry/case-c-2d.png' | relative_url }}"><img src="{{ '/assets/web/case-c-2d.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case C — 3 × 3 block array, 2D"></a><br><span class="caption">2D: the centre block twice as tall, 2D = 0.40 m.<br><a class="original" href="{{ '/assets/geometry/case-c-2d.png' | relative_url }}">1200 dpi original, 0.9 MB</a></span> |
+| <a href="{{ '/assets/geometry/case-c-0d.png' | relative_url }}"><img src="{{ '/assets/web/case-c-0d.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case C — 3 × 3 block array, 0D"></a><br><span class="caption">0D: the centre block removed.</span> | <a href="{{ '/assets/geometry/case-c-1d.png' | relative_url }}"><img src="{{ '/assets/web/case-c-1d.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case C — 3 × 3 block array, 1D"></a><br><span class="caption">1D: the centre block as tall as its neighbours, D = 0.20 m.</span> | <a href="{{ '/assets/geometry/case-c-2d.png' | relative_url }}"><img src="{{ '/assets/web/case-c-2d.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case C — 3 × 3 block array, 2D"></a><br><span class="caption">2D: the centre block twice as tall, 2D = 0.40 m.</span> |
 {: .figures }
 
 <p class="caption">The three configurations of the centre block, on one scale; 120 measurement points each, at three wind directions.</p>
@@ -33,27 +33,20 @@ description: "3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestr
 | Measurement height (m) | 0.02 |
 | Measured | 1,080 rows over 120 points: Vs |
 
-## Agreement with the tunnel
+## Validation
 
-| Engine | Status | R | FAC2 |
-|---|---|---|---|
-| OpenFOAM 12 | <span class="label label-green status">scored</span> | +0.74 … +0.91 | 0.55 … 0.98 |
-| OpenLB | <span class="label label-grey status">not comparable</span> | — | — |
-| FluidX3D | <span class="label label-grey status">not comparable</span> | — | — |
-| ML surrogate | <span class="label label-green status">scored</span> | +0.07 … +0.21 | 0.44 … 0.88 |
+| Engine | Status | Compared with | R (range) | FAC2 (range) |
+|---|---|---|---|---|
+| OpenFOAM 12 | <span class="label label-green status">scored</span> | Wind tunnel | +0.74 … +0.91 | 0.55 … 0.98 |
+| OpenLB | <span class="label label-grey status">not comparable</span> | — | — | — |
+| FluidX3D | <span class="label label-grey status">not comparable</span> | — | — | — |
+| ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | +0.07 … +0.21 | 0.44 … 0.88 |
 {: .scores }
 
 {: .warning-title }
 > Before you compare
 >
-> - The cleaned table is in SI units and one frame, with this case's corrections applied once.
+> - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
 > - Origin: array centre on the ground plane (centre of the middle block). Length unit: m (model scale).
-> - Wind direction: In the CSV\'s own frame WD rotates the wind from +x TOWARD -y. Figure 3 of the data paper draws the fan rotating toward +y. The two disagree by a y-sign flip; this release keeps the CSV frame. The disagreement is invisible at WD = 0.
+> - Wind direction: in the CSV\'s own frame WD rotates the wind from +x TOWARD -y. Figure 3 of the data paper draws the fan rotating toward +y. The two disagree by a y-sign flip; this release keeps the CSV frame. The disagreement is invisible at WD = 0.
 > - 6 known issues in the published files are listed under [Known data issues]({{ '/cases/case-c/data/' | relative_url }}#known-data-issues).
-
-<details markdown="block">
-<summary>Interpretation: Using the cleaned table</summary>
-
-Do not apply the corrections again to the published files.
-
-</details>

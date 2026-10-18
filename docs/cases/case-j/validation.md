@@ -5,7 +5,7 @@ grand_parent: "Cases"
 nav_order: 2
 has_children: false
 generated: true
-description: "Case J — 1:1:2 building, non-isothermal: Eddy3D's scores against the tunnel data, by engine."
+description: "Case J — 1:1:2 building, non-isothermal: Eddy3D's scores against the measurements, by engine."
 ---
 
 # Case J: validation
@@ -36,16 +36,9 @@ Engine status: OpenFOAM 12 <span class="label label-yellow status">pending</span
 
 Notes:
 
-- The tracer is solved steady beside the flow, as three species of one flow. The outlet carried 0.89, 0.75 and 0.62 of the emission for Sct 0.3, 0.5 and 0.7; the fixture\'s bar on this is a factor of two.
+- The tracer is solved steady beside the flow, as three species of one flow. The outlet carried 0.89, 0.75 and 0.62 of the emission for Sct 0.3, 0.5 and 0.7, within the factor of two accepted as a check on the wiring.
 - The air region ended at its 1500-iteration cap with the residualControl unmet (no \'solution converged\' line); at the last iteration the initial residuals were 1.3e-2 (U\_y), 1.5e-2 (p\_rgh) and 1.1e-3 to 1.7e-3 (the tracers).
 - The steady closure gives a longer recirculation than the tunnel: reattachment at z/H = 0.25 and 0.025 is 1.35 H and 1.35 H, against the measured 0.68 H and 0.80 H.
-
-<details markdown="block">
-<summary>Interpretation: Tracer balance</summary>
-
-The fixture\'s bar is a detector of wiring errors and not a convergence claim.
-
-</details>
 
 ## urbanMicroclimateFoam, buoyantKEpsilon (Eddy3D Outdoor+)
 
@@ -70,16 +63,9 @@ The fixture\'s bar is a detector of wiring errors and not a convergence claim.
 
 Notes:
 
-- The tracer is solved steady beside the flow, as three species of one flow. The outlet carried 0.95, 0.84 and 0.73 of the emission for Sct 0.3, 0.5 and 0.7; the fixture\'s bar on this is a factor of two.
+- The tracer is solved steady beside the flow, as three species of one flow. The outlet carried 0.95, 0.84 and 0.73 of the emission for Sct 0.3, 0.5 and 0.7, within the factor of two accepted as a check on the wiring.
 - The air region ended at its 1500-iteration cap with the residualControl unmet (no \'solution converged\' line); at the last iteration the initial residuals were 1.3e-2 (U\_y), 1.1e-2 (p\_rgh) and 1.2e-3 to 1.6e-3 (the tracers).
 - The steady closure gives a longer recirculation than the tunnel: reattachment at z/H = 0.25 and 0.025 is 1.35 H and 1.56 H, against the measured 0.68 H and 0.80 H.
-
-<details markdown="block">
-<summary>Interpretation: Tracer balance</summary>
-
-The fixture\'s bar is a detector of wiring errors and not a convergence claim.
-
-</details>
 
 ## All runs
 
@@ -92,19 +78,12 @@ Notes:
 - UMF\'s first cell is 0.75 m, 12 mm at tunnel scale: the tunnel\'s 24 K drop in air temperature between the floor and the first measurement at 3 mm lies inside it. The source is a mass rate into one pair of cells, with no release momentum and no heat from the 30.4 degC gas. The 27 points within a quarter of a building height of the source are scored with and without.
 - The building is not adiabatic here: its walls are held at the measured mean surface temperature, 297.62 K, and the measured 4 K vertical gradient up the walls is not modelled. There is no sun, and the radiation exchange is at the least the view-factor model accepts (air-side emissivity 0.01).
 - The measured +y half of the z/H = 0.25 plane runs 11 % slower than the -y half (97 mirror pairs, R 0.955, recomputed from the cleaned table): the y-symmetric ceiling control scores the measurement against the mean of each mirror pair.
-- The fixture\'s structure checks passed. The wake recirculates behind the leeward face and reattaches within 3 H; the approach layer is unstable and the first cell above the heated floor is warmer than the air that entered it; every species is emitted, with clean air 25 m ahead of the building and its maximum at the source, and leaves through the outlet at 0.5 to 2 times the emission.
+- The wake recirculates behind the leeward face and reattaches within 3 H; the approach layer is unstable and the first cell above the heated floor is warmer than the air that entered it; every species is emitted, with clean air 25 m ahead of the building and its maximum at the source, and leaves through the outlet at 0.5 to 2 times the emission.
 
 <details markdown="block">
-<summary>Interpretation: Froude scale</summary>
+<summary>Interpretation: Case J wall functions</summary>
 
-At the model\'s Re, UMF\'s wall functions belong and the tunnel\'s laminar-sublayer heat transfer does not exist.
-
-</details>
-
-<details markdown="block">
-<summary>Interpretation: First cell</summary>
-
-Near-floor temperature is a wall-function result, and the data\'s tracer peak 4 mm above the 5 mm hole is a source-cell-limited number.
+At the model\'s Re, UMF\'s wall functions belong and the tunnel\'s laminar-sublayer heat transfer does not exist. Near-floor temperature is a wall-function result, and the data\'s tracer peak 4 mm above the 5 mm hole is a source-cell-limited number.
 
 </details>
 

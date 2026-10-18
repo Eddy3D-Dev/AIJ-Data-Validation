@@ -100,30 +100,9 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-- The published coordinates are MILLIMETRES (x\[mm\]) while velocities are m/s. The API serves metres (coordinate\_scale\_applied = 0.001).
-- The published lateral velocity V is positive toward -y. The API multiplies V by -1 (lateral\_sign\_applied = -1) so that V is positive toward +y as in Case A.
-- On the centre plane model V = 0 while the tunnel measures small non-zero values there.
-
-<details markdown="block">
-<summary>Data notes: Coordinate scale</summary>
-
-Read as metres, every probe lands 1000x too far out.
-
-</details>
-
-<details markdown="block">
-<summary>Data notes: Lateral sign</summary>
-
-V = +3.630 m/s at (-0.025, -0.110, 0.013), just outside the y \< 0 flank where the flow must deflect toward -y. Scored without this, Case B\'s V comes out at R = -0.910 against R = +0.959 for U on the same points.
-
-</details>
-
-<details markdown="block">
-<summary>Interpretation: Model symmetry</summary>
-
-The RANS solution is symmetric.
-
-</details>
+- The published coordinates are MILLIMETRES (x\[mm\]) while velocities are m/s. The API serves metres (coordinate\_scale\_applied = 0.001). Read as metres, every probe lands 1000x too far out.
+- The published lateral velocity V is positive toward -y (V = +3.630 m/s at (-0.025, -0.110, 0.013), just outside the y \< 0 flank where the flow must deflect toward -y). The API multiplies V by -1 (lateral\_sign\_applied = -1) so that V is positive toward +y as in Case A. Scored without this, Case B\'s V comes out at R = -0.910 against R = +0.959 for U on the same points.
+- The RANS solution is symmetric, so model V = 0 on the centre plane while the tunnel measures small non-zero values there.
 
 ## API
 
@@ -139,8 +118,8 @@ The RANS solution is symmetric.
 
 ## Attribution
 
-- Data collectors: Yoshihide Tominaga (Niigata Institute of Technology)
-- Editors and distributors: Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
+- Data collected by Yoshihide Tominaga (Niigata Institute of Technology), 2003.
+- Edited and distributed by Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15401455](https://doi.org/10.5281/zenodo.15401455)
 - Citation requested: Miyazaki, T., Tominaga, Y. (2003). Wind tunnel experiment on flow field around a building model with a scale ratio of 4:4:1 placed within the surface boundary layer. Proc. Annual Meeting of Hokuriku Chapter, AIJ, 201-204 (in Japanese). <https://www.aij.or.jp/paper/detail.html?productId=313933>
 - Licence: CC BY 4.0

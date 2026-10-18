@@ -47,19 +47,12 @@ description: "Case F — Shinjuku district: configuration, frame and units, refe
 | x | +x EAST (full-scale metres) |
 | y | +y NORTH (compass rose in MP\_caseF.png) |
 | z | +z up from the TUNNEL FLOOR; the readme\'s rule is ground = z - 10 m (the STL\'s terrain under the points is at z = 5 m) |
-| Wind direction convention | compass FROM-direction (N = 0, E = 90): N blows toward -y; flow\_dir = (-sin WD, -cos WD). Not stated by the sources. At NNW corroborated by a solved field (status \'corroborated by a solved field\'; the other directions stay \'unverified\'). |
+| Wind direction convention | compass FROM-direction (N = 0, E = 90), so N blows toward -y; flow\_dir = (-sin WD, -cos WD). Not stated by the sources; supported by the reference-building choice and by upwind roughness, and at NNW by a solved field (status \'corroborated by a solved field\'; the other directions stay \'unverified\'). |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 800.0 |
 | Unit of length | m (FULL scale) |
 | Unit of velocity ratio | dimensionless |
 | Unit of velocity ratio sd | dimensionless |
-
-<details markdown="block">
-<summary>Data notes: Wind direction convention</summary>
-
-Supported by the reference-building choice and by upwind roughness.
-
-</details>
 
 ## Reference data
 
@@ -161,22 +154,8 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 - The tunnel did not run E, ESE, WSW or W; the field data cover all 16. The 5 m and 20 m planes exist at some points only (29 and 79 rows).
 - One tunnel value (point 8, SW, 9 m: 0.474) has no counterpart in the workbook\'s results sheet, and the flat \'Sheet1\' table has 0.63 there.
 - Field anemometer heights above the tunnel floor are 13 - 21 m (3 - 11 m above ground by the readme\'s rule); the data paper says 3 - 9 m, so points 13 and 14 (11 m) disagree.
-- The thermistor reads a SCALAR speed and the cup anemometer a 10-minute mean.
-- The files do not say whether a wind direction names where the wind comes from. The cleaned tables read it as the direction the wind comes from (N = 0, E = 90). Eddy3D\'s OpenFOAM 12 run for the wind from NNW correlates R 0.935 with the tunnel\'s 9 m column labelled NNW and R 0.077 with its column labelled SSE, the opposite wind (clean/QUESTIONS.md QF9); the other directions are not solved and stay unverified.
-
-<details markdown="block">
-<summary>Interpretation: Scalar speed</summary>
-
-A RANS |U| is biased low against the thermistor and the cup anemometer.
-
-</details>
-
-<details markdown="block">
-<summary>Interpretation: Wind direction labels</summary>
-
-A solved field corroborates this reading at NNW.
-
-</details>
+- The thermistor reads a SCALAR speed and the cup anemometer a 10-minute mean: a RANS |U| is biased low against both.
+- The files do not say whether a wind direction names where the wind comes from. The cleaned tables read it as the direction the wind comes from (N = 0, E = 90). At NNW a solved field supports that reading: Eddy3D\'s OpenFOAM 12 run for the wind from NNW correlates R 0.935 with the tunnel\'s 9 m column labelled NNW and R 0.077 with its column labelled SSE, the opposite wind (clean/QUESTIONS.md QF9); the other directions are not solved and stay unverified.
 
 ## API
 
@@ -192,8 +171,8 @@ A solved field corroborates this reading at NNW.
 
 ## Attribution
 
-- Data collectors: K. Fujii, Y. Asami, Y. Iwasa et al. (the original 1978 investigation; the readme names no data collectors)
-- Editors and distributors: Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
+- Data collected by K. Fujii, Y. Asami, Y. Iwasa et al. (the original 1978 investigation; the readme names no data collectors).
+- Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15589621](https://doi.org/10.5281/zenodo.15589621)
 - Citation requested: Fujii, K., Asami, Y., Iwasa, Y. et al. (1978). Wind in Shinjuku Sub-Central Area — Comparison Between Field Measurement and Wind Tunnel Experiment. Proc. 5th Symposium on Wind Resistance of Structures, 91-98 (in Japanese).
 - Licence: CC BY 4.0

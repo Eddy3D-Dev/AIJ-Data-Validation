@@ -5,13 +5,15 @@ grand_parent: "Cases"
 nav_order: 2
 has_children: false
 generated: true
-description: "Case G — flow behind a tree belt: Eddy3D's scores against the tunnel data, by engine."
+description: "Case G — flow behind a tree belt: Eddy3D's scores against the measurements, by engine."
 ---
 
 # Case G: validation
 {: .no_toc }
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
+
+LAD and Cd are not in the dataset (only the shading rate, 81 %): the drag values are a calibration against the 28 points.
 
 ## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration open-field
 
@@ -81,54 +83,24 @@ Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> 
 ## All runs
 
 - Quantity: U/U\_H and k/U\_H^2 at the 28 points, U\_H the wind at the tree height (7 m): the measured mean scalar speed against the modelled |U| and sqrt(|U|^2 + 2k), both over the model\'s own U(7 m) at x = -35 m, and over the imposed U\_H = 5.299 m/s; LAD and Cd are not in the dataset
-- Normalisation: the field\'s U/U\_H and k/U\_H^2 (U\_H = the wind at the tree height, 7 m, during each period) against the model\'s |U| and k over the model\'s own U(7 m) at x = -35 m (\'own approach\') and, in the second set of scores, over the imposed U\_H = 5.299 m/s (\'imposed\'); the model is also scored as sqrt(|U|^2 + 2k); hit rate D = 0.25, W = 0.05.
+- Normalisation: the field\'s U/U\_H and k/U\_H^2 (U\_H = the wind at the tree height, 7 m, during each period) against the model\'s |U| and k over the model\'s own U(7 m) at x = -35 m (\'own approach\') and, in the second set of scores, over the imposed U\_H = 5.299 m/s (\'imposed\'); the model is also scored as sqrt(|U|^2 + 2k), because the field is the mean of an instantaneous speed; hit rate D = 0.25, W = 0.05
 - Per-point values: [`/api/cases/G/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/G/pairs/openfoam12-realizableKE.csv' | relative_url }})
 
 Notes:
 
-- LAD and Cd are not in the dataset (only the shading rate, 81 %). The three crowns are entries of the Eddy3D vegetation library (Cd·LAD 0.30, 0.625 and 0.875 1/m, loss coefficients 1.2, 2.5 and 3.5), nothing is fitted.
+- The three crowns are entries of the Eddy3D vegetation library (Cd·LAD 0.30, 0.625 and 0.875 1/m, loss coefficients 1.2, 2.5 and 3.5); nothing is fitted. The arms are published side by side.
 - Eddy3D models trees as a Darcy-Forchheimer momentum sink only: there are no canopy k or epsilon source terms.
 - The slab arms idealise the belt as two-dimensional (the belt through both slip planes, infinite width; the data paper\'s Figure 7 draws a two-dimensional tree); the half-belt arm is the real 74 m belt on a half domain with its centre plane on the symmetry plane. Both are scored against the same 28 values.
 - The tabulated inlet carries the workbook\'s inflow over a smooth floor (the site\'s roughness is not in the model), so the approach flow does not stay the imposed profile: in the open-field arm it is 1.19 of it at 1.5 m and 0.995 at 7 m at x = -10 m, and the model\'s U(7 m) at x = -35 m is 0.976 to 0.984 of the imposed U\_H. The headline scores divide the model by that own U(7 m).
-- The field is the mean of the instantaneous speed of a 3-D sonic anemometer: the model is scored as |U| and as sqrt(|U|^2 + 2k), the bracket of Cases C to E.
-- The approach profile and the wake were measured on different days (28 and 26 December 2000), and the approach k does not match the workbook\'s own inflow note (k/U\_b^2 = 0.20 at 9 m against the note\'s constant 3.02 m^2/s^2, 0.096 U\_b^2).
+- The field is the mean of the instantaneous speed of a 3-D sonic anemometer, which exceeds |U| in a turbulent wake: the model is scored as |U| and as sqrt(|U|^2 + 2k), the bracket of Cases C to E.
+- The approach profile and the wake were measured on different days (28 and 26 December 2000), and the approach k does not match the workbook\'s own inflow note (k/U\_b^2 = 0.20 at 9 m against the note\'s constant 3.02 m^2/s^2, 0.096 U\_b^2). The files do not explain the mismatch.
 - Every arm ran to the 3000-iteration limit with the residualControl unmet; the epsilon initial residual at the last iteration was 2.7e-2 to 3.6e-2 in the slab arms and 3.2e-2 in the half belt.
-- The fixture\'s structure checks passed for every arm with trees: a velocity deficit directly behind the belt against the open field, recovery with distance, a speed-up through the 1.2 m gap, and more drag slowing the lee more and pushing more wind through the gap.
+- Every arm with trees shows a velocity deficit directly behind the belt against the open field, recovery with distance, a speed-up through the 1.2 m gap, and more drag slowing the lee more and pushing more wind through the gap.
 
 <details markdown="block">
-<summary>Interpretation: Scalar speed</summary>
+<summary>Interpretation: Case G drag sweep</summary>
 
-The field is the mean of an instantaneous speed.
-
-The mean instantaneous speed exceeds |U| in a turbulent wake.
-
-</details>
-
-<details markdown="block">
-<summary>Interpretation: Calibration</summary>
-
-This is a calibration, not a validation. The arm nearest the 28 values only says which library crown the belt resembles. The arms are published side by side, none chosen.
-
-</details>
-
-<details markdown="block">
-<summary>Interpretation: Modelled k behind the belt</summary>
-
-The modelled k behind the belt is whatever the inflow and the shear layer over the belt produce. It is recorded against the measurement and never asserted.
-
-</details>
-
-<details markdown="block">
-<summary>Interpretation: Approach k</summary>
-
-The cause of the mismatch is not explained, and k is only recorded (the fixture).
-
-</details>
-
-<details markdown="block">
-<summary>Interpretation: Structure checks</summary>
-
-The checks set no band on the scores.
+The arm nearest the 28 values says which library crown the belt resembles. The modelled k behind the belt follows from the inflow and the shear layer over the belt.
 
 </details>
 

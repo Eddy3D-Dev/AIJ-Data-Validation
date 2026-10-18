@@ -5,7 +5,6 @@
   "master_bytes": 817714,
   "master_height": 4800,
   "master_width": 9600,
-  "mb": "0.8",
   "web": "/assets/web/case-a.png",
   "web_bytes": 67550,
   "width": 1600
@@ -16,7 +15,6 @@
   "master_bytes": 833502,
   "master_height": 4800,
   "master_width": 9600,
-  "mb": "0.8",
   "web": "/assets/web/case-b.png",
   "web_bytes": 74888,
   "width": 1600
@@ -27,7 +25,6 @@
   "master_bytes": 876558,
   "master_height": 4800,
   "master_width": 9600,
-  "mb": "0.9",
   "web": "/assets/web/case-c-0d.png",
   "web_bytes": 114767,
   "width": 1600
@@ -38,7 +35,6 @@
   "master_bytes": 888155,
   "master_height": 4800,
   "master_width": 9600,
-  "mb": "0.9",
   "web": "/assets/web/case-c-1d.png",
   "web_bytes": 120011,
   "width": 1600
@@ -49,7 +45,6 @@
   "master_bytes": 858779,
   "master_height": 4800,
   "master_width": 9600,
-  "mb": "0.9",
   "web": "/assets/web/case-c-2d.png",
   "web_bytes": 115636,
   "width": 1600
@@ -60,7 +55,6 @@
   "master_bytes": 5585008,
   "master_height": 9768,
   "master_width": 9792,
-  "mb": "5.6",
   "web": "/assets/web/case-c-openfoam-agreement.png",
   "web_bytes": 851647,
   "width": 1600
@@ -71,7 +65,6 @@
   "master_bytes": 4011280,
   "master_height": 10272,
   "master_width": 9324,
-  "mb": "4.0",
   "web": "/assets/web/case-c-openfoam-bias-map.png",
   "web_bytes": 858798,
   "width": 1600
@@ -82,7 +75,6 @@
   "master_bytes": 2551097,
   "master_height": 4644,
   "master_width": 13944,
-  "mb": "2.6",
   "web": "/assets/web/case-d-openfoam-agreement.png",
   "web_bytes": 278234,
   "width": 1600
@@ -93,7 +85,6 @@
   "master_bytes": 2246437,
   "master_height": 4800,
   "master_width": 9600,
-  "mb": "2.2",
   "web": "/assets/web/case-d.png",
   "web_bytes": 263638,
   "width": 1600
@@ -104,7 +95,6 @@
   "master_bytes": 2226709,
   "master_height": 4800,
   "master_width": 9600,
-  "mb": "2.2",
   "web": "/assets/web/case-e-after.png",
   "web_bytes": 286233,
   "width": 1600
@@ -115,7 +105,6 @@
   "master_bytes": 2263683,
   "master_height": 4800,
   "master_width": 9600,
-  "mb": "2.3",
   "web": "/assets/web/case-e-before.png",
   "web_bytes": 285038,
   "width": 1600
@@ -126,7 +115,6 @@
   "master_bytes": 2372243,
   "master_height": 4644,
   "master_width": 10980,
-  "mb": "2.4",
   "web": "/assets/web/case-e-openfoam-agreement.png",
   "web_bytes": 352836,
   "width": 1600
@@ -137,7 +125,6 @@
   "master_bytes": 3621888,
   "master_height": 5808,
   "master_width": 9948,
-  "mb": "3.6",
   "web": "/assets/web/case-e-openfoam-bias-map.png",
   "web_bytes": 507171,
   "width": 1600
@@ -148,7 +135,6 @@
   "master_bytes": 3157043,
   "master_height": 7704,
   "master_width": 12972,
-  "mb": "3.2",
   "web": "/assets/web/case-f-openfoam-agreement.png",
   "web_bytes": 398009,
   "width": 1600
@@ -159,7 +145,6 @@
   "master_bytes": 5955062,
   "master_height": 6516,
   "master_width": 10140,
-  "mb": "6.0",
   "web": "/assets/web/case-f-openfoam-bias-map.png",
   "web_bytes": 573549,
   "width": 1600
@@ -170,7 +155,6 @@
   "master_bytes": 1869496,
   "master_height": 4800,
   "master_width": 9600,
-  "mb": "1.9",
   "web": "/assets/web/case-f.png",
   "web_bytes": 216476,
   "width": 1600
@@ -181,7 +165,6 @@
   "master_bytes": 1158273,
   "master_height": 4608,
   "master_width": 11064,
-  "mb": "1.2",
   "web": "/assets/web/case-g-openfoam-stations.png",
   "web_bytes": 215045,
   "width": 1600
@@ -192,7 +175,6 @@
   "master_bytes": 3269661,
   "master_height": 6048,
   "master_width": 13152,
-  "mb": "3.3",
   "web": "/assets/web/case-g-openfoam-sweep.png",
   "web_bytes": 379587,
   "width": 1600
@@ -203,7 +185,6 @@
   "master_bytes": 748374,
   "master_height": 4800,
   "master_width": 9600,
-  "mb": "0.7",
   "web": "/assets/web/case-g.png",
   "web_bytes": 85245,
   "width": 1600
@@ -214,7 +195,6 @@
   "master_bytes": 899084,
   "master_height": 4800,
   "master_width": 9600,
-  "mb": "0.9",
   "web": "/assets/web/case-h.png",
   "web_bytes": 84096,
   "width": 1600
@@ -225,7 +205,6 @@
   "master_bytes": 5036902,
   "master_height": 9864,
   "master_width": 10128,
-  "mb": "5.0",
   "web": "/assets/web/case-i-openfoam-closures.png",
   "web_bytes": 673322,
   "width": 1600
@@ -236,7 +215,6 @@
   "master_bytes": 972007,
   "master_height": 4800,
   "master_width": 9600,
-  "mb": "1.0",
   "web": "/assets/web/case-i.png",
   "web_bytes": 82635,
   "width": 1600
@@ -247,7 +225,6 @@
   "master_bytes": 5681672,
   "master_height": 6864,
   "master_width": 12252,
-  "mb": "5.7",
   "web": "/assets/web/case-j-umf-agreement.png",
   "web_bytes": 525058,
   "width": 1600
@@ -258,7 +235,6 @@
   "master_bytes": 4301130,
   "master_height": 6804,
   "master_width": 10416,
-  "mb": "4.3",
   "web": "/assets/web/case-j-umf-tracer.png",
   "web_bytes": 527954,
   "width": 1600
@@ -269,7 +245,6 @@
   "master_bytes": 1387751,
   "master_height": 4800,
   "master_width": 9600,
-  "mb": "1.4",
   "web": "/assets/web/case-j.png",
   "web_bytes": 93686,
   "width": 1600
@@ -280,7 +255,6 @@
   "master_bytes": 3591074,
   "master_height": 7272,
   "master_width": 11760,
-  "mb": "3.6",
   "web": "/assets/web/case-k-openfoam-agreement.png",
   "web_bytes": 393637,
   "width": 1600
@@ -291,7 +265,6 @@
   "master_bytes": 2002100,
   "master_height": 4800,
   "master_width": 9600,
-  "mb": "2.0",
   "web": "/assets/web/case-k.png",
   "web_bytes": 230302,
   "width": 1600
@@ -302,7 +275,6 @@
   "master_bytes": 5327623,
   "master_height": 6792,
   "master_width": 12072,
-  "mb": "5.3",
   "web": "/assets/web/case-l-umf-agreement.png",
   "web_bytes": 525987,
   "width": 1600
@@ -313,7 +285,6 @@
   "master_bytes": 2263625,
   "master_height": 4800,
   "master_width": 9600,
-  "mb": "2.3",
   "web": "/assets/web/case-l.png",
   "web_bytes": 302555,
   "width": 1600
@@ -324,7 +295,6 @@
   "master_bytes": 2870868,
   "master_height": 6792,
   "master_width": 12888,
-  "mb": "2.9",
   "web": "/assets/web/case-m-openfoam-agreement.png",
   "web_bytes": 345738,
   "width": 1600
@@ -335,7 +305,6 @@
   "master_bytes": 4082766,
   "master_height": 4800,
   "master_width": 12612,
-  "mb": "4.1",
   "web": "/assets/web/case-m-openfoam-plan.png",
   "web_bytes": 344311,
   "width": 1600
@@ -346,7 +315,6 @@
   "master_bytes": 1801215,
   "master_height": 4800,
   "master_width": 9600,
-  "mb": "1.8",
   "web": "/assets/web/case-m.png",
   "web_bytes": 190667,
   "width": 1600
@@ -357,7 +325,6 @@
   "master_bytes": 5097167,
   "master_height": 9468,
   "master_width": 12732,
-  "mb": "5.1",
   "web": "/assets/web/cases-ab-engine-comparison.png",
   "web_bytes": 626049,
   "width": 1600
@@ -368,7 +335,6 @@
   "master_bytes": 3372398,
   "master_height": 6936,
   "master_width": 12924,
-  "mb": "3.4",
   "web": "/assets/web/cases-ab-openfoam-agreement.png",
   "web_bytes": 442623,
   "width": 1600
@@ -379,7 +345,6 @@
   "master_bytes": 1043710,
   "master_height": 4908,
   "master_width": 9420,
-  "mb": "1.0",
   "web": "/assets/web/cases-ab-openfoam-profiles.png",
   "web_bytes": 253938,
   "width": 1600
@@ -390,7 +355,6 @@
   "master_bytes": 5593609,
   "master_height": 7032,
   "master_width": 13296,
-  "mb": "5.6",
   "web": "/assets/web/cases-hi-openfoam-agreement.png",
   "web_bytes": 457907,
   "width": 1600
@@ -401,7 +365,6 @@
   "master_bytes": 5447035,
   "master_height": 8232,
   "master_width": 10512,
-  "mb": "5.4",
   "web": "/assets/web/ml-surrogate-agreement.png",
   "web_bytes": 656315,
   "width": 1600

@@ -5,7 +5,7 @@ grand_parent: "Cases"
 nav_order: 2
 has_children: false
 generated: true
-description: "Case K — 9 x 9 cube array, point source: Eddy3D's scores against the tunnel data, by engine."
+description: "Case K — 9 x 9 cube array, point source: Eddy3D's scores against the measurements, by engine."
 ---
 
 # Case K: validation
@@ -39,47 +39,19 @@ Quantity: U, V, W over the stated U\_H = 2.33 m/s and k over U\_H^2 (split fibre
 
 Notes:
 
-- The inflow is the measured approach profile (3.23 m/s at 0.2 m, z0 fitted to 13.5 mm), not the stated U\_H = 2.33 m/s, which is not on that profile: the solved U at z = H is 1.97 m/s, 0.85 of the stated U\_H (the fixture\'s inflow.U.modelAtH). Measured and modelled velocities are both divided by 2.33 m/s.
-- The inlet k from that log law, u\*^2/sqrt(Cmu) = 0.77 m^2/s^2, is about 1.7 times the tunnel\'s 0.33 to 0.45 (the fixture\'s own remark).
-- The first measurement point is the source location: the four points within one cube height of the floor outlet hold the four largest c\* (8.73, 5.31, 3.02 and 2.86 against 1.03 for the next), and the model\'s source is the 4 cells (0.75 m across) that a 0.44 m square cuts, not the 5 mm outlet. Those four points are scored with and without.
-- 47 of the 203 points (the z = 4 mm plane, 0.4 m at 1:100) lie inside the first ground cell (0.735 m): their modelled values are that cell\'s.
-- The measured plume is not y-symmetric (C at -y exceeds C at +y at 74 of 74 mirror pairs; the fixture puts its lateral centroid 0.011 to 0.017 m toward -y at every station) and the solve is. The \'y-symmetric ceiling\' controls score the measurement against the mean of each mirror pair.
+- The inflow is the measured approach profile (3.23 m/s at 0.2 m, z0 fitted to 13.5 mm). The stated U\_H = 2.33 m/s is not on that profile: the solved U at z = H is 1.97 m/s, 0.85 of the stated U\_H. Measured and modelled velocities are both divided by 2.33 m/s.
+- The inlet k from that log law, u\*^2/sqrt(Cmu) = 0.77 m^2/s^2, is about 1.7 times the tunnel\'s 0.33 to 0.45.
+- The first measurement point is the source location: the four points within one cube height of the floor outlet hold the four largest c\* (8.73, 5.31, 3.02 and 2.86 against 1.03 for the next). The model\'s source is the 4 cells (0.75 m across) that a 0.44 m square cuts; the outlet is 5 mm. Those four points are scored with and without.
+- 47 of the 203 points (the z = 4 mm plane, 0.4 m at 1:100) lie inside the first ground cell (0.735 m): their modelled values are that cell\'s, pulled toward the wall\'s zero by the point interpolation.
+- The measured plume is not y-symmetric (C at -y exceeds C at +y at 74 of 74 mirror pairs; its lateral centroid lies 0.011 to 0.017 m toward -y at every station) and the solve is. The \'y-symmetric ceiling\' controls score the measurement against the mean of each mirror pair.
 - V has a constant offset and almost no antisymmetric part; a model with V = 0 everywhere hits 0.91 of the points at W = 0.05 U\_H.
 - The solve stopped at the 3000-iteration limit with the residualControl unmet (no \'solution converged\' line); the epsilon initial residual at the last iteration was 7e-3.
-- The fixture\'s structure checks passed. The air over the roofs outruns the street along the wind, which outruns the cavity across it; the plume leaves the source, is clean 1 to 1.5 H ahead of the array, decays through four cavities and is cleaner over the roofs than in them; the solved velocity is y-symmetric to twice the tunnel\'s own mirror-pair difference.
+- The air over the roofs outruns the street along the wind, which outruns the cavity across it; the plume leaves the source, is clean 1 to 1.5 H ahead of the array, decays through four cavities and is cleaner over the roofs than in them; the solved velocity is y-symmetric to twice the tunnel\'s own mirror-pair difference.
 
 <details markdown="block">
-<summary>Interpretation: Inflow velocity</summary>
+<summary>Interpretation: Case K scores</summary>
 
-The modelled velocity sits under the measured mean.
-
-</details>
-
-<details markdown="block">
-<summary>Interpretation: First-cell probes</summary>
-
-The modelled values are pulled toward the wall\'s zero by the point interpolation.
-
-</details>
-
-<details markdown="block">
-<summary>Interpretation: Symmetry ceiling</summary>
-
-The best a y-symmetric model can do on this file.
-
-</details>
-
-<details markdown="block">
-<summary>Interpretation: V hit rate</summary>
-
-V does not score the flow\'s divergence. V\'s hit rate says nothing.
-
-</details>
-
-<details markdown="block">
-<summary>Interpretation: Structure checks</summary>
-
-The checks set no band on the statistics.
+The modelled velocity sits under the measured mean. The y-symmetric ceiling is the best a y-symmetric model can do on this file. V does not score the flow\'s divergence. V\'s hit rate says nothing.
 
 </details>
 
