@@ -244,7 +244,9 @@ the windward street's pedestrian speed over 0D (mean Vs 2.398 vs 1.172 m/s) whil
 3000 iterations per direction, the 120 probes at exactly the tunnel's coordinates. Scored against Vs/U_H as
 √(|U|² + 2k) (headline) and as |U|; hit rate D = 0.25, W = 0.05 U_H.
 
-<!--fig name="case-c-openfoam-agreement.png" alt="Case C, measured vs modelled, nine configurations" width="800"--><a href="validation/figures/case-c-openfoam-agreement.png"><img src="docs/assets/web/case-c-openfoam-agreement.png" width="800" height="798" loading="lazy" alt="Case C, measured vs modelled, nine configurations"></a><br><sub><a href="validation/figures/case-c-openfoam-agreement.png">1200 dpi original, 5.6 MB</a></sub><!--/fig-->
+<!--fig name="case-c-layout.png" alt="Case C, measurement points" width="800"--><a href="validation/figures/case-c-layout.png"><img src="docs/assets/web/case-c-layout.png" width="800" height="1157" loading="lazy" alt="Case C, measurement points"></a><br><sub><a href="validation/figures/case-c-layout.png">1200 dpi original, 1.6 MB</a></sub><!--/fig-->
+
+<!--fig name="case-c-openfoam-agreement.png" alt="Case C, measured vs modelled, nine configurations" width="800"--><a href="validation/figures/case-c-openfoam-agreement.png"><img src="docs/assets/web/case-c-openfoam-agreement.png" width="800" height="816" loading="lazy" alt="Case C, measured vs modelled, nine configurations"></a><br><sub><a href="validation/figures/case-c-openfoam-agreement.png">1200 dpi original, 5.9 MB</a></sub><!--/fig-->
 
 | centre block | WD | R | FAC2 | FB | hit rate | \|U\| alone: FB / R |
 |---|---|---|---|---|---|---|
@@ -343,7 +345,9 @@ agree.
 8 cores beside a production campaign. 3.6 million cells at 1:400 on a cylinder domain,
 3000 iterations; the last iteration's initial residuals are below 4 × 10⁻³.
 
-<!--fig name="case-d-openfoam-agreement.png" alt="Case D, measured vs modelled" width="800"--><a href="validation/figures/case-d-openfoam-agreement.png"><img src="docs/assets/web/case-d-openfoam-agreement.png" width="800" height="266" loading="lazy" alt="Case D, measured vs modelled"></a><br><sub><a href="validation/figures/case-d-openfoam-agreement.png">1200 dpi original, 2.6 MB</a></sub><!--/fig-->
+<!--fig name="case-d-layout.png" alt="Case D, measurement points" width="800"--><a href="validation/figures/case-d-layout.png"><img src="docs/assets/web/case-d-layout.png" width="800" height="1208" loading="lazy" alt="Case D, measurement points"></a><br><sub><a href="validation/figures/case-d-layout.png">1200 dpi original, 1.7 MB</a></sub><!--/fig-->
+
+<!--fig name="case-d-openfoam-agreement.png" alt="Case D, measured vs modelled" width="800"--><a href="validation/figures/case-d-openfoam-agreement.png"><img src="docs/assets/web/case-d-openfoam-agreement.png" width="800" height="279" loading="lazy" alt="Case D, measured vs modelled"></a><br><sub><a href="validation/figures/case-d-openfoam-agreement.png">1200 dpi original, 2.8 MB</a></sub><!--/fig-->
 
 | | n | FAC2 | FB | q | R |
 |---|---|---|---|---|---|
@@ -445,7 +449,9 @@ buildings), the workbook's measured profile imposed through a tabulated inlet th
 case (`wind.inlet: "manual"`), 2000 iterations. The model's speed is divided by its own solved U(15.9 m), which
 arrives at 0.998 of the imposed value in both states.
 
-<!--fig name="case-e-openfoam-agreement.png" alt="Case E, measured vs modelled, before, after and the change" width="800"--><a href="validation/figures/case-e-openfoam-agreement.png"><img src="docs/assets/web/case-e-openfoam-agreement.png" width="800" height="338" loading="lazy" alt="Case E, measured vs modelled, before, after and the change"></a><br><sub><a href="validation/figures/case-e-openfoam-agreement.png">1200 dpi original, 2.4 MB</a></sub><!--/fig-->
+<!--fig name="case-e-layout.png" alt="Case E, measurement points" width="800"--><a href="validation/figures/case-e-layout.png"><img src="docs/assets/web/case-e-layout.png" width="800" height="860" loading="lazy" alt="Case E, measurement points"></a><br><sub><a href="validation/figures/case-e-layout.png">1200 dpi original, 2.7 MB</a></sub><!--/fig-->
+
+<!--fig name="case-e-openfoam-agreement.png" alt="Case E, measured vs modelled, before, after and the change" width="800"--><a href="validation/figures/case-e-openfoam-agreement.png"><img src="docs/assets/web/case-e-openfoam-agreement.png" width="800" height="354" loading="lazy" alt="Case E, measured vs modelled, before, after and the change"></a><br><sub><a href="validation/figures/case-e-openfoam-agreement.png">1200 dpi original, 2.5 MB</a></sub><!--/fig-->
 
 | | FAC2 | FB | q | R |
 |---|---|---|---|---|
@@ -508,6 +514,8 @@ of the 863 pairs the tunnel resolves (|Δ| > 0.05). See *ML surrogate* under *Va
 | Tunnel's SSE column, the opposite wind (compass control) | +0.077 | 0.615 | +0.327 | +0.102 | 0.385 | +0.413 |
 
 The pattern follows the tunnel and the field in both frames and the level depends on the frame (FB +0.04 or +0.13 at the 9 m plane); the 20 m plane has the lowest R. The tunnel's own 9 m column scored as a model of the field gives R 0.933, FAC2 1.00 (the bar no model is expected to clear). The solved field correlates R 0.935 with the tunnel's NNW column and R 0.077 with its SSE column, which corroborates reading the direction labels as the direction the wind comes from, at this direction. The reading is on the site's [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-fm/) page.
+
+<!--fig name="case-f-layout.png" alt="Case F, measurement points" width="800"--><a href="validation/figures/case-f-layout.png"><img src="docs/assets/web/case-f-layout.png" width="800" height="818" loading="lazy" alt="Case F, measurement points"></a><br><sub><a href="validation/figures/case-f-layout.png">1200 dpi original, 5.5 MB</a></sub><!--/fig-->
 
 <!--fig name="case-f-openfoam-agreement.png" alt="Case F, measured vs modelled speed" width="800"--><a href="validation/figures/case-f-openfoam-agreement.png"><img src="docs/assets/web/case-f-openfoam-agreement.png" width="800" height="475" loading="lazy" alt="Case F, measured vs modelled speed"></a><br><sub><a href="validation/figures/case-f-openfoam-agreement.png">1200 dpi original, 3.2 MB</a></sub><!--/fig-->
 
@@ -758,7 +766,9 @@ U and θ follow the tunnel (the model beats the undisturbed approach column on R
 
 The tracer is under-predicted at every Schmidt number (the model's mean c\* is 0.12 to 0.18 against the tunnel's 1.00, its peak 1.27 to 1.38 against 3.04), and the points mirrored across the plume axis score R +0.65 to +0.68, better than the real points' +0.20 to +0.41: the modelled plume is displaced sideways against the tunnel's. The three points nearest the source carry c\* 2.52 in the tunnel and 0.26, 0.11 and 0.05 in the model (the ordering the fixture first asserted, now recorded: at Sct 0.7 the near points carry less than the two far ones, 0.055 against 0.087); the tunnel's own WD 175 and WD 185 reach FAC2 0.73 and 0.80 against its WD 180, the model 0.13 to 0.20. The mean streamwise velocity is low (U/U<sub>R</sub> 0.026 against 0.164) while the magnitude is close (|U| FB +0.19). The 18 field runs are recorded beside it and never asserted. The reading is on the site's [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-fm/) page.
 
-<!--fig name="case-m-openfoam-agreement.png" alt="Case M, measured vs modelled velocity and concentration" width="800"--><a href="validation/figures/case-m-openfoam-agreement.png"><img src="docs/assets/web/case-m-openfoam-agreement.png" width="800" height="422" loading="lazy" alt="Case M, measured vs modelled velocity and concentration"></a><br><sub><a href="validation/figures/case-m-openfoam-agreement.png">1200 dpi original, 2.9 MB</a></sub><!--/fig-->
+<!--fig name="case-m-layout.png" alt="Case M, measurement points" width="800"--><a href="validation/figures/case-m-layout.png"><img src="docs/assets/web/case-m-layout.png" width="800" height="982" loading="lazy" alt="Case M, measurement points"></a><br><sub><a href="validation/figures/case-m-layout.png">1200 dpi original, 2.5 MB</a></sub><!--/fig-->
+
+<!--fig name="case-m-openfoam-agreement.png" alt="Case M, measured vs modelled velocity and concentration" width="800"--><a href="validation/figures/case-m-openfoam-agreement.png"><img src="docs/assets/web/case-m-openfoam-agreement.png" width="800" height="434" loading="lazy" alt="Case M, measured vs modelled velocity and concentration"></a><br><sub><a href="validation/figures/case-m-openfoam-agreement.png">1200 dpi original, 3.0 MB</a></sub><!--/fig-->
 
 **Known issues.** 10 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/M.json`](docs/api/cases/M.json).
 

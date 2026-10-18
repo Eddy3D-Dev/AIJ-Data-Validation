@@ -270,7 +270,7 @@ RUNS = [
           f"Eddy3D fixture TestAijCase{c}ContainerE2E; figures validation/plot_cases_ab_openfoam.py",
           f"case{c}_openfoam12_realizableKE_pairs.csv", PAIRS_AB) for c in ("A", "B")],
     *[run("C", "openfoam12-realizableKE", cb, f"caseC_openfoam12_realizableKE_{cb}.json", _FOAM_C,
-          ["case-c-openfoam-agreement.png", "case-c-openfoam-bias-map.png"],
+          ["case-c-layout.png", "case-c-openfoam-agreement.png", "case-c-openfoam-bias-map.png"],
           f"Eddy3D fixture TestAijCaseC{cb}ContainerE2E; figures validation/plot_case_c_openfoam.py",
           "caseC_openfoam12_realizableKE_pairs.csv",
           "config (0D/1D/2D), wind_direction_deg, point_id; x, y, z in m (case frame); measured_over_UH, the thermistor "
@@ -302,7 +302,7 @@ RUNS = [
          "WD 22.5°, rotation sense mirrored (control)": "vs.22.5.mirrored.corrected",
          "WD 45°, thermistor Vs · √(|U|²+2k)": "vs.45.corrected", "WD 45°, thermistor Vs · |U|": "vs.45.uncorrected",
          "WD 45°, rotation sense mirrored (control)": "vs.45.mirrored.corrected"},
-        ["case-d-openfoam-agreement.png"],
+        ["case-d-layout.png", "case-d-openfoam-agreement.png"],
         "Eddy3D fixture TestAijCaseDContainerE2E (EDDY3D_AIJD_HEADINGS=0,22.5,45); figure "
         "validation/plot_case_d_openfoam.py", "caseD_openfoam12_realizableKE_pairs.csv",
         "instrument (thermistor / split_fibre), wind_direction_deg, point_id; x, y, z in m (model frame); "
@@ -312,7 +312,7 @@ RUNS = [
     run("E", "openfoam12-realizableKE", "SW", "caseE_openfoam12_realizableKE.json",
         {"before, √(|U|²+2k)": "vr.bc.SW.rms", "before, |U|": "vr.bc.SW.Umag", "after, √(|U|²+2k)": "vr.ac.SW.rms",
          "after, |U|": "vr.ac.SW.Umag", "no-construction ceiling control": "noConstruction.SW"},
-        ["case-e-openfoam-agreement.png", "case-e-openfoam-bias-map.png"],
+        ["case-e-layout.png", "case-e-openfoam-agreement.png", "case-e-openfoam-bias-map.png"],
         "Eddy3D fixture TestAijCaseEContainerE2E (EDDY3D_AIJ_E_DIRECTIONS=SW, tabulated inlet); figures "
         "validation/plot_case_e_openfoam.py", "caseE_openfoam12_realizableKE_pairs.csv",
         "config (bc before / ac after construction), wind_direction, point_id; x, y, z in full-scale m (+x east, +y north); "
@@ -609,11 +609,11 @@ def _m_notes(sp):
 
 
 RUNS += [
-    *[run("F", "openfoam12-realizableKE", frame, f"caseF_openfoam12_realizableKE_{frame}.json", _F_HEADLINE, ["case-f-openfoam-agreement.png", "case-f-openfoam-bias-map.png"],
+    *[run("F", "openfoam12-realizableKE", frame, f"caseF_openfoam12_realizableKE_{frame}.json", _F_HEADLINE, ["case-f-layout.png", "case-f-openfoam-agreement.png", "case-f-openfoam-bias-map.png"],
           _FM_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseFContainerE2E (EDDY3D_AIJ_F_DIRECTIONS=NNW, the default)", what=f"Shinjuku district, 1:800, wind from NNW, frame {frame}",
                            iterations="2000", cells="2,143,488"),
           "caseF_openfoam12_realizableKE_pairs.csv", PAIRS_F, normalisation=_F_NORM, notes=_f_notes(frame)) for frame in ("literal", "agl")],
-    *[run("M", "openfoam12-realizableKE", sp, f"caseM_openfoam12_realizableKE_{sp}.json", _M_HEADLINE, ["case-m-openfoam-agreement.png", "case-m-openfoam-plan.png"],
+    *[run("M", "openfoam12-realizableKE", sp, f"caseM_openfoam12_realizableKE_{sp}.json", _M_HEADLINE, ["case-m-layout.png", "case-m-openfoam-agreement.png", "case-m-openfoam-plan.png"],
           _FM_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseMContainerE2E (WD 180, the default)", what=f"TPU Atsugi campus, 1:600, tunnel WD 180, turbulent Schmidt number {sct}",
                            iterations="3000", cells="1,394,053"),
           "caseM_openfoam12_realizableKE_pairs.csv", PAIRS_M, normalisation=_M_NORM.format(sct=sct), notes=_m_notes(sp)) for sp, sct in (("sct03", "0.3"), ("sct05", "0.5"), ("sct07", "0.7"))],
@@ -678,6 +678,8 @@ for _fig in ("cases-ab-openfoam-agreement.png", "cases-hi-openfoam-agreement.png
              "case-g-openfoam-sweep.png", "case-j-umf-agreement.png", "case-j-umf-tracer.png", "case-l-umf-agreement.png"):
     FIGURE_CAPTIONS[_fig] += " Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
 FIGURE_CAPTIONS["case-g-openfoam-stations.png"] += " The letters A to G mark the seven lines of the layout figure."
+for _fig in ("case-c-openfoam-agreement.png", "case-d-openfoam-agreement.png", "case-e-openfoam-agreement.png", "case-f-openfoam-agreement.png", "case-m-openfoam-agreement.png"):
+    FIGURE_CAPTIONS[_fig] += " Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
 
 METRIC_MEANING = {
     "Count": "number of measured points scored",
@@ -1924,6 +1926,11 @@ FIGURE_HOME = {
     "case-i-layout.png": ("/validation/cases-hi/", "Cases H and I (OpenFOAM)"),
     "case-j-layout.png": ("/validation/cases-jl/", "Cases J and L (UMF)"),
     "case-l-layout.png": ("/validation/cases-jl/", "Cases J and L (UMF)"),
+    "case-c-layout.png": ("/validation/case-c/", "Case C (OpenFOAM)"),
+    "case-d-layout.png": ("/validation/case-d/", "Case D (OpenFOAM)"),
+    "case-e-layout.png": ("/validation/case-e/", "Case E (OpenFOAM)"),
+    "case-f-layout.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
+    "case-m-layout.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
 }
 ALL_CASES_FIGURE_MIN = 3
 # A score table stays open up to this many rows, a table of configurations up to OPEN_LIST_ROWS; a longer one sits in

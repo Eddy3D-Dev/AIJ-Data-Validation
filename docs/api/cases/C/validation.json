@@ -283,8 +283,12 @@
    },
    "figures": [
     {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-c-layout.png",
+     "caption": "Case C, measurement points: A street x < 0 beside the centre block; B street x > 0 beside the centre block; C street y > 0 beside the centre block; D street y < 0 beside the centre block; E crossings beyond the corners of the centre block. Positions in multiples of D. Centre block absent (0D), D or 2D high; wind directions 0°, 22.5° and 45°."
+    },
+    {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-c-openfoam-agreement.png",
-     "caption": "Case C, OpenFOAM 12: measured Vs/U_H against the modelled √(|U|²+2k)/U_H (filled) and |U|/U_H (hollow), one panel per configuration (centre block × wind direction)."
+     "caption": "Case C, OpenFOAM 12: measured Vs/U_H against the modelled √(|U|²+2k)/U_H (filled) and |U|/U_H (hollow), one panel per configuration (centre block × wind direction). Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-c-openfoam-bias-map.png",
@@ -556,8 +560,12 @@
    },
    "figures": [
     {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-c-layout.png",
+     "caption": "Case C, measurement points: A street x < 0 beside the centre block; B street x > 0 beside the centre block; C street y > 0 beside the centre block; D street y < 0 beside the centre block; E crossings beyond the corners of the centre block. Positions in multiples of D. Centre block absent (0D), D or 2D high; wind directions 0°, 22.5° and 45°."
+    },
+    {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-c-openfoam-agreement.png",
-     "caption": "Case C, OpenFOAM 12: measured Vs/U_H against the modelled √(|U|²+2k)/U_H (filled) and |U|/U_H (hollow), one panel per configuration (centre block × wind direction)."
+     "caption": "Case C, OpenFOAM 12: measured Vs/U_H against the modelled √(|U|²+2k)/U_H (filled) and |U|/U_H (hollow), one panel per configuration (centre block × wind direction). Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-c-openfoam-bias-map.png",
@@ -829,8 +837,12 @@
    },
    "figures": [
     {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-c-layout.png",
+     "caption": "Case C, measurement points: A street x < 0 beside the centre block; B street x > 0 beside the centre block; C street y > 0 beside the centre block; D street y < 0 beside the centre block; E crossings beyond the corners of the centre block. Positions in multiples of D. Centre block absent (0D), D or 2D high; wind directions 0°, 22.5° and 45°."
+    },
+    {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-c-openfoam-agreement.png",
-     "caption": "Case C, OpenFOAM 12: measured Vs/U_H against the modelled √(|U|²+2k)/U_H (filled) and |U|/U_H (hollow), one panel per configuration (centre block × wind direction)."
+     "caption": "Case C, OpenFOAM 12: measured Vs/U_H against the modelled √(|U|²+2k)/U_H (filled) and |U|/U_H (hollow), one panel per configuration (centre block × wind direction). Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-c-openfoam-bias-map.png",

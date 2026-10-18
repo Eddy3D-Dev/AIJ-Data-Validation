@@ -170,8 +170,12 @@
    },
    "figures": [
     {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-e-layout.png",
+     "caption": "Case E, measurement points: A within 30 m of the 60 m building; B within 30 m of the two 18 m buildings; C elsewhere. Positions in metres, full scale. Dark footprints: the three buildings added in the after state."
+    },
+    {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-e-openfoam-agreement.png",
-     "caption": "Case E, OpenFOAM 12, wind from SW: measured velocity ratio against the modelled √(|U|²+2k)/U_ref (filled) and |U|/U_ref (hollow), before and after construction, and the change the construction makes."
+     "caption": "Case E, OpenFOAM 12, wind from SW: measured velocity ratio against the modelled √(|U|²+2k)/U_ref (filled) and |U|/U_ref (hollow), before and after construction, and the change the construction makes. Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-e-openfoam-bias-map.png",

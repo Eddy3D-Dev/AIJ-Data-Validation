@@ -273,8 +273,12 @@
    },
    "figures": [
     {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-f-layout.png",
+     "caption": "Case F, measurement points: A tunnel plane 5 m above ground; B tunnel plane 9 m above ground; C tunnel plane 20 m above ground; D field cup anemometers, 3 to 11 m above ground. Positions in metres, full scale. SMB and KDD: the reference buildings. The field anemometers stand at the places of the tunnel points."
+    },
+    {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-f-openfoam-agreement.png",
-     "caption": "Case F, OpenFOAM 12 (realizable k-ε), wind from NNW: the tunnel's and the field's U/U(500 m) against the modelled √(|U|²+2k) (filled) and |U| (hollow) over the model's own U(500 m), in two vertical frames (top: the published z in the STL's frame; bottom: the STL's ground plus the instrument height), for the 9 m plane, all 33 tunnel points (planes at 5, 9 and 20 m) and the 13 field observations (bars: the standard deviation of the 10-minute means)."
+     "caption": "Case F, OpenFOAM 12 (realizable k-ε), wind from NNW: the tunnel's and the field's U/U(500 m) against the modelled √(|U|²+2k) (filled) and |U| (hollow) over the model's own U(500 m), in two vertical frames (top: the published z in the STL's frame; bottom: the STL's ground plus the instrument height), for the 9 m plane, all 33 tunnel points (planes at 5, 9 and 20 m) and the 13 field observations (bars: the standard deviation of the 10-minute means). Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-f-openfoam-bias-map.png",
@@ -537,8 +541,12 @@
    },
    "figures": [
     {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-f-layout.png",
+     "caption": "Case F, measurement points: A tunnel plane 5 m above ground; B tunnel plane 9 m above ground; C tunnel plane 20 m above ground; D field cup anemometers, 3 to 11 m above ground. Positions in metres, full scale. SMB and KDD: the reference buildings. The field anemometers stand at the places of the tunnel points."
+    },
+    {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-f-openfoam-agreement.png",
-     "caption": "Case F, OpenFOAM 12 (realizable k-ε), wind from NNW: the tunnel's and the field's U/U(500 m) against the modelled √(|U|²+2k) (filled) and |U| (hollow) over the model's own U(500 m), in two vertical frames (top: the published z in the STL's frame; bottom: the STL's ground plus the instrument height), for the 9 m plane, all 33 tunnel points (planes at 5, 9 and 20 m) and the 13 field observations (bars: the standard deviation of the 10-minute means)."
+     "caption": "Case F, OpenFOAM 12 (realizable k-ε), wind from NNW: the tunnel's and the field's U/U(500 m) against the modelled √(|U|²+2k) (filled) and |U| (hollow) over the model's own U(500 m), in two vertical frames (top: the published z in the STL's frame; bottom: the STL's ground plus the instrument height), for the 9 m plane, all 33 tunnel points (planes at 5, 9 and 20 m) and the 13 field observations (bars: the standard deviation of the 10-minute means). Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-f-openfoam-bias-map.png",
