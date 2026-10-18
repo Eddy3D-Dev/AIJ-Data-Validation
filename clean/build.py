@@ -43,6 +43,8 @@ from collections import defaultdict
 import numpy as np
 import pandas as pd
 
+import case_j, case_k, case_l  # Cases J-L: one module each (META + build(B, prov)); shared helpers in jkl_common.py
+
 HERE = os.path.dirname(os.path.abspath(__file__))          # .../clean
 REPO = os.path.abspath(os.path.join(HERE, os.pardir))        # the AIJ repository
 SRC = os.path.join(HERE, "sources")
@@ -424,6 +426,9 @@ CASES = {
           "citation": "Tominaga, Y., Mochida, A., Yoshie, R., Kataoka, H., Nozu, T., Yoshikawa, M., Shirasawa, T. (2008). AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings. JWEIA 96, 1749-1761. https://doi.org/10.1016/j.jweia.2008.02.058"},
 }
 EDITORS = ["Yoshihide Tominaga (Niigata Institute of Technology)", "Hideki Kikumoto (The University of Tokyo)", "Tsubasa Okaze (Institute of Science Tokyo)"]
+PLUGIN_CASES = (case_j, case_k, case_l)                                    # Cases J-L
+CASES.update({m.META["id"]: m.META for m in PLUGIN_CASES})
+DIRECTION_BASIS: dict[str, tuple[str, str]] = {}            # single-direction cases of the plug-in modules: case -> (sense_basis, status); each build() fills its own
 
 
 def row(**kw):
@@ -1024,10 +1029,11 @@ def build_E(prov):
 def directions_for(case, pts, frame_note):
     rows = []
     for (cfg, inst, wd, wname), g in pts.groupby(["config", "instrument", "wind_direction_deg", "wind_direction"], sort=True):
-        q = {"A": "U", "B": "U", "C": "Vs", "D": ("Vs" if inst == "thermistor" else "U"), "E": "velocity_ratio"}[case]
+        q = {"A": "U", "B": "U", "C": "Vs", "D": ("Vs" if inst == "thermistor" else "U"), "E": "velocity_ratio"}.get(case, "U")
         r = math.radians(wd)
-        if case in ("A", "B"):
-            fx, fy, basis, status = 1.0, 0.0, "definition: +x streamwise (MP drawings; checks lateral_sign_*)", "settled"
+        if case in ("A", "B") or case in DIRECTION_BASIS:
+            fx, fy = 1.0, 0.0
+            basis, status = DIRECTION_BASIS.get(case, ("definition: +x streamwise (MP drawings; checks lateral_sign_*)", "settled"))
         elif case == "C":
             fx, fy = math.cos(r), -math.sin(r)
             basis = "measured: WD0 field y-mirror symmetric and faster upwind; WD45 field mirror-symmetric about y = -x, not y = +x (checks WD45_symmetry_plane_*)" if wd else "measured: y-mirror symmetry + windward band faster (checks WD0_flow_is_along_x_*)"
@@ -1115,10 +1121,12 @@ def build():
     C = build_C(prov); results["C"] = C
     Dd = build_D(prov); results["D"] = Dd
     E = build_E(prov); results["E"] = E
+    for mod in PLUGIN_CASES:
+        results[mod.META["id"]] = mod.build(sys.modules[__name__], prov)
 
     all_pts, all_af, all_dir = [], [], []
     manifest_cases = {}
-    for case in "ABCDE":
+    for case in results:
         pts, afl, geo, inflow, frame, transform = results[case][:6]
         extra = results[case][6] if len(results[case]) > 6 else None
         pts = pts.sort_values(["config", "instrument", "wind_direction_deg", "point_id"], kind="mergesort").reset_index(drop=True)
@@ -1176,8 +1184,9 @@ def build():
             "geometry_summary": [{"configuration": g["configuration"], "file": g["file"], "triangles": g["stats"]["triangles"], "watertight": g["stats"]["watertight"], "bbox_min": g["stats"]["bbox_min"], "bbox_max": g["stats"]["bbox_max"], "boxes": g.get("box_count")} for g in gfiles],
             "provenance": [{"path": relp(p) if p.startswith(HERE) else os.path.relpath(p, REPO).replace(os.sep, "/"), "sha256": sha256(p), "bytes": os.path.getsize(p),
                             "origin": ("Zenodo " + meta["zenodo_version"] + " (downloaded; SHA256SUMS.txt beside it)") if p.startswith(SRC) else "repository clone of the Zenodo record"} for p in prov[case]],
+            "normalisation": (extra or {}).get("normalisation"),
             "known_issues": (extra or {}).get("known_issues", {}),
-            "extra_measurements": {k: v for k, v in (extra or {}).items() if k != "known_issues"},
+            "extra_measurements": {k: v for k, v in (extra or {}).items() if k not in ("known_issues", "normalisation")},
         }
     big = pd.concat(all_pts, ignore_index=True)
     write_csv(os.path.join(HERE, "points.csv"), big)
@@ -1222,7 +1231,7 @@ def recheck():
     against what the sources produce now, cell for cell, and the parquet files against the CSVs."""
     import pyarrow.parquet as pq
     prov = {}
-    for case, fn in zip("ABCDE", (build_A, build_B, build_C, build_D, build_E)):
+    for case, fn in [*zip("ABCDE", (build_A, build_B, build_C, build_D, build_E)), *((m.META["id"], lambda p, m=m: m.build(sys.modules[__name__], p)) for m in PLUGIN_CASES)]:
         pts = fn(prov)[0].sort_values(["config", "instrument", "wind_direction_deg", "point_id"], kind="mergesort").reset_index(drop=True)
         for col in ("x", "y", "z", "uu", "vv", "ww"):
             pts[col] = pts[col].round(9)
