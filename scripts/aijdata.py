@@ -391,6 +391,13 @@ CASES = {
 
 CASE_IDS = ["A", "B", "C", "D", "E"]
 
+import aij_case_g, aij_case_h, aij_case_i          # Cases G, H, I live in scripts/aij_case_<x>.py: CASE, geometry(), approach_flow()
+EXTRA_CASES = {"G": aij_case_g, "H": aij_case_h, "I": aij_case_i}
+for _k, _m in EXTRA_CASES.items():
+    CASES[_k] = _m.CASE
+    DEFAULT_CONFIGURATION[_k] = _m.DEFAULT_CONFIGURATION
+    RENDER_CAPTIONS.update(_m.RENDER_CAPTIONS)
+
 
 # ----------------------------------------------------------------------------- helpers
 
@@ -630,6 +637,8 @@ def load_points(case):
 
 def load_approach_flow(case):
     """Rows of {z, U, k, ...} in metres and m/s, straight from each case's own profile."""
+    if case in EXTRA_CASES:
+        return EXTRA_CASES[case].approach_flow()
     meta = CASES[case]
     if case in ("A", "B", "C"):
         header, rows = _read_csv(os.path.join(REPO, meta["approach_flow_file"]))
@@ -862,6 +871,8 @@ def orient_outward(tris, tol=1e-4):
 
 def case_geometry(case):
     """[(name, tris, boxes_or_None, note)] for a case — one entry per configuration."""
+    if case in EXTRA_CASES:
+        return EXTRA_CASES[case].geometry(case)
     if case in BOX_GEOMETRY:
         out = []
         for cfg, boxes in BOX_GEOMETRY[case].items():
