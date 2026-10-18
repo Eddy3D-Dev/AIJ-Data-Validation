@@ -85,6 +85,7 @@ import sys
 import matplotlib as mpl
 import numpy as np
 import ultraplot as uplt
+import ultraplot.gridspec as _uplt_gridspec
 from matplotlib import font_manager
 from matplotlib.colors import to_hex, to_rgb
 from matplotlib.lines import Line2D
@@ -130,6 +131,12 @@ def apply():
     """Set the house style. Call once, before any subplots."""
     check_palette()
     font_manager.findfont(FONT, fallback_to_default=False)   # raises if the font is missing: no silent fallback
+    # ultraplot 2.7.1 lays every figure out with kiwisolver (its UltraLayout) whenever that is installed, and kiwisolver's
+    # solution differs in the last digits from build to build on identical input: 60 in-process builds of the Case E
+    # agreement layout gave 3 layouts, the axes boxes 1e-16 apart. Those digits decide which side of a pixel boundary a
+    # title's glyphs fall, so the PNG alternated between two files. The legacy solver is plain arithmetic: 60 of 60
+    # identical, and the same layout as the kiwisolver ones to 1e-15. It must be chosen before the first GridSpec exists.
+    _uplt_gridspec.ULTRA_AVAILABLE = False
     uplt.rc.update({
         "font.family": FONT,
         "mathtext.cal": "sans:italic",    # ultraplot's default asks for a cursive font nobody has, and warns
@@ -251,6 +258,8 @@ def save(fig, name, directory=FIGURES):
     os.makedirs(directory, exist_ok=True)
     path = os.path.join(directory, name)
     kind = os.path.splitext(name)[1].lower()
+    gs = getattr(fig, "gridspec", None)
+    assert not getattr(gs, "_use_ultra_layout", False), f"{name}: laid out by kiwisolver, whose last digits vary from build to build (apply() was not called first?)"
     software = f"Matplotlib {mpl.__version__}, ultraplot {uplt.__version__}"
     script = getattr(sys.modules.get("__main__"), "__file__", None) or __file__
     if kind == ".png":
