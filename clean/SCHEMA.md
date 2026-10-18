@@ -85,8 +85,7 @@ row and measured counts, and `sense_basis` / `status` saying what fixes the rota
 | D | (cos WD, **+sin WD**) for 22.5°, 45° | **corroborated by solved fields**: the array is exactly y-mirror symmetric, so the sense cannot be settled from the data; it is taken from Figure 4 of the data paper, and Eddy3D's solved fields score R 0.80 / 0.85 in this sense against 0.40 / 0.17 mirrored (22.5° / 45°) — QUESTIONS Q2 |
 | E | (−sin WD, −cos WD) | definition: FROM-direction, +y north (compass rose in `MP_caseE.png`); frame verified by all 80 points lying in open space and a 10° rotation control putting 26 inside buildings |
 
-Note C and D disagree in sense. That is what the sources say today; it is the first question to
-put to the data collectors.
+Note C and D disagree in sense (QUESTIONS Q1, Q2).
 
 ## 3. Approach flow (`approach_flow.csv` / `.parquet`)
 
@@ -218,7 +217,7 @@ heights at x = −0.498 m model (−299 m full scale), z = 3 … 360 m full scal
 
 ## Cases G, H and I (a tree belt in the field, a floor source, a roof source)
 
-Added with schema 2.0.0; the columns are the 36 of section 1, nothing new. What these cases add to the rules above.
+Added with schema 2.0.0; the columns are the 36 of section 1, nothing new.
 
 ### Frames and transforms
 
