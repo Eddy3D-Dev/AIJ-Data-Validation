@@ -22,7 +22,8 @@ Probe frame: the fixtures solve the CSV frame turned so that the WD = 0 wind blo
 (meteorological 180 deg), at 1:100: world = 100 * (-y, x, z). WD rotates the wind from +x toward -y
 in the CSV frame (the data's own mirror symmetry; see the README).
 
-Colours (plotstyle.py): the OpenFOAM model is ultraplot's blue, as in every figure; the map's diverging scale
+Colours (plotstyle.py): the dots of the agreement figure take the colour of the street of the centre block they stand in (layout.py; the letters and
+colours of case-c-layout.png); the map's diverging scale
 is ultraplot's BuRd reversed, centred on zero (red where the model is slower than the tunnel, blue where it is
 faster). Reference geometry (1:1 line, FAC2 band, blocks) is recessive grey.
 """
@@ -37,6 +38,7 @@ import os
 import numpy as np
 import ultraplot as uplt
 
+import layout
 import plotstyle as style
 from matplotlib.patches import Rectangle
 
@@ -129,17 +131,18 @@ for r, cb in enumerate(CONFIGS):
         o = np.array([p["measured_over_UH"] for p in pts])
         scalar = np.array([p["scalar_over_UH"] for p in pts])
         vector = np.array([p["vector_over_UH"] for p in pts])
+        colours = layout.grouped_colours("C", pts)            # the street of the centre block each point stands in (layout.py)
         style.one_to_one(ax, lo, hi)
-        ax.scatter(o, vector, s=16, facecolor="none", edgecolor=style.OPENFOAM, linewidth=0.7, alpha=0.75, zorder=2)
-        ax.scatter(o, scalar, s=16, color=style.OPENFOAM, edgecolor=style.SURFACE, linewidth=0.35, zorder=3)
+        ax.scatter(o, vector, s=16, facecolor="none", edgecolor=colours, linewidth=0.7, alpha=0.75, zorder=2)
+        ax.scatter(o, scalar, s=16, color=colours, edgecolor=style.SURFACE, linewidth=0.35, zorder=3)
         m = scores(cb, wd, "scalar")
         style.stats(ax, f"R {m['R']:+.2f}\nFAC2 {m['Fac2']:.2f}\nFB {m['Fb']:+.2f}")
         ax.format(xlim=(lo, hi), ylim=(lo, hi))
 style.outer_ticks(axs, 3, 3)
+legend = layout.legend_rows("C", [style.marker(style.REFERENCE, "Eddy3D √(|U|²+2k)"), style.marker(style.REFERENCE, "Eddy3D |U|", filled=False),
+                                  style.line(style.REFERENCE, "1:1", lw=1.0), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")])
 style.finish(fig, "AIJ UWE Case C — Eddy3D (OpenFOAM 12, realizable k-ε) vs wind tunnel, z = 0.1 D",
-             handles=[style.marker(style.OPENFOAM, "Eddy3D √(|U|²+2k)"),
-                      style.marker(style.OPENFOAM, "Eddy3D |U|", filled=False),
-                      style.line(style.REFERENCE, "1:1", lw=1.0), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")],
+             handles=legend[0], ncols=legend[1],
              toplabels=[f"WD = {wd:g}°" for wd in WDS], leftlabels=[CB_TITLE[cb] for cb in CONFIGS],
              xlabel="Tunnel Vs/U$_H$ [–]", ylabel="Eddy3D speed/U$_H$ [–]")
 style.save(fig, "case-c-openfoam-agreement.png")

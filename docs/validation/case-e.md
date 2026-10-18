@@ -12,7 +12,13 @@ OpenFOAM 12 runs on the Niigata district, wind from SW. Scores and per-point fil
 
 Before and after the construction of a 60 m tower and two 18 m blocks, each state on a 504 m-radius cylinder (about one million cells, 2 m at the buildings), the tunnel's own profile imposed as a table (`wind.inlet: "manual"`), the model's speed over its own solved U(15.9 m).
 
-{% include figure.html name="case-e-openfoam-agreement.png" alt="Case E, measured vs modelled, before, after and the change" caption="<strong>Figure 1.</strong> Case E, measured vs modelled, before, after and the change." %}
+## Measurement layout
+
+{% include figure.html name="case-e-layout.png" alt="Measurement points, Case E" caption="<strong>Figure 1.</strong> Case E, measurement points: A within 30 m of the 60 m building; B within 30 m of the two 18 m buildings; C elsewhere. Positions in metres, full scale. Dark footprints: the three buildings added in the after state." %}
+
+## Measured against modelled
+
+{% include figure.html name="case-e-openfoam-agreement.png" alt="Case E, measured vs modelled, before, after and the change" caption="<strong>Figure 2.</strong> Case E, measured vs modelled, before, after and the change. The dots take the colour of their group in Figure 1." %}
 
 | | FAC2 | FB | q | R |
 |---|---|---|---|---|
@@ -22,7 +28,7 @@ Before and after the construction of a 60 m tower and two 18 m blocks, each stat
 | after · \|U\| | 0.74 | +0.34 | 0.30 | 0.84 |
 | ceiling control: the tunnel's *before*, scored as a model of its *after* | 0.79 | +0.37 | 0.35 | 0.10 |
 
-{% include figure.html name="case-e-openfoam-bias-map.png" alt="Case E, where the model is slow or fast" caption="<strong>Figure 2.</strong> Case E, where the model is slow or fast." %}
+{% include figure.html name="case-e-openfoam-bias-map.png" alt="Case E, where the model is slow or fast" caption="<strong>Figure 3.</strong> Case E, where the model is slow or fast." %}
 
 - Construction change (after − before): R = 0.84; the sign is right at 75 % of the points where the tunnel resolved a change; the modelled change is about 60 % of the measured size.
 - Control that ignores the construction (the tunnel's *before* as a model of its *after*): R = 0.10.

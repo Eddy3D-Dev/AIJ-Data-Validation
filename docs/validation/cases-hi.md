@@ -16,9 +16,15 @@ OpenFOAM 12 runs on the 1:1:2 building with a floor point source (Case H) and on
 - Velocities are divided by U_H, k by U_H². Each side uses its own U_H: the tunnel's (H 3.226 m/s, I 1.7 m/s) for the measurement, the value the solve was driven with (H 3.23 m/s, I 1.7 m/s) for the model.
 - Concentration: the cleaned table's C/c₀ (c₀ = 45.18 ppm in H, 39.22 ppm in I) against the model's c\* = c U_H H²/Q, scored at the turbulent Schmidt numbers 0.3, 0.5 and 0.7 (the figures show 0.5). One detection limit, 10⁻³ of the largest measured value.
 
+## Measurement layout
+
+{% include figure.html name="case-h-layout.png" alt="Measurement lines and planes, Case H" caption="<strong>Figure 1.</strong> Case H, measurement lines and planes: A vertical profiles, y/H = 0; B plane z/H = 0.0625; C plane z/H = 0.25; D plane z/H = 0.5. Positions in multiples of H." %}
+
+{% include figure.html name="case-i-layout.png" alt="Measurement lines and planes, Case I" caption="<strong>Figure 2.</strong> Case I, measurement lines and planes: A concentration, vertical profiles, y/H = 0; B concentration, plane z/H = 0; C velocity, vertical profiles, y/H = 0; D velocity, plane z/H = 0.5. Positions in multiples of H; panels c and d: x/H = -2 to 5." %}
+
 ## Scores
 
-{% include figure.html name="cases-hi-openfoam-agreement.png" alt="Measured vs modelled, Cases H and I" caption="<strong>Figure 1.</strong> Measured vs modelled U, W, k and c*, Cases H (top) and I (bottom), realizable k-ε. The concentration panels show the positive pairs only." %}
+{% include figure.html name="cases-hi-openfoam-agreement.png" alt="Measured vs modelled, Cases H and I" caption="<strong>Figure 3.</strong> Measured vs modelled U, W, k and c*, Cases H (top) and I (bottom), realizable k-ε; the dots take the colour of the line or plane they were measured on, as in Figures 1 and 2. The concentration panels show the positive pairs only." %}
 
 Realizable k-ε, normalised by U_H.
 
@@ -59,7 +65,7 @@ FB is positive when the model is low.
 
 ## Turbulence closures on Case I
 
-{% include figure.html name="case-i-openfoam-closures.png" alt="Case I under three turbulence closures" caption="<strong>Figure 2.</strong> Case I under standard k-ε, realizable k-ε and k-ω SST on one mesh: measured vs modelled U, k and c* (Sct 0.5)." %}
+{% include figure.html name="case-i-openfoam-closures.png" alt="Case I under three turbulence closures" caption="<strong>Figure 4.</strong> Case I under standard k-ε, realizable k-ε and k-ω SST on one mesh, dots coloured as in Figure 2: measured vs modelled U, k and c* (Sct 0.5)." %}
 
 | Closure | U R | U FAC2 | k R | k FAC2 | k FB | c\* (Sct 0.5) R | c\* FAC2 | c\* FB |
 |---|---|---|---|---|---|---|---|---|

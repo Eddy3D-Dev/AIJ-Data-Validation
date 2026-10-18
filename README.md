@@ -308,6 +308,8 @@ intensity at z = D is 0.219.
 3000 iterations per direction, the 120 probes at exactly the tunnel's coordinates. Scored against Vs/U_H as
 √(|U|² + 2k) (headline) and as |U|; hit rate D = 0.25, W = 0.05 U_H.
 
+<!--fig name="case-c-layout.png" alt="Case C, measurement points" width="800"--><a href="validation/figures/case-c-layout.png"><img src="docs/assets/web/case-c-layout.png" width="800" height="1157" loading="lazy" alt="Case C, measurement points"></a><br><sub><a href="validation/figures/case-c-layout.png">1200 dpi original, 1.6 MB</a></sub><!--/fig-->
+
 <!--fig name="case-c-openfoam-agreement.png" alt="Case C, measured vs modelled, nine configurations" width="800"--><a href="validation/figures/case-c-openfoam-agreement.png"><img src="docs/assets/web/case-c-openfoam-agreement.png" width="800" height="798" loading="lazy" alt="Case C, measured vs modelled, nine configurations"></a><!--/fig-->
 
 | centre block | WD | R | FAC2 | FB | hit rate | \|U\| alone: FB / R |
@@ -416,6 +418,8 @@ the array; shifting the cloud by 12.5 mm (5 m full scale) puts points 27 and 28 
 8 cores. 3.6 million cells at 1:400 on a cylinder domain,
 3000 iterations; the last iteration's initial residuals are below 4 × 10⁻³.
 
+<!--fig name="case-d-layout.png" alt="Case D, measurement points" width="800"--><a href="validation/figures/case-d-layout.png"><img src="docs/assets/web/case-d-layout.png" width="800" height="1208" loading="lazy" alt="Case D, measurement points"></a><br><sub><a href="validation/figures/case-d-layout.png">1200 dpi original, 1.7 MB</a></sub><!--/fig-->
+
 <!--fig name="case-d-openfoam-agreement.png" alt="Case D, measured vs modelled" width="800"--><a href="validation/figures/case-d-openfoam-agreement.png"><img src="docs/assets/web/case-d-openfoam-agreement.png" width="800" height="266" loading="lazy" alt="Case D, measured vs modelled"></a><!--/fig-->
 
 | | n | FAC2 | FB | q | R |
@@ -520,6 +524,8 @@ buildings), the workbook's measured profile imposed through a tabulated inlet (`
 Eddy3D's CLI), 2000 iterations. The model's speed is divided by its own solved U(15.9 m), which
 arrives at 0.998 of the imposed value in both states.
 
+<!--fig name="case-e-layout.png" alt="Case E, measurement points" width="800"--><a href="validation/figures/case-e-layout.png"><img src="docs/assets/web/case-e-layout.png" width="800" height="860" loading="lazy" alt="Case E, measurement points"></a><br><sub><a href="validation/figures/case-e-layout.png">1200 dpi original, 2.7 MB</a></sub><!--/fig-->
+
 <!--fig name="case-e-openfoam-agreement.png" alt="Case E, measured vs modelled, before, after and the change" width="800"--><a href="validation/figures/case-e-openfoam-agreement.png"><img src="docs/assets/web/case-e-openfoam-agreement.png" width="800" height="338" loading="lazy" alt="Case E, measured vs modelled, before, after and the change"></a><!--/fig-->
 
 | | FAC2 | FB | q | R |
@@ -601,6 +607,8 @@ Full reading: [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
+<!--fig name="case-f-layout.png" alt="Case F, measurement points" width="800"--><a href="validation/figures/case-f-layout.png"><img src="docs/assets/web/case-f-layout.png" width="800" height="818" loading="lazy" alt="Case F, measurement points"></a><br><sub><a href="validation/figures/case-f-layout.png">1200 dpi original, 5.5 MB</a></sub><!--/fig-->
+
 <!--fig name="case-f-openfoam-agreement.png" alt="Case F, measured vs modelled speed" width="800"--><a href="validation/figures/case-f-openfoam-agreement.png"><img src="docs/assets/web/case-f-openfoam-agreement.png" width="800" height="475" loading="lazy" alt="Case F, measured vs modelled speed"></a><!--/fig-->
 
 **Known issues.** 11 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/F.json`](docs/api/cases/F.json).
@@ -646,6 +654,8 @@ Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
+<!--fig name="case-g-layout.png" alt="Case G, measurement lines and planes" width="800"--><a href="validation/figures/case-g-layout.png"><img src="docs/assets/web/case-g-layout.png" width="800" height="751" loading="lazy" alt="Case G, measurement lines and planes"></a><br><sub><a href="validation/figures/case-g-layout.png">1200 dpi original, 1.1 MB</a></sub><!--/fig-->
+
 <!--fig name="case-g-openfoam-sweep.png" alt="Case G, measured vs modelled, drag sweep" width="800"--><a href="validation/figures/case-g-openfoam-sweep.png"><img src="docs/assets/web/case-g-openfoam-sweep.png" width="800" height="368" loading="lazy" alt="Case G, measured vs modelled, drag sweep"></a><!--/fig-->
 
 **Known issues.** 6 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/G.json`](docs/api/cases/G.json).
@@ -688,6 +698,8 @@ Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases
 Full reading: [Cases H and I](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-hi/).
 
 </details>
+
+<!--fig name="case-h-layout.png" alt="Case H, measurement lines and planes" width="800"--><a href="validation/figures/case-h-layout.png"><img src="docs/assets/web/case-h-layout.png" width="800" height="902" loading="lazy" alt="Case H, measurement lines and planes"></a><br><sub><a href="validation/figures/case-h-layout.png">1200 dpi original, 1.2 MB</a></sub><!--/fig-->
 
 <!--fig name="cases-hi-openfoam-agreement.png" alt="Cases H and I, measured vs modelled" width="800"--><a href="validation/figures/cases-hi-openfoam-agreement.png"><img src="docs/assets/web/cases-hi-openfoam-agreement.png" width="800" height="423" loading="lazy" alt="Cases H and I, measured vs modelled"></a><!--/fig-->
 
@@ -734,6 +746,8 @@ k-ε closures, 0.40 under k-ω SST; c\* R at Sct 0.5 0.96, 0.94 and 0.47. Reatta
 Full reading: [Cases H and I](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-hi/).
 
 </details>
+
+<!--fig name="case-i-layout.png" alt="Case I, measurement lines and planes" width="800"--><a href="validation/figures/case-i-layout.png"><img src="docs/assets/web/case-i-layout.png" width="800" height="1474" loading="lazy" alt="Case I, measurement lines and planes"></a><br><sub><a href="validation/figures/case-i-layout.png">1200 dpi original, 2.1 MB</a></sub><!--/fig-->
 
 <!--fig name="case-i-openfoam-closures.png" alt="Case I under three turbulence closures" width="800"--><a href="validation/figures/case-i-openfoam-closures.png"><img src="docs/assets/web/case-i-openfoam-closures.png" width="800" height="779" loading="lazy" alt="Case I under three turbulence closures"></a><!--/fig-->
 
@@ -782,6 +796,8 @@ than the tunnel by 3.5 K on average (3.6 K under bKε).
 Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-jl/).
 
 </details>
+
+<!--fig name="case-j-layout.png" alt="Case J, measurement lines and planes" width="800"--><a href="validation/figures/case-j-layout.png"><img src="docs/assets/web/case-j-layout.png" width="800" height="924" loading="lazy" alt="Case J, measurement lines and planes"></a><br><sub><a href="validation/figures/case-j-layout.png">1200 dpi original, 1.1 MB</a></sub><!--/fig-->
 
 <!--fig name="case-j-umf-agreement.png" alt="Case J, measured vs modelled, two closures" width="800"--><a href="validation/figures/case-j-umf-agreement.png"><img src="docs/assets/web/case-j-umf-agreement.png" width="800" height="448" loading="lazy" alt="Case J, measured vs modelled, two closures"></a><!--/fig-->
 
@@ -832,6 +848,8 @@ Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
+<!--fig name="case-k-layout.png" alt="Case K, measurement lines and planes" width="800"--><a href="validation/figures/case-k-layout.png"><img src="docs/assets/web/case-k-layout.png" width="800" height="774" loading="lazy" alt="Case K, measurement lines and planes"></a><br><sub><a href="validation/figures/case-k-layout.png">1200 dpi original, 1.1 MB</a></sub><!--/fig-->
+
 <!--fig name="case-k-openfoam-agreement.png" alt="Case K, measured vs modelled" width="800"--><a href="validation/figures/case-k-openfoam-agreement.png"><img src="docs/assets/web/case-k-openfoam-agreement.png" width="800" height="494" loading="lazy" alt="Case K, measured vs modelled"></a><!--/fig-->
 
 **Known issues.** 9 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/K.json`](docs/api/cases/K.json).
@@ -879,6 +897,8 @@ than the tunnel by 1.2 K on average.
 Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-jl/).
 
 </details>
+
+<!--fig name="case-l-layout.png" alt="Case L, measurement lines and planes" width="800"--><a href="validation/figures/case-l-layout.png"><img src="docs/assets/web/case-l-layout.png" width="800" height="802" loading="lazy" alt="Case L, measurement lines and planes"></a><br><sub><a href="validation/figures/case-l-layout.png">1200 dpi original, 1.0 MB</a></sub><!--/fig-->
 
 <!--fig name="case-l-umf-agreement.png" alt="Case L, measured vs modelled" width="800"--><a href="validation/figures/case-l-umf-agreement.png"><img src="docs/assets/web/case-l-umf-agreement.png" width="800" height="450" loading="lazy" alt="Case L, measured vs modelled"></a><!--/fig-->
 
@@ -931,6 +951,8 @@ Full reading: [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
+<!--fig name="case-m-layout.png" alt="Case M, measurement points" width="800"--><a href="validation/figures/case-m-layout.png"><img src="docs/assets/web/case-m-layout.png" width="800" height="982" loading="lazy" alt="Case M, measurement points"></a><br><sub><a href="validation/figures/case-m-layout.png">1200 dpi original, 2.5 MB</a></sub><!--/fig-->
+
 <!--fig name="case-m-openfoam-agreement.png" alt="Case M, measured vs modelled velocity and concentration" width="800"--><a href="validation/figures/case-m-openfoam-agreement.png"><img src="docs/assets/web/case-m-openfoam-agreement.png" width="800" height="422" loading="lazy" alt="Case M, measured vs modelled velocity and concentration"></a><!--/fig-->
 
 **Known issues.** 10 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/M.json`](docs/api/cases/M.json).
@@ -950,6 +972,10 @@ omnidirectional *scalar* speed with thermistors, so the model is scored as √(|
 in its own section above.
 
 ### Cases A and B — measured against modelled
+
+<!--fig name="case-a-layout.png" alt="Case A, measurement lines and planes" width="800"--><a href="validation/figures/case-a-layout.png"><img src="docs/assets/web/case-a-layout.png" width="800" height="882" loading="lazy" alt="Case A, measurement lines and planes"></a><br><sub><a href="validation/figures/case-a-layout.png">1200 dpi original, 1.1 MB</a></sub><!--/fig-->
+
+<!--fig name="case-b-layout.png" alt="Case B, measurement lines and planes" width="800"--><a href="validation/figures/case-b-layout.png"><img src="docs/assets/web/case-b-layout.png" width="800" height="883" loading="lazy" alt="Case B, measurement lines and planes"></a><br><sub><a href="validation/figures/case-b-layout.png">1200 dpi original, 1.0 MB</a></sub><!--/fig-->
 
 <!--fig name="cases-ab-openfoam-agreement.png" alt="Measured vs modelled, Cases A and B" width="800"--><a href="validation/figures/cases-ab-openfoam-agreement.png"><img src="docs/assets/web/cases-ab-openfoam-agreement.png" width="800" height="430" loading="lazy" alt="Measured vs modelled, Cases A and B"></a><!--/fig-->
 
@@ -1155,7 +1181,8 @@ a refined upstream column or sampling consistent with the wall function.
 `validation/plot_case_c_openfoam.py`, `validation/plot_case_d_openfoam.py`, `validation/plot_case_e_openfoam.py`,
 `validation/plot_cases_hi_openfoam.py` (Cases H and I), `validation/plot_cases_gk_openfoam.py` (Cases G and K),
 `validation/plot_cases_jl_umf.py` (Cases J and L, on UMF), `validation/plot_cases_fm_openfoam.py` (Cases F and M) and `validation/plot_ml_surrogate.py` (UltraPlot, one style in
-`validation/plotstyle.py`: a colour-blind-safe palette) build the figures. The Eddy3D
+`validation/plotstyle.py`: a colour-blind-safe palette) build the figures; `validation/plot_layout.py` draws where each case was measured, from the
+groups of lines and planes in `validation/layout.py` (pinned by `validation/test_layout.py`), which also colour the dots of the agreement figures. The Eddy3D
 fixtures are `TestAijCaseAContainerE2E`, `TestAijCaseBContainerE2E`, `TestAijCaseC{0D,1D,2D}ContainerE2E`,
 `TestAijCaseDContainerE2E`, `TestAijCaseEContainerE2E`, `TestAijCaseFContainerE2E`, `TestAijCaseGContainerE2E`, `TestAijCaseHContainerE2E`,
 `TestAijCubeContainerE2E`, `TestAijCaseKContainerE2E`, `TestAijCaseJUmfContainerE2E`, `TestAijCaseLUmfContainerE2E`, `TestAijCaseMContainerE2E` and, for the ML

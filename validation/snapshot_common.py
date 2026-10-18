@@ -137,18 +137,21 @@ def mirror_mean(points, values, tol=1e-6):
 
 def panel(ax, o, p, color, log=False, xlab=None, ylab=None, hollow=None, decades=5):
     """Measured o against modelled p with the 1:1 line (and the factor-of-two band where the values do not change sign); returns
-    how many pairs are drawn. `hollow` is a boolean array (over the finite pairs' original order) of points drawn open."""
+    how many pairs are drawn. `hollow` is a boolean array (over the finite pairs' original order) of points drawn open. `color` is
+    one colour, or one colour per pair (layout.grouped_colours: the group of the line or plane each point was measured on)."""
     o, p = np.asarray(o, float), np.asarray(p, float)
     ok = np.isfinite(o) & np.isfinite(p)
     open_ = np.zeros(len(o), bool) if hollow is None else np.asarray(hollow, bool)
-    o, p, open_ = o[ok], p[ok], open_[ok]
+    per_point = not isinstance(color, str)
+    col = np.asarray(color, dtype=object) if per_point else np.zeros(len(o), dtype=object)
+    o, p, open_, col = o[ok], p[ok], open_[ok], col[ok]
     if log:                                   # a log axis shows the positive pairs only; the statistics use all of them
         keep = (o > 0) & (p > 0)
-        o, p, open_ = o[keep], p[keep], open_[keep]
+        o, p, open_, col = o[keep], p[keep], open_[keep], col[keep]
         hi = 10 ** math.ceil(math.log10(max(o.max(), p.max())))
         lo = max(10 ** math.floor(math.log10(min(o.min(), p.min()))), hi * 10.0 ** -decades)     # `decades` at most; pairs below are not drawn
         shown = (o >= lo) & (p >= lo)
-        o, p, open_ = o[shown], p[shown], open_[shown]
+        o, p, open_, col = o[shown], p[shown], open_[shown], col[shown]
         ax.format(xscale="log", yscale="log")
     else:
         lo, hi = float(min(o.min(), p.min())), float(max(o.max(), p.max()))
@@ -156,9 +159,9 @@ def panel(ax, o, p, color, log=False, xlab=None, ylab=None, hollow=None, decades
         lo, hi = lo - pad, hi + pad
     style.one_to_one(ax, lo, hi, factor_two=bool(log or (o > 0).all()))
     s = 9 if len(o) > 300 else 14
-    ax.scatter(o[~open_], p[~open_], s=s, color=color, edgecolor=style.SURFACE, linewidth=0.25, alpha=0.9, zorder=3)
+    ax.scatter(o[~open_], p[~open_], s=s, color=list(col[~open_]) if per_point else color, edgecolor=style.SURFACE, linewidth=0.25, alpha=0.9, zorder=3)
     if open_.any():
-        ax.scatter(o[open_], p[open_], s=s + 6, facecolor="none", edgecolor=color, linewidth=0.8, zorder=4)
+        ax.scatter(o[open_], p[open_], s=s + 6, facecolor="none", edgecolor=list(col[open_]) if per_point else color, linewidth=0.8, zorder=4)
     ax.format(xlim=(lo, hi), ylim=(lo, hi), xlabel=xlab, ylabel=ylab)
     return len(o)
 

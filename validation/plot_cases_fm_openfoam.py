@@ -40,8 +40,9 @@ axis; and this script's own: the tunnel's WD 175 and WD 185 columns scored again
 or more (10 of 18), each with its own U_R and q, c0 per run with H_R = 41 m as the table states; the fixture divides by 40.8 m, which is the whole difference
 in these numbers (1 %).
 
-Colours follow plotstyle.py: the OpenFOAM model is its engine colour; the measurement is ink; the planes of Case F take viridis (a magnitude, height);
-reference geometry (1:1 line, factor-of-two band, building outlines) is recessive grey.
+Colours follow plotstyle.py: the measurement is ink; reference geometry (1:1 line, factor-of-two band, building outlines) is recessive grey. The dots of
+the two agreement figures take the colour of the group of the tunnel's points they were measured in (layout.py; the letters and colours of
+case-f-layout.png and case-m-layout.png): Case F by plane (5, 9 and 20 m) or field anemometer, Case M by distance from the release point.
 """
 from __future__ import annotations
 
@@ -57,6 +58,7 @@ from matplotlib.collections import LineCollection
 from matplotlib.lines import Line2D
 
 import dispersion_metrics as DM
+import layout
 import plotstyle as style
 from snapshot_common import (REPO, RESULTS, SPECIES, check_snapshot, clean_table, column, fnum, non_scores, panel, read_json, read_lf, read_pairs, sha256,
                              stats_text, validation_root, write_json, write_lf, write_pairs)
@@ -534,9 +536,14 @@ def outlines(stl, project):
 # ----------------------------------------------------------------------------- figure: Case F, agreement
 style.apply()
 F_LABEL = {"literal": "Published z (STL frame)", "agl": "STL ground + instrument height"}
-cmap = uplt.Colormap(style.SEQUENTIAL)
-F_PLANE_COLOUR = {5: cmap(0.12), 9: cmap(0.5), 20: cmap(0.85)}
 F_PANELS = [("Tunnel, 9 m plane", "tunnel.9m"), ("Tunnel, 5, 9 and 20 m", "tunnel.all"), ("Field observations", "field")]
+
+
+def f_colours(sel):
+    """The layout group of each pair: the tunnel's plane by its published z, the field's cup anemometer (layout.py)."""
+    return layout.grouped_colours("F", [{"x": p["x"], "y": p["y"], "z": p["z_published"], "instrument": "cup_anemometer" if p["source"] == "field" else "thermistor"} for p in sel])
+
+
 hi = 1.1 * max(max(p["observed"], p["Umag_model"], p["rms_model"]) for p in f_pairs)
 fig, axs = uplt.subplots(nrows=2, ncols=3, refwidth=2.2, refaspect=1, share=False, wspace=4.0, hspace=3.4)
 for r, fr in enumerate(F_FRAMES):
@@ -546,22 +553,23 @@ for r, fr in enumerate(F_FRAMES):
         ax = axs[r, c]
         style.one_to_one(ax, 0, hi)
         if key == "tunnel.9m":
-            groups = [(style.OPENFOAM, [p for p in tun if p["plane_m"] == 9])]
+            sel = [p for p in tun if p["plane_m"] == 9]
         elif key == "tunnel.all":
-            groups = [(F_PLANE_COLOUR[h], [p for p in tun if p["plane_m"] == h]) for h in F_PLANES]
+            sel = [p for h in F_PLANES for p in tun if p["plane_m"] == h]
         else:
-            groups = [(style.OPENFOAM, fld)]
+            sel = fld
             ax.errorbar(column(fld, "observed"), column(fld, "rms_model"), xerr=column(fld, "observed_sd"), fmt="none", ecolor=style.REFERENCE, elinewidth=0.6, capsize=0, zorder=2)
-        for colour, sel in groups:
-            ax.scatter(column(sel, "observed"), column(sel, "Umag_model"), s=22, facecolor="none", edgecolor=colour, linewidth=0.8, alpha=0.9, zorder=2)
-            ax.scatter(column(sel, "observed"), column(sel, "rms_model"), s=22, color=colour, edgecolor=style.SURFACE, linewidth=0.4, zorder=3)
+        colours = f_colours(sel)
+        ax.scatter(column(sel, "observed"), column(sel, "Umag_model"), s=22, facecolor="none", edgecolor=colours, linewidth=0.8, alpha=0.9, zorder=2)
+        ax.scatter(column(sel, "observed"), column(sel, "rms_model"), s=22, color=colours, edgecolor=style.SURFACE, linewidth=0.4, zorder=3)
         m = f_res[fr][f"{key}.rms" if key != "field" else "field.rms"]
         style.stats(ax, stats_text(m), loc=(0.05, 0.80))
         ax.format(xlim=(0, hi), ylim=(0, hi), title=title if r == 0 else None, xlabel="Observed U/U(500 m) [–]" if r == 1 else None, ylabel="Eddy3D [–]" if c == 0 else None)
+legend = layout.legend_rows("F", [style.marker(style.REFERENCE, "Eddy3D √(|U|²+2k)"), style.marker(style.REFERENCE, "Eddy3D |U|", filled=False),
+                                  style.line(style.REFERENCE, "field σ of the 10-min means", lw=0.8), style.line(style.REFERENCE, "1:1", lw=1.0),
+                                  style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")])
 style.finish(fig, "AIJ UWE Case F — Eddy3D (OpenFOAM 12, realizable k-ε), wind from NNW, vs wind tunnel and field, speed over U(500 m)",
-             handles=[style.marker(style.OPENFOAM, "Eddy3D √(|U|²+2k)"), style.marker(style.OPENFOAM, "Eddy3D |U|", filled=False)] +
-                     [style.marker(F_PLANE_COLOUR[h], f"tunnel {h} m") for h in F_PLANES] +
-                     [style.line(style.REFERENCE, "field σ of the 10-min means", lw=0.8), style.line(style.REFERENCE, "1:1", lw=1.0), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")], ncols=4,
+             handles=legend[0], ncols=legend[1],
              leftlabels=[F_LABEL[fr] for fr in F_FRAMES])
 style.save(fig, "case-f-openfoam-agreement.png")
 
@@ -589,11 +597,12 @@ M_PANELS = [("U/U$_R$", "U_meas", "U_model", "velocity.U", False), ("V/U$_R$", "
             ("k/U$_R^2$", "k_meas", "k_model", "k", False)] + \
            [(f"c* = C/c$_0$, {lab}", "cstar_meas", f"cstar_{sp}", f"cstar.c_{sp}", True) for sp, lab in SPECIES]
 fig3, axs3 = uplt.subplots(nrows=2, ncols=4, refwidth=1.9, refaspect=1, share=False, wspace=4.2, hspace=3.4)
+m_colours = np.array(layout.grouped_colours("M", m_pairs), dtype=object)       # the distance of each point from the release point (layout.py)
 for i, (label, mk, pk, key, log) in enumerate(M_PANELS):
     ax = axs3[i // 4, i % 4]
     res = m_res["sct03"] if not log else m_res[key.split("_")[-1]]
     score = res[key] if not log else res["cstar"]
-    shown = panel(ax, column(m_pairs, mk), column(m_pairs, pk), style.OPENFOAM, log=log, xlab="Tunnel [–]" if i // 4 == 1 else None, ylab="Eddy3D [–]" if i % 4 == 0 else None, decades=8)
+    shown = panel(ax, column(m_pairs, mk), column(m_pairs, pk), m_colours, log=log, xlab="Tunnel [–]" if i // 4 == 1 else None, ylab="Eddy3D [–]" if i % 4 == 0 else None, decades=8)
     ax.format(title=label)
     style.stats(ax, stats_text(score, shown if log else None), loc=(0.40, 0.36) if log else (0.05, 0.80))
 ax = axs3[1, 3]
@@ -602,12 +611,14 @@ for col, lab, hollow in (("cstar_wd175", "WD 175", False), ("cstar_wd185", "WD 1
     o, p = c180, column(m_pairs, col)
     keep = (o > 0) & (p > 0)
     style.one_to_one(ax, 1e-3, 5)
-    ax.scatter(o[keep], p[keep], s=14, facecolor="none" if hollow else style.MEASURED, edgecolor=style.MEASURED, linewidth=0.8, alpha=0.9, zorder=3)
+    ax.scatter(o[keep], p[keep], s=14, facecolor="none" if hollow else list(m_colours[keep]), edgecolor=list(m_colours[keep]) if hollow else style.SURFACE,
+               linewidth=0.8 if hollow else 0.25, alpha=0.9, zorder=3)
 ax.format(xscale="log", yscale="log", xlim=(1e-3, 5), ylim=(1e-3, 5), title="Tunnel WD 175, 185 vs 180", xlabel="Tunnel, WD 180 [–]")
 style.stats(ax, f"FAC2 {m_res['sct03']['control.tunnelWD175AsModelOfWD180']['Fac2']:.2f} (WD 175)\nFAC2 {m_res['sct03']['control.tunnelWD185AsModelOfWD180']['Fac2']:.2f} (WD 185)", loc=(0.05, 0.80))
+legend = layout.legend_rows("M", [style.marker(style.REFERENCE, "Eddy3D at the measured points"), style.marker(style.REFERENCE, "tunnel WD 175"), style.marker(style.REFERENCE, "tunnel WD 185", filled=False),
+                                  style.line(style.REFERENCE, "1:1", lw=1.0), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")])
 style.finish(fig3, "AIJ UWE Case M — Eddy3D (OpenFOAM 12, realizable k-ε) vs wind tunnel, WD 180, 15 points 3 m above the ground",
-             handles=[style.marker(style.OPENFOAM, "Eddy3D at the measured points"), style.marker(style.MEASURED, "tunnel WD 175"), style.marker(style.MEASURED, "tunnel WD 185", filled=False),
-                      style.line(style.REFERENCE, "1:1", lw=1.0), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")])
+             handles=legend[0], ncols=legend[1])
 style.save(fig3, "case-m-openfoam-agreement.png")
 
 # ----------------------------------------------------------------------------- figure: Case M, plan

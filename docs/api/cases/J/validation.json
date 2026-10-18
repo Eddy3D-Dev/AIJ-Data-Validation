@@ -1230,12 +1230,16 @@
    },
    "figures": [
     {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-j-layout.png",
+     "caption": "Case J, measurement lines and planes: A vertical profiles, y/H = 0; B plane z/H = 0.025; C plane z/H = 0.25. Positions in multiples of H."
+    },
+    {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-j-umf-agreement.png",
-     "caption": "Case J, urbanMicroclimateFoam (Froude scale 62.5) under realizable k-ε and buoyantKEpsilon: measured against modelled U, W, k and the floor-referenced temperature θ = (T_f − T)/(T_f − T_H), in the tunnel's units, with the 1:1 line and the factor-of-two band where the values do not change sign."
+     "caption": "Case J, urbanMicroclimateFoam (Froude scale 62.5) under realizable k-ε and buoyantKEpsilon: measured against modelled U, W, k and the floor-referenced temperature θ = (T_f − T)/(T_f − T_H), in the tunnel's units, with the 1:1 line and the factor-of-two band where the values do not change sign. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-j-umf-tracer.png",
-     "caption": "Case J, urbanMicroclimateFoam: measured against modelled c* = C/c0 for turbulent Schmidt numbers 0.3, 0.5 and 0.7 under both closures (log axes show the positive pairs within seven decades only). The points within a quarter of a building height of the source are open."
+     "caption": "Case J, urbanMicroclimateFoam: measured against modelled c* = C/c0 for turbulent Schmidt numbers 0.3, 0.5 and 0.7 under both closures (log axes show the positive pairs within seven decades only). The points within a quarter of a building height of the source are open. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     }
    ],
    "pairs": {
@@ -2442,12 +2446,16 @@
    },
    "figures": [
     {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-j-layout.png",
+     "caption": "Case J, measurement lines and planes: A vertical profiles, y/H = 0; B plane z/H = 0.025; C plane z/H = 0.25. Positions in multiples of H."
+    },
+    {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-j-umf-agreement.png",
-     "caption": "Case J, urbanMicroclimateFoam (Froude scale 62.5) under realizable k-ε and buoyantKEpsilon: measured against modelled U, W, k and the floor-referenced temperature θ = (T_f − T)/(T_f − T_H), in the tunnel's units, with the 1:1 line and the factor-of-two band where the values do not change sign."
+     "caption": "Case J, urbanMicroclimateFoam (Froude scale 62.5) under realizable k-ε and buoyantKEpsilon: measured against modelled U, W, k and the floor-referenced temperature θ = (T_f − T)/(T_f − T_H), in the tunnel's units, with the 1:1 line and the factor-of-two band where the values do not change sign. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-j-umf-tracer.png",
-     "caption": "Case J, urbanMicroclimateFoam: measured against modelled c* = C/c0 for turbulent Schmidt numbers 0.3, 0.5 and 0.7 under both closures (log axes show the positive pairs within seven decades only). The points within a quarter of a building height of the source are open."
+     "caption": "Case J, urbanMicroclimateFoam: measured against modelled c* = C/c0 for turbulent Schmidt numbers 0.3, 0.5 and 0.7 under both closures (log axes show the positive pairs within seven decades only). The points within a quarter of a building height of the source are open. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     }
    ],
    "pairs": {

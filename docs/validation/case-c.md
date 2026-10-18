@@ -12,7 +12,13 @@ OpenFOAM 12 runs on the 3 × 3 block array. Scores and per-point file: [Case C](
 
 All nine configurations (centre block 0D / 1D / 2D × WD 0°, 22.5°, 45°), solved at 1:100 on a cylindrical domain (the tunnel's turntable: the array turns with WD, the domain does not), ~310,000 cells per centre-block height, 3000 iterations per direction, the 120 probes at exactly the tunnel's coordinates.
 
-{% include figure.html name="case-c-openfoam-agreement.png" alt="Case C, measured vs modelled" caption="<strong>Figure 1.</strong> Case C, measured vs modelled." %}
+## Measurement layout
+
+{% include figure.html name="case-c-layout.png" alt="Measurement points, Case C" caption="<strong>Figure 1.</strong> Case C, measurement points: A street x < 0 beside the centre block; B street x > 0 beside the centre block; C street y > 0 beside the centre block; D street y < 0 beside the centre block; E crossings beyond the corners of the centre block. Positions in multiples of D. Centre block absent (0D), D or 2D high; wind directions 0°, 22.5° and 45°." %}
+
+## Measured against modelled
+
+{% include figure.html name="case-c-openfoam-agreement.png" alt="Case C, measured vs modelled" caption="<strong>Figure 2.</strong> Case C, measured vs modelled. The dots take the colour of their street in Figure 1." %}
 
 <details markdown="block">
   <summary>Scores for all nine configurations (R, FAC2, FB, hit rate; |U| alone)</summary>
@@ -31,7 +37,7 @@ All nine configurations (centre block 0D / 1D / 2D × WD 0°, 22.5°, 45°), sol
 
 </details>
 
-{% include figure.html name="case-c-openfoam-bias-map.png" alt="Case C, where the model is slow or fast" caption="<strong>Figure 2.</strong> Case C, where the model is slow or fast." %}
+{% include figure.html name="case-c-openfoam-bias-map.png" alt="Case C, where the model is slow or fast" caption="<strong>Figure 3.</strong> Case C, where the model is slow or fast." %}
 
 - R 0.80–0.91 and FAC2 0.85–0.98 in every configuration.
 - FB +0.25 … +0.34 at WD = 0 (hit rate 0.43–0.57); FB +0.09 … +0.20 at 22.5° and 45° (hit rate 0.68–0.88). FB is positive when the model is low.

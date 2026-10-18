@@ -29,7 +29,9 @@ Both are Eddy3D production runs solved on 2026-10-18, realizable k-ε at numeric
 
 ## Case F
 
-{% include figure.html name="case-f-openfoam-agreement.png" alt="Case F, measured vs modelled speed over U(500 m)" caption="<strong>Figure 1.</strong> Case F, wind from NNW: the tunnel's and the field's U/U(500 m) against the modelled √(|U|²+2k) (filled) and |U| (hollow), in the published-z frame (top) and the STL-ground frame (bottom). The bars are the standard deviation of the field's 10-minute means." %}
+{% include figure.html name="case-f-layout.png" alt="Measurement points, Case F" caption="<strong>Figure 1.</strong> Case F, measurement points: A tunnel plane 5 m above ground; B tunnel plane 9 m above ground; C tunnel plane 20 m above ground; D field cup anemometers, 3 to 11 m above ground. Positions in metres, full scale. SMB and KDD: the reference buildings. The field anemometers stand at the places of the tunnel points." %}
+
+{% include figure.html name="case-f-openfoam-agreement.png" alt="Case F, measured vs modelled speed over U(500 m)" caption="<strong>Figure 2.</strong> Case F, wind from NNW: the tunnel's and the field's U/U(500 m) against the modelled √(|U|²+2k) (filled) and |U| (hollow), in the published-z frame (top) and the STL-ground frame (bottom). The bars are the standard deviation of the field's 10-minute means. The dots take the colour of their group in Figure 1." %}
 
 √(|U|² + 2k) over U(500 m):
 
@@ -94,11 +96,13 @@ FB is positive when the model is low.
 
 </details>
 
-{% include figure.html name="case-f-openfoam-bias-map.png" alt="Case F, where the model is slow or fast" caption="<strong>Figure 2.</strong> Case F, wind from NNW: log₂(model / tunnel) of √(|U|²+2k) at the 13 points of the 9 m plane on the plan of the district, in the two vertical frames; the arrow is the wind." %}
+{% include figure.html name="case-f-openfoam-bias-map.png" alt="Case F, where the model is slow or fast" caption="<strong>Figure 3.</strong> Case F, wind from NNW: log₂(model / tunnel) of √(|U|²+2k) at the 13 points of the 9 m plane on the plan of the district, in the two vertical frames; the arrow is the wind." %}
 
 ## Case M
 
-{% include figure.html name="case-m-openfoam-agreement.png" alt="Case M, measured vs modelled velocity, k and concentration" caption="<strong>Figure 3.</strong> Case M, WD 180: measured vs modelled U, V, W, k and c\* at three turbulent Schmidt numbers (log axes show the positive pairs within eight decades). The last panel is the tunnel's own WD 175 and WD 185 against its WD 180." %}
+{% include figure.html name="case-m-layout.png" alt="Measurement points, Case M" caption="<strong>Figure 4.</strong> Case M, measurement points: A near field, within 100 m of the release point; B mid field, 100 to 300 m from the release point; C far field, beyond 300 m. Positions in metres, full scale. Star: release point; R: reference point; dotted circles: 100 m and 300 m from the release point." %}
+
+{% include figure.html name="case-m-openfoam-agreement.png" alt="Case M, measured vs modelled velocity, k and concentration" caption="<strong>Figure 5.</strong> Case M, WD 180: measured vs modelled U, V, W, k and c\* at three turbulent Schmidt numbers (log axes show the positive pairs within eight decades). The last panel is the tunnel's own WD 175 and WD 185 against its WD 180. The dots take the colour of their group in Figure 4." %}
 
 | Quantity | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|
@@ -153,7 +157,7 @@ The concentration across the three Schmidt numbers:
 
 </details>
 
-{% include figure.html name="case-m-openfoam-plan.png" alt="Case M, the tracer on the plan of the campus" caption="<strong>Figure 4.</strong> Case M, WD 180: log₁₀ of c\* at the 15 points on the plan of the campus, the tunnel and the three Schmidt numbers on one scale (open: below 10⁻³ or zero). The star is the gas source and the square the reference mast; the arrow is the wind." %}
+{% include figure.html name="case-m-openfoam-plan.png" alt="Case M, the tracer on the plan of the campus" caption="<strong>Figure 6.</strong> Case M, WD 180: log₁₀ of c\* at the 15 points on the plan of the campus, the tunnel and the three Schmidt numbers on one scale (open: below 10⁻³ or zero). The star is the gas source and the square the reference mast; the arrow is the wind." %}
 
 ## Not run
 

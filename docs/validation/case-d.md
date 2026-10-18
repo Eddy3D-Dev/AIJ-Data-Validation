@@ -12,7 +12,13 @@ OpenFOAM 12 runs on the high-rise among city blocks. Scores and per-point file: 
 
 All three headings: 3.6 million cells at 1:400 on a cylinder domain, 3000 iterations, the 66 measured thermistor points and the 33 split-fibre points at z/H = 0.02.
 
-{% include figure.html name="case-d-openfoam-agreement.png" alt="Case D, measured vs modelled" caption="<strong>Figure 1.</strong> Case D, wind directions 0°, 22.5° and 45°: measured against modelled speed on the thermistor plane, and at the split-fibre points (0° only)." %}
+## Measurement layout
+
+{% include figure.html name="case-d-layout.png" alt="Measurement points, Case D" caption="<strong>Figure 1.</strong> Case D, measurement points: A split-fibre probe, WD 0; B thermistor on the site of the central block, |x/H| ≤ 0.2; C thermistor in the streets along y beside it; D thermistor in the streets along x further out. Positions in multiples of H. The split fibre stands at 33 of the 78 places of the thermistors; open dots: the 12 places where the thermistor read nothing; wind directions 0°, 22.5° and 45°." %}
+
+## Measured against modelled
+
+{% include figure.html name="case-d-openfoam-agreement.png" alt="Case D, measured vs modelled" caption="<strong>Figure 2.</strong> Case D, wind directions 0°, 22.5° and 45°: measured against modelled speed on the thermistor plane, and at the split-fibre points (0° only). The dots take the colour of their group in Figure 1." %}
 
 <details markdown="block">
   <summary>Scores for all three headings and both instruments</summary>

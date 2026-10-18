@@ -10,9 +10,15 @@ description: "OpenFOAM 12 against the tunnel for Case A (1:1:2 building) and Cas
 
 OpenFOAM 12 runs on the 1:1:2 building (Case A) and the 1:4:4 slab (Case B). Per-run scores and per-point files: [Case A]({{ '/cases/case-a/validation/' | relative_url }}) and [Case B]({{ '/cases/case-b/validation/' | relative_url }}) Validation pages.
 
+## Measurement layout
+
+{% include figure.html name="case-a-layout.png" alt="Measurement lines and planes, Case A" caption="<strong>Figure 1.</strong> Case A, measurement lines and planes: A vertical profiles, y/b = 0; B plane z/b = 0.125; C plane z/b = 1.25. Positions in multiples of b." %}
+
+{% include figure.html name="case-b-layout.png" alt="Measurement lines and planes, Case B" caption="<strong>Figure 2.</strong> Case B, measurement lines and planes: A vertical profiles, y/H = 0; B plane z/H = 0.0625. Positions in multiples of H." %}
+
 ## Measured against modelled
 
-{% include figure.html name="cases-ab-openfoam-agreement.png" alt="Measured vs modelled, Cases A and B" caption="<strong>Figure 1.</strong> Measured vs modelled, Cases A and B." %}
+{% include figure.html name="cases-ab-openfoam-agreement.png" alt="Measured vs modelled, Cases A and B" caption="<strong>Figure 3.</strong> Measured vs modelled, Cases A and B. The dots take the colour of the line or plane they were measured on, as in Figures 1 and 2." %}
 
 Measured against modelled for each quantity, with the 1:1 line and, where the quantity does not change sign, the factor-of-two band.
 
@@ -36,7 +42,7 @@ Measured against modelled for each quantity, with the 1:1 line and, where the qu
 
 ## Centre-plane profiles
 
-{% include figure.html name="cases-ab-openfoam-profiles.png" alt="Centre-plane profiles, Cases A and B" caption="<strong>Figure 2.</strong> Centre-plane profiles, Cases A and B." %}
+{% include figure.html name="cases-ab-openfoam-profiles.png" alt="Centre-plane profiles, Cases A and B" caption="<strong>Figure 4.</strong> Centre-plane profiles, Cases A and B." %}
 
 Vertical profiles of U/U_H on the centre plane at the first three measured stations behind the building, offset per station.
 

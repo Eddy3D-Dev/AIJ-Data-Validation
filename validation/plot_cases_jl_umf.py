@@ -25,7 +25,8 @@ V positive toward +y: the scene's own frame): coordinates divided by the scale, 
 as the floor-referenced fraction theta = (T_f - T)/(T_f - T_H) (0 at the floor, 1 in the approach air at the building height; the workbook's own
 normalisation), c* = C/c0 for the measurement against the model's tracer mass fraction turned into ppm of ethylene and divided by the same c0.
 
-Colours follow plotstyle.py. UMF is an OpenFOAM 12 solver and is drawn in the OpenFOAM colour: no figure here or elsewhere mixes it with simpleFoam.
+Colours follow plotstyle.py, except that the points of the agreement figures take the colour of the line or plane of the tunnel they were measured on
+(layout.py; the same letters and colours as case-j-layout.png and case-l-layout.png).
 """
 from __future__ import annotations
 
@@ -37,6 +38,7 @@ import numpy as np
 import ultraplot as uplt
 
 import dispersion_metrics as DM
+import layout
 import plotstyle as style
 from snapshot_common import (RESULTS, SPECIES, check_snapshot, clean_table, column, fnum, mirror_mean, panel, raw_table, read_json, read_pairs, sha256, stats_text,
                              validation_root, write_json, write_lf, write_pairs)
@@ -486,22 +488,23 @@ style.apply()
 CLOSURE_LABEL = {"realizableKE": "realizable k-ε", "buoyantKEpsilon": "buoyantKEpsilon"}
 
 
-def grid(title, runs, columns, ncols, fname, row_labels=None, handles_extra=(), decades=5):
+def grid(case, title, runs, columns, ncols, fname, row_labels=None, handles_extra=(), decades=5):
     """runs = [(pairs, results)], one row each; columns = [(label, meas key, model key, score key, log, hollow key or None)] laid out ncols to a row
     (one row of panels per run when they fit in one, with the run's name down the left; otherwise a title on every panel)."""
     per = math.ceil(len(columns) / ncols)
     nrows = len(runs) * per
     fig, axs = uplt.subplots(nrows=nrows, ncols=ncols, refwidth=1.9, refaspect=1, share=False, wspace=4.2, hspace=3.4)
     for r, (pairs, res) in enumerate(runs):
+        colours = layout.grouped_colours(case, pairs)          # the line or plane of the tunnel each point was measured on
         for i, (label, mk, pk, key, log, hollow) in enumerate(columns):
             ax = axs[r * per + i // ncols, i % ncols]
             hol = None if hollow is None else column(pairs, hollow) == 1
-            shown = panel(ax, column(pairs, mk), column(pairs, pk), style.OPENFOAM, log=log, xlab="Tunnel [–]" if r * per + i // ncols == nrows - 1 else None,
+            shown = panel(ax, column(pairs, mk), column(pairs, pk), colours, log=log, xlab="Tunnel [–]" if r * per + i // ncols == nrows - 1 else None,
                           ylab="Eddy3D (UMF) [–]" if i % ncols == 0 else None, hollow=hol, decades=decades)
             if per > 1:
                 ax.format(title=label)
             style.stats(ax, stats_text(res[key], shown if log else None), loc=(0.40, 0.36) if log else (0.05, 0.80))
-    handles = [style.marker(style.OPENFOAM, "Eddy3D (UMF) at the measured points"), *handles_extra, style.line(style.REFERENCE, "1:1", lw=1.0),
+    handles = [*layout.legend_handles(case), *handles_extra, style.line(style.REFERENCE, "1:1", lw=1.0),
                style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")]
     labels = {"toplabels": [c[0] for c in columns[:ncols]], "leftlabels": row_labels} if per == 1 else {}
     style.finish(fig, title, handles=handles, **labels)
@@ -511,13 +514,13 @@ def grid(title, runs, columns, ncols, fname, row_labels=None, handles_extra=(), 
 j_res = {c: read_json(os.path.join(RESULTS, f"{j_name(c)}.json")) for c, _ in J_CLOSURES}
 J_FLOW = [("U/U$_H$", "U_meas", "U_model", "velocity.U", False, None), ("W/U$_H$", "W_meas", "W_model", "velocity.W", False, None), ("k/U$_H^2$", "k_meas", "k_model", "k", False, None),
           ("θ = (T$_f$ − T)/(T$_f$ − T$_H$)", "theta_meas", "theta_model", "theta", False, None)]
-grid("AIJ UWE Case J — Eddy3D (UMF) vs wind tunnel, 1:1:2 building on a heated floor", [(j_pairs[c], j_res[c]) for c, _ in J_CLOSURES], J_FLOW, 4, "case-j-umf-agreement.png",
+grid("J", "AIJ UWE Case J — Eddy3D (UMF) vs wind tunnel, 1:1:2 building on a heated floor", [(j_pairs[c], j_res[c]) for c, _ in J_CLOSURES], J_FLOW, 4, "case-j-umf-agreement.png",
      row_labels=[CLOSURE_LABEL[c] for c, _ in J_CLOSURES])
 J_TRACER = [(f"c* = C/c$_0$, {lab}", "cstar_meas", f"cstar_{sp}", f"cstar.c_{sp}", True, "near_source") for sp, lab in SPECIES]
-grid("AIJ UWE Case J — the tracer, Eddy3D (UMF) vs wind tunnel, three turbulent Schmidt numbers", [(j_pairs[c], j_res[c]) for c, _ in J_CLOSURES], J_TRACER, 3, "case-j-umf-tracer.png",
-     row_labels=[CLOSURE_LABEL[c] for c, _ in J_CLOSURES], handles_extra=[style.marker(style.OPENFOAM, "within a quarter of H of the source", filled=False)], decades=7)
+grid("J", "AIJ UWE Case J — the tracer, Eddy3D (UMF) vs wind tunnel, three turbulent Schmidt numbers", [(j_pairs[c], j_res[c]) for c, _ in J_CLOSURES], J_TRACER, 3, "case-j-umf-tracer.png",
+     row_labels=[CLOSURE_LABEL[c] for c, _ in J_CLOSURES], handles_extra=[style.marker(style.REFERENCE, "within a quarter of H of the source", filled=False)], decades=7)
 l_res = read_json(os.path.join(RESULTS, f"{L_STEM}.json"))
 L_PANELS = [("U/U$_H$", "U_meas", "U_model", "velocity.U", False, None), ("W/U$_H$", "W_meas", "W_model", "velocity.W", False, None), ("k/U$_H^2$", "k_meas", "k_model", "k", False, None),
             ("θ = (T$_f$ − T)/(T$_f$ − T$_H$)", "theta_meas", "theta_model", "theta", False, None), ("V/U$_H$", "V_meas", "V_model", "velocity.V", False, None)] + \
            [(f"c* = C/c$_0$, {lab}", "cstar_meas", f"cstar_{sp}", f"cstar.c_{sp}", True, None) for sp, lab in SPECIES]
-grid("AIJ UWE Case L — Eddy3D (UMF, realizable k-ε) vs wind tunnel, 9 × 14 cube array on a heated floor", [(l_pairs, l_res)], L_PANELS, 4, "case-l-umf-agreement.png", decades=7)
+grid("L", "AIJ UWE Case L — Eddy3D (UMF, realizable k-ε) vs wind tunnel, 9 × 14 cube array on a heated floor", [(l_pairs, l_res)], L_PANELS, 4, "case-l-umf-agreement.png", decades=7)
