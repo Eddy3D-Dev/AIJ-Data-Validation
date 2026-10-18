@@ -183,3 +183,17 @@ details {
 .version-label code {
   font-size: inherit;
 }
+
+// ---------------------------------------------------------------------------------------------------------
+// Callout titles. The theme draws the warning title in yellow-300 (#e7af06), which is 1.99:1 on the white page of the
+// light scheme (WCAG 2.2 AA asks 4.5:1 for text this small); #8a6200 is the same hue at 5.49:1. The dark scheme keeps the
+// theme's colour. The note title (#183385, 11.3:1) and the important title (#dd2e2e, 4.66:1) already pass.
+
+@if $body-background-color == $white {
+  p.warning > .warning-title,
+  blockquote.warning > .warning-title,
+  p.warning-title > p:first-child,
+  blockquote.warning-title > p:first-child {
+    color: #8a6200;
+  }
+}
