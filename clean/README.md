@@ -143,3 +143,63 @@ legacy-workbook and WD = 45° symmetry checks all go red (negative control run 2
 The cleaning (frames, unit conversions, the sign flip, the rebuilt geometry) is Eddy3D's; the
 measurements are the collectors'. Where this release and a published file disagree, `checks.json`
 says by how much and `QUESTIONS.md` says what would settle it.
+
+## Cases J, K, L — Tokyo Polytechnic University non-isothermal and cube-array experiments
+
+Three Zenodo records of Yoshie and co-workers (J 10.5281/zenodo.15447887, K 10.5281/zenodo.15448050, L
+10.5281/zenodo.15487637), cleaned the same way as A–E: one table (`cases/J|K|L/points.csv`), one wind direction (0°, flow toward
++x), SI units, the approach-flow profile, the geometry, `directions.csv`, and the checks below in `checks.json`. Frames,
+reference values and extra files are in `SCHEMA.md` ("Cases J, K, L"); what the sources cannot settle is in `QUESTIONS.md`
+(QJ1 – QJ5, QK1 – QK6, QL1 – QL6).
+
+| case | what | rows | quantities measured | source |
+|---|---|---|---|---|
+| J | 1:1:2 building b = 0.08 m, H = 0.16 m; unstable (floor 45.8 °C, air at H 12.2 °C, Rb = −0.086); U_H = 1.4581 m/s | 444 (443 locations) on y = 0, z/H = 0.025, z/H = 0.25 | U V W uu vv ww k, T T_rms, uT vT wT, C c_rms | 5 mm floor outlet at x = +0.04, 5 % ethylene |
+| K | 9 × 9 cubes H = 0.06 m, pitch 0.12 m, isothermal; U_H = 2.33 m/s | 203 in the streets and over the first rows | U V W uu vv ww k, C c_rms | 5 mm floor outlet at x = −0.15, 100 % ethylene |
+| L | 14 × 9 cubes H = 0.06 m, pitch 0.12 m; unstable (floor 45.0 °C, air at H 14.75 °C, Rb = −0.035); U_H = 1.3394 m/s | 344: 27 street locations × 8 heights, 14 roof locations × 4, 24 × 3 | as J plus uv uw, uc vc wc | line source across the tunnel at x = −0.15, 100 % ethylene |
+
+**Traps found, with the numbers**
+
+*J*
+
+- **Temperature is kelvin** in `RS_caseJ.csv`, `AF_caseJ.csv` and `BD-ST_caseJ.csv`; the table carries °C (the workbook's θ_f = 45.8 °C is the CSV's 318.95 K).
+- **The CSV is quantised.** It equals the workbook's non-dimensional values rounded to 10⁻³ (U, V, W) or 10⁻⁴ and multiplied back by U_H = 1.4581 m/s, Δθ = 33.6 K or c0: reproduced with **zero** differing cells in 14 columns × 444 rows (and not by one decimal coarser). So the published heat fluxes sit on a grid of 0.0049 K·m/s (≈ 10 % of a typical value), k on 0.00021 m²/s². The table uses the workbook.
+- **c0 = 12.283 ppm contains the 5 % ethylene fraction** (workbook cell; = 0.05 q / (U_H H²) to 1e-15). Dividing by q / (U_H H²) alone gives 245.7 ppm, a factor of 20. The data paper states a c0 for Cases H (45.2 ppm, pure) and I (39.2 ppm, 10 % ethane, fraction included) but not for J.
+- **One location twice:** No. 1 and No. 153 are the same row (−0.16, 0, 0.004). The CSV merged the other 21 locations the workbook lists in two sheets; both rows are kept (as for B's repeats), but a score over the table counts that point twice.
+- **σ and variance columns disagree:** the workbook's `<u′²>` columns are not always the square of its σ columns (up to 3.2 % in uu, 47 of 443 locations with a component off by more than 1 %). `k` is built from the variances (relative error 9e-5), which the table uses.
+- **Expanded uncertainty is in the workbook** next to every quantity (non-dimensional units; none in the CSV): median 0.031 m/s for U, 0.27 K for T, 0.010 K·m/s for u′θ′, about 1 ppm (0.083 c0) plus ≈ 5 % of the value for C. The mean concentration does not exceed its own uncertainty at 197 of the 465 workbook rows, and four CSV rows read exactly 0.0 (analyser baseline). **193 uncertainty cells of the w′θ′ flux in the sheet `xy-plane2` are an Excel fill series** (1.0037, 2.0037 … 193.0037 = 0.0037 + a running integer), not values. Summary and locations: `manifest.json → cases.J.extra_measurements.expanded_uncertainty`.
+- **The empty-tunnel profile changes along the tunnel:** U at z = 0.019 H is 0.33 U_H at x/H = −2.5 (the published `AF_caseJ.csv`), 0.58 at x/H = 0 and 0.50 at +2.5; at z = H it is 1.00, 1.03, 1.04. The workbook has all three (`cases/J/approach_flow_full.csv`).
+- The readme's Reynolds number 43,000 is Case H's (3.23 m/s × 0.2 m); U_H H / ν = 1.6·10⁴ as the data paper says.
+- The readme's `T_b = 285.32 K` is the approach-flow air temperature at z = H (workbook θ_H = 12.17 °C), not the building, whose measured surface (121 points, `BD-ST_caseJ.csv`) averages 24.47 °C (22.0 – 28.9 °C).
+- No shear stresses at the points (only the approach flow has uv, uw); the lateral sign of V is confirmed (V < 0 on the windward y < 0 flank, > 0 behind).
+
+*K*
+
+- **The workbook normalises with another building:** H = 0.2 m, UH = 4.94009 m/s, C0 = 18.218 ppm (its normalised columns reproduce its dimensional ones exactly with those), not the cube's H = 0.06 m, U_H = 2.33 m/s. With the readme's numbers c0 = 429.18 ppm, 23.6 times larger; the table uses that and the manifest gives both (`QUESTIONS.md` QK1). The approach-flow file gives 2.24 m/s at z = 0.06 m, 4 % under the stated 2.33.
+- **`AF_caseK.csv` is Case H's file** (17 rows, identical); the data paper says the approach flows were the same.
+- **No point numbers**: `RS_caseK.csv` has none; `point_id` is the file's row order. The header has a space before every unit (`x (m)`).
+- The CSV is the workbook rounded (velocities 3 dp, C 2 dp) with **k recomputed from the rounded rms**; the workbook k is used (max difference 1.2·10⁻³).
+- The workbook's units: x, y in mm in both data sheets, z in mm in `Measurement data` but **metres** in `Inflow` (headed `z(mm)`).
+- The workbook's `<usc>` ("velocity magnitude", never below |U|: 1.03 – 3.9 × |U|) is not carried.
+- The array: 81 cubes on a 0.12 m pitch is read from the drawings; the points bound the pitch to 0.11 – 0.14 m (4 and 8 points fall inside cubes at 0.11 and 0.14).
+- **Mirror pairs** (74): U agrees to 2.8 %, k to 5.3 %, but C differs by 44 % on average: the mean concentration is not symmetric. V is a cross-flow offset (even part 0.057 m/s, odd part 0.017 m/s; the empty tunnel has 0.041): its sign cannot be confirmed.
+- The data paper's sentence "approximately 30 points at eight heights downwind of the line source" does not describe K (203 points, five heights, point source).
+
+*L*
+
+- **`RS_caseL.csv`'s `T(K)` column is degrees Celsius** (12.85 – 29.86 = the workbook's θ to 0.005); `AF_caseL.csv`'s is kelvin (283 – 295). Read as kelvin the points would be 260 K colder than the floor.
+- The CSV is the workbook rounded to the printed decimals, checked for all 20 columns; `Usc` of the workbook is |U| (derived) and `tc` (⟨θ′c′⟩, K·ppm) has no schema column.
+- **Geometry from `BD_caseL.stl`:** 126 cubes of 0.06 m, 14 rows along x (x = −0.96 … 0.66) by 9 columns across y (±0.51), pitch 0.12 m; watertight, outward, no duplicates. The data paper's "9 rows by 14 columns" counts the other way round. The STL's source patch is 0.04 m × 1.02 m; the readme and data paper say 0.037 m × 1.2 m.
+- **The readme's file list names `AF_caseK.csv` and `RS_caseK.csv`; its "building surface temperature T_b = 14.8 °C" is the air temperature at H** (workbook θ_H = 14.75 °C; the workbook gives θ_build = 42.2 °C).
+- **Layout matches the data paper to the point:** 27 locations × 8 heights + 14 × 4 + 24 × 3 = 344.
+- **q, ppm and the line width are consistent:** the tracer flux ∫(U C + u′c′) dz through four cross-sections, averaged over the street lines (y = ±0.06) and the cube-column line (y = 0), is 0.98, 1.00, 0.96, 0.86 of q / 1.2 m (the street lines alone carry 1.3 – 1.9, the column line 0.2 – 0.4).
+- **Not mirror-symmetric:** the same point at +y and −y differs in U by 26 %, in k by 23 %, in C by 36 % on average, and at z = 0.15 m (0.09 m above the roofs) U is 0.11 m/s lower and T 1.3 K higher at +y: a lateral gradient of the tunnel flow. Do not assume symmetry in a model.
+- The workbook, unlike J's, carries no expanded uncertainty; the approach-flow CSV lists the profile from the top and has no k.
+
+**Checks added** (names in `checks.json`; the cases' modules are `case_j.py`, `case_k.py`, `case_l.py`, shared code in `jkl_common.py`):
+
+- *Counts and layout:* row counts and point numbers; J's 465 workbook rows = 443 locations (22 shared, identical) + the one duplicate; L's census against the data paper (27 × 8 + 14 × 4 + 24 × 3); K's and L's y and z levels against the MP drawings; coordinates of CSV and workbook equal.
+- *CSV against workbook:* J reproduces the CSV exactly as round(round(ratio, 3|4) × scale, d) (negative control: one decimal coarser fails); K and L within half a unit of the last printed digit in every column; every normalised workbook column reproduces its dimensional one (K: with H = 0.2 m, UH = 4.94 m/s; L: with the cell constants); K's CSV k equals the half-sum of the rounded rms.
+- *Physics:* k = ½ Σ variances (all three); c0 recomputed from q, gas fraction, U_H and H against the workbook cell (J, L) and K's two definitions; Rb recomputed from the workbook's temperatures (J: −0.0857 against −0.0856; L: −0.0344 against −0.035); temperatures against the readme and data paper; U_H from the profile (J 1.46, L 1.3394, K 2.24 against the stated 2.33: a warning); tracer flux through cross-sections against q (L: 0.86 – 1.0 of q / W; K: a lower bound, 0.40 – 0.67 of q); concentration peaks at the source (J, K: the point 4 mm above the outlet; L: on the line).
+- *Geometry and frame:* no sensor inside a building and a shifted-points control that does land inside (J, K, L); K's pitch scan; L's STL = the 14 × 9 grid, watertight, outward, volume 126 H³; J's surface-temperature points on the building faces and their mean equal the workbook's θ_build; V sign (J); WD = 0 flow along +x (all).
+- *Warnings* (documented, never fail the build): the variance/σ discrepancy, the fill-series uncertainty cells, the mean concentration below its uncertainty and the profile change along the tunnel (J); the stated U_H, C not mirror-symmetric and V an offset (K); readme building temperature, source patch size and mirror asymmetry (L); the readme's Reynolds number (J).
