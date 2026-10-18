@@ -18,6 +18,11 @@ painted back to front (painter's algorithm), which is correct for convex, non-in
 Why coplanar triangles are merged into quads first: stroking a triangle's edges draws the diagonal across
 every face, which reads as a crease that is not there. Coplanar pairs sharing an edge become one quad, so an
 outline is a building edge and nothing else.
+
+The drawing does not depend on how a triangle is wound: pairs are found over undirected edges and compared by
+|n1 . n2|, a quad is built from vertex positions, shading uses |n . light| and nothing is culled, so a triangle
+wound the wrong way cannot drop a wall (the __main__ check reverses triangles of a cube and merges it again).
+The base slab that closes the terrain of Cases F and M lies below the ground and is not drawn.
 """
 from __future__ import annotations
 
@@ -106,6 +111,31 @@ def merge_coplanar(tris, tol=1e-6):
     return polys
 
 
+def grow_walls(tris, tall, tol=1e-6):
+    """Colour a wall as one: a wall facet that shares an edge with a tall wall facet in the same plane is tall too. A mesher splits one
+    wall into facets, and those whose highest vertex lies under the threshold (the foot of a tower, 68 to 98 m) would be drawn as
+    grey wedges in a blue tower, which reads as a missing piece of wall."""
+    n = np.array([_normal(t) for t in tris])
+    wall = np.abs(n[:, 2]) < 0.1
+    scale = 1.0 + np.abs(tris).max()
+    key = lambda v: tuple(np.round(v / (tol * scale)).astype(np.int64))  # noqa: E731
+    edges = {}
+    for t in range(len(tris)):
+        k = [key(tris[t, i]) for i in range(3)]
+        for a, b in ((0, 1), (1, 2), (2, 0)):
+            edges.setdefault(tuple(sorted((k[a], k[b]))), []).append(t)
+    pairs = [(a, b) for o in edges.values() if len(o) == 2 for a, b in [o] if wall[a] and wall[b] and abs(float(n[a] @ n[b])) > 0.9999]
+    tall = tall.copy()
+    changed = True
+    while changed:
+        changed = False
+        for a, b in pairs:
+            if tall[a] != tall[b]:
+                tall[a] = tall[b] = True
+                changed = True
+    return tall
+
+
 def draw(ax, groups, edges):
     """groups: [(triangles, base colour)], painted back to front across all groups together."""
     polys, cols = [], []
@@ -161,6 +191,8 @@ def scene(case):
     out = []
     for cfg, tris, boxes, _ in D.case_geometry(case):
         tris = np.asarray(tris, float)
+        if case in ("F", "M"):
+            tris = tris[tris[:, :, 2].min(axis=1) > D.G.BASE_Z / 2]   # without the base slab (skirt and cap), which is never in view
         if case in ("A", "B", "J"):
             groups = [(tris, ACCENT)]
         elif case == "C":
@@ -172,7 +204,7 @@ def scene(case):
             tall = [b for b in boxes if b["max"][2] > 0.6 * ztop]
             groups = [(boxes_tris([b for b in boxes if b not in tall]), BODY), (boxes_tris(tall), ACCENT)]
         elif case == "F":
-            tall = tris[:, :, 2].max(axis=1) > 100.0          # the high-rise group (full-scale metres)
+            tall = grow_walls(tris, tris[:, :, 2].max(axis=1) > 100.0)   # the high-rise group (full-scale metres)
             groups = [(tris[~tall], BODY), (tris[tall], ACCENT)]
         elif case in ("G", "H", "I"):     # one body, the subject of the case
             groups = [(tris, ACCENT)]
@@ -292,7 +324,12 @@ def render_case(case):
 
 if __name__ == "__main__":
     ps.apply()
-    cube = merge_coplanar(boxes_tris([{"min": [0, 0, 0], "max": [1, 1, 1]}]))
+    unit = boxes_tris([{"min": [0, 0, 0], "max": [1, 1, 1]}])
+    cube = merge_coplanar(unit)
     assert len(cube) == 6 and all(len(q) == 4 for q in cube), "a unit cube must merge to six quads"
+    quads = lambda polys: {frozenset(tuple(np.round(v, 6)) for v in q) for q in polys}   # noqa: E731
+    wound = unit.copy()
+    wound[[1, 4, 7, 10]] = wound[[1, 4, 7, 10]][:, ::-1]   # four triangles wound the other way
+    assert quads(merge_coplanar(wound)) == quads(cube), "the merge must not depend on how a triangle is wound"
     for c in D.CASE_IDS:
         print(c, render_case(c))

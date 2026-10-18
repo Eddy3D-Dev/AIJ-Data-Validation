@@ -513,17 +513,18 @@ for sp, _ in SPECIES:
 # ----------------------------------------------------------------------------- geometry outlines
 
 def outlines(stl, project):
-    """The plan-view outline of an ASCII STL: the vertical facets (walls) project to line segments; `project` maps (x, y) of the file's frame to the drawing's."""
+    """The plan-view outline of an ASCII STL: the vertical facets (walls) project to line segments; `project` maps (x, y) of the file's frame to the drawing's.
+    The base slab that closes the terrain (its skirt lies below z = -0.5 m) is not a wall and is left out."""
     segs, v = set(), []
     with io.open(stl, encoding="utf-8") as f:
         for line in f:
             t = line.split()
             if t and t[0] == "vertex":
-                v.append((float(t[1]), float(t[2])))
+                v.append((float(t[1]), float(t[2]), float(t[3])))
                 if len(v) == 3:
-                    (x1, y1), (x2, y2), (x3, y3) = v
-                    if abs((x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1)) < 1e-6:        # a vertical facet: its plan projection is a segment (or a point)
-                        pts = sorted({(round(a, 2), round(b, 2)) for a, b in v})
+                    (x1, y1, z1), (x2, y2, z2), (x3, y3, z3) = v
+                    if min(z1, z2, z3) > -0.5 and abs((x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1)) < 1e-6:        # a vertical facet: its plan projection is a segment (or a point)
+                        pts = sorted({(round(a, 2), round(b, 2)) for a, b, _ in v})
                         if len(pts) == 2:
                             segs.add((pts[0], pts[1]))
                     v = []
