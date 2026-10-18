@@ -173,13 +173,16 @@
   }
  },
  "counts": {
-  "rows": 4317,
+  "rows": 5308,
   "by_case": {
    "A": 186,
    "B": 224,
    "C": 1080,
    "D": 267,
-   "E": 2560
+   "E": 2560,
+   "J": 444,
+   "K": 203,
+   "L": 344
   }
  },
  "cases": {
@@ -369,6 +372,7 @@
      "origin": "repository clone of the Zenodo record"
     }
    ],
+   "normalisation": null,
    "known_issues": {},
    "extra_measurements": {}
   },
@@ -557,6 +561,7 @@
      "origin": "repository clone of the Zenodo record"
     }
    ],
+   "normalisation": null,
    "known_issues": {},
    "extra_measurements": {}
   },
@@ -875,6 +880,7 @@
      "origin": "repository clone of the Zenodo record"
     }
    ],
+   "normalisation": null,
    "known_issues": {},
    "extra_measurements": {
     "0D": {
@@ -1168,6 +1174,7 @@
      "origin": "Zenodo 10.5281/zenodo.15402669 (downloaded; SHA256SUMS.txt beside it)"
     }
    ],
+   "normalisation": null,
    "known_issues": {},
    "extra_measurements": {
     "raw_stl_stats": {
@@ -1756,6 +1763,7 @@
      "origin": "repository clone of the Zenodo record"
     }
    ],
+   "normalisation": null,
    "known_issues": {
     "official_stl_points_inside": {
      "point_ids": [
@@ -1784,6 +1792,1240 @@
      "SE": 0.1167,
      "NNW": 0.105,
      "SSE": 0.0934
+    }
+   }
+  },
+  "J": {
+   "id": "J",
+   "title": "Case J — 1:1:2 building, floor source, non-isothermal",
+   "status": "released",
+   "status_note": null,
+   "doi": "10.5281/zenodo.15447887",
+   "doi_version": null,
+   "zenodo_record": "https://zenodo.org/records/15447887",
+   "licence": "CC BY 4.0",
+   "data_collectors": [
+    "Ryuichiro Yoshie (Tokyo Polytechnic University)",
+    "Hideyuki Tanaka (Takenaka Corporation)",
+    "Tsuyoshi Kobayashi (Tokyo Polytechnic University)"
+   ],
+   "editors_distributors": [
+    "Yoshihide Tominaga (Niigata Institute of Technology)",
+    "Hideki Kikumoto (The University of Tokyo)",
+    "Tsubasa Okaze (Institute of Science Tokyo)"
+   ],
+   "contact": "Ryuichiro Yoshie <yoshie@arch.t-kougei.ac.jp>",
+   "citation_requested": "Yoshie, R. (2016). Wind Tunnel Experiment and Large Eddy Simulation of Pollutant/Thermal Dispersion in Non-isothermal Turbulent Boundary Layer. Adv Environ Wind Eng, 167-196. https://doi.org/10.1007/978-4-431-55912-2_9",
+   "files": {
+    "points_csv": "cases/J/points.csv",
+    "points_parquet": "cases/J/points.parquet",
+    "approach_flow_csv": "cases/J/approach_flow.csv",
+    "approach_flow_parquet": "cases/J/approach_flow.parquet",
+    "directions_csv": "cases/J/directions.csv",
+    "geometry_json": "cases/J/geometry.json",
+    "geometry": [
+     "cases/J/geometry.stl"
+    ]
+   },
+   "columns_present": [
+    "case_id",
+    "config",
+    "instrument",
+    "point_id",
+    "wind_direction_deg",
+    "wind_direction",
+    "x",
+    "y",
+    "z",
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "campaign",
+    "run",
+    "C",
+    "c_rms",
+    "concentration_ratio",
+    "T",
+    "T_rms",
+    "uT",
+    "vT",
+    "wT"
+   ],
+   "counts": {
+    "rows": 444,
+    "distinct_points": 444,
+    "by_config": {
+     "default": 444
+    },
+    "by_instrument": {
+     "split_fibre": 444
+    },
+    "by_direction": {
+     "0.0": 444
+    },
+    "nan_per_column": {
+     "Vs": 444,
+     "velocity_ratio": 444,
+     "uv": 444,
+     "uw": 444,
+     "vw": 444,
+     "uc": 444,
+     "vc": 444,
+     "wc": 444,
+     "velocity_ratio_sd": 444,
+     "k_ratio": 444
+    }
+   },
+   "configurations": [
+    {
+     "config": "default",
+     "instrument": "split_fibre",
+     "wind_direction_deg": 0.0,
+     "wind_direction": "",
+     "rows": 444,
+     "measured": 444,
+     "status": "settled"
+    }
+   ],
+   "frame": {
+    "origin": "the building's leeward (downwind) wall centre on the ground; x = 0 is the leeward wall",
+    "x": "+x streamwise (the wind blows toward +x); building x in [-0.08, 0]; floor source at x = +0.04 m (0.25 H beyond the leeward wall)",
+    "y": "+y lateral; building y in [-0.04, 0.04]; the z/H = 0.025 plane is measured on the y <= 0 side only, the z/H = 0.25 plane on both",
+    "z": "+z up; roof at 0.16; heated floor at z = 0",
+    "length_scale": "model metres (the sources state no model:full scale ratio); b = 0.08 m, H = 0.16 m",
+    "source": "5 mm diameter floor outlet at (0.04, 0, 0); 5 % ethylene in air at 30.4 degC, 9.17e-6 m3/s (readme, data paper section 3.10)"
+   },
+   "transform_from_published": {
+    "coordinate_scale": 1.0,
+    "lateral_sign": 1,
+    "origin_shift_m": [
+     0,
+     0,
+     0
+    ],
+    "temperature": "K -> degC (workbook values; the CSV is in Kelvin)",
+    "note": "values from the workbook at full precision (the CSV is these ratios rounded; checked); variances from the workbook's <u'2> columns; no coordinate or sign change"
+   },
+   "inflow": {
+    "U_H_m_s": 1.46,
+    "U_H_stated_m_s": 1.46,
+    "U_H_workbook_m_s": 1.4581,
+    "H_m": 0.16,
+    "log_law": {
+     "z_range_m": [
+      0.02,
+      0.32
+     ],
+     "points": 15,
+     "u_star_m_s": 0.09369,
+     "z0_m": 0.0003051023919,
+     "z0_mm": 0.3051,
+     "rms_residual_m_s": 0.0276,
+     "rms_residual_rel": 0.021,
+     "error_at_H_rel": -0.0199,
+     "note": "unstably stratified: a neutral log law is only a rough description (see rms_residual_rel)"
+    },
+    "power_law": {
+     "z_range_m": [
+      0.02,
+      0.32
+     ],
+     "points": 15,
+     "alpha": 0.1825,
+     "max_rel_error": 0.0732
+    },
+    "method": "least squares, kappa = 0.41, z = 0.02 .. 2H on AF_caseJ.csv",
+    "turbulence_intensity_at_H": 0.0863,
+    "stratification": {
+     "floor_temperature_degC": 45.8,
+     "air_temperature_at_H_degC": 12.1719,
+     "delta_theta_K": 33.6,
+     "approach_mean_temperature_degC": 16.6,
+     "gas_temperature_degC": 30.4,
+     "building_mean_surface_temperature_degC": 24.4723,
+     "bulk_Richardson_number": -0.08564,
+     "profile": "cases/J/approach_flow_full.csv (T, T_rms, uT, vT, wT per height)"
+    },
+    "streamwise_change_without_building": {
+     "note": "the workbook's empty-tunnel profiles at x/H = -2.5, 0, +2.5 do not coincide: U/U_H at z = H and at the lowest height",
+     "-2.5": {
+      "U_over_UH_at_z_eq_H": 1.000023318,
+      "U_over_UH_at_z_eq_0.01875H": 0.3291375763
+     },
+     "0.0": {
+      "U_over_UH_at_z_eq_H": 1.033291612,
+      "U_over_UH_at_z_eq_0.01875H": 0.5838711337
+     },
+     "2.5": {
+      "U_over_UH_at_z_eq_H": 1.037518003,
+      "U_over_UH_at_z_eq_0.01875H": 0.5039091969
+     }
+    }
+   },
+   "geometry_summary": [
+    {
+     "configuration": "default",
+     "file": "cases/J/geometry.stl",
+     "triangles": 12,
+     "watertight": true,
+     "bbox_min": [
+      -0.08,
+      -0.04,
+      0.0
+     ],
+     "bbox_max": [
+      0.0,
+      0.04,
+      0.16
+     ],
+     "boxes": 1
+    }
+   ],
+   "provenance": [
+    {
+     "path": "raw/cases/case-j/RS_caseJ.csv",
+     "sha256": "1f08bf8cf0018c27935afaf67a5e5aa5af30227a83a6654b8cc7b3cda6341a72",
+     "bytes": 46896,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-j/AF_caseJ.csv",
+     "sha256": "801464d563db9c15e01a3a99352cbadf6dd3534a35ba90838cec07dffd53de27",
+     "bytes": 2054,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-j/BD-ST_caseJ.csv",
+     "sha256": "2b053dc304cb085951f1f2ee0baf86466abaf4062c604aa056955f15aa4b781a",
+     "bytes": 2709,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-j/LF_caseJ.xlsx",
+     "sha256": "4ee2d404576fa76e01fcccb49000784c74ea1779aa76a37c205e2d7e5485b464",
+     "bytes": 468959,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-j/readme_caseJ.md",
+     "sha256": "c9c9afba2637503bfaf9a369f0b6cd9f3f55513fd7cf345f74bf5bebfd0e4990",
+     "bytes": 5196,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-j/MP-y_caseJ.png",
+     "sha256": "7e773322750a7cd1345ffc973a51c06eeee1fa374ef317ee17df4db2d09c9f1e",
+     "bytes": 91446,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-j/MP-z_caseJ.png",
+     "sha256": "3445a8d64ed91618e6860e53de2e167bdbae11b6b0845d94f98edebbedf17ce5",
+     "bytes": 173796,
+     "origin": "repository clone of the Zenodo record"
+    }
+   ],
+   "normalisation": {
+    "concentration": {
+     "c0_ppm": 12.283215,
+     "definition": "c0 = (gas fraction 0.05) x q / (U_H H^2), q = 9.17e-6 m3/s, U_H = 1.4581 m/s, H = 0.16 m",
+     "source": "LF_caseJ.xlsx 'Experimental Condition' cell (Co); recomputed in check c0_from_q_gas_fraction_UH_H_equals_workbook",
+     "without_gas_fraction_ppm": 245.6643
+    },
+    "velocity": {
+     "U_H_m_s": 1.4581,
+     "height_m": 0.16
+    },
+    "temperature": {
+     "theta_f_degC": 45.8,
+     "delta_theta_K": 33.6,
+     "definition": "(T - T_f) / delta_theta"
+    }
+   },
+   "known_issues": {
+    "csv_unit_of_T": "RS_caseJ.csv, AF_caseJ.csv and BD-ST_caseJ.csv give temperature in KELVIN; the table carries degC (T) and K (T_rms, a difference)",
+    "duplicate_row": "RS_caseJ.csv No. 1 and No. 153 are the same row (-0.16, 0, 0.004)",
+    "published_resolution": "the CSV is the workbook's ratios rounded to 1e-3 (U, V, W) or 1e-4: heat fluxes sit on a 0.0049 K m/s grid, k on 0.00021 m2/s2; the table uses the workbook values",
+    "fill_series_uncertainty": "workbook sheet xy-plane2, column AH (Ue of the w'theta' flux): 193 cells are 0.0037 + a running integer, not an uncertainty",
+    "readme_reynolds_number": "readme 43,000, data paper 1.6e4 (U_H H / nu); 43,000 is Case H's",
+    "no_shear_stresses_at_points": "uv, uw, vw are published only for the approach flow"
+   },
+   "extra_measurements": {
+    "expanded_uncertainty": {
+     "where": "LF_caseJ.xlsx, sheets xz-plane(Unstable state), xy-plane(Unstable state), xy-plane2(Unstable state) and Unstable Inflow: every measured quantity has a 'Measurement' column and an 'Expanded Uncertainty: Ue' column beside it, in the workbook's non-dimensional units; the table has no column for it. per_quantity is in physical units over the 465 workbook rows of the three measurement sheets (columns are the table's names, su/sv/sw = the rms columns)",
+     "coverage_factor": "not stated in the workbook (ISO/IEC Guide 98-3 per the data paper)",
+     "per_quantity": {
+      "U": {
+       "n": 465,
+       "min": 0.0007063698276,
+       "median": 0.03120062753,
+       "p95": 0.09146589472,
+       "max": 0.2022636947,
+       "unit": "m/s",
+       "workbook_columns": "E value, F Ue"
+      },
+      "V": {
+       "n": 465,
+       "min": 0.0005287327617,
+       "median": 0.009320835084,
+       "p95": 0.03747450723,
+       "max": 0.05926361862,
+       "unit": "m/s",
+       "workbook_columns": "G value, H Ue"
+      },
+      "W": {
+       "n": 465,
+       "min": 0.03472950427,
+       "median": 0.04785750586,
+       "p95": 0.06776681422,
+       "max": 0.1034005808,
+       "unit": "m/s",
+       "workbook_columns": "I value, J Ue"
+      },
+      "su": {
+       "n": 465,
+       "min": 0.0002384673283,
+       "median": 0.008564583566,
+       "p95": 0.03229237532,
+       "max": 0.07904991983,
+       "unit": "m/s",
+       "workbook_columns": "K value, L Ue"
+      },
+      "sv": {
+       "n": 465,
+       "min": 4.795831523e-05,
+       "median": 0.003966715686,
+       "p95": 0.01152380499,
+       "max": 0.01986124094,
+       "unit": "m/s",
+       "workbook_columns": "M value, N Ue"
+      },
+      "sw": {
+       "n": 465,
+       "min": 0.0002185368009,
+       "median": 0.006172419839,
+       "p95": 0.02187037799,
+       "max": 0.03397555531,
+       "unit": "m/s",
+       "workbook_columns": "O value, P Ue"
+      },
+      "uu": {
+       "n": 465,
+       "min": 1.408718502e-05,
+       "median": 0.00331287219,
+       "p95": 0.02181375085,
+       "max": 0.08290796122,
+       "unit": "m2/s2",
+       "workbook_columns": "Q value, R Ue"
+      },
+      "vv": {
+       "n": 465,
+       "min": 5.745235763e-06,
+       "median": 0.001380878111,
+       "p95": 0.005978756098,
+       "max": 0.01096340781,
+       "unit": "m2/s2",
+       "workbook_columns": "S value, T Ue"
+      },
+      "ww": {
+       "n": 465,
+       "min": 7.666832895e-06,
+       "median": 0.001433158003,
+       "p95": 0.01229073046,
+       "max": 0.0252406044,
+       "unit": "m2/s2",
+       "workbook_columns": "U value, V Ue"
+      },
+      "k": {
+       "n": 465,
+       "min": 1.402256142e-05,
+       "median": 0.002222147523,
+       "p95": 0.0141674854,
+       "max": 0.04080601916,
+       "unit": "m2/s2",
+       "workbook_columns": "W value, X Ue"
+      },
+      "T": {
+       "n": 465,
+       "min": 0.1503062263,
+       "median": 0.2684865753,
+       "p95": 0.4363612983,
+       "max": 1.097016784,
+       "unit": "K",
+       "workbook_columns": "Y value, Z Ue"
+      },
+      "T_rms": {
+       "n": 465,
+       "min": 0.01423485405,
+       "median": 0.05979374442,
+       "p95": 0.1542345088,
+       "max": 0.2424701744,
+       "unit": "K",
+       "workbook_columns": "AA value, AB Ue"
+      },
+      "uT": {
+       "n": 465,
+       "min": 0.000270477972,
+       "median": 0.01013499219,
+       "p95": 0.03757034758,
+       "max": 0.0540188029,
+       "unit": "K m/s",
+       "workbook_columns": "AC value, AD Ue"
+      },
+      "vT": {
+       "n": 465,
+       "min": 4.082482905e-05,
+       "median": 0.003514317146,
+       "p95": 0.01312800315,
+       "max": 0.03670513622,
+       "unit": "K m/s",
+       "workbook_columns": "AE value, AF Ue"
+      },
+      "wT": {
+       "n": 272,
+       "min": 0.0001521786231,
+       "median": 0.004819331229,
+       "p95": 0.01591986539,
+       "max": 0.1834328996,
+       "unit": "K m/s",
+       "workbook_columns": "AG value, AH Ue",
+       "excluded_fill_series_cells": 193
+      },
+      "C": {
+       "n": 465,
+       "min": 0.6856458054,
+       "median": 1.01661099,
+       "p95": 23.46769022,
+       "max": 824.1936694,
+       "unit": "ppm",
+       "workbook_columns": "AI value, AJ Ue",
+       "rows_where_mean_C_does_not_exceed_its_own_Ue": 197,
+       "fraction_of_rows": 0.424,
+       "relative_Ue_median_where_C_above_20_ppm": 0.0466
+      },
+      "c_rms": {
+       "n": 465,
+       "min": 0.0004734355197,
+       "median": 0.4291750722,
+       "p95": 13.4654519,
+       "max": 319.1524507,
+       "unit": "ppm",
+       "workbook_columns": "AK value, AL Ue"
+      }
+     }
+    },
+    "resolution_of_published_ratios": {
+     "U": 0.0014581,
+     "V": 0.0014581,
+     "W": 0.0014581,
+     "u_rms": 0.00014581,
+     "v_rms": 0.00014581,
+     "w_rms": 0.00014581,
+     "k": 0.000212605561,
+     "T": 0.00336,
+     "t_rms": 0.00336,
+     "ut": 0.004899216,
+     "vt": 0.004899216,
+     "wt": 0.004899216,
+     "C": 0.001228321531,
+     "c_rms": 0.001228321531
+    },
+    "extra_files": {
+     "surface_temperature": {
+      "file": "cases/J/surface_temperature.csv",
+      "columns": [
+       "x",
+       "y",
+       "z",
+       "T"
+      ],
+      "units": [
+       "m",
+       "m",
+       "m",
+       "degC"
+      ],
+      "rows": 121,
+      "source": "BD-ST_caseJ.csv (Kelvin there)"
+     },
+     "approach_flow_full": {
+      "file": "cases/J/approach_flow_full.csv",
+      "columns": [
+       "x",
+       "z",
+       "U",
+       "V",
+       "W",
+       "uu",
+       "vv",
+       "ww",
+       "uv",
+       "uw",
+       "k",
+       "T",
+       "T_rms",
+       "uT",
+       "vT",
+       "wT"
+      ],
+      "units": [
+       "m",
+       "m",
+       "m/s",
+       "m/s",
+       "m/s",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "degC",
+       "K",
+       "K m/s",
+       "K m/s",
+       "K m/s"
+      ],
+      "rows": 60,
+      "source": "LF_caseJ.xlsx 'Unstable Inflow' (three stations x = -0.4, 0, +0.4 m, no building)"
+     }
+    },
+    "csv_vs_workbook_rounding": {
+     "U": {
+      "ratio_decimals": 3,
+      "csv_decimals": 2,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "V": {
+      "ratio_decimals": 3,
+      "csv_decimals": 2,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "W": {
+      "ratio_decimals": 3,
+      "csv_decimals": 2,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "u_rms": {
+      "ratio_decimals": 4,
+      "csv_decimals": 3,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "v_rms": {
+      "ratio_decimals": 4,
+      "csv_decimals": 3,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "w_rms": {
+      "ratio_decimals": 4,
+      "csv_decimals": 3,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "k": {
+      "ratio_decimals": 4,
+      "csv_decimals": 4,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "T": {
+      "ratio_decimals": 4,
+      "csv_decimals": 2,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "t_rms": {
+      "ratio_decimals": 4,
+      "csv_decimals": 3,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "ut": {
+      "ratio_decimals": 4,
+      "csv_decimals": 4,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "vt": {
+      "ratio_decimals": 4,
+      "csv_decimals": 4,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "wt": {
+      "ratio_decimals": 4,
+      "csv_decimals": 4,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "C": {
+      "ratio_decimals": 4,
+      "csv_decimals": 3,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "c_rms": {
+      "ratio_decimals": 4,
+      "csv_decimals": 3,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     }
+    },
+    "not_carried": {
+     "none": "every published point quantity of Case J has a column"
+    }
+   }
+  },
+  "K": {
+   "id": "K",
+   "title": "Case K — 9 x 9 cube array, floor point source",
+   "status": "released",
+   "status_note": null,
+   "doi": "10.5281/zenodo.15448050",
+   "doi_version": null,
+   "zenodo_record": "https://zenodo.org/records/15448050",
+   "licence": "CC BY 4.0",
+   "data_collectors": [
+    "Ryuichiro Yoshie (Tokyo Polytechnic University)",
+    "Takumi Tachibana (Wind Engineering Institute)"
+   ],
+   "editors_distributors": [
+    "Yoshihide Tominaga (Niigata Institute of Technology)",
+    "Hideki Kikumoto (The University of Tokyo)",
+    "Tsubasa Okaze (Institute of Science Tokyo)"
+   ],
+   "contact": "Ryuichiro Yoshie <yoshie@arch.t-kougei.ac.jp>",
+   "citation_requested": "Yoshie, R. (2016). Wind Tunnel Experiment and Large Eddy Simulation of Pollutant/Thermal Dispersion in Non-isothermal Turbulent Boundary Layer. Adv Environ Wind Eng, 167-196. https://doi.org/10.1007/978-4-431-55912-2_9",
+   "files": {
+    "points_csv": "cases/K/points.csv",
+    "points_parquet": "cases/K/points.parquet",
+    "approach_flow_csv": "cases/K/approach_flow.csv",
+    "approach_flow_parquet": "cases/K/approach_flow.parquet",
+    "directions_csv": "cases/K/directions.csv",
+    "geometry_json": "cases/K/geometry.json",
+    "geometry": [
+     "cases/K/geometry.stl"
+    ]
+   },
+   "columns_present": [
+    "case_id",
+    "config",
+    "instrument",
+    "point_id",
+    "wind_direction_deg",
+    "wind_direction",
+    "x",
+    "y",
+    "z",
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "campaign",
+    "run",
+    "C",
+    "c_rms",
+    "concentration_ratio"
+   ],
+   "counts": {
+    "rows": 203,
+    "distinct_points": 203,
+    "by_config": {
+     "default": 203
+    },
+    "by_instrument": {
+     "split_fibre": 203
+    },
+    "by_direction": {
+     "0.0": 203
+    },
+    "nan_per_column": {
+     "Vs": 203,
+     "velocity_ratio": 203,
+     "uv": 203,
+     "uw": 203,
+     "vw": 203,
+     "T": 203,
+     "T_rms": 203,
+     "uc": 203,
+     "vc": 203,
+     "wc": 203,
+     "uT": 203,
+     "vT": 203,
+     "wT": 203,
+     "velocity_ratio_sd": 203,
+     "k_ratio": 203
+    }
+   },
+   "configurations": [
+    {
+     "config": "default",
+     "instrument": "split_fibre",
+     "wind_direction_deg": 0.0,
+     "wind_direction": "",
+     "rows": 203,
+     "measured": 203,
+     "status": "settled"
+    }
+   ],
+   "frame": {
+    "origin": "bottom centre of the windward wall of the 4th row of the central column: x = 0 is that wall, y = 0 the centre line of the central column",
+    "x": "+x streamwise (the wind blows toward +x); 9 rows, row k spans x in [0.12 (k-4), 0.12 (k-4) + 0.06]",
+    "y": "+y lateral; 9 columns, column centres at y = 0, +-0.12, ... +-0.48",
+    "z": "+z up; cube tops at 0.06",
+    "length_scale": "model metres (the sources state no model:full scale ratio); cube H = 0.06 m",
+    "source": "5 mm diameter floor outlet at (-0.15, 0, 0), 100 % ethylene, 3.6e-6 m3/s; between rows 2 and 3 on the centre line",
+    "point_numbers": "RS_caseK.csv publishes none; point_id is the row order of the file"
+   },
+   "transform_from_published": {
+    "coordinate_scale": 1.0,
+    "lateral_sign": 1,
+    "origin_shift_m": [
+     0,
+     0,
+     0
+    ],
+    "turbulence": "rms squared to variance",
+    "note": "values from the workbook at full precision (x, y, z there in mm); the CSV is these rounded; no sign change"
+   },
+   "inflow": {
+    "U_H_m_s": 2.2377,
+    "U_H_stated_m_s": 2.33,
+    "H_m": 0.06,
+    "U_at_z_0.2m_m_s": 3.23,
+    "turbulence_intensity_at_z_0.2": 0.2167,
+    "log_law": {
+     "z_range_m": [
+      0.02,
+      0.6
+     ],
+     "points": 15,
+     "u_star_m_s": 0.40706,
+     "z0_m": 0.007438465852,
+     "z0_mm": 7.4385,
+     "rms_residual_m_s": 0.0819,
+     "rms_residual_rel": 0.025,
+     "error_at_H_rel": -0.0737
+    },
+    "power_law": {
+     "z_range_m": [
+      0.02,
+      0.6
+     ],
+     "points": 15,
+     "alpha": 0.3934,
+     "max_rel_error": 0.2273
+    },
+    "method": "least squares, kappa = 0.41, z = 0.02 .. 0.6 m (10 H) on AF_caseK.csv: the profile is Case H's, tabulated for a 0.2 m building, so the window is a choice",
+    "note": "the file is the approach flow of Case H (identical rows); the workbook normalises it with uH = U(0.2 m) = 3.23 m/s and H = 0.2 m"
+   },
+   "geometry_summary": [
+    {
+     "configuration": "default",
+     "file": "cases/K/geometry.stl",
+     "triangles": 972,
+     "watertight": true,
+     "bbox_min": [
+      -0.36,
+      -0.51,
+      0.0
+     ],
+     "bbox_max": [
+      0.66,
+      0.51,
+      0.06
+     ],
+     "boxes": 81
+    }
+   ],
+   "provenance": [
+    {
+     "path": "raw/cases/case-k/RS_caseK.csv",
+     "sha256": "b2d154aedb54993b806eaffd4f73361250cc1a5d9da68a8623bb7632a933d55c",
+     "bytes": 14314,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-k/AF_caseK.csv",
+     "sha256": "b8a180fb44284d49fb8a73f7d5c6473046694f2d6fb95977677c9608c1486ed1",
+     "bytes": 1190,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-k/LF_caseK.xlsx",
+     "sha256": "1bb93eac07bf245458836a6a7ac79ce9a350e16db2801be3e94333c2f78602cb",
+     "bytes": 182879,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-k/readme_caseK.md",
+     "sha256": "84fcc15c75bf029322d4e27b7dada98919b71e45a03dc532cfd5aae233fd7ea5",
+     "bytes": 4535,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-k/MP-y_caseK.png",
+     "sha256": "92e063f8aad1407eaa447563ff25ea22c867921c557f497c861c558695e5d8ca",
+     "bytes": 368797,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-k/MP-z_caseK.png",
+     "sha256": "68a923fe125a8e2a4ce83a7f30e6ad12ebee31498f04bb89667677b9d154d677",
+     "bytes": 323677,
+     "origin": "repository clone of the Zenodo record"
+    }
+   ],
+   "normalisation": {
+    "concentration": {
+     "c0_ppm": 429.184549,
+     "definition": "c0 = q / (U_H H^2), q = 3.6e-6 m3/s, U_H = 2.33 m/s, H = 0.06 m (readme and data paper section 3.11)",
+     "workbook_C0_ppm": 18.218292,
+     "workbook_definition": "C0 = q / (UH H^2) with H = 0.2 m and UH = 4.94009 m/s (LF_caseK.xlsx, 'Measurement data' cells R7:R11)",
+     "ratio_c0_over_workbook_C0": 23.557892,
+     "to_get_the_workbook_ratio": "multiply concentration_ratio by c0 / workbook_C0"
+    },
+    "velocity": {
+     "U_H_m_s": 2.33,
+     "height_m": 0.06,
+     "workbook_UH_m_s": 4.94009,
+     "workbook_H_m": 0.2
+    }
+   },
+   "known_issues": {
+    "workbook_reference": "LF_caseK.xlsx normalises with H = 0.2 m, UH = 4.94009 m/s and C0 = 18.218 ppm, not the cube's H = 0.06 m and U_H = 2.33 m/s; the table uses the cube's",
+    "no_point_numbers": "RS_caseK.csv has no point-number column; point_id here is the row order",
+    "csv_k": "the CSV's k is recomputed from the rounded rms values; the table carries the workbook's k",
+    "inflow_is_case_H": "AF_caseK.csv is Case H's approach-flow file, measured at x = -0.493 m",
+    "workbook_units": "workbook x, y are millimetres in both data sheets, z is millimetres in 'Measurement data' but metres in 'Inflow'",
+    "usc_not_carried": "the workbook's <usc> and sigma_usc ('Velocity magnitute') are not in the table (QUESTIONS.md QK2)",
+    "lateral_velocity": "V is dominated by a cross-flow offset (about 0.06 m/s); its sign cannot be checked from the data",
+    "data_paper_text": "data paper section 3.11 describes 'approximately 30 points at eight heights downwind of the line source'; Case K has 203 points at five heights and a point source (QUESTIONS.md QK4)"
+   },
+   "extra_measurements": {
+    "usc": {
+     "workbook_columns": "E (<usc>, m/s) and F (sigma_usc), sheet 'Measurement data'",
+     "ratio_to_vector_magnitude": "1.03 .. 3.9 (median 1.19) of |U|, never below it; not sqrt(|U|^2 + 2k) either",
+     "note": "a mean scalar speed of the instantaneous velocity, apparently; no column of the schema holds it (Vs is a thermistor speed)"
+    },
+    "extra_files": {
+     "approach_flow_full": {
+      "file": "cases/K/approach_flow_full.csv",
+      "columns": [
+       "x",
+       "z",
+       "U",
+       "V",
+       "W",
+       "uu",
+       "vv",
+       "ww",
+       "uv",
+       "uw",
+       "k"
+      ],
+      "units": [
+       "m",
+       "m",
+       "m/s",
+       "m/s",
+       "m/s",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2"
+      ],
+      "rows": 17,
+      "source": "AF_caseK.csv"
+     }
+    },
+    "layout": {
+     "y_values_m": [
+      -0.18,
+      -0.12,
+      -0.06,
+      0.0,
+      0.06,
+      0.12,
+      0.18
+     ],
+     "z_values_m": [
+      0.004,
+      0.01,
+      0.03,
+      0.05,
+      0.07
+     ],
+     "rows_per_y": {
+      "-0.18": 15,
+      "-0.12": 9,
+      "-0.06": 50,
+      "0.0": 55,
+      "0.06": 50,
+      "0.12": 9,
+      "0.18": 15
+     }
+    },
+    "pitch_scan_points_inside_cubes": {
+     "0.09": 36,
+     "0.1": 48,
+     "0.11": 4,
+     "0.115": 0,
+     "0.12": 0,
+     "0.13": 0,
+     "0.14": 8,
+     "0.15": 8
+    },
+    "tracer_flux_over_q": {
+     "-0.03": 0.67,
+     "0.09": 0.489,
+     "0.21": 0.403
+    }
+   }
+  },
+  "L": {
+   "id": "L",
+   "title": "Case L — 9 x 14 cube array, floor line source, non-isothermal",
+   "status": "released",
+   "status_note": null,
+   "doi": "10.5281/zenodo.15487637",
+   "doi_version": null,
+   "zenodo_record": "https://zenodo.org/records/15487637",
+   "licence": "CC BY 4.0",
+   "data_collectors": [
+    "Ryuichiro Yoshie (Tokyo Polytechnic University)",
+    "Koudai Katada (Tokyo Polytechnic University)"
+   ],
+   "editors_distributors": [
+    "Yoshihide Tominaga (Niigata Institute of Technology)",
+    "Hideki Kikumoto (The University of Tokyo)",
+    "Tsubasa Okaze (Institute of Science Tokyo)"
+   ],
+   "contact": "Ryuichiro Yoshie <yoshie@arch.t-kougei.ac.jp>",
+   "citation_requested": "Yoshie, R., Nomura, K., Katada, K., Jiang, G. (2012). Non-isothermal large eddy simulation of pollutant and thermal dispersion in urban street canyons. 22nd National Symposium on Wind Engineering, 61-66 (in Japanese). https://doi.org/10.14887/kazekosymp.22.0.61.0; Jiang, G., Yoshie, R. (2018). Large-eddy simulation of flow and pollutant dispersion in a 3D urban street model located in an unstable boundary layer. Build. Environ. 142, 47-57. https://doi.org/10.1016/j.buildenv.2018.06.015",
+   "files": {
+    "points_csv": "cases/L/points.csv",
+    "points_parquet": "cases/L/points.parquet",
+    "approach_flow_csv": "cases/L/approach_flow.csv",
+    "approach_flow_parquet": "cases/L/approach_flow.parquet",
+    "directions_csv": "cases/L/directions.csv",
+    "geometry_json": "cases/L/geometry.json",
+    "geometry": [
+     "cases/L/geometry.stl"
+    ]
+   },
+   "columns_present": [
+    "case_id",
+    "config",
+    "instrument",
+    "point_id",
+    "wind_direction_deg",
+    "wind_direction",
+    "x",
+    "y",
+    "z",
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "campaign",
+    "run",
+    "uv",
+    "uw",
+    "C",
+    "c_rms",
+    "concentration_ratio",
+    "T",
+    "T_rms",
+    "uc",
+    "vc",
+    "wc",
+    "uT",
+    "vT",
+    "wT"
+   ],
+   "counts": {
+    "rows": 344,
+    "distinct_points": 344,
+    "by_config": {
+     "default": 344
+    },
+    "by_instrument": {
+     "split_fibre": 344
+    },
+    "by_direction": {
+     "0.0": 344
+    },
+    "nan_per_column": {
+     "Vs": 344,
+     "velocity_ratio": 344,
+     "vw": 344,
+     "velocity_ratio_sd": 344,
+     "k_ratio": 344
+    }
+   },
+   "configurations": [
+    {
+     "config": "default",
+     "instrument": "split_fibre",
+     "wind_direction_deg": 0.0,
+     "wind_direction": "",
+     "rows": 344,
+     "measured": 344,
+     "status": "settled"
+    }
+   ],
+   "frame": {
+    "origin": "bottom centre of the windward wall of the 9th row (of 14) of the central column: x = 0 is that wall, y = 0 the centre line of the central column",
+    "x": "+x streamwise (the wind blows toward +x); row k spans x in [0.12 (k-9), 0.12 (k-9) + 0.06]; 14 rows from x = -0.96 to 0.66",
+    "y": "+y lateral; 9 columns, column centres at y = 0, +-0.12, ... +-0.48 (1.02 m of the 1.2 m tunnel)",
+    "z": "+z up from the model floor (10 mm above the tunnel floor, data paper); cube tops at 0.06; heated floor at z = 0",
+    "length_scale": "model metres (the sources state no model:full scale ratio); cube H = 0.06 m",
+    "source": "floor line source across the tunnel between rows 7 and 8, centre x = -0.15 m; readme 0.037 m x 1.2 m, BD_caseL.stl patch 0.04 m x 1.02 m; 100 % ethylene, 500 cc/min (8.33e-6 m3/s) at 35 degC",
+    "temperature": "T is degC (the CSV's 'T(K)' is degC); T_rms and heat fluxes are in K"
+   },
+   "transform_from_published": {
+    "coordinate_scale": 1.0,
+    "lateral_sign": 1,
+    "origin_shift_m": [
+     0,
+     0,
+     0
+    ],
+    "turbulence": "rms squared to variance",
+    "temperature": "none for the points (the CSV is degC under a K header); AF: K -> degC (workbook)",
+    "note": "values from the workbook at full precision (the CSV is these rounded); no coordinate or sign change"
+   },
+   "inflow": {
+    "U_H_m_s": 1.3394,
+    "U_H_stated_m_s": 1.34,
+    "U_H_workbook_m_s": 1.339415,
+    "H_m": 0.06,
+    "turbulence_intensity_at_H": 0.1294,
+    "log_law": {
+     "z_range_m": [
+      0.02,
+      0.32
+     ],
+     "points": 19,
+     "u_star_m_s": 0.06999,
+     "z0_m": 2.652369651e-05,
+     "z0_mm": 0.0265,
+     "rms_residual_m_s": 0.0315,
+     "rms_residual_rel": 0.0224,
+     "error_at_H_rel": -0.0156,
+     "note": "unstably stratified: a neutral log law is only a rough description (see rms_residual_rel)"
+    },
+    "power_law": {
+     "z_range_m": [
+      0.02,
+      0.32
+     ],
+     "points": 19,
+     "alpha": 0.128,
+     "max_rel_error": 0.0761
+    },
+    "method": "least squares, kappa = 0.41, z = 0.02 .. 0.32 m (about 5 H) on the workbook's Inflow sheet (CSV = its rounding)",
+    "stratification": {
+     "floor_temperature_degC": 45.0091,
+     "air_temperature_at_H_degC": 14.7524,
+     "delta_theta_K": 30.2567,
+     "approach_mean_temperature_degC": 15.021,
+     "gas_temperature_degC": 35.0,
+     "building_mean_surface_temperature_degC_workbook": 42.2042,
+     "bulk_Richardson_number_workbook": -0.035,
+     "profile": "cases/L/approach_flow_full.csv (T, T_rms, uT, vT, wT per height)"
+    }
+   },
+   "geometry_summary": [
+    {
+     "configuration": "default",
+     "file": "cases/L/geometry.stl",
+     "triangles": 1512,
+     "watertight": true,
+     "bbox_min": [
+      -0.96,
+      -0.51,
+      0.0
+     ],
+     "bbox_max": [
+      0.66,
+      0.51,
+      0.06
+     ],
+     "boxes": 126
+    }
+   ],
+   "provenance": [
+    {
+     "path": "raw/cases/case-l/RS_caseL.csv",
+     "sha256": "ddde236d69feb894a83ee8d846098a31d4b2863829152d54e08a6fd4f891bf00",
+     "bytes": 52579,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-l/AF_caseL.csv",
+     "sha256": "fd6092bf906cb540e4a84770710f2a89c88b55172c01810288af32bdd3196b33",
+     "bytes": 2473,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-l/BD_caseL.stl",
+     "sha256": "56863d26f56b91930738b5a08d1bfcd7ee5fe61c4c57754df0a4512d8913cc70",
+     "bytes": 339104,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-l/LF_caseL.xlsx",
+     "sha256": "97b190d72a2a175b2ccfffa2894f39a4beeb7158b158999ce8df41ee4a3e47a9",
+     "bytes": 1981776,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-l/readme_caseL.md",
+     "sha256": "57a2e4b51a150350999c90a75a76df548cec3c3181cd02ae0272c7172a18a0d5",
+     "bytes": 6300,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-l/MP-y_caseL.png",
+     "sha256": "d77f00747fbab08c46ea0c62c565ee93f987360b4370bbe573542117fabd38ab",
+     "bytes": 565197,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-l/MP-z_caseL.png",
+     "sha256": "4b75af8554cdd535c00db80f740b2627d177d17814f8f0bd6383c9613851a8bd",
+     "bytes": 353162,
+     "origin": "repository clone of the Zenodo record"
+    }
+   ],
+   "normalisation": {
+    "concentration": {
+     "c0_ppm": 1728.22823,
+     "definition": "c0 = Cgas q / (U_H H^2), Cgas = 1e6 ppm, q = 8.33333e-6 m3/s, U_H = 1.339415 m/s, H = 0.06 m",
+     "source": "LF_caseL.xlsx cell <C0> (ppm); recomputed in check c0_from_Cgas_q_UH_H_equals_workbook",
+     "rounded_readme_values_ppm": 1726.783
+    },
+    "velocity": {
+     "U_H_m_s": 1.339415,
+     "height_m": 0.06
+    },
+    "temperature": {
+     "theta_f_degC": 45.009119,
+     "delta_theta_K": 30.256732,
+     "definition": "(T - T_f) / delta_theta"
+    }
+   },
+   "known_issues": {
+    "RS_T_unit": "RS_caseL.csv 'T(K)' holds degrees Celsius (AF_caseL.csv's 'T(K)' is kelvin); the table carries degC for both",
+    "readme_file_names": "the readme's file list names AF_caseK.csv and RS_caseK.csv; the files are AF_caseL.csv and RS_caseL.csv",
+    "readme_building_temperature": "the readme's 'building surface temperature T_b = 14.8 degC' is the air temperature at H; the workbook's <θbuild> is 42.2 degC",
+    "source_size": "readme and data paper 0.037 m x 1.2 m; BD_caseL.stl patch 0.04 m x 1.02 m",
+    "not_mirror_symmetric": "the +y and -y halves differ in U, T and C by far more than a repeatability: the tunnel flow has a lateral gradient",
+    "no_expanded_uncertainty": "the workbook carries none",
+    "csv_rounding": "the CSV is the workbook rounded to 2-4 decimals (heat flux 4 dp); the table carries the workbook values",
+    "af_order": "AF_caseL.csv lists the profile from the top (z = 0.32 m) down; the table is ascending",
+    "data_paper_columns_rows": "the data paper's '9 rows by 14 columns' is 14 rows along x by 9 columns across y"
+   },
+   "extra_measurements": {
+    "not_carried": {
+     "tc": "<θ'c'> (CSV 'tc', K ppm): temperature-concentration covariance; no column in the schema (QUESTIONS.md QL5)",
+     "Usc": "workbook 'Usc' = |mean velocity| (derived)"
+    },
+    "extra_files": {
+     "approach_flow_full": {
+      "file": "cases/L/approach_flow_full.csv",
+      "columns": [
+       "x",
+       "z",
+       "U",
+       "V",
+       "W",
+       "uu",
+       "vv",
+       "ww",
+       "uv",
+       "uw",
+       "k",
+       "T",
+       "T_rms",
+       "uT",
+       "vT",
+       "wT"
+      ],
+      "units": [
+       "m",
+       "m",
+       "m/s",
+       "m/s",
+       "m/s",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "degC",
+       "K",
+       "K m/s",
+       "K m/s",
+       "K m/s"
+      ],
+      "rows": 25,
+      "source": "LF_caseL.xlsx 'Inflow' (x = -0.4 m)"
+     }
+    },
+    "source_patch_stl": {
+     "bbox_min": [
+      -0.17,
+      -0.51,
+      0.0
+     ],
+     "bbox_max": [
+      -0.13,
+      0.51,
+      0.0
+     ],
+     "triangles": 2
+    },
+    "line_source_flux_over_q_per_width": {
+     "-0.03": 0.984,
+     "0.09": 0.999,
+     "0.21": 0.957,
+     "0.33": 0.858
+    },
+    "mirror_pairs": {
+     "pairs": 110,
+     "rel_mean_abs_diff": {
+      "U": 0.2562162618,
+      "k": 0.228572879,
+      "C": 0.3642973408
+     }
+    },
+    "layout": {
+     "locations_by_number_of_heights": {
+      "8": 27,
+      "3": 24,
+      "4": 14
+     }
     }
    }
   }

@@ -1,0 +1,54 @@
+{
+ "case_id": "J",
+ "units": "metres (model scale)",
+ "frame": {
+  "origin": "the building's leeward (downwind) wall centre on the ground; x = 0 is the leeward wall",
+  "x": "+x streamwise (the wind blows toward +x); building x in [-0.08, 0]; floor source at x = +0.04 m (0.25 H beyond the leeward wall)",
+  "y": "+y lateral; building y in [-0.04, 0.04]; the z/H = 0.025 plane is measured on the y <= 0 side only, the z/H = 0.25 plane on both",
+  "z": "+z up; roof at 0.16; heated floor at z = 0",
+  "length_scale": "model metres (the sources state no model:full scale ratio); b = 0.08 m, H = 0.16 m",
+  "source": "5 mm diameter floor outlet at (0.04, 0, 0); 5 % ethylene in air at 30.4 degC, 9.17e-6 m3/s (readme, data paper section 3.10)"
+ },
+ "files": [
+  {
+   "configuration": "default",
+   "file": "cases/J/geometry.stl",
+   "format": "ASCII STL, LF, metres, same frame as points.csv",
+   "source": "generated from the readme's stated dimensions b = 0.08 m, H = 2b = 0.16 m; the building spans x in [-0.08, 0] (leeward wall at the origin), y in [-0.04, 0.04] (MP-y_caseJ.png, MP-z_caseJ.png)",
+   "stats": {
+    "triangles": 12,
+    "bbox_min": [
+     -0.08,
+     -0.04,
+     0.0
+    ],
+    "bbox_max": [
+     0.0,
+     0.04,
+     0.16
+    ],
+    "signed_volume": 0.001024,
+    "edges": 18,
+    "edges_shared_by_two_faces": 18,
+    "edges_boundary": 0,
+    "edges_non_manifold": 0,
+    "watertight": true
+   },
+   "boxes": [
+    {
+     "min": [
+      -0.08,
+      -0.04,
+      0.0
+     ],
+     "max": [
+      0.0,
+      0.04,
+      0.16
+     ]
+    }
+   ],
+   "box_count": 1
+  }
+ ]
+}

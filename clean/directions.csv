@@ -46,3 +46,6 @@ E,bc,thermistor,270,W,1,0,80,80,"definition: compass FROM-direction, +y north (M
 E,bc,thermistor,292.5,WNW,0.923879533,-0.382683432,80,80,"definition: compass FROM-direction, +y north (MP_caseE.png rose); checks no_sensor_inside_building_* + the rotation control",settled
 E,bc,thermistor,315,NW,0.707106781,-0.707106781,80,80,"definition: compass FROM-direction, +y north (MP_caseE.png rose); checks no_sensor_inside_building_* + the rotation control",settled
 E,bc,thermistor,337.5,NNW,0.382683432,-0.923879533,80,80,"definition: compass FROM-direction, +y north (MP_caseE.png rose); checks no_sensor_inside_building_* + the rotation control",settled
+J,default,split_fibre,0,,1,0,444,444,"definition: +x streamwise (MP drawings: building x in [-0.08, 0], source at x = +0.04); checks WD0_flow_is_along_x, concentration_peaks_at_the_source, lateral_sign_*",settled
+K,default,split_fibre,0,,1,0,203,203,"definition: +x streamwise (MP drawings: rows along x, the source 0.15 m upwind of the origin wall); checks WD0_flow_is_along_x, concentration_peaks_at_the_source",settled
+L,default,split_fibre,0,,1,0,344,344,"definition: +x streamwise (BD_caseL.stl: 14 rows along x, the line source 0.15 m upwind of the origin wall); checks WD0_flow_is_along_x, concentration_peaks_on_the_source_line",settled
