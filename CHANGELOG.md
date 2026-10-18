@@ -15,6 +15,24 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api-reference/#versioning-and-changes).
 
+## [Unreleased]
+
+### Fixed
+
+- Case E: every building of `geometry.stl` and `geometry_bc.stl` is now a closed, consistently wound, outward body. 1,563 of the 8,436
+  triangles (18.5 %) of the 3dm's building meshes were wound against their neighbours, which the earlier whole-shell flip could not
+  repair; they are re-wound. One wall that two buildings share (4 triangles) is removed, which joins the two into one body: 545 bodies
+  after construction (8,432 triangles), 542 before (8,396), and 11 edges where two bodies touch.
+- Cases F and M: `geometry.stl` is one closed outward body. F is closed with a 1 m base slab (vertical walls from the rim of the 725 m disc
+  down to z = −1 m and a bottom cap, 2,436 added triangles; the zero-area triangles at T-junctions are removed and their neighbours split); M loses 7
+  slivers (0.45 m² together) on building roofs and is closed the same way (21 added triangles). The bounding box starts at z = −1 m.
+- `geometry.json`: `stats` gains `bodies`, `body_contacts`, `inconsistent_triangles` and `min_body_volume` beside `edges_boundary`;
+  `watertight` is true when every body is closed, consistently wound and positive in volume. The geometry index lists the same fields.
+- `scripts/check_geometry.py` parses every served and cleaned STL and fails the build on an open, inconsistently wound or inward body, a
+  degenerate or repeated triangle, or a stored normal that disagrees with the winding.
+- `BD_caseL.stl`, as published, has the two bottom triangles of each of its 126 cubes wound inward; the served `geometry.stl` is the 126 boxes
+  and was never affected.
+
 ## [3.0.0] - 2026-10-18
 
 Eight more cases of the benchmark, F to M, join A to E: the cleaned tables, the API and the site now cover all thirteen.

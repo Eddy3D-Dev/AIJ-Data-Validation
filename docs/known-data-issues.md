@@ -120,9 +120,21 @@ symmetry convention.
   the 3dm). Everything served here is extracted from the workbook and the 3dm.
 - `case-e.3dm` is **full-scale metres**; `MP_caseE.png` is drawn at model scale (±0.8 m). Use layers
   `buildings` and `buildings_new_construction`; the map plate on the Japanese-named layer, the terrain plates and
-  `probes` are not buildings. 475 of the 503 building shells are wound inward in the 3dm; the API's STLs are flipped
-  outward.
+  `probes` are not buildings.
+- `case-e.3dm`: 1,563 of 8,436 triangles (18.5 %) of the building meshes are wound against their neighbours; all are re-wound here.
 - Do not take measurement coordinates from the `probes` layer: its spheres sit a median 2.31 m (max 21 m) from the
   workbook's points, which are authoritative.
+
+<details markdown="block">
+  <summary>Data notes: Case E geometry</summary>
+
+- 546 of the 548 bodies of the after-construction mesh (543 of 545 before construction) have triangles wound against their neighbours; a body is a set of triangles joined through edges that exactly two triangles use.
+- The earlier build reversed whole shells by signed volume; a shell wound partly inward stays inconsistent after that, and a viewer that culls back faces draws its reversed triangles as missing walls.
+- Every building is now wound consistently (each edge is traversed once in each direction) with a positive volume: 545 closed bodies after construction, 542 before, the smallest 4.125 m³.
+- One wall that two buildings share (4.27 m × 3 m, x 3.5 to 7.5 m, y −76.5 to −75 m) is modelled twice, once per building, with different diagonals, so the copies never joined their buildings. The 4 triangles of both copies are removed and the two buildings are one body.
+- 11 edges where two separate buildings touch (15 before the wall is removed) are counted as `body_contacts`; each building still sees them as ordinary two-triangle edges, so a contact does not open a body.
+- `geometry.json` reports `bodies`, `edges_boundary`, `body_contacts`, `inconsistent_triangles` and `min_body_volume`; `watertight` is true when every body is closed, consistently wound and positive in volume.
+
+</details>
 
 {% include known-issues-fm.md %}

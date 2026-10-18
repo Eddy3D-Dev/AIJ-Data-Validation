@@ -104,8 +104,9 @@ The last line prints `R of U/U_H recomputed: 0.9548 published: 0.9548`.
 - +x runs along the wind at WD = 0 for A–D and H–L, and downwind for G. E and F keep their geographic frame (+x east,
   +y north), and their directions are meteorological: the direction the wind comes **from**, N = 0°, clockwise.
   M's frame is +x north, +y west.
-- Outward normals, LF line endings, one `solid` per file. A–D and G–L are watertight; E's buildings touch, so its
-  shells share edges; F's terrain is open along its rim; M's STL has open edges.
-- The build checks every STL: triangle count, edge-manifold census, and the bounding box against the stated
-  dimensions. `validation/render_geometry.py` draws each one from the same code that writes it, and those are the
+- Outward normals, LF line endings, one `solid` per file. Every file is watertight: each body is closed, consistently
+  wound and positive in volume. Where two bodies touch along an edge (11 edges in E) the edge counts as a `body_contacts`
+  entry in `geometry.json`. F and M are one body each, closed with a 1 m base slab below z = 0.
+- The build checks every STL: triangle count, bodies, boundary edges, winding, signed volume, and the bounding box against the stated
+  dimensions; `scripts/check_geometry.py` parses the written files again and fails on any open or inconsistently wound body. `validation/render_geometry.py` draws each one from the same code that writes it, and those are the
   renders on the case pages.

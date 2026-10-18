@@ -478,8 +478,8 @@ of the 863 pairs the tunnel resolves (|Δ| > 0.05). See *ML surrogate* under *Va
 
 **API.** [`cases/E.json`](docs/api/cases/E.json) · [`points.json`](docs/api/cases/E/points.json) /
 [`points.csv`](docs/api/cases/E/points.csv) (2560 rows, `config` bc/ac, `wind_direction` N … NNW) ·
-[`geometry.stl`](docs/api/cases/E/geometry.stl) (after construction, 8436 triangles) /
-[`geometry_bc.stl`](docs/api/cases/E/geometry_bc.stl) (before, 8400), both re-oriented outward ·
+[`geometry.stl`](docs/api/cases/E/geometry.stl) (after construction, 8432 triangles) /
+[`geometry_bc.stl`](docs/api/cases/E/geometry_bc.stl) (before, 8396), every building a closed body wound outward ·
 [`validation.json`](docs/api/cases/E/validation.json)
 
 </details>
@@ -513,7 +513,7 @@ The pattern follows the tunnel and the field in both frames and the level depend
 
 **Known issues.** 11 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/F.json`](docs/api/cases/F.json).
 
-**API.** [`cases/F.json`](docs/api/cases/F.json) · [`points.json`](docs/api/cases/F/points.json) / [`points.csv`](docs/api/cases/F/points.csv) · [`geometry.stl`](docs/api/cases/F/geometry.stl) (53,814 triangles) · [`validation.json`](docs/api/cases/F/validation.json)
+**API.** [`cases/F.json`](docs/api/cases/F.json) · [`points.json`](docs/api/cases/F/points.json) / [`points.csv`](docs/api/cases/F/points.csv) · [`geometry.stl`](docs/api/cases/F/geometry.stl) (56,250 triangles, closed with a 1 m base slab) · [`validation.json`](docs/api/cases/F/validation.json)
 
 </details>
 
@@ -750,7 +750,7 @@ The tracer is under-predicted at every Schmidt number (the model's mean c\* is 0
 
 **Known issues.** 10 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/M.json`](docs/api/cases/M.json).
 
-**API.** [`cases/M.json`](docs/api/cases/M.json) · [`points.json`](docs/api/cases/M/points.json) / [`points.csv`](docs/api/cases/M/points.csv) · [`geometry.stl`](docs/api/cases/M/geometry.stl) (43,936 triangles) · [`validation.json`](docs/api/cases/M/validation.json)
+**API.** [`cases/M.json`](docs/api/cases/M.json) · [`points.json`](docs/api/cases/M/points.json) / [`points.csv`](docs/api/cases/M/points.csv) · [`geometry.stl`](docs/api/cases/M/geometry.stl) (43,950 triangles, closed with a 1 m base slab) · [`validation.json`](docs/api/cases/M/validation.json)
 
 </details>
 
