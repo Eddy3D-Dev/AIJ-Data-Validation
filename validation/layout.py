@@ -9,19 +9,27 @@ a dot in one figure is found in the other by its colour and its letter.
 
 Public names (other scripts import them; keep them stable):
 
-  rows(case)                      the cleaned point table of a case, as dicts {x, y, z, instrument, config, point_id, ...}
+  rows(case)                      the cleaned point table of a case, as dicts {x, y, z, instrument, config, point_id, measured, ...}
   groups(case)                    [Group]: letter, label, short, kind, colour, members (row indices), the lines and planes
   classify(case, row, instrument=None)   the index of the group a row belongs to; raises unless exactly one rule matches
   grouped_colours(case, rows, instrument=None)   one colour per row, for the scatter dots of an agreement figure
   legend_handles(case, instrument=None)   handles for fig.legend / ps.finish: a circled letter in the group colour per group
-  layout_figure(case, geometry=None)      the figure: (a) elevation x-z, (b) plan x-y, groups lettered and coloured
+  legend_rows(case, neutral)      the same for the agreement figures of the district cases: the neutral entries on one row, the letters under them
+  flow_dirs(case, instrument)     the unit vectors the wind blows toward, per wind direction, from directions.csv
+  e_new_buildings()               the three buildings the after state of Case E adds, as footprints and heights
+  layout_figure(case, geometry=None)      the figure of cases A, B, G to L: (a) elevation x-z, (b) plan x-y, groups lettered and coloured
+  district_figure(case)           the figure of the district cases C, D, E, F, M: (a) plan of the points on the buildings, (b) the strip
+                                  under or beside it (elevation, or the heights at the points of F)
   check_group_palette()           the group colours are the plotstyle cycle, and tell apart under every colour vision
 
-Phase-2 contract (the district cases C, D, E, F, M): add one function `_groups_<x>(ctx)` returning a list of Spec, register
-it in SPECS, give the case a UNITS entry, and, for a case whose geometry is not a set of boxes, pass the geometry to
-layout_figure(case, geometry=Geometry(tris=read_stl(path)), wind=False). The tests in test_layout.py then cover the
-new case as soon as it is in SPECS (add its expected sizes to EXPECTED and TOTAL there). geometry(case, configuration) reads the boxes
-of A-D and G-L; a triangle mesh is drawn undirected: roofs and floors fill the plan, walls the elevation, winding is never read.
+Contract of a new case: add one function `_groups_<x>(ctx)` returning a list of Spec, register it in SPECS, give the case a UNITS
+entry. The tests in test_layout.py then cover the new case as soon as it is in SPECS (add its expected sizes to EXPECTED and TOTAL
+there). geometry(case, configuration) reads the boxes of A-D and G-L; a triangle mesh (E, F, M) is drawn undirected: roofs fill the
+plan of E, the vertical facets give the outlines of F and M and the silhouette of M, winding is never read.
+
+The district cases (C, D, E, F, M) measure at one height or a few on a plan, so their groups are Specs of kind 'points': C the
+streets round the centre block, D the instrument and the place near the tower, E the distance to the three new buildings, F the
+tunnel planes and the field anemometers, M the distance from the release point. district_figure() draws them.
 
 The module is standard library only up to `layout_figure`; matplotlib is imported when a figure is drawn, so the group
 tests run anywhere. Group kinds:
@@ -29,6 +37,7 @@ tests run anywhere. Group kinds:
   profiles   vertical lines (x, y fixed, z varies): dotted verticals in the elevation, one dot per line in the plan;
              `trace` marks the groups that are a vertical SECTION (one y): a dotted line at that y in the plan
   plane      a horizontal plane (z fixed): a dotted horizontal in the elevation, dots and an outline in the plan
+  points     points of a district case, grouped by where they stand or what read them: dots in the plan (district_figure)
 """
 from __future__ import annotations
 
@@ -62,6 +71,11 @@ UNITS = {
     "J": ("H", 0.16, "H = 0.16 m"),
     "K": ("H", 0.06, "H = 0.06 m"),
     "L": ("H", 0.06, "H = 0.06 m"),
+    "C": ("D", 0.20, "D = 0.2 m"),
+    "D": ("H", 0.25, "H = 0.25 m = 100 m full scale"),
+    "E": ("m", 1.0, "full scale, 1:250"),
+    "F": ("m", 1.0, "full scale, 1:800"),
+    "M": ("m", 1.0, "full scale, 1:600"),
 }
 
 # What the points do not show and the geometry would hide: the published half, the part of the geometry outside the frame.
@@ -71,6 +85,20 @@ NOTES = {
     "G": "belt 74 m long, y = ±37 m",
     "K": "9 × 9 cubes, cut at the frame",
     "L": "9 × 14 cubes, cut at the frame",
+    "C": "the 120 points are the same in all nine configurations",
+    "D": "plan cut at ±0.26 m of the 1.4 m array of 82 blocks",
+    "E": "z = 2 m, 16 wind directions",
+    "F": "heights above ground = z − 10 m",
+    "M": "points 3 m above the local ground; R the reference point on the roof of the main building",
+}
+
+# What a district figure shows that the groups do not say.
+TAILS = {
+    "C": "Centre block absent (0D), D or 2D high; wind directions 0°, 22.5° and 45°.",
+    "D": "The split fibre stands at 33 of the 78 places of the thermistors; open dots: the 12 places where the thermistor read nothing; wind directions 0°, 22.5° and 45°.",
+    "E": "Dark footprints: the three buildings added in the after state.",
+    "F": "SMB and KDD: the reference buildings. The field anemometers stand at the places of the tunnel points.",
+    "M": "Star: release point; R: reference point; dotted circles: 100 m and 300 m from the release point.",
 }
 
 # The gas release, from clean/cases/<X>/geometry.json: ('point', (x, y, z)) or ('line', (x0, y0), (x1, y1)) on the floor.
@@ -80,13 +108,18 @@ SOURCES = {
     "J": [("point", (0.04, 0.0, 0.0))],
     "K": [("point", (-0.15, 0.0, 0.0))],
     "L": [("line", (-0.15, -0.51), (-0.15, 0.51))],
+    "M": [("point", (-82.14, 61.98, 32.4))],     # LC_caseM.csv Gas_source (-0.1369, 0.1033, 0.054 m) x 600, in the release frame (x north, y west)
 }
+MAST = (-66.9, -3.72, 72.9)                      # Case M reference point R, LC_caseM.csv Reference (-0.1115, -0.0062, 0.1215 m) x 600: the roof of the main building, 41 m above the ground
+DISC_F = 725.0      # radius of the disc of Case F's model: the bounding box of geometry.json, 0.90625 m model x 800
+TOWERS = {"SMB": (-17.5, 96.0, 225.0), "KDD": (85.8, -347.1, 180.0)}   # Case F reference buildings: the workbook's 'Points' sheet, roofs in the STL (QUESTIONS.md QF6)
 
 
 # ----------------------------------------------------------------------------- the table
 
 _ROWS: dict[str, list[dict]] = {}
 _NUMERIC = ("x", "y", "z", "wind_direction_deg")
+VALUES = ("U", "V", "W", "k", "Vs", "velocity_ratio", "C", "T")     # a row with none of these is a place the instrument was set up at and read nothing
 
 
 def rows(case):
@@ -98,6 +131,7 @@ def rows(case):
                 d = {k: r[k] for k in ("case_id", "config", "instrument", "point_id")}
                 for k in _NUMERIC:
                     d[k] = float(r[k]) if r[k] != "" else math.nan
+                d["measured"] = any(r[k] != "" for k in VALUES)
                 out.append(d)
         _ROWS[case] = out
     return _ROWS[case]
@@ -224,8 +258,117 @@ def _groups_l(ctx):
             Spec("profiles", "street profiles around, 3 heights", "surrounding", n(3))]
 
 
-SPECS = {"A": _groups_a, "B": _groups_b, "G": _groups_g, "H": _groups_h, "I": _groups_i, "J": _groups_j, "K": _groups_k,
-         "L": _groups_l}
+# ----------------------------------------------------------------------------- the district cases: groups of points
+
+def _pts(label, short, test):
+    return Spec("points", label, short, test)
+
+
+def _groups_c(ctx):
+    """C: 120 points on z = 0.1 D in the streets round the centre block, at the same places in all nine configurations: the street
+    on each of the four sides of the block (|x| or |y| within the block's half side, D/2) and the four crossings beyond its corners."""
+    h = ctx.unit / 2
+    beside = lambda r, c: abs(r["y"]) <= h + TOL     # noqa: E731  the streets west and east of the block
+    along = lambda r, c: abs(r["x"]) <= h + TOL      # noqa: E731  the streets north and south of it
+    return [_pts("street x < 0 beside the centre block", "street x < 0", lambda r, c: beside(r, c) and r["x"] < 0),
+            _pts("street x > 0 beside the centre block", "street x > 0", lambda r, c: beside(r, c) and r["x"] > 0),
+            _pts("street y > 0 beside the centre block", "street y > 0", lambda r, c: along(r, c) and r["y"] > 0),
+            _pts("street y < 0 beside the centre block", "street y < 0", lambda r, c: along(r, c) and r["y"] < 0),
+            _pts("crossings beyond the corners of the centre block", "crossings", lambda r, c: not beside(r, c) and not along(r, c))]
+
+
+def _groups_d(ctx):
+    """D: 78 thermistor points on z/H = 0.02 round the tower (at WD 0, 22.5 and 45) and 33 split-fibre points at the places of the
+    thermistors on the +y side (WD 0). The thermistors are grouped by the column of blocks they stand in (x, from geometry.json: blocks at
+    x/H in [-0.8, -0.4], [-0.2, 0.2] and [0.5, 0.9]): the site of the removed central block, the two streets along y beside it (-0.4 < x/H < -0.2
+    and 0.2 < x/H < 0.5), and the streets along x further out."""
+    H = ctx.unit
+    th, sf = (lambda r: r["instrument"] == "thermistor"), (lambda r: r["instrument"] == "split_fibre")
+    site = lambda r: abs(r["x"]) <= 0.2 * H + TOL                                              # noqa: E731
+    beside = lambda r: -0.4 * H < r["x"] < -0.2 * H or 0.2 * H < r["x"] < 0.5 * H              # noqa: E731
+    return [_pts("split-fibre probe, WD 0", "split fibre", lambda r, c: sf(r)),
+            _pts("thermistor on the site of the central block, |x/H| ≤ 0.2", "thermistor, central site", lambda r, c: th(r) and site(r)),
+            _pts("thermistor in the streets along y beside it", "thermistor, streets along y", lambda r, c: th(r) and beside(r)),
+            _pts("thermistor in the streets along x further out", "thermistor, streets along x", lambda r, c: th(r) and not site(r) and not beside(r))]
+
+
+E_NEAR = 30.0     # Case E: a point is "near" a new building when it is within this many metres of its footprint (half the height of the 60 m building)
+_E_NEW = []
+
+
+def e_new_buildings():
+    """The buildings the 'after' state adds, [(x0, x1, y0, y1, height)] tallest first: the triangles of geometry_ac_3dm.stl that
+    geometry_bc_3dm.stl lacks, joined where they share a vertex (the 60 m building and the two of 18 m)."""
+    if not _E_NEW:
+        def tris(name):
+            return read_stl(os.path.join(CASES_DIR, "E", name))
+        key = lambda t: tuple(sorted(tuple(round(c, 3) for c in v) for v in t))    # noqa: E731
+        before = {key(t) for t in tris("geometry_bc_3dm.stl")}
+        new = [t for t in tris("geometry_ac_3dm.stl") if key(t) not in before]
+        parent = {}
+
+        def find(a):
+            while parent.setdefault(a, a) != a:
+                parent[a] = parent[parent[a]]
+                a = parent[a]
+            return a
+        for t in new:
+            vs = [tuple(round(c, 2) for c in v) for v in t]
+            for v in vs[1:]:
+                parent[find(vs[0])] = find(v)
+        parts = {}
+        for t in new:
+            parts.setdefault(find(tuple(round(c, 2) for c in t[0])), []).append(t)
+        for ts in parts.values():
+            xs, ys, zs = ([v[i] for t in ts for v in t] for i in range(3))
+            _E_NEW.append((min(xs), max(xs), min(ys), max(ys), max(zs)))
+        _E_NEW.sort(key=lambda b: (-b[4], b[0]))
+    return _E_NEW
+
+
+def _e_dist(r, b):
+    return math.hypot(max(b[0] - r["x"], 0.0, r["x"] - b[1]), max(b[2] - r["y"], 0.0, r["y"] - b[3]))
+
+
+def _groups_e(ctx):
+    """E: 80 points on z = 2 m, the same in the before and after states and in 16 wind directions: the points within 30 m of the
+    60 m building that the after state adds, those within 30 m of the two 18 m buildings, and the others."""
+    tall, *low = e_new_buildings()
+    near_tall = lambda r: _e_dist(r, tall) <= E_NEAR + TOL                       # noqa: E731
+    near_low = lambda r: min(_e_dist(r, b) for b in low) <= E_NEAR + TOL         # noqa: E731
+    return [_pts("within 30 m of the 60 m building", "near 60 m building", lambda r, c: near_tall(r)),
+            _pts("within 30 m of the two 18 m buildings", "near 18 m buildings", lambda r, c: near_low(r)),
+            _pts("elsewhere", "elsewhere", lambda r, c: not near_tall(r) and not near_low(r))]
+
+
+F_RAISE = 10.0      # the readme: the model stands 10 m above the tunnel floor, so a height above ground is z - 10 m
+
+
+def _groups_f(ctx):
+    """F: 13 points, the same places for every instrument and wind direction: the tunnel's thermistor planes 5, 9 and 20 m above
+    ground (z = 15, 19 and 30 m of the tunnel frame; 9, 13 and 13 of the points) and the field's cup anemometers at 3 to 11 m."""
+    th = lambda r: r["instrument"] == "thermistor"       # noqa: E731
+    plane = lambda h: (lambda r, c: th(r) and _near(r["z"] - F_RAISE, h))
+    return [Spec("plane", "tunnel plane 5 m above ground", "tunnel 5 m", plane(5.0)),
+            Spec("plane", "tunnel plane 9 m above ground", "tunnel 9 m", plane(9.0)),
+            Spec("plane", "tunnel plane 20 m above ground", "tunnel 20 m", plane(20.0)),
+            _pts("field cup anemometers, 3 to 11 m above ground", "field cup anemometers", lambda r, c: r["instrument"] == "cup_anemometer")]
+
+
+M_NEAR, M_FAR = 100.0, 300.0     # Case M: near field within 100 m of the release point, far field beyond 300 m
+
+
+def _groups_m(ctx):
+    """M: 15 points 3 m above the ground, the same in the tunnel at WD 175, 180 and 185 and in the 18 field runs: by distance from the release point."""
+    sx, sy, _ = SOURCES["M"][0][1]
+    dist = lambda r: math.hypot(r["x"] - sx, r["y"] - sy)    # noqa: E731
+    return [_pts("near field, within 100 m of the release point", "near field", lambda r, c: dist(r) < M_NEAR),
+            _pts("mid field, 100 to 300 m from the release point", "mid field", lambda r, c: M_NEAR <= dist(r) <= M_FAR),
+            _pts("far field, beyond 300 m", "far field", lambda r, c: dist(r) > M_FAR)]
+
+
+SPECS = {"A": _groups_a, "B": _groups_b, "C": _groups_c, "D": _groups_d, "E": _groups_e, "F": _groups_f, "G": _groups_g, "H": _groups_h,
+         "I": _groups_i, "J": _groups_j, "K": _groups_k, "L": _groups_l, "M": _groups_m}
 
 
 # ----------------------------------------------------------------------------- groups
@@ -305,11 +448,12 @@ def caption(case):
         what = f"{gs[0].letter} to {gs[-1].letter} vertical profiles, x/{sym} = " + ", ".join(_g(g.xs[0] / unit) for g in gs)
     else:
         what = "; ".join(f"{g.letter} {g.label}" for g in gs)
-    text = f"Case {case}, measurement lines and planes: {what}. Positions in multiples of {sym}"
+    text = f"Case {case}, measurement {'points' if case in DISTRICT else 'lines and planes'}: {what}. Positions in " + (
+        "metres, full scale" if sym == "m" else f"multiples of {sym}")
     if case in ZOOM:
         lo, hi = ZOOM[case][0] / unit, ZOOM[case][1] / unit
         text += f"; panels c and d: x/{sym} = {'-' if lo < 0 else ''}{_g(lo)} to {_g(hi)}"
-    return text + "."
+    return text + "." + (" " + TAILS[case] if case in TAILS else "")
 
 
 def grouped_colours(case, rows_, instrument=None):
@@ -463,6 +607,17 @@ def legend_handles(case, instrument=None, short=True, prefix=None):
     _letter_handler()
     keep = _groups_of(case, instrument)
     return [GroupHandle(g.letter, g.colour, (f"{prefix}: " if prefix else "") + (g.short if short else g.label)) for g in keep]
+
+
+def legend_rows(case, neutral):
+    """(handles, ncols) for the legend of an agreement figure of a district case: the neutral entries (markers, 1:1, factor of two) on
+    the first row and the circled letters of the case's groups on the second. ultraplot fills a legend by rows, so each row is padded
+    with blank entries to the length of the longer one."""
+    from matplotlib.lines import Line2D
+    letters = legend_handles(case)
+    n = max(len(neutral), len(letters))
+    blank = Line2D([], [], ls="none", label=" ")
+    return list(neutral) + [blank] * (n - len(neutral)) + letters + [blank] * (n - len(letters)), n
 
 
 def _groups_of(case, instrument=None):
@@ -846,3 +1001,455 @@ def _draw_pair(fig, fig_h, case, p, tab, geo, bottom, letters):
 def _rank(vs, v):
     """The index of the view's group: the first group's dots are the largest, later ones sit smaller on top."""
     return "ABCDEFG".index(v.g.letter)
+
+
+# ----------------------------------------------------------------------------- the district figure (cases C, D, E, F, M)
+
+DISTRICT = ("C", "D", "E", "F", "M")
+NUM_PT = 5.8                      # the point numbers beside the dots
+LEFT_D = 0.84                     # the left margin of a district figure: tick labels and the axis arrows
+
+# What each plan shows: window (x0, x1, y0, y1) [m of the case frame], width [in], tick step [m], dot area [pt^2], whether the dots carry the
+# tunnel's point numbers, the strip that goes with it ('elevation' under the plan; 'heights' to its right), and the cluster link [m]
+# (two points of a group closer than this belong to one patch of it) with the padding of the patch [m].
+VIEWS = {
+    "C": dict(win=(-0.58, 0.58, -0.58, 0.58), width=5.2, step=0.1, dot=17.0, numbers=False, strip="elevation", link=0.06, pad=0.025),
+    "D": dict(win=(-0.26, 0.26, -0.26, 0.26), width=5.2, step=0.05, dot=26.0, numbers=True, strip="elevation", link=0.04, pad=0.0125),
+    "E": dict(win=(-160.0, 160.0, -160.0, 160.0), width=5.8, step=50.0, dot=16.0, numbers=True, strip=None, link=0.0, pad=0.0),
+    "F": dict(win=(-340.0, 340.0, -570.0, 430.0), width=3.5, step=100.0, dot=8.0, numbers=True, strip="heights", link=0.0, pad=0.0),
+    "M": dict(win=(-140.0, 300.0, -150.0, 130.0), width=6.65, step=50.0, dot=30.0, numbers=True, strip="elevation", link=0.0, pad=0.0),
+}
+
+
+def flow_dirs(case, instrument=None):
+    """{wind direction: (flow_dir_x, flow_dir_y)} of clean/cases/<case>/directions.csv: the unit vector the wind blows toward in the case frame."""
+    out = {}
+    with io.open(os.path.join(CASES_DIR, case, "directions.csv"), encoding="utf-8", newline="") as f:
+        for r in csv.DictReader(f):
+            if instrument in (None, r["instrument"]):
+                out.setdefault(float(r["wind_direction_deg"]), (float(r["flow_dir_x"]), float(r["flow_dir_y"])))
+    return dict(sorted(out.items()))
+
+
+def wall_segments(tris):
+    """The plan outline of a triangle mesh: every vertical facet projects to a segment, which is all the outline of a building needs; no winding is read."""
+    segs = set()
+    for t in tris:
+        (x1, y1, _), (x2, y2, _), (x3, y3, _) = t
+        if abs((x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1)) < 1e-6:
+            pts = sorted({(round(a, 2), round(b, 2)) for a, b, _ in t})
+            if len(pts) == 2:
+                segs.add((pts[0], pts[1]))
+    return sorted(segs)
+
+
+def roof_polygons(tris):
+    """The triangles that have area in plan and stand above the ground, as plan polygons: roofs fill the footprints; walls project to nothing."""
+    return [((x1, y1), (x2, y2), (x3, y3)) for (x1, y1, z1), (x2, y2, z2), (x3, y3, z3) in tris
+            if abs((x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1)) > 1e-6 and max(z1, z2, z3) > 0.05]
+
+
+def skyline(tris, x0, x1, n=420):
+    """The upper envelope of a triangle mesh projected on the x-z plane, at n positions from x0 to x1: terrain and buildings as one silhouette."""
+    import numpy as np
+    t = np.asarray(tris, float)
+    xs = np.linspace(x0, x1, n)
+    top = np.zeros(n)
+    for a, b in ((0, 1), (1, 2), (2, 0)):
+        xa, za, xb, zb = t[:, a, 0], t[:, a, 2], t[:, b, 0], t[:, b, 2]
+        lo, hi = np.minimum(xa, xb), np.maximum(xa, xb)
+        run = np.where(xb != xa, xb - xa, 1.0)
+        for i, x in enumerate(xs):
+            hit = (lo <= x) & (x <= hi)
+            if hit.any():
+                z = np.where(xb != xa, za + (zb - za) * (x - xa) / run, np.maximum(za, zb))
+                top[i] = max(top[i], float(z[hit].max()))
+    return xs, top
+
+
+def clusters(pts, link):
+    """Patches of `pts` [(x, y)]: points within `link` of a point of the patch belong to it. Returns [(x0, x1, y0, y1)] of each patch."""
+    parent = list(range(len(pts)))
+
+    def find(a):
+        while parent[a] != a:
+            parent[a] = parent[parent[a]]
+            a = parent[a]
+        return a
+    for i, p in enumerate(pts):
+        for j in range(i):
+            if math.hypot(p[0] - pts[j][0], p[1] - pts[j][1]) <= link + TOL:
+                parent[find(i)] = find(j)
+    patches = {}
+    for i, p in enumerate(pts):
+        patches.setdefault(find(i), []).append(p)
+    out = [(min(q[0] for q in v), max(q[0] for q in v), min(q[1] for q in v), max(q[1] for q in v)) for v in patches.values()]
+    return sorted(out)
+
+
+def _facing(box, centre, pad):
+    """Where a patch's letter sits: the middle of the side of its padded box, or the corner, that faces away from `centre`."""
+    x0, x1, y0, y1 = box
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+    dx, dy = cx - centre[0], cy - centre[1]
+    n = math.hypot(dx, dy)
+    ux, uy = (dx / n, dy / n) if n > 1e-9 else (0.0, 1.0)
+    sx = -1 if ux < -0.38 else 1 if ux > 0.38 else 0
+    sy = -1 if uy < -0.38 else 1 if uy > 0.38 else 0
+    return (cx if sx == 0 else x0 - pad if sx < 0 else x1 + pad), (cy if sy == 0 else y0 - pad if sy < 0 else y1 + pad)
+
+
+def _round_box(x0, x1, y0, y1, r, n=10):
+    """The outline of the points within r of the box (x0, x1, y0, y1): a rounded rectangle, as a closed polygon."""
+    out = []
+    for cx, cy, a0 in ((x1, y1, 0.0), (x0, y1, 90.0), (x0, y0, 180.0), (x1, y0, 270.0)):
+        for k in range(n + 1):
+            a = math.radians(a0 + 90.0 * k / n)
+            out.append((round(cx + r * math.cos(a), 6), round(cy + r * math.sin(a), 6)))
+    return out
+
+
+def _ticks(ax, lo, hi, step, axis, sym, unit, inch, ink):
+    """Tick marks and labels outside the frame of a plan, at multiples of `step` [m]; labelled in multiples of the case's unit, or in metres."""
+    k = math.ceil(lo / step - 1e-9)
+    while k * step <= hi + 1e-9:
+        t = round(k * step, 6)
+        lab = mult(t / unit, sym) if sym != "m" else f"{t:g}"
+        if axis == "x":
+            y0 = ax.get_ylim()[0]
+            ax.plot([t, t], [y0, y0 - 0.05 * inch], color=ink, lw=0.7, clip_on=False, solid_capstyle="butt")
+            ax.text(t, y0 - 0.08 * inch, lab, fontsize=TICK_PT, color=ink, ha="center", va="top", clip_on=False)
+        else:
+            x0 = ax.get_xlim()[0]
+            ax.plot([x0, x0 - 0.05 * inch], [t, t], color=ink, lw=0.7, clip_on=False, solid_capstyle="butt")
+            ax.text(x0 - 0.08 * inch, t, lab, fontsize=TICK_PT, color=ink, ha="right", va="center_baseline", clip_on=False)
+        k += 1
+
+
+def _district_geometry(case):
+    """What the plan of a district case draws: boxes (C, D; the tallest is the subject), roof polygons (E), wall segments (F, M), and the
+    triangles themselves where the strip needs a silhouette (M)."""
+    g = {"boxes": [], "polys": [], "segs": [], "tris": None}
+    if case == "C":
+        g["boxes"] = geometry("C", "2D").boxes
+    elif case == "D":
+        g["boxes"] = geometry("D").boxes
+    else:
+        path = os.path.join(CASES_DIR, case, "geometry_ac.stl" if case == "E" else "geometry.stl")
+        tris = read_stl(path)
+        if case == "E":
+            g["polys"] = roof_polygons(tris)
+        else:
+            g["segs"] = wall_segments(tris)
+            g["tris"] = tris if case == "M" else None
+    return g
+
+
+def district_figure(case):
+    """The measurement points of a district case (C, D, E, F, M): (a) the plan with the buildings, the points coloured and lettered by group,
+    ticks in multiples of the case's unit (metres for E, F, M), the wind or north; (b) the strip: under the plan the elevation (C, D: the blocks
+    and the plane of the points; M: the silhouette of terrain and buildings with the points 3 m above the ground, the release point and the
+    reference mast), or beside it, for F, the heights above ground at each point. Returns the matplotlib figure; write it with plotstyle.save()."""
+    import numpy as np
+    import plotstyle as ps
+    from matplotlib.collections import LineCollection, PolyCollection
+    from matplotlib.figure import Figure
+    from matplotlib.patches import Polygon, Rectangle
+
+    check_group_palette()
+    ps.apply()
+    gs, tab = groups(case), rows(case)
+    sym, unit, note = UNITS[case]
+    v = VIEWS[case]
+    ink, ref, surface = ps.INK, ps.REFERENCE, ps.SURFACE
+    geo = _district_geometry(case)
+    renderer = _renderer()
+    x0, x1, y0, y1 = v["win"]
+    W = v["width"]
+    scale = W / (x1 - x0)                                   # inches per metre, in x and y alike
+    inch = 1.0 / scale
+    H_plan = (y1 - y0) * scale
+    place = {}                                              # the point number at each place
+    for r in tab:
+        place[(round(r["x"], 6), round(r["y"], 6))] = int(r["point_id"])
+    where = {g.letter: sorted({(round(tab[i]["x"], 6), round(tab[i]["y"], 6)) for i in g.members}) for g in gs}
+    strip = v["strip"]
+
+    # ---------------------------------------------------------------- the strip under the plan (elevation): sizes
+    stations, labels, row_of, z_view, band = [], {}, {}, 0.0, 0.0
+    if strip == "elevation":
+        z_top = max([hi[2] for _, hi in geo["boxes"]] or [0.0])
+        if case == "M":
+            xs_sky, top_sky = skyline(geo["tris"], x0, x1)
+            z_top = max(float(top_sky.max()), MAST[2])
+        z_view = round(z_top * 1.06, 6)
+        stations = sorted({p[0] for g in gs for p in where[g.letter] if x0 <= p[0] <= x1})
+        labels = {x: (str(place[next(p for p in place if p[0] == x)]) if case == "M" else mult(x / unit, sym)) for x in stations}
+        x_in = {x: (x - x0) * scale for x in stations}
+        row_of, n_rows = _pack([(x_in[x], _text_size(renderer, labels[x], TICK_PT)[0]) for x in stations], 0.05)
+        band = n_rows * ROW_IN + 0.10
+    h_strip = (z_view * scale + band) if strip == "elevation" else 0.0
+
+    # ---------------------------------------------------------------- the figure
+    handles = legend_handles(case, short=False)
+    chars = sum(len(h.get_label()) for h in handles)
+    ncols = len(handles) if chars <= 92 else 2 if len(handles) > 2 else 1
+    leg_h = 0.26 * math.ceil(len(handles) / ncols) + 0.10
+    bottom = 0.14 + leg_h + 0.30
+    below_plan = 0.62                                        # tick labels and the axis arrows
+    y_strip = bottom + 0.42                                  # the letters under the elevation frame
+    y_plan = (y_strip + h_strip + 0.80) if strip == "elevation" else bottom + below_plan
+    fig_h = y_plan + H_plan + 0.95                           # the title, and the wind or north above the plan
+    fig = Figure(figsize=(FIG_WIDTH, fig_h), dpi=ps.DPI)
+    fig.patch.set_facecolor(surface)
+
+    def frame(xin, yin, w, h):
+        a = fig.add_axes([xin / FIG_WIDTH, yin / fig_h, w / FIG_WIDTH, h / fig_h])
+        a.set_facecolor("none")
+        a.set_xticks([])
+        a.set_yticks([])
+        for sp in a.spines.values():
+            sp.set_linewidth(0.8)
+            sp.set_color(ink)
+        return a
+
+    ax = frame(LEFT_D, y_plan, W, H_plan)
+    ax.set_xlim(x0, x1)
+    ax.set_ylim(y0, y1)
+    ring_r = 0.082 * inch
+
+    # ---------------------------------------------------------------- plan: the buildings
+    seen = set()
+    top_z = max([hi[2] for _, hi in geo["boxes"]] or [0.0])
+    for lo, hi in geo["boxes"]:
+        k = (round(lo[0], 6), round(lo[1], 6))
+        if k in seen:
+            continue
+        seen.add(k)
+        ax.add_patch(Rectangle((lo[0], lo[1]), hi[0] - lo[0], hi[1] - lo[1], facecolor=ps.FOOTPRINT_FOCUS if hi[2] == top_z else ps.FOOTPRINT,
+                               edgecolor=ink, linewidth=0.7, zorder=2))
+    if case in ("C", "D"):                                      # the subject of the case, named where it stands
+        ax.text(0.0, 0.0, "centre\nblock" if case == "C" else "tower", fontsize=TICK_PT, color=ink, ha="center", va="center", zorder=7)
+    if geo["polys"]:
+        ax.add_collection(PolyCollection(geo["polys"], facecolors=ps.FOOTPRINT, edgecolors=ps.FOOTPRINT, linewidths=0.2, zorder=2))
+        for b in e_new_buildings():
+            ax.add_patch(Rectangle((b[0], b[2]), b[1] - b[0], b[3] - b[2], facecolor=ps.FOOTPRINT_FOCUS, edgecolor=ink, linewidth=0.8, zorder=2.5))
+    if geo["segs"]:
+        ax.add_collection(LineCollection(geo["segs"], colors=ref, linewidths=0.3, zorder=2))
+
+    # ---------------------------------------------------------------- plan: what makes the groups, drawn
+    pad = v["pad"]
+    if case in ("C", "D"):
+        for g in gs:
+            if case == "D" and g.letter == "A":
+                continue                                                 # the split fibre stands among the thermistors: its markers say it
+            for box in clusters(where[g.letter], v["link"]):
+                bx0, bx1, by0, by1 = box[0] - pad, box[1] + pad, box[2] - pad, box[3] + pad
+                ax.add_patch(Rectangle((bx0, by0), bx1 - bx0, by1 - by0, facecolor=g.colour, alpha=0.08, edgecolor="none", zorder=1.5))
+                ax.add_patch(Rectangle((bx0, by0), bx1 - bx0, by1 - by0, facecolor="none", edgecolor=g.colour, linewidth=1.0, linestyle=DOTTED, zorder=4))
+                ax_, ay_ = _facing(box, (0.0, 0.0), pad)
+                _ring(ax, ax_ + (0.5 * ring_r if ax_ > bx1 - 1e-9 else -0.5 * ring_r if ax_ < bx0 + 1e-9 else 0.0), ay_ + (
+                    0.5 * ring_r if ay_ > by1 - 1e-9 else -0.5 * ring_r if ay_ < by0 + 1e-9 else 0.0), ring_r, g.letter, g.colour)
+    if case == "E":
+        tall, *low = e_new_buildings()
+        for b, letter in ((tall, "A"), (low[0], "B"), (low[1], "B")):
+            g = gs["ABC".index(letter)]
+            poly = _round_box(b[0], b[1], b[2], b[3], E_NEAR)
+            ax.add_patch(Polygon(poly, closed=True, facecolor=g.colour, alpha=0.07, edgecolor="none", zorder=1.5))
+            ax.add_patch(Polygon(poly, closed=True, facecolor="none", edgecolor=g.colour, linewidth=1.0, linestyle=DOTTED, zorder=4))
+        for b, txt, up in ((tall, "60 m", 0.5), (low[0], "18 m", 0.2), (low[1], "18 m", 0.8)):
+            ax.text((b[0] + b[1]) / 2, b[2] + up * (b[3] - b[2]), txt, fontsize=TICK_PT, color=ink, ha="center", va="center", zorder=7)
+    if case == "M":
+        sx, sy, sz = SOURCES["M"][0][1]
+        for r, name in ((M_NEAR, "100 m"), (M_FAR, "300 m")):
+            th = np.linspace(0.0, 2 * math.pi, 241)
+            ax.plot(np.round(sx + r * np.cos(th), 6), np.round(sy + r * np.sin(th), 6), color=ref, lw=0.9, ls=DOTTED, zorder=4)
+
+    # ---------------------------------------------------------------- plan: the points
+    dot = v["dot"]
+    mini = {"A": (-1, 1), "B": (1, 1), "C": (-1, -1), "D": (1, -1)}     # Case F: up to four symbols per place, one corner for each group
+    for g in gs:
+        px, py = [p[0] for p in where[g.letter]], [p[1] for p in where[g.letter]]
+        if case == "D" and g.letter == "A":
+            ax.scatter(px, py, s=72.0, facecolor="none", edgecolor=g.colour, linewidth=1.3, zorder=5)
+        elif case == "F":
+            d = 0.042 * inch
+            ax.scatter([a + mini[g.letter][0] * d for a in px], [b + mini[g.letter][1] * d for b in py], s=dot * (1.7 if g.letter == "D" else 1.0),
+                       marker="D" if g.letter == "D" else "o", color=g.colour, edgecolor=_dark(g.colour), linewidth=0.25, zorder=6)
+        else:
+            read = {p for p in where[g.letter] if any(tab[i]["measured"] for i in g.members if (round(tab[i]["x"], 6), round(tab[i]["y"], 6)) == p)}
+            ax.scatter([p[0] for p in where[g.letter] if p in read], [p[1] for p in where[g.letter] if p in read], s=dot, color=g.colour,
+                       edgecolor=_dark(g.colour), linewidth=0.25, zorder=6)
+            ax.scatter([p[0] for p in where[g.letter] if p not in read], [p[1] for p in where[g.letter] if p not in read], s=dot, facecolor=surface,
+                       edgecolor=g.colour, linewidth=1.0, zorder=6)       # a place where the instrument stood and read nothing
+    if v["numbers"]:
+        off = {"C": 0.04, "D": 0.07, "E": 0.035, "F": 0.10, "M": 0.05}[case]
+        for (px, py), n in sorted(place.items()):
+            if x0 <= px <= x1 and y0 <= py <= y1:
+                ax.text(px + off * inch, py + 0.02 * inch, str(n), fontsize=NUM_PT, color=ink, ha="left", va="bottom", zorder=7)
+
+    # ---------------------------------------------------------------- plan: letters, release point, mast, towers
+    def ring_at(letter, x, y):
+        _ring(ax, x, y, ring_r, letter, gs["ABCDEFG".index(letter)].colour)
+    if case == "D":
+        ring_at("A", 0.0, 0.1375 + 0.0)
+    if case == "E":
+        tall, *low = e_new_buildings()
+        ring_at("A", tall[0] - E_NEAR * 0.7071, tall[3] + E_NEAR * 0.7071)
+        ring_at("B", low[1][1] + E_NEAR * 0.7071, low[1][3] + E_NEAR * 0.7071)
+        far = min(where["C"])
+        ring_at("C", far[0] - 0.17 * inch, far[1])
+    if case == "M":
+        sx, sy, sz = SOURCES["M"][0][1]
+        ax.plot([sx], [sy], marker="*", ms=9.5, color=ink, mec=surface, mew=0.4, zorder=9, ls="none")
+        ax.plot([MAST[0]], [MAST[1]], marker="s", ms=5.5, color=surface, mec=ink, mew=1.0, zorder=9, ls="none")
+        ax.text(MAST[0] - 0.09 * inch, MAST[1] - 0.05 * inch, "R", fontsize=LABEL_PT, color=ink, ha="right", va="top", zorder=9, fontweight="bold")
+        ax.text(sx + 0.10 * inch, sy, "source", fontsize=TICK_PT, color=ink, ha="left", va="center_baseline", zorder=9)
+        for r, ang, letter in ((M_NEAR, 30.0, "A"), (M_FAR, -22.0, "B")):
+            a = math.radians(ang)
+            ring_at(letter, sx + r * math.cos(a), sy + r * math.sin(a))
+        ring_at("C", 0.5 * (min(where["C"])[0] + max(where["C"])[0]) + 0.0, 0.5 * (where["C"][0][1] + where["C"][1][1]) + 22.0)
+    if case == "F":
+        for name, (tx, ty, tz) in TOWERS.items():
+            ax.plot([tx], [ty], marker="s", ms=5.5, color=surface, mec=ink, mew=1.0, zorder=9, ls="none")
+            ax.text(tx + 0.09 * inch, ty, f"{name}", fontsize=LABEL_PT, color=ink, ha="left", va="center_baseline", zorder=9, fontweight="bold")
+
+    # ---------------------------------------------------------------- plan: wind, north, ticks, axes
+    gx, gy = x1 - 0.55 * inch, y1 + 0.30 * inch
+    L = 0.36 * inch
+    if case in ("C", "D"):                                  # the three wind directions as a fan of arrows from one point, centred 0.3 in above the plan
+        fl = flow_dirs(case, "thermistor")
+        ys_ = [L * fy for fx, fy in fl.values()]
+        gy -= 0.5 * (min(ys_ + [0.0]) + max(ys_ + [0.0]))
+        for wd, (fx, fy) in fl.items():
+            _arrow(ax, (gx, gy), (gx + L * fx, gy + L * fy), 0.07 * inch, 0.028 * inch, ref, 0.8, z=3)
+            ax.text(gx + L * fx + 0.05 * inch, gy + L * fy, f"{wd:g}°", fontsize=TICK_PT, color=ref, ha="left", va="center_baseline", clip_on=False)
+        ax.text(gx - 0.06 * inch, gy, "WD", fontsize=TICK_PT, color=ref, ha="right", va="center_baseline", clip_on=False)
+    elif case == "M":                                       # the frame has north along +x and west along +y; the wind of the tunnel runs from 175 to 185 degrees
+        _arrow(ax, (x0 + 0.25 * inch, y1 + 0.30 * inch), (x0 + 0.25 * inch + L, y1 + 0.30 * inch), 0.07 * inch, 0.028 * inch, ref, 0.8, z=3)
+        ax.text(x0 + 0.25 * inch + L + 0.06 * inch, y1 + 0.30 * inch, "wind, WD 175° to 185°", fontsize=TICK_PT, color=ref, ha="left", va="center_baseline", clip_on=False)
+        gx, gy = x1 - 0.55 * inch, y1 + 0.10 * inch
+        _arrow(ax, (gx, gy), (gx + 0.26 * inch, gy), 0.07 * inch, 0.028 * inch, ink, 0.9, z=3)
+        _arrow(ax, (gx, gy), (gx, gy + 0.26 * inch), 0.07 * inch, 0.028 * inch, ink, 0.9, z=3)
+        ax.text(gx + 0.30 * inch, gy, "N", fontsize=LABEL_PT, color=ink, ha="left", va="center_baseline", clip_on=False)
+        ax.text(gx, gy + 0.30 * inch, "W", fontsize=LABEL_PT, color=ink, ha="center", va="bottom", clip_on=False)
+    else:
+        gx = x1 - 0.1 * inch
+        _arrow(ax, (gx, y1 + 0.06 * inch), (gx, y1 + 0.40 * inch), 0.07 * inch, 0.028 * inch, ink, 0.9, z=3)
+        ax.text(gx + 0.07 * inch, y1 + 0.40 * inch, "N", fontsize=LABEL_PT, color=ink, ha="left", va="center_baseline", clip_on=False)
+    _ticks(ax, x0, x1, v["step"], "x", sym, unit, inch, ink)
+    _ticks(ax, y0, y1, v["step"], "y", sym, unit, inch, ink)
+    xa, ya = x0 - 0.74 * inch, y0 - 0.50 * inch
+    _arrow(ax, (xa, ya), (xa + 0.30 * inch, ya), 0.07 * inch, 0.028 * inch, ink, 0.9)
+    _arrow(ax, (xa, ya), (xa, ya + 0.30 * inch), 0.07 * inch, 0.028 * inch, ink, 0.9)
+    ax.text(xa + 0.34 * inch, ya, "x", fontsize=LABEL_PT, ha="left", va="center_baseline", color=ink, clip_on=False)
+    ax.text(xa, ya + 0.34 * inch, "y", fontsize=LABEL_PT, ha="center", va="bottom", color=ink, clip_on=False)
+    ax.text(0.0, 1.0 + 0.06 / H_plan, "a", transform=ax.transAxes, fontsize=12, fontweight="bold", ha="left", va="bottom", color=ink)
+    ax.text(0.20 / W, 1.0 + 0.065 / H_plan, "Plan", transform=ax.transAxes, fontsize=LABEL_PT + 1, ha="left", va="bottom", color=ink)
+
+    # ---------------------------------------------------------------- strip under the plan: the elevation (C, D, M)
+    if strip == "elevation":
+        ae = frame(LEFT_D, y_strip, W, h_strip)
+        ae.set_xlim(x0, x1)
+        ae.set_ylim(0.0, z_view + band / scale)
+        ae.plot([x0, x1], [0, 0], color=ink, lw=1.2, zorder=3, solid_capstyle="butt")
+        if case == "M":
+            ae.add_patch(Polygon([(x0, 0.0)] + [(round(float(a), 6), round(float(b), 6)) for a, b in zip(xs_sky, top_sky)] + [(x1, 0.0)], closed=True,
+                                 facecolor=ps.FOOTPRINT, edgecolor=ink, linewidth=0.6, zorder=2))
+        seen = set()
+        for lo, hi in geo["boxes"]:
+            k = (round(lo[0], 6), round(hi[0], 6), round(hi[2], 6))
+            if k not in seen and hi[0] >= x0 and lo[0] <= x1:
+                seen.add(k)
+                ae.add_patch(Rectangle((lo[0], lo[2]), hi[0] - lo[0], hi[2] - lo[2], facecolor=ps.FOOTPRINT_FOCUS if hi[2] == top_z else ps.FOOTPRINT,
+                                       edgecolor=ink, linewidth=0.7, zorder=2))
+        if case == "C":
+            ae.plot([-unit / 2, unit / 2], [unit, unit], color=ink, lw=0.8, ls=DOTTED, zorder=3)
+            ae.text(0.0, 1.5 * unit, "centre block\n0D, 1D or 2D", fontsize=TICK_PT, color=ink, ha="center", va="center", zorder=7)
+        if case == "D":
+            ae.text(0.0, 0.6 * z_top, "tower", fontsize=TICK_PT, color=ink, ha="center", va="center", zorder=7)
+        zs = sorted({round(r["z"], 6) for r in tab})
+        if case != "M":
+            xl, xr = min(stations), max(stations)
+            ae.plot([xl, xr], [zs[0], zs[0]], color=ref, lw=1.0, ls=DOTTED, zorder=5)
+            ae.text(xr + 0.12 * inch, zs[0] + 0.04 * inch, f"z = {_g(zs[0] / unit)} {sym}", fontsize=LABEL_PT, color=ink, ha="left", va="bottom", zorder=8,
+                    bbox=dict(boxstyle="square,pad=0.08", facecolor=surface, edgecolor="none"))
+        for x in stations:
+            top = z_view + (row_of[x_in[x]] * ROW_IN + 0.04) * inch
+            ae.plot([x, x], [0, top], color=ref, lw=0.9, ls=DOTTED, zorder=4, dash_capstyle="round")
+            ae.text(x, top, labels[x], fontsize=TICK_PT, color=ink, ha="center", va="bottom", zorder=7, bbox=dict(boxstyle="square,pad=0.05", facecolor=surface, edgecolor="none"))
+        used = []
+        for rank, g in enumerate(gs):
+            spots = sorted({(round(r["x"], 6), round(r["z"], 6)) for r in (tab[i] for i in g.members) if x0 <= r["x"] <= x1})
+            ae.scatter([s_[0] for s_ in spots], [s_[1] for s_ in spots], s=_area(11.0, rank) * (2.2 if case == "M" else 1.0), color=g.colour,
+                       edgecolor=_dark(g.colour), linewidth=0.25, zorder=6 + 0.1 * rank)
+            for x in sorted({s_[0] for s_ in spots}):
+                if all(abs(x_in[x] - u) > 0.24 for u in used):
+                    used.append(x_in[x])
+                    _ring(ae, x, -0.15 * inch, ring_r, g.letter, g.colour)
+                    break
+        if case == "M":
+            sx, sy, sz = SOURCES["M"][0][1]
+            ae.plot([sx], [sz], marker="*", ms=9.5, color=ink, mec=surface, mew=0.4, zorder=9, ls="none")
+            ae.plot([MAST[0]], [MAST[2]], marker="s", ms=5.5, color=surface, mec=ink, mew=1.0, zorder=9, ls="none")
+            ae.text(MAST[0] + 0.09 * inch, MAST[2], "R", fontsize=LABEL_PT, color=ink, ha="left", va="center_baseline", zorder=9, fontweight="bold")
+        ae.text(0.0, 1.0 + 0.06 / h_strip, "b", transform=ae.transAxes, fontsize=12, fontweight="bold", ha="left", va="bottom", color=ink)
+        ae.text(0.20 / W, 1.0 + 0.065 / h_strip, "Elevation", transform=ae.transAxes, fontsize=LABEL_PT + 1, ha="left", va="bottom", color=ink)
+        xa, ya = x0 - 0.74 * inch, -0.10 * inch
+        _arrow(ae, (xa, ya), (xa + 0.30 * inch, ya), 0.07 * inch, 0.028 * inch, ink, 0.9)
+        _arrow(ae, (xa, ya), (xa, ya + 0.30 * inch), 0.07 * inch, 0.028 * inch, ink, 0.9)
+        ae.text(xa + 0.34 * inch, ya, "x", fontsize=LABEL_PT, ha="left", va="center_baseline", color=ink, clip_on=False)
+        ae.text(xa, ya + 0.34 * inch, "z", fontsize=LABEL_PT, ha="center", va="bottom", color=ink, clip_on=False)
+
+    # ---------------------------------------------------------------- strip beside the plan: the heights at the points of F
+    if strip == "heights":
+        ids = sorted({place[p] for p in place})
+        k_in, slot, left_pad = 0.125, 0.162, 0.52           # inches per metre of height; between two points; room for the plane labels
+        w_s = left_pad + slot * len(ids) + 0.12
+        h_s = 22.0 * k_in
+        xs_in = LEFT_D + W + 0.40
+        ah = frame(xs_in, y_plan + H_plan - h_s, w_s, h_s)
+        ah.set_xlim(0.0, w_s)
+        ah.set_ylim(0.0, h_s)
+        ah.plot([0.0, w_s], [0, 0], color=ink, lw=1.2, zorder=3, solid_capstyle="butt")
+        slot_x = {n: left_pad + slot * (i + 0.5) for i, n in enumerate(ids)}
+        for n in ids:
+            ah.plot([slot_x[n]] * 2, [0, h_s - 0.06], color=ref, lw=0.9, ls=DOTTED, zorder=4, dash_capstyle="round")
+            ah.text(slot_x[n], -0.05, str(n), fontsize=NUM_PT, color=ink, ha="center", va="top", clip_on=False)
+        ah.text(left_pad + 0.5 * slot * len(ids), -0.24, "point", fontsize=TICK_PT, color=ink, ha="center", va="top", clip_on=False)
+        for g in gs:
+            if g.letter == "D":
+                continue
+            h = {"A": 5.0, "B": 9.0, "C": 20.0}[g.letter]
+            ah.plot([left_pad, w_s - 0.04], [h * k_in] * 2, color=g.colour, lw=1.1, ls=DOTTED, zorder=5, dash_capstyle="round")
+            _ring(ah, 0.14, h * k_in, 0.082, g.letter, g.colour)
+            ah.text(0.26, h * k_in, f"{h:g} m", fontsize=TICK_PT, color=ink, ha="left", va="center_baseline", zorder=8)
+        for rank, g in enumerate(gs):
+            spots = sorted({(place[(round(tab[i]["x"], 6), round(tab[i]["y"], 6))], round(tab[i]["z"], 6)) for i in g.members})
+            xs_ = [slot_x[n] + (0.058 if g.letter == "D" else 0.0) for n, _ in spots]
+            hs_ = [(z - F_RAISE) * k_in for _, z in spots]
+            ah.scatter(xs_, hs_, s=(13.0 if g.letter != "D" else 15.0), marker="D" if g.letter == "D" else "o", color=g.colour, edgecolor=_dark(g.colour),
+                       linewidth=0.25, zorder=6 + 0.1 * rank)
+        for hh in (0, 10, 20):
+            ah.plot([0.0, -0.05], [hh * k_in] * 2, color=ink, lw=0.7, clip_on=False)
+            ah.text(-0.08, hh * k_in, f"{hh}", fontsize=TICK_PT, color=ink, ha="right", va="center_baseline", clip_on=False)
+        ah.text(0.0, 1.0 + 0.06 / h_s, "b", transform=ah.transAxes, fontsize=12, fontweight="bold", ha="left", va="bottom", color=ink)
+        ah.text(0.22 / w_s, 1.0 + 0.065 / h_s, "Heights above ground [m]", transform=ah.transAxes, fontsize=LABEL_PT + 1, ha="left", va="bottom", color=ink)
+        side = 2.2                                           # the whole model disc, with the window of the plan
+        ao = frame(xs_in + 0.5 * (w_s - side), y_plan + H_plan - h_s - 0.85 - side, side, side)
+        ao.set_xlim(-DISC_F * 1.05, DISC_F * 1.05)
+        ao.set_ylim(-DISC_F * 1.05, DISC_F * 1.05)
+        ao.add_collection(LineCollection(geo["segs"], colors=ref, linewidths=0.12, zorder=2))
+        th = np.linspace(0.0, 2 * math.pi, 361)
+        ao.plot(np.round(DISC_F * np.cos(th), 6), np.round(DISC_F * np.sin(th), 6), color=ink, lw=0.8, zorder=3)
+        ao.add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0, facecolor="none", edgecolor=ink, linewidth=0.9, linestyle=DOTTED, zorder=4))
+        ao.text(0.0, 1.0 + 0.06 / side, "c", transform=ao.transAxes, fontsize=12, fontweight="bold", ha="left", va="bottom", color=ink)
+        ao.text(0.22 / side, 1.0 + 0.065 / side, f"Model disc, radius {DISC_F:g} m", transform=ao.transAxes, fontsize=LABEL_PT + 1, ha="left", va="bottom", color=ink)
+
+    # ---------------------------------------------------------------- title, scale note, legend
+    fig.text(0.5, 1 - 0.30 / fig_h, f"AIJ UWE Case {case} — measurement points", ha="center", va="center", fontsize=13, fontweight="bold", color=ink)
+    scale_txt = note + ("; " + NOTES[case] if case in NOTES else "")
+    fig.text((LEFT_D + W) / FIG_WIDTH, (bottom - 0.12) / fig_h, scale_txt, ha="right", va="top", fontsize=LABEL_PT + 0.4, color=ink)
+    fig.legend(handles=handles, loc="lower center", ncols=ncols, frameon=False, fontsize=LABEL_PT + 1.4, bbox_to_anchor=(0.5, 0.0),
+               handlelength=1.5, handletextpad=0.5, columnspacing=1.8, labelspacing=0.55, borderaxespad=0.15)
+    return fig
