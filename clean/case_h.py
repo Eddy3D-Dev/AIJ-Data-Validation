@@ -251,7 +251,8 @@ def build(B, prov):
 
     # ---- geometry and frame
     xyz = pts.drop_duplicates(["instrument", "point_id"])[["x", "y", "z"]].to_numpy()
-    B.check(c, "no_sensor_inside_building", int(B.points_in_boxes(xyz, boxes).sum()) == 0, inside=0, points=len(xyz), note="no point lies inside the body; points ON the roof plane z = H: none")
+    n_in = int(B.points_in_boxes(xyz, boxes).sum())
+    B.check(c, "no_sensor_inside_building", n_in == 0, inside=n_in, points=len(xyz), note="no point lies inside the body; points ON the roof plane z = H: none")
     ctrl = B.points_in_boxes(xyz + np.array([0.05, 0.0, 0.0]), boxes)
     B.check(c, "control_points_shifted_0.05m_downwind_are_detected_inside", int(ctrl.sum()) > 5, inside_after_shift=int(ctrl.sum()), shift_m=[0.05, 0, 0])
     bb = [pts.x.min(), pts.x.max(), pts.y.min(), pts.y.max(), pts.z.min(), pts.z.max()]
@@ -294,12 +295,12 @@ def build(B, prov):
     B.check(c, "tracer_flux_through_x_0.38_is_0.6_to_1.3_of_the_release", 0.6 < flux / q_ppm < 1.3, flux_over_release=flux / q_ppm, flux_ppm_m3_s=flux, release_ppm_m3_s=q_ppm,
             lateral_integral_limits_m=[float(lat.index.min()), float(lat.index.max())], c_at_lateral_edge_over_centre=float(lat.iloc[0] / lat.loc[0.0]),
             method="separable: C(y, z) = C(0, z) x C(y, 0.0125)/C(0, 0.0125); U(z) from the velocity line x = 0.4 at y = 0; trapezoid from the lowest point up to z = 0.3 m",
-            note="an INDEPENDENT test of q against the concentrations; the lateral line stops at |y| = 0.2 m where C is still 23 % of the centreline value, so a deficit is expected")
+            note="an INDEPENDENT test of q against the concentrations; the lateral line stops at |y| = 0.2 m where C is still 32 % of the centreline value, so a deficit is expected")
     # baseline
     up = Cc[Cc.x < -0.1]
     B.check(c, "upwind_concentration_is_the_analyser_offset_not_tracer", float(up.C.abs().median()) < 0.2 and float(up.C.max()) < 1.0, upwind_points=len(up), median_abs_ppm=float(up.C.abs().median()),
             mean_ppm=float(up.C.mean()), min_ppm=float(Cc.C.min()), negative_values=int((Cc.C < 0).sum()), peak_ppm=float(Cc.C.max()),
-            note="the source is behind the building, so upwind C is zero in truth; the analyser reads +/-0.1 ppm and 96 of 826 values are negative. Log-based statistics (MG, VG) need a floor")
+            note="the source is behind the building, so upwind C is zero in truth; the analyser reads +/-0.1 ppm and 97 of 826 values are negative. Log-based statistics (MG, VG) need a floor")
 
     # ---- approach-flow fits
     fit1 = B.log_law_fit(afl.z, afl.U, 0.02, 2 * H_B)

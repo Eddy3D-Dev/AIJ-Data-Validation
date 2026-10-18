@@ -149,7 +149,7 @@ def build(B, prov):
     B.check(c, "far_lee_turbulence_recovers_to_at_least_half_the_approach_flow", bool((k_ratio_far > 0.5).all()), warn=True,
             k_over_UH2_at_5H=[round(float(v), 4) for v in far.k_ratio], k_over_UH2_approach=[round(float(v), 4) for v in k_app_UH2],
             ratio=[round(float(v), 3) for v in k_ratio_far], heights_m=far.z.tolist(),
-            note="the approach profile (120 min record, 28 Dec 2000) has k/UH^2 = 0.21-0.31; five tree heights behind the belt (10 min records, 26 Dec 2000) it is 0.040-0.072, "
+            note="the approach profile (120 min record, 28 Dec 2000) has k/UH^2 = 0.26-0.31 at these four heights; five tree heights behind the belt (10 min records, 26 Dec 2000) it is 0.040-0.072, "
                  "3-8 times lower, at every height. Different days and averaging times; not resolvable from the files. QUESTIONS.md QG2")
     ub_implied = math.sqrt(K_wb / float(k[z == 9.0][0])) if K_wb == K_wb else math.nan
     B.check(c, "workbook_inflow_K_is_3.02_and_implies_Ub_3.9_ms", abs(K_wb - 3.02) < 1e-9, K_m2_s2=K_wb, k_over_Ub2_at_9m=float(k[z == 9.0][0]), implied_Ub_m_s=ub_implied,

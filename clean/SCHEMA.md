@@ -136,3 +136,54 @@ changed input or a changed `build.py`.
 by name and serves them unchanged through `docs/api/cases/<id>/points.{json,csv}`
 (`points_source` in each file says so). Column `case_id` is deliberately not named `case`, which
 that adapter would read as the configuration.
+
+## Cases G, H and I (a tree belt in the field, a floor source, a roof source)
+
+Added with schema 2.0.0; the columns are the 36 of section 1, nothing new. What these cases add to the rules above.
+
+### Frames and transforms
+
+| case | origin | +x | +y | scale of the coordinates | transform from the published files |
+|---|---|---|---|---|---|
+| G | leeward face of the tree belt on the ground, on the centre section | downwind (the belt is x in [-2, 0] m) | along the belt, every point on y = 0 | **full scale**: a field observation | none; U/UH and k/UH² from the workbook |
+| H | centre of the building's leeward face on the ground | streamwise (building x in [-0.1, 0] m) | lateral (building y in [-0.05, 0.05] m) | model (building 0.10 × 0.10 × 0.20 m; the source states no ratio) | ratios × uH = 3.226 m/s from the workbook; **V × -1 for point numbers 1-220** |
+| I | centre of the cube on the ground | streamwise (cube x, y in [-0.05, 0.05] m) | lateral | model (cube 0.10 m; no ratio stated) | values from the workbook; **V on the y = 0 plane → NaN** |
+
+All three have one wind direction, `wind_direction_deg` = 0, and one `directions.csv` row per instrument with `flow_dir` = (1, 0): measured
+(recirculation behind the leeward face, downwash on the windward face, the source behind or on the building) for H and I, a definition
+for G (`unverified`: the field wind's angle to the belt is not published).
+
+### New `instrument` values
+
+| value | case | what it is |
+|---|---|---|
+| `sonic_anemometer` | G | three-dimensional ultrasonic anemometer; the published quantity is the mean scalar speed |
+| `split_fibre` | H | hot-wire split-fibre probe: U, V, W, uu, vv, ww, k (as in A, B, D) |
+| `ldv` | I | laser Doppler anemometer: U, V, W, k |
+| `hydrocarbon_analyzer` | H, I | high-speed total hydrocarbon analyser: C, c_rms (H only), concentration_ratio |
+
+### Rows and point numbers
+
+- **G**: 28 rows, `point_id` = the row order of `RS_caseG.csv` (the file has no numbers). `campaign` = `field`. Only `velocity_ratio` and `k_ratio` are filled.
+- **H**: one row per (instrument, point) with `point_id` = the CSV's `No.` (1-876): 826 `split_fibre` rows and 826 `hydrocarbon_analyzer` rows. The CSV's -999.9 marks the line a probe was not run on: concentration only at x = 0.38 m (50 points), velocity only at x = 0.40 m (50 points); none is inside the building. `uu`, `vv`, `ww` are (rms × uH)².
+- **I**: two point sets with no numbers, **stacked**: `ldv` rows numbered 1-91 and `hydrocarbon_analyzer` rows 92-630, each in its CSV's row order, so a `point_id` names one location (17 locations have both; they stay two rows). Only k is published, no variances.
+- Locations measured twice keep one row each under their own number: H's y = 0, z = 0.1 m line (13 locations; exact copies once V's sign is aligned), I's 13 ground-centreline concentration points (values up to 8.5 % apart).
+- The tables carry the **legacy workbooks' values** at full precision, not the CSVs' (H: the CSV quantises two planes, see `QUESTIONS.md` QH2; I: 3 dp and 1 dp). The CSVs are cross-checked to their own rounding.
+
+### Normalisations (`manifest.json → cases.<id>.normalisation`)
+
+| case | `velocity_ratio` / U | `k_ratio` / k | `concentration_ratio` |
+|---|---|---|---|
+| G | U/UH, UH = the mean speed at the tree height (7 m) during each period, from the approach flow's power law (0.22); no m/s anywhere | k/UH² | - |
+| H | U in m/s = ratio × uH, uH = 3.226 m/s (the approach flow at z = H; the readme says 3.23) | k in m²/s² | C / c0, c0 = cgas q / (uH H²) = 45.18 ppm (45.2 in the paper), q = 5.83e-6 m³/s of pure ethylene |
+| I | U in m/s, U_H = 1.7 m/s (the approach flow at z = H is 1.697) | k in m²/s² | C / c0, c0 = q / (U_H H²) = 39.22 ppm with q the **ethane** flow, 10 % of the 400 cc/min (the paper quotes the mixture's 6.67e-6 m³/s) |
+
+Case G's approach-flow table (`approach_flow.csv`) holds U/Ub and k/Ub² (Ub = U at 9 m, a different day) in its `U` and `k` columns: **dimensionless
+there**. Divide by UH/Ub = 0.946 for the table's normalisation. H's has 17 heights (uu, vv, ww = (rms × uH)²; the profile's uw and uv are not
+carried: the table has no column for them), I's 12 (k only).
+
+### Geometry
+
+Box geometry, `geometry.stl` and its boxes in `geometry.json`: G the belt's 2 × 74 × 7 m envelope with the 1.2 m gap (a **porous canopy**, shading rate 81 %,
+not a solid body), H the 0.10 × 0.10 × 0.20 m building, I the 0.1 m cube. The sources are not part of the geometry; their position is in
+`manifest.json → cases.<id>.extra_measurements.source`: H the 4 mm floor hole at (0.05, 0, 0), I the 6 mm roof outlet at (0, 0, 0.1).

@@ -150,7 +150,7 @@ def build(B, prov):
             note="every value is a multiple of 0.1 ppm: a 0.4 ppm value carries +/-12 % of quantisation alone; none is zero or negative, unlike Case H")
     vmax0 = float(wv[wv.y == 0].V.abs().max())
     vmin1 = float(wv[wv.y != 0].V.abs().min())
-    B.check(c, "V_on_the_y0_plane_is_numerically_zero_not_measured", vmax0 < 1e-5 and vmin1 > 1e-2 and int((cw.y == 0).sum()) == 53, max_abs_V_on_y0_m_s=vmax0, points_on_y0=int((cw.y == 0).sum()),
+    B.check(c, "V_on_the_y0_plane_is_numerically_zero_not_measured", vmax0 < 1e-5 and vmin1 > 1e-2 and int((cw.y == 0).sum()) == 53 and int(W_.V.isna().sum()) == 53 and int(W_.V.notna().sum()) == 38, max_abs_V_on_y0_m_s=vmax0, points_on_y0=int((cw.y == 0).sum()),
             min_abs_V_off_y0_m_s=vmin1, max_abs_V_off_y0_m_s=float(wv[wv.y != 0].V.abs().max()), csv_value_on_y0=sorted(set(cw[cw.y == 0].V)),
             note="53 of 91 points: the workbook's V there is 1e-9..4e-6 m/s (an LDA's noise is 1e-2); the CSV prints 0. Set to NaN so that scoring V does not count 53 symmetry values as measurements. QUESTIONS.md QI2")
     B.check(c, "k_is_not_decomposable_no_variances_published", W_[["uu", "vv", "ww"]].isna().all().all(), note="only the TKE is published; k cannot be checked against variances (Cases A, B, D can)")

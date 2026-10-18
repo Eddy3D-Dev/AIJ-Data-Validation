@@ -134,6 +134,56 @@ legacy-workbook and WD = 45° symmetry checks all go red (negative control run 2
 | D | released (official Zenodo CSVs + workbook) | released (rebuilt boxes) | 0° settled; 22.5°/45° corroborated by solved fields | Q2 |
 | E | released (workbook, full precision) | **provisional**: official STL open-edged & model-scale; bc state reconstructed | settled (compass) | Q3 |
 
+## Cases G, H and I
+
+Three more cases in the same schema (`SCHEMA.md`, section *Cases G, H and I*): the Tsuiji-matsu **tree belt**, a **field** observation with 28 normalised
+points (G); the 1:1:2 **building with a floor source**, 876 points of velocity and concentration (H); the **cube with a roof source**, 91 wind and 539
+concentration points (I). Data collectors, DOIs and requested citations are in `manifest.json`; each cleaner is `case_g.py`, `case_h.py`, `case_i.py`
+(`build.py` imports them), their checks are in `checks.json` (G 14, H 31, I 24; every one passes, one warning in G), the open questions are
+`QUESTIONS.md` QG1-QG4, QH1-QH3, QI1-QI3.
+
+| case | what | instrument | rows | frame origin | coordinate scale |
+|---|---|---|---|---|---|
+| G | Tsuiji-matsu tree belt, 74 × 2 × 7 m with a 1.2 m gap, **field**, 7 lines behind it × 4 heights | sonic anemometer: U/UH, k/UH² | 28 | belt's leeward face, +x downwind | **full-scale** m |
+| H | 1:1:2 building 0.10 × 0.10 × 0.20 m, U_H 3.226 m/s, ethylene source on the floor 0.25 H behind it, c0 45.18 ppm | split fibre U V W uu vv ww k; hydrocarbon analyser C, c_rms | 1,652 (826 + 826 at 876 points) | centre of the leeward face | model m |
+| I | cube 0.10 m, U_H 1.7 m/s, ethane source at the centre of the roof, c0 39.22 ppm | LDA U V W k (91 points); hydrocarbon analyser C (539 points) | 630 | cube centre | model m |
+
+**G**
+
+- **Field data, nothing in m/s.** Both quantities are ratios to the mean speed at the tree height during each period (`velocity_ratio`, `k_ratio`); the approach-flow table's `U` and `k` are U/Ub and k/Ub² (Ub = U at 9 m), dimensionless. UH/Ub = 0.946 (the readme's power law 0.22) converts one to the other; the profile's own index is 0.207 and log-interpolation gives 0.938.
+- **The readme's heights are wrong**: 1.5, 3, 6, 9 m (copied from the approach flow); the table, the workbook, the drawing and the data paper have 1.5, 3, 4.5, 6 m.
+- **A porous canopy**, shading rate 81 %: the served box is its envelope, and a CFD case needs a canopy model, not a wall.
+- **The lee's turbulence is below the approach flow's** at every height, 3-8 times at five tree heights downwind (k/UH² 0.040-0.072 against 0.26-0.31): different days (26 and 28 Dec 2000) and averaging times (10 and 120 min). Recorded as a warning; do not set an inlet's k from `AF_caseG.csv` and compare to the lee without a decision.
+- The workbook's inflow note `K = 3.02 m²/s²` would imply Ub = 3.89 m/s if it is k at 9 m (derived, unverified).
+- Only 28 values per quantity, no repeats, no uncertainty; the wind's angle to the belt is not published.
+
+**H**
+
+- **Two sources, one released.** The table carries the workbook's ratios × uH = 3.226 m/s, not `RS_caseH.csv`'s values: on the z/H = 1/2 and 1/4 planes (and in the approach profile) the CSV's U, V, W are the ratios rounded to 0.01 then scaled, a 0.032 m/s grid (632 values off by more than the 2 dp rounding, up to 0.021 m/s).
+- **V on the vertical plane has the opposite sign** to the horizontal planes at all 40 shared points (exactly); 207 velocity rows of point numbers 1-220 are multiplied by -1 so V is positive toward +y, the horizontal planes' convention (upwind flank check, r = +0.66 continuity with the neighbours). Case B's trap again.
+- **-999.9 is not the building interior**: it marks the line a probe was not run on. Velocity was measured on x = 0.40 m and concentration on x = 0.38 m (50 points each way); no point is inside the body.
+- 29 workbook rows (the y = 0 centre-line repeats of two horizontal planes) are not in the CSV; the y = 0, z = 0.1 m line IS, twice, as exact copies once V is aligned (13 + 13 values double-counted, not independent repeats).
+- Concentration carries the analyser's offset: upwind of the building it reads ±0.1 ppm and 97 of 826 values are negative (minimum -0.83 ppm). Geometric statistics need a floor.
+- The tracer's mass balance is checked against the data: the separable plume flux through x = 0.38 m is 0.80 of the release (a deficit is expected: the lateral line stops at |y| = 0.2 m, where C is still 32 % of the centre); the concentration peak (3,001 ppm = 66.4 c0) is at the source's x = 0.05 m.
+- Smaller: `w_rsm` in the CSV header, the workbook's inflow `z(mm)` column is metres, 12.5 mm typed 13 and x = 380 typed 400 in places, c0 45.1798 in the parameter sheet against 45.1773 in its own `<c>/Co` column, uH 3.226 against the stated 3.23.
+
+**I**
+
+- **Two files, two point sets, no numbers**: stacked, one row per instrument, wind rows 1-91, concentration rows 92-630. 17 locations have both.
+- **V on the y = 0 plane is not a measurement**: 1e-9 ... 4e-6 m/s in the workbook (0 in the CSV) at 53 of 91 points, against 0.02-0.39 m/s elsewhere; NaN here.
+- **c0 = 39.2 ppm needs the ethane flow** (10 % of 400 cc/min = 6.67e-7 m³/s); the paper's "6.67e-6 m³/s" is the mixture and would give 392 ppm. The release velocity gives M = 0.139 (stated 0.14). The far-field mass balance closes at 1.16 of the release at x = 2.7 m (the separable estimate overshoots; 3.6 at the first station).
+- The workbook uses UH = 1.7 m/s for the points and 1.697 m/s for the approach flow; the approach profile is within 4.6 % of the 1/7 power law but its best index is 0.115.
+- `AF_caseI.csv` ends in 53 `,,` rows and two stray cells (`0.5*`, `1.5*`) that a reader taking every non-blank row for data accepts.
+- Concentrations are multiples of 0.1 ppm (a 0.4 ppm value carries ±12 %); 13 ground-centreline points are measured twice, up to 8.5 % apart; the four wind points the workbook lists twice are identical and appear once.
+- Only the TKE is published: k cannot be checked against variances.
+
+Negative controls (2026-10-18, scratch copies of the cleaners): leaving H's vertical-plane V unflipped, shifting H's frame 0.05 m downwind, reading G's workbook matrix with the wrong
+row, leaving I's y = 0 V unblanked and moving I's cube 0.05 m each turn the named checks red (`the_y0_z0.5H_line_appears_twice_as_exact_copies_once_V_is_flipped`,
+`no_sensor_inside_building` / `extents_sane` / `concentration_peak_sits_at_the_source_*`, `csv_agrees_with_workbook_to_the_csv_rounding`,
+`V_on_the_y0_plane_is_numerically_zero_not_measured`, `control_points_shifted_0.1m_upwind_are_detected_inside`).
+
+Status: points and inflow released for all three; geometry released (boxes; G is an envelope of a porous canopy); rotation sense: G `unverified` (field), H and I settled; Zenodo version DOIs are not stated by the readmes, so `doi_version` is empty.
+
 ## 6. Cite
 
 - Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). *Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan.* Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083

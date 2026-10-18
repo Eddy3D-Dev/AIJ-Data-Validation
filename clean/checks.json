@@ -1058,7 +1058,7 @@
     4.5,
     6.0
    ],
-   "note": "the approach profile (120 min record, 28 Dec 2000) has k/UH^2 = 0.21-0.31; five tree heights behind the belt (10 min records, 26 Dec 2000) it is 0.040-0.072, 3-8 times lower, at every height. Different days and averaging times; not resolvable from the files. QUESTIONS.md QG2"
+   "note": "the approach profile (120 min record, 28 Dec 2000) has k/UH^2 = 0.26-0.31 at these four heights; five tree heights behind the belt (10 min records, 26 Dec 2000) it is 0.040-0.072, 3-8 times lower, at every height. Different days and averaging times; not resolvable from the files. QUESTIONS.md QG2"
   },
   {
    "case": "G",
@@ -1413,7 +1413,7 @@
    ],
    "c_at_lateral_edge_over_centre": 0.3204932459448913,
    "method": "separable: C(y, z) = C(0, z) x C(y, 0.0125)/C(0, 0.0125); U(z) from the velocity line x = 0.4 at y = 0; trapezoid from the lowest point up to z = 0.3 m",
-   "note": "an INDEPENDENT test of q against the concentrations; the lateral line stops at |y| = 0.2 m where C is still 23 % of the centreline value, so a deficit is expected"
+   "note": "an INDEPENDENT test of q against the concentrations; the lateral line stops at |y| = 0.2 m where C is still 32 % of the centreline value, so a deficit is expected"
   },
   {
    "case": "H",
@@ -1426,7 +1426,7 @@
    "min_ppm": -0.8308024390243887,
    "negative_values": 97,
    "peak_ppm": 3000.769794,
-   "note": "the source is behind the building, so upwind C is zero in truth; the analyser reads +/-0.1 ppm and 96 of 826 values are negative. Log-based statistics (MG, VG) need a floor"
+   "note": "the source is behind the building, so upwind C is zero in truth; the analyser reads +/-0.1 ppm and 97 of 826 values are negative. Log-based statistics (MG, VG) need a floor"
   },
   {
    "case": "I",
