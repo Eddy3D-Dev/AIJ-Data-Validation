@@ -871,17 +871,17 @@ def points_summary(rows):
 
 
 # Boxes the case states (the building, the belt, the array), in the case frame. F's STL is a 725 m disc drawn as a polygon, so its
-# extent in y is short of the radius by up to 3 mm; M's and F's z start at -0.0 on the ground.
+# extent in y is short of the radius by up to 3 mm; F and M stand on a base slab (geometry_checks.BASE_Z) below the ground at z = 0.
 BBOX_TOLERANCE = {"F": 0.01}
 EXPECTED_BBOX = {
-    "F": ([-725.0, -725.0, 0.0], [725.0, 725.0, 225.0]),               # the 725 m disc of terrain, the 225 m roof of the tallest tower (readme, STL)
+    "F": ([-725.0, -725.0, -1.0], [725.0, 725.0, 225.0]),              # the 725 m disc of terrain on a 1 m base slab, the 225 m roof of the tallest tower (readme, STL)
     "G": ([-2.0, -37.0, 1.2], [0.0, 37.0, 7.0]),                       # the belt: 2 m deep, 74 m long, 7 m tall, 1.2 m gap below
     "H": ([-0.1, -0.05, 0.0], [0.0, 0.05, 0.2]),                       # the 0.10 x 0.10 x 0.20 m building, leeward face at x = 0
     "I": ([-0.05, -0.05, 0.0], [0.05, 0.05, 0.1]),                     # the 0.1 m cube, centred on the origin
     "J": ([-0.08, -0.04, 0.0], [0.0, 0.04, 0.16]),                     # b = 0.08 m, H = 0.16 m
     "K": ([-0.36, -0.51, 0.0], [0.66, 0.51, 0.06]),                    # 9 x 9 cubes of 0.06 m on a 0.12 m pitch
     "L": ([-0.96, -0.51, 0.0], [0.66, 0.51, 0.06]),                    # 14 x 9 cubes of 0.06 m on a 0.12 m pitch
-    "M": ([-540.0, -360.0, 0.0], [540.0, 360.0, 64.9152]),             # the 1.8 x 1.2 m model, x600
+    "M": ([-540.0, -360.0, -1.0], [540.0, 360.0, 64.9152]),            # the 1.8 x 1.2 m model, x600, on a 1 m base slab
 }
 
 
@@ -927,8 +927,8 @@ def write_data(case):
             ok = all(abs(a - b) < tol for a, b in zip(stats["bbox_min"], lo)) and all(abs(a - b) < tol for a, b in zip(stats["bbox_max"], hi))
             if not ok:
                 raise SystemExit(f"geometry check failed for {case}/{cfg}: bbox {stats['bbox_min']}..{stats['bbox_max']} != {lo}..{hi}")
-        if boxes is not None and not stats["watertight"]:
-            raise SystemExit(f"geometry check failed for {case}/{cfg}: box geometry is not edge-manifold")
+        if not stats["watertight"]:
+            raise SystemExit(f"geometry check failed for {case}/{cfg}: not every body is closed, consistently wound and outward ({stats})")
         geometry.append({"configuration": cfg, "rel": rel, "stats": stats, "boxes": boxes, "note": note, "bbox_ok": ok})
     geometry.sort(key=lambda g: g["configuration"] != D.DEFAULT_CONFIGURATION[case])
 
@@ -1132,7 +1132,7 @@ def write_case_documents(case, d):
 
     files = []
     for g in d["geometry"]:
-        entry = {"configuration": g["configuration"], **download(g["rel"]), "format": "ASCII STL, LF line endings, outward normals",
+        entry = {"configuration": g["configuration"], **download(g["rel"]), "format": "ASCII STL, LF line endings, outward normals, every body closed and consistently wound",
                  "source": g["note"], "stats": g["stats"], "bbox_matches_stated_dimensions": g["bbox_ok"],
                  "render": render_url(case, g["configuration"]), "render_caption": D.RENDER_CAPTIONS[(case, g["configuration"])]}
         if g["boxes"] is not None:
@@ -1223,7 +1223,7 @@ def write_geometry_index(data):
                 "units": "metres" + (" (full scale)" if case in D.FULL_SCALE else " (model scale)"),
                 "frame": {k: meta["frame"][k] for k in ("origin", "x", "y", "z")},
                 "bbox_min": g["stats"]["bbox_min"], "bbox_max": g["stats"]["bbox_max"],
-                "triangles": g["stats"]["triangles"], "watertight": g["stats"]["watertight"],
+                "triangles": g["stats"]["triangles"], **{k: g["stats"][k] for k in S.GEOMETRY_FACTS},
                 "render": render_url(case, g["configuration"]),
             })
     write_json("geometry.json", "geometry-index", {

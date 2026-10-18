@@ -61,6 +61,10 @@ from typing import Iterable
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, os.pardir))
 
+sys.path.insert(0, os.path.join(REPO, "clean"))
+import geometry_checks as G  # noqa: E402  (winding, bodies, watertightness and the repairs: one copy, shared with clean/build.py)
+from geometry_checks import read_ascii_stl, shells_from_tris, stl_stats  # noqa: E402,F401  (callers reach them as D.<name>)
+
 POINT_COLUMNS = ["point_id", "config", "instrument", "wind_direction", "wind_direction_deg",
                  "x", "y", "z", "U", "V", "W", "uu", "vv", "ww", "k", "Vs", "velocity_ratio",
                  "campaign", "run", "uv", "uw", "vw", "C", "c_rms", "concentration_ratio", "T", "T_rms", "uc", "vc", "wc", "uT", "vT", "wT", "velocity_ratio_sd", "k_ratio"]
@@ -390,6 +394,7 @@ CASES = {
             "All 2560 published ratios are integer multiples of 0.0198204 (55 distinct levels): the data's own resolution is +/-0.0099, 3.1 % of the median value and about 10 % at the lowest points.",
             "The readme describes AF_caseE.csv, RS_caseE.csv and BD_caseE.stl, but this repository holds only the .3dm, .ghx, .xls and the MP drawing; everything here is extracted from the workbook and the 3dm.",
             "case-e.3dm is FULL-SCALE metres (MP_caseE.png is drawn at model scale, +/-0.8 m). Use layers 'buildings' (5,015 meshes, before construction) and 'buildings_new_construction' (3 prisms); exclude the map plate on the Japanese-named general layer, the terrain plates (the site is flat) and 'probes'.",
+            "case-e.3dm: 1,563 of 8,436 triangles (18.5 %) of the building meshes are wound against their neighbours; all are re-wound here.",
             "Do not take the measurement coordinates from the 3dm's 'probes' layer: its 80 spheres sit a median 2.31 m (max 21 m) from the workbook's points, which are authoritative (all 80 fall in open space, min 0.83 m from a building edge).",
             "The measured quantity is a scalar (thermistor) speed; a RANS |U| is biased low against it in a dense canopy. The construction signal (ac - bc) is largest for SW (mean |d| 0.2155) and smallest for SSE (0.093).",
         ],
@@ -725,45 +730,6 @@ BOX_GEOMETRY = {
 }
 
 
-def read_ascii_stl(path):
-    tris, cur = [], []
-    with io.open(path, encoding="utf-8", errors="replace") as f:
-        for line in f:
-            s = line.strip()
-            if s.startswith("vertex"):
-                cur.append(tuple(float(t) for t in s.split()[1:4]))
-                if len(cur) == 3:
-                    tris.append(tuple(cur))
-                    cur = []
-    return tris
-
-
-def shells_from_tris(tris, tol=1e-9):
-    """Connected components of a triangle soup by shared (welded) vertices."""
-    key = lambda p: tuple(round(c / tol) for c in p)
-    parent = {}
-
-    def find(a):
-        while parent.setdefault(a, a) != a:
-            parent[a] = parent[parent[a]]
-            a = parent[a]
-        return a
-
-    def union(a, b):
-        ra, rb = find(a), find(b)
-        if ra != rb:
-            parent[ra] = rb
-
-    for t in tris:
-        k0, k1, k2 = (key(p) for p in t)
-        union(k0, k1)
-        union(k1, k2)
-    groups = defaultdict(list)
-    for t in tris:
-        groups[find(key(t[0]))].append(t)
-    return list(groups.values())
-
-
 def boxes_d():
     """The 83 shells of BD_caseD.stl, each reduced to its bounding box (they are all boxes)."""
     tris = read_ascii_stl(os.path.join(REPO, "raw", "cases", "case-d", "BD_caseD.stl"))
@@ -782,29 +748,6 @@ def boxes_d():
     return boxes, len(tris)
 
 
-def mesh_e(state):
-    """Triangles of the Niigata district from the 3dm: 'bc' = buildings, 'ac' = + new construction."""
-    import rhino3dm
-    f = rhino3dm.File3dm.Read(os.path.join(REPO, "raw", "cases", "case-e", "case-e.3dm"))
-    layers = {l.Index: l.Name for l in f.Layers}
-    wanted = {"buildings"} if state == "bc" else {"buildings", "buildings_new_construction"}
-    tris = []
-    for o in f.Objects:
-        if layers.get(o.Attributes.LayerIndex) not in wanted:
-            continue
-        m = o.Geometry
-        if not isinstance(m, rhino3dm.Mesh):
-            continue
-        vs = [(m.Vertices[i].X, m.Vertices[i].Y, m.Vertices[i].Z) for i in range(len(m.Vertices))]
-        for i in range(len(m.Faces)):
-            face = m.Faces[i]
-            a, b, c, d = face[0], face[1], face[2], face[3]
-            tris.append((vs[a], vs[b], vs[c]))
-            if d != c:
-                tris.append((vs[a], vs[c], vs[d]))
-    return tris
-
-
 def tris_of_boxes(boxes):
     out = []
     for b in boxes:
@@ -812,74 +755,8 @@ def tris_of_boxes(boxes):
     return out
 
 
-def _normal(t):
-    (ax, ay, az), (bx, by, bz), (cx, cy, cz) = t
-    ux, uy, uz = bx - ax, by - ay, bz - az
-    vx, vy, vz = cx - ax, cy - ay, cz - az
-    nx, ny, nz = uy * vz - uz * vy, uz * vx - ux * vz, ux * vy - uy * vx
-    n = math.sqrt(nx * nx + ny * ny + nz * nz)
-    return (nx / n, ny / n, nz / n) if n > 0 else (0.0, 0.0, 0.0)
-
-
 def write_ascii_stl(path, tris, name):
-    """LF-only ASCII STL (CRLF makes OpenFOAM's reader keep the \\r in the last token)."""
-    with io.open(path, "w", encoding="ascii", newline="\n") as f:
-        f.write(f"solid {name}\n")
-        for t in tris:
-            n = _normal(t)
-            f.write(f"  facet normal {n[0]:.6g} {n[1]:.6g} {n[2]:.6g}\n    outer loop\n")
-            for p in t:
-                f.write(f"      vertex {p[0]:.6g} {p[1]:.6g} {p[2]:.6g}\n")
-            f.write("    endloop\n  endfacet\n")
-        f.write(f"endsolid {name}\n")
-
-
-def stl_stats(tris, tol=1e-7):
-    """Triangle count, bounding box, signed volume and the edge-manifold census of a soup."""
-    key = lambda p: tuple(round(c / tol) for c in p)
-    edges = defaultdict(int)
-    vol = 0.0
-    lo = [math.inf] * 3
-    hi = [-math.inf] * 3
-    for a, b, c in tris:
-        ka, kb, kc = key(a), key(b), key(c)
-        for u, v in ((ka, kb), (kb, kc), (kc, ka)):
-            edges[tuple(sorted((u, v)))] += 1
-        vol += (a[0] * (b[1] * c[2] - b[2] * c[1]) - a[1] * (b[0] * c[2] - b[2] * c[0]) + a[2] * (b[0] * c[1] - b[1] * c[0])) / 6.0
-        for p in (a, b, c):
-            for i in range(3):
-                lo[i] = min(lo[i], p[i])
-                hi[i] = max(hi[i], p[i])
-    counts = defaultdict(int)
-    for n in edges.values():
-        counts[n] += 1
-    return {
-        "triangles": len(tris),
-        "bbox_min": [round(v, 6) for v in lo], "bbox_max": [round(v, 6) for v in hi],
-        "signed_volume": round(vol, 9),
-        "edges": len(edges),
-        "edges_shared_by_two_faces": counts.get(2, 0),
-        "edges_boundary": counts.get(1, 0),
-        "edges_non_manifold": sum(v for k, v in counts.items() if k > 2),
-        "watertight": counts.get(2, 0) == len(edges),
-    }
-
-
-def orient_outward(tris, tol=1e-4):
-    """Flip every closed shell whose signed volume is negative. Returns (tris, shells, flipped).
-
-    The Niigata 3dm meshes are wound inconsistently (475 of 503 shells inward); OpenFOAM's
-    snappyHexMesh and most STL consumers want outward normals.
-    """
-    out, flipped, shells = [], 0, 0
-    for shell in shells_from_tris(tris, tol=tol):
-        shells += 1
-        if stl_stats(shell)["signed_volume"] < 0:
-            flipped += 1
-            out.extend((a, c, b) for a, b, c in shell)
-        else:
-            out.extend(shell)
-    return out, shells, flipped
+    G.write_ascii_stl(path, tris, name, digits=6)   # the API's files carry six significant digits
 
 
 def case_geometry(case):
@@ -898,11 +775,12 @@ def case_geometry(case):
     if case == "E":
         out = []
         for state in ("bc", "ac"):
-            tris, shells, flipped = orient_outward(mesh_e(state))
+            raw = G.mesh_3dm(os.path.join(REPO, "raw", "cases", "case-e", "case-e.3dm"), state)
+            tris, info = G.clean_buildings(raw, digits=6)
             out.append((state, tris, None,
                         "triangulated from case-e.3dm via rhino3dm, layers "
                         + ("'buildings'" if state == "bc" else "'buildings' + 'buildings_new_construction'")
-                        + f"; {flipped} of {shells} shells were wound inward in the 3dm and are flipped outward here"))
+                        + "; " + G.buildings_note(raw, info, G.stl_stats(tris))))
         return out
     raise KeyError(case)
 

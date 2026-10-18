@@ -64,6 +64,19 @@ POINT = obj(["point_id", "x", "y", "z"], {
                                 "uc", "vc", "wc", "uT", "vT", "wT", "velocity_ratio_sd", "k_ratio")},
 })
 
+# What a geometry file says about itself (geometry.json `stats`, and the geometry index). A BODY is a set of triangles joined through
+# edges that exactly two triangles use.
+GEOMETRY_FACTS = {
+    "watertight": {"type": "boolean", "description": ("true when every body is closed (no boundary edge), consistently wound (every edge is traversed once in "
+                                                      "each direction) and has a positive volume (outward normals)")},
+    "bodies": {"type": "integer", "minimum": 0, "description": "number of bodies (buildings, or the terrain with its buildings)"},
+    "edges_boundary": {"type": "integer", "minimum": 0, "description": "edges used by one triangle: 0 when every body is closed"},
+    "body_contacts": {"type": "integer", "minimum": 0, "description": ("edges that four triangles share where two separate bodies touch; "
+                                                                      "each body still sees the edge as an ordinary two-triangle edge, so a contact does not open a body")},
+    "inconsistent_triangles": {"type": "integer", "minimum": 0, "description": "fewest triangles to reverse to wind every body consistently: 0 in every served file"},
+    "min_body_volume": {"type": "number", "description": "volume of the smallest body (m^3 in the file's units cubed); positive when every body is outward"},
+}
+
 FRAME = obj(["origin", "x", "y", "z"], {k: {"type": "string"} for k in ("origin", "x", "y", "z")})
 
 
@@ -178,7 +191,7 @@ DOCUMENTS = {
             "configuration": {"type": "string"}, "format": {"type": "string"}, "source": {"type": "string"},
             "stats": obj(["triangles", "bbox_min", "bbox_max", "watertight"], {
                 "triangles": {"type": "integer"}, "bbox_min": arr({"type": "number"}, minItems=3, maxItems=3),
-                "bbox_max": arr({"type": "number"}, minItems=3, maxItems=3), "watertight": {"type": "boolean"}}),
+                "bbox_max": arr({"type": "number"}, minItems=3, maxItems=3), **GEOMETRY_FACTS}),
             "render": URL, "render_caption": {"type": "string"},
             "boxes": arr(obj(["min", "max"], {"min": arr({"type": "number"}, minItems=3, maxItems=3),
                                               "max": arr({"type": "number"}, minItems=3, maxItems=3)})),
@@ -206,7 +219,7 @@ DOCUMENTS = {
         "archive": DOWNLOAD,
         "files": arr({"allOf": [DOWNLOAD, obj(["case", "configuration", "archive_name", "units", "frame", "triangles"], {
             "case": CASE_ID, "configuration": {"type": "string"}, "archive_name": {"type": "string"}, "units": {"type": "string"},
-            "frame": FRAME, "triangles": {"type": "integer"}, "watertight": {"type": "boolean"}})]}),
+            "frame": FRAME, "triangles": {"type": "integer"}, **GEOMETRY_FACTS})]}),
     }),
     "validation-summary": _doc("validation-summary", "Validation summary", "Every case and engine in one table: status, runs and "
                                "their headline scores.", ["engines", "cases"], {
