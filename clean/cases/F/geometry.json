@@ -1,0 +1,39 @@
+{
+ "case_id": "F",
+ "units": "metres (full scale)",
+ "frame": {
+  "origin": "centre of the reproduced district, in the tunnel's floor plane (MP_caseF.png 'Origin')",
+  "x": "+x EAST (compass rose in MP_caseF.png)",
+  "y": "+y NORTH",
+  "z": "+z up from the TUNNEL FLOOR, full scale; the readme's rule is height above ground = z - 10 m (the model was raised, QUESTIONS.md QF4); tunnel planes at z = 15 / 19 / 30 m, field anemometers at z = 13 ... 21 m",
+  "wind_direction_rotation": "compass FROM-direction (N = 0, E = 90): N blows toward -y; flow_dir = (-sin WD, -cos WD). Not defined in the readme; the reference-building choice (SMB for NW-NE) and the upwind-roughness check support it (status 'unverified').",
+  "length_scale": "FULL-scale metres (model 1:800): the tunnel's model-scale coordinates and the STL are multiplied by 800; the field's are published in full scale"
+ },
+ "files": [
+  {
+   "configuration": "default",
+   "file": "cases/F/geometry.stl",
+   "format": "ASCII STL, LF, metres, same frame as points.csv",
+   "source": "BD_caseF.stl (Zenodo; terrain + buildings of Nov 1978) scaled x800 from model to full-scale metres and re-wound outward; 53814 triangles, one shell, open only along the rim of the 725 m disc (812 boundary edges), z = 0 is the tunnel floor",
+   "stats": {
+    "triangles": 53814,
+    "bbox_min": [
+     -725.0,
+     -724.9976,
+     -0.0
+    ],
+    "bbox_max": [
+     725.0,
+     724.9984,
+     225.0
+    ],
+    "signed_volume": 11693570.075203538,
+    "edges": 81127,
+    "edges_shared_by_two_faces": 80315,
+    "edges_boundary": 812,
+    "edges_non_manifold": 0,
+    "watertight": false
+   }
+  }
+ ]
+}

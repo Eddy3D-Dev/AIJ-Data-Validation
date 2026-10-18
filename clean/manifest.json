@@ -173,13 +173,15 @@
   }
  },
  "counts": {
-  "rows": 4317,
+  "rows": 5119,
   "by_case": {
    "A": 186,
    "B": 224,
    "C": 1080,
    "D": 267,
-   "E": 2560
+   "E": 2560,
+   "F": 472,
+   "M": 330
   }
  },
  "cases": {
@@ -1785,6 +1787,1633 @@
      "NNW": 0.105,
      "SSE": 0.0934
     }
+   }
+  },
+  "F": {
+   "id": "F",
+   "title": "Case F — flow within an actual urban area in Shinjuku",
+   "status": "provisional",
+   "status_note": "Case F: coordinates, ratios and inflow are released and pass every check. What stays provisional: 16 field values of point 14 whose published direction labels disagree with the legacy workbook (this release follows the workbook; QUESTIONS.md QF1), one tunnel value with no workbook counterpart (QF2), and the vertical reference of the geometry (QF4).",
+   "doi": "10.5281/zenodo.15589621",
+   "doi_version": null,
+   "zenodo_record": "https://zenodo.org/records/15589621",
+   "licence": "CC BY 4.0",
+   "data_collectors": [
+    "K. Fujii, Y. Asami, Y. Iwasa et al. (the original 1978 investigation, reference 59 of the data paper; the Zenodo readme names no data collectors)"
+   ],
+   "editors_distributors": [
+    "Yoshihide Tominaga (Niigata Institute of Technology)",
+    "Hideki Kikumoto (The University of Tokyo)",
+    "Tsubasa Okaze (Institute of Science Tokyo)"
+   ],
+   "contact": "Tsubasa Okaze <okaze.t.f356@m.isct.ac.jp>",
+   "citation_requested": "Fujii, K., Asami, Y., Iwasa, Y. et al. (1978). Wind in Shinjuku Sub-Central Area — Comparison Between Field Measurement and Wind Tunnel Experiment. Proceedings of the 5th Symposium on Wind Resistance of Structures, 91-98 (in Japanese). Also cite the data paper: Kikumoto, H. et al. (2026). Japan Architectural Review 9(1), e70083, section 3.6. https://doi.org/10.1002/2475-8876.70083",
+   "files": {
+    "points_csv": "cases/F/points.csv",
+    "points_parquet": "cases/F/points.parquet",
+    "approach_flow_csv": "cases/F/approach_flow.csv",
+    "approach_flow_parquet": "cases/F/approach_flow.parquet",
+    "directions_csv": "cases/F/directions.csv",
+    "geometry_json": "cases/F/geometry.json",
+    "geometry": [
+     "cases/F/geometry.stl"
+    ]
+   },
+   "columns_present": [
+    "case_id",
+    "config",
+    "instrument",
+    "point_id",
+    "wind_direction_deg",
+    "wind_direction",
+    "x",
+    "y",
+    "z",
+    "velocity_ratio",
+    "campaign",
+    "run",
+    "velocity_ratio_sd"
+   ],
+   "counts": {
+    "rows": 472,
+    "distinct_points": 13,
+    "by_config": {
+     "default": 364,
+     "h20": 79,
+     "h5": 29
+    },
+    "by_instrument": {
+     "cup_anemometer": 208,
+     "thermistor": 264
+    },
+    "by_direction": {
+     "0.0": 35,
+     "22.5": 43,
+     "45.0": 26,
+     "67.5": 46,
+     "90.0": 13,
+     "112.5": 13,
+     "135.0": 26,
+     "157.5": 26,
+     "180.0": 42,
+     "202.5": 43,
+     "225.0": 35,
+     "247.5": 13,
+     "270.0": 13,
+     "292.5": 26,
+     "315.0": 26,
+     "337.5": 46
+    },
+    "nan_per_column": {
+     "U": 472,
+     "V": 472,
+     "W": 472,
+     "uu": 472,
+     "vv": 472,
+     "ww": 472,
+     "k": 472,
+     "Vs": 472,
+     "uv": 472,
+     "uw": 472,
+     "vw": 472,
+     "C": 472,
+     "c_rms": 472,
+     "concentration_ratio": 472,
+     "T": 472,
+     "T_rms": 472,
+     "uc": 472,
+     "vc": 472,
+     "wc": 472,
+     "uT": 472,
+     "vT": 472,
+     "wT": 472,
+     "velocity_ratio_sd": 264,
+     "k_ratio": 472
+    }
+   },
+   "configurations": [
+    {
+     "config": "default",
+     "instrument": "cup_anemometer",
+     "wind_direction_deg": 0.0,
+     "wind_direction": "N",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "cup_anemometer",
+     "wind_direction_deg": 22.5,
+     "wind_direction": "NNE",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "cup_anemometer",
+     "wind_direction_deg": 45.0,
+     "wind_direction": "NE",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "cup_anemometer",
+     "wind_direction_deg": 67.5,
+     "wind_direction": "ENE",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "cup_anemometer",
+     "wind_direction_deg": 90.0,
+     "wind_direction": "E",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "cup_anemometer",
+     "wind_direction_deg": 112.5,
+     "wind_direction": "ESE",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "cup_anemometer",
+     "wind_direction_deg": 135.0,
+     "wind_direction": "SE",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "cup_anemometer",
+     "wind_direction_deg": 157.5,
+     "wind_direction": "SSE",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "cup_anemometer",
+     "wind_direction_deg": 180.0,
+     "wind_direction": "S",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "cup_anemometer",
+     "wind_direction_deg": 202.5,
+     "wind_direction": "SSW",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "cup_anemometer",
+     "wind_direction_deg": 225.0,
+     "wind_direction": "SW",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "cup_anemometer",
+     "wind_direction_deg": 247.5,
+     "wind_direction": "WSW",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "cup_anemometer",
+     "wind_direction_deg": 270.0,
+     "wind_direction": "W",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "cup_anemometer",
+     "wind_direction_deg": 292.5,
+     "wind_direction": "WNW",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "cup_anemometer",
+     "wind_direction_deg": 315.0,
+     "wind_direction": "NW",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "cup_anemometer",
+     "wind_direction_deg": 337.5,
+     "wind_direction": "NNW",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "thermistor",
+     "wind_direction_deg": 0.0,
+     "wind_direction": "N",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "thermistor",
+     "wind_direction_deg": 22.5,
+     "wind_direction": "NNE",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "thermistor",
+     "wind_direction_deg": 45.0,
+     "wind_direction": "NE",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "thermistor",
+     "wind_direction_deg": 67.5,
+     "wind_direction": "ENE",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "thermistor",
+     "wind_direction_deg": 135.0,
+     "wind_direction": "SE",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "thermistor",
+     "wind_direction_deg": 157.5,
+     "wind_direction": "SSE",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "thermistor",
+     "wind_direction_deg": 180.0,
+     "wind_direction": "S",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "thermistor",
+     "wind_direction_deg": 202.5,
+     "wind_direction": "SSW",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "thermistor",
+     "wind_direction_deg": 225.0,
+     "wind_direction": "SW",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "thermistor",
+     "wind_direction_deg": 292.5,
+     "wind_direction": "WNW",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "thermistor",
+     "wind_direction_deg": 315.0,
+     "wind_direction": "NW",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "default",
+     "instrument": "thermistor",
+     "wind_direction_deg": 337.5,
+     "wind_direction": "NNW",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "h20",
+     "instrument": "thermistor",
+     "wind_direction_deg": 0.0,
+     "wind_direction": "N",
+     "rows": 9,
+     "measured": 9,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "h20",
+     "instrument": "thermistor",
+     "wind_direction_deg": 22.5,
+     "wind_direction": "NNE",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "h20",
+     "instrument": "thermistor",
+     "wind_direction_deg": 67.5,
+     "wind_direction": "ENE",
+     "rows": 12,
+     "measured": 12,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "h20",
+     "instrument": "thermistor",
+     "wind_direction_deg": 180.0,
+     "wind_direction": "S",
+     "rows": 11,
+     "measured": 11,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "h20",
+     "instrument": "thermistor",
+     "wind_direction_deg": 202.5,
+     "wind_direction": "SSW",
+     "rows": 12,
+     "measured": 12,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "h20",
+     "instrument": "thermistor",
+     "wind_direction_deg": 225.0,
+     "wind_direction": "SW",
+     "rows": 9,
+     "measured": 9,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "h20",
+     "instrument": "thermistor",
+     "wind_direction_deg": 337.5,
+     "wind_direction": "NNW",
+     "rows": 13,
+     "measured": 13,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "h5",
+     "instrument": "thermistor",
+     "wind_direction_deg": 22.5,
+     "wind_direction": "NNE",
+     "rows": 4,
+     "measured": 4,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "h5",
+     "instrument": "thermistor",
+     "wind_direction_deg": 67.5,
+     "wind_direction": "ENE",
+     "rows": 8,
+     "measured": 8,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "h5",
+     "instrument": "thermistor",
+     "wind_direction_deg": 180.0,
+     "wind_direction": "S",
+     "rows": 5,
+     "measured": 5,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "h5",
+     "instrument": "thermistor",
+     "wind_direction_deg": 202.5,
+     "wind_direction": "SSW",
+     "rows": 5,
+     "measured": 5,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    },
+    {
+     "config": "h5",
+     "instrument": "thermistor",
+     "wind_direction_deg": 337.5,
+     "wind_direction": "NNW",
+     "rows": 7,
+     "measured": 7,
+     "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+    }
+   ],
+   "frame": {
+    "origin": "centre of the reproduced district, in the tunnel's floor plane (MP_caseF.png 'Origin')",
+    "x": "+x EAST (compass rose in MP_caseF.png)",
+    "y": "+y NORTH",
+    "z": "+z up from the TUNNEL FLOOR, full scale; the readme's rule is height above ground = z - 10 m (the model was raised, QUESTIONS.md QF4); tunnel planes at z = 15 / 19 / 30 m, field anemometers at z = 13 ... 21 m",
+    "wind_direction_rotation": "compass FROM-direction (N = 0, E = 90): N blows toward -y; flow_dir = (-sin WD, -cos WD). Not defined in the readme; the reference-building choice (SMB for NW-NE) and the upwind-roughness check support it (status 'unverified').",
+    "length_scale": "FULL-scale metres (model 1:800): the tunnel's model-scale coordinates and the STL are multiplied by 800; the field's are published in full scale"
+   },
+   "transform_from_published": {
+    "coordinate_scale": 800.0,
+    "lateral_sign": 1,
+    "origin_shift_m": [
+     0,
+     0,
+     0
+    ],
+    "geometry_scale": 800.0,
+    "note": "tunnel x, y, z x800; field coordinates unchanged; U/R and sigma as published except the 16 field rows of point 14 (re-derived from the workbook); STL x800 and re-wound outward"
+   },
+   "inflow": {
+    "U_ref_m_s": 10.648,
+    "z_ref_m": 500.0,
+    "U_ref_basis": "the tunnel's approaching speed at the boundary-layer height 500 m (full scale = 0.625 m model): AF_caseF.csv stops at 400 m (U = 10.0 m/s); the workbook's profile U/UR(400 m) = 0.94 puts UR = 10.65 m/s. The data paper states 10 m/s. The velocity ratios are dimensionless; the choice matters only when they are turned into m/s.",
+    "U_ref_range_over_the_18_heights_m_s": [
+     10.588,
+     10.727
+    ],
+    "U_ref_paper_m_s": 10.0,
+    "U_at_400_m_m_s": 10.0,
+    "workbook_profile_U_over_UR": {
+     "z_m": [
+      10.0,
+      20.0,
+      35.0,
+      40.0,
+      50.0,
+      60.0,
+      65.0,
+      80.0,
+      100.0,
+      120.0,
+      140.0,
+      160.0,
+      200.0,
+      240.0,
+      280.0,
+      320.0,
+      360.0,
+      400.0,
+      470.0,
+      500.0
+     ],
+     "U_over_UR": [
+      0.32,
+      0.42,
+      0.46,
+      0.5,
+      0.55,
+      0.58,
+      0.6,
+      0.62,
+      0.63,
+      0.65,
+      0.68,
+      0.73,
+      0.77,
+      0.81,
+      0.84,
+      0.89,
+      0.92,
+      0.94,
+      0.96,
+      1.0
+     ],
+     "k_over_UR2": [
+      0.008957952,
+      0.012192768,
+      0.013432368,
+      0.01452,
+      0.0160083,
+      0.0161472,
+      0.0155952,
+      0.013330992,
+      0.012192768,
+      0.0114075,
+      0.010875648,
+      0.009208512,
+      0.008608908,
+      0.006377292,
+      0.004148928,
+      0.003421872,
+      0.001625088,
+      0.000954288,
+      0.000442368,
+      0.00012
+     ]
+    },
+    "power_law": {
+     "z_range_m": [
+      10.0,
+      400.0
+     ],
+     "points": 18,
+     "alpha": 0.2773,
+     "max_rel_error": 0.0592
+    },
+    "power_law_paper_exponent": 0.25,
+    "log_law": {
+     "z_range_m": [
+      10.0,
+      400.0
+     ],
+     "points": 18,
+     "u_star_m_s": 0.73275,
+     "z0_m": 1.90764184499,
+     "z0_mm": 1907.6418,
+     "rms_residual_m_s": 0.2953,
+     "rms_residual_rel": 0.0419,
+     "note": "an urban boundary layer over a 725 m model: a power law is the paper's description (exponent 1/4); the log-law fit is listed for completeness"
+    },
+    "method": "least squares on the 18 published heights (z full-scale metres, U in the tunnel's m/s); k is published only as k/UR^2 in the workbook (UR ambiguous, not carried to approach_flow.csv)"
+   },
+   "geometry_summary": [
+    {
+     "configuration": "default",
+     "file": "cases/F/geometry.stl",
+     "triangles": 53814,
+     "watertight": false,
+     "bbox_min": [
+      -725.0,
+      -724.9976,
+      -0.0
+     ],
+     "bbox_max": [
+      725.0,
+      724.9984,
+      225.0
+     ],
+     "boxes": null
+    }
+   ],
+   "provenance": [
+    {
+     "path": "raw/cases/case-f/RS-WT_caseF.csv",
+     "sha256": "b73c1fbb9d621aaf7020fecb4a8f984f8658891cf94acb708409276ddcfc65be",
+     "bytes": 9659,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-f/RS-FO_caseF.csv",
+     "sha256": "dde6c2f6795320daf4b8913b451b21e7bc50c9808477f9fe999ef80be605dbd7",
+     "bytes": 6468,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-f/AF_caseF.csv",
+     "sha256": "77e9ae53b047521f8f9de6e3f4f6545c031dde899a9ed965bcc432ecbe58ecc6",
+     "bytes": 324,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-f/MP_caseF.csv",
+     "sha256": "89aa6edfcc009cbb6bac66aee80763c132a8200da6109ecb0c6604e21d582835",
+     "bytes": 313,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-f/MP_caseF.png",
+     "sha256": "5393ce634445a1bf510961d7fcf93a1baa89ab62b761ae867d2e0a13e07febea",
+     "bytes": 790068,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-f/BD_caseF.stl",
+     "sha256": "bc3688f5ed22d3cbb7e5db630c30f0ae2a5bce70f10d33ee122ac18df3db772b",
+     "bytes": 9508631,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-f/LF_CaseF.xls",
+     "sha256": "406482db08126b97018dd01ce92feae6280b7780407544c74c7cf58e6d33ae46",
+     "bytes": 378368,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-f/readme_caseF.md",
+     "sha256": "a63002ffe524800c7708febd75e194e1eb5fe31fbfb1770a37d819dac1ff75cd",
+     "bytes": 6785,
+     "origin": "repository clone of the Zenodo record"
+    }
+   ],
+   "known_issues": {
+    "field_point_14_directions_shifted": {
+     "summary": "RS-FO_caseF.csv: the 16 rows of point 14 hold the workbook's value of the next direction clockwise (N holds NNE, ..., NNW holds N); this release uses the workbook's alignment (QUESTIONS.md QF1)",
+     "rows": [
+      {
+       "point": 14,
+       "direction": "N",
+       "published_U_R": 0.08,
+       "published_sigma": 0.056,
+       "used_U_R": 0.08,
+       "used_sigma": 0.047
+      },
+      {
+       "point": 14,
+       "direction": "NNE",
+       "published_U_R": 0.1,
+       "published_sigma": 0.075,
+       "used_U_R": 0.08,
+       "used_sigma": 0.056
+      },
+      {
+       "point": 14,
+       "direction": "NE",
+       "published_U_R": 0.31,
+       "published_sigma": 0.169,
+       "used_U_R": 0.1,
+       "used_sigma": 0.075
+      },
+      {
+       "point": 14,
+       "direction": "ENE",
+       "published_U_R": 0.38,
+       "published_sigma": 0.077,
+       "used_U_R": 0.32,
+       "used_sigma": 0.173
+      },
+      {
+       "point": 14,
+       "direction": "E",
+       "published_U_R": 0.36,
+       "published_sigma": 0.087,
+       "used_U_R": 0.38,
+       "used_sigma": 0.077
+      },
+      {
+       "point": 14,
+       "direction": "ESE",
+       "published_U_R": 0.3,
+       "published_sigma": 0.106,
+       "used_U_R": 0.36,
+       "used_sigma": 0.087
+      },
+      {
+       "point": 14,
+       "direction": "SE",
+       "published_U_R": 0.47,
+       "published_sigma": 0.26,
+       "used_U_R": 0.3,
+       "used_sigma": 0.106
+      },
+      {
+       "point": 14,
+       "direction": "SSE",
+       "published_U_R": 0.52,
+       "published_sigma": 0.096,
+       "used_U_R": 0.47,
+       "used_sigma": 0.26
+      },
+      {
+       "point": 14,
+       "direction": "S",
+       "published_U_R": 0.44,
+       "published_sigma": 0.144,
+       "used_U_R": 0.52,
+       "used_sigma": 0.096
+      },
+      {
+       "point": 14,
+       "direction": "SSW",
+       "published_U_R": 0.23,
+       "published_sigma": 0.135,
+       "used_U_R": 0.44,
+       "used_sigma": 0.144
+      },
+      {
+       "point": 14,
+       "direction": "SW",
+       "published_U_R": 0.18,
+       "published_sigma": 0.077,
+       "used_U_R": 0.23,
+       "used_sigma": 0.135
+      },
+      {
+       "point": 14,
+       "direction": "WSW",
+       "published_U_R": 0.2,
+       "published_sigma": 0.077,
+       "used_U_R": 0.18,
+       "used_sigma": 0.077
+      },
+      {
+       "point": 14,
+       "direction": "W",
+       "published_U_R": 0.25,
+       "published_sigma": 0.077,
+       "used_U_R": 0.2,
+       "used_sigma": 0.077
+      },
+      {
+       "point": 14,
+       "direction": "WNW",
+       "published_U_R": 0.32,
+       "published_sigma": 0.087,
+       "used_U_R": 0.25,
+       "used_sigma": 0.077
+      },
+      {
+       "point": 14,
+       "direction": "NW",
+       "published_U_R": 0.12,
+       "published_sigma": 0.094,
+       "used_U_R": 0.31,
+       "used_sigma": 0.085
+      },
+      {
+       "point": 14,
+       "direction": "NNW",
+       "published_U_R": 0.08,
+       "published_sigma": 0.047,
+       "used_U_R": 0.12,
+       "used_sigma": 0.094
+      }
+     ]
+    },
+    "tunnel_8_SW_9m": {
+     "published_U_R": 0.474,
+     "workbook_Sheet1": 0.63,
+     "workbook_Results": null
+    },
+    "workbook_other_column": {
+     "values": 109,
+     "ESE_points": [
+      2,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      13,
+      14
+     ]
+    },
+    "mp_csv_reference_labels_swapped": {
+     "mp_csv_SMB_xy_m": [
+      85.8,
+      -347.1
+     ],
+     "mp_csv_KDD_xy_m": [
+      -17.5,
+      96.0
+     ],
+     "workbook_SMB_xy_m": [
+      -17.5,
+      96.0
+     ],
+     "workbook_KDD_xy_m": [
+      85.8,
+      -347.1
+     ]
+    },
+    "stl": {
+     "raw_model_scale_stats": {
+      "triangles": 53814,
+      "bbox_min": [
+       -725.0,
+       -724.9976,
+       -0.0
+      ],
+      "bbox_max": [
+       725.0,
+       724.9984,
+       225.0
+      ],
+      "signed_volume": -11693570.075203538,
+      "edges": 81127,
+      "edges_shared_by_two_faces": 80315,
+      "edges_boundary": 812,
+      "edges_non_manifold": 0,
+      "watertight": false
+     },
+     "as_published": {
+      "horizontal_facets_down": 21537,
+      "horizontal_facets_up": 38
+     },
+     "terrain_z_under_the_points_m": 5.0,
+     "disc_radius_m": 725.0004862343197
+    },
+    "workbook_band_asymmetry_rows": [
+     "2/NW: +0.04",
+     "6/E: -0.03",
+     "7/ESE: +0.10",
+     "7/NW: -0.03",
+     "9/E: -0.05",
+     "13/WNW: -0.04",
+     "14/ENE: -0.06",
+     "14/SSE: -0.11",
+     "15/N: -0.10",
+     "15/SSE: -0.04"
+    ]
+   },
+   "extra_measurements": {
+    "conversion_factors": {
+     "SMB": 0.93974,
+     "KDD": 0.96287
+    }
+   },
+   "normalisation": {
+    "quantity": "velocity_ratio = U / U_ref, U_ref = the approaching mean wind speed at 500 m (the boundary-layer height), full scale; field values were converted to it by the tunnel (readme)",
+    "U_ref_m_s": "10 (data paper) or 10.65 (profile implied); see inflow",
+    "conversion_from_the_workbook": {
+     "SMB sector (NW, NNW, N, NNE, NE; roof anemometer G.L.+237 m)": {
+      "factor": 0.93974,
+      "interval": [
+       0.9394736842105262,
+       0.9400000000000001
+      ]
+     },
+     "KDD sector (all other directions; roof anemometer G.L.+187 m)": {
+      "factor": 0.96287,
+      "interval": [
+       0.9625000000000005,
+       0.9632352941176471
+      ]
+     },
+     "meaning": "workbook ratio x factor = CSV ratio; factor = U(roof anemometer) / U(500 m) from the N (SMB) or S (KDD) tunnel test (readme); the factors themselves are not stated in the sources (QUESTIONS.md QF8)"
+    },
+    "velocity_ratio_sd": "standard deviation of the 10-minute mean ratios behind one field value (cup anemometer, only 10-minute means above 5 m/s at the reference); published to 3 dp, quantised at f/100",
+    "field_height": "z of each field row is the anemometer height above the tunnel floor (13 ... 21 m); the tunnel planes are 15, 19 and 30 m"
+   }
+  },
+  "M": {
+   "id": "M",
+   "title": "Case M — flow and dispersion within the TPU Atsugi campus",
+   "status": "released",
+   "status_note": null,
+   "doi": "10.5281/zenodo.15487857",
+   "doi_version": null,
+   "zenodo_record": "https://zenodo.org/records/15487857",
+   "licence": "CC BY 4.0",
+   "data_collectors": [
+    "Ryuichiro Yoshie (Tokyo Polytechnic University)",
+    "Takumi Tachibana (Wind Engineering Institute)"
+   ],
+   "editors_distributors": [
+    "Yoshihide Tominaga (Niigata Institute of Technology)",
+    "Hideki Kikumoto (The University of Tokyo)",
+    "Tsubasa Okaze (Institute of Science Tokyo)"
+   ],
+   "contact": "Ryuichiro Yoshie <yoshie@arch.t-kougei.ac.jp>",
+   "citation_requested": "Tachibana, T., Yoshie, R., Nakayama, S., Kishida, T., Miyashita, K., Sasaki, R. (2022). Comparison between field measurement and wind tunnel experiments of gas dispersion in an urban area and verification of similarity law. Journal of Wind Engineering 47(3), 39-52 (in Japanese). http://dx.doi.org/10.5359/jwe.47.39",
+   "files": {
+    "points_csv": "cases/M/points.csv",
+    "points_parquet": "cases/M/points.parquet",
+    "approach_flow_csv": "cases/M/approach_flow.csv",
+    "approach_flow_parquet": "cases/M/approach_flow.parquet",
+    "directions_csv": "cases/M/directions.csv",
+    "geometry_json": "cases/M/geometry.json",
+    "geometry": [
+     "cases/M/geometry.stl"
+    ]
+   },
+   "columns_present": [
+    "case_id",
+    "config",
+    "instrument",
+    "point_id",
+    "wind_direction_deg",
+    "wind_direction",
+    "x",
+    "y",
+    "z",
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "campaign",
+    "run",
+    "C",
+    "c_rms",
+    "concentration_ratio"
+   ],
+   "counts": {
+    "rows": 330,
+    "distinct_points": 15,
+    "by_config": {
+     "default": 330
+    },
+    "by_instrument": {
+     "hydrocarbon_analyser": 45,
+     "sorbent_gc_ecd": 270,
+     "split_fibre": 15
+    },
+    "by_direction": {
+     "78.0": 15,
+     "115.66666666666667": 15,
+     "132.6": 15,
+     "144.0": 15,
+     "173.66666666666666": 15,
+     "175.0": 30,
+     "175.9": 15,
+     "176.7": 15,
+     "178.6": 15,
+     "179.6": 15,
+     "179.7": 15,
+     "180.0": 30,
+     "180.3": 15,
+     "181.3": 15,
+     "181.9": 15,
+     "183.3": 15,
+     "184.3": 15,
+     "185.0": 15,
+     "194.2": 15,
+     "200.7": 15
+    },
+    "nan_per_column": {
+     "U": 315,
+     "V": 315,
+     "W": 315,
+     "uu": 315,
+     "vv": 315,
+     "ww": 315,
+     "k": 315,
+     "Vs": 330,
+     "velocity_ratio": 330,
+     "uv": 330,
+     "uw": 330,
+     "vw": 330,
+     "C": 15,
+     "c_rms": 285,
+     "concentration_ratio": 15,
+     "T": 330,
+     "T_rms": 330,
+     "uc": 330,
+     "vc": 330,
+     "wc": 330,
+     "uT": 330,
+     "vT": 330,
+     "wT": 330,
+     "velocity_ratio_sd": 330,
+     "k_ratio": 330
+    }
+   },
+   "configurations": [
+    {
+     "config": "default",
+     "instrument": "hydrocarbon_analyser",
+     "wind_direction_deg": 175.0,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "hydrocarbon_analyser",
+     "wind_direction_deg": 180.0,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "hydrocarbon_analyser",
+     "wind_direction_deg": 185.0,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 78.0,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 115.66666666666667,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 132.6,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 144.0,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 173.66666666666666,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 175.0,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 175.9,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 176.7,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 178.6,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 179.6,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 179.7,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 180.3,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 181.3,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 181.9,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 183.3,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 184.3,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 194.2,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "sorbent_gc_ecd",
+     "wind_direction_deg": 200.7,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "split_fibre",
+     "wind_direction_deg": 180.0,
+     "wind_direction": "",
+     "rows": 15,
+     "measured": 15,
+     "status": "settled"
+    }
+   ],
+   "frame": {
+    "origin": "centre of the tunnel turntable on the floor plane (MP_caseM.png 'Origin'; its ground surface is at z = 33.07 m)",
+    "x": "+x NORTH (compass rose of MP_caseM.png: N at +x)",
+    "y": "+y WEST (W at +y); the frame is right-handed",
+    "z": "+z up from the TUNNEL FLOOR, full scale; the campus ground lies at z ~ 32 m (terrain 3.6 ... 36 m); every point is 3 m above the local ground",
+    "wind_direction_rotation": "meteorological FROM-direction (N = 0, E = 90, S = 180): 180 deg blows toward +x (north); flow_dir = (-cos WD, +sin WD), so WD > 180 turns the wind toward -y. Measured: the plume's lateral centroid moves toward -y as WD grows in the tunnel (175 -> 185 deg) and across the field runs, and the compass rose of MP_caseM.png agrees.",
+    "length_scale": "FULL-scale metres (model 1:600): tunnel coordinates and the STL are multiplied by 600; velocities and concentrations are NOT scaled"
+   },
+   "transform_from_published": {
+    "coordinate_scale": 600.0,
+    "lateral_sign": 1,
+    "origin_shift_m": [
+     0,
+     0,
+     0
+    ],
+    "geometry_scale": 600.0,
+    "note": "workbook values at full precision (CSVs are the rounded copy); x, y, z x600; sigma -> variance; k = half the sum of the variances; field ppq -> ppm (x 1e-9); STL x600 and re-wound outward"
+   },
+   "inflow": {
+    "U_R_m_s": 4.08,
+    "H_R_m_model": 0.068,
+    "z_R_above_floor_m_model": 0.121503366,
+    "U_at_R_height_from_profile_m_s": 3.9386,
+    "profile_station_x_m_model": -0.498,
+    "power_law": {
+     "z_range_m": [
+      0.02,
+      0.5
+     ],
+     "points": 32,
+     "alpha": 0.2723,
+     "max_rel_error": 0.19,
+     "paper_alpha": 0.27,
+     "note": "category IV, alpha = 0.27"
+    },
+    "log_law": {
+     "z_range_m": [
+      0.02,
+      0.5
+     ],
+     "points": 32,
+     "u_star_m_s": 0.42786,
+     "z0_m": 0.00251502501366,
+     "z0_mm": 2.515,
+     "rms_residual_m_s": 0.1023,
+     "rms_residual_rel": 0.0241,
+     "note": "listed for completeness; the paper describes the profile as a power law"
+    },
+    "turbulence_intensity_u_at_R_height": 0.2139,
+    "method": "least squares on the workbook's 40 heights (z model metres, U in the tunnel's m/s) at x = -0.498 m; the case frame multiplies z by 600"
+   },
+   "geometry_summary": [
+    {
+     "configuration": "default",
+     "file": "cases/M/geometry.stl",
+     "triangles": 43936,
+     "watertight": false,
+     "bbox_min": [
+      -540.0,
+      -360.0,
+      -0.0
+     ],
+     "bbox_max": [
+      540.0,
+      360.0,
+      64.9152
+     ],
+     "boxes": null
+    }
+   ],
+   "provenance": [
+    {
+     "path": "raw/cases/case-m/RS-WT_caseM.csv",
+     "sha256": "9f5aad42e1dd294c6eb32fb75951c9be9c3859dfdcbe35dffe9acd80d860841e",
+     "bytes": 4362,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-m/RS-FO_caseM.csv",
+     "sha256": "7872f166975f53d621e27b4d045d67be0b414d7bfda48c7826d1644f5972878f",
+     "bytes": 7654,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-m/AF_caseM.csv",
+     "sha256": "89d2e965ff997e7b314439f965062fe47e26f650a4e400a86c4a594343922c39",
+     "bytes": 2381,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-m/LC_caseM.csv",
+     "sha256": "9ad2ef4c4434b8b503037a09e8d529d568f594862886fede21a67458ac5a13fa",
+     "bytes": 1049,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-m/MP_caseM.png",
+     "sha256": "4301400d1563e1a848ef22cb0b4931f32d9fa18af4ac1d8c587ef279c1598292",
+     "bytes": 363517,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-m/BD_caseM.stl",
+     "sha256": "6c1a75ffc7a108e4e21b4d6ca45dc31af56740381ca7fb10debcfb5f603cba68",
+     "bytes": 8442702,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-m/LF_caseM.xlsx",
+     "sha256": "c8383b9491a5b34647036611f9efdfbe834ecdfa16023d5f83762d7f3447917c",
+     "bytes": 519084,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-m/readme_caseM.md",
+     "sha256": "3689a3566761b16fb806f8f1a23135c1faaed357672075479c4ff1adcd480b48",
+     "bytes": 5888,
+     "origin": "repository clone of the Zenodo record"
+    }
+   ],
+   "known_issues": {
+    "field_units": "Field concentrations are in ppq (1e-15) in RS-FO_caseM.csv and the workbook, tunnel concentrations in ppm: a factor 1e9 apart before normalisation",
+    "tracer_release": {
+     "readme_tunnel": "on a rooftop",
+     "workbook_and_LC_csv": "ground surface",
+     "readme_field": "1.5 m above ground, 5 L/min",
+     "source_xyz_model_m": [
+      -0.13688954,
+      0.10334126,
+      0.05398766
+     ],
+     "stl_surface_z_at_source_model_m": [
+      32.39379790444392
+     ]
+    },
+    "reference_point": {
+     "H_R_m": 41.0,
+     "z_model_m": 0.121503366,
+     "stl_roof_z_model_m": 0.108192,
+     "anemometer_above_roof_full_scale_m": 7.986819600000004
+    },
+    "field_background": {
+     "min_median_max_ppq_by_point_11_to_15": {
+      "11": [
+       9.0,
+       13.5,
+       217.0
+      ],
+      "12": [
+       9.0,
+       10.0,
+       11.0
+      ],
+      "13": [
+       8.0,
+       42.0,
+       849.0
+      ],
+      "14": [
+       8.0,
+       42.5,
+       786.0
+      ],
+      "15": [
+       9.0,
+       138.5,
+       351.0
+      ]
+     }
+    },
+    "tunnel_concentration_offset": {
+     "negative_means": [
+      [
+       12,
+       180,
+       -0.0207
+      ],
+      [
+       12,
+       185,
+       -0.2304
+      ]
+     ],
+     "c_rms_floor_ppm": [
+      7.26,
+      7.28,
+      7.9,
+      17.31,
+      17.38
+     ]
+    },
+    "approach_flow_below_ground": {
+     "stl_ground_at_profile_station_model_m": 0.05208483263871378,
+     "heights_below": 10
+    },
+    "stl": {
+     "raw_model_scale_stats": {
+      "triangles": 43936,
+      "bbox_min": [
+       -0.9,
+       -0.6,
+       -0.0
+      ],
+      "bbox_max": [
+       0.9,
+       0.6,
+       0.108192
+      ],
+      "signed_volume": -0.049753814,
+      "edges": 65911,
+      "edges_shared_by_two_faces": 65883,
+      "edges_boundary": 21,
+      "edges_non_manifold": 7,
+      "watertight": false
+     },
+     "as_published": {
+      "horizontal_facets_down": 3118,
+      "horizontal_facets_up": 34
+     }
+    }
+   },
+   "extra_measurements": {
+    "field_runs": [
+     {
+      "run": 1,
+      "U_R_m_s": 1.4333333333333336,
+      "WD_R_deg": 132.6,
+      "q_m3_s": 1.74888888888889e-08,
+      "c0_ppq": 7258.507071741169,
+      "c0_ppm": 7.25850707174117e-06
+     },
+     {
+      "run": 2,
+      "U_R_m_s": 1.4000000000000001,
+      "WD_R_deg": 144.0,
+      "q_m3_s": 1.736666666666667e-08,
+      "c0_ppq": 7379.394351434805,
+      "c0_ppm": 7.379394351434805e-06
+     },
+     {
+      "run": 3,
+      "U_R_m_s": 2.5,
+      "WD_R_deg": 175.0,
+      "q_m3_s": 1.697777777777778e-08,
+      "c0_ppq": 4039.9233260625297,
+      "c0_ppm": 4.03992332606253e-06
+     },
+     {
+      "run": 4,
+      "U_R_m_s": 2.433333333333333,
+      "WD_R_deg": 181.3,
+      "q_m3_s": 1.6744444444444444e-08,
+      "c0_ppq": 4093.5624859088553,
+      "c0_ppm": 4.093562485908856e-06
+     },
+     {
+      "run": 5,
+      "U_R_m_s": 3.966666666666667,
+      "WD_R_deg": 179.6,
+      "q_m3_s": 1.67e-08,
+      "c0_ppq": 2504.511620234054,
+      "c0_ppm": 2.5045116202340544e-06
+     },
+     {
+      "run": 6,
+      "U_R_m_s": 4.1000000000000005,
+      "WD_R_deg": 184.3,
+      "q_m3_s": 1.6788888888888888e-08,
+      "c0_ppq": 2435.961301909271,
+      "c0_ppm": 2.435961301909271e-06
+     },
+     {
+      "run": 7,
+      "U_R_m_s": 4.633333333333333,
+      "WD_R_deg": 183.3,
+      "q_m3_s": 1.6666666666666667e-08,
+      "c0_ppq": 2139.8704950376405,
+      "c0_ppm": 2.1398704950376407e-06
+     },
+     {
+      "run": 8,
+      "U_R_m_s": 4.433333333333333,
+      "WD_R_deg": 180.3,
+      "q_m3_s": 1.6577777777777776e-08,
+      "c0_ppq": 2224.478507392813,
+      "c0_ppm": 2.224478507392813e-06
+     },
+     {
+      "run": 9,
+      "U_R_m_s": 1.7666666666666666,
+      "WD_R_deg": 78.0,
+      "q_m3_s": 1.7288888888888886e-08,
+      "c0_ppq": 5821.632077342402,
+      "c0_ppm": 5.8216320773424026e-06
+     },
+     {
+      "run": 10,
+      "U_R_m_s": 2.4333333333333336,
+      "WD_R_deg": 115.66666666666667,
+      "q_m3_s": 1.7133333333333335e-08,
+      "c0_ppq": 4188.635270916692,
+      "c0_ppm": 4.188635270916692e-06
+     },
+     {
+      "run": 11,
+      "U_R_m_s": 3.5,
+      "WD_R_deg": 173.66666666666666,
+      "q_m3_s": 1.6766666666666668e-08,
+      "c0_ppq": 2849.7776266961278,
+      "c0_ppm": 2.849777626696128e-06
+     },
+     {
+      "run": 12,
+      "U_R_m_s": 4.666666666666667,
+      "WD_R_deg": 176.7,
+      "q_m3_s": 1.6411111111111108e-08,
+      "c0_ppq": 2092.0087249652984,
+      "c0_ppm": 2.0920087249652986e-06
+     },
+     {
+      "run": 13,
+      "U_R_m_s": 5.833333333333333,
+      "WD_R_deg": 175.9,
+      "q_m3_s": 1.6855555555555552e-08,
+      "c0_ppq": 1718.9314750290357,
+      "c0_ppm": 1.7189314750290358e-06
+     },
+     {
+      "run": 14,
+      "U_R_m_s": 7.033333333333334,
+      "WD_R_deg": 179.7,
+      "q_m3_s": 1.7077777777777777e-08,
+      "c0_ppq": 1444.4497698936068,
+      "c0_ppm": 1.444449769893607e-06
+     },
+     {
+      "run": 15,
+      "U_R_m_s": 6.5,
+      "WD_R_deg": 178.6,
+      "q_m3_s": 1.7011111111111107e-08,
+      "c0_ppq": 1556.8673510374877,
+      "c0_ppm": 1.5568673510374877e-06
+     },
+     {
+      "run": 16,
+      "U_R_m_s": 6.733333333333333,
+      "WD_R_deg": 181.9,
+      "q_m3_s": 1.698888888888889e-08,
+      "c0_ppq": 1500.9531887156593,
+      "c0_ppm": 1.5009531887156593e-06
+     },
+     {
+      "run": 17,
+      "U_R_m_s": 5.6000000000000005,
+      "WD_R_deg": 194.2,
+      "q_m3_s": 1.7088888888888888e-08,
+      "c0_ppq": 1815.340453056098,
+      "c0_ppm": 1.8153404530560983e-06
+     },
+     {
+      "run": 18,
+      "U_R_m_s": 3.9666666666666663,
+      "WD_R_deg": 200.7,
+      "q_m3_s": 1.711111111111111e-08,
+      "c0_ppq": 2566.1662642451392,
+      "c0_ppm": 2.5661662642451395e-06
+     }
+    ],
+    "plume_lateral_centroid_m": {
+     "tunnel_by_WD": {
+      "175.0": -18.99426400240127,
+      "180.0": -28.131267147328124,
+      "185.0": -33.520563159664924
+     },
+     "field_by_run": {
+      "1": -4.4259749713063785,
+      "2": 0.8239815097112827,
+      "3": -31.84829360142131,
+      "4": -28.497401932552165,
+      "5": -26.604885426986442,
+      "6": -26.03821164054516,
+      "7": -32.360117294699165,
+      "8": -27.602520288571597,
+      "9": -5.558357705672974,
+      "10": -0.41905716070988586,
+      "11": -30.43046639323771,
+      "12": -26.00996264464757,
+      "13": -17.720101998433627,
+      "14": -16.615366116908415,
+      "15": -23.991190258653692,
+      "16": -29.22123387760972,
+      "17": -34.80473863803782,
+      "18": -44.41297386004889
+     }
+    }
+   },
+   "normalisation": {
+    "concentration_ratio": "C / c0, c0 = q / (U_R H_R^2): the volume fraction of pure tracer at which the release would be diluted by a flow of U_R through an area H_R^2 (data paper 3.13.1)",
+    "tunnel": {
+     "q_m3_s": 2.4999999999999998e-06,
+     "U_R_m_s": 4.08,
+     "H_R_m": 0.068,
+     "c0_ppm": 132.5140782956781,
+     "c0_paper_ppm": 133.0,
+     "tracer": "C2H4, 100 %, 6 mm outlet"
+    },
+    "field": {
+     "H_R_m": 41.0,
+     "c0": "per run: q_run / (U_R,run x 41^2) = 1444 ... 7379 ppq; see extra_measurements.field_runs",
+     "tracer": "PMCH (C7F14), 200 ppm at 5 L/min"
+    },
+    "velocity": "U, V, W and the rms values are the tunnel's m/s; divide by U_R = 4.08 m/s (the speed at the reference point R, rooftop of the main building) for the dimensionless form; no velocity ratio is tabulated",
+    "concentration_units": "tunnel C in ppm of the hydrocarbon analyser's reading; field C in ppq (parts per quadrillion, 1e-15) in the sources, ppm (x 1e-9) in points.csv"
    }
   }
  }

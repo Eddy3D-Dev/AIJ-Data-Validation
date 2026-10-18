@@ -1,0 +1,39 @@
+{
+ "case_id": "M",
+ "units": "metres (full scale)",
+ "frame": {
+  "origin": "centre of the tunnel turntable on the floor plane (MP_caseM.png 'Origin'; its ground surface is at z = 33.07 m)",
+  "x": "+x NORTH (compass rose of MP_caseM.png: N at +x)",
+  "y": "+y WEST (W at +y); the frame is right-handed",
+  "z": "+z up from the TUNNEL FLOOR, full scale; the campus ground lies at z ~ 32 m (terrain 3.6 ... 36 m); every point is 3 m above the local ground",
+  "wind_direction_rotation": "meteorological FROM-direction (N = 0, E = 90, S = 180): 180 deg blows toward +x (north); flow_dir = (-cos WD, +sin WD), so WD > 180 turns the wind toward -y. Measured: the plume's lateral centroid moves toward -y as WD grows in the tunnel (175 -> 185 deg) and across the field runs, and the compass rose of MP_caseM.png agrees.",
+  "length_scale": "FULL-scale metres (model 1:600): tunnel coordinates and the STL are multiplied by 600; velocities and concentrations are NOT scaled"
+ },
+ "files": [
+  {
+   "configuration": "default",
+   "file": "cases/M/geometry.stl",
+   "format": "ASCII STL, LF, metres, same frame as points.csv",
+   "source": "BD_caseM.stl (Zenodo; terrain + buildings of the Atsugi campus) scaled x600 from model to full-scale metres and re-wound outward; 43936 triangles, one shell, 21 boundary and 7 non-manifold edges; z = 0 is the tunnel floor, the campus ground lies at z ~ 32 m",
+   "stats": {
+    "triangles": 43936,
+    "bbox_min": [
+     -540.0,
+     -360.0,
+     -0.0
+    ],
+    "bbox_max": [
+     540.0,
+     360.0,
+     64.9152
+    ],
+    "signed_volume": 10746823.83226899,
+    "edges": 65911,
+    "edges_shared_by_two_faces": 65883,
+    "edges_boundary": 21,
+    "edges_non_manifold": 7,
+    "watertight": false
+   }
+  }
+ ]
+}
