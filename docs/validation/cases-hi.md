@@ -8,20 +8,19 @@ description: "OpenFOAM 12 against the tunnel for Case H (1:1:2 building, floor p
 
 # Cases H and I, OpenFOAM 12
 
-The reading of the OpenFOAM 12 runs on the 1:1:2 building with a floor point source (Case H) and on the cube with a roof point source (Case I). They are the two cases with a tracer-gas concentration that Eddy3D has solved so far. Every score of each run, with the per-point files, is on the [Case H]({{ '/cases/case-h/validation/' | relative_url }}) and [Case I]({{ '/cases/case-i/validation/' | relative_url }}) Validation pages.
+OpenFOAM 12 runs on the 1:1:2 building with a floor point source (Case H) and on the cube with a roof point source (Case I). Every score of each run, with the per-point files, is on the [Case H]({{ '/cases/case-h/validation/' | relative_url }}) and [Case I]({{ '/cases/case-i/validation/' | relative_url }}) Validation pages.
 
-## How these runs are scored
+## Runs
 
-- Both are Eddy3D production runs, realizable k-ε at numerics level 3 and 3000 iterations, at 1:100 (H) and 1:60 (I), with the probe at the tunnel's own coordinates. Case I was also solved with standard k-ε and with k-ω SST on the same mesh.
+- Eddy3D production runs, realizable k-ε at numerics level 3 and 3000 iterations, at 1:100 (H) and 1:60 (I), with the probe at the tunnel's own coordinates. Case I was also solved with standard k-ε and with k-ω SST on the same mesh.
 - Velocities are divided by U_H, k by U_H². Each side uses its own U_H: the tunnel's (H 3.226 m/s, I 1.7 m/s) for the measurement, the value the solve was driven with (H 3.23 m/s, I 1.7 m/s) for the model.
-- Concentration is the cleaned table's C/c₀ (c₀ = 45.18 ppm in H, 39.22 ppm in I) against the model's c\* = c U_H H²/Q. The turbulent Schmidt number is a model parameter, so c\* is scored at 0.3, 0.5 and 0.7; the figures show 0.5.
-- The measured values are the cleaned tables', which are the legacy workbooks' numbers at full precision. Eddy3D's own scores were computed against the published CSVs, so they differ from these in the third digit. The scores here are recomputed from the per-point files by `validation/dispersion_metrics.py`, which reproduces Eddy3D's metrics. Concentration is scored with one detection limit, 10⁻³ of the largest measured value.
+- Concentration: the cleaned table's C/c₀ (c₀ = 45.18 ppm in H, 39.22 ppm in I) against the model's c\* = c U_H H²/Q, scored at the turbulent Schmidt numbers 0.3, 0.5 and 0.7 (the figures show 0.5). One detection limit, 10⁻³ of the largest measured value.
 
-## Does the model agree?
+## Scores
 
 {% include figure.html name="cases-hi-openfoam-agreement.png" alt="Measured vs modelled, Cases H and I" caption="<strong>Figure 1.</strong> Measured vs modelled U, W, k and c*, Cases H (top) and I (bottom), realizable k-ε. The concentration panels show the positive pairs only." %}
 
-Realizable k-ε, normalised by U_H as above.
+Realizable k-ε, normalised by U_H.
 
 | Quantity | R | FAC2 | FB | Hit rate |
 |---|---|---|---|---|
@@ -41,14 +40,24 @@ Realizable k-ε, normalised by U_H as above.
 | I — c\*, Sct 0.7 | +0.946 | 0.477 | −0.100 | 0.291 |
 {: .scores }
 
-FB is positive when the model is low. Reading these honestly:
+FB is positive when the model is low.
 
-- **Case H: the mean flow is reproduced, k is not.** R is 0.90, 0.94 and 0.89 for U, V and W. FAC2 on V and W is low by construction, because those components change sign (see [Cases A and B]({{ '/validation/cases-ab/' | relative_url }})); W's FB of +2.76 is a near-zero mean, so read R and the hit rate. k has R = 0.11 and the model is low (FB +0.51): the pattern of the tunnel's turbulence at the measured points is not followed.
-- **Case H: the concentration is well correlated and over-predicted.** R is 0.95 at every Schmidt number, FB is −0.83 at 0.5, and the modelled c\* at the measured points peaks at 238 against a measured peak of 66. A higher turbulent Schmidt number raises the modelled concentration further (FB −0.60, −0.83, −0.93 for 0.3, 0.5, 0.7) and lowers FAC2 from 0.69 to 0.59.
-- **Case I: velocity and k agree closely.** U has R = 1.00 and FAC2 0.88, W has R = 0.97, k has R = 0.91 and FAC2 0.92. V is scored at the 38 points off the y = 0 plane: on the plane the workbook holds numerical zeros, which are not a measurement, so those points are left out. Its FB of −2.0 is the near-zero mean again; its R is 0.99.
-- **Case I: the concentration is well correlated, with a wide scatter.** R is 0.92 to 0.95, but FAC2 stays below 0.5, and the scatter at low concentration is visible in panel h. The bias changes sign with the Schmidt number: the model is low at 0.3 (FB +0.40), nearly unbiased at 0.5 (+0.08) and high at 0.7 (−0.10). Case H over-predicts at all three, so the Schmidt number that suits one case does not suit the other.
+- **Case H, flow.** R is 0.90, 0.94 and 0.89 for U, V and W. W: FB +2.76 on a near-zero mean. k: R 0.11, FB +0.51.
+- **Case H, concentration.** R is 0.95 at every Schmidt number. FB is −0.83 at 0.5, and the modelled c\* at the measured points peaks at 238 against a measured peak of 66. FB is −0.60, −0.83 and −0.93 for 0.3, 0.5 and 0.7; FAC2 falls from 0.69 to 0.59.
+- **Case I, flow.** U: R 1.00, FAC2 0.88. W: R 0.97. k: R 0.91, FAC2 0.92. V is scored at the 38 points off the y = 0 plane; on the plane the workbook holds numerical zeros, which are left out. V: FB −2.0 on a near-zero mean, R 0.99.
+- **Case I, concentration.** R is 0.92 to 0.95 and FAC2 stays below 0.5. FB +0.40 at 0.3, +0.08 at 0.5 and −0.10 at 0.7. Case H has a negative FB (model high) at all three.
 
-## Does the turbulence closure matter?
+<details markdown="block">
+<summary>Interpretation: Cases H and I, the scores</summary>
+
+- Case H: the mean flow is reproduced, k is not. FAC2 on V and W is low by construction, because those components change sign (see [Cases A and B]({{ '/validation/cases-ab/' | relative_url }})); W's FB of +2.76 is a near-zero mean, so R and the hit rate are the scores to read. The pattern of the tunnel's turbulence at the measured points is not followed (k R 0.11).
+- Case H: the concentration is well correlated and over-predicted. A higher turbulent Schmidt number raises the modelled concentration further.
+- Case I: velocity and k agree closely. V's FB of −2.0 is the near-zero mean again.
+- Case I: the concentration is well correlated, with a wide scatter at low concentration (visible in panel h). The bias changes sign with the Schmidt number: the model is low at 0.3, nearly unbiased at 0.5 and high at 0.7. Case H over-predicts at all three, so the Schmidt number that suits one case does not suit the other.
+
+</details>
+
+## Turbulence closures on Case I
 
 {% include figure.html name="case-i-openfoam-closures.png" alt="Case I under three turbulence closures" caption="<strong>Figure 2.</strong> Case I under standard k-ε, realizable k-ε and k-ω SST on one mesh: measured vs modelled U, k and c* (Sct 0.5)." %}
 
@@ -59,8 +68,16 @@ FB is positive when the model is low. Reading these honestly:
 | k-ω SST | +0.992 | 0.879 | +0.880 | 0.396 | +0.495 | +0.466 | 0.403 | −0.153 |
 {: .scores }
 
-- **The mean velocity does not tell the closures apart.** R is 0.99 to 1.00 and FAC2 0.85 to 0.88 under all three.
-- **k and the concentration do.** The two k-ε closures keep k within a factor of two at more than 90 % of the points and give a concentration with R of 0.94 to 0.96. Under k-ω SST FAC2 for k falls to 0.40, with the model low (FB +0.49), and the concentration's R falls to 0.47. The mean k/U_H² of that run's approach profile is 0.0006, against 0.0075 under both k-ε closures, so its turbulence is lower from the inlet on.
-- **The reattachment length differs too:** L_r/H is 2.23 (standard k-ε), 2.51 (realizable k-ε) and 2.68 (k-ω SST).
+- U: R is 0.99 to 1.00 and FAC2 0.85 to 0.88 under all three.
+- The two k-ε closures keep k within a factor of two at more than 90 % of the points (FAC2 0.912 and 0.923) and give a concentration with R of 0.94 to 0.96. Under k-ω SST, k FAC2 is 0.40 (FB +0.49, model low) and the concentration's R is 0.47.
+- Mean k/U_H² of the approach profile: 0.0006 under k-ω SST, 0.0075 under both k-ε closures.
+- Reattachment length L_r/H: 2.23 (standard k-ε), 2.51 (realizable k-ε), 2.68 (k-ω SST).
 
-This ranks three closures on one cube, one mesh and this release's numerics. It is not a claim about the closures in general.
+<details markdown="block">
+<summary>Interpretation: Case I, turbulence closures</summary>
+
+- The mean velocity does not tell the closures apart. k and the concentration do.
+- Under k-ω SST the turbulence is lower from the inlet on.
+- This ranks three closures on one cube, one mesh and this release's numerics.
+
+</details>
