@@ -27,6 +27,7 @@ import os
 import numpy as np
 import ultraplot as uplt
 
+import layout
 import plotstyle as style
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -117,6 +118,7 @@ for row, (tag, folder, ref_file, cscale, lsign, study, title, H, Uh, _bx) in enu
         p = np.array([m[q] for m in model]) / norm
         ok = np.isfinite(o) & np.isfinite(p)
         o, p = o[ok], p[ok]
+        colours = np.array(layout.grouped_colours(tag, meas), dtype=object)[ok]      # the line or plane of the tunnel each point was measured on
 
         lo = float(min(o.min(), p.min())); hi = float(max(o.max(), p.max()))
         pad = 0.08 * (hi - lo) if hi > lo else 0.1
@@ -124,7 +126,7 @@ for row, (tag, folder, ref_file, cscale, lsign, study, title, H, Uh, _bx) in enu
 
         # Reference geometry first, so data sits on top of it; a factor-of-two band is meaningless across zero.
         style.one_to_one(ax, lo, hi, factor_two=(q == "k" or (o > 0).all()))
-        ax.scatter(o, p, s=15, color=style.OPENFOAM, edgecolor=style.SURFACE, linewidth=0.35, zorder=3)
+        ax.scatter(o, p, s=15, color=list(colours), edgecolor=style.SURFACE, linewidth=0.35, zorder=3)
 
         m = metrics(tag, "k" if q == "k" else f"velocity.{q}")
         style.stats(ax, f"R {m['R']:+.2f}\nFAC2 {m['Fac2']:.2f}\nFB {m['Fb']:+.2f}")
@@ -132,8 +134,8 @@ for row, (tag, folder, ref_file, cscale, lsign, study, title, H, Uh, _bx) in enu
                   ylabel="Eddy3D [–]" if col == 0 else None)
 
 style.finish(fig, "AIJ UWE Cases A and B — Eddy3D (OpenFOAM 12, realizable k-ε) vs wind tunnel",
-             handles=[style.marker(style.OPENFOAM, "Eddy3D at the measured points"),
-                      style.line(style.REFERENCE, "1:1", lw=1.0), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")],
+             handles=[*layout.legend_handles("A", prefix="A"), style.line(style.REFERENCE, "1:1", lw=1.0),
+                      *layout.legend_handles("B", prefix="B"), style.line("none", " "), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")], ncols=4,
              toplabels=[label for _, label in QUANTITIES], leftlabels=[c[6] for c in CASES])
 style.save(fig, "cases-ab-openfoam-agreement.png")
 
