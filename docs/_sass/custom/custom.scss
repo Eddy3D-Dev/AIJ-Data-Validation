@@ -236,3 +236,9 @@ details {
   &:hover { background: rgba(127, 127, 127, 0.18); }
   &:focus-visible { outline: 2px solid $link-color; outline-offset: 2px; }
 }
+
+// The header's toggle is hidden below the breakpoint where just-the-docs folds the header; this copy replaces it there.
+.theme-toggle-small-screen {
+  margin: 0.5rem 0 0;
+  @include mq(md) { display: none; }
+}
