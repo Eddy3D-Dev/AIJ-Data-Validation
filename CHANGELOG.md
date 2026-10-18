@@ -15,6 +15,15 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [3.1.3] - 2026-10-18
+
+Wording; no value changed.
+
+### Changed
+
+- Case L: where the orientation matters, `clean/README.md`, `clean/SCHEMA.md` and `README.md` say "14 rows along x by 9 columns across y", which is what `BD_caseL.stl`
+  holds; the name of the array is "9 × 14 cubes" everywhere, as the readme of the case names it (Known data issues).
+
 ## [3.1.2] - 2026-10-18
 
 Wording and figures; no value changed.
