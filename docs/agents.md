@@ -1,6 +1,9 @@
 ---
-title: For agents
-nav_order: 6
+title: "For agents"
+parent: API
+nav_order: 3
+permalink: /agents/
+description: "A walk through the AIJ UWE benchmark API for scripts and AI agents, and the rules that keep a comparison honest."
 ---
 
 # Using this from an agent or a script
@@ -14,18 +17,22 @@ names in `$schema`.
 
 1. **`GET /api/index.json`**: every endpoint and every file with its size and SHA-256, the API version, the
    `data_version`, the changelog, the licence and how to cite. If the Pages site is unreachable, `fallback_base_url`
-   serves the identical files raw from the repository.
-2. **`GET /api/cases.json`**: the five cases with their frame, units, counts, engine status and links. Pick an `id`.
+   serves the identical files raw from the repository. `/api/` always serves the newest release, and
+   `/api/versions.json` lists every release with the `base_url` of its frozen copy (see the first rule below).
+2. **`GET /api/cases.json`**: every case with its frame, units, counts, engine status and links. Pick an `id`.
 3. **`GET /api/cases/{id}.json`**: read `frame`, `units` and `known_issues` **before** the numbers, because they
-   differ per case. A–D are model-scale metres with +x along the wind. E is full-scale metres, +x east, +y north,
-   with meteorological directions. `configurations` lists the values `config`, `wind_direction_deg` and `instrument`
-   take in the point table.
+   differ per case. A–D and H–L are model-scale metres with +x along the wind. E, F, G and M are full-scale metres: E and
+   F with +x east, +y north and meteorological directions, G with +x downwind, M with +x north and +y west.
+   `configurations` lists the values `config`, `campaign`, `instrument`, `run` and `wind_direction_deg` take in the
+   point table.
 4. **`GET /api/cases/{id}/points.json`** (or the `points.csv` download): every value is SI (m, m/s, m²/s²), in one
    frame per case. Unmeasured values are `null` (an empty cell in CSV). `columns` lists the fields present, and
    `column_meaning` defines each. Case E's quantity is a dimensionless `velocity_ratio` (Vs / U(15.9 m), with
-   U(15.9 m) = 3.935 m/s).
+   U(15.9 m) = 3.935 m/s); Cases F and G are ratios too (`velocity_ratio`, `k_ratio`), against a reference stated in the case's
+   `normalisation`. Cases H to M add a tracer concentration `C` in ppm, with `concentration_ratio` normalised as
+   the case states, and J and L add temperature and turbulent fluxes.
 5. **`GET /api/cases/{id}/geometry.json`**, then the STL it links: metres, outward normals, origin at the building or
-   array centre. Where the geometry is boxes (A–D), the JSON carries the box list, so you need not parse STL.
+   array centre. Where the geometry is boxes (A–D and G–L), the JSON carries the box list, so you need not parse STL.
 6. **`GET /api/validation.json`**: every case and engine in one table. **An engine whose status is not `scored` has
    no result for that case; do not infer one.** `scored` means a run exists, not that it agrees. For one case in
    full, `GET /api/cases/{id}/validation.json`: every score, the `headline` scores to quote, the figures, and
@@ -33,9 +40,19 @@ names in `$schema`.
 
 ## Rules that keep a comparison honest
 
-- Normalise by the case's own U_H (`configuration.U_H_m_s`), or for Case E by U(15.9 m); normalise k by U_H².
-- Compare a thermistor quantity (C, D, E: `Vs`, `velocity_ratio`) against the bracket |U| ≤ Vs ≤ √(|U|² + 2k), not
+- Pin the release when a result must be reproducible. Take the `base_url` of the release you used from
+  `/api/versions.json` (for example `.../api/3.0.0`) and fetch every path from it instead of from `/api/`. The
+  unversioned paths follow the newest release, so a script that uses them can return different numbers after the next
+  release, while a release's copy never changes and every API URL inside its documents points back into it. Quote the
+  release number together with `data_version`. If a release lists `self_contained: false`, its documents link outside
+  its copy: build its URLs from `base_url` and the `path` in its `index.json`.
+- Normalise by the case's own U_H (`configuration.U_H_m_s`), or for Case E by U(15.9 m); normalise k by U_H². Cases F
+  and G are published as ratios already: read their `normalisation` before comparing.
+- Compare a thermistor quantity (C, D, E, F: `Vs`, `velocity_ratio`) against the bracket |U| ≤ Vs ≤ √(|U|² + 2k), not
   against |U| alone.
+- Compare a concentration through `concentration_ratio` and the case's own `normalisation` (c₀ is defined per case, and in
+  Case K the workbook and the data paper use different reference scales). Case M's tunnel and field rows are two
+  campaigns: filter on `campaign`.
 - Probe at the published coordinates; never interpolate the reference.
 - The served tables already apply each case's corrections: Case B's V is sign-unified and its coordinates are in
   metres. Do not apply those corrections a second time when starting from the raw files.
@@ -47,10 +64,4 @@ names in `$schema`.
 
 ## Cite
 
-- Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026).
-  *Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan.* Japan Architectural Review 9(1), e70083.
-  [doi:10.1002/2475-8876.70083](https://doi.org/10.1002/2475-8876.70083)
-- Tominaga, Y. et al. (2008). *AIJ guidelines for practical applications of CFD to pedestrian wind environment around
-  buildings.* JWEIA 96, 1749–1761. https://doi.org/10.1016/j.jweia.2008.02.058
-- Each case's own requested citation and Zenodo DOI are in `/api/cases/{id}.json` (`citation_requested`, `doi`).
-- Licence: CC BY 4.0 (SPDX `CC-BY-4.0`). The data belongs to its collectors and distributors.
+How to cite the benchmark, each case's dataset and this repository is on the [About and cite]({{ '/about/' | relative_url }}) page. Each case's own requested citation and Zenodo DOI are also in `/api/cases/{id}.json` (`citation_requested`, `doi`).

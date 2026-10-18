@@ -44,6 +44,10 @@
      "id": {
       "enum": [
        "openfoam12-realizableKE",
+       "openfoam12-kEpsilon",
+       "openfoam12-kOmegaSST",
+       "umf-realizableKE",
+       "umf-buoyantKEpsilon",
        "openlb",
        "fluidx3d",
        "ml-surrogate"
@@ -80,7 +84,15 @@
        "B",
        "C",
        "D",
-       "E"
+       "E",
+       "F",
+       "G",
+       "H",
+       "I",
+       "J",
+       "K",
+       "L",
+       "M"
       ]
      },
      "title": {
@@ -103,6 +115,10 @@
         "engine": {
          "enum": [
           "openfoam12-realizableKE",
+          "openfoam12-kEpsilon",
+          "openfoam12-kOmegaSST",
+          "umf-realizableKE",
+          "umf-buoyantKEpsilon",
           "openlb",
           "fluidx3d",
           "ml-surrogate"
@@ -193,8 +209,8 @@
      }
     }
    },
-   "minItems": 5,
-   "maxItems": 5
+   "minItems": 13,
+   "maxItems": 13
   }
  }
 }

@@ -26,22 +26,24 @@ import os
 import sys
 
 import numpy as np
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt  # noqa: E402
-from matplotlib.collections import PolyCollection  # noqa: E402
+import ultraplot as uplt
+from matplotlib.collections import PolyCollection
+from matplotlib.colors import to_rgb
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, os.pardir, "scripts"))
 import aijdata as D  # noqa: E402
+import plotstyle as ps  # noqa: E402
 
-OUT = os.path.join(HERE, "figures", "geometry")
+OUT = os.path.join(ps.FIGURES, "geometry")
 
-WIND = "#eb6834"
-GRID = "#dcdcd9"
-BODY = np.array([0.66, 0.68, 0.72])         # neutral massing, shaded per face
-ACCENT = np.array([0.165, 0.471, 0.839])    # the subject of the case (#2a78d6)
-EDGE = "#ffffff"
+# Colours from plotstyle.py, so a render matches the figures: the subject is ultraplot's blue, the context is
+# neutral grey, the wind is vermillion.
+WIND = ps.VERMILLION
+GRID = ps.FOOTPRINT
+BODY = np.array(to_rgb(ps.FOOTPRINT_FOCUS))   # neutral massing, shaded per face
+ACCENT = np.array(to_rgb(ps.BLUE))            # the subject of the case
+EDGE = ps.SURFACE
 
 # One camera for every case. The azimuth is negative so that +x (the wind at WD = 0) runs left to right on
 # screen while the camera stands on the -x side: the windward face is the one you see.
@@ -112,8 +114,12 @@ def draw(ax, groups, edges):
             polys.append(p)
             cols.append(np.clip(base * (0.50 + 0.50 * abs(float(_normal(p) @ LIGHT))), 0, 1))
     order = np.argsort([-project(p)[1].mean() for p in polys])
-    ax.add_collection(PolyCollection([project(polys[i])[0] for i in order], facecolors=[cols[i] for i in order],
-                                     edgecolors=EDGE if edges else "none", linewidths=0.5 if edges else 0.0,
+    faces = [cols[i] for i in order]
+    # edges: True = white outlines; "seal" = outline in the face colour (a terrain mesh of thousands of facets would show its
+    # seams as hairlines); False = none
+    ax.add_collection(PolyCollection([project(polys[i])[0] for i in order], facecolors=faces,
+                                     edgecolors=EDGE if edges is True else (faces if edges == "seal" else "none"),
+                                     linewidths=0.5 if edges is True else (0.4 if edges == "seal" else 0.0),
                                      antialiased=True, joinstyle="round"))
 
 
@@ -128,8 +134,22 @@ def ground_grid(ax, x0, x1, y0, y1, step):
 
 def arrow(ax, start, end, label, colour=WIND):
     p, _ = project([start, end])
+    p = np.round(p, 6)   # the projection differs in its last bits (3e-14) between arm64 and amd64; an arrow turns that into pixels
+    # shortcut: the N arrow of case-e-before/after.png still differs by up to 3 grey levels in 136 pixels between
+    # arm64 and amd64, although its display-space path is bit-identical on both (measured), so the cause is in
+    # rasterising it; upgrade: draw the arrows as filled polygons with no stroke if those two files fail CI.
     ax.annotate("", xy=p[1], xytext=p[0], arrowprops=dict(arrowstyle="-|>", color=colour, lw=2.2, mutation_scale=16))
     ax.text(p[0][0], p[0][1], label + "  ", color=colour, fontsize=11, ha="right", va="center")
+
+
+def source(ax, points):
+    """The floor tracer source: a ring for a point source, a line for a line source. Drawn over the buildings, so a source
+    behind one (Case J) shows through it; the ring is open to say so."""
+    p, _ = project(points)
+    if len(p) == 1:
+        ax.plot(p[:, 0], p[:, 1], "o", mfc="white", mec=WIND, mew=2.2, ms=9, zorder=5)
+    else:
+        ax.plot(p[:, 0], p[:, 1], color=WIND, lw=3.0, solid_capstyle="butt", zorder=5)
 
 
 def boxes_tris(boxes):
@@ -141,7 +161,7 @@ def scene(case):
     out = []
     for cfg, tris, boxes, _ in D.case_geometry(case):
         tris = np.asarray(tris, float)
-        if case in ("A", "B"):
+        if case in ("A", "B", "J"):
             groups = [(tris, ACCENT)]
         elif case == "C":
             centre = [b for b in boxes if abs(b["min"][0] + b["max"][0]) < 1e-9 and abs(b["min"][1] + b["max"][1]) < 1e-9]
@@ -151,9 +171,14 @@ def scene(case):
             ztop = max(b["max"][2] for b in boxes)
             tall = [b for b in boxes if b["max"][2] > 0.6 * ztop]
             groups = [(boxes_tris([b for b in boxes if b not in tall]), BODY), (boxes_tris(tall), ACCENT)]
+        elif case == "F":
+            tall = tris[:, :, 2].max(axis=1) > 100.0          # the high-rise group (full-scale metres)
+            groups = [(tris[~tall], BODY), (tris[tall], ACCENT)]
+        elif case in ("G", "H", "I"):     # one body, the subject of the case
+            groups = [(tris, ACCENT)]
         else:
             groups = [(tris, BODY)]
-        out.append((cfg, groups, case != "E"))
+        out.append((cfg, groups, "seal" if case in ("F", "M") else case != "E"))
     if case == "E":
         # The new construction is what the after state adds to the before state.
         tris_of = {cfg: groups[0][0] for cfg, groups, _ in out}
@@ -178,18 +203,46 @@ def decorate(ax, case, lo, hi):
     elif case == "D":
         ground_grid(ax, lo[0] - 0.1, hi[0] + 0.1, lo[1] - 0.1, hi[1] + 0.1, 0.2)
         arrow(ax, (lo[0] - 0.32, 0, 0.03), (lo[0] - 0.08, 0, 0.03), "wind, WD = 0°")
+    elif case == "F":
+        # Geographic frame, full scale: +x east, +y north (no scored direction: the wind is a compass sector).
+        ground_grid(ax, lo[0], hi[0], lo[1], hi[1], 200)
+        arrow(ax, (hi[0] + 60, hi[1] - 450, 0), (hi[0] + 60, hi[1] - 100, 0), "N", colour=ps.REFERENCE)
+    elif case == "M":
+        # Frame: +x north, +y west; WD = 180 deg blows toward +x, so the arrow runs along +x from the upwind (-x) side.
+        ground_grid(ax, lo[0], hi[0], lo[1], hi[1], 100)
+        arrow(ax, (lo[0] - 320, 0, 40), (lo[0] - 60, 0, 40), "wind, WD = 180°")
+    elif case == "G":
+        ground_grid(ax, -14, 14, -46, 46, 10)
+        arrow(ax, (-17, 0, 0.3), (-6, 0, 0.3), "wind")
+    elif case == "H":
+        ground_grid(ax, -0.20, 0.30, -0.15, 0.15, 0.05)
+        arrow(ax, (-0.28, 0, 0.02), (-0.14, 0, 0.02), "wind")
+    elif case == "I":
+        ground_grid(ax, -0.15, 0.25, -0.15, 0.15, 0.05)
+        arrow(ax, (-0.23, 0, 0.02), (-0.11, 0, 0.02), "wind")
+    elif case == "J":
+        ground_grid(ax, -0.24, 0.36, -0.2, 0.2, 0.04)
+        arrow(ax, (-0.30, 0, 0.02), (-0.12, 0, 0.02), "wind")
+        source(ax, [(0.04, 0.0, 0.0)])
+    elif case == "K":
+        ground_grid(ax, -0.5, 0.8, -0.6, 0.6, 0.12)
+        arrow(ax, (-0.85, 0, 0.03), (-0.55, 0, 0.03), "wind")
+        source(ax, [(-0.15, 0.0, 0.0)])
+    elif case == "L":
+        ground_grid(ax, -1.1, 0.8, -0.6, 0.6, 0.12)
+        arrow(ax, (-1.5, 0, 0.03), (-1.15, 0, 0.03), "wind")
+        source(ax, [(-0.15, -0.51, 0.0), (-0.15, 0.51, 0.0)])
     else:
         ground_grid(ax, lo[0], hi[0], lo[1], hi[1], 50)
         # Geographic frame: +x east, +y north. The scored direction is SW, so the arrow comes from the SW.
         s = 1 / math.sqrt(2)
         cx, cy = lo[0] + 10, lo[1] + 10
         arrow(ax, (cx - 60 * s, cy - 60 * s, 6), (cx, cy, 6), "wind from SW")
-        arrow(ax, (hi[0] + 15, hi[1] - 70, 0), (hi[0] + 15, hi[1] - 10, 0), "N", colour="#5c5c5a")
+        arrow(ax, (hi[0] + 15, hi[1] - 70, 0), (hi[0] + 15, hi[1] - 10, 0), "N", colour=ps.REFERENCE)
 
 
 ASPECT = 2.0   # every render is 2:1, so a row of them lines up and so do their captions
-SIZE_IN = (8.0, 4.0)
-DPI = 160      # 1280 x 640 px
+SIZE_IN = (8.0, 4.0)   # inches; at ps.DPI (1200) that is 9600 x 4800 px
 
 
 def _limits(figs):
@@ -217,7 +270,7 @@ def render_case(case):
     lo, hi = allv.min(axis=0), allv.max(axis=0)
     figs = []
     for cfg, groups, edges in configs:
-        fig = plt.figure(figsize=SIZE_IN)
+        fig = uplt.figure(figsize=SIZE_IN)
         ax = fig.add_axes((0, 0, 1, 1))
         decorate(ax, case, lo, hi)
         draw(ax, groups, edges)
@@ -231,14 +284,14 @@ def render_case(case):
         ax.set_xlim(*xl)
         ax.set_ylim(*yl)
         name = D.render_file(case, cfg)
-        fig.savefig(os.path.join(OUT, name), dpi=DPI, facecolor="#ffffff")
-        plt.close(fig)
+        ps.save(fig, name, directory=OUT)
+        uplt.close(fig)
         written.append(name)
     return written
 
 
 if __name__ == "__main__":
-    os.makedirs(OUT, exist_ok=True)
+    ps.apply()
     cube = merge_coplanar(boxes_tris([{"min": [0, 0, 0], "max": [1, 1, 1]}]))
     assert len(cube) == 6 and all(len(q) == 4 for q in cube), "a unit cube must merge to six quads"
     for c in D.CASE_IDS:

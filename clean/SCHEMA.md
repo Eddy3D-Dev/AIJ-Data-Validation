@@ -1,6 +1,6 @@
-# clean/ — schema of the cleaned AIJ UWE release (Cases A–E)
+# clean/ — schema of the cleaned AIJ UWE release (Cases A–M)
 
-Version `1.0.0` (schema `1.0.0`). Built by `clean/build.py` from the published Zenodo files; every
+Schema `2.0.0` (release `3.0.0`; schema 1.0.0 had 18 columns, 2.0.0 adds the 18 below the line, appended, so every old column keeps its position). Built by `clean/build.py` from the published Zenodo files; every
 transform is listed in `build.log`, every validity check in `checks.json`, every source file with its
 SHA-256 in `manifest.json`. **The headers carry no units.** Units live in `units.json` (and in each
 Parquet file's schema metadata under the keys `units` and `column_meaning`).
@@ -14,18 +14,28 @@ site API (`clean/manifest.json` → `cases.<id>.files.points_csv`).
 
 | column | type | unit | meaning |
 |---|---|---|---|
-| `case_id` | text | — | `A` `B` `C` `D` `E` |
-| `config` | text | — | `default` (A, B, D) · C: centre building `0D` / `1D` / `2D` · E: `bc` before / `ac` after construction |
-| `instrument` | text | — | `split_fibre` (hot-wire split-fibre probe: vector components) · `thermistor` (omnidirectional scalar speed) |
+| `case_id` | text | — | `A` … `M` |
+| `config` | text | — | `default` (every case but C, E and F) · C: centre building `0D` / `1D` / `2D` · E: `bc` before / `ac` after construction · F: `default` (the 9 m tunnel plane and the field) and `h5` / `h20` (the tunnel's 5 m and 20 m planes) |
+| `instrument` | text | — | `split_fibre` (hot-wire split-fibre probe: vector components) · `thermistor` (omnidirectional scalar speed) · and, for Cases F to M, `cup_anemometer`, `sonic_anemometer`, `ldv`, `hydrocarbon_analyser`, `sorbent_gc_ecd` (the section for each case says which) |
 | `point_id` | int | — | the tunnel's own point number (`No.`); shared by every configuration and direction of a case |
-| `wind_direction_deg` | float | deg | A–D: the AIJ turntable angle WD (0 = flow along +x). E: meteorological FROM-direction, clockwise from north (N = 0, E = 90). **Do not turn this into a vector yourself — read `flow_dir_x/y` from `directions.csv`.** |
-| `wind_direction` | text | — | compass name (E only; empty elsewhere) |
-| `x` `y` `z` | float | m | case frame, section 2. Model-scale metres for A–D, FULL-scale metres for E |
+| `wind_direction_deg` | float | deg | A–D and G–L: the AIJ turntable angle WD (0 = flow along +x; G–L have only 0). E and F: meteorological FROM-direction, clockwise from north (N = 0, E = 90). M: the direction the wind comes FROM in the case's frame (+x north; 180° blows toward +x), a field run's own WD_R. **Do not turn this into a vector yourself — read `flow_dir_x/y` from `directions.csv`.** |
+| `wind_direction` | text | — | compass name (E and F; empty elsewhere) |
+| `x` `y` `z` | float | m | case frame, section 2. Model-scale metres for A–D and H–L, FULL-scale metres for E, F, G and M |
 | `U` `V` `W` | float | m/s | mean velocity along +x, +y, +z. **V is positive toward +y in every case** (B's published sign is flipped) |
 | `uu` `vv` `ww` | float | m²/s² | velocity variances ⟨u′u′⟩ … (A publishes rms; squared here) |
 | `k` | float | m²/s² | turbulent kinetic energy as published (= ½(uu+vv+ww) wherever all three exist — checked) |
 | `Vs` | float | m/s | mean omnidirectional scalar speed from a thermistor. Never a vector magnitude |
-| `velocity_ratio` | float | — | E only: Vs / U_ref, U_ref = approach-flow speed at z = 15.9 m full scale (3.935 m/s, section 5) |
+| `velocity_ratio` | float | — | mean speed over the case's reference speed: E: Vs / U_ref, U_ref = approach-flow speed at z = 15.9 m full scale (3.935 m/s, section 5); F, G: see the case's `normalisation` in `manifest.json` |
+| `campaign` | text | — | `wind_tunnel` (model scale) or `field` (a full-scale observation: F, G, M) |
+| `run` | text | — | replicate label where the dataset publishes individual runs (M); empty elsewhere |
+| `uv` `uw` `vw` | float | m²/s² | Reynolds shear stresses as published |
+| `C` `c_rms` | float | ppm | mean and rms tracer-gas concentration as published |
+| `concentration_ratio` | float | — | C / c0, c0 = q / (U_ref L_ref²) as the benchmark defines it for the case (`manifest.json`, `cases.<id>.normalisation`) |
+| `T` `T_rms` | float | °C, K | mean air temperature and its rms (J, L) |
+| `uc` `vc` `wc` | float | ppm·m/s | turbulent concentration fluxes |
+| `uT` `vT` `wT` | float | K·m/s | turbulent heat fluxes |
+| `velocity_ratio_sd` | float | — | standard deviation of `velocity_ratio` over the observations behind a field value (F) |
+| `k_ratio` | float | — | k / U_ref² where only normalised values are published (G) |
 
 Rules:
 
@@ -34,7 +44,7 @@ Rules:
 - The key `(case_id, config, instrument, point_id, wind_direction_deg)` is unique. Case B's seven
   repeat measurements keep their own point numbers (README, B).
 - Rows are sorted by `(config, instrument, wind_direction_deg, point_id)` within a case; cases in
-  order A–E. Floats are written with `%.10g`; coordinates and variances are rounded to 1e-9.
+  order A–M. Floats are written with `%.10g`; coordinates and variances are rounded to 1e-9.
 - A *derived* quantity the source publishes beside measured ones is dropped, not carried: Case D's
   split-fibre "Vs" / "Scalar Vel." (= √(U²+V²+W²), checked to 1e-15) and "Vs/UH"; Case B's
   "1/4 power" fit column. Everything else published is here.
@@ -60,7 +70,7 @@ the same transform; V is flipped so the coordinates stay the drawing's.
 
 Why E keeps a geographic frame: the district is real, its points and its STL are published in
 east/north coordinates, and its 16 directions are compass names. "+x along the wind" is a property
-of A–D only.
+of A–D and G–L only (E and F are geographic, M is +x north).
 
 ### Wind direction → flow vector (`directions.csv`)
 
@@ -71,7 +81,7 @@ row and measured counts, and `sense_basis` / `status` saying what fixes the rota
 | case | flow_dir(WD) | how the sense is known |
 |---|---|---|
 | A, B | (1, 0) | definition |
-| C | (cos WD, **−sin WD**) | measured from the data: the WD = 45° field is mirror-symmetric about y = −x (mean |ΔVs| 0.10–0.13 m/s, the experiment's repeatability) and not about y = +x (0.52–0.80). Figure 3 of the data paper draws the opposite sense — QUESTIONS Q1 |
+| C | (cos WD, **−sin WD**) | measured from the data: the WD = 45° field is mirror-symmetric about y = −x (mean \|ΔVs\| 0.10–0.13 m/s, the experiment's repeatability) and not about y = +x (0.52–0.80). Figure 3 of the data paper draws the opposite sense — QUESTIONS Q1 |
 | D | (cos WD, **+sin WD**) for 22.5°, 45° | **corroborated by solved fields**: the array is exactly y-mirror symmetric, so the sense cannot be settled from the data; it is taken from Figure 4 of the data paper, and Eddy3D's solved fields score R 0.80 / 0.85 in this sense against 0.40 / 0.17 mirrored (22.5° / 45°) — QUESTIONS Q2 |
 | E | (−sin WD, −cos WD) | definition: FROM-direction, +y north (compass rose in `MP_caseE.png`); frame verified by all 80 points lying in open space and a 10° rotation control putting 26 inside buildings |
 
@@ -91,7 +101,7 @@ that matter) and a power-law fit — reproduced in `build.py`, never typed in.
 
 ASCII STL, LF line endings, outward normals, **metres in the same frame as the points** (so the E
 files are full-scale and ~400 m across). `geometry.json` lists each file, its provenance, triangle
-count, bounding box, watertightness, and — for A–D — the axis-aligned boxes it is made of, so a
+count, bounding box, watertightness, and — for A–D and G–L — the axis-aligned boxes it is made of, so a
 consumer need not parse an STL at all.
 
 | case | files | made from |
@@ -114,6 +124,10 @@ the workbook rounded to 2 dp; this release carries the workbook's full values.
 ## 6. Provenance and determinism
 
 `manifest.json → cases.<id>.provenance` lists every source file read, with SHA-256 and byte size.
+Each entry has an `eol` field: `lf-normalised` means the hash and the size are those of the file with CRLF folded to LF
+(text files under `raw/`: `.csv`, `.md`, `.txt`, `.json` and ASCII `.stl`; git stores them with LF, so a checkout on
+Windows hashes the same), `as-is` means the file was hashed as stored (binary files, and the byte-exact mirrors under
+`clean/sources/`, whose hashes equal their `SHA256SUMS.txt`).
 For D and E the official Zenodo files the repository clone lacks were downloaded into
 `clean/sources/zenodo_case{D,E}/` (checksums in `SHA256SUMS.txt` beside them); the clone's
 workbooks are byte-identical in content to Zenodo's `LF_*.xls` and are used as cross-checks. Two
@@ -126,3 +140,194 @@ changed input or a changed `build.py`.
 by name and serves them unchanged through `docs/api/cases/<id>/points.{json,csv}`
 (`points_source` in each file says so). Column `case_id` is deliberately not named `case`, which
 that adapter would read as the configuration.
+
+## Cases F and M
+
+The two cases that bring the schema-2.0.0 columns `campaign`, `run`, `C`, `c_rms`, `concentration_ratio`,
+`velocity_ratio_sd` into use. Both are real sites measured in a wind tunnel and in the field, both are in
+**full-scale metres**, both come from a legacy workbook as well as from the Zenodo CSVs. Modules:
+`clean/case_f.py`, `clean/case_m.py`.
+
+### Rows: what one row is
+
+`instrument` takes three values beyond `split_fibre` and `thermistor`: `cup_anemometer` (F, field),
+`hydrocarbon_analyser` (M, tunnel concentration) and `sorbent_gc_ecd` (M, field concentration: sorbent tubes read
+by gas chromatography with an electron-capture detector). A row carries only what its instrument measured; the
+rest is NaN.
+
+| case | `campaign` | `instrument` | `config` | one row is | filled columns |
+|---|---|---|---|---|---|
+| F | `wind_tunnel` | `thermistor` | `default` (9 m plane), `h5`, `h20` | a point at one wind direction on one plane | `velocity_ratio` |
+| F | `field` | `cup_anemometer` | `default` | a point at one wind direction, the year's mean | `velocity_ratio`, `velocity_ratio_sd` |
+| M | `wind_tunnel` | `split_fibre` | `default` | a point at 180° | `U V W`, `uu vv ww`, `k` |
+| M | `wind_tunnel` | `hydrocarbon_analyser` | `default` | a point at 175°, 180° or 185° | `C`, `c_rms`, `concentration_ratio` |
+| M | `field` | `sorbent_gc_ecd` | `default` | a point in one of the 18 runs (`run` = "1" … "18") | `C`, `concentration_ratio` |
+
+F's `config` is the tunnel plane's height above ground by the readme's rule (z − 10 m): 9 m is `default` because
+it is the benchmark plane, complete at 13 points × 12 directions, and the plane the field values are compared with;
+the 5 m and 20 m planes exist at some points only. M's wind direction in a field row is the run's mean direction
+at the reference point (`WD_R`), which differs from run to run, so the row key stays unique. M's per-run
+reference speed `U_R`, tracer flow `q` and `c0` have no column; they are in `manifest.json → cases.M.extra_measurements.field_runs`.
+
+### Frames
+
+| case | origin | +x | +y | scale of the coordinates | transform from the published files |
+|---|---|---|---|---|---|
+| F | centre of the reproduced district, on the tunnel floor | **east** | **north** | **full scale**, model 1:800 | tunnel x, y, z × 800 (the field's are published in full scale); STL × 800 and re-wound outward |
+| M | centre of the tunnel turntable, on the floor | **north** | **west** | **full scale**, model 1:600 | tunnel x, y, z × 600 (the field uses the tunnel's 15 points); STL × 600 and re-wound outward |
+
+`z` is the height above the **tunnel floor**, not above the ground. F: the readme's rule is ground = z − 10 m
+(planes at z = 15, 19 and 30 m are 5, 9 and 20 m above ground); the STL's terrain under the 13 points is at
+z = 5 m, so the rule and the STL disagree by 5 m (`QUESTIONS.md` QF4). M: the campus ground lies at z ≈ 32 m and
+every point is 3 m above the local ground (verified against the STL to ±0.06 m). Velocities and concentrations are
+**not** scaled: U, V, W are the tunnel's m/s, `C` the tunnel's ppm.
+
+### Normalisations
+
+- **F, `velocity_ratio`**: U / U_ref, U_ref the approaching mean speed at 500 m (the boundary-layer height), full
+  scale. The legacy workbook normalises by the roof anemometers instead (SMB, G.L.+237 m, for NW–NE; KDD,
+  G.L.+187 m, for the other directions); the CSVs re-normalise it, and the factor is recovered from the data:
+  CSV = workbook × 0.9397 (SMB sector) or × 0.9629 (KDD sector), to within [0.93947, 0.94000] and [0.96250, 0.96324].
+  U_ref itself in m/s is 10 (data paper) or 10.65 (implied by the approach-flow profile): `QUESTIONS.md` QF8.
+  `velocity_ratio_sd` is the standard deviation of the 10-minute means behind a field value; it moves in steps of
+  f/100 = 0.0094 or 0.0096 because the workbook's S.D. is rounded to 0.01.
+- **M, `concentration_ratio`**: C / c0, c0 = q / (U_R H_R²) (data paper 3.13.1). Tunnel: q = 2.5 × 10⁻⁶ m³/s,
+  U_R = 4.08 m/s, H_R = 0.068 m, c0 = **132.514 ppm** (the paper rounds to 1.33 × 10² ppm). Field: each run's own
+  q and U_R with H_R = 41 m, c0 = 1,444 … 7,379 ppq. Field concentrations are **parts per quadrillion** (10⁻¹⁵) in
+  the sources; `C` holds ppm, so `C_ppm = C_ppq × 10⁻⁹`.
+
+### Wind direction → flow vector
+
+| case | flow_dir(WD) | how the sense is known |
+|---|---|---|
+| F | (−sin WD, −cos WD) | compass FROM-direction, +y north (`MP_caseF.png`); the readme does not define it. Supported by the reference-building choice and by upwind roughness: status `unverified` (`QUESTIONS.md` QF9), except at NNW, the one direction a solved Eddy3D field has decided (R 0.935 with the tunnel's NNW column against 0.077 with its SSE column): status `corroborated by a solved field` |
+| M | (−cos WD, +sin WD) | measured: the plume's lateral centroid moves toward −y as WD grows, in the tunnel (175° → 185°) and across the 18 field runs; the compass rose of `MP_caseM.png` (N at +x, W at +y) agrees |
+
+### Geometry
+
+| case | file | made from |
+|---|---|---|
+| F | `geometry.stl` | the published `BD_caseF.stl` × 800 (it is model scale: 0.90625 m = 725 m), every triangle reversed (all 21,537 horizontal ground and roof facets faced down); one shell, open only along the rim of the disc (812 boundary edges), 3 zero-area facets kept |
+| M | `geometry.stl` | the published `BD_caseM.stl` × 600 (model scale: 1.8 m × 1.2 m = 1080 m × 720 m), every triangle reversed (3,118 of 3,152 horizontal facets faced down); one shell with 21 boundary and 7 non-manifold edges, kept |
+
+### Approach flow
+
+F: the 18 published heights (10 … 400 m full scale), `uu` = u_rms²; no `vv`, `ww`, `k`. M: the workbook's 40
+heights at x = −0.498 m model (−299 m full scale), z = 3 … 360 m full scale, `uu vv ww` = σ², `k` = half their sum. M's heights are above the
+**empty tunnel floor**: at the profile station the model's taper is already 0.052 m high, above the 10 lowest heights.
+
+## Cases G, H and I (a tree belt in the field, a floor source, a roof source)
+
+Added with schema 2.0.0; the columns are the 36 of section 1, nothing new. What these cases add to the rules above.
+
+### Frames and transforms
+
+| case | origin | +x | +y | scale of the coordinates | transform from the published files |
+|---|---|---|---|---|---|
+| G | leeward face of the tree belt on the ground, on the centre section | downwind (the belt is x in [-2, 0] m) | along the belt, every point on y = 0 | **full scale**: a field observation | none; U/UH and k/UH² from the workbook |
+| H | centre of the building's leeward face on the ground | streamwise (building x in [-0.1, 0] m) | lateral (building y in [-0.05, 0.05] m) | model (building 0.10 × 0.10 × 0.20 m; the source states no ratio) | ratios × uH = 3.226 m/s from the workbook; **V × -1 for point numbers 1-220** |
+| I | centre of the cube on the ground | streamwise (cube x, y in [-0.05, 0.05] m) | lateral | model (cube 0.10 m; no ratio stated) | values from the workbook; **V on the y = 0 plane → NaN** |
+
+All three have one wind direction, `wind_direction_deg` = 0, and one `directions.csv` row per instrument with `flow_dir` = (1, 0): measured
+(recirculation behind the leeward face, downwash on the windward face, the source behind or on the building) for H and I, a definition
+for G (`unverified`: the field wind's angle to the belt is not published).
+
+### New `instrument` values
+
+| value | case | what it is |
+|---|---|---|
+| `sonic_anemometer` | G | three-dimensional ultrasonic anemometer; the published quantity is the mean scalar speed |
+| `split_fibre` | H | hot-wire split-fibre probe: U, V, W, uu, vv, ww, k (as in A, B, D) |
+| `ldv` | I | laser Doppler anemometer: U, V, W, k |
+| `hydrocarbon_analyser` | H, I | high-speed total hydrocarbon analyser: C, c_rms (H only), concentration_ratio |
+
+### Rows and point numbers
+
+- **G**: 28 rows, `point_id` = the row order of `RS_caseG.csv` (the file has no numbers). `campaign` = `field`. Only `velocity_ratio` and `k_ratio` are filled.
+- **H**: one row per (instrument, point) with `point_id` = the CSV's `No.` (1-876): 826 `split_fibre` rows and 826 `hydrocarbon_analyser` rows. The CSV's -999.9 marks the line a probe was not run on: concentration only at x = 0.38 m (50 points), velocity only at x = 0.40 m (50 points); none is inside the building. `uu`, `vv`, `ww` are (rms × uH)².
+- **I**: two point sets with no numbers, **stacked**: `ldv` rows numbered 1-91 and `hydrocarbon_analyser` rows 92-630, each in its CSV's row order, so a `point_id` names one location (17 locations have both; they stay two rows). Only k is published, no variances.
+- Locations measured twice keep one row each under their own number: H's y = 0, z = 0.1 m line (13 locations; exact copies once V's sign is aligned), I's 13 ground-centreline concentration points (values up to 8.5 % apart).
+- The tables carry the **legacy workbooks' values** at full precision, not the CSVs' (H: the CSV quantises two planes, see `QUESTIONS.md` QH2; I: 3 dp and 1 dp). The CSVs are cross-checked to their own rounding.
+
+### Normalisations (`manifest.json → cases.<id>.normalisation`)
+
+| case | `velocity_ratio` / U | `k_ratio` / k | `concentration_ratio` |
+|---|---|---|---|
+| G | U/UH, UH = the mean speed at the tree height (7 m) during each period, from the approach flow's power law (0.22); no m/s anywhere | k/UH² | - |
+| H | U in m/s = ratio × uH, uH = 3.226 m/s (the approach flow at z = H; the readme says 3.23) | k in m²/s² | C / c0, c0 = cgas q / (uH H²) = 45.18 ppm (45.2 in the paper), q = 5.83e-6 m³/s of pure ethylene |
+| I | U in m/s, U_H = 1.7 m/s (the approach flow at z = H is 1.697) | k in m²/s² | C / c0, c0 = q / (U_H H²) = 39.22 ppm with q the **ethane** flow, 10 % of the 400 cc/min (the paper quotes the mixture's 6.67e-6 m³/s) |
+
+Case G's approach-flow table (`approach_flow.csv`) holds U/Ub and k/Ub² (Ub = U at 9 m, a different day) in its `U` and `k` columns: **dimensionless
+there**. Divide by UH/Ub = 0.946 for the table's normalisation. H's has 17 heights (uu, vv, ww = (rms × uH)²; the profile's uw and uv are not
+carried: the table has no column for them), I's 12 (k only).
+
+### Geometry
+
+Box geometry, `geometry.stl` and its boxes in `geometry.json`: G the belt's 2 × 74 × 7 m envelope with the 1.2 m gap (a **porous canopy**, shading rate 81 %,
+not a solid body), H the 0.10 × 0.10 × 0.20 m building, I the 0.1 m cube. The sources are not part of the geometry; their position is in
+`manifest.json → cases.<id>.extra_measurements.source`: H the 4 mm floor hole at (0.05, 0, 0), I the 6 mm roof outlet at (0, 0, 0.1).
+
+## Cases J, K, L — frames, reference values, extra files
+
+The three Tokyo Polytechnic University cases (J: 1:1:2 building, K: 9 x 9 cube array, L: 14 x 9 cube array; K and L
+with a tracer source on the floor, J and L in an unstably stratified boundary layer). One wind direction each
+(`wind_direction_deg` = 0, flow toward +x, `directions.csv` status `settled`), one instrument (`split_fibre`: the
+velocity probe; temperature was read with a cold wire and concentration with a hydrocarbon analyser beside it),
+`campaign` = `wind_tunnel`, `config` = `default`.
+
+| case | origin | +x | +y | scale | transform from the published files |
+|---|---|---|---|---|---|
+| J | centre of the building's leeward (downwind) wall, on the floor | streamwise; building x in [−0.08, 0], source at x = +0.04 | lateral; building y in [−0.04, 0.04]; the z/H = 0.025 plane only on y ≤ 0 | model (b = 0.08 m, H = 0.16 m; ratio not stated) | none for x, y, z; T kelvin → °C |
+| K | windward wall of the 4th row of the central column | streamwise; 9 rows from x = −0.36 | lateral; 9 columns centred on y = 0 (span ±0.51) | model (H = 0.06 m; ratio not stated) | none (the workbook's millimetres → m); `point_id` = row order |
+| L | windward wall of the 9th row (of 14) of the central column | streamwise; 14 rows from x = −0.96 | lateral; 9 columns centred on y = 0 (span ±0.51) | model (H = 0.06 m; ratio not stated) | none (workbook mm → m); the CSV's `T(K)` is already °C |
+
+All three: right-handed, +z up from the (model) floor, lengths in metres. V is carried as published (+y by the frame); in
+J it is verified (V < 0 beside the upstream half of the y < 0 flank, V > 0 in the wake), in K and L it is not
+verifiable: a cross-flow offset of about 0.06 m/s is larger than the antisymmetric part (`checks.json`,
+`lateral_velocity_is_an_offset_not_an_antisymmetric_field`).
+
+**Precision.** The published `RS_case<X>.csv` of each is the legacy workbook (`LF_case<X>.xlsx`) rounded, checked cell
+for cell (`csv_equals_workbook_*`). The table is built from the workbook, as Case E's is: J's CSV is the workbook's
+non-dimensional values rounded to 10⁻³ (U, V, W) or 10⁻⁴ and then multiplied back by the reference scales, which puts the
+heat fluxes on a grid of 0.0049 K·m/s and k on 0.00021 m²/s²; K's CSV recomputes k from the rounded rms values.
+Variances `uu vv ww` are the square of the published rms (K, L) or the workbook's `<u′u′>` columns (J, where they
+differ from the square of the rms by up to 3 % in single rows and reproduce k).
+
+**Reference values** for `concentration_ratio = C / c0` (`manifest.json → cases.<id>.normalisation`):
+
+| case | c0 (ppm) | definition |
+|---|---|---|
+| J | 12.2832 | 0.05 · q / (U_H H²), q = 9.17·10⁻⁶ m³/s, U_H = 1.4581 m/s, H = 0.16 m: the 5 % ethylene fraction of the released gas is in it (the workbook's own cell). Without it c0 would be 245.66 |
+| K | 429.185 | q / (U_H H²), q = 3.6·10⁻⁶ m³/s, U_H = 2.33 m/s, H = 0.06 m, as the data paper defines it. The workbook normalises with H = 0.2 m and UH = 4.94009 m/s instead (C0 = 18.218 ppm): multiply `concentration_ratio` by 23.558 to reproduce it (`QUESTIONS.md` QK1) |
+| L | 1728.228 | Cgas · q / (U_H H²), q = 8.33333·10⁻⁶ m³/s, U_H = 1.339415 m/s, H = 0.06 m (the workbook's own cell) |
+
+**Temperature.** `T` is °C (the published files give kelvin in J, and a °C column headed K in L's RS file); `T_rms` and the
+heat fluxes are differences (K, K·m/s). The workbook's reference scales: floor temperature, Δθ = θ_f − θ_H (J: 45.8 °C and
+33.6 K; L: 45.009 °C and 30.257 K).
+
+**Not carried** (no column in schema 2.0.0): the mean scalar speed `<usc>` and its standard deviation of K's workbook
+(never below |U|), L's `Usc` (|U|, derived) and `tc`, the temperature-concentration covariance ⟨θ′c′⟩ (K·ppm), L's `tc`
+column. The expanded uncertainty of J's workbook has no column either; it is summarised in
+`manifest.json → cases.J.extra_measurements.expanded_uncertainty`.
+
+**Extra files** (not part of the point table; listed in the manifest under `extra_measurements.extra_files`):
+
+| file | columns (units) | what |
+|---|---|---|
+| `cases/J/surface_temperature.csv` | `x y z` (m), `T` (°C) | the building's surface temperature at 121 points (`BD-ST_caseJ.csv`, kelvin there): boundary data for a thermal CFD model |
+| `cases/J/approach_flow_full.csv` | `x z` (m), `U V W` (m/s), `uu vv ww uv uw k` (m²/s²), `T` (°C), `T_rms` (K), `uT vT wT` (K·m/s) | the workbook's empty-tunnel profiles at x = −0.4, 0 and +0.4 m (the published `AF_caseJ.csv` is the first) |
+| `cases/K/approach_flow_full.csv` | `x z U V W uu vv ww uv uw k` | `AF_caseK.csv` with V, W, uv, uw (it is Case H's file, row for row) |
+| `cases/L/approach_flow_full.csv` | as J's | the workbook's `Inflow` sheet at x = −0.4 m, ascending in z |
+
+`approach_flow.csv` of each case keeps the common columns (`z U uu vv ww k`); J, K and L publish the profile at one
+streamwise station (J: x = −0.4 m, K: −0.493 m, L: −0.4 m).
+
+## Geometry of J, K, L
+
+| case | files | made from |
+|---|---|---|
+| J | `geometry.stl` | the readme's stated dimensions: one box 0.08 × 0.08 × 0.16 m, leeward wall at the origin; 12 triangles, watertight |
+| K | `geometry.stl` | 81 cubes of 0.06 m on a 0.12 m pitch (9 rows from x = −0.36, 9 columns centred on y = 0): generated, because no STL is published. The pitch is read from `MP-y_caseK.png` / `MP-z_caseK.png`; the 203 points bound it to 0.11 – 0.14 m (no point lies inside a cube only between them) and the source position (x = −0.15 m, between rows 2 and 3) to 0.105 – 0.15 m. 972 triangles, watertight |
+| L | `geometry.stl` | the 126 closed shells of the published `BD_caseL.stl` ('buildings' solid: 1,512 triangles, watertight, outward normals, no duplicates) reduced to their boxes, which equal the 14 × 9 grid of 0.06 m cubes on a 0.12 m pitch to 1e-9. The 'line_source' solid (a flat patch 0.04 m × 1.02 m at x = −0.15 m, z = 0) is not a building and is described in `geometry.json` / the frame, not served as a wall |
+
+All model scale; no source states a model:full-scale ratio, so the case frame is the model one.

@@ -1,0 +1,54 @@
+{
+ "case_id": "G",
+ "units": "metres (full scale)",
+ "frame": {
+  "origin": "the leeward face of the tree belt at ground level, on the vertical section through the belt's centre (MP_caseG.png)",
+  "x": "+x downwind: the belt occupies x in [-2, 0] m and the measurement lines lie behind it at x = 1.75 ... 35 m",
+  "y": "+y along the belt (74 m long, y in [-37, 37]); every point is on y = 0, the centre section",
+  "z": "+z up from the ground; the belt spans z in [1.2, 7] (1.2 m bottom gap); points at z = 1.5, 3, 4.5, 6 m",
+  "wind_direction_rotation": "single direction: the wind blows toward +x (perpendicular to the belt); the field angle is not published",
+  "length_scale": "FULL-scale metres: a field observation, no model"
+ },
+ "files": [
+  {
+   "configuration": "default",
+   "file": "cases/G/geometry.stl",
+   "format": "ASCII STL, LF, metres, same frame as points.csv",
+   "source": "generated from the readme's stated dimensions (74 m along y, 2 m along x, 7 m high, 1.2 m bottom gap), centred on y = 0 with its leeward face at x = 0 (MP_caseG.png). A POROUS CANOPY, not a solid body: the data paper gives a shading rate of 81 % after pruning (section 3.7); the box is its envelope",
+   "stats": {
+    "triangles": 12,
+    "bbox_min": [
+     -2.0,
+     -37.0,
+     1.2
+    ],
+    "bbox_max": [
+     0.0,
+     37.0,
+     7.0
+    ],
+    "signed_volume": 858.4,
+    "edges": 18,
+    "edges_shared_by_two_faces": 18,
+    "edges_boundary": 0,
+    "edges_non_manifold": 0,
+    "watertight": true
+   },
+   "boxes": [
+    {
+     "min": [
+      -2.0,
+      -37.0,
+      1.2
+     ],
+     "max": [
+      0.0,
+      37.0,
+      7.0
+     ]
+    }
+   ],
+   "box_count": 1
+  }
+ ]
+}

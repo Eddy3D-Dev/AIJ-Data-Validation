@@ -1,7 +1,7 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/points.schema.json",
- "schema_version": "2.2.0",
- "data_version": "5af8c81571e452c1925b3efe58c698908066f64886eba5efd9b2f0348ecdc019",
+ "schema_version": "2.3.0",
+ "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
  "license": "CC-BY-4.0",
  "case": "D",
  "title": "Case D — high-rise among city blocks",
@@ -36,7 +36,8 @@
   "vv",
   "ww",
   "k",
-  "Vs"
+  "Vs",
+  "campaign"
  ],
  "column_meaning": {
   "point_id": "the tunnel's own measurement point number",
@@ -53,15 +54,16 @@
   "vv": "m^2/s^2, variance of v",
   "ww": "m^2/s^2, variance of w",
   "k": "m^2/s^2, turbulent kinetic energy",
-  "Vs": "m/s, mean omnidirectional scalar wind speed (thermistor); Case D also lists |U| of the split-fibre probe under Vs for its 33 vector points"
+  "Vs": "m/s, mean omnidirectional scalar wind speed (thermistor); Case D also lists |U| of the split-fibre probe under Vs for its 33 vector points",
+  "campaign": "'wind_tunnel' (model scale) or 'field' (a full-scale observation: Cases F, G, M)"
  },
  "n": 267,
  "csv": {
-  "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/points.csv?v=3b1b348a109a",
+  "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/points.csv?v=596246341e73",
   "path": "cases/D/points.csv",
   "media_type": "text/csv",
-  "bytes": 17044,
-  "sha256": "3b1b348a109af43d458188a1c378fae95c7012307d2999d328dee7648a64899c"
+  "bytes": 20257,
+  "sha256": "596246341e73398b75fb76c9eebfab38d34e4c2dcf161a8c6e3f7c7d5e1ee570"
  },
  "points": [
   {
@@ -79,7 +81,8 @@
    "vv": 0.162,
    "ww": 0.067,
    "k": 0.3845,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 3,
@@ -96,7 +99,8 @@
    "vv": 0.162,
    "ww": 0.091,
    "k": 0.4095,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 5,
@@ -113,7 +117,8 @@
    "vv": 0.786,
    "ww": 0.188,
    "k": 0.659,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 6,
@@ -130,7 +135,8 @@
    "vv": 0.612,
    "ww": 0.123,
    "k": 0.694,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 7,
@@ -147,7 +153,8 @@
    "vv": 0.506,
    "ww": 0.302,
    "k": 1.2145,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 8,
@@ -164,7 +171,8 @@
    "vv": 0.658,
    "ww": 0.192,
    "k": 0.7255,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 9,
@@ -181,7 +189,8 @@
    "vv": 0.348,
    "ww": 0.203,
    "k": 0.6345,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 15,
@@ -198,7 +207,8 @@
    "vv": 0.922,
    "ww": 0.217,
    "k": 0.8245,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 16,
@@ -215,7 +225,8 @@
    "vv": 1.027,
    "ww": 0.384,
    "k": 1.0495,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 17,
@@ -232,7 +243,8 @@
    "vv": 0.839,
    "ww": 0.476,
    "k": 0.9215,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 18,
@@ -249,7 +261,8 @@
    "vv": 0.572,
    "ww": 0.13,
    "k": 0.524,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 19,
@@ -266,7 +279,8 @@
    "vv": 0.319,
    "ww": 0.238,
    "k": 0.517,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 25,
@@ -283,7 +297,8 @@
    "vv": 0.59,
    "ww": 0.292,
    "k": 0.6615,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 31,
@@ -300,7 +315,8 @@
    "vv": 0.344,
    "ww": 0.084,
    "k": 0.662,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 35,
@@ -317,7 +333,8 @@
    "vv": 0.205,
    "ww": 0.045,
    "k": 0.662,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 39,
@@ -334,7 +351,8 @@
    "vv": 0.113,
    "ww": 0.033,
    "k": 0.5665,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 45,
@@ -351,7 +369,8 @@
    "vv": 0.629,
    "ww": 0.076,
    "k": 0.497,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 46,
@@ -368,7 +387,8 @@
    "vv": 0.357,
    "ww": 0.071,
    "k": 0.3425,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 47,
@@ -385,7 +405,8 @@
    "vv": 0.216,
    "ww": 0.135,
    "k": 0.8235,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 48,
@@ -402,7 +423,8 @@
    "vv": 0.969,
    "ww": 0.192,
    "k": 1.377,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 49,
@@ -419,7 +441,8 @@
    "vv": 4.702,
    "ww": 0.376,
    "k": 3.7315,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 55,
@@ -436,7 +459,8 @@
    "vv": 0.768,
    "ww": 0.139,
    "k": 0.717,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 56,
@@ -453,7 +477,8 @@
    "vv": 0.845,
    "ww": 0.124,
    "k": 0.74,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 57,
@@ -470,7 +495,8 @@
    "vv": 0.599,
    "ww": 0.15,
    "k": 1.6075,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 58,
@@ -487,7 +513,8 @@
    "vv": 1.17,
    "ww": 0.163,
    "k": 1.6335,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 59,
@@ -504,7 +531,8 @@
    "vv": 3.824,
    "ww": 0.237,
    "k": 2.795,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 65,
@@ -521,7 +549,8 @@
    "vv": 0.936,
    "ww": 0.155,
    "k": 0.859,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 66,
@@ -538,7 +567,8 @@
    "vv": 1.397,
    "ww": 0.128,
    "k": 0.982,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 67,
@@ -555,7 +585,8 @@
    "vv": 1.717,
    "ww": 0.184,
    "k": 1.885,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 68,
@@ -572,7 +603,8 @@
    "vv": 1.108,
    "ww": 0.19,
    "k": 1.3895,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 69,
@@ -589,7 +621,8 @@
    "vv": 2.44,
    "ww": 0.222,
    "k": 1.811,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 75,
@@ -606,7 +639,8 @@
    "vv": 0.311,
    "ww": 0.157,
    "k": 1.3455,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 77,
@@ -623,7 +657,8 @@
    "vv": 0.205,
    "ww": 0.121,
    "k": 0.846,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 1,
@@ -640,7 +675,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.296
+   "Vs": 1.296,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 2,
@@ -657,7 +693,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.296
+   "Vs": 1.296,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 3,
@@ -674,7 +711,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.307
+   "Vs": 1.307,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 4,
@@ -691,7 +729,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.307
+   "Vs": 1.307,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 5,
@@ -708,7 +747,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.341
+   "Vs": 2.341,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 6,
@@ -725,7 +765,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.459
+   "Vs": 2.459,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 7,
@@ -742,7 +783,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.38
+   "Vs": 2.38,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 8,
@@ -759,7 +801,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.022
+   "Vs": 3.022,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 9,
@@ -776,7 +819,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.027
+   "Vs": 3.027,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 10,
@@ -793,7 +837,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.027
+   "Vs": 3.027,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 11,
@@ -810,7 +855,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.022
+   "Vs": 3.022,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 12,
@@ -827,7 +873,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.38
+   "Vs": 2.38,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 13,
@@ -844,7 +891,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.459
+   "Vs": 2.459,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 14,
@@ -861,7 +909,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.341
+   "Vs": 2.341,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 15,
@@ -878,7 +927,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.982
+   "Vs": 1.982,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 16,
@@ -895,7 +945,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.099
+   "Vs": 2.099,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 17,
@@ -912,7 +963,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.271
+   "Vs": 2.271,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 18,
@@ -929,7 +981,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.025
+   "Vs": 2.025,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 19,
@@ -946,7 +999,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.608
+   "Vs": 1.608,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 20,
@@ -963,7 +1017,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.608
+   "Vs": 1.608,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 21,
@@ -980,7 +1035,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.025
+   "Vs": 2.025,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 22,
@@ -997,7 +1053,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.271
+   "Vs": 2.271,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 23,
@@ -1014,7 +1071,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.099
+   "Vs": 2.099,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 24,
@@ -1031,7 +1089,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.982
+   "Vs": 1.982,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 25,
@@ -1048,7 +1107,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.271
+   "Vs": 3.271,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 26,
@@ -1065,7 +1125,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 27,
@@ -1082,7 +1143,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 28,
@@ -1099,7 +1161,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 29,
@@ -1116,7 +1179,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 30,
@@ -1133,7 +1197,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.271
+   "Vs": 3.271,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 31,
@@ -1150,7 +1215,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.391
+   "Vs": 4.391,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 32,
@@ -1167,7 +1233,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 33,
@@ -1184,7 +1251,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 34,
@@ -1201,7 +1269,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.391
+   "Vs": 4.391,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 35,
@@ -1218,7 +1287,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.89
+   "Vs": 4.89,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 36,
@@ -1235,7 +1305,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 37,
@@ -1252,7 +1323,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 38,
@@ -1269,7 +1341,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.89
+   "Vs": 4.89,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 39,
@@ -1286,7 +1359,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.585
+   "Vs": 4.585,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 40,
@@ -1303,7 +1377,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 41,
@@ -1320,7 +1395,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 42,
@@ -1337,7 +1413,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 43,
@@ -1354,7 +1431,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 44,
@@ -1371,7 +1449,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.585
+   "Vs": 4.585,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 45,
@@ -1388,7 +1467,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.134
+   "Vs": 1.134,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 46,
@@ -1405,7 +1485,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 0.928
+   "Vs": 0.928,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 47,
@@ -1422,7 +1503,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.169
+   "Vs": 4.169,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 48,
@@ -1439,7 +1521,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.159
+   "Vs": 4.159,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 49,
@@ -1456,7 +1539,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.155
+   "Vs": 3.155,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 50,
@@ -1473,7 +1557,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.155
+   "Vs": 3.155,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 51,
@@ -1490,7 +1575,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.159
+   "Vs": 4.159,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 52,
@@ -1507,7 +1593,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.169
+   "Vs": 4.169,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 53,
@@ -1524,7 +1611,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 0.928
+   "Vs": 0.928,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 54,
@@ -1541,7 +1629,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.134
+   "Vs": 1.134,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 55,
@@ -1558,7 +1647,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.984
+   "Vs": 1.984,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 56,
@@ -1575,7 +1665,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.754
+   "Vs": 1.754,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 57,
@@ -1592,7 +1683,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.063
+   "Vs": 3.063,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 58,
@@ -1609,7 +1701,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.608
+   "Vs": 3.608,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 59,
@@ -1626,7 +1719,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.693
+   "Vs": 2.693,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 60,
@@ -1643,7 +1737,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.693
+   "Vs": 2.693,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 61,
@@ -1660,7 +1755,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.608
+   "Vs": 3.608,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 62,
@@ -1677,7 +1773,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.063
+   "Vs": 3.063,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 63,
@@ -1694,7 +1791,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.754
+   "Vs": 1.754,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 64,
@@ -1711,7 +1809,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.984
+   "Vs": 1.984,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 65,
@@ -1728,7 +1827,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.339
+   "Vs": 2.339,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 66,
@@ -1745,7 +1845,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.091
+   "Vs": 2.091,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 67,
@@ -1762,7 +1863,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.629
+   "Vs": 2.629,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 68,
@@ -1779,7 +1881,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.525
+   "Vs": 2.525,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 69,
@@ -1796,7 +1899,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.27
+   "Vs": 2.27,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 70,
@@ -1813,7 +1917,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.27
+   "Vs": 2.27,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 71,
@@ -1830,7 +1935,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.525
+   "Vs": 2.525,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 72,
@@ -1847,7 +1953,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.629
+   "Vs": 2.629,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 73,
@@ -1864,7 +1971,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.091
+   "Vs": 2.091,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 74,
@@ -1881,7 +1989,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.339
+   "Vs": 2.339,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 75,
@@ -1898,7 +2007,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.993
+   "Vs": 2.993,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 76,
@@ -1915,7 +2025,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.993
+   "Vs": 2.993,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 77,
@@ -1932,7 +2043,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.993
+   "Vs": 2.993,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 78,
@@ -1949,7 +2061,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.993
+   "Vs": 2.993,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 1,
@@ -1966,7 +2079,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.25
+   "Vs": 2.25,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 2,
@@ -1983,7 +2097,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.192
+   "Vs": 2.192,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 3,
@@ -2000,7 +2115,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.141
+   "Vs": 2.141,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 4,
@@ -2017,7 +2133,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.161
+   "Vs": 2.161,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 5,
@@ -2034,7 +2151,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.878
+   "Vs": 2.878,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 6,
@@ -2051,7 +2169,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.671
+   "Vs": 2.671,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 7,
@@ -2068,7 +2187,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.267
+   "Vs": 3.267,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 8,
@@ -2085,7 +2205,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.319
+   "Vs": 4.319,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 9,
@@ -2102,7 +2223,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.901
+   "Vs": 3.901,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 10,
@@ -2119,7 +2241,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.803
+   "Vs": 2.803,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 11,
@@ -2136,7 +2259,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.042
+   "Vs": 2.042,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 12,
@@ -2153,7 +2277,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.139
+   "Vs": 2.139,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 13,
@@ -2170,7 +2295,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.478
+   "Vs": 1.478,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 14,
@@ -2187,7 +2313,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.564
+   "Vs": 1.564,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 15,
@@ -2204,7 +2331,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.327
+   "Vs": 3.327,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 16,
@@ -2221,7 +2349,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.635
+   "Vs": 3.635,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 17,
@@ -2238,7 +2367,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.275
+   "Vs": 3.275,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 18,
@@ -2255,7 +2385,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.001
+   "Vs": 3.001,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 19,
@@ -2272,7 +2403,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.22
+   "Vs": 2.22,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 20,
@@ -2289,7 +2421,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.603
+   "Vs": 1.603,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 21,
@@ -2306,7 +2439,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.649
+   "Vs": 1.649,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 22,
@@ -2323,7 +2457,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.899
+   "Vs": 1.899,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 23,
@@ -2340,7 +2475,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.64
+   "Vs": 1.64,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 24,
@@ -2357,7 +2493,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.967
+   "Vs": 1.967,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 25,
@@ -2374,7 +2511,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.42
+   "Vs": 3.42,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 26,
@@ -2391,7 +2529,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 27,
@@ -2408,7 +2547,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 28,
@@ -2425,7 +2565,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 29,
@@ -2442,7 +2583,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 30,
@@ -2459,7 +2601,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.745
+   "Vs": 2.745,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 31,
@@ -2476,7 +2619,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 5.575
+   "Vs": 5.575,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 32,
@@ -2493,7 +2637,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 33,
@@ -2510,7 +2655,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 34,
@@ -2527,7 +2673,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.683
+   "Vs": 3.683,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 35,
@@ -2544,7 +2691,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 6.143
+   "Vs": 6.143,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 36,
@@ -2561,7 +2709,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 37,
@@ -2578,7 +2727,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 38,
@@ -2595,7 +2745,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.187
+   "Vs": 4.187,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 39,
@@ -2612,7 +2763,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 6.219
+   "Vs": 6.219,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 40,
@@ -2629,7 +2781,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 41,
@@ -2646,7 +2799,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 42,
@@ -2663,7 +2817,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 43,
@@ -2680,7 +2835,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 44,
@@ -2697,7 +2853,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.728
+   "Vs": 4.728,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 45,
@@ -2714,7 +2871,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.557
+   "Vs": 1.557,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 46,
@@ -2731,7 +2889,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.623
+   "Vs": 1.623,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 47,
@@ -2748,7 +2907,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 5.502
+   "Vs": 5.502,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 48,
@@ -2765,7 +2925,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.672
+   "Vs": 3.672,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 49,
@@ -2782,7 +2943,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.923
+   "Vs": 2.923,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 50,
@@ -2799,7 +2961,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.28
+   "Vs": 4.28,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 51,
@@ -2816,7 +2979,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.28
+   "Vs": 4.28,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 52,
@@ -2833,7 +2997,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.478
+   "Vs": 3.478,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 53,
@@ -2850,7 +3015,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.765
+   "Vs": 1.765,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 54,
@@ -2867,7 +3033,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.826
+   "Vs": 2.826,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 55,
@@ -2884,7 +3051,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.307
+   "Vs": 2.307,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 56,
@@ -2901,7 +3069,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.925
+   "Vs": 1.925,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 57,
@@ -2918,7 +3087,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.963
+   "Vs": 3.963,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 58,
@@ -2935,7 +3105,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.028
+   "Vs": 3.028,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 59,
@@ -2952,7 +3123,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.327
+   "Vs": 4.327,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 60,
@@ -2969,7 +3141,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.961
+   "Vs": 4.961,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 61,
@@ -2986,7 +3159,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.356
+   "Vs": 4.356,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 62,
@@ -3003,7 +3177,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.39
+   "Vs": 2.39,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 63,
@@ -3020,7 +3195,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.791
+   "Vs": 2.791,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 64,
@@ -3037,7 +3213,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.627
+   "Vs": 2.627,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 65,
@@ -3054,7 +3231,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.647
+   "Vs": 2.647,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 66,
@@ -3071,7 +3249,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.961
+   "Vs": 2.961,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 67,
@@ -3088,7 +3267,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.164
+   "Vs": 4.164,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 68,
@@ -3105,7 +3285,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.603
+   "Vs": 3.603,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 69,
@@ -3122,7 +3303,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.151
+   "Vs": 4.151,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 70,
@@ -3139,7 +3321,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.818
+   "Vs": 3.818,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 71,
@@ -3156,7 +3339,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.169
+   "Vs": 3.169,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 72,
@@ -3173,7 +3357,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.551
+   "Vs": 3.551,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 73,
@@ -3190,7 +3375,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.262
+   "Vs": 3.262,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 74,
@@ -3207,7 +3393,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.392
+   "Vs": 2.392,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 75,
@@ -3224,7 +3411,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.392
+   "Vs": 2.392,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 76,
@@ -3241,7 +3429,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.118
+   "Vs": 2.118,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 77,
@@ -3258,7 +3447,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.658
+   "Vs": 1.658,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 78,
@@ -3275,7 +3465,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.102
+   "Vs": 2.102,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 1,
@@ -3292,7 +3483,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.613
+   "Vs": 2.613,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 2,
@@ -3309,7 +3501,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.536
+   "Vs": 1.536,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 3,
@@ -3326,7 +3519,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.273
+   "Vs": 2.273,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 4,
@@ -3343,7 +3537,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.342
+   "Vs": 1.342,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 5,
@@ -3360,7 +3555,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.982
+   "Vs": 2.982,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 6,
@@ -3377,7 +3573,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.002
+   "Vs": 3.002,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 7,
@@ -3394,7 +3591,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.79
+   "Vs": 3.79,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 8,
@@ -3411,7 +3609,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.268
+   "Vs": 4.268,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 9,
@@ -3428,7 +3627,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.551
+   "Vs": 3.551,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 10,
@@ -3445,7 +3645,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.842
+   "Vs": 2.842,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 11,
@@ -3462,7 +3663,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.003
+   "Vs": 2.003,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 12,
@@ -3479,7 +3681,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.533
+   "Vs": 1.533,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 13,
@@ -3496,7 +3699,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.557
+   "Vs": 1.557,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 14,
@@ -3513,7 +3717,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.521
+   "Vs": 1.521,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 15,
@@ -3530,7 +3735,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.477
+   "Vs": 4.477,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 16,
@@ -3547,7 +3753,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.668
+   "Vs": 4.668,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 17,
@@ -3564,7 +3771,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.848
+   "Vs": 3.848,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 18,
@@ -3581,7 +3789,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.673
+   "Vs": 3.673,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 19,
@@ -3598,7 +3807,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.177
+   "Vs": 3.177,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 20,
@@ -3615,7 +3825,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.23
+   "Vs": 2.23,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 21,
@@ -3632,7 +3843,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.726
+   "Vs": 1.726,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 22,
@@ -3649,7 +3861,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.414
+   "Vs": 1.414,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 23,
@@ -3666,7 +3879,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.436
+   "Vs": 1.436,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 24,
@@ -3683,7 +3897,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.291
+   "Vs": 1.291,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 25,
@@ -3700,7 +3915,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.501
+   "Vs": 3.501,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 26,
@@ -3717,7 +3933,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 27,
@@ -3734,7 +3951,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 28,
@@ -3751,7 +3969,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 29,
@@ -3768,7 +3987,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 30,
@@ -3785,7 +4005,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.75
+   "Vs": 1.75,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 31,
@@ -3802,7 +4023,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 5.91
+   "Vs": 5.91,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 32,
@@ -3819,7 +4041,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 33,
@@ -3836,7 +4059,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 34,
@@ -3853,7 +4077,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.381
+   "Vs": 2.381,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 35,
@@ -3870,7 +4095,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 6.366
+   "Vs": 6.366,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 36,
@@ -3887,7 +4113,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 37,
@@ -3904,7 +4131,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 38,
@@ -3921,7 +4149,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.247
+   "Vs": 3.247,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 39,
@@ -3938,7 +4167,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 6.353
+   "Vs": 6.353,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 40,
@@ -3955,7 +4185,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 41,
@@ -3972,7 +4203,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 42,
@@ -3989,7 +4221,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 43,
@@ -4006,7 +4239,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": null
+   "Vs": null,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 44,
@@ -4023,7 +4257,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.867
+   "Vs": 3.867,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 45,
@@ -4040,7 +4275,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.139
+   "Vs": 2.139,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 46,
@@ -4057,7 +4293,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 1.959
+   "Vs": 1.959,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 47,
@@ -4074,7 +4311,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 5.752
+   "Vs": 5.752,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 48,
@@ -4091,7 +4329,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.895
+   "Vs": 2.895,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 49,
@@ -4108,7 +4347,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.27
+   "Vs": 2.27,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 50,
@@ -4125,7 +4365,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.778
+   "Vs": 3.778,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 51,
@@ -4142,7 +4383,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 5.12
+   "Vs": 5.12,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 52,
@@ -4159,7 +4401,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.92
+   "Vs": 3.92,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 53,
@@ -4176,7 +4419,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.093
+   "Vs": 2.093,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 54,
@@ -4193,7 +4437,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.856
+   "Vs": 2.856,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 55,
@@ -4210,7 +4455,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.471
+   "Vs": 2.471,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 56,
@@ -4227,7 +4473,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.557
+   "Vs": 2.557,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 57,
@@ -4244,7 +4491,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.566
+   "Vs": 4.566,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 58,
@@ -4261,7 +4509,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.169
+   "Vs": 4.169,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 59,
@@ -4278,7 +4527,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 5.432
+   "Vs": 5.432,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 60,
@@ -4295,7 +4545,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 5.61
+   "Vs": 5.61,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 61,
@@ -4312,7 +4563,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.346
+   "Vs": 4.346,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 62,
@@ -4329,7 +4581,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.245
+   "Vs": 4.245,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 63,
@@ -4346,7 +4599,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.407
+   "Vs": 2.407,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 64,
@@ -4363,7 +4617,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.392
+   "Vs": 2.392,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 65,
@@ -4380,7 +4635,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.86
+   "Vs": 3.86,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 66,
@@ -4397,7 +4653,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.879
+   "Vs": 4.879,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 67,
@@ -4414,7 +4671,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 5.139
+   "Vs": 5.139,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 68,
@@ -4431,7 +4689,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 5.159
+   "Vs": 5.159,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 69,
@@ -4448,7 +4707,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 5.037
+   "Vs": 5.037,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 70,
@@ -4465,7 +4725,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.389
+   "Vs": 4.389,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 71,
@@ -4482,7 +4743,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 4.076
+   "Vs": 4.076,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 72,
@@ -4499,7 +4761,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.432
+   "Vs": 3.432,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 73,
@@ -4516,7 +4779,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.396
+   "Vs": 3.396,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 74,
@@ -4533,7 +4797,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.662
+   "Vs": 2.662,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 75,
@@ -4550,7 +4815,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.587
+   "Vs": 2.587,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 76,
@@ -4567,7 +4833,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.023
+   "Vs": 2.023,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 77,
@@ -4584,7 +4851,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 2.225
+   "Vs": 2.225,
+   "campaign": "wind_tunnel"
   },
   {
    "point_id": 78,
@@ -4601,7 +4869,8 @@
    "vv": null,
    "ww": null,
    "k": null,
-   "Vs": 3.542
+   "Vs": 3.542,
+   "campaign": "wind_tunnel"
   }
  ]
 }

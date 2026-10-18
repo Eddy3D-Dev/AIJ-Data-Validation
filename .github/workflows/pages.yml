@@ -24,7 +24,9 @@ jobs:
   # Every generated file (clean/, validation/figures/, docs/) is committed. This job regenerates all of them with
   # scripts/build_all.sh in the image pinned by digest in scripts/BUILD_IMAGE, with every package pinned by hash in
   # requirements.lock, and fails if the result differs from the commit by a single byte, if any document breaks its
-  # schema, an index hash or a link, or if served content changed without the release version moving.
+  # schema, an index hash or a link, or if served content changed without the release version moving. The build writes
+  # docs/api/<VERSION>/ (the frozen copy of this release) and docs/api/ (the latest alias); the copies of earlier
+  # releases are never rebuilt, and the last step compares each with its tag.
   verify:
     runs-on: ubuntu-latest
     steps:
@@ -41,8 +43,17 @@ jobs:
             echo "::error::A fresh build differs from the commit. Run scripts/build_all.sh in the pinned image and commit the result."
             git status --porcelain
             git diff --stat
+            # Keep the rebuilt bytes, so the owner can commit what CI produced (a figure drawn on another CPU can differ by a pixel).
+            git status --porcelain --untracked-files=all | cut -c4- | tar czf "$RUNNER_TEMP/rebuilt-files.tar.gz" --ignore-failed-read -T -
             exit 1
           fi
+      - name: Upload what the rebuild changed
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rebuilt-files
+          path: ${{ runner.temp }}/rebuilt-files.tar.gz
+          if-no-files-found: ignore
       - name: The version moves with the change
         run: python3 scripts/release.py check
 

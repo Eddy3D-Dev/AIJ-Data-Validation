@@ -19,8 +19,9 @@ are snapshotted to validation/results/caseE_openfoam12_realizableKE_pairs.csv an
 drawn from that snapshot, so they rebuild from this repository alone when C:/Eddy3DVal is absent.
 Frame: full-scale metres, +x east, +y north, the frame of the workbook, the 3dm and points.csv.
 
-Colours: slot 1 of the validated categorical palette (blue #2a78d6) is the OpenFOAM model, as in the
-other figures; the map's diverging scale is the palette's blue <-> red pair around its neutral gray.
+Colours (plotstyle.py): the OpenFOAM model is ultraplot's blue, as in every figure; the map's diverging scale
+is ultraplot's BuRd reversed, centred on zero (red where the model is slower than the tunnel, blue where it is
+faster).
 """
 from __future__ import annotations
 
@@ -35,8 +36,6 @@ import ultraplot as uplt
 
 import plotstyle as style
 from matplotlib.collections import PolyCollection
-from matplotlib.colors import LinearSegmentedColormap
-from matplotlib.patches import FancyArrowPatch
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
@@ -44,9 +43,6 @@ VAL = r"C:/Eddy3DVal"
 RESULTS = os.path.join(HERE, "results")
 PAIRS = os.path.join(RESULTS, "caseE_openfoam12_realizableKE_pairs.csv")
 SCORES = os.path.join(RESULTS, "caseE_openfoam12_realizableKE.json")
-
-BUILDING = "#d9d8d4"
-NEW_BUILDING = "#a9a8a3"
 
 DIRECTION = "SW"
 STATES = [("bc", "before construction"), ("ac", "after construction")]
@@ -150,7 +146,6 @@ style.finish(fig, "AIJ UWE Case E — Eddy3D (OpenFOAM 12, realizable k-ε, tabu
 style.save(fig, "case-e-openfoam-agreement.png")
 
 # ----------------------------------------------------------------------------- figure 2
-cmap = LinearSegmentedColormap.from_list("aij_diverging", [style.SLOW, style.NEUTRAL, style.FAST])
 fig2, axs2 = uplt.subplots(nrows=1, ncols=2, refwidth=3.6, refaspect=1, share=True)
 xs = [p["x"] for p in pairs["bc"]]; ys = [p["y"] for p in pairs["bc"]]
 pad = 30.0
@@ -163,22 +158,19 @@ for i, (state, title) in enumerate(STATES):
     tris = bc_tris if state == "bc" else ac_tris
     old = [t[:3] for t in tris if state == "bc" or tuple(sorted((round(a, 3), round(b, 3)) for a, b in t[:3])) in bc_keys]
     new = [t[:3] for t in tris if state == "ac" and tuple(sorted((round(a, 3), round(b, 3)) for a, b in t[:3])) not in bc_keys]
-    ax.add_collection(PolyCollection(old, facecolor=BUILDING, edgecolor="none", zorder=1))
+    ax.add_collection(PolyCollection(old, facecolor=style.FOOTPRINT, edgecolor="none", zorder=1))
     if new:
-        ax.add_collection(PolyCollection(new, facecolor=NEW_BUILDING, edgecolor="none", zorder=1))
+        ax.add_collection(PolyCollection(new, facecolor=style.FOOTPRINT_FOCUS, edgecolor="none", zorder=1))
     pts = pairs[state]
-    ratio = np.log2(np.array([p["scalar_ratio"] / p["measured_ratio"] for p in pts]))
-    sc = ax.scatter([p["x"] for p in pts], [p["y"] for p in pts], c=np.clip(ratio, -1, 1), cmap=cmap,
-                    vmin=-1, vmax=1, s=34, edgecolor=style.SURFACE, linewidth=0.5, zorder=3)
+    sc = style.bias_scatter(ax, [p["x"] for p in pts], [p["y"] for p in pts], [p["scalar_ratio"] for p in pts],
+                            [p["measured_ratio"] for p in pts], s=34)
     # Wind FROM the south-west, blowing toward the north-east.
     d = np.array([math.sin(math.radians(45)), math.cos(math.radians(45))])
     tail = np.array([xlim[0] + 0.12 * (xlim[1] - xlim[0]), ylim[0] + 0.12 * (ylim[1] - ylim[0])])
-    ax.add_patch(FancyArrowPatch(tuple(tail), tuple(tail + 30 * d), arrowstyle="-|>", mutation_scale=11,
-                                 color=style.INK, lw=1.4, zorder=4))
+    style.arrow(ax, tail, tail + 30 * d)
     ax.format(xlim=xlim, ylim=ylim, aspect="equal", title=f"{title.capitalize()}, wind from {DIRECTION}")
 style.outer_ticks(axs2, 1, 2)
-fig2.colorbar(sc, loc="b", ticks=[-1, -0.5, 0, 0.5, 1], length=0.7,
-              label="log$_2$(Eddy3D √(|U|²+2k) / tunnel) [–]:  −1 = half the tunnel's speed,  0 = equal,  +1 = twice")
+style.bias_colorbar(fig2, sc, "Eddy3D √(|U|²+2k) / tunnel")
 style.finish(fig2, "AIJ UWE Case E — where the model is slow (red) or fast (blue), z = 2 m",
              xlabel="x, east [m]", ylabel="y, north [m]")
 style.save(fig2, "case-e-openfoam-bias-map.png")

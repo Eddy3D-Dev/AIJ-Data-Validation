@@ -8,7 +8,7 @@ Sources, in order of preference:
 1. `clean/` — the canonical cleaned release (Parquet + CSV + manifest.json, built by `clean/build.py`).
    When `clean/manifest.json` names a CSV for a case, the points table is read from it and the
    output records `points_source` as that path.
-2. The raw per-case folders in this repository (`case-a/RS-caseA.csv`, …, the BIFF8
+2. The raw per-case folders in this repository (`raw/cases/case-a/RS-caseA.csv`, …, the BIFF8
    workbooks for D and E). This is the fallback that makes the build work before `clean/` is
    complete, and it applies the same cleaning rules the README documents.
 
@@ -24,7 +24,25 @@ Canonical point columns (every case is a subset of these):
     uu, vv, ww           float   m^2/s^2, velocity VARIANCES (Case A's rms values are squared)
     k                    float   m^2/s^2, turbulent kinetic energy
     Vs                   float   m/s, mean scalar (omnidirectional, thermistor) wind speed
-    velocity_ratio       float   dimensionless, Vs / U_ref (Case E; U_ref = U(15.9 m) = 3.935 m/s)
+    velocity_ratio       float   dimensionless, Vs / U_ref (Case E: U_ref = U(15.9 m) = 3.935 m/s; F, G: see the case)
+    campaign             str     -: 'wind_tunnel' (model scale) or 'field' (a full-scale observation: Cases F, G, M)
+    run                  str     -: replicate label within a campaign where the dataset publishes individual runs (Case M); empty elsewhere
+    uv                   float   m^2/s^2: Reynolds shear stress <u'v'> as published
+    uw                   float   m^2/s^2: Reynolds shear stress <u'w'> as published
+    vw                   float   m^2/s^2: Reynolds shear stress <v'w'> as published
+    C                    float   ppm: mean tracer-gas concentration as published (volume fraction x 1e6 of the released gas diluted in air)
+    c_rms                float   ppm: rms of the concentration fluctuation
+    concentration_ratio  float   -: C / c0, c0 = q / (U_ref L_ref^2) as the benchmark defines it for the case (manifest cases.<id>.normalisation)
+    T                    float   degC: mean air temperature as published (Cases J, L)
+    T_rms                float   K: rms of the temperature fluctuation
+    uc                   float   ppm m/s: turbulent concentration flux <u'c'>
+    vc                   float   ppm m/s: turbulent concentration flux <v'c'>
+    wc                   float   ppm m/s: turbulent concentration flux <w'c'>
+    uT                   float   K m/s: turbulent heat flux <u'theta'>
+    vT                   float   K m/s: turbulent heat flux <v'theta'>
+    wT                   float   K m/s: turbulent heat flux <w'theta'>
+    velocity_ratio_sd    float   -: standard deviation of velocity_ratio over the observations behind a field value (Case F)
+    k_ratio              float   -: k / U_ref^2 where the dataset publishes only normalised values (Case G; U_ref = U at the tree height)
 
 Missing / unmeasured values are None (null in JSON, empty in CSV).
 """
@@ -36,6 +54,7 @@ import json
 import math
 import os
 import struct
+import sys
 from collections import defaultdict
 from typing import Iterable
 
@@ -43,7 +62,14 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, os.pardir))
 
 POINT_COLUMNS = ["point_id", "config", "instrument", "wind_direction", "wind_direction_deg",
-                 "x", "y", "z", "U", "V", "W", "uu", "vv", "ww", "k", "Vs", "velocity_ratio"]
+                 "x", "y", "z", "U", "V", "W", "uu", "vv", "ww", "k", "Vs", "velocity_ratio",
+                 "campaign", "run", "uv", "uw", "vw", "C", "c_rms", "concentration_ratio", "T", "T_rms", "uc", "vc", "wc", "uT", "vT", "wT", "velocity_ratio_sd", "k_ratio"]
+
+TEXT_COLUMNS = ("config", "instrument", "wind_direction", "campaign", "run")   # the other columns are numbers (point_id an integer)
+
+# Cases whose frame is in full-scale metres (Case E's district, the field and full-scale observations of F, G and M); the
+# others are in model-scale metres. clean/build.py has the same set for geometry.json.
+FULL_SCALE = {"E", "F", "G", "M"}
 
 COMPASS = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
            "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
@@ -102,10 +128,10 @@ CASES = {
     "A": {
         "id": "A", "slug": "case-a", "title": "Case A — 1:1:2 building",
         "short": "Isolated 1:1:2 building, velocity field (split-fibre hot wire).",
-        "folder": "case-a",
-        "reference_file": "case-a/RS-caseA.csv",
-        "approach_flow_file": "case-a/AF_caseA.csv",
-        "readme": "case-a/readme_caseA.md",
+        "folder": "raw/cases/case-a",
+        "reference_file": "raw/cases/case-a/RS-caseA.csv",
+        "approach_flow_file": "raw/cases/case-a/AF_caseA.csv",
+        "readme": "raw/cases/case-a/readme_caseA.md",
         "render": "validation/figures/geometry/case-a.png",  # the default configuration; see render_file
         "configuration": {
             "building": "1:1:2 (width : depth : height) prism",
@@ -148,10 +174,10 @@ CASES = {
     "B": {
         "id": "B", "slug": "case-b", "title": "Case B — 1:4:4 slab",
         "short": "Isolated 1:4:4 slab, velocity field (split-fibre hot wire).",
-        "folder": "case-b",
-        "reference_file": "case-b/RS_caseB.csv",
-        "approach_flow_file": "case-b/AF_caseB.csv",
-        "readme": "case-b/readme_caseB.md",
+        "folder": "raw/cases/case-b",
+        "reference_file": "raw/cases/case-b/RS_caseB.csv",
+        "approach_flow_file": "raw/cases/case-b/AF_caseB.csv",
+        "readme": "raw/cases/case-b/readme_caseB.md",
         "render": "validation/figures/geometry/case-b.png",  # the default configuration; see render_file
         "configuration": {
             "building": "1:4:4 (depth : width : height) slab",
@@ -194,10 +220,10 @@ CASES = {
     "C": {
         "id": "C", "slug": "case-c", "title": "Case C — 3 × 3 block array",
         "short": "3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestrian-height scalar speed (thermistor), 3 wind directions.",
-        "folder": "case-c",
-        "reference_file": "case-c/RS_caseC.csv",
-        "approach_flow_file": "case-c/AF_caseC.csv",
-        "readme": "case-c/readme_caseC.md",
+        "folder": "raw/cases/case-c",
+        "reference_file": "raw/cases/case-c/RS_caseC.csv",
+        "approach_flow_file": "raw/cases/case-c/AF_caseC.csv",
+        "readme": "raw/cases/case-c/readme_caseC.md",
         "render": "validation/figures/geometry/case-c-2d.png",  # the default configuration; see render_file
         "configuration": {
             "array": "3 x 3 cubes, D = 0.20 m, block centres at x, y in {-0.4, 0, +0.4} m (pitch 0.40 m = 2D, street width D)",
@@ -255,9 +281,9 @@ CASES = {
     "D": {
         "id": "D", "slug": "case-d", "title": "Case D — high-rise among city blocks",
         "short": "1:1:4 tower in a regular array of 82 low blocks, pedestrian-height scalar speed (thermistor, 3 wind directions) plus a 33-point split-fibre velocity field at WD = 0.",
-        "folder": "case-d",
-        "reference_file": "case-d/LF_caseD.xls",
-        "approach_flow_file": "case-d/LF_caseD.xls [sheet Inflow]",
+        "folder": "raw/cases/case-d",
+        "reference_file": "raw/cases/case-d/LF_caseD.xls",
+        "approach_flow_file": "raw/cases/case-d/LF_caseD.xls [sheet Inflow]",
         "readme": None,
         "render": "validation/figures/geometry/case-d.png",  # the default configuration; see render_file
         "configuration": {
@@ -314,10 +340,10 @@ CASES = {
     "E": {
         "id": "E", "slug": "case-e", "title": "Case E — Niigata district",
         "short": "Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 m mid-rises; pedestrian-height velocity ratio (thermistor), 16 wind directions.",
-        "folder": "case-e",
-        "reference_file": "case-e/LF_caseE.xls",
-        "approach_flow_file": "case-e/LF_caseE.xls [sheet Inflow]",
-        "readme": "case-e/readme_caseE.md",
+        "folder": "raw/cases/case-e",
+        "reference_file": "raw/cases/case-e/LF_caseE.xls",
+        "approach_flow_file": "raw/cases/case-e/LF_caseE.xls [sheet Inflow]",
+        "readme": "raw/cases/case-e/readme_caseE.md",
         "render": "validation/figures/geometry/case-e-after.png",  # the default configuration; see render_file
         "configuration": {
             "district": "Niigata City urban area near the Shinano River; dense low-rise stock (median top 6 m, max 30 m)",
@@ -372,6 +398,16 @@ CASES = {
 
 CASE_IDS = ["A", "B", "C", "D", "E"]
 
+# Cases F-M: one module each (scripts/aij_case_<x>.py) with CASE, DEFAULT_CONFIGURATION, RENDER_CAPTIONS,
+# geometry(D, case) and approach_flow(D, case). The point tables come from clean/ (load_points).
+import aij_case_f, aij_case_g, aij_case_h, aij_case_i, aij_case_j, aij_case_k, aij_case_l, aij_case_m  # noqa: E402
+_EXTRA = {"F": aij_case_f, "G": aij_case_g, "H": aij_case_h, "I": aij_case_i, "J": aij_case_j, "K": aij_case_k, "L": aij_case_l, "M": aij_case_m}
+CASE_IDS.extend(_EXTRA)
+CASES.update({k: m.CASE for k, m in _EXTRA.items()})
+DEFAULT_CONFIGURATION.update({k: m.DEFAULT_CONFIGURATION for k, m in _EXTRA.items()})
+for _m in _EXTRA.values():
+    RENDER_CAPTIONS.update(_m.RENDER_CAPTIONS)
+
 
 # ----------------------------------------------------------------------------- helpers
 
@@ -404,8 +440,10 @@ def _read_csv(path):
 def _row(**kw):
     r = {c: None for c in POINT_COLUMNS}
     r["config"] = "default"
+    r["campaign"] = "wind_tunnel"
     r["instrument"] = ""
     r["wind_direction"] = ""
+    r["run"] = ""
     r["wind_direction_deg"] = 0.0
     r.update(kw)
     return r
@@ -571,7 +609,9 @@ def _points_clean(case):
         with io.open(path, encoding="utf-8-sig", newline="") as f:
             rd = csv.DictReader(f)
             names = {n: n.split("(")[0].split("[")[0].strip().lower() for n in rd.fieldnames or []}
-            mapping = {}
+            # The cleaned tables use the canonical names: match them exactly first (the case matters: C is a concentration, T a
+            # temperature, and neither is c or t). The synonyms below are for a file that does not.
+            mapping = {c: c for c in POINT_COLUMNS if c in names}
             for canon, syns in _SYNONYMS.items():
                 for raw, low in names.items():
                     if low in syns and canon not in mapping:
@@ -583,7 +623,7 @@ def _points_clean(case):
                 row = _row()
                 for canon, raw in mapping.items():
                     v = r.get(raw)
-                    if canon in ("config", "instrument", "wind_direction"):
+                    if canon in TEXT_COLUMNS:
                         row[canon] = (v or "").strip() or row[canon]
                     elif canon == "point_id":
                         fv = _f(v)
@@ -610,6 +650,8 @@ def load_points(case):
 
 def load_approach_flow(case):
     """Rows of {z, U, k, ...} in metres and m/s, straight from each case's own profile."""
+    if case in _EXTRA:
+        return _EXTRA[case].approach_flow(sys.modules[__name__], case)
     meta = CASES[case]
     if case in ("A", "B", "C"):
         header, rows = _read_csv(os.path.join(REPO, meta["approach_flow_file"]))
@@ -724,7 +766,7 @@ def shells_from_tris(tris, tol=1e-9):
 
 def boxes_d():
     """The 83 shells of BD_caseD.stl, each reduced to its bounding box (they are all boxes)."""
-    tris = read_ascii_stl(os.path.join(REPO, "case-d", "BD_caseD.stl"))
+    tris = read_ascii_stl(os.path.join(REPO, "raw", "cases", "case-d", "BD_caseD.stl"))
     boxes = []
     for shell in shells_from_tris(tris):
         pts = [p for t in shell for p in t]
@@ -743,7 +785,7 @@ def boxes_d():
 def mesh_e(state):
     """Triangles of the Niigata district from the 3dm: 'bc' = buildings, 'ac' = + new construction."""
     import rhino3dm
-    f = rhino3dm.File3dm.Read(os.path.join(REPO, "case-e", "case-e.3dm"))
+    f = rhino3dm.File3dm.Read(os.path.join(REPO, "raw", "cases", "case-e", "case-e.3dm"))
     layers = {l.Index: l.Name for l in f.Layers}
     wanted = {"buildings"} if state == "bc" else {"buildings", "buildings_new_construction"}
     tris = []
@@ -842,6 +884,8 @@ def orient_outward(tris, tol=1e-4):
 
 def case_geometry(case):
     """[(name, tris, boxes_or_None, note)] for a case — one entry per configuration."""
+    if case in _EXTRA:
+        return _EXTRA[case].geometry(sys.modules[__name__], case)
     if case in BOX_GEOMETRY:
         out = []
         for cfg, boxes in BOX_GEOMETRY[case].items():

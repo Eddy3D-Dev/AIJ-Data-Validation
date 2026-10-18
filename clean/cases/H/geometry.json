@@ -1,0 +1,54 @@
+{
+ "case_id": "H",
+ "units": "metres (model scale)",
+ "frame": {
+  "origin": "the centre of the building's leeward face on the ground plane (MP-y_caseH.png, MP-z_caseH.png)",
+  "x": "+x streamwise (the wind blows toward +x): the building occupies x in [-0.1, 0]; points at x = -0.2 .. 0.4 m",
+  "y": "+y lateral; the building spans y in [-0.05, 0.05]; the z = 0.0625H plane covers y in [-0.2, 0.2], the others y in [0, 0.2] and the y = 0 line",
+  "z": "+z up; roof at z = 0.2 m; points at z = 0.01 .. 0.3 m",
+  "source": "the 4 mm floor hole at (0.05, 0, 0), i.e. 0.25 H behind the leeward face",
+  "length_scale": "model metres (the source states no model:full scale ratio; Eddy3D solves it at 1:100)"
+ },
+ "files": [
+  {
+   "configuration": "default",
+   "file": "cases/H/geometry.stl",
+   "format": "ASCII STL, LF, metres, same frame as points.csv",
+   "source": "generated from the readme's stated dimensions 0.10 x 0.10 x 0.20 m (width, depth, height); x in [-0.1, 0], y in [-0.05, 0.05], leeward face at x = 0 (MP-y_caseH.png, MP-z_caseH.png). The floor source (4 mm hole at x = 0.05 m, y = 0) is not part of the body",
+   "stats": {
+    "triangles": 12,
+    "bbox_min": [
+     -0.1,
+     -0.05,
+     0.0
+    ],
+    "bbox_max": [
+     0.0,
+     0.05,
+     0.2
+    ],
+    "signed_volume": 0.002,
+    "edges": 18,
+    "edges_shared_by_two_faces": 18,
+    "edges_boundary": 0,
+    "edges_non_manifold": 0,
+    "watertight": true
+   },
+   "boxes": [
+    {
+     "min": [
+      -0.1,
+      -0.05,
+      0.0
+     ],
+     "max": [
+      0.0,
+      0.05,
+      0.2
+     ]
+    }
+   ],
+   "box_count": 1
+  }
+ ]
+}

@@ -1,7 +1,7 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/cases.schema.json",
- "schema_version": "2.2.0",
- "data_version": "5af8c81571e452c1925b3efe58c698908066f64886eba5efd9b2f0348ecdc019",
+ "schema_version": "2.3.0",
+ "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
  "license": "CC-BY-4.0",
  "cases": [
   {
@@ -63,7 +63,7 @@
    "links": {
     "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A.json",
     "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/points.csv?v=eb21b9a8ffd3",
+    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/points.csv?v=a46201996b22",
     "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/geometry.json",
     "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/geometry.stl?v=89acdfbbff84",
     "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/validation.json",
@@ -130,7 +130,7 @@
    "links": {
     "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B.json",
     "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/points.csv?v=e8214b704821",
+    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/points.csv?v=dec97c21217a",
     "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/geometry.json",
     "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/geometry.stl?v=e6de70eeb17d",
     "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/validation.json",
@@ -195,7 +195,7 @@
    "links": {
     "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C.json",
     "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/points.csv?v=8cfc37fcec93",
+    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/points.csv?v=7448f0ceae37",
     "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/geometry.json",
     "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/geometry.stl?v=b8c31c57c453",
     "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/validation.json",
@@ -276,7 +276,7 @@
    "links": {
     "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D.json",
     "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/points.csv?v=3b1b348a109a",
+    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/points.csv?v=596246341e73",
     "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/geometry.json",
     "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/geometry.stl?v=531895531271",
     "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/validation.json",
@@ -374,12 +374,656 @@
    "links": {
     "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E.json",
     "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/points.csv?v=0297eeade3c1",
+    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/points.csv?v=e6e89432e706",
     "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/geometry.json",
     "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/geometry.stl?v=f59d27738a49",
     "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/validation.json",
     "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-e/",
     "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-e-after.png"
+   }
+  },
+  {
+   "id": "F",
+   "slug": "case-f",
+   "title": "Case F — Shinjuku district",
+   "summary": "Shinjuku sub-centre, Tokyo, November 1978: 1:800 tunnel (thermistor, 5 / 9 / 20 m) and a year of field cup anemometers; velocity ratio to the 500 m wind, 12 tunnel and 16 field directions.",
+   "configuration": {
+    "district": "Shinjuku sub-centre during construction of the high-rise group, building configuration of November 1978",
+    "scale": "1:800",
+    "model": "terrain and buildings in a disc of radius 725 m (BD_caseF.stl; the readme and the data paper say 800 m / 1600 m diameter)",
+    "points": 13,
+    "point_numbers": "1-3, 5-11, 13-15 (4 and 12 absent; points 16 and later belong to later construction stages and are not in the dataset)",
+    "wind_directions": [
+     "N",
+     "NNE",
+     "NE",
+     "ENE",
+     "SE",
+     "SSE",
+     "S",
+     "SSW",
+     "SW",
+     "WNW",
+     "NW",
+     "NNW"
+    ],
+    "wind_directions_field": [
+     "N",
+     "NNE",
+     "NE",
+     "ENE",
+     "E",
+     "ESE",
+     "SE",
+     "SSE",
+     "S",
+     "SSW",
+     "SW",
+     "WSW",
+     "W",
+     "WNW",
+     "NW",
+     "NNW"
+    ],
+    "measurement_planes_above_ground_m": [
+     5,
+     9,
+     20
+    ],
+    "measurement_planes_z_m": [
+     15,
+     19,
+     30
+    ],
+    "ground_offset_m": 10,
+    "normalisation": "velocity ratio = mean speed / the approaching mean speed at the boundary-layer height 500 m (full scale); the field values were converted to it with the tunnel (readme). U(500 m) is 10 m/s in the data paper and 10.65 m/s implied by the profile",
+    "instrument": "tunnel: thermistor anemometer, 30 s averaging; field: three-cup anemometer with wind vane, 10-minute means above 5 m/s at the reference roof, December 1977 - November 1978",
+    "tunnel": "Shimizu Corporation wind tunnel; cross-section 1.55 m wide, 2.2 m high; power-law inflow, exponent 1/4",
+    "reference_roofs": {
+     "SMB": "Shinjuku-Mitsui Building, roof G.L.+210 m, anemometer G.L.+237 m, for NW-NE",
+     "KDD": "KDD Building, roof G.L.+165 m, anemometer G.L.+187 m, for the other directions"
+    }
+   },
+   "quantities": [
+    "velocity_ratio",
+    "velocity_ratio_sd"
+   ],
+   "units": {
+    "length": "m (FULL scale)",
+    "velocity_ratio": "dimensionless",
+    "velocity_ratio_sd": "dimensionless"
+   },
+   "frame": {
+    "origin": "centre of the reproduced district, tunnel floor plane",
+    "x": "+x EAST (full-scale metres)",
+    "y": "+y NORTH (compass rose in MP_caseF.png)",
+    "z": "+z up from the TUNNEL FLOOR; the readme's rule is ground = z - 10 m (the STL's terrain under the points is at z = 5 m)"
+   },
+   "counts": {
+    "rows": 472,
+    "distinct_points": 13,
+    "configurations": 40
+   },
+   "engines": {
+    "openfoam12-realizableKE": "scored",
+    "openlb": "pending",
+    "fluidx3d": "pending",
+    "ml-surrogate": "pending"
+   },
+   "doi": "10.5281/zenodo.15589621",
+   "links": {
+    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F.json",
+    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/points.json",
+    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/points.csv?v=09b109e58dd3",
+    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/geometry.json",
+    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/geometry.stl?v=18bcb1a0bcb1",
+    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/validation.json",
+    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-f/",
+    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-f.png"
+   }
+  },
+  {
+   "id": "G",
+   "slug": "case-g",
+   "title": "Case G — flow behind a tree belt",
+   "summary": "Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m × 2 m × 7 m with a 1.2 m gap below): normalised mean speed and k at 28 points on the centre section (sonic anemometers).",
+   "configuration": {
+    "belt": "Tsuiji-matsu (Japanese black pine), trimmed to a rectangle; 74 m long (y), 2 m deep (x), 7 m tall, 1.2 m bottom gap; shading rate 81 % after pruning (data paper section 3.7)",
+    "H_m": 7.0,
+    "depth_m": 2.0,
+    "width_m": 74.0,
+    "gap_m": 1.2,
+    "campaign": "field (full scale)",
+    "location": "Taisha-machi, Hikawa-gun, Shimane, Japan; west end of an elementary-school playground",
+    "wind_directions_deg": [
+     0
+    ],
+    "measurement_lines": "0.25 H, 0.5 H, 1 H, 2 H, 3 H, 4 H, 5 H behind the belt = x 1.75, 3.5, 7, 14, 21, 28, 35 m (H = 7 m)",
+    "measurement_heights_m": [
+     1.5,
+     3.0,
+     4.5,
+     6.0
+    ],
+    "points": 28,
+    "instrument": "3-D ultrasonic anemometers (KAIJO DA-600 with TR-90Tx) at four heights on a movable tower, 5 Hz, 10 min or more per line (26 Dec 2000); approach flow 120 min (28 Dec 2000) at 1.5, 3, 6, 9 m",
+    "normalisation": "velocity_ratio = U/UH and k_ratio = k/UH^2, UH = the mean wind speed at 7 m during each measurement period (interpolated with the approach flow's power law, index 0.22); nothing is published in m/s",
+    "approach_flow_normalisation": "AF_caseG.csv is U/Ub and k/Ub^2 with Ub = U at 9 m; divide by UH/Ub = 0.946 (power law 0.22) for the table's normalisation",
+    "scale_note": "full scale: a field observation, there is no model"
+   },
+   "quantities": [
+    "velocity_ratio",
+    "k_ratio"
+   ],
+   "units": {
+    "length": "m (full scale)",
+    "velocity_ratio": "dimensionless, U/UH",
+    "k_ratio": "dimensionless, k/UH^2"
+   },
+   "frame": {
+    "origin": "the leeward face of the tree belt at ground level, on the vertical section through the belt's centre",
+    "x": "+x downwind: the belt occupies x in [-2, 0] m, the measurement lines lie behind it at x = 1.75 ... 35 m",
+    "y": "+y along the belt (y in [-37, 37] m); every point is on y = 0",
+    "z": "+z up; the belt spans z in [1.2, 7] m; points at z = 1.5, 3, 4.5, 6 m"
+   },
+   "counts": {
+    "rows": 28,
+    "distinct_points": 28,
+    "configurations": 1
+   },
+   "engines": {
+    "openfoam12-realizableKE": "scored",
+    "openlb": "pending",
+    "fluidx3d": "pending",
+    "ml-surrogate": "pending"
+   },
+   "doi": "10.5281/zenodo.15589666",
+   "links": {
+    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G.json",
+    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/points.json",
+    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/points.csv?v=914883bf7fec",
+    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/geometry.json",
+    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/geometry.stl?v=09d23c794155",
+    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/validation.json",
+    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-g/",
+    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-g.png"
+   }
+  },
+  {
+   "id": "H",
+   "slug": "case-h",
+   "title": "Case H — 1:1:2 building with a floor point source",
+   "summary": "Isolated 1:1:2 building with an ethylene point source on the floor behind it: velocity (split-fibre hot wire) and concentration (hydrocarbon analyser) at 876 points.",
+   "configuration": {
+    "building": "1:1:2 (width : depth : height) prism, 0.10 × 0.10 × 0.20 m",
+    "b_m": 0.1,
+    "H_m": 0.2,
+    "Re_H": 43000,
+    "U_H_m_s": 3.226,
+    "U_H_note": "the workbook's uH; the readme and the data paper state 3.23 m/s; the workbook's free-stream reference U0 is 5.279 m/s",
+    "wind_directions_deg": [
+     0
+    ],
+    "source": "4 mm hole in the floor 0.25 H = 0.05 m behind the leeward face at (0.05, 0, 0); ethylene (C2H4), 100 %, 350 cc/min = 5.83e-6 m3/s",
+    "reference_concentration": "c0 = cgas q / (UH H^2) = 45.18 ppm (45.2 in the paper); concentration_ratio = C / c0",
+    "measurement_planes": [
+     "vertical centre plane y/H = 0",
+     "horizontal z/H = 1/16 (y in [-0.2, 0.2])",
+     "horizontal z/H = 1/4 and 1/2 (y in [0, 0.2])"
+    ],
+    "points": 876,
+    "instrument": "velocity: constant-temperature anemometer (DANTEC 90C10) with a split-fibre probe (55R55, 55R56, 55R57), 1000 Hz, 120 s; concentration: high-speed total hydrocarbon analyser, 1000 Hz, 120 s",
+    "tunnel": "Eiffel-type boundary-layer wind tunnel, Tokyo Polytechnic University, Atsugi (1.0 m high, 1.2 m wide)",
+    "scale_note": "model scale; the source states no model:full-scale ratio; Eddy3D solves it at 1:100"
+   },
+   "quantities": [
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "C",
+    "c_rms",
+    "concentration_ratio"
+   ],
+   "units": {
+    "length": "m (model scale)",
+    "velocity": "m/s",
+    "variance": "m^2/s^2",
+    "k": "m^2/s^2",
+    "C": "ppm",
+    "concentration_ratio": "dimensionless, C/c0"
+   },
+   "frame": {
+    "origin": "the centre of the building's leeward face on the ground plane",
+    "x": "+x streamwise (the wind blows toward +x); the building spans x in [-0.1, 0]; points at x = -0.2 ... 0.4 m",
+    "y": "+y lateral; the building spans y in [-0.05, 0.05]; the z = 1/16 H plane covers y in [-0.2, 0.2]",
+    "z": "+z up; roof at z = 0.2 m; points at z = 0.01 ... 0.3 m"
+   },
+   "counts": {
+    "rows": 1652,
+    "distinct_points": 876,
+    "configurations": 2
+   },
+   "engines": {
+    "openfoam12-realizableKE": "scored",
+    "openlb": "pending",
+    "fluidx3d": "pending",
+    "ml-surrogate": "pending"
+   },
+   "doi": "10.5281/zenodo.15429871",
+   "links": {
+    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H.json",
+    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/points.json",
+    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/points.csv?v=ef5fafc61b8e",
+    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/geometry.json",
+    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/geometry.stl?v=4836687efff9",
+    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/validation.json",
+    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-h/",
+    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-h.png"
+   }
+  },
+  {
+   "id": "I",
+   "slug": "case-i",
+   "title": "Case I — cube with a roof point source",
+   "summary": "Isolated cube with an ethane point source at the centre of its roof: velocity (laser Doppler, 91 points) and concentration (hydrocarbon analyser, 539 points).",
+   "configuration": {
+    "building": "cube, 0.10 m on a side (= H)",
+    "H_m": 0.1,
+    "Re_H": 11000,
+    "U_H_m_s": 1.7,
+    "U_H_note": "the readme and the velocity sheet; the approach flow at z = H is 1.6969 m/s and the workbook's inflow sheet divides by 1.697",
+    "wind_directions_deg": [
+     0
+    ],
+    "source": "6 mm circular outlet at the centre of the roof (0, 0, 0.1); 10 % ethane in the mixture, 400 cc/min (= 6.67e-6 m3/s of mixture, 6.67e-7 m3/s of ethane); release velocity 0.236 m/s, M = Ve/UH = 0.14",
+    "reference_concentration": "c0 = q / (UH H^2) = 39.22 ppm (39.2 in the paper), q the ETHANE flow; concentration_ratio = C / c0",
+    "measurement_planes": [
+     "velocity: y/H = 0 and z/H = 0.5",
+     "concentration: y/H = 0 and z/H = 0 (the ground)"
+    ],
+    "points": {
+     "velocity": 91,
+     "concentration": 539
+    },
+    "instrument": "velocity: laser Doppler anemometer (Dantec BSA F60), 200 Hz, 240 s; concentration: hydrocarbon analyser (Kimoto HADA-01), 1 Hz, 120 s",
+    "tunnel": "AIST wind tunnel, 20 m long, 3.0 × 2.0 m cross-section; approach flow described as a 1/7 power law (data paper section 3.9)",
+    "scale_note": "model scale; the source states no model:full-scale ratio; Eddy3D solves it at 1:60 (a 6 m cube)"
+   },
+   "quantities": [
+    "U",
+    "V",
+    "W",
+    "k",
+    "C",
+    "concentration_ratio"
+   ],
+   "units": {
+    "length": "m (model scale)",
+    "velocity": "m/s",
+    "k": "m^2/s^2",
+    "C": "ppm",
+    "concentration_ratio": "dimensionless, C/c0"
+   },
+   "frame": {
+    "origin": "the centre of the cube on the ground plane",
+    "x": "+x streamwise (the wind blows toward +x); the cube spans x in [-0.05, 0.05]; wind points x = -0.15 ... 0.25 m, concentration points x = 0.065 ... 2.7 m",
+    "y": "+y lateral; the cube spans y in [-0.05, 0.05]; concentration points reach |y| = 0.44 m on the ground",
+    "z": "+z up; roof at z = 0.1 m; the outlet at (0, 0, 0.1)"
+   },
+   "counts": {
+    "rows": 630,
+    "distinct_points": 630,
+    "configurations": 2
+   },
+   "engines": {
+    "openfoam12-realizableKE": "scored",
+    "openfoam12-kEpsilon": "scored",
+    "openfoam12-kOmegaSST": "scored",
+    "openlb": "pending",
+    "fluidx3d": "pending",
+    "ml-surrogate": "pending"
+   },
+   "doi": "10.5281/zenodo.15430018",
+   "links": {
+    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I.json",
+    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/points.json",
+    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/points.csv?v=2864fee9eb19",
+    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/geometry.json",
+    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/geometry.stl?v=ff61cbb22798",
+    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/validation.json",
+    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-i/",
+    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-i.png"
+   }
+  },
+  {
+   "id": "J",
+   "slug": "case-j",
+   "title": "Case J — 1:1:2 building, non-isothermal",
+   "summary": "Isolated 1:1:2 building with a floor tracer source in an unstably stratified boundary layer: velocity, temperature, tracer concentration and their turbulent fluxes at 444 points on three planes.",
+   "configuration": {
+    "building": "1:1:2 (width : depth : height) prism, b = 0.08 m, H = 2b = 0.16 m",
+    "b_m": 0.08,
+    "H_m": 0.16,
+    "Re_H": 16000,
+    "U_H_m_s": 1.4581,
+    "wind_directions_deg": [
+     0
+    ],
+    "measurement_planes": [
+     "vertical centre plane y/H = 0",
+     "horizontal z/H = 0.025 (y <= 0 side only)",
+     "horizontal z/H = 0.25"
+    ],
+    "points": 444,
+    "stratification": "unstable: heated floor 45.8 degC, air at z = H 12.2 degC (difference 33.6 K), bulk Richardson number -0.086; building surface 22.0 .. 28.9 degC (mean 24.5 degC, 121 points in clean/cases/J/surface_temperature.csv)",
+    "source": "5 mm floor outlet at (0.04, 0, 0), 0.25 H beyond the leeward wall; 5 % ethylene in air at 30.4 degC, 9.17e-6 m3/s",
+    "concentration_normalisation": "c0 = 0.05 q / (U_H H^2) = 12.283 ppm (the workbook's value; the 5 % gas fraction is in it)",
+    "instrument": "split-fibre hot wire (velocity), cold wire (temperature), high-speed hydrocarbon analyser (concentration), 1000 Hz, 120 s per point",
+    "tunnel": "thermally stratified wind tunnel, Tokyo Polytechnic University (Atsugi); 1.2 m wide, 1.0 m high",
+    "scale_note": "model scale; the sources state no model:full scale ratio"
+   },
+   "quantities": [
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "C",
+    "c_rms",
+    "concentration_ratio",
+    "T",
+    "T_rms",
+    "uT",
+    "vT",
+    "wT"
+   ],
+   "units": {
+    "length": "m (model scale)",
+    "velocity": "m/s",
+    "variance": "m^2/s^2",
+    "k": "m^2/s^2",
+    "concentration": "ppm of the released ethylene",
+    "temperature": "degC (T); K (T_rms); heat fluxes K m/s"
+   },
+   "frame": {
+    "origin": "the building's leeward (downwind) wall centre on the ground; x = 0 is the leeward wall",
+    "x": "+x streamwise (the wind blows toward +x); the building spans x in [-0.08, 0]; the floor source is at x = +0.04",
+    "y": "+y lateral; the building spans y in [-0.04, 0.04]; the z/H = 0.025 plane is measured on the y <= 0 side only",
+    "z": "+z up; roof at z = 0.16; heated floor at z = 0"
+   },
+   "counts": {
+    "rows": 444,
+    "distinct_points": 444,
+    "configurations": 1
+   },
+   "engines": {
+    "openfoam12-realizableKE": "pending",
+    "umf-realizableKE": "scored",
+    "umf-buoyantKEpsilon": "scored",
+    "openlb": "pending",
+    "fluidx3d": "pending",
+    "ml-surrogate": "pending"
+   },
+   "doi": "10.5281/zenodo.15447887",
+   "links": {
+    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J.json",
+    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/points.json",
+    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/points.csv?v=444b7aaa1791",
+    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/geometry.json",
+    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/geometry.stl?v=1bd33d8d3531",
+    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/validation.json",
+    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-j/",
+    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-j.png"
+   }
+  },
+  {
+   "id": "K",
+   "slug": "case-k",
+   "title": "Case K — 9 x 9 cube array, point source",
+   "summary": "9 x 9 array of 0.06 m cubes with a tracer point source on the floor between rows 2 and 3: velocity and tracer concentration at 203 points in the streets and over the first rows.",
+   "configuration": {
+    "array": "9 rows (along x) by 9 columns (across y) of cubes, H = 0.06 m, pitch 0.12 m (street width = H, plan area ratio 25 %); the pitch is read from the MP drawings",
+    "H_m": 0.06,
+    "pitch_m": 0.12,
+    "cubes": 81,
+    "Re_H": 9800,
+    "U_H_m_s": 2.33,
+    "U_H_note": "stated by the readme and data paper; the approach-flow file (Case H's) gives 2.24 m/s at z = 0.06 m",
+    "wind_directions_deg": [
+     0
+    ],
+    "measurement_planes": [
+     "y/H = 0, +-1, +-2, +-3 (z up to 0.07 m)",
+     "five heights from 4 mm to 70 mm; the three upper heights only on y = 0 and +-H"
+    ],
+    "points": 203,
+    "source": "5 mm floor outlet at (-0.15, 0, 0), between rows 2 and 3 on the centre line; 100 % ethylene, 3.6e-6 m3/s",
+    "concentration_normalisation": "c0 = q / (U_H H^2) = 429.18 ppm with the cube's H and U_H; the legacy workbook uses H = 0.2 m and UH = 4.94 m/s instead (C0 = 18.218 ppm), see known issues",
+    "instrument": "split-fibre hot wire (velocity), high-speed hydrocarbon analyser (concentration), 1000 Hz with a 200 Hz low-pass filter, 60 s per point",
+    "tunnel": "Eiffel-type wind tunnel, Tokyo Polytechnic University (Atsugi); 1.2 m wide, 1.0 m high",
+    "scale_note": "model scale; the sources state no model:full scale ratio"
+   },
+   "quantities": [
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "C",
+    "c_rms",
+    "concentration_ratio"
+   ],
+   "units": {
+    "length": "m (model scale)",
+    "velocity": "m/s",
+    "variance": "m^2/s^2",
+    "k": "m^2/s^2",
+    "concentration": "ppm of the released ethylene"
+   },
+   "frame": {
+    "origin": "bottom centre of the windward wall of the 4th row of the central column: x = 0 is that wall, y = 0 the centre line of the central column",
+    "x": "+x streamwise (the wind blows toward +x); row k spans x in [0.12 (k-4), 0.12 (k-4) + 0.06], so the array spans x in [-0.36, 0.66]",
+    "y": "+y lateral; column centres at y = 0, +-0.12, ... +-0.48 (the array spans y in [-0.51, 0.51])",
+    "z": "+z up; cube tops at z = 0.06"
+   },
+   "counts": {
+    "rows": 203,
+    "distinct_points": 203,
+    "configurations": 1
+   },
+   "engines": {
+    "openfoam12-realizableKE": "scored",
+    "openlb": "pending",
+    "fluidx3d": "pending",
+    "ml-surrogate": "pending"
+   },
+   "doi": "10.5281/zenodo.15448050",
+   "links": {
+    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K.json",
+    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/points.json",
+    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/points.csv?v=8708f3251861",
+    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/geometry.json",
+    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/geometry.stl?v=f0f8a3adfa29",
+    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/validation.json",
+    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-k/",
+    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-k.png"
+   }
+  },
+  {
+   "id": "L",
+   "slug": "case-l",
+   "title": "Case L — 9 x 14 cube array, line source, non-isothermal",
+   "summary": "14 rows by 9 columns of 0.06 m cubes with a tracer line source on the floor across the tunnel, in an unstably stratified boundary layer: velocity, temperature, concentration and their fluxes at 344 points in the streets and over the roofs.",
+   "configuration": {
+    "array": "14 rows (along x) by 9 columns (across y) of cubes, H = 0.06 m, pitch 0.12 m (street width = H, plan area ratio 25 %), published as BD_caseL.stl; the data paper calls it '9 rows by 14 columns'",
+    "H_m": 0.06,
+    "pitch_m": 0.12,
+    "cubes": 126,
+    "Re_H": 5600,
+    "U_H_m_s": 1.339415,
+    "wind_directions_deg": [
+     0
+    ],
+    "measurement_planes": [
+     "8 heights (4 .. 150 mm) at 27 locations in the streets near the source",
+     "4 heights (70 .. 150 mm) at 14 locations above the blocks",
+     "3 heights (4 .. 30 mm) at 24 locations around"
+    ],
+    "points": 344,
+    "stratification": "unstable: floor 45.0 degC, air at z = H 14.75 degC (difference 30.3 K), bulk Richardson number -0.035 (workbook; the readme says -0.04); the workbook gives the building surface as 42.2 degC",
+    "source": "floor line source across the tunnel at x = -0.15 m between rows 7 and 8: readme 0.037 m x 1.2 m, BD_caseL.stl patch 0.04 m x 1.02 m; 100 % ethylene, 8.33e-6 m3/s (500 cc/min) at 35 degC",
+    "concentration_normalisation": "c0 = q / (U_H H^2) = 1728.23 ppm (the workbook's value)",
+    "instrument": "split-fibre hot wire (velocity), cold wire (temperature), high-speed hydrocarbon analyser (concentration), 1000 Hz with a 200 Hz low-pass filter, 60 s per point",
+    "tunnel": "thermally stratified wind tunnel, Tokyo Polytechnic University (Atsugi); 1.2 m wide, 1.0 m high; 26 aluminium angles 9 mm high every 200 mm as roughness; model floor 10 mm above the tunnel floor",
+    "scale_note": "model scale; the sources state no model:full scale ratio"
+   },
+   "quantities": [
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "uv",
+    "uw",
+    "C",
+    "c_rms",
+    "concentration_ratio",
+    "T",
+    "T_rms",
+    "uc",
+    "vc",
+    "wc",
+    "uT",
+    "vT",
+    "wT"
+   ],
+   "units": {
+    "length": "m (model scale)",
+    "velocity": "m/s",
+    "variance": "m^2/s^2",
+    "k": "m^2/s^2",
+    "concentration": "ppm of the released ethylene",
+    "temperature": "degC (T); K (T_rms); heat fluxes K m/s; concentration fluxes ppm m/s"
+   },
+   "frame": {
+    "origin": "bottom centre of the windward wall of the 9th row (of 14) of the central column: x = 0 is that wall, y = 0 the centre line of the central column",
+    "x": "+x streamwise (the wind blows toward +x); row k spans x in [0.12 (k-9), 0.12 (k-9) + 0.06], so the array spans x in [-0.96, 0.66]",
+    "y": "+y lateral; column centres at y = 0, +-0.12, ... +-0.48 (the array spans y in [-0.51, 0.51])",
+    "z": "+z up from the model floor; cube tops at z = 0.06; heated floor at z = 0"
+   },
+   "counts": {
+    "rows": 344,
+    "distinct_points": 344,
+    "configurations": 1
+   },
+   "engines": {
+    "openfoam12-realizableKE": "pending",
+    "umf-realizableKE": "scored",
+    "openlb": "pending",
+    "fluidx3d": "pending",
+    "ml-surrogate": "pending"
+   },
+   "doi": "10.5281/zenodo.15487637",
+   "links": {
+    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L.json",
+    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/points.json",
+    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/points.csv?v=b575fe11d107",
+    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/geometry.json",
+    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/geometry.stl?v=20864bc75187",
+    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/validation.json",
+    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-l/",
+    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-l.png"
+   }
+  },
+  {
+   "id": "M",
+   "slug": "case-m",
+   "title": "Case M — TPU Atsugi campus",
+   "summary": "Tracer-gas release on the Tokyo Polytechnic University Atsugi campus: 1:600 tunnel (velocity at 180°, ethylene concentration at 175°, 180° and 185°) and 18 field runs with PMCH, 15 points 3 m above ground.",
+   "configuration": {
+    "site": "Tokyo Polytechnic University, Atsugi campus; terrain falls from about 32 m (campus plateau) to 3.6 m at the east edge; tallest building about 32 m",
+    "scale": "1:600",
+    "points": 15,
+    "measurement_height_m": 3,
+    "measurement_height_note": "3 m above the local ground, full scale (0.005 m model)",
+    "wind_directions_deg": [
+     175,
+     180,
+     185
+    ],
+    "wind_direction_velocity_deg": 180,
+    "field_runs": 18,
+    "field_wind_directions_deg": "78 ... 200.7 (mean direction at the reference point per run); 11 of 18 within 5° of 180°",
+    "reference": {
+     "U_R_m_s": 4.08,
+     "H_R_m_model": 0.068,
+     "H_R_m_full": 41,
+     "R": "rooftop of the main building: the point is 41 m above the ground, 8 m above the roof in the STL"
+    },
+    "tracer": {
+     "tunnel": "C2H4, 100 %, 6 mm outlet, 150 cc/min = 2.5e-6 m3/s (0.09 m/s)",
+     "field": "PMCH (C7F14), 200 ppm, 5 L/min, 1.5 m above ground, 25-26 Feb 2014, 18 runs of 10 min sampling"
+    },
+    "normalisation": "concentration ratio = C / c0, c0 = q / (U_R H_R^2): 132.5 ppm in the tunnel (the paper rounds to 1.33e2); per run in the field (1,444 ... 7,379 ppq)",
+    "instrument": "tunnel: DANTEC split-fibre probe (1000 Hz, 240 s) and high-speed hydrocarbon analyser; field: sorbent tubes with GC-ECD, sonic anemometer SAT-600 at the reference point",
+    "tunnel": "Eiffel-type boundary-layer wind tunnel, Tokyo Polytechnic University; cross-section 1.0 m high, 1.2 m wide; power law exponent 0.27 (AIJ Loads category IV) with an upwind taper for the topography"
+   },
+   "quantities": [
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "C",
+    "c_rms",
+    "concentration_ratio"
+   ],
+   "units": {
+    "length": "m (FULL scale)",
+    "velocity": "m/s (the tunnel's)",
+    "variance": "m^2/s^2",
+    "concentration": "ppm (the field's ppq converted)",
+    "concentration_ratio": "dimensionless"
+   },
+   "frame": {
+    "origin": "centre of the tunnel turntable on the floor plane (ground surface there at z = 33.07 m)",
+    "x": "+x NORTH (full-scale metres)",
+    "y": "+y WEST (compass rose of MP_caseM.png: N at +x, W at +y); the frame is right-handed",
+    "z": "+z up from the TUNNEL FLOOR; the campus ground lies at z ~ 32 m"
+   },
+   "counts": {
+    "rows": 330,
+    "distinct_points": 15,
+    "configurations": 22
+   },
+   "engines": {
+    "openfoam12-realizableKE": "scored",
+    "openlb": "pending",
+    "fluidx3d": "pending",
+    "ml-surrogate": "pending"
+   },
+   "doi": "10.5281/zenodo.15487857",
+   "links": {
+    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M.json",
+    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/points.json",
+    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/points.csv?v=8d32dc8f762b",
+    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/geometry.json",
+    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/geometry.stl?v=cfc68cf63ea1",
+    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/validation.json",
+    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-m/",
+    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-m.png"
    }
   }
  ]

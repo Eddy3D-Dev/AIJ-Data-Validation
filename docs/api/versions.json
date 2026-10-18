@@ -1,0 +1,40 @@
+{
+ "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/versions.schema.json",
+ "schema_version": "2.3.0",
+ "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
+ "license": "CC-BY-4.0",
+ "description": "Every release of the data and API, newest first. The unversioned /api/ paths serve `latest`. To pin an analysis to a release, fetch its files from its `base_url` instead (the paths are those of its index.json): a release's files never change. `data_version` is the latest release's.",
+ "latest": "3.0.0",
+ "latest_base_url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api",
+ "versions": [
+  {
+   "version": "3.0.0",
+   "date": "2026-10-18",
+   "status": "latest",
+   "schema_version": "2.3.0",
+   "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
+   "base_url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0",
+   "index_url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/index.json",
+   "fallback_base_url": "https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/v3.0.0/docs/api/3.0.0",
+   "self_contained": true,
+   "tag": "v3.0.0",
+   "tag_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/releases/tag/v3.0.0",
+   "changelog_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/v3.0.0/CHANGELOG.md"
+  },
+  {
+   "version": "2.0.0",
+   "date": "2026-10-18",
+   "status": "superseded",
+   "schema_version": "2.2.0",
+   "data_version": "5af8c81571e452c1925b3efe58c698908066f64886eba5efd9b2f0348ecdc019",
+   "base_url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/2.0.0",
+   "index_url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/2.0.0/index.json",
+   "fallback_base_url": "https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/v2.0.0/docs/api",
+   "self_contained": true,
+   "note": "Released before the versioned layout and hosted here afterwards by scripts/host_release.py: the files of tag v2.0.0, byte for byte, with only their own addresses rewritten into this copy. The raw files at the tag (release.base_url in this copy's index.json) are the originals.",
+   "tag": "v2.0.0",
+   "tag_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/releases/tag/v2.0.0",
+   "changelog_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/v2.0.0/CHANGELOG.md"
+  }
+ ]
+}

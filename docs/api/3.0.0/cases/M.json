@@ -1,0 +1,650 @@
+{
+ "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/case.schema.json",
+ "schema_version": "2.3.0",
+ "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
+ "license": "CC-BY-4.0",
+ "id": "M",
+ "slug": "case-m",
+ "title": "Case M — TPU Atsugi campus",
+ "summary": "Tracer-gas release on the Tokyo Polytechnic University Atsugi campus: 1:600 tunnel (velocity at 180°, ethylene concentration at 175°, 180° and 185°) and 18 field runs with PMCH, 15 points 3 m above ground.",
+ "configuration": {
+  "site": "Tokyo Polytechnic University, Atsugi campus; terrain falls from about 32 m (campus plateau) to 3.6 m at the east edge; tallest building about 32 m",
+  "scale": "1:600",
+  "points": 15,
+  "measurement_height_m": 3,
+  "measurement_height_note": "3 m above the local ground, full scale (0.005 m model)",
+  "wind_directions_deg": [
+   175,
+   180,
+   185
+  ],
+  "wind_direction_velocity_deg": 180,
+  "field_runs": 18,
+  "field_wind_directions_deg": "78 ... 200.7 (mean direction at the reference point per run); 11 of 18 within 5° of 180°",
+  "reference": {
+   "U_R_m_s": 4.08,
+   "H_R_m_model": 0.068,
+   "H_R_m_full": 41,
+   "R": "rooftop of the main building: the point is 41 m above the ground, 8 m above the roof in the STL"
+  },
+  "tracer": {
+   "tunnel": "C2H4, 100 %, 6 mm outlet, 150 cc/min = 2.5e-6 m3/s (0.09 m/s)",
+   "field": "PMCH (C7F14), 200 ppm, 5 L/min, 1.5 m above ground, 25-26 Feb 2014, 18 runs of 10 min sampling"
+  },
+  "normalisation": "concentration ratio = C / c0, c0 = q / (U_R H_R^2): 132.5 ppm in the tunnel (the paper rounds to 1.33e2); per run in the field (1,444 ... 7,379 ppq)",
+  "instrument": "tunnel: DANTEC split-fibre probe (1000 Hz, 240 s) and high-speed hydrocarbon analyser; field: sorbent tubes with GC-ECD, sonic anemometer SAT-600 at the reference point",
+  "tunnel": "Eiffel-type boundary-layer wind tunnel, Tokyo Polytechnic University; cross-section 1.0 m high, 1.2 m wide; power law exponent 0.27 (AIJ Loads category IV) with an upwind taper for the topography"
+ },
+ "configurations": [
+  {
+   "config": "default",
+   "campaign": "wind_tunnel",
+   "instrument": "hydrocarbon_analyser",
+   "wind_direction_deg": 175.0,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "wind_tunnel",
+   "instrument": "hydrocarbon_analyser",
+   "wind_direction_deg": 180.0,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "wind_tunnel",
+   "instrument": "hydrocarbon_analyser",
+   "wind_direction_deg": 185.0,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "9",
+   "wind_direction_deg": 78.0,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "10",
+   "wind_direction_deg": 115.6666667,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "1",
+   "wind_direction_deg": 132.6,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "2",
+   "wind_direction_deg": 144.0,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "11",
+   "wind_direction_deg": 173.6666667,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "3",
+   "wind_direction_deg": 175.0,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "13",
+   "wind_direction_deg": 175.9,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "12",
+   "wind_direction_deg": 176.7,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "15",
+   "wind_direction_deg": 178.6,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "5",
+   "wind_direction_deg": 179.6,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "14",
+   "wind_direction_deg": 179.7,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "8",
+   "wind_direction_deg": 180.3,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "4",
+   "wind_direction_deg": 181.3,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "16",
+   "wind_direction_deg": 181.9,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "7",
+   "wind_direction_deg": 183.3,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "6",
+   "wind_direction_deg": 184.3,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "17",
+   "wind_direction_deg": 194.2,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sorbent_gc_ecd",
+   "run": "18",
+   "wind_direction_deg": 200.7,
+   "points": 15
+  },
+  {
+   "config": "default",
+   "campaign": "wind_tunnel",
+   "instrument": "split_fibre",
+   "wind_direction_deg": 180.0,
+   "points": 15
+  }
+ ],
+ "quantities": [
+  "U",
+  "V",
+  "W",
+  "uu",
+  "vv",
+  "ww",
+  "k",
+  "C",
+  "c_rms",
+  "concentration_ratio"
+ ],
+ "units": {
+  "length": "m (FULL scale)",
+  "velocity": "m/s (the tunnel's)",
+  "variance": "m^2/s^2",
+  "concentration": "ppm (the field's ppq converted)",
+  "concentration_ratio": "dimensionless"
+ },
+ "frame": {
+  "origin": "centre of the tunnel turntable on the floor plane (ground surface there at z = 33.07 m)",
+  "x": "+x NORTH (full-scale metres)",
+  "y": "+y WEST (compass rose of MP_caseM.png: N at +x, W at +y); the frame is right-handed",
+  "z": "+z up from the TUNNEL FLOOR; the campus ground lies at z ~ 32 m",
+  "wind_direction_rotation": "meteorological FROM-direction: 180° blows toward +x; flow_dir = (-cos WD, +sin WD), so a larger WD turns the plume toward -y. Measured on the tunnel's 175 / 180 / 185° and on the 18 field runs.",
+  "lateral_sign_applied": 1,
+  "coordinate_scale_applied": 600.0
+ },
+ "inflow_fit": {
+  "method": "power law on the workbook's 40 heights (z 0.005 ... 0.6 m model) at x = -0.498 m; the data paper states exponent 0.27",
+  "power_law_exponent_fitted": 0.272,
+  "power_law_exponent_paper": 0.27,
+  "U_at_R_height_m_s": 3.94,
+  "U_R_m_s": 4.08,
+  "note": "z is height above the empty tunnel floor; at the profile station the model's taper is already 0.052 m high, so the 10 lowest heights lie below it"
+ },
+ "approach_flow": {
+  "source": "raw/cases/case-m/AF_caseM.csv",
+  "units": {
+   "z": "m",
+   "U": "m/s",
+   "k": "m^2/s^2",
+   "u_rms": "m/s"
+  },
+  "rows": [
+   {
+    "z": 3.0,
+    "U": 1.23,
+    "k": 0.49,
+    "u_rms": 0.61
+   },
+   {
+    "z": 6.0,
+    "U": 1.41,
+    "k": 0.6,
+    "u_rms": 0.66
+   },
+   {
+    "z": 9.0,
+    "U": 1.68,
+    "k": 0.69,
+    "u_rms": 0.72
+   },
+   {
+    "z": 12.0,
+    "U": 2.0,
+    "k": 0.74,
+    "u_rms": 0.79
+   },
+   {
+    "z": 15.0,
+    "U": 2.34,
+    "k": 0.79,
+    "u_rms": 0.85
+   },
+   {
+    "z": 18.0,
+    "U": 2.68,
+    "k": 0.79,
+    "u_rms": 0.91
+   },
+   {
+    "z": 21.000000000000004,
+    "U": 2.84,
+    "k": 0.72,
+    "u_rms": 0.87
+   },
+   {
+    "z": 24.0,
+    "U": 3.09,
+    "k": 0.71,
+    "u_rms": 0.86
+   },
+   {
+    "z": 27.0,
+    "U": 3.15,
+    "k": 0.67,
+    "u_rms": 0.86
+   },
+   {
+    "z": 30.0,
+    "U": 3.12,
+    "k": 0.63,
+    "u_rms": 0.82
+   },
+   {
+    "z": 36.0,
+    "U": 3.32,
+    "k": 0.63,
+    "u_rms": 0.81
+   },
+   {
+    "z": 42.00000000000001,
+    "U": 3.54,
+    "k": 0.69,
+    "u_rms": 0.86
+   },
+   {
+    "z": 48.0,
+    "U": 3.68,
+    "k": 0.66,
+    "u_rms": 0.81
+   },
+   {
+    "z": 54.0,
+    "U": 3.74,
+    "k": 0.68,
+    "u_rms": 0.85
+   },
+   {
+    "z": 60.0,
+    "U": 3.83,
+    "k": 0.64,
+    "u_rms": 0.81
+   },
+   {
+    "z": 72.0,
+    "U": 3.92,
+    "k": 0.68,
+    "u_rms": 0.84
+   },
+   {
+    "z": 84.00000000000001,
+    "U": 4.11,
+    "k": 0.68,
+    "u_rms": 0.84
+   },
+   {
+    "z": 96.0,
+    "U": 4.25,
+    "k": 0.67,
+    "u_rms": 0.82
+   },
+   {
+    "z": 108.0,
+    "U": 4.36,
+    "k": 0.69,
+    "u_rms": 0.85
+   },
+   {
+    "z": 120.0,
+    "U": 4.39,
+    "k": 0.69,
+    "u_rms": 0.84
+   },
+   {
+    "z": 132.0,
+    "U": 4.49,
+    "k": 0.69,
+    "u_rms": 0.85
+   },
+   {
+    "z": 144.0,
+    "U": 4.67,
+    "k": 0.65,
+    "u_rms": 0.81
+   },
+   {
+    "z": 156.0,
+    "U": 4.7,
+    "k": 0.66,
+    "u_rms": 0.84
+   },
+   {
+    "z": 168.00000000000003,
+    "U": 4.91,
+    "k": 0.63,
+    "u_rms": 0.82
+   },
+   {
+    "z": 180.0,
+    "U": 4.88,
+    "k": 0.63,
+    "u_rms": 0.8
+   },
+   {
+    "z": 192.0,
+    "U": 4.98,
+    "k": 0.61,
+    "u_rms": 0.81
+   },
+   {
+    "z": 204.00000000000003,
+    "U": 5.09,
+    "k": 0.62,
+    "u_rms": 0.82
+   },
+   {
+    "z": 216.0,
+    "U": 5.24,
+    "k": 0.54,
+    "u_rms": 0.74
+   },
+   {
+    "z": 228.0,
+    "U": 5.29,
+    "k": 0.52,
+    "u_rms": 0.75
+   },
+   {
+    "z": 240.0,
+    "U": 5.38,
+    "k": 0.5,
+    "u_rms": 0.72
+   },
+   {
+    "z": 252.0,
+    "U": 5.43,
+    "k": 0.49,
+    "u_rms": 0.7
+   },
+   {
+    "z": 264.0,
+    "U": 5.45,
+    "k": 0.46,
+    "u_rms": 0.67
+   },
+   {
+    "z": 276.0,
+    "U": 5.58,
+    "k": 0.43,
+    "u_rms": 0.64
+   },
+   {
+    "z": 288.0,
+    "U": 5.61,
+    "k": 0.39,
+    "u_rms": 0.6
+   },
+   {
+    "z": 300.0,
+    "U": 5.61,
+    "k": 0.38,
+    "u_rms": 0.59
+   },
+   {
+    "z": 312.0,
+    "U": 5.72,
+    "k": 0.34,
+    "u_rms": 0.54
+   },
+   {
+    "z": 324.0,
+    "U": 5.67,
+    "k": 0.36,
+    "u_rms": 0.57
+   },
+   {
+    "z": 336.00000000000006,
+    "U": 5.68,
+    "k": 0.34,
+    "u_rms": 0.54
+   },
+   {
+    "z": 348.0,
+    "U": 5.66,
+    "k": 0.32,
+    "u_rms": 0.52
+   },
+   {
+    "z": 360.0,
+    "U": 5.65,
+    "k": 0.33,
+    "u_rms": 0.53
+   }
+  ],
+  "csv": {
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/approach_flow.csv?v=0042caa39493",
+   "path": "cases/M/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 903,
+   "sha256": "0042caa394930c19454a0b2667dbda1e2a762641d7d57f443329e1088eb376ee"
+  }
+ },
+ "points": {
+  "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/points.json",
+  "csv": {
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/points.csv?v=8d32dc8f762b",
+   "path": "cases/M/points.csv",
+   "media_type": "text/csv",
+   "bytes": 34920,
+   "sha256": "8d32dc8f762bb8ae49e0b2252121df12bf2f94c98e724f252e887a368b18bb20"
+  },
+  "source": "clean/cases/M/points.csv",
+  "rows": 330,
+  "distinct_points": 15,
+  "columns": [
+   "point_id",
+   "config",
+   "instrument",
+   "wind_direction_deg",
+   "x",
+   "y",
+   "z",
+   "U",
+   "V",
+   "W",
+   "uu",
+   "vv",
+   "ww",
+   "k",
+   "campaign",
+   "run",
+   "C",
+   "c_rms",
+   "concentration_ratio"
+  ],
+  "counts": {
+   "config": {
+    "default": 330
+   },
+   "instrument": {
+    "hydrocarbon_analyser": 45,
+    "sorbent_gc_ecd": 270,
+    "split_fibre": 15
+   },
+   "wind_direction_deg": {
+    "115.6666667": 15,
+    "132.6": 15,
+    "144.0": 15,
+    "173.6666667": 15,
+    "175.0": 30,
+    "175.9": 15,
+    "176.7": 15,
+    "178.6": 15,
+    "179.6": 15,
+    "179.7": 15,
+    "180.0": 30,
+    "180.3": 15,
+    "181.3": 15,
+    "181.9": 15,
+    "183.3": 15,
+    "184.3": 15,
+    "185.0": 15,
+    "194.2": 15,
+    "200.7": 15,
+    "78.0": 15
+   }
+  },
+  "nulls": {
+   "U": 315,
+   "V": 315,
+   "W": 315,
+   "uu": 315,
+   "vv": 315,
+   "ww": 315,
+   "k": 315,
+   "C": 15,
+   "c_rms": 285,
+   "concentration_ratio": 15
+  },
+  "bbox_min": [
+   -94.29222,
+   -113.14146,
+   6.6
+  ],
+  "bbox_max": [
+   278.60814,
+   96.30792,
+   35.92863
+  ]
+ },
+ "geometry": {
+  "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/geometry.json",
+  "files": [
+   {
+    "configuration": "default",
+    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/geometry.stl?v=cfc68cf63ea1",
+    "triangles": 43936,
+    "watertight": false
+   }
+  ]
+ },
+ "validation": {
+  "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/validation.json",
+  "status": "scored",
+  "engines": {
+   "openfoam12-realizableKE": "scored",
+   "openlb": "pending",
+   "fluidx3d": "pending",
+   "ml-surrogate": "pending"
+  }
+ },
+ "known_issues": [
+  "Field concentrations are in ppq (1e-15 volume fraction) and the tunnel's in ppm: 1 ppq = 1e-9 ppm. The cleaned table converts the field's to ppm and carries C / c0 for both, with the run's own c0 in the field.",
+  "Every field run has its own reference speed U_R, mean direction WD_R and tracer flow q (clean/manifest.json -> cases.M.extra_measurements.field_runs); the row's wind_direction_deg is WD_R.",
+  "The tunnel measured velocity only at 180°; at 175° and 185° the CSV has -999.9 in all seven velocity columns.",
+  "RS-WT_caseM.csv is the legacy workbook rounded (2 dp velocity, 1 dp concentration), and its k is half the sum of the 2-dp RMS values, up to 0.005 m2/s2 from the workbook's; the cleaned table carries the workbook's values.",
+  "The tunnel source is on the ground in the workbook, LC_caseM.csv and the STL (readme: 'on a rooftop'); the field source was 1.5 m above ground.",
+  "H_R = 41 m is the anemometer height above the ground; the main roof under the reference point is about 33 m above it. c0 uses H_R = 0.068 m (41 m / 600 = 0.06833 m would give 131.2 ppm, -1 %).",
+  "The field has an ambient floor of 8 - 11 ppq at points 11 - 15 in every run (not subtracted); the tunnel's concentration has a zero offset (two negative means at point 12) and an rms floor of 7 ppm.",
+  "Only 11 of the 18 field runs are within 5° of 180°, the tunnel's direction; runs 1, 2 and 9 have U_R of 1.4 - 1.8 m/s.",
+  "BD_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges; the served geometry.stl is multiplied by 600 and re-wound outward.",
+  "The approach-flow heights are above the empty tunnel floor: at the profile station the model's taper is 0.052 m high, above the 10 lowest profile heights."
+ ],
+ "people": {
+  "data_collectors": [
+   "Ryuichiro Yoshie (Tokyo Polytechnic University)",
+   "Takumi Tachibana (Wind Engineering Institute)"
+  ],
+  "editors_distributors": [
+   "Yoshihide Tominaga (Niigata Institute of Technology)",
+   "Hideki Kikumoto (The University of Tokyo)",
+   "Tsubasa Okaze (Institute of Science Tokyo)"
+  ],
+  "contact": "Ryuichiro Yoshie <yoshie@arch.t-kougei.ac.jp>"
+ },
+ "doi": "10.5281/zenodo.15487857",
+ "doi_note": null,
+ "citation_requested": "Tachibana, T., Yoshie, R., Nakayama, S., Kishida, T., Miyashita, K., Sasaki, R. (2022). Comparison between field measurement and wind tunnel experiments of gas dispersion in an urban area and verification of similarity law. Journal of Wind Engineering 47(3), 39-52 (in Japanese). http://dx.doi.org/10.5359/jwe.47.39",
+ "files_in_repository": {
+  "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/raw/cases/case-m",
+  "reference": "raw/cases/case-m/RS-WT_caseM.csv",
+  "approach_flow": "raw/cases/case-m/AF_caseM.csv",
+  "readme": "raw/cases/case-m/readme_caseM.md"
+ },
+ "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-m.png",
+ "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-m/"
+}

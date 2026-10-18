@@ -12,4 +12,5 @@ rhino3dm==8.35.0       # Case E: case-e.3dm
 jsonschema==4.26.0
 openapi-spec-validator==0.7.2
 matplotlib==3.11.2
+pillow==13.0.0         # scripts/build_api.py: the 1600 px web copies of the figures (matplotlib needs it too)
 ultraplot==2.7.1

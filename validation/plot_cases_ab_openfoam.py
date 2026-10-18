@@ -7,14 +7,14 @@ Two figures, each answering one question:
   cases-ab-openfoam-profiles.png    WHERE does it agree?  Centre-plane vertical profiles of U/U_H at the
                       measurement stations, measured points against the modelled line.
 
-Inputs, all in this repository: the benchmark tables case-a/RS-caseA.csv and case-b/RS_caseB.csv as published,
+Inputs, all in this repository: the benchmark tables raw/cases/case-a/RS-caseA.csv and raw/cases/case-b/RS_caseB.csv as published,
 the model at those points in validation/results/case{A,B}_openfoam12_realizableKE_probes.csv (a snapshot of the
 Eddy3D fixture's reference.probe.csv under C:/Eddy3DVal/aij_{A,B}_realizableKE_L3, same row order as the table,
 refreshed from there when that folder exists) and the scores in validation/results/case{A,B}_openfoam12_realizableKE.json.
 
-Colours follow plotstyle.py: the measurement is black and the OpenFOAM model is slot 1 of the validated
-categorical palette (blue #2a78d6), as in every figure here; reference geometry (1:1 line, factor-of-two
-band, roof line) is recessive grey so it never competes with data.
+Colours follow plotstyle.py: the measurement is black and the OpenFOAM model is ultraplot's blue (#0072b2),
+as in every figure here; reference geometry (1:1 line, factor-of-two band, roof line) is recessive grey so it
+never competes with data.
 """
 from __future__ import annotations
 
@@ -33,12 +33,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 RESULTS = os.path.join(HERE, "results")
 VAL = r"C:/Eddy3DVal"
-MUTED = "#6b6b69"
 
 CASES = [
-    ("A", "case-a", "RS-caseA.csv", 1.0, +1.0, "aij_A_realizableKE_L3",
+    ("A", "raw/cases/case-a", "RS-caseA.csv", 1.0, +1.0, "aij_A_realizableKE_L3",
      "Case A · 1:1:2 building", 0.16, 4.491, (-0.04, 0.04)),
-    ("B", "case-b", "RS_caseB.csv", 0.001, -1.0, "aij_B_realizableKE_L3",
+    ("B", "raw/cases/case-b", "RS_caseB.csv", 0.001, -1.0, "aij_B_realizableKE_L3",
      "Case B · 1:4:4 slab", 0.20, 5.133, (-0.025, 0.025)),
 ]
 
@@ -174,7 +173,7 @@ for i, (tag, folder, ref_file, cscale, lsign, study, title, H, Uh, bx) in enumer
                      float(np.nanmax(np.concatenate([up, um]))) + off])
 
     for xc, lab in drawn:
-        ax.text(xc, 2.08, lab, ha="center", fontsize=8.5, color=MUTED, zorder=5,
+        ax.text(xc, 2.08, lab, ha="center", fontsize=8.5, color=style.REFERENCE, zorder=5,
                 bbox=dict(boxstyle="round,pad=0.2", facecolor=style.SURFACE, edgecolor="none"))
 
     ax.axhline(1.0, color=style.REFERENCE, lw=0.8, ls="--", zorder=1)

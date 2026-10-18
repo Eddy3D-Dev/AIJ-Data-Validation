@@ -42,7 +42,15 @@
     "B",
     "C",
     "D",
-    "E"
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M"
    ]
   },
   "title": {
@@ -127,6 +135,12 @@
      "z": {
       "type": "number"
      },
+     "campaign": {
+      "type": "string"
+     },
+     "run": {
+      "type": "string"
+     },
      "U": {
       "type": [
        "number",
@@ -176,6 +190,102 @@
       ]
      },
      "velocity_ratio": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "uv": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "uw": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "vw": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "C": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "c_rms": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "concentration_ratio": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "T": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "T_rms": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "uc": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "vc": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "wc": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "uT": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "vT": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "wT": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "velocity_ratio_sd": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "k_ratio": {
       "type": [
        "number",
        "null"

@@ -1,0 +1,54 @@
+{
+ "case_id": "I",
+ "units": "metres (model scale)",
+ "frame": {
+  "origin": "the centre of the cube on the ground plane (MP-y-c_caseI.png, MP-z-c_caseI.png)",
+  "x": "+x streamwise (the wind blows toward +x): the cube occupies x in [-0.05, 0.05]; wind points x = -0.15 .. 0.25, concentration points x = 0.065 .. 2.7",
+  "y": "+y lateral; the cube spans y in [-0.05, 0.05]; wind points on y = 0 and on the plane z = 0.05 at |y| <= 0.15, concentration points on y = 0 and on the ground at |y| <= 0.44",
+  "z": "+z up; roof at z = 0.1 m; the source (6 mm outlet) at (0, 0, 0.1)",
+  "source": "ethane, 10 % in the mixture, 400 cc/min through a 6 mm circular outlet at the roof centre (M = 0.14)",
+  "length_scale": "model metres (the source states no model:full scale ratio; Eddy3D solves it at 1:60)"
+ },
+ "files": [
+  {
+   "configuration": "default",
+   "file": "cases/I/geometry.stl",
+   "format": "ASCII STL, LF, metres, same frame as points.csv",
+   "source": "generated from the readme's stated 0.1 m cube centred on the origin (MP-y-c_caseI.png, MP-z-c_caseI.png); x, y in [-0.05, 0.05], z in [0, 0.1]. The 6 mm roof outlet at (0, 0, 0.1) is not part of the body",
+   "stats": {
+    "triangles": 12,
+    "bbox_min": [
+     -0.05,
+     -0.05,
+     0.0
+    ],
+    "bbox_max": [
+     0.05,
+     0.05,
+     0.1
+    ],
+    "signed_volume": 0.001,
+    "edges": 18,
+    "edges_shared_by_two_faces": 18,
+    "edges_boundary": 0,
+    "edges_non_manifold": 0,
+    "watertight": true
+   },
+   "boxes": [
+    {
+     "min": [
+      -0.05,
+      -0.05,
+      0.0
+     ],
+     "max": [
+      0.05,
+      0.05,
+      0.1
+     ]
+    }
+   ],
+   "box_count": 1
+  }
+ ]
+}

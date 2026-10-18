@@ -1,7 +1,7 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/case.schema.json",
- "schema_version": "2.2.0",
- "data_version": "5af8c81571e452c1925b3efe58c698908066f64886eba5efd9b2f0348ecdc019",
+ "schema_version": "2.3.0",
+ "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
  "license": "CC-BY-4.0",
  "id": "E",
  "slug": "case-e",
@@ -137,7 +137,7 @@
   "note": "derived during scoping, not published by AIJ"
  },
  "approach_flow": {
-  "source": "case-e/LF_caseE.xls [sheet Inflow]",
+  "source": "raw/cases/case-e/LF_caseE.xls [sheet Inflow]",
   "units": {
    "z": "m",
    "U": "m/s",
@@ -216,11 +216,11 @@
  "points": {
   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/points.json",
   "csv": {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/points.csv?v=0297eeade3c1",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/points.csv?v=e6e89432e706",
    "path": "cases/E/points.csv",
    "media_type": "text/csv",
-   "bytes": 133503,
-   "sha256": "0297eeade3c1c4e263e43ecdb686ec7847bd3745949d2a3e5bf55670239b9c31"
+   "bytes": 164232,
+   "sha256": "e6e89432e706de1b807258178150dfa0376f19caa558d2c7f8106778422c11d8"
   },
   "source": "clean/cases/E/points.csv",
   "rows": 2560,
@@ -234,7 +234,8 @@
    "x",
    "y",
    "z",
-   "velocity_ratio"
+   "velocity_ratio",
+   "campaign"
   ],
   "counts": {
    "config": {
@@ -324,10 +325,10 @@
  "doi_note": null,
  "citation_requested": "Tominaga, Y. et al. (2008). AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings. JWEIA 96, 1749-1761. https://doi.org/10.1016/j.jweia.2008.02.058",
  "files_in_repository": {
-  "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/case-e",
-  "reference": "case-e/LF_caseE.xls",
-  "approach_flow": "case-e/LF_caseE.xls [sheet Inflow]",
-  "readme": "case-e/readme_caseE.md"
+  "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/raw/cases/case-e",
+  "reference": "raw/cases/case-e/LF_caseE.xls",
+  "approach_flow": "raw/cases/case-e/LF_caseE.xls [sheet Inflow]",
+  "readme": "raw/cases/case-e/readme_caseE.md"
  },
  "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-e-after.png",
  "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-e/"

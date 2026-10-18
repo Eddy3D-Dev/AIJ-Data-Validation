@@ -1,169 +1,53 @@
 ---
 title: "Case B — 1:4:4 slab"
-parent: Cases
+parent: "Cases"
 nav_order: 2
+has_children: true
+has_toc: false
+generated: true
+description: "Isolated 1:4:4 slab, velocity field (split-fibre hot wire)."
 ---
 
 # Case B — 1:4:4 slab
 
 Isolated 1:4:4 slab, velocity field (split-fibre hot wire).
+{: .fs-5 .fw-300 .lede }
 
-<figure class="figure">
-<img src="{{ '/assets/geometry/case-b.png' | relative_url }}" alt="Case B — 1:4:4 slab">
-<figcaption><strong>Figure 1.</strong> Isolated 1:4:4 slab, 0.05 m along the wind, 0.20 m across, 0.20 m tall (model scale); the wind blows along +x.</figcaption>
+[Reference data]({{ '/cases/case-b/data/' | relative_url }}){: .btn .btn-primary } [Validation]({{ '/cases/case-b/validation/' | relative_url }}){: .btn } [Case as JSON]({{ '/api/cases/B.json' | relative_url }}){: .btn }
+
+<figure class="figure render">
+<a href="{{ '/assets/geometry/case-b.png' | relative_url }}"><img src="{{ '/assets/web/case-b.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case B — 1:4:4 slab"></a>
+<figcaption>Isolated 1:4:4 slab, 0.05 m along the wind, 0.20 m across, 0.20 m tall (model scale); the wind blows along +x.<br><a class="original" href="{{ '/assets/geometry/case-b.png' | relative_url }}">1200 dpi original, 0.8 MB</a></figcaption>
 </figure>
 
-## Configuration
+## At a glance
 
-| Parameter | Value |
+| Fact | Value |
 |---|---|
 | Building | 1:4:4 (depth : width : height) slab |
-| Depth (m) | 0.05 |
-| Width (m) | 0.2 |
-| Height H (m) | 0.2 |
-| Reynolds number Re_H | 72000 |
-| U_H (m/s) | 5.133 |
+| Reynolds number Re\_H | 72,000 |
+| U\_H (m/s) | 5.133 |
 | Wind directions (°) | 0 |
 | Measurement planes | vertical centre plane y/H = 0, horizontal z/H = 1/16 |
-| Instrument | hot-wire anemometer, split-fibre probe, 100 Hz, 60 s per point |
-| Wind tunnel | Niigata Institute of Technology, Kashiwazaki |
-| Scale, note | model scale; Eddy3D solves it at 1:100 (H = 20 m) with the tunnel velocities |
+| Measured | 224 rows over 224 points: U, V, W, uu, vv, ww, k |
 
-## Frame and units
+## Agreement with the tunnel
 
-| Property | Definition |
-|---|---|
-| Origin | building centre on the ground plane |
-| x | +x streamwise (the wind at WD = 0 blows toward +x); slab spans x in [-0.025, 0.025] |
-| y | +y lateral; slab spans y in [-0.10, 0.10]; points published on the y <= 0 half by the tunnel's symmetry convention |
-| z | +z up from the ground; roof at z = 0.20 |
-| Lateral sign applied | -1 |
-| Coordinate scale applied | 0.001 |
-| Unit of length | m (model scale; converted from the published millimetres) |
-| Unit of velocity | m/s |
-| Unit of variance | m^2/s^2 |
-| Unit of k | m^2/s^2 |
-
-## Reference data
-
-Source in this repository: `case-b/RS_caseB.csv` (approach flow: `case-b/AF_caseB.csv`).
-
-The cleaned table has **224 rows** over **224 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`.
-
-| Configuration | Points |
-|---|---|
-| default, WD 0° | 224 |
-
-### Inflow
-
-| Property | Value |
-|---|---|
-| Method | log law, kappa = 0.41, least squares over z = 0.02 ... 2H on the case's own approach-flow file |
-| Friction velocity u* (m/s) | 0.399 |
-| Roughness length z₀ (mm) | 0.882 |
-| U_H, measured (m/s) | 5.133 |
-| Log-law error at H | +2.9 % |
-
-## Known data issues
-
-- The published coordinates are MILLIMETRES (x[mm]) while velocities are m/s. The API serves metres (coordinate_scale_applied = 0.001). Read as metres, every probe lands 1000x too far out.
-- The published lateral velocity V is positive toward -y (V = +3.630 m/s at (-0.025, -0.110, 0.013), just outside the y < 0 flank where the flow must deflect toward -y). The API multiplies V by -1 (lateral_sign_applied = -1) so that V is positive toward +y as in Case A. Scored without this, Case B's V comes out at R = -0.910 against R = +0.959 for U on the same points.
-- The RANS solution is symmetric, so model V = 0 on the centre plane while the tunnel measures small non-zero values there.
-
-## Validation
-
-### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor)
-
-Reattachment length L_r/H = 3.27.
-
-| Metric | U | V | W | k |
-|---|---|---|---|---|
-| **R** | +0.959 | +0.910 | +0.929 | +0.399 |
-| **FAC2** | 0.701 | 0.281 | 0.536 | 0.562 |
-| **FB** | +0.240 | +0.370 | +0.263 | +0.463 |
-| **hit rate** | 0.562 | 0.612 | 0.808 | 0.223 |
-| **n** | 224 | 224 | 224 | 224 |
-
-velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/B/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/B/pairs/openfoam12-realizableKE.csv' | relative_url }}). Reproduce: Eddy3D fixture TestAijCaseBContainerE2E; figures validation/plot_cases_ab_openfoam.py.
-
-### OpenLB (Eddy3D LBM)
-
-Reattachment length L_r/H = 2.71.
-
-| Metric | U | U, points ≥ 2 dx | V | W | k (resolved) | V, lateral sign flipped (control) |
-|---|---|---|---|---|---|---|
-| **R** | +0.790 | +0.900 | +0.831 | +0.774 | +0.486 | -0.831 |
-| **FAC2** | 0.375 | 0.642 | 0.129 | 0.237 | 0.045 | 0.138 |
-| **FB** | +0.280 | -0.072 | +1.392 | +0.376 | +1.641 | +2.873 |
-| **hit rate** | 0.290 | 0.516 | 0.549 | 0.652 | 0.004 | 0.491 |
-| **n** | 224 | 95 | 224 | 224 | 224 | 224 |
-
-velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/B/pairs/openlb.csv`]({{ '/api/cases/B/pairs/openlb.csv' | relative_url }}). Reproduce: Eddy3D fixture TestAijCaseBOpenLbContainerE2E (OpenLB eddy3dWind, CPU image, dx = 1.6 m); figure validation/plot_cases_ab_engines.py.
-
-### FluidX3D (Eddy3D GPU LBM)
-
-Reattachment length L_r/H = 2.63.
-
-| Metric | U, comparable heights | W, comparable heights | U, all points | U, approach flow alone (control) |
-|---|---|---|---|---|
-| **R** | +0.947 | +0.845 | +0.905 | +0.807 |
-| **FAC2** | 0.636 | 0.477 | 0.638 | 0.557 |
-| **FB** | +0.260 | +0.114 | +0.172 | -0.541 |
-| **hit rate** | 0.568 | 0.318 | 0.411 | 0.398 |
-| **n** | 88 | 88 | 224 | 88 |
-
-velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/B/pairs/fluidx3d.csv`]({{ '/api/cases/B/pairs/fluidx3d.csv' | relative_url }}). Reproduce: Eddy3D fixture TestAijCaseBFluidX3DE2E (Eddy3DCli.Tests/Validation/TestAijVelocityFluidX3DE2E; FluidX3D GPU lattice Boltzmann, D3Q19 Smagorinsky LES, dx = H/64, 100 + 500 H/U_H spin-up + averaging, with an empty-domain control on the same lattice); figure validation/plot_cases_ab_engines.py.
-
-### Eddy3D ML wind surrogate (pedestrian height)
-
-| Metric | \|U\| (z = H/16 plane) | \|U\|, lattice cut at ±250 m | wind reversed (control) |
+| Engine | Status | R | FAC2 |
 |---|---|---|---|
-| **R** | -0.236 | +0.010 | -0.236 |
-| **FAC2** | 0.361 | 0.459 | 0.361 |
-| **FB** | +0.821 | +0.463 | +0.821 |
-| **hit rate** | 0.172 | 0.189 | 0.172 |
-| **n** | 122 | 122 | 122 |
+| OpenFOAM 12 | <span class="label label-green status">scored</span> | +0.40 … +0.96 | 0.28 … 0.70 |
+| OpenLB | <span class="label label-green status">scored</span> | +0.49 … +0.90 | 0.04 … 0.64 |
+| FluidX3D | <span class="label label-green status">scored</span> | +0.85 … +0.95 | 0.48 … 0.64 |
+| ML surrogate | <span class="label label-green status">scored</span> | -0.24 … +0.01 | 0.36 … 0.46 |
+{: .scores }
 
-velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/B/pairs/ml-surrogate.csv`]({{ '/api/cases/B/pairs/ml-surrogate.csv' | relative_url }}). Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot_ml_surrogate.py.
+R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: every score, its figures and its reading are on the [Validation page]({{ '/cases/case-b/validation/' | relative_url }}).
 
-<figure class="figure">
-<img src="{{ '/assets/figures/cases-ab-openfoam-agreement.png' | relative_url }}" alt="cases-ab-openfoam-agreement.png">
-<figcaption><strong>Figure 2.</strong> Cases A and B, OpenFOAM 12 (realizable k-ε): measured against modelled U, V, W and k at every measured point, normalised by U_H, with the 1:1 line and the factor-of-two band.</figcaption>
-</figure>
-
-<figure class="figure">
-<img src="{{ '/assets/figures/cases-ab-openfoam-profiles.png' | relative_url }}" alt="cases-ab-openfoam-profiles.png">
-<figcaption><strong>Figure 3.</strong> Cases A and B, OpenFOAM 12: centre-plane vertical profiles of U/U_H at the measurement stations, measured points against the modelled line.</figcaption>
-</figure>
-
-<figure class="figure">
-<img src="{{ '/assets/figures/cases-ab-engine-comparison.png' | relative_url }}" alt="cases-ab-engine-comparison.png">
-<figcaption><strong>Figure 4.</strong> Cases A and B, every engine on the same points: measured against modelled U/U_H and V/U_H, one row per engine (OpenFOAM 12; OpenLB at dx = 1.6 m; FluidX3D at H/64). FluidX3D is scored on the filled points, the heights where its empty-domain control holds the imposed log law; the hollow points near the ground are excluded.</figcaption>
-</figure>
-
-<figure class="figure">
-<img src="{{ '/assets/figures/ml-surrogate-agreement.png' | relative_url }}" alt="ml-surrogate-agreement.png">
-<figcaption><strong>Figure 5.</strong> Eddy3D ML surrogate (Yel-2.0): measured against predicted pedestrian-height speed, one panel per case, with the 1:1 line and the factor-of-two band.</figcaption>
-</figure>
-
-How to read these is on the [Validation]({{ '/validation/' | relative_url }}) page.
-
-## API
-
-| Resource | Endpoint |
-|---|---|
-| Case | [`/api/cases/B.json`]({{ '/api/cases/B.json' | relative_url }}) |
-| Points (JSON) | [`/api/cases/B/points.json`]({{ '/api/cases/B/points.json' | relative_url }}) |
-| Points (CSV) | [`/api/cases/B/points.csv`]({{ '/api/cases/B/points.csv' | relative_url }}) |
-| Approach flow (CSV) | [`/api/cases/B/approach_flow.csv`]({{ '/api/cases/B/approach_flow.csv' | relative_url }}) |
-| Geometry | [`/api/cases/B/geometry.json`]({{ '/api/cases/B/geometry.json' | relative_url }}) |
-| Geometry (STL) | [`/api/cases/B/geometry.stl`]({{ '/api/cases/B/geometry.stl' | relative_url }}) |
-| Validation | [`/api/cases/B/validation.json`]({{ '/api/cases/B/validation.json' | relative_url }}) |
-
-## Attribution
-
-- Data collectors: Yoshihide Tominaga (Niigata Institute of Technology)
-- Editors and distributors: Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
-- DOI: [10.5281/zenodo.15401455](https://doi.org/10.5281/zenodo.15401455)
-- Citation requested: Miyazaki, T., Tominaga, Y. (2003). Wind tunnel experiment on flow field around a building model with a scale ratio of 4:4:1 placed within the surface boundary layer. Proc. Annual Meeting of Hokuriku Chapter, AIJ, 201-204 (in Japanese). https://www.aij.or.jp/paper/detail.html?productId=313933
-- Licence: CC BY 4.0
+{: .warning-title }
+> Before you compare
+>
+> The cleaned table is in SI units and one frame, with this case's corrections applied once; do not apply them again to the published files.
+>
+> - The lateral velocity V is multiplied by -1 in the cleaned table (`lateral_sign_applied`): the published file's V has the other sign convention.
+> - The published coordinates are multiplied by 0.001 in the cleaned table (`coordinate_scale_applied`).
+> - 3 known issues in the published files are listed under [Known data issues]({{ '/cases/case-b/data/' | relative_url }}#known-data-issues).

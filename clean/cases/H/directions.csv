@@ -1,0 +1,3 @@
+case_id,config,instrument,wind_direction_deg,wind_direction,flow_dir_x,flow_dir_y,rows,measured,sense_basis,status
+H,default,hydrocarbon_analyser,0,,1,0,826,826,measured: U < 0 in the recirculation behind the leeward face and W < 0 down the windward face (checks WD0_*); the point source sits behind the building,settled
+H,default,split_fibre,0,,1,0,826,826,measured: U < 0 in the recirculation behind the leeward face and W < 0 down the windward face (checks WD0_*); the point source sits behind the building,settled

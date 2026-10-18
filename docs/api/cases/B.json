@@ -1,7 +1,7 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/case.schema.json",
- "schema_version": "2.2.0",
- "data_version": "5af8c81571e452c1925b3efe58c698908066f64886eba5efd9b2f0348ecdc019",
+ "schema_version": "2.3.0",
+ "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
  "license": "CC-BY-4.0",
  "id": "B",
  "slug": "case-b",
@@ -63,7 +63,7 @@
   "log_law_error_at_H": "+2.9 %"
  },
  "approach_flow": {
-  "source": "case-b/AF_caseB.csv",
+  "source": "raw/cases/case-b/AF_caseB.csv",
   "units": {
    "z": "m",
    "U": "m/s",
@@ -142,11 +142,11 @@
  "points": {
   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/points.json",
   "csv": {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/points.csv?v=e8214b704821",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/points.csv?v=dec97c21217a",
    "path": "cases/B/points.csv",
    "media_type": "text/csv",
-   "bytes": 19396,
-   "sha256": "e8214b7048218de961dacf43b6ecfea419a5326205b2cf544782353dc7c9729e"
+   "bytes": 22093,
+   "sha256": "dec97c21217ae3886005264dca7096205c23bf80fb07320c80f66e238716f390"
   },
   "source": "clean/cases/B/points.csv",
   "rows": 224,
@@ -165,7 +165,8 @@
    "uu",
    "vv",
    "ww",
-   "k"
+   "k",
+   "campaign"
   ],
   "counts": {
    "config": {
@@ -230,10 +231,10 @@
  "doi_note": null,
  "citation_requested": "Miyazaki, T., Tominaga, Y. (2003). Wind tunnel experiment on flow field around a building model with a scale ratio of 4:4:1 placed within the surface boundary layer. Proc. Annual Meeting of Hokuriku Chapter, AIJ, 201-204 (in Japanese). https://www.aij.or.jp/paper/detail.html?productId=313933",
  "files_in_repository": {
-  "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/case-b",
-  "reference": "case-b/RS_caseB.csv",
-  "approach_flow": "case-b/AF_caseB.csv",
-  "readme": "case-b/readme_caseB.md"
+  "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/raw/cases/case-b",
+  "reference": "raw/cases/case-b/RS_caseB.csv",
+  "approach_flow": "raw/cases/case-b/AF_caseB.csv",
+  "readme": "raw/cases/case-b/readme_caseB.md"
  },
  "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-b.png",
  "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-b/"

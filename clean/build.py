@@ -1,12 +1,14 @@
 #!/usr/bin/env python
-"""Regenerate clean/ — the cleaned, queryable release of the AIJ UWE benchmark Cases A-E.
+"""Regenerate clean/ — the cleaned, queryable release of the AIJ UWE benchmark Cases A-M.
 
     python clean/build.py            # rebuild everything, run every check, exit 1 on any failure
     python clean/build.py --check    # re-run the checks against what is on disk, build nothing
 
 Inputs (never modified):
-    case-a/, case-b/, case-c/   the Zenodo files as cloned
-    case-d/, case-e/                      the clone's workbooks / 3dm (cross-checks only)
+    raw/cases/case-a/, case-b/, case-c/   the Zenodo files as published
+    raw/cases/case-d/, case-e/            the workbooks / 3dm (cross-checks only)
+    raw/cases/case-f/ ... case-m/         the Zenodo files as published, one module each (clean/case_<x>.py); the .xlsx workbooks of H to M
+                                          are read with the standard library (xlrd 2 reads only .xls)
     clean/sources/zenodo_caseD/, clean/sources/zenodo_caseE/
                                                         the official Zenodo files the clone lacks
                                                         (SHA256SUMS.txt beside them; see manifest provenance)
@@ -49,38 +51,57 @@ SRC = os.path.join(HERE, "sources")
 
 with open(os.path.join(REPO, "VERSION"), encoding="utf-8") as _f:
     RELEASE_VERSION = _f.read().strip()   # the repository's release (VERSION; rules in CHANGELOG.md)
-SCHEMA_VERSION = "1.0.0"                  # the tables' columns and types (SCHEMA.md); moves only when they do
+SCHEMA_VERSION = "2.0.0"                  # the tables' columns and types (SCHEMA.md); moves only when they do
 KAPPA = 0.41
 
 POINT_COLUMNS = ["case_id", "config", "instrument", "point_id", "wind_direction_deg", "wind_direction",
-                 "x", "y", "z", "U", "V", "W", "uu", "vv", "ww", "k", "Vs", "velocity_ratio"]
-TEXT_COLUMNS = {"case_id", "config", "instrument", "wind_direction"}
+                 "x", "y", "z", "U", "V", "W", "uu", "vv", "ww", "k", "Vs", "velocity_ratio",
+                 "campaign", "run", "uv", "uw", "vw", "C", "c_rms", "concentration_ratio", "T", "T_rms", "uc", "vc", "wc", "uT", "vT", "wT", "velocity_ratio_sd", "k_ratio"]
+TEXT_COLUMNS = {"case_id", "config", "instrument", "wind_direction", "campaign", "run"}
 INT_COLUMNS = {"point_id"}
 
 UNITS = {
-    "case_id": {"unit": "", "meaning": "AIJ UWE case letter: A, B, C, D or E"},
-    "config": {"unit": "", "meaning": "configuration within the case: 'default' (A, B, D); Case C centre building '0D' | '1D' | '2D'; Case E 'bc' (before construction) | 'ac' (after construction)"},
-    "instrument": {"unit": "", "meaning": "'split_fibre' = hot-wire split-fibre probe, vector components; 'thermistor' = omnidirectional scalar speed"},
+    "case_id": {"unit": "", "meaning": "AIJ UWE case letter, A to M"},
+    "config": {"unit": "", "meaning": "configuration within the case: 'default' (A, B, D, G to M, and Case F's 9 m tunnel plane, the benchmark plane); Case C centre building '0D' | '1D' | '2D'; Case E 'bc' (before construction) | 'ac' (after construction); Case F 'h5' | 'h20' (the tunnel's 5 m and 20 m planes above ground)"},
+    "instrument": {"unit": "", "meaning": "what measured the row. Tunnel: 'split_fibre' = hot-wire split-fibre probe, vector components (A, B, D, H, J, K, L, M); 'thermistor' = omnidirectional scalar speed (C, D, E, F); 'ldv' = laser Doppler anemometer, U V W k (I); 'hydrocarbon_analyser' = high-speed total hydrocarbon analyser, tracer concentration (H, I, M). Field (campaign 'field'): 'cup_anemometer' = cup anemometer, scalar speed ratio (F); 'sonic_anemometer' = three-dimensional ultrasonic anemometer, scalar speed ratio and k ratio (G); 'sorbent_gc_ecd' = sorbent tubes read by gas chromatography with an electron-capture detector, tracer concentration (M)"},
     "point_id": {"unit": "", "meaning": "the tunnel's own measurement point number (No.); shared across configurations and directions of a case"},
-    "wind_direction_deg": {"unit": "deg", "meaning": "the case's wind direction label. A-D: the AIJ turntable angle WD (0 = +x). E: meteorological FROM-direction, clockwise from north (N = 0, E = 90). The flow vector per direction is in directions.csv"},
-    "wind_direction": {"unit": "", "meaning": "compass name of the FROM-direction (Case E only; '' elsewhere)"},
-    "x": {"unit": "m", "meaning": "case frame (SCHEMA.md): +x = streamwise at WD = 0 for A-D, +x = east for E; model-scale metres for A-D, full-scale metres for E"},
-    "y": {"unit": "m", "meaning": "case frame: +y lateral (A-D), +y = north (E)"},
-    "z": {"unit": "m", "meaning": "height above the ground plane"},
+    "wind_direction_deg": {"unit": "deg", "meaning": "the case's wind direction label. A-D and G-L: the AIJ turntable angle WD (0 = +x; G to L have only 0). E and F: meteorological FROM-direction, clockwise from north (N = 0, E = 90). M: the FROM-direction in the case's frame (+x is north, so 180 blows toward +x), a field run's own mean direction at the reference point. The flow vector per direction is in directions.csv"},
+    "wind_direction": {"unit": "", "meaning": "compass name of the FROM-direction (Cases E and F; '' elsewhere)"},
+    "x": {"unit": "m", "meaning": "case frame (SCHEMA.md): +x = streamwise at WD = 0 for A-D and H-L, downwind for G, east for E and F, north for M; model-scale metres for A-D and H-L, full-scale metres for E, F, G and M"},
+    "y": {"unit": "m", "meaning": "case frame: +y lateral (A-D, H-L), along the tree belt (G), north (E, F), west (M)"},
+    "z": {"unit": "m", "meaning": "height above the ground plane (the tunnel floor in Cases F and M: F's height above ground = z - 10 m, M's campus ground lies near z = 32 m)"},
     "U": {"unit": "m/s", "meaning": "mean velocity component along +x"},
-    "V": {"unit": "m/s", "meaning": "mean velocity component along +y (positive toward +y in EVERY case; Case B's published sign is flipped, see manifest transform)"},
+    "V": {"unit": "m/s", "meaning": "mean velocity component along +y (positive toward +y in EVERY case; the published sign is flipped in Case B and for points 1-220 of Case H, see manifest transform)"},
     "W": {"unit": "m/s", "meaning": "mean velocity component along +z"},
     "uu": {"unit": "m^2/s^2", "meaning": "variance of the x-component fluctuation <u'u'> (Case A publishes rms; squared here)"},
     "vv": {"unit": "m^2/s^2", "meaning": "variance <v'v'>"},
     "ww": {"unit": "m^2/s^2", "meaning": "variance <w'w'>"},
     "k": {"unit": "m^2/s^2", "meaning": "turbulent kinetic energy as published (= (uu+vv+ww)/2 wherever all three variances exist; checked)"},
     "Vs": {"unit": "m/s", "meaning": "mean omnidirectional SCALAR wind speed from a thermistor anemometer. NOT |mean velocity vector| (Case D's split-fibre |U| column is dropped, see log)"},
-    "velocity_ratio": {"unit": "-", "meaning": "Case E: Vs / U_ref with U_ref = the approach-flow speed at z = 15.9 m (full scale); see manifest cases.E.normalisation"},
+    "velocity_ratio": {"unit": "-", "meaning": "mean speed over the case's reference speed. E: Vs / U_ref, U_ref = the approach-flow speed at z = 15.9 m (full scale). F: U / U_ref, U_ref = the approaching mean wind speed at 500 m (full scale; field values converted to it by the tunnel). G: U / UH, UH = the mean speed at the tree height (7 m) during each measurement period. See manifest cases.<id>.normalisation; the other cases carry m/s instead"},
+    "campaign": {"unit": "", "meaning": "'wind_tunnel' (model scale) or 'field' (a full-scale observation: Cases F, G, M)"},
+    "run": {"unit": "", "meaning": "replicate label within a campaign where the dataset publishes individual runs (Case M); empty elsewhere"},
+    "uv": {"unit": "m^2/s^2", "meaning": "Reynolds shear stress <u'v'> as published"},
+    "uw": {"unit": "m^2/s^2", "meaning": "Reynolds shear stress <u'w'> as published"},
+    "vw": {"unit": "m^2/s^2", "meaning": "Reynolds shear stress <v'w'> as published"},
+    "C": {"unit": "ppm", "meaning": "mean tracer-gas concentration as published (volume fraction x 1e6 of the released gas diluted in air; Case M's field runs are published in ppq and converted x 1e-9)"},
+    "c_rms": {"unit": "ppm", "meaning": "rms of the concentration fluctuation"},
+    "concentration_ratio": {"unit": "-", "meaning": "C / c0, c0 = q / (U_ref L_ref^2) as the benchmark defines it for the case (manifest cases.<id>.normalisation)"},
+    "T": {"unit": "degC", "meaning": "mean air temperature as published (Cases J, L)"},
+    "T_rms": {"unit": "K", "meaning": "rms of the temperature fluctuation"},
+    "uc": {"unit": "ppm m/s", "meaning": "turbulent concentration flux <u'c'>"},
+    "vc": {"unit": "ppm m/s", "meaning": "turbulent concentration flux <v'c'>"},
+    "wc": {"unit": "ppm m/s", "meaning": "turbulent concentration flux <w'c'>"},
+    "uT": {"unit": "K m/s", "meaning": "turbulent heat flux <u'theta'>"},
+    "vT": {"unit": "K m/s", "meaning": "turbulent heat flux <v'theta'>"},
+    "wT": {"unit": "K m/s", "meaning": "turbulent heat flux <w'theta'>"},
+    "velocity_ratio_sd": {"unit": "-", "meaning": "standard deviation of velocity_ratio over the observations behind a field value (Case F)"},
+    "k_ratio": {"unit": "-", "meaning": "k / U_ref^2 where the dataset publishes only normalised values (Case G; U_ref = U at the tree height)"},
 }
 APPROACH_FLOW_UNITS = {
-    "case_id": UNITS["case_id"], "z": {"unit": "m", "meaning": "height above ground (model-scale metres A-D, full-scale metres E)"},
-    "U": {"unit": "m/s", "meaning": "mean streamwise velocity"},
-    "uu": UNITS["uu"], "vv": UNITS["vv"], "ww": UNITS["ww"], "k": {"unit": "m^2/s^2", "meaning": "turbulent kinetic energy"},
+    "case_id": UNITS["case_id"], "z": {"unit": "m", "meaning": "height above ground (model-scale metres A-D and H-L, full-scale metres E, F, G and M)"},
+    "U": {"unit": "m/s", "meaning": "mean streamwise velocity. EXCEPT Case G, whose approach-flow table publishes U/Ub (Ub = U at 9 m, not published in m/s) and is carried as published: dimensionless there"},
+    "uu": UNITS["uu"], "vv": UNITS["vv"], "ww": UNITS["ww"], "k": {"unit": "m^2/s^2", "meaning": "turbulent kinetic energy. EXCEPT Case G: k/Ub^2, dimensionless"},
 }
 DIRECTION_UNITS = {
     "case_id": UNITS["case_id"], "config": UNITS["config"], "instrument": UNITS["instrument"],
@@ -115,7 +136,10 @@ def check(case: str, name: str, ok: bool, warn: bool = False, **measured):
     """
     verdict = "PASS" if ok else ("WARN" if warn else "FAIL")
     clean = {k: _jsonable(v) for k, v in measured.items()}
-    CHECKS.append({"case": case, "check": name, "pass": bool(ok), "severity": "warning" if (warn and not ok) else ("info" if ok else "error"), **clean})
+    entry = {"case": case, "check": name, "pass": bool(ok), "severity": "warning" if (warn and not ok) else ("info" if ok else "error")}
+    if warn and not ok:
+        entry["warning"] = True   # pass is false, and this is a documented warning, not a failure: failed counts the errors only
+    CHECKS.append({**entry, **clean})
     log(f"  [{verdict}] {case} {name}" + (f"  {json.dumps(clean, ensure_ascii=False)}" if clean else ""))
     return ok
 
@@ -139,12 +163,33 @@ def _jsonable(v):
     return v
 
 
-def sha256(path: str) -> str:
-    h = hashlib.sha256()
+TEXT_SUFFIXES = {".csv", ".md", ".txt", ".json"}
+
+
+def _is_text(path: str, data: bytes) -> bool:
+    ext = os.path.splitext(path)[1].lower()
+    if ext in TEXT_SUFFIXES:
+        return True
+    if ext == ".stl":   # ASCII STL names its facets; a binary one may start with 'solid' too, but its size is 84 + 50 n
+        binary = len(data) >= 84 and len(data) == 84 + 50 * int.from_bytes(data[80:84], "little")
+        return data.startswith(b"solid") and b"facet" in data[:1024] and not binary
+    return False
+
+
+def fingerprint(path: str) -> tuple[str, int, str]:
+    """(sha256, bytes, eol) of one source file, the same on every checkout.
+
+    A text file is hashed and sized with CRLF folded to LF, because git stores the LF form (.gitattributes) and a checkout
+    on Windows, or a working tree older than the attribute, holds the CRLF form: the manifest must not depend on which.
+    Binary files, and the byte-exact mirrors under clean/sources (`-text`, SHA256SUMS.txt beside them), are hashed as stored.
+    """
     with open(path, "rb") as f:
-        for chunk in iter(lambda: f.read(1 << 20), b""):
-            h.update(chunk)
-    return h.hexdigest()
+        data = f.read()
+    mirror = os.path.abspath(path).startswith(SRC + os.sep)
+    if mirror or not _is_text(path, data):
+        return hashlib.sha256(data).hexdigest(), len(data), "as-is"
+    data = data.replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest(), len(data), "lf-normalised"
 
 
 # --------------------------------------------------------------------------------------------- readers
@@ -383,33 +428,42 @@ def interp_log(z, U, zq):
 # --------------------------------------------------------------------------------------------- case facts (from the readmes / data paper; verified in the checks)
 
 CASES = {
-    "A": {"title": "Case A — flow around a 1:1:2 building", "folder": "case-a", "zenodo_concept": "10.5281/zenodo.15050147", "zenodo_version": "10.5281/zenodo.15050148",
+    "A": {"title": "Case A — flow around a 1:1:2 building", "folder": "raw/cases/case-a", "zenodo_concept": "10.5281/zenodo.15050147", "zenodo_version": "10.5281/zenodo.15050148",
           "b": 0.08, "H": 0.16, "U_H_stated": 4.49, "Re_H": 24000, "scale": None,
           "contact": "Takeshi Ishihara <ishihara@bridge.t.u-tokyo.ac.jp>", "collectors": ["Takeshi Ishihara (The University of Tokyo)", "Kazuki Hibi (Numerical Flow Design)"],
           "citation": "Meng, Y., & Hibi, K. (1998). Turbulent measurements of the flow field around a high-rise building. J. Wind Eng. JAWE 76, 55-64. https://doi.org/10.5359/jawe.1998.76_55"},
-    "B": {"title": "Case B — flow around a 1:4:4 slab", "folder": "case-b", "zenodo_concept": "10.5281/zenodo.15401455", "zenodo_version": "10.5281/zenodo.15401456",
+    "B": {"title": "Case B — flow around a 1:4:4 slab", "folder": "raw/cases/case-b", "zenodo_concept": "10.5281/zenodo.15401455", "zenodo_version": "10.5281/zenodo.15401456",
           "depth": 0.05, "width": 0.20, "H": 0.20, "U_H_stated": 5.1, "Re_H": 72000, "scale": None,
           "contact": "Yoshihide Tominaga <tominaga@abe.niit.ac.jp>", "collectors": ["Yoshihide Tominaga (Niigata Institute of Technology)"],
           "citation": "Miyazaki, T., Tominaga, Y. (2003). Wind tunnel experiment on flow field around a building model with a scale ratio of 4:4:1 placed within the surface boundary layer. Proc. Annual Meeting of Hokuriku Chapter, AIJ, 201-204 (in Japanese). https://www.aij.or.jp/paper/detail.html?productId=313933"},
-    "C": {"title": "Case C — flow within a 3 x 3 array of blocks", "folder": "case-c", "zenodo_concept": "10.5281/zenodo.15401791", "zenodo_version": "10.5281/zenodo.15401792",
+    "C": {"title": "Case C — flow within a 3 x 3 array of blocks", "folder": "raw/cases/case-c", "zenodo_concept": "10.5281/zenodo.15401791", "zenodo_version": "10.5281/zenodo.15401792",
           "D": 0.20, "pitch": 0.40, "U_H_stated": 3.65, "Re_H": 52000, "scale": None,
           "contact": "Yoshitami Nonomura <nonomura.yoshitami@yamato-u.ac.jp>", "collectors": ["Yoshitami Nonomura (Yamato University)"],
           "citation": "Nonomura, Y., Kobayashi, N., Tominaga, Y., Mochida, A. (2003). The cross comparison of CFD results for flow field around building models (part 3). Japan Association for Wind Engineering 95, 83-84 (in Japanese). https://doi.org/10.14887/jaweam.2003.0.41.0"},
-    "D": {"title": "Case D — flow around a high-rise building in city blocks", "folder": "case-d", "zenodo_concept": "10.5281/zenodo.15402668", "zenodo_version": "10.5281/zenodo.15402669",
+    "D": {"title": "Case D — flow around a high-rise building in city blocks", "folder": "raw/cases/case-d", "zenodo_concept": "10.5281/zenodo.15402668", "zenodo_version": "10.5281/zenodo.15402669",
           "H": 0.25, "U_H_stated": 6.65, "Re_H": 110000, "scale": 400,
           "contact": "Yoshihide Tominaga <tominaga@abe.niit.ac.jp>", "collectors": ["Yoshihide Tominaga (Niigata Institute of Technology)"],
           "citation": "Kikumoto, H., Okaze, T., Yoshie, R. et al. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083, section 3.4. https://doi.org/10.1002/2475-8876.70083"},
-    "E": {"title": "Case E — flow within an actual urban area in Niigata", "folder": "case-e", "zenodo_concept": "10.5281/zenodo.15429017", "zenodo_version": "10.5281/zenodo.15429018",
+    "E": {"title": "Case E — flow within an actual urban area in Niigata", "folder": "raw/cases/case-e", "zenodo_concept": "10.5281/zenodo.15429017", "zenodo_version": "10.5281/zenodo.15429018",
           "ZR": 250.0, "UR": 7.8, "z_ref": 15.9, "Re": 17000, "scale": 250,
           "contact": "Yoshihide Tominaga <tominaga@abe.niit.ac.jp>", "collectors": ["Yoshihide Tominaga (Niigata Institute of Technology)"],
           "citation": "Tominaga, Y., Mochida, A., Yoshie, R., Kataoka, H., Nozu, T., Yoshikawa, M., Shirasawa, T. (2008). AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings. JWEIA 96, 1749-1761. https://doi.org/10.1016/j.jweia.2008.02.058"},
 }
 EDITORS = ["Yoshihide Tominaga (Niigata Institute of Technology)", "Hideki Kikumoto (The University of Tokyo)", "Tsubasa Okaze (Institute of Science Tokyo)"]
+DIRECTION_BASIS: dict[str, tuple[str, str]] = {}   # Cases J-L, one direction each: case -> (sense_basis, status); each build() fills its own
+
+# Cases F-M: one module each (clean/case_<x>.py) with META (this table's entry) and build(B, prov); F, G, H, I and M also
+# write their own directions(B, pts), J, K and L register their DIRECTION_BASIS in build() and use the generic table.
+import case_f, case_g, case_h, case_i, case_j, case_k, case_l, case_m  # noqa: E402  (clean/ is sys.path[0] when this file is run)
+MODULES = {"F": case_f, "G": case_g, "H": case_h, "I": case_i, "J": case_j, "K": case_k, "L": case_l, "M": case_m}
+CASES.update({k: m.META for k, m in MODULES.items()})
+FULL_SCALE = {"E", "F", "G", "M"}   # cases whose frame is in full-scale metres
 
 
 def row(**kw):
     r = {c: (("" if c in TEXT_COLUMNS else math.nan)) for c in POINT_COLUMNS}
     r["config"] = "default"
+    r["campaign"] = "wind_tunnel"
     r["wind_direction_deg"] = 0.0
     r.update(kw)
     return r
@@ -1002,12 +1056,15 @@ def build_E(prov):
 # --------------------------------------------------------------------------------------------- directions
 
 def directions_for(case, pts, frame_note):
+    if hasattr(MODULES.get(case), "directions"):
+        return MODULES[case].directions(sys.modules[__name__], pts)
     rows = []
     for (cfg, inst, wd, wname), g in pts.groupby(["config", "instrument", "wind_direction_deg", "wind_direction"], sort=True):
-        q = {"A": "U", "B": "U", "C": "Vs", "D": ("Vs" if inst == "thermistor" else "U"), "E": "velocity_ratio"}[case]
+        q = {"A": "U", "B": "U", "C": "Vs", "D": ("Vs" if inst == "thermistor" else "U"), "E": "velocity_ratio"}.get(case, "U")
         r = math.radians(wd)
-        if case in ("A", "B"):
-            fx, fy, basis, status = 1.0, 0.0, "definition: +x streamwise (MP drawings; checks lateral_sign_*)", "settled"
+        if case in ("A", "B") or case in DIRECTION_BASIS:
+            fx, fy = 1.0, 0.0
+            basis, status = DIRECTION_BASIS.get(case, ("definition: +x streamwise (MP drawings; checks lateral_sign_*)", "settled"))
         elif case == "C":
             fx, fy = math.cos(r), -math.sin(r)
             basis = "measured: WD0 field y-mirror symmetric and faster upwind; WD45 field mirror-symmetric about y = -x, not y = +x (checks WD45_symmetry_plane_*)" if wd else "measured: y-mirror symmetry + windward band faster (checks WD0_flow_is_along_x_*)"
@@ -1095,10 +1152,12 @@ def build():
     C = build_C(prov); results["C"] = C
     Dd = build_D(prov); results["D"] = Dd
     E = build_E(prov); results["E"] = E
+    for case, mod in MODULES.items():
+        results[case] = mod.build(sys.modules[__name__], prov)
 
     all_pts, all_af, all_dir = [], [], []
     manifest_cases = {}
-    for case in "ABCDE":
+    for case in "ABCDE" + "".join(MODULES):
         pts, afl, geo, inflow, frame, transform = results[case][:6]
         extra = results[case][6] if len(results[case]) > 6 else None
         pts = pts.sort_values(["config", "instrument", "wind_direction_deg", "point_id"], kind="mergesort").reset_index(drop=True)
@@ -1117,7 +1176,7 @@ def build():
         all_pts.append(pts); all_af.append(afl); all_dir.append(dirs)
         gfiles = []
         for entry in geo:
-            if case == "E":
+            if len(entry) == 4:
                 cfg, boxes, tris, note = entry
             else:
                 cfg, boxes, note = entry
@@ -1133,7 +1192,7 @@ def build():
                     raise SystemExit(f"{case}/{cfg}: box geometry not watertight")
             gfiles.append(gf)
             log(f"[{case}] wrote {name}: {st['triangles']} triangles, watertight={st['watertight']}, bbox {st['bbox_min']}..{st['bbox_max']}")
-        write_json(os.path.join(cdir, "geometry.json"), {"case_id": case, "units": "metres" + (" (full scale)" if case == "E" else " (model scale)"), "frame": frame, "files": gfiles})
+        write_json(os.path.join(cdir, "geometry.json"), {"case_id": case, "units": "metres" + (" (full scale)" if case in FULL_SCALE else " (model scale)"), "frame": frame, "files": gfiles})
         counts = {"rows": int(len(pts)), "distinct_points": int(pts.point_id.nunique()),
                   "by_config": {str(k): int(v) for k, v in pts.groupby("config").size().items()},
                   "by_instrument": {str(k): int(v) for k, v in pts.groupby("instrument").size().items()},
@@ -1142,8 +1201,8 @@ def build():
         cols_present = [cname for cname in POINT_COLUMNS if cname in TEXT_COLUMNS or cname in INT_COLUMNS or pts[cname].notna().any()]
         meta = CASES[case]
         manifest_cases[case] = {
-            "id": case, "title": meta["title"], "status": "provisional" if case == "E" else "released",
-            "status_note": ("Case E: points and inflow are released at full precision from the official workbook and pass every check; what stays provisional is the GEOMETRY of the before-construction state (an Eddy3D reconstruction with no published source) and the open questions in QUESTIONS.md (Q3)." if case == "E" else None),
+            "id": case, "title": meta["title"], "status": "provisional" if case == "E" else meta.get("status", "released"),
+            "status_note": ("Case E: points and inflow are released at full precision from the official workbook and pass every check; what stays provisional is the GEOMETRY of the before-construction state (an Eddy3D reconstruction with no published source) and the open questions in QUESTIONS.md (Q3)." if case == "E" else meta.get("status_note")),
             "doi": meta["zenodo_concept"], "doi_version": meta["zenodo_version"], "zenodo_record": f"https://zenodo.org/records/{meta['zenodo_concept'].split('.')[-1]}",
             "licence": "CC BY 4.0", "data_collectors": meta["collectors"], "editors_distributors": EDITORS, "contact": meta["contact"], "citation_requested": meta["citation"],
             "files": {"points_csv": f"cases/{case}/points.csv", "points_parquet": f"cases/{case}/points.parquet",
@@ -1151,13 +1210,15 @@ def build():
                       "directions_csv": f"cases/{case}/directions.csv", "geometry_json": f"cases/{case}/geometry.json",
                       "geometry": [g["file"] for g in gfiles]},
             "columns_present": cols_present, "counts": counts,
+            **({"normalisation": n} if (n := (extra or {}).get("normalisation") or meta.get("normalisation")) else {}),   # the case module's extra, else its META
             "configurations": dirs[["config", "instrument", "wind_direction_deg", "wind_direction", "rows", "measured", "status"]].to_dict("records"),
             "frame": frame, "transform_from_published": transform, "inflow": inflow,
             "geometry_summary": [{"configuration": g["configuration"], "file": g["file"], "triangles": g["stats"]["triangles"], "watertight": g["stats"]["watertight"], "bbox_min": g["stats"]["bbox_min"], "bbox_max": g["stats"]["bbox_max"], "boxes": g.get("box_count")} for g in gfiles],
-            "provenance": [{"path": relp(p) if p.startswith(HERE) else os.path.relpath(p, REPO).replace(os.sep, "/"), "sha256": sha256(p), "bytes": os.path.getsize(p),
-                            "origin": ("Zenodo " + meta["zenodo_version"] + " (downloaded; SHA256SUMS.txt beside it)") if p.startswith(SRC) else "repository clone of the Zenodo record"} for p in prov[case]],
+            "provenance": [{"path": relp(p) if p.startswith(HERE) else os.path.relpath(p, REPO).replace(os.sep, "/"), "sha256": fp[0], "bytes": fp[1], "eol": fp[2],
+                            "origin": ("Zenodo " + meta["zenodo_version"] + " (downloaded; SHA256SUMS.txt beside it)") if p.startswith(SRC) else "repository clone of the Zenodo record"}
+                           for p, fp in ((p, fingerprint(p)) for p in prov[case])],
             "known_issues": (extra or {}).get("known_issues", {}),
-            "extra_measurements": {k: v for k, v in (extra or {}).items() if k != "known_issues"},
+            "extra_measurements": {k: v for k, v in (extra or {}).items() if k not in ("known_issues", "normalisation")},
         }
     big = pd.concat(all_pts, ignore_index=True)
     write_csv(os.path.join(HERE, "points.csv"), big)
@@ -1171,7 +1232,7 @@ def build():
     write_json(os.path.join(HERE, "units.json"), {"points": UNITS, "approach_flow": APPROACH_FLOW_UNITS, "directions": DIRECTION_UNITS,
                                                    "note": "column headers in every CSV are bare names; this file is the units sidecar; the parquet files carry the same map in their schema metadata"})
     manifest = {
-        "name": "AIJ UWE benchmark — cleaned release, Cases A-E", "version": RELEASE_VERSION, "schema_version": SCHEMA_VERSION,
+        "name": "AIJ UWE benchmark — cleaned release, Cases A-M", "version": RELEASE_VERSION, "schema_version": SCHEMA_VERSION,
         "licence": {"data": "CC BY 4.0", "url": "https://creativecommons.org/licenses/by/4.0/", "note": "The measurement data belongs to its collectors and distributors, named per case. Cite the benchmark paper and each case's requested citation."},
         "cite": {"benchmark": "Kikumoto, H., Okaze, T., Yoshie, R. et al. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083",
                  "guidelines": "Tominaga, Y. et al. (2008). AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings. JWEIA 96, 1749-1761. https://doi.org/10.1016/j.jweia.2008.02.058"},
@@ -1191,7 +1252,7 @@ def write_checks_and_log():
     failed = [c for c in CHECKS if c["severity"] == "error"]
     warned = [c for c in CHECKS if c["severity"] == "warning"]
     write_json(os.path.join(HERE, "checks.json"), {"total": len(CHECKS), "failed": len(failed), "warnings": len(warned),
-                                                    "note": "severity 'warning' = a known, documented discrepancy in the published sources (README.md / QUESTIONS.md); it never fails the build", "checks": CHECKS})
+                                                    "note": "an entry with \"pass\": false and \"warning\": true (severity 'warning') is a known, documented discrepancy in the published sources (README.md / QUESTIONS.md), not a failure: 'warnings' counts them, 'failed' counts severity 'error' only, and a warning never fails the build", "checks": CHECKS})
     with io.open(os.path.join(HERE, "build.log"), "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(LOG) + "\n")
     return failed
@@ -1202,11 +1263,11 @@ def recheck():
     against what the sources produce now, cell for cell, and the parquet files against the CSVs."""
     import pyarrow.parquet as pq
     prov = {}
-    for case, fn in zip("ABCDE", (build_A, build_B, build_C, build_D, build_E)):
+    for case, fn in list(zip("ABCDE", (build_A, build_B, build_C, build_D, build_E))) + [(k, (lambda p, m=m: m.build(sys.modules[__name__], p))) for k, m in MODULES.items()]:
         pts = fn(prov)[0].sort_values(["config", "instrument", "wind_direction_deg", "point_id"], kind="mergesort").reset_index(drop=True)
         for col in ("x", "y", "z", "uu", "vv", "ww"):
             pts[col] = pts[col].round(9)
-        disk_csv = pd.read_csv(os.path.join(HERE, "cases", case, "points.csv"), keep_default_na=True)
+        disk_csv = pd.read_csv(os.path.join(HERE, "cases", case, "points.csv"), keep_default_na=True, dtype={c: str for c in TEXT_COLUMNS})   # `run` is text: "1" must not come back as 1.0
         disk_pq = pq.read_table(os.path.join(HERE, "cases", case, "points.parquet")).to_pandas()
         for name, disk in (("csv", disk_csv), ("parquet", disk_pq)):
             same_shape = list(disk.columns) == POINT_COLUMNS and len(disk) == len(pts)
@@ -1221,7 +1282,7 @@ def recheck():
                         a = disk[col].astype(float).to_numpy()
                         b = pts[col].astype(float).to_numpy()
                         both_nan = np.isnan(a) & np.isnan(b)
-                        d = np.where(both_nan, 0.0, np.abs(a - b))
+                        d = np.where(both_nan, 0.0, np.abs(a - b) / np.maximum(1.0, np.abs(b)))   # %.10g keeps 10 significant digits: absolute below 1, relative above
                         worst = max(worst, float(np.nanmax(np.where(np.isnan(d), math.inf, d))) if len(d) else 0.0)
             check(case, f"on_disk_{name}_matches_sources", same_shape and worst < 1e-9, rows=len(disk), max_abs_diff=worst)
 

@@ -50,15 +50,18 @@ METRIC = obj(["Count", "Fb", "R"], {
     "Mg": NUM_OR_NULL, "Vg": NUM_OR_NULL, "GeometricPairs": {"type": ["integer", "null"]}, "R": NUM_OR_NULL,
 })
 
-ENGINE_ID = {"enum": ["openfoam12-realizableKE", "openlb", "fluidx3d", "ml-surrogate"]}
+ENGINE_ID = {"enum": ["openfoam12-realizableKE", "openfoam12-kEpsilon", "openfoam12-kOmegaSST", "umf-realizableKE", "umf-buoyantKEpsilon", "openlb", "fluidx3d", "ml-surrogate"]}
 STATUS = {"enum": ["scored", "running", "pending", "not comparable"]}
-CASE_ID = {"enum": ["A", "B", "C", "D", "E"]}
+CASE_ID = {"enum": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"]}
 
 POINT = obj(["point_id", "x", "y", "z"], {
     "point_id": {"type": "integer"}, "config": {"type": "string"}, "instrument": {"type": "string"},
     "wind_direction": {"type": "string"}, "wind_direction_deg": {"type": "number"},
     "x": {"type": "number"}, "y": {"type": "number"}, "z": {"type": "number"},
-    **{q: NUM_OR_NULL for q in ("U", "V", "W", "uu", "vv", "ww", "k", "Vs", "velocity_ratio")},
+    "campaign": {"type": "string"}, "run": {"type": "string"},
+    **{q: NUM_OR_NULL for q in ("U", "V", "W", "uu", "vv", "ww", "k", "Vs", "velocity_ratio",
+                                "uv", "uw", "vw", "C", "c_rms", "concentration_ratio", "T", "T_rms",
+                                "uc", "vc", "wc", "uT", "vT", "wT", "velocity_ratio_sd", "k_ratio")},
 })
 
 FRAME = obj(["origin", "x", "y", "z"], {k: {"type": "string"} for k in ("origin", "x", "y", "z")})
@@ -73,14 +76,23 @@ def _doc(name, title, description, required, properties):
 
 DOCUMENTS = {
     "index": _doc("index", "API index", "Every endpoint and file, versions, compatibility policy, changelog, licence and citation.",
-                  ["name", "base_url", "versions", "endpoints", "case_ids", "files", "changelog", "cite"], {
+                  ["name", "base_url", "tree", "release_base_url", "versions_url", "versions", "endpoints", "case_ids",
+                   "files", "changelog", "cite"], {
         "name": {"type": "string"}, "description": {"type": "string"},
-        "base_url": URL, "fallback_base_url": URL, "repository": URL, "site": URL,
+        "base_url": dict(URL, description="the root of this tree: every URL in the tree's documents starts with it"),
+        "tree": {"enum": ["release", "latest"],
+                 "description": ("'release': a frozen copy of one release under `/api/<release>/`, which never changes; "
+                                 "'latest': the unversioned `/api/` alias, which always equals the newest release")},
+        "release_base_url": dict(URL, description=("the frozen copy of `versions.release`: equal to base_url in a release "
+                                                   "tree, the pinned address of this release in the latest alias")),
+        "versions_url": dict(URL, description="versions.json, the list of every release (always at the unversioned /api/ path)"),
+        "fallback_base_url": URL, "fallback_note": {"type": "string"}, "repository": URL, "site": URL,
         "versions": obj(["release", "schema", "data"], {"release": SEMVER, "schema": SEMVER, "data": SHA256,
                                                      "clean_manifest": STR_OR_NULL}),
         "release": obj(["version", "date", "tag", "url", "base_url", "changelog"], {
             "version": SEMVER, "date": {"type": "string", "format": "date"}, "tag": {"type": "string", "pattern": r"^v\d+\.\d+\.\d+$"},
-            "url": URL, "base_url": URL, "changelog": URL}),
+            "url": URL, "base_url": dict(URL, description="the raw files of this release's frozen copy, at the release tag"),
+            "changelog": URL}),
         "compatibility": {"type": "string"}, "caching": {"type": "string"},
         "changelog": arr(obj(["version", "date", "changes"], {
             "version": {"type": "string"}, "date": {"type": "string", "format": "date"}, "changes": arr({"type": "string"})})),
@@ -99,7 +111,26 @@ DOCUMENTS = {
         "license_detail": obj(["spdx", "url"], {"spdx": {"type": "string"}, "name": {"type": "string"}, "url": URL, "note": {"type": "string"}}),
         "cite": obj(["benchmark"], {"benchmark": {"type": "string"}}),
     }),
-    "cases": _doc("cases", "Case list", "The five cases with their frame, units, counts, engine status and links.", ["cases"], {
+    "versions": _doc("versions", "Release list", "Every release of the data and API, newest first, with the address of its files.",
+                     ["latest", "latest_base_url", "versions"], {
+        "description": {"type": "string"},
+        "latest": dict(SEMVER, description="the newest release; the unversioned /api/ paths equal it"),
+        "latest_base_url": dict(URL, description="the unversioned alias of the newest release"),
+        "versions": arr(obj(["version", "date", "status", "schema_version", "data_version", "base_url", "index_url",
+                             "self_contained", "tag", "tag_url", "changelog_url"], {
+            "version": SEMVER, "date": {"type": "string", "format": "date"},
+            "status": {"enum": ["latest", "superseded"]},
+            "schema_version": {"type": "string", "pattern": r"^\d+\.\d+\.\d+$"}, "data_version": SHA256,
+            "base_url": dict(URL, description="where this release's files are frozen: GET base_url + a path from its index.json"),
+            "index_url": dict(URL, description="the index.json of this release"),
+            "fallback_base_url": {"type": ["string", "null"], "format": "uri"},
+            "self_contained": {"type": "boolean",
+                               "description": ("true if every URL to a file of the API inside this release's documents points back into "
+                                               "base_url (versions.json, served only at the unversioned path, aside)")},
+            "note": {"type": "string"},
+            "tag": {"type": "string", "pattern": r"^v\d+\.\d+\.\d+$"}, "tag_url": URL, "changelog_url": URL}), minItems=1),
+    }),
+    "cases": _doc("cases", "Case list", "Every case with its frame, units, counts, engine status and links.", ["cases"], {
         "cases": arr(obj(["id", "slug", "title", "frame", "units", "counts", "engines", "links"], {
             "id": CASE_ID, "slug": {"type": "string"}, "title": {"type": "string"}, "summary": {"type": "string"},
             "frame": FRAME, "units": {"type": "object"},
@@ -108,7 +139,7 @@ DOCUMENTS = {
             "doi": STR_OR_NULL,
             "links": obj(["case", "points", "points_csv", "geometry", "geometry_stl", "validation"],
                          {k: URL for k in ("case", "points", "points_csv", "geometry", "geometry_stl", "validation", "page", "render")}),
-        }), minItems=5, maxItems=5),
+        }), minItems=len(CASE_ID["enum"]), maxItems=len(CASE_ID["enum"])),
     }),
     "case": _doc("case", "Case", "One case in full: configuration, frame, units, inflow, point-table summary, geometry, validation status, "
                  "known data issues and attribution.",
@@ -162,7 +193,7 @@ DOCUMENTS = {
         "engines": arr(obj(["engine", "status"], {"engine": ENGINE_ID, "status": STATUS})),
         "results": arr(obj(["run_id", "engine", "configuration", "headline", "scores", "figures", "pairs", "source_url"], {
             "run_id": {"type": "string"}, "engine": ENGINE_ID, "configuration": STR_OR_NULL, "quantity": STR_OR_NULL,
-            "normalisation": {"type": "string"},
+            "normalisation": {"type": "string"}, "notes": arr({"type": "string"}),
             "headline": {"type": "object", "additionalProperties": {"type": "string"}},
             "scores": {"type": "object", "additionalProperties": METRIC},
             "figures": arr(obj(["url", "caption"], {"url": URL, "caption": {"type": "string"}})),
@@ -191,7 +222,7 @@ DOCUMENTS = {
                         "label": {"type": "string"}, "score": {"type": "string"}, "Count": {"type": "integer"},
                         "R": NUM_OR_NULL, "Fac2": NUM_OR_NULL, "Fb": NUM_OR_NULL, "HitRate": NUM_OR_NULL}))})),
             })),
-        }), minItems=5, maxItems=5),
+        }), minItems=len(CASE_ID["enum"]), maxItems=len(CASE_ID["enum"])),
     }),
 }
 

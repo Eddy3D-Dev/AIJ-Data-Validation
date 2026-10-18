@@ -15,9 +15,8 @@ Inputs: validation/results/case{A..E}_ml_pairs.csv and case{A..E}_ml.json, snaps
 fixture Outdoor.ML.Tests/TestAijSurrogateE2E's pairs.csv and results.json (C:/Eddy3DVal/ml_*); the
 snapshot is refreshed from there when that folder exists.
 
-Colour: slot 3 of the validated categorical palette (aqua #1baf7a) is the ML surrogate in every
-figure here, as slot 1 (blue) is OpenFOAM; aqua sits below 3:1 contrast on the light surface, so
-every panel carries its scores as visible text (the palette's relief rule).
+Colour (plotstyle.py): ultraplot's bluish green (#009e73, 3.4:1 against the white page) is the ML surrogate
+in every figure here, as its blue is OpenFOAM; every panel also carries its scores as visible text.
 """
 from __future__ import annotations
 

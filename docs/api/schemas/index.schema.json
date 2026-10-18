@@ -11,6 +11,9 @@
   "license",
   "name",
   "base_url",
+  "tree",
+  "release_base_url",
+  "versions_url",
   "versions",
   "endpoints",
   "case_ids",
@@ -45,11 +48,32 @@
   },
   "base_url": {
    "type": "string",
-   "format": "uri"
+   "format": "uri",
+   "description": "the root of this tree: every URL in the tree's documents starts with it"
+  },
+  "tree": {
+   "enum": [
+    "release",
+    "latest"
+   ],
+   "description": "'release': a frozen copy of one release under `/api/<release>/`, which never changes; 'latest': the unversioned `/api/` alias, which always equals the newest release"
+  },
+  "release_base_url": {
+   "type": "string",
+   "format": "uri",
+   "description": "the frozen copy of `versions.release`: equal to base_url in a release tree, the pinned address of this release in the latest alias"
+  },
+  "versions_url": {
+   "type": "string",
+   "format": "uri",
+   "description": "versions.json, the list of every release (always at the unversioned /api/ path)"
   },
   "fallback_base_url": {
    "type": "string",
    "format": "uri"
+  },
+  "fallback_note": {
+   "type": "string"
   },
   "repository": {
    "type": "string",
@@ -116,7 +140,8 @@
     },
     "base_url": {
      "type": "string",
-     "format": "uri"
+     "format": "uri",
+     "description": "the raw files of this release's frozen copy, at the release tag"
     },
     "changelog": {
      "type": "string",
@@ -241,7 +266,15 @@
      "B",
      "C",
      "D",
-     "E"
+     "E",
+     "F",
+     "G",
+     "H",
+     "I",
+     "J",
+     "K",
+     "L",
+     "M"
     ]
    }
   },
