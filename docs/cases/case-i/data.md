@@ -108,16 +108,21 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-Each of these changes the result of a comparison if it is not accounted for.
-
 - Two point sets, no point numbers: the velocity file (91 points: y = 0 plane and z/H = 0.5 plane) and the concentration file (539 points: y = 0 plane and the ground). The table stacks them, one row per instrument and point: velocity rows (instrument ldv) are numbered 1-91 and concentration rows (hydrocarbon\_analyser) 92-630, in the files\' order. 17 locations have both a velocity and a concentration value.
-- V on the y = 0 plane (53 of 91 points) is 0 in the CSV and 1e-9 ... 4e-6 m/s in the workbook: a symmetry value, not a measurement. It is NaN in the table; V is measured only at the 38 off-plane points.
+- V on the y = 0 plane (53 of 91 points) is 0 in the CSV and 1e-9 ... 4e-6 m/s in the workbook. It is NaN in the table; V is measured only at the 38 off-plane points.
 - The table carries the legacy workbook\'s values; the CSVs round to 3 decimals (velocity, k) and 1 decimal (concentration, ppm). Every concentration is a multiple of 0.1 ppm: a 0.4 ppm value carries +/-12 % of quantisation.
 - The paper\'s c0 = 39.2 ppm needs the ETHANE flow (10 % of the 400 cc/min, 6.67e-7 m3/s); its sentence \'ethane released at 6.67e-6 m3/s\' is the mixture. With the mixture flow c0 would be 392 ppm.
 - The workbook normalises the approach flow with 1.697 m/s and the points with 1.7 m/s (0.18 % apart).
 - AF\_caseI.csv ends in 53 rows of \',,\' and two stray cells, \'0.5\*\' and \'1.5\*\' (chart axis labels): a reader that does not test z for a number takes them for data.
 - Thirteen ground-centreline locations (x, 0, 0) are measured twice (they are on both the y = 0 and the z = 0 plane) with values up to 8.5 % apart; both are kept. The four y = 0, z = 0.05 wind points that appear twice in the workbook are identical copies and appear once.
 - Only the TKE is published, no variances and no concentration fluctuation: k cannot be checked against the components.
+
+<details markdown="block">
+<summary>Data notes: V on the symmetry plane</summary>
+
+V on that plane is a symmetry value, not a measurement.
+
+</details>
 
 ## API
 

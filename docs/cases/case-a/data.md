@@ -99,11 +99,23 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-Each of these changes the result of a comparison if it is not accounted for.
-
-- Lateral velocity V is positive toward +y (checked: V = -2.893 m/s at (-0.040, -0.050, 0.010), just outside the y \< 0 flank, deflecting away from the centreline). Case B uses the OPPOSITE sign; the API flips Case B so both agree.
+- Lateral velocity V is positive toward +y. Case B uses the OPPOSITE sign; the API flips Case B so both agree.
 - Coordinates are metres (Case B\'s are millimetres in the published file).
-- Case A\'s turbulence columns are rms values (u\_rms, ...). The API serves VARIANCES (uu = u\_rms^2) so A and B share one column meaning.
+- Case A\'s turbulence columns are rms values (u\_rms, ...). The API serves VARIANCES (uu = u\_rms^2).
+
+<details markdown="block">
+<summary>Data notes: Lateral sign</summary>
+
+Checked: V = -2.893 m/s at (-0.040, -0.050, 0.010), just outside the y \< 0 flank, deflecting away from the centreline.
+
+</details>
+
+<details markdown="block">
+<summary>Data notes: Variance columns</summary>
+
+A and B share one column meaning.
+
+</details>
 
 ## API
 

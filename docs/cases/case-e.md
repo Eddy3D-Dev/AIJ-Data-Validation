@@ -44,12 +44,17 @@ Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 
 | ML surrogate | <span class="label label-green status">scored</span> | +0.23 … +0.43 | 0.22 … 0.84 |
 {: .scores }
 
-R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: every score, its figures and its reading are on the [Validation page]({{ '/cases/case-e/validation/' | relative_url }}).
-
 {: .warning-title }
 > Before you compare
 >
-> The cleaned table is in SI units and one frame, with this case's corrections applied once; do not apply them again to the published files.
->
-> - The sense in which the wind direction rotates is a convention to check before comparing at any direction other than 0° (see *Frame and units* on the Data page).
+> - The cleaned table is in SI units and one frame, with this case's corrections applied once.
+> - Origin: centre of the reproduced area, ground plane. Length unit: m (FULL scale).
+> - Wind direction: Meteorological: the compass name is the direction the wind comes FROM (N = 0 deg blows toward -y, E = 90 deg toward -x), clockwise from north. This case keeps its geographic frame instead of \'+x along the wind\'.
 > - 6 known issues in the published files are listed under [Known data issues]({{ '/cases/case-e/data/' | relative_url }}#known-data-issues).
+
+<details markdown="block">
+<summary>Interpretation: Using the cleaned table</summary>
+
+Do not apply the corrections again to the published files.
+
+</details>

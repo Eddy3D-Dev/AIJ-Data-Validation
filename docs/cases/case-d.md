@@ -42,13 +42,18 @@ description: "1:1:4 tower in a regular array of 82 low blocks, pedestrian-height
 | ML surrogate | <span class="label label-green status">scored</span> | +0.22 … +0.59 | 0.34 … 0.64 |
 {: .scores }
 
-R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: every score, its figures and its reading are on the [Validation page]({{ '/cases/case-d/validation/' | relative_url }}).
-
 {: .warning-title }
 > Before you compare
 >
-> The cleaned table is in SI units and one frame, with this case's corrections applied once; do not apply them again to the published files.
->
+> - The cleaned table is in SI units and one frame, with this case's corrections applied once.
+> - Origin: tower centre on the ground plane (the array\'s bounding box is centred on it). Length unit: m (model scale; converted from the workbook\'s millimetres).
 > - The published coordinates are multiplied by 0.001 in the cleaned table (`coordinate_scale_applied`).
-> - The sense in which the wind direction rotates is a convention to check before comparing at any direction other than 0° (see *Frame and units* on the Data page).
+> - Wind direction: +x toward +y, read from Figure 4 of the data paper. Solved Eddy3D fields corroborate Figure 4\'s sense: R 0.80 (22.5 deg) and 0.85 (45 deg) in it, 0.40 and 0.17 mirrored.
 > - 6 known issues in the published files are listed under [Known data issues]({{ '/cases/case-d/data/' | relative_url }}#known-data-issues).
+
+<details markdown="block">
+<summary>Interpretation: Using the cleaned table</summary>
+
+Do not apply the corrections again to the published files.
+
+</details>

@@ -41,12 +41,17 @@ Isolated 1:1:2 building with an ethylene point source on the floor behind it: ve
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — |
 {: .scores }
 
-R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: every score, its figures and its reading are on the [Validation page]({{ '/cases/case-h/validation/' | relative_url }}).
-
 {: .warning-title }
 > Before you compare
 >
-> The cleaned table is in SI units and one frame, with this case's corrections applied once; do not apply them again to the published files.
->
+> - The cleaned table is in SI units and one frame, with this case's corrections applied once.
+> - Origin: the centre of the building\'s leeward face on the ground plane. Length unit: m (model scale).
 > - The lateral velocity V is multiplied by -1 for point numbers 1-220 (the vertical-plane sheet of the workbook), +1 elsewhere in the cleaned table (`lateral_sign_applied`): the published file's V has the other sign convention.
 > - 7 known issues in the published files are listed under [Known data issues]({{ '/cases/case-h/data/' | relative_url }}#known-data-issues).
+
+<details markdown="block">
+<summary>Interpretation: Using the cleaned table</summary>
+
+Do not apply the corrections again to the published files.
+
+</details>

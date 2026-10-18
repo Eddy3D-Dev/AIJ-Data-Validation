@@ -100,7 +100,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | least squares, kappa = 0.41, z = 0.02 .. 0.6 m (10 H) on AF\_caseK.csv: the profile is Case H\'s, tabulated for a 0.2 m building, so the window is a choice |
+| Method | least squares, kappa = 0.41, z = 0.02 .. 0.6 m (10 H) on AF\_caseK.csv: the profile is Case H\'s, tabulated for a 0.2 m building |
 | Friction velocity u\* (m/s) | 0.40706 |
 | Roughness length z₀ (mm) | 7.4385 |
 | U\_H, measured (m/s) | 2.2377 |
@@ -109,19 +109,31 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | log law rms residual | 2.5 % |
 | Note | the file is the approach flow of Case H (identical rows); the workbook normalises it with uH = U(0.2 m) = 3.23 m/s and H = 0.2 m |
 
-## Known data issues
+<details markdown="block">
+<summary>Interpretation: Inflow fit</summary>
 
-Each of these changes the result of a comparison if it is not accounted for.
+The window is a choice.
+
+</details>
+
+## Known data issues
 
 - The legacy workbook normalises with H = 0.2 m (Case H\'s building), UH = 4.94009 m/s and C0 = 18.218 ppm, not the cube\'s H = 0.06 m and U\_H = 2.33 m/s; its normalised columns are 23.6 times smaller in concentration. The API\'s concentration\_ratio uses the cube\'s c0 = 429.18 ppm.
 - RS\_caseK.csv has no point numbers; point\_id is the row order of the file.
 - The published CSV is the workbook rounded (3 decimals, concentrations 2), with k recomputed from the rounded rms values; the table is rebuilt from the workbook.
 - AF\_caseK.csv is Case H\'s approach-flow file, row for row (x = -0.493 m, tabulated for a 0.2 m building); it gives 2.24 m/s at z = 0.06 m against the stated U\_H = 2.33.
 - The lateral velocity V is dominated by a cross-flow offset (about 0.06 m/s, also in the empty tunnel); the +y and -y halves cannot confirm its sign.
-- The mean concentration is not mirror-symmetric (the +y and -y values of one point differ by 44 % on average), so the mirror pairs are not a repeatability estimate; velocity and k are (3 % and 5 %).
+- The mean concentration is not mirror-symmetric (the +y and -y values of one point differ by 44 % on average).
 - The workbook\'s \<usc\> / sigma\_usc (\'velocity magnitude\', never below |U|) is not in the table.
 - Data paper section 3.11 describes the measurements as \'approximately 30 points at eight heights downwind of the line source\'; Case K has 203 points at five heights and a point source.
 - Workbook units: x and y in millimetres in both data sheets; z in millimetres in \'Measurement data\' but metres in \'Inflow\'.
+
+<details markdown="block">
+<summary>Data notes: Mirror pairs</summary>
+
+The mirror pairs are not a repeatability estimate; velocity and k are (3 % and 5 %).
+
+</details>
 
 ## API
 

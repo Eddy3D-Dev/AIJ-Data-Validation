@@ -111,11 +111,16 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | U\_H, measured (m/s) | 1.46 |
 | Log-law error at H | -2.0 % |
 | log law rms residual | 2.1 % |
-| Note | derived during scoping, not published by AIJ; the boundary layer is unstably stratified, so a neutral log law is only a rough description |
+| Note | derived during scoping, not published by AIJ; the boundary layer is unstably stratified |
+
+<details markdown="block">
+<summary>Interpretation: Inflow fit</summary>
+
+A neutral log law is only a rough description.
+
+</details>
 
 ## Known data issues
-
-Each of these changes the result of a comparison if it is not accounted for.
 
 - Temperature is in KELVIN in all three published CSVs; the API serves degrees Celsius (T) and kelvin differences (T\_rms, heat fluxes).
 - The published CSV is the legacy workbook\'s non-dimensional values rounded to 3-4 decimals and scaled back; the table is rebuilt from the workbook. The CSV\'s heat fluxes sit on a 0.0049 K m/s grid and k on 0.00021 m^2/s^2.
@@ -124,9 +129,16 @@ Each of these changes the result of a comparison if it is not accounted for.
 - The workbook\'s \<u\'2\> is not always the square of its sigma\_u (up to 3 % in single rows); the table uses the variances, which reproduce k.
 - The workbook lists an expanded uncertainty beside every quantity (no column here; clean/manifest.json cases.J.extra\_measurements.expanded\_uncertainty). The mean concentration is below its own uncertainty (about 1 ppm) at 42 % of the rows, and 193 uncertainty cells of the w\'theta\' flux are an Excel fill series, not values.
 - The empty-tunnel profile changes along the tunnel: U at z = 0.019 H is 0.33 U\_H at x/H = -2.5 (the published AF\_caseJ.csv), 0.58 at the building\'s own position. The workbook has all three stations (clean/cases/J/approach\_flow\_full.csv).
-- The +y and -y halves are not mirror images: over the 97 mirror pairs of the z/H = 0.25 plane U at +y is 11 % lower (means 0.558 and 0.629 U\_H, R between the halves 0.955), so a y-symmetric model has a ceiling on this file.
+- The +y and -y halves are not mirror images: over the 97 mirror pairs of the z/H = 0.25 plane U at +y is 11 % lower (means 0.558 and 0.629 U\_H, R between the halves 0.955).
 - The readme\'s Reynolds number (43,000) is Case H\'s; U\_H H / nu = 1.6e4 as the data paper states.
 - uv, uw, vw are not published at the points; uc, vc, wc were not measured.
+
+<details markdown="block">
+<summary>Interpretation: Mirror symmetry</summary>
+
+A y-symmetric model has a ceiling on this file.
+
+</details>
 
 ## API
 

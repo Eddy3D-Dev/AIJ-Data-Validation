@@ -2,7 +2,7 @@
  "$schema": "https://json-schema.org/draft/2020-12/schema",
  "$id": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/validation.schema.json",
  "title": "Case validation",
- "description": "Eddy3D's scores against one case, per engine and run. 'scored' means a run exists, not that it agrees; an engine that is not 'scored' has no result here.",
+ "description": "Eddy3D's scores against one case, per engine and run. An engine that is not 'scored' has no result here.",
  "type": "object",
  "required": [
   "$schema",

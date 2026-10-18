@@ -117,21 +117,40 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | U\_H, measured (m/s) | 1.3394 |
 | Log-law error at H | -1.6 % |
 | log law rms residual | 2.2 % |
-| Note | derived during scoping, not published by AIJ; the boundary layer is unstably stratified, so a neutral log law is only a rough description |
+| Note | derived during scoping, not published by AIJ; the boundary layer is unstably stratified |
+
+<details markdown="block">
+<summary>Interpretation: Inflow fit</summary>
+
+A neutral log law is only a rough description.
+
+</details>
 
 ## Known data issues
-
-Each of these changes the result of a comparison if it is not accounted for.
 
 - RS\_caseL.csv\'s temperature column is headed \'T(K)\' but holds DEGREES CELSIUS (12.85 .. 29.86); AF\_caseL.csv\'s \'T(K)\' is kelvin (283 .. 295). The API serves degrees Celsius for both.
 - The published CSV is the workbook rounded to 2-4 decimals; the table is rebuilt from the workbook. Its \'tc\' column (temperature-concentration covariance, K ppm) and the workbook\'s \'Usc\' (the vector magnitude of the mean velocity) are not in the table.
 - The readme\'s file list names AF\_caseK.csv and RS\_caseK.csv; the files are AF\_caseL.csv and RS\_caseL.csv.
 - The readme\'s \'building surface temperature T\_b = 14.8 degC\' is the approach-flow air temperature at z = H; the workbook gives the building surface as 42.2 degC.
 - The line source is 0.037 m x 1.2 m in the readme and data paper but a 0.04 m x 1.02 m patch in BD\_caseL.stl.
-- The +y and -y halves are not mirror images: the same point differs in U by 26 %, in k by 23 %, in C by 36 % on average, and U is 0.11 m/s lower and T 1.3 K higher at +y at z = 0.15 m (0.09 m above the roofs), so the tunnel flow has a lateral gradient; do not assume symmetry.
+- The +y and -y halves are not mirror images: the same point differs in U by 26 %, in k by 23 %, in C by 36 % on average, and U is 0.11 m/s lower and T 1.3 K higher at +y at z = 0.15 m (0.09 m above the roofs).
 - The workbook carries no expanded uncertainty (the data paper mentions one for Case J only).
 - AF\_caseL.csv lists the profile from the top (z = 0.32 m) down and has no k.
-- The measured tracer flux through the cross-sections equals q / 1.2 m to 0.86 .. 1.0 (street and cube-column lines averaged), which fixes q and the unit ppm; the cube-column line alone carries only 0.2 .. 0.4 of it.
+- The measured tracer flux through the cross-sections equals q / 1.2 m to 0.86 .. 1.0 (street and cube-column lines averaged); the cube-column line alone carries only 0.2 .. 0.4 of it.
+
+<details markdown="block">
+<summary>Interpretation: Mirror symmetry</summary>
+
+The tunnel flow has a lateral gradient; do not assume symmetry.
+
+</details>
+
+<details markdown="block">
+<summary>Data notes: Tracer flux</summary>
+
+This fixes q and the unit ppm.
+
+</details>
 
 ## API
 

@@ -185,8 +185,8 @@ DOCUMENTS = {
         })]}, minItems=1),
         "render": URL,
     }),
-    "validation": _doc("validation", "Case validation", "Eddy3D's scores against one case, per engine and run. 'scored' means a run "
-                       "exists, not that it agrees; an engine that is not 'scored' has no result here.",
+    "validation": _doc("validation", "Case validation", "Eddy3D's scores against one case, per engine and run. An engine that is not "
+                       "'scored' has no result here.",
                        ["case", "status", "engines", "results"], {
         "case": CASE_ID, "title": {"type": "string"}, "status": {"enum": ["scored", "pending"]},
         "status_meaning": {"type": "object", "additionalProperties": {"type": "string"}},

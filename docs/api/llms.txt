@@ -25,7 +25,7 @@ Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark an
    geometry.json lists the boxes where the geometry IS boxes (A, B, C, D, G, H, I, J, K, L), so you need not parse the STL at all.
 6. GET validation.json for every case and engine at once, or cases/{id}/validation.json for one case in full.
    Quote the `headline` scores. An engine whose status is not "scored" has NO result for that case: do not
-   infer one. "scored" means a run exists, not that it agrees — read the numbers. Each result's `pairs` is
+   infer one. Each result's `pairs` is
    the per-point measured and modelled values, so any score can be recomputed. Status today: A: openfoam12-realizableKE scored, openlb scored, fluidx3d scored, ml-surrogate scored; B: openfoam12-realizableKE scored, openlb scored, fluidx3d scored, ml-surrogate scored; C: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored; D: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored; E: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored; F: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; G: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; H: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; I: openfoam12-realizableKE scored, openfoam12-kEpsilon scored, openfoam12-kOmegaSST scored, openlb pending, fluidx3d pending, ml-surrogate pending; J: openfoam12-realizableKE pending, umf-realizableKE scored, umf-buoyantKEpsilon scored, openlb pending, fluidx3d pending, ml-surrogate pending; K: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; L: openfoam12-realizableKE pending, umf-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; M: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending.
 7. All geometry at once: GET geometry.json (every STL with its case, configuration, units, frame and SHA-256)
    or geometry.zip. Each STL stays in its own case's frame and units; they are NOT one scene.
@@ -203,8 +203,6 @@ Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark an
 - M: Case M — TPU Atsugi campus. Tracer-gas release on the Tokyo Polytechnic University Atsugi campus: 1:600 tunnel (velocity at 180°, ethylene concentration at 175°, 180° and 185°) and 18 field runs with PMCH, 15 points 3 m above ground. 330 rows, 15 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, campaign, run, C, c_rms, concentration_ratio. Engines: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending.
 
 ## Known data issues
-
-Each of these changes the result of a comparison if it is not accounted for.
 
 - [A] Lateral velocity V is positive toward +y (checked: V = -2.893 m/s at (-0.040, -0.050, 0.010), just outside the y < 0 flank, deflecting away from the centreline). Case B uses the OPPOSITE sign; the API flips Case B so both agree.
 - [A] Coordinates are metres (Case B's are millimetres in the published file).

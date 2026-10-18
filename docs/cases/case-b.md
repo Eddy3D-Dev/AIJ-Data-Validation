@@ -41,13 +41,18 @@ Isolated 1:4:4 slab, velocity field (split-fibre hot wire).
 | ML surrogate | <span class="label label-green status">scored</span> | -0.24 … +0.01 | 0.36 … 0.46 |
 {: .scores }
 
-R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: every score, its figures and its reading are on the [Validation page]({{ '/cases/case-b/validation/' | relative_url }}).
-
 {: .warning-title }
 > Before you compare
 >
-> The cleaned table is in SI units and one frame, with this case's corrections applied once; do not apply them again to the published files.
->
-> - The lateral velocity V is multiplied by -1 in the cleaned table (`lateral_sign_applied`): the published file's V has the other sign convention.
+> - The cleaned table is in SI units and one frame, with this case's corrections applied once.
+> - Origin: building centre on the ground plane. Length unit: m (model scale; converted from the published millimetres).
 > - The published coordinates are multiplied by 0.001 in the cleaned table (`coordinate_scale_applied`).
+> - The lateral velocity V is multiplied by -1 in the cleaned table (`lateral_sign_applied`): the published file's V has the other sign convention.
 > - 3 known issues in the published files are listed under [Known data issues]({{ '/cases/case-b/data/' | relative_url }}#known-data-issues).
+
+<details markdown="block">
+<summary>Interpretation: Using the cleaned table</summary>
+
+Do not apply the corrections again to the published files.
+
+</details>

@@ -113,8 +113,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-Each of these changes the result of a comparison if it is not accounted for.
-
 - The table carries the legacy workbook\'s values (ratios at full precision x uH = 3.226 m/s), not RS\_caseH.csv\'s: on the z/H = 1/2 and 1/4 planes (and in the approach profile) the CSV\'s U, V, W are the workbook ratios ROUNDED TO 0.01 before the scaling, a 0.032 m/s grid (+/-0.016 m/s).
 - One row per instrument and point: velocity rows (split fibre) and concentration rows (hydrocarbon analyser) with the same point\_id (the CSV\'s No.). The velocity line is x = 0.40 m and the concentration line x = 0.38 m, so 50 points have no velocity and 50 no concentration (-999.9 in the CSV); none of them is inside the building.
 - V of the vertical-plane sheet (point numbers 1-220) is the exact negative of V at the same points in the horizontal-plane sheets (positive toward -y); it is multiplied by -1 so that V is positive toward +y everywhere, as in Cases A and D.

@@ -3,7 +3,7 @@
  "schema_version": "2.3.0",
  "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
  "license": "CC-BY-4.0",
- "description": "Every case and engine in one table. 'scored' means a run exists, not that it agrees: read the scores. Headline scores are the ones to quote; every score, the figures and the per-point pairs are in each case's validation.json.",
+ "description": "Every case and engine in one table. Headline scores are the ones to quote; every score, the figures and the per-point pairs are in each case's validation.json.",
  "engines": [
   {
    "id": "openfoam12-realizableKE",
@@ -47,7 +47,7 @@
   }
  ],
  "status_meaning": {
-  "scored": "a validation run exists and its scores are in cases/{id}/validation.json; whether it agrees is in the numbers",
+  "scored": "a validation run exists and its scores are in cases/{id}/validation.json",
   "running": "the solve is in progress; no scores yet",
   "pending": "not run yet",
   "not comparable": "the engine cannot produce the measured quantity at the measured location: OpenLB at the resolution this hardware runs, FluidX3D without a ground wall function; the measurement behind each is on the Validation page"
