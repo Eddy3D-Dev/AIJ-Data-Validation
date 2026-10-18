@@ -15,7 +15,8 @@ applied to the files and the API this repository serves):
 Documentation, figures and tooling that do not change a served byte need no release.
 
     python scripts/release.py check          # CI: VERSION, CHANGELOG.md, CITATION.cff and the built outputs agree,
-                                             #     and the version moves with the change since the last tag
+                                             #     the version moves with the change since the last tag, and the
+                                             #     frozen docs/api/<release>/ of every earlier release still equals its tag
     python scripts/release.py notes          # the CHANGELOG.md section of VERSION (the release notes)
     python scripts/release.py archive DIR    # DIR/aij-uwe-vX.Y.Z.tar.gz and its SHA256SUMS, byte-reproducible
                                              #     (fixed order, owner and mtime = SOURCE_DATE_EPOCH or 0)

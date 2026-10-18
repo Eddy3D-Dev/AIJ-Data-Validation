@@ -387,6 +387,7 @@ def tree_files(root):
 def use_tree(kind):
     """Point every writer at one tree: the frozen copy docs/api/<release>/ or the latest alias docs/api/. The two
     are built by the same code, so they differ only in the address each document gives its own files."""
+    # shortcut: module globals switched between two sequential builds; make the tree an object if they ever run in parallel
     global TREE, API, API_BASE, FALLBACK_BASE, WRITTEN
     WRITTEN = set()
     TREE = kind
@@ -1168,6 +1169,8 @@ def release_record(v):
         with io.open(tree_index, encoding="utf-8") as f:
             idx = json.load(f)
         hosted_later = v in LEGACY_RELEASES   # put there by scripts/host_release.py, so it is on main, not in the tag
+        if hosted_later and (idx["versions"]["schema"], idx["versions"]["data"]) != tuple(LEGACY_RELEASES[v].values()):
+            raise SystemExit(f"docs/api/{v}/index.json and LEGACY_RELEASES disagree on release {v}'s schema or data version")
         rec.update({"schema_version": idx["versions"]["schema"], "data_version": idx["versions"]["data"],
                     "base_url": base, "index_url": f"{base}/index.json",
                     "fallback_base_url": f"{RAW_BASE}/{v}" if hosted_later else f"{raw_tag}/{v}", "self_contained": True})
