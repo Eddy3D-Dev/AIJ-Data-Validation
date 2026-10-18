@@ -2,10 +2,10 @@
 title: "Validation"
 nav_order: 3
 has_children: true
-description: "How Eddy3D's solvers score against the AIJ wind-tunnel data, case by case and engine by engine."
+description: "How Eddy3D's solvers score against the AIJ measurements, case by case and engine by engine."
 ---
 
-# Validation: Eddy3D against the tunnel
+# Validation: Eddy3D against the measurements
 
 Each case is solved through Eddy3D's production case writer (`build-case → run → probe`). The probe sits at **exactly the tunnel's own
 measurement coordinates**, so no interpolation enters the comparison.
@@ -56,5 +56,3 @@ FB is positive when the model is low.
 - **ML surrogate.** The predicted field does not respond to the wind direction.
 
 </details>
-
-The API serves the same scores as `/api/validation.json` and `/api/cases/{id}/validation.json`.

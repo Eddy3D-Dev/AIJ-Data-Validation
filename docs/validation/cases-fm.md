@@ -159,7 +159,7 @@ The concentration across the three Schmidt numbers:
 
 - A second mesh or iteration count, for either case.
 - **Case F** was solved for one of the tunnel's twelve directions; the other eleven, and the field's other fifteen, were not run. Which vertical datum the tunnel meant is not settled (both frames are published). The STL is open along the rim of its disc (812 boundary edges) and the mesh fails one checkMesh check (43 highly skew faces, maximum skewness 14.8), so the solve ran on Eddy3D's hardened numerics. The rooftop anemometers' modelled speeds are in the results file and are not scored.
-- **Case M** was solved at WD 180 only: WD 175 and WD 185, which the tunnel also measured, were not. The model differs from the tunnel: a cylinder on the terrain sheet, none of the tunnel's side walls and ceiling, a smooth floor under the tabulated inflow. Its source is a 4 m cube of 20 cells where the tunnel's outlet is 6 mm (3.6 m at 1:600). The scores are of the second solve of the case.
+- **Case M** was solved at WD 180 only: WD 175 and WD 185, which the tunnel also measured, were not. Model set-up: a cylinder on the terrain sheet, none of the tunnel's side walls and ceiling, a smooth floor under the tabulated inflow. Its source is a 4 m cube of 20 cells where the tunnel's outlet is 6 mm (3.6 m at 1:600).
 - OpenLB, FluidX3D, UMF and the ML surrogate have not been run on either case.
 
 <details markdown="block">

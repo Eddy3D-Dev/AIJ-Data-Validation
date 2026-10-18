@@ -588,7 +588,7 @@ def _m_notes(sp):
         f"{each('cstar.topFiveOverlap', 'd')} of the five highest points are shared with the tunnel.",
         f"The tunnel's three points nearest the source carry about {tn / tf:.0f} times its two far downwind ones; the modelled plume carries less, and Sct {' and '.join(reversed_)} reverses the order. "
         "The ordering is a property of the modelled plume.",
-        f"Controls on the same solution: the 15 points turned 180° about the source score {c(r['control.turned180'])} (n {r['control.turned180']['Count']}; the model's mean over those points is "
+        f"Controls on the same solution: the points turned 180° about the source score {c(r['control.turned180'])} ({r['control.turned180']['Count']} of the 15 lie in the fluid; the model's mean over those points is "
         f"{r['control.meanTurned180']:.1e} against {r['control.meanReal']:.3f} at the real ones), and the points mirrored across the plume axis score {c(r['control.mirrored'])} (the real points: {c(r['cstar'])}).",
         "The tracer goes downwind: the model's mean over the points turned 180° about the source is far below its mean at the real points. The mirrored points score above the real points because the modelled "
         "plume is displaced sideways against the tunnel's. The tunnel's neighbouring headings WD 175 and WD 185 are the noise floor of a single heading.",
@@ -1241,7 +1241,7 @@ def write_geometry_index(data):
             })
     write_json("geometry.json", "geometry-index", {
         "description": ("Every cleaned STL, one entry per case and configuration. Each file is in its own case's frame "
-                        "and units — points.json of the same case lives in that frame — so they are deliberately not one "
+                        "and units — points.json of the same case lives in that frame — so they are not one "
                         "scene: overlaid, the cases would stack at the origin, and Cases E, F, G and M are full scale while the "
                         "others are model scale. geometry.zip holds the same files under archive_name."),
         "archive": download("geometry.zip"),
@@ -2390,8 +2390,11 @@ def _case_validation_page(case, meta, p, shared):
             L += ["Notes:", ""] + facts + [""]
         L += _sections(norm_collapsed + collapsed)
     if tails:
-        L += ['<details markdown="block">', "  <summary>How the scores are computed</summary>", ""]
-        L += [f"- {_esc(t[0].upper() + t[1:])}." for t in tails] + ["", "</details>", ""]
+        lines = [f"- {_esc(t[0].upper() + t[1:])}." for t in tails]
+        if len(" ".join(tails)) < MIN_SECTION:   # a line, not a collapsed fragment
+            L += lines + [""]
+        else:
+            L += ['<details markdown="block">', "  <summary>How the scores are computed</summary>", ""] + lines + ["", "</details>", ""]
     own, elsewhere = [], {}
     for fig in figures:
         name = fig["url"].rsplit("/", 1)[-1]

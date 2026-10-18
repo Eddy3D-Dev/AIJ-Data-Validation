@@ -23,7 +23,7 @@ Scores: [Validation]({{ '/validation/' | relative_url }}).
 - Case F is solved for one wind direction in two vertical frames that are each their own run. Case M (tracer over a real campus) is solved at one heading with the three Schmidt numbers as three runs on one flow.
 - Case B's lateral velocity is sign-corrected before scoring (see [Known data issues]({{ '/known-data-issues/' | relative_url }})).
 - The reattachment length L_r behind the building is read from a wake line at ground level.
-- Fixture structure checks (ordering of regions, plume decay, symmetry): passed for every run; they set no band on the statistics.
+- Fixture structure checks (ordering of regions, plume decay, symmetry): passed for every run.
 
 ### Metrics
 
@@ -49,7 +49,7 @@ A control is scored with the same metrics as the run.
 - Case D: the numbers were reproduced from the solver's probe output against the cleaned table, with the frame mapped independently and separate metric code.
 - OpenLB: reproduced from the solver's probe output against the original Zenodo CSVs (largest difference 1 × 10⁻¹⁵).
 - FluidX3D: reproduced from the solver's probe output against the cleaned tables, with the comparable set derived independently (largest difference 3 × 10⁻¹²).
-- Cases F, G, H, I, J, K, L and M: the scores served are recomputed from the per-point pairs by `validation/dispersion_metrics.py`, a transcription of Eddy3D's `MetaFOAM.DispersionMetrics`. Fed the published CSVs and the fixture's probes, it gives the fixture's own scores to 10⁻⁹ (24 scores of Case F, 43 of Case K, five per arm of Case G, 80 per run of Case J, 48 of Case L, 84 of Case M). The SHA-256 of every file a snapshot was read from is in its results file under `sources`, and the script fails if the check is not met.
+- Cases F, G, H, I, J, K, L and M: the scores served are recomputed from the per-point pairs by `validation/dispersion_metrics.py`, a transcription of Eddy3D's `MetaFOAM.DispersionMetrics`. Fed the published CSVs and the probes of Eddy3D's test, it gives that test's own scores to 10⁻⁹ (24 scores of Case F, 43 of Case K, five per arm of Case G, 80 per run of Case J, 48 of Case L, 84 of Case M). The SHA-256 of every file a snapshot was read from is in its results file under `sources`, and the script fails if the check is not met.
 
 <details markdown="block">
 <summary>Interpretation: Scoring choices</summary>

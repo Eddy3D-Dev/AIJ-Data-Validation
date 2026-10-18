@@ -68,11 +68,11 @@ Data: Kikumoto et al. (2026), CC BY 4.0. Collectors per case under *Cite*.
 
 | Case | OpenFOAM 12, realizable k-ε | UMF (non-isothermal cases) | OpenLB | FluidX3D | ML surrogate (Yel-2.0) |
 |---|---|---|---|---|---|
-| A | scored | — | scored | scored | ✔ |
-| B | scored | — | scored | scored | ✔ |
-| C | scored, 9 configurations | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | ✔ |
-| D | scored, WD 0°, 22.5° and 45° | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | ✔ |
-| E | scored, SW | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | ✔ |
+| A | scored | — | scored | scored | scored |
+| B | scored | — | scored | scored | scored |
+| C | scored, 9 configurations | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | scored |
+| D | scored, WD 0°, 22.5° and 45° | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | scored |
+| E | scored, SW | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | scored |
 | F | scored, wind from NNW in two vertical frames | — | pending | pending | pending |
 | G | scored, a drag sweep of four arms and a half belt | — | pending | pending | pending |
 | H | scored | — | pending | pending | pending |
@@ -1082,8 +1082,7 @@ W = 0.05 U_H absolute. NMSE, NAD, MG and VG are in `validation/results/*.json` a
 - Each case is solved through Eddy3D's production case writer.
 - Cases C–E: √(|U|² + 2k) and |U| are the two ends of the bracket the measurement has to fall in.
 - The ML surrogate rows use the same metric code and settings as the OpenFOAM rows.
-- Fixture structure checks (ordering of regions, plume decay, symmetry): passed for every run; they set no band on the
-  statistics.
+- Fixture structure checks (ordering of regions, plume decay, symmetry): passed for every run.
 - Reproduction of the published numbers from the solver output:
   - Case C: an independent re-scoring from the probe files and the original `RS_caseC.csv`, largest difference
     9 × 10⁻¹⁶.

@@ -20,6 +20,14 @@ CI fails a change to the served files that does not move it by at least the leve
 ### Fixed
 
 - Removed boilerplate wording from the API descriptions and from `llms.txt`.
+- `status_meaning.scored` reads "a validation run exists and its scores are in cases/{id}/validation.json"; the site and the README carry the same definition.
+- The `notes` of the runs in `validation.json` of Cases F, G, J, K, L and M state their facts directly. Case G's notes begin with the calibration statement (LAD and Cd are not in the dataset); Case M's notes keep the probe precision (seven significant digits; no c\* value moved by more than 0.003 against a six-decimal probe) and drop the account of a first solve killed for memory (exit 137). The controls text of Case M says that 14 of the 15 turned points lie in the fluid.
+- The wind-direction texts of Cases D, E, F and M and the known-issue texts of Cases D and F read as plain statements; no value changed.
+- The title reads "AIJ UWE" in `index.json`, `openapi.json`, `llms.txt` and the Dataset JSON-LD. The licence note is one line, "Data: Kikumoto et al. (2026), CC BY 4.0. Collectors per case in cases/{id}.json.", and `clean/manifest.json` carries "Data: Kikumoto et al. (2026), CC BY 4.0. Collectors and requested citation per case." Its Case E log-law note reads "appropriate choice". The geometry index no longer says the STL files are "deliberately" not one scene.
+
+### Changed (pages only)
+
+- Run history moved out of the pages into this line: Eddy3D's test of Case M asserted the near/far ordering of c\* before the first solve and now records it; Case B's first OpenLB run crashed on the STL reader fault described on the OpenLB page, and a regression test fails without the lattice move.
 
 ## [3.0.0] - 2026-10-18
 

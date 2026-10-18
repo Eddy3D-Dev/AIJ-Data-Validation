@@ -48,7 +48,7 @@ Quantity: U, V, W and k at the 15 points of the tunnel\'s WD 180 run over the tu
 Notes:
 
 - U\_R is the solved speed at the reference mast, 4.686 m/s, which is 1.19 of the tabulated inlet\'s speed at the mast\'s elevation (3.934 m/s) and 1.15 of the tunnel\'s 4.08 m/s. Over the imposed speed c\* scores FB +1.48 and over 4.08 m/s FB +1.46, against +1.40 over the solved speed.
-- Controls on the same solution: the 15 points turned 180° about the source score R -0.05, FAC2 0.07, FB +2.00 (n 14; the model\'s mean over those points is 7.3e-06 against 0.186 at the real ones), and the points mirrored across the plume axis score R +0.68, FAC2 0.47, FB +0.32 (the real points: R +0.41, FAC2 0.20, FB +1.40).
+- Controls on the same solution: the points turned 180° about the source score R -0.05, FAC2 0.07, FB +2.00 (14 of the 15 lie in the fluid; the model\'s mean over those points is 7.3e-06 against 0.186 at the real ones), and the points mirrored across the plume axis score R +0.68, FAC2 0.47, FB +0.32 (the real points: R +0.41, FAC2 0.20, FB +1.40).
 - Field campaign (18 runs): the 10 runs within 10° of 180 at 3 m/s or more, each with its own U\_R and q and H\_R = 41 m as the cleaned table states (the scores divide by 40.8 m, a 1 % difference). The model against the field\'s geometric mean scores R +0.46, FAC2 0.07, FB +1.01, and lies inside the field\'s minimum-maximum range at 2 of 15 points; the tunnel\'s WD 180 against the same mean scores R +0.98, FAC2 0.60, FB -0.59; the spread of the field at point 1 is a factor of 4.5.
 
 ## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration sct05
@@ -86,7 +86,7 @@ Quantity: U, V, W and k at the 15 points of the tunnel\'s WD 180 run over the tu
 Notes:
 
 - U\_R is the solved speed at the reference mast, 4.686 m/s, which is 1.19 of the tabulated inlet\'s speed at the mast\'s elevation (3.934 m/s) and 1.15 of the tunnel\'s 4.08 m/s. Over the imposed speed c\* scores FB +1.59 and over 4.08 m/s FB +1.58, against +1.52 over the solved speed.
-- Controls on the same solution: the 15 points turned 180° about the source score R -0.06, FAC2 0.07, FB +2.00 (n 14; the model\'s mean over those points is 9.2e-06 against 0.143 at the real ones), and the points mirrored across the plume axis score R +0.65, FAC2 0.40, FB +0.22 (the real points: R +0.25, FAC2 0.20, FB +1.52).
+- Controls on the same solution: the points turned 180° about the source score R -0.06, FAC2 0.07, FB +2.00 (14 of the 15 lie in the fluid; the model\'s mean over those points is 9.2e-06 against 0.143 at the real ones), and the points mirrored across the plume axis score R +0.65, FAC2 0.40, FB +0.22 (the real points: R +0.25, FAC2 0.20, FB +1.52).
 - Field campaign (18 runs): the 10 runs within 10° of 180 at 3 m/s or more, each with its own U\_R and q and H\_R = 41 m as the cleaned table states (the scores divide by 40.8 m, a 1 % difference). The model against the field\'s geometric mean scores R +0.28, FAC2 0.07, FB +1.20, and lies inside the field\'s minimum-maximum range at 2 of 15 points; the tunnel\'s WD 180 against the same mean scores R +0.98, FAC2 0.60, FB -0.59; the spread of the field at point 1 is a factor of 4.5.
 
 ## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration sct07
@@ -124,7 +124,7 @@ Quantity: U, V, W and k at the 15 points of the tunnel\'s WD 180 run over the tu
 Notes:
 
 - U\_R is the solved speed at the reference mast, 4.686 m/s, which is 1.19 of the tabulated inlet\'s speed at the mast\'s elevation (3.934 m/s) and 1.15 of the tunnel\'s 4.08 m/s. Over the imposed speed c\* scores FB +1.64 and over 4.08 m/s FB +1.63, against +1.58 over the solved speed.
-- Controls on the same solution: the 15 points turned 180° about the source score R -0.06, FAC2 0.07, FB +2.00 (n 14; the model\'s mean over those points is 1.0e-05 against 0.125 at the real ones), and the points mirrored across the plume axis score R +0.65, FAC2 0.40, FB +0.18 (the real points: R +0.20, FAC2 0.13, FB +1.58).
+- Controls on the same solution: the points turned 180° about the source score R -0.06, FAC2 0.07, FB +2.00 (14 of the 15 lie in the fluid; the model\'s mean over those points is 1.0e-05 against 0.125 at the real ones), and the points mirrored across the plume axis score R +0.65, FAC2 0.40, FB +0.18 (the real points: R +0.20, FAC2 0.13, FB +1.58).
 - Field campaign (18 runs): the 10 runs within 10° of 180 at 3 m/s or more, each with its own U\_R and q and H\_R = 41 m as the cleaned table states (the scores divide by 40.8 m, a 1 % difference). The model against the field\'s geometric mean scores R +0.22, FAC2 0.07, FB +1.29, and lies inside the field\'s minimum-maximum range at 2 of 15 points; the tunnel\'s WD 180 against the same mean scores R +0.98, FAC2 0.60, FB -0.59; the spread of the field at point 1 is a factor of 4.5.
 
 ## All runs

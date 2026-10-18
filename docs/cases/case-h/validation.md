@@ -32,12 +32,7 @@ Reattachment length L<sub>r</sub>/H = 1.36.
 - Per-point values: [`/api/cases/H/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/H/pairs/openfoam12-realizableKE.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCaseHContainerE2E (realizable k-ε, 1:100) (numerics level 3, 3000 iterations); figures validation/plot\_cases\_hi\_openfoam.py
 
-<details markdown="block">
-  <summary>How the scores are computed</summary>
-
 - Scores recomputed from the pairs by validation/dispersion\_metrics.py.
-
-</details>
 
 ## Figures
 

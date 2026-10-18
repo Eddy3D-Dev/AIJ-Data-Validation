@@ -71,12 +71,7 @@ Reattachment length L<sub>r</sub>/H = 2.68.
 
 - Normalisation: velocities by U\_H, k by U\_H^2 (the benchmark\'s own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units
 
-<details markdown="block">
-  <summary>How the scores are computed</summary>
-
 - Scores recomputed from the pairs by validation/dispersion\_metrics.py.
-
-</details>
 
 ## Figures
 
