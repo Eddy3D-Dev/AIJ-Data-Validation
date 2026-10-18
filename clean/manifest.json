@@ -173,7 +173,7 @@
   }
  },
  "counts": {
-  "rows": 5119,
+  "rows": 8420,
   "by_case": {
    "A": 186,
    "B": 224,
@@ -181,6 +181,12 @@
    "D": 267,
    "E": 2560,
    "F": 472,
+   "G": 28,
+   "H": 1652,
+   "I": 630,
+   "J": 444,
+   "K": 203,
+   "L": 344,
    "M": 330
   }
  },
@@ -1891,6 +1897,29 @@
      "k_ratio": 472
     }
    },
+   "normalisation": {
+    "quantity": "velocity_ratio = U / U_ref, U_ref = the approaching mean wind speed at 500 m (the boundary-layer height), full scale; field values were converted to it by the tunnel (readme)",
+    "U_ref_m_s": "10 (data paper) or 10.65 (profile implied); see inflow",
+    "conversion_from_the_workbook": {
+     "SMB sector (NW, NNW, N, NNE, NE; roof anemometer G.L.+237 m)": {
+      "factor": 0.93974,
+      "interval": [
+       0.9394736842105262,
+       0.9400000000000001
+      ]
+     },
+     "KDD sector (all other directions; roof anemometer G.L.+187 m)": {
+      "factor": 0.96287,
+      "interval": [
+       0.9625000000000005,
+       0.9632352941176471
+      ]
+     },
+     "meaning": "workbook ratio x factor = CSV ratio; factor = U(roof anemometer) / U(500 m) from the N (SMB) or S (KDD) tunnel test (readme); the factors themselves are not stated in the sources (QUESTIONS.md QF8)"
+    },
+    "velocity_ratio_sd": "standard deviation of the 10-minute mean ratios behind one field value (cup anemometer, only 10-minute means above 5 m/s at the reference); published to 3 dp, quantised at f/100",
+    "field_height": "z of each field row is the anemometer height above the tunnel floor (13 ... 21 m); the tunnel planes are 15, 19 and 30 m"
+   },
    "configurations": [
     {
      "config": "default",
@@ -2397,26 +2426,26 @@
    "provenance": [
     {
      "path": "raw/cases/case-f/RS-WT_caseF.csv",
-     "sha256": "b73c1fbb9d621aaf7020fecb4a8f984f8658891cf94acb708409276ddcfc65be",
-     "bytes": 9659,
+     "sha256": "ecd13648a27530e5ef01a6321ffc4ae36cf41be5cfd2779ecd0b85aa38c90553",
+     "bytes": 9924,
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-f/RS-FO_caseF.csv",
-     "sha256": "dde6c2f6795320daf4b8913b451b21e7bc50c9808477f9fe999ef80be605dbd7",
-     "bytes": 6468,
+     "sha256": "b94b276df73aed8dabaef5b295a5b949d778e04c0961d73f87e2bfc47c8bed3a",
+     "bytes": 6677,
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-f/AF_caseF.csv",
-     "sha256": "77e9ae53b047521f8f9de6e3f4f6545c031dde899a9ed965bcc432ecbe58ecc6",
-     "bytes": 324,
+     "sha256": "b1c8a8057bccb0414d0dc746ddde58e71ba48a1c56beff10b1b9b0b08ef0799d",
+     "bytes": 343,
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-f/MP_caseF.csv",
-     "sha256": "89aa6edfcc009cbb6bac66aee80763c132a8200da6109ecb0c6604e21d582835",
-     "bytes": 313,
+     "sha256": "41190f590152d4d82e10536d6763f2af2933e3642ff64ae8156f494fce8a0b88",
+     "bytes": 330,
      "origin": "repository clone of the Zenodo record"
     },
     {
@@ -2660,29 +2689,2001 @@
      "SMB": 0.93974,
      "KDD": 0.96287
     }
+   }
+  },
+  "G": {
+   "id": "G",
+   "title": "Case G — flow behind a tree belt (field observation)",
+   "status": "released",
+   "status_note": null,
+   "doi": "10.5281/zenodo.15589666",
+   "doi_version": null,
+   "zenodo_record": "https://zenodo.org/records/15589666",
+   "licence": "CC BY 4.0",
+   "data_collectors": [
+    "Yasuo Kurotani (Shimane University)",
+    "Nobuyoshi Kiyota (Hiroshima Institute of Technology)"
+   ],
+   "editors_distributors": [
+    "Yoshihide Tominaga (Niigata Institute of Technology)",
+    "Hideki Kikumoto (The University of Tokyo)",
+    "Tsubasa Okaze (Institute of Science Tokyo)"
+   ],
+   "contact": "Yoshihide Tominaga <tominaga@abe.niit.ac.jp>",
+   "citation_requested": "Kurotani, Y., Kiyota, N., Kobayashi, S. (2001). Windbreak effect of Tsuijimatsu in Izumo Part. 2. Summaries of technical papers of Annual Meeting, Architectural Institute of Japan, D-2 Environmental engineering II, 745-746 (in Japanese).",
+   "files": {
+    "points_csv": "cases/G/points.csv",
+    "points_parquet": "cases/G/points.parquet",
+    "approach_flow_csv": "cases/G/approach_flow.csv",
+    "approach_flow_parquet": "cases/G/approach_flow.parquet",
+    "directions_csv": "cases/G/directions.csv",
+    "geometry_json": "cases/G/geometry.json",
+    "geometry": [
+     "cases/G/geometry.stl"
+    ]
+   },
+   "columns_present": [
+    "case_id",
+    "config",
+    "instrument",
+    "point_id",
+    "wind_direction_deg",
+    "wind_direction",
+    "x",
+    "y",
+    "z",
+    "velocity_ratio",
+    "campaign",
+    "run",
+    "k_ratio"
+   ],
+   "counts": {
+    "rows": 28,
+    "distinct_points": 28,
+    "by_config": {
+     "default": 28
+    },
+    "by_instrument": {
+     "sonic_anemometer": 28
+    },
+    "by_direction": {
+     "0.0": 28
+    },
+    "nan_per_column": {
+     "U": 28,
+     "V": 28,
+     "W": 28,
+     "uu": 28,
+     "vv": 28,
+     "ww": 28,
+     "k": 28,
+     "Vs": 28,
+     "uv": 28,
+     "uw": 28,
+     "vw": 28,
+     "C": 28,
+     "c_rms": 28,
+     "concentration_ratio": 28,
+     "T": 28,
+     "T_rms": 28,
+     "uc": 28,
+     "vc": 28,
+     "wc": 28,
+     "uT": 28,
+     "vT": 28,
+     "wT": 28,
+     "velocity_ratio_sd": 28
+    }
+   },
+   "normalisation": "velocity_ratio = U/UH and k_ratio = k/UH^2, UH = the mean wind speed at the tree height z = 7 m, measured during each measurement period and interpolated with the approach flow's power law (index 0.22); no absolute speed is published. The approach-flow table carries U/Ub and k/Ub^2 instead (Ub = U at 9 m, a different day): divide by UH/Ub = 0.946 (power law) to put it on the table's normalisation.",
+   "configurations": [
+    {
+     "config": "default",
+     "instrument": "sonic_anemometer",
+     "wind_direction_deg": 0.0,
+     "wind_direction": "",
+     "rows": 28,
+     "measured": 28,
+     "status": "unverified — field data: the angle between the wind and the belt normal is not published (QUESTIONS.md QG3)"
+    }
+   ],
+   "frame": {
+    "origin": "the leeward face of the tree belt at ground level, on the vertical section through the belt's centre (MP_caseG.png)",
+    "x": "+x downwind: the belt occupies x in [-2, 0] m and the measurement lines lie behind it at x = 1.75 ... 35 m",
+    "y": "+y along the belt (74 m long, y in [-37, 37]); every point is on y = 0, the centre section",
+    "z": "+z up from the ground; the belt spans z in [1.2, 7] (1.2 m bottom gap); points at z = 1.5, 3, 4.5, 6 m",
+    "wind_direction_rotation": "single direction: the wind blows toward +x (perpendicular to the belt); the field angle is not published",
+    "length_scale": "FULL-scale metres: a field observation, no model"
+   },
+   "transform_from_published": {
+    "coordinate_scale": 1.0,
+    "lateral_sign": 1,
+    "origin_shift_m": [
+     0,
+     0,
+     0
+    ],
+    "note": "U/UH and k/UH^2 from the workbook at full precision; coordinates as published; approach flow as published (U/Ub, k/Ub^2)"
+   },
+   "inflow": {
+    "U_ref": "Ub = mean wind speed of the approach flow at 9.0 m (not published in m/s)",
+    "z_ref_m": 9.0,
+    "U_ref_basis": "AF_caseG.csv is U/Ub and k/Ub^2",
+    "UH_over_Ub_power_law_0.22": 0.946211,
+    "UH_over_Ub_log_interpolation": 0.938018,
+    "power_law": {
+     "z_range_m": [
+      1.5,
+      9.0
+     ],
+     "points": 4,
+     "alpha": 0.2073,
+     "max_rel_error": 0.0202
+    },
+    "power_law_index_stated": 0.22,
+    "lee_normalisation": "RS_caseG.csv: UH = mean speed at 7 m during each measurement period (interpolated with the approach flow's power law)",
+    "approach_date": "28 Dec 2000 (120 min, 5 Hz, 1.5/3/6/9 m)",
+    "lee_date": "26 Dec 2000 (10 min or more, 5 Hz, 1.5/3/4.5/6 m)",
+    "workbook_inflow_notes": {
+     "U(z)": "Ub (z/Hb)^0.22",
+     "K_m2_s2": 3.02,
+     "implied_Ub_m_s_if_K_is_k_at_9m": 3.8859,
+     "status": "derived, unverified"
+    }
+   },
+   "geometry_summary": [
+    {
+     "configuration": "default",
+     "file": "cases/G/geometry.stl",
+     "triangles": 12,
+     "watertight": true,
+     "bbox_min": [
+      -2.0,
+      -37.0,
+      1.2
+     ],
+     "bbox_max": [
+      0.0,
+      37.0,
+      7.0
+     ],
+     "boxes": 1
+    }
+   ],
+   "provenance": [
+    {
+     "path": "raw/cases/case-g/RS_caseG.csv",
+     "sha256": "42ee9cd013ab7ae7c58e665fd2937a861fa80a11aa5c1c06f6020a066d9e9546",
+     "bytes": 590,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-g/AF_caseG.csv",
+     "sha256": "537e02de5373704bbdc0011ab9c96d49905a0d0e4d166b00a6b964dacbc4303d",
+     "bytes": 73,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-g/LF_caseG.xls",
+     "sha256": "8328cc09234a9deecfa6e3efd6d0a9810d3ab39d412fa47568aa8eae053b8527",
+     "bytes": 68096,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-g/readme_caseG.md",
+     "sha256": "774ddbc5bc788911f95757148c66bf213348223979c72b36f1d496257626b39a",
+     "bytes": 4579,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-g/MP-y_caseG.png",
+     "sha256": "c4d026676e800ad2640b39de5876e1ef1dc284ae196af5de41941f8800602ccb",
+     "bytes": 64187,
+     "origin": "repository clone of the Zenodo record"
+    }
+   ],
+   "known_issues": {
+    "readme_heights": {
+     "readme": [
+      1.5,
+      3.0,
+      6.0,
+      9.0
+     ],
+     "table": [
+      1.5,
+      3.0,
+      4.5,
+      6.0
+     ]
+    },
+    "k_far_lee_vs_approach": {
+     "ratio_at_5H": [
+      0.129,
+      0.16,
+      0.207,
+      0.282
+     ]
+    }
+   },
+   "extra_measurements": {}
+  },
+  "H": {
+   "id": "H",
+   "title": "Case H — flow and dispersion around a 1:1:2 building (floor point source)",
+   "status": "released",
+   "status_note": null,
+   "doi": "10.5281/zenodo.15429871",
+   "doi_version": null,
+   "zenodo_record": "https://zenodo.org/records/15429871",
+   "licence": "CC BY 4.0",
+   "data_collectors": [
+    "Ryuichiro Yoshie (Tokyo Polytechnic University)",
+    "Takumi Tachibana (Wind Engineering Institute)"
+   ],
+   "editors_distributors": [
+    "Yoshihide Tominaga (Niigata Institute of Technology)",
+    "Hideki Kikumoto (The University of Tokyo)",
+    "Tsubasa Okaze (Institute of Science Tokyo)"
+   ],
+   "contact": "Ryuichiro Yoshie <yoshie@arch.t-kougei.ac.jp>",
+   "citation_requested": "Yoshie, R. (2016). Wind Tunnel Experiment and Large Eddy Simulation of Pollutant/Thermal Dispersion in Non-isothermal Turbulent Boundary Layer. Adv Environ Wind Eng, 167-196. https://doi.org/10.1007/978-4-431-55912-2_9",
+   "files": {
+    "points_csv": "cases/H/points.csv",
+    "points_parquet": "cases/H/points.parquet",
+    "approach_flow_csv": "cases/H/approach_flow.csv",
+    "approach_flow_parquet": "cases/H/approach_flow.parquet",
+    "directions_csv": "cases/H/directions.csv",
+    "geometry_json": "cases/H/geometry.json",
+    "geometry": [
+     "cases/H/geometry.stl"
+    ]
+   },
+   "columns_present": [
+    "case_id",
+    "config",
+    "instrument",
+    "point_id",
+    "wind_direction_deg",
+    "wind_direction",
+    "x",
+    "y",
+    "z",
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "campaign",
+    "run",
+    "C",
+    "c_rms",
+    "concentration_ratio"
+   ],
+   "counts": {
+    "rows": 1652,
+    "distinct_points": 876,
+    "by_config": {
+     "default": 1652
+    },
+    "by_instrument": {
+     "hydrocarbon_analyser": 826,
+     "split_fibre": 826
+    },
+    "by_direction": {
+     "0.0": 1652
+    },
+    "nan_per_column": {
+     "U": 826,
+     "V": 826,
+     "W": 826,
+     "uu": 826,
+     "vv": 826,
+     "ww": 826,
+     "k": 826,
+     "Vs": 1652,
+     "velocity_ratio": 1652,
+     "uv": 1652,
+     "uw": 1652,
+     "vw": 1652,
+     "C": 826,
+     "c_rms": 826,
+     "concentration_ratio": 826,
+     "T": 1652,
+     "T_rms": 1652,
+     "uc": 1652,
+     "vc": 1652,
+     "wc": 1652,
+     "uT": 1652,
+     "vT": 1652,
+     "wT": 1652,
+     "velocity_ratio_sd": 1652,
+     "k_ratio": 1652
+    }
+   },
+   "normalisation": "velocity by U_H = 3.226 m/s (the approach flow at z = H = 0.2 m; 3.23 in the readme and the paper), k by U_H^2; concentration_ratio = C / c0 with c0 = cgas q / (U_H H^2) = 1e6 ppm x 5.83e-6 m3/s / (3.226 m/s x 0.2^2 m2) = 45.18 ppm (the workbook; the paper rounds it to 45.2). The workbook's reference speed U0 = 5.279 m/s is the free stream, not U_H.",
+   "configurations": [
+    {
+     "config": "default",
+     "instrument": "hydrocarbon_analyser",
+     "wind_direction_deg": 0.0,
+     "wind_direction": "",
+     "rows": 826,
+     "measured": 826,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "split_fibre",
+     "wind_direction_deg": 0.0,
+     "wind_direction": "",
+     "rows": 826,
+     "measured": 826,
+     "status": "settled"
+    }
+   ],
+   "frame": {
+    "origin": "the centre of the building's leeward face on the ground plane (MP-y_caseH.png, MP-z_caseH.png)",
+    "x": "+x streamwise (the wind blows toward +x): the building occupies x in [-0.1, 0]; points at x = -0.2 .. 0.4 m",
+    "y": "+y lateral; the building spans y in [-0.05, 0.05]; the z = 0.0625H plane covers y in [-0.2, 0.2], the others y in [0, 0.2] and the y = 0 line",
+    "z": "+z up; roof at z = 0.2 m; points at z = 0.01 .. 0.3 m",
+    "source": "the 4 mm floor hole at (0.05, 0, 0), i.e. 0.25 H behind the leeward face",
+    "length_scale": "model metres (the source states no model:full scale ratio; Eddy3D solves it at 1:100)"
+   },
+   "transform_from_published": {
+    "coordinate_scale": 1.0,
+    "lateral_sign": "-1 for point numbers 1-220 (the vertical-plane sheet), +1 elsewhere",
+    "origin_shift_m": [
+     0,
+     0,
+     0
+    ],
+    "uH_m_s": 3.226,
+    "c0_ppm": 45.179789212647236,
+    "note": "U, V, W, rms and k = the workbook's ratios x uH (uH^2 for k), V of point numbers 1-220 multiplied by -1; variances = (rms x uH)^2; concentration as published; one row per instrument; the x = 400 mm label of 18 concentration-only rows is read as 380 mm"
+   },
+   "inflow": {
+    "U_H_m_s": 3.226,
+    "U_H_stated_m_s": 3.23,
+    "H_m": 0.2,
+    "U0_free_stream_m_s": 5.27944,
+    "uH_over_U0": 0.61105,
+    "profile_x_m": -0.493,
+    "turbulence_intensity_at_H": 0.2165,
+    "log_law": {
+     "z_range_m": [
+      0.02,
+      0.4
+     ],
+     "points": 13,
+     "u_star_m_s": 0.40652,
+     "z0_m": 0.00744917562488,
+     "z0_mm": 7.4492,
+     "rms_residual_m_s": 0.0827,
+     "rms_residual_rel": 0.0266,
+     "error_at_H_rel": 0.0112
+    },
+    "power_law": {
+     "z_range_m": [
+      0.02,
+      0.4
+     ],
+     "points": 13,
+     "alpha": 0.4287,
+     "max_rel_error": 0.1702
+    },
+    "method": "least squares, kappa = 0.41, z = 0.02 .. 2H on the workbook's 17-point inflow profile",
+    "c0_ppm": 45.179789212647236,
+    "c0_paper_ppm": 45.2,
+    "note": "the approach-flow table's uu, vv, ww are (rms x uH)^2; the profile's uw and uv are in the workbook and the CSV but have no column in the approach-flow table"
+   },
+   "geometry_summary": [
+    {
+     "configuration": "default",
+     "file": "cases/H/geometry.stl",
+     "triangles": 12,
+     "watertight": true,
+     "bbox_min": [
+      -0.1,
+      -0.05,
+      0.0
+     ],
+     "bbox_max": [
+      0.0,
+      0.05,
+      0.2
+     ],
+     "boxes": 1
+    }
+   ],
+   "provenance": [
+    {
+     "path": "raw/cases/case-h/RS_caseH.csv",
+     "sha256": "043087d60a197e5a105f8b4f0e592fadaff4baf8b9ad985de8d53d6a058e6df8",
+     "bytes": 64462,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-h/AF_caseH.csv",
+     "sha256": "10115bcf913cff26c38c27626c2c3f49145bbbb3f9d37a045b13a256eae67e81",
+     "bytes": 1205,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-h/LF_caseH.xlsx",
+     "sha256": "5ce495a8216e04e4769734af7b561d9422c4775ad7542fc819d305e3643d9f00",
+     "bytes": 7973608,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-h/readme_caseH.md",
+     "sha256": "85249cc1dc8736b29431aafd3c6bbd2d374648b5ef54707d14f8b298163aa625",
+     "bytes": 4266,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-h/MP-y_caseH.png",
+     "sha256": "6a56401491ab846055ee34a52f6b5b301f104556727c3a3b055e67c9429b2f61",
+     "bytes": 96271,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-h/MP-z_caseH.png",
+     "sha256": "7f8076536468f8d633ea3c794aaaa7ad4b7ba327e91c027ebfba4c1986f35cab",
+     "bytes": 218032,
+     "origin": "repository clone of the Zenodo record"
+    }
+   ],
+   "known_issues": {
+    "w_rms_header_typo": "w_rsm",
+    "csv_quantised_planes": [
+     "z=0.5H",
+     "z=0.25H"
+    ],
+    "unmeasured_lines": {
+     "velocity": 0.38,
+     "concentration": 0.4
+    },
+    "negative_concentrations": 97,
+    "duplicated_locations": {
+     "velocity": 13,
+     "concentration": 13
+    },
+    "V_sign_flipped_for_point_numbers": [
+     1,
+     220
+    ]
+   },
+   "extra_measurements": {
+    "source": {
+     "x_m": 0.05,
+     "y_m": 0.0,
+     "z_m": 0.0,
+     "diameter_mm": 4.0,
+     "gas": "ethylene (C2H4), 100 %",
+     "flow_cc_per_min": 350.0,
+     "flow_m3_s": 5.83e-06,
+     "position": "0.25 H from the leeward wall, on the floor"
+    },
+    "plume_flux_over_release_x_0.38": 0.7962
+   }
+  },
+  "I": {
+   "id": "I",
+   "title": "Case I — flow and dispersion around a cube (roof point source)",
+   "status": "released",
+   "status_note": null,
+   "doi": "10.5281/zenodo.15430018",
+   "doi_version": null,
+   "zenodo_record": "https://zenodo.org/records/15430018",
+   "licence": "CC BY 4.0",
+   "data_collectors": [
+    "Hiroaki Kondo (National Institute of Advanced Industrial Science and Technology)",
+    "Katsuhiko Mutou (National Institute of Advanced Industrial Science and Technology)",
+    "Akihiro Hori (National Institute for Environmental Studies)"
+   ],
+   "editors_distributors": [
+    "Yoshihide Tominaga (Niigata Institute of Technology)",
+    "Hideki Kikumoto (The University of Tokyo)",
+    "Tsubasa Okaze (Institute of Science Tokyo)"
+   ],
+   "contact": "Yoshihide Tominaga <tominaga@abe.niit.ac.jp>",
+   "citation_requested": "Japan Society for Atmospheric Environment (2013). Guidelines for Atmospheric Environment Assessment Methods Using CFD Models (DiMCFD). Japan Society for Atmospheric Environment (in Japanese).",
+   "files": {
+    "points_csv": "cases/I/points.csv",
+    "points_parquet": "cases/I/points.parquet",
+    "approach_flow_csv": "cases/I/approach_flow.csv",
+    "approach_flow_parquet": "cases/I/approach_flow.parquet",
+    "directions_csv": "cases/I/directions.csv",
+    "geometry_json": "cases/I/geometry.json",
+    "geometry": [
+     "cases/I/geometry.stl"
+    ]
+   },
+   "columns_present": [
+    "case_id",
+    "config",
+    "instrument",
+    "point_id",
+    "wind_direction_deg",
+    "wind_direction",
+    "x",
+    "y",
+    "z",
+    "U",
+    "V",
+    "W",
+    "k",
+    "campaign",
+    "run",
+    "C",
+    "concentration_ratio"
+   ],
+   "counts": {
+    "rows": 630,
+    "distinct_points": 630,
+    "by_config": {
+     "default": 630
+    },
+    "by_instrument": {
+     "hydrocarbon_analyser": 539,
+     "ldv": 91
+    },
+    "by_direction": {
+     "0.0": 630
+    },
+    "nan_per_column": {
+     "U": 539,
+     "V": 592,
+     "W": 539,
+     "uu": 630,
+     "vv": 630,
+     "ww": 630,
+     "k": 539,
+     "Vs": 630,
+     "velocity_ratio": 630,
+     "uv": 630,
+     "uw": 630,
+     "vw": 630,
+     "C": 91,
+     "c_rms": 630,
+     "concentration_ratio": 91,
+     "T": 630,
+     "T_rms": 630,
+     "uc": 630,
+     "vc": 630,
+     "wc": 630,
+     "uT": 630,
+     "vT": 630,
+     "wT": 630,
+     "velocity_ratio_sd": 630,
+     "k_ratio": 630
+    }
+   },
+   "normalisation": "velocity by U_H = 1.7 m/s (the readme; the approach flow at z = H = 0.1 m is 1.697 m/s), concentration_ratio = C / c0 with c0 = 39.2235 ppm (the workbook; the paper rounds it to 39.2) = q / (U_H H^2) for q = the ETHANE flow, 10 % of the 400 cc/min released (6.67e-7 m3/s), not the 6.67e-6 m3/s the paper quotes for the mixture.",
+   "configurations": [
+    {
+     "config": "default",
+     "instrument": "hydrocarbon_analyser",
+     "wind_direction_deg": 0.0,
+     "wind_direction": "",
+     "rows": 539,
+     "measured": 539,
+     "status": "settled"
+    },
+    {
+     "config": "default",
+     "instrument": "ldv",
+     "wind_direction_deg": 0.0,
+     "wind_direction": "",
+     "rows": 91,
+     "measured": 91,
+     "status": "settled"
+    }
+   ],
+   "frame": {
+    "origin": "the centre of the cube on the ground plane (MP-y-c_caseI.png, MP-z-c_caseI.png)",
+    "x": "+x streamwise (the wind blows toward +x): the cube occupies x in [-0.05, 0.05]; wind points x = -0.15 .. 0.25, concentration points x = 0.065 .. 2.7",
+    "y": "+y lateral; the cube spans y in [-0.05, 0.05]; wind points on y = 0 and on the plane z = 0.05 at |y| <= 0.15, concentration points on y = 0 and on the ground at |y| <= 0.44",
+    "z": "+z up; roof at z = 0.1 m; the source (6 mm outlet) at (0, 0, 0.1)",
+    "source": "ethane, 10 % in the mixture, 400 cc/min through a 6 mm circular outlet at the roof centre (M = 0.14)",
+    "length_scale": "model metres (the source states no model:full scale ratio; Eddy3D solves it at 1:60)"
+   },
+   "transform_from_published": {
+    "coordinate_scale": 1.0,
+    "lateral_sign": 1,
+    "origin_shift_m": [
+     0,
+     0,
+     0
+    ],
+    "c0_ppm": 39.223529411764716,
+    "note": "values from the workbook; one row per instrument, wind rows 1-91 and concentration rows 92-630; V on the y = 0 plane set to NaN; coordinates as published"
+   },
+   "inflow": {
+    "U_H_m_s": 1.696918,
+    "U_H_stated_m_s": 1.7,
+    "H_m": 0.1,
+    "z_ref_m": 0.1,
+    "U_ref_basis": "the measured U at z = H; the 'Velocity measurement' sheet and every ratio of the points use 1.7",
+    "turbulence_intensity_at_H_isotropic_estimate": 0.0752,
+    "log_law": {
+     "z_range_m": [
+      0.02,
+      0.4
+     ],
+     "points": 9,
+     "u_star_m_s": 0.09278,
+     "z0_m": 4.54668629042e-05,
+     "z0_mm": 0.0455,
+     "rms_residual_m_s": 0.0405,
+     "rms_residual_rel": 0.0233,
+     "error_at_H_rel": 0.0263
+    },
+    "power_law": {
+     "z_range_m": [
+      0.02,
+      0.2
+     ],
+     "points": 7,
+     "alpha": 0.115,
+     "max_rel_error": 0.01
+    },
+    "power_law_one_seventh_stated": "paper: 'followed a 1/7 power-law profile'",
+    "method": "least squares, kappa = 0.41, z = 0.02 .. 0.4 m on the workbook's 12-point profile",
+    "c0_ppm": 39.223529411764716,
+    "c0_paper_ppm": 39.2,
+    "tunnel": "20 m long, 3.0 x 2.0 m cross-section (paper section 3.9)",
+    "note": "the approach-flow table's uu, vv, ww are empty: only k is published; set wind speed 3.2 (the workbook's first cell, Japanese label) is the tunnel setting"
+   },
+   "geometry_summary": [
+    {
+     "configuration": "default",
+     "file": "cases/I/geometry.stl",
+     "triangles": 12,
+     "watertight": true,
+     "bbox_min": [
+      -0.05,
+      -0.05,
+      0.0
+     ],
+     "bbox_max": [
+      0.05,
+      0.05,
+      0.1
+     ],
+     "boxes": 1
+    }
+   ],
+   "provenance": [
+    {
+     "path": "raw/cases/case-i/RS-w_caseI.csv",
+     "sha256": "4b771f42270efc334127cd3808fdb4c553a7bc37f1d88a6f434895cea904c900",
+     "bytes": 3316,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-i/RS-c_caseI.csv",
+     "sha256": "090730eff1d27348064b893935d7a1c89300700ad1f3ec72933812f6d0b1d351",
+     "bytes": 8961,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-i/AF_caseI.csv",
+     "sha256": "cf765a33d50e7ab723861291b2c1f2a1bf7b841d9f320fa7dbc000a6b467ef47",
+     "bytes": 461,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-i/LF_caseI.xlsx",
+     "sha256": "64eec074ff20a5b028976473fa76193706805ccbf3a4fc3e1f6269ffd0829dcf",
+     "bytes": 58716,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-i/readme_caseI.md",
+     "sha256": "26720dbdbeb064a787e67d542a5639a26dd2380b25536fc9822ec01703067c8d",
+     "bytes": 4012,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-i/MP-y-w_caseI.png",
+     "sha256": "66c3c913db8b5f34071f3c3f7d9cd248d3f5ff2f18ef98664167ed473e0c7f45",
+     "bytes": 54121,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-i/MP-z-w_caseI.png",
+     "sha256": "48039c6f893cea2f339fc25c3fd536e4e7e32585394a6f6717272029911845c0",
+     "bytes": 53705,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-i/MP-y-c_caseI.png",
+     "sha256": "8421ea201d10e0542f4d129f62b3c8a5b17dc14e7e72b25c2348e1c206f2bb07",
+     "bytes": 121564,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-i/MP-z-c_caseI.png",
+     "sha256": "8bd5c69ed7b9d2df38a29e20568bd964b80bed6b5b2c698b8a7b4c7bccf292b8",
+     "bytes": 131303,
+     "origin": "repository clone of the Zenodo record"
+    }
+   ],
+   "known_issues": {
+    "V_on_y0": {
+     "points": 53,
+     "treated_as": "not measured (NaN)"
+    },
+    "af_csv_stray_cells": [
+     "0.5*",
+     "1.5*"
+    ],
+    "concentration_quantum_ppm": 0.1,
+    "UH_1.7_vs_1.697": {
+     "velocity_sheet": 1.7,
+     "inflow_sheet": 1.696918
+    },
+    "paper_mixture_flow_vs_ethane_flow": {
+     "paper_m3_s": 6.67e-06,
+     "ethane_m3_s": 6.666666666666667e-07
+    }
+   },
+   "extra_measurements": {
+    "source": {
+     "x_m": 0.0,
+     "y_m": 0.0,
+     "z_m": 0.1,
+     "diameter_mm": 6.0,
+     "gas": "ethane, 10 % in the mixture",
+     "flow_cc_per_min_mixture": 400.0,
+     "ethane_flow_m3_s": 6.666666666666667e-07,
+     "release_velocity_m_s": 0.23578510087688198,
+     "momentum_ratio": 0.13869711816287175
+    },
+    "plume_flux_over_release_x_2.7": 1.1596
+   }
+  },
+  "J": {
+   "id": "J",
+   "title": "Case J — 1:1:2 building, floor source, non-isothermal",
+   "status": "released",
+   "status_note": null,
+   "doi": "10.5281/zenodo.15447887",
+   "doi_version": null,
+   "zenodo_record": "https://zenodo.org/records/15447887",
+   "licence": "CC BY 4.0",
+   "data_collectors": [
+    "Ryuichiro Yoshie (Tokyo Polytechnic University)",
+    "Hideyuki Tanaka (Takenaka Corporation)",
+    "Tsuyoshi Kobayashi (Tokyo Polytechnic University)"
+   ],
+   "editors_distributors": [
+    "Yoshihide Tominaga (Niigata Institute of Technology)",
+    "Hideki Kikumoto (The University of Tokyo)",
+    "Tsubasa Okaze (Institute of Science Tokyo)"
+   ],
+   "contact": "Ryuichiro Yoshie <yoshie@arch.t-kougei.ac.jp>",
+   "citation_requested": "Yoshie, R. (2016). Wind Tunnel Experiment and Large Eddy Simulation of Pollutant/Thermal Dispersion in Non-isothermal Turbulent Boundary Layer. Adv Environ Wind Eng, 167-196. https://doi.org/10.1007/978-4-431-55912-2_9",
+   "files": {
+    "points_csv": "cases/J/points.csv",
+    "points_parquet": "cases/J/points.parquet",
+    "approach_flow_csv": "cases/J/approach_flow.csv",
+    "approach_flow_parquet": "cases/J/approach_flow.parquet",
+    "directions_csv": "cases/J/directions.csv",
+    "geometry_json": "cases/J/geometry.json",
+    "geometry": [
+     "cases/J/geometry.stl"
+    ]
+   },
+   "columns_present": [
+    "case_id",
+    "config",
+    "instrument",
+    "point_id",
+    "wind_direction_deg",
+    "wind_direction",
+    "x",
+    "y",
+    "z",
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "campaign",
+    "run",
+    "C",
+    "c_rms",
+    "concentration_ratio",
+    "T",
+    "T_rms",
+    "uT",
+    "vT",
+    "wT"
+   ],
+   "counts": {
+    "rows": 444,
+    "distinct_points": 444,
+    "by_config": {
+     "default": 444
+    },
+    "by_instrument": {
+     "split_fibre": 444
+    },
+    "by_direction": {
+     "0.0": 444
+    },
+    "nan_per_column": {
+     "Vs": 444,
+     "velocity_ratio": 444,
+     "uv": 444,
+     "uw": 444,
+     "vw": 444,
+     "uc": 444,
+     "vc": 444,
+     "wc": 444,
+     "velocity_ratio_sd": 444,
+     "k_ratio": 444
+    }
    },
    "normalisation": {
-    "quantity": "velocity_ratio = U / U_ref, U_ref = the approaching mean wind speed at 500 m (the boundary-layer height), full scale; field values were converted to it by the tunnel (readme)",
-    "U_ref_m_s": "10 (data paper) or 10.65 (profile implied); see inflow",
-    "conversion_from_the_workbook": {
-     "SMB sector (NW, NNW, N, NNE, NE; roof anemometer G.L.+237 m)": {
-      "factor": 0.93974,
-      "interval": [
-       0.9394736842105262,
-       0.9400000000000001
-      ]
-     },
-     "KDD sector (all other directions; roof anemometer G.L.+187 m)": {
-      "factor": 0.96287,
-      "interval": [
-       0.9625000000000005,
-       0.9632352941176471
-      ]
-     },
-     "meaning": "workbook ratio x factor = CSV ratio; factor = U(roof anemometer) / U(500 m) from the N (SMB) or S (KDD) tunnel test (readme); the factors themselves are not stated in the sources (QUESTIONS.md QF8)"
+    "concentration": {
+     "c0_ppm": 12.283215,
+     "definition": "c0 = (gas fraction 0.05) x q / (U_H H^2), q = 9.17e-6 m3/s, U_H = 1.4581 m/s, H = 0.16 m",
+     "source": "LF_caseJ.xlsx 'Experimental Condition' cell (Co); recomputed in check c0_from_q_gas_fraction_UH_H_equals_workbook",
+     "without_gas_fraction_ppm": 245.6643
     },
-    "velocity_ratio_sd": "standard deviation of the 10-minute mean ratios behind one field value (cup anemometer, only 10-minute means above 5 m/s at the reference); published to 3 dp, quantised at f/100",
-    "field_height": "z of each field row is the anemometer height above the tunnel floor (13 ... 21 m); the tunnel planes are 15, 19 and 30 m"
+    "velocity": {
+     "U_H_m_s": 1.4581,
+     "height_m": 0.16
+    },
+    "temperature": {
+     "theta_f_degC": 45.8,
+     "delta_theta_K": 33.6,
+     "definition": "(T - T_f) / delta_theta"
+    }
+   },
+   "configurations": [
+    {
+     "config": "default",
+     "instrument": "split_fibre",
+     "wind_direction_deg": 0.0,
+     "wind_direction": "",
+     "rows": 444,
+     "measured": 444,
+     "status": "settled"
+    }
+   ],
+   "frame": {
+    "origin": "the building's leeward (downwind) wall centre on the ground; x = 0 is the leeward wall",
+    "x": "+x streamwise (the wind blows toward +x); building x in [-0.08, 0]; floor source at x = +0.04 m (0.25 H beyond the leeward wall)",
+    "y": "+y lateral; building y in [-0.04, 0.04]; the z/H = 0.025 plane is measured on the y <= 0 side only, the z/H = 0.25 plane on both",
+    "z": "+z up; roof at 0.16; heated floor at z = 0",
+    "length_scale": "model metres (the sources state no model:full scale ratio); b = 0.08 m, H = 0.16 m",
+    "source": "5 mm diameter floor outlet at (0.04, 0, 0); 5 % ethylene in air at 30.4 degC, 9.17e-6 m3/s (readme, data paper section 3.10)"
+   },
+   "transform_from_published": {
+    "coordinate_scale": 1.0,
+    "lateral_sign": 1,
+    "origin_shift_m": [
+     0,
+     0,
+     0
+    ],
+    "temperature": "K -> degC (workbook values; the CSV is in Kelvin)",
+    "note": "values from the workbook at full precision (the CSV is these ratios rounded; checked); variances from the workbook's <u'2> columns; no coordinate or sign change"
+   },
+   "inflow": {
+    "U_H_m_s": 1.46,
+    "U_H_stated_m_s": 1.46,
+    "U_H_workbook_m_s": 1.4581,
+    "H_m": 0.16,
+    "log_law": {
+     "z_range_m": [
+      0.02,
+      0.32
+     ],
+     "points": 15,
+     "u_star_m_s": 0.09369,
+     "z0_m": 0.0003051023919,
+     "z0_mm": 0.3051,
+     "rms_residual_m_s": 0.0276,
+     "rms_residual_rel": 0.021,
+     "error_at_H_rel": -0.0199,
+     "note": "unstably stratified: a neutral log law is only a rough description (see rms_residual_rel)"
+    },
+    "power_law": {
+     "z_range_m": [
+      0.02,
+      0.32
+     ],
+     "points": 15,
+     "alpha": 0.1825,
+     "max_rel_error": 0.0732
+    },
+    "method": "least squares, kappa = 0.41, z = 0.02 .. 2H on AF_caseJ.csv",
+    "turbulence_intensity_at_H": 0.0863,
+    "stratification": {
+     "floor_temperature_degC": 45.8,
+     "air_temperature_at_H_degC": 12.1719,
+     "delta_theta_K": 33.6,
+     "approach_mean_temperature_degC": 16.6,
+     "gas_temperature_degC": 30.4,
+     "building_mean_surface_temperature_degC": 24.4723,
+     "bulk_Richardson_number": -0.08564,
+     "profile": "cases/J/approach_flow_full.csv (T, T_rms, uT, vT, wT per height)"
+    },
+    "streamwise_change_without_building": {
+     "note": "the workbook's empty-tunnel profiles at x/H = -2.5, 0, +2.5 do not coincide: U/U_H at z = H and at the lowest height",
+     "-2.5": {
+      "U_over_UH_at_z_eq_H": 1.000023318,
+      "U_over_UH_at_z_eq_0.01875H": 0.3291375763
+     },
+     "0.0": {
+      "U_over_UH_at_z_eq_H": 1.033291612,
+      "U_over_UH_at_z_eq_0.01875H": 0.5838711337
+     },
+     "2.5": {
+      "U_over_UH_at_z_eq_H": 1.037518003,
+      "U_over_UH_at_z_eq_0.01875H": 0.5039091969
+     }
+    }
+   },
+   "geometry_summary": [
+    {
+     "configuration": "default",
+     "file": "cases/J/geometry.stl",
+     "triangles": 12,
+     "watertight": true,
+     "bbox_min": [
+      -0.08,
+      -0.04,
+      0.0
+     ],
+     "bbox_max": [
+      0.0,
+      0.04,
+      0.16
+     ],
+     "boxes": 1
+    }
+   ],
+   "provenance": [
+    {
+     "path": "raw/cases/case-j/RS_caseJ.csv",
+     "sha256": "39ffbbbbca133b370bcde3bbd52a258fddebd599b2c531d69efd6699f3d4f729",
+     "bytes": 47341,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-j/AF_caseJ.csv",
+     "sha256": "1ecfda6e3e99f889e92b5c2899bdbf5f2a13a46e37b77f7f0da436dc0f10c958",
+     "bytes": 2075,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-j/BD-ST_caseJ.csv",
+     "sha256": "8874909df799fac347b3e1c7335cc7ebc025a8c596a037071e2661270d8bdcba",
+     "bytes": 2831,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-j/LF_caseJ.xlsx",
+     "sha256": "4ee2d404576fa76e01fcccb49000784c74ea1779aa76a37c205e2d7e5485b464",
+     "bytes": 468959,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-j/readme_caseJ.md",
+     "sha256": "c9c9afba2637503bfaf9a369f0b6cd9f3f55513fd7cf345f74bf5bebfd0e4990",
+     "bytes": 5196,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-j/MP-y_caseJ.png",
+     "sha256": "7e773322750a7cd1345ffc973a51c06eeee1fa374ef317ee17df4db2d09c9f1e",
+     "bytes": 91446,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-j/MP-z_caseJ.png",
+     "sha256": "3445a8d64ed91618e6860e53de2e167bdbae11b6b0845d94f98edebbedf17ce5",
+     "bytes": 173796,
+     "origin": "repository clone of the Zenodo record"
+    }
+   ],
+   "known_issues": {
+    "csv_unit_of_T": "RS_caseJ.csv, AF_caseJ.csv and BD-ST_caseJ.csv give temperature in KELVIN; the table carries degC (T) and K (T_rms, a difference)",
+    "duplicate_row": "RS_caseJ.csv No. 1 and No. 153 are the same row (-0.16, 0, 0.004)",
+    "published_resolution": "the CSV is the workbook's ratios rounded to 1e-3 (U, V, W) or 1e-4: heat fluxes sit on a 0.0049 K m/s grid, k on 0.00021 m2/s2; the table uses the workbook values",
+    "fill_series_uncertainty": "workbook sheet xy-plane2, column AH (Ue of the w'theta' flux): 193 cells are 0.0037 + a running integer, not an uncertainty",
+    "readme_reynolds_number": "readme 43,000, data paper 1.6e4 (U_H H / nu); 43,000 is Case H's",
+    "no_shear_stresses_at_points": "uv, uw, vw are published only for the approach flow",
+    "c0_includes_gas_fraction": "c0 = 12.283 ppm contains the 5 % ethylene fraction of the released gas; q / (U_H H^2) alone is 245.7 ppm; the data paper states no c0 for J (QUESTIONS.md QJ2)",
+    "variance_vs_sigma": "the workbook's <u'2>, <v'2>, <w'2> differ from the squares of its sigma columns by up to 3 % in single rows; the table uses the variances, which reproduce k (QUESTIONS.md QJ4)",
+    "expanded_uncertainty": "the workbook lists an expanded uncertainty beside every quantity (summary in extra_measurements.expanded_uncertainty); the mean concentration does not exceed its own (about 1 ppm) at 197 of 465 rows",
+    "inflow_stations": "the empty-tunnel profile at x/H = 0 and +2.5 differs from the published one at x/H = -2.5 near the ground (cases/J/approach_flow_full.csv; QUESTIONS.md QJ5)",
+    "readme_T_b": "the readme's T_b = 285.32 K is the approach-flow air temperature at z = H, not the building (121 measured surface points: 22.0 .. 28.9 degC, cases/J/surface_temperature.csv)"
+   },
+   "extra_measurements": {
+    "expanded_uncertainty": {
+     "where": "LF_caseJ.xlsx, sheets xz-plane(Unstable state), xy-plane(Unstable state), xy-plane2(Unstable state) and Unstable Inflow: every measured quantity has a 'Measurement' column and an 'Expanded Uncertainty: Ue' column beside it, in the workbook's non-dimensional units; the table has no column for it. per_quantity is in physical units over the 465 workbook rows of the three measurement sheets (columns are the table's names, su/sv/sw = the rms columns)",
+     "coverage_factor": "not stated in the workbook (ISO/IEC Guide 98-3 per the data paper)",
+     "per_quantity": {
+      "U": {
+       "n": 465,
+       "min": 0.0007063698276,
+       "median": 0.03120062753,
+       "p95": 0.09146589472,
+       "max": 0.2022636947,
+       "unit": "m/s",
+       "workbook_columns": "E value, F Ue"
+      },
+      "V": {
+       "n": 465,
+       "min": 0.0005287327617,
+       "median": 0.009320835084,
+       "p95": 0.03747450723,
+       "max": 0.05926361862,
+       "unit": "m/s",
+       "workbook_columns": "G value, H Ue"
+      },
+      "W": {
+       "n": 465,
+       "min": 0.03472950427,
+       "median": 0.04785750586,
+       "p95": 0.06776681422,
+       "max": 0.1034005808,
+       "unit": "m/s",
+       "workbook_columns": "I value, J Ue"
+      },
+      "su": {
+       "n": 465,
+       "min": 0.0002384673283,
+       "median": 0.008564583566,
+       "p95": 0.03229237532,
+       "max": 0.07904991983,
+       "unit": "m/s",
+       "workbook_columns": "K value, L Ue"
+      },
+      "sv": {
+       "n": 465,
+       "min": 4.795831523e-05,
+       "median": 0.003966715686,
+       "p95": 0.01152380499,
+       "max": 0.01986124094,
+       "unit": "m/s",
+       "workbook_columns": "M value, N Ue"
+      },
+      "sw": {
+       "n": 465,
+       "min": 0.0002185368009,
+       "median": 0.006172419839,
+       "p95": 0.02187037799,
+       "max": 0.03397555531,
+       "unit": "m/s",
+       "workbook_columns": "O value, P Ue"
+      },
+      "uu": {
+       "n": 465,
+       "min": 1.408718502e-05,
+       "median": 0.00331287219,
+       "p95": 0.02181375085,
+       "max": 0.08290796122,
+       "unit": "m2/s2",
+       "workbook_columns": "Q value, R Ue"
+      },
+      "vv": {
+       "n": 465,
+       "min": 5.745235763e-06,
+       "median": 0.001380878111,
+       "p95": 0.005978756098,
+       "max": 0.01096340781,
+       "unit": "m2/s2",
+       "workbook_columns": "S value, T Ue"
+      },
+      "ww": {
+       "n": 465,
+       "min": 7.666832895e-06,
+       "median": 0.001433158003,
+       "p95": 0.01229073046,
+       "max": 0.0252406044,
+       "unit": "m2/s2",
+       "workbook_columns": "U value, V Ue"
+      },
+      "k": {
+       "n": 465,
+       "min": 1.402256142e-05,
+       "median": 0.002222147523,
+       "p95": 0.0141674854,
+       "max": 0.04080601916,
+       "unit": "m2/s2",
+       "workbook_columns": "W value, X Ue"
+      },
+      "T": {
+       "n": 465,
+       "min": 0.1503062263,
+       "median": 0.2684865753,
+       "p95": 0.4363612983,
+       "max": 1.097016784,
+       "unit": "K",
+       "workbook_columns": "Y value, Z Ue"
+      },
+      "T_rms": {
+       "n": 465,
+       "min": 0.01423485405,
+       "median": 0.05979374442,
+       "p95": 0.1542345088,
+       "max": 0.2424701744,
+       "unit": "K",
+       "workbook_columns": "AA value, AB Ue"
+      },
+      "uT": {
+       "n": 465,
+       "min": 0.000270477972,
+       "median": 0.01013499219,
+       "p95": 0.03757034758,
+       "max": 0.0540188029,
+       "unit": "K m/s",
+       "workbook_columns": "AC value, AD Ue"
+      },
+      "vT": {
+       "n": 465,
+       "min": 4.082482905e-05,
+       "median": 0.003514317146,
+       "p95": 0.01312800315,
+       "max": 0.03670513622,
+       "unit": "K m/s",
+       "workbook_columns": "AE value, AF Ue"
+      },
+      "wT": {
+       "n": 272,
+       "min": 0.0001521786231,
+       "median": 0.004819331229,
+       "p95": 0.01591986539,
+       "max": 0.1834328996,
+       "unit": "K m/s",
+       "workbook_columns": "AG value, AH Ue",
+       "excluded_fill_series_cells": 193
+      },
+      "C": {
+       "n": 465,
+       "min": 0.6856458054,
+       "median": 1.01661099,
+       "p95": 23.46769022,
+       "max": 824.1936694,
+       "unit": "ppm",
+       "workbook_columns": "AI value, AJ Ue",
+       "rows_where_mean_C_does_not_exceed_its_own_Ue": 197,
+       "fraction_of_rows": 0.424,
+       "relative_Ue_median_where_C_above_20_ppm": 0.0466
+      },
+      "c_rms": {
+       "n": 465,
+       "min": 0.0004734355197,
+       "median": 0.4291750722,
+       "p95": 13.4654519,
+       "max": 319.1524507,
+       "unit": "ppm",
+       "workbook_columns": "AK value, AL Ue"
+      }
+     }
+    },
+    "resolution_of_published_ratios": {
+     "U": 0.0014581,
+     "V": 0.0014581,
+     "W": 0.0014581,
+     "u_rms": 0.00014581,
+     "v_rms": 0.00014581,
+     "w_rms": 0.00014581,
+     "k": 0.000212605561,
+     "T": 0.00336,
+     "t_rms": 0.00336,
+     "ut": 0.004899216,
+     "vt": 0.004899216,
+     "wt": 0.004899216,
+     "C": 0.001228321531,
+     "c_rms": 0.001228321531
+    },
+    "extra_files": {
+     "surface_temperature": {
+      "file": "cases/J/surface_temperature.csv",
+      "columns": [
+       "x",
+       "y",
+       "z",
+       "T"
+      ],
+      "units": [
+       "m",
+       "m",
+       "m",
+       "degC"
+      ],
+      "rows": 121,
+      "source": "BD-ST_caseJ.csv (Kelvin there)"
+     },
+     "approach_flow_full": {
+      "file": "cases/J/approach_flow_full.csv",
+      "columns": [
+       "x",
+       "z",
+       "U",
+       "V",
+       "W",
+       "uu",
+       "vv",
+       "ww",
+       "uv",
+       "uw",
+       "k",
+       "T",
+       "T_rms",
+       "uT",
+       "vT",
+       "wT"
+      ],
+      "units": [
+       "m",
+       "m",
+       "m/s",
+       "m/s",
+       "m/s",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "degC",
+       "K",
+       "K m/s",
+       "K m/s",
+       "K m/s"
+      ],
+      "rows": 60,
+      "source": "LF_caseJ.xlsx 'Unstable Inflow' (three stations x = -0.4, 0, +0.4 m, no building)"
+     }
+    },
+    "csv_vs_workbook_rounding": {
+     "U": {
+      "ratio_decimals": 3,
+      "csv_decimals": 2,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "V": {
+      "ratio_decimals": 3,
+      "csv_decimals": 2,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "W": {
+      "ratio_decimals": 3,
+      "csv_decimals": 2,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "u_rms": {
+      "ratio_decimals": 4,
+      "csv_decimals": 3,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "v_rms": {
+      "ratio_decimals": 4,
+      "csv_decimals": 3,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "w_rms": {
+      "ratio_decimals": 4,
+      "csv_decimals": 3,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "k": {
+      "ratio_decimals": 4,
+      "csv_decimals": 4,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "T": {
+      "ratio_decimals": 4,
+      "csv_decimals": 2,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "t_rms": {
+      "ratio_decimals": 4,
+      "csv_decimals": 3,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "ut": {
+      "ratio_decimals": 4,
+      "csv_decimals": 4,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "vt": {
+      "ratio_decimals": 4,
+      "csv_decimals": 4,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "wt": {
+      "ratio_decimals": 4,
+      "csv_decimals": 4,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "C": {
+      "ratio_decimals": 4,
+      "csv_decimals": 3,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     },
+     "c_rms": {
+      "ratio_decimals": 4,
+      "csv_decimals": 3,
+      "cells_differing": 0,
+      "max_abs_diff": 0.0
+     }
+    }
+   }
+  },
+  "K": {
+   "id": "K",
+   "title": "Case K — 9 x 9 cube array, floor point source",
+   "status": "released",
+   "status_note": null,
+   "doi": "10.5281/zenodo.15448050",
+   "doi_version": null,
+   "zenodo_record": "https://zenodo.org/records/15448050",
+   "licence": "CC BY 4.0",
+   "data_collectors": [
+    "Ryuichiro Yoshie (Tokyo Polytechnic University)",
+    "Takumi Tachibana (Wind Engineering Institute)"
+   ],
+   "editors_distributors": [
+    "Yoshihide Tominaga (Niigata Institute of Technology)",
+    "Hideki Kikumoto (The University of Tokyo)",
+    "Tsubasa Okaze (Institute of Science Tokyo)"
+   ],
+   "contact": "Ryuichiro Yoshie <yoshie@arch.t-kougei.ac.jp>",
+   "citation_requested": "Yoshie, R. (2016). Wind Tunnel Experiment and Large Eddy Simulation of Pollutant/Thermal Dispersion in Non-isothermal Turbulent Boundary Layer. Adv Environ Wind Eng, 167-196. https://doi.org/10.1007/978-4-431-55912-2_9",
+   "files": {
+    "points_csv": "cases/K/points.csv",
+    "points_parquet": "cases/K/points.parquet",
+    "approach_flow_csv": "cases/K/approach_flow.csv",
+    "approach_flow_parquet": "cases/K/approach_flow.parquet",
+    "directions_csv": "cases/K/directions.csv",
+    "geometry_json": "cases/K/geometry.json",
+    "geometry": [
+     "cases/K/geometry.stl"
+    ]
+   },
+   "columns_present": [
+    "case_id",
+    "config",
+    "instrument",
+    "point_id",
+    "wind_direction_deg",
+    "wind_direction",
+    "x",
+    "y",
+    "z",
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "campaign",
+    "run",
+    "C",
+    "c_rms",
+    "concentration_ratio"
+   ],
+   "counts": {
+    "rows": 203,
+    "distinct_points": 203,
+    "by_config": {
+     "default": 203
+    },
+    "by_instrument": {
+     "split_fibre": 203
+    },
+    "by_direction": {
+     "0.0": 203
+    },
+    "nan_per_column": {
+     "Vs": 203,
+     "velocity_ratio": 203,
+     "uv": 203,
+     "uw": 203,
+     "vw": 203,
+     "T": 203,
+     "T_rms": 203,
+     "uc": 203,
+     "vc": 203,
+     "wc": 203,
+     "uT": 203,
+     "vT": 203,
+     "wT": 203,
+     "velocity_ratio_sd": 203,
+     "k_ratio": 203
+    }
+   },
+   "normalisation": {
+    "concentration": {
+     "c0_ppm": 429.184549,
+     "definition": "c0 = q / (U_H H^2), q = 3.6e-6 m3/s, U_H = 2.33 m/s, H = 0.06 m (readme and data paper section 3.11)",
+     "workbook_C0_ppm": 18.218292,
+     "workbook_definition": "C0 = q / (UH H^2) with H = 0.2 m and UH = 4.94009 m/s (LF_caseK.xlsx, 'Measurement data' cells R7:R11)",
+     "ratio_c0_over_workbook_C0": 23.557892,
+     "to_get_the_workbook_ratio": "multiply concentration_ratio by c0 / workbook_C0"
+    },
+    "velocity": {
+     "U_H_m_s": 2.33,
+     "height_m": 0.06,
+     "workbook_UH_m_s": 4.94009,
+     "workbook_H_m": 0.2
+    }
+   },
+   "configurations": [
+    {
+     "config": "default",
+     "instrument": "split_fibre",
+     "wind_direction_deg": 0.0,
+     "wind_direction": "",
+     "rows": 203,
+     "measured": 203,
+     "status": "settled"
+    }
+   ],
+   "frame": {
+    "origin": "bottom centre of the windward wall of the 4th row of the central column: x = 0 is that wall, y = 0 the centre line of the central column",
+    "x": "+x streamwise (the wind blows toward +x); 9 rows, row k spans x in [0.12 (k-4), 0.12 (k-4) + 0.06]",
+    "y": "+y lateral; 9 columns, column centres at y = 0, +-0.12, ... +-0.48",
+    "z": "+z up; cube tops at 0.06",
+    "length_scale": "model metres (the sources state no model:full scale ratio); cube H = 0.06 m",
+    "source": "5 mm diameter floor outlet at (-0.15, 0, 0), 100 % ethylene, 3.6e-6 m3/s; between rows 2 and 3 on the centre line",
+    "point_numbers": "RS_caseK.csv publishes none; point_id is the row order of the file"
+   },
+   "transform_from_published": {
+    "coordinate_scale": 1.0,
+    "lateral_sign": 1,
+    "origin_shift_m": [
+     0,
+     0,
+     0
+    ],
+    "turbulence": "rms squared to variance",
+    "note": "values from the workbook at full precision (x, y, z there in mm); the CSV is these rounded; no sign change"
+   },
+   "inflow": {
+    "U_H_m_s": 2.2377,
+    "U_H_stated_m_s": 2.33,
+    "H_m": 0.06,
+    "U_at_z_0.2m_m_s": 3.23,
+    "turbulence_intensity_at_z_0.2": 0.2167,
+    "log_law": {
+     "z_range_m": [
+      0.02,
+      0.6
+     ],
+     "points": 15,
+     "u_star_m_s": 0.40706,
+     "z0_m": 0.007438465852,
+     "z0_mm": 7.4385,
+     "rms_residual_m_s": 0.0819,
+     "rms_residual_rel": 0.025,
+     "error_at_H_rel": -0.0737
+    },
+    "power_law": {
+     "z_range_m": [
+      0.02,
+      0.6
+     ],
+     "points": 15,
+     "alpha": 0.3934,
+     "max_rel_error": 0.2273
+    },
+    "method": "least squares, kappa = 0.41, z = 0.02 .. 0.6 m (10 H) on AF_caseK.csv: the profile is Case H's, tabulated for a 0.2 m building, so the window is a choice",
+    "note": "the file is the approach flow of Case H (identical rows); the workbook normalises it with uH = U(0.2 m) = 3.23 m/s and H = 0.2 m"
+   },
+   "geometry_summary": [
+    {
+     "configuration": "default",
+     "file": "cases/K/geometry.stl",
+     "triangles": 972,
+     "watertight": true,
+     "bbox_min": [
+      -0.36,
+      -0.51,
+      0.0
+     ],
+     "bbox_max": [
+      0.66,
+      0.51,
+      0.06
+     ],
+     "boxes": 81
+    }
+   ],
+   "provenance": [
+    {
+     "path": "raw/cases/case-k/RS_caseK.csv",
+     "sha256": "ccbb967e3d101c80131a0c656c52cc1bbc44cc24daef087f9f2c2f8c77e70176",
+     "bytes": 14518,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-k/AF_caseK.csv",
+     "sha256": "6823f22b89e942eda22a99a0965be7a9c7913e92f40a8310d8bee1f685ffc9f2",
+     "bytes": 1208,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-k/LF_caseK.xlsx",
+     "sha256": "1bb93eac07bf245458836a6a7ac79ce9a350e16db2801be3e94333c2f78602cb",
+     "bytes": 182879,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-k/readme_caseK.md",
+     "sha256": "84fcc15c75bf029322d4e27b7dada98919b71e45a03dc532cfd5aae233fd7ea5",
+     "bytes": 4535,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-k/MP-y_caseK.png",
+     "sha256": "92e063f8aad1407eaa447563ff25ea22c867921c557f497c861c558695e5d8ca",
+     "bytes": 368797,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-k/MP-z_caseK.png",
+     "sha256": "68a923fe125a8e2a4ce83a7f30e6ad12ebee31498f04bb89667677b9d154d677",
+     "bytes": 323677,
+     "origin": "repository clone of the Zenodo record"
+    }
+   ],
+   "known_issues": {
+    "workbook_reference": "LF_caseK.xlsx normalises with H = 0.2 m, UH = 4.94009 m/s and C0 = 18.218 ppm, not the cube's H = 0.06 m and U_H = 2.33 m/s; the table uses the cube's",
+    "no_point_numbers": "RS_caseK.csv has no point-number column; point_id here is the row order",
+    "csv_k": "the CSV's k is recomputed from the rounded rms values; the table carries the workbook's k",
+    "inflow_is_case_H": "AF_caseK.csv is Case H's approach-flow file, measured at x = -0.493 m",
+    "workbook_units": "workbook x, y are millimetres in both data sheets, z is millimetres in 'Measurement data' but metres in 'Inflow'",
+    "usc_not_carried": "the workbook's <usc> and sigma_usc ('Velocity magnitute') are not in the table (QUESTIONS.md QK2)",
+    "lateral_velocity": "V is dominated by a cross-flow offset (about 0.06 m/s); its sign cannot be checked from the data",
+    "stated_U_H": "the approach-flow file gives 2.24 m/s at z = 0.06 m, 4 % below the stated U_H = 2.33 m/s; the stated value defines c0",
+    "concentration_not_mirror_symmetric": "+y and -y values of the same point differ by 44 % on average (U: 3 %, k: 5 %), so the mirror pairs are not a repeatability estimate for C",
+    "pitch_not_stated": "the cube pitch (0.12 m) is read from the MP drawings; the points bound it to 0.11 - 0.14 m",
+    "data_paper_text": "data paper section 3.11 describes 'approximately 30 points at eight heights downwind of the line source'; Case K has 203 points at five heights and a point source (QUESTIONS.md QK4)"
+   },
+   "extra_measurements": {
+    "usc": {
+     "workbook_columns": "E (<usc>, m/s) and F (sigma_usc), sheet 'Measurement data'",
+     "ratio_to_vector_magnitude": "1.03 .. 3.9 (median 1.19) of |U|, never below it; not sqrt(|U|^2 + 2k) either",
+     "note": "a mean scalar speed of the instantaneous velocity, apparently; no column of the schema holds it (Vs is a thermistor speed)"
+    },
+    "extra_files": {
+     "approach_flow_full": {
+      "file": "cases/K/approach_flow_full.csv",
+      "columns": [
+       "x",
+       "z",
+       "U",
+       "V",
+       "W",
+       "uu",
+       "vv",
+       "ww",
+       "uv",
+       "uw",
+       "k"
+      ],
+      "units": [
+       "m",
+       "m",
+       "m/s",
+       "m/s",
+       "m/s",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2"
+      ],
+      "rows": 17,
+      "source": "AF_caseK.csv"
+     }
+    },
+    "layout": {
+     "y_values_m": [
+      -0.18,
+      -0.12,
+      -0.06,
+      0.0,
+      0.06,
+      0.12,
+      0.18
+     ],
+     "z_values_m": [
+      0.004,
+      0.01,
+      0.03,
+      0.05,
+      0.07
+     ],
+     "rows_per_y": {
+      "-0.18": 15,
+      "-0.12": 9,
+      "-0.06": 50,
+      "0.0": 55,
+      "0.06": 50,
+      "0.12": 9,
+      "0.18": 15
+     }
+    },
+    "pitch_scan_points_inside_cubes": {
+     "0.09": 36,
+     "0.1": 48,
+     "0.11": 4,
+     "0.115": 0,
+     "0.12": 0,
+     "0.13": 0,
+     "0.14": 8,
+     "0.15": 8
+    },
+    "tracer_flux_over_q": {
+     "-0.03": 0.67,
+     "0.09": 0.489,
+     "0.21": 0.403
+    }
+   }
+  },
+  "L": {
+   "id": "L",
+   "title": "Case L — 9 x 14 cube array, floor line source, non-isothermal",
+   "status": "released",
+   "status_note": null,
+   "doi": "10.5281/zenodo.15487637",
+   "doi_version": null,
+   "zenodo_record": "https://zenodo.org/records/15487637",
+   "licence": "CC BY 4.0",
+   "data_collectors": [
+    "Ryuichiro Yoshie (Tokyo Polytechnic University)",
+    "Koudai Katada (Tokyo Polytechnic University)"
+   ],
+   "editors_distributors": [
+    "Yoshihide Tominaga (Niigata Institute of Technology)",
+    "Hideki Kikumoto (The University of Tokyo)",
+    "Tsubasa Okaze (Institute of Science Tokyo)"
+   ],
+   "contact": "Ryuichiro Yoshie <yoshie@arch.t-kougei.ac.jp>",
+   "citation_requested": "Yoshie, R., Nomura, K., Katada, K., Jiang, G. (2012). Non-isothermal large eddy simulation of pollutant and thermal dispersion in urban street canyons. 22nd National Symposium on Wind Engineering, 61-66 (in Japanese). https://doi.org/10.14887/kazekosymp.22.0.61.0; Jiang, G., Yoshie, R. (2018). Large-eddy simulation of flow and pollutant dispersion in a 3D urban street model located in an unstable boundary layer. Build. Environ. 142, 47-57. https://doi.org/10.1016/j.buildenv.2018.06.015",
+   "files": {
+    "points_csv": "cases/L/points.csv",
+    "points_parquet": "cases/L/points.parquet",
+    "approach_flow_csv": "cases/L/approach_flow.csv",
+    "approach_flow_parquet": "cases/L/approach_flow.parquet",
+    "directions_csv": "cases/L/directions.csv",
+    "geometry_json": "cases/L/geometry.json",
+    "geometry": [
+     "cases/L/geometry.stl"
+    ]
+   },
+   "columns_present": [
+    "case_id",
+    "config",
+    "instrument",
+    "point_id",
+    "wind_direction_deg",
+    "wind_direction",
+    "x",
+    "y",
+    "z",
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "campaign",
+    "run",
+    "uv",
+    "uw",
+    "C",
+    "c_rms",
+    "concentration_ratio",
+    "T",
+    "T_rms",
+    "uc",
+    "vc",
+    "wc",
+    "uT",
+    "vT",
+    "wT"
+   ],
+   "counts": {
+    "rows": 344,
+    "distinct_points": 344,
+    "by_config": {
+     "default": 344
+    },
+    "by_instrument": {
+     "split_fibre": 344
+    },
+    "by_direction": {
+     "0.0": 344
+    },
+    "nan_per_column": {
+     "Vs": 344,
+     "velocity_ratio": 344,
+     "vw": 344,
+     "velocity_ratio_sd": 344,
+     "k_ratio": 344
+    }
+   },
+   "normalisation": {
+    "concentration": {
+     "c0_ppm": 1728.22823,
+     "definition": "c0 = Cgas q / (U_H H^2), Cgas = 1e6 ppm, q = 8.33333e-6 m3/s, U_H = 1.339415 m/s, H = 0.06 m",
+     "source": "LF_caseL.xlsx cell <C0> (ppm); recomputed in check c0_from_Cgas_q_UH_H_equals_workbook",
+     "rounded_readme_values_ppm": 1726.783
+    },
+    "velocity": {
+     "U_H_m_s": 1.339415,
+     "height_m": 0.06
+    },
+    "temperature": {
+     "theta_f_degC": 45.009119,
+     "delta_theta_K": 30.256732,
+     "definition": "(T - T_f) / delta_theta"
+    }
+   },
+   "configurations": [
+    {
+     "config": "default",
+     "instrument": "split_fibre",
+     "wind_direction_deg": 0.0,
+     "wind_direction": "",
+     "rows": 344,
+     "measured": 344,
+     "status": "settled"
+    }
+   ],
+   "frame": {
+    "origin": "bottom centre of the windward wall of the 9th row (of 14) of the central column: x = 0 is that wall, y = 0 the centre line of the central column",
+    "x": "+x streamwise (the wind blows toward +x); row k spans x in [0.12 (k-9), 0.12 (k-9) + 0.06]; 14 rows from x = -0.96 to 0.66",
+    "y": "+y lateral; 9 columns, column centres at y = 0, +-0.12, ... +-0.48 (1.02 m of the 1.2 m tunnel)",
+    "z": "+z up from the model floor (10 mm above the tunnel floor, data paper); cube tops at 0.06; heated floor at z = 0",
+    "length_scale": "model metres (the sources state no model:full scale ratio); cube H = 0.06 m",
+    "source": "floor line source across the tunnel between rows 7 and 8, centre x = -0.15 m; readme 0.037 m x 1.2 m, BD_caseL.stl patch 0.04 m x 1.02 m; 100 % ethylene, 500 cc/min (8.33e-6 m3/s) at 35 degC",
+    "temperature": "T is degC (the CSV's 'T(K)' is degC); T_rms and heat fluxes are in K"
+   },
+   "transform_from_published": {
+    "coordinate_scale": 1.0,
+    "lateral_sign": 1,
+    "origin_shift_m": [
+     0,
+     0,
+     0
+    ],
+    "turbulence": "rms squared to variance",
+    "temperature": "none for the points (the CSV is degC under a K header); AF: K -> degC (workbook)",
+    "note": "values from the workbook at full precision (the CSV is these rounded); no coordinate or sign change"
+   },
+   "inflow": {
+    "U_H_m_s": 1.3394,
+    "U_H_stated_m_s": 1.34,
+    "U_H_workbook_m_s": 1.339415,
+    "H_m": 0.06,
+    "turbulence_intensity_at_H": 0.1294,
+    "log_law": {
+     "z_range_m": [
+      0.02,
+      0.32
+     ],
+     "points": 19,
+     "u_star_m_s": 0.06999,
+     "z0_m": 2.652369651e-05,
+     "z0_mm": 0.0265,
+     "rms_residual_m_s": 0.0315,
+     "rms_residual_rel": 0.0224,
+     "error_at_H_rel": -0.0156,
+     "note": "unstably stratified: a neutral log law is only a rough description (see rms_residual_rel)"
+    },
+    "power_law": {
+     "z_range_m": [
+      0.02,
+      0.32
+     ],
+     "points": 19,
+     "alpha": 0.128,
+     "max_rel_error": 0.0761
+    },
+    "method": "least squares, kappa = 0.41, z = 0.02 .. 0.32 m (about 5 H) on the workbook's Inflow sheet (CSV = its rounding)",
+    "stratification": {
+     "floor_temperature_degC": 45.0091,
+     "air_temperature_at_H_degC": 14.7524,
+     "delta_theta_K": 30.2567,
+     "approach_mean_temperature_degC": 15.021,
+     "gas_temperature_degC": 35.0,
+     "building_mean_surface_temperature_degC_workbook": 42.2042,
+     "bulk_Richardson_number_workbook": -0.035,
+     "profile": "cases/L/approach_flow_full.csv (T, T_rms, uT, vT, wT per height)"
+    }
+   },
+   "geometry_summary": [
+    {
+     "configuration": "default",
+     "file": "cases/L/geometry.stl",
+     "triangles": 1512,
+     "watertight": true,
+     "bbox_min": [
+      -0.96,
+      -0.51,
+      0.0
+     ],
+     "bbox_max": [
+      0.66,
+      0.51,
+      0.06
+     ],
+     "boxes": 126
+    }
+   ],
+   "provenance": [
+    {
+     "path": "raw/cases/case-l/RS_caseL.csv",
+     "sha256": "954a9a851ae494a89b5213cca84726b8d06489d2c92b352c49ad7e91bb187a4a",
+     "bytes": 52924,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-l/AF_caseL.csv",
+     "sha256": "8aa9eeeebca732aee40a43fb151a5185934c077c9405aca50f90655fe26660d6",
+     "bytes": 2499,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-l/BD_caseL.stl",
+     "sha256": "da101de31c938fcdf5927a11384aa9b78f822ba0d0da93d742a0c95f818e23e2",
+     "bytes": 349705,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-l/LF_caseL.xlsx",
+     "sha256": "97b190d72a2a175b2ccfffa2894f39a4beeb7158b158999ce8df41ee4a3e47a9",
+     "bytes": 1981776,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-l/readme_caseL.md",
+     "sha256": "57a2e4b51a150350999c90a75a76df548cec3c3181cd02ae0272c7172a18a0d5",
+     "bytes": 6300,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-l/MP-y_caseL.png",
+     "sha256": "d77f00747fbab08c46ea0c62c565ee93f987360b4370bbe573542117fabd38ab",
+     "bytes": 565197,
+     "origin": "repository clone of the Zenodo record"
+    },
+    {
+     "path": "raw/cases/case-l/MP-z_caseL.png",
+     "sha256": "4b75af8554cdd535c00db80f740b2627d177d17814f8f0bd6383c9613851a8bd",
+     "bytes": 353162,
+     "origin": "repository clone of the Zenodo record"
+    }
+   ],
+   "known_issues": {
+    "RS_T_unit": "RS_caseL.csv 'T(K)' holds degrees Celsius (AF_caseL.csv's 'T(K)' is kelvin); the table carries degC for both",
+    "readme_file_names": "the readme's file list names AF_caseK.csv and RS_caseK.csv; the files are AF_caseL.csv and RS_caseL.csv",
+    "readme_building_temperature": "the readme's 'building surface temperature T_b = 14.8 degC' is the air temperature at H; the workbook's <θbuild> is 42.2 degC",
+    "source_size": "readme and data paper 0.037 m x 1.2 m; BD_caseL.stl patch 0.04 m x 1.02 m",
+    "not_mirror_symmetric": "the +y and -y halves differ in U, T and C by far more than a repeatability: the tunnel flow has a lateral gradient",
+    "no_expanded_uncertainty": "the workbook carries none",
+    "csv_rounding": "the CSV is the workbook rounded to 2-4 decimals (heat flux 4 dp); the table carries the workbook values",
+    "af_order": "AF_caseL.csv lists the profile from the top (z = 0.32 m) down; the table is ascending",
+    "data_paper_columns_rows": "the data paper's '9 rows by 14 columns' is 14 rows along x by 9 columns across y"
+   },
+   "extra_measurements": {
+    "not_carried": {
+     "tc": "<θ'c'> (CSV 'tc', K ppm): temperature-concentration covariance; no column in the schema (QUESTIONS.md QL5)",
+     "Usc": "workbook 'Usc' = |mean velocity| (derived)"
+    },
+    "extra_files": {
+     "approach_flow_full": {
+      "file": "cases/L/approach_flow_full.csv",
+      "columns": [
+       "x",
+       "z",
+       "U",
+       "V",
+       "W",
+       "uu",
+       "vv",
+       "ww",
+       "uv",
+       "uw",
+       "k",
+       "T",
+       "T_rms",
+       "uT",
+       "vT",
+       "wT"
+      ],
+      "units": [
+       "m",
+       "m",
+       "m/s",
+       "m/s",
+       "m/s",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "m2/s2",
+       "degC",
+       "K",
+       "K m/s",
+       "K m/s",
+       "K m/s"
+      ],
+      "rows": 25,
+      "source": "LF_caseL.xlsx 'Inflow' (x = -0.4 m)"
+     }
+    },
+    "source_patch_stl": {
+     "bbox_min": [
+      -0.17,
+      -0.51,
+      0.0
+     ],
+     "bbox_max": [
+      -0.13,
+      0.51,
+      0.0
+     ],
+     "triangles": 2
+    },
+    "line_source_flux_over_q_per_width": {
+     "-0.03": 0.984,
+     "0.09": 0.999,
+     "0.21": 0.957,
+     "0.33": 0.858
+    },
+    "mirror_pairs": {
+     "pairs": 110,
+     "rel_mean_abs_diff": {
+      "U": 0.2562162618,
+      "k": 0.228572879,
+      "C": 0.3642973408
+     }
+    },
+    "layout": {
+     "locations_by_number_of_heights": {
+      "8": 27,
+      "3": 24,
+      "4": 14
+     }
+    }
    }
   },
   "M": {
@@ -2799,6 +4800,24 @@
      "velocity_ratio_sd": 330,
      "k_ratio": 330
     }
+   },
+   "normalisation": {
+    "concentration_ratio": "C / c0, c0 = q / (U_R H_R^2): the volume fraction of pure tracer at which the release would be diluted by a flow of U_R through an area H_R^2 (data paper 3.13.1)",
+    "tunnel": {
+     "q_m3_s": 2.4999999999999998e-06,
+     "U_R_m_s": 4.08,
+     "H_R_m": 0.068,
+     "c0_ppm": 132.5140782956781,
+     "c0_paper_ppm": 133.0,
+     "tracer": "C2H4, 100 %, 6 mm outlet"
+    },
+    "field": {
+     "H_R_m": 41.0,
+     "c0": "per run: q_run / (U_R,run x 41^2) = 1444 ... 7379 ppq; see extra_measurements.field_runs",
+     "tracer": "PMCH (C7F14), 200 ppm at 5 L/min"
+    },
+    "velocity": "U, V, W and the rms values are the tunnel's m/s; divide by U_R = 4.08 m/s (the speed at the reference point R, rooftop of the main building) for the dimensionless form; no velocity ratio is tabulated",
+    "concentration_units": "tunnel C in ppm of the hydrocarbon analyser's reading; field C in ppq (parts per quadrillion, 1e-15) in the sources, ppm (x 1e-9) in points.csv"
    },
    "configurations": [
     {
@@ -3074,26 +5093,26 @@
    "provenance": [
     {
      "path": "raw/cases/case-m/RS-WT_caseM.csv",
-     "sha256": "9f5aad42e1dd294c6eb32fb75951c9be9c3859dfdcbe35dffe9acd80d860841e",
-     "bytes": 4362,
+     "sha256": "fed9b7e3bbcb0ff7c1dc01a4fa3f112c27accf5012a90d4bf2132ed8054f5fe9",
+     "bytes": 4408,
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-m/RS-FO_caseM.csv",
-     "sha256": "7872f166975f53d621e27b4d045d67be0b414d7bfda48c7826d1644f5972878f",
-     "bytes": 7654,
+     "sha256": "7580fcf06b21d4375ddae89ad84b7dabf658748f1fddf28a011046c786a48e02",
+     "bytes": 7925,
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-m/AF_caseM.csv",
-     "sha256": "89d2e965ff997e7b314439f965062fe47e26f650a4e400a86c4a594343922c39",
-     "bytes": 2381,
+     "sha256": "b41bfd23d56c9aaaa482e4fb9476b2427bcf1c667616d5466c980723ef9ae755",
+     "bytes": 2422,
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-m/LC_caseM.csv",
-     "sha256": "9ad2ef4c4434b8b503037a09e8d529d568f594862886fede21a67458ac5a13fa",
-     "bytes": 1049,
+     "sha256": "08bc3195f66ad1f15fa174af1de25cdc6f96da30bb6ebfc79e936e8cf5e343cf",
+     "bytes": 1068,
      "origin": "repository clone of the Zenodo record"
     },
     {
@@ -3396,24 +5415,6 @@
       "18": -44.41297386004889
      }
     }
-   },
-   "normalisation": {
-    "concentration_ratio": "C / c0, c0 = q / (U_R H_R^2): the volume fraction of pure tracer at which the release would be diluted by a flow of U_R through an area H_R^2 (data paper 3.13.1)",
-    "tunnel": {
-     "q_m3_s": 2.4999999999999998e-06,
-     "U_R_m_s": 4.08,
-     "H_R_m": 0.068,
-     "c0_ppm": 132.5140782956781,
-     "c0_paper_ppm": 133.0,
-     "tracer": "C2H4, 100 %, 6 mm outlet"
-    },
-    "field": {
-     "H_R_m": 41.0,
-     "c0": "per run: q_run / (U_R,run x 41^2) = 1444 ... 7379 ppq; see extra_measurements.field_runs",
-     "tracer": "PMCH (C7F14), 200 ppm at 5 L/min"
-    },
-    "velocity": "U, V, W and the rms values are the tunnel's m/s; divide by U_R = 4.08 m/s (the speed at the reference point R, rooftop of the main building) for the dimensionless form; no velocity ratio is tabulated",
-    "concentration_units": "tunnel C in ppm of the hydrocarbon analyser's reading; field C in ppq (parts per quadrillion, 1e-15) in the sources, ppm (x 1e-9) in points.csv"
    }
   }
  }
