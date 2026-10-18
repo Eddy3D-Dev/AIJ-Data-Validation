@@ -11,10 +11,10 @@ description: "What this site and repository are, how to cite the AIJ UWE benchma
 Wind-tunnel and field reference data from the **AIJ UWE** (Architectural Institute of Japan, Urban Wind Environment)
 benchmark, cleaned and packaged case by case, together with Eddy3D's validation against it. The cleaned tables
 re-release every case in one schema (SI units, one frame per case), regenerated from the published files by a
-checked, deterministic build. The same material is served as this website and as a [static API]({{ '/api-reference/' | relative_url }}).
+deterministic build. The same material is served as this website and as a [static API]({{ '/api-reference/' | relative_url }}).
 
-The measurements are not ours: they belong to their collectors and distributors, named on each case's Data page.
-The validation scores are Eddy3D's, and each says which run it comes from and how to reproduce it.
+The measurements belong to their collectors and distributors, named on each case's Data page.
+The validation scores are Eddy3D's; each names the run it comes from and how to reproduce it.
 
 ## Cite
 

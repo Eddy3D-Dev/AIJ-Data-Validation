@@ -151,20 +151,25 @@ certificate type. The body is ASCII STL regardless; read it as such.
 | `GET /api/cases/{id}/pairs/{engine}.csv` | the measured and modelled value at every scored point of one engine's runs, so any score can be recomputed; each result's `pairs_columns` defines the columns |
 | [`GET /api/validation.json`]({{ '/api/validation.json' | relative_url }}) | every case and engine in one table: status, runs, and each run's headline R, FAC2, FB and hit rate |
 | [`GET /api/geometry.json`]({{ '/api/geometry.json' | relative_url }}) | every STL of every case in one list: case, configuration, units, frame, bounding box, size, SHA-256 |
-| [`GET /api/geometry.zip`]({{ '/api/geometry.zip' | relative_url }}) | every STL in one archive. Each file keeps its own case's frame and units, so they are deliberately not one scene: overlaid they would stack at the origin, E, F, G and M are full scale while the others are model scale, and C's three centre blocks and E's two states are alternatives, not neighbours |
+| [`GET /api/geometry.zip`]({{ '/api/geometry.zip' | relative_url }}) | every STL in one archive. Each file keeps its own case's frame and units. Overlaid, the files would stack at the origin; E, F, G and M are full scale and the others model scale; C's three centre blocks and E's two states are alternatives |
 | `GET /api/schemas/{name}.schema.json` | the JSON Schema of each document: `index`, `versions`, `cases`, `case`, `points`, `geometry`, `validation`, `validation-summary`, `geometry-index` |
 | [`GET /api/openapi.json`]({{ '/api/openapi.json' | relative_url }}) | OpenAPI 3.1 description of every endpoint, with the schemas embedded |
 | [`GET /api/llms.txt`]({{ '/api/llms.txt' | relative_url }}) | plain-text entry point for agents (also at [`/llms.txt`]({{ '/llms.txt' | relative_url }})) |
 
-An engine's status for a case is `scored` (a run exists and its scores are served; whether it agrees is in the
-numbers), `running`, `pending`, or `not comparable`: it cannot produce the measured quantity at the measured
-location. For OpenLB that is at the resolution this hardware runs; for FluidX3D it is without a ground wall
-function. The measurements behind both are on the [Validation]({{ '/validation/' | relative_url }}) page.
-An engine that is not `scored` has no result for that case. The engine ids are `openfoam12-realizableKE`, `openfoam12-kEpsilon` and
+An engine's status for a case is `scored` (a run exists and its scores are served), `running`, `pending`, or `not comparable` (it cannot produce the measured quantity at the measured
+location). An engine that is not `scored` has no result for that case. The engine ids are `openfoam12-realizableKE`, `openfoam12-kEpsilon` and
 `openfoam12-kOmegaSST` (the last two for Case I only), `umf-realizableKE` and `umf-buoyantKEpsilon` (UMF, urbanMicroclimateFoam, an
 OpenFOAM 12 solver and Eddy3D's engine for the non-isothermal Cases J and L; `umf-buoyantKEpsilon` for J only), `openlb`, `fluidx3d` and
 `ml-surrogate`, and an engine is listed for a case only where it applies. Runs of one engine on one case that differ in a configuration (Case C's
 nine, Case F's two vertical frames, Case G's five arms, Case M's three Schmidt numbers) share the engine's pairs file. Each result has `notes`, the caveats that come with the run.
+
+<details markdown="block">
+<summary>Interpretation: why OpenLB and FluidX3D are not comparable</summary>
+
+For OpenLB, `not comparable` is at the resolution this hardware runs; for FluidX3D, it is without a ground wall
+function. The measurements behind both are on the [Validation]({{ '/validation/' | relative_url }}) page.
+
+</details>
 
 ## What each case serves today
 
