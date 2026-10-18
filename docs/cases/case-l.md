@@ -49,4 +49,4 @@ R and FAC2 are the range over the headline scores of an engine's runs (velocity 
 >
 > The cleaned table is in SI units and one frame, with this case's corrections applied once; do not apply them again to the published files.
 >
-> - 9 known issues in the published files are listed under [Known data issues]({{ '/cases/case-l/data/' | relative_url }}#known-data-issues).
+> - 10 known issues in the published files are listed under [Known data issues]({{ '/cases/case-l/data/' | relative_url }}#known-data-issues).

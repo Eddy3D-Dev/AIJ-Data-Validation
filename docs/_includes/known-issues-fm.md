@@ -7,7 +7,7 @@ Case F — Shinjuku district.
 - The 16 field rows of point 14 in RS-FO\_caseF.csv hold the workbook\'s value of the NEXT wind direction clockwise (the series is shifted by one); the cleaned table follows the workbook (clean/QUESTIONS.md QF1).
 - Tunnel and STL coordinates are MODEL scale (1:800); the field\'s are full scale. The case frame is full scale; the tunnel\'s x, y, z and the STL are multiplied by 800.
 - z is height above the tunnel floor. The readme\'s rule \'ground = z - 10 m\' gives the 5 / 9 / 20 m planes, but the STL\'s terrain under all 13 points is at z = 5 m, so the planes stand 10 / 14 / 25 m above it.
-- BD\_caseF.stl is wound inward on every ground, roof and sampled wall facet and is open along the rim of its 725 m disc (812 boundary edges); the served geometry.stl is re-wound outward.
+- BD\_caseF.stl is wound inward on every ground, roof and sampled wall facet and is open along the rim of its 725 m disc (812 boundary edges); the served geometry.stl is re-wound outward and closed with a base slab down to z = -1 m.
 - MP\_caseF.csv names the two reference points the other way round from the workbook, the STL and MP\_caseF.png (the workbook\'s Shinjuku-Mitsui Building is the 225 m tower at (-17.5, 96.0), the KDD Building the 180 m one at (85.8, -347.1)).
 - Field values are the legacy workbook\'s roof-anemometer ratios times 0.940 (NW-NE) or 0.963 (other directions); sigma is the workbook\'s S.D. rounded to 0.01 times that factor, so it moves in steps of 0.0094 / 0.0096.
 - The tunnel did not run E, ESE, WSW or W; the field data cover all 16. The 5 m and 20 m planes exist at some points only (29 and 79 rows).
@@ -87,6 +87,7 @@ Case L — 9 x 14 cube array, line source, non-isothermal.
 
 - RS\_caseL.csv\'s temperature column is headed \'T(K)\' but holds DEGREES CELSIUS (12.85 .. 29.86); AF\_caseL.csv\'s \'T(K)\' is kelvin (283 .. 295). The API serves degrees Celsius for both.
 - The published CSV is the workbook rounded to 2-4 decimals; the table is rebuilt from the workbook. Its \'tc\' column (temperature-concentration covariance, K ppm) and the workbook\'s \'Usc\' (the vector magnitude of the mean velocity) are not in the table.
+- BD\_caseL.stl: the two bottom triangles (z = 0) of each of the 126 cubes (252 triangles) are wound inward; the served geometry.stl is the 126 boxes, outward.
 - The readme\'s file list names AF\_caseK.csv and RS\_caseK.csv; the files are AF\_caseL.csv and RS\_caseL.csv.
 - The readme\'s \'building surface temperature T\_b = 14.8 degC\' is the approach-flow air temperature at z = H; the workbook gives the building surface as 42.2 degC.
 - The line source is 0.037 m x 1.2 m in the readme and data paper but a 0.04 m x 1.02 m patch in BD\_caseL.stl.
@@ -107,5 +108,5 @@ Case M — TPU Atsugi campus.
 - H\_R = 41 m is the anemometer height above the ground; the main roof under the reference point is about 33 m above it. c0 uses H\_R = 0.068 m (41 m / 600 = 0.06833 m would give 131.2 ppm, -1 %).
 - The field has an ambient floor of 8 - 11 ppq at points 11 - 15 in every run (not subtracted); the tunnel\'s concentration has a zero offset (two negative means at point 12) and an rms floor of 7 ppm.
 - Only 11 of the 18 field runs are within 5° of 180°, the tunnel\'s direction; runs 1, 2 and 9 have U\_R of 1.4 - 1.8 m/s.
-- BD\_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges; the served geometry.stl is multiplied by 600 and re-wound outward.
+- BD\_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges (7 on the rim of the panel, 14 on 7 slivers hanging on building roofs); the served geometry.stl is multiplied by 600, re-wound outward, without the slivers and closed with a base slab down to z = -1 m.
 - The approach-flow heights are above the empty tunnel floor: at the profile station the model\'s taper is 0.052 m high, above the 10 lowest profile heights.

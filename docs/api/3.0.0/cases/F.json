@@ -1,7 +1,7 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/case.schema.json",
  "schema_version": "2.3.0",
- "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
+ "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
  "id": "F",
  "slug": "case-f",
@@ -594,9 +594,9 @@
   "files": [
    {
     "configuration": "default",
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F/geometry.stl?v=18bcb1a0bcb1",
-    "triangles": 53814,
-    "watertight": false
+    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F/geometry.stl?v=8799740aa324",
+    "triangles": 56250,
+    "watertight": true
    }
   ]
  },
@@ -614,7 +614,7 @@
   "The 16 field rows of point 14 in RS-FO_caseF.csv hold the workbook's value of the NEXT wind direction clockwise (the series is shifted by one); the cleaned table follows the workbook (clean/QUESTIONS.md QF1).",
   "Tunnel and STL coordinates are MODEL scale (1:800); the field's are full scale. The case frame is full scale; the tunnel's x, y, z and the STL are multiplied by 800.",
   "z is height above the tunnel floor. The readme's rule 'ground = z - 10 m' gives the 5 / 9 / 20 m planes, but the STL's terrain under all 13 points is at z = 5 m, so the planes stand 10 / 14 / 25 m above it.",
-  "BD_caseF.stl is wound inward on every ground, roof and sampled wall facet and is open along the rim of its 725 m disc (812 boundary edges); the served geometry.stl is re-wound outward.",
+  "BD_caseF.stl is wound inward on every ground, roof and sampled wall facet and is open along the rim of its 725 m disc (812 boundary edges); the served geometry.stl is re-wound outward and closed with a base slab down to z = -1 m.",
   "MP_caseF.csv names the two reference points the other way round from the workbook, the STL and MP_caseF.png (the workbook's Shinjuku-Mitsui Building is the 225 m tower at (-17.5, 96.0), the KDD Building the 180 m one at (85.8, -347.1)).",
   "Field values are the legacy workbook's roof-anemometer ratios times 0.940 (NW-NE) or 0.963 (other directions); sigma is the workbook's S.D. rounded to 0.01 times that factor, so it moves in steps of 0.0094 / 0.0096.",
   "The tunnel did not run E, ESE, WSW or W; the field data cover all 16. The 5 m and 20 m planes exist at some points only (29 and 79 rows).",

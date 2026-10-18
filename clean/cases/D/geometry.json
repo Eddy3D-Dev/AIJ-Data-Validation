@@ -27,11 +27,15 @@
      0.675,
      0.25
     ],
-    "signed_volume": 0.021476562,
+    "signed_volume": 0.021476563,
     "edges": 1494,
     "edges_shared_by_two_faces": 1494,
     "edges_boundary": 0,
     "edges_non_manifold": 0,
+    "bodies": 83,
+    "body_contacts": 0,
+    "inconsistent_triangles": 0,
+    "min_body_volume": 0.00025,
     "watertight": true
    },
    "boxes": [

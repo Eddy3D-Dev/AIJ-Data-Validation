@@ -52,4 +52,4 @@ R and FAC2 are the range over the headline scores of an engine's runs (velocity 
 > The cleaned table is in SI units and one frame, with this case's corrections applied once; do not apply them again to the published files.
 >
 > - The sense in which the wind direction rotates is a convention to check before comparing at any direction other than 0° (see *Frame and units* on the Data page).
-> - 6 known issues in the published files are listed under [Known data issues]({{ '/cases/case-e/data/' | relative_url }}#known-data-issues).
+> - 7 known issues in the published files are listed under [Known data issues]({{ '/cases/case-e/data/' | relative_url }}#known-data-issues).

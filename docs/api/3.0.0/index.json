@@ -1,7 +1,7 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/index.schema.json",
  "schema_version": "2.3.0",
- "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
+ "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
  "name": "AIJ UWE benchmark — cleaned data API",
  "description": "Static JSON/CSV/STL endpoints for the Architectural Institute of Japan Urban Wind Environment benchmark (Cases A-M) and Eddy3D's validation against it. Every file is a plain HTTP GET; nothing is computed on request.",
@@ -16,7 +16,7 @@
  "versions": {
   "release": "3.0.0",
   "schema": "2.3.0",
-  "data": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
+  "data": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
   "clean_manifest": "3.0.0"
  },
  "release": {
@@ -239,15 +239,15 @@
     "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/B/geometry.stl?v=e6de70eeb17d",
     "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/C/geometry.stl?v=b8c31c57c453",
     "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/D/geometry.stl?v=531895531271",
-    "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/geometry.stl?v=f59d27738a49",
-    "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F/geometry.stl?v=18bcb1a0bcb1",
+    "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/geometry.stl?v=c29624fdae6d",
+    "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F/geometry.stl?v=8799740aa324",
     "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/G/geometry.stl?v=09d23c794155",
     "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/H/geometry.stl?v=4836687efff9",
     "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/I/geometry.stl?v=ff61cbb22798",
     "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/J/geometry.stl?v=1bd33d8d3531",
     "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/K/geometry.stl?v=f0f8a3adfa29",
     "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/L/geometry.stl?v=20864bc75187",
-    "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/geometry.stl?v=cfc68cf63ea1"
+    "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/geometry.stl?v=e4e0a2044536"
    ]
   },
   {
@@ -260,7 +260,7 @@
    "urls": [
     "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/C/geometry_0D.stl?v=0f08bcd4dd6b",
     "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/C/geometry_1D.stl?v=ac92c8ed427c",
-    "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/geometry_bc.stl?v=25d8af3a7617"
+    "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/geometry_bc.stl?v=9b944d97a817"
    ]
   },
   {
@@ -403,18 +403,18 @@
  ],
  "files": [
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases.json?v=972dbf3feb79",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases.json?v=d97c3a080202",
    "path": "cases.json",
    "media_type": "application/json",
    "bytes": 47214,
-   "sha256": "972dbf3feb792129fadf07aedebdaa8882f13dd56110055cc61a1f5670c6c26a"
+   "sha256": "d97c3a080202c72591de047a9c7db6b2682eb253da468137574b02e45ac0a66f"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/A.json?v=cc6921c7a1a7",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/A.json?v=5286a18400c1",
    "path": "cases/A.json",
    "media_type": "application/json",
    "bytes": 7729,
-   "sha256": "cc6921c7a1a7f02631b3ec0875856d0a88458912f6efe6728c07d6daf1f2f298"
+   "sha256": "5286a18400c12da3401976c4bdba0f784ddf2dfb8d46f057a22c28dde9516428"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/A/approach_flow.csv?v=2f3b37fa8e43",
@@ -424,11 +424,11 @@
    "sha256": "2f3b37fa8e43e307e807a5114bf2a8b2ad3ea6396cb17d6adc112663b69ea19f"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/A/geometry.json?v=e697e21d5cfa",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/A/geometry.json?v=c6f198cc651f",
    "path": "cases/A/geometry.json",
    "media_type": "application/json",
-   "bytes": 2276,
-   "sha256": "e697e21d5cfa1ec69c95e08bfa454aab963e38bc11aad2835ff56dcf7954b2ff"
+   "bytes": 2425,
+   "sha256": "c6f198cc651f3d2f3d924259dd47fa28599b66cc4c83dde7982536cb5cd1a2f0"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/A/geometry.stl?v=89acdfbbff84",
@@ -473,25 +473,25 @@
    "sha256": "a46201996b22620e9ceae7ac558d8bafc44f3ac3ed7073c2efca70bc57ad5239"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/A/points.json?v=b5051945785e",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/A/points.json?v=b072117a97ea",
    "path": "cases/A/points.json",
    "media_type": "application/json",
    "bytes": 58606,
-   "sha256": "b5051945785eed8a40343199ccf7f6280ca3765247c987a04b6a5fb362891b7d"
+   "sha256": "b072117a97ea92e61a2eeb7fc0d2f4de9dbcf31cb89bed3900ca444b351ea567"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/A/validation.json?v=e4c9e7cc6bfc",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/A/validation.json?v=b075b54073e3",
    "path": "cases/A/validation.json",
    "media_type": "application/json",
    "bytes": 46765,
-   "sha256": "e4c9e7cc6bfca69313751528db3533c318bba8ec8ad6b72fa7f420b2ba1be2dd"
+   "sha256": "b075b54073e307d79b8365541f46eb88377c06887e9d9714ff3bbcd159d7fca3"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/B.json?v=5099b490e4d7",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/B.json?v=e6944cf7c81f",
    "path": "cases/B.json",
    "media_type": "application/json",
    "bytes": 6730,
-   "sha256": "5099b490e4d769690fbf8a29e1458b6fa58fc79b18bd12cdc2f5e9d29833f360"
+   "sha256": "e6944cf7c81fefaa42583bd208beb8be40c10a65b515db3df947985ce95f5f76"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/B/approach_flow.csv?v=126a620f5698",
@@ -501,11 +501,11 @@
    "sha256": "126a620f56983e720ad25d3678369754477837fcc8d04bfdba2c5eaffc93f200"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/B/geometry.json?v=4bebdf31e72c",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/B/geometry.json?v=418a39fea3c8",
    "path": "cases/B/geometry.json",
    "media_type": "application/json",
-   "bytes": 2284,
-   "sha256": "4bebdf31e72c1412c637d816097ce325134b1adb8ca0a34ec8bacb4b760ee07a"
+   "bytes": 2430,
+   "sha256": "418a39fea3c8a41b3ae761a7b3bdd0f5ff893f9c8f86bfd7c499ac1867864e9c"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/B/geometry.stl?v=e6de70eeb17d",
@@ -550,25 +550,25 @@
    "sha256": "dec97c21217ae3886005264dca7096205c23bf80fb07320c80f66e238716f390"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/B/points.json?v=c842ccd5cf1a",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/B/points.json?v=10fb656e369a",
    "path": "cases/B/points.json",
    "media_type": "application/json",
    "bytes": 68491,
-   "sha256": "c842ccd5cf1aab7eb465517c826ac00b12ed1dc73cad70bd9dfd16d5e6b74303"
+   "sha256": "10fb656e369a85a7e74036fc6fd163cbaa84142666254be8f1719354849d7354"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/B/validation.json?v=e18b167620b2",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/B/validation.json?v=bebcf79096e6",
    "path": "cases/B/validation.json",
    "media_type": "application/json",
    "bytes": 44326,
-   "sha256": "e18b167620b24e78cb04fc39d1642b92c959ef087f8c23ff16e97b48c98755e6"
+   "sha256": "bebcf79096e62911d9554013a62eae14165fd0681b86b2a1d4105dee9ead3741"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/C.json?v=4af83ca91aec",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/C.json?v=52aa605cf19f",
    "path": "cases/C.json",
    "media_type": "application/json",
    "bytes": 10455,
-   "sha256": "4af83ca91aec484c056383e81035af9463b30a8619d54128acf6d11673e32439"
+   "sha256": "52aa605cf19f5a10fd9376c4b6c7a1eef3a890b1865ffc5bf3c68051e580abee"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/C/approach_flow.csv?v=98849731e877",
@@ -578,11 +578,11 @@
    "sha256": "98849731e877fe940be821a1aa18469c8d4b94a5e54fd1e23c19f9337c39ea2a"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/C/geometry.json?v=914e92c55440",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/C/geometry.json?v=06756d212c4f",
    "path": "cases/C/geometry.json",
    "media_type": "application/json",
-   "bytes": 7970,
-   "sha256": "914e92c55440606e36e865d8c8d30b66c1bd6c26df0857c0fac0212deb78df1c"
+   "bytes": 8408,
+   "sha256": "06756d212c4f2a318e0e127c6c21a1cfff5e3daa883058ed57c3206b0e827752"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/C/geometry.stl?v=b8c31c57c453",
@@ -627,25 +627,25 @@
    "sha256": "7448f0ceae37f076ba00da6b542797d81e9edd92fdecc7b49dd6813577550a80"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/C/points.json?v=988bd8eb7312",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/C/points.json?v=11953a26d5ec",
    "path": "cases/C/points.json",
    "media_type": "application/json",
    "bytes": 212966,
-   "sha256": "988bd8eb7312aaaa35633d4f7be1545cc8d2eda84bcf926dea1c396ce059d3f5"
+   "sha256": "11953a26d5ec1f66dd86837dba0bb2bf7df6e1d75cdd65781dca92c515df8436"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/C/validation.json?v=542ccef4cee9",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/C/validation.json?v=be829faaabb4",
    "path": "cases/C/validation.json",
    "media_type": "application/json",
    "bytes": 41145,
-   "sha256": "542ccef4cee948dae9dc24247530e22c510c1cbc679ead00c6cef4b9f01c3a80"
+   "sha256": "be829faaabb4b9f19e8bb9a4d60f4084e902c5c0dba9e1cc10c29ca3597b3012"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/D.json?v=dfd027ea8c28",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/D.json?v=b7371ab595eb",
    "path": "cases/D.json",
    "media_type": "application/json",
    "bytes": 9898,
-   "sha256": "dfd027ea8c2848e55fc752077ba01765e3ffd5f4ff3ae733b9ab8faa7824b4e1"
+   "sha256": "b7371ab595ebdb1d3b354f3bead0327221e402ddd52e395874765835ad06b8ec"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/D/approach_flow.csv?v=c8239428b9b9",
@@ -655,11 +655,11 @@
    "sha256": "c8239428b9b9ae37e33a2b35226b2519ebf6ae9fa5d1f3b3f8ea0733ae6da5dc"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/D/geometry.json?v=51d0d039a4c1",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/D/geometry.json?v=ae751806f872",
    "path": "cases/D/geometry.json",
    "media_type": "application/json",
-   "bytes": 13387,
-   "sha256": "51d0d039a4c1a86eb38dedbfc634538e580b0c240c3f621de40224b692d34ff7"
+   "bytes": 13536,
+   "sha256": "ae751806f872c3378dedba457a43ff993af991e9b94f44dd85541032f5d8df61"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/D/geometry.stl?v=531895531271",
@@ -690,25 +690,25 @@
    "sha256": "596246341e73398b75fb76c9eebfab38d34e4c2dcf161a8c6e3f7c7d5e1ee570"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/D/points.json?v=745eb99953b9",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/D/points.json?v=0a5117be067c",
    "path": "cases/D/points.json",
    "media_type": "application/json",
    "bytes": 85184,
-   "sha256": "745eb99953b941147daa3efae048e12031cfa5d130e6be92e05d005e12adeeea"
+   "sha256": "0a5117be067ca2fa1df40353f6d018cc4cccd41905aa68c72e23c9547da0ca45"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/D/validation.json?v=6f72c17cec0f",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/D/validation.json?v=00e5be679923",
    "path": "cases/D/validation.json",
    "media_type": "application/json",
    "bytes": 22889,
-   "sha256": "6f72c17cec0f2c433859e4b868de7f5ed2c2ba04c102fb014aeb48eb644c5c9f"
+   "sha256": "00e5be67992337aa4b0b758865b646d6726d2960fadfb6f1bbe54f2bd77de7be"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E.json?v=db5ce8a7fbba",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E.json?v=9b2ee9c58e7a",
    "path": "cases/E.json",
    "media_type": "application/json",
-   "bytes": 9778,
-   "sha256": "db5ce8a7fbba8bc6bd8d61d8bc2da4c2fc45c0d1ff5865cc40e4139837710299"
+   "bytes": 9909,
+   "sha256": "9b2ee9c58e7a25976f6ca4890e8fe5d4408b3449131211f2dec75df532c40c19"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/approach_flow.csv?v=4971944cd8e9",
@@ -718,25 +718,25 @@
    "sha256": "4971944cd8e9e09965961f6fd54627806708c04899f49b96df2f0efa229c4170"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/geometry.json?v=8507a6145b21",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/geometry.json?v=b202b0f50062",
    "path": "cases/E/geometry.json",
    "media_type": "application/json",
-   "bytes": 3605,
-   "sha256": "8507a6145b21bd200e3efc279345ccbfc1083a3e66807059cb4f12a940a3d291"
+   "bytes": 4247,
+   "sha256": "b202b0f50062bed88caf382148f18dfad93edd163aefb1b05891d79dcca4e2af"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/geometry.stl?v=f59d27738a49",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/geometry.stl?v=c29624fdae6d",
    "path": "cases/E/geometry.stl",
    "media_type": "model/stl",
-   "bytes": 1211403,
-   "sha256": "f59d27738a49edb8a51724c56a6c159ffc53f66f7cd2c05291c6f55ab8f5e5ce"
+   "bytes": 1210554,
+   "sha256": "c29624fdae6dbebecbb666ca1bf7b64a0c4c5f0d73cbf947d5c80d6427e96c06"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/geometry_bc.stl?v=25d8af3a7617",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/geometry_bc.stl?v=9b944d97a817",
    "path": "cases/E/geometry_bc.stl",
    "media_type": "model/stl",
-   "bytes": 1206272,
-   "sha256": "25d8af3a7617893a8077d4ed23661caeece421dac3fd048506ceb6b6df2d3552"
+   "bytes": 1205426,
+   "sha256": "9b944d97a8171394cd6440873f6250436ca11c7264a62f715bcb8e785e241ba2"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/pairs/ml-surrogate.csv?v=90b71f5762aa",
@@ -760,25 +760,25 @@
    "sha256": "e6e89432e706de1b807258178150dfa0376f19caa558d2c7f8106778422c11d8"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/points.json?v=f3836218fa87",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/points.json?v=a8f153cdcccc",
    "path": "cases/E/points.json",
    "media_type": "application/json",
    "bytes": 619652,
-   "sha256": "f3836218fa87b4206e45d3ec85e420411e5e27bc779b00a134852661749958ad"
+   "sha256": "a8f153cdcccc8c8e5ab16708bb795594dbc54311a88a97ce2aa329402049a4e6"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/validation.json?v=dd95ecad3f28",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/validation.json?v=eed43f7dccaa",
    "path": "cases/E/validation.json",
    "media_type": "application/json",
    "bytes": 33801,
-   "sha256": "dd95ecad3f289837da33893c40d0619907e9e5526e002735c7060a4f3c4003c4"
+   "sha256": "eed43f7dccaad0f7f7a1c0911caf42f2cfd5542e989153e55b2703dcf544d99b"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F.json?v=adc948fff981",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F.json?v=84f57b4688a1",
    "path": "cases/F.json",
    "media_type": "application/json",
-   "bytes": 17459,
-   "sha256": "adc948fff981123af124eb634a7c3bbae1272c4854206bff287df758ea6d03bf"
+   "bytes": 17503,
+   "sha256": "84f57b4688a1b27a7c52bd3397f0ba78c0780cdd240604273ae1b9686092144f"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F/approach_flow.csv?v=66aefe558a82",
@@ -788,18 +788,18 @@
    "sha256": "66aefe558a82a5e35b569f68bef7411d360266a82fdce773367458d0a6ef0f5f"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F/geometry.json?v=4b3ecb3d6395",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F/geometry.json?v=d059b129a525",
    "path": "cases/F/geometry.json",
    "media_type": "application/json",
-   "bytes": 2718,
-   "sha256": "4b3ecb3d639572272bf81b0bfa4d6e0f756760e6b26a0ed5c392354bb7841f6f"
+   "bytes": 3140,
+   "sha256": "d059b129a52564e94f04fded25debb637047f0e104ff8124bc0be0de0da9aa51"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F/geometry.stl?v=18bcb1a0bcb1",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F/geometry.stl?v=8799740aa324",
    "path": "cases/F/geometry.stl",
    "media_type": "model/stl",
-   "bytes": 9255612,
-   "sha256": "18bcb1a0bcb1f9576241f5d501a8de8e06e493504fc9e66426d52f530871b16c"
+   "bytes": 9661421,
+   "sha256": "8799740aa324b9494a3962197ebaa82bc3f3f8ddce138e9d2777bc9cd7660c0c"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F/pairs/openfoam12-realizableKE.csv?v=e81e010859e6",
@@ -816,25 +816,25 @@
    "sha256": "09b109e58dd39fb744e69de7adab7df216762c2bfa49fbabe4b94b2a7fbe543a"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F/points.json?v=9e0c7eec27fd",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F/points.json?v=5c0731a66dd4",
    "path": "cases/F/points.json",
    "media_type": "application/json",
    "bytes": 130176,
-   "sha256": "9e0c7eec27fd7bd5c3683290293c56135085672a3479edcdf7c229730dc865ec"
+   "sha256": "5c0731a66dd42a2c0d2f67c21b49a44cd45c8d6beb22467980e81d916a0676d2"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F/validation.json?v=b58a784464d1",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F/validation.json?v=131852c39175",
    "path": "cases/F/validation.json",
    "media_type": "application/json",
    "bytes": 32803,
-   "sha256": "b58a784464d1838c0984ecb32b7a366d7abbb67d98194fba7f9e83d7d439de78"
+   "sha256": "131852c391756f02d4d2282767761a75020fcc2c8b2311c3a02f9e033f7eef55"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/G.json?v=c81e679ca6cf",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/G.json?v=5f1cefb7e2da",
    "path": "cases/G.json",
    "media_type": "application/json",
    "bytes": 8299,
-   "sha256": "c81e679ca6cf7b9e7eade30965235b5704b30a84e74f19d7862fffc30180a826"
+   "sha256": "5f1cefb7e2dad15dc0a2b9db8ef9e4db5382b693a6e0034bdf9996d0fbaf723e"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/G/approach_flow.csv?v=45a11857cdf9",
@@ -844,11 +844,11 @@
    "sha256": "45a11857cdf9f7b02d4bf81103178099cebe416b53d20741255da7064f97ff40"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/G/geometry.json?v=7cdaa5b12a52",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/G/geometry.json?v=0ba08962349e",
    "path": "cases/G/geometry.json",
    "media_type": "application/json",
-   "bytes": 2734,
-   "sha256": "7cdaa5b12a52fd00e298e1c5639b99bd97efed277bdc96165f64525aebbe2568"
+   "bytes": 2880,
+   "sha256": "0ba08962349e68341f90e4d2301868fb0770512daab35d8e97e9588848c882ce"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/G/geometry.stl?v=09d23c794155",
@@ -872,25 +872,25 @@
    "sha256": "914883bf7fec7e7c3a0345a57694b2b14edf34e6d2786e9083b9459fe4737e19"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/G/points.json?v=985b2dcab97c",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/G/points.json?v=9bff9a5e3a3e",
    "path": "cases/G/points.json",
    "media_type": "application/json",
    "bytes": 9366,
-   "sha256": "985b2dcab97c5c759872bf1cb535a46706abce20074aba9ef6e59c534000ffbe"
+   "sha256": "9bff9a5e3a3e837554fec7c81663f92a3643e9f03db2cb2c779275d251d521f3"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/G/validation.json?v=6c22ef508b85",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/G/validation.json?v=f74bee8ae2a5",
    "path": "cases/G/validation.json",
    "media_type": "application/json",
    "bytes": 49421,
-   "sha256": "6c22ef508b855cc2dec14350016cf264d47b2ba25ae86d3de347143ba32220e3"
+   "sha256": "f74bee8ae2a5e685d47754be6263389a63b6e6966aa01743628d04f33a433970"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/H.json?v=f7f43f114fb8",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/H.json?v=1d27e024d135",
    "path": "cases/H.json",
    "media_type": "application/json",
    "bytes": 10297,
-   "sha256": "f7f43f114fb882d2518197a3ce64c735d3f1cfd0f04a9ea2eee16fb5c8a6950d"
+   "sha256": "1d27e024d13555c372aa9c83319822b32789c542b3669ee420a1fe2af1fdba7e"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/H/approach_flow.csv?v=ce516d4054a5",
@@ -900,11 +900,11 @@
    "sha256": "ce516d4054a526799b327372e30e954b2adf59658c9b6eb25b2f76cf792225b0"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/H/geometry.json?v=0cf5a991900c",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/H/geometry.json?v=e9bef16956a0",
    "path": "cases/H/geometry.json",
    "media_type": "application/json",
-   "bytes": 2579,
-   "sha256": "0cf5a991900c0c6e51b0de439c138f9a33001660c843de8cffa22b0c2e250e61"
+   "bytes": 2725,
+   "sha256": "e9bef16956a0a12afd08f6e9f53690e9c2f74cfaf5ecdeb0b542573ac99a8a17"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/H/geometry.stl?v=4836687efff9",
@@ -928,25 +928,25 @@
    "sha256": "ef5fafc61b8ea8defdec24cf23252edd1d3acdbce1daeda2295da2a31d60f06a"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/H/points.json?v=f0fce591ed87",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/H/points.json?v=f85dedd5bf68",
    "path": "cases/H/points.json",
    "media_type": "application/json",
    "bytes": 646425,
-   "sha256": "f0fce591ed878b53a1fe08c4fc81cd081e20807692b594f98afd317a90c0c1e6"
+   "sha256": "f85dedd5bf689c22f9113bacf281c32d6c4dc47cc338f5dc1acc52474abdd973"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/H/validation.json?v=82e72a85521f",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/H/validation.json?v=5d5848693f7a",
    "path": "cases/H/validation.json",
    "media_type": "application/json",
    "bytes": 12343,
-   "sha256": "82e72a85521fda6942b778be580bdfefb6caec8c5917c4ea1597987436a2f082"
+   "sha256": "5d5848693f7a39ae0f9f9ca37f994cb25175e96525b180fc98ce7fff34dbefac"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/I.json?v=a18f95c9691e",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/I.json?v=c7226ab4642f",
    "path": "cases/I.json",
    "media_type": "application/json",
    "bytes": 9687,
-   "sha256": "a18f95c9691ead7fefc5c799cf87784039c6b02d506efdaf80400a88a773e47f"
+   "sha256": "c7226ab4642f529ae34ea772a0befb0ce2d2b8b32509d48b3688b509c56df412"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/I/approach_flow.csv?v=8c9a2fa1669a",
@@ -956,11 +956,11 @@
    "sha256": "8c9a2fa1669ad55cfb86b2b158a9fd8556e6edcc0184c8baf85ccaba94defa43"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/I/geometry.json?v=df6ef6835952",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/I/geometry.json?v=921f6eec9f55",
    "path": "cases/I/geometry.json",
    "media_type": "application/json",
-   "bytes": 2474,
-   "sha256": "df6ef683595272e239cff678cbb06f80583f0522eb12a4d25dd207f67fdddb11"
+   "bytes": 2620,
+   "sha256": "921f6eec9f55a87a3f63a7a965c5f32eebd281bccc39cd5e0676d25ff4409fa7"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/I/geometry.stl?v=ff61cbb22798",
@@ -998,25 +998,25 @@
    "sha256": "2864fee9eb1972e691babaf0f7a9cc61019cfbb9697c5b11ab7e1cae789751a1"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/I/points.json?v=ad2107edec7e",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/I/points.json?v=df1050a6041c",
    "path": "cases/I/points.json",
    "media_type": "application/json",
    "bytes": 194000,
-   "sha256": "ad2107edec7e4eb3909c2a010ddb2b26d91b88d531bc04abe674536af6b58ce3"
+   "sha256": "df1050a6041ca32668c880da17b924fcd36687d27bfce5dd6710ae1e7c25295c"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/I/validation.json?v=cdd209f46b57",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/I/validation.json?v=b2b22fdf39a1",
    "path": "cases/I/validation.json",
    "media_type": "application/json",
    "bytes": 22140,
-   "sha256": "cdd209f46b57cd429a85165248f53f47365e723b37b64877aaf45142ae7fc5b7"
+   "sha256": "b2b22fdf39a1dbcbdac84efd5432fa6b7a91a43d25ef070d35008246d29936cb"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/J.json?v=4e71af6c1436",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/J.json?v=dca092e86efd",
    "path": "cases/J.json",
    "media_type": "application/json",
    "bytes": 10235,
-   "sha256": "4e71af6c1436ef363c71ae790ff14eadbf188cb593dc49c0bb86448fc5b5a4cd"
+   "sha256": "dca092e86efdd2695fdcf6b7edad493677db8cc04dd9bb056a491b779d22d863"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/J/approach_flow.csv?v=076668c06f1c",
@@ -1026,11 +1026,11 @@
    "sha256": "076668c06f1c98252006e9d9aaa100ca106ab3a4766565012e12ee4948dd5198"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/J/geometry.json?v=af618e8c243c",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/J/geometry.json?v=41e591b962f5",
    "path": "cases/J/geometry.json",
    "media_type": "application/json",
-   "bytes": 2553,
-   "sha256": "af618e8c243c23b2e0999a0773c80aef4923360bf4a594babe2dccc4ab82d1ac"
+   "bytes": 2702,
+   "sha256": "41e591b962f54732acb5e9bf5e5e1ac0ad488a29cb9ef689e66b2d267ed0b106"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/J/geometry.stl?v=1bd33d8d3531",
@@ -1061,25 +1061,25 @@
    "sha256": "444b7aaa179115570e89110e2da80564c0469437de7be787adee53c3047aef6c"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/J/points.json?v=10f77413613b",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/J/points.json?v=0921c0f1a72b",
    "path": "cases/J/points.json",
    "media_type": "application/json",
    "bytes": 234419,
-   "sha256": "10f77413613bf5037d8c9fbb328baf1ad87c99edc18148619d295d22d5496b07"
+   "sha256": "0921c0f1a72b865da95030b8b5db16232d79e690dd0bffc5ab40170585b79787"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/J/validation.json?v=e5ae8377d19a",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/J/validation.json?v=49857ebf3f2a",
    "path": "cases/J/validation.json",
    "media_type": "application/json",
    "bytes": 85621,
-   "sha256": "e5ae8377d19ab12cec9f87d4cd21500b32e4e016b8708aba086abe746abdb086"
+   "sha256": "49857ebf3f2ab565eefcaee858ede5cfb78c94d5100915c39d90c3256f8d2537"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/K.json?v=7fa677f89c01",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/K.json?v=794d2e0954ef",
    "path": "cases/K.json",
    "media_type": "application/json",
    "bytes": 9575,
-   "sha256": "7fa677f89c0155221c03875f12cdd312a632fabbd05b7c60d4d0c061b3f7cca8"
+   "sha256": "794d2e0954ef9f4e88996fcb54a0d0b866e937df428ab20176fa258cd82ea734"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/K/approach_flow.csv?v=5d197b5001ba",
@@ -1089,11 +1089,11 @@
    "sha256": "5d197b5001ba9c13e463c3dbf809945b1f8194eab418d9307cf73f1f2d33ad88"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/K/geometry.json?v=c36bd1936b0a",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/K/geometry.json?v=8324f67b94df",
    "path": "cases/K/geometry.json",
    "media_type": "application/json",
-   "bytes": 12739,
-   "sha256": "c36bd1936b0a29b15fcd0c526ae3ed2af2186eb3430f1698928917dced1b552c"
+   "bytes": 12889,
+   "sha256": "8324f67b94df05746d1ab4c630aaf00f6effbf0d12fa9cddda52c8786680c4ee"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/K/geometry.stl?v=f0f8a3adfa29",
@@ -1117,25 +1117,25 @@
    "sha256": "8708f3251861d675fcfe23d03d238885bae813003f65372430b5ee0cfd60f3d6"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/K/points.json?v=0f251732bffc",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/K/points.json?v=a0f3b7711b0b",
    "path": "cases/K/points.json",
    "media_type": "application/json",
    "bytes": 85652,
-   "sha256": "0f251732bffc2ebab26e18af20ff2f4310a61582bcd8b79c90f2e25efb3d94fd"
+   "sha256": "a0f3b7711b0b2f921689c73716f8f0a1f80bbad0975a7e081da1dd1084105ae3"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/K/validation.json?v=3cd0de5fc2e9",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/K/validation.json?v=1efa9bd221e2",
    "path": "cases/K/validation.json",
    "media_type": "application/json",
    "bytes": 21713,
-   "sha256": "3cd0de5fc2e9e9bae6d43269e8adda17a6492680dd060d141de6208aa165fc97"
+   "sha256": "1efa9bd221e28bb0c3b665d179a7bbfe31f440361c386887a225e3413d32f77f"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/L.json?v=b9c817b9cb7f",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/L.json?v=b31ecccd2e0d",
    "path": "cases/L.json",
    "media_type": "application/json",
-   "bytes": 10758,
-   "sha256": "b9c817b9cb7f18b260187ac0b030524152535034ee718af2c0bb15761e7e7d30"
+   "bytes": 10920,
+   "sha256": "b31ecccd2e0d0897dc9c07584e9df0e6333924e347b94bfe894953dc123f9218"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/L/approach_flow.csv?v=c428993827d4",
@@ -1145,11 +1145,11 @@
    "sha256": "c428993827d4593111756048f761c0d8c1308bc5d35f33130a8676c34a80b077"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/L/geometry.json?v=0c8d57bf247b",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/L/geometry.json?v=c48bbdbfeb0c",
    "path": "cases/L/geometry.json",
    "media_type": "application/json",
-   "bytes": 18591,
-   "sha256": "0c8d57bf247b32f94add88035256297b8f59e2f7a958ff954af62808fdb2a7aa"
+   "bytes": 18769,
+   "sha256": "c48bbdbfeb0c3cd6ef02be75dca86e369aed92fb21c14bf1217ae21ec324e7f2"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/L/geometry.stl?v=20864bc75187",
@@ -1173,25 +1173,25 @@
    "sha256": "b575fe11d107f31aacb2052bb31783d90964d5f90068fc5d8a8566f1004ef1f7"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/L/points.json?v=f074700daef9",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/L/points.json?v=b2bcf14a3450",
    "path": "cases/L/points.json",
    "media_type": "application/json",
    "bytes": 217371,
-   "sha256": "f074700daef944969cf5c0db0af3dfba9975ce7da756ddab5ad2db6415154048"
+   "sha256": "b2bcf14a3450f94ab718bb65a784ff0696ef333456be558d6a86aff554dfefdd"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/L/validation.json?v=a88a3c32d96c",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/L/validation.json?v=8ede9904dd37",
    "path": "cases/L/validation.json",
    "media_type": "application/json",
    "bytes": 30024,
-   "sha256": "a88a3c32d96c1c304624dae913f182a6d3f3af5c41a698c99a49779f991e6aa7"
+   "sha256": "8ede9904dd3735a664df67ba3a269b588ed6c0f6d8b4d7188f261180c10a24e2"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M.json?v=55710610f19b",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M.json?v=54a6f5cceb2b",
    "path": "cases/M.json",
    "media_type": "application/json",
-   "bytes": 15983,
-   "sha256": "55710610f19b445a4c6a22216064801763e8417010473f7909fa73686b8330d7"
+   "bytes": 16116,
+   "sha256": "54a6f5cceb2b08a1b294f885ec1189fbaa626d1fe9e983f81b9bab68af0cabf1"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/approach_flow.csv?v=0042caa39493",
@@ -1201,18 +1201,18 @@
    "sha256": "0042caa394930c19454a0b2667dbda1e2a762641d7d57f443329e1088eb376ee"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/geometry.json?v=79db6d7fb9b6",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/geometry.json?v=30f052814b1a",
    "path": "cases/M/geometry.json",
    "media_type": "application/json",
-   "bytes": 2600,
-   "sha256": "79db6d7fb9b6fd26d59de86397fff60c1e6ab8e74959b4ecfd47bebd4a358384"
+   "bytes": 2993,
+   "sha256": "30f052814b1accae7133cd1fd3cb41e937cd690ba011a3e09e7b7fa58c088752"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/geometry.stl?v=cfc68cf63ea1",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/geometry.stl?v=e4e0a2044536",
    "path": "cases/M/geometry.stl",
    "media_type": "model/stl",
-   "bytes": 8474091,
-   "sha256": "cfc68cf63ea1b18cc44cb4b1b79a8cdb0506967983d23f2b31521c0a4d0f15ff"
+   "bytes": 8475730,
+   "sha256": "e4e0a2044536248881898be3bf926b0c0da18b125b29403d2c260c95a5931525"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27",
@@ -1229,46 +1229,46 @@
    "sha256": "8d32dc8f762bb8ae49e0b2252121df12bf2f94c98e724f252e887a368b18bb20"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/points.json?v=6773e001f5e2",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/points.json?v=7c3fdad17e43",
    "path": "cases/M/points.json",
    "media_type": "application/json",
    "bytes": 133461,
-   "sha256": "6773e001f5e27bb2a1763cad59f3f59c517322e5a2412c607231e29b5b207029"
+   "sha256": "7c3fdad17e43c1ecc6a03a080f91d57cbae2ade05a03b5b0ff4ace4f03a21cbe"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/validation.json?v=fbbf934f2798",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/validation.json?v=2eb4f5f824c8",
    "path": "cases/M/validation.json",
    "media_type": "application/json",
    "bytes": 53449,
-   "sha256": "fbbf934f27985514e90ae09cddb89b2127e064d157b7ce5e0b6c52ff72d3492e"
+   "sha256": "2eb4f5f824c842f11999c9bcfc9e90e526ebee20f416a1e3099684f9f8585f24"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/geometry.json?v=435f0e490602",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/geometry.json?v=58aef059687f",
    "path": "geometry.json",
    "media_type": "application/json",
-   "bytes": 18625,
-   "sha256": "435f0e49060235564fff7c39aefe54f06d683d5c6e60fc29874bbca14670d00e"
+   "bytes": 20643,
+   "sha256": "58aef059687fa665a4c824d97202782dec778bb381f85e2f7f2932f6df7b8cb6"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/geometry.zip?v=83ab019751f8",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/geometry.zip?v=9ed663e1d97c",
    "path": "geometry.zip",
    "media_type": "application/zip",
-   "bytes": 3043960,
-   "sha256": "83ab019751f80c51e5d5527f4504cfcc75124139f663be97d183580df778b969"
+   "bytes": 3091670,
+   "sha256": "9ed663e1d97cd167b478dd1ec8cb96689362b39b4efecb95cdd00b9b3dbcae40"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/llms.txt?v=0a9538b5db2c",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/llms.txt?v=4fb65e0b3982",
    "path": "llms.txt",
    "media_type": "text/plain",
-   "bytes": 51769,
-   "sha256": "0a9538b5db2ca21aa8adcff426ee8203c51c1d69e8ef3f21d03a1cd4fdee8e84"
+   "bytes": 52245,
+   "sha256": "4fb65e0b39820360184bcafb534199d189cec95fe103da70442ea47218694c83"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/openapi.json?v=1ecef20e7111",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/openapi.json?v=08a90f9f1f10",
    "path": "openapi.json",
    "media_type": "application/json",
-   "bytes": 69343,
-   "sha256": "1ecef20e711138039ed6f99e918109f9297d0b40ac9e2277fa8917c4c5b51198"
+   "bytes": 71913,
+   "sha256": "08a90f9f1f106284156087c56bca2e4c0ea66efed8ffe4e33faa47a6acde4700"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/case.schema.json?v=86753edd823a",
@@ -1285,18 +1285,18 @@
    "sha256": "212d9dde946bef4340e0828b0b675965cc060a79a972efe2331c3129506b55de"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/geometry-index.schema.json?v=4fbabcb3e7cb",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/geometry-index.schema.json?v=497bf150a1a1",
    "path": "schemas/geometry-index.schema.json",
    "media_type": "application/schema+json",
-   "bytes": 3537,
-   "sha256": "4fbabcb3e7cbe2d8f253cb131f8628ad8939d242cce7ad157d7ebf59b9ab52e0"
+   "bytes": 4722,
+   "sha256": "497bf150a1a11e30c3e4bde856ebe668f8393aaff384a584a2097ba1d714ec18"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/geometry.schema.json?v=de4ddf1a995e",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/geometry.schema.json?v=f037df16a143",
    "path": "schemas/geometry.schema.json",
    "media_type": "application/schema+json",
-   "bytes": 4347,
-   "sha256": "de4ddf1a995e261316e4591570956614771f61d4d789a64a29b98accd676ad03"
+   "bytes": 5582,
+   "sha256": "f037df16a1435689423fd3ae07ab7eca5ab4bca5686d3fe32bad97a3a89c59c8"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/index.schema.json?v=8191fcc47fb7",
@@ -1334,11 +1334,11 @@
    "sha256": "e59c5cde49f5146780d2aa7aa4eef992731181201fc684b7717de8d9b468c6c3"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/validation.json?v=002a2e67303b",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/validation.json?v=b5dc6d33c5ec",
    "path": "validation.json",
    "media_type": "application/json",
    "bytes": 84644,
-   "sha256": "002a2e67303b509f269e6c996445ce765c341f73013c2dc3b6fd32cd56f1856c"
+   "sha256": "b5dc6d33c5ec9ec08d412fd1f98f326a41438846ddfd14a252edf1199962444b"
   }
  ],
  "license_detail": {
