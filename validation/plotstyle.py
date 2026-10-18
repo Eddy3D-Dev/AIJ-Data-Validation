@@ -37,10 +37,12 @@ The rules this repository applies, where they depart from those defaults, and wh
      starts at #ffffff, which is the page, so the smallest values of a magnitude would vanish; viridis runs
      from L* 15 to 91 in steps within 0.6 to 1.3 times the mean and is built to survive colour blindness.
   5. ABOVE OR BELOW A REFERENCE (diverging): ultraplot's default "BuRd" REVERSED (BIAS_CMAP), centred on zero
-     (vmin = -vmax, zero = the neutral #f7f6f6, ends at L* 20, lightness within 5 L* of each other at equal
-     distance from the centre). Reversed so that red is "model slower than the tunnel" and blue "faster",
-     the sense these figures have had since release 2.0.0. Markers carry a thin grey edge, because the
-     neutral centre is the white of the page and the best-agreeing points would otherwise disappear.
+     (vmin = -vmax, so zero is the neutral #f6f7f7, L* 97 and chroma 0.4; the ends are at L* 20, and the two
+     halves differ by at most 4 L* at equal distance from the centre). Reversed so that red is "model slower
+     than the tunnel" and blue "faster", the sense these figures have had since release 2.0.0. Markers carry
+     a thin grey edge, because the neutral centre is nearly the white of the page and the best-agreeing
+     points would otherwise disappear. Under the three colour-blindness simulations the two poles stay 35 to
+     69 CIE76 units apart, and a ratio 19 % off (log2 = +-0.25) stays at least 13 units from the zero colour.
   6. Ink and greys, all achromatic so they never tint a colour map: INK for text and frames, REFERENCE
      (#6b6b69, 5.3:1) for 1:1 lines and secondary text, FOOTPRINT and FOOTPRINT_FOCUS for plan-view solids.
      Reference geometry is always thinner than data.
@@ -222,11 +224,12 @@ def finish(fig, title, handles=None, ncols=None, **fmt):
         fig.legend(handles, loc="b", ncols=ncols or len(handles), frame=False)
 
 
-def save(fig, name, directory=FIGURES, dpi=DPI):
+def save(fig, name, directory=FIGURES):
     """Write `fig` as directory/name; the only place a figure is written.
 
-    .png at `dpi` (1200) on the white page, losslessly optimised, with no timestamp so a rebuild is
-    byte-identical; .svg and .pdf stay vector. The PNG's own dpi field is read back and checked.
+    .png at DPI (1200, not a parameter: no figure is written at less) on the white page, losslessly
+    optimised, with no timestamp so a rebuild is byte-identical; .svg and .pdf stay vector. The PNG's own
+    dpi field is read back and checked.
     """
     os.makedirs(directory, exist_ok=True)
     path = os.path.join(directory, name)
@@ -234,13 +237,13 @@ def save(fig, name, directory=FIGURES, dpi=DPI):
     software = f"Matplotlib {mpl.__version__}, ultraplot {uplt.__version__}"
     script = getattr(sys.modules.get("__main__"), "__file__", None) or __file__
     if kind == ".png":
-        fig.savefig(path, dpi=dpi, facecolor=SURFACE, pil_kwargs={"optimize": True},
+        fig.savefig(path, dpi=DPI, facecolor=SURFACE, pil_kwargs={"optimize": True},
                     metadata={"Software": software, "Comment": "validation/" + os.path.basename(script)})
         with open(path, "rb") as f:        # the pHYs chunk (pixels per metre) sits before the image data
             head = f.read(4096)
         i = head.index(b"pHYs")
         per_metre = struct.unpack(">II", head[i + 4:i + 12])
-        assert all(abs(p * 0.0254 - dpi) < 1 for p in per_metre), (name, per_metre)
+        assert all(abs(p * 0.0254 - DPI) < 1 for p in per_metre), (name, per_metre)
     elif kind == ".svg":
         fig.savefig(path, facecolor=SURFACE, metadata={"Date": None, "Creator": software})
     elif kind == ".pdf":
@@ -304,8 +307,14 @@ def palette_report(colours=None):
     print("minimum   " + "  ".join(f"{v} {min((r[v], p) for p, r in rows.items())[0]:.1f}" for v in VISIONS))
 
 
+def _lightness(cmap, n=129):
+    cm = uplt.Colormap(cmap)
+    return np.array([_lab(_linear(to_hex(cm(v))))[0] for v in np.linspace(0, 1, n)])
+
+
 def check_palette():
-    """The categorical colours must be ultraplot's, tell apart under every vision, and show on the page."""
+    """The categorical colours must be ultraplot's, tell apart under every vision, and show on the page;
+    the sequential map must brighten steadily; the diverging one must peak at a neutral zero, symmetrically."""
     cycle = [to_hex(d["color"]) for d in uplt.Cycle("colorblind")]
     assert cycle[:4] == [BLUE, VERMILLION, GREEN, PURPLE], f"ultraplot's colorblind cycle changed: {cycle}"
     for (a, ca), (b, cb) in itertools.combinations(CATEGORICAL.items(), 2):
@@ -313,6 +322,11 @@ def check_palette():
             assert delta_e(ca, cb, v) >= MIN_DELTA_E, (a, b, v, delta_e(ca, cb, v))
     for n, c in CATEGORICAL.items():
         assert contrast(c) >= MIN_CONTRAST, (n, contrast(c))
+    seq, div = _lightness(SEQUENTIAL), _lightness(BIAS_CMAP)
+    assert (np.diff(seq) > 0).all(), f"{SEQUENTIAL} must get lighter at every step"
+    assert (np.diff(div[:65]) > 0).all() and (np.diff(div[64:]) < 0).all(), f"{BIAS_CMAP} must peak in the middle"
+    assert np.abs(div - div[::-1]).max() < 5, f"{BIAS_CMAP} must be as light on both sides of zero"
+    assert np.hypot(*_lab(_linear(NEUTRAL))[1:]) < 2, f"zero of {BIAS_CMAP} must be neutral"
 
 
 if __name__ == "__main__":
