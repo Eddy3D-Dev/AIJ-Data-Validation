@@ -17,7 +17,7 @@ frameless legend centred under the panels. It is built on ultraplot 2.7.1 (requi
 The rules this repository applies, where they depart from those defaults, and why:
 
   1. Raster figures are written at 1200 dpi (DPI), nothing lower; sizes stay in inches, so a panel keeps its
-     physical size and its text stays 10 pt. Vector output (.svg, .pdf) stays vector, with outlined text.
+     physical size and its text stays 10 pt. Vector output (.svg with outlined text, .pdf) stays vector.
      Every figure is written through save(), which also fixes the metadata so that a rebuild is
      byte-identical (no timestamp; the PNG carries the producing script and the library versions).
   2. One font, TeX Gyre Heros, for text and for maths. Sizes are 10 pt body and 11 pt labels where ultraplot
@@ -52,7 +52,7 @@ The rules this repository applies, where they depart from those defaults, and wh
 Public names (keep them stable; other scripts import them): DPI, FIGURES, INK, MEASURED, REFERENCE, SURFACE,
 FOOTPRINT, FOOTPRINT_FOCUS, BLUE, VERMILLION, GREEN, PURPLE, OPENFOAM, OPENLB, ML, FLUIDX3D, SEQUENTIAL,
 BIAS_CMAP, BIAS_LIM, SLOW, FAST, NEUTRAL, apply, line, marker, stats, one_to_one, outer_ticks, arrow,
-bias_scatter, bias_colorbar, finish, save, delta_e, contrast, check_palette, palette_report.
+bias_scatter, bias_colorbar, finish, save, delta_e, contrast, check_palette, check_figures, palette_report.
 
 A figure script, complete:
 
@@ -69,10 +69,11 @@ A figure script, complete:
     ps.finish(fig, "Title", handles=[ps.marker(ps.OPENFOAM, "Eddy3D"), ps.line(ps.REFERENCE, "1:1")])
     ps.save(fig, "figure-name.png")      # validation/figures/figure-name.png at 1200 dpi
 
-Why arrow() rounds its end points: a FancyArrowPatch whose direction is exactly 45 degrees has a head on a
-sub-pixel rounding boundary, and sin and cos of 45 degrees differ in the last bit between libm builds, so
-the same script drew a head one 1/256 pixel apart on arm64 and on amd64 (14 pixels, one grey level, in
-case-c-openfoam-bias-map.png). Rounded to 1e-6 the input is the same on every CPU.
+Why arrow() rounds its end points: the same script drew the 45 degree arrow of case-c-openfoam-bias-map.png
+with a head one 1/256 pixel apart on arm64 and on amd64 (14 pixels, one grey level). The inputs were bit-
+identical on both (sin and cos of 45 degrees agree), so the cause sits inside matplotlib's arrow geometry and
+was not isolated. Rounding the end points to 1e-6, which also makes a 45 degree direction exactly symmetric,
+removed the difference in every arrow of both bias maps; the rest of that figure was never affected.
 """
 from __future__ import annotations
 
@@ -224,6 +225,22 @@ def finish(fig, title, handles=None, ncols=None, **fmt):
         fig.legend(handles, loc="b", ncols=ncols or len(handles), frame=False)
 
 
+def _png_dpi(path):
+    """The dpi a PNG declares, from its pHYs chunk (pixels per metre, before the image data); no decoding."""
+    with open(path, "rb") as f:
+        head = f.read(4096)
+    i = head.index(b"pHYs")
+    return tuple(round(p * 0.0254) for p in struct.unpack(">II", head[i + 4:i + 12]))
+
+
+def check_figures(directory=FIGURES):
+    """Every PNG under `directory` (default validation/figures) declares DPI; returns how many there are."""
+    found = [os.path.join(d, f) for d, _, fs in os.walk(directory) for f in sorted(fs) if f.endswith(".png")]
+    bad = {os.path.relpath(p, directory): _png_dpi(p) for p in found if _png_dpi(p) != (DPI, DPI)}
+    assert not bad, f"figures not at {DPI} dpi (not written by save()?): {bad}"
+    return len(found)
+
+
 def save(fig, name, directory=FIGURES):
     """Write `fig` as directory/name; the only place a figure is written.
 
@@ -239,11 +256,7 @@ def save(fig, name, directory=FIGURES):
     if kind == ".png":
         fig.savefig(path, dpi=DPI, facecolor=SURFACE, pil_kwargs={"optimize": True},
                     metadata={"Software": software, "Comment": "validation/" + os.path.basename(script)})
-        with open(path, "rb") as f:        # the pHYs chunk (pixels per metre) sits before the image data
-            head = f.read(4096)
-        i = head.index(b"pHYs")
-        per_metre = struct.unpack(">II", head[i + 4:i + 12])
-        assert all(abs(p * 0.0254 - DPI) < 1 for p in per_metre), (name, per_metre)
+        assert _png_dpi(path) == (DPI, DPI), (name, _png_dpi(path))
     elif kind == ".svg":
         fig.savefig(path, facecolor=SURFACE, metadata={"Date": None, "Creator": software})
     elif kind == ".pdf":
@@ -332,3 +345,4 @@ def check_palette():
 if __name__ == "__main__":
     check_palette()
     palette_report()
+    print(f"{check_figures()} PNGs under validation/figures, all at {DPI} dpi")

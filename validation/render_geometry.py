@@ -131,9 +131,9 @@ def ground_grid(ax, x0, x1, y0, y1, step):
 def arrow(ax, start, end, label, colour=WIND):
     p, _ = project([start, end])
     p = np.round(p, 6)   # the projection differs in its last bits (3e-14) between arm64 and amd64; an arrow turns that into pixels
-    # shortcut: Agg strokes the arrow with libm maths that differ in the last bit between CPUs, so the N arrow of
-    # case-e-before/after.png still differs by up to 3 grey levels in 136 pixels between arm64 and amd64;
-    # upgrade: draw the arrows as filled polygons, with no stroke, once those two files fail CI on a rebuild.
+    # shortcut: the N arrow of case-e-before/after.png still differs by up to 3 grey levels in 136 pixels between
+    # arm64 and amd64, although its display-space path is bit-identical on both (measured), so the cause is in
+    # rasterising it; upgrade: draw the arrows as filled polygons with no stroke if those two files fail CI.
     ax.annotate("", xy=p[1], xytext=p[0], arrowprops=dict(arrowstyle="-|>", color=colour, lw=2.2, mutation_scale=16))
     ax.text(p[0][0], p[0][1], label + "  ", color=colour, fontsize=11, ha="right", va="center")
 
