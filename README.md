@@ -7,10 +7,7 @@
 [![Data licence: CC BY 4.0](https://img.shields.io/badge/data%20licence-CC%20BY%204.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
 [![Data paper](https://img.shields.io/badge/data%20paper-10.1002%2F2475--8876.70083-informational)](https://doi.org/10.1002/2475-8876.70083)
 
-Wind-tunnel and field reference data from the **AIJ UWE** (Urban Wind Environment) benchmark, Cases A to M, cleaned and
-packaged case by case, together with Eddy3D's validation against it where it exists. The same material is served as a
-website and as a static API that scripts and agents can query: cleaned measurement tables in SI units
-and one frame per case, cleaned STL geometry in metres, and the validation scores.
+Validation data from the AIJ (Architectural Institute of Japan) benchmark cases—cleaned and packaged as an API.
 
 <table>
 <tr>
@@ -61,9 +58,11 @@ and one frame per case, cleaned STL geometry in metres, and the validation score
 | M | TPU Atsugi campus, 1:600 tunnel and field tracer release | 330 rows: tunnel velocity and concentration, 18 field runs | `raw/cases/case-m/RS-WT_caseM.csv` |
 
 Sources and instrumentation are documented per case in each folder's `readme_case*.md` and in the data paper,
-[Kikumoto et al. (2026)](https://doi.org/10.1002/2475-8876.70083) (linked, not stored here); each case's Zenodo
-record is linked in its section. [`clean/`](clean/README.md) re-releases all thirteen cases in one schema (SI units,
-one frame per case), regenerated from the published files by a checked, deterministic build.
+[Kikumoto et al. (2026)](https://doi.org/10.1002/2475-8876.70083); each case's Zenodo record is linked in its section.
+[`clean/`](clean/README.md) re-releases all thirteen cases in one schema (SI units, one frame per case), regenerated
+from the published files by a deterministic build.
+
+Data: Kikumoto et al. (2026), CC BY 4.0. Collectors per case under *Cite*.
 
 **Validation status**
 
@@ -83,8 +82,9 @@ one frame per case), regenerated from the published files by a checked, determin
 | L | pending | scored | pending | pending | pending |
 | M | scored, WD 180, three Schmidt numbers | — | pending | pending | pending |
 
-Pending: not run. —: the engine does not apply. UMF (urbanMicroclimateFoam, an OpenFOAM 12 solver) is Eddy3D's engine
-for the non-isothermal Cases J and L; the isothermal OpenFOAM 12 engine was not run on them.
+Scored: a validation run exists and its scores are in `cases/{id}/validation.json`. Pending: not run yet. —: the engine
+does not apply. UMF (urbanMicroclimateFoam, an OpenFOAM 12 solver) is Eddy3D's engine for the non-isothermal Cases J and
+L; the isothermal OpenFOAM 12 engine was not run on them.
 
 Score columns (R, FAC2, FB, hit rate) are defined under *Metrics* in *Validation method*; FB is positive when the model
 is low.
@@ -1145,7 +1145,7 @@ a refined upstream column or sampling consistent with the wall function.
 `validation/plot_case_c_openfoam.py`, `validation/plot_case_d_openfoam.py`, `validation/plot_case_e_openfoam.py`,
 `validation/plot_cases_hi_openfoam.py` (Cases H and I), `validation/plot_cases_gk_openfoam.py` (Cases G and K),
 `validation/plot_cases_jl_umf.py` (Cases J and L, on UMF), `validation/plot_cases_fm_openfoam.py` (Cases F and M) and `validation/plot_ml_surrogate.py` (UltraPlot, one style in
-`validation/plotstyle.py`: a colour-blind-safe palette, every PNG at 1200 dpi) build the figures. The Eddy3D
+`validation/plotstyle.py`: a colour-blind-safe palette) build the figures. The Eddy3D
 fixtures are `TestAijCaseAContainerE2E`, `TestAijCaseBContainerE2E`, `TestAijCaseC{0D,1D,2D}ContainerE2E`,
 `TestAijCaseDContainerE2E`, `TestAijCaseEContainerE2E`, `TestAijCaseFContainerE2E`, `TestAijCaseGContainerE2E`, `TestAijCaseHContainerE2E`,
 `TestAijCubeContainerE2E`, `TestAijCaseKContainerE2E`, `TestAijCaseJUmfContainerE2E`, `TestAijCaseLUmfContainerE2E`, `TestAijCaseMContainerE2E` and, for the ML
@@ -1440,11 +1440,9 @@ are not part of this rebuild: their results and per-point values are committed a
 <details>
 <summary><b>Cite</b> · licence and attribution</summary>
 
-The measurements belong to their collectors, and the benchmark is edited and distributed by Yoshihide Tominaga,
-Hideki Kikumoto and Tsubasa Okaze. Every dataset is released under
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (stated in each case's readme), so it may be
-redistributed and adapted with attribution. When you use any of it, cite the benchmark paper, the case's dataset
-and the case's original study:
+Data: Kikumoto et al. (2026), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The benchmark is edited and
+distributed by Yoshihide Tominaga, Hideki Kikumoto and Tsubasa Okaze; collectors per case are in the table below.
+Cite the benchmark paper, the case's dataset and the case's original study:
 
 **The benchmark**
 
@@ -1474,9 +1472,8 @@ and the case's original study:
 | M | Yoshie, R., Tachibana, T., Tominaga, Y., Kikumoto, H., Okaze, T. AIJ UWE Benchmark Dataset — Case M (TPU): Wind Tunnel Experiment and Field Observation for Flow and Dispersion within TPU Campus. [doi:10.5281/zenodo.15487857](https://doi.org/10.5281/zenodo.15487857) | Tachibana, T., Yoshie, R., Nakayama, S., Kishida, T., Miyashita, K., Sasaki, R. (2022). Comparison between field measurement and wind tunnel experiments of gas dispersion in an urban area and verification of similarity law. Journal of Wind Engineering 47(3), 39-52 (in Japanese). <http://dx.doi.org/10.5359/jwe.47.39> |
 
 The dataset entries of Cases A to E are as the benchmark paper lists them (its references 17, 36, 40, 50, 53); those of Cases F to M
-are composed from each case's readme (its data collectors, then the editors, and the DOI it names) and have not been checked against the
-paper's reference list. The original studies are the citations each case's readme requests. The cleaning in `clean/` and the validation on this page are
-Eddy3D's ([github.com/SustainableUrbanSystemsLab](https://github.com/SustainableUrbanSystemsLab)); the measurements
-are the collectors'.
+are composed from each case's readme (its data collectors, then the editors, and the DOI it names) and are not checked against the
+paper's reference list. The original studies are the citations each case's readme requests. Cleaning in `clean/` and validation
+scores: Eddy3D ([github.com/SustainableUrbanSystemsLab](https://github.com/SustainableUrbanSystemsLab)).
 
 </details>

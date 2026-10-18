@@ -100,7 +100,7 @@ document links to: the figures and geometry renders under `/assets/` and the rep
 | `$schema` | the URL of the document's JSON Schema (draft 2020-12). The build validates every document against it. |
 | `schema_version` | the version of this JSON contract, semantic versioning (see [Versions and changes]({{ '/api-reference/versions/' | relative_url }})). The release of the data is `versions.release` in `index.json`. |
 | `data_version` | a SHA-256 over every served measurement, geometry and score file. It changes when, and only when, the data changes. Quote it with any number you take from here. |
-| `license` | `CC-BY-4.0`, the SPDX identifier. The data belongs to its collectors; cite them (see *Cite* on the home page). |
+| `license` | `CC-BY-4.0`, the SPDX identifier. Citation: [About and cite]({{ '/about/' | relative_url }}). |
 
 **Downloads are objects, not bare URLs.** Wherever a document points at a CSV, STL or ZIP file, it gives:
 
@@ -156,20 +156,9 @@ certificate type. The body is ASCII STL regardless; read it as such.
 | [`GET /api/openapi.json`]({{ '/api/openapi.json' | relative_url }}) | OpenAPI 3.1 description of every endpoint, with the schemas embedded |
 | [`GET /api/llms.txt`]({{ '/api/llms.txt' | relative_url }}) | plain-text entry point for agents (also at [`/llms.txt`]({{ '/llms.txt' | relative_url }})) |
 
-An engine's status for a case is `scored` (a run exists and its scores are served), `running`, `pending`, or `not comparable` (it cannot produce the measured quantity at the measured
-location). An engine that is not `scored` has no result for that case. The engine ids are `openfoam12-realizableKE`, `openfoam12-kEpsilon` and
-`openfoam12-kOmegaSST` (the last two for Case I only), `umf-realizableKE` and `umf-buoyantKEpsilon` (UMF, urbanMicroclimateFoam, an
-OpenFOAM 12 solver and Eddy3D's engine for the non-isothermal Cases J and L; `umf-buoyantKEpsilon` for J only), `openlb`, `fluidx3d` and
-`ml-surrogate`, and an engine is listed for a case only where it applies. Runs of one engine on one case that differ in a configuration (Case C's
-nine, Case F's two vertical frames, Case G's five arms, Case M's three Schmidt numbers) share the engine's pairs file. Each result has `notes`, the caveats that come with the run.
+An engine's status for a case is `scored` (a validation run exists and its scores are in `cases/{id}/validation.json`), `running` (the solve is in progress; no scores yet), `pending` (not run yet) or `not comparable` (the engine cannot produce the measured quantity at the measured location: OpenLB at the resolution this hardware runs, FluidX3D without a ground wall function; the measurements are on the [Validation]({{ '/validation/' | relative_url }}) page). An engine that is not `scored` has no result for that case.
 
-<details markdown="block">
-<summary>Interpretation: why OpenLB and FluidX3D are not comparable</summary>
-
-For OpenLB, `not comparable` is at the resolution this hardware runs; for FluidX3D, it is without a ground wall
-function. The measurements behind both are on the [Validation]({{ '/validation/' | relative_url }}) page.
-
-</details>
+The engine ids are `openfoam12-realizableKE`, `openfoam12-kEpsilon` and `openfoam12-kOmegaSST` (the last two for Case I only), `umf-realizableKE` and `umf-buoyantKEpsilon` (UMF, urbanMicroclimateFoam, an OpenFOAM 12 solver and Eddy3D's engine for the non-isothermal Cases J and L; `umf-buoyantKEpsilon` for J only), `openlb`, `fluidx3d` and `ml-surrogate`. An engine is listed for a case only where it applies. Runs of one engine on one case that differ in a configuration (Case C's nine, Case F's two vertical frames, Case G's five arms, Case M's three Schmidt numbers) share the engine's pairs file. Each result has `notes`, the caveats that come with the run.
 
 ## What each case serves today
 
