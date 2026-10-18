@@ -345,7 +345,7 @@ for row, (case, _, closure, *_rest) in enumerate([RUNS[0], RUNS[1]]):
         extra = ""
         if tag == "c":
             extra = "\nFAC2 Sct 0.3 / 0.7: " + " / ".join(f"{rs[f'cstar.c_{sp}']['Fac2']:.2f}" for sp in ("sct03", "sct07"))
-        style.stats(ax, stats_text(rs[key], shown if tag == "c" else None, extra), loc=(0.40, 0.36) if tag == "c" else (0.05, 0.80))
+        style.stats(ax, stats_text(rs[key], shown if tag == "c" else None, extra), loc=(0.40, 0.36) if tag == "c" else (0.05, 0.80), halo="auto")
 style.finish(fig, "AIJ UWE Cases H and I — Eddy3D (OpenFOAM 12, realizable k-ε) vs wind tunnel",
              handles=[*layout.legend_handles("H", prefix="H"), *layout.legend_handles("I", prefix="I"), style.line(style.REFERENCE, "1:1", lw=1.0),
                       style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")],
@@ -363,7 +363,7 @@ for row, (case, _, closure, *_rest) in enumerate(closures):
     for col, (tag, mk, pk, key, label) in enumerate(QI):
         ax = axs2[row, col]
         shown = panel(ax, column(pairs, mk), column(pairs, pk), colours, log=(tag == "c"), xlab="Tunnel [–]" if row == 2 else None, ylab="Eddy3D [–]" if col == 0 else None)
-        style.stats(ax, stats_text(rs[key], shown if tag == "c" else None), loc=(0.40, 0.36) if tag == "c" else (0.05, 0.80))
+        style.stats(ax, stats_text(rs[key], shown if tag == "c" else None), loc=(0.40, 0.36) if tag == "c" else (0.05, 0.80), halo="auto")
 style.finish(fig2, "AIJ UWE Case I — three turbulence closures on one mesh (OpenFOAM 12) vs wind tunnel",
              handles=[*layout.legend_handles("I"), style.line(style.REFERENCE, "1:1", lw=1.0), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")],
              ncols=3, toplabels=[q[4] for q in QI], leftlabels=["standard k-ε", "realizable k-ε", "k-ω SST"])

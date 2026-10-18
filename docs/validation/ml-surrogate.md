@@ -26,7 +26,7 @@ Eddy3D's Wind Predictor (the public `Yel-2.0` network) predicts \|U_mean\|/U_ref
 
 FB is positive when the model is low.
 
-- The predicted speed is roughly half the tunnel's everywhere.
+- FB is +0.23 to +1.07: the mean predicted speed is 0.79 to 0.30 of the mean measured speed.
 - Reversing the wind changes the predicted field by at most 1 × 10⁻⁴ U_ref over all 254,016 cells, in every case.
 
 <details markdown="block">

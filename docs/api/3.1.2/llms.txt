@@ -1,0 +1,320 @@
+# AIJ UWE — cleaned data API
+
+> Wind-tunnel and field reference data from the Architectural Institute of Japan Urban Wind Environment (UWE)
+> benchmark, Cases A-M, cleaned into one schema, plus Eddy3D's validation against it. Static files, plain GET.
+
+Base URL: https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2
+Fallback (raw files from the repository): https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/v3.1.2/docs/api/3.1.2
+Repository: https://github.com/Eddy3D-Dev/AIJ-Data-Validation
+Release: 3.1.2 (2026-10-18). This is the frozen copy of that release: its files never change and every URL below stays inside it.
+All releases: https://eddy3d-dev.github.io/AIJ-Data-Validation/api/versions.json
+API schema version: 2.4.0. Data version (SHA-256 of the served data): 6c8b16ff73fa45f1aae99db9c2299e63d3fff6602e06a47434ddc86424661be7.
+Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and requested citation of each case are in cases/{id}.json.
+
+## How to use this
+
+1. GET index.json — every endpoint and file (with size and SHA-256), versions, changelog, citation.
+2. GET cases.json — every case with its frame, units, counts and links. Pick an id (A, B, C, D, E, F, G, H, I, J, K, L, M).
+3. GET cases/{id}.json — read `frame`, `units` and `known_issues` BEFORE the numbers; they differ per case.
+4. GET cases/{id}/points.json (or points.csv) — every value is SI (m, m/s, m^2/s^2; concentrations in ppm, temperatures in
+   degC) in ONE frame per case; unmeasured values are null. Cases E, F and G publish dimensionless ratios (velocity_ratio,
+   k_ratio), not speeds in m/s; Case M has wind-tunnel and field rows (`campaign`). Read `units` and the normalisation first.
+5. GET cases/{id}/geometry.stl — ASCII STL in metres, outward normals, in the case's own frame (cases/{id}.json `frame`).
+   Cases A-D and H-L are model-scale with +x along the wind at WD = 0; E to G and M are full-scale: E and F keep their
+   geographic frame (+x east, +y north), G has +x downwind, and M has +x north and +y west.
+   geometry.json lists the boxes where the geometry IS boxes (A, B, C, D, G, H, I, J, K, L), so you need not parse the STL at all.
+6. GET validation.json for every case and engine at once, or cases/{id}/validation.json for one case in full.
+   Quote the `headline` scores. An engine whose status is not "scored" has NO result for that case: do not
+   infer one. Each result's `pairs` is the per-point measured and modelled values, so any score can be recomputed. Status: A: openfoam12-realizableKE scored, openlb scored, fluidx3d scored, ml-surrogate scored; B: openfoam12-realizableKE scored, openlb scored, fluidx3d scored, ml-surrogate scored; C: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored; D: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored; E: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored; F: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; G: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; H: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; I: openfoam12-realizableKE scored, openfoam12-kEpsilon scored, openfoam12-kOmegaSST scored, openlb pending, fluidx3d pending, ml-surrogate pending; J: openfoam12-realizableKE pending, umf-realizableKE scored, umf-buoyantKEpsilon scored, openlb pending, fluidx3d pending, ml-surrogate pending; K: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; L: openfoam12-realizableKE pending, umf-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; M: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending.
+7. All geometry at once: GET geometry.json (every STL with its case, configuration, units, frame and SHA-256)
+   or geometry.zip. Each STL stays in its own case's frame and units; they are NOT one scene.
+8. Every JSON document names its JSON Schema in `$schema` (schemas/{name}.schema.json); openapi.json describes
+   every endpoint. Download URLs carry ?v=<SHA-256 prefix>: use the URLs the documents give, not hand-built ones.
+9. Send a descriptive User-Agent: the site's CDN answers HTTP 403 to Python urllib's default one and to some AI
+   crawlers. If you are refused, the fallback URL above serves byte-identical files from the repository.
+10. To make a result reproducible, pin the release: GET versions.json, take the base_url of the release you used,
+   and fetch every path below from it instead of from the unversioned base. A release's files never change, and
+   every URL to an API file inside its documents points back into it. Quote the release number with any number you report.
+
+## Endpoints
+
+- https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/index.json — every endpoint and file with its size and SHA-256, versions, compatibility policy, changelog, licence, how to cite the API (cite.api)
+- https://eddy3d-dev.github.io/AIJ-Data-Validation/api/versions.json — every release, newest first: version, date, status (latest or superseded), schema and data version, base URL, tag, changelog; always at the unversioned /api/ path
+- https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases.json — every case: id, title, frame, units, counts, engine status, links
+- cases/{id}.json (base URL + path, one file per value) — one case in full: configurations, frame, units, inflow fit and approach-flow profile, point-table summary, geometry files, validation status, known data issues, attribution, citation of the case's dataset:
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/A.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/B.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/C.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/D.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/E.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/F.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/G.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/H.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/I.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/J.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/K.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/L.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/M.json
+- cases/{id}/points.json (base URL + path, one file per value) — the cleaned measurement table: SI units, one frame, null where not measured:
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/A/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/B/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/C/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/D/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/E/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/F/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/G/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/H/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/I/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/J/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/K/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/L/points.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/M/points.json
+- cases/{id}/points.csv (base URL + path, one file per value) — the same table as CSV (empty cell = not measured):
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/A/points.csv?v=a46201996b22
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/B/points.csv?v=dec97c21217a
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/C/points.csv?v=7448f0ceae37
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/D/points.csv?v=596246341e73
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/E/points.csv?v=e6e89432e706
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/F/points.csv?v=09b109e58dd3
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/G/points.csv?v=914883bf7fec
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/H/points.csv?v=ef5fafc61b8e
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/I/points.csv?v=2864fee9eb19
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/J/points.csv?v=444b7aaa1791
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/K/points.csv?v=8708f3251861
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/L/points.csv?v=b575fe11d107
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/M/points.csv?v=8d32dc8f762b
+- cases/{id}/approach_flow.csv (base URL + path, one file per value) — the measured approach-flow profile: z (m), U (m/s), and k (m^2/s^2) or u_rms (m/s) where published; Case G's U and k are dimensionless (U/Ub, k/Ub^2):
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/A/approach_flow.csv?v=2f3b37fa8e43
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/B/approach_flow.csv?v=126a620f5698
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/C/approach_flow.csv?v=98849731e877
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/D/approach_flow.csv?v=c8239428b9b9
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/E/approach_flow.csv?v=4971944cd8e9
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/F/approach_flow.csv?v=66aefe558a82
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/G/approach_flow.csv?v=45a11857cdf9
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/H/approach_flow.csv?v=ce516d4054a5
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/I/approach_flow.csv?v=8c9a2fa1669a
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/J/approach_flow.csv?v=076668c06f1c
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/K/approach_flow.csv?v=5d197b5001ba
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/L/approach_flow.csv?v=c428993827d4
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/M/approach_flow.csv?v=0042caa39493
+- cases/{id}/geometry.json (base URL + path, one file per value) — the case's STL files with statistics, renders, and the boxes where the geometry is boxes:
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/A/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/B/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/C/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/D/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/E/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/F/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/G/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/H/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/I/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/J/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/K/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/L/geometry.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/M/geometry.json
+- cases/{id}/geometry.stl (base URL + path, one file per value) — cleaned ASCII STL of the default configuration: metres, case frame, outward normals:
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/A/geometry.stl?v=89acdfbbff84
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/B/geometry.stl?v=e6de70eeb17d
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/C/geometry.stl?v=b8c31c57c453
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/D/geometry.stl?v=531895531271
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/E/geometry.stl?v=c29624fdae6d
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/F/geometry.stl?v=8799740aa324
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/G/geometry.stl?v=09d23c794155
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/H/geometry.stl?v=4836687efff9
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/I/geometry.stl?v=ff61cbb22798
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/J/geometry.stl?v=1bd33d8d3531
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/K/geometry.stl?v=f0f8a3adfa29
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/L/geometry.stl?v=20864bc75187
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/M/geometry.stl?v=e4e0a2044536
+- cases/{id}/geometry_{configuration}.stl (base URL + path, one file per value) — the other configurations' STLs (C: 0D, 1D; E: bc, before construction):
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/C/geometry_0D.stl?v=0f08bcd4dd6b
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/C/geometry_1D.stl?v=ac92c8ed427c
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/E/geometry_bc.stl?v=9b944d97a817
+- cases/{id}/validation.json (base URL + path, one file per value) — Eddy3D's scores per engine and run, with figures and the per-point pairs:
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/A/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/B/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/C/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/D/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/E/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/F/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/G/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/H/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/I/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/J/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/K/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/L/validation.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/M/validation.json
+- cases/{id}/pairs/{engine}.csv (base URL + path, one file per value) — per-point measured and modelled values of one engine's runs on the case (columns described by the result's pairs_columns):
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/A/pairs/fluidx3d.csv?v=fb16be8c5800
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/A/pairs/ml-surrogate.csv?v=6177f32a94f4
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/A/pairs/openfoam12-realizableKE.csv?v=0695411d68cf
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/A/pairs/openlb.csv?v=974bf65cfd71
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/B/pairs/fluidx3d.csv?v=c4af803fd09e
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/B/pairs/ml-surrogate.csv?v=eb9a9c3970e7
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/B/pairs/openfoam12-realizableKE.csv?v=9f7c10ff5544
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/B/pairs/openlb.csv?v=9b2950d76b99
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/C/pairs/ml-surrogate.csv?v=6a2b60658913
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/C/pairs/openfoam12-realizableKE.csv?v=f3d2b649b543
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/D/pairs/ml-surrogate.csv?v=9dd71c9ce66b
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/D/pairs/openfoam12-realizableKE.csv?v=fab4f6f21ad5
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/E/pairs/ml-surrogate.csv?v=90b71f5762aa
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/E/pairs/openfoam12-realizableKE.csv?v=fa16bc3bcd62
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/F/pairs/openfoam12-realizableKE.csv?v=e81e010859e6
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/H/pairs/openfoam12-realizableKE.csv?v=915d369f503f
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/I/pairs/openfoam12-kEpsilon.csv?v=6e6ba0f446e8
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/I/pairs/openfoam12-kOmegaSST.csv?v=549a7aa4117e
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/I/pairs/openfoam12-realizableKE.csv?v=d1bafd9c68e2
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/J/pairs/umf-buoyantKEpsilon.csv?v=87ba413bfa96
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/J/pairs/umf-realizableKE.csv?v=cb34fb5fc9c7
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/K/pairs/openfoam12-realizableKE.csv?v=746a236c4635
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/L/pairs/umf-realizableKE.csv?v=a0aedc557c46
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27
+- https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/validation.json — every case and engine in one table: status, runs, headline scores
+- https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/geometry.json — every STL of every case in one list: case, configuration, units, frame, bounding box, size, SHA-256
+- https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/geometry.zip — every STL in one archive (each keeps its own case's frame and units: they are not one scene)
+- schemas/{name}.schema.json (base URL + path, one file per value) — the JSON Schema (draft 2020-12) of each JSON document:
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/schemas/case.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/schemas/cases.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/schemas/geometry-index.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/schemas/geometry.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/schemas/index.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/schemas/points.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/schemas/validation-summary.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/schemas/validation.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/schemas/versions.schema.json
+- https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/openapi.json — OpenAPI 3.1 description of every endpoint
+- https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/llms.txt — plain-text entry point for agents
+
+## Cases
+
+- A: Case A — 1:1:2 building. Isolated 1:1:2 building, velocity field (split-fibre hot wire). 186 rows, 186 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, campaign. Engines: openfoam12-realizableKE scored, openlb scored, fluidx3d scored, ml-surrogate scored.
+- B: Case B — 1:4:4 slab. Isolated 1:4:4 slab, velocity field (split-fibre hot wire). 224 rows, 224 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, campaign. Engines: openfoam12-realizableKE scored, openlb scored, fluidx3d scored, ml-surrogate scored.
+- C: Case C — 3 × 3 block array. 3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestrian-height scalar speed (thermistor), 3 wind directions. 1080 rows, 120 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, Vs, campaign. Engines: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored.
+- D: Case D — high-rise among city blocks. 1:1:4 tower in a regular array of 82 low blocks, pedestrian-height scalar speed (thermistor, 3 wind directions) plus a 33-point split-fibre velocity field at WD = 0. 267 rows, 78 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, Vs, campaign. Engines: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored.
+- E: Case E — Niigata district. Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 m mid-rises; pedestrian-height velocity ratio (thermistor), 16 wind directions. 2560 rows, 80 points, columns point_id, config, instrument, wind_direction, wind_direction_deg, x, y, z, velocity_ratio, campaign. Engines: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored.
+- F: Case F — Shinjuku district. Shinjuku sub-centre, Tokyo, November 1978: 1:800 tunnel (thermistor, 5 / 9 / 20 m) and a year of field cup anemometers; velocity ratio to the 500 m wind, 12 tunnel and 16 field directions. 472 rows, 13 points, columns point_id, config, instrument, wind_direction, wind_direction_deg, x, y, z, velocity_ratio, campaign, velocity_ratio_sd. Engines: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending.
+- G: Case G — flow behind a tree belt. Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m × 2 m × 7 m with a 1.2 m gap below): normalised mean speed and k at 28 points on the centre section (sonic anemometers). 28 rows, 28 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, velocity_ratio, campaign, k_ratio. Engines: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending.
+- H: Case H — 1:1:2 building with a floor point source. Isolated 1:1:2 building with an ethylene point source on the floor behind it: velocity (split-fibre hot wire) and concentration (hydrocarbon analyser) at 876 points. 1652 rows, 876 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, campaign, C, c_rms, concentration_ratio. Engines: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending.
+- I: Case I — cube with a roof point source. Isolated cube with an ethane point source at the centre of its roof: velocity (laser Doppler, 91 points) and concentration (hydrocarbon analyser, 539 points). 630 rows, 630 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, k, campaign, C, concentration_ratio. Engines: openfoam12-realizableKE scored, openfoam12-kEpsilon scored, openfoam12-kOmegaSST scored, openlb pending, fluidx3d pending, ml-surrogate pending.
+- J: Case J — 1:1:2 building, non-isothermal. Isolated 1:1:2 building with a floor tracer source in an unstably stratified boundary layer: velocity, temperature, tracer concentration and their turbulent fluxes at 444 points on three planes. 444 rows, 444 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, campaign, C, c_rms, concentration_ratio, T, T_rms, uT, vT, wT. Engines: openfoam12-realizableKE pending, umf-realizableKE scored, umf-buoyantKEpsilon scored, openlb pending, fluidx3d pending, ml-surrogate pending.
+- K: Case K — 9 x 9 cube array, point source. 9 x 9 array of 0.06 m cubes with a tracer point source on the floor between rows 2 and 3: velocity and tracer concentration at 203 points in the streets and over the first rows. 203 rows, 203 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, campaign, C, c_rms, concentration_ratio. Engines: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending.
+- L: Case L — 9 x 14 cube array, line source, non-isothermal. 14 rows by 9 columns of 0.06 m cubes with a tracer line source on the floor across the tunnel, in an unstably stratified boundary layer: velocity, temperature, concentration and their fluxes at 344 points in the streets and over the roofs. 344 rows, 344 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, campaign, uv, uw, C, c_rms, concentration_ratio, T, T_rms, uc, vc, wc, uT, vT, wT. Engines: openfoam12-realizableKE pending, umf-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending.
+- M: Case M — TPU Atsugi campus. Tracer-gas release on the Tokyo Polytechnic University Atsugi campus: 1:600 tunnel (velocity at 180°, ethylene concentration at 175°, 180° and 185°) and 18 field runs with PMCH, 15 points 3 m above ground. 330 rows, 15 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, campaign, run, C, c_rms, concentration_ratio. Engines: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending.
+
+## Known data issues
+
+- [A] Lateral velocity V is positive toward +y (checked: V = -2.893 m/s at (-0.040, -0.050, 0.010), just outside the y < 0 flank, deflecting away from the centreline). Case B uses the OPPOSITE sign; the API flips Case B so both agree.
+- [A] Coordinates are metres (Case B's are millimetres in the published file).
+- [A] Case A's turbulence columns are rms values (u_rms, ...). The API serves VARIANCES (uu = u_rms^2) so A and B share one column meaning.
+- [B] The published coordinates are MILLIMETRES (x[mm]) while velocities are m/s. The API serves metres (coordinate_scale_applied = 0.001). Read as metres, every probe lands 1000x too far out.
+- [B] The published lateral velocity V is positive toward -y (V = +3.630 m/s at (-0.025, -0.110, 0.013), just outside the y < 0 flank where the flow must deflect toward -y). The API multiplies V by -1 (lateral_sign_applied = -1) so that V is positive toward +y as in Case A. Scored without this, Case B's V comes out at R = -0.910 against R = +0.959 for U on the same points.
+- [B] The RANS solution is symmetric, so model V = 0 on the centre plane while the tunnel measures small non-zero values there.
+- [C] The measured quantity Vs is the MEAN OMNIDIRECTIONAL SCALAR speed from a thermistor, not |mean velocity vector|. A RANS |U| is biased low against it; the data paper suggests comparing sqrt(|U|^2 + 2k) as a conservative correction (over all 1080 rows no Vs is below 0.13 U_H).
+- [C] The 'CB' column is TEXT ('0D', '1D', '2D'); a reader that parses every field as a number gets NaN for it. The header ends with a trailing comma (an empty 8th column).
+- [C] 1080 rows = 3 wind directions x 3 centre buildings x 120 points, not 3 configurations. In the 0D configuration the 25 centre grid nodes are still absent although the ground there is free: the grid is held constant across configurations.
+- [C] 24 of the 120 points sit exactly on a building face plane (|x| = 0.30 or |y| = 0.30) in the open gap between two blocks: legitimate fluid points, but a probe's cell lookup is delicate there.
+- [C] Point numbers 1, 2, 3, 34, 35, 36, 37, 46, 55, 100, 101, 102 do not occur (No. runs 4 ... 132 with nine interior gaps).
+- [C] Experimental repeatability, from the mirror-symmetric point pairs: mean |dVs| 0.088-0.137 m/s (0.024-0.038 U_H).
+- [D] All of Case D's data lives in LF_caseD.xls, an OLE2/BIFF8 workbook (read it with xlrd 2.x; openpyxl cannot). Sheets: 'Geometry&Points', 'Inflow', 'Results (Exp_S)' (split fibre, WD = 0), 'Results (Exp_T)' (thermistor, 0 / 22.5 / 45 deg).
+- [D] Coordinates are millimetres in the workbook; the API serves metres.
+- [D] The shipped BD_caseD.stl has 1572 facets of which 576 are duplicates, and all 83 roofs are wound inward (signed volume 0.011159 m^3 against the true 0.021477 m^3). The API's geometry.stl is rebuilt from the 83 shells' bounding boxes: 996 facets, watertight, volume 0.021477 m^3.
+- [D] The thermistor reads a SCALAR speed. Over the 33 points where both instruments overlap at WD = 0, the ratio of mean thermistor speed to mean |U| is 1.342 (the mean of the per-point ratios is 1.50). sqrt(|U|^2 + 2k) from the split-fibre data matches the thermistor to FB +0.058, R 0.947; |U| alone to FB +0.292, R 0.872.
+- [D] Unmeasured thermistor cells are '-' in the workbook (null here). At WD = 0 the 66 measured values are 33 exact mirror pairs, so only 33 are independent; at 22.5 and 45 deg all 66 are independent.
+- [D] A prior Eddy3D comparison kept in the folder (case-d-eddy3d-prior-comparison.xlsx) scores R = +0.096 against the thermistor. The score comes from a frame or geometry error; do not use it as a validation.
+- [E] The velocity ratio is normalised by the inflow velocity at 15.9 m (= 3.935 m/s), NOT by U_H and NOT by UR = 7.8 m/s. A prior Eddy3D comparison in the folder divided by the wrong reference and came out low by a factor of 2.048 (FAC2 0.338 -> 0.863 once rescaled, R unchanged at 0.661).
+- [E] All 2560 published ratios are integer multiples of 0.0198204 (55 distinct levels): the data's own resolution is +/-0.0099, 3.1 % of the median value and about 10 % at the lowest points.
+- [E] The readme describes AF_caseE.csv, RS_caseE.csv and BD_caseE.stl, but this repository holds only the .3dm, .ghx, .xls and the MP drawing; everything here is extracted from the workbook and the 3dm.
+- [E] case-e.3dm is FULL-SCALE metres (MP_caseE.png is drawn at model scale, +/-0.8 m). Use layers 'buildings' (5,015 meshes, before construction) and 'buildings_new_construction' (3 prisms); exclude the map plate on the Japanese-named general layer, the terrain plates (the site is flat) and 'probes'.
+- [E] case-e.3dm: 1,563 of 8,436 triangles (18.5 %) of the building meshes are wound against their neighbours; all are re-wound here.
+- [E] Do not take the measurement coordinates from the 3dm's 'probes' layer: its 80 spheres sit a median 2.31 m (max 21 m) from the workbook's points, which are authoritative (all 80 fall in open space, min 0.83 m from a building edge).
+- [E] The measured quantity is a scalar (thermistor) speed; a RANS |U| is biased low against it in a dense canopy. The construction signal (ac - bc) is largest for SW (mean |d| 0.2155) and smallest for SSE (0.093).
+- [F] The 16 field rows of point 14 in RS-FO_caseF.csv hold the workbook's value of the NEXT wind direction clockwise (the series is shifted by one); the cleaned table follows the workbook (clean/QUESTIONS.md QF1).
+- [F] Tunnel and STL coordinates are MODEL scale (1:800); the field's are full scale. The case frame is full scale; the tunnel's x, y, z and the STL are multiplied by 800.
+- [F] z is height above the tunnel floor. The readme's rule 'ground = z - 10 m' gives the 5 / 9 / 20 m planes, but the STL's terrain under all 13 points is at z = 5 m, so the planes stand 10 / 14 / 25 m above it.
+- [F] BD_caseF.stl is wound inward on every ground, roof and sampled wall facet and is open along the rim of its 725 m disc (812 boundary edges); the served geometry.stl is re-wound outward and closed with a base slab down to z = -1 m.
+- [F] MP_caseF.csv names the two reference points the other way round from the workbook, the STL and MP_caseF.png (the workbook's Shinjuku-Mitsui Building is the 225 m tower at (-17.5, 96.0), the KDD Building the 180 m one at (85.8, -347.1)).
+- [F] Field values are the legacy workbook's roof-anemometer ratios times 0.940 (NW-NE) or 0.963 (other directions); sigma is the workbook's S.D. rounded to 0.01 times that factor, so it moves in steps of 0.0094 / 0.0096.
+- [F] The tunnel did not run E, ESE, WSW or W; the field data cover all 16. The 5 m and 20 m planes exist at some points only (29 and 79 rows).
+- [F] One tunnel value (point 8, SW, 9 m: 0.474) has no counterpart in the workbook's results sheet, and the flat 'Sheet1' table has 0.63 there.
+- [F] Field anemometer heights above the tunnel floor are 13 - 21 m (3 - 11 m above ground by the readme's rule); the data paper says 3 - 9 m, so points 13 and 14 (11 m) disagree.
+- [F] The thermistor reads a SCALAR speed and the cup anemometer a 10-minute mean: a RANS |U| is biased low against both.
+- [F] The files do not say whether a wind direction names where the wind comes from. The cleaned tables read it as the direction the wind comes from (N = 0, E = 90). At NNW a solved field supports that reading: Eddy3D's OpenFOAM 12 run for the wind from NNW correlates R 0.935 with the tunnel's 9 m column labelled NNW and R 0.077 with its column labelled SSE, the opposite wind (clean/QUESTIONS.md QF9); the other directions are not solved and stay unverified.
+- [G] FIELD data: full-scale metres, no model, and nothing in m/s. The table carries U/UH (velocity_ratio) and k/UH^2 (k_ratio), UH = the mean speed at 7 m during each period; the approach-flow table carries U/Ub and k/Ub^2 (Ub = U at 9 m) in its U and k columns, which are dimensionless here.
+- [G] The readme lists the heights of the lee measurement as 1.5, 3.0, 6.0, 9.0 m; the table, the workbook, the drawing and the data paper have 1.5, 3, 4.5, 6 m.
+- [G] The tree belt is a porous canopy (shading rate 81 % after pruning): the served geometry is its 2 m × 74 m × 7 m envelope with the 1.2 m gap, and a solver needs a canopy (drag) model.
+- [G] The approach profile (28 Dec 2000, 120 min) and the lee measurements (26 Dec 2000, 10 min or more) are from different days. Behind the belt k/UH^2 is 0.040-0.072 at 5 H, 3-8 times below the approach flow's 0.26-0.31 at the same heights; the files do not say why.
+- [G] Only 28 numbers per quantity exist, on one centre section, one time-average each, with no repeats and no uncertainty.
+- [G] The wind direction relative to the belt normal during the measurement is not published; the case is two-dimensional by assumption.
+- [H] The table carries the legacy workbook's values (ratios at full precision x uH = 3.226 m/s), not RS_caseH.csv's: on the z/H = 1/2 and 1/4 planes (and in the approach profile) the CSV's U, V, W are the workbook ratios ROUNDED TO 0.01 before the scaling, a 0.032 m/s grid (+/-0.016 m/s).
+- [H] One row per instrument and point: velocity rows (split fibre) and concentration rows (hydrocarbon analyser) with the same point_id (the CSV's No.). The velocity line is x = 0.40 m and the concentration line x = 0.38 m, so 50 points have no velocity and 50 no concentration (-999.9 in the CSV); none of them is inside the building.
+- [H] V of the vertical-plane sheet (point numbers 1-220) is the exact negative of V at the same points in the horizontal-plane sheets (positive toward -y); it is multiplied by -1 so that V is positive toward +y everywhere, as in Cases A and D.
+- [H] The y = 0, z = 0.1 line (13 locations) is in two sheets and appears twice in the table, as exact copies once V is flipped; they are not independent repeat measurements.
+- [H] Concentration is the analyser's reading: upwind of the building (where the true value is zero) it is +/-0.1 ppm, and 97 of 826 values are negative (minimum -0.83 ppm). Log-based statistics (geometric mean, geometric variance) need a floor.
+- [H] The published header misspells w_rms as 'w_rsm'; the workbook's inflow sheet labels z as 'mm' but holds metres.
+- [H] The profile's uw and uv are published but the approach-flow table has no column for them.
+- [I] Two point sets, no point numbers: the velocity file (91 points: y = 0 plane and z/H = 0.5 plane) and the concentration file (539 points: y = 0 plane and the ground). The table stacks them, one row per instrument and point: velocity rows (instrument ldv) are numbered 1-91 and concentration rows (hydrocarbon_analyser) 92-630, in the files' order. 17 locations have both a velocity and a concentration value.
+- [I] V on the y = 0 plane (53 of 91 points) is 0 in the CSV and 1e-9 ... 4e-6 m/s in the workbook, a symmetry value. It is NaN in the table; V is measured only at the 38 off-plane points.
+- [I] The table carries the legacy workbook's values; the CSVs round to 3 decimals (velocity, k) and 1 decimal (concentration, ppm). Every concentration is a multiple of 0.1 ppm: a 0.4 ppm value carries +/-12 % of quantisation.
+- [I] The paper's c0 = 39.2 ppm needs the ETHANE flow (10 % of the 400 cc/min, 6.67e-7 m3/s); its sentence 'ethane released at 6.67e-6 m3/s' is the mixture. With the mixture flow c0 would be 392 ppm.
+- [I] The workbook normalises the approach flow with 1.697 m/s and the points with 1.7 m/s (0.18 % apart).
+- [I] AF_caseI.csv ends in 53 rows of ',,' and two stray cells, '0.5*' and '1.5*' (chart axis labels): a reader that does not test z for a number takes them for data.
+- [I] Thirteen ground-centreline locations (x, 0, 0) are measured twice (they are on both the y = 0 and the z = 0 plane) with values up to 8.5 % apart; both are kept. The four y = 0, z = 0.05 wind points that appear twice in the workbook are identical copies and appear once.
+- [I] Only the TKE is published, no variances and no concentration fluctuation: k cannot be checked against the components.
+- [J] Temperature is in KELVIN in all three published CSVs; the API serves degrees Celsius (T) and kelvin differences (T_rms, heat fluxes).
+- [J] The published CSV is the legacy workbook's non-dimensional values rounded to 3-4 decimals and scaled back; the table is rebuilt from the workbook. The CSV's heat fluxes sit on a 0.0049 K m/s grid and k on 0.00021 m^2/s^2.
+- [J] c0 = 12.283 ppm includes the 5 % ethylene fraction of the released gas (workbook cell Co); q / (U_H H^2) alone is 245.7 ppm. The data paper states no c0 for Case J.
+- [J] RS_caseJ.csv lists the location (-0.16, 0, 0.004) twice (No. 1 and 153, identical values): a score over the table counts that point twice.
+- [J] The workbook's <u'2> is not always the square of its sigma_u (up to 3 % in single rows); the table uses the variances, which reproduce k.
+- [J] The workbook lists an expanded uncertainty beside every quantity (no column here; clean/manifest.json cases.J.extra_measurements.expanded_uncertainty). The mean concentration is below its own uncertainty (about 1 ppm) at 42 % of the rows, and 193 uncertainty cells of the w'theta' flux are an Excel fill series, not values.
+- [J] The empty-tunnel profile changes along the tunnel: U at z = 0.019 H is 0.33 U_H at x/H = -2.5 (the published AF_caseJ.csv), 0.58 at the building's own position. The workbook has all three stations (clean/cases/J/approach_flow_full.csv).
+- [J] The +y and -y halves are not mirror images: over the 97 mirror pairs of the z/H = 0.25 plane U at +y is 11 % lower (means 0.558 and 0.629 U_H, R between the halves 0.955), so a y-symmetric model has a ceiling on this file.
+- [J] The readme's Reynolds number (43,000) is Case H's; U_H H / nu = 1.6e4 as the data paper states.
+- [J] uv, uw, vw are not published at the points; uc, vc, wc were not measured.
+- [K] The legacy workbook normalises with H = 0.2 m (Case H's building), UH = 4.94009 m/s and C0 = 18.218 ppm, not the cube's H = 0.06 m and U_H = 2.33 m/s; its normalised columns are 23.6 times smaller in concentration. The API's concentration_ratio uses the cube's c0 = 429.18 ppm.
+- [K] RS_caseK.csv has no point numbers; point_id is the row order of the file.
+- [K] The published CSV is the workbook rounded (3 decimals, concentrations 2), with k recomputed from the rounded rms values; the table is rebuilt from the workbook.
+- [K] AF_caseK.csv is Case H's approach-flow file, row for row (x = -0.493 m, tabulated for a 0.2 m building); it gives 2.24 m/s at z = 0.06 m against the stated U_H = 2.33.
+- [K] The lateral velocity V is dominated by a cross-flow offset (about 0.06 m/s, also in the empty tunnel); the +y and -y halves cannot confirm its sign.
+- [K] The mean concentration is not mirror-symmetric (the +y and -y values of one point differ by 44 % on average), so the mirror pairs are not a repeatability estimate; velocity and k are (3 % and 5 %).
+- [K] The workbook's <usc> / sigma_usc ('velocity magnitude', never below |U|) is not in the table.
+- [K] Data paper section 3.11 describes the measurements as 'approximately 30 points at eight heights downwind of the line source'; Case K has 203 points at five heights and a point source.
+- [K] Workbook units: x and y in millimetres in both data sheets; z in millimetres in 'Measurement data' but metres in 'Inflow'.
+- [L] RS_caseL.csv's temperature column is headed 'T(K)' but holds DEGREES CELSIUS (12.85 .. 29.86); AF_caseL.csv's 'T(K)' is kelvin (283 .. 295). The API serves degrees Celsius for both.
+- [L] The published CSV is the workbook rounded to 2-4 decimals; the table is rebuilt from the workbook. Its 'tc' column (temperature-concentration covariance, K ppm) and the workbook's 'Usc' (the vector magnitude of the mean velocity) are not in the table.
+- [L] BD_caseL.stl: the two bottom triangles (z = 0) of each of the 126 cubes (252 triangles) are wound inward; the served geometry.stl is the 126 boxes, outward.
+- [L] The readme's file list names AF_caseK.csv and RS_caseK.csv; the files are AF_caseL.csv and RS_caseL.csv.
+- [L] The readme's 'building surface temperature T_b = 14.8 degC' is the approach-flow air temperature at z = H; the workbook gives the building surface as 42.2 degC.
+- [L] The line source is 0.037 m x 1.2 m in the readme and data paper but a 0.04 m x 1.02 m patch in BD_caseL.stl.
+- [L] The +y and -y halves are not mirror images: the same point differs in U by 26 %, in k by 23 %, in C by 36 % on average, and U is 0.11 m/s lower and T 1.3 K higher at +y at z = 0.15 m (0.09 m above the roofs), so the tunnel flow has a lateral gradient; do not assume symmetry.
+- [L] The workbook carries no expanded uncertainty (the data paper mentions one for Case J only).
+- [L] AF_caseL.csv lists the profile from the top (z = 0.32 m) down and has no k.
+- [L] The measured tracer flux through the cross-sections equals q / 1.2 m to 0.86 .. 1.0 (street and cube-column lines averaged), which fixes q and the unit ppm; the cube-column line alone carries only 0.2 .. 0.4 of it.
+- [M] Field concentrations are in ppq (1e-15 volume fraction) and the tunnel's in ppm: 1 ppq = 1e-9 ppm. The cleaned table converts the field's to ppm and carries C / c0 for both, with the run's own c0 in the field.
+- [M] Every field run has its own reference speed U_R, mean direction WD_R and tracer flow q (clean/manifest.json -> cases.M.extra_measurements.field_runs); the row's wind_direction_deg is WD_R.
+- [M] The tunnel measured velocity only at 180°; at 175° and 185° the CSV has -999.9 in all seven velocity columns.
+- [M] RS-WT_caseM.csv is the legacy workbook rounded (2 dp velocity, 1 dp concentration), and its k is half the sum of the 2-dp RMS values, up to 0.005 m2/s2 from the workbook's; the cleaned table carries the workbook's values.
+- [M] The tunnel source is on the ground in the workbook, LC_caseM.csv and the STL (readme: 'on a rooftop'); the field source was 1.5 m above ground.
+- [M] H_R = 41 m is the anemometer height above the ground; the main roof under the reference point is about 33 m above it. c0 uses H_R = 0.068 m (41 m / 600 = 0.06833 m would give 131.2 ppm, -1 %).
+- [M] The field has an ambient floor of 8 - 11 ppq at points 11 - 15 in every run (not subtracted); the tunnel's concentration has a zero offset (two negative means at point 12) and an rms floor of 7 ppm.
+- [M] Only 11 of the 18 field runs are within 5° of 180°, the tunnel's direction; runs 1, 2 and 9 have U_R of 1.4 - 1.8 m/s.
+- [M] BD_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges (7 on the rim of the panel, 14 on 7 slivers hanging on building roofs); the served geometry.stl is multiplied by 600, re-wound outward, without the slivers and closed with a base slab down to z = -1 m.
+- [M] The approach-flow heights are above the empty tunnel floor: at the profile station the model's taper is 0.052 m high, above the 10 lowest profile heights.
+
+## Validation method
+
+Each case is solved through Eddy3D's production case writer (build-case -> run -> probe); the probe sits at
+exactly the tunnel's measurement coordinates. Scores are normalised by U_H
+(k by U_H^2; Case E by U at 15.9 m); hit rate uses D = 0.25, W = 0.05 in those units. FAC2 is harsh by
+construction on sign-changing V and W, where R and hit rate are the usable scores. The lateral sign of Case B is corrected
+before scoring. Cases C-E measure an omnidirectional SCALAR speed (thermistor): the model is scored as
+sqrt(|U|^2 + 2k) and as |U|, the two ends of the bracket the measurement must fall in.
+The ML surrogate predicts |U|/U_ref at 1.8 m; each case is scaled so its measurement plane lands there.
+On the full prediction window it does not respond to the wind direction at all (reversing the wind changes
+the field by < 1e-4 U_ref), so its scores grade the geometry it was given.
+
+## Cite
+
+- Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083
+- Tominaga, Y., Mochida, A., Yoshie, R., Kataoka, H., Nozu, T., Yoshikawa, M., Shirasawa, T. (2008). AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings. J. Wind Eng. Ind. Aerodyn. 96, 1749-1761. https://doi.org/10.1016/j.jweia.2008.02.058
+- Each case's own requested citation and Zenodo DOI are in cases/{id}.json.
+- Cite the API: cite.api in index.json

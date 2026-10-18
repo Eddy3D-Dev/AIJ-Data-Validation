@@ -13,7 +13,7 @@ description: "Case G — flow behind a tree belt: Eddy3D's scores against the me
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
-LAD and Cd are not in the dataset (only the shading rate, 81 %). The drag values are crowns of the Eddy3D vegetation library; no optimiser is run against the 28 points.
+LAD and Cd are not in the dataset (only the shading rate, 81 %). The drag values are crowns of the Eddy3D vegetation library.
 
 ## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration open-field
 

@@ -29,7 +29,11 @@ Both are Eddy3D production runs solved on 2026-10-18, realizable k-ε at numeric
 
 ## Case F
 
+### Measurement layout
+
 {% include figure.html name="case-f-layout.png" alt="Measurement points, Case F" caption="<strong>Figure 1.</strong> Case F, measurement points: A tunnel plane 5 m above ground; B tunnel plane 9 m above ground; C tunnel plane 20 m above ground; D field cup anemometers, 3 to 11 m above ground. Positions in metres, full scale. SMB and KDD: the reference buildings. The field anemometers stand at the places of the tunnel points." %}
+
+### Measured against modelled
 
 {% include figure.html name="case-f-openfoam-agreement.png" alt="Case F, measured vs modelled speed over U(500 m)" caption="<strong>Figure 2.</strong> Case F, wind from NNW: the tunnel's and the field's U/U(500 m) against the modelled √(|U|²+2k) (filled) and |U| (hollow), in the published-z frame (top) and the STL-ground frame (bottom). The bars are the standard deviation of the field's 10-minute means. The dots take the colour of their group in Figure 1." %}
 
@@ -100,7 +104,11 @@ FB is positive when the model is low.
 
 ## Case M
 
+### Measurement layout
+
 {% include figure.html name="case-m-layout.png" alt="Measurement points, Case M" caption="<strong>Figure 4.</strong> Case M, measurement points: A near field, within 100 m of the release point; B mid field, 100 to 300 m from the release point; C far field, beyond 300 m. Positions in metres, full scale. Star: release point; R: reference point; dotted circles: 100 m and 300 m from the release point." %}
+
+### Measured against modelled
 
 {% include figure.html name="case-m-openfoam-agreement.png" alt="Case M, measured vs modelled velocity, k and concentration" caption="<strong>Figure 5.</strong> Case M, WD 180: measured vs modelled U, V, W, k and c* at three turbulent Schmidt numbers (log axes show the positive pairs within eight decades). The last panel is the tunnel's own WD 175 and WD 185 against its WD 180. The dots take the colour of their group in Figure 4." %}
 

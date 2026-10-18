@@ -946,7 +946,10 @@ def _draw_pair(fig, fig_h, case, p, tab, geo, bottom, letters):
             spots.append((g, pts[0][0], pts[0][1]))
         else:
             far = max(pts)
-            rings.append([g, far[0], far[1], p.x_hi + 0.20 * inch, 0.0])
+            xe = p.x_hi + 0.20 * inch
+            if xe - far[0] > 1.2 * inch:         # a group that ends far from the right edge is lettered at its own end, not at the end of a long leader
+                xe = far[0] + 0.20 * inch
+            rings.append([g, far[0], far[1], xe, 0.0])
         k = _rank(vs, v)
         ax_p.scatter([q[0] for q in pts], [q[1] for q in pts], s=_area(p.dot, k), color=g.colour, edgecolor=_dark(g.colour), linewidth=0.2,
                      zorder=6 + 0.1 * k)
