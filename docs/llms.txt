@@ -6,8 +6,9 @@
 Base URL: https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api
 Fallback (raw files from the repository): https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/main/docs/api
 Repository: https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ
-Release: 2.0.0 (2026-10-18); its files, frozen: https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/v2.0.0/docs/api
-API schema version: 2.2.0. Data version (SHA-256 of the served data): f079fcd55a7a51a9c0fb0f97aae6f941cbc6b52495b0f69934f4f6e770229e14.
+Release: 3.0.0 (2026-10-18). This is the latest alias, which always equals the newest release; the frozen copy of 3.0.0 is https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0.
+All releases: https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/versions.json
+API schema version: 2.3.0. Data version (SHA-256 of the served data): f079fcd55a7a51a9c0fb0f97aae6f941cbc6b52495b0f69934f4f6e770229e14.
 Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark and the per-case papers.
 
 ## How to use this
@@ -30,10 +31,14 @@ Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark an
    every endpoint. Download URLs carry ?v=<SHA-256 prefix>: use the URLs the documents give, not hand-built ones.
 9. Send a descriptive User-Agent: the site's CDN answers HTTP 403 to Python urllib's default one and to some AI
    crawlers. If you are refused, the fallback URL above serves byte-identical files from the repository.
+10. To make a result reproducible, pin the release: GET versions.json, take the base_url of the release you used,
+   and fetch every path below from it instead of from the unversioned base. A release's files never change, and
+   every URL inside its documents points back into it. Quote the release number with any number you report.
 
 ## Endpoints
 
 - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/index.json — every endpoint and file with its size and SHA-256, versions, compatibility policy, changelog, licence, citation
+- https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/versions.json — every release, newest first: version, date, status (latest or superseded), schema and data version, base URL, tag, changelog; always at the unversioned /api/ path
 - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases.json — the five cases: id, title, frame, units, counts, engine status, links
 - cases/{id}.json (base URL + path, one file per value) — one case in full: configurations, frame, units, inflow fit and approach-flow profile, point-table summary, geometry files, validation status, known data issues, attribution:
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A.json
@@ -108,6 +113,7 @@ Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark an
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/points.schema.json
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/validation-summary.schema.json
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/validation.schema.json
+  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/versions.schema.json
 - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/openapi.json — OpenAPI 3.1 description of every endpoint
 - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/llms.txt — plain-text entry point for agents
 
