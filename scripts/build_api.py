@@ -49,6 +49,7 @@ import zipfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import aijdata as D  # noqa: E402
 import api_schemas as S  # noqa: E402
+import page_prose as P  # noqa: E402
 import release as R  # noqa: E402
 
 REPO = D.REPO
@@ -178,9 +179,8 @@ ENGINES = [
     {"id": "fluidx3d", "name": "FluidX3D (Eddy3D GPU LBM)", "kind": "LBM"},
     {"id": "ml-surrogate", "name": "Eddy3D ML wind surrogate (pedestrian height)", "kind": "surrogate"},
 ]
-# "scored" says a run exists and its scores are served, NOT that it agrees; how well it agrees is in the numbers.
 STATUS_MEANING = {
-    "scored": "a validation run exists and its scores are in cases/{id}/validation.json; whether it agrees is in the numbers",
+    "scored": "a validation run exists and its scores are in cases/{id}/validation.json",
     "running": "the solve is in progress; no scores yet",
     "pending": "not run yet",
     "not comparable": ("the engine cannot produce the measured quantity at the measured location: OpenLB at the resolution "
@@ -1157,7 +1157,7 @@ def write_case_documents(case, d):
         "engines": [{"engine": e["id"], "status": ENGINE_STATUS[case][e["id"]]} for e in case_engines(case)],
         "results": results,
         "note": (None if results else "No validation has been run for this case yet; results is an empty list. "
-                 f"Nothing on this page is a claim about this case. {QUEUED}"),
+                 f"{QUEUED}"),
     })
 
     configs = configurations(case, d["rows"])
@@ -1251,9 +1251,8 @@ def write_validation_summary(percase):
             engines.append({"engine": e["id"], "status": ENGINE_STATUS[case][e["id"]], "runs": runs})
         cases.append({"case": case, "title": D.CASES[case]["title"], "url": url(f"cases/{case}/validation.json"), "engines": engines})
     write_json("validation.json", "validation-summary", {
-        "description": ("Every case and engine in one table. 'scored' means a run exists, not that it agrees: read the "
-                        "scores. Headline scores are the ones to quote; every score, the figures and the per-point pairs "
-                        "are in each case's validation.json."),
+        "description": ("Every case and engine in one table. Headline scores are the ones to quote; every score, the "
+                        "figures and the per-point pairs are in each case's validation.json."),
         "engines": ENGINES, "status_meaning": STATUS_MEANING, "metric_meaning": METRIC_MEANING, "cases": cases,
     })
 
@@ -1366,7 +1365,7 @@ def llms_text(percase):
         "   geometry.json lists the boxes where the geometry IS boxes (A, B, C, D, G, H, I, J, K, L), so you need not parse the STL at all.",
         "6. GET validation.json for every case and engine at once, or cases/{id}/validation.json for one case in full.",
         "   Quote the `headline` scores. An engine whose status is not \"scored\" has NO result for that case: do not",
-        "   infer one. \"scored\" means a run exists, not that it agrees — read the numbers. Each result's `pairs` is",
+        "   infer one. Each result's `pairs` is",
         "   the per-point measured and modelled values, so any score can be recomputed. Status today: "
         + "; ".join(f"{c}: " + ", ".join(f"{e} {s}" for e, s in ENGINE_STATUS[c].items()) for c in D.CASE_IDS) + ".",
         "7. All geometry at once: GET geometry.json (every STL with its case, configuration, units, frame and SHA-256)",
@@ -1395,7 +1394,7 @@ def llms_text(percase):
         summ = percase[case]["summ"]
         walk.append(f"- {case}: {meta['title']}. {meta['short']} {summ['rows']} rows, {summ['distinct_points']} points, "
                     f"columns {', '.join(summ['columns'])}. Engines: " + ", ".join(f"{k} {v}" for k, v in ENGINE_STATUS[case].items()) + ".")
-    walk += ["", "## Known data issues", "", "Each of these changes the result of a comparison if it is not accounted for.", ""]
+    walk += ["", "## Known data issues", ""]
     for case in D.CASE_IDS:
         for g in D.CASES[case]["known_issues"]:
             walk.append(f"- [{case}] {g}")
@@ -1788,15 +1787,40 @@ def _cell(text):
     return _esc(text).replace("|", "\\|")
 
 
-def _md_value(v):
-    """A configuration value as the text of one table cell: escaped once (the cell's pipes too, as in |y|)."""
+def _md_value(v, sink=None):
+    """A configuration value as the text of one table cell: escaped once (the cell's pipes too, as in |y|). The
+    reasoning part of a text (page_prose) is appended to `sink`, for the collapsed section under the table; a text
+    that has one needs a sink."""
     if isinstance(v, dict):
-        return "<br>".join(f"**{_esc(_label(k))}**: {_md_value(x)}" for k, x in v.items())
+        return "<br>".join(f"**{_esc(_label(k))}**: {_md_value(x, sink)}" for k, x in v.items())
     if isinstance(v, list):
         return ", ".join(_cell(x) for x in v)
     if isinstance(v, int) and not isinstance(v, bool) and abs(v) >= 10000:
         return f"{v:,}"
+    if isinstance(v, str):
+        shown, collapsed = P.split(v, cell=True)
+        if collapsed:
+            if sink is None:
+                raise SystemExit(f"a text with a collapsed part where the page has no place for it: {v[:70]!r}")
+            sink.append(collapsed)
+        return _cell(shown)
     return _cell(v)
+
+
+def _sections(collapsed):
+    """Collapsed sections for [(kind, topic, text)]: one <details> per (kind, topic), a paragraph per text.
+    `Interpretation: <topic>` holds a reading of a result, `Data notes: <topic>` an explanation of the published files."""
+    groups = {}
+    for kind, topic, text in collapsed:
+        if text not in groups.setdefault((kind, topic), []):
+            groups[(kind, topic)].append(text)
+    L = []
+    for (kind, topic), texts in groups.items():
+        L += ['<details markdown="block">', f"<summary>{P.SUMMARY[kind]}: {topic}</summary>", ""]
+        for t in texts:
+            L += [_esc(t), ""]
+        L += ["</details>", ""]
+    return L
 
 
 def _asset(rel):
@@ -1907,10 +1931,6 @@ OPEN_LIST_ROWS = 8
 # under that key's label. The Data page has everything.
 GLANCE = [("building", "array", "tower", "district"), ("scale",), ("Re_H", "Re_D", "Re"), ("U_H_m_s", "normalisation"),
           ("wind_directions", "wind_directions_deg"), ("measurement_height_m", "measurement_planes")]
-# The hand-written page that reads a case's results (a case without one is read on the Validation overview).
-READING_PAGES = {"A": "/validation/cases-ab/", "B": "/validation/cases-ab/", "C": "/validation/case-c/",
-                 "D": "/validation/case-d/", "E": "/validation/case-e/", "F": "/validation/cases-fm/", "G": "/validation/cases-gk/", "H": "/validation/cases-hi/",
-                 "I": "/validation/cases-hi/", "J": "/validation/cases-jl/", "K": "/validation/cases-gk/", "L": "/validation/cases-jl/", "M": "/validation/cases-fm/"}
 
 
 def _engine_name(engine_id):
@@ -2075,7 +2095,7 @@ def build_known_issues():
         if case in "ABCDE":
             continue
         meta = D.CASES[case]
-        L += [f"## Case {case}", "", f"{_esc(meta['title'])}.", ""] + [f"- {_esc(g)}" for g in meta["known_issues"]] + [""]
+        L += [f"## Case {case}", "", f"{_esc(meta['title'])}.", ""] + _issue_list(meta["known_issues"])
     _write("_includes/known-issues-fm.md", L)
 
 
@@ -2089,19 +2109,21 @@ def build_version_label():
         f' · <abbr title="SHA-256 of the served data; the full value is in api/index.json">data {DATA_VERSION[:8]}</abbr></span>'])
 
 
-def _frame_traps(meta):
-    """One sentence per way the cleaned table differs from the published file, read from the case's frame."""
-    frame, traps = meta["frame"], []
-    if frame.get("lateral_sign_applied") not in (None, 1):
-        traps.append(f"The lateral velocity V is multiplied by {frame['lateral_sign_applied']} in the cleaned table "
-                     "(`lateral_sign_applied`): the published file's V has the other sign convention.")
+def _frame_facts(meta):
+    """One line per fact a comparison depends on, read from the case's frame and units: where the cleaned table
+    differs from the published files, and the wind-direction convention."""
+    frame, facts = meta["frame"], []
+    facts.append(f"Origin: {_esc(frame['origin'])}. Length unit: {_esc(meta['units']['length'])}.")
     if frame.get("coordinate_scale_applied") not in (None, 1, 1.0):
-        traps.append(f"The published coordinates are multiplied by {frame['coordinate_scale_applied']:g} in the cleaned table "
+        facts.append(f"The published coordinates are multiplied by {frame['coordinate_scale_applied']:g} in the cleaned table "
                      "(`coordinate_scale_applied`).")
+    if frame.get("lateral_sign_applied") not in (None, 1):
+        facts.append(f"The lateral velocity V is multiplied by {frame['lateral_sign_applied']} in the cleaned table "
+                     "(`lateral_sign_applied`): the published file's V has the other sign convention.")
     if "wind_direction_rotation" in frame:
-        traps.append("The sense in which the wind direction rotates is a convention to check before comparing at "
-                     "any direction other than 0° (see *Frame and units* on the Data page).")
-    return traps
+        shown, _ = P.split(frame["wind_direction_rotation"], cell=True)
+        facts.append(f"Wind direction: {_esc(shown.rstrip('.'))}.")
+    return facts
 
 
 def _case_page(case, meta, p, shared):
@@ -2135,22 +2157,29 @@ def _case_page(case, meta, p, shared):
             ranges = _headline_ranges([r for r in results if r["engine"] == e["id"]])
             L.append(f"| {_engine_name(e['id'])} | {status_label(ENGINE_STATUS[case][e['id']])} | "
                      + (" | ".join((_range(ranges["R"], True), _range(ranges.get("Fac2"), False))) if ranges else "— | —") + " |")
-        L += ["{: .scores }", "",
-              "R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; "
-              "negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: "
-              f"every score, its figures and its reading are on the {_link('Validation page', val_url)}.", ""]
+        L += ["{: .scores }", ""]
     else:
-        L += [f"**No validation has been run for this case yet.** Nothing on this page is a claim about it. {QUEUED} Engine status: "
+        L += [f"**No validation has been run for this case yet.** {QUEUED} Engine status: "
               + " · ".join(f"{_engine_name(k)} {status_label(v)}" for k, v in ENGINE_STATUS[case].items()), ""]
-    traps = _frame_traps(meta)
     L += ["{: .warning-title }", "> Before you compare", ">",
-          "> The cleaned table is in SI units and one frame, with this case's corrections applied once; "
-          "do not apply them again to the published files.", ">"]
-    for t in traps:
+          "> - The cleaned table is in SI units and one frame, with this case's corrections applied once."]
+    for t in _frame_facts(meta):
         L.append(f"> - {t}")
     L += [f"> - {len(meta['known_issues'])} known issues in the published files are listed under "
           f"{_link('Known data issues', data_url, '#known-data-issues')}.", ""]
+    L += _sections([("I", "Using the cleaned table", "Do not apply the corrections again to the published files.")])
     return L
+
+
+def _issue_list(issues):
+    """The known issues as a list of the facts, then the collapsed Data notes behind them; ends with a blank line."""
+    L, collapsed = [], []
+    for g in issues:
+        shown, c = P.split(g)
+        L.append(f"- {_esc(shown)}")
+        if c:
+            collapsed.append(c)
+    return L + [""] + _sections(collapsed)
 
 
 def _case_data_page(case, meta, p):
@@ -2159,16 +2188,20 @@ def _case_data_page(case, meta, p):
     L = _front("Data", 1, parent=meta["title"], grand_parent="Cases", has_children=False,
                description=f"{meta['title']}: configuration, frame and units, reference data, inflow and known data issues.")
     L += [f"# Case {case}: reference data", "{: .no_toc }", ""] + _toc()
+    sink = []
     L += ["## Configuration", "", "| Parameter | Value |", "|---|---|"]
     for k, v in meta["configuration"].items():
-        L.append(f"| {_cell(_label(k))} | {_md_value(v)} |")
-    L += ["", "## Frame and units", "", "| Property | Definition |", "|---|---|"]
+        L.append(f"| {_cell(_label(k))} | {_md_value(v, sink)} |")
+    L += [""] + _sections(sink)
+    sink = []
+    L += ["## Frame and units", "", "| Property | Definition |", "|---|---|"]
     for k, v in meta["frame"].items():
-        L.append(f"| {_cell(_label(k))} | {_md_value(v)} |")
+        L.append(f"| {_cell(_label(k))} | {_md_value(v, sink)} |")
     for k, v in meta["units"].items():
         L.append(f"| Unit of {'k' if k == 'k' else _cell(_label(k).lower())} | {_cell(v)} |")
+    L += [""] + _sections(sink)
     af = meta.get("approach_flow_file")
-    L += ["", "## Reference data", "",
+    L += ["## Reference data", "",
           f"Source in this repository: `{meta['reference_file']}`" + (f" (approach flow: `{af}`)" if af else "") + ".", "",
           f"The cleaned table has **{summ['rows']:,} rows** over **{summ['distinct_points']:,} distinct points**; "
           f"columns `{'`, `'.join(summ['columns'])}`.", ""]
@@ -2197,18 +2230,17 @@ def _case_data_page(case, meta, p):
         L += cols + [""]
     inflow = meta.get("inflow_fit")
     if inflow:
+        sink = []
         L += ["## Inflow", "", "| Property | Value |", "|---|---|"]
         for k, v in inflow.items():
             if k == "windows":
                 for w in v:
                     L.append("| Fit window | " + "; ".join(f"{_cell(_label(a))} {_cell(b)}" for a, b in w.items()) + " |")
             else:
-                L.append(f"| {_cell(_label(k))} | {_md_value(v)} |")
-        L.append("")
-    L += ["## Known data issues", "", "Each of these changes the result of a comparison if it is not accounted for.", ""]
-    for g in meta["known_issues"]:
-        L.append(f"- {_esc(g)}")
-    L += ["", "## API", "", "| Resource | Endpoint |", "|---|---|"]
+                L.append(f"| {_cell(_label(k))} | {_md_value(v, sink)} |")
+        L += [""] + _sections(sink)
+    L += ["## Known data issues", ""] + _issue_list(meta["known_issues"])
+    L += ["## API", "", "| Resource | Endpoint |", "|---|---|"]
     for name, rel in (("Case", f"cases/{case}.json"), ("Points (JSON)", f"cases/{case}/points.json"),
                       ("Points (CSV)", f"cases/{case}/points.csv"), ("Approach flow (CSV)", f"cases/{case}/approach_flow.csv"),
                       ("Geometry", f"cases/{case}/geometry.json"), ("Geometry (STL)", f"cases/{case}/geometry.stl"),
@@ -2236,6 +2268,21 @@ def _score_table(e):
     return L
 
 
+REPRODUCE_TAIL = "; scores recomputed"       # in a run's `reproduce`: what comes after is how the scores were made, not how to run it
+
+
+def _notes(notes):
+    """Run notes as a list of the facts, then the collapsed Interpretation sections behind them."""
+    L, collapsed = [], []
+    for n in notes:
+        shown, c = P.split(n)
+        if shown:
+            L.append(f"- {_esc(shown)}")
+        if c:
+            collapsed.append(c)
+    return L, collapsed
+
+
 def _case_validation_page(case, meta, p, shared):
     results = p["results"]
     n = D.CASE_IDS.index(case) + 1
@@ -2244,16 +2291,19 @@ def _case_validation_page(case, meta, p, shared):
     L += [f"# Case {case}: validation", "{: .no_toc }", ""]
     L += ["Engine status: " + " · ".join(f"{_engine_name(k)} {status_label(v)}" for k, v in ENGINE_STATUS[case].items()), ""]
     if not results:
-        L += [f"**No validation has been run for this case yet.** Nothing on this page is a claim about it. {QUEUED}", ""]
+        L += [f"**No validation has been run for this case yet.** {QUEUED}", ""]
         return L
-    L += ["*Scored* means a run exists and its scores are below, not that it agrees. How to read them is on "
-          f"{_link('the reading page', READING_PAGES.get(case, '/validation/'))}; the "
-          f"{_link('Validation', '/validation/')} overview says what each status means and why an engine is *not comparable*.", ""]
     names = {e["id"]: e["name"] for e in ENGINES}
-    figures, fig_no = [], 1
+    # What every run of the page has in common is said once, after the runs.
+    many = len(results) > 1
+    all_quantity = many and len({e["quantity"] for e in results}) == 1 and bool(results[0]["quantity"])
+    all_norm = many and len({e["normalisation"] for e in results}) == 1
+    all_pairs = many and len({e["pairs"]["path"] for e in results}) == 1
+    all_notes = [n for n in results[0]["notes"] if all(n in e["notes"] for e in results[1:])] if many else []
+    figures, fig_no, tails = [], 1, []
     for e in results:
         L += [f"## {_esc(names[e['engine']])}" + (f", configuration {_esc(e['configuration'])}" if e["configuration"] else ""), ""]
-        if e["quantity"]:
+        if e["quantity"] and not all_quantity:
             L += [f"Quantity: {_esc(e['quantity'])}.", ""]
         if e["recirculation_Lr_over_H"] is not None:
             L += [f"Reattachment length L<sub>r</sub>/H = {e['recirculation_Lr_over_H']:.2f}.", ""]
@@ -2262,12 +2312,45 @@ def _case_validation_page(case, meta, p, shared):
             L += ['<details markdown="block">', f"  <summary>All {len(e['headline'])} headline scores</summary>", ""] + table + ["", "</details>", ""]
         else:
             L += table + [""]
-        if e["notes"]:
-            L += ["Recorded with this run:", ""] + [f"- {_esc(n)}" for n in e["notes"]] + [""]
+        norm, norm_collapsed = [], []
+        if not all_norm:
+            shown, c = P.split(e["normalisation"])
+            norm = [f"- Normalisation: {_esc(shown)}"]
+            norm_collapsed = [c] if c else []
         pairs_rel = e["pairs"]["path"]
-        L += [f"{_esc(e['normalisation'])}. Per-point values: {_link('`/api/' + pairs_rel + '`', '/api/' + pairs_rel)}. "
-              f"Reproduce: {_esc(e['reproduce'])}.", ""]
+        head, sep, tail = e["reproduce"].partition(REPRODUCE_TAIL)
+        if sep and ("scores recomputed" + tail) not in tails:
+            tails.append("scores recomputed" + tail)
+        L += norm
+        if not all_pairs:
+            L.append(f"- Per-point values: {_link('`/api/' + pairs_rel + '`', '/api/' + pairs_rel)}")
+        L += [f"- Reproduce: {_esc(head)}", ""]
+        facts, collapsed = _notes([n for n in e["notes"] if n not in all_notes])
+        if facts:
+            L += ["Notes:", ""] + facts + [""]
+        L += _sections(norm_collapsed + collapsed)
         figures += [f for f in e["figures"] if f not in figures]
+    if many and (all_quantity or all_norm or all_pairs or all_notes):
+        L += ["## All runs", ""]
+        if all_quantity:
+            L += [f"- Quantity: {_esc(results[0]['quantity'])}"]
+        if all_norm:
+            shown, c = P.split(results[0]["normalisation"])
+            L += [f"- Normalisation: {_esc(shown)}"]
+            norm_collapsed = [c] if c else []
+        else:
+            norm_collapsed = []
+        if all_pairs:
+            pairs_rel = results[0]["pairs"]["path"]
+            L += [f"- Per-point values: {_link('`/api/' + pairs_rel + '`', '/api/' + pairs_rel)}"]
+        L.append("")
+        facts, collapsed = _notes(all_notes)
+        if facts:
+            L += ["Notes:", ""] + facts + [""]
+        L += _sections(norm_collapsed + collapsed)
+    if tails:
+        L += ['<details markdown="block">', "  <summary>How the scores are computed</summary>", ""]
+        L += [f"- {_esc(t[0].upper() + t[1:])}." for t in tails] + ["", "</details>", ""]
     own, elsewhere = [], {}
     for fig in figures:
         name = fig["url"].rsplit("/", 1)[-1]
@@ -2285,8 +2368,7 @@ def _case_validation_page(case, meta, p, shared):
         fig_no += 1
     if elsewhere:
         L += ["## Figures", ""] if not own else []
-        L += ["The figures for these runs are shown once, beside their reading: "
-              + "; ".join(f"{_link(label, page)}" for (page, label) in elsewhere) + ".", ""]
+        L += ["Figures: " + "; ".join(f"{_link(label, page)}" for (page, label) in elsewhere) + ".", ""]
     return L
 
 
@@ -2305,6 +2387,8 @@ def build_pages(percase):
         _write(f"cases/{meta['slug']}.md", _case_page(case, meta, p, shared))
         _write(f"cases/{meta['slug']}/data.md", _case_data_page(case, meta, p))
         _write(f"cases/{meta['slug']}/validation.md", _case_validation_page(case, meta, p, shared))
+    if P.unused():
+        raise SystemExit(f"page_prose entries that match no text (rewritten source string?): {P.unused()}")
 
 
 # ----------------------------------------------------------------------------- verify
