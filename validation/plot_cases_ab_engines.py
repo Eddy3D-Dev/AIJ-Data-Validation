@@ -4,10 +4,10 @@
       Measured against modelled U/U_H and V/U_H, Cases A and B, one ROW per engine (small multiples:
       each panel carries one engine, in that engine's colour, with its scores printed beside it).
 
-Engines and their colours (fixed across every figure in this repository): OpenFOAM 12 realizable k-epsilon
-slot 1 blue; OpenLB slot 4 yellow; FluidX3D slot 5 magenta. Yellow and magenta sit below 3:1 contrast on
-the light surface, so every panel prints its scores (the palette's relief rule), and no panel carries two
-engines (only slots 1-3 are validated against each other for overlapping marks).
+Engines and their colours (plotstyle.py, fixed across every figure in this repository, from ultraplot's
+colour-blind-safe cycle): OpenFOAM 12 realizable k-epsilon blue (#0072b2), OpenLB vermillion (#d55e00),
+FluidX3D reddish purple (#cc79a7). All three are at least 3:1 against the white page; every panel also prints
+its scores, and no panel carries two engines, so the marks never have to be told apart by colour alone.
 
 Inputs: the measured tables clean/cases/{A,B}/points.csv; each engine's probes at those points under
 C:/Eddy3DVal (OpenFOAM: aij_{A,B}_realizableKE_L3/reference.probe.csv, case frame wind along +y, so

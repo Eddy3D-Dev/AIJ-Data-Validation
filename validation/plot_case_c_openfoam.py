@@ -22,9 +22,9 @@ Probe frame: the fixtures solve the CSV frame turned so that the WD = 0 wind blo
 (meteorological 180 deg), at 1:100: world = 100 * (-y, x, z). WD rotates the wind from +x toward -y
 in the CSV frame (the data's own mirror symmetry; see the README).
 
-Colours: slot 1 of the validated categorical palette (blue #2a78d6) is the OpenFOAM model, as in
-cases-ab-openfoam-agreement.png; the map's diverging scale is the palette's blue <-> red pair around its neutral
-gray (#f0efec). Reference geometry (1:1 line, FAC2 band, blocks) is recessive grey.
+Colours (plotstyle.py): the OpenFOAM model is ultraplot's blue, as in every figure; the map's diverging scale
+is ultraplot's BuRd reversed, centred on zero (red where the model is slower than the tunnel, blue where it is
+faster). Reference geometry (1:1 line, FAC2 band, blocks) is recessive grey.
 """
 from __future__ import annotations
 
@@ -38,19 +38,13 @@ import numpy as np
 import ultraplot as uplt
 
 import plotstyle as style
-from matplotlib.colors import LinearSegmentedColormap
-from matplotlib.patches import FancyArrowPatch, Rectangle
+from matplotlib.patches import Rectangle
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 VAL = r"C:/Eddy3DVal"
 RESULTS = os.path.join(HERE, "results")
 PAIRS = os.path.join(RESULTS, "caseC_openfoam12_realizableKE_pairs.csv")
-
-BLUE = "#2a78d6"     # slot 1 - the OpenFOAM model
-RED = "#e34948"      # diverging pole: model slower than the tunnel
-MID = "#f0efec"      # diverging neutral midpoint
-BLOCK = "#d9d8d4"
 
 UH = 3.654           # U(z = D) from AF_caseC.csv, the case's normalising speed [m/s]
 SCALE = 100.0        # the fixtures solve at 1:100
@@ -151,29 +145,24 @@ style.finish(fig, "AIJ UWE Case C — Eddy3D (OpenFOAM 12, realizable k-ε) vs w
 style.save(fig, "case-c-openfoam-agreement.png")
 
 # ----------------------------------------------------------------------------- figure 2
-cmap = LinearSegmentedColormap.from_list("aij_diverging", [style.SLOW, style.NEUTRAL, style.FAST])
 fig2, axs2 = uplt.subplots(nrows=3, ncols=3, refwidth=2.1, refaspect=1, share=True)
 for r, cb in enumerate(CONFIGS):
     for c, wd in enumerate(WDS):
         ax = axs2[r, c]
         for bx, by, tall in blocks(cb):
-            ax.add_patch(Rectangle((bx, by), 0.2, 0.2, facecolor="#9f9e99" if tall else BLOCK,
+            ax.add_patch(Rectangle((bx, by), 0.2, 0.2, facecolor=style.FOOTPRINT_FOCUS if tall else style.FOOTPRINT,
                                    edgecolor="none", zorder=1))
         pts = pairs[(cb, wd)]
         x = np.array([p["x"] for p in pts]); y = np.array([p["y"] for p in pts])
-        ratio = np.log2(np.array([p["scalar_over_UH"] / p["measured_over_UH"] for p in pts]))
-        sc = ax.scatter(x, y, c=np.clip(ratio, -1, 1), cmap=cmap, vmin=-1, vmax=1, s=26,
-                        edgecolor=style.SURFACE, linewidth=0.4, zorder=3)
+        sc = style.bias_scatter(ax, x, y, [p["scalar_over_UH"] for p in pts], [p["measured_over_UH"] for p in pts], s=26)
         # The wind: from upstream, rotating from +x toward -y with WD (the CSV frame).
         t = math.radians(wd)
         d = np.array([math.cos(t), -math.sin(t)])
         tail = -0.52 * d
-        ax.add_patch(FancyArrowPatch(tuple(tail), tuple(tail + 0.14 * d), arrowstyle="-|>",
-                                     mutation_scale=11, color=style.INK, lw=1.4, zorder=4))
+        style.arrow(ax, tail, tail + 0.14 * d)
         ax.format(xlim=(-0.58, 0.58), ylim=(-0.58, 0.58), aspect="equal")
 style.outer_ticks(axs2, 3, 3)
-fig2.colorbar(sc, loc="b", ticks=[-1, -0.5, 0, 0.5, 1], length=0.7,
-              label="log$_2$(Eddy3D √(|U|²+2k) / tunnel Vs) [–]:  −1 = half the tunnel's speed,  0 = equal,  +1 = twice")
+style.bias_colorbar(fig2, sc, "Eddy3D √(|U|²+2k) / tunnel Vs")
 style.finish(fig2, "AIJ UWE Case C — where the model is slow (red) or fast (blue), z = 0.1 D",
              toplabels=[f"WD = {wd:g}°" for wd in WDS], leftlabels=[CB_TITLE[cb] for cb in CONFIGS],
              xlabel="x [m]", ylabel="y [m]")
