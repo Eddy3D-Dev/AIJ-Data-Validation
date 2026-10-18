@@ -2,7 +2,7 @@
  "$schema": "https://json-schema.org/draft/2020-12/schema",
  "$id": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/cases.schema.json",
  "title": "Case list",
- "description": "The five cases with their frame, units, counts, engine status and links.",
+ "description": "Every case with its frame, units, counts, engine status and links.",
  "type": "object",
  "required": [
   "$schema",
@@ -176,8 +176,8 @@
      }
     }
    },
-   "minItems": 5,
-   "maxItems": 5
+   "minItems": 13,
+   "maxItems": 13
   }
  }
 }

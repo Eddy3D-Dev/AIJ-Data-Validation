@@ -1,0 +1,35 @@
+{
+ "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/validation.schema.json",
+ "schema_version": "2.3.0",
+ "data_version": "9f4727b2432b495eb9d4bcdfeda3ab5c6ed726d4de450b71b449955800da3e42",
+ "license": "CC-BY-4.0",
+ "case": "J",
+ "title": "Case J — 1:1:2 building, non-isothermal",
+ "status": "pending",
+ "status_meaning": {
+  "scored": "a validation run exists and its scores are in cases/{id}/validation.json; whether it agrees is in the numbers",
+  "running": "the solve is in progress; no scores yet",
+  "pending": "not run yet",
+  "not comparable": "the engine cannot produce the measured quantity at the measured location: OpenLB at the resolution this hardware runs, FluidX3D without a ground wall function; the measurement behind each is on the Validation page"
+ },
+ "engines": [
+  {
+   "engine": "openfoam12-realizableKE",
+   "status": "pending"
+  },
+  {
+   "engine": "openlb",
+   "status": "pending"
+  },
+  {
+   "engine": "fluidx3d",
+   "status": "pending"
+  },
+  {
+   "engine": "ml-surrogate",
+   "status": "pending"
+  }
+ ],
+ "results": [],
+ "note": "No validation has been run for this case yet; results is an empty list. Nothing on this page is a claim about this case. Eddy3D's fixture for this case is written and its solves are queued; no result exists yet."
+}

@@ -1,15 +1,15 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/geometry-index.schema.json",
  "schema_version": "2.3.0",
- "data_version": "f079fcd55a7a51a9c0fb0f97aae6f941cbc6b52495b0f69934f4f6e770229e14",
+ "data_version": "9f4727b2432b495eb9d4bcdfeda3ab5c6ed726d4de450b71b449955800da3e42",
  "license": "CC-BY-4.0",
- "description": "Every cleaned STL, one entry per case and configuration. Each file is in its own case's frame and units — points.json of the same case lives in that frame — so they are deliberately not one scene: overlaid, the cases would stack at the origin, and Case E is full scale while A-D are model scale. geometry.zip holds the same files under archive_name.",
+ "description": "Every cleaned STL, one entry per case and configuration. Each file is in its own case's frame and units — points.json of the same case lives in that frame — so they are deliberately not one scene: overlaid, the cases would stack at the origin, and Cases E, F, G and M are full scale while the others are model scale. geometry.zip holds the same files under archive_name.",
  "archive": {
-  "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/geometry.zip?v=4093dfb56581",
+  "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/geometry.zip?v=83ab019751f8",
   "path": "geometry.zip",
   "media_type": "application/zip",
-  "bytes": 179295,
-  "sha256": "4093dfb565815a2ef93a885d864372418943bc33ddf3ef47ce2ccaf982ba3d35"
+  "bytes": 3043960,
+  "sha256": "83ab019751f80c51e5d5527f4504cfcc75124139f663be97d183580df778b969"
  },
  "files": [
   {
@@ -251,6 +251,246 @@
    "triangles": 8400,
    "watertight": false,
    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-e-before.png"
+  },
+  {
+   "case": "F",
+   "configuration": "default",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/geometry.stl?v=18bcb1a0bcb1",
+   "path": "cases/F/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 9255612,
+   "sha256": "18bcb1a0bcb1f9576241f5d501a8de8e06e493504fc9e66426d52f530871b16c",
+   "archive_name": "AIJ_caseF_default.stl",
+   "units": "metres (full scale)",
+   "frame": {
+    "origin": "centre of the reproduced district, tunnel floor plane",
+    "x": "+x EAST (full-scale metres)",
+    "y": "+y NORTH (compass rose in MP_caseF.png)",
+    "z": "+z up from the TUNNEL FLOOR; the readme's rule is ground = z - 10 m (the STL's terrain under the points is at z = 5 m)"
+   },
+   "bbox_min": [
+    -725.0,
+    -724.9976,
+    -0.0
+   ],
+   "bbox_max": [
+    725.0,
+    724.9984,
+    225.0
+   ],
+   "triangles": 53814,
+   "watertight": false,
+   "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-f.png"
+  },
+  {
+   "case": "G",
+   "configuration": "default",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/geometry.stl?v=09d23c794155",
+   "path": "cases/G/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1558,
+   "sha256": "09d23c79415538941986395e14fc0da1cae5326d2bcd53a773c811dedf9b5692",
+   "archive_name": "AIJ_caseG_default.stl",
+   "units": "metres (full scale)",
+   "frame": {
+    "origin": "the leeward face of the tree belt at ground level, on the vertical section through the belt's centre",
+    "x": "+x downwind: the belt occupies x in [-2, 0] m, the measurement lines lie behind it at x = 1.75 ... 35 m",
+    "y": "+y along the belt (y in [-37, 37] m); every point is on y = 0",
+    "z": "+z up; the belt spans z in [1.2, 7] m; points at z = 1.5, 3, 4.5, 6 m"
+   },
+   "bbox_min": [
+    -2.0,
+    -37.0,
+    1.2
+   ],
+   "bbox_max": [
+    0.0,
+    37.0,
+    7.0
+   ],
+   "triangles": 12,
+   "watertight": true,
+   "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-g.png"
+  },
+  {
+   "case": "H",
+   "configuration": "default",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/geometry.stl?v=4836687efff9",
+   "path": "cases/H/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1666,
+   "sha256": "4836687efff9d49c4c80e540dcec255ba78e3aef7a90679bee6a9945b0eea9e7",
+   "archive_name": "AIJ_caseH_default.stl",
+   "units": "metres (model scale)",
+   "frame": {
+    "origin": "the centre of the building's leeward face on the ground plane",
+    "x": "+x streamwise (the wind blows toward +x); the building spans x in [-0.1, 0]; points at x = -0.2 ... 0.4 m",
+    "y": "+y lateral; the building spans y in [-0.05, 0.05]; the z = 1/16 H plane covers y in [-0.2, 0.2]",
+    "z": "+z up; roof at z = 0.2 m; points at z = 0.01 ... 0.3 m"
+   },
+   "bbox_min": [
+    -0.1,
+    -0.05,
+    0.0
+   ],
+   "bbox_max": [
+    0.0,
+    0.05,
+    0.2
+   ],
+   "triangles": 12,
+   "watertight": true,
+   "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-h.png"
+  },
+  {
+   "case": "I",
+   "configuration": "default",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/geometry.stl?v=ff61cbb22798",
+   "path": "cases/I/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1738,
+   "sha256": "ff61cbb22798b0a8e10ed47f20da3cb2c7fa489e4483414cf9789364c47b659c",
+   "archive_name": "AIJ_caseI_default.stl",
+   "units": "metres (model scale)",
+   "frame": {
+    "origin": "the centre of the cube on the ground plane",
+    "x": "+x streamwise (the wind blows toward +x); the cube spans x in [-0.05, 0.05]; wind points x = -0.15 ... 0.25 m, concentration points x = 0.065 ... 2.7 m",
+    "y": "+y lateral; the cube spans y in [-0.05, 0.05]; concentration points reach |y| = 0.44 m on the ground",
+    "z": "+z up; roof at z = 0.1 m; the outlet at (0, 0, 0.1)"
+   },
+   "bbox_min": [
+    -0.05,
+    -0.05,
+    0.0
+   ],
+   "bbox_max": [
+    0.05,
+    0.05,
+    0.1
+   ],
+   "triangles": 12,
+   "watertight": true,
+   "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-i.png"
+  },
+  {
+   "case": "J",
+   "configuration": "default",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/geometry.stl?v=1bd33d8d3531",
+   "path": "cases/J/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1702,
+   "sha256": "1bd33d8d3531e7c9637e1b0bffa697a9193b502ec30333a59229afb75b09d5ef",
+   "archive_name": "AIJ_caseJ_default.stl",
+   "units": "metres (model scale)",
+   "frame": {
+    "origin": "the building's leeward (downwind) wall centre on the ground; x = 0 is the leeward wall",
+    "x": "+x streamwise (the wind blows toward +x); the building spans x in [-0.08, 0]; the floor source is at x = +0.04",
+    "y": "+y lateral; the building spans y in [-0.04, 0.04]; the z/H = 0.025 plane is measured on the y <= 0 side only",
+    "z": "+z up; roof at z = 0.16; heated floor at z = 0"
+   },
+   "bbox_min": [
+    -0.08,
+    -0.04,
+    0.0
+   ],
+   "bbox_max": [
+    0.0,
+    0.04,
+    0.16
+   ],
+   "triangles": 12,
+   "watertight": true,
+   "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-j.png"
+  },
+  {
+   "case": "K",
+   "configuration": "default",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/geometry.stl?v=f0f8a3adfa29",
+   "path": "cases/K/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 136698,
+   "sha256": "f0f8a3adfa290e86df4bf4f8efb5466cb1d8d3fd7424a24be80f39fd3370ce41",
+   "archive_name": "AIJ_caseK_default.stl",
+   "units": "metres (model scale)",
+   "frame": {
+    "origin": "bottom centre of the windward wall of the 4th row of the central column: x = 0 is that wall, y = 0 the centre line of the central column",
+    "x": "+x streamwise (the wind blows toward +x); row k spans x in [0.12 (k-4), 0.12 (k-4) + 0.06], so the array spans x in [-0.36, 0.66]",
+    "y": "+y lateral; column centres at y = 0, +-0.12, ... +-0.48 (the array spans y in [-0.51, 0.51])",
+    "z": "+z up; cube tops at z = 0.06"
+   },
+   "bbox_min": [
+    -0.36,
+    -0.51,
+    0.0
+   ],
+   "bbox_max": [
+    0.66,
+    0.51,
+    0.06
+   ],
+   "triangles": 972,
+   "watertight": true,
+   "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-k.png"
+  },
+  {
+   "case": "L",
+   "configuration": "default",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/geometry.stl?v=20864bc75187",
+   "path": "cases/L/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 213909,
+   "sha256": "20864bc7518792c737eb094c784508f259788d5835badf908edd2fe6ad044a3f",
+   "archive_name": "AIJ_caseL_default.stl",
+   "units": "metres (model scale)",
+   "frame": {
+    "origin": "bottom centre of the windward wall of the 9th row (of 14) of the central column: x = 0 is that wall, y = 0 the centre line of the central column",
+    "x": "+x streamwise (the wind blows toward +x); row k spans x in [0.12 (k-9), 0.12 (k-9) + 0.06], so the array spans x in [-0.96, 0.66]",
+    "y": "+y lateral; column centres at y = 0, +-0.12, ... +-0.48 (the array spans y in [-0.51, 0.51])",
+    "z": "+z up from the model floor; cube tops at z = 0.06; heated floor at z = 0"
+   },
+   "bbox_min": [
+    -0.96,
+    -0.51,
+    0.0
+   ],
+   "bbox_max": [
+    0.66,
+    0.51,
+    0.06
+   ],
+   "triangles": 1512,
+   "watertight": true,
+   "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-l.png"
+  },
+  {
+   "case": "M",
+   "configuration": "default",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/geometry.stl?v=cfc68cf63ea1",
+   "path": "cases/M/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 8474091,
+   "sha256": "cfc68cf63ea1b18cc44cb4b1b79a8cdb0506967983d23f2b31521c0a4d0f15ff",
+   "archive_name": "AIJ_caseM_default.stl",
+   "units": "metres (full scale)",
+   "frame": {
+    "origin": "centre of the tunnel turntable on the floor plane (ground surface there at z = 33.07 m)",
+    "x": "+x NORTH (full-scale metres)",
+    "y": "+y WEST (compass rose of MP_caseM.png: N at +x, W at +y); the frame is right-handed",
+    "z": "+z up from the TUNNEL FLOOR; the campus ground lies at z ~ 32 m"
+   },
+   "bbox_min": [
+    -540.0,
+    -360.0,
+    -0.0
+   ],
+   "bbox_max": [
+    540.0,
+    360.0,
+    64.9152
+   ],
+   "triangles": 43936,
+   "watertight": false,
+   "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-m.png"
   }
  ]
 }

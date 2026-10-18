@@ -77,6 +77,8 @@
      "engine": {
       "enum": [
        "openfoam12-realizableKE",
+       "openfoam12-kEpsilon",
+       "openfoam12-kOmegaSST",
        "openlb",
        "fluidx3d",
        "ml-surrogate"
@@ -114,6 +116,8 @@
      "engine": {
       "enum": [
        "openfoam12-realizableKE",
+       "openfoam12-kEpsilon",
+       "openfoam12-kOmegaSST",
        "openlb",
        "fluidx3d",
        "ml-surrogate"

@@ -4,7 +4,7 @@
  "info": {
   "title": "AIJ UWE benchmark — cleaned data API",
   "version": "2.3.0",
-  "summary": "Wind-tunnel reference data of the AIJ UWE benchmark (Cases A-E), cleaned, with Eddy3D's validation against it.",
+  "summary": "Wind-tunnel and field reference data of the AIJ UWE benchmark (Cases A-M), cleaned, with Eddy3D's validation against it.",
   "description": "Static files, one GET each; nothing is computed on request. Lengths in metres, velocities in m/s, variances and k in m^2/s^2, in one frame per case. Semantic versioning, twice. `versions.release` versions what is served (MAJOR: a file, field or column renamed or removed, or a unit or frame changed; MINOR: something added; PATCH: a value corrected). Every release is also a frozen copy of the whole API under `/api/<release>/` whose files never change (`release_base_url`; all releases in versions.json), and the unversioned /api/ paths always equal the newest release: pin an analysis to a release by using that release's base URL. `schema_version` versions this JSON contract: within a major version it only adds new fields, endpoints and runs, clients must ignore fields they do not know, and a field is renamed or removed only in a new major version, which the changelog names. `data_version` is a fingerprint, not a version: the SHA-256 of the served data. GitHub Pages sends JSON with a 10-minute max-age and CSV and ZIP files with a 186-day max-age. Every download URL therefore carries ?v=<first 12 hex digits of the file's SHA-256>: the server ignores the query, and a changed file gets a new URL. Fetch the JSON documents for the current URLs; check downloads against `sha256`.",
   "license": {
    "name": "Creative Commons Attribution 4.0 International",
@@ -28,7 +28,7 @@
   },
   {
    "name": "cases",
-   "description": "the five cases"
+   "description": "the 13 cases"
   },
   {
    "name": "points",
@@ -106,8 +106,8 @@
     "tags": [
      "cases"
     ],
-    "summary": "The five cases",
-    "description": "the five cases: id, title, frame, units, counts, engine status, links",
+    "summary": "Every case",
+    "description": "every case: id, title, frame, units, counts, engine status, links",
     "responses": {
      "200": {
       "description": "OK",
@@ -161,7 +161,15 @@
         "B",
         "C",
         "D",
-        "E"
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M"
        ]
       }
      }
@@ -204,7 +212,15 @@
         "B",
         "C",
         "D",
-        "E"
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M"
        ]
       }
      }
@@ -247,7 +263,15 @@
         "B",
         "C",
         "D",
-        "E"
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M"
        ]
       }
      },
@@ -300,7 +324,15 @@
         "B",
         "C",
         "D",
-        "E"
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M"
        ]
       }
      },
@@ -353,7 +385,15 @@
         "B",
         "C",
         "D",
-        "E"
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M"
        ]
       }
      }
@@ -396,7 +436,15 @@
         "B",
         "C",
         "D",
-        "E"
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M"
        ]
       }
      },
@@ -449,7 +497,15 @@
         "B",
         "C",
         "D",
-        "E"
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M"
        ]
       }
      },
@@ -516,7 +572,15 @@
         "B",
         "C",
         "D",
-        "E"
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M"
        ]
       }
      }
@@ -559,7 +623,15 @@
         "B",
         "C",
         "D",
-        "E"
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M"
        ]
       }
      },
@@ -572,6 +644,8 @@
        "type": "string",
        "enum": [
         "openfoam12-realizableKE",
+        "openfoam12-kEpsilon",
+        "openfoam12-kOmegaSST",
         "openlb",
         "fluidx3d",
         "ml-surrogate"
@@ -1266,7 +1340,7 @@
    },
    "Cases": {
     "title": "Case list",
-    "description": "The five cases with their frame, units, counts, engine status and links.",
+    "description": "Every case with its frame, units, counts, engine status and links.",
     "type": "object",
     "required": [
      "$schema",
@@ -1440,8 +1514,8 @@
         }
        }
       },
-      "minItems": 5,
-      "maxItems": 5
+      "minItems": 13,
+      "maxItems": 13
      }
     }
    },
@@ -2442,6 +2516,8 @@
         "engine": {
          "enum": [
           "openfoam12-realizableKE",
+          "openfoam12-kEpsilon",
+          "openfoam12-kOmegaSST",
           "openlb",
           "fluidx3d",
           "ml-surrogate"
@@ -2479,6 +2555,8 @@
         "engine": {
          "enum": [
           "openfoam12-realizableKE",
+          "openfoam12-kEpsilon",
+          "openfoam12-kOmegaSST",
           "openlb",
           "fluidx3d",
           "ml-surrogate"
@@ -2886,6 +2964,8 @@
         "id": {
          "enum": [
           "openfoam12-realizableKE",
+          "openfoam12-kEpsilon",
+          "openfoam12-kOmegaSST",
           "openlb",
           "fluidx3d",
           "ml-surrogate"
@@ -2953,6 +3033,8 @@
            "engine": {
             "enum": [
              "openfoam12-realizableKE",
+             "openfoam12-kEpsilon",
+             "openfoam12-kOmegaSST",
              "openlb",
              "fluidx3d",
              "ml-surrogate"
@@ -3043,8 +3125,8 @@
         }
        }
       },
-      "minItems": 5,
-      "maxItems": 5
+      "minItems": 13,
+      "maxItems": 13
      }
     }
    }

@@ -1,13 +1,23 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/validation-summary.schema.json",
  "schema_version": "2.3.0",
- "data_version": "f079fcd55a7a51a9c0fb0f97aae6f941cbc6b52495b0f69934f4f6e770229e14",
+ "data_version": "9f4727b2432b495eb9d4bcdfeda3ab5c6ed726d4de450b71b449955800da3e42",
  "license": "CC-BY-4.0",
  "description": "Every case and engine in one table. 'scored' means a run exists, not that it agrees: read the scores. Headline scores are the ones to quote; every score, the figures and the per-point pairs are in each case's validation.json.",
  "engines": [
   {
    "id": "openfoam12-realizableKE",
    "name": "OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor)",
+   "kind": "RANS"
+  },
+  {
+   "id": "openfoam12-kEpsilon",
+   "name": "OpenFOAM 12, standard k-epsilon (Eddy3D Outdoor)",
+   "kind": "RANS"
+  },
+  {
+   "id": "openfoam12-kOmegaSST",
+   "name": "OpenFOAM 12, k-omega SST (Eddy3D Outdoor)",
    "kind": "RANS"
   },
   {
@@ -1010,6 +1020,512 @@
        ]
       }
      ]
+    }
+   ]
+  },
+  {
+   "case": "F",
+   "title": "Case F — Shinjuku district",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F/validation.json",
+   "engines": [
+    {
+     "engine": "openfoam12-realizableKE",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "openlb",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "fluidx3d",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "ml-surrogate",
+     "status": "pending",
+     "runs": []
+    }
+   ]
+  },
+  {
+   "case": "G",
+   "title": "Case G — flow behind a tree belt",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/G/validation.json",
+   "engines": [
+    {
+     "engine": "openfoam12-realizableKE",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "openlb",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "fluidx3d",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "ml-surrogate",
+     "status": "pending",
+     "runs": []
+    }
+   ]
+  },
+  {
+   "case": "H",
+   "title": "Case H — 1:1:2 building with a floor point source",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/H/validation.json",
+   "engines": [
+    {
+     "engine": "openfoam12-realizableKE",
+     "status": "scored",
+     "runs": [
+      {
+       "run_id": "H.openfoam12-realizableKE",
+       "configuration": null,
+       "headline": [
+        {
+         "label": "U",
+         "score": "velocity.U",
+         "Count": 826,
+         "R": 0.8972143797853717,
+         "Fac2": 0.6089588377723971,
+         "Fb": 0.35501721117539775,
+         "HitRate": 0.44552058111380144
+        },
+        {
+         "label": "V",
+         "score": "velocity.V",
+         "Count": 826,
+         "R": 0.9350097549728007,
+         "Fac2": 0.35472154963680386,
+         "Fb": -0.43210355277034335,
+         "HitRate": 0.6815980629539952
+        },
+        {
+         "label": "W",
+         "score": "velocity.W",
+         "Count": 826,
+         "R": 0.8866053835783476,
+         "Fac2": 0.3135593220338983,
+         "Fb": 2.75797548450021,
+         "HitRate": 0.7130750605326877
+        },
+        {
+         "label": "k",
+         "score": "k",
+         "Count": 826,
+         "R": 0.10745631599590928,
+         "Fac2": 0.5702179176755447,
+         "Fb": 0.5144943755027755,
+         "HitRate": 0.3050847457627119
+        },
+        {
+         "label": "c*, Sct 0.3",
+         "score": "cstar.c_sct03",
+         "Count": 826,
+         "R": 0.9537051407716474,
+         "Fac2": 0.6937046004842615,
+         "Fb": -0.5969573220834277,
+         "HitRate": 0.4927360774818402
+        },
+        {
+         "label": "c*, Sct 0.5",
+         "score": "cstar.c_sct05",
+         "Count": 826,
+         "R": 0.9511168201940537,
+         "Fac2": 0.6150121065375302,
+         "Fb": -0.8253187222806306,
+         "HitRate": 0.5072639225181598
+        },
+        {
+         "label": "c*, Sct 0.7",
+         "score": "cstar.c_sct07",
+         "Count": 826,
+         "R": 0.9461587867020758,
+         "Fac2": 0.5883777239709443,
+         "Fb": -0.9343884717450233,
+         "HitRate": 0.4927360774818402
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "engine": "openlb",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "fluidx3d",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "ml-surrogate",
+     "status": "pending",
+     "runs": []
+    }
+   ]
+  },
+  {
+   "case": "I",
+   "title": "Case I — cube with a roof point source",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/I/validation.json",
+   "engines": [
+    {
+     "engine": "openfoam12-realizableKE",
+     "status": "scored",
+     "runs": [
+      {
+       "run_id": "I.openfoam12-realizableKE",
+       "configuration": null,
+       "headline": [
+        {
+         "label": "U",
+         "score": "velocity.U",
+         "Count": 91,
+         "R": 0.9984868695512156,
+         "Fac2": 0.8791208791208791,
+         "Fb": 0.020129686682940833,
+         "HitRate": 0.8131868131868132
+        },
+        {
+         "label": "V",
+         "score": "velocity.V",
+         "Count": 38,
+         "R": 0.9851271140402716,
+         "Fac2": 0.8947368421052632,
+         "Fb": -2.016400269766273,
+         "HitRate": 1.0
+        },
+        {
+         "label": "W",
+         "score": "velocity.W",
+         "Count": 91,
+         "R": 0.9721592227422619,
+         "Fac2": 0.6593406593406593,
+         "Fb": -0.04898869115650264,
+         "HitRate": 0.967032967032967
+        },
+        {
+         "label": "k",
+         "score": "k",
+         "Count": 91,
+         "R": 0.904703277584547,
+         "Fac2": 0.9230769230769231,
+         "Fb": 0.10601305733148972,
+         "HitRate": 0.5824175824175825
+        },
+        {
+         "label": "c*, Sct 0.3",
+         "score": "cstar.c_sct03",
+         "Count": 539,
+         "R": 0.9217997205024153,
+         "Fac2": 0.35992578849721707,
+         "Fb": 0.39812679709036825,
+         "HitRate": 0.10575139146567718
+        },
+        {
+         "label": "c*, Sct 0.5",
+         "score": "cstar.c_sct05",
+         "Count": 539,
+         "R": 0.9401587140933699,
+         "Fac2": 0.4749536178107607,
+         "Fb": 0.08289588929687729,
+         "HitRate": 0.28385899814471244
+        },
+        {
+         "label": "c*, Sct 0.7",
+         "score": "cstar.c_sct07",
+         "Count": 539,
+         "R": 0.9464657005792699,
+         "Fac2": 0.47680890538033394,
+         "Fb": -0.10041318754037104,
+         "HitRate": 0.2912801484230056
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "engine": "openfoam12-kEpsilon",
+     "status": "scored",
+     "runs": [
+      {
+       "run_id": "I.openfoam12-kEpsilon",
+       "configuration": null,
+       "headline": [
+        {
+         "label": "U",
+         "score": "velocity.U",
+         "Count": 91,
+         "R": 0.9903513310804983,
+         "Fac2": 0.8461538461538461,
+         "Fb": -0.0031817581159843725,
+         "HitRate": 0.7692307692307693
+        },
+        {
+         "label": "V",
+         "score": "velocity.V",
+         "Count": 38,
+         "R": 0.966416247478164,
+         "Fac2": 0.7894736842105263,
+         "Fb": -2.004968584198736,
+         "HitRate": 0.8947368421052632
+        },
+        {
+         "label": "W",
+         "score": "velocity.W",
+         "Count": 91,
+         "R": 0.9430921235170846,
+         "Fac2": 0.6153846153846154,
+         "Fb": 0.0797495528729898,
+         "HitRate": 0.9010989010989011
+        },
+        {
+         "label": "k",
+         "score": "k",
+         "Count": 91,
+         "R": 0.8703080010948288,
+         "Fac2": 0.9120879120879121,
+         "Fb": -0.0372199654722193,
+         "HitRate": 0.6373626373626373
+        },
+        {
+         "label": "c*, Sct 0.3",
+         "score": "cstar.c_sct03",
+         "Count": 539,
+         "R": 0.9375852419052121,
+         "Fac2": 0.44155844155844154,
+         "Fb": 0.30833102421746444,
+         "HitRate": 0.13358070500927643
+        },
+        {
+         "label": "c*, Sct 0.5",
+         "score": "cstar.c_sct05",
+         "Count": 539,
+         "R": 0.955336360337149,
+         "Fac2": 0.5194805194805194,
+         "Fb": -0.03525726028612643,
+         "HitRate": 0.3784786641929499
+        },
+        {
+         "label": "c*, Sct 0.7",
+         "score": "cstar.c_sct07",
+         "Count": 539,
+         "R": 0.9535769617702943,
+         "Fac2": 0.5194805194805194,
+         "Fb": -0.24845632613340116,
+         "HitRate": 0.287569573283859
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "engine": "openfoam12-kOmegaSST",
+     "status": "scored",
+     "runs": [
+      {
+       "run_id": "I.openfoam12-kOmegaSST",
+       "configuration": null,
+       "headline": [
+        {
+         "label": "U",
+         "score": "velocity.U",
+         "Count": 91,
+         "R": 0.9915701399809963,
+         "Fac2": 0.8791208791208791,
+         "Fb": 0.09107873765986048,
+         "HitRate": 0.8021978021978022
+        },
+        {
+         "label": "V",
+         "score": "velocity.V",
+         "Count": 38,
+         "R": 0.9680953631385582,
+         "Fac2": 0.7894736842105263,
+         "Fb": -1.9995607278368377,
+         "HitRate": 0.9210526315789473
+        },
+        {
+         "label": "W",
+         "score": "velocity.W",
+         "Count": 91,
+         "R": 0.9217770144325877,
+         "Fac2": 0.6153846153846154,
+         "Fb": -0.21430581925346667,
+         "HitRate": 0.8681318681318682
+        },
+        {
+         "label": "k",
+         "score": "k",
+         "Count": 91,
+         "R": 0.88027265288418,
+         "Fac2": 0.3956043956043956,
+         "Fb": 0.49453146467957676,
+         "HitRate": 0.26373626373626374
+        },
+        {
+         "label": "c*, Sct 0.3",
+         "score": "cstar.c_sct03",
+         "Count": 539,
+         "R": 0.5144804453831074,
+         "Fac2": 0.4322820037105751,
+         "Fb": -0.046546048926177676,
+         "HitRate": 0.23562152133580705
+        },
+        {
+         "label": "c*, Sct 0.5",
+         "score": "cstar.c_sct05",
+         "Count": 539,
+         "R": 0.46619380800851146,
+         "Fac2": 0.4025974025974026,
+         "Fb": -0.15289948863805058,
+         "HitRate": 0.20222634508348794
+        },
+        {
+         "label": "c*, Sct 0.7",
+         "score": "cstar.c_sct07",
+         "Count": 539,
+         "R": 0.43878721107437274,
+         "Fac2": 0.3803339517625232,
+         "Fb": -0.22124703934695145,
+         "HitRate": 0.19480519480519481
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "engine": "openlb",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "fluidx3d",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "ml-surrogate",
+     "status": "pending",
+     "runs": []
+    }
+   ]
+  },
+  {
+   "case": "J",
+   "title": "Case J — 1:1:2 building, non-isothermal",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/J/validation.json",
+   "engines": [
+    {
+     "engine": "openfoam12-realizableKE",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "openlb",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "fluidx3d",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "ml-surrogate",
+     "status": "pending",
+     "runs": []
+    }
+   ]
+  },
+  {
+   "case": "K",
+   "title": "Case K — 9 x 9 cube array, point source",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/K/validation.json",
+   "engines": [
+    {
+     "engine": "openfoam12-realizableKE",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "openlb",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "fluidx3d",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "ml-surrogate",
+     "status": "pending",
+     "runs": []
+    }
+   ]
+  },
+  {
+   "case": "L",
+   "title": "Case L — 9 x 14 cube array, line source, non-isothermal",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/L/validation.json",
+   "engines": [
+    {
+     "engine": "openfoam12-realizableKE",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "openlb",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "fluidx3d",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "ml-surrogate",
+     "status": "pending",
+     "runs": []
+    }
+   ]
+  },
+  {
+   "case": "M",
+   "title": "Case M — TPU Atsugi campus",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/validation.json",
+   "engines": [
+    {
+     "engine": "openfoam12-realizableKE",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "openlb",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "fluidx3d",
+     "status": "pending",
+     "runs": []
+    },
+    {
+     "engine": "ml-surrogate",
+     "status": "pending",
+     "runs": []
     }
    ]
   }

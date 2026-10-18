@@ -44,6 +44,8 @@
      "id": {
       "enum": [
        "openfoam12-realizableKE",
+       "openfoam12-kEpsilon",
+       "openfoam12-kOmegaSST",
        "openlb",
        "fluidx3d",
        "ml-surrogate"
@@ -111,6 +113,8 @@
         "engine": {
          "enum": [
           "openfoam12-realizableKE",
+          "openfoam12-kEpsilon",
+          "openfoam12-kOmegaSST",
           "openlb",
           "fluidx3d",
           "ml-surrogate"
@@ -201,8 +205,8 @@
      }
     }
    },
-   "minItems": 5,
-   "maxItems": 5
+   "minItems": 13,
+   "maxItems": 13
   }
  }
 }
