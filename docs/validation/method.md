@@ -25,6 +25,7 @@ coordinates**, so no interpolation enters the comparison.
 - Metrics per quantity: Pearson **R**; **FAC2**, the fraction of points within a factor of two; **FB**, the fractional
   bias 2(ō − p̄)/(ō + p̄), positive when the model is low; and the **hit rate**, the fraction within D = 0.25 relative
   or W = 0.05 U_H absolute. NMSE, NAD, MG, VG are in the API's `validation.json`.
+- Cases H and I add a tracer concentration. The measured C/c₀ is scored against the model's c\* = c U_H H²/Q at three turbulent Schmidt numbers, with one detection limit (10⁻³ of the largest measured value); see [Cases H and I]({{ '/validation/cases-hi/' | relative_url }}).
 - Case B's lateral velocity is sign-corrected before scoring (see [Known data issues]({{ '/known-data-issues/' | relative_url }})).
 - The reattachment length L_r behind the building is read from a wake line at ground level.
 
@@ -57,8 +58,9 @@ log-law inlet is least right. The fits are in `/api/cases/{id}.json` under `infl
 
 ## Reproducing the figures
 
-`validation/plot_cases_ab_openfoam.py` (Cases A and B), `validation/plot_case_c_openfoam.py` and `validation/plot_ml_surrogate.py` (UltraPlot)
-build the figures. The Eddy3D fixtures are `TestAijCaseAContainerE2E`, `TestAijCaseBContainerE2E`,
-`TestAijCaseC{0D,1D,2D}ContainerE2E` and `Outdoor.ML.Tests/TestAijSurrogateE2E`. The scores they wrote are
+`validation/plot_cases_ab_openfoam.py` (Cases A and B), `validation/plot_case_c_openfoam.py`, `validation/plot_cases_hi_openfoam.py`
+(Cases H and I) and `validation/plot_ml_surrogate.py` (UltraPlot) build the figures. The Eddy3D fixtures are
+`TestAijCaseAContainerE2E`, `TestAijCaseBContainerE2E`, `TestAijCaseC{0D,1D,2D}ContainerE2E`, `TestAijCaseHContainerE2E`,
+`TestAijCubeContainerE2E` and `Outdoor.ML.Tests/TestAijSurrogateE2E`. The scores they wrote are
 snapshotted in `validation/results/` with the per-point pairs beside them, and served unchanged by
 `/api/cases/{id}/validation.json`.

@@ -8,7 +8,7 @@ description: "What this site and repository are, how to cite the AIJ UWE benchma
 
 ## What this is
 
-Wind-tunnel reference data from the **AIJ UWE** (Architectural Institute of Japan, Urban Wind Environment)
+Wind-tunnel and field reference data from the **AIJ UWE** (Architectural Institute of Japan, Urban Wind Environment)
 benchmark, cleaned and packaged case by case, together with Eddy3D's validation against it. The cleaned tables
 re-release every case in one schema (SI units, one frame per case), regenerated from the published files by a
 checked, deterministic build. The same material is served as this website and as a [static API]({{ '/api-reference/' | relative_url }}).

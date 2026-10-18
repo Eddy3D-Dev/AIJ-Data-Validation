@@ -1,12 +1,14 @@
 ---
 title: "ML surrogate"
 parent: Validation
-nav_order: 7
+nav_order: 8
 summary: "the Wind Predictor against Cases A to E"
 description: "Eddy3D's ML wind surrogate (Wind Predictor, Yel-2.0) against the tunnel data of Cases A to E."
 ---
 
 # ML surrogate
+
+The surrogate has been run on Cases A to E. It has not been run on Cases F to M.
 
 <figure class="figure">
 <img src="{{ '/assets/figures/ml-surrogate-agreement.png' | relative_url }}" alt="Measured vs predicted, ML surrogate, Cases A–E">

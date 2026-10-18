@@ -49,10 +49,16 @@ An engine that is not *scored* has no result for that case, and nothing here inf
   [Reading]({{ '/validation/case-d/' | relative_url }}).
 - **Case E, OpenFOAM 12, wind from SW.** The absolute ratios are low and the cause is not established. The change the
   construction makes (after − before) has R = 0.84. [Reading]({{ '/validation/case-e/' | relative_url }}).
+- **Cases H and I, OpenFOAM 12.** Velocity is reproduced (R 0.90 to 1.00 for U), the tracer concentration is well
+  correlated (R 0.92 to 0.95) and its bias depends on the turbulent Schmidt number. k is poor in Case H (R 0.11). Case I
+  was also solved with standard k-ε and k-ω SST: the mean velocity does not tell the closures apart, k and the
+  concentration do. [Reading]({{ '/validation/cases-hi/' | relative_url }}).
 - **OpenLB and FluidX3D** are scored on Cases A and B only. On C to E each cannot produce the measured quantity at the
   measured height, which was measured rather than assumed. [Reading]({{ '/validation/engines/' | relative_url }}).
 - **The ML surrogate** predicts roughly half the tunnel's speed everywhere, and it does not respond to the wind
-  direction. [Reading]({{ '/validation/ml-surrogate/' | relative_url }}).
+  direction. It has been run on Cases A to E only. [Reading]({{ '/validation/ml-surrogate/' | relative_url }}).
+- **Cases F, G, J, K, L and M have no validation run yet.** Eddy3D's fixtures for them are written and their solves
+  are queued, so every engine is *pending* there; nothing on this site is a claim about them.
 
 Every case's scores, with the figures that show them, are on its own page: *Cases*, then the case, then
 *Validation*. The same scores are served by the API as `/api/validation.json` and `/api/cases/{id}/validation.json`.

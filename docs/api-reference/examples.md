@@ -94,14 +94,18 @@ The last line prints `R of U/U_H recomputed: 0.9548 published: 0.9548`.
 
 ## Geometry conventions
 
-- Metres. A–D are model scale, the scale the tunnel measured at. E is full scale, the scale of its 3dm and
-  workbook. `units` in `geometry.json` states which.
-- The origin is the building centre (A, B) or the array centre (C, D) on the ground plane. For E it is the centre
-  of the reproduced area.
-- +x runs along the wind at WD = 0 for A–D. E keeps its geographic frame (+x east, +y north), and its directions
-  are meteorological: the direction the wind comes **from**, N = 0°, clockwise.
-- Outward normals, LF line endings, one `solid` per file. A–D are watertight; E's buildings touch, so its shells
-  share edges and are not.
+- Metres. A–D and H–L are model scale, the scale the tunnel measured at. E, F, G and M are full scale: E at the scale
+  of its 3dm and workbook, F and M (measured at 1:800 and 1:600) scaled up, G a field observation. `units` in
+  `geometry.json` states which.
+- The origin is a point of each case's own: the building centre (A, B), the array centre (C, D), the centre of the
+  reproduced area (E, F), the leeward face of the belt (G) or of the building (H, J), the cube's centre (I), a cube of
+  the array (K, L) or the turntable's centre (M). `frame.origin` in the case document names it. In F and M the
+  heights are above the tunnel floor, not the ground.
+- +x runs along the wind at WD = 0 for A–D and H–L, and downwind for G. E and F keep their geographic frame (+x east,
+  +y north), and their directions are meteorological: the direction the wind comes **from**, N = 0°, clockwise.
+  M's frame is +x north, +y west.
+- Outward normals, LF line endings, one `solid` per file. A–D and G–L are watertight; E's buildings touch, so its
+  shells share edges; F's terrain is open along its rim; M's STL has open edges.
 - The build checks every STL: triangle count, edge-manifold census, and the bounding box against the stated
   dimensions. `validation/render_geometry.py` draws each one from the same code that writes it, and those are the
   renders on the case pages.

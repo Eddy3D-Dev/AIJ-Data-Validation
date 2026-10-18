@@ -21,15 +21,18 @@ names in `$schema`.
    `/api/versions.json` lists every release with the `base_url` of its frozen copy (see the first rule below).
 2. **`GET /api/cases.json`**: every case with its frame, units, counts, engine status and links. Pick an `id`.
 3. **`GET /api/cases/{id}.json`**: read `frame`, `units` and `known_issues` **before** the numbers, because they
-   differ per case. A–D are model-scale metres with +x along the wind. E is full-scale metres, +x east, +y north,
-   with meteorological directions. `configurations` lists the values `config`, `wind_direction_deg` and `instrument`
-   take in the point table.
+   differ per case. A–D and H–L are model-scale metres with +x along the wind. E, F, G and M are full-scale metres: E and
+   F with +x east, +y north and meteorological directions, G with +x downwind, M with +x north and +y west.
+   `configurations` lists the values `config`, `campaign`, `instrument`, `run` and `wind_direction_deg` take in the
+   point table.
 4. **`GET /api/cases/{id}/points.json`** (or the `points.csv` download): every value is SI (m, m/s, m²/s²), in one
    frame per case. Unmeasured values are `null` (an empty cell in CSV). `columns` lists the fields present, and
    `column_meaning` defines each. Case E's quantity is a dimensionless `velocity_ratio` (Vs / U(15.9 m), with
-   U(15.9 m) = 3.935 m/s).
+   U(15.9 m) = 3.935 m/s); Cases F and G are ratios too (`velocity_ratio`, `k_ratio`), against a reference stated in the case's
+   `normalisation`. Cases H to M add a tracer concentration `C` in ppm, with `concentration_ratio` normalised as
+   the case states, and J and L add temperature and turbulent fluxes.
 5. **`GET /api/cases/{id}/geometry.json`**, then the STL it links: metres, outward normals, origin at the building or
-   array centre. Where the geometry is boxes (A–D), the JSON carries the box list, so you need not parse STL.
+   array centre. Where the geometry is boxes (A–D and G–L), the JSON carries the box list, so you need not parse STL.
 6. **`GET /api/validation.json`**: every case and engine in one table. **An engine whose status is not `scored` has
    no result for that case; do not infer one.** `scored` means a run exists, not that it agrees. For one case in
    full, `GET /api/cases/{id}/validation.json`: every score, the `headline` scores to quote, the figures, and
@@ -43,9 +46,13 @@ names in `$schema`.
   release, while a release's copy never changes and every API URL inside its documents points back into it. Quote the
   release number together with `data_version`. If a release lists `self_contained: false`, its documents link outside
   its copy: build its URLs from `base_url` and the `path` in its `index.json`.
-- Normalise by the case's own U_H (`configuration.U_H_m_s`), or for Case E by U(15.9 m); normalise k by U_H².
-- Compare a thermistor quantity (C, D, E: `Vs`, `velocity_ratio`) against the bracket |U| ≤ Vs ≤ √(|U|² + 2k), not
+- Normalise by the case's own U_H (`configuration.U_H_m_s`), or for Case E by U(15.9 m); normalise k by U_H². Cases F
+  and G are published as ratios already: read their `normalisation` before comparing.
+- Compare a thermistor quantity (C, D, E, F: `Vs`, `velocity_ratio`) against the bracket |U| ≤ Vs ≤ √(|U|² + 2k), not
   against |U| alone.
+- Compare a concentration through `concentration_ratio` and the case's own `normalisation` (c₀ is defined per case, and in
+  Case K the workbook and the data paper use different reference scales). Case M's tunnel and field rows are two
+  campaigns: filter on `campaign`.
 - Probe at the published coordinates; never interpolate the reference.
 - The served tables already apply each case's corrections: Case B's V is sign-unified and its coordinates are in
   metres. Do not apply those corrections a second time when starting from the raw files.

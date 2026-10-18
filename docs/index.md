@@ -1,14 +1,14 @@
 ---
 title: "Home"
 nav_order: 1
-description: "Wind-tunnel reference data from the Architectural Institute of Japan Urban Wind Environment benchmark, cleaned case by case, with Eddy3D's validation against it and a static API."
+description: "Wind-tunnel and field reference data from the Architectural Institute of Japan Urban Wind Environment benchmark, Cases A to M, cleaned case by case, with Eddy3D's validation against it and a static API."
 ---
 
 # AIJ UWE benchmark
 {: .no_toc }
 
-Wind-tunnel reference data from the **AIJ UWE** (Architectural Institute of Japan, Urban Wind Environment) benchmark,
-cleaned and packaged case by case, with Eddy3D's validation against it.
+Wind-tunnel and field reference data from the **AIJ UWE** (Architectural Institute of Japan, Urban Wind Environment)
+benchmark, Cases A to M, cleaned and packaged case by case, with Eddy3D's validation against it where it exists.
 {: .fs-6 .fw-300 .lede }
 
 [Browse the cases]({{ '/cases/' | relative_url }}){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Use the API]({{ '/api-reference/' | relative_url }}){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 } [Data paper (DOI)](https://doi.org/10.1002/2475-8876.70083){: .btn .fs-5 .mb-4 .mb-md-0 }

@@ -15,12 +15,12 @@ site API (`clean/manifest.json` → `cases.<id>.files.points_csv`).
 | column | type | unit | meaning |
 |---|---|---|---|
 | `case_id` | text | — | `A` … `M` |
-| `config` | text | — | `default` (A, B, D) · C: centre building `0D` / `1D` / `2D` · E: `bc` before / `ac` after construction |
-| `instrument` | text | — | `split_fibre` (hot-wire split-fibre probe: vector components) · `thermistor` (omnidirectional scalar speed) |
+| `config` | text | — | `default` (every case but C, E and F) · C: centre building `0D` / `1D` / `2D` · E: `bc` before / `ac` after construction · F: `default` (the 9 m tunnel plane and the field) and `h5` / `h20` (the tunnel's 5 m and 20 m planes) |
+| `instrument` | text | — | `split_fibre` (hot-wire split-fibre probe: vector components) · `thermistor` (omnidirectional scalar speed) · and, for Cases F to M, `cup_anemometer`, `sonic_anemometer`, `ldv`, `hydrocarbon_analyser`, `sorbent_gc_ecd` (the section for each case says which) |
 | `point_id` | int | — | the tunnel's own point number (`No.`); shared by every configuration and direction of a case |
-| `wind_direction_deg` | float | deg | A–D: the AIJ turntable angle WD (0 = flow along +x). E: meteorological FROM-direction, clockwise from north (N = 0, E = 90). **Do not turn this into a vector yourself — read `flow_dir_x/y` from `directions.csv`.** |
-| `wind_direction` | text | — | compass name (E only; empty elsewhere) |
-| `x` `y` `z` | float | m | case frame, section 2. Model-scale metres for A–D, FULL-scale metres for E |
+| `wind_direction_deg` | float | deg | A–D and G–L: the AIJ turntable angle WD (0 = flow along +x; G–L have only 0). E and F: meteorological FROM-direction, clockwise from north (N = 0, E = 90). M: the direction the wind comes FROM in the case's frame (+x north; 180° blows toward +x), a field run's own WD_R. **Do not turn this into a vector yourself — read `flow_dir_x/y` from `directions.csv`.** |
+| `wind_direction` | text | — | compass name (E and F; empty elsewhere) |
+| `x` `y` `z` | float | m | case frame, section 2. Model-scale metres for A–D and H–L, FULL-scale metres for E, F, G and M |
 | `U` `V` `W` | float | m/s | mean velocity along +x, +y, +z. **V is positive toward +y in every case** (B's published sign is flipped) |
 | `uu` `vv` `ww` | float | m²/s² | velocity variances ⟨u′u′⟩ … (A publishes rms; squared here) |
 | `k` | float | m²/s² | turbulent kinetic energy as published (= ½(uu+vv+ww) wherever all three exist — checked) |
@@ -44,7 +44,7 @@ Rules:
 - The key `(case_id, config, instrument, point_id, wind_direction_deg)` is unique. Case B's seven
   repeat measurements keep their own point numbers (README, B).
 - Rows are sorted by `(config, instrument, wind_direction_deg, point_id)` within a case; cases in
-  order A–E. Floats are written with `%.10g`; coordinates and variances are rounded to 1e-9.
+  order A–M. Floats are written with `%.10g`; coordinates and variances are rounded to 1e-9.
 - A *derived* quantity the source publishes beside measured ones is dropped, not carried: Case D's
   split-fibre "Vs" / "Scalar Vel." (= √(U²+V²+W²), checked to 1e-15) and "Vs/UH"; Case B's
   "1/4 power" fit column. Everything else published is here.
@@ -70,7 +70,7 @@ the same transform; V is flipped so the coordinates stay the drawing's.
 
 Why E keeps a geographic frame: the district is real, its points and its STL are published in
 east/north coordinates, and its 16 directions are compass names. "+x along the wind" is a property
-of A–D only.
+of A–D and G–L only (E and F are geographic, M is +x north).
 
 ### Wind direction → flow vector (`directions.csv`)
 
@@ -101,7 +101,7 @@ that matter) and a power-law fit — reproduced in `build.py`, never typed in.
 
 ASCII STL, LF line endings, outward normals, **metres in the same frame as the points** (so the E
 files are full-scale and ~400 m across). `geometry.json` lists each file, its provenance, triangle
-count, bounding box, watertightness, and — for A–D — the axis-aligned boxes it is made of, so a
+count, bounding box, watertightness, and — for A–D and G–L — the axis-aligned boxes it is made of, so a
 consumer need not parse an STL at all.
 
 | case | files | made from |
@@ -235,13 +235,13 @@ for G (`unverified`: the field wind's angle to the belt is not published).
 | `sonic_anemometer` | G | three-dimensional ultrasonic anemometer; the published quantity is the mean scalar speed |
 | `split_fibre` | H | hot-wire split-fibre probe: U, V, W, uu, vv, ww, k (as in A, B, D) |
 | `ldv` | I | laser Doppler anemometer: U, V, W, k |
-| `hydrocarbon_analyzer` | H, I | high-speed total hydrocarbon analyser: C, c_rms (H only), concentration_ratio |
+| `hydrocarbon_analyser` | H, I | high-speed total hydrocarbon analyser: C, c_rms (H only), concentration_ratio |
 
 ### Rows and point numbers
 
 - **G**: 28 rows, `point_id` = the row order of `RS_caseG.csv` (the file has no numbers). `campaign` = `field`. Only `velocity_ratio` and `k_ratio` are filled.
-- **H**: one row per (instrument, point) with `point_id` = the CSV's `No.` (1-876): 826 `split_fibre` rows and 826 `hydrocarbon_analyzer` rows. The CSV's -999.9 marks the line a probe was not run on: concentration only at x = 0.38 m (50 points), velocity only at x = 0.40 m (50 points); none is inside the building. `uu`, `vv`, `ww` are (rms × uH)².
-- **I**: two point sets with no numbers, **stacked**: `ldv` rows numbered 1-91 and `hydrocarbon_analyzer` rows 92-630, each in its CSV's row order, so a `point_id` names one location (17 locations have both; they stay two rows). Only k is published, no variances.
+- **H**: one row per (instrument, point) with `point_id` = the CSV's `No.` (1-876): 826 `split_fibre` rows and 826 `hydrocarbon_analyser` rows. The CSV's -999.9 marks the line a probe was not run on: concentration only at x = 0.38 m (50 points), velocity only at x = 0.40 m (50 points); none is inside the building. `uu`, `vv`, `ww` are (rms × uH)².
+- **I**: two point sets with no numbers, **stacked**: `ldv` rows numbered 1-91 and `hydrocarbon_analyser` rows 92-630, each in its CSV's row order, so a `point_id` names one location (17 locations have both; they stay two rows). Only k is published, no variances.
 - Locations measured twice keep one row each under their own number: H's y = 0, z = 0.1 m line (13 locations; exact copies once V's sign is aligned), I's 13 ground-centreline concentration points (values up to 8.5 % apart).
 - The tables carry the **legacy workbooks' values** at full precision, not the CSVs' (H: the CSV quantises two planes, see `QUESTIONS.md` QH2; I: 3 dp and 1 dp). The CSVs are cross-checked to their own rounding.
 

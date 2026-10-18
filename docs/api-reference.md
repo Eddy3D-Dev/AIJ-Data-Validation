@@ -114,9 +114,9 @@ new URL, so no cache can serve a stale copy. GitHub Pages caches CSV and ZIP fil
 documents give, and check what you download against `sha256`. `index.json` lists every file in the API this way.
 
 **Units and frames.** SI throughout: m, m/s, m²/s². Each case has one frame, and its `points.json` and STL files
-share it. A–D are model-scale metres with +x along the wind at WD = 0. E is full-scale metres with +x east, +y north,
-and meteorological wind directions. Read `frame`, `units` and `known_issues` in `cases/{id}.json` before using any
-number.
+share it. A–D and H–L are model-scale metres with +x along the wind at WD = 0. E, F, G and M are full-scale metres: E and F
+with +x east, +y north and meteorological wind directions, G with +x downwind, M with +x north and +y west. Read `frame`,
+`units` and `known_issues` in `cases/{id}.json` before using any number.
 
 **Templated endpoints.** Paths such as `cases/{id}.json` and `schemas/{name}.schema.json` are templates, not
 URLs to fetch. In `index.json` such an endpoint says `templated: true` and lists every concrete file under
@@ -144,14 +144,14 @@ certificate type. The body is ASCII STL regardless; read it as such.
 | `GET /api/cases/{id}/points.json` | the cleaned measurement table: SI units, one frame, `null` where not measured; `columns` and `column_meaning` define each field |
 | `GET /api/cases/{id}/points.csv` | the same table as CSV (an empty cell is `null`) |
 | `GET /api/cases/{id}/approach_flow.csv` | the measured approach-flow profile: `z` (m), `U` (m/s), and `k` (m²/s²) or `u_rms` (m/s) where published |
-| `GET /api/cases/{id}/geometry.json` | the case's STL files with statistics (triangles, bounding box, edge-manifold census), renders and captions, and the **box list** where the geometry is boxes (A–D) |
+| `GET /api/cases/{id}/geometry.json` | the case's STL files with statistics (triangles, bounding box, edge-manifold census), renders and captions, and the **box list** where the geometry is boxes (A–D and G–L) |
 | `GET /api/cases/{id}/geometry.stl` | cleaned ASCII STL of the default configuration: metres, case frame, outward normals |
 | `GET /api/cases/{id}/geometry_{configuration}.stl` | the other configurations: `C/geometry_0D.stl` and `C/geometry_1D.stl` (`geometry.stl` is 2D); `E/geometry_bc.stl`, before construction (`geometry.stl` is after construction) |
 | `GET /api/cases/{id}/validation.json` | Eddy3D's scores per engine and run. Each result carries every score, the `headline` scores to quote, captioned figures, the reproducing fixture, and `pairs` |
 | `GET /api/cases/{id}/pairs/{engine}.csv` | the measured and modelled value at every scored point of one engine's runs, so any score can be recomputed; each result's `pairs_columns` defines the columns |
 | [`GET /api/validation.json`]({{ '/api/validation.json' | relative_url }}) | every case and engine in one table: status, runs, and each run's headline R, FAC2, FB and hit rate |
 | [`GET /api/geometry.json`]({{ '/api/geometry.json' | relative_url }}) | every STL of every case in one list: case, configuration, units, frame, bounding box, size, SHA-256 |
-| [`GET /api/geometry.zip`]({{ '/api/geometry.zip' | relative_url }}) | every STL in one archive. Each file keeps its own case's frame and units, so they are deliberately not one scene: overlaid they would stack at the origin, E is full scale while A–D are model scale, and C's three centre blocks and E's two states are alternatives, not neighbours |
+| [`GET /api/geometry.zip`]({{ '/api/geometry.zip' | relative_url }}) | every STL in one archive. Each file keeps its own case's frame and units, so they are deliberately not one scene: overlaid they would stack at the origin, E, F, G and M are full scale while the others are model scale, and C's three centre blocks and E's two states are alternatives, not neighbours |
 | `GET /api/schemas/{name}.schema.json` | the JSON Schema of each document: `index`, `versions`, `cases`, `case`, `points`, `geometry`, `validation`, `validation-summary`, `geometry-index` |
 | [`GET /api/openapi.json`]({{ '/api/openapi.json' | relative_url }}) | OpenAPI 3.1 description of every endpoint, with the schemas embedded |
 | [`GET /api/llms.txt`]({{ '/api/llms.txt' | relative_url }}) | plain-text entry point for agents (also at [`/llms.txt`]({{ '/llms.txt' | relative_url }})) |
@@ -169,8 +169,16 @@ An engine that is not `scored` has no result for that case.
 | A | 186 rows: U, V, W, uu, vv, ww, k (variances; metres) | 1 box, 12 triangles: 0.08 × 0.08 × 0.16 m | OpenFOAM 12 realizable k-ε; OpenLB at dx = 1.6 m; FluidX3D at H/64; ML surrogate |
 | B | 224 rows: U, V, W, uu, vv, ww, k (converted from mm; V sign-unified to +y) | 1 box, 12 triangles: 0.05 × 0.20 × 0.20 m | OpenFOAM 12 realizable k-ε; OpenLB at dx = 1.6 m; FluidX3D at H/64; ML surrogate |
 | C | 1,080 rows: Vs over 9 configurations (`config` 0D/1D/2D × `wind_direction_deg` 0/22.5/45) | 3 STLs (0D: 8 cubes; 1D, 2D: 9 boxes) with box lists | OpenFOAM 12 realizable k-ε, each configuration (√(\|U\|²+2k) and \|U\| at each wind direction); ML surrogate |
-| D | 267 rows: 234 thermistor (78 points × 3 directions, 36 unmeasured) and 33 split-fibre with U, V, W, uu, vv, ww, k | 83 boxes, 996 triangles, watertight, rebuilt from the shipped STL | ML surrogate; OpenFOAM solving |
+| D | 267 rows: 234 thermistor (78 points × 3 directions, 36 unmeasured) and 33 split-fibre with U, V, W, uu, vv, ww, k | 83 boxes, 996 triangles, watertight, rebuilt from the shipped STL | OpenFOAM 12 realizable k-ε at WD 0°, 22.5° and 45°; ML surrogate |
 | E | 2,560 rows: velocity ratio over `config` bc/ac × 16 directions × 80 points; full-scale metres | 2 STLs from the 3dm (before: 8,400 triangles; after: 8,436), outward-oriented; not watertight (touching buildings share edges) | OpenFOAM 12 realizable k-ε, wind from SW, before and after; ML surrogate |
+| F | 472 rows: `velocity_ratio` and `velocity_ratio_sd` at 13 points: 264 tunnel thermistor rows (planes at 5, 9 and 20 m) and 208 field cup-anemometer rows (`campaign`); full-scale metres | 1 STL, 53,814 triangles: terrain and buildings, outward-oriented, open along the rim | none yet: every engine pending |
+| G | 28 rows: `velocity_ratio` and `k_ratio` (sonic anemometers in the field; no speed in m/s is published) | 1 box, 12 triangles: the tree belt's 2 × 74 × 7 m envelope with its 1.2 m gap | none yet: every engine pending |
+| H | 1,652 rows: 826 split-fibre rows (U, V, W, uu, vv, ww, k) and 826 hydrocarbon-analyser rows (`C`, `c_rms`, `concentration_ratio`) | 1 box, 12 triangles: 0.10 × 0.10 × 0.20 m | OpenFOAM 12 realizable k-ε (velocity, k and c\*) |
+| I | 630 rows: 91 LDV rows (U, V, W, k) and 539 hydrocarbon-analyser rows (`C`, `concentration_ratio`) | 1 box, 12 triangles: the 0.1 m cube | OpenFOAM 12 under realizable k-ε, standard k-ε and k-ω SST |
+| J | 444 rows: U, V, W, variances, k, concentration, temperature and their turbulent fluxes | 1 box, 12 triangles: 0.08 × 0.08 × 0.16 m | none yet: every engine pending |
+| K | 203 rows: U, V, W, variances, k and concentration | 81 cubes, 972 triangles, watertight | none yet: every engine pending |
+| L | 344 rows: as J, with the Reynolds shear stresses and concentration fluxes | 126 cubes, 1,512 triangles, watertight | none yet: every engine pending |
+| M | 330 rows: 15 tunnel split-fibre rows, 45 tunnel hydrocarbon-analyser rows and 270 field sorbent-tube rows (`campaign`, `run`); full-scale metres | 1 STL, 43,936 triangles: the campus, outward-oriented, open edges | none yet: every engine pending |
 
 Examples in `curl` and Python are on the [Examples]({{ '/api-reference/examples/' | relative_url }}) page; the
 versions, the changelog and how the files are regenerated are under [Versions and changes]({{ '/api-reference/versions/' | relative_url }}).
