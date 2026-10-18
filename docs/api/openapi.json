@@ -3,9 +3,9 @@
  "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
  "info": {
   "title": "AIJ UWE benchmark — cleaned data API",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "summary": "Wind-tunnel reference data of the AIJ UWE benchmark (Cases A-E), cleaned, with Eddy3D's validation against it.",
-  "description": "Static files, one GET each; nothing is computed on request. Lengths in metres, velocities in m/s, variances and k in m^2/s^2, in one frame per case. Semantic versioning, twice. `versions.release` versions what is served (MAJOR: a file, field or column renamed or removed, or a unit or frame changed; MINOR: something added; PATCH: a value corrected), and every release is a tag whose files never change: `release.base_url`. `schema_version` versions this JSON contract: within a major version it only adds new fields, endpoints and runs, clients must ignore fields they do not know, and a field is renamed or removed only in a new major version, which the changelog names. `data_version` is a fingerprint, not a version: the SHA-256 of the served data. GitHub Pages sends JSON with a 10-minute max-age and CSV and ZIP files with a 186-day max-age. Every download URL therefore carries ?v=<first 12 hex digits of the file's SHA-256>: the server ignores the query, and a changed file gets a new URL. Fetch the JSON documents for the current URLs; check downloads against `sha256`.",
+  "description": "Static files, one GET each; nothing is computed on request. Lengths in metres, velocities in m/s, variances and k in m^2/s^2, in one frame per case. Semantic versioning, twice. `versions.release` versions what is served (MAJOR: a file, field or column renamed or removed, or a unit or frame changed; MINOR: something added; PATCH: a value corrected). Every release is also a frozen copy of the whole API under `/api/<release>/` whose files never change (`release_base_url`; all releases in versions.json), and the unversioned /api/ paths always equal the newest release: pin an analysis to a release by using that release's base URL. `schema_version` versions this JSON contract: within a major version it only adds new fields, endpoints and runs, clients must ignore fields they do not know, and a field is renamed or removed only in a new major version, which the changelog names. `data_version` is a fingerprint, not a version: the SHA-256 of the served data. GitHub Pages sends JSON with a 10-minute max-age and CSV and ZIP files with a 186-day max-age. Every download URL therefore carries ?v=<first 12 hex digits of the file's SHA-256>: the server ignores the query, and a changed file gets a new URL. Fetch the JSON documents for the current URLs; check downloads against `sha256`.",
   "license": {
    "name": "Creative Commons Attribution 4.0 International",
    "identifier": "CC-BY-4.0"
@@ -13,7 +13,8 @@
  },
  "servers": [
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api"
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api",
+   "description": "the latest release"
   },
   {
    "url": "https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/main/docs/api",
@@ -67,6 +68,37 @@
      }
     }
    }
+  },
+  "/versions.json": {
+   "get": {
+    "operationId": "getVersions",
+    "tags": [
+     "discovery"
+    ],
+    "summary": "Every release, newest first",
+    "description": "every release, newest first: version, date, status (latest or superseded), schema and data version, base URL, tag, changelog; always at the unversioned /api/ path",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Versions"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    }
+   },
+   "servers": [
+    {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api",
+     "description": "the unversioned alias; versions.json is not copied into release trees"
+    }
+   ]
   },
   "/cases.json": {
    "get": {
@@ -680,6 +712,7 @@
        "type": "string",
        "enum": [
         "index",
+        "versions",
         "cases",
         "case",
         "points",
@@ -767,6 +800,9 @@
      "license",
      "name",
      "base_url",
+     "tree",
+     "release_base_url",
+     "versions_url",
      "versions",
      "endpoints",
      "case_ids",
@@ -801,11 +837,32 @@
      },
      "base_url": {
       "type": "string",
-      "format": "uri"
+      "format": "uri",
+      "description": "the root of this tree: every URL in the tree's documents starts with it"
+     },
+     "tree": {
+      "enum": [
+       "release",
+       "latest"
+      ],
+      "description": "'release': a frozen copy of one release under `/api/<release>/`, which never changes; 'latest': the unversioned `/api/` alias, which always equals the newest release"
+     },
+     "release_base_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "the frozen copy of `versions.release`: equal to base_url in a release tree, the pinned address of this release in the latest alias"
+     },
+     "versions_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "versions.json, the list of every release (always at the unversioned /api/ path)"
      },
      "fallback_base_url": {
       "type": "string",
       "format": "uri"
+     },
+     "fallback_note": {
+      "type": "string"
      },
      "repository": {
       "type": "string",
@@ -872,7 +929,8 @@
        },
        "base_url": {
         "type": "string",
-        "format": "uri"
+        "format": "uri",
+        "description": "the raw files of this release's frozen copy, at the release tag"
        },
        "changelog": {
         "type": "string",
@@ -1076,6 +1134,133 @@
         "type": "string"
        }
       }
+     }
+    }
+   },
+   "Versions": {
+    "title": "Release list",
+    "description": "Every release of the data and API, newest first, with the address of its files.",
+    "type": "object",
+    "required": [
+     "$schema",
+     "schema_version",
+     "data_version",
+     "license",
+     "latest",
+     "latest_base_url",
+     "versions"
+    ],
+    "properties": {
+     "$schema": {
+      "type": "string",
+      "format": "uri"
+     },
+     "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "the API's version (semantic versioning); see index.json changelog"
+     },
+     "data_version": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 over every served measurement, geometry and score file; changes when, and only when, the data does"
+     },
+     "license": {
+      "const": "CC-BY-4.0",
+      "description": "SPDX identifier of the data's licence"
+     },
+     "description": {
+      "type": "string"
+     },
+     "latest": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$",
+      "description": "the newest release; the unversioned /api/ paths equal it"
+     },
+     "latest_base_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "the unversioned alias of the newest release"
+     },
+     "versions": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "version",
+        "date",
+        "status",
+        "schema_version",
+        "data_version",
+        "base_url",
+        "index_url",
+        "self_contained",
+        "tag",
+        "tag_url",
+        "changelog_url"
+       ],
+       "properties": {
+        "version": {
+         "type": "string",
+         "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+        },
+        "date": {
+         "type": "string",
+         "format": "date"
+        },
+        "status": {
+         "enum": [
+          "latest",
+          "superseded"
+         ]
+        },
+        "schema_version": {
+         "type": "string",
+         "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "data_version": {
+         "type": "string",
+         "pattern": "^[0-9a-f]{64}$"
+        },
+        "base_url": {
+         "type": "string",
+         "format": "uri",
+         "description": "where this release's files are frozen: GET base_url + a path from its index.json"
+        },
+        "index_url": {
+         "type": "string",
+         "format": "uri",
+         "description": "the index.json of this release"
+        },
+        "fallback_base_url": {
+         "type": [
+          "string",
+          "null"
+         ],
+         "format": "uri"
+        },
+        "self_contained": {
+         "type": "boolean",
+         "description": "true if every URL to a file of the API inside this release's documents points back into base_url (versions.json, served only at the unversioned path, aside)"
+        },
+        "note": {
+         "type": "string"
+        },
+        "tag": {
+         "type": "string",
+         "pattern": "^v\\d+\\.\\d+\\.\\d+$"
+        },
+        "tag_url": {
+         "type": "string",
+         "format": "uri"
+        },
+        "changelog_url": {
+         "type": "string",
+         "format": "uri"
+        }
+       }
+      },
+      "minItems": 1
      }
     }
    },

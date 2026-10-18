@@ -1,0 +1,3053 @@
+{
+ "openapi": "3.1.0",
+ "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
+ "info": {
+  "title": "AIJ UWE benchmark — cleaned data API",
+  "version": "2.3.0",
+  "summary": "Wind-tunnel reference data of the AIJ UWE benchmark (Cases A-E), cleaned, with Eddy3D's validation against it.",
+  "description": "Static files, one GET each; nothing is computed on request. Lengths in metres, velocities in m/s, variances and k in m^2/s^2, in one frame per case. Semantic versioning, twice. `versions.release` versions what is served (MAJOR: a file, field or column renamed or removed, or a unit or frame changed; MINOR: something added; PATCH: a value corrected). Every release is also a frozen copy of the whole API under `/api/<release>/` whose files never change (`release_base_url`; all releases in versions.json), and the unversioned /api/ paths always equal the newest release: pin an analysis to a release by using that release's base URL. `schema_version` versions this JSON contract: within a major version it only adds new fields, endpoints and runs, clients must ignore fields they do not know, and a field is renamed or removed only in a new major version, which the changelog names. `data_version` is a fingerprint, not a version: the SHA-256 of the served data. GitHub Pages sends JSON with a 10-minute max-age and CSV and ZIP files with a 186-day max-age. Every download URL therefore carries ?v=<first 12 hex digits of the file's SHA-256>: the server ignores the query, and a changed file gets a new URL. Fetch the JSON documents for the current URLs; check downloads against `sha256`.",
+  "license": {
+   "name": "Creative Commons Attribution 4.0 International",
+   "identifier": "CC-BY-4.0"
+  }
+ },
+ "servers": [
+  {
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0",
+   "description": "release 3.0.0, frozen"
+  },
+  {
+   "url": "https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/v3.0.0/docs/api/3.0.0",
+   "description": "the same files, raw from the repository (fallback)"
+  }
+ ],
+ "tags": [
+  {
+   "name": "discovery",
+   "description": "where everything is"
+  },
+  {
+   "name": "cases",
+   "description": "the five cases"
+  },
+  {
+   "name": "points",
+   "description": "measurement tables"
+  },
+  {
+   "name": "geometry",
+   "description": "STL geometry"
+  },
+  {
+   "name": "validation",
+   "description": "Eddy3D's scores and the per-point pairs behind them"
+  }
+ ],
+ "paths": {
+  "/index.json": {
+   "get": {
+    "operationId": "getIndex",
+    "tags": [
+     "discovery"
+    ],
+    "summary": "Every endpoint and file with its size and SHA-256, versions, compatibility policy, changelog, licence, citation",
+    "description": "every endpoint and file with its size and SHA-256, versions, compatibility policy, changelog, licence, citation",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Index"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    }
+   }
+  },
+  "/versions.json": {
+   "get": {
+    "operationId": "getVersions",
+    "tags": [
+     "discovery"
+    ],
+    "summary": "Every release, newest first",
+    "description": "every release, newest first: version, date, status (latest or superseded), schema and data version, base URL, tag, changelog; always at the unversioned /api/ path",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Versions"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    }
+   },
+   "servers": [
+    {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api",
+     "description": "the unversioned alias; versions.json is not copied into release trees"
+    }
+   ]
+  },
+  "/cases.json": {
+   "get": {
+    "operationId": "listCases",
+    "tags": [
+     "cases"
+    ],
+    "summary": "The five cases",
+    "description": "the five cases: id, title, frame, units, counts, engine status, links",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Cases"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    }
+   }
+  },
+  "/cases/{id}.json": {
+   "get": {
+    "operationId": "getCase",
+    "tags": [
+     "cases"
+    ],
+    "summary": "One case in full",
+    "description": "one case in full: configurations, frame, units, inflow fit and approach-flow profile, point-table summary, geometry files, validation status, known data issues, attribution",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Case"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    },
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "description": "case id",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "/cases/{id}/points.json": {
+   "get": {
+    "operationId": "getPoints",
+    "tags": [
+     "points"
+    ],
+    "summary": "The cleaned measurement table",
+    "description": "the cleaned measurement table: SI units, one frame, null where not measured",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Points"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    },
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "description": "case id",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "/cases/{id}/points.csv": {
+   "get": {
+    "operationId": "getPointsCsv",
+    "tags": [
+     "points"
+    ],
+    "summary": "The same table as CSV (empty cell = not measured)",
+    "description": "the same table as CSV (empty cell = not measured)",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "text/csv": {
+        "schema": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    },
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "description": "case id",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+       ]
+      }
+     },
+     {
+      "name": "v",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "pattern": "^[0-9a-f]{12}$"
+      },
+      "description": "the file's SHA-256 prefix, as in the URLs the JSON documents give; ignored by the server, it keeps caches from serving a stale copy"
+     }
+    ]
+   }
+  },
+  "/cases/{id}/approach_flow.csv": {
+   "get": {
+    "operationId": "getApproachFlowCsv",
+    "tags": [
+     "points"
+    ],
+    "summary": "The measured approach-flow profile",
+    "description": "the measured approach-flow profile: z (m), U (m/s), and k (m^2/s^2) or u_rms (m/s) where published",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "text/csv": {
+        "schema": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    },
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "description": "case id",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+       ]
+      }
+     },
+     {
+      "name": "v",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "pattern": "^[0-9a-f]{12}$"
+      },
+      "description": "the file's SHA-256 prefix, as in the URLs the JSON documents give; ignored by the server, it keeps caches from serving a stale copy"
+     }
+    ]
+   }
+  },
+  "/cases/{id}/geometry.json": {
+   "get": {
+    "operationId": "getGeometry",
+    "tags": [
+     "geometry"
+    ],
+    "summary": "The case's STL files with statistics, renders, and the boxes where the geometry is boxes",
+    "description": "the case's STL files with statistics, renders, and the boxes where the geometry is boxes",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Geometry"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    },
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "description": "case id",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "/cases/{id}/geometry.stl": {
+   "get": {
+    "operationId": "getGeometryStl",
+    "tags": [
+     "geometry"
+    ],
+    "summary": "Cleaned ASCII STL of the default configuration",
+    "description": "cleaned ASCII STL of the default configuration: metres, case frame, outward normals GitHub Pages labels .stl responses `application/vnd.ms-pki.stl` (a certificate type); the body is ASCII STL whatever the header says.",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "model/stl": {
+        "schema": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    },
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "description": "case id",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+       ]
+      }
+     },
+     {
+      "name": "v",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "pattern": "^[0-9a-f]{12}$"
+      },
+      "description": "the file's SHA-256 prefix, as in the URLs the JSON documents give; ignored by the server, it keeps caches from serving a stale copy"
+     }
+    ]
+   }
+  },
+  "/cases/{id}/geometry_{configuration}.stl": {
+   "get": {
+    "operationId": "getGeometryVariantStl",
+    "tags": [
+     "geometry"
+    ],
+    "summary": "The other configurations' STLs (C",
+    "description": "the other configurations' STLs (C: 0D, 1D; E: bc, before construction) GitHub Pages labels .stl responses `application/vnd.ms-pki.stl` (a certificate type); the body is ASCII STL whatever the header says.",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "model/stl": {
+        "schema": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    },
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "description": "case id",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+       ]
+      }
+     },
+     {
+      "name": "configuration",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "enum": [
+        "0D",
+        "1D",
+        "bc"
+       ]
+      },
+      "description": "a non-default geometry configuration: C 0D or 1D (2D is geometry.stl); E bc (ac is geometry.stl)"
+     },
+     {
+      "name": "v",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "pattern": "^[0-9a-f]{12}$"
+      },
+      "description": "the file's SHA-256 prefix, as in the URLs the JSON documents give; ignored by the server, it keeps caches from serving a stale copy"
+     }
+    ]
+   }
+  },
+  "/cases/{id}/validation.json": {
+   "get": {
+    "operationId": "getValidation",
+    "tags": [
+     "validation"
+    ],
+    "summary": "Eddy3D's scores per engine and run, with figures and the per-point pairs",
+    "description": "Eddy3D's scores per engine and run, with figures and the per-point pairs",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Validation"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    },
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "description": "case id",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "/cases/{id}/pairs/{engine}.csv": {
+   "get": {
+    "operationId": "getPairsCsv",
+    "tags": [
+     "validation"
+    ],
+    "summary": "Per-point measured and modelled values of one engine's runs on the case (columns described by the result's pairs_columns)",
+    "description": "per-point measured and modelled values of one engine's runs on the case (columns described by the result's pairs_columns)",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "text/csv": {
+        "schema": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    },
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "description": "case id",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+       ]
+      }
+     },
+     {
+      "name": "engine",
+      "in": "path",
+      "required": true,
+      "description": "an engine with a scored run on the case",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "openfoam12-realizableKE",
+        "openlb",
+        "fluidx3d",
+        "ml-surrogate"
+       ]
+      }
+     },
+     {
+      "name": "v",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "pattern": "^[0-9a-f]{12}$"
+      },
+      "description": "the file's SHA-256 prefix, as in the URLs the JSON documents give; ignored by the server, it keeps caches from serving a stale copy"
+     }
+    ]
+   }
+  },
+  "/validation.json": {
+   "get": {
+    "operationId": "getValidationSummary",
+    "tags": [
+     "validation"
+    ],
+    "summary": "Every case and engine in one table",
+    "description": "every case and engine in one table: status, runs, headline scores",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ValidationSummary"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    }
+   }
+  },
+  "/geometry.json": {
+   "get": {
+    "operationId": "listGeometry",
+    "tags": [
+     "geometry"
+    ],
+    "summary": "Every STL of every case in one list",
+    "description": "every STL of every case in one list: case, configuration, units, frame, bounding box, size, SHA-256",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GeometryIndex"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    }
+   }
+  },
+  "/geometry.zip": {
+   "get": {
+    "operationId": "getGeometryArchive",
+    "tags": [
+     "geometry"
+    ],
+    "summary": "Every STL in one archive (each keeps its own case's frame and units",
+    "description": "every STL in one archive (each keeps its own case's frame and units: they are not one scene)",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/zip": {
+        "schema": {
+         "type": "string",
+         "format": "binary"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    },
+    "parameters": [
+     {
+      "name": "v",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "pattern": "^[0-9a-f]{12}$"
+      },
+      "description": "the file's SHA-256 prefix, as in the URLs the JSON documents give; ignored by the server, it keeps caches from serving a stale copy"
+     }
+    ]
+   }
+  },
+  "/schemas/{name}.schema.json": {
+   "get": {
+    "operationId": "getSchema",
+    "tags": [
+     "discovery"
+    ],
+    "summary": "The JSON Schema (draft 2020-12) of each JSON document",
+    "description": "the JSON Schema (draft 2020-12) of each JSON document",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/schema+json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    },
+    "parameters": [
+     {
+      "name": "name",
+      "in": "path",
+      "required": true,
+      "description": "a document schema",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "index",
+        "versions",
+        "cases",
+        "case",
+        "points",
+        "geometry",
+        "validation",
+        "geometry-index",
+        "validation-summary"
+       ]
+      }
+     },
+     {
+      "name": "v",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "pattern": "^[0-9a-f]{12}$"
+      },
+      "description": "the file's SHA-256 prefix, as in the URLs the JSON documents give; ignored by the server, it keeps caches from serving a stale copy"
+     }
+    ]
+   }
+  },
+  "/openapi.json": {
+   "get": {
+    "operationId": "getOpenApi",
+    "tags": [
+     "discovery"
+    ],
+    "summary": "OpenAPI 3.1 description of every endpoint",
+    "description": "OpenAPI 3.1 description of every endpoint",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    }
+   }
+  },
+  "/llms.txt": {
+   "get": {
+    "operationId": "getLlmsTxt",
+    "tags": [
+     "discovery"
+    ],
+    "summary": "Plain-text entry point for agents",
+    "description": "plain-text entry point for agents",
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "No such case, configuration, engine or file. GitHub Pages answers with an HTML page, not JSON."
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "Index": {
+    "title": "API index",
+    "description": "Every endpoint and file, versions, compatibility policy, changelog, licence and citation.",
+    "type": "object",
+    "required": [
+     "$schema",
+     "schema_version",
+     "data_version",
+     "license",
+     "name",
+     "base_url",
+     "tree",
+     "release_base_url",
+     "versions_url",
+     "versions",
+     "endpoints",
+     "case_ids",
+     "files",
+     "changelog",
+     "cite"
+    ],
+    "properties": {
+     "$schema": {
+      "type": "string",
+      "format": "uri"
+     },
+     "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "the API's version (semantic versioning); see index.json changelog"
+     },
+     "data_version": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 over every served measurement, geometry and score file; changes when, and only when, the data does"
+     },
+     "license": {
+      "const": "CC-BY-4.0",
+      "description": "SPDX identifier of the data's licence"
+     },
+     "name": {
+      "type": "string"
+     },
+     "description": {
+      "type": "string"
+     },
+     "base_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "the root of this tree: every URL in the tree's documents starts with it"
+     },
+     "tree": {
+      "enum": [
+       "release",
+       "latest"
+      ],
+      "description": "'release': a frozen copy of one release under `/api/<release>/`, which never changes; 'latest': the unversioned `/api/` alias, which always equals the newest release"
+     },
+     "release_base_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "the frozen copy of `versions.release`: equal to base_url in a release tree, the pinned address of this release in the latest alias"
+     },
+     "versions_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "versions.json, the list of every release (always at the unversioned /api/ path)"
+     },
+     "fallback_base_url": {
+      "type": "string",
+      "format": "uri"
+     },
+     "fallback_note": {
+      "type": "string"
+     },
+     "repository": {
+      "type": "string",
+      "format": "uri"
+     },
+     "site": {
+      "type": "string",
+      "format": "uri"
+     },
+     "versions": {
+      "type": "object",
+      "required": [
+       "release",
+       "schema",
+       "data"
+      ],
+      "properties": {
+       "release": {
+        "type": "string",
+        "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+       },
+       "schema": {
+        "type": "string",
+        "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+       },
+       "data": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+       },
+       "clean_manifest": {
+        "type": [
+         "string",
+         "null"
+        ]
+       }
+      }
+     },
+     "release": {
+      "type": "object",
+      "required": [
+       "version",
+       "date",
+       "tag",
+       "url",
+       "base_url",
+       "changelog"
+      ],
+      "properties": {
+       "version": {
+        "type": "string",
+        "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+       },
+       "date": {
+        "type": "string",
+        "format": "date"
+       },
+       "tag": {
+        "type": "string",
+        "pattern": "^v\\d+\\.\\d+\\.\\d+$"
+       },
+       "url": {
+        "type": "string",
+        "format": "uri"
+       },
+       "base_url": {
+        "type": "string",
+        "format": "uri",
+        "description": "the raw files of this release's frozen copy, at the release tag"
+       },
+       "changelog": {
+        "type": "string",
+        "format": "uri"
+       }
+      }
+     },
+     "compatibility": {
+      "type": "string"
+     },
+     "caching": {
+      "type": "string"
+     },
+     "changelog": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "version",
+        "date",
+        "changes"
+       ],
+       "properties": {
+        "version": {
+         "type": "string"
+        },
+        "date": {
+         "type": "string",
+         "format": "date"
+        },
+        "changes": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        }
+       }
+      }
+     },
+     "endpoints": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "path",
+        "method",
+        "media_type",
+        "description",
+        "templated"
+       ],
+       "properties": {
+        "path": {
+         "type": "string"
+        },
+        "templated": {
+         "type": "boolean"
+        },
+        "url": {
+         "type": "string",
+         "format": "uri",
+         "pattern": "^[^{}]*$"
+        },
+        "urls": {
+         "type": "array",
+         "items": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^[^{}]*$"
+         },
+         "minItems": 1
+        },
+        "method": {
+         "const": "GET"
+        },
+        "media_type": {
+         "type": "string"
+        },
+        "description": {
+         "type": "string"
+        },
+        "schema": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "if": {
+        "properties": {
+         "templated": {
+          "const": true
+         }
+        }
+       },
+       "then": {
+        "required": [
+         "urls"
+        ],
+        "not": {
+         "required": [
+          "url"
+         ]
+        }
+       },
+       "else": {
+        "required": [
+         "url"
+        ],
+        "not": {
+         "required": [
+          "urls"
+         ]
+        }
+       }
+      }
+     },
+     "case_ids": {
+      "type": "array",
+      "items": {
+       "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M"
+       ]
+      }
+     },
+     "files": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "url",
+        "path",
+        "media_type",
+        "bytes",
+        "sha256"
+       ],
+       "properties": {
+        "url": {
+         "type": "string",
+         "format": "uri",
+         "description": "absolute URL; the ?v= query is the file's SHA-256 prefix, so a changed file has a new URL"
+        },
+        "path": {
+         "type": "string",
+         "description": "path below the API base"
+        },
+        "media_type": {
+         "type": "string"
+        },
+        "bytes": {
+         "type": "integer",
+         "minimum": 0
+        },
+        "sha256": {
+         "type": "string",
+         "pattern": "^[0-9a-f]{64}$"
+        }
+       }
+      }
+     },
+     "license_detail": {
+      "type": "object",
+      "required": [
+       "spdx",
+       "url"
+      ],
+      "properties": {
+       "spdx": {
+        "type": "string"
+       },
+       "name": {
+        "type": "string"
+       },
+       "url": {
+        "type": "string",
+        "format": "uri"
+       },
+       "note": {
+        "type": "string"
+       }
+      }
+     },
+     "cite": {
+      "type": "object",
+      "required": [
+       "benchmark"
+      ],
+      "properties": {
+       "benchmark": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   },
+   "Versions": {
+    "title": "Release list",
+    "description": "Every release of the data and API, newest first, with the address of its files.",
+    "type": "object",
+    "required": [
+     "$schema",
+     "schema_version",
+     "data_version",
+     "license",
+     "latest",
+     "latest_base_url",
+     "versions"
+    ],
+    "properties": {
+     "$schema": {
+      "type": "string",
+      "format": "uri"
+     },
+     "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "the API's version (semantic versioning); see index.json changelog"
+     },
+     "data_version": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 over every served measurement, geometry and score file; changes when, and only when, the data does"
+     },
+     "license": {
+      "const": "CC-BY-4.0",
+      "description": "SPDX identifier of the data's licence"
+     },
+     "description": {
+      "type": "string"
+     },
+     "latest": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$",
+      "description": "the newest release; the unversioned /api/ paths equal it"
+     },
+     "latest_base_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "the unversioned alias of the newest release"
+     },
+     "versions": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "version",
+        "date",
+        "status",
+        "schema_version",
+        "data_version",
+        "base_url",
+        "index_url",
+        "self_contained",
+        "tag",
+        "tag_url",
+        "changelog_url"
+       ],
+       "properties": {
+        "version": {
+         "type": "string",
+         "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+        },
+        "date": {
+         "type": "string",
+         "format": "date"
+        },
+        "status": {
+         "enum": [
+          "latest",
+          "superseded"
+         ]
+        },
+        "schema_version": {
+         "type": "string",
+         "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "data_version": {
+         "type": "string",
+         "pattern": "^[0-9a-f]{64}$"
+        },
+        "base_url": {
+         "type": "string",
+         "format": "uri",
+         "description": "where this release's files are frozen: GET base_url + a path from its index.json"
+        },
+        "index_url": {
+         "type": "string",
+         "format": "uri",
+         "description": "the index.json of this release"
+        },
+        "fallback_base_url": {
+         "type": [
+          "string",
+          "null"
+         ],
+         "format": "uri"
+        },
+        "self_contained": {
+         "type": "boolean",
+         "description": "true if every URL to a file of the API inside this release's documents points back into base_url (versions.json, served only at the unversioned path, aside)"
+        },
+        "note": {
+         "type": "string"
+        },
+        "tag": {
+         "type": "string",
+         "pattern": "^v\\d+\\.\\d+\\.\\d+$"
+        },
+        "tag_url": {
+         "type": "string",
+         "format": "uri"
+        },
+        "changelog_url": {
+         "type": "string",
+         "format": "uri"
+        }
+       }
+      },
+      "minItems": 1
+     }
+    }
+   },
+   "Cases": {
+    "title": "Case list",
+    "description": "The five cases with their frame, units, counts, engine status and links.",
+    "type": "object",
+    "required": [
+     "$schema",
+     "schema_version",
+     "data_version",
+     "license",
+     "cases"
+    ],
+    "properties": {
+     "$schema": {
+      "type": "string",
+      "format": "uri"
+     },
+     "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "the API's version (semantic versioning); see index.json changelog"
+     },
+     "data_version": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 over every served measurement, geometry and score file; changes when, and only when, the data does"
+     },
+     "license": {
+      "const": "CC-BY-4.0",
+      "description": "SPDX identifier of the data's licence"
+     },
+     "cases": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "id",
+        "slug",
+        "title",
+        "frame",
+        "units",
+        "counts",
+        "engines",
+        "links"
+       ],
+       "properties": {
+        "id": {
+         "enum": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J",
+          "K",
+          "L",
+          "M"
+         ]
+        },
+        "slug": {
+         "type": "string"
+        },
+        "title": {
+         "type": "string"
+        },
+        "summary": {
+         "type": "string"
+        },
+        "frame": {
+         "type": "object",
+         "required": [
+          "origin",
+          "x",
+          "y",
+          "z"
+         ],
+         "properties": {
+          "origin": {
+           "type": "string"
+          },
+          "x": {
+           "type": "string"
+          },
+          "y": {
+           "type": "string"
+          },
+          "z": {
+           "type": "string"
+          }
+         }
+        },
+        "units": {
+         "type": "object"
+        },
+        "counts": {
+         "type": "object",
+         "required": [
+          "rows",
+          "distinct_points"
+         ],
+         "properties": {
+          "rows": {
+           "type": "integer"
+          },
+          "distinct_points": {
+           "type": "integer"
+          }
+         }
+        },
+        "engines": {
+         "type": "object",
+         "additionalProperties": {
+          "enum": [
+           "scored",
+           "running",
+           "pending",
+           "not comparable"
+          ]
+         }
+        },
+        "doi": {
+         "type": [
+          "string",
+          "null"
+         ]
+        },
+        "links": {
+         "type": "object",
+         "required": [
+          "case",
+          "points",
+          "points_csv",
+          "geometry",
+          "geometry_stl",
+          "validation"
+         ],
+         "properties": {
+          "case": {
+           "type": "string",
+           "format": "uri"
+          },
+          "points": {
+           "type": "string",
+           "format": "uri"
+          },
+          "points_csv": {
+           "type": "string",
+           "format": "uri"
+          },
+          "geometry": {
+           "type": "string",
+           "format": "uri"
+          },
+          "geometry_stl": {
+           "type": "string",
+           "format": "uri"
+          },
+          "validation": {
+           "type": "string",
+           "format": "uri"
+          },
+          "page": {
+           "type": "string",
+           "format": "uri"
+          },
+          "render": {
+           "type": "string",
+           "format": "uri"
+          }
+         }
+        }
+       }
+      },
+      "minItems": 5,
+      "maxItems": 5
+     }
+    }
+   },
+   "Case": {
+    "title": "Case",
+    "description": "One case in full: configuration, frame, units, inflow, point-table summary, geometry, validation status, known data issues and attribution.",
+    "type": "object",
+    "required": [
+     "$schema",
+     "schema_version",
+     "data_version",
+     "license",
+     "id",
+     "title",
+     "frame",
+     "units",
+     "approach_flow",
+     "points",
+     "geometry",
+     "validation",
+     "known_issues",
+     "people"
+    ],
+    "properties": {
+     "$schema": {
+      "type": "string",
+      "format": "uri"
+     },
+     "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "the API's version (semantic versioning); see index.json changelog"
+     },
+     "data_version": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 over every served measurement, geometry and score file; changes when, and only when, the data does"
+     },
+     "license": {
+      "const": "CC-BY-4.0",
+      "description": "SPDX identifier of the data's licence"
+     },
+     "id": {
+      "enum": [
+       "A",
+       "B",
+       "C",
+       "D",
+       "E",
+       "F",
+       "G",
+       "H",
+       "I",
+       "J",
+       "K",
+       "L",
+       "M"
+      ]
+     },
+     "slug": {
+      "type": "string"
+     },
+     "title": {
+      "type": "string"
+     },
+     "summary": {
+      "type": "string"
+     },
+     "configuration": {
+      "type": "object"
+     },
+     "configurations": {
+      "type": "array",
+      "items": {
+       "type": "object"
+      }
+     },
+     "quantities": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "units": {
+      "type": "object"
+     },
+     "frame": {
+      "type": "object",
+      "required": [
+       "origin",
+       "x",
+       "y",
+       "z"
+      ],
+      "properties": {
+       "origin": {
+        "type": "string"
+       },
+       "x": {
+        "type": "string"
+       },
+       "y": {
+        "type": "string"
+       },
+       "z": {
+        "type": "string"
+       }
+      }
+     },
+     "inflow_fit": {
+      "type": "object"
+     },
+     "approach_flow": {
+      "type": "object",
+      "required": [
+       "source",
+       "units",
+       "rows",
+       "csv"
+      ],
+      "properties": {
+       "source": {
+        "type": "string"
+       },
+       "units": {
+        "type": "object"
+       },
+       "rows": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "required": [
+          "z",
+          "U"
+         ],
+         "properties": {
+          "z": {
+           "type": "number"
+          },
+          "U": {
+           "type": "number"
+          },
+          "k": {
+           "type": [
+            "number",
+            "null"
+           ]
+          },
+          "u_rms": {
+           "type": [
+            "number",
+            "null"
+           ]
+          }
+         }
+        }
+       },
+       "csv": {
+        "type": "object",
+        "required": [
+         "url",
+         "path",
+         "media_type",
+         "bytes",
+         "sha256"
+        ],
+        "properties": {
+         "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "absolute URL; the ?v= query is the file's SHA-256 prefix, so a changed file has a new URL"
+         },
+         "path": {
+          "type": "string",
+          "description": "path below the API base"
+         },
+         "media_type": {
+          "type": "string"
+         },
+         "bytes": {
+          "type": "integer",
+          "minimum": 0
+         },
+         "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+         }
+        }
+       }
+      }
+     },
+     "points": {
+      "type": "object",
+      "required": [
+       "url",
+       "csv",
+       "rows",
+       "distinct_points",
+       "columns"
+      ],
+      "properties": {
+       "url": {
+        "type": "string",
+        "format": "uri"
+       },
+       "csv": {
+        "type": "object",
+        "required": [
+         "url",
+         "path",
+         "media_type",
+         "bytes",
+         "sha256"
+        ],
+        "properties": {
+         "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "absolute URL; the ?v= query is the file's SHA-256 prefix, so a changed file has a new URL"
+         },
+         "path": {
+          "type": "string",
+          "description": "path below the API base"
+         },
+         "media_type": {
+          "type": "string"
+         },
+         "bytes": {
+          "type": "integer",
+          "minimum": 0
+         },
+         "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+         }
+        }
+       },
+       "rows": {
+        "type": "integer"
+       },
+       "distinct_points": {
+        "type": "integer"
+       },
+       "columns": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "geometry": {
+      "type": "object",
+      "required": [
+       "url",
+       "files"
+      ],
+      "properties": {
+       "url": {
+        "type": "string",
+        "format": "uri"
+       },
+       "files": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "required": [
+          "configuration",
+          "url",
+          "triangles",
+          "watertight"
+         ],
+         "properties": {
+          "configuration": {
+           "type": "string"
+          },
+          "url": {
+           "type": "string",
+           "format": "uri"
+          },
+          "triangles": {
+           "type": "integer"
+          },
+          "watertight": {
+           "type": "boolean"
+          }
+         }
+        }
+       }
+      }
+     },
+     "validation": {
+      "type": "object",
+      "required": [
+       "url",
+       "status",
+       "engines"
+      ],
+      "properties": {
+       "url": {
+        "type": "string",
+        "format": "uri"
+       },
+       "status": {
+        "enum": [
+         "scored",
+         "pending"
+        ]
+       },
+       "engines": {
+        "type": "object",
+        "additionalProperties": {
+         "enum": [
+          "scored",
+          "running",
+          "pending",
+          "not comparable"
+         ]
+        }
+       }
+      }
+     },
+     "known_issues": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "minItems": 1
+     },
+     "people": {
+      "type": "object",
+      "required": [
+       "data_collectors",
+       "editors_distributors"
+      ],
+      "properties": {
+       "data_collectors": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "editors_distributors": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "doi": {
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "citation_requested": {
+      "type": "string"
+     },
+     "render": {
+      "type": "string",
+      "format": "uri"
+     },
+     "page": {
+      "type": "string",
+      "format": "uri"
+     }
+    }
+   },
+   "Points": {
+    "title": "Point table",
+    "description": "The cleaned measurement table of one case: SI units, one frame, null where not measured.",
+    "type": "object",
+    "required": [
+     "$schema",
+     "schema_version",
+     "data_version",
+     "license",
+     "case",
+     "columns",
+     "column_meaning",
+     "n",
+     "points",
+     "units",
+     "frame"
+    ],
+    "properties": {
+     "$schema": {
+      "type": "string",
+      "format": "uri"
+     },
+     "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "the API's version (semantic versioning); see index.json changelog"
+     },
+     "data_version": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 over every served measurement, geometry and score file; changes when, and only when, the data does"
+     },
+     "license": {
+      "const": "CC-BY-4.0",
+      "description": "SPDX identifier of the data's licence"
+     },
+     "case": {
+      "enum": [
+       "A",
+       "B",
+       "C",
+       "D",
+       "E",
+       "F",
+       "G",
+       "H",
+       "I",
+       "J",
+       "K",
+       "L",
+       "M"
+      ]
+     },
+     "title": {
+      "type": "string"
+     },
+     "points_source": {
+      "type": "string"
+     },
+     "units": {
+      "type": "object"
+     },
+     "frame": {
+      "type": "object",
+      "required": [
+       "origin",
+       "x",
+       "y",
+       "z"
+      ],
+      "properties": {
+       "origin": {
+        "type": "string"
+       },
+       "x": {
+        "type": "string"
+       },
+       "y": {
+        "type": "string"
+       },
+       "z": {
+        "type": "string"
+       }
+      }
+     },
+     "columns": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "column_meaning": {
+      "type": "object",
+      "additionalProperties": {
+       "type": "string"
+      }
+     },
+     "n": {
+      "type": "integer"
+     },
+     "points": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "point_id",
+        "x",
+        "y",
+        "z"
+       ],
+       "properties": {
+        "point_id": {
+         "type": "integer"
+        },
+        "config": {
+         "type": "string"
+        },
+        "instrument": {
+         "type": "string"
+        },
+        "wind_direction": {
+         "type": "string"
+        },
+        "wind_direction_deg": {
+         "type": "number"
+        },
+        "x": {
+         "type": "number"
+        },
+        "y": {
+         "type": "number"
+        },
+        "z": {
+         "type": "number"
+        },
+        "campaign": {
+         "type": "string"
+        },
+        "run": {
+         "type": "string"
+        },
+        "U": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "V": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "W": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "uu": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "vv": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "ww": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "k": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "Vs": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "velocity_ratio": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "uv": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "uw": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "vw": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "C": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "c_rms": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "concentration_ratio": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "T": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "T_rms": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "uc": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "vc": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "wc": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "uT": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "vT": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "wT": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "velocity_ratio_sd": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "k_ratio": {
+         "type": [
+          "number",
+          "null"
+         ]
+        }
+       }
+      }
+     },
+     "csv": {
+      "type": "object",
+      "required": [
+       "url",
+       "path",
+       "media_type",
+       "bytes",
+       "sha256"
+      ],
+      "properties": {
+       "url": {
+        "type": "string",
+        "format": "uri",
+        "description": "absolute URL; the ?v= query is the file's SHA-256 prefix, so a changed file has a new URL"
+       },
+       "path": {
+        "type": "string",
+        "description": "path below the API base"
+       },
+       "media_type": {
+        "type": "string"
+       },
+       "bytes": {
+        "type": "integer",
+        "minimum": 0
+       },
+       "sha256": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+       }
+      }
+     }
+    }
+   },
+   "Geometry": {
+    "title": "Case geometry",
+    "description": "The STL files of one case, their statistics and, where the geometry is boxes, the boxes.",
+    "type": "object",
+    "required": [
+     "$schema",
+     "schema_version",
+     "data_version",
+     "license",
+     "case",
+     "units",
+     "frame",
+     "default_configuration",
+     "configurations",
+     "files"
+    ],
+    "properties": {
+     "$schema": {
+      "type": "string",
+      "format": "uri"
+     },
+     "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "the API's version (semantic versioning); see index.json changelog"
+     },
+     "data_version": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 over every served measurement, geometry and score file; changes when, and only when, the data does"
+     },
+     "license": {
+      "const": "CC-BY-4.0",
+      "description": "SPDX identifier of the data's licence"
+     },
+     "case": {
+      "enum": [
+       "A",
+       "B",
+       "C",
+       "D",
+       "E",
+       "F",
+       "G",
+       "H",
+       "I",
+       "J",
+       "K",
+       "L",
+       "M"
+      ]
+     },
+     "title": {
+      "type": "string"
+     },
+     "units": {
+      "type": "string"
+     },
+     "frame": {
+      "type": "object",
+      "required": [
+       "origin",
+       "x",
+       "y",
+       "z"
+      ],
+      "properties": {
+       "origin": {
+        "type": "string"
+       },
+       "x": {
+        "type": "string"
+       },
+       "y": {
+        "type": "string"
+       },
+       "z": {
+        "type": "string"
+       }
+      }
+     },
+     "default_configuration": {
+      "type": "string"
+     },
+     "configurations": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "is_boxes": {
+      "type": "boolean"
+     },
+     "files": {
+      "type": "array",
+      "items": {
+       "allOf": [
+        {
+         "type": "object",
+         "required": [
+          "url",
+          "path",
+          "media_type",
+          "bytes",
+          "sha256"
+         ],
+         "properties": {
+          "url": {
+           "type": "string",
+           "format": "uri",
+           "description": "absolute URL; the ?v= query is the file's SHA-256 prefix, so a changed file has a new URL"
+          },
+          "path": {
+           "type": "string",
+           "description": "path below the API base"
+          },
+          "media_type": {
+           "type": "string"
+          },
+          "bytes": {
+           "type": "integer",
+           "minimum": 0
+          },
+          "sha256": {
+           "type": "string",
+           "pattern": "^[0-9a-f]{64}$"
+          }
+         }
+        },
+        {
+         "type": "object",
+         "required": [
+          "configuration",
+          "stats",
+          "render"
+         ],
+         "properties": {
+          "configuration": {
+           "type": "string"
+          },
+          "format": {
+           "type": "string"
+          },
+          "source": {
+           "type": "string"
+          },
+          "stats": {
+           "type": "object",
+           "required": [
+            "triangles",
+            "bbox_min",
+            "bbox_max",
+            "watertight"
+           ],
+           "properties": {
+            "triangles": {
+             "type": "integer"
+            },
+            "bbox_min": {
+             "type": "array",
+             "items": {
+              "type": "number"
+             },
+             "minItems": 3,
+             "maxItems": 3
+            },
+            "bbox_max": {
+             "type": "array",
+             "items": {
+              "type": "number"
+             },
+             "minItems": 3,
+             "maxItems": 3
+            },
+            "watertight": {
+             "type": "boolean"
+            }
+           }
+          },
+          "render": {
+           "type": "string",
+           "format": "uri"
+          },
+          "render_caption": {
+           "type": "string"
+          },
+          "boxes": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "required": [
+             "min",
+             "max"
+            ],
+            "properties": {
+             "min": {
+              "type": "array",
+              "items": {
+               "type": "number"
+              },
+              "minItems": 3,
+              "maxItems": 3
+             },
+             "max": {
+              "type": "array",
+              "items": {
+               "type": "number"
+              },
+              "minItems": 3,
+              "maxItems": 3
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      },
+      "minItems": 1
+     },
+     "render": {
+      "type": "string",
+      "format": "uri"
+     }
+    }
+   },
+   "Validation": {
+    "title": "Case validation",
+    "description": "Eddy3D's scores against one case, per engine and run. 'scored' means a run exists, not that it agrees; an engine that is not 'scored' has no result here.",
+    "type": "object",
+    "required": [
+     "$schema",
+     "schema_version",
+     "data_version",
+     "license",
+     "case",
+     "status",
+     "engines",
+     "results"
+    ],
+    "properties": {
+     "$schema": {
+      "type": "string",
+      "format": "uri"
+     },
+     "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "the API's version (semantic versioning); see index.json changelog"
+     },
+     "data_version": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 over every served measurement, geometry and score file; changes when, and only when, the data does"
+     },
+     "license": {
+      "const": "CC-BY-4.0",
+      "description": "SPDX identifier of the data's licence"
+     },
+     "case": {
+      "enum": [
+       "A",
+       "B",
+       "C",
+       "D",
+       "E",
+       "F",
+       "G",
+       "H",
+       "I",
+       "J",
+       "K",
+       "L",
+       "M"
+      ]
+     },
+     "title": {
+      "type": "string"
+     },
+     "status": {
+      "enum": [
+       "scored",
+       "pending"
+      ]
+     },
+     "status_meaning": {
+      "type": "object",
+      "additionalProperties": {
+       "type": "string"
+      }
+     },
+     "engines": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "engine",
+        "status"
+       ],
+       "properties": {
+        "engine": {
+         "enum": [
+          "openfoam12-realizableKE",
+          "openlb",
+          "fluidx3d",
+          "ml-surrogate"
+         ]
+        },
+        "status": {
+         "enum": [
+          "scored",
+          "running",
+          "pending",
+          "not comparable"
+         ]
+        }
+       }
+      }
+     },
+     "results": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "run_id",
+        "engine",
+        "configuration",
+        "headline",
+        "scores",
+        "figures",
+        "pairs",
+        "source_url"
+       ],
+       "properties": {
+        "run_id": {
+         "type": "string"
+        },
+        "engine": {
+         "enum": [
+          "openfoam12-realizableKE",
+          "openlb",
+          "fluidx3d",
+          "ml-surrogate"
+         ]
+        },
+        "configuration": {
+         "type": [
+          "string",
+          "null"
+         ]
+        },
+        "quantity": {
+         "type": [
+          "string",
+          "null"
+         ]
+        },
+        "normalisation": {
+         "type": "string"
+        },
+        "headline": {
+         "type": "object",
+         "additionalProperties": {
+          "type": "string"
+         }
+        },
+        "scores": {
+         "type": "object",
+         "additionalProperties": {
+          "type": "object",
+          "required": [
+           "Count",
+           "Fb",
+           "R"
+          ],
+          "properties": {
+           "Count": {
+            "type": "integer",
+            "minimum": 0
+           },
+           "MeanObserved": {
+            "type": [
+             "number",
+             "null"
+            ]
+           },
+           "MeanPredicted": {
+            "type": [
+             "number",
+             "null"
+            ]
+           },
+           "Fb": {
+            "type": [
+             "number",
+             "null"
+            ]
+           },
+           "Nmse": {
+            "type": [
+             "number",
+             "null"
+            ]
+           },
+           "Nad": {
+            "type": [
+             "number",
+             "null"
+            ]
+           },
+           "Fac2": {
+            "type": [
+             "number",
+             "null"
+            ]
+           },
+           "HitRate": {
+            "type": [
+             "number",
+             "null"
+            ]
+           },
+           "Mg": {
+            "type": [
+             "number",
+             "null"
+            ]
+           },
+           "Vg": {
+            "type": [
+             "number",
+             "null"
+            ]
+           },
+           "GeometricPairs": {
+            "type": [
+             "integer",
+             "null"
+            ]
+           },
+           "R": {
+            "type": [
+             "number",
+             "null"
+            ]
+           }
+          }
+         }
+        },
+        "figures": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "required": [
+           "url",
+           "caption"
+          ],
+          "properties": {
+           "url": {
+            "type": "string",
+            "format": "uri"
+           },
+           "caption": {
+            "type": "string"
+           }
+          }
+         }
+        },
+        "pairs": {
+         "anyOf": [
+          {
+           "type": "object",
+           "required": [
+            "url",
+            "path",
+            "media_type",
+            "bytes",
+            "sha256"
+           ],
+           "properties": {
+            "url": {
+             "type": "string",
+             "format": "uri",
+             "description": "absolute URL; the ?v= query is the file's SHA-256 prefix, so a changed file has a new URL"
+            },
+            "path": {
+             "type": "string",
+             "description": "path below the API base"
+            },
+            "media_type": {
+             "type": "string"
+            },
+            "bytes": {
+             "type": "integer",
+             "minimum": 0
+            },
+            "sha256": {
+             "type": "string",
+             "pattern": "^[0-9a-f]{64}$"
+            }
+           }
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "pairs_columns": {
+         "type": [
+          "string",
+          "null"
+         ]
+        },
+        "reproduce": {
+         "type": "string"
+        },
+        "source_file": {
+         "type": "string"
+        },
+        "source_url": {
+         "type": "string",
+         "format": "uri"
+        },
+        "cite": {
+         "type": "string"
+        }
+       }
+      }
+     }
+    }
+   },
+   "GeometryIndex": {
+    "title": "All geometry",
+    "description": "Every STL of every case in one list, and the archive that holds them.",
+    "type": "object",
+    "required": [
+     "$schema",
+     "schema_version",
+     "data_version",
+     "license",
+     "files",
+     "archive"
+    ],
+    "properties": {
+     "$schema": {
+      "type": "string",
+      "format": "uri"
+     },
+     "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "the API's version (semantic versioning); see index.json changelog"
+     },
+     "data_version": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 over every served measurement, geometry and score file; changes when, and only when, the data does"
+     },
+     "license": {
+      "const": "CC-BY-4.0",
+      "description": "SPDX identifier of the data's licence"
+     },
+     "archive": {
+      "type": "object",
+      "required": [
+       "url",
+       "path",
+       "media_type",
+       "bytes",
+       "sha256"
+      ],
+      "properties": {
+       "url": {
+        "type": "string",
+        "format": "uri",
+        "description": "absolute URL; the ?v= query is the file's SHA-256 prefix, so a changed file has a new URL"
+       },
+       "path": {
+        "type": "string",
+        "description": "path below the API base"
+       },
+       "media_type": {
+        "type": "string"
+       },
+       "bytes": {
+        "type": "integer",
+        "minimum": 0
+       },
+       "sha256": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+       }
+      }
+     },
+     "files": {
+      "type": "array",
+      "items": {
+       "allOf": [
+        {
+         "type": "object",
+         "required": [
+          "url",
+          "path",
+          "media_type",
+          "bytes",
+          "sha256"
+         ],
+         "properties": {
+          "url": {
+           "type": "string",
+           "format": "uri",
+           "description": "absolute URL; the ?v= query is the file's SHA-256 prefix, so a changed file has a new URL"
+          },
+          "path": {
+           "type": "string",
+           "description": "path below the API base"
+          },
+          "media_type": {
+           "type": "string"
+          },
+          "bytes": {
+           "type": "integer",
+           "minimum": 0
+          },
+          "sha256": {
+           "type": "string",
+           "pattern": "^[0-9a-f]{64}$"
+          }
+         }
+        },
+        {
+         "type": "object",
+         "required": [
+          "case",
+          "configuration",
+          "archive_name",
+          "units",
+          "frame",
+          "triangles"
+         ],
+         "properties": {
+          "case": {
+           "enum": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J",
+            "K",
+            "L",
+            "M"
+           ]
+          },
+          "configuration": {
+           "type": "string"
+          },
+          "archive_name": {
+           "type": "string"
+          },
+          "units": {
+           "type": "string"
+          },
+          "frame": {
+           "type": "object",
+           "required": [
+            "origin",
+            "x",
+            "y",
+            "z"
+           ],
+           "properties": {
+            "origin": {
+             "type": "string"
+            },
+            "x": {
+             "type": "string"
+            },
+            "y": {
+             "type": "string"
+            },
+            "z": {
+             "type": "string"
+            }
+           }
+          },
+          "triangles": {
+           "type": "integer"
+          },
+          "watertight": {
+           "type": "boolean"
+          }
+         }
+        }
+       ]
+      }
+     }
+    }
+   },
+   "ValidationSummary": {
+    "title": "Validation summary",
+    "description": "Every case and engine in one table: status, runs and their headline scores.",
+    "type": "object",
+    "required": [
+     "$schema",
+     "schema_version",
+     "data_version",
+     "license",
+     "engines",
+     "cases"
+    ],
+    "properties": {
+     "$schema": {
+      "type": "string",
+      "format": "uri"
+     },
+     "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "the API's version (semantic versioning); see index.json changelog"
+     },
+     "data_version": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 over every served measurement, geometry and score file; changes when, and only when, the data does"
+     },
+     "license": {
+      "const": "CC-BY-4.0",
+      "description": "SPDX identifier of the data's licence"
+     },
+     "engines": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "id",
+        "name",
+        "kind"
+       ],
+       "properties": {
+        "id": {
+         "enum": [
+          "openfoam12-realizableKE",
+          "openlb",
+          "fluidx3d",
+          "ml-surrogate"
+         ]
+        },
+        "name": {
+         "type": "string"
+        },
+        "kind": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "status_meaning": {
+      "type": "object",
+      "additionalProperties": {
+       "type": "string"
+      }
+     },
+     "cases": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "case",
+        "url",
+        "engines"
+       ],
+       "properties": {
+        "case": {
+         "enum": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J",
+          "K",
+          "L",
+          "M"
+         ]
+        },
+        "title": {
+         "type": "string"
+        },
+        "url": {
+         "type": "string",
+         "format": "uri"
+        },
+        "engines": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "required": [
+           "engine",
+           "status",
+           "runs"
+          ],
+          "properties": {
+           "engine": {
+            "enum": [
+             "openfoam12-realizableKE",
+             "openlb",
+             "fluidx3d",
+             "ml-surrogate"
+            ]
+           },
+           "status": {
+            "enum": [
+             "scored",
+             "running",
+             "pending",
+             "not comparable"
+            ]
+           },
+           "runs": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "required": [
+              "run_id",
+              "configuration",
+              "headline"
+             ],
+             "properties": {
+              "run_id": {
+               "type": "string"
+              },
+              "configuration": {
+               "type": [
+                "string",
+                "null"
+               ]
+              },
+              "headline": {
+               "type": "array",
+               "items": {
+                "type": "object",
+                "required": [
+                 "label",
+                 "score",
+                 "Count",
+                 "R",
+                 "Fac2",
+                 "Fb",
+                 "HitRate"
+                ],
+                "properties": {
+                 "label": {
+                  "type": "string"
+                 },
+                 "score": {
+                  "type": "string"
+                 },
+                 "Count": {
+                  "type": "integer"
+                 },
+                 "R": {
+                  "type": [
+                   "number",
+                   "null"
+                  ]
+                 },
+                 "Fac2": {
+                  "type": [
+                   "number",
+                   "null"
+                  ]
+                 },
+                 "Fb": {
+                  "type": [
+                   "number",
+                   "null"
+                  ]
+                 },
+                 "HitRate": {
+                  "type": [
+                   "number",
+                   "null"
+                  ]
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      },
+      "minItems": 5,
+      "maxItems": 5
+     }
+    }
+   }
+  }
+ }
+}

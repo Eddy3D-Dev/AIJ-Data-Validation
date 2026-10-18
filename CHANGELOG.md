@@ -15,6 +15,23 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api-reference/#versioning-and-changes).
 
+## [3.0.0] - 2026-10-18
+
+Preliminary section, written with the versioned API layout; the integrating change rewrites it to cover everything in 3.0.0.
+
+### Changed (incompatible)
+
+- The point table gained 18 columns (`campaign`, `run`, `uv`, `uw`, `vw`, `C`, `c_rms`, `concentration_ratio`, `T`,
+  `T_rms`, `uc`, `vc`, `wc`, `uT`, `vT`, `wT`, `velocity_ratio_sd`, `k_ratio`), appended after the 18 of 2.0.0; see
+  `clean/SCHEMA.md`.
+
+### Added
+
+- Release-numbered API paths: every release is a frozen copy of the whole API under `/api/<release>/` (for example
+  `/api/3.0.0/index.json`), the unversioned `/api/` paths always equal the newest release, and `/api/versions.json`
+  lists every release. API schema 2.3.0 (a minor change: nothing renamed or removed). Release 2.0.0 predates the
+  layout; `/api/2.0.0/` holds the files of its tag with only their addresses rewritten (`scripts/host_release.py`).
+
 ## [2.0.0] - 2026-10-18
 
 The first tagged release. Every number from here on identifies exactly one content of the served files, and

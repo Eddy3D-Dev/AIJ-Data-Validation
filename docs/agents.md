@@ -14,7 +14,8 @@ names in `$schema`.
 
 1. **`GET /api/index.json`**: every endpoint and every file with its size and SHA-256, the API version, the
    `data_version`, the changelog, the licence and how to cite. If the Pages site is unreachable, `fallback_base_url`
-   serves the identical files raw from the repository.
+   serves the identical files raw from the repository. `/api/` always serves the newest release, and
+   `/api/versions.json` lists every release with the `base_url` of its frozen copy (see the first rule below).
 2. **`GET /api/cases.json`**: the five cases with their frame, units, counts, engine status and links. Pick an `id`.
 3. **`GET /api/cases/{id}.json`**: read `frame`, `units` and `known_issues` **before** the numbers, because they
    differ per case. A–D are model-scale metres with +x along the wind. E is full-scale metres, +x east, +y north,
@@ -33,6 +34,12 @@ names in `$schema`.
 
 ## Rules that keep a comparison honest
 
+- Pin the release when a result must be reproducible. Take the `base_url` of the release you used from
+  `/api/versions.json` (for example `.../api/3.0.0`) and fetch every path from it instead of from `/api/`. The
+  unversioned paths follow the newest release, so a script that uses them can return different numbers after the next
+  release, while a release's copy never changes and every API URL inside its documents points back into it. Quote the
+  release number together with `data_version`. If a release lists `self_contained: false`, its documents link outside
+  its copy: build its URLs from `base_url` and the `path` in its `index.json`.
 - Normalise by the case's own U_H (`configuration.U_H_m_s`), or for Case E by U(15.9 m); normalise k by U_H².
 - Compare a thermistor quantity (C, D, E: `Vs`, `velocity_ratio`) against the bracket |U| ≤ Vs ≤ √(|U|² + 2k), not
   against |U| alone.
