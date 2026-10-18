@@ -4,10 +4,22 @@
      what dataset search engines index.
   2. The colour scheme: the visitor's saved choice, else the system's. It runs after just-the-docs.js, which
      defines jtd.setTheme, and swaps the stylesheet before the page is painted.
+  3. The layout of the colour scheme button. The theme stylesheet is cached by the browser for minutes after a release, and an
+     old copy has no rule for the button: it showed as a tall grey box with 4 px icons. The page itself always has these.
 {%- endcomment -%}
 {%- if page.url == "/" -%}
 {% include dataset-jsonld.html %}
 {%- endif -%}
+<style>
+.theme-toggle { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 2rem; height: 2rem; margin: 0 .5rem; padding: 0; border: 0; border-radius: 50%; background: none; color: inherit; cursor: pointer; }
+.main-header > .theme-toggle { align-self: center; }
+.theme-toggle svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle[data-mode="dark"] .icon-moon { display: none; }
+.theme-toggle[data-mode="dark"] .icon-sun { display: inline; }
+.theme-toggle-small-screen { position: fixed; left: 1rem; bottom: 1rem; z-index: 5; margin: 0; border: 1px solid rgba(127, 127, 127, .45); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+@media (min-width: 50rem) { .theme-toggle-small-screen { display: none; } }
+</style>
 <script>
 (function () {
   var KEY = "aij-color-scheme";
