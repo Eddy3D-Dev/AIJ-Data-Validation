@@ -1,0 +1,291 @@
+{
+ "case": "AIJ UWE Case G (Tsuiji-matsu) — flow behind a 7 m x 74 m x 2 m black-pine belt with a 1.2 m trunk gap",
+ "reference": "Kurotani, Y., Kiyota, N. & Kobayashi, S. (2001) Windbreak effect of Tsuijimatsu in Izumo Part. 2, Summaries of technical papers of the AIJ Annual Meeting D-2, 745-746; AIJ UWE Benchmark Dataset Case G, Zenodo doi:10.5281/zenodo.15589666 (CC BY 4.0); Kikumoto, H., Okaze, T., Yoshie, R. et al. (2026) Japan Architectural Review 9(1) e70083, doi:10.1002/2475-8876.70083, section 3.7; Mochida, A. et al. (2008) JWEIA 96, 1667-1677, doi:10.1016/j.jweia.2008.02.055",
+ "turbulenceModel": "realizableKE",
+ "numericsLevel": 3,
+ "iterations": 3000,
+ "cpus": 8,
+ "idealisation": {
+  "primary": "2-D idealisation: a 6.4 m slab, the belt through both slip planes (infinite width)",
+  "check": "3-D: the real 74 m belt, half domain with the centre plane on the y = 0 symmetry plane",
+  "why": "the data paper's Figure 7 is captioned 'Geometry of a two-dimensional pine tree in Case G'; the measured plane is the centre of a belt 10.6 H wide; the half belt (EDDY3D_AIJ_G_FINITE) measures the end effect at the 28 points (endEffect.*)"
+ },
+ "inflow": {
+  "kind": "wind.inlet = manual: the workbook's own inflow (LF_caseG.xls, Geometry sheet, Fig. 1 and the CFD note)",
+  "profile": "U = 5.6 (z/9)^0.22 m/s, k = 3.02 m2/s2 at every height, epsilon = Cmu^0.5 k |dU/dz| (Pk = epsilon)",
+  "uH": 5.298784335134799,
+  "floor": "smooth (nutkWallFunction): the tabulated inlet's floor; the site's z0 (0.030 m from a log-law fit of AF_caseG.csv) is not represented"
+ },
+ "k.assertion": "none. Eddy3D models trees as a momentum sink only (Darcy-Forchheimer, f = 2 Cd LAD): there are no canopy k/epsilon source terms, so the modelled k behind the belt is recorded against the measurement and never asserted",
+ "lad.provenance": {
+  "note": "LAD and Cd are NOT in the dataset (only the shading rate, 81 %). The three crowns are the repository's vegetation library entries nearest a pruned pine belt; nothing is fitted.",
+  "beerLambertLad": 1.660731206821651,
+  "beerLambertNote": "-ln(1 - 0.81) / (G x 2 m) with G = 0.5 assumed (spherical leaf angles): inside the library bracket 1.5 ... 3.5"
+ },
+ "quantity": "U/U_H and k/U_H^2 at the 28 points, U_H the wind at the tree height (7 m): the measured mean scalar speed against the modelled |U| and sqrt(|U|^2 + 2k), both over the model's own U(7 m) at x = -35 m, and over the imposed U_H = 5.299 m/s; LAD and Cd are not in the dataset",
+ "arm": "screen",
+ "layout": "slab",
+ "Lad": 3.5,
+ "Cd": 0.25,
+ "dragPerMetre": 0.875,
+ "armProvenance": "the library's 'Cypress screen' (LAD 3.5, Cd 0.25): the densest crown, the upper bracket of the sweep",
+ "solvedTime": 3000,
+ "mesh.cells": 90576,
+ "zone": {
+  "cells": 1200,
+  "volume": 77.35390019086309,
+  "expected": 74.368,
+  "ratio": 1.0401503360432323,
+  "note": "expected is the stated belt plus the 1 cm nudge; with the nudge the top cell is in, so the zone is ~1.03 of it by construction"
+ },
+ "approach.far.U7": 5.18365,
+ "approach.far.U7overImposed": 0.9782715566717115,
+ "approach.far.solvedOverImposedByHeight": [
+  1.0198623998652896,
+  0.9904237176803955,
+  0.9802237736867403,
+  0.9782715566717115,
+  0.9796725000000001,
+  0.983994401493368
+ ],
+ "approach.near.solvedOverImposedByHeight": [
+  1.0665408520238873,
+  0.9724016722517677,
+  0.9387709029426262,
+  0.9308496771245762,
+  0.9336628341704613,
+  0.94834375,
+  0.9715251607581921
+ ],
+ "lateralMax": 2.314971111089676e-06,
+ "structure": {
+  "ratioToOpenByStation": [
+   {
+    "x": 1.75,
+    "ratio": 0.5648543308829266
+   },
+   {
+    "x": 3.5,
+    "ratio": 0.5583552328407252
+   },
+   {
+    "x": 7,
+    "ratio": 0.5554947141415476
+   },
+   {
+    "x": 14,
+    "ratio": 0.5693370123507888
+   },
+   {
+    "x": 21,
+    "ratio": 0.5892628066741383
+   },
+   {
+    "x": 28,
+    "ratio": 0.6109771981379435
+   },
+   {
+    "x": 35,
+    "ratio": 0.6302318777243547
+   }
+  ],
+  "overallRatioToOpen": 0.5826447389646322,
+  "gapSpeedUp": 1.1213272987902896,
+  "canopyRatio": 0.6250896202490638,
+  "lineSpeedsAtX": -1,
+  "lineZ": [
+   0.2,
+   0.6,
+   1,
+   1.4,
+   2.6,
+   4.2,
+   5.8,
+   6.6,
+   8.2,
+   10.2
+  ],
+  "lineMag": [
+   4.811245,
+   4.922693,
+   4.447839,
+   3.077114,
+   3.03503,
+   3.087252,
+   3.181007,
+   3.278241,
+   5.929021,
+   6.117562
+  ],
+  "openLineMag": [
+   4.151852,
+   4.390059,
+   4.48761,
+   4.5588,
+   4.73194,
+   4.938895,
+   5.142131,
+   5.243451,
+   5.442932,
+   5.679135
+  ]
+ },
+ "solveLog": {
+  "iterationsRun": 3000,
+  "stoppedBy": "the iteration limit: the log has no 'solution converged' line (residualControl not met)",
+  "finalInitialResiduals": {
+   "Ux": 0.0036041896,
+   "Uy": 2.4883043e-06,
+   "Uz": 3.4886016e-06,
+   "p": 2.4530266e-06,
+   "epsilon": 0.026489784,
+   "k": 4.1116426e-07
+  }
+ },
+ "pairs": "caseG_openfoam12_realizableKE_pairs.csv",
+ "probes": "caseG_openfoam12_realizableKE_screen_probes.csv",
+ "UhImposed": 5.298784335134799,
+ "scoresFrom": "the pairs file (validation/dispersion_metrics.py); the fixture's own scores, computed against RS_caseG.csv, are in Eddy3D's results.json",
+ "sources": {
+  "aij_G_2d_screen/belt.probe.csv": "f433a44b97368b9a01abeeb44fd409b668240dcc48766e577f90c69f14a960df",
+  "aij_G_2d_screen/study/case_180/run_01_foamRun.txt": "b0f342085a6a6a9c49eb05d04d897273b3b5ef4d5223b3c6433a458309f51a0e",
+  "aij_G_2d_screen/config.json": "eaec52260e9d1ad7c3053809d8c5fa8c08c0674c68d97aa7f16a14face9d5f35",
+  "aij_G/results.json": "b9c1dcd4b5a56f69cf4e822d88d00f99eafe80e36caa054be26e11c8285edab7"
+ },
+ "byStation": [
+  {
+   "x": 1.75,
+   "xOverH": 0.25,
+   "observedU": 0.498914737675,
+   "modelU": 0.5305250161565691,
+   "modelRms": 0.5988973887451192,
+   "observedK": 0.0208299803525,
+   "modelK": 0.038462067610965225
+  },
+  {
+   "x": 3.5,
+   "xOverH": 0.5,
+   "observedU": 0.46230527330000004,
+   "modelU": 0.5245298679501895,
+   "modelRms": 0.5956072674045076,
+   "observedK": 0.019941154604999997,
+   "modelK": 0.03954621363066066
+  },
+  {
+   "x": 7.0,
+   "xOverH": 1.0,
+   "observedU": 0.43485142255,
+   "modelU": 0.523163938537517,
+   "modelRms": 0.597514371020016,
+   "observedK": 0.017525097445000002,
+   "modelK": 0.04135047823244928
+  },
+  {
+   "x": 14.0,
+   "xOverH": 2.0,
+   "observedU": 0.444749660475,
+   "modelU": 0.5402934225883306,
+   "modelRms": 0.612857785278145,
+   "observedK": 0.021823421909999998,
+   "modelK": 0.041561371498516096
+  },
+  {
+   "x": 21.0,
+   "xOverH": 3.0,
+   "observedU": 0.489861295425,
+   "modelU": 0.5636404849864478,
+   "modelRms": 0.627731109912364,
+   "observedK": 0.0393499196825,
+   "modelK": 0.03835456014683666
+  },
+  {
+   "x": 28.0,
+   "xOverH": 4.0,
+   "observedU": 0.50998684645,
+   "modelU": 0.5882369565846459,
+   "modelRms": 0.644172855988022,
+   "observedK": 0.04516369905,
+   "modelK": 0.03505121072092114
+  },
+  {
+   "x": 35.0,
+   "xOverH": 5.0,
+   "observedU": 0.504080444025,
+   "modelU": 0.6101416955234247,
+   "modelRms": 0.6603938995000591,
+   "observedK": 0.052472667545000004,
+   "modelK": 0.03272009906904649
+  }
+ ],
+ "calibration.rmseU": 0.09728545533298175,
+ "score.U.ownApproach": {
+  "Count": 28,
+  "MeanObserved": 0.47782138284285713,
+  "MeanPredicted": 0.5543616260467321,
+  "Fb": -0.14830750466666973,
+  "Nmse": 0.035730335241450834,
+  "Nad": 0.08319263106887806,
+  "Fac2": 1.0,
+  "HitRate": 0.8571428571428571,
+  "Mg": 0.8605196762452416,
+  "Vg": 1.0368797361402946,
+  "GeometricPairs": 28,
+  "R": 0.45934760808457936
+ },
+ "score.U.imposedUH": {
+  "Count": 28,
+  "MeanObserved": 0.47782138284285713,
+  "MeanPredicted": 0.5423162108717978,
+  "Fb": -0.1264433904334295,
+  "Nmse": 0.029660255024809245,
+  "Nad": 0.07471589880901258,
+  "Fac2": 1.0,
+  "HitRate": 0.8928571428571429,
+  "Mg": 0.8796327260836583,
+  "Vg": 1.0305560739326922,
+  "GeometricPairs": 28,
+  "R": 0.4593476080845795
+ },
+ "score.rms.ownApproach": {
+  "Count": 28,
+  "MeanObserved": 0.47782138284285713,
+  "MeanPredicted": 0.6195963825497477,
+  "Fb": -0.25837926845693093,
+  "Nmse": 0.07927844795570582,
+  "Nad": 0.13042045232712474,
+  "Fac2": 1.0,
+  "HitRate": 0.25,
+  "Mg": 0.7687591516677834,
+  "Vg": 1.0846832541853726,
+  "GeometricPairs": 28,
+  "R": 0.4721715958944426
+ },
+ "score.rms.imposedUH": {
+  "Count": 28,
+  "MeanObserved": 0.47782138284285713,
+  "MeanPredicted": 0.6061335176651028,
+  "Fb": -0.23674810596292592,
+  "Nmse": 0.06824766569563344,
+  "Nad": 0.12045248553390989,
+  "Fac2": 1.0,
+  "HitRate": 0.32142857142857145,
+  "Mg": 0.7858341034500338,
+  "Vg": 1.0727403319901228,
+  "GeometricPairs": 28,
+  "R": 0.47217159589444235
+ },
+ "score.k.ownApproach": {
+  "Count": 28,
+  "MeanObserved": 0.03101513437,
+  "MeanPredicted": 0.038149428701342226,
+  "Fb": -0.20629912239836773,
+  "Nmse": 0.2742458540883583,
+  "Nad": 0.2378826657095997,
+  "Fac2": 0.6785714285714286,
+  "HitRate": 0.21428571428571427,
+  "Mg": 0.7397379520631878,
+  "Vg": 1.4979712857920475,
+  "GeometricPairs": 28,
+  "R": 0.23394772023983137
+ }
+}
