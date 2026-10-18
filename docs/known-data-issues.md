@@ -25,9 +25,9 @@ The cleaned tables served by the API apply the corrections (units, signs, frames
 > Scalar vs vector mean speed
 >
 > Cases C, D and E, and the tunnel part of Case F, measure with thermistor anemometers: an *omnidirectional scalar*
-> speed, not |mean velocity vector|. The data paper suggests comparing √(|U|² + 2k) as a conservative correction.
-> Case D, over the 33 points both instruments share: thermistor / |U| = 1.34, as a ratio of means.
-> Compare the bracket |U| ≤ Vs ≤ √(|U|² + 2k).
+> speed, not |mean velocity vector|. The data paper suggests comparing $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ as a conservative correction.
+> Case D, over the 33 points both instruments share: thermistor / $$\lvert\mathbf{U}\rvert$$ = 1.34, as a ratio of means.
+> Compare the bracket $$\lvert\mathbf{U}\rvert$$ ≤ $$V_{\mathrm{s}}$$ ≤ $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$.
 
 {: .warning-title }
 > Each case has its own frame and unit
@@ -40,7 +40,7 @@ The cleaned tables served by the API apply the corrections (units, signs, frames
 {: .warning-title }
 > Concentrations are normalised per case
 >
-> Cases H to M carry a tracer concentration `C` in ppm and `concentration_ratio` = C / c₀. c₀ is defined by each
+> Cases H to M carry a tracer concentration `C` in ppm and `concentration_ratio` = $$C/c_0$$. $$c_0$$ is defined by each
 > case's own release rate, reference speed and length (`normalisation` in `/api/cases/{id}.json`).
 > Case K: the workbook and its data paper use different reference scales (a factor of 23.6 apart).
 > Case M: field values are published in ppq and converted to ppm.
@@ -48,13 +48,13 @@ The cleaned tables served by the API apply the corrections (units, signs, frames
 
 ## Case A
 
-- V is positive toward +y (V = −2.893 m/s at (−0.040, −0.050, 0.010), just outside the y < 0 flank).
-- Coordinates are metres; turbulence columns are rms values. The API serves variances (uu = u_rms²) so A and B share
+- $$V$$ is positive toward +y ($$V$$ = −2.893 m/s at (−0.040, −0.050, 0.010), just outside the y < 0 flank).
+- Coordinates are metres; turbulence columns are rms values. The API serves variances (uu = $$u_{\mathrm{rms}}^2$$) so A and B share
   one column meaning.
 
 ## Case B
 
-- V is positive toward −y, the opposite of Case A. The API flips it (`lateral_sign_applied: -1`).
+- $$V$$ is positive toward −y, the opposite of Case A. The API flips it (`lateral_sign_applied: -1`).
 - Coordinates are millimetres (`x[mm]`); velocities are m/s. Read as metres, every probe lands 1000× too far out. The
   API serves metres (`coordinate_scale_applied: 0.001`).
 - Geometry was taken from each case's own measurement-point drawing (`MP-z_case*.png`). Both buildings are centred on
@@ -65,10 +65,10 @@ The cleaned tables served by the API apply the corrections (units, signs, frames
 
 Just outside the windward side face the flow must deflect away from the centreline, toward −y on the y < 0 flank.
 
-- Case A: V = **−2.893 m/s** at (−0.040, −0.050, 0.010), edge at y = −0.04.
-- Case B: V = **+3.630 m/s** at (−0.025, −0.110, 0.013), edge at y = −0.100.
+- Case A: $$V$$ = **−2.893 m/s** at (−0.040, −0.050, 0.010), edge at y = −0.04.
+- Case B: $$V$$ = **+3.630 m/s** at (−0.025, −0.110, 0.013), edge at y = −0.100.
 
-Same flow feature, opposite sign, so Case B's V is positive toward −y. Scored without the flip, Case B's V gives
+Same flow feature, opposite sign, so Case B's $$V$$ is positive toward −y. Scored without the flip, Case B's $$V$$ gives
 R = −0.910 against an R = +0.959 streamwise control on the same points, an anti-correlation no turbulence closure
 produces.
 
@@ -86,7 +86,7 @@ The geometry was not inferred from the CSV extents.
   WD rotates the wind from +x toward −y. WD = 0 is not affected.
 - 24 of the 120 points sit exactly on a building face plane (\|x\| = 0.30 or \|y\| = 0.30), in the gap between blocks.
 - The 0.40 m pitch is read from the drawing and the paper (street = D); the point grid alone bounds it to (0.35, 0.40].
-- Repeatability floor from the mirror-symmetric pairs: mean \|ΔVs\| 0.088–0.137 m/s (0.024–0.038 U_H).
+- Repeatability floor from the mirror-symmetric pairs: mean \|ΔVs\| 0.088–0.137 m/s (0.024–0.038 $$U_H$$).
 
 <details markdown="block">
 <summary>Data notes: Sense of the WD rotation</summary>
@@ -122,7 +122,7 @@ figure's sense it falls to −0.33 … +0.03.
 ## Case E
 
 - The velocity ratio is normalised by the inflow velocity at 15.9 m (the Niigata meteorological station height):
-  U(15.9 m) = 0.504531 × UR = 3.935 m/s with UR = 7.8 m/s at ZR = 250 m. The reference is neither U_H nor UR.
+  $$U(15.9\text{ m})$$ = 0.504531 × $$U_R$$ = 3.935 m/s with $$U_R$$ = 7.8 m/s at $$Z_R$$ = 250 m. The reference is neither $$U_H$$ nor $$U_R$$.
 - `case-e-eddy3d-prior-comparison.xlsx` (kept in the folder) divided by the wrong reference and is low by a factor of
   2.048.
 - All 2560 published ratios are integer multiples of 0.0198204 (55 distinct levels): the data's own resolution is

@@ -6,9 +6,21 @@
      defines jtd.setTheme, and swaps the stylesheet before the page is painted.
   3. The layout of the colour scheme button. The theme stylesheet is cached by the browser for minutes after a release, and an
      old copy has no rule for the button: it showed as a tall grey box with 4 px icons. The page itself always has these.
+  4. MathJax, when docs/_config.yml sets `mathjax`. kramdown writes a formula of the Markdown (between $$ and $$) as \( ... \) or
+     \[ ... \]; only those two delimiters are read, so a $$ that stays in the page (inside a block of raw HTML, where GitHub shows
+     it as it is too) is not typeset. The SVG output draws every glyph itself, so no font file is fetched.
 {%- endcomment -%}
 {%- if page.url == "/" -%}
 {% include dataset-jsonld.html %}
+{%- endif -%}
+{%- if site.mathjax -%}
+<script>
+window.MathJax = {
+  tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]], processEscapes: false },
+  svg: { fontCache: "global" }
+};
+</script>
+<script defer src="{{ site.mathjax.src }}" integrity="{{ site.mathjax.integrity }}" crossorigin="anonymous"></script>
 {%- endif -%}
 <style>
 .theme-toggle { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 2rem; height: 2rem; margin: 0 .5rem; padding: 0; border: 0; border-radius: 50%; background: none; color: inherit; cursor: pointer; }

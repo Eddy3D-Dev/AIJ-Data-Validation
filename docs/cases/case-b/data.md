@@ -28,13 +28,15 @@ description: "Case B — 1:4:4 slab: configuration, frame and units, reference d
 | Depth (m) | 0.05 |
 | Width (m) | 0.2 |
 | Height H (m) | 0.2 |
-| Reynolds number Re\_H | 72,000 |
-| U\_H (m/s) | 5.133 |
+| Reynolds number $$\mathrm{Re_H}$$ | 72,000 |
+| $$U_H$$ (m/s) | 5.133 |
 | Wind directions (°) | 0 |
 | Measurement planes | vertical centre plane y/H = 0, horizontal z/H = 1/16 |
 | Instrument | hot-wire anemometer, split-fibre probe, 100 Hz, 60 s per point |
 | Wind tunnel | Niigata Institute of Technology, Kashiwazaki |
 | Scale, note | model scale; Eddy3D solves it at 1:100 (H = 20 m) with the tunnel velocities |
+
+{% include nomenclature.md %}
 
 ## Frame and units
 
@@ -48,8 +50,10 @@ description: "Case B — 1:4:4 slab: configuration, frame and units, reference d
 | Coordinate scale applied | 0.001 |
 | Unit of length | m (model scale; converted from the published millimetres) |
 | Unit of velocity | m/s |
-| Unit of variance | m^2/s^2 |
-| Unit of k | m^2/s^2 |
+| Unit of variance | m²/s² |
+| Unit of $$k$$ | m²/s² |
+
+{% include nomenclature.md %}
 
 ## Reference data
 
@@ -68,23 +72,25 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 <details markdown="block">
   <summary>The 15 columns and what each holds</summary>
 
-| Column | Meaning |
-|---|---|
-| `point_id` | the tunnel\'s own measurement point number |
-| `config` | configuration key: \'default\', Case C centre building \'0D\'/\'1D\'/\'2D\', Case E state \'bc\' (before) / \'ac\' (after construction) |
-| `instrument` | \'split\_fibre\' (vector components) or \'thermistor\' (omnidirectional scalar speed) |
-| `wind_direction_deg` | AIJ wind direction in degrees; 0 is the case\'s reference direction (see frame) |
-| `x` | m, case frame |
-| `y` | m, case frame |
-| `z` | m above ground, case frame |
-| `U` | m/s, mean velocity along +x |
-| `V` | m/s, mean velocity along +y (sign unified: positive toward +y) |
-| `W` | m/s, mean velocity along +z |
-| `uu` | m^2/s^2, variance of u |
-| `vv` | m^2/s^2, variance of v |
-| `ww` | m^2/s^2, variance of w |
-| `k` | m^2/s^2, turbulent kinetic energy |
-| `campaign` | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
+| Column | Symbol | Meaning |
+|---|---|---|
+| `point_id` |  | the tunnel\'s own measurement point number |
+| `config` |  | configuration key: \'default\', Case C centre building \'0D\'/\'1D\'/\'2D\', Case E state \'bc\' (before) / \'ac\' (after construction) |
+| `instrument` |  | \'split\_fibre\' (vector components) or \'thermistor\' (omnidirectional scalar speed) |
+| `wind_direction_deg` |  | AIJ wind direction in degrees; 0 is the case\'s reference direction (see frame) |
+| `x` |  | m, case frame |
+| `y` |  | m, case frame |
+| `z` |  | m above ground, case frame |
+| `U` | $$U$$ | m/s, mean velocity along +x |
+| `V` | $$V$$ | m/s, mean velocity along +y (sign unified: positive toward +y) |
+| `W` | $$W$$ | m/s, mean velocity along +z |
+| `uu` | $$\overline{u'u'}$$ | m²/s², variance of u |
+| `vv` | $$\overline{v'v'}$$ | m²/s², variance of v |
+| `ww` | $$\overline{w'w'}$$ | m²/s², variance of w |
+| `k` | $$k$$ | m²/s², turbulent kinetic energy |
+| `campaign` |  | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
+
+{% include nomenclature.md %}
 
 </details>
 
@@ -92,17 +98,19 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | log law, kappa = 0.41, least squares over z = 0.02 ... 2H on the case\'s own approach-flow file |
-| Friction velocity u\* (m/s) | 0.399 |
-| Roughness length z₀ (mm) | 0.882 |
-| U\_H, measured (m/s) | 5.133 |
+| Method | log law, $$\kappa$$ = 0.41, least squares over z = 0.02 ... 2H on the case\'s own approach-flow file |
+| Friction velocity $$u_\ast$$ (m/s) | 0.399 |
+| Roughness length $$z_0$$ (mm) | 0.882 |
+| $$U_H$$, measured (m/s) | 5.133 |
 | Log-law error at H | +2.9 % |
+
+{% include nomenclature.md %}
 
 ## Known data issues
 
 - The published coordinates are MILLIMETRES (x\[mm\]) while velocities are m/s. The API serves metres (coordinate\_scale\_applied = 0.001). Read as metres, every probe lands 1000x too far out.
-- The published lateral velocity V is positive toward -y (V = +3.630 m/s at (-0.025, -0.110, 0.013), just outside the y \< 0 flank where the flow must deflect toward -y). The API multiplies V by -1 (lateral\_sign\_applied = -1) so that V is positive toward +y as in Case A. Scored without this, Case B\'s V comes out at R = -0.910 against R = +0.959 for U on the same points.
-- The RANS solution is symmetric, so model V = 0 on the centre plane while the tunnel measures small non-zero values there.
+- The published lateral velocity $$V$$ is positive toward -y ($$V$$ = +3.630 m/s at (-0.025, -0.110, 0.013), just outside the y \< 0 flank where the flow must deflect toward -y). The API multiplies $$V$$ by -1 (lateral\_sign\_applied = -1) so that $$V$$ is positive toward +y as in Case A. Scored without this, Case B\'s $$V$$ comes out at R = -0.910 against R = +0.959 for $$U$$ on the same points.
+- The RANS solution is symmetric, so model $$V$$ = 0 on the centre plane while the tunnel measures small non-zero values there.
 
 ## API
 

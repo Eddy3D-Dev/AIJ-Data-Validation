@@ -158,6 +158,8 @@ certificate type. The body is ASCII STL regardless; read it as such.
 | [`GET /api/openapi.json`]({{ '/api/openapi.json' | relative_url }}) | OpenAPI 3.1 description of every endpoint, with the schemas embedded |
 | [`GET /api/llms.txt`]({{ '/api/llms.txt' | relative_url }}) | plain-text entry point for agents (also at [`/llms.txt`]({{ '/llms.txt' | relative_url }})) |
 
+{% include nomenclature-scores.md %}
+
 An engine's status for a case is `scored` (a validation run exists and its scores are in `cases/{id}/validation.json`), `running` (the solve is in progress; no scores yet), `pending` (not run yet) or `not comparable` (the engine cannot produce the measured quantity at the measured location: OpenLB at the resolution this hardware runs, FluidX3D without a ground wall function; the measurements are on the [Validation]({{ '/validation/' | relative_url }}) page). An engine that is not `scored` has no result for that case.
 
 The engine ids are `openfoam12-realizableKE`, `openfoam12-kEpsilon` and `openfoam12-kOmegaSST` (the last two for Case I only), `umf-realizableKE` and `umf-buoyantKEpsilon` (UMF, urbanMicroclimateFoam, an OpenFOAM 12 solver and Eddy3D's engine for the non-isothermal Cases J and L; `umf-buoyantKEpsilon` for J only), `openlb`, `fluidx3d` and `ml-surrogate`. An engine is listed for a case only where it applies. Runs of one engine on one case that differ in a configuration (Case C's nine, Case F's two vertical frames, Case G's five arms, Case M's three Schmidt numbers) share the engine's pairs file. Each result has `notes`, the caveats that come with the run.
@@ -166,19 +168,21 @@ The engine ids are `openfoam12-realizableKE`, `openfoam12-kEpsilon` and `openfoa
 
 | Case | Points | Geometry | Validation |
 |---|---|---|---|
-| A | 186 rows: U, V, W, uu, vv, ww, k (variances; metres) | 1 box, 12 triangles: 0.08 × 0.08 × 0.16 m | OpenFOAM 12 realizable k-ε; OpenLB at dx = 1.6 m; FluidX3D at H/64; ML surrogate |
-| B | 224 rows: U, V, W, uu, vv, ww, k (converted from mm; V sign-unified to +y) | 1 box, 12 triangles: 0.05 × 0.20 × 0.20 m | OpenFOAM 12 realizable k-ε; OpenLB at dx = 1.6 m; FluidX3D at H/64; ML surrogate |
-| C | 1,080 rows: Vs over 9 configurations (`config` 0D/1D/2D × `wind_direction_deg` 0/22.5/45) | 3 STLs (0D: 8 cubes; 1D, 2D: 9 boxes) with box lists | OpenFOAM 12 realizable k-ε, each configuration (√(\|U\|²+2k) and \|U\| at each wind direction); ML surrogate |
-| D | 267 rows: 234 thermistor (78 points × 3 directions, 36 unmeasured) and 33 split-fibre with U, V, W, uu, vv, ww, k | 83 boxes, 996 triangles, watertight, rebuilt from the shipped STL | OpenFOAM 12 realizable k-ε at WD 0°, 22.5° and 45°; ML surrogate |
+| A | 186 rows: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$ (variances; metres) | 1 box, 12 triangles: 0.08 × 0.08 × 0.16 m | OpenFOAM 12 realizable k-ε; OpenLB at dx = 1.6 m; FluidX3D at H/64; ML surrogate |
+| B | 224 rows: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$ (converted from mm; $$V$$ sign-unified to +y) | 1 box, 12 triangles: 0.05 × 0.20 × 0.20 m | OpenFOAM 12 realizable k-ε; OpenLB at dx = 1.6 m; FluidX3D at H/64; ML surrogate |
+| C | 1,080 rows: $$V_{\mathrm{s}}$$ over 9 configurations (`config` 0D/1D/2D × `wind_direction_deg` 0/22.5/45) | 3 STLs (0D: 8 cubes; 1D, 2D: 9 boxes) with box lists | OpenFOAM 12 realizable k-ε, each configuration ($$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ and $$\lvert\mathbf{U}\rvert$$ at each wind direction); ML surrogate |
+| D | 267 rows: 234 thermistor (78 points × 3 directions, 36 unmeasured) and 33 split-fibre with $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$ | 83 boxes, 996 triangles, watertight, rebuilt from the shipped STL | OpenFOAM 12 realizable k-ε at WD 0°, 22.5° and 45°; ML surrogate |
 | E | 2,560 rows: velocity ratio over `config` bc/ac × 16 directions × 80 points; full-scale metres | 2 STLs from the 3dm (before: 8,396 triangles, 542 bodies; after: 8,432, 545 bodies), every body closed and outward; 11 edges where two buildings touch | OpenFOAM 12 realizable k-ε, wind from SW, before and after; ML surrogate |
 | F | 472 rows: `velocity_ratio` and `velocity_ratio_sd` at 13 points: 264 tunnel thermistor rows (planes at 5, 9 and 20 m) and 208 field cup-anemometer rows (`campaign`); full-scale metres | 1 STL, 56,250 triangles: terrain and buildings, outward, closed with a 1 m base slab below the rim | OpenFOAM 12 realizable k-ε, wind from NNW, in two vertical frames (`configuration`: `literal`, `agl`) |
 | G | 28 rows: `velocity_ratio` and `k_ratio` (sonic anemometers in the field; no speed in m/s is published) | 1 box, 12 triangles: the tree belt's 2 × 74 × 7 m envelope with its 1.2 m gap | OpenFOAM 12 realizable k-ε as a drag sweep: one run per arm (`configuration`: no belt, three crowns, the real belt as a half domain) |
-| H | 1,652 rows: 826 split-fibre rows (U, V, W, uu, vv, ww, k) and 826 hydrocarbon-analyser rows (`C`, `c_rms`, `concentration_ratio`) | 1 box, 12 triangles: 0.10 × 0.10 × 0.20 m | OpenFOAM 12 realizable k-ε (velocity, k and c\*) |
-| I | 630 rows: 91 LDV rows (U, V, W, k) and 539 hydrocarbon-analyser rows (`C`, `concentration_ratio`) | 1 box, 12 triangles: the 0.1 m cube | OpenFOAM 12 under realizable k-ε, standard k-ε and k-ω SST |
-| J | 444 rows: U, V, W, variances, k, concentration, temperature and their turbulent fluxes | 1 box, 12 triangles: 0.08 × 0.08 × 0.16 m | UMF under realizable k-ε (`umf-realizableKE`) and buoyantKEpsilon (`umf-buoyantKEpsilon`) |
-| K | 203 rows: U, V, W, variances, k and concentration | 81 cubes, 972 triangles, watertight | OpenFOAM 12 realizable k-ε (velocity, k and c\* at three turbulent Schmidt numbers) |
+| H | 1,652 rows: 826 split-fibre rows ($$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$) and 826 hydrocarbon-analyser rows (`C`, `c_rms`, `concentration_ratio`) | 1 box, 12 triangles: 0.10 × 0.10 × 0.20 m | OpenFOAM 12 realizable k-ε (velocity, $$k$$ and $$c^\ast$$) |
+| I | 630 rows: 91 LDV rows ($$U$$, $$V$$, $$W$$, $$k$$) and 539 hydrocarbon-analyser rows (`C`, `concentration_ratio`) | 1 box, 12 triangles: the 0.1 m cube | OpenFOAM 12 under realizable k-ε, standard k-ε and k-ω SST |
+| J | 444 rows: $$U$$, $$V$$, $$W$$, variances, $$k$$, concentration, temperature and their turbulent fluxes | 1 box, 12 triangles: 0.08 × 0.08 × 0.16 m | UMF under realizable k-ε (`umf-realizableKE`) and buoyantKEpsilon (`umf-buoyantKEpsilon`) |
+| K | 203 rows: $$U$$, $$V$$, $$W$$, variances, $$k$$ and concentration | 81 cubes, 972 triangles, watertight | OpenFOAM 12 realizable k-ε (velocity, $$k$$ and $$c^\ast$$ at three turbulent Schmidt numbers) |
 | L | 344 rows: as J, with the Reynolds shear stresses and concentration fluxes | 126 cubes, 1,512 triangles, watertight | UMF realizable k-ε (`umf-realizableKE`) |
 | M | 330 rows: 15 tunnel split-fibre rows, 45 tunnel hydrocarbon-analyser rows and 270 field sorbent-tube rows (`campaign`, `run`); full-scale metres | 1 STL, 43,950 triangles: the campus, outward, closed with a 1 m base slab | OpenFOAM 12 realizable k-ε, WD 180, one run per turbulent Schmidt number (`configuration`: `sct03`, `sct05`, `sct07`) |
+
+{% include nomenclature.md %}
 
 Examples in `curl` and Python are on the [Examples]({{ '/api-reference/examples/' | relative_url }}) page; the
 versions, the changelog and how the files are regenerated are under [Versions and changes]({{ '/api-reference/versions/' | relative_url }}).

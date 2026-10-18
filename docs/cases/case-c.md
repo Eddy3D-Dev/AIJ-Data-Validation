@@ -27,11 +27,13 @@ description: "3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestr
 | Fact | Value |
 |---|---|
 | Array | 3 x 3 cubes, D = 0.20 m, block centres at x, y in {-0.4, 0, +0.4} m (pitch 0.40 m = 2D, street width D) |
-| Reynolds number Re\_D | 52,000 |
-| U\_H (m/s) | 3.654 |
+| Reynolds number $$\mathrm{Re_D}$$ | 52,000 |
+| $$U_H$$ (m/s) | 3.654 |
 | Wind directions (°) | 0, 22.5, 45 |
 | Measurement height (m) | 0.02 |
-| Measured | 1,080 rows over 120 points: Vs |
+| Measured | 1,080 rows over 120 points: $$V_{\mathrm{s}}$$ |
+
+{% include nomenclature.md %}
 
 ## Validation
 
@@ -42,6 +44,8 @@ description: "3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestr
 | FluidX3D | <span class="label label-grey status">not comparable</span> | — | — | — |
 | ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | +0.07 … +0.21 | 0.44 … 0.88 |
 {: .scores }
+
+{% include nomenclature-scores.md %}
 
 {: .warning-title }
 > Before you compare

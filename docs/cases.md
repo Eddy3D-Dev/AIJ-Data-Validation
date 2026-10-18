@@ -14,8 +14,12 @@ facts as `/api/cases/{id}.json`.
 
 {% include cases-table.md %}
 
+{% include nomenclature.md %}
+
 ## Frames and units
 
 Each case has its own frame and unit. The API's `points.json` and STL files of a case share its frame.
 
 {% include cases-frames.md %}
+
+{% include nomenclature.md %}

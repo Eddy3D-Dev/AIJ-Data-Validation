@@ -25,11 +25,13 @@ Isolated 1:1:2 building with an ethylene point source on the floor behind it: ve
 | Fact | Value |
 |---|---|
 | Building | 1:1:2 (width : depth : height) prism, 0.10 × 0.10 × 0.20 m |
-| Reynolds number Re\_H | 43,000 |
-| U\_H (m/s) | 3.226 |
+| Reynolds number $$\mathrm{Re_H}$$ | 43,000 |
+| $$U_H$$ (m/s) | 3.226 |
 | Wind directions (°) | 0 |
 | Measurement planes | vertical centre plane y/H = 0, horizontal z/H = 1/16 (y in \[-0.2, 0.2\]), horizontal z/H = 1/4 and 1/2 (y in \[0, 0.2\]) |
-| Measured | 1,652 rows over 876 points: U, V, W, uu, vv, ww, k, C, c\_rms, concentration\_ratio |
+| Measured | 1,652 rows over 876 points: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$, $$C$$, $$c_{\mathrm{rms}}$$, $$c^\ast$$ |
+
+{% include nomenclature.md %}
 
 ## Validation
 
@@ -40,6 +42,8 @@ Isolated 1:1:2 building with an ethylene point source on the floor behind it: ve
 | FluidX3D | <span class="label label-yellow status">pending</span> | — | — | — |
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
+
+{% include nomenclature-scores.md %}
 
 {: .warning-title }
 > Before you compare

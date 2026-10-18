@@ -30,14 +30,16 @@ description: "Case F — Shinjuku district: configuration, frame and units, refe
 | Points | 13 |
 | point numbers | 1-3, 5-11, 13-15 (4 and 12 absent; points 16 and later belong to later construction stages and are not in the dataset) |
 | Wind directions | N, NNE, NE, ENE, SE, SSE, S, SSW, SW, WNW, NW, NNW |
-| wind directions field | N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW |
+| wind directions field | N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, $$W$$, WNW, NW, NNW |
 | measurement planes above ground m | 5, 9, 20 |
 | measurement planes z m | 15, 19, 30 |
 | ground offset m | 10 |
-| Normalisation | velocity ratio = mean speed / the approaching mean speed at the boundary-layer height 500 m (full scale); the field values were converted to it with the tunnel (readme). U(500 m) is 10 m/s in the data paper and 10.65 m/s implied by the profile |
+| Normalisation | velocity ratio = mean speed / the approaching mean speed at the boundary-layer height 500 m (full scale); the field values were converted to it with the tunnel (readme). $$U(500\text{ m})$$ is 10 m/s in the data paper and 10.65 m/s implied by the profile |
 | Instrument | tunnel: thermistor anemometer, 30 s averaging; field: three-cup anemometer with wind vane, 10-minute means above 5 m/s at the reference roof, December 1977 - November 1978 |
 | Wind tunnel | Shimizu Corporation wind tunnel; cross-section 1.55 m wide, 2.2 m high; power-law inflow, exponent 1/4 |
 | reference roofs | **SMB**: Shinjuku-Mitsui Building, roof G.L.+210 m, anemometer G.L.+237 m, for NW-NE<br>**KDD**: KDD Building, roof G.L.+165 m, anemometer G.L.+187 m, for the other directions |
+
+{% include nomenclature.md %}
 
 ## Frame and units
 
@@ -51,8 +53,10 @@ description: "Case F — Shinjuku district: configuration, frame and units, refe
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 800.0 |
 | Unit of length | m (FULL scale) |
-| Unit of velocity ratio | dimensionless |
-| Unit of velocity ratio sd | dimensionless |
+| Unit of $$U/U_{\mathrm{ref}}$$ | dimensionless |
+| Unit of $$\sigma_{U/U_{\mathrm{ref}}}$$ | dimensionless |
+
+{% include nomenclature.md %}
 
 ## Reference data
 
@@ -60,7 +64,7 @@ Source in this repository: [`raw/cases/case-f/RS-WT_caseF.csv`](https://github.c
 
 The cleaned table has **472 rows** over **13 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction`, `wind_direction_deg`, `x`, `y`, `z`, `velocity_ratio`, `campaign`, `velocity_ratio_sd`.
 
-Unmeasured cells (null): velocity_ratio_sd 264.
+Unmeasured cells (null): `velocity_ratio_sd` 264.
 
 <details markdown="block">
   <summary>The 40 configurations and their points</summary>
@@ -117,19 +121,21 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 <details markdown="block">
   <summary>The 11 columns and what each holds</summary>
 
-| Column | Meaning |
-|---|---|
-| `point_id` | the tunnel\'s own measurement point number |
-| `config` | configuration key: \'default\', Case C centre building \'0D\'/\'1D\'/\'2D\', Case E state \'bc\' (before) / \'ac\' (after construction) |
-| `instrument` | \'split\_fibre\' (vector components) or \'thermistor\' (omnidirectional scalar speed) |
-| `wind_direction` | compass name of the direction the wind comes FROM (Case E) |
-| `wind_direction_deg` | AIJ wind direction in degrees; 0 is the case\'s reference direction (see frame) |
-| `x` | m, case frame |
-| `y` | m, case frame |
-| `z` | m above ground, case frame |
-| `velocity_ratio` | dimensionless, mean speed over the case\'s reference speed (Case E: Vs / U(15.9 m), U(15.9 m) = 3.935 m/s; see the case\'s normalisation) |
-| `campaign` | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
-| `velocity_ratio_sd` | standard deviation of velocity\_ratio over the observations behind a field value (Case F) |
+| Column | Symbol | Meaning |
+|---|---|---|
+| `point_id` |  | the tunnel\'s own measurement point number |
+| `config` |  | configuration key: \'default\', Case C centre building \'0D\'/\'1D\'/\'2D\', Case E state \'bc\' (before) / \'ac\' (after construction) |
+| `instrument` |  | \'split\_fibre\' (vector components) or \'thermistor\' (omnidirectional scalar speed) |
+| `wind_direction` |  | compass name of the direction the wind comes FROM (Case E) |
+| `wind_direction_deg` |  | AIJ wind direction in degrees; 0 is the case\'s reference direction (see frame) |
+| `x` |  | m, case frame |
+| `y` |  | m, case frame |
+| `z` |  | m above ground, case frame |
+| `velocity_ratio` | $$U/U_{\mathrm{ref}}$$ | dimensionless, mean speed over the case\'s reference speed (Case E: $$V_{\mathrm{s}}/U(15.9\text{ m})$$, $$U(15.9\text{ m})$$ = 3.935 m/s; see the case\'s normalisation) |
+| `campaign` |  | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
+| `velocity_ratio_sd` | $$\sigma_{U/U_{\mathrm{ref}}}$$ | standard deviation of `velocity_ratio` over the observations behind a field value (Case F) |
+
+{% include nomenclature.md %}
 
 </details>
 
@@ -140,8 +146,10 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | Method | power law on the 18 published heights (z 10 ... 400 m full scale); the data paper states exponent 1/4 |
 | Power-law exponent, fitted | 0.277 |
 | Power-law exponent, data paper | 0.25 |
-| U 500m m s | **data paper**: 10.0<br>**implied by profile**: 10.65 |
-| Note | AF\_caseF.csv stops at 400 m (U = 10.0 m/s); the workbook\'s U/UR profile (0.94 at 400 m) puts the 500 m speed at 10.65 m/s |
+| $$U$$ 500m m s | **data paper**: 10.0<br>**implied by profile**: 10.65 |
+| Note | AF\_caseF.csv stops at 400 m ($$U$$ = 10.0 m/s); the workbook\'s $$U/U_R$$ profile (0.94 at 400 m) puts the 500 m speed at 10.65 m/s |
+
+{% include nomenclature.md %}
 
 ## Known data issues
 
@@ -154,7 +162,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 - The tunnel did not run E, ESE, WSW or W; the field data cover all 16. The 5 m and 20 m planes exist at some points only (29 and 79 rows).
 - One tunnel value (point 8, SW, 9 m: 0.474) has no counterpart in the workbook\'s results sheet, and the flat \'Sheet1\' table has 0.63 there.
 - Field anemometer heights above the tunnel floor are 13 - 21 m (3 - 11 m above ground by the readme\'s rule); the data paper says 3 - 9 m, so points 13 and 14 (11 m) disagree.
-- The thermistor reads a SCALAR speed and the cup anemometer a 10-minute mean: a RANS \|U\| is biased low against both.
+- The thermistor reads a SCALAR speed and the cup anemometer a 10-minute mean: a RANS $$\lvert\mathbf{U}\rvert$$ is biased low against both.
 - The files do not say whether a wind direction names where the wind comes from. The cleaned tables read it as the direction the wind comes from (N = 0, E = 90). At NNW a solved field supports that reading: Eddy3D\'s OpenFOAM 12 run for the wind from NNW correlates R 0.935 with the tunnel\'s 9 m column labelled NNW and R 0.077 with its column labelled SSE, the opposite wind (clean/QUESTIONS.md QF9); the other directions are not solved and stay unverified.
 
 ## API

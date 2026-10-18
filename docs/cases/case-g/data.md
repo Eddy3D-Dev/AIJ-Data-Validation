@@ -36,9 +36,11 @@ description: "Case G — flow behind a tree belt: configuration, frame and units
 | measurement heights m | 1.5, 3.0, 4.5, 6.0 |
 | Points | 28 |
 | Instrument | 3-D ultrasonic anemometers (KAIJO DA-600 with TR-90Tx) at four heights on a movable tower, 5 Hz, 10 min or more per line (26 Dec 2000); approach flow 120 min (28 Dec 2000) at 1.5, 3, 6, 9 m |
-| Normalisation | velocity\_ratio = U/UH and k\_ratio = k/UH^2, UH = the mean wind speed at 7 m during each measurement period (interpolated with the approach flow\'s power law, index 0.22); nothing is published in m/s |
-| approach flow normalisation | AF\_caseG.csv is U/Ub and k/Ub^2 with Ub = U at 9 m; divide by UH/Ub = 0.946 (power law 0.22) for the table\'s normalisation |
+| Normalisation | `velocity_ratio` = $$U/U_H$$ and `k_ratio` = $$k/U_H^2$$, $$U_H$$ = the mean wind speed at 7 m during each measurement period (interpolated with the approach flow\'s power law, index 0.22); nothing is published in m/s |
+| approach flow normalisation | AF\_caseG.csv is $$U/U_b$$ and $$k/U_b^2$$ with $$U_b$$ = $$U$$ at 9 m; divide by $$U_H/U_b$$ = 0.946 (power law 0.22) for the table\'s normalisation |
 | Scale, note | full scale: a field observation, there is no model |
+
+{% include nomenclature.md %}
 
 ## Frame and units
 
@@ -52,8 +54,10 @@ description: "Case G — flow behind a tree belt: configuration, frame and units
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 1.0 |
 | Unit of length | m (full scale) |
-| Unit of velocity ratio | dimensionless, U/UH |
-| Unit of k ratio | dimensionless, k/UH^2 |
+| Unit of $$U/U_{\mathrm{ref}}$$ | dimensionless, $$U/U_H$$ |
+| Unit of $$k/U_{\mathrm{ref}}^2$$ | dimensionless, $$k/U_H^2$$ |
+
+{% include nomenclature.md %}
 
 ## Reference data
 
@@ -72,18 +76,20 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 <details markdown="block">
   <summary>The 10 columns and what each holds</summary>
 
-| Column | Meaning |
-|---|---|
-| `point_id` | the tunnel\'s own measurement point number |
-| `config` | configuration key: \'default\', Case C centre building \'0D\'/\'1D\'/\'2D\', Case E state \'bc\' (before) / \'ac\' (after construction) |
-| `instrument` | \'split\_fibre\' (vector components) or \'thermistor\' (omnidirectional scalar speed) |
-| `wind_direction_deg` | AIJ wind direction in degrees; 0 is the case\'s reference direction (see frame) |
-| `x` | m, case frame |
-| `y` | m, case frame |
-| `z` | m above ground, case frame |
-| `velocity_ratio` | dimensionless, mean speed over the case\'s reference speed (Case E: Vs / U(15.9 m), U(15.9 m) = 3.935 m/s; see the case\'s normalisation) |
-| `campaign` | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
-| `k_ratio` | k / U\_ref^2 where the dataset publishes only normalised values (Case G; U\_ref = U at the tree height) |
+| Column | Symbol | Meaning |
+|---|---|---|
+| `point_id` |  | the tunnel\'s own measurement point number |
+| `config` |  | configuration key: \'default\', Case C centre building \'0D\'/\'1D\'/\'2D\', Case E state \'bc\' (before) / \'ac\' (after construction) |
+| `instrument` |  | \'split\_fibre\' (vector components) or \'thermistor\' (omnidirectional scalar speed) |
+| `wind_direction_deg` |  | AIJ wind direction in degrees; 0 is the case\'s reference direction (see frame) |
+| `x` |  | m, case frame |
+| `y` |  | m, case frame |
+| `z` |  | m above ground, case frame |
+| `velocity_ratio` | $$U/U_{\mathrm{ref}}$$ | dimensionless, mean speed over the case\'s reference speed (Case E: $$V_{\mathrm{s}}/U(15.9\text{ m})$$, $$U(15.9\text{ m})$$ = 3.935 m/s; see the case\'s normalisation) |
+| `campaign` |  | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
+| `k_ratio` | $$k/U_{\mathrm{ref}}^2$$ | $$k/U_{\mathrm{ref}}^2$$ where the dataset publishes only normalised values (Case G; $$U_{\mathrm{ref}}$$ = $$U$$ at the tree height) |
+
+{% include nomenclature.md %}
 
 </details>
 
@@ -91,19 +97,21 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | power law on the four published heights (1.5, 3, 6, 9 m) of U/Ub; the readme states the index 0.22 |
+| Method | power law on the four published heights (1.5, 3, 6, 9 m) of $$U/U_b$$; the readme states the index 0.22 |
 | power law index fitted | 0.2073 |
 | power law index stated | 0.22 |
-| UH over Ub power law 0.22 | 0.9462 |
-| UH over Ub log interpolation | 0.938 |
+| $$U_H$$ over $$U_b$$ power law 0.22 | 0.9462 |
+| $$U_H$$ over $$U_b$$ log interpolation | 0.938 |
 | Note | derived during cleaning, not published as a fit; the profile carries 2 decimals, so the fitted index is good to about +/-0.01 |
+
+{% include nomenclature.md %}
 
 ## Known data issues
 
-- FIELD data: full-scale metres, no model, and nothing in m/s. The table carries U/UH (velocity\_ratio) and k/UH^2 (k\_ratio), UH = the mean speed at 7 m during each period; the approach-flow table carries U/Ub and k/Ub^2 (Ub = U at 9 m) in its U and k columns, which are dimensionless here.
+- FIELD data: full-scale metres, no model, and nothing in m/s. The table carries $$U/U_H$$ (`velocity_ratio`) and $$k/U_H^2$$ (`k_ratio`), $$U_H$$ = the mean speed at 7 m during each period; the approach-flow table carries $$U/U_b$$ and $$k/U_b^2$$ ($$U_b$$ = $$U$$ at 9 m) in its $$U$$ and $$k$$ columns, which are dimensionless here.
 - The readme lists the heights of the lee measurement as 1.5, 3.0, 6.0, 9.0 m; the table, the workbook, the drawing and the data paper have 1.5, 3, 4.5, 6 m.
 - The tree belt is a porous canopy (shading rate 81 % after pruning): the served geometry is its 2 m × 74 m × 7 m envelope with the 1.2 m gap, and a solver needs a canopy (drag) model.
-- The approach profile (28 Dec 2000, 120 min) and the lee measurements (26 Dec 2000, 10 min or more) are from different days. Behind the belt k/UH^2 is 0.040-0.072 at 5 H, 3-8 times below the approach flow\'s 0.26-0.31 at the same heights; the files do not say why.
+- The approach profile (28 Dec 2000, 120 min) and the lee measurements (26 Dec 2000, 10 min or more) are from different days. Behind the belt $$k/U_H^2$$ is 0.040-0.072 at 5 H, 3-8 times below the approach flow\'s 0.26-0.31 at the same heights; the files do not say why.
 - Only 28 numbers per quantity exist, on one centre section, one time-average each, with no repeats and no uncertainty.
 - The wind direction relative to the belt normal during the measurement is not published; the case is two-dimensional by assumption.
 

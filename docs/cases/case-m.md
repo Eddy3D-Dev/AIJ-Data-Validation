@@ -25,10 +25,12 @@ Tracer-gas release on the Tokyo Polytechnic University Atsugi campus: 1:600 tunn
 | Fact | Value |
 |---|---|
 | Scale | 1:600 |
-| Normalisation | concentration ratio = C / c0, c0 = q / (U\_R H\_R^2): 132.5 ppm in the tunnel (the paper rounds to 1.33e2); per run in the field (1,444 ... 7,379 ppq) |
+| Normalisation | concentration ratio = $$C/c_0$$, $$c_0 = \dfrac{q}{U_R H_R^2}$$: 132.5 ppm in the tunnel (the paper rounds to 1.33e2); per run in the field (1,444 ... 7,379 ppq) |
 | Wind directions (°) | 175, 180, 185 |
 | Measurement height (m) | 3 |
-| Measured | 330 rows over 15 points: U, V, W, uu, vv, ww, k, C, c\_rms, concentration\_ratio |
+| Measured | 330 rows over 15 points: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$, $$C$$, $$c_{\mathrm{rms}}$$, $$c^\ast$$ |
+
+{% include nomenclature.md %}
 
 ## Validation
 
@@ -40,6 +42,8 @@ Tracer-gas release on the Tokyo Polytechnic University Atsugi campus: 1:600 tunn
 | FluidX3D | <span class="label label-yellow status">pending</span> | — | — | — |
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
+
+{% include nomenclature-scores.md %}
 
 {: .warning-title }
 > Before you compare

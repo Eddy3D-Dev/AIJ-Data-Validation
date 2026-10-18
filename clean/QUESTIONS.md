@@ -63,16 +63,16 @@ collector's own word, and for which half of the 0° plane was measured.
    used here (`geometry_bc_3dm.stl`) is the 3dm's `buildings` layer with the three sites empty. Is
    that what stood in the tunnel for the "bc" runs, or were there earlier buildings on the sites?
 4. `RS_caseE.csv` on Zenodo is the workbook rounded to 2 dp (max |Δ| 0.00497); the workbook's values
-   are exact multiples of 0.0198204 (= U/UR at 0.01 resolution re-normalised by UR / U(15.9 m), which
-   gives U(15.9 m) = 3.935 m/s; the paper says 4.0). Which U_ref was used, and is the workbook the
+   are exact multiples of 0.0198204 (= $$U/U_R$$ at 0.01 resolution re-normalised by $$U_R/U(15.9\text{ m})$$, which
+   gives $$U(15.9\text{ m})$$ = 3.935 m/s; the paper says 4.0). Which $$U_{\mathrm{ref}}$$ was used, and is the workbook the
    authoritative precision?
 
 ## Q4 — Case B: lateral sign and the seven repeated points (Tominaga)
 
-1. The published V appears positive toward −y: V = +3.630 m/s at (−25, −110, 12.5) mm, just outside
-   the y = −100 mm flank where the flow must deflect away from the centreline. Case A (V = −2.893 at
-   the equivalent point) and Case D (V = +2.055 on the +y flank) both read positive toward +y. This
-   release flips B's V. Please confirm the sign convention of V in `RS_caseB.csv` (or whether the
+1. The published $$V$$ appears positive toward −y: $$V$$ = +3.630 m/s at (−25, −110, 12.5) mm, just outside
+   the y = −100 mm flank where the flow must deflect away from the centreline. Case A ($$V$$ = −2.893 at
+   the equivalent point) and Case D ($$V$$ = +2.055 on the +y flank) both read positive toward +y. This
+   release flips B's $$V$$. Please confirm the sign convention of $$V$$ in `RS_caseB.csv` (or whether the
    published points are on the +y half rather than the −y half of the drawing).
 2. Seven locations appear twice with different values: the foot of each vertical-section profile
    (z = 12.5 mm, y = 0; points 12, 43, 56, 69, 82, 95, 108) and the horizontal-plane centreline
@@ -82,13 +82,13 @@ collector's own word, and for which half of the 0° plane was measured.
 ## Q5 — Case C: what reference speed did the legacy workbook use? (Nonomura)
 
 `LF-caseC.xls` publishes velocity ratios "normalized by the inflow velocity at the same height".
-Multiplying by U(0.02 m) = 2.434 m/s from `AF_caseC.csv` reproduces the CSV's Vs only to 0.3 %:
-Vs / ratio spans 2.4145–2.4525 m/s across the 1,080 values, so the ratios seem to use a per-run
-reference. Is that so, and are the CSV's 2-dp Vs values the raw measurements?
+Multiplying by $$U(0.02\text{ m})$$ = 2.434 m/s from `AF_caseC.csv` reproduces the CSV's $$V_{\mathrm{s}}$$ only to 0.3 %:
+$$V_{\mathrm{s}}$$ / ratio spans 2.4145–2.4525 m/s across the 1,080 values, so the ratios seem to use a per-run
+reference. Is that so, and are the CSV's 2-dp $$V_{\mathrm{s}}$$ values the raw measurements?
 
 ## Q6 — Case D: the split-fibre "Scalar Vel." column (Tominaga)
 
-`RS-S_caseD.csv`'s `Vs` and the workbook's `Scalar Vel.` equal √(U²+V²+W²) to 1e-15 at all 33
+`RS-S_caseD.csv`'s `Vs` and the workbook's `Scalar Vel.` equal $$\sqrt{U^2+V^2+W^2}$$ to 1e-15 at all 33
 points, so they are the vector magnitude, not a thermistor reading, and are dropped here. Is that
 right? (The thermistor readings at the same 33 points are in `RS-T_caseD.csv`; their ratio to the
 magnitude averages 1.34.)
@@ -120,7 +120,7 @@ as published (every other point: 0.63 … 0.93) and 0.72 with the workbook's ali
 
 ## QF2 — Case F: tunnel value of point 8, SW, 9 m (Okaze)
 
-`RS-WT_caseF.csv` has U/R = 0.474 at (8, SW, z = 0.02375 m). The workbook's 'Results' sheet is blank for it (as for
+`RS-WT_caseF.csv` has $$U$$/R = 0.474 at (8, SW, z = 0.02375 m). The workbook's 'Results' sheet is blank for it (as for
 the 'Other' column), and its flat 'Sheet1' table gives 0.63 (× 0.9629 = 0.607). The 155 other 9 m rows all reproduce
 from the workbook within 0.014. Is the value 0.474, 0.607, or was the point not measured at SW?
 
@@ -164,9 +164,9 @@ heights above the local ground?
 ## QF8 — Case F: the reference speed and the conversion factors (Okaze)
 
 The ratios are normalised by the approaching speed at 500 m. The data paper gives it as 10 m/s; `AF_caseF.csv` reaches 400 m
-at 10.0 m/s, and combined with the workbook's U/UR profile (0.94 at 400 m) the 18 shared heights imply U(500 m) = 10.65 m/s
+at 10.0 m/s, and combined with the workbook's $$U/U_R$$ profile (0.94 at 400 m) the 18 shared heights imply $$U(500\text{ m})$$ = 10.65 m/s
 (10.59 … 10.73). The field values are the workbook's roof-anemometer ratios times 0.9397 (SMB sector, interval
-[0.93947, 0.94000]) and 0.9629 (KDD, [0.96250, 0.96324]), which the readme describes without giving. What are U(500 m) in m/s and the two
+[0.93947, 0.94000]) and 0.9629 (KDD, [0.96250, 0.96324]), which the readme describes without giving. What are $$U(500\text{ m})$$ in m/s and the two
 factors, and what height does AF_caseF.csv's last row stand for?
 
 ## QF9 — Case F: direction sense (Okaze)
@@ -199,8 +199,8 @@ Was the tunnel source at ground level, on a roof, or 1.5 m high (0.0025 m model)
 `LC_caseM.csv` puts the reference point R at ground + 41 m (z = 72.90 m). The STL's main-building roof under R is at 64.92 m, 33.0 m
 above the same ground, so R is 8.0 m above the roof; Table 1 of the data paper says Hmax = 41 m and the readme "reference building
 height", while the tallest surface of the STL is 31.8 m above the origin's ground. Is 41 m the anemometer height (a mast on a 33 m roof)? The
-workbook's c0 uses H_R = 0.068 m (41 m / 600 = 0.06833 m would give c0 = 131.2 ppm instead of 132.5, the paper's 1.33 × 10² ppm):
-which H_R was meant for the tunnel?
+workbook's $$c_0$$ uses $$H_R$$ = 0.068 m (41 m / 600 = 0.06833 m would give $$c_0$$ = 131.2 ppm instead of 132.5, the paper's 1.33 × 10² ppm):
+which $$H_R$$ was meant for the tunnel?
 
 ## QM3 — Case M: backgrounds and baselines (Yoshie)
 
@@ -211,7 +211,7 @@ baseline subtracted, and is the rms at those points noise or intermittency?
 
 ## QM4 — Case M: the rounding of the field's run conditions (Yoshie)
 
-`RS-FO_caseM.csv` gives U_R to 0.01 m/s (the workbook's values are multiples of 1/30 m/s, i.e. means of three values), WD_R to 0.1° and q to
+`RS-FO_caseM.csv` gives $$U_R$$ to 0.01 m/s (the workbook's values are multiples of 1/30 m/s, i.e. means of three values), $$\mathrm{WD_R}$$ to 0.1° and q to
 three significant digits. The cleaned table carries the workbook's. Are the workbook's the sonic anemometer's 10-minute values averaged
 over three periods?
 
@@ -219,14 +219,14 @@ over three periods?
 
 `AF_caseM.csv` is at x = −0.498 m, y = 0, with z "above the wind-tunnel floor". In `BD_caseM.stl` the model's upwind taper is 0.0521 m high at that
 station, so the 10 lowest of the 40 heights (0.005 to 0.05 m) are below the model's ground there. Was the profile measured on the empty floor
-(without the model), and is its U(z) the inlet for the ground at z = 0 or for the model's terrain? The profile at the height of R (0.1215 m)
-gives 3.94 m/s against U_R = 4.08 m/s measured at R above the model.
+(without the model), and is its $$U$$(z) the inlet for the ground at z = 0 or for the model's terrain? The profile at the height of R (0.1215 m)
+gives 3.94 m/s against $$U_R$$ = 4.08 m/s measured at R above the model.
 
 ## QM6 — Case M: direction convention (Yoshie)
 
 The frame used here is +x north, +y west with WD the direction the wind comes from (the compass rose of `MP_caseM.png` and the plume's
-lateral shift with WD in the tunnel and the field agree). Please confirm that WD_R of the field runs and WD of the tunnel are the same
-meteorological direction, and that the sign of V in `RS-WT_caseM.csv` is positive toward +y (west).
+lateral shift with WD in the tunnel and the field agree). Please confirm that $$\mathrm{WD_R}$$ of the field runs and WD of the tunnel are the same
+meteorological direction, and that the sign of $$V$$ in `RS-WT_caseM.csv` is positive toward +y (west).
 
 ## Cases G, H and I
 
@@ -242,45 +242,45 @@ the fourth anemometer's height on the movable tower, and was nothing measured at
 
 ### QG2 — Case G: the turbulence of the approach flow against the lee (Kurotani, Kiyota)
 
-`AF_caseG.csv` gives k/Ub² = 0.20-0.28 (120 min, 28 Dec 2000, four heights up to 9 m). Converted to the table's normalisation
-(k/UH², UH/Ub = 0.946) that is 0.26-0.31 at 1.5-6 m. Behind the belt, five tree heights downwind (x = 35 m), `RS_caseG.csv` has k/UH²
+`AF_caseG.csv` gives $$k/U_b^2$$ = 0.20-0.28 (120 min, 28 Dec 2000, four heights up to 9 m). Converted to the table's normalisation
+($$k/U_H^2$$, $$U_H/U_b$$ = 0.946) that is 0.26-0.31 at 1.5-6 m. Behind the belt, five tree heights downwind (x = 35 m), `RS_caseG.csv` has $$k/U_H^2$$
 = 0.040, 0.043, 0.054 and 0.072: 3 to 8 times lower at every height, although a windbreak's wake should not be quieter than the wind
 it breaks (check `far_lee_turbulence_recovers_to_at_least_half_the_approach_flow`, a documented warning). The two records are two
-days apart (28 and 26 Dec 2000) and 120 against 10 minutes. **Question:** are the two k comparable (same definition: all three
+days apart (28 and 26 Dec 2000) and 120 against 10 minutes. **Question:** are the two $$k$$ comparable (same definition: all three
 components? same detrending and averaging time?), or should the approach profile not be used to set a CFD inlet's turbulence?
 Also, `Uxyz` is called 'mean scalar velocity': is it |mean vector| or the mean of the instantaneous speed?
 
 ### QG3 — Case G: the wind direction and UH (Kurotani, Kiyota)
 
 The readme says each line is normalised by the mean speed at 7 m "during the measurement period"; no value in m/s, no wind direction
-and no angle to the belt's normal is published, and the measurement lines are one-dimensional (y = 0). **Question:** what were UH
+and no angle to the belt's normal is published, and the measurement lines are one-dimensional (y = 0). **Question:** what were $$U_H$$
 (seven lines) and the wind direction relative to the belt's normal? This release states the direction as `unverified` in
 `directions.csv`.
 
 ### QG4 — Case G: an absolute Ub, and the canopy (Kurotani, Kiyota)
 
-The workbook's `Geometry` sheet carries the Guidebook's inflow note: `U(z) = Ub (z/Hb)^0.22`, `K = 3.02 [m2/s2]`. If K is the k at 9 m,
-Ub = sqrt(3.02 / 0.20) = 3.89 m/s (check `workbook_inflow_K_is_3.02_and_implies_Ub_3.9_ms`); this is derived here, not published.
+The workbook's `Geometry` sheet carries the Guidebook's inflow note: `U(z) = Ub (z/Hb)^0.22`, `K = 3.02 [m2/s2]`. If K is the $$k$$ at 9 m,
+$$U_b$$ = sqrt(3.02 / 0.20) = 3.89 m/s (check `workbook_inflow_K_is_3.02_and_implies_Ub_3.9_ms`); this is derived here, not published.
 **Question:** is that the intended reading? And: the data paper gives a shading rate of 81 % after pruning; is a leaf-area-density or a
 drag-coefficient profile of the trimmed belt on record for canopy models?
 
 ### QH1 — Case H: the sign of V on the vertical plane (Yoshie)
 
-At the 40 points the `y=0H` sheet shares with the horizontal-plane sheets, U, W, k and C agree to the last digit and **V has the
+At the 40 points the `y=0H` sheet shares with the horizontal-plane sheets, $$U$$, $$W$$, $$k$$ and $$C$$ agree to the last digit and **$$V$$ has the
 opposite sign** (0.00206 against -0.00206; check `vertical_plane_V_is_the_exact_negative_of_the_horizontal_planes_V_at_the_shared_points`,
-`max |V1 + V2| = 0`). The horizontal planes' V has the sign of y upwind of the building (flow diverging around it: check
+`max |V1 + V2| = 0`). The horizontal planes' $$V$$ has the sign of y upwind of the building (flow diverging around it: check
 `lateral_sign_V_positive_toward_plus_y`) and is continuous with its neighbours at y = +/-25 mm (r = +0.66; the vertical plane's is
--0.66, 14 points). This release multiplies the 207 velocity rows of point numbers 1-220 by -1, so V is positive toward +y everywhere.
-**Question:** is V on the vertical plane (`y=0H`, `RS_caseH.csv` point numbers 1-220) positive toward -y?
+-0.66, 14 points). This release multiplies the 207 velocity rows of point numbers 1-220 by -1, so $$V$$ is positive toward +y everywhere.
+**Question:** is $$V$$ on the vertical plane (`y=0H`, `RS_caseH.csv` point numbers 1-220) positive toward -y?
 
 ### QH2 — Case H: which file is the data? (Yoshie)
 
-1. On the z/H = 1/2 and 1/4 planes (and in the approach profile) `RS_caseH.csv`'s U, V, W are the workbook's ratios rounded to 0.01 and then
+1. On the z/H = 1/2 and 1/4 planes (and in the approach profile) `RS_caseH.csv`'s $$U$$, $$V$$, $$W$$ are the workbook's ratios rounded to 0.01 and then
    multiplied by uH = 3.226 m/s, a 0.032 m/s grid (check `csv_velocity_on_the_z_0.5H_and_z_0.25H_planes_is_the_ratio_rounded_to_0.01_then_scaled`:
    632 values differ from the exact ones by more than the 2 dp rounding, by up to 0.021 m/s); on the other two planes the CSV is the
    exact ratio x uH to 2 dp. This release takes the workbook. Is the workbook the authoritative precision?
 2. The y = 0, z = 0.1 m line (13 locations with velocity, 13 with concentration) is in two sheets and appears twice in the CSV (point
-   numbers 18 & 221, 31 & 231, ...), identical once V's sign is aligned: one record or two runs? The CSV drops the same duplicate
+   numbers 18 & 221, 31 & 231, ...), identical once $$V$$'s sign is aligned: one record or two runs? The CSV drops the same duplicate
    on the 1/4 and 1/16 planes (29 workbook rows) but keeps it on the 1/2 plane.
 3. The workbook's z/H = 1/16 sheet labels 19 concentration-only rows x = 400 mm; the CSV, and every other plane, put the
    concentration line at x = 380 mm and the velocity line at x = 400 mm. A labelling slip in the workbook (read as 380 here)? Why are the
@@ -291,25 +291,25 @@ opposite sign** (0.00206 against -0.00206; check `vertical_plane_V_is_the_exact_
 Upwind of the building, where the true concentration is zero, the analyser reads +/-0.1 ppm (median |c| 0.12, mean +0.067) and 97 of 826
 values are negative, down to -0.83 ppm (check `upwind_concentration_is_the_analyser_offset_not_tracer`). **Question:** is the baseline
 subtracted, and what detection limit or floor do you recommend for geometric statistics (MG, VG)? Also: the workbook's `<c>/Co`
-column divides by 45.1773 ppm, its parameter sheet says c0 = 45.1798 ppm (uH = 3.226) and the paper 45.2: which c0 is intended (the
+column divides by 45.1773 ppm, its parameter sheet says $$c_0$$ = 45.1798 ppm (uH = 3.226) and the paper 45.2: which $$c_0$$ is intended (the
 difference is 0.006 %)? And the workbook's `inflow` sheet labels its z column `z(mm)` but holds metres.
 
 ### QI1 — Case I: the release rate (Kondo, Mutou, Hori)
 
-The paper says "10 % ethane was released at 6.67e-6 m3/s" and c0 = q/(UH H²) = 39.2 ppm. With q = 6.67e-6 m³/s, c0 would be 392 ppm;
+The paper says "10 % ethane was released at 6.67e-6 m³/s" and $$c_0 = \dfrac{q}{U_H H^2}$$ = 39.2 ppm. With $$q$$ = 6.67e-6 m³/s, $$c_0$$ would be 392 ppm;
 39.2 ppm needs the ethane flow, 10 % of 400 cc/min = 6.67e-7 m³/s (check `c0_is_the_ethane_flow_over_UH_H2`; the workbook's 39.2235
 is 666.8/17). **Question:** is 6.67e-6 m³/s the total (mixture) flow and 6.67e-7 m³/s the ethane flow, as this release reads it?
 
 ### QI2 — Case I: what was measured on the y = 0 plane? (Kondo, Mutou)
 
-V at the 53 y = 0 wind points is 1e-9 ... 4e-6 m/s in the workbook (and 0 in the CSV) against 0.02 ... 0.39 m/s at the 38 off-plane
+$$V$$ at the 53 y = 0 wind points is 1e-9 ... 4e-6 m/s in the workbook (and 0 in the CSV) against 0.02 ... 0.39 m/s at the 38 off-plane
 points (check `V_on_the_y0_plane_is_numerically_zero_not_measured`). An LDA's noise is 1e-2 m/s, so these look like symmetry values.
-This release sets them to NaN. **Question:** was V measured on the y = 0 plane (a 3-component LDA), or is it a symmetry fill? How is
-the TKE built (2 or 3 components)? Only k is published, not the variances.
+This release sets them to NaN. **Question:** was $$V$$ measured on the y = 0 plane (a 3-component LDA), or is it a symmetry fill? How is
+the TKE built (2 or 3 components)? Only $$k$$ is published, not the variances.
 
 ### QI3 — Case I: UH, the inflow and the repeats (Kondo, Mutou)
 
-1. The workbook normalises the points by UH = 1.7 m/s and its inflow sheet by 1.697 m/s (U(0.1 m), 0.18 % apart).
+1. The workbook normalises the points by $$U_H$$ = 1.7 m/s and its inflow sheet by 1.697 m/s ($$U(0.1\text{ m})$$, 0.18 % apart).
 2. The paper says the approach flow follows a 1/7 power law; the workbook's (z/H)^(1/7) column is within 4.6 % of the profile but the
    least-squares index over z = 0.02 ... 0.2 m is 0.115 (check `approach_profile_follows_the_1_over_7_power_law_within_5_percent`). Which
    is the intended inflow?
@@ -320,55 +320,55 @@ the TKE built (2 or 3 components)? Only k is published, not the variances.
 
 ## QJ1 — Case J: the w′θ′ uncertainty at z/H = 0.25 (Yoshie)
 
-In `LF_caseJ.xlsx`, sheet `xy-plane2(Unstable state)`, the "Expanded Uncertainty" column of ⟨w′θ′⟩/(U_H Δθ) (column AH) reads
+In `LF_caseJ.xlsx`, sheet `xy-plane2(Unstable state)`, the "Expanded Uncertainty" column of $$\overline{w'\theta'}$$/($$U_H$$ Δθ) (column AH) reads
 0.00374 in row 31 and then 1.0037, 2.0037, 3.0037 … 193.0037 down to row 234: the cell was dragged with the fill handle
 (+1 per row), 193 cells. Only the 11 rows on y = 0 (the locations the `xz-plane` sheet shares) hold a real value (5·10⁻⁵ – 5.5·10⁻⁴); row 31, the seed, is 0.00374. What are the original
-uncertainties of w′θ′ on the z/H = 0.25 plane? (The mean-concentration uncertainty has no such problem; it is about 1 ppm.)
+uncertainties of $$\overline{w'\theta'}$$ on the z/H = 0.25 plane? (The mean-concentration uncertainty has no such problem; it is about 1 ppm.)
 
 ## QJ2 — Case J: the reference concentration (Yoshie)
 
-The workbook's c0 = 12.283 ppm equals 0.05 · q / (U_H H²) with U_H = 1.4581 m/s (to 1e-15): the 5 % ethylene fraction of the
-released gas is in it. The data paper gives c0 for Cases H (45.2 ppm, pure ethylene) and I (39.2 ppm, 10 % ethane, fraction
-included) but not for J, and the readme gives q = 9.17·10⁻⁶ m³/s of "5 % concentration". Confirm: are the published C
-values ppm of ethylene itself (not of the 5 % mixture), and is 12.283 ppm the intended c0? (Without the fraction c0 would be
+The workbook's $$c_0$$ = 12.283 ppm equals $$0.05\thinspace q/(U_H H^2)$$ with $$U_H$$ = 1.4581 m/s (to 1e-15): the 5 % ethylene fraction of the
+released gas is in it. The data paper gives $$c_0$$ for Cases H (45.2 ppm, pure ethylene) and I (39.2 ppm, 10 % ethane, fraction
+included) but not for J, and the readme gives $$q$$ = 9.17·10⁻⁶ m³/s of "5 % concentration". Confirm: are the published C
+values ppm of ethylene itself (not of the 5 % mixture), and is 12.283 ppm the intended $$c_0$$? (Without the fraction $$c_0$$ would be
 245.7 ppm and every concentration ratio 20 times smaller.)
 
 ## QJ3 — Case J: the readme's Reynolds number (Yoshie)
 
-The readme says the Reynolds number is "approx. 43,000 (based on U_H and H)". With U_H = 1.46 m/s and H = 0.16 m it is
+The readme says the Reynolds number is "approx. 43,000 (based on $$U_H$$ and H)". With $$U_H$$ = 1.46 m/s and H = 0.16 m it is
 1.6·10⁴, which is what the data paper states; 43,000 is Case H's (3.23 m/s × 0.2 m). A copy from Case H's readme?
 
 ## QJ4 — Case J: σ against ⟨u′²⟩ (Yoshie)
 
-The workbook's ⟨u′²⟩/U_H² columns are not the squares of its σ_u/U_H columns: up to 3.2 % in u, 2.2 % in v, 1.7 % in w
+The workbook's $$\overline{u'^2}/U_H^2$$ columns are not the squares of its $$\sigma_u/U_H$$ columns: up to 3.2 % in u, 2.2 % in v, 1.7 % in w
 (47 of 443 locations differ by more than 1 % in a component; the largest absolute difference is at (−0.06, −0.05, 0.04): σ_u² =
-0.1294, ⟨u′²⟩ = 0.1316 in units of U_H²). k is the half-sum of the ⟨u′²⟩ columns to 9·10⁻⁵. This release carries the variance columns.
+0.1294, $$\overline{u'^2}$$ = 0.1316 in units of $$U_H^2$$). $$k$$ is the half-sum of the $$\overline{u'^2}$$ columns to 9·10⁻⁵. This release carries the variance columns.
 Is that the right one, and why do the two differ (different sensor of the split-fibre probe, detrending)? The published CSV has
 only the rms.
 
 ## QJ5 — Case J: which empty-tunnel profile is the inflow? (Yoshie)
 
 `AF_caseJ.csv` is the workbook's profile at x/H = −2.5 (x = −0.4 m). The workbook also has the empty-tunnel profiles at
-x/H = 0 and +2.5, which differ near the ground: U/U_H at z/H = 0.019 is 0.33, 0.58 and 0.50 (and 1.00, 1.03, 1.04 at z = H).
+x/H = 0 and +2.5, which differ near the ground: $$U/U_H$$ at z/H = 0.019 is 0.33, 0.58 and 0.50 (and 1.00, 1.03, 1.04 at z = H).
 Was the boundary layer still developing over the heated floor, and which profile should a model reproduce at the
 building's position? Also: `RS_caseJ.csv` lists (−0.16, 0, 0.004) twice (No. 1 and 153, identical); a duplicate or two
 runs?
 
 ## QK1 — Case K: the reference height, velocity and concentration (Yoshie, Tachibana)
 
-The readme and the data paper give the cube H = 0.06 m and U_H = 2.33 m/s, from which c0 = q / (U_H H²) = 429.18 ppm for
-q = 3.6·10⁻⁶ m³/s of pure ethylene. `LF_caseK.xlsx` ('Measurement data', cells R7:R11) normalises with H = 0.2 m (Case H's
-building), a "reference velocity" UH = 4.94009 m/s and C0 = 18.218 ppm; every normalised column (X/H, ⟨u⟩/UH, k/UH²,
-⟨c⟩/C0) reproduces its dimensional column exactly with those, so the workbook's concentration ratios are 23.56 times smaller
-than the cube's. The approach-flow file (Case H's) gives U = 2.24 m/s at z = 0.06 m (log-interpolated), 4 % below 2.33, and
-4.94 m/s is not on it (U = 4.32 at z = 0.6 m). Which H, U_H and c0 are meant for Case K, and what is UH = 4.94 m/s? This
-release uses the cube's (c0 = 429.18 ppm) and gives the factor to the workbook's in the manifest.
+The readme and the data paper give the cube H = 0.06 m and $$U_H$$ = 2.33 m/s, from which $$c_0 = \dfrac{q}{U_H H^2}$$ = 429.18 ppm for
+$$q$$ = 3.6·10⁻⁶ m³/s of pure ethylene. `LF_caseK.xlsx` ('Measurement data', cells R7:R11) normalises with H = 0.2 m (Case H's
+building), a "reference velocity" $$U_H$$ = 4.94009 m/s and $$C_0$$ = 18.218 ppm; every normalised column (X/H, $$\langle u\rangle/U_H$$, $$k/U_H^2$$,
+$$\langle c\rangle/C_0$$) reproduces its dimensional column exactly with those, so the workbook's concentration ratios are 23.56 times smaller
+than the cube's. The approach-flow file (Case H's) gives $$U$$ = 2.24 m/s at z = 0.06 m (log-interpolated), 4 % below 2.33, and
+4.94 m/s is not on it ($$U$$ = 4.32 at z = 0.6 m). Which H, $$U_H$$ and $$c_0$$ are meant for Case K, and what is $$U_H$$ = 4.94 m/s? This
+release uses the cube's ($$c_0$$ = 429.18 ppm) and gives the factor to the workbook's in the manifest.
 
 ## QK2 — Cases K and L: the workbook's mean scalar speed (Yoshie)
 
-K's workbook has `<usc>` and σ_usc ("Velocity magnitute") beside ⟨u⟩, ⟨v⟩, ⟨w⟩: it is never below |U| (1.03 – 3.9 × |U|,
-median 1.19) and is not √(|U|² + 2k) (0.67 – 0.98 of it). L's workbook has `Usc`, which equals √(⟨u⟩² + ⟨v⟩² + ⟨w⟩²) to
-1e-16. Is K's `<usc>` the mean of the instantaneous speed (a scalar, like a thermistor's)? If so it is the quantity a RANS |U|
+K's workbook has `<usc>` and σ_usc ("Velocity magnitute") beside $$\langle u\rangle$$, $$\langle v\rangle$$, $$\langle w\rangle$$: it is never below $$\lvert\mathbf{U}\rvert$$ (1.03 – 3.9 × $$\lvert\mathbf{U}\rvert$$,
+median 1.19) and is not $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ (0.67 – 0.98 of it). L's workbook has `Usc`, which equals $$\sqrt{\langle u\rangle^2 + \langle v\rangle^2 + \langle w\rangle^2}$$ to
+1e-16. Is K's `<usc>` the mean of the instantaneous speed (a scalar, like a thermistor's)? If so it is the quantity a RANS $$\lvert\mathbf{U}\rvert$$
 should be compared with, and the table has no column for it; if not, what is it?
 
 ## QK3 — Case K: point numbers (Yoshie)
@@ -384,27 +384,27 @@ Case L (27 locations at 8 heights). A text slip?
 
 ## QK5 — Case K: the approach flow (Yoshie)
 
-`AF_caseK.csv` equals `AF_caseH.csv` row for row (17 heights at x = −0.493 m, U = 3.23 m/s at z = 0.2 m). The data paper says
+`AF_caseK.csv` equals `AF_caseH.csv` row for row (17 heights at x = −0.493 m, $$U$$ = 3.23 m/s at z = 0.2 m). The data paper says
 the approach flows were the same. Was Case K's own profile measured, or is Case H's the record? (The workbook's `Inflow`
-sheet divides by 3.23 m/s and H = 0.2 m, and its ratios imply 3.21 – 3.27 m/s for U, not exactly 3.23.)
+sheet divides by 3.23 m/s and H = 0.2 m, and its ratios imply 3.21 – 3.27 m/s for $$U$$, not exactly 3.23.)
 
 ## QK6 — Cases K and L: the lateral velocity (Yoshie)
 
-In the y-symmetric arrays V should be odd in y. K's even part is 0.057 m/s against an odd part of 0.017 m/s (74 mirror pairs;
-the empty-tunnel profile has V ≈ +0.04 m/s), L's comparable: a cross-flow offset of about 2° (probe yaw or tunnel swirl) that
-hides the lateral structure and the sign of V. Is V corrected for it, and does +V point toward +y of the published
+In the y-symmetric arrays $$V$$ should be odd in y. K's even part is 0.057 m/s against an odd part of 0.017 m/s (74 mirror pairs;
+the empty-tunnel profile has $$V$$ ≈ +0.04 m/s), L's comparable: a cross-flow offset of about 2° (probe yaw or tunnel swirl) that
+hides the lateral structure and the sign of $$V$$. Is $$V$$ corrected for it, and does $$+V$$ point toward +y of the published
 coordinates?
 
 ## QL1 — Case L: the unit of the temperature column (Yoshie, Katada)
 
-`RS_caseL.csv`'s column is headed `T(K)` but holds 12.85 … 29.86, equal to the workbook's ⟨θ⟩ (deg.) to 0.005, i.e. degrees
+`RS_caseL.csv`'s column is headed `T(K)` but holds 12.85 … 29.86, equal to the workbook's $$\langle \theta\rangle$$ (deg.) to 0.005, i.e. degrees
 Celsius; `AF_caseL.csv`'s `T(K)` (283.11 … 295.31) is kelvin. Confirm. This release carries °C for both.
 
 ## QL2 — Case L: the building surface temperature (Yoshie, Katada)
 
-The readme lists "Building surface temperature: T_b = 14.8 °C", the same number as its T_0 = 14.8 °C and as the workbook's
-⟨θ_H⟩ = 14.75 °C (the air at z = H); the bulk Richardson number uses T_b − T_f = θ_H − θ_f. The workbook gives
-⟨θ_build⟩ = 42.2 °C (floor 45.0 °C). Which is the building surface in the experiment? (Case J's readme calls θ_H "T_b" as
+The readme lists "Building surface temperature: $$T_b$$ = 14.8 °C", the same number as its T_0 = 14.8 °C and as the workbook's
+$$\langle \theta_H\rangle$$ = 14.75 °C (the air at z = H); the bulk Richardson number uses $$T_b - T_f$$ = θ_H − θ_f. The workbook gives
+$$\langle \theta_{\mathrm{build}}\rangle$$ = 42.2 °C (floor 45.0 °C). Which is the building surface in the experiment? (Case J's readme calls θ_H "T_b" as
 well, and its measured surface is 24.5 °C.) A model needs the surface temperature, and no per-point values are published for L.
 
 ## QL3 — Case L: the source geometry (Yoshie, Katada)
@@ -416,15 +416,15 @@ so the data favour the 1.2 m width only weakly.
 
 ## QL4 — Case L: the lateral asymmetry (Yoshie, Katada)
 
-The array and the source are y-symmetric, yet the same point at +y and −y differs in U by 26 %, in k by 23 %, in C by 36 % on
-average (110 mirror pairs), and at z = 0.15 m (0.09 m above the roofs) U is 0.11 m/s lower and T 1.3 K higher at +y. Is the
+The array and the source are y-symmetric, yet the same point at +y and −y differs in $$U$$ by 26 %, in $$k$$ by 23 %, in C by 36 % on
+average (110 mirror pairs), and at z = 0.15 m (0.09 m above the roofs) $$U$$ is 0.11 m/s lower and T 1.3 K higher at +y. Is the
 heated floor or the stratification non-uniform across the tunnel, were the two halves measured in different runs, and which
 half is representative of a symmetric simulation?
 
 ## QL5 — Case L: the readme (Yoshie, Katada)
 
 The readme's file list names `AF_caseK.csv` and `RS_caseK.csv` (the files are `AF_caseL.csv`, `RS_caseL.csv`), lists `tc`
-(⟨θ′c′⟩, K·ppm) which has no counterpart in the other cases, and says "9 rows by 14 columns" where `BD_caseL.stl` has 14 rows
+($$\overline{\theta'c'}$$, K·ppm) which has no counterpart in the other cases, and says "9 rows by 14 columns" where `BD_caseL.stl` has 14 rows
 along the flow by 9 across. Please confirm the rows and columns are 14 along x and 9 across y, and that `tc` is the
 covariance of the temperature and concentration fluctuations.
 

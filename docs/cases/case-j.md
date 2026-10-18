@@ -25,11 +25,13 @@ Isolated 1:1:2 building with a floor tracer source in an unstably stratified bou
 | Fact | Value |
 |---|---|
 | Building | 1:1:2 (width : depth : height) prism, b = 0.08 m, H = 2b = 0.16 m |
-| Reynolds number Re\_H | 16,000 |
-| U\_H (m/s) | 1.4581 |
+| Reynolds number $$\mathrm{Re_H}$$ | 16,000 |
+| $$U_H$$ (m/s) | 1.4581 |
 | Wind directions (°) | 0 |
 | Measurement planes | vertical centre plane y/H = 0, horizontal z/H = 0.025 (y \<= 0 side only), horizontal z/H = 0.25 |
-| Measured | 444 rows over 444 points: U, V, W, uu, vv, ww, k, C, c\_rms, concentration\_ratio, T, T\_rms, uT, vT, wT |
+| Measured | 444 rows over 444 points: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$, $$C$$, $$c_{\mathrm{rms}}$$, $$c^\ast$$, $$T$$, $$T_{\mathrm{rms}}$$, $$\overline{u'\theta'}$$, $$\overline{v'\theta'}$$, $$\overline{w'\theta'}$$ |
+
+{% include nomenclature.md %}
 
 ## Validation
 
@@ -42,6 +44,8 @@ Isolated 1:1:2 building with a floor tracer source in an unstably stratified bou
 | FluidX3D | <span class="label label-yellow status">pending</span> | — | — | — |
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
+
+{% include nomenclature-scores.md %}
 
 {: .warning-title }
 > Before you compare

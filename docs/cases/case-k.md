@@ -25,11 +25,13 @@ description: "9 x 9 array of 0.06 m cubes with a tracer point source on the floo
 | Fact | Value |
 |---|---|
 | Array | 9 rows (along x) by 9 columns (across y) of cubes, H = 0.06 m, pitch 0.12 m (street width = H, plan area ratio 25 %); the pitch is read from the MP drawings |
-| Reynolds number Re\_H | 9800 |
-| U\_H (m/s) | 2.33 |
+| Reynolds number $$\mathrm{Re_H}$$ | 9800 |
+| $$U_H$$ (m/s) | 2.33 |
 | Wind directions (°) | 0 |
 | Measurement planes | y/H = 0, +-1, +-2, +-3 (z up to 0.07 m), five heights from 4 mm to 70 mm; the three upper heights only on y = 0 and +-H |
-| Measured | 203 rows over 203 points: U, V, W, uu, vv, ww, k, C, c\_rms, concentration\_ratio |
+| Measured | 203 rows over 203 points: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$, $$C$$, $$c_{\mathrm{rms}}$$, $$c^\ast$$ |
+
+{% include nomenclature.md %}
 
 ## Validation
 
@@ -40,6 +42,8 @@ description: "9 x 9 array of 0.06 m cubes with a tracer point source on the floo
 | FluidX3D | <span class="label label-yellow status">pending</span> | — | — | — |
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
+
+{% include nomenclature-scores.md %}
 
 {: .warning-title }
 > Before you compare

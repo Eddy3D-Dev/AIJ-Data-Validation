@@ -26,9 +26,11 @@ Shinjuku sub-centre, Tokyo, November 1978: 1:800 tunnel (thermistor, 5 / 9 / 20 
 |---|---|
 | District | Shinjuku sub-centre during construction of the high-rise group, building configuration of November 1978 |
 | Scale | 1:800 |
-| Normalisation | velocity ratio = mean speed / the approaching mean speed at the boundary-layer height 500 m (full scale); the field values were converted to it with the tunnel (readme). U(500 m) is 10 m/s in the data paper and 10.65 m/s implied by the profile |
+| Normalisation | velocity ratio = mean speed / the approaching mean speed at the boundary-layer height 500 m (full scale); the field values were converted to it with the tunnel (readme). $$U(500\text{ m})$$ is 10 m/s in the data paper and 10.65 m/s implied by the profile |
 | Wind directions | N, NNE, NE, ENE, SE, SSE, S, SSW, SW, WNW, NW, NNW |
-| Measured | 472 rows over 13 points: velocity\_ratio, velocity\_ratio\_sd |
+| Measured | 472 rows over 13 points: $$U/U_{\mathrm{ref}}$$, $$\sigma_{U/U_{\mathrm{ref}}}$$ |
+
+{% include nomenclature.md %}
 
 ## Validation
 
@@ -40,6 +42,8 @@ Shinjuku sub-centre, Tokyo, November 1978: 1:800 tunnel (thermistor, 5 / 9 / 20 
 | FluidX3D | <span class="label label-yellow status">pending</span> | — | — | — |
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
+
+{% include nomenclature-scores.md %}
 
 {: .warning-title }
 > Before you compare
