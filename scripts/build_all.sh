@@ -19,5 +19,7 @@ python clean/build.py
 (cd validation && python render_geometry.py && for f in plot_*.py; do python "$f"; done)
 (cd validation && python plotstyle.py)   # the palette checks, and every PNG under validation/figures at 1200 dpi
 python scripts/build_api.py
+python scripts/check_geometry.py   # every served and cleaned STL, parsed again from the files: closed, consistently wound, outward bodies
+python scripts/test_geometry.py
 python scripts/check_markdown.py --self-test
 python scripts/check_markdown.py
