@@ -215,6 +215,11 @@ def build(B, prov):
             rat[x_] = 0.5 * (col + float(np.mean(street))) / qW
     check(B, c, "line_source_flux_is_recovered_in_the_cross_sections", len(rat) == 4 and all(0.67 < v_ < 1.5 for v_ in rat.values()), flux_over_q_per_width_by_x=rat, q_per_width_ppm_m2_s=qW,
           note="(U C + u'c') integrated over z <= 0.15 m on the cube-column line (y = 0) and the street lines (y = +-0.06, equal widths), averaged, over q / 1.2 m: 0.86 .. 1.0 at four stations; the column line alone carries 0.2 .. 0.4 of it and the street lines 1.3 .. 1.9. This fixes q, the unit ppm and the 1.2 m source width independently of c0")
+    # signs of the turbulent fluxes in an unstable boundary layer: heat flows up (w'theta' > 0), the air cools with height, momentum flows down (u'w' < 0)
+    t_drop = bool((afw.sort_values("z")["T"].diff().dropna() < 0).all())
+    check(B, c, "turbulent_flux_signs_are_those_of_an_unstable_layer", bool((afw.wT > 0).all()) and t_drop and float((afw.uw < 0).mean()) >= 0.9 and float((pts.wT > 0).mean()) >= 0.9 and float((pts.uw.dropna() < 0).mean()) >= 0.8,
+          approach_flow_wT_positive_fraction=float((afw.wT > 0).mean()), approach_flow_T_decreases_with_height=t_drop, approach_flow_uw_negative_fraction=float((afw.uw < 0).mean()),
+          points_wT_positive_fraction=float((pts.wT > 0).mean()), points_uw_negative_fraction=float((pts.uw < 0).mean()), note="w'theta' > 0 (upward heat flux over the heated floor), T falls with z, u'w' < 0: the signs the published columns must have if they are in the usual convention")
     # inflow
     u_at_H = float(np.interp(math.log(H), np.log(afl.z), afl.U))
     check(B, c, "U_H_from_profile_matches_stated", abs(u_at_H - U_H_STATED) < 0.05 and abs(u_at_H - uH) < 0.01, U_H_profile=u_at_H, U_H_stated=U_H_STATED, U_H_workbook=uH)

@@ -1,5 +1,5 @@
 {
- "total": 157,
+ "total": 159,
  "failed": 0,
  "warnings": 12,
  "note": "severity 'warning' = a known, documented discrepancy in the published sources (README.md / QUESTIONS.md); it never fails the build",
@@ -1260,6 +1260,17 @@
   },
   {
    "case": "J",
+   "check": "turbulent_flux_signs_are_those_of_an_unstable_layer",
+   "pass": true,
+   "severity": "info",
+   "approach_flow_wT_positive_fraction": 1.0,
+   "approach_flow_T_decreases_with_height_at_every_station": true,
+   "approach_flow_uw_negative_fraction": 0.933333333,
+   "points_wT_positive_fraction": 0.945945946,
+   "note": "w'theta' > 0 (upward heat flux over the heated floor), T falls with z, u'w' < 0: the signs the published columns must have if they are in the usual convention"
+  },
+  {
+   "case": "J",
    "check": "approach_flow_csv_is_workbook_station_x_minus_2.5H_rounded",
    "pass": true,
    "severity": "info",
@@ -2097,6 +2108,18 @@
    },
    "q_per_width_ppm_m2_s": 6.94166667,
    "note": "(U C + u'c') integrated over z <= 0.15 m on the cube-column line (y = 0) and the street lines (y = +-0.06, equal widths), averaged, over q / 1.2 m: 0.86 .. 1.0 at four stations; the column line alone carries 0.2 .. 0.4 of it and the street lines 1.3 .. 1.9. This fixes q, the unit ppm and the 1.2 m source width independently of c0"
+  },
+  {
+   "case": "L",
+   "check": "turbulent_flux_signs_are_those_of_an_unstable_layer",
+   "pass": true,
+   "severity": "info",
+   "approach_flow_wT_positive_fraction": 1.0,
+   "approach_flow_T_decreases_with_height": true,
+   "approach_flow_uw_negative_fraction": 0.96,
+   "points_wT_positive_fraction": 1.0,
+   "points_uw_negative_fraction": 0.889534884,
+   "note": "w'theta' > 0 (upward heat flux over the heated floor), T falls with z, u'w' < 0: the signs the published columns must have if they are in the usual convention"
   },
   {
    "case": "L",

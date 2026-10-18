@@ -224,6 +224,12 @@ def build(B, prov):
     on_surface = bool(np.all((bd.x >= -0.08 - 1e-9) & (bd.x <= 1e-9) & (bd.y.abs() <= 0.04 + 1e-9) & (bd.z <= HEIGHT + 1e-9) & ((np.isclose(bd.x, -0.08) | np.isclose(bd.x, 0.0) | np.isclose(bd.y.abs(), 0.04) | np.isclose(bd.z, HEIGHT)))))
     check(B, c, "building_surface_points_lie_on_the_building_faces", on_surface, points=len(bd), bbox_min=[float(bd[a].min()) for a in "xyz"], bbox_max=[float(bd[a].max()) for a in "xyz"])
 
+    # signs of the turbulent fluxes in an unstable boundary layer: heat flows up (w'theta' > 0), the air cools with height, momentum flows down (u'w' < 0)
+    st = full.sort_values(["x", "z"])
+    t_drop = bool(all((g_["T"].diff().dropna() < 0).all() for _, g_ in st.groupby("x")))
+    check(B, c, "turbulent_flux_signs_are_those_of_an_unstable_layer", bool((full.wT > 0).all()) and t_drop and float((full.uw < 0).mean()) >= 0.9 and float((pts.wT > 0).mean()) >= 0.9,
+          approach_flow_wT_positive_fraction=float((full.wT > 0).mean()), approach_flow_T_decreases_with_height_at_every_station=t_drop, approach_flow_uw_negative_fraction=float((full.uw < 0).mean()),
+          points_wT_positive_fraction=float((pts.wT > 0).mean()), note="w'theta' > 0 (upward heat flux over the heated floor), T falls with z, u'w' < 0: the signs the published columns must have if they are in the usual convention")
     # inflow
     afk = {"U": afc.U, "V": afc.V, "W": afc.W, "u_rms": afc.u_rms, "v_rms": afc.v_rms, "w_rms": afc.w_rms, "uv": afc.uv, "uw": afc.uw, "k": afc.k, "t_rms": afc.t_rms, "ut": afc.ut, "vt": afc.vt, "wt": afc.wt}
     st1 = stations[min(stations)]
@@ -297,13 +303,17 @@ def build(B, prov):
                               "published_resolution": "the CSV is the workbook's ratios rounded to 1e-3 (U, V, W) or 1e-4: heat fluxes sit on a 0.0049 K m/s grid, k on 0.00021 m2/s2; the table uses the workbook values",
                               "fill_series_uncertainty": f"workbook sheet xy-plane2, column {_letter(WB_COL['wT'] + 1)} (Ue of the w'theta' flux): {len(fill)} cells are 0.0037 + a running integer, not an uncertainty",
                               "readme_reynolds_number": "readme 43,000, data paper 1.6e4 (U_H H / nu); 43,000 is Case H's",
-                              "no_shear_stresses_at_points": "uv, uw, vw are published only for the approach flow"},
+                              "no_shear_stresses_at_points": "uv, uw, vw are published only for the approach flow",
+                              "c0_includes_gas_fraction": "c0 = 12.283 ppm contains the 5 % ethylene fraction of the released gas; q / (U_H H^2) alone is 245.7 ppm; the data paper states no c0 for J (QUESTIONS.md QJ2)",
+                              "variance_vs_sigma": "the workbook's <u'2>, <v'2>, <w'2> differ from the squares of its sigma columns by up to 3 % in single rows; the table uses the variances, which reproduce k (QUESTIONS.md QJ4)",
+                              "expanded_uncertainty": "the workbook lists an expanded uncertainty beside every quantity (summary in extra_measurements.expanded_uncertainty); the mean concentration does not exceed its own (about 1 ppm) at 197 of 465 rows",
+                              "inflow_stations": "the empty-tunnel profile at x/H = 0 and +2.5 differs from the published one at x/H = -2.5 near the ground (cases/J/approach_flow_full.csv; QUESTIONS.md QJ5)",
+                              "readme_T_b": "the readme's T_b = 285.32 K is the approach-flow air temperature at z = H, not the building (121 measured surface points: 22.0 .. 28.9 degC, cases/J/surface_temperature.csv)"},
              "expanded_uncertainty": {"where": "LF_caseJ.xlsx, sheets xz-plane(Unstable state), xy-plane(Unstable state), xy-plane2(Unstable state) and Unstable Inflow: every measured quantity has a 'Measurement' column and an 'Expanded Uncertainty: Ue' column beside it, in the workbook's non-dimensional units; the table has no column for it. per_quantity is in physical units over the 465 workbook rows of the three measurement sheets (columns are the table's names, su/sv/sw = the rms columns)",
                                       "coverage_factor": "not stated in the workbook (ISO/IEC Guide 98-3 per the data paper)", "per_quantity": uncertainty},
              "resolution_of_published_ratios": {k: float(v) for k, v in resolution.items()},
              "extra_files": {"surface_temperature": {"file": "cases/J/surface_temperature.csv", "columns": ["x", "y", "z", "T"], "units": ["m", "m", "m", "degC"], "rows": len(bd), "source": "BD-ST_caseJ.csv (Kelvin there)"},
                              "approach_flow_full": {"file": "cases/J/approach_flow_full.csv", "columns": list(full.columns), "units": ["m", "m", "m/s", "m/s", "m/s", "m2/s2", "m2/s2", "m2/s2", "m2/s2", "m2/s2", "m2/s2", "degC", "K", "K m/s", "K m/s", "K m/s"],
                                                     "rows": len(full), "source": "LF_caseJ.xlsx 'Unstable Inflow' (three stations x = -0.4, 0, +0.4 m, no building)"}},
-             "csv_vs_workbook_rounding": res,
-             "not_carried": {"none": "every published point quantity of Case J has a column"}}
+             "csv_vs_workbook_rounding": res}
     return pts, afl, geo, X.sig(inflow, 10), frame, transform, X.sig(extra, 10)
