@@ -1,6 +1,7 @@
 ---
-title: Known data issues
+title: "Known data issues"
 nav_order: 4
+description: "What in the published AIJ data files changes a comparison if it is not accounted for, case by case."
 redirect_from:
   - /gotchas/
 ---
@@ -10,18 +11,33 @@ redirect_from:
 Each item below changes the result of a comparison if it is not accounted for.
 
 All of these were found by scoring or measuring the files rather than reading them. The cleaned tables served by
-the API already apply the corrections (units, signs, frames); the raw files in the repository do not. Each case page
-repeats its own list.
+the API already apply the corrections (units, signs, frames); the raw files in the repository do not. Each case's
+Data page repeats its own list.
+
+<details open markdown="block">
+  <summary>
+    Contents
+  </summary>
+  {: .text-delta }
+1. TOC
+{:toc}
+</details>
 
 ## Across cases
 
-- **Scalar vs vector mean speed.** Cases C, D and E measure with thermistor anemometers: an *omnidirectional scalar*
-  speed, not |mean velocity vector|. A RANS |U| is biased low against it, most where the flow is sheltered and
-  turbulent. The data paper suggests comparing √(|U|² + 2k) as a conservative correction; Case D's split-fibre data
-  measures the gap directly (thermistor / |U| = 1.34 as a ratio of means over the 33 shared points).
-- **Each case has its own frame and unit.** A–D are model-scale metres with +x along the wind at WD = 0; E is
-  full-scale metres with +x east and +y north and meteorological (from-) directions. Read `frame` in
-  `/api/cases/{id}.json` before any number.
+{: .warning-title }
+> Scalar vs vector mean speed
+>
+> Cases C, D and E measure with thermistor anemometers: an *omnidirectional scalar* speed, not |mean velocity
+> vector|. A RANS |U| is biased low against it, most where the flow is sheltered and turbulent. The data paper
+> suggests comparing √(|U|² + 2k) as a conservative correction; Case D's split-fibre data measures the gap directly
+> (thermistor / |U| = 1.34 as a ratio of means over the 33 shared points).
+
+{: .warning-title }
+> Each case has its own frame and unit
+>
+> A–D are model-scale metres with +x along the wind at WD = 0; E is full-scale metres with +x east and +y north and
+> meteorological (from-) directions. Read `frame` in `/api/cases/{id}.json` before any number.
 
 ## Case A
 

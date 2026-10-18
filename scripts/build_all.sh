@@ -7,6 +7,7 @@
 # Run from a checkout of any release tag, the outputs are byte-identical to what that tag committed; CI runs exactly
 # this and fails on any difference. Outputs: clean/ (the cleaned tables), validation/figures/ (the figures and
 # geometry renders, drawn from the snapshots in validation/results/), and docs/ (the API and the generated pages).
+# The last step checks that every Markdown file, generated or not, renders the same on GitHub and in Jekyll.
 set -euo pipefail
 export PYTHONHASHSEED=0 PYTHONIOENCODING=utf-8 PYTHONDONTWRITEBYTECODE=1 MPLBACKEND=Agg
 
@@ -15,3 +16,5 @@ pip install --quiet --disable-pip-version-check --root-user-action=ignore --no-d
 python clean/build.py
 (cd validation && python render_geometry.py && for f in plot_*.py; do python "$f"; done)
 python scripts/build_api.py
+python scripts/check_markdown.py --self-test
+python scripts/check_markdown.py

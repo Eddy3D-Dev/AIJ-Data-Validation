@@ -86,15 +86,18 @@ legacy-workbook and WD = 45° symmetry checks all go red (negative control run 2
 ## 4. Known data issues — what the published files do that this release corrects, and what it cannot
 
 **A**
+
 - Turbulence is published as **rms**; the table holds **variances** (rms²) so A and B share one column meaning. k = ½ Σ variances to 2e-3 (publication rounding).
 - Points are on the y ≤ 0 half only (symmetry convention). V is positive toward +y.
 
 **B**
+
 - Coordinates are **millimetres** in `RS_caseB.csv` (`x[mm]`) while velocities are m/s. Converted to metres here. Read as metres, every probe lands 1000× too far out.
 - **The published V is positive toward −y** (V = +3.630 just outside the y = −100 mm flank where the flow must deflect outward; Case A reads −2.893 there). Flipped here so V is positive toward +y like A and D. Scored without the flip, B's V anti-correlates with a model at R ≈ −0.9.
 - **Seven locations were measured twice**: the foot of each vertical-section profile (points 12, 43, 56, 69, 82, 95, 108 at z = 12.5 mm, y = 0) and the horizontal plane's centreline (110, 147, 160, 173, 186, 199, 212). Both rows are kept under their own point numbers; |ΔU| is 0.05–0.14 m/s (mean 0.105) — a free repeatability estimate, and a trap for anyone keying on coordinates.
 
 **C**
+
 - `CB` is **text** (`0D`/`1D`/`2D`) and the header ends with a trailing comma; here `config`.
 - 1,080 rows = **9 configurations** (3 centre blocks × 3 directions) sharing one 120-point set. The 25 centre nodes are absent even for 0D (grid held constant); 24 points lie exactly on a building face plane (|x| or |y| = 0.30) in the gap between blocks — fluid points, but a probe's cell lookup is delicate there.
 - Point numbers run 4…132 with gaps 34–37, 46, 55, 100–102 (and 1–3 below the range), exactly the readme's list.
@@ -104,6 +107,7 @@ legacy-workbook and WD = 45° symmetry checks all go red (negative control run 2
 - Repeatability from the mirror pairs: mean |ΔVs| 0.09–0.13 m/s = 0.024–0.036 U_H.
 
 **D**
+
 - The repository clone had only the workbook; the official `RS-T_caseD.csv`, `RS-S_caseD.csv`, `AF_caseD.csv`, readme and `MP_caseD.png` are on Zenodo 10.5281/zenodo.15402668 and are now in `sources/zenodo_caseD/`. The CSVs are in metres; the workbook in mm; they agree to 4e-16.
 - Unmeasured = `-999.9` in the CSVs, `-` in the workbook: NaN here. 12 thermistor points in the band around the tower are unmeasured in every direction (66 of 78 measured); 45 of the 78 points were never measured by the split fibre and are simply absent from its rows.
 - `RS-S_caseD.csv`'s z header is the **full-width** character `ｚ[m]` (U+FF5A) — a reader keyed on `z` misses it.
@@ -114,6 +118,7 @@ legacy-workbook and WD = 45° symmetry checks all go red (negative control run 2
 - The repository's `raw/cases/case-d/case-d-eddy3d-prior-comparison.xlsx` is a prior attempt at R = +0.10 against the thermistor — a frame or geometry error, not a result.
 
 **E (provisional geometry — see manifest `status_note`)**
+
 - Coordinates are **full-scale metres**, +x east, +y north, origin at the centre of the area; wind directions are compass FROM-directions (N blows toward −y). z = 2 m (0.008 m model).
 - The ratio is normalised by **U(15.9 m) = 3.935 m/s** (the Niigata met-station height), not by U_H and not by UR = 7.8 m/s. Divide by UR and every prediction is low by 1.98×; the repository's prior `raw/cases/case-e/case-e-eddy3d-prior-comparison.xlsx` did exactly that.
 - **Quantised:** every ratio is a multiple of 0.0198204 (55 levels); resolution ±0.0099 = 3 % of the median, 10 % of the smallest values. Any bar tighter than one quantum measures the publisher's rounding. Zenodo's `RS_caseE.csv` is the workbook rounded further, to 2 dp; this release uses the workbook.
@@ -136,7 +141,7 @@ legacy-workbook and WD = 45° symmetry checks all go red (negative control run 2
 
 ## 6. Cite
 
-- Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). *Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan.* Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083
+- Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). *Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan.* Japan Architectural Review 9(1), e70083. <https://doi.org/10.1002/2475-8876.70083>
 - Per case: A 10.5281/zenodo.15050147 (Meng & Hibi 1998) · B 10.5281/zenodo.15401455 (Miyazaki & Tominaga 2003) · C 10.5281/zenodo.15401791 (Nonomura et al. 2003) · D 10.5281/zenodo.15402668 · E 10.5281/zenodo.15429017 — requested citations in `manifest.json → cases.<id>.citation_requested`.
 - Tominaga, Y. et al. (2008). *AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings.* JWEIA 96, 1749–1761.
 
