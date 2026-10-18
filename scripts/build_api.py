@@ -27,6 +27,7 @@ import hashlib
 import io
 import json
 import os
+import re
 import shutil
 import sys
 import zipfile
@@ -1094,21 +1095,57 @@ def _config_part(k, v):
     return str(v).replace("_", " ")
 
 
+def _esc(text):
+    """Plain text from the data, safe in Markdown on GitHub and in kramdown: emphasis, HTML and link characters are
+    backslash-escaped, and a Liquid delimiter (which the site build would try to run) stops the build."""
+    text = str(text)
+    if "{{" in text or "{%" in text:
+        raise SystemExit(f"a Liquid delimiter in text that becomes a page: {text[:80]!r}")
+    out = []
+    for i, piece in enumerate(re.split(r"(https?://[^\s<>]+)", text)):
+        if i % 2:                                  # a URL becomes an autolink, which GitHub and kramdown both follow
+            url, tail = re.match(r"(.*?)([.,;:]*)$", piece).groups()
+            out.append(f"<{url}>" + tail)
+            continue
+        for ch in "\\*_<>[]":
+            piece = piece.replace(ch, "\\" + ch)
+        out.append(piece)
+    return "".join(out)
+
+
+def _cell(text):
+    """_esc, and the pipe that would end a table cell."""
+    return _esc(text).replace("|", "\\|")
+
+
 def _md_value(v):
     if isinstance(v, dict):
-        return "<br>".join(f"**{_label(k)}**: {_md_value(x)}" for k, x in v.items())
+        return "<br>".join(f"**{_esc(_label(k))}**: {_md_value(x)}" for k, x in v.items())
     if isinstance(v, list):
-        return ", ".join(str(x) for x in v)
-    return str(v)
+        return ", ".join(_esc(x) for x in v)
+    if isinstance(v, int) and not isinstance(v, bool) and abs(v) >= 10000:
+        return f"{v:,}"
+    return _esc(v)
 
 
 def _asset(rel):
     return f"{{{{ '{rel}' | relative_url }}}}"
 
 
-def figure(src, alt, caption):
+def _plain(html):
+    """A caption as plain text (for alt attributes): tags dropped, quotes escaped."""
+    out, inside = [], False
+    for ch in html:
+        inside = True if ch == "<" else False if ch == ">" else inside
+        if not inside and ch != ">":
+            out.append(ch)
+    return "".join(out).replace('"', "&quot;")
+
+
+def figure(src, alt, caption, cls="figure"):
     """One image with its caption, as HTML (<figure>), so the caption stays attached to the image."""
-    return ['<figure class="figure">', f'<img src="{_asset(src)}" alt="{alt}">', f"<figcaption>{caption}</figcaption>", "</figure>", ""]
+    return [f'<figure class="{cls}">', f'<img src="{_asset(src)}" alt="{_plain(alt)}">', f"<figcaption>{caption}</figcaption>",
+            "</figure>", ""]
 
 
 def figure_table(cells, columns, caption=None):
@@ -1118,7 +1155,7 @@ def figure_table(cells, columns, caption=None):
     for i in range(0, len(cells), columns):
         row = []
         for src, alt, cap, link in cells[i:i + columns]:
-            img = f"![{alt}]({_asset(src)})"
+            img = f"![{_plain(alt)}]({_asset(src)})"
             if link:
                 img = f"[{img}]({_asset(link)})"
             row.append(f"{img}<br><span class=\"caption\">{cap.replace('|', '&#124;')}</span>")
@@ -1130,6 +1167,8 @@ def figure_table(cells, columns, caption=None):
     return L
 
 
+# What the gallery says under each render. A case without an entry gets its one-line summary and its counts, so a
+# new case needs no change here.
 GALLERY_CAPTIONS = {
     "A": "Isolated building · {points} points · U, V, W and k",
     "B": "Isolated slab · {points} points · U, V, W and k",
@@ -1137,126 +1176,388 @@ GALLERY_CAPTIONS = {
     "D": "A tower among 82 low blocks · {rows} measurements: scalar speed at 3 wind directions, velocity at 33 points",
     "E": "Before and after a 60 m high-rise (after shown) · {rows} velocity ratios over 16 wind directions",
 }
+# The caption of a case page's figure when the case has several renders (configurations on one scale).
+RENDER_GROUP_CAPTIONS = {
+    "C": "The three configurations of the centre block, on one scale; 120 measurement points each, at three wind directions.",
+    "E": "The two states, on one scale (full-scale metres, +x east, +y north); the arrow marks SW, the direction Eddy3D is scored at.",
+}
+
+ENGINE_SHORT = {"openfoam12-realizableKE": "OpenFOAM 12", "openlb": "OpenLB", "fluidx3d": "FluidX3D", "ml-surrogate": "ML surrogate"}
+STATUS_CLASS = {"scored": "label-green", "running": "label-blue", "pending": "label-yellow", "not comparable": "label-grey"}
+# A figure that illustrates runs of at least this many cases is an all-cases figure: it is shown once, on its
+# validation page, and the case pages link to it instead of repeating it.
+ALL_CASES_FIGURE_MIN = 3
+SHARED_FIGURE_PAGES = {"ml-surrogate-agreement.png": ("/validation/ml-surrogate/", "the ML surrogate page")}
+# A score table stays open up to this many rows, a table of configurations up to OPEN_LIST_ROWS; a longer one sits in
+# a closed <details>.
+OPEN_TABLE_ROWS = 12
+OPEN_LIST_ROWS = 8
+# Facts the case page's "At a glance" table shows, one row per group: the first configuration key present in it,
+# under that key's label. The Data page has everything.
+GLANCE = [("building", "array", "tower", "district"), ("scale",), ("Re_H", "Re_D", "Re"), ("U_H_m_s", "normalisation"),
+          ("wind_directions", "wind_directions_deg"), ("measurement_height_m", "measurement_planes")]
+# The hand-written page that reads a case's results (a case without one is read on the Validation overview).
+READING_PAGES = {"A": "/validation/cases-ab/", "B": "/validation/cases-ab/", "C": "/validation/case-c/",
+                 "D": "/validation/case-d/", "E": "/validation/case-e/"}
+
+
+def _engine_name(engine_id):
+    return ENGINE_SHORT.get(engine_id, engine_id)
+
+
+def status_label(status):
+    return f'<span class="label {STATUS_CLASS[status]} status">{status}</span>'
+
+
+def _front(title, nav_order, parent=None, grand_parent=None, has_children=None, has_toc=None, description=None):
+    """Front matter of a generated page. `generated: true` makes the footer point at this script, not at the page."""
+    L = ["---", f'title: "{title}"']
+    if parent:
+        L.append(f'parent: "{parent}"')
+    if grand_parent:
+        L.append(f'grand_parent: "{grand_parent}"')
+    L.append(f"nav_order: {nav_order}")
+    if has_children is not None:
+        L.append(f"has_children: {'true' if has_children else 'false'}")
+    if has_toc is not None:
+        L.append(f"has_toc: {'true' if has_toc else 'false'}")
+    L.append("generated: true")
+    if description:
+        L.append(f'description: "{description.replace(chr(34), chr(39))}"')
+    return L + ["---", ""]
+
+
+def _write(rel, lines):
+    path = os.path.join(DOCS, rel)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with io.open(path, "w", encoding="utf-8", newline="\n") as f:
+        f.write("\n".join(lines).rstrip("\n") + "\n")
+
+
+def _page_url(slug, sub=""):
+    return f"/cases/{slug}/" + (f"{sub}/" if sub else "")
+
+
+def _link(text, url, anchor=""):
+    return f"[{text}]({_asset(url)}{anchor})"
+
+
+def _toc():
+    """just-the-docs' collapsible table of contents of a page's headings."""
+    return ['<details open markdown="block">', "  <summary>", "    Contents", "  </summary>", "  {: .text-delta }",
+            "1. TOC", "{:toc}", "</details>", ""]
+
+
+def _is_control(label):
+    """A headline whose label says 'control' is a negative control (the frame flipped, the wind reversed, the
+    building removed): it shows the test can fail, it is not a result, so no summary of results includes it."""
+    return "control" in label.lower()
+
+
+def _headline_ranges(entries):
+    """{'R': (lo, hi), 'Fac2': (lo, hi)} over the headline scores of these validation entries, controls excluded;
+    None when there is none."""
+    vals = {"R": [], "Fac2": []}
+    for e in entries:
+        for label, key in e["headline"].items():
+            if _is_control(label):
+                continue
+            for m in vals:
+                v = e["scores"][key].get(m)
+                if v is not None:
+                    vals[m].append(v)
+    if not vals["R"]:
+        return None
+    return {m: (min(v), max(v)) for m, v in vals.items() if v}
+
+
+def _range(lo_hi, signed):
+    if lo_hi is None:
+        return "—"
+    lo, hi = (f"{x:+.2f}" if signed else f"{x:.2f}" for x in lo_hi)
+    return lo if lo == hi else f"{lo} … {hi}"
+
+
+def _shared_figures(percase):
+    """Figures of runs of at least ALL_CASES_FIGURE_MIN cases: {file name: set of case ids}."""
+    users = {}
+    for case, p in percase.items():
+        for e in p["results"]:
+            for fig in e["figures"]:
+                users.setdefault(fig["url"].rsplit("/", 1)[-1], set()).add(case)
+    return {name: cases for name, cases in users.items() if len(cases) >= ALL_CASES_FIGURE_MIN}
 
 
 def build_gallery(percase):
-    """docs/_includes/case-gallery.md: the five cases, two to a row, each render linked to its page."""
+    """docs/_includes/case-gallery.md: every case, two to a row, each render linked to its page."""
     cells = []
     for case in D.CASE_IDS:
         meta = D.CASES[case]
         summ = percase[case]["summ"]
-        cap = GALLERY_CAPTIONS[case].format(points=f"{summ['distinct_points']:,}", rows=f"{summ['rows']:,}")
+        counts = dict(points=f"{summ['distinct_points']:,}", rows=f"{summ['rows']:,}")
+        cap = (GALLERY_CAPTIONS[case].format(**counts) if case in GALLERY_CAPTIONS
+               else f"{_esc(meta['short'])} · {counts['rows']} rows")
         cells.append((f"/assets/geometry/{D.render_file(case)}", meta["title"], f"<strong>{meta['title']}</strong><br>{cap}",
-                      f"/cases/{meta['slug']}/"))
-    os.makedirs(os.path.join(DOCS, "_includes"), exist_ok=True)
-    with io.open(os.path.join(DOCS, "_includes", "case-gallery.md"), "w", encoding="utf-8", newline="\n") as f:
-        f.write("\n".join(["<!-- Generated by scripts/build_api.py; edit GALLERY_CAPTIONS there. -->", ""] + figure_table(cells, 2)))
+                      _page_url(meta["slug"])))
+    _write("_includes/case-gallery.md",
+           ["<!-- Generated by scripts/build_api.py; edit GALLERY_CAPTIONS there. -->", ""] + figure_table(cells, 2))
+
+
+def build_cases_table(percase):
+    """docs/_includes/cases-table.md: one row per case, what it is, what was measured, who scored it."""
+    L = ["<!-- Generated by scripts/build_api.py. -->", "",
+         "| Case | What it is | Measured | Scored by |", "|---|---|---|---|"]
+    for case in D.CASE_IDS:
+        meta = D.CASES[case]
+        summ = percase[case]["summ"]
+        scored = [_engine_name(e["id"]) for e in ENGINES if ENGINE_STATUS[case][e["id"]] == "scored"]
+        measured = f"{summ['rows']:,} rows over {summ['distinct_points']:,} points; {_cell(', '.join(meta['quantities']))}"
+        L.append(f"| {_link(_cell(meta['title']), _page_url(meta['slug']))} | {_cell(meta['short'])} | {measured} | "
+                 f"{', '.join(scored) if scored else 'none yet'} |")
+    _write("_includes/cases-table.md", L)
+
+
+def build_cases_frames():
+    """docs/_includes/cases-frames.md: each case's length unit, the unit of what it measures, and its origin."""
+    L = ["<!-- Generated by scripts/build_api.py. -->", "", "| Case | Length | Measured quantity | Origin |", "|---|---|---|---|"]
+    for case in D.CASE_IDS:
+        meta = D.CASES[case]
+        units = meta["units"]
+        measured = units.get("velocity", next((v for k, v in units.items() if k != "length"), ""))
+        L.append(f"| {_link(_cell(meta['title']), _page_url(meta['slug'], 'data'), '#frame-and-units')} | {_cell(units['length'])} | "
+                 f"{_cell(measured)} | {_cell(meta['frame']['origin'])} |")
+    _write("_includes/cases-frames.md", L)
+
+
+def build_validation_matrix(percase):
+    """docs/_includes/validation-matrix.md: every case against every engine, status and the range of the headline
+    R and FAC2 (negative controls excluded). Five columns of short cells: it needs no sideways scrolling."""
+    L = ["<!-- Generated by scripts/build_api.py. -->", "",
+         "| Case | " + " | ".join(_engine_name(e["id"]) for e in ENGINES) + " |", "|---" * (len(ENGINES) + 1) + "|"]
+    for case in D.CASE_IDS:
+        meta = D.CASES[case]
+        cells = []
+        for e in ENGINES:
+            status = ENGINE_STATUS[case][e["id"]]
+            entries = [r for r in percase[case]["results"] if r["engine"] == e["id"]]
+            cell = status_label(status)
+            ranges = _headline_ranges(entries) if entries else None
+            if ranges:
+                cell += (f'<br><span class="caption">R {_range(ranges["R"], True)}'
+                         f'<br>FAC2 {_range(ranges.get("Fac2"), False)}</span>')
+            cells.append(cell)
+        L.append(f"| {_link(_cell(meta['title']), _page_url(meta['slug'], 'validation'))} | " + " | ".join(cells) + " |")
+    _write("_includes/validation-matrix.md", L)
+
+
+def build_version_label():
+    """docs/_includes/version-label.html: the release, the API schema version and the data fingerprint, for the
+    sidebar footer. The numbers are this build's, so the label cannot say something the files do not."""
+    _write("_includes/version-label.html", [
+        "<!-- Generated by scripts/build_api.py. -->",
+        f'<span class="version-label"><a href="{{{{ \'/api-reference/versions/\' | relative_url }}}}">Release {RELEASE}</a>'
+        f' · API schema {SCHEMA_VERSION}'
+        f' · <abbr title="SHA-256 of the served data; the full value is in api/index.json">data {DATA_VERSION[:8]}</abbr></span>'])
+
+
+def _frame_traps(meta):
+    """One sentence per way the cleaned table differs from the published file, read from the case's frame."""
+    frame, traps = meta["frame"], []
+    if frame.get("lateral_sign_applied") not in (None, 1):
+        traps.append(f"The lateral velocity V is multiplied by {frame['lateral_sign_applied']} in the cleaned table "
+                     "(`lateral_sign_applied`): the published file's V has the other sign convention.")
+    if frame.get("coordinate_scale_applied") not in (None, 1, 1.0):
+        traps.append(f"The published coordinates are multiplied by {frame['coordinate_scale_applied']:g} in the cleaned table "
+                     "(`coordinate_scale_applied`).")
+    if "wind_direction_rotation" in frame:
+        traps.append("The sense in which the wind direction rotates is a convention to check before comparing at "
+                     "any direction other than 0° (see *Frame and units* on the Data page).")
+    return traps
+
+
+def _case_page(case, meta, p, shared):
+    summ, results = p["summ"], p["results"]
+    base, data_url, val_url = _page_url(meta["slug"]), _page_url(meta["slug"], "data"), _page_url(meta["slug"], "validation")
+    n = D.CASE_IDS.index(case) + 1
+    L = _front(meta["title"], n, parent="Cases", has_children=True, has_toc=False, description=meta["short"])
+    L += [f"# {meta['title']}", "", f"{_esc(meta['short'])}", "{: .fs-5 .fw-300 .lede }", "",
+          f"{_link('Reference data', data_url)}{{: .btn .btn-primary }} {_link('Validation', val_url)}{{: .btn }} "
+          f"{_link('Case as JSON', f'/api/cases/{case}.json')}{{: .btn }}", ""]
+    cfgs = [cfg for (c, cfg) in D.RENDER_CAPTIONS if c == case]
+    if len(cfgs) == 1:
+        L += figure(f"/assets/geometry/{D.render_file(case)}", meta["title"], D.RENDER_CAPTIONS[(case, cfgs[0])], "figure render")
+    else:
+        group = RENDER_GROUP_CAPTIONS.get(case, f"The configurations of {meta['title']}, on one scale.")
+        L += figure_table([(f"/assets/geometry/{D.render_file(case, cfg)}", f"{meta['title']}, {cfg}",
+                            D.RENDER_CAPTIONS[(case, cfg)], None) for cfg in cfgs], min(len(cfgs), 3), group)
+    L += ["## At a glance", "", "| Fact | Value |", "|---|---|"]
+    conf = meta["configuration"]
+    for keys in GLANCE:
+        key = next((k for k in keys if k in conf), None)
+        if key:
+            L.append(f"| {_cell(_label(key))} | {_cell(_md_value(conf[key]))} |")
+    L.append(f"| Measured | {summ['rows']:,} rows over {summ['distinct_points']:,} points: {_cell(', '.join(meta['quantities']))} |")
+    L += ["", "## Agreement with the tunnel", ""]
+    if results:
+        L += ["| Engine | Status | R | FAC2 |", "|---|---|---|---|"]
+        for e in ENGINES:
+            ranges = _headline_ranges([r for r in results if r["engine"] == e["id"]])
+            L.append(f"| {_engine_name(e['id'])} | {status_label(ENGINE_STATUS[case][e['id']])} | "
+                     + (" | ".join((_range(ranges["R"], True), _range(ranges.get("Fac2"), False))) if ranges else "— | —") + " |")
+        L += ["{: .scores }", "",
+              "R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; "
+              "negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: "
+              f"every score, its figures and its reading are on the {_link('Validation page', val_url)}.", ""]
+    else:
+        L += ["**No validation has been run for this case yet.** Nothing on this page is a claim about it. Engine status: "
+              + " · ".join(f"{_engine_name(k)} {status_label(v)}" for k, v in ENGINE_STATUS[case].items()), ""]
+    traps = _frame_traps(meta)
+    L += ["{: .warning-title }", "> Before you compare", ">",
+          "> The cleaned table is in SI units and one frame, with this case's corrections applied once; "
+          "do not apply them again to the published files.", ">"]
+    for t in traps:
+        L.append(f"> - {t}")
+    L += [f"> - {len(meta['known_issues'])} known issues in the published files are listed under "
+          f"{_link('Known data issues', data_url, '#known-data-issues')}.", ""]
+    return L
+
+
+def _case_data_page(case, meta, p):
+    summ, configs = p["summ"], p["configs"]
+    n = D.CASE_IDS.index(case) + 1
+    L = _front("Data", 1, parent=meta["title"], grand_parent="Cases", has_children=False,
+               description=f"{meta['title']}: configuration, frame and units, reference data, inflow and known data issues.")
+    L += [f"# Case {case}: reference data", "{: .no_toc }", ""] + _toc()
+    L += ["## Configuration", "", "| Parameter | Value |", "|---|---|"]
+    for k, v in meta["configuration"].items():
+        L.append(f"| {_cell(_label(k))} | {_md_value(v)} |")
+    L += ["", "## Frame and units", "", "| Property | Definition |", "|---|---|"]
+    for k, v in meta["frame"].items():
+        L.append(f"| {_cell(_label(k))} | {_md_value(v)} |")
+    for k, v in meta["units"].items():
+        L.append(f"| Unit of {'k' if k == 'k' else _cell(_label(k).lower())} | {_cell(v)} |")
+    af = meta.get("approach_flow_file")
+    L += ["", "## Reference data", "",
+          f"Source in this repository: `{meta['reference_file']}`" + (f" (approach flow: `{af}`)" if af else "") + ".", "",
+          f"The cleaned table has **{summ['rows']:,} rows** over **{summ['distinct_points']:,} distinct points**; "
+          f"columns `{'`, `'.join(summ['columns'])}`.", ""]
+    if summ["nulls"]:
+        L += ["Unmeasured cells (null): " + ", ".join(f"{k} {v}" for k, v in summ["nulls"].items()) + ".", ""]
+    rows = []
+    for c in configs:
+        key = ", ".join(_config_part(k, v) for k, v in c.items() if k not in ("points", "measured", "points_per_direction", "wind_directions"))
+        val = c.get("points", c.get("points_per_direction"))
+        if "measured" in c:
+            val = f"{val} ({c['measured']} measured)"
+        if "wind_directions" in c:
+            key += ", 16 wind directions"
+            val = f"{val} per direction"
+        rows.append(f"| {_cell(key)} | {val} |")
+    table = ["| Configuration | Points |", "|---|---|"] + rows
+    if len(rows) > OPEN_LIST_ROWS:
+        L += ['<details markdown="block">', f"  <summary>The {len(rows)} configurations and their points</summary>", ""] + table + ["", "</details>", ""]
+    else:
+        L += table + [""]
+    inflow = meta.get("inflow_fit")
+    if inflow:
+        L += ["## Inflow", "", "| Property | Value |", "|---|---|"]
+        for k, v in inflow.items():
+            if k == "windows":
+                for w in v:
+                    L.append("| Fit window | " + "; ".join(f"{_cell(_label(a))} {_cell(b)}" for a, b in w.items()) + " |")
+            else:
+                L.append(f"| {_cell(_label(k))} | {_md_value(v)} |")
+        L.append("")
+    L += ["## Known data issues", "", "Each of these changes the result of a comparison if it is not accounted for.", ""]
+    for g in meta["known_issues"]:
+        L.append(f"- {_esc(g)}")
+    L += ["", "## API", "", "| Resource | Endpoint |", "|---|---|"]
+    for name, rel in (("Case", f"cases/{case}.json"), ("Points (JSON)", f"cases/{case}/points.json"),
+                      ("Points (CSV)", f"cases/{case}/points.csv"), ("Approach flow (CSV)", f"cases/{case}/approach_flow.csv"),
+                      ("Geometry", f"cases/{case}/geometry.json"), ("Geometry (STL)", f"cases/{case}/geometry.stl"),
+                      ("Validation", f"cases/{case}/validation.json")):
+        L.append(f"| {name} | {_link('`/api/' + rel + '`', '/api/' + rel)} |")
+    L += ["", "## Attribution", "", f"- Data collectors: {_esc(', '.join(meta['people']['data_collectors']))}",
+          f"- Editors and distributors: {_esc(', '.join(meta['people']['editors_distributors']))}"]
+    if meta["doi"]:
+        L.append(f"- DOI: [{meta['doi']}](https://doi.org/{meta['doi']})")
+    elif meta.get("doi_note"):
+        L.append(f"- DOI: {_esc(meta['doi_note'])}")
+    L += [f"- Citation requested: {_esc(meta['citation_requested'])}", "- Licence: CC BY 4.0"]
+    return L
+
+
+def _score_table(e):
+    """One run's headline scores: a row per score, the metrics across. A bare '|' in a label (|U|) is escaped."""
+    L = ["| Score | R | FAC2 | FB | Hit rate | n |", "|---|---|---|---|---|---|"]
+    for label, key in e["headline"].items():
+        s = e["scores"][key]
+        num = lambda m, f: "—" if s.get(m) is None else f"{s[m]:{f}}"  # noqa: E731
+        L.append(f"| {_cell(label)} | {num('R', '+.3f')} | {num('Fac2', '.3f')} | {num('Fb', '+.3f')} | "
+                 f"{num('HitRate', '.3f')} | {num('Count', 'd')} |")
+    L.append("{: .scores }")
+    return L
+
+
+def _case_validation_page(case, meta, p, shared):
+    results = p["results"]
+    n = D.CASE_IDS.index(case) + 1
+    L = _front("Validation", 2, parent=meta["title"], grand_parent="Cases", has_children=False,
+               description=f"{meta['title']}: Eddy3D's scores against the tunnel data, by engine.")
+    L += [f"# Case {case}: validation", "{: .no_toc }", ""]
+    L += ["Engine status: " + " · ".join(f"{_engine_name(k)} {status_label(v)}" for k, v in ENGINE_STATUS[case].items()), ""]
+    if not results:
+        L += ["**No validation has been run for this case yet.** Nothing on this page is a claim about it.", ""]
+        return L
+    L += ["*Scored* means a run exists and its scores are below, not that it agrees. How to read them is on "
+          f"{_link('the reading page', READING_PAGES.get(case, '/validation/'))}; the "
+          f"{_link('Validation', '/validation/')} overview says what each status means and why an engine is *not comparable*.", ""]
+    names = {e["id"]: e["name"] for e in ENGINES}
+    figures, fig_no = [], 1
+    for e in results:
+        L += [f"## {_esc(names[e['engine']])}" + (f", configuration {_esc(e['configuration'])}" if e["configuration"] else ""), ""]
+        if e["quantity"]:
+            L += [f"Quantity: {_esc(e['quantity'])}.", ""]
+        if e["recirculation_Lr_over_H"] is not None:
+            L += [f"Reattachment length L<sub>r</sub>/H = {e['recirculation_Lr_over_H']:.2f}.", ""]
+        table = _score_table(e)
+        if len(e["headline"]) > OPEN_TABLE_ROWS:
+            L += ['<details markdown="block">', f"  <summary>All {len(e['headline'])} headline scores</summary>", ""] + table + ["", "</details>", ""]
+        else:
+            L += table + [""]
+        pairs_rel = e["pairs"]["path"]
+        L += [f"{_esc(e['normalisation'])}. Per-point values: {_link('`/api/' + pairs_rel + '`', '/api/' + pairs_rel)}. "
+              f"Reproduce: {_esc(e['reproduce'])}.", ""]
+        figures += [f for f in e["figures"] if f not in figures]
+    own = [f for f in figures if f["url"].rsplit("/", 1)[-1] not in shared]
+    elsewhere = [f for f in figures if f["url"].rsplit("/", 1)[-1] in shared]
+    if own:
+        L += ["## Figures", ""]
+    for fig in own:
+        name = fig["url"].rsplit("/", 1)[-1]
+        L += figure(f"/assets/figures/{name}", fig["caption"], f"<strong>Figure {fig_no}.</strong> {fig['caption']}")
+        fig_no += 1
+    for fig in elsewhere:
+        name = fig["url"].rsplit("/", 1)[-1]
+        page, label = SHARED_FIGURE_PAGES.get(name, ("/validation/", "the Validation page"))
+        L += [f"The figure for all cases together ({_esc(fig['caption'].split(':')[0])}) is on {_link(label, page)}.", ""]
+    return L
 
 
 def build_pages(percase):
-    """docs/cases/<slug>.md, one per case, from the same facts the API serves."""
-    out_dir = os.path.join(DOCS, "cases")
-    os.makedirs(out_dir, exist_ok=True)
+    """The site's generated pages, one set per case in D.CASE_IDS (any id the data has gets its pages): the case page
+    (summary, render, status), its Data page and its Validation page, plus the includes the hand-written pages use."""
+    shared = _shared_figures(percase)
     build_gallery(percase)
-    for n, case in enumerate(D.CASE_IDS, start=1):
-        meta = D.CASES[case]
-        summ, configs, ventries = percase[case]["summ"], percase[case]["configs"], percase[case]["results"]
-        L = ["---", f"title: \"{meta['title']}\"", "parent: Cases", f"nav_order: {n}", "---", "",
-             f"# {meta['title']}", "", meta["short"], ""]
-        fig_no = 1
-        cfgs = [cfg for (c, cfg) in D.RENDER_CAPTIONS if c == case]
-        if len(cfgs) == 1:
-            L += figure(f"/assets/geometry/{D.render_file(case)}", meta["title"],
-                        f"<strong>Figure {fig_no}.</strong> {D.RENDER_CAPTIONS[(case, cfgs[0])]}")
-        else:
-            label = {"C": "The three configurations of the centre block, on one scale; 120 measurement points each, "
-                          "at three wind directions.",
-                     "E": "The two states, on one scale (full-scale metres, +x east, +y north); the arrow marks SW, the "
-                          "direction Eddy3D is scored at."}[case]
-            L += figure_table([(f"/assets/geometry/{D.render_file(case, cfg)}", f"{meta['title']}, {cfg}",
-                                D.RENDER_CAPTIONS[(case, cfg)], None) for cfg in cfgs],
-                              3 if case == "C" else 1,  # C's three states side by side; E's are wide, so they stack
-                              f"<strong>Figure {fig_no}.</strong> {label}")
-        fig_no += 1
-        L += ["## Configuration", "", "| Parameter | Value |", "|---|---|"]
-        for k, v in meta["configuration"].items():
-            L.append(f"| {_label(k)} | {_md_value(v)} |")
-        L += ["", "## Frame and units", "", "| Property | Definition |", "|---|---|"]
-        for k, v in meta["frame"].items():
-            L.append(f"| {_label(k)} | {_md_value(v)} |")
-        for k, v in meta["units"].items():
-            L.append(f"| Unit of {'k' if k == 'k' else _label(k).lower()} | {v} |")
-        L += ["", "## Reference data", "",
-              f"Source in this repository: `{meta['reference_file']}`" + (f" (approach flow: `{meta['approach_flow_file']}`)" if meta["approach_flow_file"] else "") + ".",
-              "", f"The cleaned table has **{summ['rows']} rows** over **{summ['distinct_points']} distinct points**; columns `{'`, `'.join(summ['columns'])}`.", ""]
-        if summ["nulls"]:
-            L.append("Unmeasured cells (null): " + ", ".join(f"{k} {v}" for k, v in summ["nulls"].items()) + ".")
-            L.append("")
-        L += ["| Configuration | Points |", "|---|---|"]
-        for c in configs:
-            key = ", ".join(_config_part(k, v) for k, v in c.items() if k not in ("points", "measured", "points_per_direction", "wind_directions"))
-            val = c.get("points", c.get("points_per_direction"))
-            if "measured" in c:
-                val = f"{val} ({c['measured']} measured)"
-            if "wind_directions" in c:
-                key += ", 16 wind directions"
-                val = f"{val} per direction"
-            L.append(f"| {key} | {val} |")
-        L += ["", "### Inflow", "", "| Property | Value |", "|---|---|"]
-        for k, v in meta["inflow_fit"].items():
-            if k == "windows":
-                for w in v:
-                    L.append("| Fit window | " + "; ".join(f"{_label(a)} {b}" for a, b in w.items()) + " |")
-            else:
-                L.append(f"| {_label(k)} | {_md_value(v)} |")
-        L += ["", "## Known data issues", ""]
-        for g in meta["known_issues"]:
-            L.append(f"- {g}")
-        L += ["", "## Validation", ""]
-        if ventries:
-            names = {e["id"]: e["name"] for e in ENGINES}
-            figures = []
-            for e in ventries:
-                title = names[e["engine"]] + (f" — configuration {e['configuration']}" if e["configuration"] else "")
-                L += [f"### {title}", ""]
-                if e["quantity"]:
-                    L += [f"Quantity: {e['quantity']}.", ""]
-                if e["recirculation_Lr_over_H"] is not None:
-                    L += [f"Reattachment length L_r/H = {e['recirculation_Lr_over_H']:.2f}.", ""]
-                scores = {label: e["scores"][key] for label, key in e["headline"].items()}
-                # A bare '|' in a label (|U|) would split the Markdown table's column: escape it.
-                L += ["| Metric | " + " | ".join(lab.replace("|", "\\|") for lab in scores) + " |", "|---|" + "---|" * len(scores)]
-                for m, label in (("R", "R"), ("Fac2", "FAC2"), ("Fb", "FB"), ("HitRate", "hit rate"), ("Count", "n")):
-                    L.append(f"| **{label}** | " + " | ".join(
-                        "—" if s.get(m) is None else str(s[m]) if m == "Count" else f"{s[m]:+.3f}" if m in ("R", "Fb") else f"{s[m]:.3f}"
-                        for s in scores.values()) + " |")
-                pairs_rel = e["pairs"]["path"]
-                L += ["", f"{e['normalisation']}. Per-point values: [`/api/{pairs_rel}`]({_asset('/api/' + pairs_rel)}). "
-                      f"Reproduce: {e['reproduce']}.", ""]
-                figures += [f for f in e["figures"] if f not in figures]
-            for fig in figures:
-                name = fig["url"].rsplit("/", 1)[-1]
-                L += figure(f"/assets/figures/{name}", name, f"<strong>Figure {fig_no}.</strong> {fig['caption']}")
-                fig_no += 1
-            L += ["How to read these is on the [Validation]({{ '/validation/' | relative_url }}) page."]
-        else:
-            L.append("**No validation has been run for this case yet.** Nothing on this page is a claim about it. Engine status: "
-                     + ", ".join(f"{k} {v}" for k, v in ENGINE_STATUS[case].items()) + ".")
-        L += ["", "## API", "", "| Resource | Endpoint |", "|---|---|"]
-        for name, rel in (("Case", f"cases/{case}.json"), ("Points (JSON)", f"cases/{case}/points.json"),
-                          ("Points (CSV)", f"cases/{case}/points.csv"), ("Approach flow (CSV)", f"cases/{case}/approach_flow.csv"),
-                          ("Geometry", f"cases/{case}/geometry.json"), ("Geometry (STL)", f"cases/{case}/geometry.stl"),
-                          ("Validation", f"cases/{case}/validation.json")):
-            L.append(f"| {name} | [`/api/{rel}`]({_asset('/api/' + rel)}) |")
-        L += ["", "## Attribution", "", f"- Data collectors: {', '.join(meta['people']['data_collectors'])}",
-              f"- Editors and distributors: {', '.join(meta['people']['editors_distributors'])}"]
-        if meta["doi"]:
-            L.append(f"- DOI: [{meta['doi']}](https://doi.org/{meta['doi']})")
-        elif meta.get("doi_note"):
-            L.append(f"- DOI: {meta['doi_note']}")
-        L += [f"- Citation requested: {meta['citation_requested']}", "- Licence: CC BY 4.0", ""]
-        with io.open(os.path.join(out_dir, f"{meta['slug']}.md"), "w", encoding="utf-8", newline="\n") as f:
-            f.write("\n".join(L))
+    build_cases_table(percase)
+    build_cases_frames()
+    build_validation_matrix(percase)
+    build_version_label()
+    for case in D.CASE_IDS:
+        meta, p = D.CASES[case], percase[case]
+        _write(f"cases/{meta['slug']}.md", _case_page(case, meta, p, shared))
+        _write(f"cases/{meta['slug']}/data.md", _case_data_page(case, meta, p))
+        _write(f"cases/{meta['slug']}/validation.md", _case_validation_page(case, meta, p, shared))
 
 
 # ----------------------------------------------------------------------------- verify
