@@ -394,8 +394,8 @@ CASE_IDS = ["A", "B", "C", "D", "E"]
 
 # Cases F-M: one module each (scripts/aij_case_<x>.py) with CASE, DEFAULT_CONFIGURATION, RENDER_CAPTIONS,
 # geometry(D, case) and approach_flow(D, case). The point tables come from clean/ (load_points).
-import aij_case_f, aij_case_g, aij_case_h, aij_case_i, aij_case_m  # noqa: E402
-_EXTRA = {"F": aij_case_f, "G": aij_case_g, "H": aij_case_h, "I": aij_case_i, "M": aij_case_m}
+import aij_case_f, aij_case_g, aij_case_h, aij_case_i, aij_case_j, aij_case_k, aij_case_l, aij_case_m  # noqa: E402
+_EXTRA = {"F": aij_case_f, "G": aij_case_g, "H": aij_case_h, "I": aij_case_i, "J": aij_case_j, "K": aij_case_k, "L": aij_case_l, "M": aij_case_m}
 CASE_IDS.extend(_EXTRA)
 CASES.update({k: m.CASE for k, m in _EXTRA.items()})
 DEFAULT_CONFIGURATION.update({k: m.DEFAULT_CONFIGURATION for k, m in _EXTRA.items()})

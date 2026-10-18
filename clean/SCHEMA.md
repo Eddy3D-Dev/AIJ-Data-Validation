@@ -262,3 +262,68 @@ carried: the table has no column for them), I's 12 (k only).
 Box geometry, `geometry.stl` and its boxes in `geometry.json`: G the belt's 2 × 74 × 7 m envelope with the 1.2 m gap (a **porous canopy**, shading rate 81 %,
 not a solid body), H the 0.10 × 0.10 × 0.20 m building, I the 0.1 m cube. The sources are not part of the geometry; their position is in
 `manifest.json → cases.<id>.extra_measurements.source`: H the 4 mm floor hole at (0.05, 0, 0), I the 6 mm roof outlet at (0, 0, 0.1).
+
+## Cases J, K, L — frames, reference values, extra files
+
+The three Tokyo Polytechnic University cases (J: 1:1:2 building, K: 9 x 9 cube array, L: 14 x 9 cube array; K and L
+with a tracer source on the floor, J and L in an unstably stratified boundary layer). One wind direction each
+(`wind_direction_deg` = 0, flow toward +x, `directions.csv` status `settled`), one instrument (`split_fibre`: the
+velocity probe; temperature was read with a cold wire and concentration with a hydrocarbon analyser beside it),
+`campaign` = `wind_tunnel`, `config` = `default`.
+
+| case | origin | +x | +y | scale | transform from the published files |
+|---|---|---|---|---|---|
+| J | centre of the building's leeward (downwind) wall, on the floor | streamwise; building x in [−0.08, 0], source at x = +0.04 | lateral; building y in [−0.04, 0.04]; the z/H = 0.025 plane only on y ≤ 0 | model (b = 0.08 m, H = 0.16 m; ratio not stated) | none for x, y, z; T kelvin → °C |
+| K | windward wall of the 4th row of the central column | streamwise; 9 rows from x = −0.36 | lateral; 9 columns centred on y = 0 (span ±0.51) | model (H = 0.06 m; ratio not stated) | none (the workbook's millimetres → m); `point_id` = row order |
+| L | windward wall of the 9th row (of 14) of the central column | streamwise; 14 rows from x = −0.96 | lateral; 9 columns centred on y = 0 (span ±0.51) | model (H = 0.06 m; ratio not stated) | none (workbook mm → m); the CSV's `T(K)` is already °C |
+
+All three: right-handed, +z up from the (model) floor, lengths in metres. V is carried as published (+y by the frame); in
+J it is verified (V < 0 beside the upstream half of the y < 0 flank, V > 0 in the wake), in K and L it is not
+verifiable: a cross-flow offset of about 0.06 m/s is larger than the antisymmetric part (`checks.json`,
+`lateral_velocity_is_an_offset_not_an_antisymmetric_field`).
+
+**Precision.** The published `RS_case<X>.csv` of each is the legacy workbook (`LF_case<X>.xlsx`) rounded, checked cell
+for cell (`csv_equals_workbook_*`). The table is built from the workbook, as Case E's is: J's CSV is the workbook's
+non-dimensional values rounded to 10⁻³ (U, V, W) or 10⁻⁴ and then multiplied back by the reference scales, which puts the
+heat fluxes on a grid of 0.0049 K·m/s and k on 0.00021 m²/s²; K's CSV recomputes k from the rounded rms values.
+Variances `uu vv ww` are the square of the published rms (K, L) or the workbook's `<u′u′>` columns (J, where they
+differ from the square of the rms by up to 3 % in single rows and reproduce k).
+
+**Reference values** for `concentration_ratio = C / c0` (`manifest.json → cases.<id>.normalisation`):
+
+| case | c0 (ppm) | definition |
+|---|---|---|
+| J | 12.2832 | 0.05 · q / (U_H H²), q = 9.17·10⁻⁶ m³/s, U_H = 1.4581 m/s, H = 0.16 m: the 5 % ethylene fraction of the released gas is in it (the workbook's own cell). Without it c0 would be 245.66 |
+| K | 429.185 | q / (U_H H²), q = 3.6·10⁻⁶ m³/s, U_H = 2.33 m/s, H = 0.06 m, as the data paper defines it. The workbook normalises with H = 0.2 m and UH = 4.94009 m/s instead (C0 = 18.218 ppm): multiply `concentration_ratio` by 23.558 to reproduce it (`QUESTIONS.md` QK1) |
+| L | 1728.228 | Cgas · q / (U_H H²), q = 8.33333·10⁻⁶ m³/s, U_H = 1.339415 m/s, H = 0.06 m (the workbook's own cell) |
+
+**Temperature.** `T` is °C (the published files give kelvin in J, and a °C column headed K in L's RS file); `T_rms` and the
+heat fluxes are differences (K, K·m/s). The workbook's reference scales: floor temperature, Δθ = θ_f − θ_H (J: 45.8 °C and
+33.6 K; L: 45.009 °C and 30.257 K).
+
+**Not carried** (no column in schema 2.0.0): the mean scalar speed `<usc>` and its standard deviation of K's workbook
+(never below |U|), L's `Usc` (|U|, derived) and `tc`, the temperature-concentration covariance ⟨θ′c′⟩ (K·ppm), L's `tc`
+column. The expanded uncertainty of J's workbook has no column either; it is summarised in
+`manifest.json → cases.J.extra_measurements.expanded_uncertainty`.
+
+**Extra files** (not part of the point table; listed in the manifest under `extra_measurements.extra_files`):
+
+| file | columns (units) | what |
+|---|---|---|
+| `cases/J/surface_temperature.csv` | `x y z` (m), `T` (°C) | the building's surface temperature at 121 points (`BD-ST_caseJ.csv`, kelvin there): boundary data for a thermal CFD model |
+| `cases/J/approach_flow_full.csv` | `x z` (m), `U V W` (m/s), `uu vv ww uv uw k` (m²/s²), `T` (°C), `T_rms` (K), `uT vT wT` (K·m/s) | the workbook's empty-tunnel profiles at x = −0.4, 0 and +0.4 m (the published `AF_caseJ.csv` is the first) |
+| `cases/K/approach_flow_full.csv` | `x z U V W uu vv ww uv uw k` | `AF_caseK.csv` with V, W, uv, uw (it is Case H's file, row for row) |
+| `cases/L/approach_flow_full.csv` | as J's | the workbook's `Inflow` sheet at x = −0.4 m, ascending in z |
+
+`approach_flow.csv` of each case keeps the common columns (`z U uu vv ww k`); J, K and L publish the profile at one
+streamwise station (J: x = −0.4 m, K: −0.493 m, L: −0.4 m).
+
+## Geometry of J, K, L
+
+| case | files | made from |
+|---|---|---|
+| J | `geometry.stl` | the readme's stated dimensions: one box 0.08 × 0.08 × 0.16 m, leeward wall at the origin; 12 triangles, watertight |
+| K | `geometry.stl` | 81 cubes of 0.06 m on a 0.12 m pitch (9 rows from x = −0.36, 9 columns centred on y = 0): generated, because no STL is published. The pitch is read from `MP-y_caseK.png` / `MP-z_caseK.png`; the 203 points bound it to 0.11 – 0.14 m (no point lies inside a cube only between them) and the source position (x = −0.15 m, between rows 2 and 3) to 0.105 – 0.15 m. 972 triangles, watertight |
+| L | `geometry.stl` | the 126 closed shells of the published `BD_caseL.stl` ('buildings' solid: 1,512 triangles, watertight, outward normals, no duplicates) reduced to their boxes, which equal the 14 × 9 grid of 0.06 m cubes on a 0.12 m pitch to 1e-9. The 'line_source' solid (a flat patch 0.04 m × 1.02 m at x = −0.15 m, z = 0) is not a building and is described in `geometry.json` / the frame, not served as a wall |
+
+All model scale; no source states a model:full-scale ratio, so the case frame is the model one.

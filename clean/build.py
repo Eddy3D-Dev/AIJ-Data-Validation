@@ -424,10 +424,12 @@ CASES = {
           "citation": "Tominaga, Y., Mochida, A., Yoshie, R., Kataoka, H., Nozu, T., Yoshikawa, M., Shirasawa, T. (2008). AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings. JWEIA 96, 1749-1761. https://doi.org/10.1016/j.jweia.2008.02.058"},
 }
 EDITORS = ["Yoshihide Tominaga (Niigata Institute of Technology)", "Hideki Kikumoto (The University of Tokyo)", "Tsubasa Okaze (Institute of Science Tokyo)"]
+DIRECTION_BASIS: dict[str, tuple[str, str]] = {}   # Cases J-L, one direction each: case -> (sense_basis, status); each build() fills its own
 
-# Cases F-M: one module each (clean/case_<x>.py) with META (this table's entry), build(B, prov) and directions(B, pts).
-import case_f, case_g, case_h, case_i, case_m  # noqa: E402  (clean/ is sys.path[0] when this file is run)
-MODULES = {"F": case_f, "G": case_g, "H": case_h, "I": case_i, "M": case_m}
+# Cases F-M: one module each (clean/case_<x>.py) with META (this table's entry) and build(B, prov); F, G, H, I and M also
+# write their own directions(B, pts), J, K and L register their DIRECTION_BASIS in build() and use the generic table.
+import case_f, case_g, case_h, case_i, case_j, case_k, case_l, case_m  # noqa: E402  (clean/ is sys.path[0] when this file is run)
+MODULES = {"F": case_f, "G": case_g, "H": case_h, "I": case_i, "J": case_j, "K": case_k, "L": case_l, "M": case_m}
 CASES.update({k: m.META for k, m in MODULES.items()})
 FULL_SCALE = {"E", "F", "G", "M"}   # cases whose frame is in full-scale metres
 
@@ -1028,14 +1030,15 @@ def build_E(prov):
 # --------------------------------------------------------------------------------------------- directions
 
 def directions_for(case, pts, frame_note):
-    if case in MODULES:
+    if hasattr(MODULES.get(case), "directions"):
         return MODULES[case].directions(sys.modules[__name__], pts)
     rows = []
     for (cfg, inst, wd, wname), g in pts.groupby(["config", "instrument", "wind_direction_deg", "wind_direction"], sort=True):
-        q = {"A": "U", "B": "U", "C": "Vs", "D": ("Vs" if inst == "thermistor" else "U"), "E": "velocity_ratio"}[case]
+        q = {"A": "U", "B": "U", "C": "Vs", "D": ("Vs" if inst == "thermistor" else "U"), "E": "velocity_ratio"}.get(case, "U")
         r = math.radians(wd)
-        if case in ("A", "B"):
-            fx, fy, basis, status = 1.0, 0.0, "definition: +x streamwise (MP drawings; checks lateral_sign_*)", "settled"
+        if case in ("A", "B") or case in DIRECTION_BASIS:
+            fx, fy = 1.0, 0.0
+            basis, status = DIRECTION_BASIS.get(case, ("definition: +x streamwise (MP drawings; checks lateral_sign_*)", "settled"))
         elif case == "C":
             fx, fy = math.cos(r), -math.sin(r)
             basis = "measured: WD0 field y-mirror symmetric and faster upwind; WD45 field mirror-symmetric about y = -x, not y = +x (checks WD45_symmetry_plane_*)" if wd else "measured: y-mirror symmetry + windward band faster (checks WD0_flow_is_along_x_*)"
