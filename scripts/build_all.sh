@@ -16,6 +16,7 @@ export PYTHONHASHSEED=0 PYTHONIOENCODING=utf-8 PYTHONDONTWRITEBYTECODE=1 MPLBACK
 pip install --quiet --disable-pip-version-check --root-user-action=ignore --no-deps --require-hashes -r requirements.lock
 
 python clean/build.py
+(cd validation && python -m unittest test_layout)   # the measurement groups: every point in one group, the sizes the tunnel and the data paper give
 (cd validation && python render_geometry.py && for f in plot_*.py; do python "$f"; done)
 (cd validation && python plotstyle.py)   # the palette checks, and every PNG under validation/figures at 1200 dpi
 python scripts/build_api.py
