@@ -13,22 +13,8 @@ Case F — Shinjuku district.
 - The tunnel did not run E, ESE, WSW or W; the field data cover all 16. The 5 m and 20 m planes exist at some points only (29 and 79 rows).
 - One tunnel value (point 8, SW, 9 m: 0.474) has no counterpart in the workbook\'s results sheet, and the flat \'Sheet1\' table has 0.63 there.
 - Field anemometer heights above the tunnel floor are 13 - 21 m (3 - 11 m above ground by the readme\'s rule); the data paper says 3 - 9 m, so points 13 and 14 (11 m) disagree.
-- The thermistor reads a SCALAR speed and the cup anemometer a 10-minute mean.
-- The files do not say whether a wind direction names where the wind comes from. The cleaned tables read it as the direction the wind comes from (N = 0, E = 90). Eddy3D\'s OpenFOAM 12 run for the wind from NNW correlates R 0.935 with the tunnel\'s 9 m column labelled NNW and R 0.077 with its column labelled SSE, the opposite wind (clean/QUESTIONS.md QF9); the other directions are not solved and stay unverified.
-
-<details markdown="block">
-<summary>Interpretation: Scalar speed</summary>
-
-A RANS |U| is biased low against the thermistor and the cup anemometer.
-
-</details>
-
-<details markdown="block">
-<summary>Interpretation: Wind direction labels</summary>
-
-A solved field corroborates this reading at NNW.
-
-</details>
+- The thermistor reads a SCALAR speed and the cup anemometer a 10-minute mean: a RANS |U| is biased low against both.
+- The files do not say whether a wind direction names where the wind comes from. The cleaned tables read it as the direction the wind comes from (N = 0, E = 90). At NNW a solved field supports that reading: Eddy3D\'s OpenFOAM 12 run for the wind from NNW correlates R 0.935 with the tunnel\'s 9 m column labelled NNW and R 0.077 with its column labelled SSE, the opposite wind (clean/QUESTIONS.md QF9); the other directions are not solved and stay unverified.
 
 ## Case G
 
@@ -36,17 +22,10 @@ Case G — flow behind a tree belt.
 
 - FIELD data: full-scale metres, no model, and nothing in m/s. The table carries U/UH (velocity\_ratio) and k/UH^2 (k\_ratio), UH = the mean speed at 7 m during each period; the approach-flow table carries U/Ub and k/Ub^2 (Ub = U at 9 m) in its U and k columns, which are dimensionless here.
 - The readme lists the heights of the lee measurement as 1.5, 3.0, 6.0, 9.0 m; the table, the workbook, the drawing and the data paper have 1.5, 3, 4.5, 6 m.
-- The tree belt is a POROUS canopy (shading rate 81 % after pruning), not a solid body: the served geometry is its 2 m × 74 m × 7 m envelope with the 1.2 m gap.
+- The tree belt is a POROUS canopy (shading rate 81 % after pruning), not a solid body: the served geometry is its 2 m × 74 m × 7 m envelope with the 1.2 m gap, and a solver needs a canopy (drag) model, not a wall.
 - The approach profile (28 Dec 2000, 120 min) and the lee measurements (26 Dec 2000, 10 min or more) are from different days. Behind the belt k/UH^2 is 0.040-0.072 at 5 H, 3-8 times below the approach flow\'s 0.26-0.31 at the same heights; the files do not say why.
 - Only 28 numbers per quantity exist, on one centre section, one time-average each, with no repeats and no uncertainty.
 - The wind direction relative to the belt normal during the measurement is not published; the case is two-dimensional by assumption.
-
-<details markdown="block">
-<summary>Interpretation: Canopy model</summary>
-
-A solver needs a canopy (drag) model, not a wall.
-
-</details>
 
 ## Case H
 
@@ -65,20 +44,13 @@ Case H — 1:1:2 building with a floor point source.
 Case I — cube with a roof point source.
 
 - Two point sets, no point numbers: the velocity file (91 points: y = 0 plane and z/H = 0.5 plane) and the concentration file (539 points: y = 0 plane and the ground). The table stacks them, one row per instrument and point: velocity rows (instrument ldv) are numbered 1-91 and concentration rows (hydrocarbon\_analyser) 92-630, in the files\' order. 17 locations have both a velocity and a concentration value.
-- V on the y = 0 plane (53 of 91 points) is 0 in the CSV and 1e-9 ... 4e-6 m/s in the workbook. It is NaN in the table; V is measured only at the 38 off-plane points.
+- V on the y = 0 plane (53 of 91 points) is 0 in the CSV and 1e-9 ... 4e-6 m/s in the workbook: a symmetry value, not a measurement. It is NaN in the table; V is measured only at the 38 off-plane points.
 - The table carries the legacy workbook\'s values; the CSVs round to 3 decimals (velocity, k) and 1 decimal (concentration, ppm). Every concentration is a multiple of 0.1 ppm: a 0.4 ppm value carries +/-12 % of quantisation.
 - The paper\'s c0 = 39.2 ppm needs the ETHANE flow (10 % of the 400 cc/min, 6.67e-7 m3/s); its sentence \'ethane released at 6.67e-6 m3/s\' is the mixture. With the mixture flow c0 would be 392 ppm.
 - The workbook normalises the approach flow with 1.697 m/s and the points with 1.7 m/s (0.18 % apart).
 - AF\_caseI.csv ends in 53 rows of \',,\' and two stray cells, \'0.5\*\' and \'1.5\*\' (chart axis labels): a reader that does not test z for a number takes them for data.
 - Thirteen ground-centreline locations (x, 0, 0) are measured twice (they are on both the y = 0 and the z = 0 plane) with values up to 8.5 % apart; both are kept. The four y = 0, z = 0.05 wind points that appear twice in the workbook are identical copies and appear once.
 - Only the TKE is published, no variances and no concentration fluctuation: k cannot be checked against the components.
-
-<details markdown="block">
-<summary>Data notes: V on the symmetry plane</summary>
-
-V on that plane is a symmetry value, not a measurement.
-
-</details>
 
 ## Case J
 
@@ -91,16 +63,9 @@ Case J — 1:1:2 building, non-isothermal.
 - The workbook\'s \<u\'2\> is not always the square of its sigma\_u (up to 3 % in single rows); the table uses the variances, which reproduce k.
 - The workbook lists an expanded uncertainty beside every quantity (no column here; clean/manifest.json cases.J.extra\_measurements.expanded\_uncertainty). The mean concentration is below its own uncertainty (about 1 ppm) at 42 % of the rows, and 193 uncertainty cells of the w\'theta\' flux are an Excel fill series, not values.
 - The empty-tunnel profile changes along the tunnel: U at z = 0.019 H is 0.33 U\_H at x/H = -2.5 (the published AF\_caseJ.csv), 0.58 at the building\'s own position. The workbook has all three stations (clean/cases/J/approach\_flow\_full.csv).
-- The +y and -y halves are not mirror images: over the 97 mirror pairs of the z/H = 0.25 plane U at +y is 11 % lower (means 0.558 and 0.629 U\_H, R between the halves 0.955).
+- The +y and -y halves are not mirror images: over the 97 mirror pairs of the z/H = 0.25 plane U at +y is 11 % lower (means 0.558 and 0.629 U\_H, R between the halves 0.955), so a y-symmetric model has a ceiling on this file.
 - The readme\'s Reynolds number (43,000) is Case H\'s; U\_H H / nu = 1.6e4 as the data paper states.
 - uv, uw, vw are not published at the points; uc, vc, wc were not measured.
-
-<details markdown="block">
-<summary>Interpretation: Mirror symmetry</summary>
-
-A y-symmetric model has a ceiling on this file.
-
-</details>
 
 ## Case K
 
@@ -111,17 +76,10 @@ Case K — 9 x 9 cube array, point source.
 - The published CSV is the workbook rounded (3 decimals, concentrations 2), with k recomputed from the rounded rms values; the table is rebuilt from the workbook.
 - AF\_caseK.csv is Case H\'s approach-flow file, row for row (x = -0.493 m, tabulated for a 0.2 m building); it gives 2.24 m/s at z = 0.06 m against the stated U\_H = 2.33.
 - The lateral velocity V is dominated by a cross-flow offset (about 0.06 m/s, also in the empty tunnel); the +y and -y halves cannot confirm its sign.
-- The mean concentration is not mirror-symmetric (the +y and -y values of one point differ by 44 % on average).
+- The mean concentration is not mirror-symmetric (the +y and -y values of one point differ by 44 % on average), so the mirror pairs are not a repeatability estimate; velocity and k are (3 % and 5 %).
 - The workbook\'s \<usc\> / sigma\_usc (\'velocity magnitude\', never below |U|) is not in the table.
 - Data paper section 3.11 describes the measurements as \'approximately 30 points at eight heights downwind of the line source\'; Case K has 203 points at five heights and a point source.
 - Workbook units: x and y in millimetres in both data sheets; z in millimetres in \'Measurement data\' but metres in \'Inflow\'.
-
-<details markdown="block">
-<summary>Data notes: Mirror pairs</summary>
-
-The mirror pairs are not a repeatability estimate; velocity and k are (3 % and 5 %).
-
-</details>
 
 ## Case L
 
@@ -132,24 +90,10 @@ Case L — 9 x 14 cube array, line source, non-isothermal.
 - The readme\'s file list names AF\_caseK.csv and RS\_caseK.csv; the files are AF\_caseL.csv and RS\_caseL.csv.
 - The readme\'s \'building surface temperature T\_b = 14.8 degC\' is the approach-flow air temperature at z = H; the workbook gives the building surface as 42.2 degC.
 - The line source is 0.037 m x 1.2 m in the readme and data paper but a 0.04 m x 1.02 m patch in BD\_caseL.stl.
-- The +y and -y halves are not mirror images: the same point differs in U by 26 %, in k by 23 %, in C by 36 % on average, and U is 0.11 m/s lower and T 1.3 K higher at +y at z = 0.15 m (0.09 m above the roofs).
+- The +y and -y halves are not mirror images: the same point differs in U by 26 %, in k by 23 %, in C by 36 % on average, and U is 0.11 m/s lower and T 1.3 K higher at +y at z = 0.15 m (0.09 m above the roofs), so the tunnel flow has a lateral gradient; do not assume symmetry.
 - The workbook carries no expanded uncertainty (the data paper mentions one for Case J only).
 - AF\_caseL.csv lists the profile from the top (z = 0.32 m) down and has no k.
-- The measured tracer flux through the cross-sections equals q / 1.2 m to 0.86 .. 1.0 (street and cube-column lines averaged); the cube-column line alone carries only 0.2 .. 0.4 of it.
-
-<details markdown="block">
-<summary>Interpretation: Mirror symmetry</summary>
-
-The tunnel flow has a lateral gradient; do not assume symmetry.
-
-</details>
-
-<details markdown="block">
-<summary>Data notes: Tracer flux</summary>
-
-This fixes q and the unit ppm.
-
-</details>
+- The measured tracer flux through the cross-sections equals q / 1.2 m to 0.86 .. 1.0 (street and cube-column lines averaged), which fixes q and the unit ppm; the cube-column line alone carries only 0.2 .. 0.4 of it.
 
 ## Case M
 

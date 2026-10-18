@@ -16,7 +16,7 @@
   "x": "+x EAST (full-scale metres)",
   "y": "+y NORTH (compass rose in MP_caseF.png)",
   "z": "+z up from the TUNNEL FLOOR; the readme's rule is ground = z - 10 m (the STL's terrain under the points is at z = 5 m)",
-  "wind_direction_rotation": "compass FROM-direction (N = 0, E = 90): N blows toward -y; flow_dir = (-sin WD, -cos WD). Not stated by the sources; supported by the reference-building choice and by upwind roughness, and at NNW corroborated by a solved field (status 'corroborated by a solved field'; the other directions stay 'unverified').",
+  "wind_direction_rotation": "compass FROM-direction (N = 0, E = 90), so N blows toward -y; flow_dir = (-sin WD, -cos WD). Not stated by the sources; supported by the reference-building choice and by upwind roughness, and at NNW by a solved field (status 'corroborated by a solved field'; the other directions stay 'unverified').",
   "lateral_sign_applied": 1,
   "coordinate_scale_applied": 800.0
  },

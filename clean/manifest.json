@@ -5,7 +5,7 @@
  "licence": {
   "data": "CC BY 4.0",
   "url": "https://creativecommons.org/licenses/by/4.0/",
-  "note": "The measurement data belongs to its collectors and distributors, named per case. Cite the benchmark paper and each case's requested citation."
+  "note": "Data: Kikumoto et al. (2026), CC BY 4.0. Collectors and requested citation per case."
  },
  "cite": {
   "benchmark": "Kikumoto, H., Okaze, T., Yoshie, R. et al. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083",
@@ -1664,7 +1664,7 @@
      "z0_mm": 34.9212,
      "rms_residual_m_s": 0.2625,
      "rms_residual_rel": 0.0667,
-     "note": "does not fit — see rms_residual_rel; a tabulated inlet is the honest choice"
+     "note": "does not fit — see rms_residual_rel; a tabulated inlet is the appropriate choice"
     },
     "power_law": {
      "z_range_m": [

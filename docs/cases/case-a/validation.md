@@ -5,7 +5,7 @@ grand_parent: "Cases"
 nav_order: 2
 has_children: false
 generated: true
-description: "Case A — 1:1:2 building: Eddy3D's scores against the tunnel data, by engine."
+description: "Case A — 1:1:2 building: Eddy3D's scores against the measurements, by engine."
 ---
 
 # Case A: validation

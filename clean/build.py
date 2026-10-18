@@ -420,7 +420,7 @@ def power_law_fit(z, U, zlo, zhi):
 
 
 def interp_log(z, U, zq):
-    """U at zq by linear interpolation in ln z (the honest reading of a tabulated boundary-layer profile)."""
+    """U at zq by linear interpolation in ln z (the natural reading of a tabulated boundary-layer profile)."""
     z, U = np.asarray(z, float), np.asarray(U, float)
     return float(np.interp(math.log(zq), np.log(z), U))
 
@@ -1042,7 +1042,7 @@ def build_E(prov):
     check(c, "construction_signal_present", abs(float(d.mean())) > 0.05, mean_ac_minus_bc=float(d.mean()), sd=float(d.std()), largest_mean_abs_delta_direction=bydir.index[0], largest=float(bydir.iloc[0]), smallest_direction=bydir.index[-1], smallest=float(bydir.iloc[-1]))
     inflow = {"U_ref_m_s": round(U_ref, 4), "z_ref_m": CASES[c]["z_ref"], "U_ref_basis": "all 2560 ratios are integer multiples of one quantum q; U_ref = 0.01 UR / q (the sheet re-normalised U/UR, itself quantised at 0.01, by UR/U_ref); log-interpolation of the profile gives the value beside it",
               "U_ref_log_interp_m_s": round(U_ref_interp, 4), "quantum": q, "ZR_m": ZR, "UR_m_s": UR,
-              "log_law": {**log_law_fit(afl.z, afl.U, 1.25, 75.0), "note": "does not fit — see rms_residual_rel; a tabulated inlet is the honest choice"},
+              "log_law": {**log_law_fit(afl.z, afl.U, 1.25, 75.0), "note": "does not fit — see rms_residual_rel; a tabulated inlet is the appropriate choice"},
               "power_law": power_law_fit(afl.z, afl.U, 1.25, 60.0), "power_law_whole_profile": power_law_fit(afl.z, afl.U, 1.25, 250.0),
               "epsilon_note": "the sheet defines epsilon(z) = Pk(z) = Cmu^0.5 k(z) dU/dz with Cmu = 0.09"}
     frame = {"origin": "centre of the reproduced area, ground plane ('Geometry&Points' sheet)", "x": "+x EAST (compass rose in MP_caseE.png)", "y": "+y NORTH",
@@ -1233,7 +1233,7 @@ def build():
                                                    "note": "column headers in every CSV are bare names; this file is the units sidecar; the parquet files carry the same map in their schema metadata"})
     manifest = {
         "name": "AIJ UWE benchmark — cleaned release, Cases A-M", "version": RELEASE_VERSION, "schema_version": SCHEMA_VERSION,
-        "licence": {"data": "CC BY 4.0", "url": "https://creativecommons.org/licenses/by/4.0/", "note": "The measurement data belongs to its collectors and distributors, named per case. Cite the benchmark paper and each case's requested citation."},
+        "licence": {"data": "CC BY 4.0", "url": "https://creativecommons.org/licenses/by/4.0/", "note": "Data: Kikumoto et al. (2026), CC BY 4.0. Collectors and requested citation per case."},
         "cite": {"benchmark": "Kikumoto, H., Okaze, T., Yoshie, R. et al. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083",
                  "guidelines": "Tominaga, Y. et al. (2008). AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings. JWEIA 96, 1749-1761. https://doi.org/10.1016/j.jweia.2008.02.058"},
         "built_by": "clean/build.py (deterministic; re-run to regenerate; checks.json carries the validity checks, build.log every transform)",

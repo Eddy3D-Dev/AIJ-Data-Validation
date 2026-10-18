@@ -5,7 +5,7 @@ grand_parent: "Cases"
 nav_order: 2
 has_children: false
 generated: true
-description: "Case F — Shinjuku district: Eddy3D's scores against the tunnel data, by engine."
+description: "Case F — Shinjuku district: Eddy3D's scores against the measurements, by engine."
 ---
 
 # Case F: validation
@@ -43,15 +43,8 @@ Quantity: the thermistor\'s (tunnel) and the cup anemometer\'s (field) mean spee
 
 Notes:
 
-- Frame \'literal\': the model is probed at the published z in the STL\'s frame. The readme says z is measured from the tunnel floor and the ground is z - 10 m, but the STL\'s own ground under all 13 points is 5 m, so the 5, 9 and 20 m planes are probed 10, 14 and 25 m above the STL\'s ground (height\_above\_stl\_ground in the pairs). The other frame, \'agl\' (the STL\'s ground plus 5, 9 and 20 m), is the other run of this case. The files do not say which one the tunnel meant: the 9 m plane\'s √(|U|²+2k) scores R 0.93 and FB +0.04 in the literal frame and R 0.94 and FB +0.13 in the agl frame.
+- Frame \'literal\': the model is probed at the published z in the STL\'s frame. The readme says z is measured from the tunnel floor and the ground is z - 10 m, but the STL\'s own ground under all 13 points is 5 m, so the 5, 9 and 20 m planes are probed 10, 14 and 25 m above the STL\'s ground (height\_above\_stl\_ground in the pairs). The other frame, \'agl\' (the STL\'s ground plus 5, 9 and 20 m), is the other run of this case. The files do not say which frame the tunnel meant: the 9 m plane\'s √(|U|²+2k) scores R 0.93 and FB +0.04 in the literal frame and R 0.94 and FB +0.13 in the agl frame.
 - Both sides are U/U(500 m): the tunnel\'s ratio is as published, the model\'s is over its own approach U(500 m) = 9.862 m/s, probed 1100 m upwind of the centre (0.986 of the imposed 10 m/s). Over the imposed 10 m/s the 9 m plane\'s √(|U|²+2k) scores R 0.93 and FB +0.05.
-
-<details markdown="block">
-<summary>Interpretation: Vertical frame</summary>
-
-Neither frame is asserted. The difference between the frames is a statement about the datum, not about the model.
-
-</details>
 
 ## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration agl
 
@@ -83,23 +76,9 @@ Quantity: the thermistor\'s (tunnel) and the cup anemometer\'s (field) mean spee
 
 Notes:
 
-- Frame \'agl\': the model is probed at the STL\'s own ground under each point plus the instrument height (5, 9 and 20 m for the tunnel, 3 to 11 m for the field). The readme says z is measured from the tunnel floor and the ground is z - 10 m, but the STL\'s ground under all 13 points is 5 m, so the published z would sit 5 m higher; that frame is the other run of this case, \'literal\'. The files do not say which one the tunnel meant: the 9 m plane\'s √(|U|²+2k) scores R 0.93 and FB +0.04 in the literal frame and R 0.94 and FB +0.13 in the agl frame.
-- At the fixture\'s 4 m surface cells the lowest probes of this frame (the 7 points of the 5 m plane, 1.25 cells above the ground, and the field\'s point at 3 m) sit in the first cell.
+- Frame \'agl\': the model is probed at the STL\'s own ground under each point plus the instrument height (5, 9 and 20 m for the tunnel, 3 to 11 m for the field). The readme says z is measured from the tunnel floor and the ground is z - 10 m, but the STL\'s ground under all 13 points is 5 m, so the published z would sit 5 m higher; that frame is the other run of this case, \'literal\'. The files do not say which frame the tunnel meant: the 9 m plane\'s √(|U|²+2k) scores R 0.93 and FB +0.04 in the literal frame and R 0.94 and FB +0.13 in the agl frame.
+- At the 4 m surface cells of the mesh the lowest probes of this frame (the 7 points of the 5 m plane, 1.25 cells above the ground, and the field\'s point at 3 m) sit in the first cell, where the point interpolation is pulled toward the wall\'s zero.
 - Both sides are U/U(500 m): the tunnel\'s ratio is as published, the model\'s is over its own approach U(500 m) = 9.862 m/s, probed 1100 m upwind of the centre (0.986 of the imposed 10 m/s). Over the imposed 10 m/s the 9 m plane\'s √(|U|²+2k) scores R 0.94 and FB +0.14.
-
-<details markdown="block">
-<summary>Interpretation: Vertical frame</summary>
-
-Neither frame is asserted. The difference between the frames is a statement about the datum, not about the model.
-
-</details>
-
-<details markdown="block">
-<summary>Interpretation: First-cell probes</summary>
-
-In the first cell the point interpolation is pulled toward the wall\'s zero (the fixture\'s own remark). Read the rows at the lowest probes as such.
-
-</details>
 
 ## All runs
 
@@ -108,40 +87,19 @@ In the first cell the point interpolation is pulled toward the wall\'s zero (the
 
 Notes:
 
-- One direction of the tunnel\'s twelve: only wind from NNW was solved, the direction Eddy3D\'s fixture solves by default (with ENE it has the most tunnel rows, 33). The other eleven tunnel directions and the field\'s other fifteen were not run.
+- One direction of the tunnel\'s twelve was solved: wind from NNW, which with ENE has the most tunnel rows (33). The other eleven tunnel directions and the field\'s other fifteen were not run.
 - The thermistor reads a scalar speed and so does the cup anemometer: the model is scored as |U|, and as √(|U|²+2k), the speed of a velocity with the modelled turbulent kinetic energy in all three components.
 - The field is a year of 10-minute means above 5 m/s at a rooftop reference, over a sector 22.5° wide, at 3 to 11 m above ground; the standard deviation of the means behind each value is 0.075 to 0.15 of U(500 m), 0.20 to 0.78 of the value itself (the horizontal bars of the figure). The tunnel\'s 9 m column scored as a model of the field, point for point, gives R 0.93, FAC2 1.00, FB -0.01.
 - The field values of point 14 are the cleaned table\'s, realigned with the workbook: the published RS-FO\_caseF.csv holds them shifted by one direction (clean/QUESTIONS.md QF1). The field scores here therefore differ from Eddy3D\'s own results file in the third decimal (√(|U|²+2k) in the literal frame: R 0.8729 here, 0.8731 there; in the agl frame 0.8893 and 0.8872); the tunnel scores are identical to it.
 - The STL is open along the rim of its 725 m disc (812 boundary edges, one shell, wound inward), which the canvas\'s pre-meshing pass cannot close (it removed 3 degenerate faces). The mesh has 2,143,488 cells and checkMesh fails one check (43 highly skew faces, maximum skewness 14.8, maximum non-orthogonality 64.8°), so the solve started on the hardened numerics of Eddy3D\'s mesh-quality tier.
 - The solve ran to its 2000-iteration limit with the residualControl unmet (no \'solution converged\' line); the initial residuals at the last iteration were U\_x 1.0e-04, U\_y 5.9e-05, U\_z 2.6e-03, p 3.0e-05, epsilon 1.0e-03 and k 1.4e-04, and the log has 1,988 \'bounding k\' lines.
-- The solved field correlates R 0.93 with the tunnel\'s 9 m column for the wind from NNW and R 0.08 with its column for the opposite wind, SSE (agl frame: 0.94 and 0.10).
-- The model\'s U/U(500 m) at the workbook\'s two rooftop anemometers (SMB 0.85 for |U|, KDD 0.45) is recorded in the results file and not scored: the tunnel\'s anchors for them exist for the north and south tests only.
+- The solved field correlates R 0.93 with the tunnel\'s 9 m column for the wind from NNW and R 0.08 with its column for the opposite wind, SSE (agl frame: 0.94 and 0.10). A RANS field knows no compass, so this supports reading the direction labels as the direction the wind comes from (clean/QUESTIONS.md QF9), at this one direction.
+- The model\'s U/U(500 m) at the workbook\'s two rooftop anemometers (SMB 0.85 for |U|, KDD 0.45) is in the results file and not scored: the tunnel\'s anchors for them exist for the north and south tests only.
 
 <details markdown="block">
-<summary>Interpretation: Coverage of the run</summary>
+<summary>Interpretation: Case F scalar speed and field data</summary>
 
-Nothing here says how the model does at the other directions.
-
-</details>
-
-<details markdown="block">
-<summary>Interpretation: Scalar speed</summary>
-
-The modelled |U| is the lower bound. √(|U|²+2k) is the upper bracket (as in Cases C to E).
-
-</details>
-
-<details markdown="block">
-<summary>Interpretation: Field data and the ceiling control</summary>
-
-A RANS field is one steady state for one exact direction. That is the bar a model of the tunnel is not expected to clear.
-
-</details>
-
-<details markdown="block">
-<summary>Interpretation: Direction labels</summary>
-
-A RANS field knows no compass, so this corroborates the reading of the direction labels as the direction the wind comes from (clean/QUESTIONS.md QF9), at this one direction.
+The modelled |U| is the lower bound. √(|U|²+2k) is the upper bracket (as in Cases C to E). A RANS field is one steady state for one exact direction. The tunnel\'s 9 m column as a model of the field is the bar a model of the tunnel is not expected to clear.
 
 </details>
 

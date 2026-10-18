@@ -54,16 +54,9 @@ description: "Case C — 3 × 3 block array: configuration, frame and units, ref
 | Unit of velocity | m/s |
 
 <details markdown="block">
-<summary>Data notes: Frame</summary>
+<summary>Data notes: Frame and wind direction</summary>
 
-Checked three ways on the data: y -\> -y is a symmetry, the x \<= -0.25 band is faster than x \>= +0.25 in every configuration, and the regression slope of Vs is most negative within 0.8-4.3 deg of +x.
-
-</details>
-
-<details markdown="block">
-<summary>Data notes: Wind direction convention</summary>
-
-The WD = 45 field is mirror-symmetric about y = -x to within the experiment\'s repeatability, 0.10-0.13 m/s, and not about y = +x, 0.5-0.8 m/s. The CSV frame is the frame the point coordinates live in.
+Checked three ways on the data: y -\> -y is a symmetry, the x \<= -0.25 band is faster than x \>= +0.25 in every configuration, and the regression slope of Vs is most negative within 0.8-4.3 deg of +x. The WD = 45 field is mirror-symmetric about y = -x to within the experiment\'s repeatability, 0.10-0.13 m/s, and not about y = +x, 0.5-0.8 m/s. The CSV frame is the frame the point coordinates live in.
 
 </details>
 
@@ -126,34 +119,18 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 <details markdown="block">
 <summary>Interpretation: Inflow fit</summary>
 
-The fit has two windows because Case C scores at ONE height (z = 0.02 m) and the near-ground half of the fit matters.
-
-The tunnel profile is closer to a power law than a log law, so a log-law inlet carries a ~2.3 % rms residual over the fitted range.
+The fit has two windows because Case C scores at ONE height (z = 0.02 m) and the near-ground half of the fit matters. The tunnel profile is closer to a power law than a log law, so a log-law inlet carries a ~2.3 % rms residual over the fitted range.
 
 </details>
 
 ## Known data issues
 
-- The measured quantity Vs is the MEAN OMNIDIRECTIONAL SCALAR speed from a thermistor, not |mean velocity vector|. The data paper suggests comparing sqrt(|U|^2 + 2k) as a conservative correction (over all 1080 rows no Vs is below 0.13 U\_H).
+- The measured quantity Vs is the MEAN OMNIDIRECTIONAL SCALAR speed from a thermistor, not |mean velocity vector|. A RANS |U| is biased low against it; the data paper suggests comparing sqrt(|U|^2 + 2k) as a conservative correction (over all 1080 rows no Vs is below 0.13 U\_H).
 - The \'CB\' column is TEXT (\'0D\', \'1D\', \'2D\'); a reader that parses every field as a number gets NaN for it. The header ends with a trailing comma (an empty 8th column).
 - 1080 rows = 3 wind directions x 3 centre buildings x 120 points, not 3 configurations. In the 0D configuration the 25 centre grid nodes are still absent although the ground there is free: the grid is held constant across configurations.
-- 24 of the 120 points sit exactly on a building face plane (|x| = 0.30 or |y| = 0.30) in the open gap between two blocks.
+- 24 of the 120 points sit exactly on a building face plane (|x| = 0.30 or |y| = 0.30) in the open gap between two blocks: legitimate fluid points, but a probe\'s cell lookup is delicate there.
 - Point numbers 1, 2, 3, 34, 35, 36, 37, 46, 55, 100, 101, 102 do not occur (No. runs 4 ... 132 with nine interior gaps).
 - Experimental repeatability, from the mirror-symmetric point pairs: mean |dVs| 0.088-0.137 m/s (0.024-0.038 U\_H).
-
-<details markdown="block">
-<summary>Interpretation: Scalar speed</summary>
-
-A RANS |U| is biased low against Vs.
-
-</details>
-
-<details markdown="block">
-<summary>Data notes: Points on a face plane</summary>
-
-Legitimate fluid points, but a probe\'s cell lookup is delicate there.
-
-</details>
 
 ## API
 
@@ -169,8 +146,8 @@ Legitimate fluid points, but a probe\'s cell lookup is delicate there.
 
 ## Attribution
 
-- Data collectors: Yoshitami Nonomura (Yamato University)
-- Editors and distributors: Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
+- Data collected by Yoshitami Nonomura (Yamato University), 2003.
+- Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15401791](https://doi.org/10.5281/zenodo.15401791)
 - Citation requested: Nonomura, Y., Kobayashi, N., Tominaga, Y., Mochida, A. (2003). The cross comparison of CFD results for flow field around building models (part 3). Japan Association for Wind Engineering, 95, 83-84 (in Japanese). <https://doi.org/10.14887/jaweam.2003.0.41.0>
 - Licence: CC BY 4.0

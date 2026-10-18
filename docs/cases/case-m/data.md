@@ -47,7 +47,7 @@ description: "Case M — TPU Atsugi campus: configuration, frame and units, refe
 | x | +x NORTH (full-scale metres) |
 | y | +y WEST (compass rose of MP\_caseM.png: N at +x, W at +y); the frame is right-handed |
 | z | +z up from the TUNNEL FLOOR; the campus ground lies at z ~ 32 m |
-| Wind direction convention | meteorological FROM-direction: 180° blows toward +x; flow\_dir = (-cos WD, +sin WD), so a larger WD turns the plume toward -y. Measured on the tunnel\'s 175 / 180 / 185° and on the 18 field runs. |
+| Wind direction convention | meteorological FROM-direction, so 180° blows toward +x; flow\_dir = (-cos WD, +sin WD), and a larger WD turns the plume toward -y. Measured on the tunnel\'s 175 / 180 / 185° and on the 18 field runs. |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 600.0 |
 | Unit of length | m (FULL scale) |
@@ -163,8 +163,8 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Attribution
 
-- Data collectors: Ryuichiro Yoshie (Tokyo Polytechnic University), Takumi Tachibana (Wind Engineering Institute)
-- Editors and distributors: Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
+- Data collected by Ryuichiro Yoshie (Tokyo Polytechnic University) and Takumi Tachibana (Wind Engineering Institute), 2022.
+- Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15487857](https://doi.org/10.5281/zenodo.15487857)
 - Citation requested: Tachibana, T., Yoshie, R., Nakayama, S., Kishida, T., Miyashita, K., Sasaki, R. (2022). Comparison between field measurement and wind tunnel experiments of gas dispersion in an urban area and verification of similarity law. Journal of Wind Engineering 47(3), 39-52 (in Japanese). <http://dx.doi.org/10.5359/jwe.47.39>
 - Licence: CC BY 4.0

@@ -122,7 +122,7 @@
   "x": "+x EAST (full-scale metres)",
   "y": "+y NORTH (compass rose in MP_caseE.png)",
   "z": "+z up; all points at z = 2.0",
-  "wind_direction_rotation": "Meteorological: the compass name is the direction the wind comes FROM (N = 0 deg blows toward -y, E = 90 deg toward -x), clockwise from north. This case keeps its geographic frame instead of '+x along the wind' because the district is real and its coordinates are the data's.",
+  "wind_direction_rotation": "meteorological FROM-direction, clockwise from north; the compass name is the direction the wind comes from (N = 0 deg blows toward -y, E = 90 deg toward -x). This case keeps its geographic frame instead of '+x along the wind' because the district is real and its coordinates are the data's.",
   "lateral_sign_applied": 1,
   "coordinate_scale_applied": 1.0
  },

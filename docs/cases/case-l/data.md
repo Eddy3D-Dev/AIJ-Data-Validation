@@ -117,14 +117,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | U\_H, measured (m/s) | 1.3394 |
 | Log-law error at H | -1.6 % |
 | log law rms residual | 2.2 % |
-| Note | derived during scoping, not published by AIJ; the boundary layer is unstably stratified |
-
-<details markdown="block">
-<summary>Interpretation: Inflow fit</summary>
-
-A neutral log law is only a rough description.
-
-</details>
+| Note | derived during scoping, not published by AIJ; the boundary layer is unstably stratified, so a neutral log law is only a rough description |
 
 ## Known data issues
 
@@ -133,24 +126,10 @@ A neutral log law is only a rough description.
 - The readme\'s file list names AF\_caseK.csv and RS\_caseK.csv; the files are AF\_caseL.csv and RS\_caseL.csv.
 - The readme\'s \'building surface temperature T\_b = 14.8 degC\' is the approach-flow air temperature at z = H; the workbook gives the building surface as 42.2 degC.
 - The line source is 0.037 m x 1.2 m in the readme and data paper but a 0.04 m x 1.02 m patch in BD\_caseL.stl.
-- The +y and -y halves are not mirror images: the same point differs in U by 26 %, in k by 23 %, in C by 36 % on average, and U is 0.11 m/s lower and T 1.3 K higher at +y at z = 0.15 m (0.09 m above the roofs).
+- The +y and -y halves are not mirror images: the same point differs in U by 26 %, in k by 23 %, in C by 36 % on average, and U is 0.11 m/s lower and T 1.3 K higher at +y at z = 0.15 m (0.09 m above the roofs), so the tunnel flow has a lateral gradient; do not assume symmetry.
 - The workbook carries no expanded uncertainty (the data paper mentions one for Case J only).
 - AF\_caseL.csv lists the profile from the top (z = 0.32 m) down and has no k.
-- The measured tracer flux through the cross-sections equals q / 1.2 m to 0.86 .. 1.0 (street and cube-column lines averaged); the cube-column line alone carries only 0.2 .. 0.4 of it.
-
-<details markdown="block">
-<summary>Interpretation: Mirror symmetry</summary>
-
-The tunnel flow has a lateral gradient; do not assume symmetry.
-
-</details>
-
-<details markdown="block">
-<summary>Data notes: Tracer flux</summary>
-
-This fixes q and the unit ppm.
-
-</details>
+- The measured tracer flux through the cross-sections equals q / 1.2 m to 0.86 .. 1.0 (street and cube-column lines averaged), which fixes q and the unit ppm; the cube-column line alone carries only 0.2 .. 0.4 of it.
 
 ## API
 
@@ -166,8 +145,8 @@ This fixes q and the unit ppm.
 
 ## Attribution
 
-- Data collectors: Ryuichiro Yoshie (Tokyo Polytechnic University), Koudai Katada (Tokyo Polytechnic University)
-- Editors and distributors: Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
+- Data collected by Ryuichiro Yoshie (Tokyo Polytechnic University) and Koudai Katada (Tokyo Polytechnic University), 2012.
+- Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15487637](https://doi.org/10.5281/zenodo.15487637)
 - Citation requested: Yoshie, R., Nomura, K., Katada, K., Jiang, G. (2012). Non-isothermal large eddy simulation of pollutant and thermal dispersion in urban street canyons. 22nd National Symposium on Wind Engineering, 61-66 (in Japanese). <https://doi.org/10.14887/kazekosymp.22.0.61.0>; Jiang, G., Yoshie, R. (2018). Large-eddy simulation of flow and pollutant dispersion in a 3D urban street model located in an unstable boundary layer. Build. Environ. 142, 47-57. <https://doi.org/10.1016/j.buildenv.2018.06.015>
 - Licence: CC BY 4.0

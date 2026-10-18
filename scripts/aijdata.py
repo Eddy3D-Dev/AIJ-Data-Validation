@@ -78,8 +78,7 @@ LICENSE = {
     "spdx": "CC-BY-4.0",
     "name": "Creative Commons Attribution 4.0 International",
     "url": "https://creativecommons.org/licenses/by/4.0/",
-    "note": ("The measurement data belongs to its collectors and distributors, named per case. "
-             "Cite the AIJ UWE benchmark and the accompanying papers when using it."),
+    "note": "Data: Kikumoto et al. (2026), CC BY 4.0. Collectors per case in cases/{id}.json.",
 }
 
 CITATION = {
@@ -307,7 +306,7 @@ CASES = {
             "x": "+x streamwise at WD = 0 (the 0 deg thermistor field is exactly y-mirror symmetric; the split-fibre U is positive at the stream-like points and negative in the tower's windward horseshoe)",
             "y": "+y lateral",
             "z": "+z up; all points at z = 0.005",
-            "wind_direction_rotation": "+x toward +y, read from Figure 4 of the data paper. The array is exactly y-mirror symmetric, so the measurements alone cannot settle the rotation sense (headings +theta and -theta give exact mirror fields); solved Eddy3D fields corroborate Figure 4's sense: R 0.80 (22.5 deg) and 0.85 (45 deg) in it, 0.40 and 0.17 mirrored.",
+            "wind_direction_rotation": "+x toward +y, read from Figure 4 of the data paper. The array is exactly y-mirror symmetric, so the measurements alone cannot settle the rotation sense (headings +theta and -theta give exact mirror fields); solved Eddy3D fields score R 0.80 (22.5 deg) and 0.85 (45 deg) in Figure 4's sense, 0.40 and 0.17 mirrored.",
             "lateral_sign_applied": 1,
             "coordinate_scale_applied": 0.001,
         },
@@ -329,12 +328,12 @@ CASES = {
             "note": "derived during scoping, not published by AIJ; a log-law inlet cannot be right at both the measurement plane and the upper profile",
         },
         "known_issues": [
-            "All of Case D's data lives in LF_caseD.xls, a genuine OLE2/BIFF8 workbook (read it with xlrd 2.x; openpyxl cannot). Sheets: 'Geometry&Points', 'Inflow', 'Results (Exp_S)' (split fibre, WD = 0), 'Results (Exp_T)' (thermistor, 0 / 22.5 / 45 deg).",
+            "All of Case D's data lives in LF_caseD.xls, an OLE2/BIFF8 workbook (read it with xlrd 2.x; openpyxl cannot). Sheets: 'Geometry&Points', 'Inflow', 'Results (Exp_S)' (split fibre, WD = 0), 'Results (Exp_T)' (thermistor, 0 / 22.5 / 45 deg).",
             "Coordinates are millimetres in the workbook; the API serves metres.",
-            "The shipped BD_caseD.stl is dirty: 1572 facets of which 576 are duplicates, and all 83 roofs are wound inward (signed volume 0.011159 m^3 against the true 0.021477 m^3). The API's geometry.stl is rebuilt from the 83 shells' bounding boxes: 996 facets, watertight, volume 0.021477 m^3.",
+            "The shipped BD_caseD.stl has 1572 facets of which 576 are duplicates, and all 83 roofs are wound inward (signed volume 0.011159 m^3 against the true 0.021477 m^3). The API's geometry.stl is rebuilt from the 83 shells' bounding boxes: 996 facets, watertight, volume 0.021477 m^3.",
             "The thermistor reads a SCALAR speed. Over the 33 points where both instruments overlap at WD = 0, the ratio of mean thermistor speed to mean |U| is 1.342 (the mean of the per-point ratios is 1.50). sqrt(|U|^2 + 2k) from the split-fibre data matches the thermistor to FB +0.058, R 0.947; |U| alone to FB +0.292, R 0.872.",
             "Unmeasured thermistor cells are '-' in the workbook (null here). At WD = 0 the 66 measured values are 33 exact mirror pairs, so only 33 are independent; at 22.5 and 45 deg all 66 are independent.",
-            "A prior Eddy3D comparison kept in the folder (case-d-eddy3d-prior-comparison.xlsx) scores R = +0.096 against the thermistor: a frame or geometry error, not a closure result. It is not a validation.",
+            "A prior Eddy3D comparison kept in the folder (case-d-eddy3d-prior-comparison.xlsx) scores R = +0.096 against the thermistor. The score comes from a frame or geometry error; do not use it as a validation.",
         ],
     },
     "E": {
@@ -367,7 +366,7 @@ CASES = {
             "x": "+x EAST (full-scale metres)",
             "y": "+y NORTH (compass rose in MP_caseE.png)",
             "z": "+z up; all points at z = 2.0",
-            "wind_direction_rotation": "Meteorological: the compass name is the direction the wind comes FROM (N = 0 deg blows toward -y, E = 90 deg toward -x), clockwise from north. This case keeps its geographic frame instead of '+x along the wind' because the district is real and its coordinates are the data's.",
+            "wind_direction_rotation": "meteorological FROM-direction, clockwise from north; the compass name is the direction the wind comes from (N = 0 deg blows toward -y, E = 90 deg toward -x). This case keeps its geographic frame instead of '+x along the wind' because the district is real and its coordinates are the data's.",
             "lateral_sign_applied": 1,
             "coordinate_scale_applied": 1.0,
         },

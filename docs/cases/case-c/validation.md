@@ -5,7 +5,7 @@ grand_parent: "Cases"
 nav_order: 2
 has_children: false
 generated: true
-description: "Case C — 3 × 3 block array: Eddy3D's scores against the tunnel data, by engine."
+description: "Case C — 3 × 3 block array: Eddy3D's scores against the measurements, by engine."
 ---
 
 # Case C: validation

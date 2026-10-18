@@ -39,7 +39,7 @@ CASE = {
         "x": "+x NORTH (full-scale metres)",
         "y": "+y WEST (compass rose of MP_caseM.png: N at +x, W at +y); the frame is right-handed",
         "z": "+z up from the TUNNEL FLOOR; the campus ground lies at z ~ 32 m",
-        "wind_direction_rotation": "meteorological FROM-direction: 180° blows toward +x; flow_dir = (-cos WD, +sin WD), so a larger WD turns the plume toward -y. Measured on the tunnel's 175 / 180 / 185° and on the 18 field runs.",
+        "wind_direction_rotation": "meteorological FROM-direction, so 180° blows toward +x; flow_dir = (-cos WD, +sin WD), and a larger WD turns the plume toward -y. Measured on the tunnel's 175 / 180 / 185° and on the 18 field runs.",
         "lateral_sign_applied": 1,
         "coordinate_scale_applied": SCALE,
     },
