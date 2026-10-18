@@ -541,7 +541,9 @@ The pattern follows the tunnel and the field in both frames and the level depend
 
 The field's mean U/U_H is 0.478. Drag moves the level (the mean speed falls from 0.948 to 0.554 and the root-mean-square error of U from 0.474 to 0.097) and not the pattern (R stays between +0.46 and +0.50 in every arm with trees); even the densest crown leaves the mean above the measurement, so the sweep does not bracket the field. The field's k rises with distance behind the belt and the model's falls. The reading is on the site's [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-gk/) page.
 
-<!--fig name="case-g-openfoam-sweep.png" alt="Case G, measured vs modelled, drag sweep" width="800"--><a href="validation/figures/case-g-openfoam-sweep.png"><img src="docs/assets/web/case-g-openfoam-sweep.png" width="800" height="368" loading="lazy" alt="Case G, measured vs modelled, drag sweep"></a><br><sub><a href="validation/figures/case-g-openfoam-sweep.png">1200 dpi original, 3.3 MB</a></sub><!--/fig-->
+<!--fig name="case-g-layout.png" alt="Case G, measurement lines and planes" width="800"--><a href="validation/figures/case-g-layout.png"><img src="docs/assets/web/case-g-layout.png" width="800" height="751" loading="lazy" alt="Case G, measurement lines and planes"></a><br><sub><a href="validation/figures/case-g-layout.png">1200 dpi original, 1.1 MB</a></sub><!--/fig-->
+
+<!--fig name="case-g-openfoam-sweep.png" alt="Case G, measured vs modelled, drag sweep" width="800"--><a href="validation/figures/case-g-openfoam-sweep.png"><img src="docs/assets/web/case-g-openfoam-sweep.png" width="800" height="380" loading="lazy" alt="Case G, measured vs modelled, drag sweep"></a><br><sub><a href="validation/figures/case-g-openfoam-sweep.png">1200 dpi original, 3.5 MB</a></sub><!--/fig-->
 
 **Known issues.** 6 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/G.json`](docs/api/cases/G.json).
 
@@ -575,7 +577,9 @@ The field's mean U/U_H is 0.478. Drag moves the level (the mean speed falls from
 
 The mean flow is reproduced (R 0.89 to 0.94); k is not (R 0.11); the concentration is well correlated and over-predicted at every Schmidt number (FB −0.60 to −0.93). FAC2 on V and W is low by construction, and W's FB is a near-zero mean. The reading is on the site's [Cases H and I](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-hi/) page.
 
-<!--fig name="cases-hi-openfoam-agreement.png" alt="Cases H and I, measured vs modelled" width="800"--><a href="validation/figures/cases-hi-openfoam-agreement.png"><img src="docs/assets/web/cases-hi-openfoam-agreement.png" width="800" height="423" loading="lazy" alt="Cases H and I, measured vs modelled"></a><br><sub><a href="validation/figures/cases-hi-openfoam-agreement.png">1200 dpi original, 5.6 MB</a></sub><!--/fig-->
+<!--fig name="case-h-layout.png" alt="Case H, measurement lines and planes" width="800"--><a href="validation/figures/case-h-layout.png"><img src="docs/assets/web/case-h-layout.png" width="800" height="902" loading="lazy" alt="Case H, measurement lines and planes"></a><br><sub><a href="validation/figures/case-h-layout.png">1200 dpi original, 1.2 MB</a></sub><!--/fig-->
+
+<!--fig name="cases-hi-openfoam-agreement.png" alt="Cases H and I, measured vs modelled" width="800"--><a href="validation/figures/cases-hi-openfoam-agreement.png"><img src="docs/assets/web/cases-hi-openfoam-agreement.png" width="800" height="450" loading="lazy" alt="Cases H and I, measured vs modelled"></a><br><sub><a href="validation/figures/cases-hi-openfoam-agreement.png">1200 dpi original, 6.0 MB</a></sub><!--/fig-->
 
 **Known issues.** 7 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/H.json`](docs/api/cases/H.json).
 
@@ -609,7 +613,9 @@ The mean flow is reproduced (R 0.89 to 0.94); k is not (R 0.11); the concentrati
 
 (realizable k-ε; V's FB is a near-zero mean, read its R of 0.99.) The closures: mean velocity does not separate them (U R 0.99 to 1.00); k does (FAC2 0.91 and 0.92 under the k-ε closures, 0.40 under k-ω SST), and so does the concentration (R at Sct 0.5: 0.96, 0.94 and 0.47 for standard k-ε, realizable k-ε and k-ω SST). Reattachment L_r/H: 2.23, 2.51, 2.68. This ranks three closures on one cube and one mesh, not in general. The reading is on the site's [Cases H and I](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-hi/) page.
 
-<!--fig name="case-i-openfoam-closures.png" alt="Case I under three turbulence closures" width="800"--><a href="validation/figures/case-i-openfoam-closures.png"><img src="docs/assets/web/case-i-openfoam-closures.png" width="800" height="779" loading="lazy" alt="Case I under three turbulence closures"></a><br><sub><a href="validation/figures/case-i-openfoam-closures.png">1200 dpi original, 5.0 MB</a></sub><!--/fig-->
+<!--fig name="case-i-layout.png" alt="Case I, measurement lines and planes" width="800"--><a href="validation/figures/case-i-layout.png"><img src="docs/assets/web/case-i-layout.png" width="800" height="1474" loading="lazy" alt="Case I, measurement lines and planes"></a><br><sub><a href="validation/figures/case-i-layout.png">1200 dpi original, 2.1 MB</a></sub><!--/fig-->
+
+<!--fig name="case-i-openfoam-closures.png" alt="Case I under three turbulence closures" width="800"--><a href="validation/figures/case-i-openfoam-closures.png"><img src="docs/assets/web/case-i-openfoam-closures.png" width="800" height="796" loading="lazy" alt="Case I under three turbulence closures"></a><br><sub><a href="validation/figures/case-i-openfoam-closures.png">1200 dpi original, 5.2 MB</a></sub><!--/fig-->
 
 **Known issues.** 8 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/I.json`](docs/api/cases/I.json).
 
@@ -642,7 +648,9 @@ The mean flow is reproduced (R 0.89 to 0.94); k is not (R 0.11); the concentrati
 
 (k-ε is realizable k-ε, bKε is buoyantKEpsilon; V, W and the near-source split are on the Validation page.) The flow is reproduced in pattern and low in level (U R 0.92, the model's mean U/U_H 0.465 against 0.564), the recirculation is too long (reattachment 1.35 H against the measured 0.68 H at z/H = 0.25), k is not reproduced (R 0.32 to 0.36), the model is warmer than the tunnel by 3.5 K (3.6 K under bKε) on average, and the tracer's bias changes sign with the Schmidt number. The two closures differ little in the flow and more in the tracer. The reading is on the site's [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-jl/) page.
 
-<!--fig name="case-j-umf-agreement.png" alt="Case J, measured vs modelled, two closures" width="800"--><a href="validation/figures/case-j-umf-agreement.png"><img src="docs/assets/web/case-j-umf-agreement.png" width="800" height="448" loading="lazy" alt="Case J, measured vs modelled, two closures"></a><br><sub><a href="validation/figures/case-j-umf-agreement.png">1200 dpi original, 5.7 MB</a></sub><!--/fig-->
+<!--fig name="case-j-layout.png" alt="Case J, measurement lines and planes" width="800"--><a href="validation/figures/case-j-layout.png"><img src="docs/assets/web/case-j-layout.png" width="800" height="924" loading="lazy" alt="Case J, measurement lines and planes"></a><br><sub><a href="validation/figures/case-j-layout.png">1200 dpi original, 1.1 MB</a></sub><!--/fig-->
+
+<!--fig name="case-j-umf-agreement.png" alt="Case J, measured vs modelled, two closures" width="800"--><a href="validation/figures/case-j-umf-agreement.png"><img src="docs/assets/web/case-j-umf-agreement.png" width="800" height="448" loading="lazy" alt="Case J, measured vs modelled, two closures"></a><br><sub><a href="validation/figures/case-j-umf-agreement.png">1200 dpi original, 6.1 MB</a></sub><!--/fig-->
 
 **Known issues.** 10 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/J.json`](docs/api/cases/J.json).
 
@@ -676,7 +684,9 @@ The mean flow is reproduced (R 0.89 to 0.94); k is not (R 0.11); the concentrati
 
 The velocity pattern is reproduced and the level is low (mean U/U_H 0.272 against 0.502); k is a factor of four low (R 0.33); V has a constant offset in the tunnel, so a model with V = 0 hits 0.91 of the points and V's hit rate scores nothing. The concentration is correlated at every Schmidt number (R 0.95) and high (FB −0.69 to −0.98); the four points within one cube height of the source, where the model's source is a zone of four cells, are 3.7 to 5.1 times too high on average. The reading is on the site's [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-gk/) page.
 
-<!--fig name="case-k-openfoam-agreement.png" alt="Case K, measured vs modelled" width="800"--><a href="validation/figures/case-k-openfoam-agreement.png"><img src="docs/assets/web/case-k-openfoam-agreement.png" width="800" height="494" loading="lazy" alt="Case K, measured vs modelled"></a><br><sub><a href="validation/figures/case-k-openfoam-agreement.png">1200 dpi original, 3.6 MB</a></sub><!--/fig-->
+<!--fig name="case-k-layout.png" alt="Case K, measurement lines and planes" width="800"--><a href="validation/figures/case-k-layout.png"><img src="docs/assets/web/case-k-layout.png" width="800" height="774" loading="lazy" alt="Case K, measurement lines and planes"></a><br><sub><a href="validation/figures/case-k-layout.png">1200 dpi original, 1.1 MB</a></sub><!--/fig-->
+
+<!--fig name="case-k-openfoam-agreement.png" alt="Case K, measured vs modelled" width="800"--><a href="validation/figures/case-k-openfoam-agreement.png"><img src="docs/assets/web/case-k-openfoam-agreement.png" width="800" height="407" loading="lazy" alt="Case K, measured vs modelled"></a><br><sub><a href="validation/figures/case-k-openfoam-agreement.png">1200 dpi original, 3.8 MB</a></sub><!--/fig-->
 
 **Known issues.** 9 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/K.json`](docs/api/cases/K.json).
 
@@ -711,7 +721,9 @@ The velocity pattern is reproduced and the level is low (mean U/U_H 0.272 agains
 
 U and θ follow the tunnel (the model beats the undisturbed approach column on R: 0.918 against 0.861 for U), but the street air is nearly stagnant in the model (mean U/U_H 0.045 below 30 mm, the tunnel's 0.297), V and W carry no pattern, k is low (R 0.15), the model is warmer by 1.2 K on average, and the tracer is correlated (R 0.75 to 0.80) and high (FB −0.50 to −0.73). The reading is on the site's [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-jl/) page.
 
-<!--fig name="case-l-umf-agreement.png" alt="Case L, measured vs modelled" width="800"--><a href="validation/figures/case-l-umf-agreement.png"><img src="docs/assets/web/case-l-umf-agreement.png" width="800" height="450" loading="lazy" alt="Case L, measured vs modelled"></a><br><sub><a href="validation/figures/case-l-umf-agreement.png">1200 dpi original, 5.3 MB</a></sub><!--/fig-->
+<!--fig name="case-l-layout.png" alt="Case L, measurement lines and planes" width="800"--><a href="validation/figures/case-l-layout.png"><img src="docs/assets/web/case-l-layout.png" width="800" height="802" loading="lazy" alt="Case L, measurement lines and planes"></a><br><sub><a href="validation/figures/case-l-layout.png">1200 dpi original, 1.0 MB</a></sub><!--/fig-->
+
+<!--fig name="case-l-umf-agreement.png" alt="Case L, measured vs modelled" width="800"--><a href="validation/figures/case-l-umf-agreement.png"><img src="docs/assets/web/case-l-umf-agreement.png" width="800" height="450" loading="lazy" alt="Case L, measured vs modelled"></a><br><sub><a href="validation/figures/case-l-umf-agreement.png">1200 dpi original, 5.6 MB</a></sub><!--/fig-->
 
 **Known issues.** 9 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/L.json`](docs/api/cases/L.json).
 
@@ -767,7 +779,11 @@ ends of the bracket the measurement has to fall in. Case C's figures and reading
 
 ### Cases A and B — does the model agree?
 
-<!--fig name="cases-ab-openfoam-agreement.png" alt="Measured vs modelled, Cases A and B" width="800"--><a href="validation/figures/cases-ab-openfoam-agreement.png"><img src="docs/assets/web/cases-ab-openfoam-agreement.png" width="800" height="430" loading="lazy" alt="Measured vs modelled, Cases A and B"></a><br><sub><a href="validation/figures/cases-ab-openfoam-agreement.png">1200 dpi original, 3.4 MB</a></sub><!--/fig-->
+<!--fig name="case-a-layout.png" alt="Case A, measurement lines and planes" width="800"--><a href="validation/figures/case-a-layout.png"><img src="docs/assets/web/case-a-layout.png" width="800" height="882" loading="lazy" alt="Case A, measurement lines and planes"></a><br><sub><a href="validation/figures/case-a-layout.png">1200 dpi original, 1.1 MB</a></sub><!--/fig-->
+
+<!--fig name="case-b-layout.png" alt="Case B, measurement lines and planes" width="800"--><a href="validation/figures/case-b-layout.png"><img src="docs/assets/web/case-b-layout.png" width="800" height="883" loading="lazy" alt="Case B, measurement lines and planes"></a><br><sub><a href="validation/figures/case-b-layout.png">1200 dpi original, 1.0 MB</a></sub><!--/fig-->
+
+<!--fig name="cases-ab-openfoam-agreement.png" alt="Measured vs modelled, Cases A and B" width="800"--><a href="validation/figures/cases-ab-openfoam-agreement.png"><img src="docs/assets/web/cases-ab-openfoam-agreement.png" width="800" height="441" loading="lazy" alt="Measured vs modelled, Cases A and B"></a><br><sub><a href="validation/figures/cases-ab-openfoam-agreement.png">1200 dpi original, 3.7 MB</a></sub><!--/fig-->
 
 Measured against modelled for each quantity, with the 1:1 line and, where the quantity does not
 change sign, the factor-of-two band.
@@ -931,7 +947,8 @@ approach flow at pedestrian height needs a refined upstream column or sampling c
 `validation/plot_case_c_openfoam.py`, `validation/plot_case_d_openfoam.py`, `validation/plot_case_e_openfoam.py`,
 `validation/plot_cases_hi_openfoam.py` (Cases H and I), `validation/plot_cases_gk_openfoam.py` (Cases G and K),
 `validation/plot_cases_jl_umf.py` (Cases J and L, on UMF), `validation/plot_cases_fm_openfoam.py` (Cases F and M) and `validation/plot_ml_surrogate.py` (UltraPlot, one style in
-`validation/plotstyle.py`: a colour-blind-safe palette, every PNG at 1200 dpi) build the figures. The Eddy3D
+`validation/plotstyle.py`: a colour-blind-safe palette, every PNG at 1200 dpi) build the figures; `validation/plot_layout.py` draws where each case was measured, from the
+groups of lines and planes in `validation/layout.py` (pinned by `validation/test_layout.py`), which also colour the dots of the agreement figures. The Eddy3D
 fixtures are `TestAijCaseAContainerE2E`, `TestAijCaseBContainerE2E`, `TestAijCaseC{0D,1D,2D}ContainerE2E`,
 `TestAijCaseDContainerE2E`, `TestAijCaseEContainerE2E`, `TestAijCaseFContainerE2E`, `TestAijCaseGContainerE2E`, `TestAijCaseHContainerE2E`,
 `TestAijCubeContainerE2E`, `TestAijCaseKContainerE2E`, `TestAijCaseJUmfContainerE2E`, `TestAijCaseLUmfContainerE2E`, `TestAijCaseMContainerE2E` and, for the ML

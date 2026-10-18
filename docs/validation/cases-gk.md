@@ -18,7 +18,9 @@ The reading of the OpenFOAM 12 runs on the 9 × 9 cube array with a floor point 
 
 ## Case K: does the model agree?
 
-{% include figure.html name="case-k-openfoam-agreement.png" alt="Case K, measured vs modelled" caption="<strong>Figure 1.</strong> Case K, measured vs modelled U, W, k and c* at three turbulent Schmidt numbers. The concentration panels show the positive pairs within five decades; the four points within one cube height of the source are open." %}
+{% include figure.html name="case-k-layout.png" alt="Measurement lines and planes, Case K" caption="<strong>Figure 1.</strong> Case K, measurement lines and planes: A vertical profiles, y/H = 0; B vertical profiles, y/H = ±1; C vertical profiles, y/H = ±2; D vertical profiles, y/H = ±3. Positions in multiples of H." %}
+
+{% include figure.html name="case-k-openfoam-agreement.png" alt="Case K, measured vs modelled" caption="<strong>Figure 2.</strong> Case K, measured vs modelled U, W, k and c* at three turbulent Schmidt numbers; the dots take the colour of their line in Figure 1. The concentration panels show the positive pairs within five decades; the four points within one cube height of the source are open." %}
 
 | Quantity | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|
@@ -49,7 +51,9 @@ Eddy3D's structure checks on this solve passed: the air over the roofs outruns t
 
 ## Case G: what does the unknown drag do?
 
-{% include figure.html name="case-g-openfoam-sweep.png" alt="Case G, measured vs modelled, drag sweep" caption="<strong>Figure 2.</strong> Case G, the field's U/U_H and k/U_H² against the modelled |U| and k over the model's own U(7 m), one column per arm of the drag sweep." %}
+{% include figure.html name="case-g-layout.png" alt="Measurement lines and planes, Case G" caption="<strong>Figure 3.</strong> Case G, measurement lines and planes: A to G vertical profiles, x/H = 0.25, 0.5, 1, 2, 3, 4, 5. Positions in multiples of H." %}
+
+{% include figure.html name="case-g-openfoam-sweep.png" alt="Case G, measured vs modelled, drag sweep" caption="<strong>Figure 4.</strong> Case G, the field's U/U_H and k/U_H² against the modelled |U| and k over the model's own U(7 m), one column per arm of the drag sweep; the dots take the colour of their line in Figure 3." %}
 
 | Arm | Cd·LAD [1/m] | U R | U FAC2 | U FB | U hit rate | mean U/U_H | RMSE of U |
 |---|---|---|---|---|---|---|---|
@@ -73,7 +77,7 @@ The field's mean U/U_H over the 28 points is 0.478. Here the model is |U| over i
 
 The field's mean k/U_H² is 0.031.
 
-{% include figure.html name="case-g-openfoam-stations.png" alt="Case G, by station" caption="<strong>Figure 3.</strong> Case G, the mean U/U_H and the mean k/U_H² over the four heights at each station behind the belt, the field against each arm of the drag sweep." %}
+{% include figure.html name="case-g-openfoam-stations.png" alt="Case G, by station" caption="<strong>Figure 5.</strong> Case G, the letters A to G mark the seven lines of Figure 3; the mean U/U_H and the mean k/U_H² over the four heights at each station behind the belt, the field against each arm of the drag sweep." %}
 
 - **Drag moves the level, not the pattern.** The mean speed falls from 0.948 with no belt to 0.735, 0.613 and 0.554 as Cd·LAD rises, and the root-mean-square error of U from 0.474 to 0.097, but R stays between +0.46 and +0.50 in every arm with trees (+0.30 with none). That the arm nearest the data is the densest one is a calibration against these 28 values, not a validation: LAD and Cd are not in the dataset, and nothing is fitted. It is also the edge of the sweep: even the densest library crown leaves the mean speed above the measured 0.478, so the sweep does not bracket the field.
 - **Every tree arm is within a factor of two at all 28 points**, which the no-belt control (FAC2 0.46) is not. For U, FB is negative in every arm: the model is high.

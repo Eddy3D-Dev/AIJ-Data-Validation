@@ -312,8 +312,12 @@
    },
    "figures": [
     {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-h-layout.png",
+     "caption": "Case H, measurement lines and planes: A vertical profiles, y/H = 0; B plane z/H = 0.0625; C plane z/H = 0.25; D plane z/H = 0.5. Positions in multiples of H."
+    },
+    {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/cases-hi-openfoam-agreement.png",
-     "caption": "Cases H and I, OpenFOAM 12 (realizable k-ε): measured against modelled U, W, k and the dimensionless concentration c* = C/c0 (turbulent Schmidt number 0.5; log axes show the positive pairs only), with the 1:1 line and the factor-of-two band where the values do not change sign."
+     "caption": "Cases H and I, OpenFOAM 12 (realizable k-ε): measured against modelled U, W, k and the dimensionless concentration c* = C/c0 (turbulent Schmidt number 0.5; log axes show the positive pairs only), with the 1:1 line and the factor-of-two band where the values do not change sign. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     }
    ],
    "pairs": {

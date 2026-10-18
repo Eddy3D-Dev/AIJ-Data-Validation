@@ -51,6 +51,19 @@ import aijdata as D  # noqa: E402
 import api_schemas as S  # noqa: E402
 import release as R  # noqa: E402
 
+
+def _load_layout():
+    """validation/layout.py (standard library at import): the measurement groups of each case and the captions of its layout figure."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("aij_layout", os.path.join(D.REPO, "validation", "layout.py"))
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules["aij_layout"] = mod
+    spec.loader.exec_module(mod)
+    return mod
+
+
+LAYOUT = _load_layout()
+
 REPO = D.REPO
 DOCS = os.path.join(REPO, "docs")
 API_ROOT = os.path.join(DOCS, "api")   # the latest alias, versions.json, and one frozen <release>/ tree per release
@@ -253,7 +266,7 @@ _FOAM_C = {f"WD {wd} {q}": f"vs.{lab}.{key}" for wd, lab in (("0°", "wd-0"), ("
 _ML_REPRO = "Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot_ml_surrogate.py"
 RUNS = [
     *[run(c, "openfoam12-realizableKE", None, f"case{c}_openfoam12_realizableKE.json", _FOAM_A_B,
-          ["cases-ab-openfoam-agreement.png", "cases-ab-openfoam-profiles.png"],
+          [f"case-{c.lower()}-layout.png", "cases-ab-openfoam-agreement.png", "cases-ab-openfoam-profiles.png"],
           f"Eddy3D fixture TestAijCase{c}ContainerE2E; figures validation/plot_cases_ab_openfoam.py",
           f"case{c}_openfoam12_realizableKE_pairs.csv", PAIRS_AB) for c in ("A", "B")],
     *[run("C", "openfoam12-realizableKE", cb, f"caseC_openfoam12_realizableKE_{cb}.json", _FOAM_C,
@@ -327,9 +340,9 @@ RUNS = [
          "wind reversed (control)": "negativeControl.reversedWind"},
         ["ml-surrogate-agreement.png"], _ML_REPRO, "caseE_ml_pairs.csv", PAIRS_ML),
     # Cases H and I (Eddy3D's solves, scored against the cleaned tables): the closures other than realizable k-epsilon are separate engine ids
-    run("H", "openfoam12-realizableKE", None, "caseH_openfoam12_realizableKE.json", _HI_HEADLINE, ["cases-hi-openfoam-agreement.png"],
+    run("H", "openfoam12-realizableKE", None, "caseH_openfoam12_realizableKE.json", _HI_HEADLINE, ["case-h-layout.png", "cases-hi-openfoam-agreement.png"],
         _HI_REPRO.format(fixture="TestAijCaseHContainerE2E (realizable k-ε, 1:100)"), "caseH_openfoam12_realizableKE_pairs.csv", PAIRS_H),
-    run("I", "openfoam12-realizableKE", None, "caseI_openfoam12_realizableKE.json", _HI_HEADLINE, ["cases-hi-openfoam-agreement.png", "case-i-openfoam-closures.png"],
+    run("I", "openfoam12-realizableKE", None, "caseI_openfoam12_realizableKE.json", _HI_HEADLINE, ["case-i-layout.png", "cases-hi-openfoam-agreement.png", "case-i-openfoam-closures.png"],
         _HI_REPRO.format(fixture="TestAijCubeContainerE2E (realizable k-ε, 1:60)"), "caseI_openfoam12_realizableKE_pairs.csv", PAIRS_I),
     run("I", "openfoam12-kEpsilon", None, "caseI_openfoam12_kEpsilon.json", _HI_HEADLINE, ["case-i-openfoam-closures.png"],
         _HI_REPRO.format(fixture="TestAijCubeContainerE2E (standard k-ε, 1:60)"), "caseI_openfoam12_kEpsilon_pairs.csv", PAIRS_I),
@@ -460,19 +473,19 @@ _L_NOTES = [
     "cools with height; the street flow is slower than the flow above the array; every species emits and its largest value is in the source street. They set no band on the statistics.",
 ]
 RUNS += [
-    run("K", "openfoam12-realizableKE", None, "caseK_openfoam12_realizableKE.json", _K_HEADLINE, ["case-k-openfoam-agreement.png"],
+    run("K", "openfoam12-realizableKE", None, "caseK_openfoam12_realizableKE.json", _K_HEADLINE, ["case-k-layout.png", "case-k-openfoam-agreement.png"],
         _KG_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseKContainerE2E", what="9 x 9 cubes, floor point source, 1:100", cells="972,637"), "caseK_openfoam12_realizableKE_pairs.csv", PAIRS_K,
         normalisation=_K_NORM, notes=_K_NOTES),
     *[run("G", "openfoam12-realizableKE", arm, f"caseG_openfoam12_realizableKE_{arm}.json",
           {f"|U|/U(7 m){sfx}": "score.U.ownApproach", f"√(|U|²+2k)/U(7 m){sfx}": "score.rms.ownApproach", f"k/U(7 m)²{sfx}": "score.k.ownApproach",
            f"|U|/U_H, imposed{sfx}": "score.U.imposedUH", f"√(|U|²+2k)/U_H, imposed{sfx}": "score.rms.imposedUH"},
-          ["case-g-openfoam-sweep.png", "case-g-openfoam-stations.png"],
+          ["case-g-layout.png", "case-g-openfoam-sweep.png", "case-g-openfoam-stations.png"],
           _KG_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseGContainerE2E", what=f"arm: {what}, full scale", cells=f"{cells:,}"), "caseG_openfoam12_realizableKE_pairs.csv", PAIRS_G,
           normalisation=_G_NORM, notes=_G_NOTES) for arm, what, cells, sfx in _G_ARMS],
-    *[run("J", f"umf-{closure}", None, f"caseJ_umf_{closure}.json", _J_HEADLINE, ["case-j-umf-agreement.png", "case-j-umf-tracer.png"],
+    *[run("J", f"umf-{closure}", None, f"caseJ_umf_{closure}.json", _J_HEADLINE, ["case-j-layout.png", "case-j-umf-agreement.png", "case-j-umf-tracer.png"],
           _JL_REPRO.format(fixture="MetaFOAM.Lib.Tests/TestAijCaseJUmfContainerE2E", what="1:1:2 building, heated floor, floor point source", closure=_J_CLOSURES[closure][0], cells="236,408", scale="62.5"),
           f"caseJ_umf_{closure}_pairs.csv", PAIRS_J, normalisation=_J_NORM, notes=_j_notes(closure)) for closure in _J_CLOSURES],
-    run("L", "umf-realizableKE", None, "caseL_umf_realizableKE.json", _L_HEADLINE, ["case-l-umf-agreement.png"],
+    run("L", "umf-realizableKE", None, "caseL_umf_realizableKE.json", _L_HEADLINE, ["case-l-layout.png", "case-l-umf-agreement.png"],
         _JL_REPRO.format(fixture="MetaFOAM.Lib.Tests/TestAijCaseLUmfContainerE2E", what="9 x 14 cubes, heated floor, floor line source", closure="realizable k-ε", cells="754,940", scale="100"),
         "caseL_umf_realizableKE_pairs.csv", PAIRS_L, normalisation=_L_NORM, notes=_L_NOTES),
 ]
@@ -659,6 +672,12 @@ FIGURE_CAPTIONS = {
     "ml-surrogate-agreement.png": ("Eddy3D ML surrogate (Yel-2.0): measured against predicted pedestrian-height speed, one "
                                    "panel per case, with the 1:1 line and the factor-of-two band."),
 }
+# The layout figure of each case (validation/plot_layout.py): the caption is written by layout.py from the same groups that colour the agreement figures.
+FIGURE_CAPTIONS.update({f"case-{c.lower()}-layout.png": LAYOUT.caption(c) for c in LAYOUT.SPECS})
+for _fig in ("cases-ab-openfoam-agreement.png", "cases-hi-openfoam-agreement.png", "case-i-openfoam-closures.png", "case-k-openfoam-agreement.png",
+             "case-g-openfoam-sweep.png", "case-j-umf-agreement.png", "case-j-umf-tracer.png", "case-l-umf-agreement.png"):
+    FIGURE_CAPTIONS[_fig] += " Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
+FIGURE_CAPTIONS["case-g-openfoam-stations.png"] += " The letters A to G mark the seven lines of the layout figure."
 
 METRIC_MEANING = {
     "Count": "number of measured points scored",
@@ -1897,6 +1916,14 @@ FIGURE_HOME = {
     "case-m-openfoam-agreement.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
     "case-m-openfoam-plan.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
     "ml-surrogate-agreement.png": ("/validation/ml-surrogate/", "ML surrogate"),
+    "case-a-layout.png": ("/validation/cases-ab/", "Cases A and B (OpenFOAM)"),
+    "case-b-layout.png": ("/validation/cases-ab/", "Cases A and B (OpenFOAM)"),
+    "case-g-layout.png": ("/validation/cases-gk/", "Cases G and K (OpenFOAM)"),
+    "case-k-layout.png": ("/validation/cases-gk/", "Cases G and K (OpenFOAM)"),
+    "case-h-layout.png": ("/validation/cases-hi/", "Cases H and I (OpenFOAM)"),
+    "case-i-layout.png": ("/validation/cases-hi/", "Cases H and I (OpenFOAM)"),
+    "case-j-layout.png": ("/validation/cases-jl/", "Cases J and L (UMF)"),
+    "case-l-layout.png": ("/validation/cases-jl/", "Cases J and L (UMF)"),
 }
 ALL_CASES_FIGURE_MIN = 3
 # A score table stays open up to this many rows, a table of configurations up to OPEN_LIST_ROWS; a longer one sits in

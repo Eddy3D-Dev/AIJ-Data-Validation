@@ -20,7 +20,9 @@ Cases J and L are non-isothermal: a floor held at about 45 °C (45.8 °C in J, 4
 
 ## Case J: does the model agree?
 
-{% include figure.html name="case-j-umf-agreement.png" alt="Case J, measured vs modelled velocity, k and temperature" caption="<strong>Figure 1.</strong> Case J under realizable k-ε (top) and buoyantKEpsilon (bottom): measured vs modelled U, W, k and the floor-referenced temperature θ." %}
+{% include figure.html name="case-j-layout.png" alt="Measurement lines and planes, Case J" caption="<strong>Figure 1.</strong> Case J, measurement lines and planes: A vertical profiles, y/H = 0; B plane z/H = 0.025; C plane z/H = 0.25. Positions in multiples of H." %}
+
+{% include figure.html name="case-j-umf-agreement.png" alt="Case J, measured vs modelled velocity, k and temperature" caption="<strong>Figure 2.</strong> Case J under realizable k-ε (top) and buoyantKEpsilon (bottom): measured vs modelled U, W, k and the floor-referenced temperature θ; the dots take the colour of the line or plane they were measured on, as in Figure 1." %}
 
 | Quantity | R (rk-ε) | FAC2 | FB | R (bKε) | FAC2 | FB |
 |---|---|---|---|---|---|---|
@@ -45,11 +47,13 @@ n is 443 (416 without the 27 points within a quarter of a building height of the
 - **The tracer pattern is correlated at every Schmidt number, and the bias changes sign.** R is 0.92 to 0.90 (rk-ε) and 0.89 to 0.85 (bKε) from Sct 0.3 to 0.7. Under rk-ε the model is low at Sct 0.3 (FB +0.065) and high at 0.5 and 0.7 (−0.162, −0.256); the modelled peak at the measured points is 275, 339 and 373 against a measured peak of 437, so the near-source points are low, not high as in Cases H and K. By region at Sct 0.5 under rk-ε: above the roof R = +0.78 and FAC2 0.33 (75 points), beside the building +0.82 and 0.40 (60), the near wake +0.90 and 0.75 (168), the far wake +0.89 and 0.82 (56). The 84 points upstream have R = −0.18 and FAC2 0.05: the tunnel measures a background of 0.018 c₀ on average (about 0.2 ppm, below the workbook's expanded uncertainty noted in the known data issues) where the model has almost none (a mean of 4 × 10⁻⁵ c₀ and a largest value of 1.4 × 10⁻³ at Sct 0.5 under rk-ε), so FAC2 there is small whatever the model does.
 - **The two closures differ little in the flow and more in the tracer.** buoyantKEpsilon raises U's R from 0.921 to 0.924 and its FAC2 from 0.731 to 0.761, and k's R from 0.32 to 0.36. It lowers the tracer's R by 0.025 to 0.044 and moves FB down by 0.11 to 0.12: the modelled concentration is higher. This ranks two closures on one building, one mesh and a run capped at 1500 iterations; it is not a claim about the closures in general.
 
-{% include figure.html name="case-j-umf-tracer.png" alt="Case J, measured vs modelled tracer concentration" caption="<strong>Figure 2.</strong> Case J, measured vs modelled c* at three turbulent Schmidt numbers under both closures. The concentration panels show the positive pairs within seven decades; the points within a quarter of a building height of the source are open." %}
+{% include figure.html name="case-j-umf-tracer.png" alt="Case J, measured vs modelled tracer concentration" caption="<strong>Figure 3.</strong> Case J, dots coloured as in Figure 1: measured vs modelled c* at three turbulent Schmidt numbers under both closures. The concentration panels show the positive pairs within seven decades; the points within a quarter of a building height of the source are open." %}
 
 ## Case L: does the model agree?
 
-{% include figure.html name="case-l-umf-agreement.png" alt="Case L, measured vs modelled" caption="<strong>Figure 3.</strong> Case L under realizable k-ε: measured vs modelled U, W, k, θ, V and c* at three turbulent Schmidt numbers, in the tunnel's units." %}
+{% include figure.html name="case-l-layout.png" alt="Measurement lines and planes, Case L" caption="<strong>Figure 4.</strong> Case L, measurement lines and planes: A street profiles near the source, 8 heights; B profiles above the roofs, 4 heights; C street profiles around, 3 heights. Positions in multiples of H." %}
+
+{% include figure.html name="case-l-umf-agreement.png" alt="Case L, measured vs modelled" caption="<strong>Figure 5.</strong> Case L under realizable k-ε: measured vs modelled U, W, k, θ, V and c* at three turbulent Schmidt numbers, in the tunnel's units; the dots take the colour of their class in Figure 4." %}
 
 | Quantity | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|

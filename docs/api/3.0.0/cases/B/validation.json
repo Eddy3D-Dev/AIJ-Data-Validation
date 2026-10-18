@@ -127,8 +127,12 @@
    },
    "figures": [
     {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-b-layout.png",
+     "caption": "Case B, measurement lines and planes: A vertical profiles, y/H = 0; B plane z/H = 0.0625. Positions in multiples of H."
+    },
+    {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/cases-ab-openfoam-agreement.png",
-     "caption": "Cases A and B, OpenFOAM 12 (realizable k-ε): measured against modelled U, V, W and k at every measured point, normalised by U_H, with the 1:1 line and the factor-of-two band."
+     "caption": "Cases A and B, OpenFOAM 12 (realizable k-ε): measured against modelled U, V, W and k at every measured point, normalised by U_H, with the 1:1 line and the factor-of-two band. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/cases-ab-openfoam-profiles.png",

@@ -151,12 +151,16 @@
    },
    "figures": [
     {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-layout.png",
+     "caption": "Case G, measurement lines and planes: A to G vertical profiles, x/H = 0.25, 0.5, 1, 2, 3, 4, 5. Positions in multiples of H."
+    },
+    {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-sweep.png",
-     "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset."
+     "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-stations.png",
-     "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep."
+     "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
     }
    ],
    "pairs": {
@@ -292,12 +296,16 @@
    },
    "figures": [
     {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-layout.png",
+     "caption": "Case G, measurement lines and planes: A to G vertical profiles, x/H = 0.25, 0.5, 1, 2, 3, 4, 5. Positions in multiples of H."
+    },
+    {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-sweep.png",
-     "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset."
+     "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-stations.png",
-     "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep."
+     "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
     }
    ],
    "pairs": {
@@ -433,12 +441,16 @@
    },
    "figures": [
     {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-layout.png",
+     "caption": "Case G, measurement lines and planes: A to G vertical profiles, x/H = 0.25, 0.5, 1, 2, 3, 4, 5. Positions in multiples of H."
+    },
+    {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-sweep.png",
-     "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset."
+     "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-stations.png",
-     "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep."
+     "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
     }
    ],
    "pairs": {
@@ -574,12 +586,16 @@
    },
    "figures": [
     {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-layout.png",
+     "caption": "Case G, measurement lines and planes: A to G vertical profiles, x/H = 0.25, 0.5, 1, 2, 3, 4, 5. Positions in multiples of H."
+    },
+    {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-sweep.png",
-     "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset."
+     "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-stations.png",
-     "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep."
+     "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
     }
    ],
    "pairs": {
@@ -715,12 +731,16 @@
    },
    "figures": [
     {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-layout.png",
+     "caption": "Case G, measurement lines and planes: A to G vertical profiles, x/H = 0.25, 0.5, 1, 2, 3, 4, 5. Positions in multiples of H."
+    },
+    {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-sweep.png",
-     "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset."
+     "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-stations.png",
-     "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep."
+     "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
     }
    ],
    "pairs": {
