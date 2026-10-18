@@ -102,8 +102,8 @@ CHANGELOG = [
         "`fallback_base_url` name that copy, and `release.base_url` (the raw files at the release tag) now ends in the "
         "release number; paths below it are unchanged.",
         "Added: Cases F to M, thirteen cases in all (the `case_ids` of index.json): their cases.json entries, `cases/{id}.json`, "
-        "points, approach flow, geometry (STL) and validation documents, and `pairs` files for the runs that exist. Two of them "
-        "(F, M) have no validation run yet: every engine is `pending` and `results` is empty. `cases.json` and "
+        "points, approach flow, geometry (STL) and validation documents, and `pairs` files for the runs that exist. Every case has at "
+        "least one scored run; an engine that has none for a case is `pending` there. `cases.json` and "
         "`validation.json` list thirteen cases (the schemas fixed the length at five).",
         "Added: the point table's columns of schema 2.0.0 (the cleaned release) are served in `points.json` and `points.csv`: "
         "`campaign` and `run`, `uv` `uw` `vw`, `C` `c_rms` `concentration_ratio`, `T` `T_rms`, `uc` `vc` `wc`, `uT` `vT` `wT`, "
@@ -114,8 +114,9 @@ CHANGELOG = [
         "(urbanMicroclimateFoam, an OpenFOAM 12 solver) under its two closures, which exist for Cases J and L (`umf-buoyantKEpsilon` for J only). "
         "`engines` in `cases.json` and `cases/{id}.json` lists an engine only for the cases it applies to.",
         "Added to each result of validation.json: `notes`, a list of the caveats that come with the run (what the model leaves out, what the "
-        "measurement cannot say, how the solve ended); empty where the run has none recorded. Cases G, J and L have several runs on one engine "
-        "(Case G: one per arm of a drag sweep, as `configuration`), all sharing the engine's pairs file, whose first column names the arm.",
+        "measurement cannot say, how the solve ended); empty where the run has none recorded. Cases F, G and M have several runs on one engine "
+        "(Case F: one per vertical frame, Case G: one per arm of a drag sweep, Case M: one per turbulent Schmidt number, each as `configuration`), all sharing the engine's pairs file; "
+        "the first column of Case F's and Case G's names the frame or the arm, and Case M's holds the three Schmidt numbers as columns.",
         "Why MINOR: nothing is renamed or removed. Every unversioned URL and field keeps its meaning; the layout, the cases, "
         "documents, a schema, columns, engines and three index.json fields are additions.",
     ]},
@@ -196,17 +197,16 @@ ENGINE_STATUS = {
     "C": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "not comparable", "ml-surrogate": "scored"},
     "D": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "not comparable", "ml-surrogate": "scored"},
     "E": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "not comparable", "ml-surrogate": "scored"},
-    # Cases F to M: H, I, G and K have OpenFOAM 12 runs (I under three closures, G as a drag sweep); J and L, which are non-isothermal, have runs on
-    # UMF (J under two closures) and none on the isothermal solver. Eddy3D's fixtures for F and M are written and their solves are queued, so every
-    # engine is pending there. Nothing else has been run on F to M.
-    "F": dict(_NOT_RUN),
+    # Cases F to M: F, G, H, I, K and M have OpenFOAM 12 runs (I under three closures, G as a drag sweep, F in two vertical frames, M at three Schmidt
+    # numbers); J and L, which are non-isothermal, have runs on UMF (J under two closures) and none on the isothermal solver. Nothing else has been run on F to M.
+    "F": {**_NOT_RUN, "openfoam12-realizableKE": "scored"},
     "G": {**_NOT_RUN, "openfoam12-realizableKE": "scored"},
     "H": {**_NOT_RUN, "openfoam12-realizableKE": "scored"},
     "I": {**_NOT_RUN, "openfoam12-realizableKE": "scored", "openfoam12-kEpsilon": "scored", "openfoam12-kOmegaSST": "scored"},
     "J": {**_NOT_RUN, "umf-realizableKE": "scored", "umf-buoyantKEpsilon": "scored"},
     "K": {**_NOT_RUN, "openfoam12-realizableKE": "scored"},
     "L": {**_NOT_RUN, "umf-realizableKE": "scored"},
-    "M": dict(_NOT_RUN),
+    "M": {**_NOT_RUN, "openfoam12-realizableKE": "scored"},
 }
 ENGINE_STATUS = {c: {e["id"]: st[e["id"]] for e in ENGINES if e["id"] in st} for c, st in ENGINE_STATUS.items()}   # in ENGINES order
 QUEUED = "Eddy3D's fixture for this case is written and its solves are queued; no result exists yet."
@@ -477,6 +477,135 @@ RUNS += [
         "caseL_umf_realizableKE_pairs.csv", PAIRS_L, normalisation=_L_NORM, notes=_L_NOTES),
 ]
 
+# ---- Cases F and M (Eddy3D's solves of 2026-10-18, scored against the cleaned tables) ------------------------------------------------------------
+PAIRS_F = ("frame (literal or agl: the two runs share this file), source (tunnel: the thermistor at 5, 9 and 20 m; field: the cup anemometers), plane_m (the instrument height above ground by the readme's "
+           "rule: 5, 9 or 20 for the tunnel, 3 to 11 for the field), point_id (the table's); x and y in m and z_published, the height above the tunnel floor in m, full scale (+x east, +y north); "
+           "z_probe, the height the model was probed at (the published z in the literal frame; the STL's own ground under the point plus plane_m in the agl frame) and height_above_stl_ground, the "
+           "probe's height above that ground; observed, the cleaned table's U/U(500 m) for wind from NNW, and observed_sd, the standard deviation of the 10-minute means behind a field value; "
+           "observed_sse, the tunnel's 9 m value for the opposite wind (SSE) at the same point, for the compass control; Umag_model and rms_model, the modelled |U| and sqrt(|U|^2 + 2k) over the "
+           "model's own approach U(500 m) (U500 in the results file); k_model, k in m^2/s^2")
+PAIRS_M = ("point_id (the tunnel's); x, y, z in m (the release's frame, full scale: x north, y west, z above the tunnel floor); U, V, W, speed (the magnitude of the velocity vector) and k at WD 180, measured "
+           "(_meas: the cleaned workbook values over the tunnel's U_R = 4.08 m/s, k over U_R^2) and modelled (_model: over the solved speed at the reference mast, 4.686 m/s; U is the case's +y, V = -U_x, "
+           "W = U_z); cstar_meas, the measured C/c0 at WD 180 (c0 = 132.514 ppm), cstar_wd175 and cstar_wd185, the same at the tunnel's neighbouring headings, and cstar_sct03 / _sct05 / _sct07, the "
+           "modelled c* = c U_R H_R^2 / Q (H_R = 40.8 m, Q = 1 kg/s) for turbulent Schmidt numbers 0.3, 0.5 and 0.7; cstar_<sct>_turned180 and cstar_<sct>_mirrored, the model's c* at the 15 points turned "
+           "180 degrees about the source and mirrored across the plume axis (3 m above the ground or a roof there; empty where the control point is not in the fluid); cstar_field_geomean, _min and _max, "
+           "the field campaign's geometric mean, minimum and maximum of c* over its 10 runs within 10 degrees of 180 at 3 m/s or more (each run's own U_R and q, H_R = 41 m)")
+_FM_REPRO = ("Eddy3D fixture {fixture} ({what}; OpenFOAM 12 realizable k-ε, numerics level 3, {iterations} iterations, {cells} cells, solved 2026-10-18); figures validation/plot_cases_fm_openfoam.py; "
+             "scores recomputed from the pairs by validation/dispersion_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`")
+_F_HEADLINE = {**{f"Tunnel, {lab}, √(|U|²+2k)": f"tunnel.{key}.rms" for lab, key in (("9 m plane", "9m"), ("5 m plane", "5m"), ("20 m plane", "20m"), ("all 33 points", "all"))},
+               **{f"Tunnel, {lab}, |U|": f"tunnel.{key}.Umag" for lab, key in (("9 m plane", "9m"), ("5 m plane", "5m"), ("20 m plane", "20m"), ("all 33 points", "all"))},
+               "Field, √(|U|²+2k)": "field.rms", "Field, |U|": "field.Umag", "Tunnel, 9 m plane, √(|U|²+2k) over the imposed U(500 m) = 10 m/s": "tunnel.9m.rms.byImposedUR",
+               "Tunnel's 9 m column as a model of the field (ceiling control)": "control.tunnelAsModelOfField",
+               "Tunnel's SSE column, the opposite wind, against the solved NNW field (compass control)": "control.sense.opposite"}
+_F_NORM = ("the thermistor's (tunnel) and the cup anemometer's (field) mean speed over U(500 m), the benchmark's own ratio, against the model's |U| and sqrt(|U|^2 + 2k) over its own approach U(500 m) "
+           "= 9.862 m/s (the imposed U(500 m) is 10 m/s); hit rate D = 0.25, W = 0.05 in those units; 33 tunnel points and 13 field observations of wind from NNW; FB is positive when the model is low")
+_M_HEADLINE = {"c*": "cstar", "c*, over the imposed speed at the mast's height (3.934 m/s)": "cstar.byImposedMastSpeed", "c*, over the tunnel's U_R = 4.08 m/s": "cstar.byPaperUR",
+               "c*, points turned 180° about the source (control)": "control.turned180", "c*, points mirrored across the plume axis (control)": "control.mirrored",
+               "c*, tunnel WD 175 as a model of its WD 180 (control)": "control.tunnelWD175AsModelOfWD180", "c*, tunnel WD 185 as a model of its WD 180 (control)": "control.tunnelWD185AsModelOfWD180",
+               "c*, mean of the tunnel's WD 175 and WD 185 as a model of its WD 180 (control)": "control.tunnelNeighbourMeanAsModelOfWD180",
+               "c* against the field's geometric mean (10 runs)": "field.vsGeometricMean", "c*, tunnel WD 180 as a model of the field's geometric mean (control)": "field.tunnelAsModelOfGeometricMean",
+               "U": "velocity.U", "V": "velocity.V", "V, sign flipped (control)": "velocity.V.flipped", "W": "velocity.W", "|U|": "velocity.magnitude", "k": "k"}
+_M_NORM = ("U, V, W and k at the 15 points over the tunnel's U_R = 4.08 m/s on the measurement and over the solved speed at the reference mast on the model (U_R is defined at the mast), k over U_R^2; "
+           "c* = C/c0 (c0 = q/(U_R H_R^2) = 132.5 ppm) against the model's c U_R H_R^2/Q (H_R = 0.068 m x 600, Q = 1 kg/s) for turbulent Schmidt number {sct}, with one detection limit of 10^-3 of the "
+           "largest measured value; hit rate D = 0.25, W = 0.05 in those units; the Schmidt numbers are three runs on one flow, published side by side")
+
+
+def _res(name):
+    with io.open(os.path.join(RESULTS_DIR, name), encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _f_notes(frame):
+    a, b = _res("caseF_openfoam12_realizableKE_literal.json"), _res("caseF_openfoam12_realizableKE_agl.json")
+    me, other = (a, b) if frame == "literal" else (b, a)
+    nine = lambda r: r["tunnel.9m.rms"]  # noqa: E731
+    sl = me["solveLog"]
+    res = sl["finalInitialResiduals"]
+    mesh = me["meshCheck"]
+    anem = me["anemometers"]
+    notes = [
+        "One direction of the tunnel's twelve: only wind from NNW was solved, the direction Eddy3D's fixture solves by default (with ENE it has the most tunnel rows, 33). The other eleven tunnel directions "
+        "and the field's other fifteen were not run, so nothing here says how the model does at them.",
+        ("Frame 'literal': the model is probed at the published z in the STL's frame. The readme says z is measured from the tunnel floor and the ground is z - 10 m, but the STL's own ground under all 13 points is "
+         "5 m, so the 5, 9 and 20 m planes are probed 10, 14 and 25 m above the STL's ground (height_above_stl_ground in the pairs). The other frame, 'agl' (the STL's ground plus 5, 9 and 20 m), is the other run "
+         "of this case." if frame == "literal" else
+         "Frame 'agl': the model is probed at the STL's own ground under each point plus the instrument height (5, 9 and 20 m for the tunnel, 3 to 11 m for the field). The readme says z is measured from the tunnel "
+         "floor and the ground is z - 10 m, but the STL's ground under all 13 points is 5 m, so the published z would sit 5 m higher; that frame is the other run of this case, 'literal'.")
+        + f" Neither is asserted, and the files do not say which one the tunnel meant: the 9 m plane's √(|U|²+2k) scores R {nine(a)['R']:.2f} and FB {nine(a)['Fb']:+.2f} in the literal frame and R {nine(b)['R']:.2f} "
+          f"and FB {nine(b)['Fb']:+.2f} in the agl frame, which is a statement about the datum, not about the model.",
+        f"Both sides are U/U(500 m): the tunnel's ratio is as published, the model's is over its own approach U(500 m) = {me['U500']:.3f} m/s, probed 1100 m upwind of the centre ({me['U500'] / 10:.3f} of the imposed 10 m/s). "
+        f"Over the imposed 10 m/s the 9 m plane's √(|U|²+2k) scores R {me['tunnel.9m.rms.byImposedUR']['R']:.2f} and FB {me['tunnel.9m.rms.byImposedUR']['Fb']:+.2f}.",
+        "The thermistor reads a scalar speed and so does the cup anemometer: the model is scored as |U|, which is the lower bound, and as √(|U|²+2k), the speed of a velocity with the modelled turbulent kinetic "
+        "energy in all three components, which is the upper bracket (as in Cases C to E).",
+        f"The field is a year of 10-minute means above 5 m/s at a rooftop reference, over a sector 22.5° wide, at 3 to 11 m above ground; the standard deviation of the means behind each value is 0.075 to 0.15 of "
+        f"U(500 m), 0.20 to 0.78 of the value itself (the horizontal bars of the figure), and a RANS field is one steady state for one exact direction. The tunnel's 9 m column scored as a model of the field, point "
+        f"for point, gives R {me['control.tunnelAsModelOfField']['R']:.2f}, FAC2 {me['control.tunnelAsModelOfField']['Fac2']:.2f}, FB {me['control.tunnelAsModelOfField']['Fb']:+.2f}: the bar a model of the tunnel is not expected to clear.",
+        "The field values of point 14 are the cleaned table's, realigned with the workbook: the published RS-FO_caseF.csv holds them shifted by one direction (clean/QUESTIONS.md QF1). The field scores here therefore differ "
+        "from Eddy3D's own results file in the third decimal (√(|U|²+2k) in the literal frame: R 0.8729 here, 0.8731 there; in the agl frame 0.8893 and 0.8872); the tunnel scores are identical to it.",
+        f"The STL is open along the rim of its 725 m disc (812 boundary edges, one shell, wound inward), which the canvas's pre-meshing pass cannot close (it removed 3 degenerate faces). The mesh has {mesh['cells']:,} cells "
+        f"and checkMesh fails one check ({mesh['highlySkewFaces']} highly skew faces, maximum skewness {mesh['maxSkewness']:.1f}, maximum non-orthogonality {mesh['maxNonOrthogonalityDeg']:.1f}°), so the solve started on the "
+        "hardened numerics of Eddy3D's mesh-quality tier.",
+        f"The solve ran to its {sl['iterationsRun']}-iteration limit with the residualControl unmet (no 'solution converged' line); the initial residuals at the last iteration were U_x {res['Ux']:.1e}, U_y {res['Uy']:.1e}, "
+        f"U_z {res['Uz']:.1e}, p {res['p']:.1e}, epsilon {res['epsilon']:.1e} and k {res['k']:.1e}, and the log has {sl['boundingKLines']:,} 'bounding k' lines.",
+        f"The solved field correlates R {a['tunnel.9m.rms']['R']:.2f} with the tunnel's 9 m column for the wind from NNW and R {a['control.sense.opposite']['R']:.2f} with its column for the opposite wind, SSE (agl frame: "
+        f"{b['tunnel.9m.rms']['R']:.2f} and {b['control.sense.opposite']['R']:.2f}). A RANS field knows no compass, so this corroborates the reading of the direction labels as the direction the wind comes from "
+        "(clean/QUESTIONS.md QF9), at this one direction.",
+        f"The model's U/U(500 m) at the workbook's two rooftop anemometers (SMB {anem['smb.Umag']:.2f} for |U|, KDD {anem['kdd.Umag']:.2f}) is recorded in the results file and not scored: the tunnel's anchors for them "
+        "exist for the north and south tests only.",
+    ]
+    if frame == "agl":
+        notes.insert(2, "At the fixture's 4 m surface cells the lowest probes of this frame (the 7 points of the 5 m plane, 1.25 cells above the ground, and the field's point at 3 m) sit in the first cell, where the point "
+                        "interpolation is pulled toward the wall's zero (the fixture's own remark): read those rows as such.")
+    return notes
+
+
+def _m_notes(sp):
+    r = _res(f"caseM_openfoam12_realizableKE_{sp}.json")
+    sl, mesh = r["solveLog"], r["meshCheck"]
+    res = sl["finalInitialResiduals"]
+    c = lambda m: f"R {m['R']:+.2f}, FAC2 {m['Fac2']:.2f}, FB {m['Fb']:+.2f}"  # noqa: E731
+    near = "carry more than" if r["cstar.nearBeatsFar"] else "carry less than"
+    return [
+        f"One heading and one steady solve: WD 180, the only heading with measured velocities. The tunnel's own neighbouring headings are the noise floor of a single heading: its WD 175 scored as a model of its WD 180 "
+        f"gives {c(r['control.tunnelWD175AsModelOfWD180'])}, its WD 185 {c(r['control.tunnelWD185AsModelOfWD180'])}, and the mean of the two {c(r['control.tunnelNeighbourMeanAsModelOfWD180'])}; 8 of the 15 points change "
+        "by more than a factor of two between WD 175 and WD 185 (computed from the pairs).",
+        "The turbulent Schmidt number does not change the flow: the three runs of this case are one solve with three passive tracers, so U, V, W and k are the same in all three and only c* differs.",
+        f"U_R is the solved speed at the reference mast, {r['referenceSpeed.solvedAtMast']:.3f} m/s, which is {r['reference.180.U.overImposed']:.2f} of the tabulated inlet's speed at the mast's elevation "
+        f"({r['reference.U.imposedAtMastElevation']:.3f} m/s) and {r['reference.180.U.overTunnelUR']:.2f} of the tunnel's 4.08 m/s. Over the imposed speed c* scores FB {r['cstar.byImposedMastSpeed']['Fb']:+.2f} and over "
+        f"4.08 m/s FB {r['cstar.byPaperUR']['Fb']:+.2f}, against {r['cstar']['Fb']:+.2f} over the solved speed.",
+        "The model is not the tunnel: a cylinder of 540 m radius and 240 m height on the terrain sheet, the tabulated approach profile over a smooth floor, none of the tunnel's side walls (at ±360 m) and 600 m ceiling "
+        "(blockage 5 % in the fixture's count); the 6 mm outlet is 3.6 m at 1:600, and the source here is a 4 m cube on the ground (a zone of 20 cells, 2 m surface cells), 1 kg/s as a volume source with no exit "
+        "momentum. The 15 points are 3 m above the ground.",
+        f"The structure the fixture first asserted is recorded: the three points nearest the source {near} the two far downwind ones in this run ({r['cstar.nearThreeMean']:.2f} against {r['cstar.farTwoMean']:.2f}), "
+        f"where the tunnel's are {r['cstar.tunnel.nearThreeMean']:.2f} against {r['cstar.tunnel.farTwoMean']:.2f}. The tunnel obeys it by a factor of about twelve and the model by less (Sct 0.7 reverses it), which Eddy3D "
+        f"reads as a finding about where the model puts the plume and not as a wrong bar: a probe repeated at full precision moved no c* value by more than 0.003. The peak c* is {r['cstar.peakModel']:.2f} against {r['cstar.peakMeasured']:.2f} "
+        f"measured, and {r['cstar.topFiveOverlap']} of the five highest points are shared.",
+        f"Controls on the same solution: the 15 points turned 180° about the source score {c(r['control.turned180'])} (n {r['control.turned180']['Count']}; the model's mean over those points is "
+        f"{r['control.meanTurned180']:.1e} against {r['control.meanReal']:.3f} at the real ones: the tracer goes downwind), and the points mirrored across the plume axis score {c(r['control.mirrored'])}, better "
+        f"than the real points' {c(r['cstar'])}: the modelled plume is displaced sideways against the tunnel's.",
+        f"The field campaign (18 runs) is recorded beside the tunnel, not asserted: the 10 runs within 10° of 180 at 3 m/s or more, each with its own U_R and q and H_R = 41 m as the cleaned table states (the fixture divides by "
+        f"40.8 m, a 1 % difference). The model against the field's geometric mean scores {c(r['field.vsGeometricMean'])}, and lies inside the field's minimum-maximum range at {r['field.insideFieldRange']} of 15 points; "
+        f"the tunnel's WD 180 against the same mean scores {c(r['field.tunnelAsModelOfGeometricMean'])}; the spread of the field at point 1 is a factor of {r['field.spreadAtPoint1']:.1f}.",
+        f"The velocity at the 15 points: the mean U/U_R is {r['velocity.U.mean.model']:.3f} modelled against {r['velocity.U.mean.tunnel']:.3f} measured. FB is not defined for V and W (their means are not both positive); V "
+        f"correlates at R {r['velocity.V']['R']:+.2f} and flipping its sign gives {r['velocity.V.flipped']['R']:+.2f}.",
+        f"The solve ran to its {sl['iterationsRun']}-iteration limit with the residualControl unmet (no 'solution converged' line); the initial residuals at the last iteration were U_x {res['Ux']:.1e}, "
+        f"U_z {res['Uz']:.1e}, p {res['p']:.1e}, epsilon {res['epsilon']:.1e}, k {res['k']:.1e} and the tracers {res['c_sct03']:.1e} to {res['c_sct07']:.1e}. checkMesh: {mesh['verdict']} {mesh['cells']:,} cells. "
+        "The first solve of this case was killed by the container runtime for memory (exit 137) and the solve was run again alone; the scores are of the second. Its tracer probe, which printed six decimals, was "
+        "replaced by a probe of the same solved study at seven significant digits (no c* value moved by more than 0.003, Eddy3D's account).",
+    ]
+
+
+RUNS += [
+    *[run("F", "openfoam12-realizableKE", frame, f"caseF_openfoam12_realizableKE_{frame}.json", _F_HEADLINE, ["case-f-openfoam-agreement.png", "case-f-openfoam-bias-map.png"],
+          _FM_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseFContainerE2E (EDDY3D_AIJ_F_DIRECTIONS=NNW, the default)", what=f"Shinjuku district, 1:800, wind from NNW, frame {frame}",
+                           iterations="2000", cells="2,143,488"),
+          "caseF_openfoam12_realizableKE_pairs.csv", PAIRS_F, normalisation=_F_NORM, notes=_f_notes(frame)) for frame in ("literal", "agl")],
+    *[run("M", "openfoam12-realizableKE", sp, f"caseM_openfoam12_realizableKE_{sp}.json", _M_HEADLINE, ["case-m-openfoam-agreement.png", "case-m-openfoam-plan.png"],
+          _FM_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseMContainerE2E (WD 180, the default)", what=f"TPU Atsugi campus, 1:600, tunnel WD 180, turbulent Schmidt number {sct}",
+                           iterations="3000", cells="1,394,053"),
+          "caseM_openfoam12_realizableKE_pairs.csv", PAIRS_M, normalisation=_M_NORM.format(sct=sct), notes=_m_notes(sp)) for sp, sct in (("sct03", "0.3"), ("sct05", "0.5"), ("sct07", "0.7"))],
+]
+
 # One caption per validation figure, used on the case pages and served with each result.
 FIGURE_CAPTIONS = {
     "cases-ab-openfoam-agreement.png": ("Cases A and B, OpenFOAM 12 (realizable k-ε): measured against modelled U, V, W and k at "
@@ -517,6 +646,16 @@ FIGURE_CAPTIONS = {
                               "positive pairs within seven decades only). The points within a quarter of a building height of the source are open."),
     "case-l-umf-agreement.png": ("Case L, urbanMicroclimateFoam (Froude scale 100, realizable k-ε): measured against modelled U, W, k, θ, V and c* at three turbulent Schmidt numbers at the 344 "
                                  "points, in the tunnel's units (log axes show the positive pairs within seven decades only)."),
+    "case-f-openfoam-agreement.png": ("Case F, OpenFOAM 12 (realizable k-ε), wind from NNW: the tunnel's and the field's U/U(500 m) against the modelled √(|U|²+2k) (filled) and |U| (hollow) over "
+                                      "the model's own U(500 m), in two vertical frames (top: the published z in the STL's frame; bottom: the STL's ground plus the instrument height), for the 9 m plane, "
+                                      "all 33 tunnel points (planes at 5, 9 and 20 m) and the 13 field observations (bars: the standard deviation of the 10-minute means)."),
+    "case-f-openfoam-bias-map.png": ("Case F, OpenFOAM 12, wind from NNW: log₂(model / tunnel) of the scalar speed at the tunnel's 13 points of the 9 m plane on the plan of the district (full-scale metres, "
+                                     "north up; the arrow is the wind), in the two vertical frames."),
+    "case-m-openfoam-agreement.png": ("Case M, OpenFOAM 12 (realizable k-ε), WD 180: measured against modelled U, V, W and k over the tunnel's U_R and the solved speed at the mast, and the dimensionless "
+                                      "concentration c* = C/c0 at turbulent Schmidt numbers 0.3, 0.5 and 0.7 (log axes show the positive pairs within eight decades only); the last panel is the tunnel's own "
+                                      "WD 175 and WD 185 against its WD 180, the noise floor of a single heading."),
+    "case-m-openfoam-plan.png": ("Case M, OpenFOAM 12, WD 180: log₁₀ of c* at the 15 points on the plan of the campus (north up; the arrow is the wind), the tunnel and the three Schmidt numbers on one scale; "
+                                 "a point below 10⁻³ (or zero) is open. The star is the gas source and the square the reference mast."),
     "ml-surrogate-agreement.png": ("Eddy3D ML surrogate (Yel-2.0): measured against predicted pedestrian-height speed, one "
                                    "panel per case, with the 1:1 line and the factor-of-two band."),
 }
@@ -1753,6 +1892,10 @@ FIGURE_HOME = {
     "case-j-umf-agreement.png": ("/validation/cases-jl/", "Cases J and L (UMF)"),
     "case-j-umf-tracer.png": ("/validation/cases-jl/", "Cases J and L (UMF)"),
     "case-l-umf-agreement.png": ("/validation/cases-jl/", "Cases J and L (UMF)"),
+    "case-f-openfoam-agreement.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
+    "case-f-openfoam-bias-map.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
+    "case-m-openfoam-agreement.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
+    "case-m-openfoam-plan.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
     "ml-surrogate-agreement.png": ("/validation/ml-surrogate/", "ML surrogate"),
 }
 ALL_CASES_FIGURE_MIN = 3
@@ -1766,8 +1909,8 @@ GLANCE = [("building", "array", "tower", "district"), ("scale",), ("Re_H", "Re_D
           ("wind_directions", "wind_directions_deg"), ("measurement_height_m", "measurement_planes")]
 # The hand-written page that reads a case's results (a case without one is read on the Validation overview).
 READING_PAGES = {"A": "/validation/cases-ab/", "B": "/validation/cases-ab/", "C": "/validation/case-c/",
-                 "D": "/validation/case-d/", "E": "/validation/case-e/", "G": "/validation/cases-gk/", "H": "/validation/cases-hi/", "I": "/validation/cases-hi/",
-                 "J": "/validation/cases-jl/", "K": "/validation/cases-gk/", "L": "/validation/cases-jl/"}
+                 "D": "/validation/case-d/", "E": "/validation/case-e/", "F": "/validation/cases-fm/", "G": "/validation/cases-gk/", "H": "/validation/cases-hi/",
+                 "I": "/validation/cases-hi/", "J": "/validation/cases-jl/", "K": "/validation/cases-gk/", "L": "/validation/cases-jl/", "M": "/validation/cases-fm/"}
 
 
 def _engine_name(engine_id):

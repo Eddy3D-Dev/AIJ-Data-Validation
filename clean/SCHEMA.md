@@ -200,7 +200,7 @@ every point is 3 m above the local ground (verified against the STL to ±0.06 m)
 
 | case | flow_dir(WD) | how the sense is known |
 |---|---|---|
-| F | (−sin WD, −cos WD) | compass FROM-direction, +y north (`MP_caseF.png`); the readme does not define it. Supported by the reference-building choice and by upwind roughness: status `unverified` (`QUESTIONS.md` QF9) |
+| F | (−sin WD, −cos WD) | compass FROM-direction, +y north (`MP_caseF.png`); the readme does not define it. Supported by the reference-building choice and by upwind roughness: status `unverified` (`QUESTIONS.md` QF9), except at NNW, the one direction a solved Eddy3D field has decided (R 0.935 with the tunnel's NNW column against 0.077 with its SSE column): status `corroborated by a solved field` |
 | M | (−cos WD, +sin WD) | measured: the plume's lateral centroid moves toward −y as WD grows, in the tunnel (175° → 185°) and across the 18 field runs; the compass rose of `MP_caseM.png` (N at +x, W at +y) agrees |
 
 ### Geometry

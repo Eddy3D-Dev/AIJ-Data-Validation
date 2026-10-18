@@ -261,7 +261,7 @@ m.query("campaign == 'field' and abs(wind_direction_deg - 180) <= 5").groupby("p
 | C | released | released (boxes, pitch verified) | **measured from the data; contradicts the paper's figure** | Q1 |
 | D | released (official Zenodo CSVs + workbook) | released (rebuilt boxes) | 0° settled; 22.5°/45° corroborated by solved fields | Q2 |
 | E | released (workbook, full precision) | **provisional**: official STL open-edged & model-scale; bc state reconstructed | settled (compass) | Q3 |
-| F | coordinates, ratios and inflow released; **provisional**: 16 field values of point 14 (direction labels disagree with the workbook, QF1) and one tunnel value (QF2) | released: `BD_caseF.stl` scaled ×800 and re-wound outward, open along the rim of a 725 m disc; the vertical reference is provisional (QF4) | convention + data corroboration, **not a solved field**; unverified (QF9) | — |
+| F | coordinates, ratios and inflow released; **provisional**: 16 field values of point 14 (direction labels disagree with the workbook, QF1) and one tunnel value (QF2) | released: `BD_caseF.stl` scaled ×800 and re-wound outward, open along the rim of a 725 m disc; the vertical reference is provisional (QF4) | convention + data corroboration; NNW **corroborated by a solved field** (R 0.935 against 0.077 for the opposite wind), the other directions unverified (QF9) | — |
 | G | released | released (box: the envelope of a porous canopy) | `unverified`: field data, the wind's angle to the belt is not published (QG3) | field data, nothing in m/s |
 | H | released | released (box) | settled (measured: U < 0 in the recirculation behind the leeward face) | — |
 | I | released | released (box) | settled (measured: U < 0 in the recirculation behind the leeward face) | — |

@@ -41,7 +41,7 @@ The point table gained columns, which is why this release is MAJOR.
   `sorbent_gc_ecd`; `campaign` separates the tunnel from the field in Cases F, G and M.
 - Validation runs, each with its scores and per-point pairs: OpenFOAM 12 on Case H (realizable k-ε) and on Case I under
   realizable k-ε, standard k-ε and k-ω SST. The API lists the two closures as the engines `openfoam12-kEpsilon` and
-  `openfoam12-kOmegaSST`, for Case I only. Cases F and M have no run yet: every engine is `pending`.
+  `openfoam12-kOmegaSST`, for Case I only.
 - Validation of Case K (9 × 9 cube array, floor point source): OpenFOAM 12, realizable k-ε, numerics level 3, 972,637 cells, 3000
   iterations, solved 2026-10-18, scored at the tunnel's 203 points: U, V, W, k and the concentration c\* at turbulent Schmidt numbers 0.3,
   0.5 and 0.7 (three species on one flow, all published), with and without the four points at the source, and the
@@ -56,7 +56,21 @@ The point table gained columns, which is why this release is MAJOR.
   236,408 air cells, L: 754,940, the air region stopped at its 1500-iteration cap). J under realizable k-ε and `buoyantKEpsilon`, L under
   realizable k-ε; U, V, W, k, the floor-referenced temperature θ and the concentration at three Schmidt numbers, in the tunnel's units.
   The API lists UMF as the engines `umf-realizableKE` (J, L) and `umf-buoyantKEpsilon` (J), and each validation result has `notes`.
-- Every score of the runs of Cases G, K, J and L is recomputed from the per-point pairs by `validation/dispersion_metrics.py`, never copied
+- Validation of Case F (Shinjuku district: a 1978 high-rise district, thermistor speed in a 1:800 tunnel at 5, 9 and 20 m and a year of field cup
+  anemometers): OpenFOAM 12, realizable k-ε, numerics level 3, 2,143,488 cells, 2000 iterations, solved 2026-10-18 for the wind from NNW only
+  (the other eleven tunnel directions were not run). The tunnel's 33 points and the field's 13 are scored as |U| and √(|U|²+2k) over the model's own
+  U(500 m), in two vertical frames that are two runs of one engine (`configuration` `literal`: the published z in the STL's frame; `agl`: the STL's
+  ground plus the instrument height; the files do not say which the tunnel meant, so neither is asserted), with the tunnel's 9 m column as a model of
+  the field and the solved field's correlation with the tunnel's column for the opposite wind (SSE) as controls. That control corroborates the
+  compass reading of the wind directions at NNW: the direction table of `clean/` marks the NNW rows `corroborated by a solved field`, the other
+  directions stay `unverified`.
+- Validation of Case M (TPU Atsugi campus, tracer release over real terrain): OpenFOAM 12, realizable k-ε, numerics level 3, 1,394,053 cells, 3000
+  iterations, solved 2026-10-18 for the tunnel's heading WD 180 only, scored at the 15 points: c\* at turbulent Schmidt numbers 0.3, 0.5 and 0.7 (three
+  runs on one flow, `configuration` `sct03`, `sct05`, `sct07`, none chosen) and U, V, W and k over the solved speed at the reference mast, with the
+  fixture's two controls (the points turned 180° about the source and mirrored across the plume axis), the tunnel's own WD 175 and WD 185 scored
+  against its WD 180, and the 18 field runs recorded beside the tunnel. The ordering the fixture first asserted (the points nearest the source carry
+  more than the far ones) is recorded and stated in the run notes as a model finding.
+- Every score of the runs of Cases F, G, K, J, L and M is recomputed from the per-point pairs by `validation/dispersion_metrics.py`, never copied
   from Eddy3D's log; fed the published CSVs and the fixtures' own probes it reproduces the fixtures' scores to 10⁻⁹ (the script fails
   otherwise), and the scores here differ from the logged ones where the measured side moved from the rounded CSVs to the workbooks.
   The SHA-256 of every file a snapshot was read from is in its results file under `sources`.

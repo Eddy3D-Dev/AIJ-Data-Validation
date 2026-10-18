@@ -393,7 +393,7 @@ def build(B, prov):
     ev = {nm: (quad(d, ("NW", "N", "NNE", "NE")), quad(d, ("SE", "S", "SSW", "SW"))) for nm, d in (("tunnel_9m", t9), ("field", F_))}
     faster = sum(float(t9[(t9.point_id == no) & t9.wind_direction.isin(("SE", "S", "SSW", "SW"))].velocity_ratio.mean()) > float(t9[(t9.point_id == no) & t9.wind_direction.isin(("NW", "N", "NNE", "NE"))].velocity_ratio.mean()) for no in north)
     check(c, "northern_points_see_faster_flow_for_the_S_labels_than_for_the_N_labels", all(b > a for a, b in ev.values()) and faster >= 0.7 * len(north), mean_U_R_north_labels_vs_south_labels=ev, points_faster_from_S=int(faster), of=len(north),
-          note="the points in the dense low-rise area north of y = 150 m (MP_caseF.png) read higher when the label is S (open plaza and towers upwind) than N (low-rise upwind): the labels are FROM-directions, as is the reference-building choice (SMB for NW-NE). Not a solved field: status 'unverified'")
+          note="the points in the dense low-rise area north of y = 150 m (MP_caseF.png) read higher when the label is S (open plaza and towers upwind) than N (low-rise upwind): the labels are FROM-directions, as is the reference-building choice (SMB for NW-NE). Not a solved field; a solved field decides NNW alone (directions.csv, QUESTIONS.md QF9)")
 
     # ---- inflow
     UR = [float(r_.U) / wbi[i, 1] for i, r_ in enumerate(afl.itertuples())]
@@ -418,7 +418,7 @@ def build(B, prov):
                      "field_height": "z of each field row is the anemometer height above the tunnel floor (13 ... 21 m); the tunnel planes are 15, 19 and 30 m"}
     frame = {"origin": "centre of the reproduced district, in the tunnel's floor plane (MP_caseF.png 'Origin')", "x": "+x EAST (compass rose in MP_caseF.png)", "y": "+y NORTH",
              "z": f"+z up from the TUNNEL FLOOR, full scale; the readme's rule is height above ground = z - {GROUND_OFFSET:g} m (the model was raised, QUESTIONS.md QF4); tunnel planes at z = 15 / 19 / 30 m, field anemometers at z = 13 ... 21 m",
-             "wind_direction_rotation": "compass FROM-direction (N = 0, E = 90): N blows toward -y; flow_dir = (-sin WD, -cos WD). Not defined in the readme; the reference-building choice (SMB for NW-NE) and the upwind-roughness check support it (status 'unverified').",
+             "wind_direction_rotation": "compass FROM-direction (N = 0, E = 90): N blows toward -y; flow_dir = (-sin WD, -cos WD). Not defined in the readme; the reference-building choice (SMB for NW-NE) and the upwind-roughness check support it, and at NNW a solved field corroborates it (status 'corroborated by a solved field'; the other directions stay 'unverified').",
              "length_scale": "FULL-scale metres (model 1:800): the tunnel's model-scale coordinates and the STL are multiplied by 800; the field's are published in full scale"}
     transform = {"coordinate_scale": SCALE, "lateral_sign": 1, "origin_shift_m": [0, 0, 0], "geometry_scale": SCALE,
                  "note": "tunnel x, y, z x800; field coordinates unchanged; U/R and sigma as published except the 16 field rows of point 14 (re-derived from the workbook); STL x800 and re-wound outward"}
@@ -435,6 +435,11 @@ def build(B, prov):
     return pts, afl, geo, inflow, frame, transform, extra
 
 
+# The one direction a solved field has decided (Eddy3D, OpenFOAM 12, realizable k-epsilon, 2,143,488 cells, wind from NNW, 2026-10-18): the solved field correlates R 0.935 with the
+# tunnel's 9 m column labelled NNW and R 0.077 with its column labelled SSE, the opposite wind, at the 13 points (R 0.945 and 0.102 probed at the STL's ground plus 9 m).
+SOLVED_DIRECTION = "NNW"
+
+
 def directions(B, pts):
     rows = []
     for (cfg, inst, wd, wname), g in pts.groupby(["config", "instrument", "wind_direction_deg", "wind_direction"], sort=True):
@@ -442,7 +447,12 @@ def directions(B, pts):
         fx, fy = -math.sin(r), -math.cos(r)
         basis = ("convention: compass FROM-direction, +y north (MP_caseF.png rose); supported by the reference-building choice (SMB for NW-NE) and by the upwind-roughness check "
                  "northern_points_see_faster_flow_for_the_S_labels_than_for_the_N_labels; the readme does not define it")
+        status = "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"
+        if wname == SOLVED_DIRECTION:
+            basis += ("; the solved Eddy3D field for the wind from this direction correlates R 0.935 with the tunnel's 9 m column for this label and R 0.077 with its column for the "
+                      "opposite label (SSE), so it corroborates the FROM reading (R 0.945 and 0.102 at the STL's ground plus 9 m)")
+            status = "corroborated by a solved field — QUESTIONS.md QF9"
         rows.append({"case_id": "F", "config": cfg, "instrument": inst, "wind_direction_deg": wd, "wind_direction": wname,
                      "flow_dir_x": round(fx, 9) + 0.0, "flow_dir_y": round(fy, 9) + 0.0, "rows": int(len(g)), "measured": int(g["velocity_ratio"].notna().sum()),
-                     "sense_basis": basis, "status": "unverified (convention + data corroboration, not a solved field) — QUESTIONS.md QF9"})
+                     "sense_basis": basis, "status": status})
     return pd.DataFrame(rows)

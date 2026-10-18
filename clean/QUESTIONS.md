@@ -177,6 +177,13 @@ Are the wind directions the meteorological directions the wind blows **from**, c
 `MP_caseF.png`? This release assumes so (status `unverified`): the reference-building choice (SMB, the northern building, for
 NW to NE) and the upwind roughness of the northern points (higher for S than for N) agree with it.
 
+*Update 2026-10-18 — a solved field decides NNW.* Eddy3D solved the district for the wind from NNW (OpenFOAM 12, realizable k-ε, 2,143,488 cells,
+2000 iterations) and scored the 13 points of the 9 m plane against the tunnel's column for that label and against its column for the opposite
+wind, SSE, on the same solution. Probed at the published z, R = 0.935 with the NNW column and R = 0.077 with the SSE column (FAC2 1.00 and 0.62);
+probed at the STL's ground plus 9 m, R = 0.945 and 0.102. A RANS solution knows no compass, so the labels name the direction the wind comes
+from, at least at this direction (`directions.csv` says so for the NNW rows; the other directions stay `unverified` until one is solved). The
+question stays open for the collector's own word.
+
 ## QF10 — Case F: the field band of the workbook (Okaze)
 
 In 10 rows of the workbook (2/NW, 6/E, 7/ESE, 7/NW, 9/E, 13/WNW, 14/ENE, 14/SSE, 15/N, 15/SSE) Mean + S.D. and Mean − S.D. are not

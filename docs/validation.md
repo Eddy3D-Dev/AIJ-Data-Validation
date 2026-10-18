@@ -63,12 +63,15 @@ was not run there. The API's engine ids are `openfoam12-realizableKE` (also `ope
   reproduced in pattern (U R 0.92) and low in level, the recirculation is too long, the model is 3.5 K warmer, and the tracer's bias changes sign with the
   Schmidt number. Case L: U and temperature follow the tunnel (R 0.92 and 0.94), the street air is nearly stagnant in the model, and the tracer is high.
   [Reading]({{ '/validation/cases-jl/' | relative_url }}).
+- **Cases F and M, OpenFOAM 12.** One steady solve of each. Case F (the Shinjuku district, wind from NNW only, probed in two vertical frames that are published side by side because the files do not
+  say which the tunnel meant): the pattern follows the tunnel (R 0.90 to 0.95 at the 9 m plane and over all 33 points) and the field (R 0.87 to 0.89), the level depends on the frame (FB +0.04 or +0.13
+  at the 9 m plane), and the solved field correlates with the tunnel's NNW column and not with its SSE one, which corroborates the compass reading of the wind directions. Case M (a tracer release over a
+  campus, WD 180 only, three Schmidt numbers): the tracer is under-predicted at every one (R 0.20 to 0.41, FB +1.4 to +1.6) and the modelled plume is displaced sideways against the tunnel's.
+  [Reading]({{ '/validation/cases-fm/' | relative_url }}).
 - **OpenLB and FluidX3D** are scored on Cases A and B only. On C to E each cannot produce the measured quantity at the
   measured height, which was measured rather than assumed. [Reading]({{ '/validation/engines/' | relative_url }}).
 - **The ML surrogate** predicts roughly half the tunnel's speed everywhere, and it does not respond to the wind
   direction. It has been run on Cases A to E only. [Reading]({{ '/validation/ml-surrogate/' | relative_url }}).
-- **Cases F and M have no validation run yet.** Eddy3D's fixtures for them are written and their solves
-  are queued, so every engine is *pending* there; nothing on this site is a claim about them.
 
 Every case's scores, with the figures that show them, are on its own page: *Cases*, then the case, then
 *Validation*. The same scores are served by the API as `/api/validation.json` and `/api/cases/{id}/validation.json`.

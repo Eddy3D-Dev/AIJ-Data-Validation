@@ -75,17 +75,16 @@ it agrees is in the numbers and their reading. Anything not marked scored is not
 | C | scored, 9 configurations | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | ✔ |
 | D | scored, WD 0°, 22.5° and 45° | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | ✔ |
 | E | scored, SW | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | ✔ |
-| F | pending | — | pending | pending | pending |
+| F | scored, wind from NNW in two vertical frames | — | pending | pending | pending |
 | G | scored, a drag sweep of four arms and a half belt | — | pending | pending | pending |
 | H | scored | — | pending | pending | pending |
 | I | scored, also standard k-ε and k-ω SST | — | pending | pending | pending |
 | J | pending | scored, realizable k-ε and buoyantKEpsilon | pending | pending | pending |
 | K | scored | — | pending | pending | pending |
 | L | pending | scored | pending | pending | pending |
-| M | pending | — | pending | pending | pending |
+| M | scored, WD 180, three Schmidt numbers | — | pending | pending | pending |
 
-*Pending* means not run yet. For Cases F and M Eddy3D's fixtures are written and their solves are queued;
-nothing here is a claim about them. *—* means the engine does not apply: UMF (urbanMicroclimateFoam, an OpenFOAM 12
+*Pending* means not run yet. *—* means the engine does not apply: UMF (urbanMicroclimateFoam, an OpenFOAM 12
 solver) is Eddy3D's engine for the non-isothermal Cases J and L, where the isothermal OpenFOAM 12 engine was not run.
 
 ---
@@ -486,7 +485,7 @@ of the 863 pairs the tunnel resolves (|Δ| > 0.05). See *ML surrogate* under *Va
 </details>
 
 <details>
-<summary><b>Case F — Shinjuku district</b> · 472 ratios at 13 points · scored: none yet</summary>
+<summary><b>Case F — Shinjuku district</b> · 472 ratios at 13 points · scored: OpenFOAM 12 (wind from NNW, two vertical frames)</summary>
 
 <p><!--fig name="case-f.png" alt="Case F geometry" width="700"--><a href="validation/figures/geometry/case-f.png"><img src="docs/assets/web/case-f.png" width="700" height="350" loading="lazy" alt="Case F geometry"></a><br><sub><a href="validation/figures/geometry/case-f.png">1200 dpi original, 1.9 MB</a></sub><!--/fig--><br>
 <em>Shinjuku sub-centre, November 1978: terrain and buildings of the 1:800 model over a disc of 725 m radius (full-scale metres); north is +y, the towers over 100 m are blue.</em></p>
@@ -497,9 +496,22 @@ of the 863 pairs the tunnel resolves (|Δ| > 0.05). See *ML surrogate* under *Va
 
 **Frame.** Origin: centre of the reproduced district, tunnel floor plane. x: +x EAST (full-scale metres). y: +y NORTH (compass rose in MP_caseF.png). z: +z up from the TUNNEL FLOOR; the readme's rule is ground = z - 10 m (the STL's terrain under the points is at z = 5 m).
 
-**Validation.** None yet: Eddy3D's fixture for this case is written and its solves are queued, so every engine is *pending*. Nothing here is a claim about the case.
+**Validation (OpenFOAM 12, realizable k-ε, full scale).** One steady solve for the wind from NNW (2,143,488 cells, 2000 iterations); the other eleven tunnel directions were not run. The thermistor and the cup anemometer read a scalar speed, so the model is scored as √(|U|²+2k) (below) and as |U| (on the Validation page), both over the model's own U(500 m) = 9.862 m/s. The readme's vertical datum and the STL's disagree by 5 m, so the model is probed in two frames, the published z in the STL's frame (*literal*) and the STL's ground plus the instrument height (*agl*), published as two runs; neither is asserted. FB is positive when the model is low.
 
-**Known issues.** 10 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/F.json`](docs/api/cases/F.json).
+| √(\|U\|²+2k) over U(500 m) | R (literal) | FAC2 | FB | R (agl) | FAC2 | FB |
+|---|---|---|---|---|---|---|
+| Tunnel, 9 m plane (13 points) | +0.935 | 1.000 | +0.036 | +0.945 | 1.000 | +0.126 |
+| Tunnel, 5 m plane (7) | +0.995 | 1.000 | +0.127 | +0.918 | 1.000 | +0.128 |
+| Tunnel, 20 m plane (13) | +0.796 | 0.923 | +0.071 | +0.807 | 1.000 | +0.208 |
+| Tunnel, all 33 points | +0.912 | 0.970 | +0.067 | +0.898 | 1.000 | +0.165 |
+| Field, 13 observations | +0.873 | 1.000 | +0.027 | +0.889 | 1.000 | +0.147 |
+| Tunnel's SSE column, the opposite wind (compass control) | +0.077 | 0.615 | +0.327 | +0.102 | 0.385 | +0.413 |
+
+The pattern follows the tunnel and the field in both frames and the level depends on the frame (FB +0.04 or +0.13 at the 9 m plane); the 20 m plane has the lowest R. The tunnel's own 9 m column scored as a model of the field gives R 0.933, FAC2 1.00 (the bar no model is expected to clear). The solved field correlates R 0.935 with the tunnel's NNW column and R 0.077 with its SSE column, which corroborates reading the direction labels as the direction the wind comes from, at this direction. The reading is on the site's [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-fm/) page.
+
+<!--fig name="case-f-openfoam-agreement.png" alt="Case F, measured vs modelled speed" width="800"--><a href="validation/figures/case-f-openfoam-agreement.png"><img src="docs/assets/web/case-f-openfoam-agreement.png" width="800" height="475" loading="lazy" alt="Case F, measured vs modelled speed"></a><br><sub><a href="validation/figures/case-f-openfoam-agreement.png">1200 dpi original, 3.2 MB</a></sub><!--/fig-->
+
+**Known issues.** 11 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/F.json`](docs/api/cases/F.json).
 
 **API.** [`cases/F.json`](docs/api/cases/F.json) · [`points.json`](docs/api/cases/F/points.json) / [`points.csv`](docs/api/cases/F/points.csv) · [`geometry.stl`](docs/api/cases/F/geometry.stl) (53,814 triangles) · [`validation.json`](docs/api/cases/F/validation.json)
 
@@ -708,7 +720,7 @@ U and θ follow the tunnel (the model beats the undisturbed approach column on R
 </details>
 
 <details>
-<summary><b>Case M — TPU Atsugi campus</b> · 330 rows, tunnel and field · scored: none yet</summary>
+<summary><b>Case M — TPU Atsugi campus</b> · 330 rows, tunnel and field · scored: OpenFOAM 12 (WD 180, three Schmidt numbers)</summary>
 
 <p><!--fig name="case-m.png" alt="Case M geometry" width="700"--><a href="validation/figures/geometry/case-m.png"><img src="docs/assets/web/case-m.png" width="700" height="350" loading="lazy" alt="Case M geometry"></a><br><sub><a href="validation/figures/geometry/case-m.png">1200 dpi original, 1.8 MB</a></sub><!--/fig--><br>
 <em>TPU Atsugi campus: terrain and buildings of the 1:600 model (full-scale metres, 1080 m by 720 m); the arrow is the wind at WD = 180°, blowing toward +x (north).</em></p>
@@ -719,7 +731,22 @@ U and θ follow the tunnel (the model beats the undisturbed approach column on R
 
 **Frame.** Origin: centre of the tunnel turntable on the floor plane (ground surface there at z = 33.07 m). x: +x NORTH (full-scale metres). y: +y WEST (compass rose of MP_caseM.png: N at +x, W at +y); the frame is right-handed. z: +z up from the TUNNEL FLOOR; the campus ground lies at z ~ 32 m.
 
-**Validation.** None yet: Eddy3D's fixture for this case is written and its solves are queued, so every engine is *pending*. Nothing here is a claim about the case.
+**Validation (OpenFOAM 12, realizable k-ε, full scale).** One steady solve at WD 180, the tunnel's only heading with velocities (1,394,053 cells, 3000 iterations). U, V, W and k are over the tunnel's U<sub>R</sub> = 4.08 m/s (measured) and over the solved speed at the reference mast (modelled); the concentration is the measured C/c₀ against the model's c\* = c U<sub>R</sub> H<sub>R</sub>²/Q at three turbulent Schmidt numbers, three runs on one flow, published side by side. FB is positive when the model is low.
+
+| | R | FAC2 | FB | hit rate |
+|---|---|---|---|---|
+| c\*, Sct 0.3 | +0.412 | 0.200 | +1.396 | 0.133 |
+| c\*, Sct 0.5 | +0.251 | 0.200 | +1.524 | 0.133 |
+| c\*, Sct 0.7 | +0.198 | 0.133 | +1.579 | 0.133 |
+| U | +0.708 | 0.267 | +1.460 | 0.267 |
+| V | +0.731 | 0.333 | — | 0.133 |
+| W | +0.181 | 0.267 | — | 0.733 |
+| \|U\| | +0.601 | 0.733 | +0.185 | 0.400 |
+| k | +0.446 | 0.133 | +1.131 | 0.067 |
+
+The tracer is under-predicted at every Schmidt number (the model's mean c\* is 0.12 to 0.18 against the tunnel's 1.00, its peak 1.27 to 1.38 against 3.04), and the points mirrored across the plume axis score R +0.65 to +0.68, better than the real points' +0.20 to +0.41: the modelled plume is displaced sideways against the tunnel's. The three points nearest the source carry c\* 2.52 in the tunnel and 0.26, 0.11 and 0.05 in the model (the ordering the fixture first asserted, now recorded: at Sct 0.7 the near points carry less than the two far ones, 0.055 against 0.087); the tunnel's own WD 175 and WD 185 reach FAC2 0.73 and 0.80 against its WD 180, the model 0.13 to 0.20. The mean streamwise velocity is low (U/U<sub>R</sub> 0.026 against 0.164) while the magnitude is close (|U| FB +0.19). The 18 field runs are recorded beside it and never asserted. The reading is on the site's [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-fm/) page.
+
+<!--fig name="case-m-openfoam-agreement.png" alt="Case M, measured vs modelled velocity and concentration" width="800"--><a href="validation/figures/case-m-openfoam-agreement.png"><img src="docs/assets/web/case-m-openfoam-agreement.png" width="800" height="422" loading="lazy" alt="Case M, measured vs modelled velocity and concentration"></a><br><sub><a href="validation/figures/case-m-openfoam-agreement.png">1200 dpi original, 2.9 MB</a></sub><!--/fig-->
 
 **Known issues.** 10 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/M.json`](docs/api/cases/M.json).
 
@@ -903,11 +930,11 @@ approach flow at pedestrian height needs a refined upstream column or sampling c
 `validation/plot_cases_ab_openfoam.py` (Cases A and B), `validation/plot_cases_ab_engines.py` (A and B, every engine),
 `validation/plot_case_c_openfoam.py`, `validation/plot_case_d_openfoam.py`, `validation/plot_case_e_openfoam.py`,
 `validation/plot_cases_hi_openfoam.py` (Cases H and I), `validation/plot_cases_gk_openfoam.py` (Cases G and K),
-`validation/plot_cases_jl_umf.py` (Cases J and L, on UMF) and `validation/plot_ml_surrogate.py` (UltraPlot, one style in
+`validation/plot_cases_jl_umf.py` (Cases J and L, on UMF), `validation/plot_cases_fm_openfoam.py` (Cases F and M) and `validation/plot_ml_surrogate.py` (UltraPlot, one style in
 `validation/plotstyle.py`: a colour-blind-safe palette, every PNG at 1200 dpi) build the figures. The Eddy3D
 fixtures are `TestAijCaseAContainerE2E`, `TestAijCaseBContainerE2E`, `TestAijCaseC{0D,1D,2D}ContainerE2E`,
-`TestAijCaseDContainerE2E`, `TestAijCaseEContainerE2E`, `TestAijCaseGContainerE2E`, `TestAijCaseHContainerE2E`,
-`TestAijCubeContainerE2E`, `TestAijCaseKContainerE2E`, `TestAijCaseJUmfContainerE2E`, `TestAijCaseLUmfContainerE2E` and, for the ML
+`TestAijCaseDContainerE2E`, `TestAijCaseEContainerE2E`, `TestAijCaseFContainerE2E`, `TestAijCaseGContainerE2E`, `TestAijCaseHContainerE2E`,
+`TestAijCubeContainerE2E`, `TestAijCaseKContainerE2E`, `TestAijCaseJUmfContainerE2E`, `TestAijCaseLUmfContainerE2E`, `TestAijCaseMContainerE2E` and, for the ML
 surrogate, `Outdoor.ML.Tests/TestAijSurrogateE2E`.
 Their `results.json` files and the model values at the measured points are snapshotted in `validation/results/` and
 served unchanged by the API, so the figures rebuild from this repository alone, byte for byte, with
@@ -922,9 +949,8 @@ served unchanged by the API, so the figures rebuild from this repository alone, 
 | C | scored | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | scored |
 | D | scored, WD 0°, 22.5° and 45° | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | scored |
 | E | scored, SW | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | scored |
-| G, H, I, K | scored (G as a drag sweep; I also under standard k-ε and k-ω SST) | — | pending | pending | pending |
+| F, G, H, I, K, M | scored (F in two vertical frames; G as a drag sweep; I also under standard k-ε and k-ω SST; M at three Schmidt numbers) | — | pending | pending | pending |
 | J, L | pending | scored (J also under buoyantKEpsilon) | pending | pending | pending |
-| F, M | pending | — | pending | pending | pending |
 
 **Why OpenLB is not scored on C–E — measured, not assumed.** Cases C, D and E measure only at pedestrian height,
 and a point is scoreable on OpenLB only once it sits three to four cells above its no-slip floor. On the A and B
