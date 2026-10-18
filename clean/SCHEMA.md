@@ -136,3 +136,78 @@ changed input or a changed `build.py`.
 by name and serves them unchanged through `docs/api/cases/<id>/points.{json,csv}`
 (`points_source` in each file says so). Column `case_id` is deliberately not named `case`, which
 that adapter would read as the configuration.
+
+## Cases F and M
+
+The two cases that bring the schema-2.0.0 columns `campaign`, `run`, `C`, `c_rms`, `concentration_ratio`,
+`velocity_ratio_sd` into use. Both are real sites measured in a wind tunnel and in the field, both are in
+**full-scale metres**, both come from a legacy workbook as well as from the Zenodo CSVs. Modules:
+`clean/case_f.py`, `clean/case_m.py`.
+
+### Rows: what one row is
+
+`instrument` takes three values beyond `split_fibre` and `thermistor`: `cup_anemometer` (F, field),
+`hydrocarbon_analyser` (M, tunnel concentration) and `sorbent_gc_ecd` (M, field concentration: sorbent tubes read
+by gas chromatography with an electron-capture detector). A row carries only what its instrument measured; the
+rest is NaN.
+
+| case | `campaign` | `instrument` | `config` | one row is | filled columns |
+|---|---|---|---|---|---|
+| F | `wind_tunnel` | `thermistor` | `default` (9 m plane), `h5`, `h20` | a point at one wind direction on one plane | `velocity_ratio` |
+| F | `field` | `cup_anemometer` | `default` | a point at one wind direction, the year's mean | `velocity_ratio`, `velocity_ratio_sd` |
+| M | `wind_tunnel` | `split_fibre` | `default` | a point at 180° | `U V W`, `uu vv ww`, `k` |
+| M | `wind_tunnel` | `hydrocarbon_analyser` | `default` | a point at 175°, 180° or 185° | `C`, `c_rms`, `concentration_ratio` |
+| M | `field` | `sorbent_gc_ecd` | `default` | a point in one of the 18 runs (`run` = "1" … "18") | `C`, `concentration_ratio` |
+
+F's `config` is the tunnel plane's height above ground by the readme's rule (z − 10 m): 9 m is `default` because
+it is the benchmark plane, complete at 13 points × 12 directions, and the plane the field values are compared with;
+the 5 m and 20 m planes exist at some points only. M's wind direction in a field row is the run's mean direction
+at the reference point (`WD_R`), which differs from run to run, so the row key stays unique. M's per-run
+reference speed `U_R`, tracer flow `q` and `c0` have no column; they are in `manifest.json → cases.M.extra_measurements.field_runs`.
+
+### Frames
+
+| case | origin | +x | +y | scale of the coordinates | transform from the published files |
+|---|---|---|---|---|---|
+| F | centre of the reproduced district, on the tunnel floor | **east** | **north** | **full scale**, model 1:800 | tunnel x, y, z × 800 (the field's are published in full scale); STL × 800 and re-wound outward |
+| M | centre of the tunnel turntable, on the floor | **north** | **west** | **full scale**, model 1:600 | tunnel x, y, z × 600 (the field uses the tunnel's 15 points); STL × 600 and re-wound outward |
+
+`z` is the height above the **tunnel floor**, not above the ground. F: the readme's rule is ground = z − 10 m
+(planes at z = 15, 19 and 30 m are 5, 9 and 20 m above ground); the STL's terrain under the 13 points is at
+z = 5 m, so the rule and the STL disagree by 5 m (`QUESTIONS.md` QF4). M: the campus ground lies at z ≈ 32 m and
+every point is 3 m above the local ground (verified against the STL to ±0.06 m). Velocities and concentrations are
+**not** scaled: U, V, W are the tunnel's m/s, `C` the tunnel's ppm.
+
+### Normalisations
+
+- **F, `velocity_ratio`**: U / U_ref, U_ref the approaching mean speed at 500 m (the boundary-layer height), full
+  scale. The legacy workbook normalises by the roof anemometers instead (SMB, G.L.+237 m, for NW–NE; KDD,
+  G.L.+187 m, for the other directions); the CSVs re-normalise it, and the factor is recovered from the data:
+  CSV = workbook × 0.9397 (SMB sector) or × 0.9629 (KDD sector), to within [0.93947, 0.94000] and [0.96250, 0.96324].
+  U_ref itself in m/s is 10 (data paper) or 10.65 (implied by the approach-flow profile): `QUESTIONS.md` QF8.
+  `velocity_ratio_sd` is the standard deviation of the 10-minute means behind a field value; it moves in steps of
+  f/100 = 0.0094 or 0.0096 because the workbook's S.D. is rounded to 0.01.
+- **M, `concentration_ratio`**: C / c0, c0 = q / (U_R H_R²) (data paper 3.13.1). Tunnel: q = 2.5 × 10⁻⁶ m³/s,
+  U_R = 4.08 m/s, H_R = 0.068 m, c0 = **132.514 ppm** (the paper rounds to 1.33 × 10² ppm). Field: each run's own
+  q and U_R with H_R = 41 m, c0 = 1,444 … 7,379 ppq. Field concentrations are **parts per quadrillion** (10⁻¹⁵) in
+  the sources; `C` holds ppm, so `C_ppm = C_ppq × 10⁻⁹`.
+
+### Wind direction → flow vector
+
+| case | flow_dir(WD) | how the sense is known |
+|---|---|---|
+| F | (−sin WD, −cos WD) | compass FROM-direction, +y north (`MP_caseF.png`); the readme does not define it. Supported by the reference-building choice and by upwind roughness: status `unverified` (`QUESTIONS.md` QF9) |
+| M | (−cos WD, +sin WD) | measured: the plume's lateral centroid moves toward −y as WD grows, in the tunnel (175° → 185°) and across the 18 field runs; the compass rose of `MP_caseM.png` (N at +x, W at +y) agrees |
+
+### Geometry
+
+| case | file | made from |
+|---|---|---|
+| F | `geometry.stl` | the published `BD_caseF.stl` × 800 (it is model scale: 0.90625 m = 725 m), every triangle reversed (all 21,537 horizontal ground and roof facets faced down); one shell, open only along the rim of the disc (812 boundary edges), 3 zero-area facets kept |
+| M | `geometry.stl` | the published `BD_caseM.stl` × 600 (model scale: 1.8 m × 1.2 m = 1080 m × 720 m), every triangle reversed (3,118 of 3,152 horizontal facets faced down); one shell with 21 boundary and 7 non-manifold edges, kept |
+
+### Approach flow
+
+F: the 18 published heights (10 … 400 m full scale), `uu` = u_rms²; no `vv`, `ww`, `k`. M: the workbook's 40
+heights at x = −0.498 m model (−299 m full scale), z = 3 … 360 m full scale, `uu vv ww` = σ², `k` = half their sum. M's heights are above the
+**empty tunnel floor**: at the profile station the model's taper is already 0.052 m high, above the 10 lowest heights.
