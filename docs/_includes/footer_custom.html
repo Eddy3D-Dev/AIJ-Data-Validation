@@ -1,0 +1,15 @@
+{%- comment -%}
+  The page footer. Generated pages (front matter generated: true) are rebuilt by scripts/build_api.py, so the link
+  goes to the template that writes them; the others are edited in place.
+{%- endcomment -%}
+{%- assign repo = "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ" -%}
+{%- if site.footer_content -%}
+<p class="text-small mb-1">{{ site.footer_content }}</p>
+{%- endif -%}
+<p class="text-small mb-0">
+{%- if page.generated -%}
+This page is generated from the data: <a href="{{ repo }}/blob/main/scripts/build_api.py" id="edit-this-page">edit its template (scripts/build_api.py)</a>.
+{%- else -%}
+<a href="{{ repo }}/blob/main/docs/{{ page.path }}" id="edit-this-page">Edit this page on GitHub</a>.
+{%- endif -%}
+</p>

@@ -1,9 +1,18 @@
+// Site additions to just-the-docs. Everything here reads the theme's colour variables, so it follows the
+// light/dark scheme without a second copy.
+
+// ---------------------------------------------------------------------------------------------------------
 // Figures. One image with its caption is a <figure>; several side by side are a Markdown table marked
 // {: .figures } whose header row is blank (see figure() and figure_table() in scripts/build_api.py).
 // Images fill their column; captions sit under them in secondary ink.
 
 figure.figure {
   margin: 1.5rem 0 2rem;
+
+  // A render on a case page: 2:1 and full width would fill the screen.
+  &.render {
+    max-width: 42rem;
+  }
 
   img {
     display: block;
@@ -19,7 +28,8 @@ p.caption {
   margin-top: 0.5rem;
   font-size: 0.875rem;
   line-height: 1.45;
-  color: $grey-dk-100;
+  color: $body-text-color;
+  opacity: 0.8;
 }
 
 p.caption {
@@ -57,4 +67,119 @@ table.figures {
     width: 100%;
     height: auto;
   }
+}
+
+// Under the theme's medium breakpoint the figures stack: three renders at 375 px are thumbnails.
+@media (max-width: 49.99rem) {
+  table.figures {
+    border-spacing: 0;
+
+    tbody,
+    tr,
+    td {
+      display: block;
+      width: 100%;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------
+// Tables. The theme gives every cell a 7.5 rem minimum, so a table of eight columns cannot fit the content
+// column and scrolls sideways. Cells may shrink and wrap instead; .table-wrapper still scrolls a table that
+// cannot fit (a narrow phone), so nothing is cut off.
+
+th,
+td {
+  min-width: 0;
+}
+
+th {
+  text-align: left;
+}
+
+td code,
+th code {
+  overflow-wrap: anywhere;
+}
+
+table.scores {
+  td,
+  th {
+    font-variant-numeric: tabular-nums;
+  }
+
+  // Score tables: a label column and short numeric columns.
+  td:not(:first-child),
+  th:not(:first-child) {
+    text-align: right;
+    white-space: nowrap;
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------
+// Engine and run status. The theme has blue, green, purple, red and yellow labels; "not comparable" is a
+// limit of an engine, not a failure, so it gets a neutral grey.
+
+.label-grey:not(g) {
+  background-color: $grey-dk-100;
+  color: $white;
+}
+
+.label.status,
+.label-green.status,
+.label-yellow.status,
+.label-grey.status,
+.label-blue.status {
+  margin: 0 0 0 0.25rem;
+  white-space: nowrap;
+}
+
+// ---------------------------------------------------------------------------------------------------------
+// Collapsible blocks (<details markdown="block">): long statistics tables stay one click away.
+
+details {
+  margin: 1rem 0 1.5rem;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+
+  > summary {
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  &[open] > summary {
+    border-bottom: 1px solid $border-color;
+  }
+
+  > :not(summary) {
+    margin-right: 0.75rem;
+    margin-left: 0.75rem;
+  }
+
+  > .table-wrapper {
+    margin-right: 0;
+    margin-left: 0;
+    box-shadow: none;
+  }
+
+  > :last-child {
+    margin-bottom: 0.75rem;
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------
+// Home page and section lead-ins.
+
+.lede {
+  max-width: 42rem;
+}
+
+.btn-row {
+  margin: 1rem 0 1.5rem;
+}
+
+// The version line in the sidebar footer.
+.version-label code {
+  font-size: inherit;
 }
