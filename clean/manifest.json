@@ -356,24 +356,28 @@
      "path": "raw/cases/case-a/RS-caseA.csv",
      "sha256": "f7e3c2479ef4edb07731ee41c47b12b68e3e10f021c429ec9c9dddda3e8781ad",
      "bytes": 11237,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-a/AF_caseA.csv",
      "sha256": "f626460853d87954215edffc36df79a4525fdd9488943b35a4b9d8ef9b3ae972",
      "bytes": 883,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-a/LF-caseA.xls",
      "sha256": "44c7af675e25246a7bcce1e5603515f73c635dd692d97cccd639d03586b845e1",
      "bytes": 510976,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-a/readme_caseA.md",
      "sha256": "8f97de6045b69bf4269be142029717b2f4be0718f269a70ae6b362314b7dd0da",
      "bytes": 4068,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     }
    ],
@@ -544,24 +548,28 @@
      "path": "raw/cases/case-b/RS_caseB.csv",
      "sha256": "3b12e6955e2681fcab0591deaf960c5833e47b8fc4a42b1ba0a44007309ac4b8",
      "bytes": 12938,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-b/AF_caseB.csv",
      "sha256": "c775a3fb8de1abb9598593c47a5e6646d020864132742048b0c2d549840b22fc",
      "bytes": 543,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-b/LF_caseB.xls",
      "sha256": "883c055670596f6ae3800b0a951e1c8a338e3c0ba438bb5397bae1a83e3ee214",
      "bytes": 113664,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-b/readme_caseB.md",
      "sha256": "dae340cabc7a347f4790a082a4877ca6dde011c13833db193b6fb3c203e531a8",
      "bytes": 4108,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     }
    ],
@@ -862,24 +870,28 @@
      "path": "raw/cases/case-c/RS_caseC.csv",
      "sha256": "e10e08551e700442ee5e117de76afc93b1b386b1e70df62aeeadde2cf0eced8d",
      "bytes": 33169,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-c/AF_caseC.csv",
      "sha256": "0d100e7051414afb4e9b46a4ed84237566d2276d09dbb45e11e3610b5820792c",
      "bytes": 285,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-c/LF-caseC.xls",
      "sha256": "be0c7bd18ba0b6bba514bc5f246f11d703055bea1c6029c4b35d229ebd22b7d5",
      "bytes": 1165312,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-c/readme_caseC.md",
      "sha256": "b5c3dfa1ee1095324ae520cdb0e8d6b4eb7632b9a834b96b5d627a0fe1f3381f",
      "bytes": 4070,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     }
    ],
@@ -1137,42 +1149,49 @@
      "path": "sources/zenodo_caseD/RS-T_caseD.csv",
      "sha256": "bec06720fec7871b5fff66c4b0a8cb20b9d61d0fa5a440000b12c6c0e21ad3de",
      "bytes": 8046,
+     "eol": "as-is",
      "origin": "Zenodo 10.5281/zenodo.15402669 (downloaded; SHA256SUMS.txt beside it)"
     },
     {
      "path": "sources/zenodo_caseD/RS-S_caseD.csv",
      "sha256": "37de138791884056b9f8895eb33bfb723b027e7f17047bfa026bcc785c7d52ad",
      "bytes": 6362,
+     "eol": "as-is",
      "origin": "Zenodo 10.5281/zenodo.15402669 (downloaded; SHA256SUMS.txt beside it)"
     },
     {
      "path": "sources/zenodo_caseD/AF_caseD.csv",
      "sha256": "36541796c2a39ba8ff2941772b0e4566c300d24a806aee01aa0068626cead29a",
      "bytes": 247,
+     "eol": "as-is",
      "origin": "Zenodo 10.5281/zenodo.15402669 (downloaded; SHA256SUMS.txt beside it)"
     },
     {
      "path": "sources/zenodo_caseD/BD_caseD.stl",
      "sha256": "2acc1f5af0dc4a4799835d2b77be6c67a667d7f8b22abf2a4e393e476bb5802e",
      "bytes": 206511,
+     "eol": "as-is",
      "origin": "Zenodo 10.5281/zenodo.15402669 (downloaded; SHA256SUMS.txt beside it)"
     },
     {
      "path": "sources/zenodo_caseD/LF_caseD.xls",
      "sha256": "55ba922c81894bc7f57bb961adb209b21d363a89fb1373f9236c8f6942e40fd4",
      "bytes": 116736,
+     "eol": "as-is",
      "origin": "Zenodo 10.5281/zenodo.15402669 (downloaded; SHA256SUMS.txt beside it)"
     },
     {
      "path": "sources/zenodo_caseD/readme_caseD.md",
      "sha256": "517977ce5fcd469feff7ae166c4035b1c96251c2c925509e523603b61bfef3b8",
      "bytes": 4015,
+     "eol": "as-is",
      "origin": "Zenodo 10.5281/zenodo.15402669 (downloaded; SHA256SUMS.txt beside it)"
     },
     {
      "path": "sources/zenodo_caseD/MP_caseD.png",
      "sha256": "9550457b123bf3b29be08142021f57f3a489d6fa05796eaeaf6b87d8b85b3cb0",
      "bytes": 302393,
+     "eol": "as-is",
      "origin": "Zenodo 10.5281/zenodo.15402669 (downloaded; SHA256SUMS.txt beside it)"
     }
    ],
@@ -1725,42 +1744,49 @@
      "path": "sources/zenodo_caseE/LF_caseE.xls",
      "sha256": "462c6dbf875fd47630102bf9eab607749d9f713a71ee313e7bc59315aee7441a",
      "bytes": 132608,
+     "eol": "as-is",
      "origin": "Zenodo 10.5281/zenodo.15429018 (downloaded; SHA256SUMS.txt beside it)"
     },
     {
      "path": "sources/zenodo_caseE/RS_caseE.csv",
      "sha256": "d2f687c052c21d734c0de2ade677984d62a348f2660e09dd6d2fc09e7586c799",
      "bytes": 66145,
+     "eol": "as-is",
      "origin": "Zenodo 10.5281/zenodo.15429018 (downloaded; SHA256SUMS.txt beside it)"
     },
     {
      "path": "sources/zenodo_caseE/AF_caseE.csv",
      "sha256": "267ae89113e9f51a8c437543bdc0549c9f352dced7ed571a3e6844082b555f77",
      "bytes": 222,
+     "eol": "as-is",
      "origin": "Zenodo 10.5281/zenodo.15429018 (downloaded; SHA256SUMS.txt beside it)"
     },
     {
      "path": "sources/zenodo_caseE/BD_caseE.stl",
      "sha256": "eef5cae06ea5be7b02f837ba291959e3de25aa47628f5eda1f164f5e4eb549d9",
      "bytes": 11847740,
+     "eol": "as-is",
      "origin": "Zenodo 10.5281/zenodo.15429018 (downloaded; SHA256SUMS.txt beside it)"
     },
     {
      "path": "sources/zenodo_caseE/readme_caseE.md",
      "sha256": "a879d029decf0ebd41362fb4693b246fb9629c518167aa02e82c8d861e86ecb5",
      "bytes": 3624,
+     "eol": "as-is",
      "origin": "Zenodo 10.5281/zenodo.15429018 (downloaded; SHA256SUMS.txt beside it)"
     },
     {
      "path": "sources/zenodo_caseE/MP_caseE.png",
      "sha256": "0fc868d42899783dea655cee10a47c79e148bf5febef6dfed7d293f6b50c96a3",
      "bytes": 970842,
+     "eol": "as-is",
      "origin": "Zenodo 10.5281/zenodo.15429018 (downloaded; SHA256SUMS.txt beside it)"
     },
     {
      "path": "raw/cases/case-e/case-e.3dm",
      "sha256": "769eaaed5de2e2d57746f4fc97681118a1e2a68c98ac1f2019480333873f222f",
      "bytes": 7865962,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     }
    ],
@@ -2426,50 +2452,58 @@
    "provenance": [
     {
      "path": "raw/cases/case-f/RS-WT_caseF.csv",
-     "sha256": "ecd13648a27530e5ef01a6321ffc4ae36cf41be5cfd2779ecd0b85aa38c90553",
-     "bytes": 9924,
+     "sha256": "b73c1fbb9d621aaf7020fecb4a8f984f8658891cf94acb708409276ddcfc65be",
+     "bytes": 9659,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-f/RS-FO_caseF.csv",
-     "sha256": "b94b276df73aed8dabaef5b295a5b949d778e04c0961d73f87e2bfc47c8bed3a",
-     "bytes": 6677,
+     "sha256": "dde6c2f6795320daf4b8913b451b21e7bc50c9808477f9fe999ef80be605dbd7",
+     "bytes": 6468,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-f/AF_caseF.csv",
-     "sha256": "b1c8a8057bccb0414d0dc746ddde58e71ba48a1c56beff10b1b9b0b08ef0799d",
-     "bytes": 343,
+     "sha256": "77e9ae53b047521f8f9de6e3f4f6545c031dde899a9ed965bcc432ecbe58ecc6",
+     "bytes": 324,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-f/MP_caseF.csv",
-     "sha256": "41190f590152d4d82e10536d6763f2af2933e3642ff64ae8156f494fce8a0b88",
-     "bytes": 330,
+     "sha256": "89aa6edfcc009cbb6bac66aee80763c132a8200da6109ecb0c6604e21d582835",
+     "bytes": 313,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-f/MP_caseF.png",
      "sha256": "5393ce634445a1bf510961d7fcf93a1baa89ab62b761ae867d2e0a13e07febea",
      "bytes": 790068,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-f/BD_caseF.stl",
      "sha256": "bc3688f5ed22d3cbb7e5db630c30f0ae2a5bce70f10d33ee122ac18df3db772b",
      "bytes": 9508631,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-f/LF_CaseF.xls",
      "sha256": "406482db08126b97018dd01ce92feae6280b7780407544c74c7cf58e6d33ae46",
      "bytes": 378368,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-f/readme_caseF.md",
      "sha256": "a63002ffe524800c7708febd75e194e1eb5fe31fbfb1770a37d819dac1ff75cd",
      "bytes": 6785,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     }
    ],
@@ -2853,32 +2887,37 @@
    "provenance": [
     {
      "path": "raw/cases/case-g/RS_caseG.csv",
-     "sha256": "42ee9cd013ab7ae7c58e665fd2937a861fa80a11aa5c1c06f6020a066d9e9546",
-     "bytes": 590,
+     "sha256": "cf5afa7e7880c06528e3d5beb828aa10fe885bd79f44210d6ec6352ac7de3165",
+     "bytes": 561,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-g/AF_caseG.csv",
-     "sha256": "537e02de5373704bbdc0011ab9c96d49905a0d0e4d166b00a6b964dacbc4303d",
-     "bytes": 73,
+     "sha256": "890f79910122a94348cb79792cec6444c7cc0342c8c0e3b5d8c162d124359386",
+     "bytes": 68,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-g/LF_caseG.xls",
      "sha256": "8328cc09234a9deecfa6e3efd6d0a9810d3ab39d412fa47568aa8eae053b8527",
      "bytes": 68096,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-g/readme_caseG.md",
      "sha256": "774ddbc5bc788911f95757148c66bf213348223979c72b36f1d496257626b39a",
      "bytes": 4579,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-g/MP-y_caseG.png",
      "sha256": "c4d026676e800ad2640b39de5876e1ef1dc284ae196af5de41941f8800602ccb",
      "bytes": 64187,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     }
    ],
@@ -3101,38 +3140,44 @@
    "provenance": [
     {
      "path": "raw/cases/case-h/RS_caseH.csv",
-     "sha256": "043087d60a197e5a105f8b4f0e592fadaff4baf8b9ad985de8d53d6a058e6df8",
-     "bytes": 64462,
+     "sha256": "9b8249ebd40392f2c94ff0346e375eba485d754f2bcfbc825bb5fe88047cafcc",
+     "bytes": 63585,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-h/AF_caseH.csv",
-     "sha256": "10115bcf913cff26c38c27626c2c3f49145bbbb3f9d37a045b13a256eae67e81",
-     "bytes": 1205,
+     "sha256": "bea3ec3ba8c8c6577ede638781ae3bad16c25031b12134601ffcd51a0deec612",
+     "bytes": 1187,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-h/LF_caseH.xlsx",
      "sha256": "5ce495a8216e04e4769734af7b561d9422c4775ad7542fc819d305e3643d9f00",
      "bytes": 7973608,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-h/readme_caseH.md",
      "sha256": "85249cc1dc8736b29431aafd3c6bbd2d374648b5ef54707d14f8b298163aa625",
      "bytes": 4266,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-h/MP-y_caseH.png",
      "sha256": "6a56401491ab846055ee34a52f6b5b301f104556727c3a3b055e67c9429b2f61",
      "bytes": 96271,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-h/MP-z_caseH.png",
      "sha256": "7f8076536468f8d633ea3c794aaaa7ad4b7ba327e91c027ebfba4c1986f35cab",
      "bytes": 218032,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     }
    ],
@@ -3360,56 +3405,65 @@
    "provenance": [
     {
      "path": "raw/cases/case-i/RS-w_caseI.csv",
-     "sha256": "4b771f42270efc334127cd3808fdb4c553a7bc37f1d88a6f434895cea904c900",
-     "bytes": 3316,
+     "sha256": "340002cd719f4d5bf1905b3b71d934d96409989fdc02013a55ae626476edc289",
+     "bytes": 3224,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-i/RS-c_caseI.csv",
-     "sha256": "090730eff1d27348064b893935d7a1c89300700ad1f3ec72933812f6d0b1d351",
-     "bytes": 8961,
+     "sha256": "ad58a9e3de996f92db49e91ca9948c6bb975213ad389210361b6c2f1f13b3818",
+     "bytes": 8421,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-i/AF_caseI.csv",
-     "sha256": "cf765a33d50e7ab723861291b2c1f2a1bf7b841d9f320fa7dbc000a6b467ef47",
-     "bytes": 461,
+     "sha256": "04ea51e735e0c9af0a52f248352828287cb82696ec0744a7c39908fd708eda9a",
+     "bytes": 396,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-i/LF_caseI.xlsx",
      "sha256": "64eec074ff20a5b028976473fa76193706805ccbf3a4fc3e1f6269ffd0829dcf",
      "bytes": 58716,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-i/readme_caseI.md",
      "sha256": "26720dbdbeb064a787e67d542a5639a26dd2380b25536fc9822ec01703067c8d",
      "bytes": 4012,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-i/MP-y-w_caseI.png",
      "sha256": "66c3c913db8b5f34071f3c3f7d9cd248d3f5ff2f18ef98664167ed473e0c7f45",
      "bytes": 54121,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-i/MP-z-w_caseI.png",
      "sha256": "48039c6f893cea2f339fc25c3fd536e4e7e32585394a6f6717272029911845c0",
      "bytes": 53705,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-i/MP-y-c_caseI.png",
      "sha256": "8421ea201d10e0542f4d129f62b3c8a5b17dc14e7e72b25c2348e1c206f2bb07",
      "bytes": 121564,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-i/MP-z-c_caseI.png",
      "sha256": "8bd5c69ed7b9d2df38a29e20568bd964b80bed6b5b2c698b8a7b4c7bccf292b8",
      "bytes": 131303,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     }
    ],
@@ -3657,44 +3711,51 @@
    "provenance": [
     {
      "path": "raw/cases/case-j/RS_caseJ.csv",
-     "sha256": "39ffbbbbca133b370bcde3bbd52a258fddebd599b2c531d69efd6699f3d4f729",
-     "bytes": 47341,
+     "sha256": "1f08bf8cf0018c27935afaf67a5e5aa5af30227a83a6654b8cc7b3cda6341a72",
+     "bytes": 46896,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-j/AF_caseJ.csv",
-     "sha256": "1ecfda6e3e99f889e92b5c2899bdbf5f2a13a46e37b77f7f0da436dc0f10c958",
-     "bytes": 2075,
+     "sha256": "801464d563db9c15e01a3a99352cbadf6dd3534a35ba90838cec07dffd53de27",
+     "bytes": 2054,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-j/BD-ST_caseJ.csv",
-     "sha256": "8874909df799fac347b3e1c7335cc7ebc025a8c596a037071e2661270d8bdcba",
-     "bytes": 2831,
+     "sha256": "2b053dc304cb085951f1f2ee0baf86466abaf4062c604aa056955f15aa4b781a",
+     "bytes": 2709,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-j/LF_caseJ.xlsx",
      "sha256": "4ee2d404576fa76e01fcccb49000784c74ea1779aa76a37c205e2d7e5485b464",
      "bytes": 468959,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-j/readme_caseJ.md",
      "sha256": "c9c9afba2637503bfaf9a369f0b6cd9f3f55513fd7cf345f74bf5bebfd0e4990",
      "bytes": 5196,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-j/MP-y_caseJ.png",
      "sha256": "7e773322750a7cd1345ffc973a51c06eeee1fa374ef317ee17df4db2d09c9f1e",
      "bytes": 91446,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-j/MP-z_caseJ.png",
      "sha256": "3445a8d64ed91618e6860e53de2e167bdbae11b6b0845d94f98edebbedf17ce5",
      "bytes": 173796,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     }
    ],
@@ -4223,38 +4284,44 @@
    "provenance": [
     {
      "path": "raw/cases/case-k/RS_caseK.csv",
-     "sha256": "ccbb967e3d101c80131a0c656c52cc1bbc44cc24daef087f9f2c2f8c77e70176",
-     "bytes": 14518,
+     "sha256": "b2d154aedb54993b806eaffd4f73361250cc1a5d9da68a8623bb7632a933d55c",
+     "bytes": 14314,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-k/AF_caseK.csv",
-     "sha256": "6823f22b89e942eda22a99a0965be7a9c7913e92f40a8310d8bee1f685ffc9f2",
-     "bytes": 1208,
+     "sha256": "b8a180fb44284d49fb8a73f7d5c6473046694f2d6fb95977677c9608c1486ed1",
+     "bytes": 1190,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-k/LF_caseK.xlsx",
      "sha256": "1bb93eac07bf245458836a6a7ac79ce9a350e16db2801be3e94333c2f78602cb",
      "bytes": 182879,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-k/readme_caseK.md",
      "sha256": "84fcc15c75bf029322d4e27b7dada98919b71e45a03dc532cfd5aae233fd7ea5",
      "bytes": 4535,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-k/MP-y_caseK.png",
      "sha256": "92e063f8aad1407eaa447563ff25ea22c867921c557f497c861c558695e5d8ca",
      "bytes": 368797,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-k/MP-z_caseK.png",
      "sha256": "68a923fe125a8e2a4ce83a7f30e6ad12ebee31498f04bb89667677b9d154d677",
      "bytes": 323677,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     }
    ],
@@ -4550,44 +4617,51 @@
    "provenance": [
     {
      "path": "raw/cases/case-l/RS_caseL.csv",
-     "sha256": "954a9a851ae494a89b5213cca84726b8d06489d2c92b352c49ad7e91bb187a4a",
-     "bytes": 52924,
+     "sha256": "ddde236d69feb894a83ee8d846098a31d4b2863829152d54e08a6fd4f891bf00",
+     "bytes": 52579,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-l/AF_caseL.csv",
-     "sha256": "8aa9eeeebca732aee40a43fb151a5185934c077c9405aca50f90655fe26660d6",
-     "bytes": 2499,
+     "sha256": "fd6092bf906cb540e4a84770710f2a89c88b55172c01810288af32bdd3196b33",
+     "bytes": 2473,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-l/BD_caseL.stl",
-     "sha256": "da101de31c938fcdf5927a11384aa9b78f822ba0d0da93d742a0c95f818e23e2",
-     "bytes": 349705,
+     "sha256": "56863d26f56b91930738b5a08d1bfcd7ee5fe61c4c57754df0a4512d8913cc70",
+     "bytes": 339104,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-l/LF_caseL.xlsx",
      "sha256": "97b190d72a2a175b2ccfffa2894f39a4beeb7158b158999ce8df41ee4a3e47a9",
      "bytes": 1981776,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-l/readme_caseL.md",
      "sha256": "57a2e4b51a150350999c90a75a76df548cec3c3181cd02ae0272c7172a18a0d5",
      "bytes": 6300,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-l/MP-y_caseL.png",
      "sha256": "d77f00747fbab08c46ea0c62c565ee93f987360b4370bbe573542117fabd38ab",
      "bytes": 565197,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-l/MP-z_caseL.png",
      "sha256": "4b75af8554cdd535c00db80f740b2627d177d17814f8f0bd6383c9613851a8bd",
      "bytes": 353162,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     }
    ],
@@ -5093,50 +5167,58 @@
    "provenance": [
     {
      "path": "raw/cases/case-m/RS-WT_caseM.csv",
-     "sha256": "fed9b7e3bbcb0ff7c1dc01a4fa3f112c27accf5012a90d4bf2132ed8054f5fe9",
-     "bytes": 4408,
+     "sha256": "9f5aad42e1dd294c6eb32fb75951c9be9c3859dfdcbe35dffe9acd80d860841e",
+     "bytes": 4362,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-m/RS-FO_caseM.csv",
-     "sha256": "7580fcf06b21d4375ddae89ad84b7dabf658748f1fddf28a011046c786a48e02",
-     "bytes": 7925,
+     "sha256": "7872f166975f53d621e27b4d045d67be0b414d7bfda48c7826d1644f5972878f",
+     "bytes": 7654,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-m/AF_caseM.csv",
-     "sha256": "b41bfd23d56c9aaaa482e4fb9476b2427bcf1c667616d5466c980723ef9ae755",
-     "bytes": 2422,
+     "sha256": "89d2e965ff997e7b314439f965062fe47e26f650a4e400a86c4a594343922c39",
+     "bytes": 2381,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-m/LC_caseM.csv",
-     "sha256": "08bc3195f66ad1f15fa174af1de25cdc6f96da30bb6ebfc79e936e8cf5e343cf",
-     "bytes": 1068,
+     "sha256": "9ad2ef4c4434b8b503037a09e8d529d568f594862886fede21a67458ac5a13fa",
+     "bytes": 1049,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-m/MP_caseM.png",
      "sha256": "4301400d1563e1a848ef22cb0b4931f32d9fa18af4ac1d8c587ef279c1598292",
      "bytes": 363517,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-m/BD_caseM.stl",
      "sha256": "6c1a75ffc7a108e4e21b4d6ca45dc31af56740381ca7fb10debcfb5f603cba68",
      "bytes": 8442702,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-m/LF_caseM.xlsx",
      "sha256": "c8383b9491a5b34647036611f9efdfbe834ecdfa16023d5f83762d7f3447917c",
      "bytes": 519084,
+     "eol": "as-is",
      "origin": "repository clone of the Zenodo record"
     },
     {
      "path": "raw/cases/case-m/readme_caseM.md",
      "sha256": "3689a3566761b16fb806f8f1a23135c1faaed357672075479c4ff1adcd480b48",
      "bytes": 5888,
+     "eol": "lf-normalised",
      "origin": "repository clone of the Zenodo record"
     }
    ],

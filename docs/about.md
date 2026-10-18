@@ -48,5 +48,5 @@ has every release.
 ## Where the files are
 
 The [repository](https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ)
-holds the files exactly as published by their collectors (`raw/`), the cleaned tables (`clean/`), the validation
+holds the files as published by their collectors (`raw/`; text files with LF line endings, see the README), the cleaned tables (`clean/`), the validation
 snapshots and figures (`validation/`), and the build scripts. Its README describes each folder.

@@ -124,6 +124,10 @@ the workbook rounded to 2 dp; this release carries the workbook's full values.
 ## 6. Provenance and determinism
 
 `manifest.json → cases.<id>.provenance` lists every source file read, with SHA-256 and byte size.
+Each entry has an `eol` field: `lf-normalised` means the hash and the size are those of the file with CRLF folded to LF
+(text files under `raw/`: `.csv`, `.md`, `.txt`, `.json` and ASCII `.stl`; git stores them with LF, so a checkout on
+Windows hashes the same), `as-is` means the file was hashed as stored (binary files, and the byte-exact mirrors under
+`clean/sources/`, whose hashes equal their `SHA256SUMS.txt`).
 For D and E the official Zenodo files the repository clone lacks were downloaded into
 `clean/sources/zenodo_case{D,E}/` (checksums in `SHA256SUMS.txt` beside them); the clone's
 workbooks are byte-identical in content to Zenodo's `LF_*.xls` and are used as cross-checks. Two

@@ -160,12 +160,33 @@ def _jsonable(v):
     return v
 
 
-def sha256(path: str) -> str:
-    h = hashlib.sha256()
+TEXT_SUFFIXES = {".csv", ".md", ".txt", ".json"}
+
+
+def _is_text(path: str, data: bytes) -> bool:
+    ext = os.path.splitext(path)[1].lower()
+    if ext in TEXT_SUFFIXES:
+        return True
+    if ext == ".stl":   # ASCII STL names its facets; a binary one may start with 'solid' too, but its size is 84 + 50 n
+        binary = len(data) >= 84 and len(data) == 84 + 50 * int.from_bytes(data[80:84], "little")
+        return data.startswith(b"solid") and b"facet" in data[:1024] and not binary
+    return False
+
+
+def fingerprint(path: str) -> tuple[str, int, str]:
+    """(sha256, bytes, eol) of one source file, the same on every checkout.
+
+    A text file is hashed and sized with CRLF folded to LF, because git stores the LF form (.gitattributes) and a checkout
+    on Windows, or a working tree older than the attribute, holds the CRLF form: the manifest must not depend on which.
+    Binary files, and the byte-exact mirrors under clean/sources (`-text`, SHA256SUMS.txt beside them), are hashed as stored.
+    """
     with open(path, "rb") as f:
-        for chunk in iter(lambda: f.read(1 << 20), b""):
-            h.update(chunk)
-    return h.hexdigest()
+        data = f.read()
+    mirror = os.path.abspath(path).startswith(SRC + os.sep)
+    if mirror or not _is_text(path, data):
+        return hashlib.sha256(data).hexdigest(), len(data), "as-is"
+    data = data.replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest(), len(data), "lf-normalised"
 
 
 # --------------------------------------------------------------------------------------------- readers
@@ -1190,8 +1211,9 @@ def build():
             "configurations": dirs[["config", "instrument", "wind_direction_deg", "wind_direction", "rows", "measured", "status"]].to_dict("records"),
             "frame": frame, "transform_from_published": transform, "inflow": inflow,
             "geometry_summary": [{"configuration": g["configuration"], "file": g["file"], "triangles": g["stats"]["triangles"], "watertight": g["stats"]["watertight"], "bbox_min": g["stats"]["bbox_min"], "bbox_max": g["stats"]["bbox_max"], "boxes": g.get("box_count")} for g in gfiles],
-            "provenance": [{"path": relp(p) if p.startswith(HERE) else os.path.relpath(p, REPO).replace(os.sep, "/"), "sha256": sha256(p), "bytes": os.path.getsize(p),
-                            "origin": ("Zenodo " + meta["zenodo_version"] + " (downloaded; SHA256SUMS.txt beside it)") if p.startswith(SRC) else "repository clone of the Zenodo record"} for p in prov[case]],
+            "provenance": [{"path": relp(p) if p.startswith(HERE) else os.path.relpath(p, REPO).replace(os.sep, "/"), "sha256": fp[0], "bytes": fp[1], "eol": fp[2],
+                            "origin": ("Zenodo " + meta["zenodo_version"] + " (downloaded; SHA256SUMS.txt beside it)") if p.startswith(SRC) else "repository clone of the Zenodo record"}
+                           for p, fp in ((p, fingerprint(p)) for p in prov[case])],
             "known_issues": (extra or {}).get("known_issues", {}),
             "extra_measurements": {k: v for k, v in (extra or {}).items() if k not in ("known_issues", "normalisation")},
         }

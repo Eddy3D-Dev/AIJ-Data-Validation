@@ -56,6 +56,9 @@ The point table gained columns, which is why this release is MAJOR.
 
 - API `cases.json` and `validation.json` list thirteen cases; an engine is listed for a case only where it applies.
 - README, the site and `CITATION.cff` cover Cases A to M; `CITATION.cff` lists the dataset of each case.
+- `clean/manifest.json`: every provenance entry gained `eol`. `lf-normalised` means the SHA-256 and the byte count are those of
+  the text file with CRLF folded to LF, so a fresh clone and a Windows checkout record the same numbers; `as-is` means
+  the file was hashed as stored (binary files and the byte-exact mirrors in `clean/sources/`).
 
 ### Fixed
 
@@ -69,8 +72,10 @@ The point table gained columns, which is why this release is MAJOR.
 
 These change no served byte.
 
-- The raw case folders moved from `case-a/` … `case-e/` to `raw/cases/case-a/` …; Cases F to M are added there exactly as
-  published on Zenodo (CC BY 4.0).
+- The raw case folders moved from `case-a/` … `case-e/` to `raw/cases/case-a/` …; Cases F to M are added there from their
+  Zenodo records (CC BY 4.0). Their text files are stored with LF line endings, like those of Cases A to E
+  (`.gitattributes`): 23 of the Zenodo originals (22 CSV files and the STL of Case L) use CRLF, and the MD5 check against the
+  records was made on those CRLF originals, so a stored copy matches its record only after converting back to CRLF.
 - No PDFs are stored: the data paper (Kikumoto et al. 2026) and the AIJ guidelines paper (Tominaga et al. 2008) are cited
   and linked by DOI in `papers/README.md`. The Elsevier PDF of the guidelines paper (all rights reserved, removed from the tree in
   2.0.0) was also purged from the repository's git history, which rewrote the commits up to the 2.0.0 tag: a clone made

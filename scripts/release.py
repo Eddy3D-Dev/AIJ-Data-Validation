@@ -15,8 +15,9 @@ applied to the files and the API this repository serves):
 Documentation, figures and tooling that do not change a served byte need no release.
 
     python scripts/release.py check          # CI: VERSION, CHANGELOG.md, CITATION.cff and the built outputs agree,
-                                             #     the version moves with the change since the last tag, and the
-                                             #     frozen docs/api/<release>/ of every earlier release still equals its tag
+                                             #     the version moves with the change since the last tag, the
+                                             #     frozen docs/api/<release>/ of every earlier release still equals its tag,
+                                             #     and no text file of raw/ holds CRLF in the git index
     python scripts/release.py notes          # the CHANGELOG.md section of VERSION (the release notes)
     python scripts/release.py archive DIR    # DIR/aij-uwe-vX.Y.Z.tar.gz and its SHA256SUMS, byte-reproducible
                                              #     (fixed order, owner and mtime = SOURCE_DATE_EPOCH or 0)
@@ -191,9 +192,26 @@ def surface_diff(tag, paths):
     return [tuple(line.split("\t", 1)) for line in r.stdout.splitlines() if line.strip()]
 
 
+def check_line_endings(errors):
+    """Every text file of raw/ is LF in the index (clean/manifest.json hashes the LF form, so a CRLF blob would make a
+    fresh clone and a Windows checkout disagree about it). The `-text` mirrors under clean/sources are byte-exact on purpose."""
+    r = git("ls-files", "--eol", "raw", "clean/sources")
+    if r.returncode:
+        raise SystemExit(f"git ls-files --eol failed: {r.stderr.strip()}")
+    bad = []
+    for line in r.stdout.splitlines():
+        info, _, path = line.partition("\t")
+        if re.search(r"\bi/(crlf|mixed)\b", info) and "attr/-text" not in info:
+            bad.append(path)
+    if bad:
+        errors.append(f"{len(bad)} text file(s) of raw/ or clean/sources/ hold CRLF in the index ({', '.join(bad[:4])}"
+                      f"{' ...' if len(bad) > 4 else ''}): commit them as LF (git add --renormalize)")
+
+
 def check():
     errors = []
     v = version()
+    check_line_endings(errors)
     entries = changelog()
     released = [(ver, d) for ver, d, _ in entries if ver != "Unreleased"]
     if not released or released[0][0] != v:

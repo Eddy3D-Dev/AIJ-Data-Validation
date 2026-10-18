@@ -1023,7 +1023,10 @@ unregistered snapshot stops the build). The changes from 1.0.0 are in `index.jso
 the readmes, the Zenodo records and the data paper refer to, and renaming them would break that trail. Every file
 in a case folder was checked against its Zenodo record (MD5): the images, readmes, STL and the A and B workbooks are
 byte-identical; the CSVs are identical but for line endings, except `RS_caseC.csv`, whose values are identical but
-which carries trailing empty columns from a re-save; the C, D and E workbooks are re-saved but cell-identical. The
+which carries trailing empty columns from a re-save; the C, D and E workbooks are re-saved but cell-identical. Cases F
+to M follow the same rule: their text files are stored with LF line endings (`.gitattributes`), while 23 of the Zenodo
+originals (22 CSV files and the STL of Case L) use CRLF, and the MD5 check against those records was made on the CRLF
+originals, so a stored copy matches its record only after converting back to CRLF. The
 repository's own files are `case-x[-description].ext` in lower case; folders are `raw/cases/case-a` … `case-e`, as the
 site names the cases (`/cases/case-a/`).
 
