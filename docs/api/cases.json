@@ -1,5 +1,5 @@
 {
- "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/cases.schema.json",
+ "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/cases.schema.json",
  "schema_version": "2.4.0",
  "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
@@ -61,14 +61,14 @@
    },
    "doi": "10.5281/zenodo.15050147",
    "links": {
-    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A.json",
-    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/points.csv?v=a46201996b22",
-    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/geometry.json",
-    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/geometry.stl?v=89acdfbbff84",
-    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/validation.json",
-    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-a/",
-    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-a.png"
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/points.csv?v=a46201996b22",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/geometry.stl?v=89acdfbbff84",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-a/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-a.png"
    }
   },
   {
@@ -128,14 +128,14 @@
    },
    "doi": "10.5281/zenodo.15401455",
    "links": {
-    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B.json",
-    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/points.csv?v=dec97c21217a",
-    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/geometry.json",
-    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/geometry.stl?v=e6de70eeb17d",
-    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/validation.json",
-    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-b/",
-    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-b.png"
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/points.csv?v=dec97c21217a",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/geometry.stl?v=e6de70eeb17d",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-b/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-b.png"
    }
   },
   {
@@ -193,14 +193,14 @@
    },
    "doi": "10.5281/zenodo.15401791",
    "links": {
-    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C.json",
-    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/points.csv?v=7448f0ceae37",
-    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/geometry.json",
-    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/geometry.stl?v=b8c31c57c453",
-    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/validation.json",
-    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-c/",
-    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-c-2d.png"
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/points.csv?v=7448f0ceae37",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry.stl?v=b8c31c57c453",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-c/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-c-2d.png"
    }
   },
   {
@@ -274,14 +274,14 @@
    },
    "doi": "10.5281/zenodo.15402668",
    "links": {
-    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D.json",
-    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/points.csv?v=596246341e73",
-    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/geometry.json",
-    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/geometry.stl?v=531895531271",
-    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/validation.json",
-    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-d/",
-    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-d.png"
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/points.csv?v=596246341e73",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/geometry.stl?v=531895531271",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-d/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-d.png"
    }
   },
   {
@@ -372,14 +372,14 @@
    },
    "doi": "10.5281/zenodo.15429017",
    "links": {
-    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E.json",
-    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/points.csv?v=e6e89432e706",
-    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/geometry.json",
-    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/geometry.stl?v=c29624fdae6d",
-    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/validation.json",
-    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-e/",
-    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-e-after.png"
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/points.csv?v=e6e89432e706",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/geometry.stl?v=c29624fdae6d",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-e/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-e-after.png"
    }
   },
   {
@@ -472,14 +472,14 @@
    },
    "doi": "10.5281/zenodo.15589621",
    "links": {
-    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F.json",
-    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/points.csv?v=09b109e58dd3",
-    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/geometry.json",
-    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/geometry.stl?v=8799740aa324",
-    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/validation.json",
-    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-f/",
-    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-f.png"
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/points.csv?v=09b109e58dd3",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/geometry.stl?v=8799740aa324",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-f/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-f.png"
    }
   },
   {
@@ -539,14 +539,14 @@
    },
    "doi": "10.5281/zenodo.15589666",
    "links": {
-    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G.json",
-    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/points.csv?v=914883bf7fec",
-    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/geometry.json",
-    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/geometry.stl?v=09d23c794155",
-    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/validation.json",
-    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-g/",
-    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-g.png"
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/points.csv?v=914883bf7fec",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/geometry.stl?v=09d23c794155",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-g/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-g.png"
    }
   },
   {
@@ -615,14 +615,14 @@
    },
    "doi": "10.5281/zenodo.15429871",
    "links": {
-    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H.json",
-    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/points.csv?v=ef5fafc61b8e",
-    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/geometry.json",
-    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/geometry.stl?v=4836687efff9",
-    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/validation.json",
-    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-h/",
-    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-h.png"
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/points.csv?v=ef5fafc61b8e",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/geometry.stl?v=4836687efff9",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-h/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-h.png"
    }
   },
   {
@@ -689,14 +689,14 @@
    },
    "doi": "10.5281/zenodo.15430018",
    "links": {
-    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I.json",
-    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/points.csv?v=2864fee9eb19",
-    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/geometry.json",
-    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/geometry.stl?v=ff61cbb22798",
-    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/validation.json",
-    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-i/",
-    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-i.png"
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/points.csv?v=2864fee9eb19",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/geometry.stl?v=ff61cbb22798",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-i/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-i.png"
    }
   },
   {
@@ -772,14 +772,14 @@
    },
    "doi": "10.5281/zenodo.15447887",
    "links": {
-    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J.json",
-    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/points.csv?v=444b7aaa1791",
-    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/geometry.json",
-    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/geometry.stl?v=1bd33d8d3531",
-    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/validation.json",
-    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-j/",
-    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-j.png"
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/points.csv?v=444b7aaa1791",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/geometry.stl?v=1bd33d8d3531",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-j/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-j.png"
    }
   },
   {
@@ -847,14 +847,14 @@
    },
    "doi": "10.5281/zenodo.15448050",
    "links": {
-    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K.json",
-    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/points.csv?v=8708f3251861",
-    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/geometry.json",
-    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/geometry.stl?v=f0f8a3adfa29",
-    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/validation.json",
-    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-k/",
-    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-k.png"
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/points.csv?v=8708f3251861",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/geometry.stl?v=f0f8a3adfa29",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-k/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-k.png"
    }
   },
   {
@@ -935,14 +935,14 @@
    },
    "doi": "10.5281/zenodo.15487637",
    "links": {
-    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L.json",
-    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/points.csv?v=b575fe11d107",
-    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/geometry.json",
-    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/geometry.stl?v=20864bc75187",
-    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/validation.json",
-    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-l/",
-    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-l.png"
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/points.csv?v=b575fe11d107",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/geometry.stl?v=20864bc75187",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-l/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-l.png"
    }
   },
   {
@@ -1016,14 +1016,14 @@
    },
    "doi": "10.5281/zenodo.15487857",
    "links": {
-    "case": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M.json",
-    "points": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/points.json",
-    "points_csv": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/points.csv?v=8d32dc8f762b",
-    "geometry": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/geometry.json",
-    "geometry_stl": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/geometry.stl?v=e4e0a2044536",
-    "validation": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/validation.json",
-    "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-m/",
-    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-m.png"
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/points.csv?v=8d32dc8f762b",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/geometry.stl?v=e4e0a2044536",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-m/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-m.png"
    }
   }
  ]

@@ -58,7 +58,7 @@ description: "Case H — 1:1:2 building with a floor point source: configuration
 
 ## Reference data
 
-Source in this repository: `raw/cases/case-h/RS_caseH.csv` (approach flow: `raw/cases/case-h/AF_caseH.csv`).
+Source in this repository: [`raw/cases/case-h/RS_caseH.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-h/RS_caseH.csv) (approach flow: [`raw/cases/case-h/AF_caseH.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-h/AF_caseH.csv)).
 
 The cleaned table has **1,652 rows** over **876 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `campaign`, `C`, `c_rms`, `concentration_ratio`.
 

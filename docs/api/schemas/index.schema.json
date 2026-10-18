@@ -1,6 +1,6 @@
 {
  "$schema": "https://json-schema.org/draft/2020-12/schema",
- "$id": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/index.schema.json",
+ "$id": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/index.schema.json",
  "title": "API index",
  "description": "Every endpoint and file, versions, compatibility policy, changelog, licence and citation.",
  "type": "object",

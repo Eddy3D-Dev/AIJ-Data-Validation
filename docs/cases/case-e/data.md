@@ -55,7 +55,7 @@ description: "Case E — Niigata district: configuration, frame and units, refer
 
 ## Reference data
 
-Source in this repository: `raw/cases/case-e/LF_caseE.xls` (approach flow: `raw/cases/case-e/LF_caseE.xls [sheet Inflow]`).
+Source in this repository: [`raw/cases/case-e/LF_caseE.xls`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-e/LF_caseE.xls) (approach flow: [`raw/cases/case-e/LF_caseE.xls [sheet Inflow]`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-e/LF_caseE.xls [sheet Inflow])).
 
 The cleaned table has **2,560 rows** over **80 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction`, `wind_direction_deg`, `x`, `y`, `z`, `velocity_ratio`, `campaign`.
 

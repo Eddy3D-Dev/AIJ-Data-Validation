@@ -1,5 +1,5 @@
 {
- "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/geometry.schema.json",
+ "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/geometry.schema.json",
  "schema_version": "2.4.0",
  "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
@@ -22,7 +22,7 @@
  "files": [
   {
    "configuration": "default",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/geometry.stl?v=ff61cbb22798",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/geometry.stl?v=ff61cbb22798",
    "path": "cases/I/geometry.stl",
    "media_type": "model/stl",
    "bytes": 1738,
@@ -53,7 +53,7 @@
     "watertight": true
    },
    "bbox_matches_stated_dimensions": true,
-   "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-i.png",
+   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-i.png",
    "render_caption": "Isolated cube, 0.10 m on a side (model scale); the wind blows along +x. The tracer is released from a 6 mm outlet at the centre of the roof (not drawn).",
    "boxes": [
     {
@@ -73,5 +73,5 @@
    "analytic_volume": 0.001
   }
  ],
- "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-i.png"
+ "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-i.png"
 }

@@ -13,11 +13,11 @@
  },
  "servers": [
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api",
    "description": "the latest release"
   },
   {
-   "url": "https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/main/docs/api",
+   "url": "https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/main/docs/api",
    "description": "the same files, raw from the repository (fallback)"
   }
  ],
@@ -95,7 +95,7 @@
    },
    "servers": [
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api",
      "description": "the unversioned alias; versions.json is not copied into release trees"
     }
    ]

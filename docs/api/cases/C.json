@@ -1,5 +1,5 @@
 {
- "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/case.schema.json",
+ "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/case.schema.json",
  "schema_version": "2.4.0",
  "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
@@ -215,7 +215,7 @@
    }
   ],
   "csv": {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/approach_flow.csv?v=98849731e877",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/approach_flow.csv?v=98849731e877",
    "path": "cases/C/approach_flow.csv",
    "media_type": "text/csv",
    "bytes": 268,
@@ -223,9 +223,9 @@
   }
  },
  "points": {
-  "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/points.json",
+  "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/points.json",
   "csv": {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/points.csv?v=7448f0ceae37",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/points.csv?v=7448f0ceae37",
    "path": "cases/C/points.csv",
    "media_type": "text/csv",
    "bytes": 58159,
@@ -273,30 +273,30 @@
   ]
  },
  "geometry": {
-  "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/geometry.json",
+  "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry.json",
   "files": [
    {
     "configuration": "2D",
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/geometry.stl?v=b8c31c57c453",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry.stl?v=b8c31c57c453",
     "triangles": 108,
     "watertight": true
    },
    {
     "configuration": "0D",
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/geometry_0D.stl?v=0f08bcd4dd6b",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry_0D.stl?v=0f08bcd4dd6b",
     "triangles": 96,
     "watertight": true
    },
    {
     "configuration": "1D",
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/geometry_1D.stl?v=ac92c8ed427c",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry_1D.stl?v=ac92c8ed427c",
     "triangles": 108,
     "watertight": true
    }
   ]
  },
  "validation": {
-  "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/validation.json",
+  "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/validation.json",
   "status": "scored",
   "engines": {
    "openfoam12-realizableKE": "scored",
@@ -332,11 +332,11 @@
   "bibtex": "@misc{aijuwe_case_c,\n  author    = \"Nonomura, Yoshitami and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa\",\n  title     = \"{AIJ UWE Benchmark Dataset -- Case C (Blocks): Wind Tunnel Experiment for Flow within Simple Building Blocks}\",\n  year      = \"2025\",\n  publisher = \"Zenodo\",\n  doi       = \"10.5281/zenodo.15401791\",\n  url       = \"https://doi.org/10.5281/zenodo.15401791\",\n  note      = \"Data set\"\n}"
  },
  "files_in_repository": {
-  "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/raw/cases/case-c",
+  "folder": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/tree/main/raw/cases/case-c",
   "reference": "raw/cases/case-c/RS_caseC.csv",
   "approach_flow": "raw/cases/case-c/AF_caseC.csv",
   "readme": "raw/cases/case-c/readme_caseC.md"
  },
- "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-c-2d.png",
- "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-c/"
+ "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-c-2d.png",
+ "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-c/"
 }

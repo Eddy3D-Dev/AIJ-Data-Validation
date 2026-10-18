@@ -56,7 +56,7 @@ description: "Case I — cube with a roof point source: configuration, frame and
 
 ## Reference data
 
-Source in this repository: `raw/cases/case-i/RS-w_caseI.csv` (approach flow: `raw/cases/case-i/AF_caseI.csv`).
+Source in this repository: [`raw/cases/case-i/RS-w_caseI.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-i/RS-w_caseI.csv) (approach flow: [`raw/cases/case-i/AF_caseI.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-i/AF_caseI.csv)).
 
 The cleaned table has **630 rows** over **630 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `k`, `campaign`, `C`, `concentration_ratio`.
 

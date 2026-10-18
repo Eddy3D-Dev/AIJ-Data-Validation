@@ -62,7 +62,7 @@ The 0 deg thermistor field is exactly y-mirror symmetric; the split-fibre U is p
 
 ## Reference data
 
-Source in this repository: `raw/cases/case-d/LF_caseD.xls` (approach flow: `raw/cases/case-d/LF_caseD.xls [sheet Inflow]`).
+Source in this repository: [`raw/cases/case-d/LF_caseD.xls`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-d/LF_caseD.xls) (approach flow: [`raw/cases/case-d/LF_caseD.xls [sheet Inflow]`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-d/LF_caseD.xls [sheet Inflow])).
 
 The cleaned table has **267 rows** over **78 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `Vs`, `campaign`.
 

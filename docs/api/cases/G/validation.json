@@ -1,5 +1,5 @@
 {
- "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/validation.schema.json",
+ "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation.schema.json",
  "schema_version": "2.4.0",
  "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
@@ -152,20 +152,20 @@
    },
    "figures": [
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-layout.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-layout.png",
      "caption": "Case G, measurement lines and planes: A to G vertical profiles, x/H = 0.25, 0.5, 1, 2, 3, 4, 5. Positions in multiples of H."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-sweep.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-sweep.png",
      "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-stations.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-stations.png",
      "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
     }
    ],
    "pairs": {
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
     "path": "cases/G/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 21505,
@@ -174,7 +174,7 @@
    "pairs_columns": "arm (open-field, pine, conifer, screen or half-belt-conifer: the five runs share this file), point_id (the table's, 1-28), x (m behind the leeward face) and z (m above ground), full scale; U_meas and k_meas, the field's U/U_H and k/U_H^2; U_model and Urms_model, the modelled |U| and sqrt(|U|^2 + 2k) over the arm's own U(7 m) at x = -35 m (u7_mps, in m/s), k_model, k over u7_mps^2; U_model_imposed and Urms_model_imposed, the same over the imposed U_H = 5.299 m/s",
    "reproduce": "Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseGContainerE2E (arm: no belt, full scale; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 90,576 cells, solved 2026-10-18); figures validation/plot_cases_gk_openfoam.py; scores recomputed from the pairs by validation/dispersion_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`",
    "source_file": "validation/results/caseG_openfoam12_realizableKE_open-field.json",
-   "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseG_openfoam12_realizableKE_open-field.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseG_openfoam12_realizableKE_open-field.json",
    "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   },
   {
@@ -298,20 +298,20 @@
    },
    "figures": [
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-layout.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-layout.png",
      "caption": "Case G, measurement lines and planes: A to G vertical profiles, x/H = 0.25, 0.5, 1, 2, 3, 4, 5. Positions in multiples of H."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-sweep.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-sweep.png",
      "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-stations.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-stations.png",
      "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
     }
    ],
    "pairs": {
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
     "path": "cases/G/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 21505,
@@ -320,7 +320,7 @@
    "pairs_columns": "arm (open-field, pine, conifer, screen or half-belt-conifer: the five runs share this file), point_id (the table's, 1-28), x (m behind the leeward face) and z (m above ground), full scale; U_meas and k_meas, the field's U/U_H and k/U_H^2; U_model and Urms_model, the modelled |U| and sqrt(|U|^2 + 2k) over the arm's own U(7 m) at x = -35 m (u7_mps, in m/s), k_model, k over u7_mps^2; U_model_imposed and Urms_model_imposed, the same over the imposed U_H = 5.299 m/s",
    "reproduce": "Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseGContainerE2E (arm: pine, Cd·LAD 0.30 1/m, full scale; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 90,576 cells, solved 2026-10-18); figures validation/plot_cases_gk_openfoam.py; scores recomputed from the pairs by validation/dispersion_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`",
    "source_file": "validation/results/caseG_openfoam12_realizableKE_pine.json",
-   "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseG_openfoam12_realizableKE_pine.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseG_openfoam12_realizableKE_pine.json",
    "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   },
   {
@@ -444,20 +444,20 @@
    },
    "figures": [
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-layout.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-layout.png",
      "caption": "Case G, measurement lines and planes: A to G vertical profiles, x/H = 0.25, 0.5, 1, 2, 3, 4, 5. Positions in multiples of H."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-sweep.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-sweep.png",
      "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-stations.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-stations.png",
      "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
     }
    ],
    "pairs": {
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
     "path": "cases/G/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 21505,
@@ -466,7 +466,7 @@
    "pairs_columns": "arm (open-field, pine, conifer, screen or half-belt-conifer: the five runs share this file), point_id (the table's, 1-28), x (m behind the leeward face) and z (m above ground), full scale; U_meas and k_meas, the field's U/U_H and k/U_H^2; U_model and Urms_model, the modelled |U| and sqrt(|U|^2 + 2k) over the arm's own U(7 m) at x = -35 m (u7_mps, in m/s), k_model, k over u7_mps^2; U_model_imposed and Urms_model_imposed, the same over the imposed U_H = 5.299 m/s",
    "reproduce": "Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseGContainerE2E (arm: conifer, Cd·LAD 0.625 1/m, full scale; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 90,576 cells, solved 2026-10-18); figures validation/plot_cases_gk_openfoam.py; scores recomputed from the pairs by validation/dispersion_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`",
    "source_file": "validation/results/caseG_openfoam12_realizableKE_conifer.json",
-   "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseG_openfoam12_realizableKE_conifer.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseG_openfoam12_realizableKE_conifer.json",
    "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   },
   {
@@ -590,20 +590,20 @@
    },
    "figures": [
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-layout.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-layout.png",
      "caption": "Case G, measurement lines and planes: A to G vertical profiles, x/H = 0.25, 0.5, 1, 2, 3, 4, 5. Positions in multiples of H."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-sweep.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-sweep.png",
      "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-stations.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-stations.png",
      "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
     }
    ],
    "pairs": {
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
     "path": "cases/G/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 21505,
@@ -612,7 +612,7 @@
    "pairs_columns": "arm (open-field, pine, conifer, screen or half-belt-conifer: the five runs share this file), point_id (the table's, 1-28), x (m behind the leeward face) and z (m above ground), full scale; U_meas and k_meas, the field's U/U_H and k/U_H^2; U_model and Urms_model, the modelled |U| and sqrt(|U|^2 + 2k) over the arm's own U(7 m) at x = -35 m (u7_mps, in m/s), k_model, k over u7_mps^2; U_model_imposed and Urms_model_imposed, the same over the imposed U_H = 5.299 m/s",
    "reproduce": "Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseGContainerE2E (arm: screen, Cd·LAD 0.875 1/m, full scale; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 90,576 cells, solved 2026-10-18); figures validation/plot_cases_gk_openfoam.py; scores recomputed from the pairs by validation/dispersion_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`",
    "source_file": "validation/results/caseG_openfoam12_realizableKE_screen.json",
-   "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseG_openfoam12_realizableKE_screen.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseG_openfoam12_realizableKE_screen.json",
    "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   },
   {
@@ -736,20 +736,20 @@
    },
    "figures": [
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-layout.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-layout.png",
      "caption": "Case G, measurement lines and planes: A to G vertical profiles, x/H = 0.25, 0.5, 1, 2, 3, 4, 5. Positions in multiples of H."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-sweep.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-sweep.png",
      "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-g-openfoam-stations.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-stations.png",
      "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
     }
    ],
    "pairs": {
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
     "path": "cases/G/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 21505,
@@ -758,7 +758,7 @@
    "pairs_columns": "arm (open-field, pine, conifer, screen or half-belt-conifer: the five runs share this file), point_id (the table's, 1-28), x (m behind the leeward face) and z (m above ground), full scale; U_meas and k_meas, the field's U/U_H and k/U_H^2; U_model and Urms_model, the modelled |U| and sqrt(|U|^2 + 2k) over the arm's own U(7 m) at x = -35 m (u7_mps, in m/s), k_model, k over u7_mps^2; U_model_imposed and Urms_model_imposed, the same over the imposed U_H = 5.299 m/s",
    "reproduce": "Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseGContainerE2E (arm: the real 74 m belt as a half domain, conifer, Cd·LAD 0.625 1/m, full scale; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 625,252 cells, solved 2026-10-18); figures validation/plot_cases_gk_openfoam.py; scores recomputed from the pairs by validation/dispersion_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`",
    "source_file": "validation/results/caseG_openfoam12_realizableKE_half-belt-conifer.json",
-   "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseG_openfoam12_realizableKE_half-belt-conifer.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseG_openfoam12_realizableKE_half-belt-conifer.json",
    "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   }
  ],

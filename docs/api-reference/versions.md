@@ -28,7 +28,7 @@ curl -s -A "aij-client/1.0" "$REL/cases/A/points.csv" | head -3
 
 Within a major `schema_version` the API only adds: new fields, new endpoints, new runs. Clients must ignore
 fields they do not know. A field is renamed or removed only in a new major version, listed below. `index.json`
-serves the same changelog as `changelog`; the releases are in [`CHANGELOG.md`](https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/CHANGELOG.md).
+serves the same changelog as `changelog`; the releases are in [`CHANGELOG.md`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/CHANGELOG.md).
 
 ## Changelog
 

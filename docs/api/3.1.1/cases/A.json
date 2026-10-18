@@ -1,0 +1,332 @@
+{
+ "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.1/schemas/case.schema.json",
+ "schema_version": "2.4.0",
+ "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
+ "license": "CC-BY-4.0",
+ "id": "A",
+ "slug": "case-a",
+ "title": "Case A — 1:1:2 building",
+ "summary": "Isolated 1:1:2 building, velocity field (split-fibre hot wire).",
+ "configuration": {
+  "building": "1:1:2 (width : depth : height) prism",
+  "b_m": 0.08,
+  "H_m": 0.16,
+  "Re_H": 24000,
+  "U_H_m_s": 4.491,
+  "wind_directions_deg": [
+   0
+  ],
+  "measurement_planes": [
+   "vertical centre plane y/b = 0",
+   "horizontal z/b = 0.125",
+   "horizontal z/b = 1.25"
+  ],
+  "instrument": "hot-wire anemometer, split-fibre probes (DANTEC 55R55 streamwise, 55R57 spanwise/vertical), 1000 Hz, 60 s per point, 500 Hz low-pass",
+  "tunnel": "Technical Research Institute, Shimizu Corporation, Tokyo",
+  "scale_note": "model scale; Eddy3D solves it at 1:100 (b = 8 m, H = 16 m) with the tunnel velocities"
+ },
+ "configurations": [
+  {
+   "config": "default",
+   "wind_direction_deg": 0.0,
+   "points": 186
+  }
+ ],
+ "quantities": [
+  "U",
+  "V",
+  "W",
+  "uu",
+  "vv",
+  "ww",
+  "k"
+ ],
+ "units": {
+  "length": "m (model scale)",
+  "velocity": "m/s",
+  "variance": "m^2/s^2",
+  "k": "m^2/s^2"
+ },
+ "frame": {
+  "origin": "building centre on the ground plane",
+  "x": "+x streamwise (the wind at WD = 0 blows toward +x); building spans x in [-0.04, 0.04]",
+  "y": "+y lateral; building spans y in [-0.04, 0.04]; points published on the y <= 0 half by the tunnel's symmetry convention",
+  "z": "+z up from the ground; roof at z = 0.16",
+  "lateral_sign_applied": 1,
+  "coordinate_scale_applied": 1.0
+ },
+ "inflow_fit": {
+  "method": "log law, kappa = 0.41, least squares over z = 0.02 ... 2H on the case's own approach-flow file",
+  "u_star_m_s": 0.343,
+  "z0_mm": 0.668,
+  "U_H_measured_m_s": 4.491,
+  "log_law_error_at_H": "+2.0 %"
+ },
+ "approach_flow": {
+  "source": "raw/cases/case-a/AF_caseA.csv",
+  "units": {
+   "z": "m",
+   "U": "m/s",
+   "k": "m^2/s^2",
+   "u_rms": "m/s"
+  },
+  "rows": [
+   {
+    "z": 0.005,
+    "U": 2.745,
+    "k": 0.372,
+    "u_rms": 0.663
+   },
+   {
+    "z": 0.01,
+    "U": 2.935,
+    "k": 0.4,
+    "u_rms": 0.669
+   },
+   {
+    "z": 0.02,
+    "U": 3.175,
+    "k": 0.437,
+    "u_rms": 0.687
+   },
+   {
+    "z": 0.04,
+    "U": 3.435,
+    "k": 0.492,
+    "u_rms": 0.717
+   },
+   {
+    "z": 0.06,
+    "U": 3.627,
+    "k": 0.538,
+    "u_rms": 0.749
+   },
+   {
+    "z": 0.08,
+    "U": 3.824,
+    "k": 0.574,
+    "u_rms": 0.777
+   },
+   {
+    "z": 0.1,
+    "U": 4.021,
+    "k": 0.585,
+    "u_rms": 0.766
+   },
+   {
+    "z": 0.12,
+    "U": 4.21,
+    "k": 0.627,
+    "u_rms": 0.799
+   },
+   {
+    "z": 0.14,
+    "U": 4.362,
+    "k": 0.635,
+    "u_rms": 0.793
+   },
+   {
+    "z": 0.16,
+    "U": 4.491,
+    "k": 0.652,
+    "u_rms": 0.807
+   },
+   {
+    "z": 0.165,
+    "U": 4.502,
+    "k": 0.643,
+    "u_rms": 0.798
+   },
+   {
+    "z": 0.17,
+    "U": 4.586,
+    "k": 0.657,
+    "u_rms": 0.813
+   },
+   {
+    "z": 0.18,
+    "U": 4.606,
+    "k": 0.65,
+    "u_rms": 0.799
+   },
+   {
+    "z": 0.19,
+    "U": 4.712,
+    "k": 0.659,
+    "u_rms": 0.808
+   },
+   {
+    "z": 0.21,
+    "U": 4.854,
+    "k": 0.661,
+    "u_rms": 0.806
+   },
+   {
+    "z": 0.23,
+    "U": 4.993,
+    "k": 0.651,
+    "u_rms": 0.795
+   },
+   {
+    "z": 0.25,
+    "U": 5.132,
+    "k": 0.626,
+    "u_rms": 0.784
+   },
+   {
+    "z": 0.3,
+    "U": 5.449,
+    "k": 0.593,
+    "u_rms": 0.767
+   },
+   {
+    "z": 0.35,
+    "U": 5.782,
+    "k": 0.521,
+    "u_rms": 0.725
+   },
+   {
+    "z": 0.4,
+    "U": 6.077,
+    "k": 0.434,
+    "u_rms": 0.663
+   },
+   {
+    "z": 0.45,
+    "U": 6.338,
+    "k": 0.352,
+    "u_rms": 0.594
+   },
+   {
+    "z": 0.5,
+    "U": 6.588,
+    "k": 0.254,
+    "u_rms": 0.496
+   },
+   {
+    "z": 0.55,
+    "U": 6.693,
+    "k": 0.175,
+    "u_rms": 0.402
+   },
+   {
+    "z": 0.6,
+    "U": 6.751,
+    "k": 0.106,
+    "u_rms": 0.307
+   }
+  ],
+  "csv": {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.1/cases/A/approach_flow.csv?v=2f3b37fa8e43",
+   "path": "cases/A/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 557,
+   "sha256": "2f3b37fa8e43e307e807a5114bf2a8b2ad3ea6396cb17d6adc112663b69ea19f"
+  }
+ },
+ "points": {
+  "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.1/cases/A/points.json",
+  "csv": {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.1/cases/A/points.csv?v=a46201996b22",
+   "path": "cases/A/points.csv",
+   "media_type": "text/csv",
+   "bytes": 19729,
+   "sha256": "a46201996b22620e9ceae7ac558d8bafc44f3ac3ed7073c2efca70bc57ad5239"
+  },
+  "source": "clean/cases/A/points.csv",
+  "rows": 186,
+  "distinct_points": 186,
+  "columns": [
+   "point_id",
+   "config",
+   "instrument",
+   "wind_direction_deg",
+   "x",
+   "y",
+   "z",
+   "U",
+   "V",
+   "W",
+   "uu",
+   "vv",
+   "ww",
+   "k",
+   "campaign"
+  ],
+  "counts": {
+   "config": {
+    "default": 186
+   },
+   "instrument": {
+    "split_fibre": 186
+   },
+   "wind_direction_deg": {
+    "0.0": 186
+   }
+  },
+  "nulls": {},
+  "bbox_min": [
+   -0.06,
+   -0.16,
+   0.01
+  ],
+  "bbox_max": [
+   0.26,
+   0.0,
+   0.28
+  ]
+ },
+ "geometry": {
+  "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.1/cases/A/geometry.json",
+  "files": [
+   {
+    "configuration": "default",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.1/cases/A/geometry.stl?v=89acdfbbff84",
+    "triangles": 12,
+    "watertight": true
+   }
+  ]
+ },
+ "validation": {
+  "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.1/cases/A/validation.json",
+  "status": "scored",
+  "engines": {
+   "openfoam12-realizableKE": "scored",
+   "openlb": "scored",
+   "fluidx3d": "scored",
+   "ml-surrogate": "scored"
+  }
+ },
+ "known_issues": [
+  "Lateral velocity V is positive toward +y (checked: V = -2.893 m/s at (-0.040, -0.050, 0.010), just outside the y < 0 flank, deflecting away from the centreline). Case B uses the OPPOSITE sign; the API flips Case B so both agree.",
+  "Coordinates are metres (Case B's are millimetres in the published file).",
+  "Case A's turbulence columns are rms values (u_rms, ...). The API serves VARIANCES (uu = u_rms^2) so A and B share one column meaning."
+ ],
+ "people": {
+  "data_collectors": [
+   "Takeshi Ishihara (The University of Tokyo)",
+   "Kazuki Hibi (Numerical Flow Design)"
+  ],
+  "editors_distributors": [
+   "Yoshihide Tominaga (Niigata Institute of Technology)",
+   "Hideki Kikumoto (The University of Tokyo)",
+   "Tsubasa Okaze (Institute of Science Tokyo)"
+  ],
+  "contact": "Takeshi Ishihara <ishihara@bridge.t.u-tokyo.ac.jp>"
+ },
+ "doi": "10.5281/zenodo.15050147",
+ "doi_note": null,
+ "citation_requested": "Meng, Y., & Hibi, K. (1998). Turbulent measurements of the flow field around a high-rise building. Journal of Wind Engineering, JAWE, 76, 55-64. https://doi.org/10.5359/jawe.1998.76_55",
+ "citation": {
+  "apa": "Ishihara, T., Hibi, K., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case A (112): Wind Tunnel Experiment for Flow around a 1:1:2 Shape Building Model [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15050147",
+  "bibtex": "@misc{aijuwe_case_a,\n  author    = \"Ishihara, Takeshi and Hibi, Kazuki and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa\",\n  title     = \"{AIJ UWE Benchmark Dataset -- Case A (112): Wind Tunnel Experiment for Flow around a 1:1:2 Shape Building Model}\",\n  year      = \"2025\",\n  publisher = \"Zenodo\",\n  doi       = \"10.5281/zenodo.15050147\",\n  url       = \"https://doi.org/10.5281/zenodo.15050147\",\n  note      = \"Data set\"\n}"
+ },
+ "files_in_repository": {
+  "folder": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/tree/main/raw/cases/case-a",
+  "reference": "raw/cases/case-a/RS-caseA.csv",
+  "approach_flow": "raw/cases/case-a/AF_caseA.csv",
+  "readme": "raw/cases/case-a/readme_caseA.md"
+ },
+ "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-a.png",
+ "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-a/"
+}

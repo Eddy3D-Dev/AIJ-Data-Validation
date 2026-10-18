@@ -33,7 +33,7 @@ import citation as C  # noqa: E402
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-APA_API = re.compile(r"^(?P<org>.+?)\. \((?P<year>\d{4})\)\. (?P<title>.+) \(Version (?P<version>[^)]+)\) \[Data set\]\. (?P<url>\S+)$")
+APA_API = re.compile(r"^(?P<org>.+?)\. \((?P<year>\d{4})\)\. (?P<title>.+) \(Version (?P<version>[^)]+)\) \[Data set\]\. (?:(?P<publisher>.+?)\. )?(?P<url>\S+)$")
 FENCE = re.compile(r"```(\w+)\n(.*?)\n```", re.S)
 ENTRY = re.compile(r"^@(\w+)\{([^,\s]+),\n(.*?)\n\}$", re.S | re.M)
 FIELD = re.compile(r'^\s*(\w+)\s*=\s*"(.*)",?$', re.M)

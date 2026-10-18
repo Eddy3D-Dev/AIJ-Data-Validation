@@ -58,7 +58,7 @@ description: "Case J — 1:1:2 building, non-isothermal: configuration, frame an
 
 ## Reference data
 
-Source in this repository: `raw/cases/case-j/RS_caseJ.csv` (approach flow: `raw/cases/case-j/AF_caseJ.csv`).
+Source in this repository: [`raw/cases/case-j/RS_caseJ.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-j/RS_caseJ.csv) (approach flow: [`raw/cases/case-j/AF_caseJ.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-j/AF_caseJ.csv)).
 
 The cleaned table has **444 rows** over **444 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `campaign`, `C`, `c_rms`, `concentration_ratio`, `T`, `T_rms`, `uT`, `vT`, `wT`.
 

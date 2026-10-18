@@ -1,5 +1,5 @@
 {
- "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/validation.schema.json",
+ "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation.schema.json",
  "schema_version": "2.4.0",
  "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
@@ -180,20 +180,20 @@
    },
    "figures": [
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-i-layout.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-i-layout.png",
      "caption": "Case I, measurement lines and planes: A concentration, vertical profiles, y/H = 0; B concentration, plane z/H = 0; C velocity, vertical profiles, y/H = 0; D velocity, plane z/H = 0.5. Positions in multiples of H; panels c and d: x/H = -2 to 5."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/cases-hi-openfoam-agreement.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/cases-hi-openfoam-agreement.png",
      "caption": "Cases H and I, OpenFOAM 12 (realizable k-ε): measured against modelled U, W, k and the dimensionless concentration c* = C/c0 (turbulent Schmidt number 0.5; log axes show the positive pairs only), with the 1:1 line and the factor-of-two band where the values do not change sign. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-i-openfoam-closures.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-i-openfoam-closures.png",
      "caption": "Case I, OpenFOAM 12 under standard k-ε, realizable k-ε and k-ω SST on one mesh: measured against modelled U, k and c* (Sct 0.5). Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     }
    ],
    "pairs": {
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/pairs/openfoam12-realizableKE.csv?v=d1bafd9c68e2",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/pairs/openfoam12-realizableKE.csv?v=d1bafd9c68e2",
     "path": "cases/I/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 114311,
@@ -202,7 +202,7 @@
    "pairs_columns": "instrument (ldv or hydrocarbon_analyser), point_id (the table's: wind points 1-91, concentration points 92-630); x, y, z in m (case frame); U, V, W and k measured (_meas: the cleaned workbook values; V is empty on the y = 0 plane) and modelled (_model), velocities by U_H = 1.7 m/s, k by U_H^2; cstar_meas, the measured C/c0 (c0 = 39.22 ppm), and cstar_sct03 / _sct05 / _sct07, the modelled c* for turbulent Schmidt numbers 0.3, 0.5 and 0.7 (a wind row has no concentration columns and a concentration row no velocity columns)",
    "reproduce": "Eddy3D fixture TestAijCubeContainerE2E (realizable k-ε, 1:60) (numerics level 3, 3000 iterations); figures validation/plot_cases_hi_openfoam.py; scores recomputed from the pairs by validation/dispersion_metrics.py",
    "source_file": "validation/results/caseI_openfoam12_realizableKE.json",
-   "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseI_openfoam12_realizableKE.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseI_openfoam12_realizableKE.json",
    "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   },
   {
@@ -346,12 +346,12 @@
    },
    "figures": [
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-i-openfoam-closures.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-i-openfoam-closures.png",
      "caption": "Case I, OpenFOAM 12 under standard k-ε, realizable k-ε and k-ω SST on one mesh: measured against modelled U, k and c* (Sct 0.5). Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     }
    ],
    "pairs": {
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/pairs/openfoam12-kEpsilon.csv?v=6e6ba0f446e8",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/pairs/openfoam12-kEpsilon.csv?v=6e6ba0f446e8",
     "path": "cases/I/pairs/openfoam12-kEpsilon.csv",
     "media_type": "text/csv",
     "bytes": 114105,
@@ -360,7 +360,7 @@
    "pairs_columns": "instrument (ldv or hydrocarbon_analyser), point_id (the table's: wind points 1-91, concentration points 92-630); x, y, z in m (case frame); U, V, W and k measured (_meas: the cleaned workbook values; V is empty on the y = 0 plane) and modelled (_model), velocities by U_H = 1.7 m/s, k by U_H^2; cstar_meas, the measured C/c0 (c0 = 39.22 ppm), and cstar_sct03 / _sct05 / _sct07, the modelled c* for turbulent Schmidt numbers 0.3, 0.5 and 0.7 (a wind row has no concentration columns and a concentration row no velocity columns)",
    "reproduce": "Eddy3D fixture TestAijCubeContainerE2E (standard k-ε, 1:60) (numerics level 3, 3000 iterations); figures validation/plot_cases_hi_openfoam.py; scores recomputed from the pairs by validation/dispersion_metrics.py",
    "source_file": "validation/results/caseI_openfoam12_kEpsilon.json",
-   "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseI_openfoam12_kEpsilon.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseI_openfoam12_kEpsilon.json",
    "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   },
   {
@@ -504,12 +504,12 @@
    },
    "figures": [
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-i-openfoam-closures.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-i-openfoam-closures.png",
      "caption": "Case I, OpenFOAM 12 under standard k-ε, realizable k-ε and k-ω SST on one mesh: measured against modelled U, k and c* (Sct 0.5). Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     }
    ],
    "pairs": {
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/pairs/openfoam12-kOmegaSST.csv?v=549a7aa4117e",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/pairs/openfoam12-kOmegaSST.csv?v=549a7aa4117e",
     "path": "cases/I/pairs/openfoam12-kOmegaSST.csv",
     "media_type": "text/csv",
     "bytes": 113367,
@@ -518,7 +518,7 @@
    "pairs_columns": "instrument (ldv or hydrocarbon_analyser), point_id (the table's: wind points 1-91, concentration points 92-630); x, y, z in m (case frame); U, V, W and k measured (_meas: the cleaned workbook values; V is empty on the y = 0 plane) and modelled (_model), velocities by U_H = 1.7 m/s, k by U_H^2; cstar_meas, the measured C/c0 (c0 = 39.22 ppm), and cstar_sct03 / _sct05 / _sct07, the modelled c* for turbulent Schmidt numbers 0.3, 0.5 and 0.7 (a wind row has no concentration columns and a concentration row no velocity columns)",
    "reproduce": "Eddy3D fixture TestAijCubeContainerE2E (k-ω SST, 1:60) (numerics level 3, 3000 iterations); figures validation/plot_cases_hi_openfoam.py; scores recomputed from the pairs by validation/dispersion_metrics.py",
    "source_file": "validation/results/caseI_openfoam12_kOmegaSST.json",
-   "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseI_openfoam12_kOmegaSST.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseI_openfoam12_kOmegaSST.json",
    "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   }
  ],

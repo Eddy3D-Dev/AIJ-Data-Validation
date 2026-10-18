@@ -1,5 +1,5 @@
 {
- "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/validation.schema.json",
+ "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation.schema.json",
  "schema_version": "2.4.0",
  "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
@@ -273,20 +273,20 @@
    },
    "figures": [
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-f-layout.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-f-layout.png",
      "caption": "Case F, measurement points: A tunnel plane 5 m above ground; B tunnel plane 9 m above ground; C tunnel plane 20 m above ground; D field cup anemometers, 3 to 11 m above ground. Positions in metres, full scale. SMB and KDD: the reference buildings. The field anemometers stand at the places of the tunnel points."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-f-openfoam-agreement.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-f-openfoam-agreement.png",
      "caption": "Case F, OpenFOAM 12 (realizable k-ε), wind from NNW: the tunnel's and the field's U/U(500 m) against the modelled √(|U|²+2k) (filled) and |U| (hollow) over the model's own U(500 m), in two vertical frames (top: the published z in the STL's frame; bottom: the STL's ground plus the instrument height), for the 9 m plane, all 33 tunnel points (planes at 5, 9 and 20 m) and the 13 field observations (bars: the standard deviation of the 10-minute means). Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-f-openfoam-bias-map.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-f-openfoam-bias-map.png",
      "caption": "Case F, OpenFOAM 12, wind from NNW: log₂(model / tunnel) of the scalar speed at the tunnel's 13 points of the 9 m plane on the plan of the district (full-scale metres, north up; the arrow is the wind), in the two vertical frames."
     }
    ],
    "pairs": {
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/pairs/openfoam12-realizableKE.csv?v=e81e010859e6",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/pairs/openfoam12-realizableKE.csv?v=e81e010859e6",
     "path": "cases/F/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 9531,
@@ -295,7 +295,7 @@
    "pairs_columns": "frame (literal or agl: the two runs share this file), source (tunnel: the thermistor at 5, 9 and 20 m; field: the cup anemometers), plane_m (the instrument height above ground by the readme's rule: 5, 9 or 20 for the tunnel, 3 to 11 for the field), point_id (the table's); x and y in m and z_published, the height above the tunnel floor in m, full scale (+x east, +y north); z_probe, the height the model was probed at (the published z in the literal frame; the STL's own ground under the point plus plane_m in the agl frame) and height_above_stl_ground, the probe's height above that ground; observed, the cleaned table's U/U(500 m) for wind from NNW, and observed_sd, the standard deviation of the 10-minute means behind a field value; observed_sse, the tunnel's 9 m value for the opposite wind (SSE) at the same point, for the compass control; Umag_model and rms_model, the modelled |U| and sqrt(|U|^2 + 2k) over the model's own approach U(500 m) (U500 in the results file); k_model, k in m^2/s^2",
    "reproduce": "Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseFContainerE2E (EDDY3D_AIJ_F_DIRECTIONS=NNW, the default) (Shinjuku district, 1:800, wind from NNW, frame literal; OpenFOAM 12 realizable k-ε, numerics level 3, 2000 iterations, 2,143,488 cells, solved 2026-10-18); figures validation/plot_cases_fm_openfoam.py; scores recomputed from the pairs by validation/dispersion_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`",
    "source_file": "validation/results/caseF_openfoam12_realizableKE_literal.json",
-   "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseF_openfoam12_realizableKE_literal.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseF_openfoam12_realizableKE_literal.json",
    "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   },
   {
@@ -541,20 +541,20 @@
    },
    "figures": [
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-f-layout.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-f-layout.png",
      "caption": "Case F, measurement points: A tunnel plane 5 m above ground; B tunnel plane 9 m above ground; C tunnel plane 20 m above ground; D field cup anemometers, 3 to 11 m above ground. Positions in metres, full scale. SMB and KDD: the reference buildings. The field anemometers stand at the places of the tunnel points."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-f-openfoam-agreement.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-f-openfoam-agreement.png",
      "caption": "Case F, OpenFOAM 12 (realizable k-ε), wind from NNW: the tunnel's and the field's U/U(500 m) against the modelled √(|U|²+2k) (filled) and |U| (hollow) over the model's own U(500 m), in two vertical frames (top: the published z in the STL's frame; bottom: the STL's ground plus the instrument height), for the 9 m plane, all 33 tunnel points (planes at 5, 9 and 20 m) and the 13 field observations (bars: the standard deviation of the 10-minute means). Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-f-openfoam-bias-map.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-f-openfoam-bias-map.png",
      "caption": "Case F, OpenFOAM 12, wind from NNW: log₂(model / tunnel) of the scalar speed at the tunnel's 13 points of the 9 m plane on the plan of the district (full-scale metres, north up; the arrow is the wind), in the two vertical frames."
     }
    ],
    "pairs": {
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/pairs/openfoam12-realizableKE.csv?v=e81e010859e6",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/pairs/openfoam12-realizableKE.csv?v=e81e010859e6",
     "path": "cases/F/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 9531,
@@ -563,7 +563,7 @@
    "pairs_columns": "frame (literal or agl: the two runs share this file), source (tunnel: the thermistor at 5, 9 and 20 m; field: the cup anemometers), plane_m (the instrument height above ground by the readme's rule: 5, 9 or 20 for the tunnel, 3 to 11 for the field), point_id (the table's); x and y in m and z_published, the height above the tunnel floor in m, full scale (+x east, +y north); z_probe, the height the model was probed at (the published z in the literal frame; the STL's own ground under the point plus plane_m in the agl frame) and height_above_stl_ground, the probe's height above that ground; observed, the cleaned table's U/U(500 m) for wind from NNW, and observed_sd, the standard deviation of the 10-minute means behind a field value; observed_sse, the tunnel's 9 m value for the opposite wind (SSE) at the same point, for the compass control; Umag_model and rms_model, the modelled |U| and sqrt(|U|^2 + 2k) over the model's own approach U(500 m) (U500 in the results file); k_model, k in m^2/s^2",
    "reproduce": "Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseFContainerE2E (EDDY3D_AIJ_F_DIRECTIONS=NNW, the default) (Shinjuku district, 1:800, wind from NNW, frame agl; OpenFOAM 12 realizable k-ε, numerics level 3, 2000 iterations, 2,143,488 cells, solved 2026-10-18); figures validation/plot_cases_fm_openfoam.py; scores recomputed from the pairs by validation/dispersion_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`",
    "source_file": "validation/results/caseF_openfoam12_realizableKE_agl.json",
-   "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseF_openfoam12_realizableKE_agl.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseF_openfoam12_realizableKE_agl.json",
    "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   }
  ],

@@ -1,6 +1,6 @@
 {
  "$schema": "https://json-schema.org/draft/2020-12/schema",
- "$id": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/versions.schema.json",
+ "$id": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/versions.schema.json",
  "title": "Release list",
  "description": "Every release of the data and API, newest first, with the address of its files.",
  "type": "object",

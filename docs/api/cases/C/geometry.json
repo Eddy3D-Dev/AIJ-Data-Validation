@@ -1,5 +1,5 @@
 {
- "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/geometry.schema.json",
+ "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/geometry.schema.json",
  "schema_version": "2.4.0",
  "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
@@ -25,7 +25,7 @@
  "files": [
   {
    "configuration": "2D",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/geometry.stl?v=b8c31c57c453",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry.stl?v=b8c31c57c453",
    "path": "cases/C/geometry.stl",
    "media_type": "model/stl",
    "bytes": 14576,
@@ -56,7 +56,7 @@
     "watertight": true
    },
    "bbox_matches_stated_dimensions": true,
-   "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-c-2d.png",
+   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-c-2d.png",
    "render_caption": "2D: the centre block twice as tall, 2D = 0.40 m.",
    "boxes": [
     {
@@ -173,7 +173,7 @@
   },
   {
    "configuration": "0D",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/geometry_0D.stl?v=0f08bcd4dd6b",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry_0D.stl?v=0f08bcd4dd6b",
    "path": "cases/C/geometry_0D.stl",
    "media_type": "model/stl",
    "bytes": 12961,
@@ -204,7 +204,7 @@
     "watertight": true
    },
    "bbox_matches_stated_dimensions": true,
-   "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-c-0d.png",
+   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-c-0d.png",
    "render_caption": "0D: the centre block removed.",
    "boxes": [
     {
@@ -309,7 +309,7 @@
   },
   {
    "configuration": "1D",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/geometry_1D.stl?v=ac92c8ed427c",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry_1D.stl?v=ac92c8ed427c",
    "path": "cases/C/geometry_1D.stl",
    "media_type": "model/stl",
    "bytes": 14576,
@@ -340,7 +340,7 @@
     "watertight": true
    },
    "bbox_matches_stated_dimensions": true,
-   "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-c-1d.png",
+   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-c-1d.png",
    "render_caption": "1D: the centre block as tall as its neighbours, D = 0.20 m.",
    "boxes": [
     {
@@ -456,5 +456,5 @@
    "analytic_volume": 0.072
   }
  ],
- "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-c-2d.png"
+ "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-c-2d.png"
 }

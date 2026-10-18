@@ -23,8 +23,8 @@ import re
 from collections import namedtuple
 
 ORG = "Sustainable Urban Systems Lab"
-REPO_URL = "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ"
-SITE = "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ"
+REPO_URL = "https://github.com/Eddy3D-Dev/AIJ-Data-Validation"
+SITE = "https://eddy3d-dev.github.io/AIJ-Data-Validation"
 TITLE = ("AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, "
          "geometry and validation API")
 ABSTRACT = ("Cleaned wind-tunnel and field data of the AIJ Urban Wind Environment benchmark, Cases A-M, with their "
@@ -32,6 +32,7 @@ ABSTRACT = ("Cleaned wind-tunnel and field data of the AIJ Urban Wind Environmen
 KEYWORDS = ["computational fluid dynamics", "CFD validation", "wind tunnel", "urban wind environment", "pedestrian wind",
             "Architectural Institute of Japan"]
 LICENSE = "CC-BY-4.0"
+API_AUTHORS = [("Karadag", "Ilker"), ("Kastner", "Patrick")]    # who made this API; the lab publishes it
 API_DOI = None        # the DOI Zenodo mints for this API's releases; None until it exists
 
 # The release a citation names: VERSION, its date in CHANGELOG.md, and the build's data version (SHA-256 of the data).
@@ -126,11 +127,12 @@ def _year(date):
 
 def api_apa(rel):
     where = doi_url(API_DOI) if API_DOI else pinned_url(rel.version)
-    return f"{ORG}. ({_year(rel.date)}). {TITLE} (Version {rel.version}) [Data set]. {where}"
+    names = _apa_names([(family, _initials(given)) for family, given in API_AUTHORS])
+    return f"{names} ({_year(rel.date)}). {TITLE} (Version {rel.version}) [Data set]. {ORG}. {where}"
 
 
 def api_bibtex(rel):
-    fields = [("author", "{" + ORG + "}"), ("title", "{" + _tex(TITLE) + "}"), ("year", str(_year(rel.date))),
+    fields = [("author", " and ".join(f"{family}, {given}" for family, given in API_AUTHORS)), ("title", "{" + _tex(TITLE) + "}"), ("year", str(_year(rel.date))),
               ("version", rel.version), ("publisher", ORG)]
     if API_DOI:
         fields.append(("doi", API_DOI))
@@ -141,7 +143,8 @@ def api_bibtex(rel):
 
 def api_csl(rel):
     y, m, d = (int(x) for x in rel.date.split("-"))
-    item = {"id": "aijuwe-api-" + rel.version, "type": "dataset", "title": TITLE, "author": [{"literal": ORG}],
+    item = {"id": "aijuwe-api-" + rel.version, "type": "dataset", "title": TITLE,
+            "author": [{"family": family, "given": given} for family, given in API_AUTHORS],
             "issued": {"date-parts": [[y, m, d]]}, "version": rel.version, "publisher": ORG, "URL": pinned_url(rel.version),
             "note": f"Data version {rel.data_version[:12]}"}
     if API_DOI:
@@ -308,8 +311,10 @@ def cff(rel, cases):
          f"date-released: {_y(rel.date)}"]
     if API_DOI:
         L.append(f"doi: {_y(API_DOI)}")
-    L += ["authors:", f"  - name: {_y(ORG)}",
-          f"repository-code: {_y(REPO_URL)}",
+    L += ["authors:"]
+    for family, given in API_AUTHORS:
+        L += _cff_person(family, given)
+    L += [f"repository-code: {_y(REPO_URL)}",
           f"url: {_y(pinned_url(rel.version))}",
           f"license: {LICENSE}",
           f"abstract: {_y(ABSTRACT)}",
@@ -334,7 +339,7 @@ def zenodo_json(cases):
         "title": TITLE,
         "description": ABSTRACT,
         "upload_type": "dataset",
-        "creators": [{"name": ORG}],
+        "creators": [{"name": f"{family}, {given}", "affiliation": ORG} for family, given in API_AUTHORS],
         "license": LICENSE.lower(),
         "keywords": KEYWORDS,
         "access_right": "open",

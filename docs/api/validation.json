@@ -1,5 +1,5 @@
 {
- "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/validation-summary.schema.json",
+ "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation-summary.schema.json",
  "schema_version": "2.4.0",
  "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
@@ -71,7 +71,7 @@
   {
    "case": "A",
    "title": "Case A — 1:1:2 building",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/validation.json",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/validation.json",
    "engines": [
     {
      "engine": "openfoam12-realizableKE",
@@ -288,7 +288,7 @@
   {
    "case": "B",
    "title": "Case B — 1:4:4 slab",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/validation.json",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/validation.json",
    "engines": [
     {
      "engine": "openfoam12-realizableKE",
@@ -496,7 +496,7 @@
   {
    "case": "C",
    "title": "Case C — 3 × 3 block array",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/validation.json",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/validation.json",
    "engines": [
     {
      "engine": "openfoam12-realizableKE",
@@ -738,7 +738,7 @@
   {
    "case": "D",
    "title": "Case D — high-rise among city blocks",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/validation.json",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/validation.json",
    "engines": [
     {
      "engine": "openfoam12-realizableKE",
@@ -905,7 +905,7 @@
   {
    "case": "E",
    "title": "Case E — Niigata district",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/validation.json",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/validation.json",
    "engines": [
     {
      "engine": "openfoam12-realizableKE",
@@ -1036,7 +1036,7 @@
   {
    "case": "F",
    "title": "Case F — Shinjuku district",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/validation.json",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/validation.json",
    "engines": [
     {
      "engine": "openfoam12-realizableKE",
@@ -1310,7 +1310,7 @@
   {
    "case": "G",
    "title": "Case G — flow behind a tree belt",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/G/validation.json",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/validation.json",
    "engines": [
     {
      "engine": "openfoam12-realizableKE",
@@ -1593,7 +1593,7 @@
   {
    "case": "H",
    "title": "Case H — 1:1:2 building with a floor point source",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/H/validation.json",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/validation.json",
    "engines": [
     {
      "engine": "openfoam12-realizableKE",
@@ -1690,7 +1690,7 @@
   {
    "case": "I",
    "title": "Case I — cube with a roof point source",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/I/validation.json",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/validation.json",
    "engines": [
     {
      "engine": "openfoam12-realizableKE",
@@ -1937,7 +1937,7 @@
   {
    "case": "J",
    "title": "Case J — 1:1:2 building, non-isothermal",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/J/validation.json",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/validation.json",
    "engines": [
     {
      "engine": "openfoam12-realizableKE",
@@ -2204,7 +2204,7 @@
   {
    "case": "K",
    "title": "Case K — 9 x 9 cube array, point source",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/validation.json",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/validation.json",
    "engines": [
     {
      "engine": "openfoam12-realizableKE",
@@ -2346,7 +2346,7 @@
   {
    "case": "L",
    "title": "Case L — 9 x 14 cube array, line source, non-isothermal",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/validation.json",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/validation.json",
    "engines": [
     {
      "engine": "openfoam12-realizableKE",
@@ -2556,7 +2556,7 @@
   {
    "case": "M",
    "title": "Case M — TPU Atsugi campus",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/validation.json",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/validation.json",
    "engines": [
     {
      "engine": "openfoam12-realizableKE",

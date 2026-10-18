@@ -58,7 +58,7 @@ description: "Case K — 9 x 9 cube array, point source: configuration, frame an
 
 ## Reference data
 
-Source in this repository: `raw/cases/case-k/RS_caseK.csv` (approach flow: `raw/cases/case-k/AF_caseK.csv`).
+Source in this repository: [`raw/cases/case-k/RS_caseK.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-k/RS_caseK.csv) (approach flow: [`raw/cases/case-k/AF_caseK.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-k/AF_caseK.csv)).
 
 The cleaned table has **203 rows** over **203 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `campaign`, `C`, `c_rms`, `concentration_ratio`.
 

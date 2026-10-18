@@ -17,12 +17,12 @@ import check_citation as K  # noqa: E402
 import citation as C  # noqa: E402
 
 REL = C.Release("1.2.3", "2030-01-02", "abcdef012345" + "0" * 52)
-ROOT = "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api"
+ROOT = "https://eddy3d-dev.github.io/AIJ-Data-Validation/api"
 T = "AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API"
 
-API_APA = f"Sustainable Urban Systems Lab. (2030). {T} (Version 1.2.3) [Data set]. {ROOT}/1.2.3/index.json"
+API_APA = f"Karadag, I., & Kastner, P. (2030). {T} (Version 1.2.3) [Data set]. Sustainable Urban Systems Lab. {ROOT}/1.2.3/index.json"
 API_BIBTEX = f'''@misc{{aijuwe_api_1_2_3,
-  author    = "{{Sustainable Urban Systems Lab}}",
+  author    = "Karadag, Ilker and Kastner, Patrick",
   title     = "{{{T}}}",
   year      = "2030",
   version   = "1.2.3",
@@ -30,7 +30,7 @@ API_BIBTEX = f'''@misc{{aijuwe_api_1_2_3,
   url       = "{ROOT}/1.2.3/index.json",
   note      = "Data set; data version abcdef012345"
 }}'''
-API_CSL = {"id": "aijuwe-api-1.2.3", "type": "dataset", "title": T, "author": [{"literal": "Sustainable Urban Systems Lab"}],
+API_CSL = {"id": "aijuwe-api-1.2.3", "type": "dataset", "title": T, "author": [{"family": "Karadag", "given": "Ilker"}, {"family": "Kastner", "given": "Patrick"}],
            "issued": {"date-parts": [[2030, 1, 2]]}, "version": "1.2.3", "publisher": "Sustainable Urban Systems Lab",
            "URL": f"{ROOT}/1.2.3/index.json", "note": "Data version abcdef012345"}
 PAPER_APA = ("Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., "
@@ -95,7 +95,7 @@ class Release(unittest.TestCase):
 
     def test_a_minted_doi_goes_everywhere(self):
         with mock.patch.object(C, "API_DOI", "10.5281/zenodo.1"):
-            self.assertTrue(C.api_apa(REL).endswith("[Data set]. https://doi.org/10.5281/zenodo.1"))
+            self.assertTrue(C.api_apa(REL).endswith("[Data set]. Sustainable Urban Systems Lab. https://doi.org/10.5281/zenodo.1"))
             self.assertIn('doi       = "10.5281/zenodo.1"', C.api_bibtex(REL))
             self.assertEqual(C.api_csl(REL)["DOI"], "10.5281/zenodo.1")
             self.assertEqual(C.api(REL)["doi"], "10.5281/zenodo.1")
@@ -165,7 +165,8 @@ class Files(unittest.TestCase):
     def test_zenodo_json(self):
         z = json.loads(C.zenodo_json(D.CASES))
         self.assertEqual((z["title"], z["upload_type"], z["license"], z["access_right"]), (T, "dataset", "cc-by-4.0", "open"))
-        self.assertEqual(z["creators"], [{"name": "Sustainable Urban Systems Lab"}])
+        self.assertEqual(z["creators"], [{"name": "Karadag, Ilker", "affiliation": "Sustainable Urban Systems Lab"},
+                                          {"name": "Kastner, Patrick", "affiliation": "Sustainable Urban Systems Lab"}])
         ids = [(r["relation"], r["identifier"]) for r in z["related_identifiers"]]
         self.assertEqual(ids[0], ("isDescribedBy", "10.1002/2475-8876.70083"))
         self.assertEqual(sorted(i for r, i in ids[1:]), sorted(m["doi"] for m in D.CASES.values()))

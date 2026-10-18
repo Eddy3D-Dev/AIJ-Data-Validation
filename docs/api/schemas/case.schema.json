@@ -1,6 +1,6 @@
 {
  "$schema": "https://json-schema.org/draft/2020-12/schema",
- "$id": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/case.schema.json",
+ "$id": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/case.schema.json",
  "title": "Case",
  "description": "One case in full: configuration, frame, units, inflow, point-table summary, geometry, validation status, known data issues and attribution.",
  "type": "object",

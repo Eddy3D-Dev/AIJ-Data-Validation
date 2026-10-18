@@ -58,7 +58,7 @@ description: "Case M — TPU Atsugi campus: configuration, frame and units, refe
 
 ## Reference data
 
-Source in this repository: `raw/cases/case-m/RS-WT_caseM.csv` (approach flow: `raw/cases/case-m/AF_caseM.csv`).
+Source in this repository: [`raw/cases/case-m/RS-WT_caseM.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-m/RS-WT_caseM.csv) (approach flow: [`raw/cases/case-m/AF_caseM.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-m/AF_caseM.csv)).
 
 The cleaned table has **330 rows** over **15 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `campaign`, `run`, `C`, `c_rms`, `concentration_ratio`.
 

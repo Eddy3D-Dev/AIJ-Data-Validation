@@ -1,5 +1,5 @@
 {
- "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/validation.schema.json",
+ "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation.schema.json",
  "schema_version": "2.4.0",
  "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
@@ -371,16 +371,16 @@
    },
    "figures": [
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-d-layout.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-d-layout.png",
      "caption": "Case D, measurement points: A split-fibre probe, WD 0; B thermistor on the site of the central block, |x/H| ≤ 0.2; C thermistor in the streets along y beside it; D thermistor in the streets along x further out. Positions in multiples of H. The split fibre stands at 33 of the 78 places of the thermistors; open dots: the 12 places where the thermistor read nothing; wind directions 0°, 22.5° and 45°."
     },
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-d-openfoam-agreement.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-d-openfoam-agreement.png",
      "caption": "Case D, OpenFOAM 12, wind directions 0°, 22.5° and 45°: measured thermistor Vs/U_H against the modelled √(|U|²+2k)/U_H (filled) and |U|/U_H (hollow), and the split-fibre |U| against the modelled |U| at 0°. At 0° the 66 thermistor points are 33 mirror pairs. Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     }
    ],
    "pairs": {
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/pairs/openfoam12-realizableKE.csv?v=fab4f6f21ad5",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/pairs/openfoam12-realizableKE.csv?v=fab4f6f21ad5",
     "path": "cases/D/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 27892,
@@ -389,7 +389,7 @@
    "pairs_columns": "instrument (thermistor / split_fibre), wind_direction_deg, point_id; x, y, z in m (model frame); measured_over_UH, the thermistor's Vs or the split fibre's |U| over U_H; scalar_over_UH and vector_over_UH, the modelled sqrt(|U|^2 + 2k) and |U| over U_H; for the split fibre also U, V, W measured (_meas) and modelled (_model) over U_H",
    "reproduce": "Eddy3D fixture TestAijCaseDContainerE2E (EDDY3D_AIJD_HEADINGS=0,22.5,45); figure validation/plot_case_d_openfoam.py",
    "source_file": "validation/results/caseD_openfoam12_realizableKE.json",
-   "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseD_openfoam12_realizableKE.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseD_openfoam12_realizableKE.json",
    "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   },
   {
@@ -600,12 +600,12 @@
    },
    "figures": [
     {
-     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/ml-surrogate-agreement.png",
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/ml-surrogate-agreement.png",
      "caption": "Eddy3D ML surrogate (Yel-2.0): measured against predicted pedestrian-height speed, one panel per case, with the 1:1 line and the factor-of-two band."
     }
    ],
    "pairs": {
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/pairs/ml-surrogate.csv?v=9dd71c9ce66b",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/pairs/ml-surrogate.csv?v=9dd71c9ce66b",
     "path": "cases/D/pairs/ml-surrogate.csv",
     "media_type": "text/csv",
     "bytes": 18339,
@@ -614,7 +614,7 @@
    "pairs_columns": "set (the scored subset); x_tunnel, y_tunnel in m (case frame); x_scene, y_scene in m (the scaled scene the surrogate was given); observed_over_UH and predicted_over_UH, the speeds divided by U_H (Case E: by U at 15.9 m)",
    "reproduce": "Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot_ml_surrogate.py",
    "source_file": "validation/results/caseD_ml.json",
-   "source_url": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/validation/results/caseD_ml.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseD_ml.json",
    "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   }
  ],
