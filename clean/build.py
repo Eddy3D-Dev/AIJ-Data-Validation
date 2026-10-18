@@ -49,16 +49,17 @@ SRC = os.path.join(HERE, "sources")
 
 with open(os.path.join(REPO, "VERSION"), encoding="utf-8") as _f:
     RELEASE_VERSION = _f.read().strip()   # the repository's release (VERSION; rules in CHANGELOG.md)
-SCHEMA_VERSION = "1.0.0"                  # the tables' columns and types (SCHEMA.md); moves only when they do
+SCHEMA_VERSION = "2.0.0"                  # the tables' columns and types (SCHEMA.md); moves only when they do
 KAPPA = 0.41
 
 POINT_COLUMNS = ["case_id", "config", "instrument", "point_id", "wind_direction_deg", "wind_direction",
-                 "x", "y", "z", "U", "V", "W", "uu", "vv", "ww", "k", "Vs", "velocity_ratio"]
-TEXT_COLUMNS = {"case_id", "config", "instrument", "wind_direction"}
+                 "x", "y", "z", "U", "V", "W", "uu", "vv", "ww", "k", "Vs", "velocity_ratio",
+                 "campaign", "run", "uv", "uw", "vw", "C", "c_rms", "concentration_ratio", "T", "T_rms", "uc", "vc", "wc", "uT", "vT", "wT", "velocity_ratio_sd", "k_ratio"]
+TEXT_COLUMNS = {"case_id", "config", "instrument", "wind_direction", "campaign", "run"}
 INT_COLUMNS = {"point_id"}
 
 UNITS = {
-    "case_id": {"unit": "", "meaning": "AIJ UWE case letter: A, B, C, D or E"},
+    "case_id": {"unit": "", "meaning": "AIJ UWE case letter, A to M"},
     "config": {"unit": "", "meaning": "configuration within the case: 'default' (A, B, D); Case C centre building '0D' | '1D' | '2D'; Case E 'bc' (before construction) | 'ac' (after construction)"},
     "instrument": {"unit": "", "meaning": "'split_fibre' = hot-wire split-fibre probe, vector components; 'thermistor' = omnidirectional scalar speed"},
     "point_id": {"unit": "", "meaning": "the tunnel's own measurement point number (No.); shared across configurations and directions of a case"},
@@ -76,6 +77,24 @@ UNITS = {
     "k": {"unit": "m^2/s^2", "meaning": "turbulent kinetic energy as published (= (uu+vv+ww)/2 wherever all three variances exist; checked)"},
     "Vs": {"unit": "m/s", "meaning": "mean omnidirectional SCALAR wind speed from a thermistor anemometer. NOT |mean velocity vector| (Case D's split-fibre |U| column is dropped, see log)"},
     "velocity_ratio": {"unit": "-", "meaning": "Case E: Vs / U_ref with U_ref = the approach-flow speed at z = 15.9 m (full scale); see manifest cases.E.normalisation"},
+    "campaign": {"unit": "", "meaning": "'wind_tunnel' (model scale) or 'field' (a full-scale observation: Cases F, G, M)"},
+    "run": {"unit": "", "meaning": "replicate label within a campaign where the dataset publishes individual runs (Case M); empty elsewhere"},
+    "uv": {"unit": "m^2/s^2", "meaning": "Reynolds shear stress <u'v'> as published"},
+    "uw": {"unit": "m^2/s^2", "meaning": "Reynolds shear stress <u'w'> as published"},
+    "vw": {"unit": "m^2/s^2", "meaning": "Reynolds shear stress <v'w'> as published"},
+    "C": {"unit": "ppm", "meaning": "mean tracer-gas concentration as published (volume fraction x 1e6 of the released gas diluted in air)"},
+    "c_rms": {"unit": "ppm", "meaning": "rms of the concentration fluctuation"},
+    "concentration_ratio": {"unit": "-", "meaning": "C / c0, c0 = q / (U_ref L_ref^2) as the benchmark defines it for the case (manifest cases.<id>.normalisation)"},
+    "T": {"unit": "degC", "meaning": "mean air temperature as published (Cases J, L)"},
+    "T_rms": {"unit": "K", "meaning": "rms of the temperature fluctuation"},
+    "uc": {"unit": "ppm m/s", "meaning": "turbulent concentration flux <u'c'>"},
+    "vc": {"unit": "ppm m/s", "meaning": "turbulent concentration flux <v'c'>"},
+    "wc": {"unit": "ppm m/s", "meaning": "turbulent concentration flux <w'c'>"},
+    "uT": {"unit": "K m/s", "meaning": "turbulent heat flux <u'theta'>"},
+    "vT": {"unit": "K m/s", "meaning": "turbulent heat flux <v'theta'>"},
+    "wT": {"unit": "K m/s", "meaning": "turbulent heat flux <w'theta'>"},
+    "velocity_ratio_sd": {"unit": "-", "meaning": "standard deviation of velocity_ratio over the observations behind a field value (Case F)"},
+    "k_ratio": {"unit": "-", "meaning": "k / U_ref^2 where the dataset publishes only normalised values (Case G; U_ref = U at the tree height)"},
 }
 APPROACH_FLOW_UNITS = {
     "case_id": UNITS["case_id"], "z": {"unit": "m", "meaning": "height above ground (model-scale metres A-D, full-scale metres E)"},
@@ -410,6 +429,7 @@ EDITORS = ["Yoshihide Tominaga (Niigata Institute of Technology)", "Hideki Kikum
 def row(**kw):
     r = {c: (("" if c in TEXT_COLUMNS else math.nan)) for c in POINT_COLUMNS}
     r["config"] = "default"
+    r["campaign"] = "wind_tunnel"
     r["wind_direction_deg"] = 0.0
     r.update(kw)
     return r

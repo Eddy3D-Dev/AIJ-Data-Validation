@@ -267,7 +267,25 @@ COLUMN_MEANING = {
     "uu": "m^2/s^2, variance of u", "vv": "m^2/s^2, variance of v", "ww": "m^2/s^2, variance of w",
     "k": "m^2/s^2, turbulent kinetic energy",
     "Vs": "m/s, mean omnidirectional scalar wind speed (thermistor); Case D also lists |U| of the split-fibre probe under Vs for its 33 vector points",
-    "velocity_ratio": "dimensionless, Vs / U(15.9 m) with U(15.9 m) = 3.935 m/s (Case E)",
+    "velocity_ratio": "dimensionless, mean speed over the case's reference speed (Case E: Vs / U(15.9 m), U(15.9 m) = 3.935 m/s; see the case's normalisation)",
+    "campaign": "'wind_tunnel' (model scale) or 'field' (a full-scale observation: Cases F, G, M)",
+    "run": "replicate label within a campaign where the dataset publishes individual runs (Case M); empty elsewhere",
+    "uv": "m^2/s^2, Reynolds shear stress <u'v'> as published",
+    "uw": "m^2/s^2, Reynolds shear stress <u'w'> as published",
+    "vw": "m^2/s^2, Reynolds shear stress <v'w'> as published",
+    "C": "ppm, mean tracer-gas concentration as published (volume fraction x 1e6 of the released gas diluted in air)",
+    "c_rms": "ppm, rms of the concentration fluctuation",
+    "concentration_ratio": "C / c0, c0 = q / (U_ref L_ref^2) as the benchmark defines it for the case (manifest cases.<id>.normalisation)",
+    "T": "degC, mean air temperature as published (Cases J, L)",
+    "T_rms": "K, rms of the temperature fluctuation",
+    "uc": "ppm m/s, turbulent concentration flux <u'c'>",
+    "vc": "ppm m/s, turbulent concentration flux <v'c'>",
+    "wc": "ppm m/s, turbulent concentration flux <w'c'>",
+    "uT": "K m/s, turbulent heat flux <u'theta'>",
+    "vT": "K m/s, turbulent heat flux <v'theta'>",
+    "wT": "K m/s, turbulent heat flux <w'theta'>",
+    "velocity_ratio_sd": "standard deviation of velocity_ratio over the observations behind a field value (Case F)",
+    "k_ratio": "k / U_ref^2 where the dataset publishes only normalised values (Case G; U_ref = U at the tree height)",
 }
 
 # (path, media type, schema name or None, description); the order is the order of index.json and openapi.json.
@@ -1059,7 +1077,7 @@ LABELS = {
     "power_law_exponent_fitted": "Power-law exponent, fitted", "power_law_exponent_paper": "Power-law exponent, data paper",
     "turbulence_intensity_at_D": "Turbulence intensity at D", "u_star_m_s": "Friction velocity u* (m/s)",
     "z0_mm": "Roughness length z₀ (mm)", "length": "Length", "variance": "Variance", "velocity": "Velocity",
-    "velocity_ratio": "Velocity ratio",
+    "velocity_ratio": "Velocity ratio", "concentration_ratio": "Concentration ratio", "campaign": "Campaign",
 }
 
 

@@ -47,7 +47,7 @@ Isolated 1:1:2 building, velocity field (split-fibre hot wire).
 
 Source in this repository: `raw/cases/case-a/RS-caseA.csv` (approach flow: `raw/cases/case-a/AF_caseA.csv`).
 
-The cleaned table has **186 rows** over **186 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`.
+The cleaned table has **186 rows** over **186 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `campaign`.
 
 | Configuration | Points |
 |---|---|

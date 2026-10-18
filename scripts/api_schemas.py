@@ -52,13 +52,16 @@ METRIC = obj(["Count", "Fb", "R"], {
 
 ENGINE_ID = {"enum": ["openfoam12-realizableKE", "openlb", "fluidx3d", "ml-surrogate"]}
 STATUS = {"enum": ["scored", "running", "pending", "not comparable"]}
-CASE_ID = {"enum": ["A", "B", "C", "D", "E"]}
+CASE_ID = {"enum": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"]}
 
 POINT = obj(["point_id", "x", "y", "z"], {
     "point_id": {"type": "integer"}, "config": {"type": "string"}, "instrument": {"type": "string"},
     "wind_direction": {"type": "string"}, "wind_direction_deg": {"type": "number"},
     "x": {"type": "number"}, "y": {"type": "number"}, "z": {"type": "number"},
-    **{q: NUM_OR_NULL for q in ("U", "V", "W", "uu", "vv", "ww", "k", "Vs", "velocity_ratio")},
+    "campaign": {"type": "string"}, "run": {"type": "string"},
+    **{q: NUM_OR_NULL for q in ("U", "V", "W", "uu", "vv", "ww", "k", "Vs", "velocity_ratio",
+                                "uv", "uw", "vw", "C", "c_rms", "concentration_ratio", "T", "T_rms",
+                                "uc", "vc", "wc", "uT", "vT", "wT", "velocity_ratio_sd", "k_ratio")},
 })
 
 FRAME = obj(["origin", "x", "y", "z"], {k: {"type": "string"} for k in ("origin", "x", "y", "z")})

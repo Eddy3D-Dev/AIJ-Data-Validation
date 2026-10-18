@@ -7,7 +7,7 @@ Base URL: https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Insti
 Fallback (raw files from the repository): https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/main/docs/api
 Repository: https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ
 Release: 2.0.0 (2026-10-18); its files, frozen: https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/v2.0.0/docs/api
-API schema version: 2.2.0. Data version (SHA-256 of the served data): 5af8c81571e452c1925b3efe58c698908066f64886eba5efd9b2f0348ecdc019.
+API schema version: 2.2.0. Data version (SHA-256 of the served data): f079fcd55a7a51a9c0fb0f97aae6f941cbc6b52495b0f69934f4f6e770229e14.
 Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark and the per-case papers.
 
 ## How to use this
@@ -48,11 +48,11 @@ Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark an
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/points.json
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/points.json
 - cases/{id}/points.csv (base URL + path, one file per value) — the same table as CSV (empty cell = not measured):
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/points.csv?v=eb21b9a8ffd3
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/points.csv?v=e8214b704821
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/points.csv?v=8cfc37fcec93
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/points.csv?v=3b1b348a109a
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/points.csv?v=0297eeade3c1
+  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/points.csv?v=a46201996b22
+  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/points.csv?v=dec97c21217a
+  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/points.csv?v=7448f0ceae37
+  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/D/points.csv?v=596246341e73
+  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/E/points.csv?v=e6e89432e706
 - cases/{id}/approach_flow.csv (base URL + path, one file per value) — the measured approach-flow profile: z (m), U (m/s), and k (m^2/s^2) or u_rms (m/s) where published:
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/approach_flow.csv?v=2f3b37fa8e43
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/approach_flow.csv?v=126a620f5698
@@ -113,11 +113,11 @@ Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark an
 
 ## Cases
 
-- A: Case A — 1:1:2 building. Isolated 1:1:2 building, velocity field (split-fibre hot wire). 186 rows, 186 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k. Engines: openfoam12-realizableKE scored, openlb scored, fluidx3d scored, ml-surrogate scored.
-- B: Case B — 1:4:4 slab. Isolated 1:4:4 slab, velocity field (split-fibre hot wire). 224 rows, 224 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k. Engines: openfoam12-realizableKE scored, openlb scored, fluidx3d scored, ml-surrogate scored.
-- C: Case C — 3 × 3 block array. 3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestrian-height scalar speed (thermistor), 3 wind directions. 1080 rows, 120 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, Vs. Engines: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored.
-- D: Case D — high-rise among city blocks. 1:1:4 tower in a regular array of 82 low blocks, pedestrian-height scalar speed (thermistor, 3 wind directions) plus a 33-point split-fibre velocity field at WD = 0. 267 rows, 78 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, Vs. Engines: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored.
-- E: Case E — Niigata district. Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 m mid-rises; pedestrian-height velocity ratio (thermistor), 16 wind directions. 2560 rows, 80 points, columns point_id, config, instrument, wind_direction, wind_direction_deg, x, y, z, velocity_ratio. Engines: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored.
+- A: Case A — 1:1:2 building. Isolated 1:1:2 building, velocity field (split-fibre hot wire). 186 rows, 186 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, campaign. Engines: openfoam12-realizableKE scored, openlb scored, fluidx3d scored, ml-surrogate scored.
+- B: Case B — 1:4:4 slab. Isolated 1:4:4 slab, velocity field (split-fibre hot wire). 224 rows, 224 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, campaign. Engines: openfoam12-realizableKE scored, openlb scored, fluidx3d scored, ml-surrogate scored.
+- C: Case C — 3 × 3 block array. 3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestrian-height scalar speed (thermistor), 3 wind directions. 1080 rows, 120 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, Vs, campaign. Engines: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored.
+- D: Case D — high-rise among city blocks. 1:1:4 tower in a regular array of 82 low blocks, pedestrian-height scalar speed (thermistor, 3 wind directions) plus a 33-point split-fibre velocity field at WD = 0. 267 rows, 78 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, Vs, campaign. Engines: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored.
+- E: Case E — Niigata district. Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 m mid-rises; pedestrian-height velocity ratio (thermistor), 16 wind directions. 2560 rows, 80 points, columns point_id, config, instrument, wind_direction, wind_direction_deg, x, y, z, velocity_ratio, campaign. Engines: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored.
 
 ## Known data issues
 

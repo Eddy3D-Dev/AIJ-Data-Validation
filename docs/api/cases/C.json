@@ -1,7 +1,7 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/case.schema.json",
  "schema_version": "2.2.0",
- "data_version": "5af8c81571e452c1925b3efe58c698908066f64886eba5efd9b2f0348ecdc019",
+ "data_version": "f079fcd55a7a51a9c0fb0f97aae6f941cbc6b52495b0f69934f4f6e770229e14",
  "license": "CC-BY-4.0",
  "id": "C",
  "slug": "case-c",
@@ -225,11 +225,11 @@
  "points": {
   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/points.json",
   "csv": {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/points.csv?v=8cfc37fcec93",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/points.csv?v=7448f0ceae37",
    "path": "cases/C/points.csv",
    "media_type": "text/csv",
-   "bytes": 45190,
-   "sha256": "8cfc37fcec9366b3c0493571a07c883d9cc2bcda837b0a62a0779d59d0457d05"
+   "bytes": 58159,
+   "sha256": "7448f0ceae37f076ba00da6b542797d81e9edd92fdecc7b49dd6813577550a80"
   },
   "source": "clean/cases/C/points.csv",
   "rows": 1080,
@@ -242,7 +242,8 @@
    "x",
    "y",
    "z",
-   "Vs"
+   "Vs",
+   "campaign"
   ],
   "counts": {
    "config": {

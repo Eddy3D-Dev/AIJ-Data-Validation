@@ -24,7 +24,25 @@ Canonical point columns (every case is a subset of these):
     uu, vv, ww           float   m^2/s^2, velocity VARIANCES (Case A's rms values are squared)
     k                    float   m^2/s^2, turbulent kinetic energy
     Vs                   float   m/s, mean scalar (omnidirectional, thermistor) wind speed
-    velocity_ratio       float   dimensionless, Vs / U_ref (Case E; U_ref = U(15.9 m) = 3.935 m/s)
+    velocity_ratio       float   dimensionless, Vs / U_ref (Case E: U_ref = U(15.9 m) = 3.935 m/s; F, G: see the case)
+    campaign             str     -: 'wind_tunnel' (model scale) or 'field' (a full-scale observation: Cases F, G, M)
+    run                  str     -: replicate label within a campaign where the dataset publishes individual runs (Case M); empty elsewhere
+    uv                   float   m^2/s^2: Reynolds shear stress <u'v'> as published
+    uw                   float   m^2/s^2: Reynolds shear stress <u'w'> as published
+    vw                   float   m^2/s^2: Reynolds shear stress <v'w'> as published
+    C                    float   ppm: mean tracer-gas concentration as published (volume fraction x 1e6 of the released gas diluted in air)
+    c_rms                float   ppm: rms of the concentration fluctuation
+    concentration_ratio  float   -: C / c0, c0 = q / (U_ref L_ref^2) as the benchmark defines it for the case (manifest cases.<id>.normalisation)
+    T                    float   degC: mean air temperature as published (Cases J, L)
+    T_rms                float   K: rms of the temperature fluctuation
+    uc                   float   ppm m/s: turbulent concentration flux <u'c'>
+    vc                   float   ppm m/s: turbulent concentration flux <v'c'>
+    wc                   float   ppm m/s: turbulent concentration flux <w'c'>
+    uT                   float   K m/s: turbulent heat flux <u'theta'>
+    vT                   float   K m/s: turbulent heat flux <v'theta'>
+    wT                   float   K m/s: turbulent heat flux <w'theta'>
+    velocity_ratio_sd    float   -: standard deviation of velocity_ratio over the observations behind a field value (Case F)
+    k_ratio              float   -: k / U_ref^2 where the dataset publishes only normalised values (Case G; U_ref = U at the tree height)
 
 Missing / unmeasured values are None (null in JSON, empty in CSV).
 """
@@ -43,7 +61,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, os.pardir))
 
 POINT_COLUMNS = ["point_id", "config", "instrument", "wind_direction", "wind_direction_deg",
-                 "x", "y", "z", "U", "V", "W", "uu", "vv", "ww", "k", "Vs", "velocity_ratio"]
+                 "x", "y", "z", "U", "V", "W", "uu", "vv", "ww", "k", "Vs", "velocity_ratio",
+                 "campaign", "run", "uv", "uw", "vw", "C", "c_rms", "concentration_ratio", "T", "T_rms", "uc", "vc", "wc", "uT", "vT", "wT", "velocity_ratio_sd", "k_ratio"]
 
 COMPASS = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
            "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
@@ -404,6 +423,7 @@ def _read_csv(path):
 def _row(**kw):
     r = {c: None for c in POINT_COLUMNS}
     r["config"] = "default"
+    r["campaign"] = "wind_tunnel"
     r["instrument"] = ""
     r["wind_direction"] = ""
     r["wind_direction_deg"] = 0.0

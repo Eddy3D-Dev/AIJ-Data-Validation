@@ -52,7 +52,7 @@ nav_order: 3
 
 Source in this repository: `raw/cases/case-c/RS_caseC.csv` (approach flow: `raw/cases/case-c/AF_caseC.csv`).
 
-The cleaned table has **1080 rows** over **120 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `Vs`.
+The cleaned table has **1080 rows** over **120 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `Vs`, `campaign`.
 
 | Configuration | Points |
 |---|---|

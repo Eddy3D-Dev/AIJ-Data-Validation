@@ -2,7 +2,7 @@
  "points": {
   "case_id": {
    "unit": "",
-   "meaning": "AIJ UWE case letter: A, B, C, D or E"
+   "meaning": "AIJ UWE case letter, A to M"
   },
   "config": {
    "unit": "",
@@ -71,12 +71,84 @@
   "velocity_ratio": {
    "unit": "-",
    "meaning": "Case E: Vs / U_ref with U_ref = the approach-flow speed at z = 15.9 m (full scale); see manifest cases.E.normalisation"
+  },
+  "campaign": {
+   "unit": "",
+   "meaning": "'wind_tunnel' (model scale) or 'field' (a full-scale observation: Cases F, G, M)"
+  },
+  "run": {
+   "unit": "",
+   "meaning": "replicate label within a campaign where the dataset publishes individual runs (Case M); empty elsewhere"
+  },
+  "uv": {
+   "unit": "m^2/s^2",
+   "meaning": "Reynolds shear stress <u'v'> as published"
+  },
+  "uw": {
+   "unit": "m^2/s^2",
+   "meaning": "Reynolds shear stress <u'w'> as published"
+  },
+  "vw": {
+   "unit": "m^2/s^2",
+   "meaning": "Reynolds shear stress <v'w'> as published"
+  },
+  "C": {
+   "unit": "ppm",
+   "meaning": "mean tracer-gas concentration as published (volume fraction x 1e6 of the released gas diluted in air)"
+  },
+  "c_rms": {
+   "unit": "ppm",
+   "meaning": "rms of the concentration fluctuation"
+  },
+  "concentration_ratio": {
+   "unit": "-",
+   "meaning": "C / c0, c0 = q / (U_ref L_ref^2) as the benchmark defines it for the case (manifest cases.<id>.normalisation)"
+  },
+  "T": {
+   "unit": "degC",
+   "meaning": "mean air temperature as published (Cases J, L)"
+  },
+  "T_rms": {
+   "unit": "K",
+   "meaning": "rms of the temperature fluctuation"
+  },
+  "uc": {
+   "unit": "ppm m/s",
+   "meaning": "turbulent concentration flux <u'c'>"
+  },
+  "vc": {
+   "unit": "ppm m/s",
+   "meaning": "turbulent concentration flux <v'c'>"
+  },
+  "wc": {
+   "unit": "ppm m/s",
+   "meaning": "turbulent concentration flux <w'c'>"
+  },
+  "uT": {
+   "unit": "K m/s",
+   "meaning": "turbulent heat flux <u'theta'>"
+  },
+  "vT": {
+   "unit": "K m/s",
+   "meaning": "turbulent heat flux <v'theta'>"
+  },
+  "wT": {
+   "unit": "K m/s",
+   "meaning": "turbulent heat flux <w'theta'>"
+  },
+  "velocity_ratio_sd": {
+   "unit": "-",
+   "meaning": "standard deviation of velocity_ratio over the observations behind a field value (Case F)"
+  },
+  "k_ratio": {
+   "unit": "-",
+   "meaning": "k / U_ref^2 where the dataset publishes only normalised values (Case G; U_ref = U at the tree height)"
   }
  },
  "approach_flow": {
   "case_id": {
    "unit": "",
-   "meaning": "AIJ UWE case letter: A, B, C, D or E"
+   "meaning": "AIJ UWE case letter, A to M"
   },
   "z": {
    "unit": "m",
@@ -106,7 +178,7 @@
  "directions": {
   "case_id": {
    "unit": "",
-   "meaning": "AIJ UWE case letter: A, B, C, D or E"
+   "meaning": "AIJ UWE case letter, A to M"
   },
   "config": {
    "unit": "",

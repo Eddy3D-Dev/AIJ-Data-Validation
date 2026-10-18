@@ -1,7 +1,7 @@
 {
  "name": "AIJ UWE benchmark — cleaned release, Cases A-E",
  "version": "2.0.0",
- "schema_version": "1.0.0",
+ "schema_version": "2.0.0",
  "licence": {
   "data": "CC BY 4.0",
   "url": "https://creativecommons.org/licenses/by/4.0/",
@@ -29,7 +29,7 @@
  "columns": {
   "case_id": {
    "unit": "",
-   "meaning": "AIJ UWE case letter: A, B, C, D or E"
+   "meaning": "AIJ UWE case letter, A to M"
   },
   "config": {
    "unit": "",
@@ -98,6 +98,78 @@
   "velocity_ratio": {
    "unit": "-",
    "meaning": "Case E: Vs / U_ref with U_ref = the approach-flow speed at z = 15.9 m (full scale); see manifest cases.E.normalisation"
+  },
+  "campaign": {
+   "unit": "",
+   "meaning": "'wind_tunnel' (model scale) or 'field' (a full-scale observation: Cases F, G, M)"
+  },
+  "run": {
+   "unit": "",
+   "meaning": "replicate label within a campaign where the dataset publishes individual runs (Case M); empty elsewhere"
+  },
+  "uv": {
+   "unit": "m^2/s^2",
+   "meaning": "Reynolds shear stress <u'v'> as published"
+  },
+  "uw": {
+   "unit": "m^2/s^2",
+   "meaning": "Reynolds shear stress <u'w'> as published"
+  },
+  "vw": {
+   "unit": "m^2/s^2",
+   "meaning": "Reynolds shear stress <v'w'> as published"
+  },
+  "C": {
+   "unit": "ppm",
+   "meaning": "mean tracer-gas concentration as published (volume fraction x 1e6 of the released gas diluted in air)"
+  },
+  "c_rms": {
+   "unit": "ppm",
+   "meaning": "rms of the concentration fluctuation"
+  },
+  "concentration_ratio": {
+   "unit": "-",
+   "meaning": "C / c0, c0 = q / (U_ref L_ref^2) as the benchmark defines it for the case (manifest cases.<id>.normalisation)"
+  },
+  "T": {
+   "unit": "degC",
+   "meaning": "mean air temperature as published (Cases J, L)"
+  },
+  "T_rms": {
+   "unit": "K",
+   "meaning": "rms of the temperature fluctuation"
+  },
+  "uc": {
+   "unit": "ppm m/s",
+   "meaning": "turbulent concentration flux <u'c'>"
+  },
+  "vc": {
+   "unit": "ppm m/s",
+   "meaning": "turbulent concentration flux <v'c'>"
+  },
+  "wc": {
+   "unit": "ppm m/s",
+   "meaning": "turbulent concentration flux <w'c'>"
+  },
+  "uT": {
+   "unit": "K m/s",
+   "meaning": "turbulent heat flux <u'theta'>"
+  },
+  "vT": {
+   "unit": "K m/s",
+   "meaning": "turbulent heat flux <v'theta'>"
+  },
+  "wT": {
+   "unit": "K m/s",
+   "meaning": "turbulent heat flux <w'theta'>"
+  },
+  "velocity_ratio_sd": {
+   "unit": "-",
+   "meaning": "standard deviation of velocity_ratio over the observations behind a field value (Case F)"
+  },
+  "k_ratio": {
+   "unit": "-",
+   "meaning": "k / U_ref^2 where the dataset publishes only normalised values (Case G; U_ref = U at the tree height)"
   }
  },
  "counts": {
@@ -158,7 +230,9 @@
     "uu",
     "vv",
     "ww",
-    "k"
+    "k",
+    "campaign",
+    "run"
    ],
    "counts": {
     "rows": 186,
@@ -174,7 +248,23 @@
     },
     "nan_per_column": {
      "Vs": 186,
-     "velocity_ratio": 186
+     "velocity_ratio": 186,
+     "uv": 186,
+     "uw": 186,
+     "vw": 186,
+     "C": 186,
+     "c_rms": 186,
+     "concentration_ratio": 186,
+     "T": 186,
+     "T_rms": 186,
+     "uc": 186,
+     "vc": 186,
+     "wc": 186,
+     "uT": 186,
+     "vT": 186,
+     "wT": 186,
+     "velocity_ratio_sd": 186,
+     "k_ratio": 186
     }
    },
    "configurations": [
@@ -328,7 +418,9 @@
     "uu",
     "vv",
     "ww",
-    "k"
+    "k",
+    "campaign",
+    "run"
    ],
    "counts": {
     "rows": 224,
@@ -344,7 +436,23 @@
     },
     "nan_per_column": {
      "Vs": 224,
-     "velocity_ratio": 224
+     "velocity_ratio": 224,
+     "uv": 224,
+     "uw": 224,
+     "vw": 224,
+     "C": 224,
+     "c_rms": 224,
+     "concentration_ratio": 224,
+     "T": 224,
+     "T_rms": 224,
+     "uc": 224,
+     "vc": 224,
+     "wc": 224,
+     "uT": 224,
+     "vT": 224,
+     "wT": 224,
+     "velocity_ratio_sd": 224,
+     "k_ratio": 224
     }
    },
    "configurations": [
@@ -494,7 +602,9 @@
     "x",
     "y",
     "z",
-    "Vs"
+    "Vs",
+    "campaign",
+    "run"
    ],
    "counts": {
     "rows": 1080,
@@ -520,7 +630,23 @@
      "vv": 1080,
      "ww": 1080,
      "k": 1080,
-     "velocity_ratio": 1080
+     "velocity_ratio": 1080,
+     "uv": 1080,
+     "uw": 1080,
+     "vw": 1080,
+     "C": 1080,
+     "c_rms": 1080,
+     "concentration_ratio": 1080,
+     "T": 1080,
+     "T_rms": 1080,
+     "uc": 1080,
+     "vc": 1080,
+     "wc": 1080,
+     "uT": 1080,
+     "vT": 1080,
+     "wT": 1080,
+     "velocity_ratio_sd": 1080,
+     "k_ratio": 1080
     }
    },
    "configurations": [
@@ -827,7 +953,9 @@
     "vv",
     "ww",
     "k",
-    "Vs"
+    "Vs",
+    "campaign",
+    "run"
    ],
    "counts": {
     "rows": 267,
@@ -853,7 +981,23 @@
      "ww": 234,
      "k": 234,
      "Vs": 69,
-     "velocity_ratio": 267
+     "velocity_ratio": 267,
+     "uv": 267,
+     "uw": 267,
+     "vw": 267,
+     "C": 267,
+     "c_rms": 267,
+     "concentration_ratio": 267,
+     "T": 267,
+     "T_rms": 267,
+     "uc": 267,
+     "vc": 267,
+     "wc": 267,
+     "uT": 267,
+     "vT": 267,
+     "wT": 267,
+     "velocity_ratio_sd": 267,
+     "k_ratio": 267
     }
    },
    "configurations": [
@@ -1106,7 +1250,9 @@
     "x",
     "y",
     "z",
-    "velocity_ratio"
+    "velocity_ratio",
+    "campaign",
+    "run"
    ],
    "counts": {
     "rows": 2560,
@@ -1144,7 +1290,23 @@
      "vv": 2560,
      "ww": 2560,
      "k": 2560,
-     "Vs": 2560
+     "Vs": 2560,
+     "uv": 2560,
+     "uw": 2560,
+     "vw": 2560,
+     "C": 2560,
+     "c_rms": 2560,
+     "concentration_ratio": 2560,
+     "T": 2560,
+     "T_rms": 2560,
+     "uc": 2560,
+     "vc": 2560,
+     "wc": 2560,
+     "uT": 2560,
+     "vT": 2560,
+     "wT": 2560,
+     "velocity_ratio_sd": 2560,
+     "k_ratio": 2560
     }
    },
    "configurations": [

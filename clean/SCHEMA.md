@@ -1,6 +1,6 @@
-# clean/ — schema of the cleaned AIJ UWE release (Cases A–E)
+# clean/ — schema of the cleaned AIJ UWE release (Cases A–M)
 
-Version `1.0.0` (schema `1.0.0`). Built by `clean/build.py` from the published Zenodo files; every
+Schema `2.0.0` (release `3.0.0`; schema 1.0.0 had 18 columns, 2.0.0 adds the 18 below the line, appended, so every old column keeps its position). Built by `clean/build.py` from the published Zenodo files; every
 transform is listed in `build.log`, every validity check in `checks.json`, every source file with its
 SHA-256 in `manifest.json`. **The headers carry no units.** Units live in `units.json` (and in each
 Parquet file's schema metadata under the keys `units` and `column_meaning`).
@@ -14,7 +14,7 @@ site API (`clean/manifest.json` → `cases.<id>.files.points_csv`).
 
 | column | type | unit | meaning |
 |---|---|---|---|
-| `case_id` | text | — | `A` `B` `C` `D` `E` |
+| `case_id` | text | — | `A` … `M` |
 | `config` | text | — | `default` (A, B, D) · C: centre building `0D` / `1D` / `2D` · E: `bc` before / `ac` after construction |
 | `instrument` | text | — | `split_fibre` (hot-wire split-fibre probe: vector components) · `thermistor` (omnidirectional scalar speed) |
 | `point_id` | int | — | the tunnel's own point number (`No.`); shared by every configuration and direction of a case |
@@ -25,7 +25,17 @@ site API (`clean/manifest.json` → `cases.<id>.files.points_csv`).
 | `uu` `vv` `ww` | float | m²/s² | velocity variances ⟨u′u′⟩ … (A publishes rms; squared here) |
 | `k` | float | m²/s² | turbulent kinetic energy as published (= ½(uu+vv+ww) wherever all three exist — checked) |
 | `Vs` | float | m/s | mean omnidirectional scalar speed from a thermistor. Never a vector magnitude |
-| `velocity_ratio` | float | — | E only: Vs / U_ref, U_ref = approach-flow speed at z = 15.9 m full scale (3.935 m/s, section 5) |
+| `velocity_ratio` | float | — | mean speed over the case's reference speed: E: Vs / U_ref, U_ref = approach-flow speed at z = 15.9 m full scale (3.935 m/s, section 5); F, G: see the case's `normalisation` in `manifest.json` |
+| `campaign` | text | — | `wind_tunnel` (model scale) or `field` (a full-scale observation: F, G, M) |
+| `run` | text | — | replicate label where the dataset publishes individual runs (M); empty elsewhere |
+| `uv` `uw` `vw` | float | m²/s² | Reynolds shear stresses as published |
+| `C` `c_rms` | float | ppm | mean and rms tracer-gas concentration as published |
+| `concentration_ratio` | float | — | C / c0, c0 = q / (U_ref L_ref²) as the benchmark defines it for the case (`manifest.json`, `cases.<id>.normalisation`) |
+| `T` `T_rms` | float | °C, K | mean air temperature and its rms (J, L) |
+| `uc` `vc` `wc` | float | ppm·m/s | turbulent concentration fluxes |
+| `uT` `vT` `wT` | float | K·m/s | turbulent heat fluxes |
+| `velocity_ratio_sd` | float | — | standard deviation of `velocity_ratio` over the observations behind a field value (F) |
+| `k_ratio` | float | — | k / U_ref² where only normalised values are published (G) |
 
 Rules:
 
