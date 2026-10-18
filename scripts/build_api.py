@@ -102,16 +102,20 @@ CHANGELOG = [
         "`fallback_base_url` name that copy, and `release.base_url` (the raw files at the release tag) now ends in the "
         "release number; paths below it are unchanged.",
         "Added: Cases F to M, thirteen cases in all (the `case_ids` of index.json): their cases.json entries, `cases/{id}.json`, "
-        "points, approach flow, geometry (STL) and validation documents, and `pairs` files for the runs that exist. Six of them "
-        "(F, G, J, K, L, M) have no validation run yet: every engine is `pending` and `results` is empty. `cases.json` and "
+        "points, approach flow, geometry (STL) and validation documents, and `pairs` files for the runs that exist. Two of them "
+        "(F, M) have no validation run yet: every engine is `pending` and `results` is empty. `cases.json` and "
         "`validation.json` list thirteen cases (the schemas fixed the length at five).",
         "Added: the point table's columns of schema 2.0.0 (the cleaned release) are served in `points.json` and `points.csv`: "
         "`campaign` and `run`, `uv` `uw` `vw`, `C` `c_rms` `concentration_ratio`, `T` `T_rms`, `uc` `vc` `wc`, `uT` `vT` `wT`, "
         "`velocity_ratio_sd` and `k_ratio`; `instrument` takes the new values `cup_anemometer`, `sonic_anemometer`, `ldv`, "
         "`hydrocarbon_analyser` and `sorbent_gc_ecd`. A document lists only the columns a case has.",
-        "Added: two engines, `openfoam12-kEpsilon` and `openfoam12-kOmegaSST`, which exist for Case I only (the closures other than "
-        "realizable k-epsilon, solved on one mesh). `engines` in `cases.json` and `cases/{id}.json` lists an engine only for the "
-        "cases it applies to.",
+        "Added: four engines, `openfoam12-kEpsilon` and `openfoam12-kOmegaSST`, which exist for Case I only (the closures other than "
+        "realizable k-epsilon, solved on one mesh), and `umf-realizableKE` and `umf-buoyantKEpsilon`, Eddy3D's buoyant microclimate engine "
+        "(urbanMicroclimateFoam, an OpenFOAM 12 solver) under its two closures, which exist for Cases J and L (`umf-buoyantKEpsilon` for J only). "
+        "`engines` in `cases.json` and `cases/{id}.json` lists an engine only for the cases it applies to.",
+        "Added to each result of validation.json: `notes`, a list of the caveats that come with the run (what the model leaves out, what the "
+        "measurement cannot say, how the solve ended); empty where the run has none recorded. Cases G, J and L have several runs on one engine "
+        "(Case G: one per arm of a drag sweep, as `configuration`), all sharing the engine's pairs file, whose first column names the arm.",
         "Why MINOR: nothing is renamed or removed. Every unversioned URL and field keeps its meaning; the layout, the cases, "
         "documents, a schema, columns, engines and three index.json fields are additions.",
     ]},
@@ -167,6 +171,8 @@ ENGINES = [
     {"id": "openfoam12-realizableKE", "name": "OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor)", "kind": "RANS"},
     {"id": "openfoam12-kEpsilon", "name": "OpenFOAM 12, standard k-epsilon (Eddy3D Outdoor)", "kind": "RANS"},
     {"id": "openfoam12-kOmegaSST", "name": "OpenFOAM 12, k-omega SST (Eddy3D Outdoor)", "kind": "RANS"},
+    {"id": "umf-realizableKE", "name": "urbanMicroclimateFoam, realizable k-epsilon (Eddy3D Outdoor+)", "kind": "RANS"},
+    {"id": "umf-buoyantKEpsilon", "name": "urbanMicroclimateFoam, buoyantKEpsilon (Eddy3D Outdoor+)", "kind": "RANS"},
     {"id": "openlb", "name": "OpenLB (Eddy3D LBM)", "kind": "LBM"},
     {"id": "fluidx3d", "name": "FluidX3D (Eddy3D GPU LBM)", "kind": "LBM"},
     {"id": "ml-surrogate", "name": "Eddy3D ML wind surrogate (pedestrian height)", "kind": "surrogate"},
@@ -180,9 +186,9 @@ STATUS_MEANING = {
                        "this hardware runs, FluidX3D without a ground wall function; the measurement behind each is on the "
                        "Validation page"),
 }
-# The closures other than realizable k-epsilon were solved for Case I alone: they are listed for the cases they apply to
-# (ENGINE_STATUS has no entry for them elsewhere) and left out of the all-cases matrix.
-CLOSURE_VARIANTS = {"openfoam12-kEpsilon", "openfoam12-kOmegaSST"}
+# The closures other than realizable k-epsilon were solved for Case I alone (simpleFoam) and Case J (UMF): they are listed for the cases they apply to
+# (ENGINE_STATUS has no entry for them elsewhere) and left out of the all-cases matrix. The matrix has one column for UMF, which applies to J and L only.
+CLOSURE_VARIANTS = {"openfoam12-kEpsilon", "openfoam12-kOmegaSST", "umf-buoyantKEpsilon"}
 _NOT_RUN = {"openfoam12-realizableKE": "pending", "openlb": "pending", "fluidx3d": "pending", "ml-surrogate": "pending"}
 ENGINE_STATUS = {
     "A": {"openfoam12-realizableKE": "scored", "openlb": "scored", "fluidx3d": "scored", "ml-surrogate": "scored"},
@@ -190,15 +196,16 @@ ENGINE_STATUS = {
     "C": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "not comparable", "ml-surrogate": "scored"},
     "D": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "not comparable", "ml-surrogate": "scored"},
     "E": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "not comparable", "ml-surrogate": "scored"},
-    # Cases F to M: Eddy3D's fixtures for F, G, J, K, L and M are written and their solves are queued, so every engine is
-    # pending there; H and I have OpenFOAM runs (I under three closures). Nothing else has been run on F to M.
+    # Cases F to M: H, I, G and K have OpenFOAM 12 runs (I under three closures, G as a drag sweep); J and L, which are non-isothermal, have runs on
+    # UMF (J under two closures) and none on the isothermal solver. Eddy3D's fixtures for F and M are written and their solves are queued, so every
+    # engine is pending there. Nothing else has been run on F to M.
     "F": dict(_NOT_RUN),
-    "G": dict(_NOT_RUN),
+    "G": {**_NOT_RUN, "openfoam12-realizableKE": "scored"},
     "H": {**_NOT_RUN, "openfoam12-realizableKE": "scored"},
     "I": {**_NOT_RUN, "openfoam12-realizableKE": "scored", "openfoam12-kEpsilon": "scored", "openfoam12-kOmegaSST": "scored"},
-    "J": dict(_NOT_RUN),
-    "K": dict(_NOT_RUN),
-    "L": dict(_NOT_RUN),
+    "J": {**_NOT_RUN, "umf-realizableKE": "scored", "umf-buoyantKEpsilon": "scored"},
+    "K": {**_NOT_RUN, "openfoam12-realizableKE": "scored"},
+    "L": {**_NOT_RUN, "umf-realizableKE": "scored"},
     "M": dict(_NOT_RUN),
 }
 ENGINE_STATUS = {c: {e["id"]: st[e["id"]] for e in ENGINES if e["id"] in st} for c, st in ENGINE_STATUS.items()}   # in ENGINES order
@@ -223,9 +230,10 @@ PAIRS_ML = ("set (the scored subset); x_tunnel, y_tunnel in m (case frame); x_sc
             "surrogate was given); observed_over_UH and predicted_over_UH, the speeds divided by U_H (Case E: by U at 15.9 m)")
 
 
-def run(case, engine, configuration, results, headline, figures, reproduce, pairs, pairs_columns):
+def run(case, engine, configuration, results, headline, figures, reproduce, pairs, pairs_columns, normalisation=None, notes=()):
+    """normalisation: this run's own sentence where the default (velocities by U_H, k by U_H^2) does not say it; notes: the caveats that come with it."""
     return {"case": case, "engine": engine, "configuration": configuration, "results": results, "headline": headline,
-            "figures": figures, "reproduce": reproduce, "pairs": pairs, "pairs_columns": pairs_columns,
+            "figures": figures, "reproduce": reproduce, "pairs": pairs, "pairs_columns": pairs_columns, "normalisation": normalisation, "notes": list(notes),
             "run_id": f"{case}.{engine}" + (f".{configuration}" if configuration else "")}
 
 
@@ -329,6 +337,146 @@ RUNS = [
         _HI_REPRO.format(fixture="TestAijCubeContainerE2E (k-ω SST, 1:60)"), "caseI_openfoam12_kOmegaSST_pairs.csv", PAIRS_I),
 ]
 
+# ---- Cases K, G, J and L (Eddy3D's solves of 2026-10-18, scored against the cleaned tables) ------------------------------------------------------------
+PAIRS_K = ("point_id (the table's: the row order of RS_caseK.csv); x, y, z in m (model scale, case frame: +x streamwise, V positive toward +y); region (aboveRoof, lateralStreet = a street along the wind, "
+           "crossStreet = across it) and near_source (1 within one cube height of the floor outlet); U, V, W and k measured (_meas: the cleaned workbook values) and modelled (_model), velocities by "
+           "the stated U_H = 2.33 m/s on both sides, k by U_H^2; cstar_meas, the measured C/c0 (c0 = 429.2 ppm), and cstar_sct03 / _sct05 / _sct07, the modelled c* = c U_H H^2 / Q for turbulent "
+           "Schmidt numbers 0.3, 0.5 and 0.7")
+PAIRS_G = ("arm (open-field, pine, conifer, screen or half-belt-conifer: the five runs share this file), point_id (the table's, 1-28), x (m behind the leeward face) and z (m above ground), full scale; "
+           "U_meas and k_meas, the field's U/U_H and k/U_H^2; U_model and Urms_model, the modelled |U| and sqrt(|U|^2 + 2k) over the arm's own U(7 m) at x = -35 m (u7_mps, in m/s), k_model, k over "
+           "u7_mps^2; U_model_imposed and Urms_model_imposed, the same over the imposed U_H = 5.299 m/s")
+PAIRS_J = ("point_id (the table's; point 153, a repeat of point 1, is left out); x, y, z in m (the tunnel's units and frame: x streamwise, the leeward wall at x = 0, V positive toward +y); region (aboveRoof, "
+           "upstream, beside, nearWake, farWake) and near_source (1 within a quarter of the building height of the source, at or below z = H/4); U, V, W and k measured (_meas: the cleaned workbook values) "
+           "and modelled (_model), velocities by U_H (1.4581 m/s for the measurement, the Froude-scaled 11.53 m/s for the model), k by U_H^2; T_meas_degC and T_model_degC; theta_meas and theta_model, "
+           "(T_f - T)/(T_f - T_H) with T_f = 45.8 degC and T_f - T_H = 33.63 K; cstar_meas, the measured C/c0 (c0 = 12.28 ppm), and cstar_sct03 / _sct05 / _sct07, the modelled ethylene mass fraction "
+           "as ppm over the same c0, for turbulent Schmidt numbers 0.3, 0.5 and 0.7")
+PAIRS_L = ("point_id (the table's); x, y, z in m (the tunnel's units and frame: x streamwise, z from the block floor, V positive toward +y); region (road = in the streets between the cubes, block = above "
+           "a cube, surround = beside the array); U, V, W, S (the speed |U|) and k measured (_meas: the cleaned workbook values) and modelled (_model), by U_H (1.3394 m/s for the measurement, the "
+           "Froude-scaled 13.39 m/s for the model) and U_H^2; T_meas_degC and T_model_degC; theta_meas and theta_model, (T_f - T)/(T_f - T_H) with T_f = 45.01 degC and T_f - T_H = 30.26 K; cstar_meas, "
+           "the measured C/c0 (c0 = 1728 ppm), and cstar_sct03 / _sct05 / _sct07, the modelled ethylene mass fraction as ppm over the same c0; U_approach and theta_approach, the model's own undisturbed "
+           "approach column at the point's height: the control a model of the array has to beat")
+_KG_REPRO = ("Eddy3D fixture {fixture} ({what}; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, {cells} cells, solved 2026-10-18); figures validation/plot_cases_gk_openfoam.py; scores recomputed "
+             "from the pairs by validation/dispersion_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`")
+_JL_REPRO = ("Eddy3D fixture {fixture} ({what}; urbanMicroclimateFoam, {closure}, {cells} air cells at Froude scale {scale}, 1500 air iterations, solved 2026-10-18); figures validation/plot_cases_jl_umf.py; "
+             "scores recomputed from the pairs by validation/dispersion_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`")
+_K_HEADLINE = {"U": "velocity.U", "V": "velocity.V", "W": "velocity.W", "k": "k",
+               **{f"c*, Sct {s}": f"cstar.c_sct{s.replace('0.', '0')}" for s in ("0.3", "0.5", "0.7")},
+               **{f"c*, Sct {s}, without the 4 near-source points": f"cstar.c_sct{s.replace('0.', '0')}.excludingNearSource" for s in ("0.3", "0.5", "0.7")},
+               "U, y-symmetric ceiling (control)": "velocity.U.symmetryCeiling", "c*, y-symmetric ceiling (control)": "cstar.symmetryCeiling"}
+_K_NORM = ("U, V, W by the stated U_H = 2.33 m/s and k by U_H^2, the same divisor on both sides; c* is the measured C/c0 (c0 = q/(U_H H^2) = 429.2 ppm) against the modelled c U_H H^2/Q (full scale, "
+           "Q = 1 kg/s) for turbulent Schmidt numbers 0.3, 0.5 and 0.7, with one detection limit of 10^-3 of the largest measured value; hit rate D = 0.25, W = 0.05 in U_H")
+_K_NOTES = [
+    "The inflow is the measured approach profile (3.23 m/s at 0.2 m, z0 fitted to 13.5 mm), not the stated U_H = 2.33 m/s, which is not on that profile: the solved U at z = H is 1.97 m/s, 0.85 of the "
+    "stated U_H (the fixture's inflow.U.modelAtH). Measured and modelled velocities are both divided by 2.33 m/s, so the modelled velocity sits under the measured mean.",
+    "The inlet k from that log law, u*^2/sqrt(Cmu) = 0.77 m^2/s^2, is about 1.7 times the tunnel's 0.33 to 0.45 (the fixture's own remark).",
+    "The first measurement point is the source location: the four points within one cube height of the floor outlet hold the four largest c* (8.73, 5.31, 3.02 and 2.86 against 1.03 for the next), "
+    "and the model's source is the 4 cells (0.75 m across) that a 0.44 m square cuts, not the 5 mm outlet. Those four points are scored with and without.",
+    "47 of the 203 points (the z = 4 mm plane, 0.4 m at 1:100) lie inside the first ground cell (0.735 m): their modelled values are that cell's, pulled toward the wall's zero by the point interpolation.",
+    "The measured plume is not y-symmetric (C at -y exceeds C at +y at 74 of 74 mirror pairs; the fixture puts its lateral centroid 0.011 to 0.017 m toward -y at every station) and the solve is. The "
+    "'y-symmetric ceiling' controls score the measurement against the mean of each mirror pair, the best a y-symmetric model can do on this file.",
+    "V has a constant offset and almost no antisymmetric part, so it does not score the flow's divergence; a model with V = 0 everywhere hits 0.91 of the points at W = 0.05 U_H, so V's hit rate says nothing.",
+    "The solve stopped at the 3000-iteration limit with the residualControl unmet (no 'solution converged' line); the epsilon initial residual at the last iteration was 7e-3.",
+    "The fixture's structure checks passed. The air over the roofs outruns the street along the wind, which outruns the cavity across it; the plume leaves the source, is clean 1 to 1.5 H ahead of the "
+    "array, decays through four cavities and is cleaner over the roofs than in them; the solved velocity is y-symmetric to twice the tunnel's own mirror-pair difference. They set no band on the statistics.",
+]
+_G_ARMS = [("open-field", "no belt", 90576, " (control: no belt)"), ("pine", "pine, Cd·LAD 0.30 1/m", 90576, ""), ("conifer", "conifer, Cd·LAD 0.625 1/m", 90576, ""),
+           ("screen", "screen, Cd·LAD 0.875 1/m", 90576, ""), ("half-belt-conifer", "the real 74 m belt as a half domain, conifer, Cd·LAD 0.625 1/m", 625252, "")]
+_G_NORM = ("the field's U/U_H and k/U_H^2 (U_H = the wind at the tree height, 7 m, during each period) against the model's |U| and k over the model's own U(7 m) at x = -35 m ('own approach') and, in the "
+           "second set of scores, over the imposed U_H = 5.299 m/s ('imposed'); the model is also scored as sqrt(|U|^2 + 2k), because the field is the mean of an instantaneous speed; hit rate D = 0.25, W = 0.05")
+_G_NOTES = [
+    "LAD and Cd are not in the dataset (only the shading rate, 81 %), so this is a calibration, not a validation. The three crowns are entries of the Eddy3D vegetation library (Cd·LAD 0.30, 0.625 and "
+    "0.875 1/m, loss coefficients 1.2, 2.5 and 3.5), nothing is fitted, and the arm nearest the 28 values only says which library crown the belt resembles. The arms are published side by side, none chosen.",
+    "Eddy3D models trees as a Darcy-Forchheimer momentum sink only: there are no canopy k or epsilon source terms, so the modelled k behind the belt is whatever the inflow and the shear layer over the "
+    "belt produce. It is recorded against the measurement and never asserted.",
+    "The slab arms idealise the belt as two-dimensional (the belt through both slip planes, infinite width; the data paper's Figure 7 draws a two-dimensional tree); the half-belt arm is the real 74 m belt "
+    "on a half domain with its centre plane on the symmetry plane. Both are scored against the same 28 values.",
+    "The tabulated inlet carries the workbook's inflow over a smooth floor (the site's roughness is not in the model), so the approach flow does not stay the imposed profile: in the open-field arm it is "
+    "1.19 of it at 1.5 m and 0.995 at 7 m at x = -10 m, and the model's U(7 m) at x = -35 m is 0.976 to 0.984 of the imposed U_H. The headline scores divide the model by that own U(7 m).",
+    "The field is the mean of the instantaneous speed of a 3-D sonic anemometer, which exceeds |U| in a turbulent wake: the model is scored as |U| and as sqrt(|U|^2 + 2k), the bracket of Cases C to E.",
+    "The approach profile and the wake were measured on different days (28 and 26 December 2000), and the approach k does not match the workbook's own inflow note (k/U_b^2 = 0.20 at 9 m against the "
+    "note's constant 3.02 m^2/s^2, 0.096 U_b^2); the cause is not explained, and k is only recorded (the fixture).",
+    "Every arm ran to the 3000-iteration limit with the residualControl unmet; the epsilon initial residual at the last iteration was 2.7e-2 to 3.6e-2 in the slab arms and 3.2e-2 in the half belt.",
+    "The fixture's structure checks passed for every arm with trees: a velocity deficit directly behind the belt against the open field, recovery with distance, a speed-up through the 1.2 m gap, and more "
+    "drag slowing the lee more and pushing more wind through the gap. They set no band on the scores.",
+]
+_J_HEADLINE = {"U": "velocity.U", "V": "velocity.V", "W": "velocity.W", "k": "k", "θ, floor-referenced temperature": "theta",
+               **{f"c*, Sct {s}": f"cstar.c_sct{s.replace('0.', '0')}" for s in ("0.3", "0.5", "0.7")},
+               **{f"c*, Sct {s}, without the near-source points": f"farFromSource.cstar.c_sct{s.replace('0.', '0')}" for s in ("0.3", "0.5", "0.7")},
+               "U, y-symmetric ceiling (control)": "velocity.U.symmetryCeiling"}
+_J_NORM = ("the tunnel's units: velocities by U_H (1.4581 m/s measured, the Froude-scaled 11.53 m/s modelled), k by U_H^2, temperature as theta = (T_f - T)/(T_f - T_H) (T_f = 45.8 degC, T_f - T_H = 33.63 K), "
+           "c* = C/c0 (c0 = 12.28 ppm) against the modelled ethylene mass fraction as ppm over the same c0; hit rate D = 0.25, W = 0.05 in those units, concentration with one detection limit of 10^-3 of the "
+           "largest measured value; 443 points (point 153 repeats point 1)")
+# per closure: outflow over emission at Sct 0.3, 0.5, 0.7; reattachment length at z/H = 0.25 and 0.025; initial residuals of U_y, p_rgh and the tracers at the last air iteration
+_J_CLOSURES = {"realizableKE": ("realizable k-ε", (0.89, 0.75, 0.62), (1.35, 1.35), "1.3e-2", "1.5e-2", "1.1e-3 to 1.7e-3"),
+               "buoyantKEpsilon": ("buoyantKEpsilon", (0.95, 0.84, 0.73), (1.35, 1.56), "1.3e-2", "1.1e-2", "1.2e-3 to 1.6e-3")}
+
+
+def _j_notes(closure):
+    _, bal, lr, uy, prgh, tracer = _J_CLOSURES[closure]
+    return [
+        "The scene is the tunnel at Froude scale 62.5 (the production case writer cannot mesh a 0.16 m building): lengths times 62.5, velocities times 7.9, temperatures unchanged. That keeps the bulk "
+        "Richardson number (-0.0856), Pr, the tunnel's Kelvin values and the dimensionless tracer, and does not keep Re (1.6e4 in the tunnel, 8e6 here), where UMF's wall functions belong and the "
+        "tunnel's laminar-sublayer heat transfer does not exist.",
+        "UMF's first cell is 0.75 m, 12 mm at tunnel scale: the tunnel's 24 K drop in air temperature between the floor and the first measurement at 3 mm lies inside it, so near-floor temperature is a "
+        "wall-function result, and the data's tracer peak 4 mm above the 5 mm hole is a source-cell-limited number. The source is a mass rate into one pair of cells, with no release momentum and no heat "
+        "from the 30.4 degC gas. The 27 points within a quarter of a building height of the source are scored with and without.",
+        "The building is not adiabatic here: its walls are held at the measured mean surface temperature, 297.62 K, and the measured 4 K vertical gradient up the walls is not modelled. There is no sun, and the radiation exchange is at the least the view-factor model accepts (air-side emissivity 0.01).",
+        f"The tracer is solved steady beside the flow, as three species of one flow. The outlet carried {bal[0]:.2f}, {bal[1]:.2f} and {bal[2]:.2f} of the emission for Sct 0.3, 0.5 and 0.7; the fixture's "
+        "bar on this is a factor of two, a detector of wiring errors and not a convergence claim.",
+        f"The air region ended at its 1500-iteration cap with the residualControl unmet (no 'solution converged' line); at the last iteration the initial residuals were {uy} (U_y), {prgh} (p_rgh) and "
+        f"{tracer} (the tracers).",
+        f"The steady closure gives a longer recirculation than the tunnel: reattachment at z/H = 0.25 and 0.025 is {lr[0]:.2f} H and {lr[1]:.2f} H, against the measured 0.68 H and 0.80 H.",
+        "The measured +y half of the z/H = 0.25 plane runs 11 % slower than the -y half (97 mirror pairs, R 0.955, recomputed from the cleaned table): the y-symmetric ceiling control scores the measurement "
+        "against the mean of each mirror pair.",
+        "The fixture's structure checks passed. The wake recirculates behind the leeward face and reattaches within 3 H; the approach layer is unstable and the first cell above the heated floor is warmer "
+        "than the air that entered it; every species is emitted, with clean air 25 m ahead of the building and its maximum at the source, and leaves through the outlet at 0.5 to 2 times the emission.",
+    ]
+
+
+_L_HEADLINE = {"U": "velocity.U", "V": "velocity.V", "W": "velocity.W", "|U|": "speed", "k": "k", "θ, floor-referenced temperature": "theta",
+               **{f"c*, Sct {s}": f"cstar.c_sct{s.replace('0.', '0')}" for s in ("0.3", "0.5", "0.7")},
+               "U, points at or above 30 mm": "comparable.velocity.U", "k, points at or above 30 mm": "comparable.k", "θ, points at or above 30 mm": "comparable.theta",
+               **{f"c*, Sct {s}, points at or above 30 mm": f"comparable.cstar.c_sct{s.replace('0.', '0')}" for s in ("0.3", "0.5", "0.7")},
+               "V, lateral sign flipped (control)": "control.V.flippedSign", "U, approach column alone (control)": "control.U.approachOnly",
+               "θ, approach column alone (control)": "control.theta.approachOnly", "U, y-symmetric ceiling (control)": "velocity.U.symmetryCeiling"}
+_L_NORM = ("the tunnel's units: velocities by U_H (1.3394 m/s measured, the Froude-scaled 13.39 m/s modelled), k by U_H^2, temperature as theta = (T_f - T)/(T_f - T_H) (T_f = 45.01 degC, T_f - T_H = 30.26 K), "
+           "c* = C/c0 (c0 = 1728 ppm) against the modelled ethylene mass fraction as ppm over the same c0; hit rate D = 0.25, W = 0.05 in those units, concentration with one detection limit of 10^-3 of the "
+           "largest measured value")
+_L_NOTES = [
+    "The scene is the tunnel at Froude scale 100 (lengths times 100, velocities times 10, temperatures unchanged), which keeps the bulk Richardson number (-0.034) and the tunnel's Kelvin values and does not keep Re.",
+    "What the model does not represent (the fixture's list): the gas's own heat and the buried slot (a mass rate into 624 whole cells, a strip 3 m wide), the tunnel's near-floor temperature drop (below the "
+    "first cell), the measured velocity profile (UMF's inlet is a log law), the tunnel's no-slip side walls and ceiling (slip here), radiation (emissivity 0.01, effectively off) and the 10 mm raised block floor.",
+    "51 of the 344 points (z = 4 mm, 0.4 m here) lie inside the first fine cell (0.75 m), a wall-function cell. The 242 points at or above 30 mm are scored separately.",
+    "The street air is nearly stagnant in the model: the mean U/U_H in the streets is 0.045 below 30 mm and 1.11 above 110 mm, against the tunnel's 0.297 and 1.068 as the fixture quotes them; the model's "
+    "approach column differs from the tunnel's AF profile by up to 39 % above 30 mm (UMF's inlet is a log law, the tunnel's profile is not).",
+    "The tracer is solved steady beside the flow, as three species of one flow. The outlet carried 0.86, 0.73 and 0.70 of the emission for Sct 0.3, 0.5 and 0.7, the fixture's bar being a factor of two, a "
+    "detector of wiring errors and not a convergence claim. The largest modelled c* over the 344 points is in the source street for every species, at y = -0.12 m (Sct 0.3) and y = +0.18 m (Sct 0.5 "
+    "and 0.7), against the tunnel's 1.929 at (-0.15, -0.12, 0.004).",
+    "The air region ended at its 1500-iteration cap with the residualControl unmet (no 'solution converged' line); at the last iteration the initial residuals were 2.6e-2 (U_y), 3.0e-2 (p_rgh) and "
+    "1.1e-3 to 2.0e-3 (the tracers).",
+    "The tunnel is not y-symmetric although the array is: over 110 mirror pairs the mean |U(y) - U(-y)| is 0.143 U_H in the tunnel and 0.058 U_H in the model. V is barely antisymmetric in the tunnel, "
+    "so it cannot be scored as a pattern; the sign-flipped control shows what a wrong sign scores.",
+    "The fixture's structure checks passed. The inlet's U_H reaches the array within 20 %; the approach air is warmest at the floor; the street air near the floor is warmer than the approach air at H and "
+    "cools with height; the street flow is slower than the flow above the array; every species emits and its largest value is in the source street. They set no band on the statistics.",
+]
+RUNS += [
+    run("K", "openfoam12-realizableKE", None, "caseK_openfoam12_realizableKE.json", _K_HEADLINE, ["case-k-openfoam-agreement.png"],
+        _KG_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseKContainerE2E", what="9 x 9 cubes, floor point source, 1:100", cells="972,637"), "caseK_openfoam12_realizableKE_pairs.csv", PAIRS_K,
+        normalisation=_K_NORM, notes=_K_NOTES),
+    *[run("G", "openfoam12-realizableKE", arm, f"caseG_openfoam12_realizableKE_{arm}.json",
+          {f"|U|/U(7 m){sfx}": "score.U.ownApproach", f"√(|U|²+2k)/U(7 m){sfx}": "score.rms.ownApproach", f"k/U(7 m)²{sfx}": "score.k.ownApproach",
+           f"|U|/U_H, imposed{sfx}": "score.U.imposedUH", f"√(|U|²+2k)/U_H, imposed{sfx}": "score.rms.imposedUH"},
+          ["case-g-openfoam-sweep.png", "case-g-openfoam-stations.png"],
+          _KG_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseGContainerE2E", what=f"arm: {what}, full scale", cells=f"{cells:,}"), "caseG_openfoam12_realizableKE_pairs.csv", PAIRS_G,
+          normalisation=_G_NORM, notes=_G_NOTES) for arm, what, cells, sfx in _G_ARMS],
+    *[run("J", f"umf-{closure}", None, f"caseJ_umf_{closure}.json", _J_HEADLINE, ["case-j-umf-agreement.png", "case-j-umf-tracer.png"],
+          _JL_REPRO.format(fixture="MetaFOAM.Lib.Tests/TestAijCaseJUmfContainerE2E", what="1:1:2 building, heated floor, floor point source", closure=_J_CLOSURES[closure][0], cells="236,408", scale="62.5"),
+          f"caseJ_umf_{closure}_pairs.csv", PAIRS_J, normalisation=_J_NORM, notes=_j_notes(closure)) for closure in _J_CLOSURES],
+    run("L", "umf-realizableKE", None, "caseL_umf_realizableKE.json", _L_HEADLINE, ["case-l-umf-agreement.png"],
+        _JL_REPRO.format(fixture="MetaFOAM.Lib.Tests/TestAijCaseLUmfContainerE2E", what="9 x 14 cubes, heated floor, floor line source", closure="realizable k-ε", cells="754,940", scale="100"),
+        "caseL_umf_realizableKE_pairs.csv", PAIRS_L, normalisation=_L_NORM, notes=_L_NOTES),
+]
+
 # One caption per validation figure, used on the case pages and served with each result.
 FIGURE_CAPTIONS = {
     "cases-ab-openfoam-agreement.png": ("Cases A and B, OpenFOAM 12 (realizable k-ε): measured against modelled U, V, W and k at "
@@ -356,6 +504,19 @@ FIGURE_CAPTIONS = {
                                         "factor-of-two band where the values do not change sign."),
     "case-i-openfoam-closures.png": ("Case I, OpenFOAM 12 under standard k-ε, realizable k-ε and k-ω SST on one mesh: measured against modelled U, k and c* "
                                      "(Sct 0.5)."),
+    "case-k-openfoam-agreement.png": ("Case K, OpenFOAM 12 (realizable k-ε): measured against modelled U, W and k, and the dimensionless concentration c* = C/c0 at turbulent Schmidt "
+                                      "numbers 0.3, 0.5 and 0.7 (log axes show the positive pairs within five decades only), with the 1:1 line and the factor-of-two band where the values do not "
+                                      "change sign. The four points within one cube height of the source are open."),
+    "case-g-openfoam-sweep.png": ("Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own "
+                                  "U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset."),
+    "case-g-openfoam-stations.png": ("Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field "
+                                     "against each arm of the drag sweep."),
+    "case-j-umf-agreement.png": ("Case J, urbanMicroclimateFoam (Froude scale 62.5) under realizable k-ε and buoyantKEpsilon: measured against modelled U, W, k and the floor-referenced "
+                                 "temperature θ = (T_f − T)/(T_f − T_H), in the tunnel's units, with the 1:1 line and the factor-of-two band where the values do not change sign."),
+    "case-j-umf-tracer.png": ("Case J, urbanMicroclimateFoam: measured against modelled c* = C/c0 for turbulent Schmidt numbers 0.3, 0.5 and 0.7 under both closures (log axes show the "
+                              "positive pairs within seven decades only). The points within a quarter of a building height of the source are open."),
+    "case-l-umf-agreement.png": ("Case L, urbanMicroclimateFoam (Froude scale 100, realizable k-ε): measured against modelled U, W, k, θ, V and c* at three turbulent Schmidt numbers at the 344 "
+                                 "points, in the tunnel's units (log axes show the positive pairs within seven decades only)."),
     "ml-surrogate-agreement.png": ("Eddy3D ML surrogate (Yel-2.0): measured against predicted pedestrian-height speed, one "
                                    "panel per case, with the 1:1 line and the factor-of-two band."),
 }
@@ -763,8 +924,9 @@ def validation_entries(case):
             "recirculation_Lr_over_H": res.get("recirculation.LrOverH",
                                                (res.get("recirculation.z=0.05H") or {}).get("LrOverH")),
             "quantity": res.get("quantity"),
-            "normalisation": ("velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, "
-                              "as it is published); hit rate D = 0.25, W = 0.05 in those units"),
+            "normalisation": r["normalisation"] or ("velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, "
+                                                    "as it is published); hit rate D = 0.25, W = 0.05 in those units"),
+            "notes": r["notes"],
             "metric_meaning": METRIC_MEANING,
             "headline": dict(r["headline"]),
             "scores": scores,
@@ -1567,6 +1729,7 @@ RENDER_GROUP_CAPTIONS = {
 }
 
 ENGINE_SHORT = {"openfoam12-realizableKE": "OpenFOAM 12", "openfoam12-kEpsilon": "OpenFOAM 12 k-ε", "openfoam12-kOmegaSST": "OpenFOAM 12 k-ω SST",
+                "umf-realizableKE": "UMF", "umf-buoyantKEpsilon": "UMF buoyantKEpsilon",
                 "openlb": "OpenLB", "fluidx3d": "FluidX3D", "ml-surrogate": "ML surrogate"}
 STATUS_CLASS = {"scored": "label-green", "running": "label-blue", "pending": "label-yellow", "not comparable": "label-grey"}
 # Where the hand-written validation pages show each figure, beside its reading. A case's own Validation page links
@@ -1584,6 +1747,12 @@ FIGURE_HOME = {
     "case-e-openfoam-bias-map.png": ("/validation/case-e/", "Case E (OpenFOAM)"),
     "cases-hi-openfoam-agreement.png": ("/validation/cases-hi/", "Cases H and I (OpenFOAM)"),
     "case-i-openfoam-closures.png": ("/validation/cases-hi/", "Cases H and I (OpenFOAM)"),
+    "case-k-openfoam-agreement.png": ("/validation/cases-gk/", "Cases G and K (OpenFOAM)"),
+    "case-g-openfoam-sweep.png": ("/validation/cases-gk/", "Cases G and K (OpenFOAM)"),
+    "case-g-openfoam-stations.png": ("/validation/cases-gk/", "Cases G and K (OpenFOAM)"),
+    "case-j-umf-agreement.png": ("/validation/cases-jl/", "Cases J and L (UMF)"),
+    "case-j-umf-tracer.png": ("/validation/cases-jl/", "Cases J and L (UMF)"),
+    "case-l-umf-agreement.png": ("/validation/cases-jl/", "Cases J and L (UMF)"),
     "ml-surrogate-agreement.png": ("/validation/ml-surrogate/", "ML surrogate"),
 }
 ALL_CASES_FIGURE_MIN = 3
@@ -1597,7 +1766,8 @@ GLANCE = [("building", "array", "tower", "district"), ("scale",), ("Re_H", "Re_D
           ("wind_directions", "wind_directions_deg"), ("measurement_height_m", "measurement_planes")]
 # The hand-written page that reads a case's results (a case without one is read on the Validation overview).
 READING_PAGES = {"A": "/validation/cases-ab/", "B": "/validation/cases-ab/", "C": "/validation/case-c/",
-                 "D": "/validation/case-d/", "E": "/validation/case-e/", "H": "/validation/cases-hi/", "I": "/validation/cases-hi/"}
+                 "D": "/validation/case-d/", "E": "/validation/case-e/", "G": "/validation/cases-gk/", "H": "/validation/cases-hi/", "I": "/validation/cases-hi/",
+                 "J": "/validation/cases-jl/", "K": "/validation/cases-gk/", "L": "/validation/cases-jl/"}
 
 
 def _engine_name(engine_id):
@@ -1739,6 +1909,9 @@ def build_validation_matrix(percase):
         meta = D.CASES[case]
         cells = []
         for e in MATRIX_ENGINES:
+            if e["id"] not in ENGINE_STATUS[case]:       # UMF applies to the non-isothermal cases J and L only
+                cells.append("—")
+                continue
             status = ENGINE_STATUS[case][e["id"]]
             entries = [r for r in percase[case]["results"] if r["engine"] == e["id"]]
             cell = status_label(status)
@@ -1946,6 +2119,8 @@ def _case_validation_page(case, meta, p, shared):
             L += ['<details markdown="block">', f"  <summary>All {len(e['headline'])} headline scores</summary>", ""] + table + ["", "</details>", ""]
         else:
             L += table + [""]
+        if e["notes"]:
+            L += ["Recorded with this run:", ""] + [f"- {_esc(n)}" for n in e["notes"]] + [""]
         pairs_rel = e["pairs"]["path"]
         L += [f"{_esc(e['normalisation'])}. Per-point values: {_link('`/api/' + pairs_rel + '`', '/api/' + pairs_rel)}. "
               f"Reproduce: {_esc(e['reproduce'])}.", ""]

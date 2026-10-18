@@ -68,24 +68,25 @@ one frame per case), regenerated from the published files by a checked, determin
 **Validation status.** *Scored* means a run exists and its scores are on this page — not that it agrees; how well
 it agrees is in the numbers and their reading. Anything not marked scored is not a claim.
 
-| Case | OpenFOAM 12, realizable k-ε | OpenLB | FluidX3D | ML surrogate (Yel-2.0) |
-|---|---|---|---|---|
-| A | scored | scored | scored | ✔ |
-| B | scored | scored | scored | ✔ |
-| C | scored, 9 configurations | not comparable at dx = 1.6 m | not comparable (no ground wall function) | ✔ |
-| D | scored, WD 0°, 22.5° and 45° | not comparable at dx = 1.6 m | not comparable (no ground wall function) | ✔ |
-| E | scored, SW | not comparable at dx = 1.6 m | not comparable (no ground wall function) | ✔ |
-| F | pending | pending | pending | pending |
-| G | pending | pending | pending | pending |
-| H | scored | pending | pending | pending |
-| I | scored, also standard k-ε and k-ω SST | pending | pending | pending |
-| J | pending | pending | pending | pending |
-| K | pending | pending | pending | pending |
-| L | pending | pending | pending | pending |
-| M | pending | pending | pending | pending |
+| Case | OpenFOAM 12, realizable k-ε | UMF (non-isothermal cases) | OpenLB | FluidX3D | ML surrogate (Yel-2.0) |
+|---|---|---|---|---|---|
+| A | scored | — | scored | scored | ✔ |
+| B | scored | — | scored | scored | ✔ |
+| C | scored, 9 configurations | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | ✔ |
+| D | scored, WD 0°, 22.5° and 45° | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | ✔ |
+| E | scored, SW | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | ✔ |
+| F | pending | — | pending | pending | pending |
+| G | scored, a drag sweep of four arms and a half belt | — | pending | pending | pending |
+| H | scored | — | pending | pending | pending |
+| I | scored, also standard k-ε and k-ω SST | — | pending | pending | pending |
+| J | pending | scored, realizable k-ε and buoyantKEpsilon | pending | pending | pending |
+| K | scored | — | pending | pending | pending |
+| L | pending | scored | pending | pending | pending |
+| M | pending | — | pending | pending | pending |
 
-*Pending* means not run yet. For Cases F, G, J, K, L and M Eddy3D's fixtures are written and their solves are queued;
-nothing here is a claim about them.
+*Pending* means not run yet. For Cases F and M Eddy3D's fixtures are written and their solves are queued;
+nothing here is a claim about them. *—* means the engine does not apply: UMF (urbanMicroclimateFoam, an OpenFOAM 12
+solver) is Eddy3D's engine for the non-isothermal Cases J and L, where the isothermal OpenFOAM 12 engine was not run.
 
 ---
 
@@ -505,7 +506,7 @@ of the 863 pairs the tunnel resolves (|Δ| > 0.05). See *ML surrogate* under *Va
 </details>
 
 <details>
-<summary><b>Case G — flow behind a tree belt</b> · 28 points, U/U_H and k/U_H² · scored: none yet</summary>
+<summary><b>Case G — flow behind a tree belt</b> · 28 points, U/U_H and k/U_H² · scored: OpenFOAM 12 (a drag sweep)</summary>
 
 <p><!--fig name="case-g.png" alt="Case G geometry" width="700"--><a href="validation/figures/geometry/case-g.png"><img src="docs/assets/web/case-g.png" width="700" height="350" loading="lazy" alt="Case G geometry"></a><br><sub><a href="validation/figures/geometry/case-g.png">1200 dpi original, 0.7 MB</a></sub><!--/fig--><br>
 <em>The Tsuiji-matsu tree belt, 2 m × 74 m × 7 m with a 1.2 m gap below (full scale; shown as its envelope — a porous canopy, not a solid body); the wind blows along +x and the measurements are behind the belt.</em></p>
@@ -516,7 +517,19 @@ of the 863 pairs the tunnel resolves (|Δ| > 0.05). See *ML surrogate* under *Va
 
 **Frame.** Origin: the leeward face of the tree belt at ground level, on the vertical section through the belt's centre. x: +x downwind: the belt occupies x in [-2, 0] m, the measurement lines lie behind it at x = 1.75 ... 35 m. y: +y along the belt (y in [-37, 37] m); every point is on y = 0. z: +z up; the belt spans z in [1.2, 7] m; points at z = 1.5, 3, 4.5, 6 m.
 
-**Validation.** None yet: Eddy3D's fixture for this case is written and its solves are queued, so every engine is *pending*. Nothing here is a claim about the case.
+**Validation (OpenFOAM 12, realizable k-ε, full scale).** The belt's leaf area density and drag coefficient are not in the dataset, so Eddy3D solved a **drag sweep**: no belt, three vegetation-library crowns of rising Cd·LAD (0.30, 0.625 and 0.875 1/m) on a two-dimensional slab, and the conifer crown on the real 74 m belt as a half domain. Each arm is its own run and none is chosen; the arm nearest the data is a calibration against these 28 values, not a validation, and Eddy3D's trees have no canopy k source, so k is recorded only. The measurement is U/U_H and k/U_H² (U_H the wind at 7 m); the model is |U| and k over its own U(7 m) at x = −35 m. FB is positive when the model is low.
+
+| Arm | Cd·LAD [1/m] | U R | U FAC2 | U FB | mean U/U_H | k R | k FAC2 | k FB |
+|---|---|---|---|---|---|---|---|---|
+| no belt (control) | 0 | +0.300 | 0.464 | −0.659 | 0.948 | −0.087 | 0.714 | +0.300 |
+| pine | 0.30 | +0.503 | 1.000 | −0.425 | 0.735 | +0.213 | 0.714 | +0.138 |
+| conifer | 0.625 | +0.489 | 1.000 | −0.248 | 0.613 | +0.278 | 0.750 | −0.090 |
+| screen | 0.875 | +0.459 | 1.000 | −0.148 | 0.554 | +0.234 | 0.679 | −0.206 |
+| conifer, real belt (half domain) | 0.625 | +0.468 | 1.000 | −0.202 | 0.585 | +0.228 | 0.750 | −0.081 |
+
+The field's mean U/U_H is 0.478. Drag moves the level (the mean speed falls from 0.948 to 0.554 and the root-mean-square error of U from 0.474 to 0.097) and not the pattern (R stays between +0.46 and +0.50 in every arm with trees); even the densest crown leaves the mean above the measurement, so the sweep does not bracket the field. The field's k rises with distance behind the belt and the model's falls. The reading is on the site's [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-gk/) page.
+
+<!--fig name="case-g-openfoam-sweep.png" alt="Case G, measured vs modelled, drag sweep" width="800"--><a href="validation/figures/case-g-openfoam-sweep.png"><img src="docs/assets/web/case-g-openfoam-sweep.png" width="800" height="368" loading="lazy" alt="Case G, measured vs modelled, drag sweep"></a><br><sub><a href="validation/figures/case-g-openfoam-sweep.png">1200 dpi original, 3.3 MB</a></sub><!--/fig-->
 
 **Known issues.** 6 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/G.json`](docs/api/cases/G.json).
 
@@ -593,7 +606,7 @@ The mean flow is reproduced (R 0.89 to 0.94); k is not (R 0.11); the concentrati
 </details>
 
 <details>
-<summary><b>Case J — 1:1:2 building, non-isothermal</b> · 444 rows, velocity, temperature, concentration, fluxes · scored: none yet</summary>
+<summary><b>Case J — 1:1:2 building, non-isothermal</b> · 444 rows, velocity, temperature, concentration, fluxes · scored: UMF (two closures)</summary>
 
 <p><!--fig name="case-j.png" alt="Case J geometry" width="700"--><a href="validation/figures/geometry/case-j.png"><img src="docs/assets/web/case-j.png" width="700" height="350" loading="lazy" alt="Case J geometry"></a><br><sub><a href="validation/figures/geometry/case-j.png">1200 dpi original, 1.4 MB</a></sub><!--/fig--><br>
 <em>Isolated 1:1:2 building, b = 0.08 m, H = 0.16 m (model scale); the orange ring marks the floor tracer source, 0.25 H behind the building (seen through it); the wind blows along +x.</em></p>
@@ -604,16 +617,29 @@ The mean flow is reproduced (R 0.89 to 0.94); k is not (R 0.11); the concentrati
 
 **Frame.** Origin: the building's leeward (downwind) wall centre on the ground; x = 0 is the leeward wall. x: +x streamwise (the wind blows toward +x); the building spans x in [-0.08, 0]; the floor source is at x = +0.04. y: +y lateral; the building spans y in [-0.04, 0.04]; the z/H = 0.025 plane is measured on the y <= 0 side only. z: +z up; roof at z = 0.16; heated floor at z = 0.
 
-**Validation.** None yet: Eddy3D's fixture for this case is written and its solves are queued, so every engine is *pending*. Nothing here is a claim about the case.
+**Validation (urbanMicroclimateFoam, Froude scale 62.5).** Eddy3D's buoyant microclimate engine, an OpenFOAM 12 solver, under its two closures, realizable k-ε and `buoyantKEpsilon`, on 236,408 air cells; the air region stopped at its 1500-iteration cap. 443 points (point 153 repeats point 1); velocities by U_H, k by U_H², temperature as θ = (T_f − T)/(T_f − T_H), the concentration as the measured C/c₀ against the modelled c\* at three turbulent Schmidt numbers. FB is positive when the model is low.
 
-**Known issues.** 9 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/J.json`](docs/api/cases/J.json).
+| | R (k-ε) | FAC2 | FB | R (bKε) | FAC2 | FB |
+|---|---|---|---|---|---|---|
+| U | +0.921 | 0.731 | +0.193 | +0.924 | 0.761 | +0.167 |
+| k | +0.322 | 0.558 | −0.034 | +0.360 | 0.582 | −0.088 |
+| θ | +0.922 | 1.000 | +0.120 | +0.920 | 0.998 | +0.127 |
+| c\*, Sct 0.3 | +0.919 | 0.858 | +0.065 | +0.894 | 0.869 | −0.050 |
+| c\*, Sct 0.5 | +0.905 | 0.847 | −0.162 | +0.869 | 0.840 | −0.274 |
+| c\*, Sct 0.7 | +0.896 | 0.828 | −0.256 | +0.852 | 0.806 | −0.380 |
+
+(k-ε is realizable k-ε, bKε is buoyantKEpsilon; V, W and the near-source split are on the Validation page.) The flow is reproduced in pattern and low in level (U R 0.92, the model's mean U/U_H 0.465 against 0.564), the recirculation is too long (reattachment 1.35 H against the measured 0.68 H at z/H = 0.25), k is not reproduced (R 0.32 to 0.36), the model is warmer than the tunnel by 3.5 K (3.6 K under bKε) on average, and the tracer's bias changes sign with the Schmidt number. The two closures differ little in the flow and more in the tracer. The reading is on the site's [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-jl/) page.
+
+<!--fig name="case-j-umf-agreement.png" alt="Case J, measured vs modelled, two closures" width="800"--><a href="validation/figures/case-j-umf-agreement.png"><img src="docs/assets/web/case-j-umf-agreement.png" width="800" height="448" loading="lazy" alt="Case J, measured vs modelled, two closures"></a><br><sub><a href="validation/figures/case-j-umf-agreement.png">1200 dpi original, 5.7 MB</a></sub><!--/fig-->
+
+**Known issues.** 10 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/J.json`](docs/api/cases/J.json).
 
 **API.** [`cases/J.json`](docs/api/cases/J.json) · [`points.json`](docs/api/cases/J/points.json) / [`points.csv`](docs/api/cases/J/points.csv) · [`geometry.stl`](docs/api/cases/J/geometry.stl) (1 box, 12 triangles) · [`validation.json`](docs/api/cases/J/validation.json)
 
 </details>
 
 <details>
-<summary><b>Case K — 9 x 9 cube array, point source</b> · 203 rows, velocity and concentration · scored: none yet</summary>
+<summary><b>Case K — 9 x 9 cube array, point source</b> · 203 rows, velocity and concentration · scored: OpenFOAM 12</summary>
 
 <p><!--fig name="case-k.png" alt="Case K geometry" width="700"--><a href="validation/figures/geometry/case-k.png"><img src="docs/assets/web/case-k.png" width="700" height="350" loading="lazy" alt="Case K geometry"></a><br><sub><a href="validation/figures/geometry/case-k.png">1200 dpi original, 2.0 MB</a></sub><!--/fig--><br>
 <em>9 x 9 array of 0.06 m cubes on a 0.12 m pitch (model scale); the orange ring marks the floor tracer source between rows 2 and 3; the wind blows along +x.</em></p>
@@ -624,7 +650,21 @@ The mean flow is reproduced (R 0.89 to 0.94); k is not (R 0.11); the concentrati
 
 **Frame.** Origin: bottom centre of the windward wall of the 4th row of the central column: x = 0 is that wall, y = 0 the centre line of the central column. x: +x streamwise (the wind blows toward +x); row k spans x in [0.12 (k-4), 0.12 (k-4) + 0.06], so the array spans x in [-0.36, 0.66]. y: +y lateral; column centres at y = 0, +-0.12, ... +-0.48 (the array spans y in [-0.51, 0.51]). z: +z up; cube tops at z = 0.06.
 
-**Validation.** None yet: Eddy3D's fixture for this case is written and its solves are queued, so every engine is *pending*. Nothing here is a claim about the case.
+**Validation (OpenFOAM 12, realizable k-ε, 1:100).** 972,637 cells; the solve ran to its 3000-iteration limit. Measured and modelled velocities are both divided by the stated U_H = 2.33 m/s and k by U_H²; the model is driven by the measured approach profile, which gives 1.97 m/s at z = H. The concentration is the measured C/c₀ against the modelled c\* at three turbulent Schmidt numbers. FB is positive when the model is low.
+
+| | R | FAC2 | FB | hit rate |
+|---|---|---|---|---|
+| U | +0.958 | 0.586 | +0.594 | 0.123 |
+| V | −0.151 | 0.054 | — | 0.901 |
+| W | +0.573 | 0.143 | — | 0.685 |
+| k | +0.330 | 0.044 | +1.201 | 0.005 |
+| c\*, Sct 0.3 | +0.953 | 0.793 | −0.690 | 0.458 |
+| c\*, Sct 0.5 | +0.951 | 0.685 | −0.875 | 0.163 |
+| c\*, Sct 0.7 | +0.950 | 0.394 | −0.983 | 0.099 |
+
+The velocity pattern is reproduced and the level is low (mean U/U_H 0.272 against 0.502); k is a factor of four low (R 0.33); V has a constant offset in the tunnel, so a model with V = 0 hits 0.91 of the points and V's hit rate scores nothing. The concentration is correlated at every Schmidt number (R 0.95) and high (FB −0.69 to −0.98); the four points within one cube height of the source, where the model's source is a zone of four cells, are 3.7 to 5.1 times too high on average. The reading is on the site's [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-gk/) page.
+
+<!--fig name="case-k-openfoam-agreement.png" alt="Case K, measured vs modelled" width="800"--><a href="validation/figures/case-k-openfoam-agreement.png"><img src="docs/assets/web/case-k-openfoam-agreement.png" width="800" height="494" loading="lazy" alt="Case K, measured vs modelled"></a><br><sub><a href="validation/figures/case-k-openfoam-agreement.png">1200 dpi original, 3.6 MB</a></sub><!--/fig-->
 
 **Known issues.** 9 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/K.json`](docs/api/cases/K.json).
 
@@ -633,7 +673,7 @@ The mean flow is reproduced (R 0.89 to 0.94); k is not (R 0.11); the concentrati
 </details>
 
 <details>
-<summary><b>Case L — 9 x 14 cube array, line source, non-isothermal</b> · 344 rows, velocity, temperature, concentration, fluxes · scored: none yet</summary>
+<summary><b>Case L — 9 x 14 cube array, line source, non-isothermal</b> · 344 rows, velocity, temperature, concentration, fluxes · scored: UMF</summary>
 
 <p><!--fig name="case-l.png" alt="Case L geometry" width="700"--><a href="validation/figures/geometry/case-l.png"><img src="docs/assets/web/case-l.png" width="700" height="350" loading="lazy" alt="Case L geometry"></a><br><sub><a href="validation/figures/geometry/case-l.png">1200 dpi original, 2.3 MB</a></sub><!--/fig--><br>
 <em>14 x 9 array of 0.06 m cubes on a 0.12 m pitch (model scale); the orange line is the floor tracer source between rows 7 and 8; the wind blows along +x.</em></p>
@@ -644,7 +684,22 @@ The mean flow is reproduced (R 0.89 to 0.94); k is not (R 0.11); the concentrati
 
 **Frame.** Origin: bottom centre of the windward wall of the 9th row (of 14) of the central column: x = 0 is that wall, y = 0 the centre line of the central column. x: +x streamwise (the wind blows toward +x); row k spans x in [0.12 (k-9), 0.12 (k-9) + 0.06], so the array spans x in [-0.96, 0.66]. y: +y lateral; column centres at y = 0, +-0.12, ... +-0.48 (the array spans y in [-0.51, 0.51]). z: +z up from the model floor; cube tops at z = 0.06; heated floor at z = 0.
 
-**Validation.** None yet: Eddy3D's fixture for this case is written and its solves are queued, so every engine is *pending*. Nothing here is a claim about the case.
+**Validation (urbanMicroclimateFoam, Froude scale 100, realizable k-ε).** 754,940 air cells; the air region stopped at its 1500-iteration cap. Velocities by U_H, k by U_H², temperature as θ = (T_f − T)/(T_f − T_H), the concentration as the measured C/c₀ against the modelled c\* at three turbulent Schmidt numbers. The 51 points at z = 4 mm lie inside the model's first cell; the 242 at or above 30 mm are scored separately on the Validation page. FB is positive when the model is low.
+
+| | R | FAC2 | FB | hit rate |
+|---|---|---|---|---|
+| U | +0.918 | 0.608 | +0.268 | 0.506 |
+| V | −0.037 | 0.291 | −0.795 | 0.747 |
+| W | −0.027 | 0.183 | — | 0.762 |
+| k | +0.145 | 0.584 | +0.635 | 0.244 |
+| θ | +0.936 | 1.000 | +0.049 | 0.985 |
+| c\*, Sct 0.3 | +0.798 | 0.759 | −0.498 | 0.468 |
+| c\*, Sct 0.5 | +0.766 | 0.683 | −0.649 | 0.387 |
+| c\*, Sct 0.7 | +0.746 | 0.602 | −0.731 | 0.358 |
+
+U and θ follow the tunnel (the model beats the undisturbed approach column on R: 0.918 against 0.861 for U), but the street air is nearly stagnant in the model (mean U/U_H 0.045 below 30 mm, the tunnel's 0.297), V and W carry no pattern, k is low (R 0.15), the model is warmer by 1.2 K on average, and the tracer is correlated (R 0.75 to 0.80) and high (FB −0.50 to −0.73). The reading is on the site's [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-jl/) page.
+
+<!--fig name="case-l-umf-agreement.png" alt="Case L, measured vs modelled" width="800"--><a href="validation/figures/case-l-umf-agreement.png"><img src="docs/assets/web/case-l-umf-agreement.png" width="800" height="450" loading="lazy" alt="Case L, measured vs modelled"></a><br><sub><a href="validation/figures/case-l-umf-agreement.png">1200 dpi original, 5.3 MB</a></sub><!--/fig-->
 
 **Known issues.** 9 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/L.json`](docs/api/cases/L.json).
 
@@ -847,10 +902,12 @@ approach flow at pedestrian height needs a refined upstream column or sampling c
 
 `validation/plot_cases_ab_openfoam.py` (Cases A and B), `validation/plot_cases_ab_engines.py` (A and B, every engine),
 `validation/plot_case_c_openfoam.py`, `validation/plot_case_d_openfoam.py`, `validation/plot_case_e_openfoam.py`,
-`validation/plot_cases_hi_openfoam.py` (Cases H and I) and `validation/plot_ml_surrogate.py` (UltraPlot, one style in
+`validation/plot_cases_hi_openfoam.py` (Cases H and I), `validation/plot_cases_gk_openfoam.py` (Cases G and K),
+`validation/plot_cases_jl_umf.py` (Cases J and L, on UMF) and `validation/plot_ml_surrogate.py` (UltraPlot, one style in
 `validation/plotstyle.py`: a colour-blind-safe palette, every PNG at 1200 dpi) build the figures. The Eddy3D
 fixtures are `TestAijCaseAContainerE2E`, `TestAijCaseBContainerE2E`, `TestAijCaseC{0D,1D,2D}ContainerE2E`,
-`TestAijCaseDContainerE2E`, `TestAijCaseEContainerE2E`, `TestAijCaseHContainerE2E`, `TestAijCubeContainerE2E` and, for the ML
+`TestAijCaseDContainerE2E`, `TestAijCaseEContainerE2E`, `TestAijCaseGContainerE2E`, `TestAijCaseHContainerE2E`,
+`TestAijCubeContainerE2E`, `TestAijCaseKContainerE2E`, `TestAijCaseJUmfContainerE2E`, `TestAijCaseLUmfContainerE2E` and, for the ML
 surrogate, `Outdoor.ML.Tests/TestAijSurrogateE2E`.
 Their `results.json` files and the model values at the measured points are snapshotted in `validation/results/` and
 served unchanged by the API, so the figures rebuild from this repository alone, byte for byte, with
@@ -858,14 +915,16 @@ served unchanged by the API, so the figures rebuild from this repository alone, 
 
 ### What is scored, and why some engines are not
 
-| Case | OpenFOAM 12, realizable k-ε | OpenLB | FluidX3D | ML surrogate |
-|---|---|---|---|---|
-| A | scored | scored | scored | scored |
-| B | scored | scored | scored | scored |
-| C | scored | not comparable at dx = 1.6 m | not comparable (no ground wall function) | scored |
-| D | scored, WD 0°, 22.5° and 45° | not comparable at dx = 1.6 m | not comparable (no ground wall function) | scored |
-| E | scored, SW | not comparable at dx = 1.6 m | not comparable (no ground wall function) | scored |
-| F to M | H and I scored (I also under standard k-ε and k-ω SST); F, G, J, K, L, M pending | pending | pending | pending |
+| Case | OpenFOAM 12, realizable k-ε | UMF | OpenLB | FluidX3D | ML surrogate |
+|---|---|---|---|---|---|
+| A | scored | — | scored | scored | scored |
+| B | scored | — | scored | scored | scored |
+| C | scored | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | scored |
+| D | scored, WD 0°, 22.5° and 45° | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | scored |
+| E | scored, SW | — | not comparable at dx = 1.6 m | not comparable (no ground wall function) | scored |
+| G, H, I, K | scored (G as a drag sweep; I also under standard k-ε and k-ω SST) | — | pending | pending | pending |
+| J, L | pending | scored (J also under buoyantKEpsilon) | pending | pending | pending |
+| F, M | pending | — | pending | pending | pending |
 
 **Why OpenLB is not scored on C–E — measured, not assumed.** Cases C, D and E measure only at pedestrian height,
 and a point is scoreable on OpenLB only once it sits three to four cells above its no-slip floor. On the A and B

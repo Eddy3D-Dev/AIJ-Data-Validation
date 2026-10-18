@@ -25,7 +25,8 @@ coordinates**, so no interpolation enters the comparison.
 - Metrics per quantity: Pearson **R**; **FAC2**, the fraction of points within a factor of two; **FB**, the fractional
   bias 2(ō − p̄)/(ō + p̄), positive when the model is low; and the **hit rate**, the fraction within D = 0.25 relative
   or W = 0.05 U_H absolute. NMSE, NAD, MG, VG are in the API's `validation.json`.
-- Cases H and I add a tracer concentration. The measured C/c₀ is scored against the model's c\* = c U_H H²/Q at three turbulent Schmidt numbers, with one detection limit (10⁻³ of the largest measured value); see [Cases H and I]({{ '/validation/cases-hi/' | relative_url }}).
+- Cases H, I, J, K and L add a tracer concentration. The measured C/c₀ is scored against the model's c\* = c U_H H²/Q at three turbulent Schmidt numbers, with one detection limit (10⁻³ of the largest measured value); see [Cases H and I]({{ '/validation/cases-hi/' | relative_url }}), [Cases G and K]({{ '/validation/cases-gk/' | relative_url }}) and [Cases J and L]({{ '/validation/cases-jl/' | relative_url }}).
+- Cases J and L add a temperature, scored as the floor-referenced fraction θ = (T<sub>f</sub> − T)/(T<sub>f</sub> − T<sub>H</sub>) (the workbook's normalisation; 0 at the floor, 1 in the approach air at the building height), and are solved at a Froude scale on Eddy3D's buoyant engine. Case G is field data with an unknown canopy drag, solved as a sweep of arms that are each their own run.
 - Case B's lateral velocity is sign-corrected before scoring (see [Known data issues]({{ '/known-data-issues/' | relative_url }})).
 - The reattachment length L_r behind the building is read from a wake line at ground level.
 
@@ -59,8 +60,10 @@ log-law inlet is least right. The fits are in `/api/cases/{id}.json` under `infl
 ## Reproducing the figures
 
 `validation/plot_cases_ab_openfoam.py` (Cases A and B), `validation/plot_case_c_openfoam.py`, `validation/plot_cases_hi_openfoam.py`
-(Cases H and I) and `validation/plot_ml_surrogate.py` (UltraPlot) build the figures. The Eddy3D fixtures are
-`TestAijCaseAContainerE2E`, `TestAijCaseBContainerE2E`, `TestAijCaseC{0D,1D,2D}ContainerE2E`, `TestAijCaseHContainerE2E`,
-`TestAijCubeContainerE2E` and `Outdoor.ML.Tests/TestAijSurrogateE2E`. The scores they wrote are
+(Cases H and I), `validation/plot_cases_gk_openfoam.py` (Cases G and K), `validation/plot_cases_jl_umf.py` (Cases J and L) and
+`validation/plot_ml_surrogate.py` (UltraPlot) build the figures. The Eddy3D fixtures are
+`TestAijCaseAContainerE2E`, `TestAijCaseBContainerE2E`, `TestAijCaseC{0D,1D,2D}ContainerE2E`, `TestAijCaseGContainerE2E`, `TestAijCaseHContainerE2E`,
+`TestAijCubeContainerE2E`, `TestAijCaseKContainerE2E`, `TestAijCaseJUmfContainerE2E`, `TestAijCaseLUmfContainerE2E` and `Outdoor.ML.Tests/TestAijSurrogateE2E`. The scores they wrote are
 snapshotted in `validation/results/` with the per-point pairs beside them, and served unchanged by
-`/api/cases/{id}/validation.json`.
+`/api/cases/{id}/validation.json`. For Cases G, K, J and L (as for H and I) the scores served are recomputed from the pairs, the SHA-256 of every file a snapshot was read from is in its
+results file under `sources`, and the script fails if the metrics, fed the published CSVs and the fixture's probes, do not give the fixture's own scores to 10⁻⁹.

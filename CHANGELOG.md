@@ -41,7 +41,25 @@ The point table gained columns, which is why this release is MAJOR.
   `sorbent_gc_ecd`; `campaign` separates the tunnel from the field in Cases F, G and M.
 - Validation runs, each with its scores and per-point pairs: OpenFOAM 12 on Case H (realizable k-ε) and on Case I under
   realizable k-ε, standard k-ε and k-ω SST. The API lists the two closures as the engines `openfoam12-kEpsilon` and
-  `openfoam12-kOmegaSST`, for Case I only. Cases F, G, J, K, L and M have no run yet: every engine is `pending`.
+  `openfoam12-kOmegaSST`, for Case I only. Cases F and M have no run yet: every engine is `pending`.
+- Validation of Case K (9 × 9 cube array, floor point source): OpenFOAM 12, realizable k-ε, numerics level 3, 972,637 cells, 3000
+  iterations, solved 2026-10-18, scored at the tunnel's 203 points: U, V, W, k and the concentration c\* at turbulent Schmidt numbers 0.3,
+  0.5 and 0.7 (three species on one flow, all published), with and without the four points at the source, and the
+  y-symmetric ceiling of the measurement. The solve ran to its iteration limit with the residual control unmet.
+- Validation of Case G (tree belt, field data): OpenFOAM 12, realizable k-ε, a drag sweep because the canopy's leaf area density and drag
+  coefficient are not in the dataset: no belt, three vegetation-library crowns (Cd·LAD 0.30, 0.625 and 0.875 1/m) on a two-dimensional
+  slab, and the conifer crown on the real belt as a half domain. Five runs of one engine, each its own `configuration`, none chosen;
+  U and k at the 28 points over the model's own U(7 m) and over the imposed U_H, and the run notes say that the arm nearest the data is a
+  calibration and that Eddy3D's trees have no canopy k source.
+- Validation of Case J (1:1:2 building on a heated floor, floor tracer source) and Case L (9 × 14 cube array on a heated floor, line
+  source) on Eddy3D's buoyant microclimate engine, urbanMicroclimateFoam (UMF), at Froude scales 62.5 and 100, solved 2026-10-18 (J:
+  236,408 air cells, L: 754,940, the air region stopped at its 1500-iteration cap). J under realizable k-ε and `buoyantKEpsilon`, L under
+  realizable k-ε; U, V, W, k, the floor-referenced temperature θ and the concentration at three Schmidt numbers, in the tunnel's units.
+  The API lists UMF as the engines `umf-realizableKE` (J, L) and `umf-buoyantKEpsilon` (J), and each validation result has `notes`.
+- Every score of the runs of Cases G, K, J and L is recomputed from the per-point pairs by `validation/dispersion_metrics.py`, never copied
+  from Eddy3D's log; fed the published CSVs and the fixtures' own probes it reproduces the fixtures' scores to 10⁻⁹ (the script fails
+  otherwise), and the scores here differ from the logged ones where the measured side moved from the rounded CSVs to the workbooks.
+  The SHA-256 of every file a snapshot was read from is in its results file under `sources`.
 - Release-numbered API paths: every release is a frozen copy of the whole API under `/api/<release>/` (for example
   `/api/3.0.0/index.json`), the unversioned `/api/` paths always equal the newest release, and `/api/versions.json`
   lists every release. API schema 2.3.0 (a minor change: nothing renamed or removed; thirteen cases, the new

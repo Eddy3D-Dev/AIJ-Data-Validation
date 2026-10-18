@@ -160,7 +160,11 @@ An engine's status for a case is `scored` (a run exists and its scores are serve
 numbers), `running`, `pending`, or `not comparable`: it cannot produce the measured quantity at the measured
 location. For OpenLB that is at the resolution this hardware runs; for FluidX3D it is without a ground wall
 function. The measurements behind both are on the [Validation]({{ '/validation/' | relative_url }}) page.
-An engine that is not `scored` has no result for that case.
+An engine that is not `scored` has no result for that case. The engine ids are `openfoam12-realizableKE`, `openfoam12-kEpsilon` and
+`openfoam12-kOmegaSST` (the last two for Case I only), `umf-realizableKE` and `umf-buoyantKEpsilon` (UMF, urbanMicroclimateFoam, an
+OpenFOAM 12 solver and Eddy3D's engine for the non-isothermal Cases J and L; `umf-buoyantKEpsilon` for J only), `openlb`, `fluidx3d` and
+`ml-surrogate`, and an engine is listed for a case only where it applies. Runs of one engine on one case that differ in a configuration (Case C's
+nine, Case G's five arms) share the engine's pairs file. Each result has `notes`, the caveats that come with the run.
 
 ## What each case serves today
 
@@ -172,12 +176,12 @@ An engine that is not `scored` has no result for that case.
 | D | 267 rows: 234 thermistor (78 points × 3 directions, 36 unmeasured) and 33 split-fibre with U, V, W, uu, vv, ww, k | 83 boxes, 996 triangles, watertight, rebuilt from the shipped STL | OpenFOAM 12 realizable k-ε at WD 0°, 22.5° and 45°; ML surrogate |
 | E | 2,560 rows: velocity ratio over `config` bc/ac × 16 directions × 80 points; full-scale metres | 2 STLs from the 3dm (before: 8,400 triangles; after: 8,436), outward-oriented; not watertight (touching buildings share edges) | OpenFOAM 12 realizable k-ε, wind from SW, before and after; ML surrogate |
 | F | 472 rows: `velocity_ratio` and `velocity_ratio_sd` at 13 points: 264 tunnel thermistor rows (planes at 5, 9 and 20 m) and 208 field cup-anemometer rows (`campaign`); full-scale metres | 1 STL, 53,814 triangles: terrain and buildings, outward-oriented, open along the rim | none yet: every engine pending |
-| G | 28 rows: `velocity_ratio` and `k_ratio` (sonic anemometers in the field; no speed in m/s is published) | 1 box, 12 triangles: the tree belt's 2 × 74 × 7 m envelope with its 1.2 m gap | none yet: every engine pending |
+| G | 28 rows: `velocity_ratio` and `k_ratio` (sonic anemometers in the field; no speed in m/s is published) | 1 box, 12 triangles: the tree belt's 2 × 74 × 7 m envelope with its 1.2 m gap | OpenFOAM 12 realizable k-ε as a drag sweep: one run per arm (`configuration`: no belt, three crowns, the real belt as a half domain) |
 | H | 1,652 rows: 826 split-fibre rows (U, V, W, uu, vv, ww, k) and 826 hydrocarbon-analyser rows (`C`, `c_rms`, `concentration_ratio`) | 1 box, 12 triangles: 0.10 × 0.10 × 0.20 m | OpenFOAM 12 realizable k-ε (velocity, k and c\*) |
 | I | 630 rows: 91 LDV rows (U, V, W, k) and 539 hydrocarbon-analyser rows (`C`, `concentration_ratio`) | 1 box, 12 triangles: the 0.1 m cube | OpenFOAM 12 under realizable k-ε, standard k-ε and k-ω SST |
-| J | 444 rows: U, V, W, variances, k, concentration, temperature and their turbulent fluxes | 1 box, 12 triangles: 0.08 × 0.08 × 0.16 m | none yet: every engine pending |
-| K | 203 rows: U, V, W, variances, k and concentration | 81 cubes, 972 triangles, watertight | none yet: every engine pending |
-| L | 344 rows: as J, with the Reynolds shear stresses and concentration fluxes | 126 cubes, 1,512 triangles, watertight | none yet: every engine pending |
+| J | 444 rows: U, V, W, variances, k, concentration, temperature and their turbulent fluxes | 1 box, 12 triangles: 0.08 × 0.08 × 0.16 m | UMF under realizable k-ε (`umf-realizableKE`) and buoyantKEpsilon (`umf-buoyantKEpsilon`) |
+| K | 203 rows: U, V, W, variances, k and concentration | 81 cubes, 972 triangles, watertight | OpenFOAM 12 realizable k-ε (velocity, k and c\* at three turbulent Schmidt numbers) |
+| L | 344 rows: as J, with the Reynolds shear stresses and concentration fluxes | 126 cubes, 1,512 triangles, watertight | UMF realizable k-ε (`umf-realizableKE`) |
 | M | 330 rows: 15 tunnel split-fibre rows, 45 tunnel hydrocarbon-analyser rows and 270 field sorbent-tube rows (`campaign`, `run`); full-scale metres | 1 STL, 43,936 triangles: the campus, outward-oriented, open edges | none yet: every engine pending |
 
 Examples in `curl` and Python are on the [Examples]({{ '/api-reference/examples/' | relative_url }}) page; the

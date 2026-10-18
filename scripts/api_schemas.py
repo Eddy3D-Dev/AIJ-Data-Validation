@@ -50,7 +50,7 @@ METRIC = obj(["Count", "Fb", "R"], {
     "Mg": NUM_OR_NULL, "Vg": NUM_OR_NULL, "GeometricPairs": {"type": ["integer", "null"]}, "R": NUM_OR_NULL,
 })
 
-ENGINE_ID = {"enum": ["openfoam12-realizableKE", "openfoam12-kEpsilon", "openfoam12-kOmegaSST", "openlb", "fluidx3d", "ml-surrogate"]}
+ENGINE_ID = {"enum": ["openfoam12-realizableKE", "openfoam12-kEpsilon", "openfoam12-kOmegaSST", "umf-realizableKE", "umf-buoyantKEpsilon", "openlb", "fluidx3d", "ml-surrogate"]}
 STATUS = {"enum": ["scored", "running", "pending", "not comparable"]}
 CASE_ID = {"enum": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"]}
 
@@ -193,7 +193,7 @@ DOCUMENTS = {
         "engines": arr(obj(["engine", "status"], {"engine": ENGINE_ID, "status": STATUS})),
         "results": arr(obj(["run_id", "engine", "configuration", "headline", "scores", "figures", "pairs", "source_url"], {
             "run_id": {"type": "string"}, "engine": ENGINE_ID, "configuration": STR_OR_NULL, "quantity": STR_OR_NULL,
-            "normalisation": {"type": "string"},
+            "normalisation": {"type": "string"}, "notes": arr({"type": "string"}),
             "headline": {"type": "object", "additionalProperties": {"type": "string"}},
             "scores": {"type": "object", "additionalProperties": METRIC},
             "figures": arr(obj(["url", "caption"], {"url": URL, "caption": {"type": "string"}})),

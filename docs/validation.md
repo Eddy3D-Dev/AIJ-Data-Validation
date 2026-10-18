@@ -35,7 +35,10 @@ of measured and modelled values; **FAC2** is the fraction of points within a fac
 | <span class="label label-yellow status">pending</span> | Not run yet. |
 | <span class="label label-grey status">not comparable</span> | The engine cannot produce the measured quantity at the measured location: OpenLB at the resolution this hardware runs, FluidX3D without a ground wall function. The measurements behind each are on the [OpenLB and FluidX3D]({{ '/validation/engines/' | relative_url }}) page. |
 
-An engine that is not *scored* has no result for that case, and nothing here infers one.
+An engine that is not *scored* has no result for that case, and nothing here infers one. A dash in the table means the engine does not apply to the case:
+**UMF** is urbanMicroclimateFoam, an OpenFOAM 12 solver and Eddy3D's engine for the non-isothermal Cases J and L; the isothermal OpenFOAM 12 engine
+was not run there. The API's engine ids are `openfoam12-realizableKE` (also `openfoam12-kEpsilon` and `openfoam12-kOmegaSST`, Case I only),
+`umf-realizableKE` (also `umf-buoyantKEpsilon`, Case J only), `openlb`, `fluidx3d` and `ml-surrogate`.
 
 ## What the scores say
 
@@ -53,11 +56,18 @@ An engine that is not *scored* has no result for that case, and nothing here inf
   correlated (R 0.92 to 0.95) and its bias depends on the turbulent Schmidt number. k is poor in Case H (R 0.11). Case I
   was also solved with standard k-ε and k-ω SST: the mean velocity does not tell the closures apart, k and the
   concentration do. [Reading]({{ '/validation/cases-hi/' | relative_url }}).
+- **Cases G and K, OpenFOAM 12.** Case K reproduces the velocity pattern (U R 0.96) and the tracer pattern (R 0.95 at every Schmidt number), with the velocity
+  and k low and the concentration high. Case G is a field case with an unknown leaf area density, so Eddy3D solved a drag sweep, published arm by arm: drag moves
+  the level of the mean speed and not its pattern (R about 0.5), and k is not modelled by the trees. [Reading]({{ '/validation/cases-gk/' | relative_url }}).
+- **Cases J and L, UMF.** Eddy3D's buoyant microclimate engine (urbanMicroclimateFoam) on the two heated-floor cases. Case J under two closures: the flow is
+  reproduced in pattern (U R 0.92) and low in level, the recirculation is too long, the model is 3.5 K warmer, and the tracer's bias changes sign with the
+  Schmidt number. Case L: U and temperature follow the tunnel (R 0.92 and 0.94), the street air is nearly stagnant in the model, and the tracer is high.
+  [Reading]({{ '/validation/cases-jl/' | relative_url }}).
 - **OpenLB and FluidX3D** are scored on Cases A and B only. On C to E each cannot produce the measured quantity at the
   measured height, which was measured rather than assumed. [Reading]({{ '/validation/engines/' | relative_url }}).
 - **The ML surrogate** predicts roughly half the tunnel's speed everywhere, and it does not respond to the wind
   direction. It has been run on Cases A to E only. [Reading]({{ '/validation/ml-surrogate/' | relative_url }}).
-- **Cases F, G, J, K, L and M have no validation run yet.** Eddy3D's fixtures for them are written and their solves
+- **Cases F and M have no validation run yet.** Eddy3D's fixtures for them are written and their solves
   are queued, so every engine is *pending* there; nothing on this site is a claim about them.
 
 Every case's scores, with the figures that show them, are on its own page: *Cases*, then the case, then
