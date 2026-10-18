@@ -7,6 +7,11 @@ Two figures, each answering one question:
   cases-ab-openfoam-profiles.png    WHERE does it agree?  Centre-plane vertical profiles of U/U_H at the
                       measurement stations, measured points against the modelled line.
 
+Inputs, all in this repository: the benchmark tables case-a/RS-caseA.csv and case-b/RS_caseB.csv as published,
+the model at those points in validation/results/case{A,B}_openfoam12_realizableKE_probes.csv (a snapshot of the
+Eddy3D fixture's reference.probe.csv under C:/Eddy3DVal/aij_{A,B}_realizableKE_L3, same row order as the table,
+refreshed from there when that folder exists) and the scores in validation/results/case{A,B}_openfoam12_realizableKE.json.
+
 Colours follow plotstyle.py: the measurement is black and the OpenFOAM model is slot 1 of the validated
 categorical palette (blue #2a78d6), as in every figure here; reference geometry (1:1 line, factor-of-two
 band, roof line) is recessive grey so it never competes with data.
@@ -24,15 +29,31 @@ import ultraplot as uplt
 
 import plotstyle as style
 
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.dirname(HERE)
+RESULTS = os.path.join(HERE, "results")
 VAL = r"C:/Eddy3DVal"
 MUTED = "#6b6b69"
 
 CASES = [
-    ("A", "aij_A", "RS-caseA.csv", 1.0, +1.0, "aij_A_realizableKE_L3",
+    ("A", "case-a", "RS-caseA.csv", 1.0, +1.0, "aij_A_realizableKE_L3",
      "Case A · 1:1:2 building", 0.16, 4.491, (-0.04, 0.04)),
-    ("B", "aij_B", "RS_caseB.csv", 0.001, -1.0, "aij_B_realizableKE_L3",
+    ("B", "case-b", "RS_caseB.csv", 0.001, -1.0, "aij_B_realizableKE_L3",
      "Case B · 1:4:4 slab", 0.20, 5.133, (-0.025, 0.025)),
 ]
+
+
+def probes_path(tag):
+    return os.path.join(RESULTS, f"case{tag}_openfoam12_realizableKE_probes.csv")
+
+
+def snapshot():
+    """Refresh the probe snapshots from the solves, LF on every platform like the rest of the served data."""
+    for tag, _, _, _, _, study, *_ in CASES:
+        with io.open(os.path.join(VAL, study, "reference.probe.csv"), encoding="utf-8-sig") as f:
+            text = f.read().replace("\r\n", "\n")
+        with io.open(probes_path(tag), "w", encoding="utf-8", newline="\n") as f:
+            f.write(text)
 
 
 def read_reference(path, coord_scale, lateral_sign):
@@ -73,10 +94,13 @@ def read_probe(path):
     return rows
 
 
-def metrics(case_dir, key):
-    with io.open(os.path.join(VAL, case_dir, "results.json"), encoding="utf-8") as f:
+def metrics(tag, key):
+    with io.open(os.path.join(RESULTS, f"case{tag}_openfoam12_realizableKE.json"), encoding="utf-8") as f:
         return json.load(f)[key]
 
+
+if os.path.isdir(VAL):
+    snapshot()
 
 # ----------------------------------------------------------------------------- figure 1
 QUANTITIES = [("U", "U/U$_H$"), ("V", "V/U$_H$"), ("W", "W/U$_H$"), ("k", "k/U$_H^2$")]
@@ -84,9 +108,9 @@ QUANTITIES = [("U", "U/U$_H$"), ("V", "V/U$_H$"), ("W", "W/U$_H$"), ("k", "k/U$_
 style.apply()
 fig, axs = uplt.subplots(nrows=2, ncols=4, refwidth=2.0, refaspect=1, share=False, wspace=4.2, hspace=2.4)
 
-for row, (tag, ref_id, ref_file, cscale, lsign, study, title, H, Uh, _bx) in enumerate(CASES):
-    meas = read_reference(os.path.join(VAL, "reference", ref_id, ref_file), cscale, lsign)
-    model = read_probe(os.path.join(VAL, study, "reference.probe.csv"))
+for row, (tag, folder, ref_file, cscale, lsign, study, title, H, Uh, _bx) in enumerate(CASES):
+    meas = read_reference(os.path.join(REPO, folder, ref_file), cscale, lsign)
+    model = read_probe(probes_path(tag))
     for col, (q, label) in enumerate(QUANTITIES):
         ax = axs[row, col]
         norm = Uh * Uh if q == "k" else Uh
@@ -103,7 +127,7 @@ for row, (tag, ref_id, ref_file, cscale, lsign, study, title, H, Uh, _bx) in enu
         style.one_to_one(ax, lo, hi, factor_two=(q == "k" or (o > 0).all()))
         ax.scatter(o, p, s=15, color=style.OPENFOAM, edgecolor=style.SURFACE, linewidth=0.35, zorder=3)
 
-        m = metrics(study, "k" if q == "k" else f"velocity.{q}")
+        m = metrics(tag, "k" if q == "k" else f"velocity.{q}")
         style.stats(ax, f"R {m['R']:+.2f}\nFAC2 {m['Fac2']:.2f}\nFB {m['Fb']:+.2f}")
         ax.format(xlim=(lo, hi), ylim=(lo, hi), xlabel="Tunnel [–]" if row == len(CASES) - 1 else None,
                   ylabel="Eddy3D [–]" if col == 0 else None)
@@ -118,10 +142,10 @@ style.save(fig, "cases-ab-openfoam-agreement.png")
 # ----------------------------------------------------------------------------- figure 2
 fig2, axs2 = uplt.subplots(nrows=1, ncols=2, refwidth=3.4, refaspect=1.25, share=False, wspace=2.0)
 
-for i, (tag, ref_id, ref_file, cscale, lsign, study, title, H, Uh, bx) in enumerate(CASES):
+for i, (tag, folder, ref_file, cscale, lsign, study, title, H, Uh, bx) in enumerate(CASES):
     ax = axs2[i]
-    meas = read_reference(os.path.join(VAL, "reference", ref_id, ref_file), cscale, lsign)
-    model = read_probe(os.path.join(VAL, study, "reference.probe.csv"))
+    meas = read_reference(os.path.join(REPO, folder, ref_file), cscale, lsign)
+    model = read_probe(probes_path(tag))
 
     centre = [(m, p) for m, p in zip(meas, model)
               if abs(m["y"]) < 1e-6 and np.isfinite(m["U"]) and np.isfinite(p["U"])]

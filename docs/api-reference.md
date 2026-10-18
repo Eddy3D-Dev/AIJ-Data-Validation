@@ -22,7 +22,7 @@ cleaned data and served by GitHub Pages. Plain HTTP GET, no keys, CORS-open (`Ac
 | Key | Meaning |
 |---|---|
 | `$schema` | the URL of the document's JSON Schema (draft 2020-12). The build validates every document against it. |
-| `schema_version` | the API version, semantic versioning (see [Versioning](#versioning-and-changes)). |
+| `schema_version` | the version of this JSON contract, semantic versioning (see [Versioning](#versioning-and-changes)). The release of the data is `versions.release` in `index.json`. |
 | `data_version` | a SHA-256 over every served measurement, geometry and score file. It changes when, and only when, the data changes. Quote it with any number you take from here. |
 | `license` | `CC-BY-4.0`, the SPDX identifier. The data belongs to its collectors; cite them (see *Cite* on the home page). |
 
@@ -194,23 +194,45 @@ The last line prints `R of U/U_H recomputed: 0.9548 published: 0.9548`.
 
 ## Versioning and changes
 
-The API follows semantic versioning. Within a major version it only adds: new fields, new endpoints, new runs.
-Clients must ignore fields they do not know. A field is renamed or removed only in a new major version, listed
-below. `index.json` serves the same changelog as `changelog`.
+Two semantic versions and one fingerprint, all in `index.json` under `versions`:
+
+| | what it versions | moves when |
+|---|---|---|
+| `versions.release` | what is served: the API files and the cleaned tables, as one release (the repository's `VERSION`, tag `vX.Y.Z`) | MAJOR: a file, field or column renamed or removed, a CSV column added or reordered, a unit or frame changed; MINOR: something added; PATCH: a value or text corrected |
+| `schema_version` (also `versions.schema`) | the JSON contract of these documents | MAJOR: a field renamed or removed; MINOR: a field or endpoint added; the changelog below |
+| `data_version` (also `versions.data`) | nothing: it is the SHA-256 of the served data, a fingerprint | whenever a served measurement, geometry or score file changes |
+
+`release` in `index.json` gives the release's date, tag, release page, changelog and `base_url`: the raw files of
+exactly that release, which never change. Fetch from it to pin an analysis to one release:
+
+```bash
+REL=$(curl -s -A "aij-client/1.0" $BASE/index.json | jq -r .release.base_url)   # .../v2.0.0/docs/api
+curl -s "$REL/cases/A/points.csv" | head -3
+```
+
+Within a major `schema_version` the API only adds: new fields, new endpoints, new runs. Clients must ignore
+fields they do not know. A field is renamed or removed only in a new major version, listed below. `index.json`
+serves the same changelog as `changelog`; the releases are in [`CHANGELOG.md`](https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/CHANGELOG.md).
 
 {% include api-changelog.md %}
 
 ## Regenerating and checking
 
 ```bash
-pip install -r scripts/requirements.txt
+# everything (cleaned tables, figures, API), in the pinned image: what CI runs
+docker run --rm -v "$PWD:/w" -w /w "$(cat scripts/BUILD_IMAGE)" bash scripts/build_all.sh
+
+# the API alone
+pip install --require-hashes -r requirements.lock
 python scripts/build_api.py          # builds docs/api/, the case pages and the site includes, then verifies
 python scripts/build_api.py --check  # verify only
 ```
 
 The build is a pure function of the repository: no timestamps and no commit hashes, so rebuilding unchanged inputs
-gives byte-identical files on Windows and Linux alike. On every push, CI rebuilds and fails if anything differs
-from what is committed. The site deploys only after that check passes. Verification covers:
+gives byte-identical files. On every push and pull request, CI rebuilds everything in Python 3.12.12 (an image
+pinned by digest) with every package pinned by hash, and fails if anything differs from what is committed or if
+served content changed without the release version moving. The site deploys only after that check passes, and a
+new `VERSION` is then tagged and released. Verification covers:
 
 - every document against its JSON Schema, and `openapi.json` against the OpenAPI 3.1 specification;
 - every file's size and SHA-256 against `index.json`, and every file served against the files listed;

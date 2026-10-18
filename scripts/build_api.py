@@ -3,7 +3,7 @@
     python scripts/build_api.py            # build, then verify
     python scripts/build_api.py --check    # verify what is on disk; build nothing
 
-Requirements: scripts/requirements.txt (xlrd, rhino3dm, jsonschema, openapi-spec-validator).
+Requirements: requirements.lock at the repository root (one pinned environment for every build here).
 
 GitHub Pages serves docs/ at <site>/; every API file is a plain GET of a static file. The build is a pure
 function of the repository: the same inputs give byte-identical outputs (no timestamps, no commit hashes),
@@ -34,6 +34,7 @@ import zipfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import aijdata as D  # noqa: E402
 import api_schemas as S  # noqa: E402
+import release as R  # noqa: E402
 
 REPO = D.REPO
 DOCS = os.path.join(REPO, "docs")
@@ -46,9 +47,17 @@ REPO_URL = "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Archite
 SITE = "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ"
 API_BASE = SITE + "/api"
 RAW_BASE = "https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/main/docs/api"
-SCHEMA_VERSION = "2.1.0"
+SCHEMA_VERSION = "2.2.0"
+RELEASE = R.version()             # the repository's release (VERSION); the API names it, it does not set it
+RELEASE_DATE = R.release_date()
+RELEASE_BASE = RAW_BASE.replace("/main/", f"/v{RELEASE}/")   # the same files, frozen at the release tag
 
 CHANGELOG = [
+    {"version": "2.2.0", "date": "2026-10-18", "changes": [
+        "Added: `versions.release`, the semantic version of the published data and API (the repository's VERSION; "
+        "tag vX.Y.Z; rules in CHANGELOG.md), and `release` with its date, tag, release page and `base_url`, the raw "
+        "files of exactly that release (the tag never moves). `schema_version` stays the version of this JSON contract.",
+    ]},
     {"version": "2.1.0", "date": "2026-10-15", "changes": [
         "Correction: index.json gave each templated endpoint (cases/{id}.json, schemas/{name}.schema.json, ...) its "
         "URI template under `url`, which is not a URL and answered 404 when followed. A templated endpoint now says "
@@ -76,9 +85,13 @@ CHANGELOG = [
     ]},
     {"version": "1.0.0", "date": "2026-10-14", "changes": ["First release."]},
 ]
-COMPATIBILITY = ("Semantic versioning. Within a major version the API only adds: new fields, new endpoints, new runs. "
-                 "Clients must ignore fields they do not know. A field is renamed or removed only in a new major "
-                 "version, and the changelog says which.")
+COMPATIBILITY = ("Semantic versioning, twice. `versions.release` versions what is served (MAJOR: a file, field or "
+                 "column renamed or removed, or a unit or frame changed; MINOR: something added; PATCH: a value "
+                 "corrected), and every release is a tag whose files never change: `release.base_url`. "
+                 "`schema_version` versions this JSON contract: within a major version it only adds new fields, "
+                 "endpoints and runs, clients must ignore fields they do not know, and a field is renamed or removed "
+                 "only in a new major version, which the changelog names. `data_version` is a fingerprint, not a "
+                 "version: the SHA-256 of the served data.")
 CACHING = ("GitHub Pages sends JSON with a 10-minute max-age and CSV and ZIP files with a 186-day max-age. Every "
            "download URL therefore carries ?v=<first 12 hex digits of the file's SHA-256>: the server ignores the "
            "query, and a changed file gets a new URL. Fetch the JSON documents for the current URLs; check "
@@ -814,7 +827,8 @@ def llms_text(percase):
         f"Base URL: {API_BASE}",
         f"Fallback (raw files from the repository): {RAW_BASE}",
         f"Repository: {REPO_URL}",
-        f"API version: {SCHEMA_VERSION}. Data version (SHA-256 of the served data): {DATA_VERSION}.",
+        f"Release: {RELEASE} ({RELEASE_DATE}); its files, frozen: {RELEASE_BASE}",
+        f"API schema version: {SCHEMA_VERSION}. Data version (SHA-256 of the served data): {DATA_VERSION}.",
         "Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark and the per-case papers.",
         "",
         "## How to use this",
@@ -897,6 +911,8 @@ def write_dataset_jsonld(percase):
                         "SI units and one frame per case, with cleaned STL geometry and Eddy3D's CFD validation scores."),
         "url": SITE + "/",
         "sameAs": REPO_URL,
+        "version": RELEASE,
+        "dateModified": RELEASE_DATE,
         "license": D.LICENSE["url"],
         "isAccessibleForFree": True,
         "keywords": ["computational fluid dynamics", "CFD validation", "wind tunnel", "urban wind environment",
@@ -967,7 +983,11 @@ def write_index():
         "fallback_base_url": RAW_BASE,
         "fallback_note": "the same files, served raw from the repository's main branch (use when the Pages site is not reachable)",
         "repository": REPO_URL, "site": SITE,
-        "versions": {"schema": SCHEMA_VERSION, "data": DATA_VERSION, "clean_manifest": (D.clean_manifest() or {}).get("version")},
+        "versions": {"release": RELEASE, "schema": SCHEMA_VERSION, "data": DATA_VERSION,
+                     "clean_manifest": (D.clean_manifest() or {}).get("version")},
+        "release": {"version": RELEASE, "date": RELEASE_DATE, "tag": f"v{RELEASE}",
+                    "url": f"{REPO_URL}/releases/tag/v{RELEASE}", "base_url": RELEASE_BASE,
+                    "changelog": f"{REPO_URL}/blob/v{RELEASE}/CHANGELOG.md"},
         "compatibility": COMPATIBILITY,
         "caching": CACHING,
         "changelog": CHANGELOG,
@@ -1244,7 +1264,7 @@ def verify():
         import jsonschema
         from openapi_spec_validator import validate as validate_openapi
     except ImportError as e:  # the contract is not optional
-        return [f"{e.name} is not installed: pip install -r scripts/requirements.txt"]
+        return [f"{e.name} is not installed: pip install --require-hashes -r requirements.lock"]
 
     def load(rel):
         with io.open(os.path.join(API, rel), encoding="utf-8") as f:

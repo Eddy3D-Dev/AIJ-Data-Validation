@@ -6,7 +6,7 @@ nav_order: 3
 # Validation: Eddy3D vs the tunnel
 
 **Status.** *Scored* means a run exists and its scores are on this page — not that it agrees; how well it agrees is
-in the numbers and their reading. Anything not marked scored is not a claim; see "What is still running" below.
+in the numbers and their reading. Anything not marked scored is not a claim; see "What is scored, and why some engines are not" below.
 
 ## Method
 
@@ -308,7 +308,7 @@ build the figures. The Eddy3D fixtures are `TestAijCaseAContainerE2E`, `TestAijC
 snapshotted in `validation/results/` with the per-point pairs beside them, and served unchanged by
 `/api/cases/{id}/validation.json`.
 
-## What is still running
+## What is scored, and why some engines are not
 
 | | A | B | C | D | E |
 |---|---|---|---|---|---|

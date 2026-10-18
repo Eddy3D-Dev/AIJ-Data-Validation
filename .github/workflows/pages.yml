@@ -1,6 +1,8 @@
-# Verify the generated API, then build the Jekyll site under docs/ (which carries the static API under
-# docs/api/) and deploy it to GitHub Pages. Pages must be set to "GitHub Actions" as its source
-# (Settings -> Pages -> Source), which `gh api -X POST repos/<owner>/<repo>/pages -f build_type=workflow` also does.
+# Rebuild everything in the pinned environment and fail on any byte that differs from what is committed; check that
+# the release version moves with the served content; build the Jekyll site under docs/ (which carries the static API
+# under docs/api/) and deploy it to GitHub Pages; and when VERSION is new on main, tag it and publish the release.
+# Pages must be set to "GitHub Actions" as its source (Settings -> Pages -> Source), which
+# `gh api -X POST repos/<owner>/<repo>/pages -f build_type=workflow` also does.
 name: pages
 
 on:
@@ -19,33 +21,33 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # The API is generated and committed. This job rebuilds it from the sources and fails if the result differs
-  # from what is committed by a single byte, or if any document breaks its schema, an index hash or a link.
-  # Nothing deploys unless it passes.
-  verify-api:
+  # Every generated file (clean/, validation/figures/, docs/) is committed. This job regenerates all of them with
+  # scripts/build_all.sh in the image pinned by digest in scripts/BUILD_IMAGE, with every package pinned by hash in
+  # requirements.lock, and fails if the result differs from the commit by a single byte, if any document breaks its
+  # schema, an index hash or a link, or if served content changed without the release version moving.
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-          cache: pip
-          cache-dependency-path: scripts/requirements.txt
-      - run: pip install -r scripts/requirements.txt
-      - name: Verify the committed API as it is
-        run: python scripts/build_api.py --check
-      - name: Rebuild and compare with what is committed
+          fetch-depth: 0   # the release tags, for the version check
+      - name: Rebuild everything in the pinned environment
         run: |
-          python scripts/build_api.py
-          if [ -n "$(git status --porcelain -- docs)" ]; then
-            echo "::error::docs/ differs from a fresh build of scripts/build_api.py. Run it and commit the result."
-            git status --porcelain -- docs
-            git diff --stat -- docs
+          docker run --rm -v "$PWD:/w" -w /w "$(cat scripts/BUILD_IMAGE)" bash scripts/build_all.sh
+          sudo chown -R "$(id -u):$(id -g)" .
+      - name: Nothing may differ from what is committed
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::A fresh build differs from the commit. Run scripts/build_all.sh in the pinned image and commit the result."
+            git status --porcelain
+            git diff --stat
             exit 1
           fi
+      - name: The version moves with the change
+        run: python3 scripts/release.py check
 
   build:
-    needs: verify-api
+    needs: verify
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
@@ -68,3 +70,32 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # A release is the deployed commit whose VERSION has no tag yet: tag it vX.Y.Z and publish its CHANGELOG.md section
+  # with the archive (aij-uwe-vX.Y.Z.tar.gz) and its SHA256SUMS, built in the pinned image so the bytes are reproducible.
+  release:
+    needs: deploy
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Tag and publish the release if VERSION is new
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          v="$(python3 scripts/release.py version)"
+          if git rev-parse -q --verify "refs/tags/v$v" >/dev/null; then
+            echo "v$v is already released"
+            exit 0
+          fi
+          export SOURCE_DATE_EPOCH="$(git log -1 --format=%ct)"
+          mkdir -p dist
+          docker run --rm -e SOURCE_DATE_EPOCH -v "$PWD:/w" -w /w "$(cat scripts/BUILD_IMAGE)" \
+            python scripts/release.py archive dist
+          python3 scripts/release.py notes > dist/NOTES.md
+          gh release create "v$v" --target "$GITHUB_SHA" --title "v$v" --notes-file dist/NOTES.md \
+            "dist/aij-uwe-v$v.tar.gz" "dist/aij-uwe-v$v.SHA256SUMS"

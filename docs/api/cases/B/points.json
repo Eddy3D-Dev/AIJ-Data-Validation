@@ -1,6 +1,6 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/points.schema.json",
- "schema_version": "2.1.0",
+ "schema_version": "2.2.0",
  "data_version": "5af8c81571e452c1925b3efe58c698908066f64886eba5efd9b2f0348ecdc019",
  "license": "CC-BY-4.0",
  "case": "B",

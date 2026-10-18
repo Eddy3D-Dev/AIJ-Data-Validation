@@ -47,8 +47,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))          # .../clean
 REPO = os.path.abspath(os.path.join(HERE, os.pardir))        # the AIJ repository
 SRC = os.path.join(HERE, "sources")
 
-RELEASE_VERSION = "1.0.0"
-SCHEMA_VERSION = "1.0.0"
+with open(os.path.join(REPO, "VERSION"), encoding="utf-8") as _f:
+    RELEASE_VERSION = _f.read().strip()   # the repository's release (VERSION; rules in CHANGELOG.md)
+SCHEMA_VERSION = "1.0.0"                  # the tables' columns and types (SCHEMA.md); moves only when they do
 KAPPA = 0.41
 
 POINT_COLUMNS = ["case_id", "config", "instrument", "point_id", "wind_direction_deg", "wind_direction",
@@ -350,7 +351,9 @@ def log_law_fit(z, U, zlo, zhi):
     A = np.column_stack([np.log(z[m]), np.ones(m.sum())])
     (a, b), *_ = np.linalg.lstsq(A, U[m], rcond=None)
     ustar = KAPPA * a
-    z0 = math.exp(-b / a)
+    # 12 significant digits: lstsq's last bits differ between LAPACK builds (Windows and Linux numpy wheels give
+    # z0 differing around the 15th digit), and the release must be byte-identical on every platform.
+    z0 = float(f"{math.exp(-b / a):.12g}")
     pred = a * np.log(z[m]) + b
     rms = float(np.sqrt(np.mean((pred - U[m]) ** 2)))
     return {"z_range_m": [float(zlo), float(zhi)], "points": int(m.sum()), "u_star_m_s": round(ustar, 5), "z0_m": z0,

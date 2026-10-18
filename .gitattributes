@@ -23,3 +23,10 @@ clean/** text=auto eol=lf
 clean/sources/** -text
 # ...except archives, which are binary wherever they live (docs/api/geometry.zip).
 *.zip binary
+
+# Release and build pins: the same bytes on every platform.
+VERSION text eol=lf
+scripts/BUILD_IMAGE text eol=lf
+.python-version text eol=lf
+*.lock text eol=lf
+*.sh text eol=lf

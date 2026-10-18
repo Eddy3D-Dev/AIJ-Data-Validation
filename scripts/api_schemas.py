@@ -10,6 +10,7 @@ from __future__ import annotations
 DRAFT = "https://json-schema.org/draft/2020-12/schema"
 
 SHA256 = {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+SEMVER = {"type": "string", "pattern": r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$"}
 URL = {"type": "string", "format": "uri"}
 NUM_OR_NULL = {"type": ["number", "null"]}
 STR_OR_NULL = {"type": ["string", "null"]}
@@ -75,7 +76,11 @@ DOCUMENTS = {
                   ["name", "base_url", "versions", "endpoints", "case_ids", "files", "changelog", "cite"], {
         "name": {"type": "string"}, "description": {"type": "string"},
         "base_url": URL, "fallback_base_url": URL, "repository": URL, "site": URL,
-        "versions": obj(["schema", "data"], {"schema": {"type": "string"}, "data": SHA256, "clean_manifest": STR_OR_NULL}),
+        "versions": obj(["release", "schema", "data"], {"release": SEMVER, "schema": SEMVER, "data": SHA256,
+                                                     "clean_manifest": STR_OR_NULL}),
+        "release": obj(["version", "date", "tag", "url", "base_url", "changelog"], {
+            "version": SEMVER, "date": {"type": "string", "format": "date"}, "tag": {"type": "string", "pattern": r"^v\d+\.\d+\.\d+$"},
+            "url": URL, "base_url": URL, "changelog": URL}),
         "compatibility": {"type": "string"}, "caching": {"type": "string"},
         "changelog": arr(obj(["version", "date", "changes"], {
             "version": {"type": "string"}, "date": {"type": "string", "format": "date"}, "changes": arr({"type": "string"})})),

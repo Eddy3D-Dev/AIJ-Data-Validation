@@ -65,8 +65,8 @@ m["cases"]["D"]["frame"]; m["cases"]["D"]["inflow"]["log_law"]; m["cases"]["D"][
 Parquet files carry the units in their metadata too:
 `pyarrow.parquet.read_schema("clean/points.parquet").metadata[b"units"]`.
 
-Regenerate: `python clean/build.py` (needs `pandas pyarrow numpy xlrd rhino3dm`, see
-`requirements.txt`; ~20 s). It exits non-zero if any check fails. `python clean/build.py --check`
+Regenerate: `python clean/build.py` (in the environment of `requirements.lock` at the repository root, or
+with everything else by `scripts/build_all.sh`; ~20 s). It exits non-zero if any check fails. `python clean/build.py --check`
 re-runs the checks and confirms the on-disk tables are what the sources produce (cell for cell, CSV
 and Parquet). The output is byte-deterministic (two builds: 49 files identical), so `git diff` after
 a rebuild shows exactly what changed and why. The checks are known to be able to fail: with B's

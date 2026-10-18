@@ -22,7 +22,8 @@ and one frame per case, cleaned STL geometry in metres, and the validation score
 **API:** [`/api/index.json`](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/index.json) ·
 [`/api/llms.txt`](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/llms.txt) for agents ·
 [OpenAPI](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/openapi.json)
-(the same files are in [`docs/api/`](docs/api/))
+(the same files are in [`docs/api/`](docs/api/)) ·
+**Release:** [v2.0.0](CHANGELOG.md), rebuilt byte for byte from its tag (see *Versions, releases and reproducing them*)
 
 | Case | Configuration | Measurements | Reference file |
 |---|---|---|---|
@@ -447,7 +448,7 @@ of the 863 pairs the tunnel resolves (|Δ| > 0.05). See *ML surrogate* under *Va
 ---
 
 <details>
-<summary><b>Validation method</b> · how Eddy3D is scored, the figures, the ML surrogate, what is still running</summary>
+<summary><b>Validation method</b> · how Eddy3D is scored, the figures, the ML surrogate, what is scored and why</summary>
 
 Each case is solved through Eddy3D's production case writer (`build-case → run → probe`), not a
 hand-built OpenFOAM case, so what is validated is what a user gets. The probe sits at **exactly the
@@ -618,13 +619,15 @@ approach flow at pedestrian height needs a refined upstream column or sampling c
 ### Reproducing the figures
 
 `validation/plot_cases_ab_openfoam.py` (Cases A and B), `validation/plot_cases_ab_engines.py` (A and B, every engine),
-`validation/plot_case_c_openfoam.py`, `validation/plot_case_e_openfoam.py` and `validation/plot_ml_surrogate.py`
-(UltraPlot) build the figures. The Eddy3D fixtures are `TestAijCaseAContainerE2E`, `TestAijCaseBContainerE2E`,
-`TestAijCaseC{0D,1D,2D}ContainerE2E`, `TestAijCaseEContainerE2E` and, for the ML surrogate, `Outdoor.ML.Tests/TestAijSurrogateE2E`. Their
-`results.json` files are snapshotted in `validation/results/` and served unchanged by the API, with the per-point
-pairs beside them, so the figures rebuild from this repository alone.
+`validation/plot_case_c_openfoam.py`, `validation/plot_case_d_openfoam.py`, `validation/plot_case_e_openfoam.py` and
+`validation/plot_ml_surrogate.py` (UltraPlot, one style in `validation/plotstyle.py`) build the figures. The Eddy3D
+fixtures are `TestAijCaseAContainerE2E`, `TestAijCaseBContainerE2E`, `TestAijCaseC{0D,1D,2D}ContainerE2E`,
+`TestAijCaseDContainerE2E`, `TestAijCaseEContainerE2E` and, for the ML surrogate, `Outdoor.ML.Tests/TestAijSurrogateE2E`.
+Their `results.json` files and the model values at the measured points are snapshotted in `validation/results/` and
+served unchanged by the API, so the figures rebuild from this repository alone, byte for byte, with
+`scripts/build_all.sh` (see *Versions, releases and reproducing them*).
 
-### What is still running
+### What is scored, and why some engines are not
 
 | | A | B | C | D | E |
 |---|---|---|---|---|---|
@@ -749,8 +752,9 @@ engine whose status is not `scored` has no result for that case, and `scored` me
 agrees: quote the `headline` scores with their reading, together with `data_version`. Cite the AIJ benchmark. The
 site's API page has tested curl and Python examples, including recomputing a published score from its pairs.
 
-Regenerate with `pip install -r scripts/requirements.txt && python scripts/build_api.py`. The build is
-reproducible byte for byte on any platform; CI rebuilds on every push, fails on any difference from what is
+Regenerate everything with `scripts/build_all.sh` in the pinned image (see *Versions, releases and reproducing
+them*), or the API alone with `pip install --require-hashes -r requirements.lock && python scripts/build_api.py`.
+The build is reproducible byte for byte; CI rebuilds on every push, fails on any difference from what is
 committed, and deploys the site only when the check passes. The point tables come from `clean/`, and the scores
 and pairs from the snapshots in `validation/results/`, each registered in `RUNS` in `scripts/build_api.py` (an
 unregistered snapshot stops the build). The changes from 1.0.0 are in `index.json` (`changelog`) and on the API page.
@@ -803,6 +807,54 @@ names the cases; papers are `author-year-title.pdf`.
 | `validation/plot_aij*.py` | `validation/plot_<scope>_<engine>.py` (e.g. `plot_case_c_openfoam.py`) | named for what they draw |
 | site page `/gotchas/` (*Data gotchas*) | `/known-data-issues/` (*Known data issues*; the old URL redirects) | descriptive naming |
 | API keys `gotchas`, `licence` | `known_issues`, `license` (API 2.0.0; the changelog is in `/api/index.json`) | descriptive naming; SPDX licence identifier |
+
+</details>
+
+<details>
+<summary><b>Versions, releases and reproducing them</b> · what a version number promises, and how to rebuild any release byte for byte</summary>
+
+**One version for what this repository serves.** [`VERSION`](VERSION) holds it; [`CHANGELOG.md`](CHANGELOG.md)
+lists every release; `CITATION.cff`, `clean/manifest.json` and the API (`versions.release` and `release` in
+[`/api/index.json`](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/index.json)) carry the same number. It follows Semantic Versioning with the rules of the
+[Data Package version recipe](https://datapackage.org/recipes/data-package-version/), applied to the API under
+`docs/api/` and the cleaned tables under `clean/`:
+
+| | when | examples |
+|---|---|---|
+| MAJOR | an incompatible change | a file, endpoint, field or column renamed or removed; a CSV column added, removed or reordered; a unit, frame or normalisation changed |
+| MINOR | a backward-compatible addition | a new case, configuration, run, endpoint, field or file |
+| PATCH | a backward-compatible fix | a corrected value, score, caption or metadata text |
+
+Documentation, figures and tooling that change no served byte need no release. CI enforces the rules: it compares
+the served files with the last release tag and fails a change that does not move `VERSION` by at least the level
+the change needs (a removed file or a changed CSV header needs MAJOR; an added file MINOR; anything else PATCH).
+When `VERSION` moves on `main` and the site has deployed, CI tags the commit `vX.Y.Z` and publishes a
+[GitHub Release](https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/releases)
+with the changelog section, `aij-uwe-vX.Y.Z.tar.gz` (the cleaned tables, the API, the changelog and the citation)
+and its `SHA256SUMS`. A tag is never moved, so `release.base_url` in `index.json`, the raw files at that tag,
+identifies one content forever; `data_version`, a SHA-256 of the served data, is the fingerprint to quote with a
+number. The API's JSON contract has its own version, `schema_version` (see the API section).
+
+**Reproduce a release.** Every generated file (the cleaned tables, the figures and geometry renders, the API and the
+generated pages) is committed, and one script regenerates all of them in one pinned environment: Python 3.12.12
+in a container image pinned by digest ([`scripts/BUILD_IMAGE`](scripts/BUILD_IMAGE)) and every package pinned by hash
+([`requirements.lock`](requirements.lock), compiled from [`requirements.txt`](requirements.txt)):
+
+```bash
+git clone https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ
+cd CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ
+git checkout v2.0.0                     # any release tag
+docker run --rm -v "$PWD:/w" -w /w "$(cat scripts/BUILD_IMAGE)" bash scripts/build_all.sh
+git status --porcelain                  # empty: every byte matches the release
+```
+
+CI runs exactly this on every push and pull request and deploys nothing that differs by a byte. The builds use no
+clock, no randomness and no machine-specific value (`PYTHONHASHSEED=0`; the one least-squares fit whose last bits
+depend on the LAPACK build is written to 12 significant digits). The release archive is built in the same image
+with fixed member order, owner and timestamp (`SOURCE_DATE_EPOCH`, the release commit's time), so
+`python scripts/release.py archive dist` there reproduces it and its `SHA256SUMS`. The solver runs behind the scores
+are not part of this rebuild: their results and per-point values are committed as snapshots in
+`validation/results/`, and the Eddy3D fixture named in each run (`/api/validation.json`, `reproduce`) re-runs one.
 
 </details>
 

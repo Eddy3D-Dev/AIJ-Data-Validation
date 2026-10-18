@@ -62,12 +62,18 @@
   "versions": {
    "type": "object",
    "required": [
+    "release",
     "schema",
     "data"
    ],
    "properties": {
+    "release": {
+     "type": "string",
+     "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+    },
     "schema": {
-     "type": "string"
+     "type": "string",
+     "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
     },
     "data": {
      "type": "string",
@@ -78,6 +84,43 @@
       "string",
       "null"
      ]
+    }
+   }
+  },
+  "release": {
+   "type": "object",
+   "required": [
+    "version",
+    "date",
+    "tag",
+    "url",
+    "base_url",
+    "changelog"
+   ],
+   "properties": {
+    "version": {
+     "type": "string",
+     "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+    },
+    "date": {
+     "type": "string",
+     "format": "date"
+    },
+    "tag": {
+     "type": "string",
+     "pattern": "^v\\d+\\.\\d+\\.\\d+$"
+    },
+    "url": {
+     "type": "string",
+     "format": "uri"
+    },
+    "base_url": {
+     "type": "string",
+     "format": "uri"
+    },
+    "changelog": {
+     "type": "string",
+     "format": "uri"
     }
    }
   },
