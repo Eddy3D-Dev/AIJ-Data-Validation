@@ -24,7 +24,7 @@ Validation data from the AIJ (Architectural Institute of Japan) benchmark casesâ
 
 - **[Cases]({{ '/cases/' | relative_url }})**: a page per case with its render, status and key numbers, then its reference data and its validation.
 - **[Validation]({{ '/validation/' | relative_url }})**: every case against every engine in one table, and the method.
-- **[Known data issues]({{ '/known-data-issues/' | relative_url }})**: what in the published files changes a comparison if it is not accounted for (units, signs, frames, scalar vs vector speed).
+- **[Known data issues]({{ '/known-data-issues/' | relative_url }})**: units, signs, frames and scalar vs vector speed, per case.
 - **[API]({{ '/api-reference/' | relative_url }})**: every endpoint with `curl` and Python examples, and the walk for [agents]({{ '/agents/' | relative_url }}).
 - **[About and cite]({{ '/about/' | relative_url }})**: the citations of the API, the data paper and each case, the licence, and how a release is reproduced.
 

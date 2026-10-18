@@ -189,7 +189,7 @@ add("The field is a year of 10-minute means above 5 m/s", "Case F scalar speed a
     (": the bar a model of the tunnel is not expected to clear", "I", (": the bar ", "The tunnel's 9 m column as a model of the field is the bar ")))
 # Case G
 add("The three crowns are entries of the Eddy3D vegetation library", "Case G drag sweep",
-    (" The arm nearest the 28 values", "I"), (" The arms are published side by side", "F"))
+    (" The arm nearest the 28 values", "I"))
 add("Eddy3D models trees as a Darcy-Forchheimer momentum sink only", "Case G drag sweep",
     (" The modelled k behind the belt", "I"))
 # Case J

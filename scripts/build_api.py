@@ -83,7 +83,7 @@ REPO_URL = C.REPO_URL
 SITE = C.SITE
 LIVE_BASE = SITE + "/api"         # the unversioned alias: always the newest release
 RAW_BASE = "https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/main/docs/api"
-SCHEMA_VERSION = "2.3.0"
+SCHEMA_VERSION = "2.4.0"
 RELEASE = R.version()             # the repository's release (VERSION); the API names it, it does not set it
 RELEASE_DATE = R.release_date()
 PINNED_BASE = f"{LIVE_BASE}/{RELEASE}"   # this release, frozen: nothing under it changes once the release is tagged
@@ -104,6 +104,18 @@ API_BASE = None          # the URL every document in the tree uses for its own f
 FALLBACK_BASE = None     # the same tree, raw from the repository
 
 CHANGELOG = [
+    {"version": "2.4.0", "date": "2026-10-18", "changes": [
+        "Added to index.json: `cite.api`, the citation of the API release (`title`, `version`, `url`, `release_url`, `doi`, `apa`, `bibtex`, "
+        "`csl_json`). `url` is the pinned address of the release, `/api/<release>/index.json`; `doi` is null until Zenodo mints one for the release.",
+        "Added to cases/{id}.json: `citation`, the Zenodo dataset of the case as `apa` and `bibtex`.",
+        "Added to the `stats` of geometry.json and to the entries of the geometry index: `bodies`, `body_contacts`, `inconsistent_triangles` and "
+        "`min_body_volume`, beside `edges_boundary`. `watertight` is true when every body is closed, consistently wound and positive in volume.",
+        "Changed: the `geometry.stl` of Cases E, F and M. Every body is a closed, consistently wound, outward body; Cases F and M stand on a 1 m base "
+        "slab, so the bounding box of each starts at z = -1 m, and `triangles` and `data_version` change with the files.",
+        "Added: the layout figure of each case, `case-<id>-layout.png`, is the first entry of `figures` of the validation results of that case "
+        "(Cases A to M); the agreement figures colour their points by the groups of that figure.",
+        "Why MINOR: nothing is renamed or removed. Every field keeps its meaning; the fields above and the layout figures are additions.",
+    ]},
     {"version": "2.3.0", "date": "2026-10-18", "changes": [
         "Added: release-numbered paths. Every release is a frozen copy of the whole API under `/api/<release>/` (for example "
         "`/api/3.0.0/index.json`, `/api/3.0.0/cases/F.json`). Every URL to a file of the API inside a copy points into the same copy "
@@ -176,8 +188,8 @@ COMPATIBILITY = ("Semantic versioning, twice. `versions.release` versions what i
                  "the newest release: pin an analysis to a release by using that release's base URL. "
                  "`schema_version` versions this JSON contract: within a major version it only adds new fields, "
                  "endpoints and runs, clients must ignore fields they do not know, and a field is renamed or removed "
-                 "only in a new major version, which the changelog names. `data_version` is a fingerprint, not a "
-                 "version: the SHA-256 of the served data.")
+                 "only in a new major version, which the changelog names. `data_version` is a fingerprint: "
+                 "the SHA-256 of the served data.")
 CACHING = ("GitHub Pages sends JSON with a 10-minute max-age and CSV and ZIP files with a 186-day max-age. Every "
            "download URL therefore carries ?v=<first 12 hex digits of the file's SHA-256>: the server ignores the "
            "query, and a changed file gets a new URL. Fetch the JSON documents for the current URLs; check "
@@ -401,11 +413,11 @@ _G_ARMS = [("open-field", "no belt", 90576, " (control: no belt)"), ("pine", "pi
            ("screen", "screen, Cd·LAD 0.875 1/m", 90576, ""), ("half-belt-conifer", "the real 74 m belt as a half domain, conifer, Cd·LAD 0.625 1/m", 625252, "")]
 _G_NORM = ("the field's U/U_H and k/U_H^2 (U_H = the wind at the tree height, 7 m, during each period) against the model's |U| and k over the model's own U(7 m) at x = -35 m ('own approach') and, in the "
            "second set of scores, over the imposed U_H = 5.299 m/s ('imposed'); the model is also scored as sqrt(|U|^2 + 2k), because the field is the mean of an instantaneous speed; hit rate D = 0.25, W = 0.05")
-_G_CAL = "LAD and Cd are not in the dataset (only the shading rate, 81 %): the drag values are a calibration against the 28 points."
+_G_CAL = "LAD and Cd are not in the dataset (only the shading rate, 81 %). The drag values are crowns of the Eddy3D vegetation library; no optimiser is run against the 28 points."
 _G_NOTES = [
     _G_CAL,
-    "The three crowns are entries of the Eddy3D vegetation library (Cd·LAD 0.30, 0.625 and 0.875 1/m, loss coefficients 1.2, 2.5 and 3.5); nothing is fitted. The arm nearest the 28 values says which "
-    "library crown the belt resembles. The arms are published side by side.",
+    "The three crowns are entries of the Eddy3D vegetation library (Cd·LAD 0.30, 0.625 and 0.875 1/m, loss coefficients 1.2, 2.5 and 3.5). The arm nearest the 28 values says which "
+    "library crown the belt resembles.",
     "Eddy3D models trees as a Darcy-Forchheimer momentum sink only: there are no canopy k or epsilon source terms. The modelled k behind the belt follows from the inflow and the shear layer over the belt.",
     "The slab arms idealise the belt as two-dimensional (the belt through both slip planes, infinite width; the data paper's Figure 7 draws a two-dimensional tree); the half-belt arm is the real 74 m belt "
     "on a half domain with its centre plane on the symmetry plane. Both are scored against the same 28 values.",
@@ -526,7 +538,7 @@ _M_HEADLINE = {"c*": "cstar", "c*, over the imposed speed at the mast's height (
                "U": "velocity.U", "V": "velocity.V", "V, sign flipped (control)": "velocity.V.flipped", "W": "velocity.W", "|U|": "velocity.magnitude", "k": "k"}
 _M_NORM = ("U, V, W and k at the 15 points over the tunnel's U_R = 4.08 m/s on the measurement and over the solved speed at the reference mast on the model (U_R is defined at the mast), k over U_R^2; "
            "c* = C/c0 (c0 = q/(U_R H_R^2) = 132.5 ppm) against the model's c U_R H_R^2/Q (H_R = 0.068 m x 600, Q = 1 kg/s) for turbulent Schmidt number {sct}, with one detection limit of 10^-3 of the "
-           "largest measured value; hit rate D = 0.25, W = 0.05 in those units; the Schmidt numbers are three runs on one flow, published side by side")
+           "largest measured value; hit rate D = 0.25, W = 0.05 in those units; the Schmidt numbers are three runs on one flow")
 
 
 def _res(name):
@@ -604,8 +616,7 @@ def _m_notes(sp):
         f"Mean c* over the three points nearest the source: {tn:.2f} (tunnel), {each('cstar.nearThreeMean', '.2f')} (model, Sct 0.3 / 0.5 / 0.7); over the two far downwind points: {tf:.2f} (tunnel), "
         f"{each('cstar.farTwoMean', '.2f')} (model). Peak c*: {r['cstar.peakMeasured']:.2f} (tunnel), {each('cstar.peakModel', '.2f')} (model); "
         f"{each('cstar.topFiveOverlap', 'd')} of the five highest points are shared with the tunnel.",
-        f"The tunnel's three points nearest the source carry about {tn / tf:.0f} times its two far downwind ones; the modelled plume carries less, and Sct {' and '.join(reversed_)} reverses the order. "
-        "The ordering is a property of the modelled plume.",
+        f"The tunnel's three points nearest the source carry about {tn / tf:.0f} times its two far downwind ones; the modelled plume carries less, and Sct {' and '.join(reversed_)} reverses the order.",
         f"Controls on the same solution: the points turned 180° about the source score {c(r['control.turned180'])} ({r['control.turned180']['Count']} of the 15 lie in the fluid; the model's mean over those points is "
         f"{r['control.meanTurned180']:.1e} against {r['control.meanReal']:.3f} at the real ones), and the points mirrored across the plume axis score {c(r['control.mirrored'])} (the real points: {c(r['cstar'])}).",
         "The tracer goes downwind: the model's mean over the points turned 180° about the source is far below its mean at the real points. The mirrored points score above the real points because the modelled "
@@ -2525,8 +2536,6 @@ def _read(root, rel):
 def _link_problem(sv, base, root, on_disk, index):
     """Why a URL a tree's document gives is wrong, or None. Inside a tree every URL stays in the tree; the registry
     (versions.json) is the one file outside it, and the latest alias may name its release's frozen copy."""
-    if sv.startswith(LIVE_BASE + "/") and sv.endswith("/"):
-        sv = sv.rstrip("/")      # the root of a tree, as the citation of a release gives it
     if sv == base or "{" in sv or not (sv == LIVE_BASE or sv.startswith(LIVE_BASE + "/")):
         return None
     if sv == f"{LIVE_BASE}/versions.json":

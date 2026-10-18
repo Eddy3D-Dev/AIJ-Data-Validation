@@ -79,8 +79,9 @@ ZENODO = {
 # ----------------------------------------------------------------------------- addresses
 
 def pinned_url(version):
-    """The root of one release's frozen API: the address the API is cited by."""
-    return f"{SITE}/api/{version}/"
+    """The index of one release's frozen API: the address the API is cited by. GitHub Pages answers 404 for the folder
+    itself (there is no index document), so the address names the file."""
+    return f"{SITE}/api/{version}/index.json"
 
 
 def tag_url(version):

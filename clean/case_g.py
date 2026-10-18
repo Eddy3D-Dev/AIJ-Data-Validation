@@ -104,7 +104,7 @@ def build(B, prov):
 
     box = _box()
     geo = [("default", [box], "generated from the readme's stated dimensions (74 m along y, 2 m along x, 7 m high, 1.2 m bottom gap), "
-            "centred on y = 0 with its leeward face at x = 0 (MP_caseG.png). A POROUS CANOPY, not a solid body: the data paper gives a "
+            "centred on y = 0 with its leeward face at x = 0 (MP_caseG.png). A porous canopy: the data paper gives a "
             "shading rate of 81 % after pruning (section 3.7); the box is its envelope")]
 
     # ---- checks

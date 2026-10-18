@@ -20,19 +20,19 @@ REL = C.Release("1.2.3", "2030-01-02", "abcdef012345" + "0" * 52)
 ROOT = "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api"
 T = "AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API"
 
-API_APA = f"Sustainable Urban Systems Lab. (2030). {T} (Version 1.2.3) [Data set]. {ROOT}/1.2.3/"
+API_APA = f"Sustainable Urban Systems Lab. (2030). {T} (Version 1.2.3) [Data set]. {ROOT}/1.2.3/index.json"
 API_BIBTEX = f'''@misc{{aijuwe_api_1_2_3,
   author    = "{{Sustainable Urban Systems Lab}}",
   title     = "{{{T}}}",
   year      = "2030",
   version   = "1.2.3",
   publisher = "Sustainable Urban Systems Lab",
-  url       = "{ROOT}/1.2.3/",
+  url       = "{ROOT}/1.2.3/index.json",
   note      = "Data set; data version abcdef012345"
 }}'''
 API_CSL = {"id": "aijuwe-api-1.2.3", "type": "dataset", "title": T, "author": [{"literal": "Sustainable Urban Systems Lab"}],
            "issued": {"date-parts": [[2030, 1, 2]]}, "version": "1.2.3", "publisher": "Sustainable Urban Systems Lab",
-           "URL": f"{ROOT}/1.2.3/", "note": "Data version abcdef012345"}
+           "URL": f"{ROOT}/1.2.3/index.json", "note": "Data version abcdef012345"}
 PAPER_APA = ("Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., "
              "& Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: "
              "Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review, 9(1), e70083. "
@@ -56,7 +56,7 @@ class Frozen(unittest.TestCase):
         self.assertEqual(C.api_apa(REL), API_APA)
         self.assertEqual(C.api_bibtex(REL), API_BIBTEX)
         self.assertEqual(C.api_csl(REL), API_CSL)
-        self.assertEqual(C.api(REL), {"title": T, "version": "1.2.3", "url": f"{ROOT}/1.2.3/", "doi": None, "apa": API_APA,
+        self.assertEqual(C.api(REL), {"title": T, "version": "1.2.3", "url": f"{ROOT}/1.2.3/index.json", "doi": None, "apa": API_APA,
                                       "bibtex": API_BIBTEX, "csl_json": API_CSL,
                                       "release_url": C.REPO_URL + "/releases/tag/v1.2.3"})
 
@@ -77,7 +77,7 @@ class Frozen(unittest.TestCase):
 class Release(unittest.TestCase):
     def test_pinned_url_follows_version(self):
         other = C.Release("1.2.4", REL.date, REL.data_version)
-        self.assertEqual(C.pinned_url("1.2.3"), f"{ROOT}/1.2.3/")
+        self.assertEqual(C.pinned_url("1.2.3"), f"{ROOT}/1.2.3/index.json")
         for render in (C.api_apa, C.api_bibtex, lambda r: json.dumps(C.api_csl(r)), lambda r: C.cff(r, D.CASES)):
             self.assertIn("/api/1.2.3/", render(REL))
             self.assertNotIn("/api/1.2.3/", render(other))

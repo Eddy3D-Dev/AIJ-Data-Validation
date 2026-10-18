@@ -621,7 +621,7 @@ Full reading: [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases
 <summary><b>Case G — flow behind a tree belt</b> · 28 points, U/U_H and k/U_H² · scored: OpenFOAM 12 (a drag sweep)</summary>
 
 <p><!--fig name="case-g.png" alt="Case G geometry" width="700"--><a href="validation/figures/geometry/case-g.png"><img src="docs/assets/web/case-g.png" width="700" height="350" loading="lazy" alt="Case G geometry"></a><!--/fig--><br>
-<em>The Tsuiji-matsu tree belt, 2 m × 74 m × 7 m with a 1.2 m gap below (full scale; shown as its envelope — a porous canopy, not a solid body); the wind blows along +x and the measurements are behind the belt.</em></p>
+<em>The Tsuiji-matsu tree belt, 2 m × 74 m × 7 m with a 1.2 m gap below (full scale; shown as its envelope, a porous canopy); the wind blows along +x and the measurements are behind the belt.</em></p>
 
 **What it is.** Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m × 2 m × 7 m with a 1.2 m gap below): normalised mean speed and k at 28 points on the centre section (sonic anemometers).
 
@@ -629,7 +629,7 @@ Full reading: [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases
 
 **Frame.** Origin: the leeward face of the tree belt at ground level, on the vertical section through the belt's centre. x: +x downwind: the belt occupies x in [-2, 0] m, the measurement lines lie behind it at x = 1.75 ... 35 m. y: +y along the belt (y in [-37, 37] m); every point is on y = 0. z: +z up; the belt spans z in [1.2, 7] m; points at z = 1.5, 3, 4.5, 6 m.
 
-**Validation (OpenFOAM 12, realizable k-ε, full scale).** The belt's leaf area density and drag coefficient are not in the dataset, so Eddy3D solved a **drag sweep**: no belt, three vegetation-library crowns of rising Cd·LAD (0.30, 0.625 and 0.875 1/m) on a two-dimensional slab, and the conifer crown on the real 74 m belt as a half domain. Each arm is its own run. The drag values are a calibration against the 28 points. Eddy3D's trees have no canopy k source. The measurement is U/U_H and k/U_H² (U_H the wind at 7 m); the model is |U| and k over its own U(7 m) at x = −35 m.
+**Validation (OpenFOAM 12, realizable k-ε, full scale).** The belt's leaf area density and drag coefficient are not in the dataset, so Eddy3D solved a **drag sweep**: no belt, three vegetation-library crowns of rising Cd·LAD (0.30, 0.625 and 0.875 1/m) on a two-dimensional slab, and the conifer crown on the real 74 m belt as a half domain. Each arm is its own run. The drag values are crowns of the Eddy3D vegetation library; no optimiser is run against the 28 points. Eddy3D's trees have no canopy k source. The measurement is U/U_H and k/U_H² (U_H the wind at 7 m); the model is |U| and k over its own U(7 m) at x = −35 m.
 
 | Arm | Cd·LAD [1/m] | U R | U FAC2 | U FB | mean U/U_H | k R | k FAC2 | k FB |
 |---|---|---|---|---|---|---|---|---|
@@ -920,7 +920,7 @@ Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases
 
 **Frame.** Origin: centre of the tunnel turntable on the floor plane (ground surface there at z = 33.07 m). x: +x NORTH (full-scale metres). y: +y WEST (compass rose of MP_caseM.png: N at +x, W at +y); the frame is right-handed. z: +z up from the TUNNEL FLOOR; the campus ground lies at z ~ 32 m.
 
-**Validation (OpenFOAM 12, realizable k-ε, full scale).** One steady solve at WD 180, the tunnel's only heading with velocities (1,394,053 cells, 3000 iterations). U, V, W and k are over the tunnel's U<sub>R</sub> = 4.08 m/s (measured) and over the solved speed at the reference mast (modelled); the concentration is the measured C/c₀ against the model's c\* = c U<sub>R</sub> H<sub>R</sub>²/Q at three turbulent Schmidt numbers, three runs on one flow, published side by side.
+**Validation (OpenFOAM 12, realizable k-ε, full scale).** One steady solve at WD 180, the tunnel's only heading with velocities (1,394,053 cells, 3000 iterations). U, V, W and k are over the tunnel's U<sub>R</sub> = 4.08 m/s (measured) and over the solved speed at the reference mast (modelled); the concentration is the measured C/c₀ against the model's c\* = c U<sub>R</sub> H<sub>R</sub>²/Q at three turbulent Schmidt numbers, three runs on one flow.
 
 | | R | FAC2 | FB | hit rate |
 |---|---|---|---|---|
@@ -1230,7 +1230,7 @@ imposed log law (mean across a span of ±H):
 At H/32 the z/H = 0.10 height reads 0.74–0.80 (3.2 cells up); at H/64 the near-wall flow forms stationary streaks, and
 across the span the ratio at z/H = 0.10 runs from 0.24 to 0.88 (4 H downstream). Case E's height comes closest
 (0.91–0.99 at Case A's lattice); the Niigata district fits on this GPU only at about 1.6 cells per 2 m (an estimate from
-the lattice sizes, not a run).
+the lattice sizes).
 
 FluidX3D has no ground wall function; scoring Cases C to E needs one in the engine.
 
@@ -1289,7 +1289,7 @@ Cases C to E (each case's section above carries the detail):
 7. **Cases F to M each carry their own list** (six to ten items each), in the case's section above, on the site's
    *Known data issues* page and in `cases/{id}.json`. Among them: F's field series of point 14 is shifted by one direction in
    the published CSV relative to the workbook, and the heights of F and M are above the tunnel floor, not the ground; H's vertical-plane V has the
-   opposite sign to its horizontal planes; I's V on the y = 0 plane is a numerical zero, not a measurement; K's workbook and
+   opposite sign to its horizontal planes; I's V on the y = 0 plane is a numerical zero; K's workbook and
    data paper use different concentration scales; L's `T(K)` column of the tunnel file is in degrees Celsius.
 
 The cleaned tables served by the API apply the unit, sign and frame corrections; the raw files do not. Do not apply the corrections again to the published files.

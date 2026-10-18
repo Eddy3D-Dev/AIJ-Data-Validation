@@ -9,8 +9,8 @@ from aij_case_common import EDITORS, clean_approach_flow
 DEFAULT_CONFIGURATION = "default"
 
 RENDER_CAPTIONS = {
-    ("G", "default"): ("The Tsuiji-matsu tree belt, 2 m × 74 m × 7 m with a 1.2 m gap below (full scale; shown as its envelope — a porous canopy, "
-                       "not a solid body); the wind blows along +x and the measurements are behind the belt."),
+    ("G", "default"): ("The Tsuiji-matsu tree belt, 2 m × 74 m × 7 m with a 1.2 m gap below (full scale; shown as its envelope, a porous canopy); "
+                       "the wind blows along +x and the measurements are behind the belt."),
 }
 
 BOXES = [{"min": [-2.0, -37.0, 1.2], "max": [0.0, 37.0, 7.0]}]
@@ -64,7 +64,7 @@ CASE = {
     "known_issues": [
         "FIELD data: full-scale metres, no model, and nothing in m/s. The table carries U/UH (velocity_ratio) and k/UH^2 (k_ratio), UH = the mean speed at 7 m during each period; the approach-flow table carries U/Ub and k/Ub^2 (Ub = U at 9 m) in its U and k columns, which are dimensionless here.",
         "The readme lists the heights of the lee measurement as 1.5, 3.0, 6.0, 9.0 m; the table, the workbook, the drawing and the data paper have 1.5, 3, 4.5, 6 m.",
-        "The tree belt is a POROUS canopy (shading rate 81 % after pruning), not a solid body: the served geometry is its 2 m × 74 m × 7 m envelope with the 1.2 m gap, and a solver needs a canopy (drag) model, not a wall.",
+        "The tree belt is a porous canopy (shading rate 81 % after pruning): the served geometry is its 2 m × 74 m × 7 m envelope with the 1.2 m gap, and a solver needs a canopy (drag) model.",
         "The approach profile (28 Dec 2000, 120 min) and the lee measurements (26 Dec 2000, 10 min or more) are from different days. Behind the belt k/UH^2 is 0.040-0.072 at 5 H, 3-8 times below the approach flow's 0.26-0.31 at the same heights; the files do not say why.",
         "Only 28 numbers per quantity exist, on one centre section, one time-average each, with no repeats and no uncertainty.",
         "The wind direction relative to the belt normal during the measurement is not published; the case is two-dimensional by assumption.",

@@ -35,7 +35,7 @@ Case M. The wind-tunnel run at WD 180 (the only heading with velocities) is scor
 frame (x north, y west, full-scale metres, z above the tunnel floor; the case's x east, y north is a quarter turn of it): U, V, W and k at the 15 points over
 the tunnel's own U_R = 4.08 m/s on the measurement and over the SOLVED speed at the reference mast on the model (U_R is defined at the mast), c* = C/c0 for the
 measurement (c0 = 132.514 ppm) against c U_R H_R^2 / Q (H_R = 0.068 m x 600, Q = 1 kg/s) for the model at the three turbulent Schmidt numbers, which are three
-runs on one flow, published side by side. The controls are the fixture's: the 15 points turned 180 degrees about the source, and mirrored across the plume
+runs on one flow. The controls are the fixture's: the 15 points turned 180 degrees about the source, and mirrored across the plume
 axis; and this script's own: the tunnel's WD 175 and WD 185 columns scored against its WD 180. The field band is the runs within 10 degrees of 180 at 3 m/s
 or more (10 of 18), each with its own U_R and q, c0 per run with H_R = 41 m as the table states; the fixture divides by 40.8 m, which is the whole difference
 in these numbers (1 %).

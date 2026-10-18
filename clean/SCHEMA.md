@@ -268,8 +268,7 @@ carried: the table has no column for them), I's 12 (k only).
 
 ### Geometry
 
-Box geometry, `geometry.stl` and its boxes in `geometry.json`: G the belt's 2 × 74 × 7 m envelope with the 1.2 m gap (a **porous canopy**, shading rate 81 %,
-not a solid body), H the 0.10 × 0.10 × 0.20 m building, I the 0.1 m cube. The sources are not part of the geometry; their position is in
+Box geometry, `geometry.stl` and its boxes in `geometry.json`: G the belt's 2 × 74 × 7 m envelope with the 1.2 m gap (a **porous canopy**, shading rate 81 %), H the 0.10 × 0.10 × 0.20 m building, I the 0.1 m cube. The sources are not part of the geometry; their position is in
 `manifest.json → cases.<id>.extra_measurements.source`: H the 4 mm floor hole at (0.05, 0, 0), I the 6 mm roof outlet at (0, 0, 0.1).
 
 ## Cases J, K, L — frames, reference values, extra files

@@ -106,7 +106,7 @@ In the empty-domain run at H/64, 4–6 H downstream of the inlet (where the buil
 
 - At H/32 the same height reads 0.74–0.80 (3.2 cells up).
 - At H/64 the near-wall flow forms stationary streaks, and across the span the ratio at z/H = 0.10 runs from 0.24 to 0.88 (4 H downstream).
-- Case E's height reads 0.91–0.99 at Case A's lattice. The Niigata district fits on this GPU only at about 1.6 cells per 2 m (an estimate from the lattice sizes, not a run).
+- Case E's height reads 0.91–0.99 at Case A's lattice. The Niigata district fits on this GPU only at about 1.6 cells per 2 m (an estimate from the lattice sizes).
 
 FluidX3D has no ground wall function; scoring Cases C to E needs one in the engine.
 
