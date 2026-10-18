@@ -109,7 +109,7 @@ def within_half_unit(published, workbook, decimals: int):
     """(largest |published - workbook|, number of cells further than half a unit of the last printed digit).
 
     The published value is the workbook value rounded to `decimals`; a half-way cell may round either way
-    (Excel rounds half up, the binary double may sit just below), so half a unit is the honest bar.
+    (Excel rounds half up, the binary double may sit just below), so half a unit is the right bar.
     """
     d = np.abs(np.asarray(published, float) - np.asarray(workbook, float))
     return float(d.max()), int((d > 0.5 * 10.0 ** -decimals * (1 + 1e-6)).sum())
