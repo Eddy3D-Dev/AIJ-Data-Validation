@@ -112,8 +112,12 @@ def draw(ax, groups, edges):
             polys.append(p)
             cols.append(np.clip(base * (0.50 + 0.50 * abs(float(_normal(p) @ LIGHT))), 0, 1))
     order = np.argsort([-project(p)[1].mean() for p in polys])
-    ax.add_collection(PolyCollection([project(polys[i])[0] for i in order], facecolors=[cols[i] for i in order],
-                                     edgecolors=EDGE if edges else "none", linewidths=0.5 if edges else 0.0,
+    faces = [cols[i] for i in order]
+    # edges: True = white outlines; "seal" = outline in the face colour (a terrain mesh of thousands of facets would show its
+    # seams as hairlines); False = none
+    ax.add_collection(PolyCollection([project(polys[i])[0] for i in order], facecolors=faces,
+                                     edgecolors=EDGE if edges is True else (faces if edges == "seal" else "none"),
+                                     linewidths=0.5 if edges is True else (0.4 if edges == "seal" else 0.0),
                                      antialiased=True, joinstyle="round"))
 
 
@@ -151,9 +155,12 @@ def scene(case):
             ztop = max(b["max"][2] for b in boxes)
             tall = [b for b in boxes if b["max"][2] > 0.6 * ztop]
             groups = [(boxes_tris([b for b in boxes if b not in tall]), BODY), (boxes_tris(tall), ACCENT)]
+        elif case == "F":
+            tall = tris[:, :, 2].max(axis=1) > 100.0          # the high-rise group (full-scale metres)
+            groups = [(tris[~tall], BODY), (tris[tall], ACCENT)]
         else:
             groups = [(tris, BODY)]
-        out.append((cfg, groups, case != "E"))
+        out.append((cfg, groups, "seal" if case in ("F", "M") else case != "E"))
     if case == "E":
         # The new construction is what the after state adds to the before state.
         tris_of = {cfg: groups[0][0] for cfg, groups, _ in out}
@@ -178,6 +185,14 @@ def decorate(ax, case, lo, hi):
     elif case == "D":
         ground_grid(ax, lo[0] - 0.1, hi[0] + 0.1, lo[1] - 0.1, hi[1] + 0.1, 0.2)
         arrow(ax, (lo[0] - 0.32, 0, 0.03), (lo[0] - 0.08, 0, 0.03), "wind, WD = 0°")
+    elif case == "F":
+        # Geographic frame, full scale: +x east, +y north (no scored direction: the wind is a compass sector).
+        ground_grid(ax, lo[0], hi[0], lo[1], hi[1], 200)
+        arrow(ax, (hi[0] + 60, hi[1] - 450, 0), (hi[0] + 60, hi[1] - 100, 0), "N", colour="#5c5c5a")
+    elif case == "M":
+        # Frame: +x north, +y west; WD = 180 deg blows toward +x, so the arrow runs along +x from the upwind (-x) side.
+        ground_grid(ax, lo[0], hi[0], lo[1], hi[1], 100)
+        arrow(ax, (lo[0] - 320, 0, 40), (lo[0] - 60, 0, 40), "wind, WD = 180°")
     else:
         ground_grid(ax, lo[0], hi[0], lo[1], hi[1], 50)
         # Geographic frame: +x east, +y north. The scored direction is SW, so the arrow comes from the SW.
@@ -241,5 +256,5 @@ if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     cube = merge_coplanar(boxes_tris([{"min": [0, 0, 0], "max": [1, 1, 1]}]))
     assert len(cube) == 6 and all(len(q) == 4 for q in cube), "a unit cube must merge to six quads"
-    for c in D.CASE_IDS:
+    for c in D.CASE_IDS + D.EXTRA_CASE_IDS:
         print(c, render_case(c))
