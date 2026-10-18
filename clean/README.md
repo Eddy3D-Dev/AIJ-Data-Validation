@@ -144,7 +144,7 @@ The repeated locations are a free repeatability estimate, and a trap for anyone 
 **D**
 
 - The repository clone had only the workbook; the official `RS-T_caseD.csv`, `RS-S_caseD.csv`, `AF_caseD.csv`, readme and `MP_caseD.png` are on Zenodo 10.5281/zenodo.15402668 and are now in `sources/zenodo_caseD/`. The CSVs are in metres; the workbook in mm; they agree to 4e-16.
-- Unmeasured = `-999.9` in the CSVs, `-` in the workbook: NaN here. 12 thermistor points in the band around the tower are unmeasured in every direction (66 of 78 measured); 45 of the 78 points were never measured by the split fibre and are simply absent from its rows.
+- Unmeasured = `-999.9` in the CSVs, `-` in the workbook: NaN here. 12 thermistor points in the band around the tower are unmeasured in every direction (66 of 78 measured); 45 of the 78 points were never measured by the split fibre and are absent from its rows.
 - `RS-S_caseD.csv`'s z header is the **full-width** character `ｚ[m]` (U+FF5A) — a reader keyed on `z` misses it.
 - The split-fibre `Vs` column (and the workbook's "Scalar Vel.") is √(U²+V²+W²) to 1e-15 — the vector magnitude, not a thermistor reading — and is dropped. The thermistor's readings at those 33 points are in the thermistor rows; they average 1.34× the magnitude, and √(|U|² + 2k) from the split-fibre data reproduces them to FB +0.06.
 - The 0° thermistor field is an **exact** y-mirror (33 pairs, ΔVs = 0): half was measured and mirrored, so only 33 of 66 values are independent. The array is exactly y-symmetric, so the **22.5°/45° rotation sense is undecidable from the data**; the sense in `directions.csv` follows Figure 4 of the data paper (`QUESTIONS.md` Q2).

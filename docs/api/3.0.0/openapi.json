@@ -2443,7 +2443,7 @@
    },
    "Validation": {
     "title": "Case validation",
-    "description": "Eddy3D's scores against one case, per engine and run. An engine that is not 'scored' has no result here.",
+    "description": "Eddy3D's scores against one case, per engine and run. 'scored' means a run exists, not that it agrees; an engine that is not 'scored' has no result here.",
     "type": "object",
     "required": [
      "$schema",

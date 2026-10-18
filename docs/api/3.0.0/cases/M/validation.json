@@ -7,7 +7,7 @@
  "title": "Case M — TPU Atsugi campus",
  "status": "scored",
  "status_meaning": {
-  "scored": "a validation run exists and its scores are in cases/{id}/validation.json",
+  "scored": "a validation run exists and its scores are in cases/{id}/validation.json; whether it agrees is in the numbers",
   "running": "the solve is in progress; no scores yet",
   "pending": "not run yet",
   "not comparable": "the engine cannot produce the measured quantity at the measured location: OpenLB at the resolution this hardware runs, FluidX3D without a ground wall function; the measurement behind each is on the Validation page"

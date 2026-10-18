@@ -1365,8 +1365,7 @@ def llms_text(percase):
         "   geometry.json lists the boxes where the geometry IS boxes (A, B, C, D, G, H, I, J, K, L), so you need not parse the STL at all.",
         "6. GET validation.json for every case and engine at once, or cases/{id}/validation.json for one case in full.",
         "   Quote the `headline` scores. An engine whose status is not \"scored\" has NO result for that case: do not",
-        "   infer one. Each result's `pairs` is",
-        "   the per-point measured and modelled values, so any score can be recomputed. Status today: "
+        "   infer one. Each result's `pairs` is the per-point measured and modelled values, so any score can be recomputed. Status today: "
         + "; ".join(f"{c}: " + ", ".join(f"{e} {s}" for e, s in ENGINE_STATUS[c].items()) for c in D.CASE_IDS) + ".",
         "7. All geometry at once: GET geometry.json (every STL with its case, configuration, units, frame and SHA-256)",
         "   or geometry.zip. Each STL stays in its own case's frame and units; they are NOT one scene.",
