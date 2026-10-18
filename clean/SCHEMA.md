@@ -100,7 +100,7 @@ that matter) and a power-law fit — reproduced in `build.py`, never typed in.
 
 ASCII STL, LF line endings, outward normals, **metres in the same frame as the points** (so the E
 files are full-scale and ~400 m across). `geometry.json` lists each file, its provenance, triangle
-count, bounding box, watertightness, and — for A–D and G–L — the axis-aligned boxes it is made of, so a
+count, bounding box, watertightness, and, for A–D and G–L, the axis-aligned boxes it is made of, so a
 consumer need not parse an STL at all.
 
 | case | files | made from |

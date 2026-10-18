@@ -139,7 +139,7 @@ m.query("campaign == 'field' and abs(wind_direction_deg - 180) <= 5").groupby("p
 - The repository clone had only the workbook; the official `RS-T_caseD.csv`, `RS-S_caseD.csv`, `AF_caseD.csv`, readme and `MP_caseD.png` are on Zenodo 10.5281/zenodo.15402668 and are now in `sources/zenodo_caseD/`. The CSVs are in metres; the workbook in mm; they agree to 4e-16.
 - Unmeasured = `-999.9` in the CSVs, `-` in the workbook: NaN here. 12 thermistor points in the band around the tower are unmeasured in every direction (66 of 78 measured); 45 of the 78 points were never measured by the split fibre and are absent from its rows.
 - `RS-S_caseD.csv`'s z header is the **full-width** character `ｚ[m]` (U+FF5A) — a reader keyed on `z` misses it.
-- The split-fibre `Vs` column (and the workbook's "Scalar Vel.") is √(U²+V²+W²) to 1e-15 — the vector magnitude, not a thermistor reading — and is dropped. The thermistor's readings at those 33 points are in the thermistor rows; they average 1.34× the magnitude, and √(|U|² + 2k) from the split-fibre data reproduces them to FB +0.06.
+- The split-fibre `Vs` column (and the workbook's "Scalar Vel.") is √(U²+V²+W²) to 1e-15, the vector magnitude of the split-fibre probe, and is dropped. The thermistor's readings at those 33 points are in the thermistor rows; they average 1.34× the magnitude, and √(|U|² + 2k) from the split-fibre data reproduces them to FB +0.06.
 - The 0° thermistor field is an **exact** y-mirror (33 pairs, ΔVs = 0): half was measured and mirrored, so only 33 of 66 values are independent. The array is exactly y-symmetric, so the **22.5°/45° rotation sense is undecidable from the data**; the sense in `directions.csv` follows Figure 4 of the data paper (`QUESTIONS.md` Q2). Solved Eddy3D fields score R 0.80 and 0.85 in that sense at 22.5° and 45°, 0.40 and 0.17 mirrored.
 - The published `BD_caseD.stl` has 576 duplicate facets and all 83 roofs wound inward (signed volume half the true one); `geometry.stl` here is the 83 boxes, watertight, analytic volume.
 - The measurement plane z/H = 0.02 sits below the 0.02…2H window a log law is usually fitted over; the two fits in `manifest.json` differ by 5× in z₀ and by 20 points in U at the plane. The inlet k implied by atmBoundaryLayer (0.39–0.65 m²/s²) is below the tunnel's 0.53–0.75; a log-law inlet cannot be right at both the plane and aloft.
@@ -173,7 +173,7 @@ m.query("campaign == 'field' and abs(wind_direction_deg - 180) <= 5").groupby("p
 <summary>Interpretation: Case F</summary>
 
 - Point 14 of the field file: the R between the tunnel and the field is 0.55 as published, below every other point
-  (0.63 … 0.93), and 0.72 aligned to the workbook. It is evidence for the workbook, not proof (QF1).
+  (0.63 … 0.93), and 0.72 aligned to the workbook. It supports the workbook (QF1).
 - A tolerance on σ below one step measures the rounding.
 - Reference buildings: the roofs under the two points are 225 m and 180 m high, differing by the 45 m that SMB (210 m)
   and KDD (165 m) differ by, and the taller is at the workbook's SMB (QF6).

@@ -37,7 +37,7 @@ Before and after the construction of a 60 m tower and two 18 m blocks, each stat
 </details>
 
 <details markdown="block">
-<summary>Data notes: approach-flow sampling</summary>
+<summary>Data notes: Approach-flow sampling</summary>
 
 The approach flow reads 0.41 and 0.79 of the imposed table at 1.25 m and 2.5 m. Those readings were taken inside the first cell of the coarse upstream mesh, where the sampling interpolates to zero at the wall (see [Inflow]({{ '/validation/method/' | relative_url }}#inflow)).
 

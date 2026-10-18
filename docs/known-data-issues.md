@@ -89,7 +89,7 @@ The geometry was not inferred from the CSV extents.
 - Repeatability floor from the mirror-symmetric pairs: mean |ΔVs| 0.088–0.137 m/s (0.024–0.038 U_H).
 
 <details markdown="block">
-<summary>Data notes: sense of the WD rotation</summary>
+<summary>Data notes: Sense of the WD rotation</summary>
 
 In the CSV's own frame the WD = 45° field is mirror-symmetric about y = −x to within the experiment's repeatability
 (0.10–0.13 m/s) and not about y = +x (0.5–0.8 m/s), so WD rotates the wind from +x toward −y. Figure 3 of the data

@@ -25,7 +25,7 @@ Cases J and L are non-isothermal: a floor held at about 45 °C (45.8 °C in J, 4
 
 - The isothermal OpenFOAM 12 solver Eddy3D uses for the other cases cannot represent a heated floor, which is why these cases were solved with UMF.
 - Temperature FAC2 is 1.00 almost everywhere because θ lies between 0.4 and 1.1, so R and the hit rate carry the comparison.
-- The Froude scale keeps the Richardson number, Pr and the Kelvin values and not the Reynolds number, so the wall-function regime of the model is not the tunnel's.
+- The Froude scale keeps the Richardson number, Pr and the Kelvin values and changes the Reynolds number, so the wall-function regime of the model differs from the tunnel's.
 
 </details>
 

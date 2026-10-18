@@ -383,7 +383,7 @@ the array; shifting the cloud by 12.5 mm (5 m full scale) puts points 27 and 28 
 </details>
 
 **Validation (OpenFOAM 12, realizable k-ε), all three wind directions: 0°, 22.5° and 45°**; each about 15 h on
-8 cores beside a production campaign. 3.6 million cells at 1:400 on a cylinder domain,
+8 cores. 3.6 million cells at 1:400 on a cylinder domain,
 3000 iterations; the last iteration's initial residuals are below 4 × 10⁻³.
 
 <!--fig name="case-d-openfoam-agreement.png" alt="Case D, measured vs modelled" width="800"--><a href="validation/figures/case-d-openfoam-agreement.png"><img src="docs/assets/web/case-d-openfoam-agreement.png" width="800" height="266" loading="lazy" alt="Case D, measured vs modelled"></a><br><sub><a href="validation/figures/case-d-openfoam-agreement.png">1200 dpi original, 2.6 MB</a></sub><!--/fig-->
@@ -414,7 +414,7 @@ the array; shifting the cloud by 12.5 mm (5 m full scale) puts points 27 and 28 
 - Against the instrument that measures what RANS computes, the model is nearly unbiased. On the 33 split-fibre points
   its |U| has FB +0.07; against the thermistor it is +0.21 with √(|U|²+2k) and +0.36 with |U|. In the tunnel itself the
   thermistor reads 1.34 times the split-fibre |U| over the same 33 points, so most of the thermistor gap is the
-  instrument, not the flow.
+  instrument.
 - Its streamwise component is low (U FB +0.67, R 0.95) while its |U| is not: more of the model's near-ground speed is in
   the lateral and vertical components than the tunnel's.
 - At 22.5° and 45° the solved fields corroborate the rotation sense the data cannot decide. The array is symmetric about
@@ -484,10 +484,10 @@ least-squares factor of 2.048; rescaled, its FAC2 goes 0.338 → 0.863 with R un
 every fit overshoots U(15.9 m) by 4–7 %); power-law exponents are 0.158 (ground … 60 m) and 0.201 (whole profile).
 Construction signal: mean (ac − bc) = +0.097, largest for SW (mean |Δ| 0.2155), smallest for SSE (0.093).
 
-**Validation (OpenFOAM 12, realizable k-ε), wind from SW** — the direction with the largest construction signal —
+**Validation (OpenFOAM 12, realizable k-ε), wind from SW** (the direction with the largest construction signal),
 before and after construction: 986,540 and 1,006,090 cells on a 504 m-radius cylinder (4 m cells to 80 m, 2 m at the
-buildings), the workbook's measured profile imposed through a tabulated inlet that Eddy3D's CLI gained for this
-case (`wind.inlet: "manual"`), 2000 iterations. The model's speed is divided by its own solved U(15.9 m), which
+buildings), the workbook's measured profile imposed through a tabulated inlet (`wind.inlet: "manual"` in
+Eddy3D's CLI), 2000 iterations. The model's speed is divided by its own solved U(15.9 m), which
 arrives at 0.998 of the imposed value in both states.
 
 <!--fig name="case-e-openfoam-agreement.png" alt="Case E, measured vs modelled, before, after and the change" width="800"--><a href="validation/figures/case-e-openfoam-agreement.png"><img src="docs/assets/web/case-e-openfoam-agreement.png" width="800" height="338" loading="lazy" alt="Case E, measured vs modelled, before, after and the change"></a><br><sub><a href="validation/figures/case-e-openfoam-agreement.png">1200 dpi original, 2.4 MB</a></sub><!--/fig-->
@@ -1112,7 +1112,7 @@ layer. At the measurement points, inside the refined mesh, it affects 0 of 240 p
 Case D (both sheltered and nearly still) and 5 of 80 (before construction) and 1 of 80 (after) in Case E.
 
 <details markdown="block">
-<summary>Data notes: approach flow at pedestrian height</summary>
+<summary>Data notes: Approach flow at pedestrian height</summary>
 
 The approach flow cannot be read at 2 m upstream. Read at that height it appears 17 % slow in Case C and 0.41 and 0.79
 of the table at 1.25 m and 2.5 m in Case E; both are this artefact. Reading the approach flow at pedestrian height needs

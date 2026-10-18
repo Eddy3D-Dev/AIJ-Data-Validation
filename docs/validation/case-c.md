@@ -50,7 +50,7 @@ All nine configurations (centre block 0D / 1D / 2D × WD 0°, 22.5°, 45°), sol
 </details>
 
 <details markdown="block">
-<summary>Data notes: approach-flow sampling</summary>
+<summary>Data notes: Approach-flow sampling</summary>
 
 The approach flow at the probe height reads 0.83 of the tunnel's; that reading is a sampling artefact. Upstream of the array the probe height lies below the centre of the first cell of the coarse background mesh, where the probes' cell-to-point interpolation runs linearly to zero at the wall: the sampled |U| is exactly proportional to z there (1.00 m/s at 1 m, 2.01 m/s at 2 m). At z = D the approach matches the tunnel (0.99). At the measurement points the sampling is sound: none of the 240 checked (2D at 0°, 0D at 45°) has its 2 m sample inside the first cell.
 
