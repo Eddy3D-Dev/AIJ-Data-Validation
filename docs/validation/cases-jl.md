@@ -31,7 +31,11 @@ Cases J and L are non-isothermal: a floor held at about 45 °C (45.8 °C in J, 4
 
 ## Case J
 
+### Measurement layout
+
 {% include figure.html name="case-j-layout.png" alt="Measurement lines and planes, Case J" caption="<strong>Figure 1.</strong> Case J, measurement lines and planes: A vertical profiles, y/H = 0; B plane z/H = 0.025; C plane z/H = 0.25. Positions in multiples of H." %}
+
+### Measured against modelled
 
 {% include figure.html name="case-j-umf-agreement.png" alt="Case J, measured vs modelled velocity, k and temperature" caption="<strong>Figure 2.</strong> Case J under realizable k-ε (top) and buoyantKEpsilon (bottom): measured vs modelled U, W, k and the floor-referenced temperature θ; the dots take the colour of the line or plane they were measured on, as in Figure 1." %}
 
@@ -75,7 +79,11 @@ n is 443 (416 without the 27 points within a quarter of a building height of the
 
 ## Case L
 
+### Measurement layout
+
 {% include figure.html name="case-l-layout.png" alt="Measurement lines and planes, Case L" caption="<strong>Figure 4.</strong> Case L, measurement lines and planes: A street profiles near the source, 8 heights; B profiles above the roofs, 4 heights; C street profiles around, 3 heights. Positions in multiples of H." %}
+
+### Measured against modelled
 
 {% include figure.html name="case-l-umf-agreement.png" alt="Case L, measured vs modelled" caption="<strong>Figure 5.</strong> Case L under realizable k-ε: measured vs modelled U, W, k, θ, V and c* at three turbulent Schmidt numbers, in the tunnel's units; the dots take the colour of their class in Figure 4." %}
 

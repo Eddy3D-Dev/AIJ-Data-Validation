@@ -292,11 +292,11 @@
  "case-i-openfoam-closures.png": {
   "height": 1591,
   "master": "/assets/figures/case-i-openfoam-closures.png",
-  "master_bytes": 5248309,
+  "master_bytes": 5272507,
   "master_height": 10068,
   "master_width": 10128,
   "web": "/assets/web/case-i-openfoam-closures.png",
-  "web_bytes": 704168,
+  "web_bytes": 709412,
   "width": 1600
  },
  "case-i.png": {
@@ -322,21 +322,21 @@
  "case-j-umf-agreement.png": {
   "height": 896,
   "master": "/assets/figures/case-j-umf-agreement.png",
-  "master_bytes": 6089038,
+  "master_bytes": 6118347,
   "master_height": 6864,
   "master_width": 12252,
   "web": "/assets/web/case-j-umf-agreement.png",
-  "web_bytes": 537645,
+  "web_bytes": 540499,
   "width": 1600
  },
  "case-j-umf-tracer.png": {
-  "height": 899,
+  "height": 907,
   "master": "/assets/figures/case-j-umf-tracer.png",
-  "master_bytes": 4638774,
-  "master_height": 6804,
+  "master_bytes": 4674577,
+  "master_height": 6864,
   "master_width": 12108,
   "web": "/assets/web/case-j-umf-tracer.png",
-  "web_bytes": 457468,
+  "web_bytes": 462717,
   "width": 1600
  },
  "case-j.png": {
@@ -382,21 +382,21 @@
  "case-l-layout.png": {
   "height": 1604,
   "master": "/assets/figures/case-l-layout.png",
-  "master_bytes": 964697,
+  "master_bytes": 964579,
   "master_height": 9140,
   "master_width": 9120,
   "web": "/assets/web/case-l-layout.png",
-  "web_bytes": 258056,
+  "web_bytes": 258008,
   "width": 1600
  },
  "case-l-umf-agreement.png": {
-  "height": 900,
+  "height": 893,
   "master": "/assets/figures/case-l-umf-agreement.png",
-  "master_bytes": 5627425,
+  "master_bytes": 5646890,
   "master_height": 6792,
-  "master_width": 12072,
+  "master_width": 12168,
   "web": "/assets/web/case-l-umf-agreement.png",
-  "web_bytes": 534571,
+  "web_bytes": 526318,
   "width": 1600
  },
  "case-l.png": {
@@ -480,13 +480,13 @@
   "width": 1600
  },
  "cases-hi-openfoam-agreement.png": {
-  "height": 901,
+  "height": 934,
   "master": "/assets/figures/cases-hi-openfoam-agreement.png",
-  "master_bytes": 6043883,
+  "master_bytes": 5898699,
   "master_height": 7488,
-  "master_width": 13296,
+  "master_width": 12828,
   "web": "/assets/web/cases-hi-openfoam-agreement.png",
-  "web_bytes": 497218,
+  "web_bytes": 511018,
   "width": 1600
  },
  "ml-surrogate-agreement.png": {

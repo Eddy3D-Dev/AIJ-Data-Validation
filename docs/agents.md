@@ -60,7 +60,6 @@ names in `$schema`.
   `sha256`.
 - Send a descriptive `User-Agent`. The site's CDN rejects Python `urllib`'s default one and some AI crawlers with
   HTTP 403. If you are refused anyway, `fallback_base_url` serves byte-identical files from the repository.
-- Quote `data_version` with any number you report: it identifies exactly the data the number came from.
 - Cite the release you pinned and quote its version: `cite.api` in that release's `index.json`.
 
 ## Cite

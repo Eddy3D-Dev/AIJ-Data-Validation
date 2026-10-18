@@ -1,0 +1,62 @@
+{
+ "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/schemas/geometry.schema.json",
+ "schema_version": "2.4.0",
+ "data_version": "6c8b16ff73fa45f1aae99db9c2299e63d3fff6602e06a47434ddc86424661be7",
+ "license": "CC-BY-4.0",
+ "case": "F",
+ "title": "Case F — Shinjuku district",
+ "units": "metres (full scale)",
+ "frame": {
+  "origin": "centre of the reproduced district, tunnel floor plane",
+  "x": "+x EAST (full-scale metres)",
+  "y": "+y NORTH (compass rose in MP_caseF.png)",
+  "z": "+z up from the TUNNEL FLOOR; the readme's rule is ground = z - 10 m (the STL's terrain under the points is at z = 5 m)",
+  "wind_direction_rotation": "compass FROM-direction (N = 0, E = 90), so N blows toward -y; flow_dir = (-sin WD, -cos WD). Not stated by the sources; supported by the reference-building choice and by upwind roughness, and at NNW by a solved field (status 'corroborated by a solved field'; the other directions stay 'unverified').",
+  "lateral_sign_applied": 1,
+  "coordinate_scale_applied": 800.0
+ },
+ "default_configuration": "default",
+ "configurations": [
+  "default"
+ ],
+ "is_boxes": false,
+ "files": [
+  {
+   "configuration": "default",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/cases/F/geometry.stl?v=8799740aa324",
+   "path": "cases/F/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 9661421,
+   "sha256": "8799740aa324b9494a3962197ebaa82bc3f3f8ddce138e9d2777bc9cd7660c0c",
+   "format": "ASCII STL, LF line endings, outward normals, every body closed and consistently wound",
+   "source": "BD_caseF.stl (terrain + buildings, November 1978) scaled x800 from model to full-scale metres; 21537 of 21575 horizontal facets faced down as published, so every triangle is reversed to point outward; the published STL is open along the rim of the 725 m disc (812 boundary edges at z = 0, the tunnel floor) and is closed here with a base slab: vertical walls from the rim down to z = -1 m and a bottom cap at z = -1 m (2,436 added triangles); 10 zero-area triangles are removed and the neighbour across each is split",
+   "stats": {
+    "triangles": 56250,
+    "bbox_min": [
+     -725.0,
+     -724.998,
+     -1.0
+    ],
+    "bbox_max": [
+     725.0,
+     724.998,
+     225.0
+    ],
+    "signed_volume": 13344850.393472837,
+    "edges": 84375,
+    "edges_shared_by_two_faces": 84375,
+    "edges_boundary": 0,
+    "edges_non_manifold": 0,
+    "bodies": 1,
+    "body_contacts": 0,
+    "inconsistent_triangles": 0,
+    "min_body_volume": 13344850.393472837,
+    "watertight": true
+   },
+   "bbox_matches_stated_dimensions": true,
+   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-f.png",
+   "render_caption": "Shinjuku sub-centre, November 1978: terrain and buildings of the 1:800 model over a disc of 725 m radius (full-scale metres); north is +y, the towers over 100 m are blue."
+  }
+ ],
+ "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-f.png"
+}

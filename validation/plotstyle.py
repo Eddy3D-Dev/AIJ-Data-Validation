@@ -183,8 +183,26 @@ def marker(color, label, filled=True, size=6.5):
                   markeredgewidth=1.0 if not filled else 0.4)
 
 
-def stats(ax, text, loc=(0.05, 0.80)):
-    """Scores printed in the panel, under its letter, on a white halo so grid lines never cut them."""
+def _emptiest_corner(ax, text):
+    """Where in the panel the scores hide the fewest of its points: the corner (as axes fractions, top left of the text) whose box holds
+    the fewest of the scatter points drawn so far; the first of the four on a tie."""
+    offs = [c.get_offsets() for c in ax.collections if len(c.get_offsets())]
+    pts = ax.transLimits.transform(np.vstack(offs)) if offs else np.empty((0, 2))
+    w = 0.0245 * max(len(line) for line in text.split("\n")) + 0.06
+    h = 0.075 * (text.count("\n") + 1) + 0.03
+    best = None
+    for x0, y0 in ((0.05, 0.80), (0.95 - w, 0.80), (0.05, h + 0.06), (0.95 - w, h + 0.06)):
+        inside = int(((pts[:, 0] >= x0 - 0.02) & (pts[:, 0] <= x0 + w) & (pts[:, 1] <= y0 + 0.02) & (pts[:, 1] >= y0 - h)).sum())
+        if best is None or inside < best[0]:
+            best = (inside, (x0, y0))
+    return best[1]
+
+
+def stats(ax, text, loc=(0.05, 0.80), halo="box"):
+    """Scores printed in the panel, under its letter, on a white halo so grid lines never cut them. halo="auto" puts them in the corner
+    that hides the fewest points, for panels whose points reach the corner the scores usually sit in."""
+    if halo == "auto":
+        loc = _emptiest_corner(ax, text)
     ax.text(*loc, text, transform=ax.transAxes, va="top", ha="left", fontsize=8.5, color=INK, zorder=10,
             bbox=dict(boxstyle="round,pad=0.25", facecolor=SURFACE, edgecolor="none", alpha=0.85))
 

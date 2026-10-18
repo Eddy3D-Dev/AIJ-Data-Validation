@@ -500,10 +500,10 @@ def grid(case, title, runs, columns, ncols, fname, row_labels=None, handles_extr
             ax = axs[r * per + i // ncols, i % ncols]
             hol = None if hollow is None else column(pairs, hollow) == 1
             shown = panel(ax, column(pairs, mk), column(pairs, pk), colours, log=log, xlab="Tunnel [–]" if r * per + i // ncols == nrows - 1 else None,
-                          ylab="Eddy3D (UMF) [–]" if i % ncols == 0 else None, hollow=hol, decades=decades)
+                          ylab="Eddy3D (UMF) [–]" if i % ncols == 0 else None, hollow=hol, decades=decades, trim=True)
             if per > 1:
                 ax.format(title=label)
-            style.stats(ax, stats_text(res[key], shown if log else None), loc=(0.40, 0.36) if log else (0.05, 0.80))
+            style.stats(ax, stats_text(res[key], shown if log else None), loc=(0.40, 0.36) if log else (0.05, 0.80), halo="auto")
     handles = [*layout.legend_handles(case), *handles_extra, style.line(style.REFERENCE, "1:1", lw=1.0),
                style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")]
     labels = {"toplabels": [c[0] for c in columns[:ncols]], "leftlabels": row_labels} if per == 1 else {}

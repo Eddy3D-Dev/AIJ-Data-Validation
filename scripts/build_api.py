@@ -114,7 +114,6 @@ CHANGELOG = [
         "slab, so the bounding box of each starts at z = -1 m, and `triangles` and `data_version` change with the files.",
         "Added: the layout figure of each case, `case-<id>-layout.png`, is the first entry of `figures` of the validation results of that case "
         "(Cases A to M); the agreement figures colour their points by the groups of that figure.",
-        "Why MINOR: nothing is renamed or removed. Every field keeps its meaning; the fields above and the layout figures are additions.",
     ]},
     {"version": "2.3.0", "date": "2026-10-18", "changes": [
         "Added: release-numbered paths. Every release is a frozen copy of the whole API under `/api/<release>/` (for example "
@@ -146,8 +145,6 @@ CHANGELOG = [
         "measurement cannot say, how the solve ended); empty where the run has none recorded. Cases F, G and M have several runs on one engine "
         "(Case F: one per vertical frame, Case G: one per arm of a drag sweep, Case M: one per turbulent Schmidt number, each as `configuration`), all sharing the engine's pairs file; "
         "the first column of Case F's and Case G's names the frame or the arm, and Case M's holds the three Schmidt numbers as columns.",
-        "Why MINOR: nothing is renamed or removed. Every unversioned URL and field keeps its meaning; the layout, the cases, "
-        "documents, a schema, columns, engines and three index.json fields are additions.",
     ]},
     {"version": "2.2.0", "date": "2026-10-18", "changes": [
         "Added: `versions.release`, the semantic version of the published data and API (the repository's VERSION; "
@@ -413,7 +410,7 @@ _G_ARMS = [("open-field", "no belt", 90576, " (control: no belt)"), ("pine", "pi
            ("screen", "screen, Cd·LAD 0.875 1/m", 90576, ""), ("half-belt-conifer", "the real 74 m belt as a half domain, conifer, Cd·LAD 0.625 1/m", 625252, "")]
 _G_NORM = ("the field's U/U_H and k/U_H^2 (U_H = the wind at the tree height, 7 m, during each period) against the model's |U| and k over the model's own U(7 m) at x = -35 m ('own approach') and, in the "
            "second set of scores, over the imposed U_H = 5.299 m/s ('imposed'); the model is also scored as sqrt(|U|^2 + 2k), because the field is the mean of an instantaneous speed; hit rate D = 0.25, W = 0.05")
-_G_CAL = "LAD and Cd are not in the dataset (only the shading rate, 81 %). The drag values are crowns of the Eddy3D vegetation library; no optimiser is run against the 28 points."
+_G_CAL = "LAD and Cd are not in the dataset (only the shading rate, 81 %). The drag values are crowns of the Eddy3D vegetation library."
 _G_NOTES = [
     _G_CAL,
     "The three crowns are entries of the Eddy3D vegetation library (Cd·LAD 0.30, 0.625 and 0.875 1/m, loss coefficients 1.2, 2.5 and 3.5). The arm nearest the 28 values says which "
@@ -573,7 +570,7 @@ def _f_notes(frame):
         f"for point, gives R {me['control.tunnelAsModelOfField']['R']:.2f}, FAC2 {me['control.tunnelAsModelOfField']['Fac2']:.2f}, FB {me['control.tunnelAsModelOfField']['Fb']:+.2f}: the bar a model of the tunnel is not expected to clear.",
         "The field values of point 14 are the cleaned table's, realigned with the workbook: the published RS-FO_caseF.csv holds them shifted by one direction (clean/QUESTIONS.md QF1). The field scores here therefore differ "
         "from Eddy3D's own results file in the third decimal (√(|U|²+2k) in the literal frame: R 0.8729 here, 0.8731 there; in the agl frame 0.8893 and 0.8872); the tunnel scores are identical to it.",
-        f"The STL is open along the rim of its 725 m disc (812 boundary edges, one shell, wound inward), which the canvas's pre-meshing pass cannot close (it removed 3 degenerate faces). The mesh has {mesh['cells']:,} cells "
+        f"The published STL is open along the rim of its 725 m disc (812 boundary edges, one shell, wound inward), which the canvas's pre-meshing pass cannot close (it removed 3 degenerate faces). The mesh has {mesh['cells']:,} cells "
         f"and checkMesh fails one check ({mesh['highlySkewFaces']} highly skew faces, maximum skewness {mesh['maxSkewness']:.1f}, maximum non-orthogonality {mesh['maxNonOrthogonalityDeg']:.1f}°), so the solve started on the "
         "hardened numerics of Eddy3D's mesh-quality tier.",
         f"The solve ran to its {sl['iterationsRun']}-iteration limit with the residualControl unmet (no 'solution converged' line); the initial residuals at the last iteration were U_x {res['Ux']:.1e}, U_y {res['Uy']:.1e}, "
@@ -1421,7 +1418,7 @@ def llms_text(percase):
         "   geometry.json lists the boxes where the geometry IS boxes (A, B, C, D, G, H, I, J, K, L), so you need not parse the STL at all.",
         "6. GET validation.json for every case and engine at once, or cases/{id}/validation.json for one case in full.",
         "   Quote the `headline` scores. An engine whose status is not \"scored\" has NO result for that case: do not",
-        "   infer one. Each result's `pairs` is the per-point measured and modelled values, so any score can be recomputed. Status today: "
+        "   infer one. Each result's `pairs` is the per-point measured and modelled values, so any score can be recomputed. Status: "
         + "; ".join(f"{c}: " + ", ".join(f"{e} {s}" for e, s in ENGINE_STATUS[c].items()) for c in D.CASE_IDS) + ".",
         "7. All geometry at once: GET geometry.json (every STL with its case, configuration, units, frame and SHA-256)",
         "   or geometry.zip. Each STL stays in its own case's frame and units; they are NOT one scene.",

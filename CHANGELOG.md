@@ -15,6 +15,20 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [3.1.2] - 2026-10-18
+
+Wording and figures; no value changed.
+
+### Changed
+
+- Case L is "9 × 14 cubes" (nine rows by fourteen columns, as the case's readme says) in `README.md`, `clean/README.md` and `clean/SCHEMA.md`.
+- The `notes` of Case F say "The published STL is open along the rim"; the notes of Case G no longer state what is not fitted; `llms.txt` says "Status:";
+  the entries of the API changelog in `index.json` lose their "Why MINOR" sentences; the `message` of `CITATION.cff` is the standard one.
+  `clean/README.md` states what the building shells of Case E are, not how an earlier build treated them.
+- The scores in the panels of the agreement figures of Cases H, I, J and L sit in the corner that hides the fewest points; a box in a fixed corner hid dozens.
+  The log axes of Cases J and L start a thousandth above their lowest decade, so two tick labels no longer sit on each other in the corner.
+  The letter C of Case L's layout figure sits at the end of its points, not at the end of a long line.
+
 ## [3.1.1] - 2026-10-18
 
 Metadata only; no value changed. The repository and the site moved to <https://github.com/Eddy3D-Dev/AIJ-Data-Validation>.
@@ -63,7 +77,7 @@ Additive: new figures, fields and citation endpoints, and fixes. The API schema 
 
 ### Changed
 
-- The title reads "AIJ UWE" in `index.json`, `openapi.json`, `llms.txt` and the Dataset JSON-LD. The licence note is one line, "Data: Kikumoto et al. (2026), CC BY 4.0. Collectors per case in cases/{id}.json.", and `clean/manifest.json` carries "Data: Kikumoto et al. (2026), CC BY 4.0. Collectors and requested citation per case."
+- The site title reads "AIJ UWE"; `index.json`, `openapi.json` and `llms.txt` say "AIJ UWE — cleaned data API". The licence note is one line, "Data: Kikumoto et al. (2026), CC BY 4.0. Collectors per case in cases/{id}.json.", and `clean/manifest.json` carries "Data: Kikumoto et al. (2026), CC BY 4.0. Collectors and requested citation per case."
 
 ## [3.0.0] - 2026-10-18
 

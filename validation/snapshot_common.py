@@ -135,10 +135,11 @@ def mirror_mean(points, values, tol=1e-6):
 
 # ----------------------------------------------------------------------------- figures
 
-def panel(ax, o, p, color, log=False, xlab=None, ylab=None, hollow=None, decades=5):
+def panel(ax, o, p, color, log=False, xlab=None, ylab=None, hollow=None, decades=5, trim=False):
     """Measured o against modelled p with the 1:1 line (and the factor-of-two band where the values do not change sign); returns
     how many pairs are drawn. `hollow` is a boolean array (over the finite pairs' original order) of points drawn open. `color` is
-    one colour, or one colour per pair (layout.grouped_colours: the group of the line or plane each point was measured on)."""
+    one colour, or one colour per pair (layout.grouped_colours: the group of the line or plane each point was measured on). `trim` starts a log axis a
+    thousandth above its lowest decade, so the tick label of that decade does not sit on the other axis' label in the corner."""
     o, p = np.asarray(o, float), np.asarray(p, float)
     ok = np.isfinite(o) & np.isfinite(p)
     open_ = np.zeros(len(o), bool) if hollow is None else np.asarray(hollow, bool)
@@ -162,7 +163,8 @@ def panel(ax, o, p, color, log=False, xlab=None, ylab=None, hollow=None, decades
     ax.scatter(o[~open_], p[~open_], s=s, color=list(col[~open_]) if per_point else color, edgecolor=style.SURFACE, linewidth=0.25, alpha=0.9, zorder=3)
     if open_.any():
         ax.scatter(o[open_], p[open_], s=s + 6, facecolor="none", edgecolor=list(col[open_]) if per_point else color, linewidth=0.8, zorder=4)
-    ax.format(xlim=(lo, hi), ylim=(lo, hi), xlabel=xlab, ylabel=ylab)
+    shown_lo = lo * 1.001 if (log and trim) else lo
+    ax.format(xlim=(shown_lo, hi), ylim=(shown_lo, hi), xlabel=xlab, ylabel=ylab)
     return len(o)
 
 

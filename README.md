@@ -48,20 +48,20 @@ Validation data from the AIJ (Architectural Institute of Japan) benchmark cases�
 **API, APA**
 
 ```text
-Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.1.1) [Data set]. Sustainable Urban Systems Lab. https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.1/index.json
+Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.1.2) [Data set]. Sustainable Urban Systems Lab. https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/index.json
 ```
 
 **API, BibTeX**
 
 ```bibtex
-@misc{aijuwe_api_3_1_1,
+@misc{aijuwe_api_3_1_2,
   author    = "Karadag, Ilker and Kastner, Patrick",
   title     = "{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}",
   year      = "2026",
-  version   = "3.1.1",
+  version   = "3.1.2",
   publisher = "Sustainable Urban Systems Lab",
-  url       = "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.1/index.json",
-  note      = "Data set; data version be415e94ac63"
+  url       = "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.2/index.json",
+  note      = "Data set; data version 6c8b16ff73fa"
 }
 ```
 
@@ -85,7 +85,7 @@ Cases: each case's dataset DOI is on its Data page and in `/api/cases/{id}.json`
 | I | Cube with a roof point source (ethane) | 91 LDV points and 539 concentration points | [`raw/cases/case-i/RS-w_caseI.csv`](raw/cases/case-i/RS-w_caseI.csv) |
 | J | 1:1:2 building with a floor source, non-isothermal | 444 points, velocity, temperature, concentration, fluxes | [`raw/cases/case-j/RS_caseJ.csv`](raw/cases/case-j/RS_caseJ.csv) |
 | K | 9 × 9 cube array, point source | 203 points, velocity and concentration | [`raw/cases/case-k/RS_caseK.csv`](raw/cases/case-k/RS_caseK.csv) |
-| L | 14 × 9 cube array, line source, non-isothermal | 344 points, velocity, temperature, concentration, fluxes | [`raw/cases/case-l/RS_caseL.csv`](raw/cases/case-l/RS_caseL.csv) |
+| L | 9 × 14 cube array, line source, non-isothermal | 344 points, velocity, temperature, concentration, fluxes | [`raw/cases/case-l/RS_caseL.csv`](raw/cases/case-l/RS_caseL.csv) |
 | M | TPU Atsugi campus, 1:600 tunnel and field tracer release | 330 rows: tunnel velocity and concentration, 18 field runs | [`raw/cases/case-m/RS-WT_caseM.csv`](raw/cases/case-m/RS-WT_caseM.csv) |
 
 Sources and instrumentation are documented per case in each folder's `readme_case*.md` and in the data paper,
@@ -630,7 +630,7 @@ Full reading: [Cases F and M](https://eddy3d-dev.github.io/AIJ-Data-Validation/v
 
 **Frame.** Origin: the leeward face of the tree belt at ground level, on the vertical section through the belt's centre. x: +x downwind: the belt occupies x in [-2, 0] m, the measurement lines lie behind it at x = 1.75 ... 35 m. y: +y along the belt (y in [-37, 37] m); every point is on y = 0. z: +z up; the belt spans z in [1.2, 7] m; points at z = 1.5, 3, 4.5, 6 m.
 
-**Validation (OpenFOAM 12, realizable k-ε, full scale).** The belt's leaf area density and drag coefficient are not in the dataset, so Eddy3D solved a **drag sweep**: no belt, three vegetation-library crowns of rising Cd·LAD (0.30, 0.625 and 0.875 1/m) on a two-dimensional slab, and the conifer crown on the real 74 m belt as a half domain. Each arm is its own run. The drag values are crowns of the Eddy3D vegetation library; no optimiser is run against the 28 points. Eddy3D's trees have no canopy k source. The measurement is U/U_H and k/U_H² (U_H the wind at 7 m); the model is |U| and k over its own U(7 m) at x = −35 m.
+**Validation (OpenFOAM 12, realizable k-ε, full scale).** The belt's leaf area density and drag coefficient are not in the dataset, so Eddy3D solved a **drag sweep**: no belt, three vegetation-library crowns of rising Cd·LAD (0.30, 0.625 and 0.875 1/m) on a two-dimensional slab, and the conifer crown on the real 74 m belt as a half domain. Each arm is its own run. The drag values are crowns of the Eddy3D vegetation library. Eddy3D's trees have no canopy k source. The measurement is U/U_H and k/U_H² (U_H the wind at 7 m); the model is |U| and k over its own U(7 m) at x = −35 m.
 
 | Arm | Cd·LAD [1/m] | U R | U FAC2 | U FB | mean U/U_H | k R | k FAC2 | k FB |
 |---|---|---|---|---|---|---|---|---|
@@ -702,7 +702,7 @@ Full reading: [Cases H and I](https://eddy3d-dev.github.io/AIJ-Data-Validation/v
 
 <!--fig name="case-h-layout.png" alt="Case H, measurement lines and planes" width="800"--><a href="validation/figures/case-h-layout.png"><img src="docs/assets/web/case-h-layout.png" width="800" height="902" loading="lazy" alt="Case H, measurement lines and planes"></a><!--/fig-->
 
-<!--fig name="cases-hi-openfoam-agreement.png" alt="Cases H and I, measured vs modelled" width="800"--><a href="validation/figures/cases-hi-openfoam-agreement.png"><img src="docs/assets/web/cases-hi-openfoam-agreement.png" width="800" height="450" loading="lazy" alt="Cases H and I, measured vs modelled"></a><!--/fig-->
+<!--fig name="cases-hi-openfoam-agreement.png" alt="Cases H and I, measured vs modelled" width="800"--><a href="validation/figures/cases-hi-openfoam-agreement.png"><img src="docs/assets/web/cases-hi-openfoam-agreement.png" width="800" height="467" loading="lazy" alt="Cases H and I, measured vs modelled"></a><!--/fig-->
 
 **Known issues.** 7 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/H.json`](docs/api/cases/H.json).
 
@@ -901,7 +901,7 @@ Full reading: [Cases J and L](https://eddy3d-dev.github.io/AIJ-Data-Validation/v
 
 <!--fig name="case-l-layout.png" alt="Case L, measurement lines and planes" width="800"--><a href="validation/figures/case-l-layout.png"><img src="docs/assets/web/case-l-layout.png" width="800" height="802" loading="lazy" alt="Case L, measurement lines and planes"></a><!--/fig-->
 
-<!--fig name="case-l-umf-agreement.png" alt="Case L, measured vs modelled" width="800"--><a href="validation/figures/case-l-umf-agreement.png"><img src="docs/assets/web/case-l-umf-agreement.png" width="800" height="450" loading="lazy" alt="Case L, measured vs modelled"></a><!--/fig-->
+<!--fig name="case-l-umf-agreement.png" alt="Case L, measured vs modelled" width="800"--><a href="validation/figures/case-l-umf-agreement.png"><img src="docs/assets/web/case-l-umf-agreement.png" width="800" height="446" loading="lazy" alt="Case L, measured vs modelled"></a><!--/fig-->
 
 **Known issues.** 10 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/L.json`](docs/api/cases/L.json).
 
@@ -1111,7 +1111,7 @@ U_H with each case's approach-flow file.
 | E · Vs/U(15.9 m), 16 WD, before + after | 2560 | +1.00 | 0.22 | +0.43 | 0.08 | — |
 | E · the same, SW only (both states) | 160 | +1.07 | 0.20 | +0.53 | 0.04 | \|U\|: FB +0.31, FAC2 0.76, R +0.81, hit rate 0.36 |
 
-- FB +0.67 … +1.00 on the thermistor cases. The predicted speed is roughly half the tunnel's everywhere.
+- FB +0.23 to +1.07: the mean predicted speed is 0.79 to 0.30 of the mean measured speed.
 - Reversing the wind (θ + 180°) changes the predicted field by at most 1 × 10⁻⁴ U_ref over all 254,016 cells, in every
   case.
 - With the lattice cut at ±250 m the field moves by up to ~1 U_ref between the wind and its reverse.

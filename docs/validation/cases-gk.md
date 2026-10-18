@@ -15,11 +15,15 @@ All runs are Eddy3D production runs solved on 2026-10-18, realizable k-ε at num
 ## Runs
 
 - **Case K** is the tunnel at 1:100 (H = 6 m). Measured and modelled velocities are both divided by the dataset's stated U_H = 2.33 m/s, and k by U_H². The model is driven by the measured approach profile (3.23 m/s at 0.2 m), which gives 1.97 m/s at z = H, 0.85 of the stated U_H. The concentration is the measured C/c₀ (c₀ = 429.2 ppm) against the model's c\* = c U_H H²/Q at the turbulent Schmidt numbers 0.3, 0.5 and 0.7, three species on one flow; all three are published.
-- **Case G** is a field observation at full scale. The measurement is U/U_H and k/U_H² at 28 points, U_H the wind at the tree height (7 m) during each period. Eddy3D models trees as a Darcy-Forchheimer momentum sink only. The leaf area density (LAD) and drag coefficient (Cd) of the belt are not in the dataset (only its shading rate, 81 %); the drag values are crowns of the Eddy3D vegetation library, and no optimiser is run against the 28 points. Eddy3D solved a **sweep**: no belt, and three crowns from its vegetation library of rising Cd·LAD (0.30, 0.625 and 0.875 1/m), on a two-dimensional slab, and the conifer crown on the real 74 m belt as a half domain. Each arm is a separate run. The model is divided by its own U(7 m) at x = −35 m, because the tabulated inlet has a smooth floor and the approach does not stay the imposed profile; scores over the imposed U_H = 5.299 m/s are in the files too.
+- **Case G** is a field observation at full scale. The measurement is U/U_H and k/U_H² at 28 points, U_H the wind at the tree height (7 m) during each period. Eddy3D models trees as a Darcy-Forchheimer momentum sink only. The leaf area density (LAD) and drag coefficient (Cd) of the belt are not in the dataset (only its shading rate, 81 %); the drag values are crowns of the Eddy3D vegetation library. Eddy3D solved a **sweep**: no belt, and three crowns from its vegetation library of rising Cd·LAD (0.30, 0.625 and 0.875 1/m), on a two-dimensional slab, and the conifer crown on the real 74 m belt as a half domain. Each arm is a separate run. The model is divided by its own U(7 m) at x = −35 m, because the tabulated inlet has a smooth floor and the approach does not stay the imposed profile; scores over the imposed U_H = 5.299 m/s are in the files too.
 
 ## Case K
 
+### Measurement layout
+
 {% include figure.html name="case-k-layout.png" alt="Measurement lines and planes, Case K" caption="<strong>Figure 1.</strong> Case K, measurement lines and planes: A vertical profiles, y/H = 0; B vertical profiles, y/H = ±1; C vertical profiles, y/H = ±2; D vertical profiles, y/H = ±3. Positions in multiples of H." %}
+
+### Measured against modelled
 
 {% include figure.html name="case-k-openfoam-agreement.png" alt="Case K, measured vs modelled" caption="<strong>Figure 2.</strong> Case K, measured vs modelled U, W, k and c* at three turbulent Schmidt numbers; the dots take the colour of their line in Figure 1. The concentration panels show the positive pairs within five decades; the four points within one cube height of the source are open." %}
 
@@ -62,7 +66,11 @@ FB is positive when the model is low, and is left out (—) for a signed compone
 
 ## Case G
 
+### Measurement layout
+
 {% include figure.html name="case-g-layout.png" alt="Measurement lines and planes, Case G" caption="<strong>Figure 3.</strong> Case G, measurement lines and planes: A to G vertical profiles, x/H = 0.25, 0.5, 1, 2, 3, 4, 5. Positions in multiples of H." %}
+
+### Measured against modelled
 
 {% include figure.html name="case-g-openfoam-sweep.png" alt="Case G, measured vs modelled, drag sweep" caption="<strong>Figure 4.</strong> Case G, the field's U/U_H and k/U_H² against the modelled |U| and k over the model's own U(7 m), one column per arm of the drag sweep; the dots take the colour of their line in Figure 3." %}
 

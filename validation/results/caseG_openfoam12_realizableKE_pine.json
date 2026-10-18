@@ -18,7 +18,7 @@
  },
  "k.assertion": "none. Eddy3D models trees as a momentum sink only (Darcy-Forchheimer, f = 2 Cd LAD): there are no canopy k/epsilon source terms, so the modelled k behind the belt is recorded against the measurement and never asserted",
  "lad.provenance": {
-  "note": "LAD and Cd are NOT in the dataset (only the shading rate, 81 %). The three crowns are the repository's vegetation library entries nearest a pruned pine belt; nothing is fitted.",
+  "note": "LAD and Cd are NOT in the dataset (only the shading rate, 81 %). The three crowns are the repository's vegetation library entries nearest a pruned pine belt.",
   "beerLambertLad": 1.660731206821651,
   "beerLambertNote": "-ln(1 - 0.81) / (G x 2 m) with G = 0.5 assumed (spherical leaf angles): inside the library bracket 1.5 ... 3.5"
  },
