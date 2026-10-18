@@ -22,7 +22,7 @@ Case G — flow behind a tree belt.
 
 - FIELD data: full-scale metres, no model, and nothing in m/s. The table carries U/UH (velocity\_ratio) and k/UH^2 (k\_ratio), UH = the mean speed at 7 m during each period; the approach-flow table carries U/Ub and k/Ub^2 (Ub = U at 9 m) in its U and k columns, which are dimensionless here.
 - The readme lists the heights of the lee measurement as 1.5, 3.0, 6.0, 9.0 m; the table, the workbook, the drawing and the data paper have 1.5, 3, 4.5, 6 m.
-- The tree belt is a POROUS canopy (shading rate 81 % after pruning), not a solid body: the served geometry is its 2 m × 74 m × 7 m envelope with the 1.2 m gap, and a solver needs a canopy (drag) model, not a wall.
+- The tree belt is a porous canopy (shading rate 81 % after pruning): the served geometry is its 2 m × 74 m × 7 m envelope with the 1.2 m gap, and a solver needs a canopy (drag) model.
 - The approach profile (28 Dec 2000, 120 min) and the lee measurements (26 Dec 2000, 10 min or more) are from different days. Behind the belt k/UH^2 is 0.040-0.072 at 5 H, 3-8 times below the approach flow\'s 0.26-0.31 at the same heights; the files do not say why.
 - Only 28 numbers per quantity exist, on one centre section, one time-average each, with no repeats and no uncertainty.
 - The wind direction relative to the belt normal during the measurement is not published; the case is two-dimensional by assumption.
@@ -44,7 +44,7 @@ Case H — 1:1:2 building with a floor point source.
 Case I — cube with a roof point source.
 
 - Two point sets, no point numbers: the velocity file (91 points: y = 0 plane and z/H = 0.5 plane) and the concentration file (539 points: y = 0 plane and the ground). The table stacks them, one row per instrument and point: velocity rows (instrument ldv) are numbered 1-91 and concentration rows (hydrocarbon\_analyser) 92-630, in the files\' order. 17 locations have both a velocity and a concentration value.
-- V on the y = 0 plane (53 of 91 points) is 0 in the CSV and 1e-9 ... 4e-6 m/s in the workbook: a symmetry value, not a measurement. It is NaN in the table; V is measured only at the 38 off-plane points.
+- V on the y = 0 plane (53 of 91 points) is 0 in the CSV and 1e-9 ... 4e-6 m/s in the workbook, a symmetry value. It is NaN in the table; V is measured only at the 38 off-plane points.
 - The table carries the legacy workbook\'s values; the CSVs round to 3 decimals (velocity, k) and 1 decimal (concentration, ppm). Every concentration is a multiple of 0.1 ppm: a 0.4 ppm value carries +/-12 % of quantisation.
 - The paper\'s c0 = 39.2 ppm needs the ETHANE flow (10 % of the 400 cc/min, 6.67e-7 m3/s); its sentence \'ethane released at 6.67e-6 m3/s\' is the mixture. With the mixture flow c0 would be 392 ppm.
 - The workbook normalises the approach flow with 1.697 m/s and the points with 1.7 m/s (0.18 % apart).

@@ -42,7 +42,7 @@ Quantity: U, V, W and k at the 15 points of the tunnel\'s WD 180 run over the tu
 
 </details>
 
-- Normalisation: U, V, W and k at the 15 points over the tunnel\'s U\_R = 4.08 m/s on the measurement and over the solved speed at the reference mast on the model (U\_R is defined at the mast), k over U\_R^2; c\* = C/c0 (c0 = q/(U\_R H\_R^2) = 132.5 ppm) against the model\'s c U\_R H\_R^2/Q (H\_R = 0.068 m x 600, Q = 1 kg/s) for turbulent Schmidt number 0.3, with one detection limit of 10^-3 of the largest measured value; hit rate D = 0.25, W = 0.05 in those units; the Schmidt numbers are three runs on one flow, published side by side
+- Normalisation: U, V, W and k at the 15 points over the tunnel\'s U\_R = 4.08 m/s on the measurement and over the solved speed at the reference mast on the model (U\_R is defined at the mast), k over U\_R^2; c\* = C/c0 (c0 = q/(U\_R H\_R^2) = 132.5 ppm) against the model\'s c U\_R H\_R^2/Q (H\_R = 0.068 m x 600, Q = 1 kg/s) for turbulent Schmidt number 0.3, with one detection limit of 10^-3 of the largest measured value; hit rate D = 0.25, W = 0.05 in those units; the Schmidt numbers are three runs on one flow
 - Reproduce: Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseMContainerE2E (WD 180, the default) (TPU Atsugi campus, 1:600, tunnel WD 180, turbulent Schmidt number 0.3; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 1,394,053 cells, solved 2026-10-18); figures validation/plot\_cases\_fm\_openfoam.py
 
 Notes:
@@ -80,7 +80,7 @@ Quantity: U, V, W and k at the 15 points of the tunnel\'s WD 180 run over the tu
 
 </details>
 
-- Normalisation: U, V, W and k at the 15 points over the tunnel\'s U\_R = 4.08 m/s on the measurement and over the solved speed at the reference mast on the model (U\_R is defined at the mast), k over U\_R^2; c\* = C/c0 (c0 = q/(U\_R H\_R^2) = 132.5 ppm) against the model\'s c U\_R H\_R^2/Q (H\_R = 0.068 m x 600, Q = 1 kg/s) for turbulent Schmidt number 0.5, with one detection limit of 10^-3 of the largest measured value; hit rate D = 0.25, W = 0.05 in those units; the Schmidt numbers are three runs on one flow, published side by side
+- Normalisation: U, V, W and k at the 15 points over the tunnel\'s U\_R = 4.08 m/s on the measurement and over the solved speed at the reference mast on the model (U\_R is defined at the mast), k over U\_R^2; c\* = C/c0 (c0 = q/(U\_R H\_R^2) = 132.5 ppm) against the model\'s c U\_R H\_R^2/Q (H\_R = 0.068 m x 600, Q = 1 kg/s) for turbulent Schmidt number 0.5, with one detection limit of 10^-3 of the largest measured value; hit rate D = 0.25, W = 0.05 in those units; the Schmidt numbers are three runs on one flow
 - Reproduce: Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseMContainerE2E (WD 180, the default) (TPU Atsugi campus, 1:600, tunnel WD 180, turbulent Schmidt number 0.5; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 1,394,053 cells, solved 2026-10-18); figures validation/plot\_cases\_fm\_openfoam.py
 
 Notes:
@@ -118,7 +118,7 @@ Quantity: U, V, W and k at the 15 points of the tunnel\'s WD 180 run over the tu
 
 </details>
 
-- Normalisation: U, V, W and k at the 15 points over the tunnel\'s U\_R = 4.08 m/s on the measurement and over the solved speed at the reference mast on the model (U\_R is defined at the mast), k over U\_R^2; c\* = C/c0 (c0 = q/(U\_R H\_R^2) = 132.5 ppm) against the model\'s c U\_R H\_R^2/Q (H\_R = 0.068 m x 600, Q = 1 kg/s) for turbulent Schmidt number 0.7, with one detection limit of 10^-3 of the largest measured value; hit rate D = 0.25, W = 0.05 in those units; the Schmidt numbers are three runs on one flow, published side by side
+- Normalisation: U, V, W and k at the 15 points over the tunnel\'s U\_R = 4.08 m/s on the measurement and over the solved speed at the reference mast on the model (U\_R is defined at the mast), k over U\_R^2; c\* = C/c0 (c0 = q/(U\_R H\_R^2) = 132.5 ppm) against the model\'s c U\_R H\_R^2/Q (H\_R = 0.068 m x 600, Q = 1 kg/s) for turbulent Schmidt number 0.7, with one detection limit of 10^-3 of the largest measured value; hit rate D = 0.25, W = 0.05 in those units; the Schmidt numbers are three runs on one flow
 - Reproduce: Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseMContainerE2E (WD 180, the default) (TPU Atsugi campus, 1:600, tunnel WD 180, turbulent Schmidt number 0.7; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 1,394,053 cells, solved 2026-10-18); figures validation/plot\_cases\_fm\_openfoam.py
 
 Notes:
@@ -143,7 +143,7 @@ Notes:
 <details markdown="block">
 <summary>Interpretation: Case M near-source ordering</summary>
 
-The tunnel\'s three points nearest the source carry about 12 times its two far downwind ones; the modelled plume carries less, and Sct 0.7 reverses the order. The ordering is a property of the modelled plume.
+The tunnel\'s three points nearest the source carry about 12 times its two far downwind ones; the modelled plume carries less, and Sct 0.7 reverses the order.
 
 </details>
 

@@ -43,7 +43,7 @@
    "configuration": "ac_3dm",
    "file": "cases/E/geometry_ac_3dm.stl",
    "format": "ASCII STL, LF, metres, same frame as points.csv",
-   "source": "Eddy3D-side reconstruction from case-e.3dm, layers 'buildings' + 'buildings_new_construction'; 1,563 of 8,436 triangles are wound against their neighbours in the 3dm; every body is re-wound here, outward; 1 wall shared by two buildings (4 triangles) is removed, which joins them into one body; 545 bodies, all closed, 11 edges where two bodies touch",
+   "source": "Eddy3D-side reconstruction from case-e.3dm, layers 'buildings' + 'buildings_new_construction'; 478 of 506 shells are wound inward in the 3dm and 1,563 of 8,436 triangles are wound against their neighbours; every body is re-wound here, outward; 1 wall shared by two buildings (4 triangles) is removed, which joins them into one body; 545 bodies, all closed, 11 edges where two bodies touch",
    "stats": {
     "triangles": 8432,
     "bbox_min": [
@@ -72,7 +72,7 @@
    "configuration": "bc_3dm",
    "file": "cases/E/geometry_bc_3dm.stl",
    "format": "ASCII STL, LF, metres, same frame as points.csv",
-   "source": "Eddy3D-side reconstruction of the BEFORE-construction state from case-e.3dm, layer 'buildings' only (the sites of A, B, C are empty on that layer); no published source exists for this state; 1,557 of 8,400 triangles are wound against their neighbours in the 3dm; every body is re-wound here, outward; 1 wall shared by two buildings (4 triangles) is removed, which joins them into one body; 542 bodies, all closed, 11 edges where two bodies touch",
+   "source": "Eddy3D-side reconstruction of the BEFORE-construction state from case-e.3dm, layer 'buildings' only (the sites of A, B, C are empty on that layer); no published source exists for this state; 475 of 503 shells are wound inward in the 3dm and 1,557 of 8,400 triangles are wound against their neighbours; every body is re-wound here, outward; 1 wall shared by two buildings (4 triangles) is removed, which joins them into one body; 542 bodies, all closed, 11 edges where two bodies touch",
    "stats": {
     "triangles": 8396,
     "bbox_min": [

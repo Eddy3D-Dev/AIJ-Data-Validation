@@ -5,20 +5,20 @@
 **APA**
 
 ```text
-Sustainable Urban Systems Lab. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.0.1) [Data set]. https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.1/
+Sustainable Urban Systems Lab. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.1.0) [Data set]. https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.1.0/index.json
 ```
 
 **BibTeX**
 
 ```bibtex
-@misc{aijuwe_api_3_0_1,
+@misc{aijuwe_api_3_1_0,
   author    = "{Sustainable Urban Systems Lab}",
   title     = "{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}",
   year      = "2026",
-  version   = "3.0.1",
+  version   = "3.1.0",
   publisher = "Sustainable Urban Systems Lab",
-  url       = "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.1/",
-  note      = "Data set; data version a3b3555182df"
+  url       = "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.1.0/index.json",
+  note      = "Data set; data version be415e94ac63"
 }
 ```
 

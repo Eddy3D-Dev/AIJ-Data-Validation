@@ -24,7 +24,7 @@ of a case before its numbers (section 4).
 | `units.json` | column → unit and meaning (headers are bare names on purpose) |
 | `SCHEMA.md` | the schema, the frames, the transforms, the geometry conventions |
 | `QUESTIONS.md` | what the sources cannot settle, including the non-zero wind directions of C and D |
-| `checks.json`, `build.log` | 289 validity checks with the numbers they measured (273 pass, 16 documented warnings); every transform in order |
+| `checks.json`, `build.log` | 293 validity checks with the numbers they measured (277 pass, 16 documented warnings); every transform in order |
 | `sources/zenodo_case{D,E}/` | the official Zenodo files the repository clone lacks (checksummed) |
 
 ## 2. One-liners
@@ -160,7 +160,7 @@ m.query("campaign == 'field' and abs(wind_direction_deg - 180) <= 5").groupby("p
   <summary>Data notes: Case E geometry</summary>
 
 - 546 of the 548 bodies of the after-construction mesh (543 of 545 before construction) have triangles wound against their neighbours; a body is a set of triangles joined through edges that exactly two triangles use.
-- 475 of the 503 building shells are wound inward in the 3dm. The earlier build reversed whole shells by signed volume; a shell wound partly inward stays inconsistent after that, and a viewer that culls back faces draws its reversed triangles as missing walls.
+- 475 of the 503 building shells (478 of 506 after construction) are wound inward in the 3dm. The earlier build reversed whole shells by signed volume; a shell wound partly inward stays inconsistent after that, and a viewer that culls back faces draws its reversed triangles as missing walls.
 - Every building is now wound consistently (each edge is traversed once in each direction) with a positive volume: 545 closed bodies after construction, 542 before, the smallest 4.125 m³.
 - One wall that two buildings share (4.27 m × 3 m, x 3.5 to 7.5 m, y −76.5 to −75 m) is modelled twice, once per building, with different diagonals, so the copies never joined their buildings. The 4 triangles of both copies are removed and the two buildings are one body.
 - 11 edges where two separate buildings touch (15 before the wall is removed) are counted as `body_contacts`; each building still sees them as ordinary two-triangle edges, so a contact does not open a body.

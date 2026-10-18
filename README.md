@@ -39,7 +39,7 @@ Validation data from the AIJ (Architectural Institute of Japan) benchmark cases�
 
 - **Site:** <https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/>
 - **API:** [`/api/index.json`](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/index.json) · [`/api/llms.txt`](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/llms.txt) for agents · [OpenAPI](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/openapi.json) (the same files are in [`docs/api/`](docs/api/)); every release is also frozen under `/api/<release>/`, listed in [`/api/versions.json`](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/versions.json)
-- **Release:** [v3.0.1](CHANGELOG.md), rebuilt byte for byte from its tag (see *Versions, releases and reproducing them*)
+- **Release:** [v3.1.0](CHANGELOG.md), rebuilt byte for byte from its tag (see *Versions, releases and reproducing them*)
 
 ## Cite
 
@@ -48,20 +48,20 @@ Validation data from the AIJ (Architectural Institute of Japan) benchmark cases�
 **API, APA**
 
 ```text
-Sustainable Urban Systems Lab. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.0.1) [Data set]. https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.1/
+Sustainable Urban Systems Lab. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.1.0) [Data set]. https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.1.0/index.json
 ```
 
 **API, BibTeX**
 
 ```bibtex
-@misc{aijuwe_api_3_0_1,
+@misc{aijuwe_api_3_1_0,
   author    = "{Sustainable Urban Systems Lab}",
   title     = "{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}",
   year      = "2026",
-  version   = "3.0.1",
+  version   = "3.1.0",
   publisher = "Sustainable Urban Systems Lab",
-  url       = "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.1/",
-  note      = "Data set; data version a3b3555182df"
+  url       = "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.1.0/index.json",
+  note      = "Data set; data version be415e94ac63"
 }
 ```
 
@@ -308,9 +308,9 @@ intensity at z = D is 0.219.
 3000 iterations per direction, the 120 probes at exactly the tunnel's coordinates. Scored against Vs/U_H as
 √(|U|² + 2k) (headline) and as |U|; hit rate D = 0.25, W = 0.05 U_H.
 
-<!--fig name="case-c-layout.png" alt="Case C, measurement points" width="800"--><a href="validation/figures/case-c-layout.png"><img src="docs/assets/web/case-c-layout.png" width="800" height="1157" loading="lazy" alt="Case C, measurement points"></a><br><sub><a href="validation/figures/case-c-layout.png">1200 dpi original, 1.6 MB</a></sub><!--/fig-->
+<!--fig name="case-c-layout.png" alt="Case C, measurement points" width="800"--><a href="validation/figures/case-c-layout.png"><img src="docs/assets/web/case-c-layout.png" width="800" height="1157" loading="lazy" alt="Case C, measurement points"></a><!--/fig-->
 
-<!--fig name="case-c-openfoam-agreement.png" alt="Case C, measured vs modelled, nine configurations" width="800"--><a href="validation/figures/case-c-openfoam-agreement.png"><img src="docs/assets/web/case-c-openfoam-agreement.png" width="800" height="798" loading="lazy" alt="Case C, measured vs modelled, nine configurations"></a><!--/fig-->
+<!--fig name="case-c-openfoam-agreement.png" alt="Case C, measured vs modelled, nine configurations" width="800"--><a href="validation/figures/case-c-openfoam-agreement.png"><img src="docs/assets/web/case-c-openfoam-agreement.png" width="800" height="816" loading="lazy" alt="Case C, measured vs modelled, nine configurations"></a><!--/fig-->
 
 | centre block | WD | R | FAC2 | FB | hit rate | \|U\| alone: FB / R |
 |---|---|---|---|---|---|---|
@@ -418,9 +418,9 @@ the array; shifting the cloud by 12.5 mm (5 m full scale) puts points 27 and 28 
 8 cores. 3.6 million cells at 1:400 on a cylinder domain,
 3000 iterations; the last iteration's initial residuals are below 4 × 10⁻³.
 
-<!--fig name="case-d-layout.png" alt="Case D, measurement points" width="800"--><a href="validation/figures/case-d-layout.png"><img src="docs/assets/web/case-d-layout.png" width="800" height="1208" loading="lazy" alt="Case D, measurement points"></a><br><sub><a href="validation/figures/case-d-layout.png">1200 dpi original, 1.7 MB</a></sub><!--/fig-->
+<!--fig name="case-d-layout.png" alt="Case D, measurement points" width="800"--><a href="validation/figures/case-d-layout.png"><img src="docs/assets/web/case-d-layout.png" width="800" height="1208" loading="lazy" alt="Case D, measurement points"></a><!--/fig-->
 
-<!--fig name="case-d-openfoam-agreement.png" alt="Case D, measured vs modelled" width="800"--><a href="validation/figures/case-d-openfoam-agreement.png"><img src="docs/assets/web/case-d-openfoam-agreement.png" width="800" height="266" loading="lazy" alt="Case D, measured vs modelled"></a><!--/fig-->
+<!--fig name="case-d-openfoam-agreement.png" alt="Case D, measured vs modelled" width="800"--><a href="validation/figures/case-d-openfoam-agreement.png"><img src="docs/assets/web/case-d-openfoam-agreement.png" width="800" height="279" loading="lazy" alt="Case D, measured vs modelled"></a><!--/fig-->
 
 | | n | FAC2 | FB | q | R |
 |---|---|---|---|---|---|
@@ -524,9 +524,9 @@ buildings), the workbook's measured profile imposed through a tabulated inlet (`
 Eddy3D's CLI), 2000 iterations. The model's speed is divided by its own solved U(15.9 m), which
 arrives at 0.998 of the imposed value in both states.
 
-<!--fig name="case-e-layout.png" alt="Case E, measurement points" width="800"--><a href="validation/figures/case-e-layout.png"><img src="docs/assets/web/case-e-layout.png" width="800" height="860" loading="lazy" alt="Case E, measurement points"></a><br><sub><a href="validation/figures/case-e-layout.png">1200 dpi original, 2.7 MB</a></sub><!--/fig-->
+<!--fig name="case-e-layout.png" alt="Case E, measurement points" width="800"--><a href="validation/figures/case-e-layout.png"><img src="docs/assets/web/case-e-layout.png" width="800" height="860" loading="lazy" alt="Case E, measurement points"></a><!--/fig-->
 
-<!--fig name="case-e-openfoam-agreement.png" alt="Case E, measured vs modelled, before, after and the change" width="800"--><a href="validation/figures/case-e-openfoam-agreement.png"><img src="docs/assets/web/case-e-openfoam-agreement.png" width="800" height="338" loading="lazy" alt="Case E, measured vs modelled, before, after and the change"></a><!--/fig-->
+<!--fig name="case-e-openfoam-agreement.png" alt="Case E, measured vs modelled, before, after and the change" width="800"--><a href="validation/figures/case-e-openfoam-agreement.png"><img src="docs/assets/web/case-e-openfoam-agreement.png" width="800" height="354" loading="lazy" alt="Case E, measured vs modelled, before, after and the change"></a><!--/fig-->
 
 | | FAC2 | FB | q | R |
 |---|---|---|---|---|
@@ -607,7 +607,7 @@ Full reading: [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
-<!--fig name="case-f-layout.png" alt="Case F, measurement points" width="800"--><a href="validation/figures/case-f-layout.png"><img src="docs/assets/web/case-f-layout.png" width="800" height="818" loading="lazy" alt="Case F, measurement points"></a><br><sub><a href="validation/figures/case-f-layout.png">1200 dpi original, 5.5 MB</a></sub><!--/fig-->
+<!--fig name="case-f-layout.png" alt="Case F, measurement points" width="800"--><a href="validation/figures/case-f-layout.png"><img src="docs/assets/web/case-f-layout.png" width="800" height="818" loading="lazy" alt="Case F, measurement points"></a><!--/fig-->
 
 <!--fig name="case-f-openfoam-agreement.png" alt="Case F, measured vs modelled speed" width="800"--><a href="validation/figures/case-f-openfoam-agreement.png"><img src="docs/assets/web/case-f-openfoam-agreement.png" width="800" height="475" loading="lazy" alt="Case F, measured vs modelled speed"></a><!--/fig-->
 
@@ -654,9 +654,9 @@ Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
-<!--fig name="case-g-layout.png" alt="Case G, measurement lines and planes" width="800"--><a href="validation/figures/case-g-layout.png"><img src="docs/assets/web/case-g-layout.png" width="800" height="751" loading="lazy" alt="Case G, measurement lines and planes"></a><br><sub><a href="validation/figures/case-g-layout.png">1200 dpi original, 1.1 MB</a></sub><!--/fig-->
+<!--fig name="case-g-layout.png" alt="Case G, measurement lines and planes" width="800"--><a href="validation/figures/case-g-layout.png"><img src="docs/assets/web/case-g-layout.png" width="800" height="751" loading="lazy" alt="Case G, measurement lines and planes"></a><!--/fig-->
 
-<!--fig name="case-g-openfoam-sweep.png" alt="Case G, measured vs modelled, drag sweep" width="800"--><a href="validation/figures/case-g-openfoam-sweep.png"><img src="docs/assets/web/case-g-openfoam-sweep.png" width="800" height="368" loading="lazy" alt="Case G, measured vs modelled, drag sweep"></a><!--/fig-->
+<!--fig name="case-g-openfoam-sweep.png" alt="Case G, measured vs modelled, drag sweep" width="800"--><a href="validation/figures/case-g-openfoam-sweep.png"><img src="docs/assets/web/case-g-openfoam-sweep.png" width="800" height="380" loading="lazy" alt="Case G, measured vs modelled, drag sweep"></a><!--/fig-->
 
 **Known issues.** 6 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/G.json`](docs/api/cases/G.json).
 
@@ -699,9 +699,9 @@ Full reading: [Cases H and I](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
-<!--fig name="case-h-layout.png" alt="Case H, measurement lines and planes" width="800"--><a href="validation/figures/case-h-layout.png"><img src="docs/assets/web/case-h-layout.png" width="800" height="902" loading="lazy" alt="Case H, measurement lines and planes"></a><br><sub><a href="validation/figures/case-h-layout.png">1200 dpi original, 1.2 MB</a></sub><!--/fig-->
+<!--fig name="case-h-layout.png" alt="Case H, measurement lines and planes" width="800"--><a href="validation/figures/case-h-layout.png"><img src="docs/assets/web/case-h-layout.png" width="800" height="902" loading="lazy" alt="Case H, measurement lines and planes"></a><!--/fig-->
 
-<!--fig name="cases-hi-openfoam-agreement.png" alt="Cases H and I, measured vs modelled" width="800"--><a href="validation/figures/cases-hi-openfoam-agreement.png"><img src="docs/assets/web/cases-hi-openfoam-agreement.png" width="800" height="423" loading="lazy" alt="Cases H and I, measured vs modelled"></a><!--/fig-->
+<!--fig name="cases-hi-openfoam-agreement.png" alt="Cases H and I, measured vs modelled" width="800"--><a href="validation/figures/cases-hi-openfoam-agreement.png"><img src="docs/assets/web/cases-hi-openfoam-agreement.png" width="800" height="450" loading="lazy" alt="Cases H and I, measured vs modelled"></a><!--/fig-->
 
 **Known issues.** 7 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/H.json`](docs/api/cases/H.json).
 
@@ -747,9 +747,9 @@ Full reading: [Cases H and I](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
-<!--fig name="case-i-layout.png" alt="Case I, measurement lines and planes" width="800"--><a href="validation/figures/case-i-layout.png"><img src="docs/assets/web/case-i-layout.png" width="800" height="1474" loading="lazy" alt="Case I, measurement lines and planes"></a><br><sub><a href="validation/figures/case-i-layout.png">1200 dpi original, 2.1 MB</a></sub><!--/fig-->
+<!--fig name="case-i-layout.png" alt="Case I, measurement lines and planes" width="800"--><a href="validation/figures/case-i-layout.png"><img src="docs/assets/web/case-i-layout.png" width="800" height="1474" loading="lazy" alt="Case I, measurement lines and planes"></a><!--/fig-->
 
-<!--fig name="case-i-openfoam-closures.png" alt="Case I under three turbulence closures" width="800"--><a href="validation/figures/case-i-openfoam-closures.png"><img src="docs/assets/web/case-i-openfoam-closures.png" width="800" height="779" loading="lazy" alt="Case I under three turbulence closures"></a><!--/fig-->
+<!--fig name="case-i-openfoam-closures.png" alt="Case I under three turbulence closures" width="800"--><a href="validation/figures/case-i-openfoam-closures.png"><img src="docs/assets/web/case-i-openfoam-closures.png" width="800" height="796" loading="lazy" alt="Case I under three turbulence closures"></a><!--/fig-->
 
 **Known issues.** 8 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/I.json`](docs/api/cases/I.json).
 
@@ -797,7 +797,7 @@ Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
-<!--fig name="case-j-layout.png" alt="Case J, measurement lines and planes" width="800"--><a href="validation/figures/case-j-layout.png"><img src="docs/assets/web/case-j-layout.png" width="800" height="924" loading="lazy" alt="Case J, measurement lines and planes"></a><br><sub><a href="validation/figures/case-j-layout.png">1200 dpi original, 1.1 MB</a></sub><!--/fig-->
+<!--fig name="case-j-layout.png" alt="Case J, measurement lines and planes" width="800"--><a href="validation/figures/case-j-layout.png"><img src="docs/assets/web/case-j-layout.png" width="800" height="924" loading="lazy" alt="Case J, measurement lines and planes"></a><!--/fig-->
 
 <!--fig name="case-j-umf-agreement.png" alt="Case J, measured vs modelled, two closures" width="800"--><a href="validation/figures/case-j-umf-agreement.png"><img src="docs/assets/web/case-j-umf-agreement.png" width="800" height="448" loading="lazy" alt="Case J, measured vs modelled, two closures"></a><!--/fig-->
 
@@ -848,9 +848,9 @@ Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
-<!--fig name="case-k-layout.png" alt="Case K, measurement lines and planes" width="800"--><a href="validation/figures/case-k-layout.png"><img src="docs/assets/web/case-k-layout.png" width="800" height="774" loading="lazy" alt="Case K, measurement lines and planes"></a><br><sub><a href="validation/figures/case-k-layout.png">1200 dpi original, 1.1 MB</a></sub><!--/fig-->
+<!--fig name="case-k-layout.png" alt="Case K, measurement lines and planes" width="800"--><a href="validation/figures/case-k-layout.png"><img src="docs/assets/web/case-k-layout.png" width="800" height="774" loading="lazy" alt="Case K, measurement lines and planes"></a><!--/fig-->
 
-<!--fig name="case-k-openfoam-agreement.png" alt="Case K, measured vs modelled" width="800"--><a href="validation/figures/case-k-openfoam-agreement.png"><img src="docs/assets/web/case-k-openfoam-agreement.png" width="800" height="494" loading="lazy" alt="Case K, measured vs modelled"></a><!--/fig-->
+<!--fig name="case-k-openfoam-agreement.png" alt="Case K, measured vs modelled" width="800"--><a href="validation/figures/case-k-openfoam-agreement.png"><img src="docs/assets/web/case-k-openfoam-agreement.png" width="800" height="407" loading="lazy" alt="Case K, measured vs modelled"></a><!--/fig-->
 
 **Known issues.** 9 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/K.json`](docs/api/cases/K.json).
 
@@ -898,11 +898,11 @@ Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
-<!--fig name="case-l-layout.png" alt="Case L, measurement lines and planes" width="800"--><a href="validation/figures/case-l-layout.png"><img src="docs/assets/web/case-l-layout.png" width="800" height="802" loading="lazy" alt="Case L, measurement lines and planes"></a><br><sub><a href="validation/figures/case-l-layout.png">1200 dpi original, 1.0 MB</a></sub><!--/fig-->
+<!--fig name="case-l-layout.png" alt="Case L, measurement lines and planes" width="800"--><a href="validation/figures/case-l-layout.png"><img src="docs/assets/web/case-l-layout.png" width="800" height="802" loading="lazy" alt="Case L, measurement lines and planes"></a><!--/fig-->
 
 <!--fig name="case-l-umf-agreement.png" alt="Case L, measured vs modelled" width="800"--><a href="validation/figures/case-l-umf-agreement.png"><img src="docs/assets/web/case-l-umf-agreement.png" width="800" height="450" loading="lazy" alt="Case L, measured vs modelled"></a><!--/fig-->
 
-**Known issues.** 9 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/L.json`](docs/api/cases/L.json).
+**Known issues.** 10 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/L.json`](docs/api/cases/L.json).
 
 **API.** [`cases/L.json`](docs/api/cases/L.json) · [`points.json`](docs/api/cases/L/points.json) / [`points.csv`](docs/api/cases/L/points.csv) · [`geometry.stl`](docs/api/cases/L/geometry.stl) (1 box, 1,512 triangles) · [`validation.json`](docs/api/cases/L/validation.json)
 
@@ -951,9 +951,9 @@ Full reading: [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases
 
 </details>
 
-<!--fig name="case-m-layout.png" alt="Case M, measurement points" width="800"--><a href="validation/figures/case-m-layout.png"><img src="docs/assets/web/case-m-layout.png" width="800" height="982" loading="lazy" alt="Case M, measurement points"></a><br><sub><a href="validation/figures/case-m-layout.png">1200 dpi original, 2.5 MB</a></sub><!--/fig-->
+<!--fig name="case-m-layout.png" alt="Case M, measurement points" width="800"--><a href="validation/figures/case-m-layout.png"><img src="docs/assets/web/case-m-layout.png" width="800" height="982" loading="lazy" alt="Case M, measurement points"></a><!--/fig-->
 
-<!--fig name="case-m-openfoam-agreement.png" alt="Case M, measured vs modelled velocity and concentration" width="800"--><a href="validation/figures/case-m-openfoam-agreement.png"><img src="docs/assets/web/case-m-openfoam-agreement.png" width="800" height="422" loading="lazy" alt="Case M, measured vs modelled velocity and concentration"></a><!--/fig-->
+<!--fig name="case-m-openfoam-agreement.png" alt="Case M, measured vs modelled velocity and concentration" width="800"--><a href="validation/figures/case-m-openfoam-agreement.png"><img src="docs/assets/web/case-m-openfoam-agreement.png" width="800" height="434" loading="lazy" alt="Case M, measured vs modelled velocity and concentration"></a><!--/fig-->
 
 **Known issues.** 10 in the published files, listed on the [Known data issues](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/known-data-issues/) page and in [`cases/M.json`](docs/api/cases/M.json).
 
@@ -973,11 +973,11 @@ in its own section above.
 
 ### Cases A and B — measured against modelled
 
-<!--fig name="case-a-layout.png" alt="Case A, measurement lines and planes" width="800"--><a href="validation/figures/case-a-layout.png"><img src="docs/assets/web/case-a-layout.png" width="800" height="882" loading="lazy" alt="Case A, measurement lines and planes"></a><br><sub><a href="validation/figures/case-a-layout.png">1200 dpi original, 1.1 MB</a></sub><!--/fig-->
+<!--fig name="case-a-layout.png" alt="Case A, measurement lines and planes" width="800"--><a href="validation/figures/case-a-layout.png"><img src="docs/assets/web/case-a-layout.png" width="800" height="882" loading="lazy" alt="Case A, measurement lines and planes"></a><!--/fig-->
 
-<!--fig name="case-b-layout.png" alt="Case B, measurement lines and planes" width="800"--><a href="validation/figures/case-b-layout.png"><img src="docs/assets/web/case-b-layout.png" width="800" height="883" loading="lazy" alt="Case B, measurement lines and planes"></a><br><sub><a href="validation/figures/case-b-layout.png">1200 dpi original, 1.0 MB</a></sub><!--/fig-->
+<!--fig name="case-b-layout.png" alt="Case B, measurement lines and planes" width="800"--><a href="validation/figures/case-b-layout.png"><img src="docs/assets/web/case-b-layout.png" width="800" height="883" loading="lazy" alt="Case B, measurement lines and planes"></a><!--/fig-->
 
-<!--fig name="cases-ab-openfoam-agreement.png" alt="Measured vs modelled, Cases A and B" width="800"--><a href="validation/figures/cases-ab-openfoam-agreement.png"><img src="docs/assets/web/cases-ab-openfoam-agreement.png" width="800" height="430" loading="lazy" alt="Measured vs modelled, Cases A and B"></a><!--/fig-->
+<!--fig name="cases-ab-openfoam-agreement.png" alt="Measured vs modelled, Cases A and B" width="800"--><a href="validation/figures/cases-ab-openfoam-agreement.png"><img src="docs/assets/web/cases-ab-openfoam-agreement.png" width="800" height="441" loading="lazy" alt="Measured vs modelled, Cases A and B"></a><!--/fig-->
 
 Measured against modelled for each quantity, with the 1:1 line and, where the quantity does not
 change sign, the factor-of-two band.
@@ -1465,5 +1465,6 @@ are not part of this rebuild: their results and per-point values are committed a
 
 Data: Kikumoto et al. (2026), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The benchmark is edited and
 distributed by Yoshihide Tominaga, Hideki Kikumoto and Tsubasa Okaze; collectors per case are on each Data page and in `/api/cases/{id}.json`.
+Cleaning in `clean/` and validation scores: Eddy3D ([github.com/SustainableUrbanSystemsLab](https://github.com/SustainableUrbanSystemsLab)).
 
 </details>

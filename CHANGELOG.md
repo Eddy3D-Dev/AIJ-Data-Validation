@@ -31,7 +31,8 @@ Additive: new figures, fields and citation endpoints, and fixes. The API schema 
 - `bodies`, `body_contacts`, `inconsistent_triangles` and `min_body_volume` in the `stats` of `geometry.json` and in the geometry index,
   beside `edges_boundary`; `watertight` is true when every body is closed, consistently wound and positive in volume.
   `scripts/check_geometry.py` parses every served and cleaned STL and fails the build on an open, inconsistently wound or inward body, a
-  degenerate or repeated triangle, or a stored normal that disagrees with the winding.
+  degenerate or repeated triangle, or a stored normal that disagrees with the winding. `clean/build.py` runs four more checks on the cleaned
+  tables (293 in all, none failing; 289 before): the closed outward bodies of Cases E, F and M, and the winding and solid of `BD_caseL.stl`.
 
 ### Fixed
 

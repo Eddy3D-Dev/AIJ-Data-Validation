@@ -1,6 +1,6 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/geometry.schema.json",
- "schema_version": "2.3.0",
+ "schema_version": "2.4.0",
  "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
  "case": "G",
@@ -55,7 +55,7 @@
    },
    "bbox_matches_stated_dimensions": true,
    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-g.png",
-   "render_caption": "The Tsuiji-matsu tree belt, 2 m × 74 m × 7 m with a 1.2 m gap below (full scale; shown as its envelope — a porous canopy, not a solid body); the wind blows along +x and the measurements are behind the belt.",
+   "render_caption": "The Tsuiji-matsu tree belt, 2 m × 74 m × 7 m with a 1.2 m gap below (full scale; shown as its envelope, a porous canopy); the wind blows along +x and the measurements are behind the belt.",
    "boxes": [
     {
      "min": [

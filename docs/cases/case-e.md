@@ -50,4 +50,4 @@ Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 
 > - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
 > - Origin: centre of the reproduced area, ground plane. Length unit: m (FULL scale).
 > - Wind direction: meteorological FROM-direction, clockwise from north; the compass name is the direction the wind comes from (N = 0 deg blows toward -y, E = 90 deg toward -x). This case keeps its geographic frame instead of \'+x along the wind\' because the district is real and its coordinates are the data\'s.
-> - 6 known issues in the published files are listed under [Known data issues]({{ '/cases/case-e/data/' | relative_url }}#known-data-issues).
+> - 7 known issues in the published files are listed under [Known data issues]({{ '/cases/case-e/data/' | relative_url }}#known-data-issues).

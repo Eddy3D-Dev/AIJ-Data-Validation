@@ -13,7 +13,7 @@ description: "Case G — flow behind a tree belt: Eddy3D's scores against the me
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
-LAD and Cd are not in the dataset (only the shading rate, 81 %): the drag values are a calibration against the 28 points.
+LAD and Cd are not in the dataset (only the shading rate, 81 %). The drag values are crowns of the Eddy3D vegetation library; no optimiser is run against the 28 points.
 
 ## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration open-field
 
@@ -88,7 +88,7 @@ LAD and Cd are not in the dataset (only the shading rate, 81 %): the drag values
 
 Notes:
 
-- The three crowns are entries of the Eddy3D vegetation library (Cd·LAD 0.30, 0.625 and 0.875 1/m, loss coefficients 1.2, 2.5 and 3.5); nothing is fitted. The arms are published side by side.
+- The three crowns are entries of the Eddy3D vegetation library (Cd·LAD 0.30, 0.625 and 0.875 1/m, loss coefficients 1.2, 2.5 and 3.5).
 - Eddy3D models trees as a Darcy-Forchheimer momentum sink only: there are no canopy k or epsilon source terms.
 - The slab arms idealise the belt as two-dimensional (the belt through both slip planes, infinite width; the data paper\'s Figure 7 draws a two-dimensional tree); the half-belt arm is the real 74 m belt on a half domain with its centre plane on the symmetry plane. Both are scored against the same 28 values.
 - The tabulated inlet carries the workbook\'s inflow over a smooth floor (the site\'s roughness is not in the model), so the approach flow does not stay the imposed profile: in the open-field arm it is 1.19 of it at 1.5 m and 0.995 at 7 m at x = -10 m, and the model\'s U(7 m) at x = -35 m is 0.976 to 0.984 of the imposed U\_H. The headline scores divide the model by that own U(7 m).

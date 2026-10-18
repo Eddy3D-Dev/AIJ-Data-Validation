@@ -336,8 +336,10 @@ def buildings_note(raw, info, out):
     """The sentence the geometry's source field carries after clean_buildings: what was wrong and what was done."""
     r = stl_stats(raw)
     walls = info["party_walls"]
-    note = (f"{r['inconsistent_triangles']:,} of {r['triangles']:,} triangles are wound against their neighbours in the 3dm; every body is re-wound here, "
-            "outward")
+    shells = shells_from_tris(raw, tol=1e-4)
+    inward = sum(1 for sh in shells if sum(_volume6(*t) for t in sh) < 0)     # the count the earlier whole-shell flip acted on
+    note = (f"{inward:,} of {len(shells):,} shells are wound inward in the 3dm and {r['inconsistent_triangles']:,} of {r['triangles']:,} triangles are wound "
+            "against their neighbours; every body is re-wound here, outward")
     if walls:
         note += (f"; {len(walls)} wall shared by two buildings ({sum(w[1] for w in walls)} triangles) is removed, which joins them into one body" if len(walls) == 1
                  else f"; {len(walls)} walls shared by two buildings ({sum(w[1] for w in walls)} triangles) are removed, which joins each pair into one body")

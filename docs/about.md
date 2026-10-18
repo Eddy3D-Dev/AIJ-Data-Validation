@@ -19,6 +19,8 @@ Data: Kikumoto et al. (2026), CC BY 4.0. Collectors per case on each Data page.
 
 {% include cite.md %}
 
+This repository: [`CITATION.cff`](https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/CITATION.cff) is what GitHub's *Cite this repository* button reads.
+
 ## Licence
 
 CC BY 4.0 (SPDX `CC-BY-4.0`). Collectors and editors are named per case.

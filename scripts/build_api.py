@@ -2540,8 +2540,9 @@ def _link_problem(sv, base, root, on_disk, index):
         return None
     if sv == f"{LIVE_BASE}/versions.json":
         return None if os.path.isfile(os.path.join(API_ROOT, "versions.json")) else "link to versions.json, which does not exist"
-    if base == LIVE_BASE and sv == f"{LIVE_BASE}/{index['versions']['release']}":
-        return None if os.path.isdir(os.path.join(API_ROOT, index["versions"]["release"])) else f"names {sv}, which does not exist"
+    rel_dir = f"{LIVE_BASE}/{index['versions']['release']}"
+    if base == LIVE_BASE and sv in (rel_dir, rel_dir + "/index.json"):   # the root of the frozen copy, and the pinned address a citation gives
+        return None if os.path.exists(os.path.join(API_ROOT, sv[len(LIVE_BASE) + 1:])) else f"names {sv}, which does not exist"
     if not sv.startswith(base + "/"):
         return f"link {sv} leaves the tree (it must start with {base}/)"
     rel_t, _, query = sv[len(base) + 1:].partition("?v=")

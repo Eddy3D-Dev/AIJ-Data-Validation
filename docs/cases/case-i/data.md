@@ -109,7 +109,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 ## Known data issues
 
 - Two point sets, no point numbers: the velocity file (91 points: y = 0 plane and z/H = 0.5 plane) and the concentration file (539 points: y = 0 plane and the ground). The table stacks them, one row per instrument and point: velocity rows (instrument ldv) are numbered 1-91 and concentration rows (hydrocarbon\_analyser) 92-630, in the files\' order. 17 locations have both a velocity and a concentration value.
-- V on the y = 0 plane (53 of 91 points) is 0 in the CSV and 1e-9 ... 4e-6 m/s in the workbook: a symmetry value, not a measurement. It is NaN in the table; V is measured only at the 38 off-plane points.
+- V on the y = 0 plane (53 of 91 points) is 0 in the CSV and 1e-9 ... 4e-6 m/s in the workbook, a symmetry value. It is NaN in the table; V is measured only at the 38 off-plane points.
 - The table carries the legacy workbook\'s values; the CSVs round to 3 decimals (velocity, k) and 1 decimal (concentration, ppm). Every concentration is a multiple of 0.1 ppm: a 0.4 ppm value carries +/-12 % of quantisation.
 - The paper\'s c0 = 39.2 ppm needs the ETHANE flow (10 % of the 400 cc/min, 6.67e-7 m3/s); its sentence \'ethane released at 6.67e-6 m3/s\' is the mixture. With the mixture flow c0 would be 392 ppm.
 - The workbook normalises the approach flow with 1.697 m/s and the points with 1.7 m/s (0.18 % apart).
