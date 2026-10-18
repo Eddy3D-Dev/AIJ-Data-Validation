@@ -109,7 +109,15 @@ DOCUMENTS = {
         "case_ids": arr(CASE_ID),
         "files": arr(DOWNLOAD),
         "license_detail": obj(["spdx", "url"], {"spdx": {"type": "string"}, "name": {"type": "string"}, "url": URL, "note": {"type": "string"}}),
-        "cite": obj(["benchmark"], {"benchmark": {"type": "string"}}),
+        "cite": obj(["api", "benchmark"], {
+            "benchmark": {"type": "string"}, "guidelines": {"type": "string"}, "per_case": {"type": "string"},
+            "api": obj(["title", "version", "url", "release_url", "doi", "apa", "bibtex", "csl_json"], {
+                "title": {"type": "string"}, "version": SEMVER,
+                "url": dict(URL, description="the pinned address of this release's API: the address to cite"),
+                "release_url": dict(URL, description="the release's page in the repository"),
+                "doi": dict(STR_OR_NULL, description="the DOI of the release's Zenodo record; null until one exists"),
+                "apa": {"type": "string"}, "bibtex": {"type": "string"},
+                "csl_json": dict({"type": "object"}, description="the same citation as a CSL-JSON item")})}),
     }),
     "versions": _doc("versions", "Release list", "Every release of the data and API, newest first, with the address of its files.",
                      ["latest", "latest_base_url", "versions"], {
@@ -143,7 +151,8 @@ DOCUMENTS = {
     }),
     "case": _doc("case", "Case", "One case in full: configuration, frame, units, inflow, point-table summary, geometry, validation status, "
                  "known data issues and attribution.",
-                 ["id", "title", "frame", "units", "approach_flow", "points", "geometry", "validation", "known_issues", "people"], {
+                 ["id", "title", "frame", "units", "approach_flow", "points", "geometry", "validation", "known_issues", "people",
+                  "citation"], {
         "id": CASE_ID, "slug": {"type": "string"}, "title": {"type": "string"}, "summary": {"type": "string"},
         "configuration": {"type": "object"}, "configurations": arr({"type": "object"}),
         "quantities": arr({"type": "string"}), "units": {"type": "object"}, "frame": FRAME, "inflow_fit": {"type": "object"},
@@ -162,6 +171,7 @@ DOCUMENTS = {
         "people": obj(["data_collectors", "editors_distributors"], {"data_collectors": arr({"type": "string"}),
                                                                     "editors_distributors": arr({"type": "string"})}),
         "doi": STR_OR_NULL, "citation_requested": {"type": "string"}, "render": URL, "page": URL,
+        "citation": obj(["apa", "bibtex"], {"apa": {"type": "string"}, "bibtex": {"type": "string"}}),
     }),
     "points": _doc("points", "Point table", "The cleaned measurement table of one case: SI units, one frame, null where not measured.",
                    ["case", "columns", "column_meaning", "n", "points", "units", "frame"], {
