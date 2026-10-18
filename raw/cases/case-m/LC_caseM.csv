@@ -1,0 +1,19 @@
+No.,x (m),y (m),Elevation,Remarks
+Origin,0,0,0.0551,ground_surface
+1,-0.057,0.0509,0.0592,ground_surface+3m (in full scale)
+2,-0.0397,0.1188,0.0595,ground_surface+3m (in full scale)
+3,-0.0642,0.001,0.0589,ground_surface+3m (in full scale)
+4,0.0063,0.031,0.0592,ground_surface+3m (in full scale)
+5,0.0431,0.0265,0.0592,ground_surface+3m (in full scale)
+6,0.054,0.0984,0.0599,ground_surface+3m (in full scale)
+7,0.0547,0.1605,0.0596,ground_surface+3m (in full scale)
+8,0.0769,0.0218,0.0592,ground_surface+3m (in full scale)
+9,0.0456,-0.0449,0.0596,ground_surface+3m (in full scale)
+10,-0.0441,-0.047,0.0582,ground_surface+3m (in full scale)
+11,-0.0108,-0.1263,0.0589,ground_surface+3m (in full scale)
+12,-0.1572,-0.1886,0.0564,ground_surface+3m (in full scale)
+13,0.1278,-0.1488,0.0599,ground_surface+3m (in full scale)
+14,0.4176,-0.1187,0.011,ground_surface+3m (in full scale)
+15,0.4643,0.0141,0.0115,ground_surface+3m (in full scale)
+Gas_source,-0.1369,0.1033,0.054,ground_surface
+Reference,-0.1115,-0.0062,0.1215,ground_surface+41m (in full scale)
