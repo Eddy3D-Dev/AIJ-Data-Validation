@@ -22,10 +22,7 @@ Eddy3D's two lattice-Boltzmann engines were scored on Cases A and B, on the same
 
 ## Cases A and B, every engine on the same points
 
-<figure class="figure">
-<img src="{{ '/assets/figures/cases-ab-engine-comparison.png' | relative_url }}" alt="Measured vs modelled U and V, Cases A and B, one row per engine">
-<figcaption><strong>Figure 1.</strong> Measured vs modelled U and V, Cases A and B, one row per engine.</figcaption>
-</figure>
+{% include figure.html name="cases-ab-engine-comparison.png" alt="Measured vs modelled U and V, Cases A and B, one row per engine" caption="<strong>Figure 1.</strong> Measured vs modelled U and V, Cases A and B, one row per engine." %}
 
 ## OpenLB
 

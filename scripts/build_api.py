@@ -13,9 +13,11 @@ so CI can rebuild and diff. Inputs:
 - the case folders            approach-flow profiles, Case D's STL, Case E's 3dm (aijdata)
 - validation/results/         snapshots of the Eddy3D fixtures' results.json and per-point pairs, one entry
                               per run in RUNS below
-- validation/figures/         the figures and geometry renders the site shows
+- validation/figures/         the figures and geometry renders the site shows (1200 dpi masters)
 
-Outputs: docs/api/** (the API), docs/assets/{figures,geometry}/, docs/cases/<slug>.md and
+Outputs: docs/api/** (the API), docs/assets/{figures,geometry}/ (the masters, copied), docs/assets/web/ (a 1600 px
+copy of each, which the pages and the README embed, linked to its master), docs/_data/figures.json (their sizes, for
+the include docs/_includes/figure.html), the figure blocks of README.md (between its <!--fig ...--> markers), docs/cases/<slug>.md and
 docs/cases/<slug>/{data,validation}.md (three pages per case), docs/_includes/{case-gallery,cases-table,
 cases-frames,validation-matrix,known-issues-fm,api-changelog}.md, docs/_includes/{version-label,dataset-jsonld}.html and
 docs/llms.txt. Every JSON document names its JSON Schema in `$schema`; the schemas are in scripts/api_schemas.py
@@ -33,12 +35,14 @@ from __future__ import annotations
 
 import argparse
 import csv
+import glob
 import hashlib
 import io
 import json
 import os
 import re
 import shutil
+import struct
 import sys
 import zipfile
 
@@ -51,7 +55,11 @@ REPO = D.REPO
 DOCS = os.path.join(REPO, "docs")
 API_ROOT = os.path.join(DOCS, "api")   # the latest alias, versions.json, and one frozen <release>/ tree per release
 ASSETS = os.path.join(DOCS, "assets")
+WEB = os.path.join(ASSETS, "web")      # the 1600 px copies the pages and the README show; the 1200 dpi masters stay the downloads
+DATA_FILES = os.path.join(DOCS, "_data")
+WEB_WIDTH = 1600
 FIGURES = os.path.join(REPO, "validation", "figures")
+FIGURE_INFO = {}                       # file name -> what a page needs to embed the figure; filled by copy_assets()
 RESULTS_DIR = os.path.join(REPO, "validation", "results")
 
 REPO_URL = "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ"
@@ -361,7 +369,8 @@ METRIC_MEANING = {
     "HitRate": "fraction of points within D = 0.25 relative or W = 0.05 U_H absolute",
     "Mg": "geometric mean bias", "Vg": "geometric variance", "GeometricPairs": "pairs with both values positive (used for Mg/Vg)",
     "R": "Pearson correlation coefficient",
-    "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive)",
+    "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive; Fb, Nmse and Nad of a signed velocity "
+            "component of Case H or I whose observed and predicted means are not both positive)",
 }
 
 COLUMN_MEANING = {
@@ -404,7 +413,7 @@ ENDPOINTS = [
     ("cases/{id}.json", "application/json", "case", "one case in full: configurations, frame, units, inflow fit and approach-flow profile, point-table summary, geometry files, validation status, known data issues, attribution"),
     ("cases/{id}/points.json", "application/json", "points", "the cleaned measurement table: SI units, one frame, null where not measured"),
     ("cases/{id}/points.csv", "text/csv", None, "the same table as CSV (empty cell = not measured)"),
-    ("cases/{id}/approach_flow.csv", "text/csv", None, "the measured approach-flow profile: z (m), U (m/s), and k (m^2/s^2) or u_rms (m/s) where published"),
+    ("cases/{id}/approach_flow.csv", "text/csv", None, "the measured approach-flow profile: z (m), U (m/s), and k (m^2/s^2) or u_rms (m/s) where published; Case G's U and k are dimensionless (U/Ub, k/Ub^2)"),
     ("cases/{id}/geometry.json", "application/json", "geometry", "the case's STL files with statistics, renders, and the boxes where the geometry is boxes"),
     ("cases/{id}/geometry.stl", "model/stl", None, "cleaned ASCII STL of the default configuration: metres, case frame, outward normals"),
     ("cases/{id}/geometry_{configuration}.stl", "model/stl", None, "the other configurations' STLs (C: 0D, 1D; E: bc, before construction)"),
@@ -858,7 +867,7 @@ def write_case_documents(case, d):
         "quantities": meta["quantities"],
         "units": meta["units"], "frame": meta["frame"],
         "inflow_fit": meta["inflow_fit"],
-        "approach_flow": {"source": d["af_src"], "units": {c: {"z": "m", "U": "m/s", "k": "m^2/s^2", "u_rms": "m/s"}[c] for c in d["af_cols"]},
+        "approach_flow": {"source": d["af_src"], "units": {c: {**{"z": "m", "U": "m/s", "k": "m^2/s^2", "u_rms": "m/s"}, **meta.get("approach_flow_units", {})}[c] for c in d["af_cols"]},
                           "rows": d["af"], "csv": download(f"cases/{case}/approach_flow.csv")},
         "points": {"url": url(f"cases/{case}/points.json"), "csv": download(f"cases/{case}/points.csv"), "source": d["src"], **summ},
         "geometry": {"url": url(f"cases/{case}/geometry.json"),
@@ -1267,12 +1276,12 @@ def release_record(v):
     if os.path.isfile(tree_index):
         with io.open(tree_index, encoding="utf-8") as f:
             idx = json.load(f)
-        hosted_later = v in LEGACY_RELEASES   # put there by scripts/host_release.py, so it is on main, not in the tag
+        hosted_later = v in LEGACY_RELEASES   # put there by scripts/host_release.py, so the copy is on main, not in the tag; its fallback is the tag
         if hosted_later and (idx["versions"]["schema"], idx["versions"]["data"]) != tuple(LEGACY_RELEASES[v].values()):
             raise SystemExit(f"docs/api/{v}/index.json and LEGACY_RELEASES disagree on release {v}'s schema or data version")
         rec.update({"schema_version": idx["versions"]["schema"], "data_version": idx["versions"]["data"],
                     "base_url": base, "index_url": f"{base}/index.json",
-                    "fallback_base_url": f"{RAW_BASE}/{v}" if hosted_later else f"{raw_tag}/{v}", "self_contained": True})
+                    "fallback_base_url": raw_tag if hosted_later else f"{raw_tag}/{v}", "self_contained": True})
         if hosted_later:
             rec["note"] = (f"Released before the versioned layout and hosted here afterwards by scripts/host_release.py: the files of "
                            f"tag v{v}, byte for byte, with only their own addresses rewritten into this copy. The raw files at the tag "
@@ -1315,12 +1324,46 @@ def write_versions(data_version):
 
 # ----------------------------------------------------------------------------- assets
 
+def _png_size(path):
+    """(width, height) of a PNG, from its IHDR chunk."""
+    with open(path, "rb") as f:
+        return struct.unpack(">II", f.read(24)[16:24])
+
+
+def web_copy(src, dst):
+    """A WEB_WIDTH px wide copy of a 1200 dpi master, for the pages; returns its (width, height).
+
+    Deterministic: LANCZOS resampling, the encoder's own settings, no metadata chunks, so two builds write the same bytes.
+    An opaque RGBA master is stored as RGB (the page is white; an alpha channel only adds bytes). Pillow is imported here,
+    so --check needs none; the masters are up to 120 MP, which is why the pixel limit is lifted in this function only."""
+    from PIL import Image
+    limit = Image.MAX_IMAGE_PIXELS
+    Image.MAX_IMAGE_PIXELS = None
+    try:
+        with Image.open(src) as master:
+            im = master
+            im.load()
+            if im.mode == "RGBA" and im.getchannel("A").getextrema() == (255, 255):
+                im = im.convert("RGB")
+            if im.width > WEB_WIDTH:
+                im = im.resize((WEB_WIDTH, round(im.height * WEB_WIDTH / im.width)), Image.LANCZOS)
+            im.save(dst, format="PNG", optimize=True)
+            return im.size
+    finally:
+        Image.MAX_IMAGE_PIXELS = limit
+
+
 def copy_assets():
-    """docs/assets/geometry/ = every render, docs/assets/figures/ = every figure a run names; nothing else."""
+    """docs/assets/geometry/ = every render, docs/assets/figures/ = every figure a run names, docs/assets/web/ = a 1600 px
+    copy of each (same file name), docs/_data/figures.json = what a page needs to embed them; nothing else."""
     wanted = {
         "geometry": {D.render_file(c, cfg) for (c, cfg) in D.RENDER_CAPTIONS},
         "figures": {fig for r in RUNS for fig in r["figures"]},
     }
+    clash = wanted["geometry"] & wanted["figures"]
+    if clash:
+        raise SystemExit(f"a render and a figure share the file name {sorted(clash)}; the web copies are named alike in one folder")
+    masters = {}
     for sub_dir, names in wanted.items():
         src = os.path.join(FIGURES, "geometry") if sub_dir == "geometry" else FIGURES
         dst = os.path.join(ASSETS, sub_dir)
@@ -1329,6 +1372,58 @@ def copy_assets():
             os.remove(os.path.join(dst, stale))
         for name in sorted(names):
             shutil.copyfile(os.path.join(src, name), os.path.join(dst, name))
+            masters[name] = (sub_dir, os.path.join(dst, name))
+    os.makedirs(WEB, exist_ok=True)
+    for stale in set(os.listdir(WEB)) - set(masters):
+        os.remove(os.path.join(WEB, stale))
+    FIGURE_INFO.clear()
+    for name in sorted(masters):
+        sub_dir, master = masters[name]
+        web = os.path.join(WEB, name)
+        width, height = web_copy(master, web)
+        FIGURE_INFO[name] = {"master": f"/assets/{sub_dir}/{name}", "master_bytes": os.path.getsize(master),
+                             "master_width": _png_size(master)[0], "master_height": _png_size(master)[1],
+                             "web": f"/assets/web/{name}", "web_bytes": os.path.getsize(web), "width": width, "height": height,
+                             "mb": f"{os.path.getsize(master) / 1e6:.1f}"}
+    os.makedirs(DATA_FILES, exist_ok=True)
+    with io.open(os.path.join(DATA_FILES, "figures.json"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(json.dumps(FIGURE_INFO, indent=1, ensure_ascii=False, sort_keys=True) + "\n")
+
+
+# ----------------------------------------------------------------------------- the README's figures
+
+# README.md is written by hand, except for the figures: each sits between <!--fig name="x.png" alt="..." width="700"-->
+# and <!--/fig--> on one line, and the build writes what is between them (the 1600 px copy at the width given, linked to
+# its 1200 dpi master; label="0" puts the size in a tooltip instead of under the image).
+FIG_MARKER = re.compile(r'<!--fig ((?:\w+="[^"]*"\s*)+)-->(.*?)<!--/fig-->')
+
+
+def _readme_figure(attrs, info):
+    name, width = attrs["name"], int(attrs["width"])
+    f = info[name]
+    master = "validation/figures/" + ("geometry/" if f["master"].startswith("/assets/geometry/") else "") + name
+    img = (f'<img src="docs/assets/web/{name}" width="{width}" height="{round(width * f["height"] / f["width"])}" '
+           f'loading="lazy" alt="{attrs["alt"]}">')
+    if attrs.get("label") == "0":
+        return f'<a href="{master}" title="{_original(f)}">{img}</a>'
+    return f'<a href="{master}">{img}</a><br><sub><a href="{master}">{_original(f)}</a></sub>'
+
+
+def readme_with_figures(text, info):
+    def one(m):
+        attrs = dict(re.findall(r'(\w+)="([^"]*)"', m.group(1)))
+        return f"<!--fig {m.group(1)}-->{_readme_figure(attrs, info)}<!--/fig-->"
+    return FIG_MARKER.sub(one, text)
+
+
+def sync_readme():
+    path = os.path.join(REPO, "README.md")
+    with io.open(path, encoding="utf-8", newline="") as f:
+        text = f.read()
+    new = readme_with_figures(text, FIGURE_INFO)
+    if new != text:
+        with io.open(path, "w", encoding="utf-8", newline="\n") as f:
+            f.write(new)
 
 
 # ----------------------------------------------------------------------------- site pages
@@ -1417,23 +1512,37 @@ def _plain(html):
     return "".join(out).replace('"', "&quot;")
 
 
+def _original(f):
+    """The link text to a figure's 1200 dpi master."""
+    return f"1200 dpi original, {f['master_bytes'] / 1e6:.1f} MB"
+
+
+def _web_img(f, alt):
+    return (f'<img src="{_asset(f["web"])}" width="{f["width"]}" height="{f["height"]}" loading="lazy" '
+            f'alt="{_plain(alt)}">')
+
+
 def figure(src, alt, caption, cls="figure"):
-    """One image with its caption, as HTML (<figure>), so the caption stays attached to the image."""
-    return [f'<figure class="{cls}">', f'<img src="{_asset(src)}" alt="{_plain(alt)}">', f"<figcaption>{caption}</figcaption>",
+    """One image with its caption, as HTML (<figure>), so the caption stays attached to the image. The page shows the
+    1600 px copy; the image and a link under the caption lead to the 1200 dpi master."""
+    f = FIGURE_INFO[src.rsplit("/", 1)[-1]]
+    return [f'<figure class="{cls}">', f'<a href="{_asset(f["master"])}">{_web_img(f, alt)}</a>',
+            f'<figcaption>{caption}<br><a class="original" href="{_asset(f["master"])}">{_original(f)}</a></figcaption>',
             "</figure>", ""]
 
 
 def figure_table(cells, columns, caption=None):
     """Images side by side in a Markdown table marked {: .figures } (see docs/_sass/custom/custom.scss):
-    cells are (src, alt, caption, link or None); the header row is blank and hidden by the stylesheet."""
+    cells are (src, alt, caption, link or None); the header row is blank and hidden by the stylesheet. An image with
+    a link leads there; one without leads to its 1200 dpi master, named under it."""
     L = ["|" + " |" * columns, "|" + "---|" * columns]
     for i in range(0, len(cells), columns):
         row = []
         for src, alt, cap, link in cells[i:i + columns]:
-            img = f"![{_plain(alt)}]({_asset(src)})"
-            if link:
-                img = f"[{img}]({_asset(link)})"
-            row.append(f"{img}<br><span class=\"caption\">{cap.replace('|', '&#124;')}</span>")
+            f = FIGURE_INFO[src.rsplit("/", 1)[-1]]
+            img = f'<a href="{_asset(link or f["master"])}">{_web_img(f, alt)}</a>'
+            original = "" if link else f'<br><a class="original" href="{_asset(f["master"])}">{_original(f)}</a>'
+            row.append(f"{img}<br><span class=\"caption\">{cap.replace('|', '&#124;')}{original}</span>")
         row += [" "] * (columns - len(row))
         L.append("| " + " | ".join(row) + " |")
     L += ["{: .figures }", ""]
@@ -2124,6 +2233,48 @@ def verify_registry():
     return problems
 
 
+def verify_web():
+    """The web copies: each one exists at the size _data/figures.json records, next to its master; the README's figure blocks
+    are what the build writes; and no page or README embeds a 1200 dpi master directly."""
+    problems = []
+    path = os.path.join(DATA_FILES, "figures.json")
+    if not os.path.isfile(path):
+        return ["docs/_data/figures.json does not exist; run scripts/build_api.py"]
+    with io.open(path, encoding="utf-8") as f:
+        info = json.load(f)
+    for name, rec in info.items():
+        web, master = (os.path.join(DOCS, rec[k].lstrip("/")) for k in ("web", "master"))
+        if not os.path.isfile(web) or not os.path.isfile(master):
+            problems.append(f"{name}: the web copy or the master is missing")
+            continue
+        if _png_size(web) != (rec["width"], rec["height"]) or os.path.getsize(web) != rec["web_bytes"]:
+            problems.append(f"{name}: the web copy is not the size _data/figures.json records")
+        if os.path.getsize(master) != rec["master_bytes"] or _png_size(master) != (rec["master_width"], rec["master_height"]):
+            problems.append(f"{name}: the master is not the one _data/figures.json describes")
+        if rec["width"] > WEB_WIDTH:
+            problems.append(f"{name}: the web copy is wider than {WEB_WIDTH} px")
+    if set(os.listdir(WEB)) != set(info):
+        problems.append("docs/assets/web/ and _data/figures.json list different files")
+    with io.open(os.path.join(REPO, "README.md"), encoding="utf-8", newline="") as f:
+        text = f.read()
+    try:
+        if readme_with_figures(text, info) != text:
+            problems.append("README.md: a figure block is not what the build writes (sizes, links or labels); run scripts/build_api.py")
+    except KeyError as e:
+        problems.append(f"README.md: a figure block names {e}, which is not a figure of the site")
+    if re.search(r'<img[^>]*src="validation/figures/|!\[[^\]]*\]\(validation/figures/', text):
+        problems.append("README.md embeds a 1200 dpi master directly; use a <!--fig ...--> block")
+    for path in sorted(glob.glob(os.path.join(DOCS, "**", "*.md"), recursive=True)):
+        rel = os.path.relpath(path, DOCS).replace(os.sep, "/")
+        if rel.startswith("api/"):
+            continue
+        with io.open(path, encoding="utf-8") as f:
+            page = f.read()
+        if re.search(r"<img[^>]*src=\"\{\{ '/assets/(figures|geometry)/|\]\(\{\{ '/assets/(figures|geometry)/", page):
+            problems.append(f"docs/{rel} embeds a 1200 dpi master directly; show the web copy (the include figure.html)")
+    return problems
+
+
 def verify():
     """Everything a client relies on, checked against the files on disk: the latest alias, every frozen release tree,
     that the alias is the newest release, and the registry that lists them."""
@@ -2141,6 +2292,7 @@ def verify():
         problems += [f"[{label}] {p}" for p in verify_tree(root, base, strict)]
     problems += [f"[alias vs release] {p}" for p in verify_alias_matches_release()]
     problems += [f"[registry] {p}" for p in verify_registry()]
+    problems += [f"[web copies] {p}" for p in verify_web()]
     if _read(DOCS, "llms.txt") != _read(API_ROOT, "llms.txt"):
         problems.append("docs/llms.txt and docs/api/llms.txt differ")
     return problems
@@ -2184,6 +2336,7 @@ def build():
     os.makedirs(API_ROOT, exist_ok=True)
     check_runs_registry()
     copy_assets()
+    sync_readme()
     # The frozen copy of this release first, then the latest alias, which is the same files addressed without the release.
     use_tree("release")
     percase = build_tree()

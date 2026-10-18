@@ -14,10 +14,7 @@ All nine configurations (centre block 0D / 1D / 2D × WD 0°, 22.5°, 45°), sol
 the tunnel's turntable: the array turns with WD, the domain does not — ~310,000 cells per centre-block height,
 3000 iterations per direction, the 120 probes at exactly the tunnel's coordinates.
 
-<figure class="figure">
-<img src="{{ '/assets/figures/case-c-openfoam-agreement.png' | relative_url }}" alt="Case C, measured vs modelled">
-<figcaption><strong>Figure 1.</strong> Case C, measured vs modelled.</figcaption>
-</figure>
+{% include figure.html name="case-c-openfoam-agreement.png" alt="Case C, measured vs modelled" caption="<strong>Figure 1.</strong> Case C, measured vs modelled." %}
 
 <details markdown="block">
   <summary>Scores for all nine configurations (R, FAC2, FB, hit rate; |U| alone)</summary>
@@ -36,10 +33,7 @@ the tunnel's turntable: the array turns with WD, the domain does not — ~310,00
 
 </details>
 
-<figure class="figure">
-<img src="{{ '/assets/figures/case-c-openfoam-bias-map.png' | relative_url }}" alt="Case C, where the model is slow or fast">
-<figcaption><strong>Figure 2.</strong> Case C, where the model is slow or fast.</figcaption>
-</figure>
+{% include figure.html name="case-c-openfoam-bias-map.png" alt="Case C, where the model is slow or fast" caption="<strong>Figure 2.</strong> Case C, where the model is slow or fast." %}
 
 - **The pattern is right in every configuration** — R 0.80–0.91, FAC2 0.85–0.98.
 - **The model is slow, worst at WD = 0** (FB +0.25 … +0.34, hit rate 0.43–0.57; at 22.5° and 45° FB +0.09 … +0.20,

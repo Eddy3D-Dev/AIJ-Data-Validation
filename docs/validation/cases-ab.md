@@ -12,10 +12,7 @@ The reading of the OpenFOAM 12 runs on the 1:1:2 building and the 1:4:4 slab. Ev
 
 ## Does the model agree?
 
-<figure class="figure">
-<img src="{{ '/assets/figures/cases-ab-openfoam-agreement.png' | relative_url }}" alt="Measured vs modelled, Cases A and B">
-<figcaption><strong>Figure 1.</strong> Measured vs modelled, Cases A and B.</figcaption>
-</figure>
+{% include figure.html name="cases-ab-openfoam-agreement.png" alt="Measured vs modelled, Cases A and B" caption="<strong>Figure 1.</strong> Measured vs modelled, Cases A and B." %}
 
 Measured against modelled for each quantity, with the 1:1 line and, where the quantity does not change sign, the
 factor-of-two band.
@@ -49,10 +46,7 @@ Reading these honestly:
 
 ## Where does it agree?
 
-<figure class="figure">
-<img src="{{ '/assets/figures/cases-ab-openfoam-profiles.png' | relative_url }}" alt="Centre-plane profiles, Cases A and B">
-<figcaption><strong>Figure 2.</strong> Centre-plane profiles, Cases A and B.</figcaption>
-</figure>
+{% include figure.html name="cases-ab-openfoam-profiles.png" alt="Centre-plane profiles, Cases A and B" caption="<strong>Figure 2.</strong> Centre-plane profiles, Cases A and B." %}
 
 Vertical profiles of U/U_H on the centre plane at the first three measured stations behind the building, offset
 per station. The model follows the measured profile closely above roof height and in the recovering wake; the

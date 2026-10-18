@@ -10,10 +10,7 @@ description: "Eddy3D's ML wind surrogate (Wind Predictor, Yel-2.0) against the t
 
 The surrogate has been run on Cases A to E. It has not been run on Cases F to M.
 
-<figure class="figure">
-<img src="{{ '/assets/figures/ml-surrogate-agreement.png' | relative_url }}" alt="Measured vs predicted, ML surrogate, Cases A–E">
-<figcaption><strong>Figure 1.</strong> Measured vs predicted, ML surrogate, Cases A–E.</figcaption>
-</figure>
+{% include figure.html name="ml-surrogate-agreement.png" alt="Measured vs predicted, ML surrogate, Cases A–E" caption="<strong>Figure 1.</strong> Measured vs predicted, ML surrogate, Cases A–E." %}
 
 Eddy3D's Wind Predictor (the public `Yel-2.0` network) predicts \|U_mean\|/U_ref at one height, 1.8 m. Each case is
 scaled so its measurement plane lands there — A ×180, B ×144, C ×90, D ×360, E ×0.9 — its buildings are rasterised

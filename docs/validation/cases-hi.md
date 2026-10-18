@@ -19,10 +19,7 @@ The reading of the OpenFOAM 12 runs on the 1:1:2 building with a floor point sou
 
 ## Does the model agree?
 
-<figure class="figure">
-<img src="{{ '/assets/figures/cases-hi-openfoam-agreement.png' | relative_url }}" alt="Measured vs modelled, Cases H and I">
-<figcaption><strong>Figure 1.</strong> Measured vs modelled U, W, k and c*, Cases H (top) and I (bottom), realizable k-ε. The concentration panels show the positive pairs only.</figcaption>
-</figure>
+{% include figure.html name="cases-hi-openfoam-agreement.png" alt="Measured vs modelled, Cases H and I" caption="<strong>Figure 1.</strong> Measured vs modelled U, W, k and c*, Cases H (top) and I (bottom), realizable k-ε. The concentration panels show the positive pairs only." %}
 
 Realizable k-ε, normalised by U_H as above.
 
@@ -53,10 +50,7 @@ FB is positive when the model is low. Reading these honestly:
 
 ## Does the turbulence closure matter?
 
-<figure class="figure">
-<img src="{{ '/assets/figures/case-i-openfoam-closures.png' | relative_url }}" alt="Case I under three turbulence closures">
-<figcaption><strong>Figure 2.</strong> Case I under standard k-ε, realizable k-ε and k-ω SST on one mesh: measured vs modelled U, k and c* (Sct 0.5).</figcaption>
-</figure>
+{% include figure.html name="case-i-openfoam-closures.png" alt="Case I under three turbulence closures" caption="<strong>Figure 2.</strong> Case I under standard k-ε, realizable k-ε and k-ω SST on one mesh: measured vs modelled U, k and c* (Sct 0.5)." %}
 
 | Closure | U R | U FAC2 | k R | k FAC2 | k FB | c\* (Sct 0.5) R | c\* FAC2 | c\* FB |
 |---|---|---|---|---|---|---|---|---|

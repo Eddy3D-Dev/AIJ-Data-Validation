@@ -59,7 +59,7 @@ TABLE_DELIM = re.compile(r"^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)*\|?\s*$")
 IAL = re.compile(r"^\s*\{:[^}]*\}\s*$")
 RULE = re.compile(r"^\s{0,3}(-{3,}|={3,})\s*$")
 LIQUID_URL = re.compile(r"\{\{\s*'([^']*)'\s*\|\s*relative_url\s*\}\}")
-LIQUID_INCLUDE = re.compile(r"^\s*\{%-?\s*include\s+(\S+)\s*-?%\}\s*$")
+LIQUID_INCLUDE = re.compile(r"^\s*\{%-?\s*include\s+([^\s%]+)((?:\s+[\w-]+=(?:\"[^\"]*\"|'[^']*'|[^\s%]+))*)\s*-?%\}\s*$")
 MD_IN_HTML = [(re.compile(p), what) for p, what in (
     (r"\*\*[^*\s][^*]*\*\*", "**bold**"), (r"(?<![\w*])\*[^*\s][^*]*\*(?![\w*])", "*emphasis*"),
     (r"`[^`]+`", "`code`"), (r"!?\[[^\]\n]*\]\([^)\n]+\)", "[link](url)"), (r"^\s*#{1,6}\s+\S", "# heading"),
@@ -177,10 +177,10 @@ def expand_includes(lines, errors, base_dir):
             continue
         name = m.group(1)
         path = os.path.join(base_dir, "_includes", name)
-        if not name.endswith(".md"):
-            out.append((n, ""))                      # an HTML include (version label, JSON-LD): no Markdown in it
-        elif not os.path.isfile(path):
+        if not os.path.isfile(path):
             errors.append((n, f"liquid: include {name} does not exist"))
+        elif not name.endswith(".md"):
+            out.append((n, ""))                      # an HTML include (version label, JSON-LD, a figure): no Markdown in it
         else:
             if (out and out[-1][1].strip()) or (n < len(lines) and lines[n].strip()):
                 errors.append((n, f"liquid: {{% include {name} %}} needs a blank line before and after it"))
@@ -449,6 +449,8 @@ def self_test():
         ("text\n\n> a\n>\n> - x\n> - y\n", []),
         ("text\n\n> a\n> - x\n", ["list-start"]),
         ("[x]({{ '/nowhere/' | relative_url }})\n", []),     # no Site given: the link rule needs the site's pages
+        ('text\n\n{% include figure.html name="x.png" alt="a | b" caption="<strong>F.</strong> c" %}\n\ntext\n', []),   # an HTML include with parameters
+        ('text\n\n{% include nowhere.html name="x.png" %}\n\ntext\n', ["liquid"]),
     ]
     for cases, is_jekyll in ((github, False), (jekyll, True)):
         for text, want in cases:

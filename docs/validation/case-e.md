@@ -14,10 +14,7 @@ Before and after the construction of a 60 m tower and two 18 m blocks, each stat
 (about one million cells, 2 m at the buildings), the tunnel's own profile imposed as a table
 (`wind.inlet: "manual"`), the model's speed over its own solved U(15.9 m).
 
-<figure class="figure">
-<img src="{{ '/assets/figures/case-e-openfoam-agreement.png' | relative_url }}" alt="Case E, measured vs modelled, before, after and the change">
-<figcaption><strong>Figure 1.</strong> Case E, measured vs modelled, before, after and the change.</figcaption>
-</figure>
+{% include figure.html name="case-e-openfoam-agreement.png" alt="Case E, measured vs modelled, before, after and the change" caption="<strong>Figure 1.</strong> Case E, measured vs modelled, before, after and the change." %}
 
 | | FAC2 | FB | q | R |
 |---|---|---|---|---|
@@ -27,10 +24,7 @@ Before and after the construction of a 60 m tower and two 18 m blocks, each stat
 | after · \|U\| | 0.74 | +0.34 | 0.30 | 0.84 |
 | ceiling control: the tunnel's *before*, scored as a model of its *after* | 0.79 | +0.37 | 0.35 | 0.10 |
 
-<figure class="figure">
-<img src="{{ '/assets/figures/case-e-openfoam-bias-map.png' | relative_url }}" alt="Case E, where the model is slow or fast">
-<figcaption><strong>Figure 2.</strong> Case E, where the model is slow or fast.</figcaption>
-</figure>
+{% include figure.html name="case-e-openfoam-bias-map.png" alt="Case E, where the model is slow or fast" caption="<strong>Figure 2.</strong> Case E, where the model is slow or fast." %}
 
 The construction change (after − before), in which inflow, closure and instrument biases largely cancel, has
 R = 0.84, the sign right at 75 % of the points where the tunnel resolved a change, and about 60 % of the measured

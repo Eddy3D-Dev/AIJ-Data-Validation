@@ -38,6 +38,7 @@ CASE = {
     },
     "quantities": ["velocity_ratio", "k_ratio"],
     "units": {"length": "m (full scale)", "velocity_ratio": "dimensionless, U/UH", "k_ratio": "dimensionless, k/UH^2"},
+    "approach_flow_units": {"U": "dimensionless, U/Ub (Ub = mean speed at 9 m, not published in m/s)", "k": "dimensionless, k/Ub^2"},
     "frame": {
         "origin": "the leeward face of the tree belt at ground level, on the vertical section through the belt's centre",
         "x": "+x downwind: the belt occupies x in [-2, 0] m, the measurement lines lie behind it at x = 1.75 ... 35 m",

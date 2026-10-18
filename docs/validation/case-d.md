@@ -13,10 +13,7 @@ The reading of the OpenFOAM 12 runs on the high-rise among city blocks. Every sc
 All three headings: 3.6 million cells at 1:400 on a cylinder domain, 3000
 iterations, the 66 measured thermistor points and the 33 split-fibre points at z/H = 0.02.
 
-<figure class="figure">
-<img src="{{ '/assets/figures/case-d-openfoam-agreement.png' | relative_url }}" alt="Case D, measured vs modelled">
-<figcaption><strong>Figure 1.</strong> Case D, wind directions 0°, 22.5° and 45°: measured against modelled speed on the thermistor plane, and at the split-fibre points (0° only).</figcaption>
-</figure>
+{% include figure.html name="case-d-openfoam-agreement.png" alt="Case D, measured vs modelled" caption="<strong>Figure 1.</strong> Case D, wind directions 0°, 22.5° and 45°: measured against modelled speed on the thermistor plane, and at the split-fibre points (0° only)." %}
 
 <details markdown="block">
   <summary>Scores for all three headings and both instruments</summary>
