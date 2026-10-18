@@ -8,7 +8,7 @@ description: "OpenFOAM 12 against the tunnel for Case A (1:1:2 building) and Cas
 
 # Cases A and B, OpenFOAM 12
 
-OpenFOAM 12 runs on the 1:1:2 building (Case A) and the 1:4:4 slab (Case B). Every score of each run, with the per-point files, is on the [Case A]({{ '/cases/case-a/validation/' | relative_url }}) and [Case B]({{ '/cases/case-b/validation/' | relative_url }}) Validation pages.
+OpenFOAM 12 runs on the 1:1:2 building (Case A) and the 1:4:4 slab (Case B). Per-run scores and per-point files: [Case A]({{ '/cases/case-a/validation/' | relative_url }}) and [Case B]({{ '/cases/case-b/validation/' | relative_url }}) Validation pages.
 
 ## Measured against modelled
 
@@ -34,17 +34,6 @@ Measured against modelled for each quantity, with the 1:1 line and, where the qu
 - Case A, W: the mean measured W is ~0.01 m/s.
 - Case B, V: the model's V is 0 on the centre plane (y = 0, a symmetry plane); the tunnel measures small non-zero values there.
 
-<details markdown="block">
-<summary>Interpretation: Cases A and B, the scores</summary>
-
-- The streamwise field is right: R ≈ 0.96 in both cases, FAC2 0.82 and 0.70.
-- k is under-predicted in both (FB ≈ +0.47, R ≈ 0.4). This is the familiar realizable k-ε behaviour and consistent with what Eddy3D already records for AIJ Case H.
-- FAC2 on V and W is low by construction, not by failure. Those components change sign, so factor-of-two agreement is a harsh measure near zero; R and hit rate are the meaningful columns there.
-- The flat row of model V ≈ 0 in Case B's panel is the symmetry plane: a RANS solution is symmetric, so V ≡ 0 at y = 0.
-- Case A's W FB of −1.50 and its NMSE are artefacts of a near-zero mean, not a blow-up. R = +0.71 is the score to read.
-
-</details>
-
 ## Centre-plane profiles
 
 {% include figure.html name="cases-ab-openfoam-profiles.png" alt="Centre-plane profiles, Cases A and B" caption="<strong>Figure 2.</strong> Centre-plane profiles, Cases A and B." %}
@@ -52,8 +41,13 @@ Measured against modelled for each quantity, with the 1:1 line and, where the qu
 Vertical profiles of U/U_H on the centre plane at the first three measured stations behind the building, offset per station.
 
 <details markdown="block">
-<summary>Interpretation: Cases A and B, the profiles</summary>
+<summary>Interpretation: Cases A and B scores and profiles</summary>
 
-The model follows the measured profile closely above roof height and in the recovering wake; the near-ground deficit immediately behind the building is where the closure does least well.
+- The streamwise field is right: R ≈ 0.96 in both cases, FAC2 0.82 and 0.70.
+- k is under-predicted in both (FB ≈ +0.47, R ≈ 0.4); Case H shows the same under-prediction (FB +0.51).
+- V and W change sign, so factor-of-two agreement is a harsh measure near zero and FAC2 is low on both; R and hit rate carry the comparison there.
+- The flat row of model V ≈ 0 in Case B's panel is the symmetry plane: a RANS solution is symmetric, so V ≡ 0 at y = 0.
+- Case A's W FB of −1.50 and its NMSE follow from a near-zero mean; the correlation is R = +0.71.
+- The model follows the measured profile closely above roof height and in the recovering wake; the near-ground deficit immediately behind the building is where the closure does least well.
 
 </details>

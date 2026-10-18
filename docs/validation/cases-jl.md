@@ -8,7 +8,7 @@ description: "urbanMicroclimateFoam, an OpenFOAM 12 solver, against the wind tun
 
 # Cases J and L, urbanMicroclimateFoam
 
-Cases J and L are non-isothermal: a floor held at about 45 °C (45.8 °C in J, 45.0 °C in L) under a cooler approach flow (bulk Richardson number −0.086 in J, −0.034 in L), with an ethylene tracer released from the floor. Eddy3D solved them with its buoyant microclimate engine, urbanMicroclimateFoam (UMF, the Outdoor+ plugin), an OpenFOAM 12 solver developed at ETH Zurich and Empa (its engine ids are on the [Validation]({{ '/validation/' | relative_url }}) overview; Eddy3D owns none of its physics). Every score of each run, with the per-point files and the caveats recorded with the run, is on the [Case J]({{ '/cases/case-j/validation/' | relative_url }}) and [Case L]({{ '/cases/case-l/validation/' | relative_url }}) Validation pages. The isothermal OpenFOAM 12 engine is *pending* on both cases: it was not run.
+Cases J and L are non-isothermal: a floor held at about 45 °C (45.8 °C in J, 45.0 °C in L) under a cooler approach flow (bulk Richardson number −0.086 in J, −0.034 in L), with an ethylene tracer released from the floor. Eddy3D solved them with its buoyant microclimate engine, urbanMicroclimateFoam (UMF, the Outdoor+ plugin), an OpenFOAM 12 solver developed at ETH Zurich and Empa (its engine ids are on the [Validation]({{ '/validation/' | relative_url }}) overview; Eddy3D owns none of its physics). Per-run scores and per-point files: [Case J]({{ '/cases/case-j/validation/' | relative_url }}) and [Case L]({{ '/cases/case-l/validation/' | relative_url }}) Validation pages. The isothermal OpenFOAM 12 engine is *pending* on both cases: it was not run.
 
 ## Runs
 
@@ -16,15 +16,15 @@ Cases J and L are non-isothermal: a floor held at about 45 °C (45.8 °C in J, 4
 - **Froude scale.** The production case writer cannot mesh a 0.16 m building, so each scene is the tunnel scaled by 62.5 (J) or 100 (L): lengths times the scale, velocities times its square root, temperatures unchanged. The Richardson number, Pr and the Kelvin values are kept; the Reynolds number is not (1.6 × 10⁴ in the tunnel of Case J, 8 × 10⁶ in the scene). Every pair is in the tunnel's units: coordinates divided by the scale, velocities by the scene's U<sub>H</sub>, k by its square.
 - **Temperature** is scored as the floor-referenced fraction θ = (T<sub>f</sub> − T)/(T<sub>f</sub> − T<sub>H</sub>), 0 at the floor and 1 in the approach air at the building height (the workbook's own normalisation). θ lies between 0.4 and 1.1. The temperature errors in kelvin are in the files (`temperature.all`).
 - **Concentration** is the measured C/c₀ (c₀ = 12.28 ppm in J, 1728 ppm in L) against the model's ethylene mass fraction as ppm over the same c₀, with one detection limit of 10⁻³ of the largest measured value.
-- **Measured side.** Case J's point 153 repeats point 1 (the crossing of two planes, identical values) and is left out, as Eddy3D's fixture does: 443 points.
-- **Tracer mass balance.** The outlet carried 0.62 to 0.95 of the emission in Case J (0.89, 0.75 and 0.62 under rk-ε; 0.95, 0.84 and 0.73 under bKε, for Sct 0.3, 0.5 and 0.7) and 0.86, 0.73 and 0.70 in Case L. Eddy3D's fixture accepts a factor of two. Why a part of the emission is not at the outlet was not investigated here.
+- **Measured side.** Case J's point 153 repeats point 1 (the crossing of two planes, identical values) and is left out: 443 points.
+- **Tracer mass balance.** The outlet carried 0.62 to 0.95 of the emission in Case J (0.89, 0.75 and 0.62 under rk-ε; 0.95, 0.84 and 0.73 under bKε, for Sct 0.3, 0.5 and 0.7) and 0.86, 0.73 and 0.70 in Case L.
 - FB is positive when the model is low, and is left out (—) for a signed component whose measured and modelled means are not both positive.
 
 <details markdown="block">
-<summary>Interpretation: engine, scale and temperature scoring</summary>
+<summary>Interpretation: Engine, scale and temperature scoring</summary>
 
 - The isothermal OpenFOAM 12 solver Eddy3D uses for the other cases cannot represent a heated floor, which is why these cases were solved with UMF.
-- Temperature FAC2 is 1.00 almost everywhere because θ lies between 0.4 and 1.1, so R and the hit rate are the scores to read.
+- Temperature FAC2 is 1.00 almost everywhere because θ lies between 0.4 and 1.1, so R and the hit rate carry the comparison.
 - The Froude scale keeps the Richardson number, Pr and the Kelvin values and not the Reynolds number, so the wall-function regime of the model is not the tunnel's.
 
 </details>
@@ -57,13 +57,13 @@ n is 443 (416 without the 27 points within a quarter of a building height of the
 - **Closures compared.** buoyantKEpsilon against realizable k-ε: U's R 0.924 against 0.921, U's FAC2 0.761 against 0.731, k's R 0.36 against 0.32. The tracer's R is lower by 0.025 to 0.044 and FB lower by 0.11 to 0.12.
 
 <details markdown="block">
-<summary>Interpretation: Case J, flow, temperature and tracer</summary>
+<summary>Interpretation: Case J flow, temperature and tracer</summary>
 
 - The flow is reproduced in pattern and low in level. The deficit is largest in the wake. The steady closures give a recirculation that is too long.
-- The tunnel's lack of y-symmetry is not what holds the model's R at 0.92.
+- The tunnel's mirror-pair ceiling (R = 0.99) is above the model's R of 0.92.
 - k is not reproduced. The means are close, so the agreement in FB is not agreement in pattern.
 - The model is warmer than the tunnel. Near-floor temperature is a wall-function result, because the tunnel's 24 K drop lies inside the model's first cell.
-- The tracer pattern is correlated at every Schmidt number, and the bias changes sign. The near-source points are low, not high as in Cases H and K.
+- The tracer pattern is correlated at every Schmidt number, and the bias changes sign. The near-source points are low; in Cases H and K they are high.
 - Upstream, FAC2 is small whatever the model does, because the tunnel measures a background the model has almost none of.
 - The two closures differ little in the flow and more in the tracer: the modelled concentration is higher under buoyantKEpsilon. This ranks two closures on one building, one mesh and a run capped at 1500 iterations.
 
@@ -100,13 +100,13 @@ n is 443 (416 without the 27 points within a quarter of a building height of the
 
 The 51 points at z = 4 mm lie inside the model's first fine cell (0.75 m, 0.4 m at 1:100), a wall-function cell; the 242 points at or above 30 mm are scored separately.
 
-- **Flow.** U: R = 0.92, and the mean U/U<sub>H</sub> is 0.499 modelled against 0.654 measured; at or above 30 mm R is 0.90 and FAC2 0.80. Against the undisturbed approach column, the model's R is higher (U: 0.918 against 0.861; θ: 0.936 against 0.925). The model's mean U/U<sub>H</sub> in the streets is 0.045 below 30 mm and 1.11 above 110 mm, against the tunnel's 0.297 and 1.068 (as Eddy3D's fixture quotes them). V and W: R is −0.04 and −0.03, and with the sign of V flipped it is +0.04.
+- **Flow.** U: R = 0.92, and the mean U/U<sub>H</sub> is 0.499 modelled against 0.654 measured; at or above 30 mm R is 0.90 and FAC2 0.80. Against the undisturbed approach column, the model's R is higher (U: 0.918 against 0.861; θ: 0.936 against 0.925). The model's mean U/U<sub>H</sub> in the streets is 0.045 below 30 mm and 1.11 above 110 mm, against the tunnel's 0.297 and 1.068. V and W: R is −0.04 and −0.03, and with the sign of V flipped it is +0.04.
 - **k.** R = 0.15 (0.47 at or above 30 mm), FB +0.64.
 - **Temperature.** θ: R = 0.94, hit rate 0.99. The mean bias is +1.17 K, the mean absolute error 1.59 K and the root-mean-square error 2.11 K.
 - **Tracer.** R is 0.80, 0.77 and 0.75 from Sct 0.3 to 0.7 (0.81 to 0.82 at or above 30 mm); FAC2 falls from 0.76 to 0.60 and FB from −0.50 to −0.73. The largest modelled c\* is 3.3, 4.0 and 5.0 (at y = −0.12, +0.18 and +0.18 m, in the source street) against the tunnel's 1.93 at (−0.15, −0.12, 0.004).
 
 <details markdown="block">
-<summary>Interpretation: Case L, flow, temperature and tracer</summary>
+<summary>Interpretation: Case L flow, temperature and tracer</summary>
 
 - The streamwise flow and the temperature follow the tunnel; the streets do not. The model beats the undisturbed approach column on R, which is the number a model of the array has to beat. The street air is nearly stagnant in the model. V and W carry no pattern.
 - k is low and weakly correlated.
@@ -122,9 +122,9 @@ The 51 points at z = 4 mm lie inside the model's first fine cell (0.75 m, 0.4 m 
 - Not represented in the model (Eddy3D's list): the release momentum and the gas's own heat; the tunnel's side walls and ceiling (slip here); radiation (emissivity 0.01, effectively off); in Case L the 10 mm raised block floor and the measured velocity profile (UMF's inlet is a log law; the model's approach column differs from the tunnel's by up to 39 % above 30 mm); in Case J the measured 4 K gradient up the building's walls.
 
 <details markdown="block">
-<summary>Interpretation: limits of these runs</summary>
+<summary>Interpretation: Limits of these runs</summary>
 
 - The air region reached its cap with residuals near 10⁻², so these numbers are those of an unconverged steady solve on one mesh.
-- The fixture's factor-of-two acceptance of the tracer balance is a wiring detector and not a convergence claim.
+- The tracer balance closes within a factor of two; why part of the emission is missing at the outlet was not investigated.
 
 </details>

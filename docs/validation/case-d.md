@@ -8,7 +8,7 @@ description: "OpenFOAM 12 against the tunnel for Case D, the high-rise among cit
 
 # Case D, OpenFOAM 12
 
-OpenFOAM 12 runs on the high-rise among city blocks. Every score, with the per-point file, is on the [Case D]({{ '/cases/case-d/validation/' | relative_url }}) Validation page.
+OpenFOAM 12 runs on the high-rise among city blocks. Scores and per-point file: [Case D]({{ '/cases/case-d/validation/' | relative_url }}) Validation page.
 
 All three headings: 3.6 million cells at 1:400 on a cylinder domain, 3000 iterations, the 66 measured thermistor points and the 33 split-fibre points at z/H = 0.02.
 
@@ -33,7 +33,6 @@ All three headings: 3.6 million cells at 1:400 on a cylinder domain, 3000 iterat
 </details>
 
 - Thermistor plane: R 0.80–0.85 at all three headings. Split-fibre \|U\|: R 0.85.
-- Frame check asserted by the fixture: R > 0.5 at 0°. A prior Eddy3D attempt at this case scored R 0.10.
 - Split-fibre points (33): \|U\| FB +0.07. Thermistor (66): FB +0.21 with √(\|U\|²+2k) and +0.36 with \|U\|. In the tunnel the thermistor reads 1.34 times the split-fibre \|U\| over the same 33 points.
 - Split-fibre streamwise U: FB +0.67, R 0.95.
 - Rotation sense at 22.5° and 45°: the array is symmetric about y = 0, so a wind turned toward +y and one turned toward −y give mirror-image fields. The data paper's Figure 4 draws +y.
@@ -44,12 +43,12 @@ All three headings: 3.6 million cells at 1:400 on a cylinder domain, 3000 iterat
 - FB is positive when the model is low.
 
 <details markdown="block">
-<summary>Interpretation: Case D, pattern, instruments and rotation sense</summary>
+<summary>Interpretation: Case D pattern, instruments and rotation sense</summary>
 
-- The pattern is right. The frame check passes with room to spare.
+- The pattern is right. The frame check (R above 0.5 at 0°) passes with room to spare; a prior Eddy3D attempt at this case scored R 0.10 ([Known data issues]({{ '/known-data-issues/' | relative_url }})).
 - Against the instrument that measures what RANS computes, the model is nearly unbiased (split-fibre \|U\|, FB +0.07).
-- Most of the thermistor gap is the instrument, not the flow: the thermistor reads 1.34 times the split-fibre \|U\| in the tunnel itself.
+- Most of the thermistor gap is the instrument: the thermistor reads 1.34 times the split-fibre \|U\| in the tunnel itself.
 - The model's streamwise component is low (U FB +0.67, R 0.95) while its \|U\| is not: more of the model's near-ground speed is in the lateral and vertical components than the tunnel's.
-- At 22.5° and 45° the solved fields corroborate the rotation sense the data cannot decide. The measurements alone cannot say which sense was used. At both headings the model is also nearly unbiased against the thermistor (FB +0.05 and +0.09 with √(\|U\|²+2k)).
+- At 22.5° and 45° the solved fields corroborate the rotation sense that the measurements alone cannot decide. At both headings the model is also nearly unbiased against the thermistor (FB +0.05 and +0.09 with √(\|U\|²+2k)).
 
 </details>

@@ -8,7 +8,7 @@ description: "OpenFOAM 12 against the tunnel for Case E, the Niigata district, w
 
 # Case E, OpenFOAM 12
 
-OpenFOAM 12 runs on the Niigata district, wind from SW. Every score, with the per-point file, is on the [Case E]({{ '/cases/case-e/validation/' | relative_url }}) Validation page.
+OpenFOAM 12 runs on the Niigata district, wind from SW. Scores and per-point file: [Case E]({{ '/cases/case-e/validation/' | relative_url }}) Validation page.
 
 Before and after the construction of a 60 m tower and two 18 m blocks, each state on a 504 m-radius cylinder (about one million cells, 2 m at the buildings), the tunnel's own profile imposed as a table (`wind.inlet: "manual"`), the model's speed over its own solved U(15.9 m).
 
@@ -29,7 +29,7 @@ Before and after the construction of a 60 m tower and two 18 m blocks, each stat
 - FB is positive when the model is low.
 
 <details markdown="block">
-<summary>Interpretation: Case E, absolute ratios and the construction change</summary>
+<summary>Interpretation: Case E absolute ratios and the construction change</summary>
 
 - In the change after − before, inflow, closure and instrument biases largely cancel. R = 0.84 is far above the control that ignores the construction.
 - The absolute ratios are low and the cause is not established.
