@@ -1,7 +1,7 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/validation.schema.json",
  "schema_version": "2.3.0",
- "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
+ "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
  "license": "CC-BY-4.0",
  "case": "J",
  "title": "Case J — 1:1:2 building, non-isothermal",

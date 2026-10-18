@@ -1,7 +1,7 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/case.schema.json",
  "schema_version": "2.3.0",
- "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
+ "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
  "license": "CC-BY-4.0",
  "id": "M",
  "slug": "case-m",
@@ -596,9 +596,9 @@
   "files": [
    {
     "configuration": "default",
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/geometry.stl?v=e4e0a2044536",
-    "triangles": 43950,
-    "watertight": true
+    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/geometry.stl?v=cfc68cf63ea1",
+    "triangles": 43936,
+    "watertight": false
    }
   ]
  },
@@ -621,7 +621,7 @@
   "H_R = 41 m is the anemometer height above the ground; the main roof under the reference point is about 33 m above it. c0 uses H_R = 0.068 m (41 m / 600 = 0.06833 m would give 131.2 ppm, -1 %).",
   "The field has an ambient floor of 8 - 11 ppq at points 11 - 15 in every run (not subtracted); the tunnel's concentration has a zero offset (two negative means at point 12) and an rms floor of 7 ppm.",
   "Only 11 of the 18 field runs are within 5° of 180°, the tunnel's direction; runs 1, 2 and 9 have U_R of 1.4 - 1.8 m/s.",
-  "BD_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges (7 on the rim of the panel, 14 on 7 slivers hanging on building roofs); the served geometry.stl is multiplied by 600, re-wound outward, without the slivers and closed with a base slab down to z = -1 m.",
+  "BD_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges; the served geometry.stl is multiplied by 600 and re-wound outward.",
   "The approach-flow heights are above the empty tunnel floor: at the profile station the model's taper is 0.052 m high, above the 10 lowest profile heights."
  ],
  "people": {
