@@ -142,6 +142,28 @@
   "web_bytes": 507171,
   "width": 1600
  },
+ "case-f-openfoam-agreement.png": {
+  "height": 950,
+  "master": "/assets/figures/case-f-openfoam-agreement.png",
+  "master_bytes": 3157043,
+  "master_height": 7704,
+  "master_width": 12972,
+  "mb": "3.2",
+  "web": "/assets/web/case-f-openfoam-agreement.png",
+  "web_bytes": 398009,
+  "width": 1600
+ },
+ "case-f-openfoam-bias-map.png": {
+  "height": 1028,
+  "master": "/assets/figures/case-f-openfoam-bias-map.png",
+  "master_bytes": 5955062,
+  "master_height": 6516,
+  "master_width": 10140,
+  "mb": "6.0",
+  "web": "/assets/web/case-f-openfoam-bias-map.png",
+  "web_bytes": 573549,
+  "width": 1600
+ },
  "case-f.png": {
   "height": 800,
   "master": "/assets/geometry/case-f.png",
@@ -294,6 +316,28 @@
   "mb": "2.3",
   "web": "/assets/web/case-l.png",
   "web_bytes": 302560,
+  "width": 1600
+ },
+ "case-m-openfoam-agreement.png": {
+  "height": 843,
+  "master": "/assets/figures/case-m-openfoam-agreement.png",
+  "master_bytes": 2870868,
+  "master_height": 6792,
+  "master_width": 12888,
+  "mb": "2.9",
+  "web": "/assets/web/case-m-openfoam-agreement.png",
+  "web_bytes": 345738,
+  "width": 1600
+ },
+ "case-m-openfoam-plan.png": {
+  "height": 609,
+  "master": "/assets/figures/case-m-openfoam-plan.png",
+  "master_bytes": 4082766,
+  "master_height": 4800,
+  "master_width": 12612,
+  "mb": "4.1",
+  "web": "/assets/web/case-m-openfoam-plan.png",
+  "web_bytes": 344311,
   "width": 1600
  },
  "case-m.png": {

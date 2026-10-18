@@ -32,7 +32,15 @@ Shinjuku sub-centre, Tokyo, November 1978: 1:800 tunnel (thermistor, 5 / 9 / 20 
 
 ## Agreement with the tunnel
 
-**No validation has been run for this case yet.** Nothing on this page is a claim about it. Eddy3D's fixture for this case is written and its solves are queued; no result exists yet. Engine status: OpenFOAM 12 <span class="label label-yellow status">pending</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
+| Engine | Status | R | FAC2 |
+|---|---|---|---|
+| OpenFOAM 12 | <span class="label label-green status">scored</span> | +0.79 … +1.00 | 0.85 … 1.00 |
+| OpenLB | <span class="label label-yellow status">pending</span> | — | — |
+| FluidX3D | <span class="label label-yellow status">pending</span> | — | — |
+| ML surrogate | <span class="label label-yellow status">pending</span> | — | — |
+{: .scores }
+
+R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: every score, its figures and its reading are on the [Validation page]({{ '/cases/case-f/validation/' | relative_url }}).
 
 {: .warning-title }
 > Before you compare
@@ -41,4 +49,4 @@ Shinjuku sub-centre, Tokyo, November 1978: 1:800 tunnel (thermistor, 5 / 9 / 20 
 >
 > - The published coordinates are multiplied by 800 in the cleaned table (`coordinate_scale_applied`).
 > - The sense in which the wind direction rotates is a convention to check before comparing at any direction other than 0° (see *Frame and units* on the Data page).
-> - 10 known issues in the published files are listed under [Known data issues]({{ '/cases/case-f/data/' | relative_url }}#known-data-issues).
+> - 11 known issues in the published files are listed under [Known data issues]({{ '/cases/case-f/data/' | relative_url }}#known-data-issues).

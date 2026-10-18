@@ -1332,7 +1332,7 @@
    },
    "points_faster_from_S": 9,
    "of": 10,
-   "note": "the points in the dense low-rise area north of y = 150 m (MP_caseF.png) read higher when the label is S (open plaza and towers upwind) than N (low-rise upwind): the labels are FROM-directions, as is the reference-building choice (SMB for NW-NE). Not a solved field: status 'unverified'"
+   "note": "the points in the dense low-rise area north of y = 150 m (MP_caseF.png) read higher when the label is S (open plaza and towers upwind) than N (low-rise upwind): the labels are FROM-directions, as is the reference-building choice (SMB for NW-NE). Not a solved field; a solved field decides NNW alone (directions.csv, QUESTIONS.md QF9)"
   },
   {
    "case": "F",

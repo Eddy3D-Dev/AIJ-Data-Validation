@@ -1,7 +1,7 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/points.schema.json",
  "schema_version": "2.3.0",
- "data_version": "cef1af2b7f12fd73ff1bfbdcd3d8ee4952d9460f14350bd5479d514aa1baa837",
+ "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
  "license": "CC-BY-4.0",
  "case": "A",
  "title": "Case A — 1:1:2 building",
