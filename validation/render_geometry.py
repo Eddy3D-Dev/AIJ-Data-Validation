@@ -206,7 +206,7 @@ def decorate(ax, case, lo, hi):
     elif case == "F":
         # Geographic frame, full scale: +x east, +y north (no scored direction: the wind is a compass sector).
         ground_grid(ax, lo[0], hi[0], lo[1], hi[1], 200)
-        arrow(ax, (hi[0] + 60, hi[1] - 450, 0), (hi[0] + 60, hi[1] - 100, 0), "N", colour="#5c5c5a")
+        arrow(ax, (hi[0] + 60, hi[1] - 450, 0), (hi[0] + 60, hi[1] - 100, 0), "N", colour=ps.REFERENCE)
     elif case == "M":
         # Frame: +x north, +y west; WD = 180 deg blows toward +x, so the arrow runs along +x from the upwind (-x) side.
         ground_grid(ax, lo[0], hi[0], lo[1], hi[1], 100)
