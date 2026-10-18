@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Regenerate clean/ — the cleaned, queryable release of the AIJ UWE benchmark Cases A-E.
+"""Regenerate clean/ — the cleaned, queryable release of the AIJ UWE benchmark Cases A-M.
 
     python clean/build.py            # rebuild everything, run every check, exit 1 on any failure
     python clean/build.py --check    # re-run the checks against what is on disk, build nothing
@@ -7,6 +7,8 @@
 Inputs (never modified):
     raw/cases/case-a/, case-b/, case-c/   the Zenodo files as published
     raw/cases/case-d/, case-e/            the workbooks / 3dm (cross-checks only)
+    raw/cases/case-f/ ... case-m/         the Zenodo files as published, one module each (clean/case_<x>.py); the .xlsx workbooks of H to M
+                                          are read with the standard library (xlrd 2 reads only .xls)
     clean/sources/zenodo_caseD/, clean/sources/zenodo_caseE/
                                                         the official Zenodo files the clone lacks
                                                         (SHA256SUMS.txt beside them; see manifest provenance)
@@ -1205,7 +1207,7 @@ def build():
     write_json(os.path.join(HERE, "units.json"), {"points": UNITS, "approach_flow": APPROACH_FLOW_UNITS, "directions": DIRECTION_UNITS,
                                                    "note": "column headers in every CSV are bare names; this file is the units sidecar; the parquet files carry the same map in their schema metadata"})
     manifest = {
-        "name": "AIJ UWE benchmark — cleaned release, Cases A-E", "version": RELEASE_VERSION, "schema_version": SCHEMA_VERSION,
+        "name": "AIJ UWE benchmark — cleaned release, Cases A-M", "version": RELEASE_VERSION, "schema_version": SCHEMA_VERSION,
         "licence": {"data": "CC BY 4.0", "url": "https://creativecommons.org/licenses/by/4.0/", "note": "The measurement data belongs to its collectors and distributors, named per case. Cite the benchmark paper and each case's requested citation."},
         "cite": {"benchmark": "Kikumoto, H., Okaze, T., Yoshie, R. et al. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083",
                  "guidelines": "Tominaga, Y. et al. (2008). AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings. JWEIA 96, 1749-1761. https://doi.org/10.1016/j.jweia.2008.02.058"},

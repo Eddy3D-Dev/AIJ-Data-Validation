@@ -62,6 +62,8 @@ The point table gained columns, which is why this release is MAJOR.
 - Markdown that rendered differently in Jekyll and on GitHub: lists and tables not preceded by a blank line, a table row
   with an unescaped pipe in `clean/SCHEMA.md`, bare URLs, and the API changelog include, whose text with `<word>`
   was read as an HTML tag.
+- The figure build is deterministic: `scripts/build_all.sh` pins the numerical libraries to one thread. With several, the Case D
+  agreement figure came out as one of two layouts, a pixel apart, from run to run on the same machine.
 
 ### Repository notes
 

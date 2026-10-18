@@ -9,7 +9,9 @@
 # geometry renders, drawn from the snapshots in validation/results/), and docs/ (the API and the generated pages).
 # The last step checks that every Markdown file, generated or not, renders the same on GitHub and in Jekyll.
 set -euo pipefail
-export PYTHONHASHSEED=0 PYTHONIOENCODING=utf-8 PYTHONDONTWRITEBYTECODE=1 MPLBACKEND=Agg
+# One thread for the numerical libraries: with several, a figure's layout solve (the Case D agreement figure) came out as one of
+# two layouts, a pixel apart, from run to run on the same machine, and a build that is a pure function must not.
+export PYTHONHASHSEED=0 PYTHONIOENCODING=utf-8 PYTHONDONTWRITEBYTECODE=1 MPLBACKEND=Agg OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
 
 pip install --quiet --disable-pip-version-check --root-user-action=ignore --no-deps --require-hashes -r requirements.lock
 
