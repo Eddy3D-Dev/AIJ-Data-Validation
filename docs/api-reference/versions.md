@@ -22,7 +22,7 @@ that release's frozen copy at its tag, which never change. `release_base_url` is
 [Versions and pinning]({{ '/api-reference/' | relative_url }}#versions-and-pinning)):
 
 ```bash
-REL=$(curl -s -A "aij-client/1.0" $BASE/index.json | jq -r .release_base_url)   # .../api/3.0.0
+REL=$(curl -s -A "aij-client/1.0" $BASE/index.json | jq -r .release_base_url)   # .../api/3.1.0
 curl -s -A "aij-client/1.0" "$REL/cases/A/points.csv" | head -3
 ```
 

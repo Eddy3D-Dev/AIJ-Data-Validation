@@ -104,7 +104,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 - case-e.3dm is FULL-SCALE metres (MP\_caseE.png is drawn at model scale, +/-0.8 m). Use layers \'buildings\' (5,015 meshes, before construction) and \'buildings\_new\_construction\' (3 prisms); exclude the map plate on the Japanese-named general layer, the terrain plates (the site is flat) and \'probes\'.
 - case-e.3dm: 1,563 of 8,436 triangles (18.5 %) of the building meshes are wound against their neighbours; all are re-wound here.
 - Do not take the measurement coordinates from the 3dm\'s \'probes\' layer: its 80 spheres sit a median 2.31 m (max 21 m) from the workbook\'s points, which are authoritative (all 80 fall in open space, min 0.83 m from a building edge).
-- The measured quantity is a scalar (thermistor) speed; a RANS |U| is biased low against it in a dense canopy. The construction signal (ac - bc) is largest for SW (mean |d| 0.2155) and smallest for SSE (0.093).
+- The measured quantity is a scalar (thermistor) speed; a RANS \|U\| is biased low against it in a dense canopy. The construction signal (ac - bc) is largest for SW (mean \|d\| 0.2155) and smallest for SSE (0.093).
 
 ## API
 
@@ -120,7 +120,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Attribution
 
-- Data collected by Yoshihide Tominaga (Niigata Institute of Technology), 2008.
+- Data collected by Yoshihide Tominaga (Niigata Institute of Technology).
 - Edited and distributed by Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15429017](https://doi.org/10.5281/zenodo.15429017)
 - Citation requested: Tominaga, Y. et al. (2008). AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings. JWEIA 96, 1749-1761. <https://doi.org/10.1016/j.jweia.2008.02.058>

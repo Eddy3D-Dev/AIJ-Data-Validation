@@ -126,7 +126,7 @@ The fit has two windows because the measurement plane z/H = 0.02 sits below the 
 - All of Case D\'s data lives in LF\_caseD.xls, an OLE2/BIFF8 workbook (read it with xlrd 2.x; openpyxl cannot). Sheets: \'Geometry&Points\', \'Inflow\', \'Results (Exp\_S)\' (split fibre, WD = 0), \'Results (Exp\_T)\' (thermistor, 0 / 22.5 / 45 deg).
 - Coordinates are millimetres in the workbook; the API serves metres.
 - The shipped BD\_caseD.stl has 1572 facets of which 576 are duplicates, and all 83 roofs are wound inward (signed volume 0.011159 m^3 against the true 0.021477 m^3). The API\'s geometry.stl is rebuilt from the 83 shells\' bounding boxes: 996 facets, watertight, volume 0.021477 m^3.
-- The thermistor reads a SCALAR speed. Over the 33 points where both instruments overlap at WD = 0, the ratio of mean thermistor speed to mean |U| is 1.342 (the mean of the per-point ratios is 1.50). sqrt(|U|^2 + 2k) from the split-fibre data matches the thermistor to FB +0.058, R 0.947; |U| alone to FB +0.292, R 0.872.
+- The thermistor reads a SCALAR speed. Over the 33 points where both instruments overlap at WD = 0, the ratio of mean thermistor speed to mean \|U\| is 1.342 (the mean of the per-point ratios is 1.50). sqrt(\|U\|^2 + 2k) from the split-fibre data matches the thermistor to FB +0.058, R 0.947; \|U\| alone to FB +0.292, R 0.872.
 - Unmeasured thermistor cells are \'-\' in the workbook (null here). At WD = 0 the 66 measured values are 33 exact mirror pairs, so only 33 are independent; at 22.5 and 45 deg all 66 are independent.
 - A prior Eddy3D comparison kept in the folder (case-d-eddy3d-prior-comparison.xlsx) scores R = +0.096 against the thermistor. The score comes from a frame or geometry error; do not use it as a validation.
 
@@ -144,7 +144,7 @@ The fit has two windows because the measurement plane z/H = 0.02 sits below the 
 
 ## Attribution
 
-- Data collected by Yoshihide Tominaga (Niigata Institute of Technology), 2026.
+- Data collected by Yoshihide Tominaga (Niigata Institute of Technology).
 - Edited and distributed by Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15402668](https://doi.org/10.5281/zenodo.15402668)
 - Citation requested: Kikumoto, H. et al. (2026). Japan Architectural Review 9(1), e70083, section 3.4.

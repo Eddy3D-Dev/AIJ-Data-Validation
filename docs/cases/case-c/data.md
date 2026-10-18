@@ -125,12 +125,12 @@ The fit has two windows because Case C scores at ONE height (z = 0.02 m) and the
 
 ## Known data issues
 
-- The measured quantity Vs is the MEAN OMNIDIRECTIONAL SCALAR speed from a thermistor, not |mean velocity vector|. A RANS |U| is biased low against it; the data paper suggests comparing sqrt(|U|^2 + 2k) as a conservative correction (over all 1080 rows no Vs is below 0.13 U\_H).
+- The measured quantity Vs is the MEAN OMNIDIRECTIONAL SCALAR speed from a thermistor, not \|mean velocity vector\|. A RANS \|U\| is biased low against it; the data paper suggests comparing sqrt(\|U\|^2 + 2k) as a conservative correction (over all 1080 rows no Vs is below 0.13 U\_H).
 - The \'CB\' column is TEXT (\'0D\', \'1D\', \'2D\'); a reader that parses every field as a number gets NaN for it. The header ends with a trailing comma (an empty 8th column).
 - 1080 rows = 3 wind directions x 3 centre buildings x 120 points, not 3 configurations. In the 0D configuration the 25 centre grid nodes are still absent although the ground there is free: the grid is held constant across configurations.
-- 24 of the 120 points sit exactly on a building face plane (|x| = 0.30 or |y| = 0.30) in the open gap between two blocks: legitimate fluid points, but a probe\'s cell lookup is delicate there.
+- 24 of the 120 points sit exactly on a building face plane (\|x\| = 0.30 or \|y\| = 0.30) in the open gap between two blocks: legitimate fluid points, but a probe\'s cell lookup is delicate there.
 - Point numbers 1, 2, 3, 34, 35, 36, 37, 46, 55, 100, 101, 102 do not occur (No. runs 4 ... 132 with nine interior gaps).
-- Experimental repeatability, from the mirror-symmetric point pairs: mean |dVs| 0.088-0.137 m/s (0.024-0.038 U\_H).
+- Experimental repeatability, from the mirror-symmetric point pairs: mean \|dVs\| 0.088-0.137 m/s (0.024-0.038 U\_H).
 
 ## API
 
@@ -146,7 +146,7 @@ The fit has two windows because Case C scores at ONE height (z = 0.02 m) and the
 
 ## Attribution
 
-- Data collected by Yoshitami Nonomura (Yamato University), 2003.
+- Data collected by Yoshitami Nonomura (Yamato University).
 - Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15401791](https://doi.org/10.5281/zenodo.15401791)
 - Citation requested: Nonomura, Y., Kobayashi, N., Tominaga, Y., Mochida, A. (2003). The cross comparison of CFD results for flow field around building models (part 3). Japan Association for Wind Engineering, 95, 83-84 (in Japanese). <https://doi.org/10.14887/jaweam.2003.0.41.0>

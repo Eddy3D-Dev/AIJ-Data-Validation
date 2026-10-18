@@ -19,6 +19,7 @@ one such disagreement, or a mistake neither renderer forgives:
   table-columns    a table row with another number of cells than its header
   table-code-pipe  a pipe inside a code span in a table row (GitHub splits the cell, kramdown does not)
   pipe-line        a block that starts with a pipe (kramdown turns it into a table)
+  pipe-text        a paragraph or list item whose first line holds an unescaped pipe (kramdown turns it into a table)
   html-markdown    Markdown inside a block of HTML (kramdown prints it raw unless the tag says markdown="1";
                    GitHub needs a blank line between the tag and the Markdown)
   fence            a code fence that is never closed
@@ -327,6 +328,9 @@ def check_text(text, path="<text>", jekyll=False, site=None, base_dir=DOCS):
             prev = "blank"                                     # another block ends the table: read the line as that block
         if text_.startswith("|") and prev in ("blank", "heading", "html", "ial", "rule"):
             errors.append((n, "pipe-line: a block that starts with a pipe is a table to kramdown; start the line differently"))
+        if (jekyll and not text_.startswith("|") and (item or prev in ("blank", "heading", "html", "ial", "rule"))
+                and "|" in re.sub(r"\\\|", "", mask_code(line))):
+            errors.append((n, "pipe-text: a block whose first line has a pipe is a table to kramdown; write \\| (GitHub shows a plain pipe)"))
         if HEADING.match(line):
             if prev == "para":
                 errors.append((n, "block-start: a heading directly under a paragraph line"))
@@ -448,6 +452,10 @@ def self_test():
         ("text\n\n{: .note }\n\ntext\n", ["ial"]),
         ("text\n\n> a\n>\n> - x\n> - y\n", []),
         ("text\n\n> a\n> - x\n", ["list-start"]),
+        ("text\n\n- Split-fibre |U|: FB +0.07\n", ["pipe-text"]),
+        ("text\n\n> speed, not |mean velocity vector|.\n", ["pipe-text"]),
+        ("text\n\n- Split-fibre \\|U\\|: FB +0.07\n- the code `a|b` stays\n", []),
+        ("text\n\nfirst line\nsecond |U| line\n", []),
         ("[x]({{ '/nowhere/' | relative_url }})\n", []),     # no Site given: the link rule needs the site's pages
         ('text\n\n{% include figure.html name="x.png" alt="a | b" caption="<strong>F.</strong> c" %}\n\ntext\n', []),   # an HTML include with parameters
         ('text\n\n{% include nowhere.html name="x.png" %}\n\ntext\n', ["liquid"]),

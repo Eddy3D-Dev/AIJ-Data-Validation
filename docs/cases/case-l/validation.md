@@ -15,7 +15,7 @@ Engine status: OpenFOAM 12 <span class="label label-yellow status">pending</span
 
 ## urbanMicroclimateFoam, realizable k-epsilon (Eddy3D Outdoor+)
 
-Quantity: U, V, W, the speed |U| over U\_H = 1.3394 m/s and k over U\_H^2 (the tunnel\'s units, 344 points); theta = (T\_f - T)/(T\_f - T\_H) with T\_f = 45.01 degC and T\_f - T\_H = 30.26 K; c\* = C/c0 (c0 = 1728 ppm) against the model\'s ethylene mass fraction as ppm over the same c0, for turbulent Schmidt numbers 0.3, 0.5 and 0.7; also the 242 points at or above 30 mm, the first four fine cells above the floor. The scene is the tunnel at Froude scale 100.
+Quantity: U, V, W, the speed \|U\| over U\_H = 1.3394 m/s and k over U\_H^2 (the tunnel\'s units, 344 points); theta = (T\_f - T)/(T\_f - T\_H) with T\_f = 45.01 degC and T\_f - T\_H = 30.26 K; c\* = C/c0 (c0 = 1728 ppm) against the model\'s ethylene mass fraction as ppm over the same c0, for turbulent Schmidt numbers 0.3, 0.5 and 0.7; also the 242 points at or above 30 mm, the first four fine cells above the floor. The scene is the tunnel at Froude scale 100.
 
 <details markdown="block">
   <summary>All 19 headline scores</summary>
@@ -57,7 +57,7 @@ Notes:
 - The street air is nearly stagnant in the model: the mean U/U\_H in the streets is 0.045 below 30 mm and 1.11 above 110 mm, against the tunnel\'s 0.297 and 1.068; the model\'s approach column differs from the tunnel\'s AF profile by up to 39 % above 30 mm (UMF\'s inlet is a log law, the tunnel\'s profile is not).
 - The tracer is solved steady beside the flow, as three species of one flow. The outlet carried 0.86, 0.73 and 0.70 of the emission for Sct 0.3, 0.5 and 0.7, within the factor of two accepted as a check on the wiring. The largest modelled c\* over the 344 points is in the source street for every species, at y = -0.12 m (Sct 0.3) and y = +0.18 m (Sct 0.5 and 0.7), against the tunnel\'s 1.929 at (-0.15, -0.12, 0.004).
 - The air region ended at its 1500-iteration cap with the residualControl unmet (no \'solution converged\' line); at the last iteration the initial residuals were 2.6e-2 (U\_y), 3.0e-2 (p\_rgh) and 1.1e-3 to 2.0e-3 (the tracers).
-- The tunnel is not y-symmetric although the array is: over 110 mirror pairs the mean |U(y) - U(-y)| is 0.143 U\_H in the tunnel and 0.058 U\_H in the model. V is barely antisymmetric in the tunnel, so it cannot be scored as a pattern; the sign-flipped control shows what a wrong sign scores.
+- The tunnel is not y-symmetric although the array is: over 110 mirror pairs the mean \|U(y) - U(-y)\| is 0.143 U\_H in the tunnel and 0.058 U\_H in the model. V is barely antisymmetric in the tunnel, so it cannot be scored as a pattern; the sign-flipped control shows what a wrong sign scores.
 - The inlet\'s U\_H reaches the array within 20 %; the approach air is warmest at the floor; the street air near the floor is warmer than the approach air at H and cools with height; the street flow is slower than the flow above the array; every species emits and its largest value is in the source street.
 
 <details markdown="block">

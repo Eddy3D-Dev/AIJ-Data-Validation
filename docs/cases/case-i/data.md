@@ -131,7 +131,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Attribution
 
-- Data collected by Hiroaki Kondo (National Institute of Advanced Industrial Science and Technology), Katsuhiko Mutou (National Institute of Advanced Industrial Science and Technology) and Akihiro Hori (National Institute for Environmental Studies), 2013.
+- Data collected by Hiroaki Kondo (National Institute of Advanced Industrial Science and Technology), Katsuhiko Mutou (National Institute of Advanced Industrial Science and Technology) and Akihiro Hori (National Institute for Environmental Studies).
 - Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15430018](https://doi.org/10.5281/zenodo.15430018)
 - Citation requested: Japan Society for Atmospheric Environment (2013). Guidelines for Atmospheric Environment Assessment Methods Using CFD Models (DiMCFD). Japan Society for Atmospheric Environment (in Japanese).

@@ -45,6 +45,14 @@ Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., 
 }
 ```
 
+### AIJ guidelines
+
+**APA**
+
+```text
+Tominaga, Y., Mochida, A., Yoshie, R., Kataoka, H., Nozu, T., Yoshikawa, M., & Shirasawa, T. (2008). AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings. Journal of Wind Engineering and Industrial Aerodynamics, 96, 1749-1761. https://doi.org/10.1016/j.jweia.2008.02.058
+```
+
 ### A single case
 
 Each case's Data page has its own citation; see [Cases]({{ '/cases/' | relative_url }}).

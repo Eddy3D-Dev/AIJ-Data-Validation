@@ -154,7 +154,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 - The tunnel did not run E, ESE, WSW or W; the field data cover all 16. The 5 m and 20 m planes exist at some points only (29 and 79 rows).
 - One tunnel value (point 8, SW, 9 m: 0.474) has no counterpart in the workbook\'s results sheet, and the flat \'Sheet1\' table has 0.63 there.
 - Field anemometer heights above the tunnel floor are 13 - 21 m (3 - 11 m above ground by the readme\'s rule); the data paper says 3 - 9 m, so points 13 and 14 (11 m) disagree.
-- The thermistor reads a SCALAR speed and the cup anemometer a 10-minute mean: a RANS |U| is biased low against both.
+- The thermistor reads a SCALAR speed and the cup anemometer a 10-minute mean: a RANS \|U\| is biased low against both.
 - The files do not say whether a wind direction names where the wind comes from. The cleaned tables read it as the direction the wind comes from (N = 0, E = 90). At NNW a solved field supports that reading: Eddy3D\'s OpenFOAM 12 run for the wind from NNW correlates R 0.935 with the tunnel\'s 9 m column labelled NNW and R 0.077 with its column labelled SSE, the opposite wind (clean/QUESTIONS.md QF9); the other directions are not solved and stay unverified.
 
 ## API

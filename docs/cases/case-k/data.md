@@ -117,7 +117,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 - AF\_caseK.csv is Case H\'s approach-flow file, row for row (x = -0.493 m, tabulated for a 0.2 m building); it gives 2.24 m/s at z = 0.06 m against the stated U\_H = 2.33.
 - The lateral velocity V is dominated by a cross-flow offset (about 0.06 m/s, also in the empty tunnel); the +y and -y halves cannot confirm its sign.
 - The mean concentration is not mirror-symmetric (the +y and -y values of one point differ by 44 % on average), so the mirror pairs are not a repeatability estimate; velocity and k are (3 % and 5 %).
-- The workbook\'s \<usc\> / sigma\_usc (\'velocity magnitude\', never below |U|) is not in the table.
+- The workbook\'s \<usc\> / sigma\_usc (\'velocity magnitude\', never below \|U\|) is not in the table.
 - Data paper section 3.11 describes the measurements as \'approximately 30 points at eight heights downwind of the line source\'; Case K has 203 points at five heights and a point source.
 - Workbook units: x and y in millimetres in both data sheets; z in millimetres in \'Measurement data\' but metres in \'Inflow\'.
 
@@ -135,7 +135,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Attribution
 
-- Data collected by Ryuichiro Yoshie (Tokyo Polytechnic University) and Takumi Tachibana (Wind Engineering Institute), 2016.
+- Data collected by Ryuichiro Yoshie (Tokyo Polytechnic University) and Takumi Tachibana (Wind Engineering Institute).
 - Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15448050](https://doi.org/10.5281/zenodo.15448050)
 - Citation requested: Yoshie, R. (2016). Wind Tunnel Experiment and Large Eddy Simulation of Pollutant/Thermal Dispersion in Non-isothermal Turbulent Boundary Layer. Adv Environ Wind Eng, 167-196. <https://doi.org/10.1007/978-4-431-55912-2_9>

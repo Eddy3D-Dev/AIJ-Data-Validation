@@ -14,7 +14,7 @@ Both are Eddy3D production runs solved on 2026-10-18, realizable k-ε at numeric
 
 ## Runs
 
-- **Case F** is scored in the benchmark's own ratio, U/U(500 m). The tunnel's thermistor and the field's cup anemometer read a *scalar* speed, so the model is scored as |U| and as √(|U|² + 2k); both are in the tables. The model is divided by **its own** approach speed at 500 m, 9.862 m/s (probed 1100 m upwind of the centre, 0.986 of the imposed 10 m/s); over the imposed 10 m/s the scores are in the files. The tunnel measured at 5, 9 and 20 m above ground at 13 points (7, 13 and 13 of them have a value for NNW) and the field at 13 points, 3 to 11 m up.
+- **Case F** is scored in the benchmark's own ratio, U/U(500 m). The tunnel's thermistor and the field's cup anemometer read a *scalar* speed, so the model is scored as \|U\| and as √(\|U\|² + 2k); both are in the tables. The model is divided by **its own** approach speed at 500 m, 9.862 m/s (probed 1100 m upwind of the centre, 0.986 of the imposed 10 m/s); over the imposed 10 m/s the scores are in the files. The tunnel measured at 5, 9 and 20 m above ground at 13 points (7, 13 and 13 of them have a value for NNW) and the field at 13 points, 3 to 11 m up.
 - **Two vertical frames.** The readme says z is measured from the tunnel floor and the ground is z − 10 m, but the STL's own ground under all 13 points is 5 m. *Literal* probes the model at the published z in the STL's frame, which is 10, 14 and 25 m above the STL's ground for the three planes; *agl* probes the STL's ground plus 5, 9 and 20 m. The files do not say which one the tunnel meant, so both are scored, as two runs of one engine (`configuration` literal and agl).
 - **Case M** is scored at WD 180 against the wind-tunnel run: U, V, W and k over the tunnel's U<sub>R</sub> = 4.08 m/s on the measurement and over the **solved** speed at the reference mast (4.686 m/s) on the model, because U<sub>R</sub> is defined at the mast. The concentration is the measured C/c₀ (c₀ = 132.5 ppm) against the model's c\* = c U<sub>R</sub> H<sub>R</sub>²/Q with the same solved U<sub>R</sub>, for the turbulent Schmidt numbers 0.3, 0.5 and 0.7: three passive tracers on one flow, **three runs** (`configuration` sct03, sct05, sct07); the flow scores are the same in all three. One detection limit, 10⁻³ of the largest measured value.
 
@@ -33,7 +33,7 @@ Both are Eddy3D production runs solved on 2026-10-18, realizable k-ε at numeric
 
 {% include figure.html name="case-f-openfoam-agreement.png" alt="Case F, measured vs modelled speed over U(500 m)" caption="<strong>Figure 2.</strong> Case F, wind from NNW: the tunnel's and the field's U/U(500 m) against the modelled √(|U|²+2k) (filled) and |U| (hollow), in the published-z frame (top) and the STL-ground frame (bottom). The bars are the standard deviation of the field's 10-minute means. The dots take the colour of their group in Figure 1." %}
 
-√(|U|² + 2k) over U(500 m):
+√(\|U\|² + 2k) over U(500 m):
 
 | Points | Frame | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|---|
@@ -79,10 +79,10 @@ Controls:
 
 FB is positive when the model is low.
 
-- **9 m plane and all points, √(|U|²+2k).** At the 9 m plane R is 0.935 (literal) and 0.945 (agl) with FAC2 1.00; over all 33 tunnel points R is 0.912 and 0.898, FAC2 0.970 and 1.00. The 20 m plane has the lowest R (0.796 and 0.807); the 5 m plane (7 points) the highest in the literal frame (0.995) and 0.918 in the agl frame. The mean of the modelled scalar speed at the 9 m plane is 0.252 (literal) and 0.230 (agl) against 0.261 measured, FB +0.04 and +0.13; for \|U\| alone FB is +0.13 and +0.24, the model's mean 0.228 and 0.205.
+- **9 m plane and all points, √(\|U\|²+2k).** At the 9 m plane R is 0.935 (literal) and 0.945 (agl) with FAC2 1.00; over all 33 tunnel points R is 0.912 and 0.898, FAC2 0.970 and 1.00. The 20 m plane has the lowest R (0.796 and 0.807); the 5 m plane (7 points) the highest in the literal frame (0.995) and 0.918 in the agl frame. The mean of the modelled scalar speed at the 9 m plane is 0.252 (literal) and 0.230 (agl) against 0.261 measured, FB +0.04 and +0.13; for \|U\| alone FB is +0.13 and +0.24, the model's mean 0.228 and 0.205.
 - **Frames.** The published z sits 5 m higher above the STL's ground than the instrument heights. FB, literal against agl: +0.04 and +0.13 at the 9 m plane, +0.07 and +0.21 at the 20 m plane; R differs by at most 0.02 at those planes. Nothing in the files says which datum the tunnel meant. At the 4 m surface cells the lowest probes of the agl frame (the 7 points of the 5 m plane, 1.25 cells up, and the field's point at 3 m) sit in the first cell.
-- **Point by point.** At the 9 m plane, literal frame, the model-to-tunnel ratio of √(|U|²+2k) runs from 0.70 (point 8) to 1.51 (point 3): the model is faster than the tunnel at points 3, 5, 10 and 14 and slower at points 1, 2, 8, 9 and 13, within 5 % at points 6, 7, 11 and 15. In the agl frame the ratio runs from 0.65 (point 1) to 1.31 (point 3), slower at points 1, 2, 6, 8, 9 and 13 (0.65 to 0.80) and faster at points 3, 5, 10 and 14 (1.08 to 1.31). Over all 33 tunnel points one is outside a factor of two in the literal frame (FAC2 0.970), none in the agl frame. The plan is in Figure 2.
-- **Field.** R is 0.873 and 0.889 and FAC2 1.00 for √(|U|²+2k) (\|U\|: R 0.860 and 0.866, FB +0.13 and +0.27). The standard deviation of the 10-minute means behind a field value is 0.075 to 0.15 of U(500 m), 0.20 to 0.78 of the value itself. The tunnel's own 9 m column scored as a model of the field gives R 0.933, FAC2 1.00, FB −0.015; the model's R against the field is 0.04 to 0.06 under it.
+- **Point by point.** At the 9 m plane, literal frame, the model-to-tunnel ratio of √(\|U\|²+2k) runs from 0.70 (point 8) to 1.51 (point 3): the model is faster than the tunnel at points 3, 5, 10 and 14 and slower at points 1, 2, 8, 9 and 13, within 5 % at points 6, 7, 11 and 15. In the agl frame the ratio runs from 0.65 (point 1) to 1.31 (point 3), slower at points 1, 2, 6, 8, 9 and 13 (0.65 to 0.80) and faster at points 3, 5, 10 and 14 (1.08 to 1.31). Over all 33 tunnel points one is outside a factor of two in the literal frame (FAC2 0.970), none in the agl frame. The plan is in Figure 3.
+- **Field.** R is 0.873 and 0.889 and FAC2 1.00 for √(\|U\|²+2k) (\|U\|: R 0.860 and 0.866, FB +0.13 and +0.27). The standard deviation of the 10-minute means behind a field value is 0.075 to 0.15 of U(500 m), 0.20 to 0.78 of the value itself. The tunnel's own 9 m column scored as a model of the field gives R 0.933, FAC2 1.00, FB −0.015; the model's R against the field is 0.04 to 0.06 under it.
 - **Opposite wind.** The solved field correlates R 0.935 with the tunnel's 9 m column for the wind from NNW and R 0.077 with its column for the opposite wind, SSE (agl frame 0.945 and 0.102). The cleaned release's direction table marks its NNW rows *corroborated by a solved field*; the other directions stay *unverified* until one is solved (clean/QUESTIONS.md QF9).
 
 <details markdown="block">
@@ -102,7 +102,7 @@ FB is positive when the model is low.
 
 {% include figure.html name="case-m-layout.png" alt="Measurement points, Case M" caption="<strong>Figure 4.</strong> Case M, measurement points: A near field, within 100 m of the release point; B mid field, 100 to 300 m from the release point; C far field, beyond 300 m. Positions in metres, full scale. Star: release point; R: reference point; dotted circles: 100 m and 300 m from the release point." %}
 
-{% include figure.html name="case-m-openfoam-agreement.png" alt="Case M, measured vs modelled velocity, k and concentration" caption="<strong>Figure 5.</strong> Case M, WD 180: measured vs modelled U, V, W, k and c\* at three turbulent Schmidt numbers (log axes show the positive pairs within eight decades). The last panel is the tunnel's own WD 175 and WD 185 against its WD 180. The dots take the colour of their group in Figure 4." %}
+{% include figure.html name="case-m-openfoam-agreement.png" alt="Case M, measured vs modelled velocity, k and concentration" caption="<strong>Figure 5.</strong> Case M, WD 180: measured vs modelled U, V, W, k and c* at three turbulent Schmidt numbers (log axes show the positive pairs within eight decades). The last panel is the tunnel's own WD 175 and WD 185 against its WD 180. The dots take the colour of their group in Figure 4." %}
 
 | Quantity | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|
@@ -157,12 +157,12 @@ The concentration across the three Schmidt numbers:
 
 </details>
 
-{% include figure.html name="case-m-openfoam-plan.png" alt="Case M, the tracer on the plan of the campus" caption="<strong>Figure 6.</strong> Case M, WD 180: log₁₀ of c\* at the 15 points on the plan of the campus, the tunnel and the three Schmidt numbers on one scale (open: below 10⁻³ or zero). The star is the gas source and the square the reference mast; the arrow is the wind." %}
+{% include figure.html name="case-m-openfoam-plan.png" alt="Case M, the tracer on the plan of the campus" caption="<strong>Figure 6.</strong> Case M, WD 180: log₁₀ of c* at the 15 points on the plan of the campus, the tunnel and the three Schmidt numbers on one scale (open: below 10⁻³ or zero). The star is the gas source and the square the reference mast; the arrow is the wind." %}
 
 ## Not run
 
 - A second mesh or iteration count, for either case.
-- **Case F** was solved for one of the tunnel's twelve directions; the other eleven, and the field's other fifteen, were not run. Which vertical datum the tunnel meant is not settled (both frames are published). The STL is open along the rim of its disc (812 boundary edges) and the mesh fails one checkMesh check (43 highly skew faces, maximum skewness 14.8), so the solve ran on Eddy3D's hardened numerics. The rooftop anemometers' modelled speeds are in the results file and are not scored.
+- **Case F** was solved for one of the tunnel's twelve directions; the other eleven, and the field's other fifteen, were not run. Which vertical datum the tunnel meant is not settled (both frames are published). The published STL is open along the rim of its disc (812 boundary edges) and the mesh fails one checkMesh check (43 highly skew faces, maximum skewness 14.8), so the solve ran on Eddy3D's hardened numerics. The rooftop anemometers' modelled speeds are in the results file and are not scored.
 - **Case M** was solved at WD 180 only: WD 175 and WD 185, which the tunnel also measured, were not. Model set-up: a cylinder on the terrain sheet, none of the tunnel's side walls and ceiling, a smooth floor under the tabulated inflow. Its source is a 4 m cube of 20 cells where the tunnel's outlet is 6 mm (3.6 m at 1:600).
 - OpenLB, FluidX3D, UMF and the ML surrogate have not been run on either case.
 

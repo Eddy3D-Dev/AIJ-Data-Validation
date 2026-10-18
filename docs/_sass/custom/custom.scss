@@ -237,8 +237,32 @@ details {
   &:focus-visible { outline: 2px solid $link-color; outline-offset: 2px; }
 }
 
-// The header's toggle is hidden below the breakpoint where just-the-docs folds the header; this copy replaces it there.
+// The header's toggle sits in the middle of the header row; below the breakpoint where just-the-docs folds the header, this copy
+// stays in the corner of the screen instead.
+.main-header > .theme-toggle { align-self: center; }
+
 .theme-toggle-small-screen {
-  margin: 0.5rem 0 0;
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 5;
+  margin: 0;
+  background: $body-background-color;
+  border: 1px solid $border-color;
   @include mq(md) { display: none; }
+}
+
+// Citations are copied, not scrolled: long lines wrap, and the copy button shows without a hover (a touch screen has none).
+div.language-text pre.highlight,
+div.language-bibtex pre.highlight {
+  padding-right: 2.5rem;
+
+  code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (hover: none) {
+  div.highlighter-rouge > button { opacity: 1; }
 }

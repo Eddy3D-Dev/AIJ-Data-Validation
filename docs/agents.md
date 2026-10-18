@@ -41,14 +41,14 @@ names in `$schema`.
 ## Rules for a comparison
 
 - Pin the release when a result must be reproducible. Take the `base_url` of the release you used from
-  `/api/versions.json` (for example `.../api/3.0.0`) and fetch every path from it instead of from `/api/`. The
+  `/api/versions.json` (for example `.../api/3.1.0`) and fetch every path from it instead of from `/api/`. The
   unversioned paths follow the newest release, so a script that uses them can return different numbers after the next
   release, while a release's copy never changes and every API URL inside its documents points back into it. Quote the
   release number together with `data_version`. If a release lists `self_contained: false`, its documents link outside
   its copy: build its URLs from `base_url` and the `path` in its `index.json`.
 - Normalise by the case's own U_H (`configuration.U_H_m_s`), or for Case E by U(15.9 m); normalise k by U_H². Cases F
   and G are published as ratios already: read their `normalisation` before comparing.
-- Compare a thermistor quantity (C, D, E, F: `Vs`, `velocity_ratio`) against the bracket |U| ≤ Vs ≤ √(|U|² + 2k), not
+- Compare a thermistor quantity (C, D, E, F: `Vs`, `velocity_ratio`) against the bracket \|U\| ≤ Vs ≤ √(\|U\|² + 2k), not
   against |U| alone.
 - Compare a concentration through `concentration_ratio` and the case's own `normalisation` (c₀ is defined per case, and in
   Case K the workbook and the data paper use different reference scales). Case M's tunnel and field rows are two

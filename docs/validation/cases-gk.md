@@ -75,7 +75,7 @@ FB is positive when the model is low, and is left out (—) for a signed compone
 | conifer, real belt (half domain) | 0.625 | +0.468 | 1.000 | −0.202 | 0.607 | 0.585 | 0.120 |
 {: .scores }
 
-The field's mean U/U_H over the 28 points is 0.478. The model is |U| over its own U(7 m); the same scores over the imposed U_H, and for √(|U|² + 2k), are in the files. The same arms for k:
+The field's mean U/U_H over the 28 points is 0.478. The model is \|U\| over its own U(7 m); the same scores over the imposed U_H, and for √(\|U\|² + 2k), are in the files. The same arms for k:
 
 | Arm | k R | k FAC2 | k FB | mean k/U_H² |
 |---|---|---|---|---|
