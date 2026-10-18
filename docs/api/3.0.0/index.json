@@ -34,7 +34,7 @@
    "version": "2.3.0",
    "date": "2026-10-18",
    "changes": [
-    "Added: release-numbered paths. Every release is a frozen copy of the whole API under `/api/<release>/` (for example `/api/3.0.0/index.json`, `/api/3.0.0/cases/F.json`). Every URL inside a copy points into the same copy, so a client that starts there never leaves it, and nothing under it changes once the release is tagged. The unversioned `/api/` paths are unchanged and always equal the newest release (the `latest` alias).",
+    "Added: release-numbered paths. Every release is a frozen copy of the whole API under `/api/<release>/` (for example `/api/3.0.0/index.json`, `/api/3.0.0/cases/F.json`). Every URL to a file of the API inside a copy points into the same copy (versions.json, served only at the unversioned path, aside), so a client that starts there never leaves it, and nothing under it changes once the release is tagged. The unversioned `/api/` paths are unchanged and always equal the newest release (the `latest` alias).",
     "Added: `/api/versions.json` (schema `versions`), the list of every release, newest first: version, date, status (`latest` or `superseded`), schema_version, data_version, base_url, tag, release page and changelog. Release 2.0.0 predates the layout and is not regenerated: `/api/2.0.0/` holds the files of its tag byte for byte, with only their own addresses rewritten into the copy (scripts/host_release.py derives it and the release check re-derives it).",
     "Added to index.json: `tree` (`release` in a frozen copy, `latest` in the alias), `release_base_url` (the frozen copy of `versions.release`; equal to `base_url` inside that copy) and `versions_url`. In a frozen copy `base_url` and `fallback_base_url` name that copy, and `release.base_url` (the raw files at the release tag) now ends in the release number; paths below it are unchanged.",
     "Why MINOR: nothing is renamed or removed. Every unversioned URL and field keeps its meaning; the layout, a document, a schema and three index.json fields are additions."
@@ -709,18 +709,18 @@
    "sha256": "4093dfb565815a2ef93a885d864372418943bc33ddf3ef47ce2ccaf982ba3d35"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/llms.txt?v=7fc38de86a47",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/llms.txt?v=f9f2612f358e",
    "path": "llms.txt",
    "media_type": "text/plain",
-   "bytes": 24126,
-   "sha256": "7fc38de86a472c0bc3eaa9d14559abbb3dcc88780db9dc793909b515e3e852a0"
+   "bytes": 24141,
+   "sha256": "f9f2612f358ec9f9df9d40292d94da5615a51b751148c48a9697b252f7461b21"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/openapi.json?v=e9f6886e02e6",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/openapi.json?v=96d6b12ef725",
    "path": "openapi.json",
    "media_type": "application/json",
-   "bytes": 67509,
-   "sha256": "e9f6886e02e63341a706c423b28f1fecb36c34a3260c6e8e4abd35f607780d29"
+   "bytes": 67590,
+   "sha256": "96d6b12ef725bf14b6a4a1d2101b89d6a589e2c98a8724f88068b5dbb17523c0"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/case.schema.json?v=86753edd823a",
@@ -779,11 +779,11 @@
    "sha256": "332cc16bdf3c98de1673c88857be0ff8fda50cd92fd384cf9ee5bdafc75fe3b9"
   },
   {
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/versions.schema.json?v=15918e8fba68",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/versions.schema.json?v=e59c5cde49f5",
    "path": "schemas/versions.schema.json",
    "media_type": "application/schema+json",
-   "bytes": 3058,
-   "sha256": "15918e8fba68acce1fe15f7a3f6f588063d50638525fb11921a3a8481bededfe"
+   "bytes": 3139,
+   "sha256": "e59c5cde49f5146780d2aa7aa4eef992731181201fc684b7717de8d9b468c6c3"
   },
   {
    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/validation.json?v=a1d34b83ef99",

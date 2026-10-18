@@ -79,8 +79,9 @@ FALLBACK_BASE = None     # the same tree, raw from the repository
 CHANGELOG = [
     {"version": "2.3.0", "date": "2026-10-18", "changes": [
         "Added: release-numbered paths. Every release is a frozen copy of the whole API under `/api/<release>/` (for example "
-        "`/api/3.0.0/index.json`, `/api/3.0.0/cases/F.json`). Every URL inside a copy points into the same copy, so a client "
-        "that starts there never leaves it, and nothing under it changes once the release is tagged. The unversioned "
+        "`/api/3.0.0/index.json`, `/api/3.0.0/cases/F.json`). Every URL to a file of the API inside a copy points into the same copy "
+        "(versions.json, served only at the unversioned path, aside), so a client that starts there never leaves it, and "
+        "nothing under it changes once the release is tagged. The unversioned "
         "`/api/` paths are unchanged and always equal the newest release (the `latest` alias).",
         "Added: `/api/versions.json` (schema `versions`), the list of every release, newest first: version, date, status "
         "(`latest` or `superseded`), schema_version, data_version, base_url, tag, release page and changelog. Release 2.0.0 "
@@ -968,7 +969,7 @@ def llms_text(percase):
         "   crawlers. If you are refused, the fallback URL above serves byte-identical files from the repository.",
         "10. To make a result reproducible, pin the release: GET versions.json, take the base_url of the release you used,",
         "   and fetch every path below from it instead of from the unversioned base. A release's files never change, and",
-        "   every URL inside its documents points back into it. Quote the release number with any number you report.",
+        "   every URL to an API file inside its documents points back into it. Quote the release number with any number you report.",
         "",
         "## Endpoints",
         "",

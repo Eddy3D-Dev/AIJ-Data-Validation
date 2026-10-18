@@ -125,7 +125,8 @@ DOCUMENTS = {
             "index_url": dict(URL, description="the index.json of this release"),
             "fallback_base_url": {"type": ["string", "null"], "format": "uri"},
             "self_contained": {"type": "boolean",
-                               "description": "true if every URL inside this release's documents points back into base_url"},
+                               "description": ("true if every URL to a file of the API inside this release's documents points back into "
+                                               "base_url (versions.json, served only at the unversioned path, aside)")},
             "note": {"type": "string"},
             "tag": {"type": "string", "pattern": r"^v\d+\.\d+\.\d+$"}, "tag_url": URL, "changelog_url": URL}), minItems=1),
     }),

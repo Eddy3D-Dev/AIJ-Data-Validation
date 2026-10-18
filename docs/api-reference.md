@@ -29,10 +29,11 @@ Every release of the data and API is kept as a frozen copy of the whole API unde
 | `/api/...`, for example `/api/index.json` | the newest release (the **latest alias**) | with each release |
 
 A release's copy and the alias hold the same files at the same relative paths. They differ only in the address a
-document gives its own files. Inside a release's copy every URL points back into the same copy: `index.json` says
-`"tree": "release"` and its `base_url` ends in the release number, and the `$schema` URL of every document, the `?v=`
-download URLs, the `servers` of `openapi.json` and the endpoint URLs in `llms.txt` all start with that `base_url`.
-A client that starts there never leaves it. The alias says `"tree": "latest"` and names the copy it currently
+document gives its own files. Inside a release's copy every URL to a file of the API points back into the same copy:
+`index.json` says `"tree": "release"` and its `base_url` ends in the release number, and the `$schema` URL of every
+document, the `?v=` download URLs, the `servers` of `openapi.json` and the endpoint URLs in `llms.txt` all start with
+that `base_url`. The one file outside it is `versions.json` (`versions_url` in `index.json`), which has a single home at
+the unversioned path because it changes with every release. A client that starts in a copy never leaves it for data. The alias says `"tree": "latest"` and names the copy it currently
 equals in `release_base_url`.
 
 **To pin a script to a release, use that release's base URL and change nothing else.**
@@ -60,7 +61,7 @@ Each entry of `versions` has:
 | `schema_version`, `data_version` | the JSON contract and the data fingerprint of that release |
 | `base_url`, `index_url` | where that release's files are frozen, and its `index.json`. Fetch `base_url` + a path from `index.json` |
 | `fallback_base_url` | the same files raw from the repository at the release tag, or `null` |
-| `self_contained` | `true` if every URL inside that release's documents points back into its `base_url`; if `false`, build URLs from `base_url` and a `path` in its `index.json` instead of following the links |
+| `self_contained` | `true` if every API URL inside that release's documents points back into its `base_url`; if `false`, build URLs from `base_url` and a `path` in its `index.json` instead of following the links |
 | `tag`, `tag_url`, `changelog_url` | the git tag, the GitHub release page and the changelog at that tag |
 
 An address that names a base is one of four, depending on whether it is pinned and where it is served:
@@ -164,7 +165,7 @@ An engine that is not `scored` has no result for that case.
 ### curl
 
 ```bash
-BASE=https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api
+BASE=https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api   # newest release; append /3.0.0 to pin
 
 curl -s $BASE/index.json | jq '.versions, (.endpoints[].path)'
 curl -s $BASE/cases.json | jq '.cases[] | {id, title, counts, engines}'
@@ -188,6 +189,7 @@ Standard library only. This script runs as written against the live API.
 ```python
 import csv, hashlib, io, json, statistics, urllib.request
 
+# The newest release. To pin the analysis to one release, append its number (any in /api/versions.json): ".../api/3.0.0".
 BASE = "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api"
 
 

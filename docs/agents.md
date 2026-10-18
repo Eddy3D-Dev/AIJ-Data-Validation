@@ -37,7 +37,7 @@ names in `$schema`.
 - Pin the release when a result must be reproducible. Take the `base_url` of the release you used from
   `/api/versions.json` (for example `.../api/3.0.0`) and fetch every path from it instead of from `/api/`. The
   unversioned paths follow the newest release, so a script that uses them can return different numbers after the next
-  release, while a release's copy never changes and every URL inside its documents points back into it. Quote the
+  release, while a release's copy never changes and every API URL inside its documents points back into it. Quote the
   release number together with `data_version`. If a release lists `self_contained: false`, its documents link outside
   its copy: build its URLs from `base_url` and the `path` in its `index.json`.
 - Normalise by the case's own U_H (`configuration.U_H_m_s`), or for Case E by U(15.9 m); normalise k by U_H².
