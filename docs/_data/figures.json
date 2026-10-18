@@ -167,12 +167,12 @@
  "case-f.png": {
   "height": 800,
   "master": "/assets/geometry/case-f.png",
-  "master_bytes": 1869490,
+  "master_bytes": 1869496,
   "master_height": 4800,
   "master_width": 9600,
   "mb": "1.9",
   "web": "/assets/web/case-f.png",
-  "web_bytes": 216473,
+  "web_bytes": 216476,
   "width": 1600
  },
  "case-g-openfoam-stations.png": {
@@ -310,12 +310,12 @@
  "case-l.png": {
   "height": 800,
   "master": "/assets/geometry/case-l.png",
-  "master_bytes": 2263606,
+  "master_bytes": 2263625,
   "master_height": 4800,
   "master_width": 9600,
   "mb": "2.3",
   "web": "/assets/web/case-l.png",
-  "web_bytes": 302560,
+  "web_bytes": 302555,
   "width": 1600
  },
  "case-m-openfoam-agreement.png": {
