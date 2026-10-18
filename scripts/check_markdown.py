@@ -220,7 +220,7 @@ def check_text(text, path="<text>", jekyll=False, site=None, base_dir=DOCS):
 
     in_fence, fence_mark, fence_line = False, "", 0
     prev = "blank"            # blank, para, list, table, html, heading, ial, rule
-    raw_close, raw_stack, raw_md = None, [], False       # inside a raw HTML block
+    raw_close, raw_stack = None, []                       # inside a raw HTML block: its tag, and the open tags of it
     list_stack, table_cols, quote_prev = [], None, False
     i = 0
     while i < len(numbered):
@@ -249,7 +249,7 @@ def check_text(text, path="<text>", jekyll=False, site=None, base_dir=DOCS):
             continue
         if raw_close is not None:                              # inside a block of raw HTML
             what = md_in_html(line)
-            if what and not raw_md:
+            if what:
                 errors.append((n, f'html-markdown: {what} inside a block of HTML ({HTML_FIX})'))
             for closing, name in re.findall(r"<(/?)(\w+)[^>]*>", line):
                 if name.lower() == raw_close:
@@ -286,7 +286,7 @@ def check_text(text, path="<text>", jekyll=False, site=None, base_dir=DOCS):
             elif jekyll and md:
                 prev = "html"                                   # the content is Markdown: read on as Markdown
             else:
-                raw_close, raw_md = name, False
+                raw_close = name
                 raw_stack = [name] if jekyll else []
                 what = md_in_html(line[o.end():])
                 if what:
@@ -312,17 +312,19 @@ def check_text(text, path="<text>", jekyll=False, site=None, base_dir=DOCS):
             table_cols, prev = len(header), "table"
             i += 1
             continue
-        if prev == "table":                                    # a row, or text that ends the table badly
-            if "|" not in line:
-                errors.append((n, "table-end: a text line directly under a table (GitHub makes it a row); add a blank line"))
-                prev = "para"
-            else:
+        if prev == "table":
+            if "|" in line:                                    # another row
                 cells = split_cells(line)
                 if len(cells) != table_cols:
                     errors.append((n, f"table-columns: {len(cells)} cells in a table whose header has {table_cols}"))
                 if any("|" in m.group(2) for m in CODE_SPAN.finditer(line)):
                     errors.append((n, TABLE_CODE_PIPE))
-            continue
+                continue
+            if not (item or HEADING.match(line) or RULE.match(line)):
+                errors.append((n, "table-end: a text line directly under a table (GitHub makes it a row); add a blank line"))
+                prev = "para"
+                continue
+            prev = "blank"                                     # another block ends the table: read the line as that block
         if text_.startswith("|") and prev in ("blank", "heading", "html", "ial", "rule"):
             errors.append((n, "pipe-line: a block that starts with a pipe is a table to kramdown; start the line differently"))
         if HEADING.match(line):
@@ -415,6 +417,7 @@ def self_test():
         ("text\n| a | b |\n|---|---|\n| 1 | 2 |\n", ["block-start"]),
         ("| a | b |\n|---|---|\n| 1 | 2 |\n\ntext\n", []),
         ("| a | b |\n|---|---|\n| 1 | 2 |\ntext\n", ["table-end"]),
+        ("| a | b |\n|---|---|\n| 1 | 2 |\n## Next\n", []),
         ("| a | b |\n|---|---|\n| 1 |\n", ["table-columns"]),
         ("| a | b |\n|---|---|\n| `x|y` | 2 |\n", ["table-code-pipe"]),
         ("```\ncode\n", ["fence"]),
