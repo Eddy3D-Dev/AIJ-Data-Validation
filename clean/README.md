@@ -148,3 +148,67 @@ legacy-workbook and WD = 45° symmetry checks all go red (negative control run 2
 The cleaning (frames, unit conversions, the sign flip, the rebuilt geometry) is Eddy3D's; the
 measurements are the collectors'. Where this release and a published file disagree, `checks.json`
 says by how much and `QUESTIONS.md` says what would settle it.
+
+## Cases F and M: two real sites, tunnel and field
+
+Case F is the Shinjuku sub-centre of Tokyo at the 1978 stage of construction (1:800 tunnel, thermistor at 5, 9 and
+20 m, and a year of field cup anemometers); Case M is a tracer-gas release on the Tokyo Polytechnic University
+Atsugi campus (1:600 tunnel, 18 field runs). Both are in full-scale metres and both carry a `campaign` column
+(`wind_tunnel` or `field`). Frames, normalisations, wind-direction rules, geometry and the `instrument` values they add
+are in `SCHEMA.md` → *Cases F and M*; what the sources cannot settle is in `QUESTIONS.md` (QF1 … QF10, QM1 … QM6).
+
+| case | what | rows | frame origin | coordinate scale |
+|---|---|---|---|---|
+| F | Shinjuku, 13 points, tunnel 12 directions × 3 planes + field 16 directions | 472 (tunnel 264, field 208) | district centre, +x east, +y north | **full-scale** m (tunnel × 800) |
+| M | TPU Atsugi campus, 15 points 3 m above ground, tracer release | 330 (split fibre 15, concentration 45, field 270) | turntable centre, +x north, +y west | **full-scale** m (tunnel × 600) |
+
+```python
+import pandas as pd
+pts = pd.read_parquet("clean/points.parquet")
+
+# Case F: the field and the tunnel on the shared 9 m plane, one value per (point, direction)
+f = pts.query("case_id == 'F' and config == 'default'")
+f.pivot_table(index=["point_id", "wind_direction"], columns="campaign", values="velocity_ratio")
+
+# Case M: tunnel and field concentration ratio at the points, runs within 5 degrees of the tunnel's 180
+m = pts.query("case_id == 'M' and concentration_ratio.notna()")
+m.query("campaign == 'field' and abs(wind_direction_deg - 180) <= 5").groupby("point_id").concentration_ratio.median()
+```
+
+### Case F: known data issues
+
+- **Two coordinate scales in one dataset.** `RS-WT_caseF.csv` and `BD_caseF.stl` are model-scale metres (1:800), `RS-FO_caseF.csv` is full scale. Multiplying the tunnel's by 800 reproduces the field's coordinates to 6e-14 m, which also confirms the scale. Read the tunnel's as metres and every point lands 800 times too close to the origin.
+- **`z` is above the tunnel floor, not the ground.** The readme's rule is ground = z − 10 m (planes at 15, 19, 30 m are 5, 9, 20 m above ground). The STL's terrain under all 13 points is at z = 5 m, so the planes stand 10, 14 and 25 m above it. A CFD case built on the STL and the table's z is 5 m higher than the readme describes (QF4).
+- **Point 14 of the field file is shifted by one wind direction.** In `RS-FO_caseF.csv` each of the 16 rows of point 14 holds the legacy workbook's value of the next direction clockwise (N holds NNE, …, NNW holds N), while the other 12 points match the workbook 16 of 16 rows unshifted. This release follows the workbook (re-derived with the CSV's own rounding rule; the published numbers are kept in `manifest.json`). Evidence for the workbook: the R between the tunnel and the field at point 14 is 0.55 as published, below every other point (0.63 … 0.93), and 0.72 aligned to the workbook. It is evidence, not proof (QF1).
+- **The field values are the workbook times one factor per sector.** CSV = round(f × workbook): f = 0.9397 for NW, NNW, N, NNE, NE (reference: the SMB roof anemometer) and 0.9629 for the other eleven directions (KDD). All 192 rows of the 12 aligned points reproduce exactly, for the mean and for σ. The factors are the ratio of the roof anemometer to the 500 m wind and are stated nowhere in the sources (QF8).
+- **σ is quantised.** The workbook's S.D. is rounded to 0.01 before it is multiplied by f, so `velocity_ratio_sd` takes 13 (SMB) or 17 (KDD) values in steps of 0.0094 or 0.0096, 4 to 20 % of the value. A tolerance below one step measures the rounding.
+- **`MP_caseF.csv` has the two reference buildings swapped.** It puts "SMB" at (85.8, −347.1) and "KDD" at (−17.5, 96.0); the workbook, `MP_caseF.png` (D = SMB, C = KDD) and the STL say the opposite. The roofs under the two points are 225 m and 180 m high, differing by the 45 m that SMB (210 m) and KDD (165 m) differ by, and the taller is at the workbook's SMB (QF6).
+- **`BD_caseF.stl` is wound inward everywhere.** All 21,537 horizontal ground and roof facets (of 21,575) face down, as do all 403 sampled walls; the stored normals agree with the winding. Reversed here. The surface is closed except along the rim of a **725 m**-radius disc (812 boundary edges), while the readme and the data paper say 800 m / 1,600 m diameter, and a 1.8 m model would not fit the 1.55 m tunnel they describe (QF5).
+- **Unexplained cells.** The workbook's "Other" column (109 values) is neither the 5 m nor the 20 m plane, and holds 9 values for ESE, which the tunnel did not run (QF3); one 9 m tunnel value (point 8, SW: 0.474) has a blank in the workbook's results sheet and 0.63 in its flat table (QF2); in 10 workbook rows Mean + S.D. and Mean − S.D. are not symmetric about the mean by up to 0.11, and the CSV's σ is the lower half-width (QF10).
+- **Field heights.** The 13 points' anemometers stand 3, 7, 8, 9 or 11 m above ground by the readme's rule; the data paper says 3 to 9 m, so points 13 and 14 (11 m) disagree (QF7). Only the 9 m plane is directly comparable with the tunnel at 8 points.
+- **The tunnel's 9 m plane is complete (13 × 12), the 5 m and 20 m planes are not (29 and 79 rows).** Where the three planes can be compared U/R mostly rises with height (median 20 m / 9 m = 1.41), but 4 of 29 pairs have the 5 m value above the 9 m one.
+- **The wind-direction sense is an assumption.** Compass FROM-directions, +y north. Corroborated by the reference-building choice and by the 10 points north of y = 150 m reading higher for the southern labels than for the northern (tunnel 0.31 against 0.22, field 0.30 against 0.19): upwind of them lies open plaza for S and dense low-rise for N. Not tested by a solved field.
+
+### Case M: known data issues
+
+- **Units.** Field concentrations are in **ppq** (10⁻¹⁵) and the tunnel's in ppm. The table converts the field's to ppm (× 10⁻⁹) and carries C / c0 for both, with each run's own c0 (1,444 … 7,379 ppq) in the field and 132.514 ppm in the tunnel.
+- **Each field run is its own experiment.** U_R runs from 1.4 to 7.0 m/s, the mean direction at the reference point from 78° to 200.7° and the tracer flow from 1.64 to 1.75 × 10⁻⁸ m³/s (mean 1.2 % above the stated 5 L/min of 200 ppm). Only 11 of the 18 runs are within 5° of the tunnel's 180°; runs 1, 2 and 9 have U_R of 1.4 to 1.8 m/s. The per-run conditions are in the manifest, not in the table.
+- **The CSVs are the legacy workbook rounded**, and the workbook is carried: velocities to 0.01 m/s and concentration to 0.1 ppm in `RS-WT_caseM.csv` against 15 digits. The CSV's k is half the sum of the 2-dp RMS values, up to 0.0052 m²/s² from the same quantity of the workbook's values; k here is computed from the workbook.
+- **Velocity was measured at 180° only.** At 175° and 185° all seven velocity columns are −999.9; concentration exists at all three directions.
+- **The frame is not the usual one.** +x is north and +y west (compass rose of `MP_caseM.png`); WD = 180° blows toward +x. Measured, not assumed: the downwind plume's concentration-weighted lateral centroid moves toward −y as WD grows (−19.0, −28.1, −33.5 m at 175°, 180°, 185° in the tunnel; R = −0.82 between WD_R and the centroid over the 18 field runs).
+- **`z` is above the tunnel floor.** The campus ground is at z ≈ 32 m (the terrain falls to 3.6 m on the east side); every point is 3 m above the local ground of the STL (±0.06 m).
+- **The approach-flow heights are above the empty floor.** The profile station x = −0.498 m stands on the model's upwind taper, 0.0521 m (31 m) above the floor: the 10 lowest of the 40 heights are below the model's ground there (QM5).
+- **Reference height.** H_R = 41 m is the anemometer's height above the ground; the roof under it is 33 m above that ground. c0 uses H_R = 0.068 m (41/600 = 0.06833 m would give 131.2 ppm). The tracer source is on the ground in the workbook, `LC_caseM.csv` and the STL, while the readme says "on a rooftop" (QM1, QM2).
+- **Floors.** Every field run reads 8 to 11 ppq at point 12 whatever the wind (and 8 to 9 ppq minima at points 11, 13, 14, 15): 0.0014 to 0.0069 of the runs' c0, not subtracted (QM3). The tunnel's concentration has two negative means (point 12) and an rms of 7 ppm where the mean is below 1.
+- **`BD_caseM.stl` is wound inward** on 3,118 of its 3,152 horizontal facets and has 21 boundary and 7 non-manifold edges; reversed here, edges kept.
+
+### Checks
+
+The checks of Cases F and M (`checks.json`, filter on `case`; every transform is in `build.log`) include controls that were run to fail:
+points of F rotated by 45° land inside buildings, and the two roof-anemometer positions of F stop standing on tall roofs after a 10°
+rotation; M's points shifted by 12 m leave their 3 m height above the terrain. Negative controls run on scratch copies of the build
+(2026-10-18): F's scale 800 → 700 stops the build at the first plane it cannot place; F's two sectors exchanged turns four checks red
+(the field rule, the 9 m plane against the workbook, the σ lattice, the alignment); M's y negated turns the plume-sense, 3 m-height and
+LC-coordinate checks red; M's scale 600 → 500 turns the 3 m-height and domain checks red. Not checked: the sign of M's lateral velocity V and of
+F's wind direction against a solved field, the V and W of M's approach flow beyond the workbook's agreement with the CSV, and any
+absolute level (no model of these cases was solved for this release).

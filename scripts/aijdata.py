@@ -54,6 +54,7 @@ import json
 import math
 import os
 import struct
+import sys
 from collections import defaultdict
 from typing import Iterable
 
@@ -391,6 +392,17 @@ CASES = {
 
 CASE_IDS = ["A", "B", "C", "D", "E"]
 
+# Cases F and M: one module each (scripts/aij_case_<x>.py) with CASE, DEFAULT_CONFIGURATION, RENDER_CAPTIONS,
+# geometry(D, case) and approach_flow(D, case). They are cleaned and rendered but not yet served by the API:
+# EXTRA_CASE_IDS joins CASE_IDS when build_api.py learns them.
+import aij_case_f, aij_case_m  # noqa: E402
+_EXTRA = {"F": aij_case_f, "M": aij_case_m}
+EXTRA_CASE_IDS = list(_EXTRA)
+CASES.update({k: m.CASE for k, m in _EXTRA.items()})
+DEFAULT_CONFIGURATION.update({k: m.DEFAULT_CONFIGURATION for k, m in _EXTRA.items()})
+for _m in _EXTRA.values():
+    RENDER_CAPTIONS.update(_m.RENDER_CAPTIONS)
+
 
 # ----------------------------------------------------------------------------- helpers
 
@@ -630,6 +642,8 @@ def load_points(case):
 
 def load_approach_flow(case):
     """Rows of {z, U, k, ...} in metres and m/s, straight from each case's own profile."""
+    if case in _EXTRA:
+        return _EXTRA[case].approach_flow(sys.modules[__name__], case)
     meta = CASES[case]
     if case in ("A", "B", "C"):
         header, rows = _read_csv(os.path.join(REPO, meta["approach_flow_file"]))
@@ -862,6 +876,8 @@ def orient_outward(tris, tol=1e-4):
 
 def case_geometry(case):
     """[(name, tris, boxes_or_None, note)] for a case — one entry per configuration."""
+    if case in _EXTRA:
+        return _EXTRA[case].geometry(sys.modules[__name__], case)
     if case in BOX_GEOMETRY:
         out = []
         for cfg, boxes in BOX_GEOMETRY[case].items():

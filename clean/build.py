@@ -425,6 +425,12 @@ CASES = {
 }
 EDITORS = ["Yoshihide Tominaga (Niigata Institute of Technology)", "Hideki Kikumoto (The University of Tokyo)", "Tsubasa Okaze (Institute of Science Tokyo)"]
 
+# Cases F and M: one module each (clean/case_<x>.py) with META (this table's entry), build(B, prov) and directions(B, pts).
+import case_f, case_m  # noqa: E402  (clean/ is sys.path[0] when this file is run)
+MODULES = {"F": case_f, "M": case_m}
+CASES.update({k: m.META for k, m in MODULES.items()})
+FULL_SCALE = {"E", "F", "M"}   # cases whose frame is in full-scale metres
+
 
 def row(**kw):
     r = {c: (("" if c in TEXT_COLUMNS else math.nan)) for c in POINT_COLUMNS}
@@ -1022,6 +1028,8 @@ def build_E(prov):
 # --------------------------------------------------------------------------------------------- directions
 
 def directions_for(case, pts, frame_note):
+    if case in MODULES:
+        return MODULES[case].directions(sys.modules[__name__], pts)
     rows = []
     for (cfg, inst, wd, wname), g in pts.groupby(["config", "instrument", "wind_direction_deg", "wind_direction"], sort=True):
         q = {"A": "U", "B": "U", "C": "Vs", "D": ("Vs" if inst == "thermistor" else "U"), "E": "velocity_ratio"}[case]
@@ -1115,10 +1123,12 @@ def build():
     C = build_C(prov); results["C"] = C
     Dd = build_D(prov); results["D"] = Dd
     E = build_E(prov); results["E"] = E
+    for case, mod in MODULES.items():
+        results[case] = mod.build(sys.modules[__name__], prov)
 
     all_pts, all_af, all_dir = [], [], []
     manifest_cases = {}
-    for case in "ABCDE":
+    for case in "ABCDE" + "".join(MODULES):
         pts, afl, geo, inflow, frame, transform = results[case][:6]
         extra = results[case][6] if len(results[case]) > 6 else None
         pts = pts.sort_values(["config", "instrument", "wind_direction_deg", "point_id"], kind="mergesort").reset_index(drop=True)
@@ -1137,7 +1147,7 @@ def build():
         all_pts.append(pts); all_af.append(afl); all_dir.append(dirs)
         gfiles = []
         for entry in geo:
-            if case == "E":
+            if len(entry) == 4:
                 cfg, boxes, tris, note = entry
             else:
                 cfg, boxes, note = entry
@@ -1153,7 +1163,7 @@ def build():
                     raise SystemExit(f"{case}/{cfg}: box geometry not watertight")
             gfiles.append(gf)
             log(f"[{case}] wrote {name}: {st['triangles']} triangles, watertight={st['watertight']}, bbox {st['bbox_min']}..{st['bbox_max']}")
-        write_json(os.path.join(cdir, "geometry.json"), {"case_id": case, "units": "metres" + (" (full scale)" if case == "E" else " (model scale)"), "frame": frame, "files": gfiles})
+        write_json(os.path.join(cdir, "geometry.json"), {"case_id": case, "units": "metres" + (" (full scale)" if case in FULL_SCALE else " (model scale)"), "frame": frame, "files": gfiles})
         counts = {"rows": int(len(pts)), "distinct_points": int(pts.point_id.nunique()),
                   "by_config": {str(k): int(v) for k, v in pts.groupby("config").size().items()},
                   "by_instrument": {str(k): int(v) for k, v in pts.groupby("instrument").size().items()},
@@ -1162,8 +1172,8 @@ def build():
         cols_present = [cname for cname in POINT_COLUMNS if cname in TEXT_COLUMNS or cname in INT_COLUMNS or pts[cname].notna().any()]
         meta = CASES[case]
         manifest_cases[case] = {
-            "id": case, "title": meta["title"], "status": "provisional" if case == "E" else "released",
-            "status_note": ("Case E: points and inflow are released at full precision from the official workbook and pass every check; what stays provisional is the GEOMETRY of the before-construction state (an Eddy3D reconstruction with no published source) and the open questions in QUESTIONS.md (Q3)." if case == "E" else None),
+            "id": case, "title": meta["title"], "status": "provisional" if case == "E" else meta.get("status", "released"),
+            "status_note": ("Case E: points and inflow are released at full precision from the official workbook and pass every check; what stays provisional is the GEOMETRY of the before-construction state (an Eddy3D reconstruction with no published source) and the open questions in QUESTIONS.md (Q3)." if case == "E" else meta.get("status_note")),
             "doi": meta["zenodo_concept"], "doi_version": meta["zenodo_version"], "zenodo_record": f"https://zenodo.org/records/{meta['zenodo_concept'].split('.')[-1]}",
             "licence": "CC BY 4.0", "data_collectors": meta["collectors"], "editors_distributors": EDITORS, "contact": meta["contact"], "citation_requested": meta["citation"],
             "files": {"points_csv": f"cases/{case}/points.csv", "points_parquet": f"cases/{case}/points.parquet",
@@ -1177,8 +1187,10 @@ def build():
             "provenance": [{"path": relp(p) if p.startswith(HERE) else os.path.relpath(p, REPO).replace(os.sep, "/"), "sha256": sha256(p), "bytes": os.path.getsize(p),
                             "origin": ("Zenodo " + meta["zenodo_version"] + " (downloaded; SHA256SUMS.txt beside it)") if p.startswith(SRC) else "repository clone of the Zenodo record"} for p in prov[case]],
             "known_issues": (extra or {}).get("known_issues", {}),
-            "extra_measurements": {k: v for k, v in (extra or {}).items() if k != "known_issues"},
+            "extra_measurements": {k: v for k, v in (extra or {}).items() if k not in ("known_issues", "normalisation")},
         }
+        if extra and "normalisation" in extra:
+            manifest_cases[case]["normalisation"] = extra["normalisation"]
     big = pd.concat(all_pts, ignore_index=True)
     write_csv(os.path.join(HERE, "points.csv"), big)
     write_parquet(os.path.join(HERE, "points.parquet"), big, UNITS)
@@ -1222,11 +1234,11 @@ def recheck():
     against what the sources produce now, cell for cell, and the parquet files against the CSVs."""
     import pyarrow.parquet as pq
     prov = {}
-    for case, fn in zip("ABCDE", (build_A, build_B, build_C, build_D, build_E)):
+    for case, fn in list(zip("ABCDE", (build_A, build_B, build_C, build_D, build_E))) + [(k, (lambda p, m=m: m.build(sys.modules[__name__], p))) for k, m in MODULES.items()]:
         pts = fn(prov)[0].sort_values(["config", "instrument", "wind_direction_deg", "point_id"], kind="mergesort").reset_index(drop=True)
         for col in ("x", "y", "z", "uu", "vv", "ww"):
             pts[col] = pts[col].round(9)
-        disk_csv = pd.read_csv(os.path.join(HERE, "cases", case, "points.csv"), keep_default_na=True)
+        disk_csv = pd.read_csv(os.path.join(HERE, "cases", case, "points.csv"), keep_default_na=True, dtype={c: str for c in TEXT_COLUMNS})   # `run` is text: "1" must not come back as 1.0
         disk_pq = pq.read_table(os.path.join(HERE, "cases", case, "points.parquet")).to_pandas()
         for name, disk in (("csv", disk_csv), ("parquet", disk_pq)):
             same_shape = list(disk.columns) == POINT_COLUMNS and len(disk) == len(pts)
@@ -1241,7 +1253,7 @@ def recheck():
                         a = disk[col].astype(float).to_numpy()
                         b = pts[col].astype(float).to_numpy()
                         both_nan = np.isnan(a) & np.isnan(b)
-                        d = np.where(both_nan, 0.0, np.abs(a - b))
+                        d = np.where(both_nan, 0.0, np.abs(a - b) / np.maximum(1.0, np.abs(b)))   # %.10g keeps 10 significant digits: absolute below 1, relative above
                         worst = max(worst, float(np.nanmax(np.where(np.isnan(d), math.inf, d))) if len(d) else 0.0)
             check(case, f"on_disk_{name}_matches_sources", same_shape and worst < 1e-9, rows=len(disk), max_abs_diff=worst)
 
