@@ -1,8 +1,7 @@
 # Open questions for the data collectors (Ilker / Patrick to forward)
 
 Things the published files, readmes and the data paper (Kikumoto et al. 2026, JAR 9(1) e70083)
-cannot settle, each with what was measured and what one line from the collector would close.
-Contacts are in `manifest.json → cases.<id>.contact`. Numbers below are in `checks.json`.
+cannot settle. Contacts: `manifest.json → cases.<id>.contact`. Numbers: `checks.json`.
 
 ## Q1 — Case C: which way does the turntable turn? (Nonomura)
 
@@ -108,8 +107,7 @@ measured and withheld (e.g. inside buildings for one configuration)?
 
 ## Questions on Cases F and M
 
-Numbered with the case letter (QF1 …, QM1 …) so that the questions of each case stay together; the numbers
-are in `checks.json` and `manifest.json → cases.F / M`. Contacts: Case F, Tsubasa Okaze; Case M, Ryuichiro Yoshie.
+Numbers: `checks.json` and `manifest.json → cases.F / M`. Contacts: Case F, Tsubasa Okaze; Case M, Ryuichiro Yoshie.
 
 ## QF1 — Case F: is the field series of point 14 shifted by one direction? (Okaze)
 
@@ -232,7 +230,7 @@ meteorological direction, and that the sign of V in `RS-WT_caseM.csv` is positiv
 
 ## Cases G, H and I
 
-Numbered per case (QG, QH, QI) so that the notes of this release's cleaning of Cases G, H and I stay together. What each check measured
+What each check measured
 is in `checks.json` (the check names are given). Contacts: G and I Tominaga, H Yoshie (`manifest.json → cases.<id>.contact`).
 
 ### QG1 — Case G: which heights were measured behind the belt? (Kurotani, Kiyota)
