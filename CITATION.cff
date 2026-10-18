@@ -8,7 +8,7 @@ message: >-
 type: dataset
 version: "3.0.0"
 date-released: "2026-10-18"
-title: "AIJ Urban Wind Environment benchmark, Cases A-E: cleaned wind-tunnel data, geometry and Eddy3D validation"
+title: "AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and Eddy3D validation"
 authors:
   - name: Sustainable Urban Systems Lab
 repository-code: "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ"
@@ -151,4 +151,140 @@ references:
       name: Zenodo
     date-released: 2025-05-16
     doi: 10.5281/zenodo.15429017
+    license: CC-BY-4.0
+  - type: data
+    title: "AIJ UWE Benchmark Dataset – Case F (Shinjuku): Wind Tunnel Experiment and Field Observation for Flow within an Actual Urban Area in Shinjuku"
+    authors:
+      - family-names: Tominaga
+        given-names: Yoshihide
+      - family-names: Kikumoto
+        given-names: Hideki
+      - family-names: Okaze
+        given-names: Tsubasa
+    publisher:
+      name: Zenodo
+    doi: 10.5281/zenodo.15589621
+    license: CC-BY-4.0
+  - type: data
+    title: "AIJ UWE Benchmark Dataset – Case G (Tree): Field Observation for Flow behind Tree Belt"
+    authors:
+      - family-names: Kurotani
+        given-names: Yasuo
+      - family-names: Kiyota
+        given-names: Nobuyoshi
+      - family-names: Tominaga
+        given-names: Yoshihide
+      - family-names: Kikumoto
+        given-names: Hideki
+      - family-names: Okaze
+        given-names: Tsubasa
+    publisher:
+      name: Zenodo
+    doi: 10.5281/zenodo.15589666
+    license: CC-BY-4.0
+  - type: data
+    title: "AIJ UWE Benchmark Dataset – Case H (112C): Wind Tunnel Experiment for Flow and Dispersion around a 1:1:2 Shape Building Model"
+    authors:
+      - family-names: Yoshie
+        given-names: Ryuichiro
+      - family-names: Tachibana
+        given-names: Takumi
+      - family-names: Tominaga
+        given-names: Yoshihide
+      - family-names: Kikumoto
+        given-names: Hideki
+      - family-names: Okaze
+        given-names: Tsubasa
+    publisher:
+      name: Zenodo
+    doi: 10.5281/zenodo.15429871
+    license: CC-BY-4.0
+  - type: data
+    title: "AIJ UWE Benchmark Dataset – Case I (CubeC): Wind Tunnel Experiment for Flow and Dispersion around a Cubic Building Model"
+    authors:
+      - family-names: Kondo
+        given-names: Hiroaki
+      - family-names: Mutou
+        given-names: Katsuhiko
+      - family-names: Hori
+        given-names: Akihiro
+      - family-names: Tominaga
+        given-names: Yoshihide
+      - family-names: Kikumoto
+        given-names: Hideki
+      - family-names: Okaze
+        given-names: Tsubasa
+    publisher:
+      name: Zenodo
+    doi: 10.5281/zenodo.15430018
+    license: CC-BY-4.0
+  - type: data
+    title: "AIJ UWE Benchmark Dataset – Case J (112CT): Wind Tunnel Experiment for Flow and Dispersion Around a 1:1:2 Shape Building Model under Non-isothermal Conditions"
+    authors:
+      - family-names: Yoshie
+        given-names: Ryuichiro
+      - family-names: Tanaka
+        given-names: Hideyuki
+      - family-names: Kobayashi
+        given-names: Tsuyoshi
+      - family-names: Tominaga
+        given-names: Yoshihide
+      - family-names: Kikumoto
+        given-names: Hideki
+      - family-names: Okaze
+        given-names: Tsubasa
+    publisher:
+      name: Zenodo
+    doi: 10.5281/zenodo.15447887
+    license: CC-BY-4.0
+  - type: data
+    title: "AIJ UWE Benchmark Dataset – Case K (ArraysC): Wind and Concentration Measurements in Cube Arrays with Point-source Dispersion"
+    authors:
+      - family-names: Yoshie
+        given-names: Ryuichiro
+      - family-names: Tachibana
+        given-names: Takumi
+      - family-names: Tominaga
+        given-names: Yoshihide
+      - family-names: Kikumoto
+        given-names: Hideki
+      - family-names: Okaze
+        given-names: Tsubasa
+    publisher:
+      name: Zenodo
+    doi: 10.5281/zenodo.15448050
+    license: CC-BY-4.0
+  - type: data
+    title: "AIJ UWE Benchmark Dataset – Case L (ArraysCT): Wind Tunnel Experiment for Flow and Dispersion around Cube Arrays with a Line-source under Non-isothermal Conditions"
+    authors:
+      - family-names: Yoshie
+        given-names: Ryuichiro
+      - family-names: Katada
+        given-names: Koudai
+      - family-names: Tominaga
+        given-names: Yoshihide
+      - family-names: Kikumoto
+        given-names: Hideki
+      - family-names: Okaze
+        given-names: Tsubasa
+    publisher:
+      name: Zenodo
+    doi: 10.5281/zenodo.15487637
+    license: CC-BY-4.0
+  - type: data
+    title: "AIJ UWE Benchmark Dataset – Case M (TPU): Wind Tunnel Experiment and Field Observation for Flow and Dispersion within TPU Campus"
+    authors:
+      - family-names: Yoshie
+        given-names: Ryuichiro
+      - family-names: Tachibana
+        given-names: Takumi
+      - family-names: Tominaga
+        given-names: Yoshihide
+      - family-names: Kikumoto
+        given-names: Hideki
+      - family-names: Okaze
+        given-names: Tsubasa
+    publisher:
+      name: Zenodo
+    doi: 10.5281/zenodo.15487857
     license: CC-BY-4.0
