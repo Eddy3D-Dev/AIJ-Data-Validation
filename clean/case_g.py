@@ -109,7 +109,8 @@ def build(B, prov):
 
     # ---- checks
     B.check(c, "row_count_7_lines_x_4_heights", len(pts) == 28, rows=len(pts), expected=28, source="readme / data paper section 3.7")
-    B.check(c, "point_ids_are_the_csv_row_order_1_to_28", sorted(pts.point_id) == list(range(1, 29)))
+    B.check(c, "point_ids_are_the_csv_row_order_1_to_28", sorted(pts.point_id) == list(range(1, 29)),
+            rows=len(pts), min_point_id=int(pts.point_id.min()), max_point_id=int(pts.point_id.max()), distinct_point_ids=int(pts.point_id.nunique()))
     xs = sorted(pts.x.unique())
     B.check(c, "measurement_lines_are_the_readme_multiples_of_H", all(abs(a - h * H_TREE) < 1e-9 for a, h in zip(xs, LINES_OVER_H)) and len(xs) == 7,
             lines_m=xs, expected_m=[h * H_TREE for h in LINES_OVER_H], note="readme: 0.25H, 0.5H, 1.0H, 2.0H, 3.0H, 4.0H, 5.0H behind the tree, H = 7 m")
@@ -117,11 +118,13 @@ def build(B, prov):
     B.check(c, "heights_are_1.5_3_4.5_6_as_the_paper_and_the_drawing_say", zs == HEIGHTS, heights_m=zs,
             note="the readme lists the heights of the lee measurement as 1.5, 3.0, 6.0, 9.0 m (a copy of the approach-flow heights); the CSV, the workbook, "
                  "MP_caseG.png and the data paper (section 3.7) all say 1.5, 3, 4.5, 6 m. QUESTIONS.md QG1")
-    B.check(c, "no_sensor_inside_the_canopy_envelope", int(B.points_in_boxes(pts[["x", "y", "z"]].to_numpy(), [box]).sum()) == 0)
+    inside_envelope = int(B.points_in_boxes(pts[["x", "y", "z"]].to_numpy(), [box]).sum())
+    B.check(c, "no_sensor_inside_the_canopy_envelope", inside_envelope == 0, points=len(pts), inside=inside_envelope)
     shifted = np.column_stack([pts.x.to_numpy() - 3.0, pts.y.to_numpy(), pts.z.to_numpy()])
     B.check(c, "control_points_shifted_3m_upwind_are_detected_inside", int(B.points_in_boxes(shifted, [box]).sum()) == 4,
             inside_after_shift=int(B.points_in_boxes(shifted, [box]).sum()), shift_m=[-3.0, 0, 0], note="the 0.25H line (x = 1.75 m, four heights) lands at x = -1.25 m inside the belt; the other lines land at x >= 0.5 m, outside")
-    B.check(c, "no_sentinels_or_nan", not pts[["x", "y", "z", "velocity_ratio", "k_ratio"]].isna().any().any())
+    cells = pts[["x", "y", "z", "velocity_ratio", "k_ratio"]]
+    B.check(c, "no_sentinels_or_nan", not cells.isna().any().any(), cells=int(cells.size), nan_cells=int(cells.isna().sum().sum()), min_value=float(cells.min().min()))
     B.check(c, "csv_agrees_with_workbook_to_the_csv_rounding", mx_u <= 5.0e-4 + 1e-9 and mx_k <= 5.0e-5 + 1e-9 and mx_x < 1e-9, max_abs_dU_over_UH=mx_u,
             max_abs_dk_over_UH2=mx_k, max_abs_dx_m=mx_x, note="RS_caseG.csv rounds U/UH to 3 dp and k/UH^2 to 4 dp; the workbook is the value released here")
 

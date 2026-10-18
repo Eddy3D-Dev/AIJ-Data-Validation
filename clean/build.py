@@ -62,29 +62,29 @@ INT_COLUMNS = {"point_id"}
 
 UNITS = {
     "case_id": {"unit": "", "meaning": "AIJ UWE case letter, A to M"},
-    "config": {"unit": "", "meaning": "configuration within the case: 'default' (A, B, D); Case C centre building '0D' | '1D' | '2D'; Case E 'bc' (before construction) | 'ac' (after construction)"},
-    "instrument": {"unit": "", "meaning": "'split_fibre' = hot-wire split-fibre probe, vector components; 'thermistor' = omnidirectional scalar speed"},
+    "config": {"unit": "", "meaning": "configuration within the case: 'default' (A, B, D, G to M, and Case F's 9 m tunnel plane, the benchmark plane); Case C centre building '0D' | '1D' | '2D'; Case E 'bc' (before construction) | 'ac' (after construction); Case F 'h5' | 'h20' (the tunnel's 5 m and 20 m planes above ground)"},
+    "instrument": {"unit": "", "meaning": "what measured the row. Tunnel: 'split_fibre' = hot-wire split-fibre probe, vector components (A, B, D, H, J, K, L, M); 'thermistor' = omnidirectional scalar speed (C, D, E, F); 'ldv' = laser Doppler anemometer, U V W k (I); 'hydrocarbon_analyser' = high-speed total hydrocarbon analyser, tracer concentration (H, I, M). Field (campaign 'field'): 'cup_anemometer' = cup anemometer, scalar speed ratio (F); 'sonic_anemometer' = three-dimensional ultrasonic anemometer, scalar speed ratio and k ratio (G); 'sorbent_gc_ecd' = sorbent tubes read by gas chromatography with an electron-capture detector, tracer concentration (M)"},
     "point_id": {"unit": "", "meaning": "the tunnel's own measurement point number (No.); shared across configurations and directions of a case"},
-    "wind_direction_deg": {"unit": "deg", "meaning": "the case's wind direction label. A-D: the AIJ turntable angle WD (0 = +x). E: meteorological FROM-direction, clockwise from north (N = 0, E = 90). The flow vector per direction is in directions.csv"},
-    "wind_direction": {"unit": "", "meaning": "compass name of the FROM-direction (Case E only; '' elsewhere)"},
-    "x": {"unit": "m", "meaning": "case frame (SCHEMA.md): +x = streamwise at WD = 0 for A-D, +x = east for E; model-scale metres for A-D, full-scale metres for E"},
-    "y": {"unit": "m", "meaning": "case frame: +y lateral (A-D), +y = north (E)"},
-    "z": {"unit": "m", "meaning": "height above the ground plane"},
+    "wind_direction_deg": {"unit": "deg", "meaning": "the case's wind direction label. A-D and G-L: the AIJ turntable angle WD (0 = +x; G to L have only 0). E and F: meteorological FROM-direction, clockwise from north (N = 0, E = 90). M: the FROM-direction in the case's frame (+x is north, so 180 blows toward +x), a field run's own mean direction at the reference point. The flow vector per direction is in directions.csv"},
+    "wind_direction": {"unit": "", "meaning": "compass name of the FROM-direction (Cases E and F; '' elsewhere)"},
+    "x": {"unit": "m", "meaning": "case frame (SCHEMA.md): +x = streamwise at WD = 0 for A-D and H-L, downwind for G, east for E and F, north for M; model-scale metres for A-D and H-L, full-scale metres for E, F, G and M"},
+    "y": {"unit": "m", "meaning": "case frame: +y lateral (A-D, H-L), along the tree belt (G), north (E, F), west (M)"},
+    "z": {"unit": "m", "meaning": "height above the ground plane (the tunnel floor in Cases F and M: F's height above ground = z - 10 m, M's campus ground lies near z = 32 m)"},
     "U": {"unit": "m/s", "meaning": "mean velocity component along +x"},
-    "V": {"unit": "m/s", "meaning": "mean velocity component along +y (positive toward +y in EVERY case; Case B's published sign is flipped, see manifest transform)"},
+    "V": {"unit": "m/s", "meaning": "mean velocity component along +y (positive toward +y in EVERY case; the published sign is flipped in Case B and for points 1-220 of Case H, see manifest transform)"},
     "W": {"unit": "m/s", "meaning": "mean velocity component along +z"},
     "uu": {"unit": "m^2/s^2", "meaning": "variance of the x-component fluctuation <u'u'> (Case A publishes rms; squared here)"},
     "vv": {"unit": "m^2/s^2", "meaning": "variance <v'v'>"},
     "ww": {"unit": "m^2/s^2", "meaning": "variance <w'w'>"},
     "k": {"unit": "m^2/s^2", "meaning": "turbulent kinetic energy as published (= (uu+vv+ww)/2 wherever all three variances exist; checked)"},
     "Vs": {"unit": "m/s", "meaning": "mean omnidirectional SCALAR wind speed from a thermistor anemometer. NOT |mean velocity vector| (Case D's split-fibre |U| column is dropped, see log)"},
-    "velocity_ratio": {"unit": "-", "meaning": "Case E: Vs / U_ref with U_ref = the approach-flow speed at z = 15.9 m (full scale); see manifest cases.E.normalisation"},
+    "velocity_ratio": {"unit": "-", "meaning": "mean speed over the case's reference speed. E: Vs / U_ref, U_ref = the approach-flow speed at z = 15.9 m (full scale). F: U / U_ref, U_ref = the approaching mean wind speed at 500 m (full scale; field values converted to it by the tunnel). G: U / UH, UH = the mean speed at the tree height (7 m) during each measurement period. See manifest cases.<id>.normalisation; the other cases carry m/s instead"},
     "campaign": {"unit": "", "meaning": "'wind_tunnel' (model scale) or 'field' (a full-scale observation: Cases F, G, M)"},
     "run": {"unit": "", "meaning": "replicate label within a campaign where the dataset publishes individual runs (Case M); empty elsewhere"},
     "uv": {"unit": "m^2/s^2", "meaning": "Reynolds shear stress <u'v'> as published"},
     "uw": {"unit": "m^2/s^2", "meaning": "Reynolds shear stress <u'w'> as published"},
     "vw": {"unit": "m^2/s^2", "meaning": "Reynolds shear stress <v'w'> as published"},
-    "C": {"unit": "ppm", "meaning": "mean tracer-gas concentration as published (volume fraction x 1e6 of the released gas diluted in air)"},
+    "C": {"unit": "ppm", "meaning": "mean tracer-gas concentration as published (volume fraction x 1e6 of the released gas diluted in air; Case M's field runs are published in ppq and converted x 1e-9)"},
     "c_rms": {"unit": "ppm", "meaning": "rms of the concentration fluctuation"},
     "concentration_ratio": {"unit": "-", "meaning": "C / c0, c0 = q / (U_ref L_ref^2) as the benchmark defines it for the case (manifest cases.<id>.normalisation)"},
     "T": {"unit": "degC", "meaning": "mean air temperature as published (Cases J, L)"},
@@ -99,9 +99,9 @@ UNITS = {
     "k_ratio": {"unit": "-", "meaning": "k / U_ref^2 where the dataset publishes only normalised values (Case G; U_ref = U at the tree height)"},
 }
 APPROACH_FLOW_UNITS = {
-    "case_id": UNITS["case_id"], "z": {"unit": "m", "meaning": "height above ground (model-scale metres A-D, full-scale metres E)"},
-    "U": {"unit": "m/s", "meaning": "mean streamwise velocity"},
-    "uu": UNITS["uu"], "vv": UNITS["vv"], "ww": UNITS["ww"], "k": {"unit": "m^2/s^2", "meaning": "turbulent kinetic energy"},
+    "case_id": UNITS["case_id"], "z": {"unit": "m", "meaning": "height above ground (model-scale metres A-D and H-L, full-scale metres E, F, G and M)"},
+    "U": {"unit": "m/s", "meaning": "mean streamwise velocity. EXCEPT Case G, whose approach-flow table publishes U/Ub (Ub = U at 9 m, not published in m/s) and is carried as published: dimensionless there"},
+    "uu": UNITS["uu"], "vv": UNITS["vv"], "ww": UNITS["ww"], "k": {"unit": "m^2/s^2", "meaning": "turbulent kinetic energy. EXCEPT Case G: k/Ub^2, dimensionless"},
 }
 DIRECTION_UNITS = {
     "case_id": UNITS["case_id"], "config": UNITS["config"], "instrument": UNITS["instrument"],
@@ -136,7 +136,10 @@ def check(case: str, name: str, ok: bool, warn: bool = False, **measured):
     """
     verdict = "PASS" if ok else ("WARN" if warn else "FAIL")
     clean = {k: _jsonable(v) for k, v in measured.items()}
-    CHECKS.append({"case": case, "check": name, "pass": bool(ok), "severity": "warning" if (warn and not ok) else ("info" if ok else "error"), **clean})
+    entry = {"case": case, "check": name, "pass": bool(ok), "severity": "warning" if (warn and not ok) else ("info" if ok else "error")}
+    if warn and not ok:
+        entry["warning"] = True   # pass is false, and this is a documented warning, not a failure: failed counts the errors only
+    CHECKS.append({**entry, **clean})
     log(f"  [{verdict}] {case} {name}" + (f"  {json.dumps(clean, ensure_ascii=False)}" if clean else ""))
     return ok
 
@@ -1249,7 +1252,7 @@ def write_checks_and_log():
     failed = [c for c in CHECKS if c["severity"] == "error"]
     warned = [c for c in CHECKS if c["severity"] == "warning"]
     write_json(os.path.join(HERE, "checks.json"), {"total": len(CHECKS), "failed": len(failed), "warnings": len(warned),
-                                                    "note": "severity 'warning' = a known, documented discrepancy in the published sources (README.md / QUESTIONS.md); it never fails the build", "checks": CHECKS})
+                                                    "note": "an entry with \"pass\": false and \"warning\": true (severity 'warning') is a known, documented discrepancy in the published sources (README.md / QUESTIONS.md), not a failure: 'warnings' counts them, 'failed' counts severity 'error' only, and a warning never fails the build", "checks": CHECKS})
     with io.open(os.path.join(HERE, "build.log"), "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(LOG) + "\n")
     return failed

@@ -220,7 +220,8 @@ def build(B, prov):
     check(B, c, "lateral_sign_V_negative_on_the_windward_y_negative_flank_and_positive_in_the_wake", bool((flank.V < 0).all()) and bool((wake.V > 0).all()) and len(flank) > 0 and len(wake) > 0,
           flank_V=flank.V.tolist(), wake_V=wake.V.tolist(), note="beside the upstream half of the y < 0 flank the flow turns away from the centreline (V < 0); behind the building it closes toward it (V > 0): V is positive toward +y as in Cases A and D")
     check(B, c, "building_surface_temperature_matches_workbook", bd_diff < 1e-9 and len(bd) == 121, points=len(bd), max_abs_diff_degC=bd_diff, mean_surface_degC=float(bd["T"].mean()), workbook_theta_build=K["<θbuild> (oC)"])
-    check(B, c, "building_surface_temperature_mean_equals_workbook_theta_build", abs(float(bd["T"].mean()) - K["<θbuild> (oC)"]) < 1e-9)
+    check(B, c, "building_surface_temperature_mean_equals_workbook_theta_build", abs(float(bd["T"].mean()) - K["<θbuild> (oC)"]) < 1e-9,
+          mean_surface_degC=float(bd["T"].mean()), workbook_theta_build=K["<θbuild> (oC)"], abs_difference_degC=abs(float(bd["T"].mean()) - K["<θbuild> (oC)"]), points=len(bd))
     on_surface = bool(np.all((bd.x >= -0.08 - 1e-9) & (bd.x <= 1e-9) & (bd.y.abs() <= 0.04 + 1e-9) & (bd.z <= HEIGHT + 1e-9) & ((np.isclose(bd.x, -0.08) | np.isclose(bd.x, 0.0) | np.isclose(bd.y.abs(), 0.04) | np.isclose(bd.z, HEIGHT)))))
     check(B, c, "building_surface_points_lie_on_the_building_faces", on_surface, points=len(bd), bbox_min=[float(bd[a].min()) for a in "xyz"], bbox_max=[float(bd[a].max()) for a in "xyz"])
 
