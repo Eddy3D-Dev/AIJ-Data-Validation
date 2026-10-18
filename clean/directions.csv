@@ -46,3 +46,8 @@ E,bc,thermistor,270,W,1,0,80,80,"definition: compass FROM-direction, +y north (M
 E,bc,thermistor,292.5,WNW,0.923879533,-0.382683432,80,80,"definition: compass FROM-direction, +y north (MP_caseE.png rose); checks no_sensor_inside_building_* + the rotation control",settled
 E,bc,thermistor,315,NW,0.707106781,-0.707106781,80,80,"definition: compass FROM-direction, +y north (MP_caseE.png rose); checks no_sensor_inside_building_* + the rotation control",settled
 E,bc,thermistor,337.5,NNW,0.382683432,-0.923879533,80,80,"definition: compass FROM-direction, +y north (MP_caseE.png rose); checks no_sensor_inside_building_* + the rotation control",settled
+G,default,sonic_anemometer,0,,1,0,28,28,"definition: the readme puts the measurement lines BEHIND the belt, on +x of its leeward face (MP_caseG.png); the field wind direction relative to the belt normal is not published",unverified — field data: the angle between the wind and the belt normal is not published (QUESTIONS.md QG3)
+H,default,hydrocarbon_analyzer,0,,1,0,826,826,measured: U < 0 in the recirculation behind the leeward face and W < 0 down the windward face (checks WD0_*); the point source sits behind the building,settled
+H,default,split_fibre,0,,1,0,826,826,measured: U < 0 in the recirculation behind the leeward face and W < 0 down the windward face (checks WD0_*); the point source sits behind the building,settled
+I,default,hydrocarbon_analyzer,0,,1,0,539,539,"measured: U < 0 in the recirculation behind the cube's leeward face and U, W > 0 over the roof (checks WD0_*); the source is on the roof",settled
+I,default,ldv,0,,1,0,91,91,"measured: U < 0 in the recirculation behind the cube's leeward face and U, W > 0 over the roof (checks WD0_*); the source is on the roof",settled

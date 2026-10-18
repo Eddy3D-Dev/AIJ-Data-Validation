@@ -425,6 +425,10 @@ CASES = {
 }
 EDITORS = ["Yoshihide Tominaga (Niigata Institute of Technology)", "Hideki Kikumoto (The University of Tokyo)", "Tsubasa Okaze (Institute of Science Tokyo)"]
 
+import case_g, case_h, case_i                      # Cases G, H, I live in clean/case_<x>.py: META + build(B, prov)
+CASE_MODULES = {"G": case_g, "H": case_h, "I": case_i}
+CASES.update({k: m.META for k, m in CASE_MODULES.items()})
+
 
 def row(**kw):
     r = {c: (("" if c in TEXT_COLUMNS else math.nan)) for c in POINT_COLUMNS}
@@ -1022,6 +1026,8 @@ def build_E(prov):
 # --------------------------------------------------------------------------------------------- directions
 
 def directions_for(case, pts, frame_note):
+    if case in CASE_MODULES:
+        return CASE_MODULES[case].directions(sys.modules[__name__], pts)
     rows = []
     for (cfg, inst, wd, wname), g in pts.groupby(["config", "instrument", "wind_direction_deg", "wind_direction"], sort=True):
         q = {"A": "U", "B": "U", "C": "Vs", "D": ("Vs" if inst == "thermistor" else "U"), "E": "velocity_ratio"}[case]
@@ -1115,10 +1121,11 @@ def build():
     C = build_C(prov); results["C"] = C
     Dd = build_D(prov); results["D"] = Dd
     E = build_E(prov); results["E"] = E
+    for k, m in CASE_MODULES.items(): results[k] = m.build(sys.modules[__name__], prov)
 
     all_pts, all_af, all_dir = [], [], []
     manifest_cases = {}
-    for case in "ABCDE":
+    for case in list("ABCDE") + list(CASE_MODULES):
         pts, afl, geo, inflow, frame, transform = results[case][:6]
         extra = results[case][6] if len(results[case]) > 6 else None
         pts = pts.sort_values(["config", "instrument", "wind_direction_deg", "point_id"], kind="mergesort").reset_index(drop=True)
@@ -1137,7 +1144,7 @@ def build():
         all_pts.append(pts); all_af.append(afl); all_dir.append(dirs)
         gfiles = []
         for entry in geo:
-            if case == "E":
+            if len(entry) == 4:
                 cfg, boxes, tris, note = entry
             else:
                 cfg, boxes, note = entry
@@ -1153,7 +1160,7 @@ def build():
                     raise SystemExit(f"{case}/{cfg}: box geometry not watertight")
             gfiles.append(gf)
             log(f"[{case}] wrote {name}: {st['triangles']} triangles, watertight={st['watertight']}, bbox {st['bbox_min']}..{st['bbox_max']}")
-        write_json(os.path.join(cdir, "geometry.json"), {"case_id": case, "units": "metres" + (" (full scale)" if case == "E" else " (model scale)"), "frame": frame, "files": gfiles})
+        write_json(os.path.join(cdir, "geometry.json"), {"case_id": case, "units": "metres" + (" (full scale)" if case == "E" or CASES[case].get("full_scale") else " (model scale)"), "frame": frame, "files": gfiles})
         counts = {"rows": int(len(pts)), "distinct_points": int(pts.point_id.nunique()),
                   "by_config": {str(k): int(v) for k, v in pts.groupby("config").size().items()},
                   "by_instrument": {str(k): int(v) for k, v in pts.groupby("instrument").size().items()},
@@ -1171,6 +1178,7 @@ def build():
                       "directions_csv": f"cases/{case}/directions.csv", "geometry_json": f"cases/{case}/geometry.json",
                       "geometry": [g["file"] for g in gfiles]},
             "columns_present": cols_present, "counts": counts,
+            **({"normalisation": meta["normalisation"]} if meta.get("normalisation") else {}),
             "configurations": dirs[["config", "instrument", "wind_direction_deg", "wind_direction", "rows", "measured", "status"]].to_dict("records"),
             "frame": frame, "transform_from_published": transform, "inflow": inflow,
             "geometry_summary": [{"configuration": g["configuration"], "file": g["file"], "triangles": g["stats"]["triangles"], "watertight": g["stats"]["watertight"], "bbox_min": g["stats"]["bbox_min"], "bbox_max": g["stats"]["bbox_max"], "boxes": g.get("box_count")} for g in gfiles],
@@ -1222,7 +1230,7 @@ def recheck():
     against what the sources produce now, cell for cell, and the parquet files against the CSVs."""
     import pyarrow.parquet as pq
     prov = {}
-    for case, fn in zip("ABCDE", (build_A, build_B, build_C, build_D, build_E)):
+    for case, fn in [*zip("ABCDE", (build_A, build_B, build_C, build_D, build_E)), *((k, lambda p, m=m: m.build(sys.modules[__name__], p)) for k, m in CASE_MODULES.items())]:
         pts = fn(prov)[0].sort_values(["config", "instrument", "wind_direction_deg", "point_id"], kind="mergesort").reset_index(drop=True)
         for col in ("x", "y", "z", "uu", "vv", "ww"):
             pts[col] = pts[col].round(9)

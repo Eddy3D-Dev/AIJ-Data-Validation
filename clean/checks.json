@@ -1,7 +1,7 @@
 {
- "total": 76,
+ "total": 145,
  "failed": 0,
- "warnings": 1,
+ "warnings": 2,
  "note": "severity 'warning' = a known, documented discrepancy in the published sources (README.md / QUESTIONS.md); it never fails the build",
  "checks": [
   {
@@ -891,6 +891,817 @@
    "largest": 0.21554690437500007,
    "smallest_direction": "SSE",
    "smallest": 0.09340365856250002
+  },
+  {
+   "case": "G",
+   "check": "row_count_7_lines_x_4_heights",
+   "pass": true,
+   "severity": "info",
+   "rows": 28,
+   "expected": 28,
+   "source": "readme / data paper section 3.7"
+  },
+  {
+   "case": "G",
+   "check": "point_ids_are_the_csv_row_order_1_to_28",
+   "pass": true,
+   "severity": "info"
+  },
+  {
+   "case": "G",
+   "check": "measurement_lines_are_the_readme_multiples_of_H",
+   "pass": true,
+   "severity": "info",
+   "lines_m": [
+    1.75,
+    3.5,
+    7.0,
+    14.0,
+    21.0,
+    28.0,
+    35.0
+   ],
+   "expected_m": [
+    1.75,
+    3.5,
+    7.0,
+    14.0,
+    21.0,
+    28.0,
+    35.0
+   ],
+   "note": "readme: 0.25H, 0.5H, 1.0H, 2.0H, 3.0H, 4.0H, 5.0H behind the tree, H = 7 m"
+  },
+  {
+   "case": "G",
+   "check": "heights_are_1.5_3_4.5_6_as_the_paper_and_the_drawing_say",
+   "pass": true,
+   "severity": "info",
+   "heights_m": [
+    1.5,
+    3.0,
+    4.5,
+    6.0
+   ],
+   "note": "the readme lists the heights of the lee measurement as 1.5, 3.0, 6.0, 9.0 m (a copy of the approach-flow heights); the CSV, the workbook, MP_caseG.png and the data paper (section 3.7) all say 1.5, 3, 4.5, 6 m. QUESTIONS.md QG1"
+  },
+  {
+   "case": "G",
+   "check": "no_sensor_inside_the_canopy_envelope",
+   "pass": true,
+   "severity": "info"
+  },
+  {
+   "case": "G",
+   "check": "control_points_shifted_3m_upwind_are_detected_inside",
+   "pass": true,
+   "severity": "info",
+   "inside_after_shift": 4,
+   "shift_m": [
+    -3.0,
+    0,
+    0
+   ],
+   "note": "the 0.25H line (x = 1.75 m, four heights) lands at x = -1.25 m inside the belt; the other lines land at x >= 0.5 m, outside"
+  },
+  {
+   "case": "G",
+   "check": "no_sentinels_or_nan",
+   "pass": true,
+   "severity": "info"
+  },
+  {
+   "case": "G",
+   "check": "csv_agrees_with_workbook_to_the_csv_rounding",
+   "pass": true,
+   "severity": "info",
+   "max_abs_dU_over_UH": 0.00048351987915179473,
+   "max_abs_dk_over_UH2": 4.698479321612464e-05,
+   "max_abs_dx_m": 0.0,
+   "note": "RS_caseG.csv rounds U/UH to 3 dp and k/UH^2 to 4 dp; the workbook is the value released here"
+  },
+  {
+   "case": "G",
+   "check": "approach_flow_unity_at_9m_by_definition",
+   "pass": true,
+   "severity": "info",
+   "U_over_Ub_at_9m": 1.0
+  },
+  {
+   "case": "G",
+   "check": "approach_flow_power_law_index_matches_the_stated_0.22",
+   "pass": true,
+   "severity": "info",
+   "fitted": 0.2073,
+   "stated": 0.22,
+   "fit": {
+    "z_range_m": [
+     1.5,
+     9.0
+    ],
+    "points": 4,
+    "alpha": 0.2073,
+    "max_rel_error": 0.0202
+   },
+   "note": "4 heights published to 2 dp, so the fitted index carries about +/-0.01 of rounding alone"
+  },
+  {
+   "case": "G",
+   "check": "UH_over_Ub_from_the_stated_power_law_and_from_the_profile_agree_within_1pct",
+   "pass": true,
+   "severity": "info",
+   "UH_over_Ub_power_law_022": 0.9462114884169286,
+   "UH_over_Ub_log_interpolation": 0.9380182355385648,
+   "UH_over_Ub_fitted_index": 0.9492363298424811
+  },
+  {
+   "case": "G",
+   "check": "belt_shelters_every_point_below_the_approach_speed",
+   "pass": true,
+   "severity": "info",
+   "max_ratio_to_approach": 0.748632997218986,
+   "min_ratio_to_approach": 0.4259341104288303,
+   "ratio_at_5H": [
+    0.663,
+    0.557,
+    0.546,
+    0.606
+   ],
+   "note": "U/UH divided by the approach flow's U/UH at the same height (power law 0.22): every lee point is slower"
+  },
+  {
+   "case": "G",
+   "check": "far_lee_turbulence_recovers_to_at_least_half_the_approach_flow",
+   "pass": false,
+   "severity": "warning",
+   "k_over_UH2_at_5H": [
+    0.0404,
+    0.0428,
+    0.0543,
+    0.0724
+   ],
+   "k_over_UH2_approach": [
+    0.3127,
+    0.2681,
+    0.2625,
+    0.2569
+   ],
+   "ratio": [
+    0.129,
+    0.16,
+    0.207,
+    0.282
+   ],
+   "heights_m": [
+    1.5,
+    3.0,
+    4.5,
+    6.0
+   ],
+   "note": "the approach profile (120 min record, 28 Dec 2000) has k/UH^2 = 0.21-0.31; five tree heights behind the belt (10 min records, 26 Dec 2000) it is 0.040-0.072, 3-8 times lower, at every height. Different days and averaging times; not resolvable from the files. QUESTIONS.md QG2"
+  },
+  {
+   "case": "G",
+   "check": "workbook_inflow_K_is_3.02_and_implies_Ub_3.9_ms",
+   "pass": true,
+   "severity": "info",
+   "K_m2_s2": 3.02,
+   "k_over_Ub2_at_9m": 0.2,
+   "implied_Ub_m_s": 3.8858718455450894,
+   "note": "DERIVED, not published: if the Guidebook's inflow K = 3.02 m2/s2 is the k at 9 m, Ub = sqrt(K / 0.2) = 3.89 m/s. QUESTIONS.md QG4"
+  },
+  {
+   "case": "H",
+   "check": "csv_876_rows_numbered_1_to_876",
+   "pass": true,
+   "severity": "info",
+   "rows": 876
+  },
+  {
+   "case": "H",
+   "check": "every_csv_row_maps_to_one_workbook_row",
+   "pass": true,
+   "severity": "info",
+   "mapped": 876,
+   "workbook_rows": 905
+  },
+  {
+   "case": "H",
+   "check": "csv_coordinates_equal_the_workbooks_in_mm",
+   "pass": true,
+   "severity": "info",
+   "max_abs_diff_mm_xyz": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "note": "after the two workbook slips above: x = 400 -> 380 (18 + 1 concentration-only rows), z = 13 -> 12.5"
+  },
+  {
+   "case": "H",
+   "check": "workbook_rows_without_a_csv_row_are_exact_copies_of_csv_rows",
+   "pass": true,
+   "severity": "info",
+   "dropped": 29,
+   "max_abs_diff_to_the_kept_row": 0.0,
+   "by_sheet": {
+    "y=0H": 0,
+    "z=0.5H": 0,
+    "z=0.25H": 14,
+    "z=0.0625H": 15
+   },
+   "note": "the y = 0 centre-line points appear in the y=0H sheet and again in each horizontal-plane sheet, identical in every quantity except V, whose sign is opposite (next check); the CSV keeps the repeat only on the z=0.5H plane"
+  },
+  {
+   "case": "H",
+   "check": "unmeasured_rows_are_two_whole_lines_not_the_building_interior",
+   "pass": true,
+   "severity": "info",
+   "velocity_unmeasured": 50,
+   "at_x_velocity_unmeasured": [
+    0.38
+   ],
+   "concentration_unmeasured": 50,
+   "at_x_concentration_unmeasured": [
+    0.4
+   ],
+   "note": "the concentration line is x = 0.38 m (no velocity) and the velocity line x = 0.40 m (no concentration): two probes on adjacent lines. -999.9 is therefore not 'inside the building'"
+  },
+  {
+   "case": "H",
+   "check": "vertical_plane_V_is_the_exact_negative_of_the_horizontal_planes_V_at_the_shared_points",
+   "pass": true,
+   "severity": "info",
+   "shared_points": 40,
+   "max_abs_v_sum": 0.0,
+   "max_abs_v_difference": 0.1031,
+   "largest_pair": [
+    -0.0515,
+    0.0515
+   ],
+   "note": "y = 0 points shared by the y=0H sheet and a horizontal-plane sheet agree in U, W, k and C to the last digit and carry V of opposite sign (e.g. 0.00206 against -0.00206). Not noise: a sign convention"
+  },
+  {
+   "case": "H",
+   "check": "horizontal_planes_V_is_continuous_with_its_neighbours_so_the_vertical_plane_V_is_the_flipped_one",
+   "pass": true,
+   "severity": "info",
+   "corr_horizontal_y0_vs_mean_of_y_pm_25mm": 0.6642589900419061,
+   "corr_vertical_y0_vs_the_same": -0.6642589900419061,
+   "points": 14,
+   "note": "at the shared points, V at y = 0 against the mean of V at y = +/-25 mm of the same horizontal plane: positive for the horizontal sheets, negative for the vertical one. With the lateral-sign check below (horizontal planes: V has the sign of y upwind) the horizontal convention is the one released"
+  },
+  {
+   "case": "H",
+   "check": "csv_velocity_is_workbook_ratio_x_uH_to_2dp_on_the_y0_and_z_0.0625H_planes",
+   "pass": true,
+   "severity": "info",
+   "max_abs_diff_m_s": 0.005133300000000229,
+   "planes": [
+    "y=0H",
+    "z=0.0625H"
+   ],
+   "uH": 3.226,
+   "uH_implied_by_the_csv": 3.225804195107134,
+   "note": "2 dp rounding (0.005) plus the CSV having been scaled with 3.2257 rather than 3.226 (up to 0.0005 at 4.4 m/s). V compared in the workbook's own sign: the CSV carries the same V as the workbook"
+  },
+  {
+   "case": "H",
+   "check": "csv_velocity_on_the_z_0.5H_and_z_0.25H_planes_is_the_ratio_rounded_to_0.01_then_scaled",
+   "pass": true,
+   "severity": "info",
+   "max_abs_diff_to_rounded_ratio_m_s": 0.004979999999999762,
+   "max_abs_diff_to_full_precision_m_s": 0.02089774000000011,
+   "values_beyond_2dp_rounding_of_the_full_precision": 632,
+   "quantum_m_s": 0.03226,
+   "planes": [
+    "z=0.5H",
+    "z=0.25H"
+   ],
+   "note": "the CSV's U, V, W on these two planes sit on a 0.0323 m/s grid (+/-0.016 m/s, up to 15 % of a 0.1 m/s value); the workbook is released instead"
+  },
+  {
+   "case": "H",
+   "check": "csv_rms_and_k_agree_with_the_workbook_to_their_rounding",
+   "pass": true,
+   "severity": "info",
+   "max_abs_diff_rms_m_s": 0.0020707400000000153,
+   "max_abs_diff_k_m2_s2": 0.003813580879999945,
+   "note": "on the two coarse planes the workbook's rms/uH and k/uH^2 were rounded to 3 dp before the scaling (+/-0.0016 m/s, +/-0.005 m2/s2)"
+  },
+  {
+   "case": "H",
+   "check": "csv_concentration_agrees_with_the_workbook_to_3dp",
+   "pass": true,
+   "severity": "info",
+   "rows": 826,
+   "max_abs_diff_c_ppm": 0.0004995652173960252,
+   "max_abs_diff_c_rms_ppm": 0.0005000000000023874
+  },
+  {
+   "case": "H",
+   "check": "k_equals_half_sum_of_variances",
+   "pass": true,
+   "severity": "info",
+   "max_abs_error": 7.582751679757749e-05,
+   "rows": 826,
+   "note": "the workbook's k/uH^2 against its own rms/uH, to the workbook's rounding (5 dp in the ratios)"
+  },
+  {
+   "case": "H",
+   "check": "no_nan_in_the_released_rows",
+   "pass": true,
+   "severity": "info",
+   "velocity_rows": 826,
+   "concentration_rows": 826
+  },
+  {
+   "case": "H",
+   "check": "826_velocity_rows_and_826_concentration_rows",
+   "pass": true,
+   "severity": "info",
+   "velocity_rows": 826,
+   "concentration_rows": 826,
+   "note": "876 points, 50 without velocity, 50 without concentration"
+  },
+  {
+   "case": "H",
+   "check": "c0_is_cgas_q_over_uH_H2",
+   "pass": true,
+   "severity": "info",
+   "c0_workbook_ppm": 45.179789212647236,
+   "c0_recomputed_ppm": 45.179789212647236,
+   "c0_paper_ppm": 45.2,
+   "uH": 3.226,
+   "q_m3_s": 5.83e-06,
+   "H_m": 0.2,
+   "note": "the paper (section 3.8) states 45.2 ppm; the workbook's formula with its own uH gives 45.18"
+  },
+  {
+   "case": "H",
+   "check": "release_rate_350_cc_per_min_is_5.83e-6_m3_s",
+   "pass": true,
+   "severity": "info",
+   "workbook_cc_per_min": 350.0,
+   "m3_s_from_it": 5.833333333333333e-06,
+   "readme_m3_s": 5.83e-06
+  },
+  {
+   "case": "H",
+   "check": "workbook_C_over_c0_column_uses_one_c0_within_1e-4_of_the_stated_45.18",
+   "pass": true,
+   "severity": "info",
+   "c0_implied_by_the_column": 45.1772684723109,
+   "c0_parameter_sheet": 45.179789212647236,
+   "relative_difference": -5.579353910822871e-05,
+   "note": "the column <c>/Co divides by 45.17727 (uH = 3.22618) while the parameter sheet says 45.17979; released here with the parameter sheet's value"
+  },
+  {
+   "case": "H",
+   "check": "approach_flow_csv_is_the_workbook_profile_with_U_rounded_to_0.01_before_the_scaling",
+   "pass": true,
+   "severity": "info",
+   "rows": 17,
+   "max_abs_diff_U_to_rounded_ratio": 0.0048000000000000265,
+   "max_abs_diff_U_to_full_precision": 0.015031119999999287,
+   "max_abs_diff_urms": 0.0017416999999999572,
+   "max_abs_diff_k": 0.0017665656399999952,
+   "note": "like the z = 0.5H and 0.25H planes, the CSV's U is round(u/uH, 2) x uH (a 0.032 m/s grid); the workbook is released"
+  },
+  {
+   "case": "H",
+   "check": "inflow_sheet_z_column_headed_mm_is_in_metres",
+   "pass": true,
+   "severity": "info",
+   "max_abs_diff_m": 0.0,
+   "note": "z/H x H = the column's value, so it is metres although the header says mm; x(mm) in the same sheet is millimetres"
+  },
+  {
+   "case": "H",
+   "check": "U_H_from_the_profile_is_the_workbook_uH_and_the_stated_3.23",
+   "pass": true,
+   "severity": "info",
+   "U_H_workbook": 3.226,
+   "U_H_profile": 3.226,
+   "U_H_csv": 3.23,
+   "U_H_stated": 3.23,
+   "uH_over_U0": 0.6110496567817799
+  },
+  {
+   "case": "H",
+   "check": "no_sensor_inside_building",
+   "pass": true,
+   "severity": "info",
+   "inside": 0,
+   "points": 1652,
+   "note": "no point lies inside the body; points ON the roof plane z = H: none"
+  },
+  {
+   "case": "H",
+   "check": "control_points_shifted_0.05m_downwind_are_detected_inside",
+   "pass": true,
+   "severity": "info",
+   "inside_after_shift": 68,
+   "shift_m": [
+    0.05,
+    0,
+    0
+   ]
+  },
+  {
+   "case": "H",
+   "check": "extents_sane",
+   "pass": true,
+   "severity": "info",
+   "bbox": [
+    -0.2,
+    0.4,
+    -0.2,
+    0.2,
+    0.01,
+    0.3
+   ],
+   "note": "MP-y_caseH.png: x -0.2 .. 0.4, z 0.01 .. 0.3; MP-z_caseH.png: y -0.2 .. 0.2"
+  },
+  {
+   "case": "H",
+   "check": "concentration_peak_sits_at_the_source_x_0.05_0.25H_behind_the_leeward_face",
+   "pass": true,
+   "severity": "info",
+   "peak_ppm": 3000.769794,
+   "at": [
+    0.05,
+    0.0,
+    0.01
+   ],
+   "peak_over_c0": 66.41841067200001,
+   "note": "the lowest point above the hole; the frame (leeward face at x = 0) and the readme's 0.25 H are consistent"
+  },
+  {
+   "case": "H",
+   "check": "WD0_flow_reverses_behind_the_leeward_face",
+   "pass": true,
+   "severity": "info",
+   "points": 24,
+   "mean_U_m_s": -0.5999083041666666,
+   "note": "y = 0, z <= 0.1, 0 < x <= 0.075: U < 0 at every point (the wake's recirculation), so the wind blows toward +x and the leeward face is x = 0"
+  },
+  {
+   "case": "H",
+   "check": "WD0_downwash_on_the_windward_face",
+   "pass": true,
+   "severity": "info",
+   "points": 6,
+   "mean_W_m_s": -0.6840517933333333,
+   "note": "x = -0.125 and -0.11 m (just upwind of the windward face), z = 0.05 and 0.1 m: W < 0, the stagnation flow runs down; at z = 0.15 m (0.75 H) it turns up (W = +0.10, +0.04)"
+  },
+  {
+   "case": "H",
+   "check": "lateral_sign_V_positive_toward_plus_y",
+   "pass": true,
+   "severity": "info",
+   "points": 16,
+   "sign_agreement": 1.0,
+   "note": "upwind of the building at z = 0.0125 m, |y| >= 0.1: the flow diverges around it, so V has the sign of y; same convention as Cases A, B, D"
+  },
+  {
+   "case": "H",
+   "check": "the_y0_z0.5H_line_appears_twice_as_exact_copies_once_V_is_flipped",
+   "pass": true,
+   "severity": "info",
+   "velocity_locations": 13,
+   "concentration_locations": 13,
+   "max_abs_gap_UVWk": 0.0,
+   "max_abs_gap_C_ppm": 0.0,
+   "point_ids": [
+    [
+     18,
+     221
+    ],
+    [
+     31,
+     231
+    ],
+    [
+     44,
+     241
+    ]
+   ],
+   "note": "the y = 0, z = 0.1 line is in the y=0H sheet and again in the z=0.5H sheet (14 x locations; x = 0.38 has no velocity, x = 0.40 no concentration): the rows are one record twice, not two measurements, so they give no repeatability. Both rows are kept under their own point numbers (the CSV's), which double-counts 13 + 13 values"
+  },
+  {
+   "case": "H",
+   "check": "z_0.0625H_plane_y_mirror_pairs_give_the_repeatability_of_U",
+   "pass": true,
+   "severity": "info",
+   "pairs": 156,
+   "mean_abs_dU_m_s": 0.13806018551282048,
+   "mean_abs_dU_over_UH": 0.042796089743589734,
+   "note": "the building is y-symmetric, so U(x, y) and U(x, -y) are two measurements of one value"
+  },
+  {
+   "case": "H",
+   "check": "tracer_flux_through_x_0.38_is_0.6_to_1.3_of_the_release",
+   "pass": true,
+   "severity": "info",
+   "flux_over_release": 0.7961749045327126,
+   "flux_ppm_m3_s": 4.641699693425714,
+   "release_ppm_m3_s": 5.83,
+   "lateral_integral_limits_m": [
+    -0.2,
+    0.2
+   ],
+   "c_at_lateral_edge_over_centre": 0.3204932459448913,
+   "method": "separable: C(y, z) = C(0, z) x C(y, 0.0125)/C(0, 0.0125); U(z) from the velocity line x = 0.4 at y = 0; trapezoid from the lowest point up to z = 0.3 m",
+   "note": "an INDEPENDENT test of q against the concentrations; the lateral line stops at |y| = 0.2 m where C is still 23 % of the centreline value, so a deficit is expected"
+  },
+  {
+   "case": "H",
+   "check": "upwind_concentration_is_the_analyser_offset_not_tracer",
+   "pass": true,
+   "severity": "info",
+   "upwind_points": 181,
+   "median_abs_ppm": 0.12050756097561077,
+   "mean_ppm": 0.06743710955396957,
+   "min_ppm": -0.8308024390243887,
+   "negative_values": 97,
+   "peak_ppm": 3000.769794,
+   "note": "the source is behind the building, so upwind C is zero in truth; the analyser reads +/-0.1 ppm and 96 of 826 values are negative. Log-based statistics (MG, VG) need a floor"
+  },
+  {
+   "case": "I",
+   "check": "csv_row_counts_91_wind_and_539_concentration",
+   "pass": true,
+   "severity": "info",
+   "wind": 91,
+   "concentration": 539,
+   "workbook_wind_rows": 95,
+   "workbook_concentration_rows": 539
+  },
+  {
+   "case": "I",
+   "check": "point_ids_1_to_630_unique",
+   "pass": true,
+   "severity": "info"
+  },
+  {
+   "case": "I",
+   "check": "workbook_wind_rows_not_in_the_csv_are_exact_copies",
+   "pass": true,
+   "severity": "info",
+   "workbook_rows": 95,
+   "csv_rows": 91,
+   "duplicates_dropped_by_the_csv": 4,
+   "note": "the four y = 0, z = 0.05 points shared by the vertical-plane and the z/H = 0.5 plane listings appear twice in the workbook, identical, and once in the CSV"
+  },
+  {
+   "case": "I",
+   "check": "wind_csv_agrees_with_the_workbook_to_3dp",
+   "pass": true,
+   "severity": "info",
+   "max_abs_diff": {
+    "U": 0.0004766760000000092,
+    "V": 0.0004992462400000008,
+    "W": 0.0004948174,
+    "k": 0.0004918430399999951
+   },
+   "rows": 91
+  },
+  {
+   "case": "I",
+   "check": "concentration_csv_agrees_with_the_workbook_to_1dp",
+   "pass": true,
+   "severity": "info",
+   "rows": 539,
+   "max_abs_diff_ppm": 0.0,
+   "workbook_rows": 539
+  },
+  {
+   "case": "I",
+   "check": "concentration_is_published_to_0.1_ppm_so_the_plume_edge_is_coarse",
+   "pass": true,
+   "severity": "info",
+   "min_ppm": 0.1,
+   "values_below_1_ppm": 163,
+   "values_at_or_below_0_5_ppm": 110,
+   "negatives": 0,
+   "note": "every value is a multiple of 0.1 ppm: a 0.4 ppm value carries +/-12 % of quantisation alone; none is zero or negative, unlike Case H"
+  },
+  {
+   "case": "I",
+   "check": "V_on_the_y0_plane_is_numerically_zero_not_measured",
+   "pass": true,
+   "severity": "info",
+   "max_abs_V_on_y0_m_s": 3.771813681e-06,
+   "points_on_y0": 53,
+   "min_abs_V_off_y0_m_s": 0.0208072532,
+   "max_abs_V_off_y0_m_s": 0.3873942494,
+   "csv_value_on_y0": [
+    0.0
+   ],
+   "note": "53 of 91 points: the workbook's V there is 1e-9..4e-6 m/s (an LDA's noise is 1e-2); the CSV prints 0. Set to NaN so that scoring V does not count 53 symmetry values as measurements. QUESTIONS.md QI2"
+  },
+  {
+   "case": "I",
+   "check": "k_is_not_decomposable_no_variances_published",
+   "pass": true,
+   "severity": "info",
+   "note": "only the TKE is published; k cannot be checked against variances (Cases A, B, D can)"
+  },
+  {
+   "case": "I",
+   "check": "velocity_sheet_ratios_use_UH_1.7",
+   "pass": true,
+   "severity": "info",
+   "max_abs_diff_k": 2.7755575615628914e-17,
+   "max_abs_diff_U": 2.220446049250313e-16,
+   "UH_velocity_sheet": 1.7
+  },
+  {
+   "case": "I",
+   "check": "inflow_sheet_normalises_with_1.697_not_1.7",
+   "pass": true,
+   "severity": "info",
+   "U_at_z_H_m_s": 1.69691823013906,
+   "UH_implied_by_the_inflow_sheet_ratios": 1.697,
+   "UH_velocity_sheet": 1.7,
+   "difference_pct": -0.18128058005529857,
+   "note": "the 'Inflow boundary layer' sheet divides by the measured U(0.1 m) = 1.6969, the 'Velocity measurement' sheet by 1.7: a 0.18 % difference between two normalisations in one workbook"
+  },
+  {
+   "case": "I",
+   "check": "inflow_sheet_k_ratio_is_k_over_the_same_UH_1.697",
+   "pass": true,
+   "severity": "info",
+   "max_abs_diff": 0.0,
+   "UH_implied": 1.697,
+   "spread_of_the_implied_UH": 4.440892098500626e-16
+  },
+  {
+   "case": "I",
+   "check": "approach_flow_csv_agrees_with_the_workbook_profile_and_carries_stray_cells",
+   "pass": true,
+   "severity": "info",
+   "rows": 12,
+   "stray_rows": 2,
+   "stray_cells": [
+    "0.5*",
+    "1.5*"
+   ],
+   "max_abs_diff_U": 0.000440766500300116,
+   "max_abs_diff_k": 4.867734240699903e-05,
+   "note": "AF_caseI.csv ends in 53 rows of ',,' and two cells '0.5*' and '1.5*' (axis labels of a chart); the whitespace rows are blank, the two cells are rows a reader that does not test z for a number accepts"
+  },
+  {
+   "case": "I",
+   "check": "c0_is_the_ethane_flow_over_UH_H2",
+   "pass": true,
+   "severity": "info",
+   "c0_workbook_ppm": 39.223529411764716,
+   "c0_recomputed_ppm": 39.21568627450981,
+   "c0_paper_ppm": 39.2,
+   "ethane_flow_m3_s": 6.666666666666667e-07,
+   "mixture_flow_m3_s": 6.666666666666667e-06,
+   "c0_if_the_mixture_flow_were_used_ppm": 392.156862745098,
+   "note": "the paper writes 'ethane released at 6.67e-6 m3/s' (the 10 % mixture); c0 = 39.2 ppm needs the 6.67e-7 m3/s of pure ethane (10 times more would be 392 ppm). The workbook's 39.2235 = 666.8/17 uses 1/60 rounded to 0.01667"
+  },
+  {
+   "case": "I",
+   "check": "workbook_C_over_C0_column_is_C_over_39.2235",
+   "pass": true,
+   "severity": "info",
+   "max_abs_diff": 0.0
+  },
+  {
+   "case": "I",
+   "check": "release_momentum_ratio_Ve_over_UH_is_0.14",
+   "pass": true,
+   "severity": "info",
+   "Ve_m_s": 0.23578510087688198,
+   "M": 0.13869711816287175,
+   "M_stated": 0.14,
+   "note": "400 cc/min through a 6 mm outlet, over UH = 1.7 m/s"
+  },
+  {
+   "case": "I",
+   "check": "no_sensor_inside_the_cube",
+   "pass": true,
+   "severity": "info",
+   "points": 600,
+   "points_on_a_face_plane": 20,
+   "note": "points at x = -0.05 and 0.0 lie over the roof (z >= 0.115), none inside"
+  },
+  {
+   "case": "I",
+   "check": "control_points_shifted_0.1m_upwind_are_detected_inside",
+   "pass": true,
+   "severity": "info",
+   "inside_after_shift": 20,
+   "shift_m": [
+    -0.1,
+    0,
+    0
+   ],
+   "note": "the x = 0.065 and 0.1 concentration lines land inside the cube"
+  },
+  {
+   "case": "I",
+   "check": "extents_sane",
+   "pass": true,
+   "severity": "info",
+   "bbox": [
+    -0.15,
+    2.7,
+    -0.44,
+    0.4,
+    0.0,
+    0.5
+   ],
+   "note": "MP-y-c_caseI.png: x to 2.7 m, z to 0.42 m; MP-z-c_caseI.png: y -0.44 .. 0.4"
+  },
+  {
+   "case": "I",
+   "check": "WD0_flow_reverses_behind_the_cube_and_speeds_up_over_the_roof",
+   "pass": true,
+   "severity": "info",
+   "points_behind": 6,
+   "mean_U_behind_m_s": -0.43794931718333335,
+   "points_over_roof": 6,
+   "mean_W_over_roof_m_s": 0.31016211833333335,
+   "note": "y = 0, 0.065 <= x <= 0.15, z <= 0.05: U < 0 (the wake); over the roof W > 0 and U > 0: the wind blows toward +x and the cube sits at x in [-0.05, 0.05]"
+  },
+  {
+   "case": "I",
+   "check": "lateral_sign_V_positive_toward_plus_y",
+   "pass": true,
+   "severity": "info",
+   "points": 4,
+   "sign_agreement": 1.0,
+   "xs": [
+    -0.05
+   ],
+   "note": "at and upwind of the windward face the flow diverges around the cube, so V has the sign of y"
+  },
+  {
+   "case": "I",
+   "check": "concentration_peak_is_just_above_the_roof_outlet_downwind",
+   "pass": true,
+   "severity": "info",
+   "peak_ppm": 255.3,
+   "at": [
+    0.065,
+    0.0,
+    0.12
+   ],
+   "peak_over_c0": 6.5088482303539275,
+   "note": "the first station past the cube (x = 0.065), z = 0.12 m, 2 cm above the roof plane: the plume leaves the roof and is carried down the leeward face"
+  },
+  {
+   "case": "I",
+   "check": "thirteen_ground_centreline_locations_measured_twice",
+   "pass": true,
+   "severity": "info",
+   "locations": 13,
+   "mean_relative_difference": 0.024747320463635224,
+   "max_relative_difference": 0.08527131782945735,
+   "max_abs_difference_ppm": 2.1999999999999993,
+   "note": "(x, 0, 0): the y = 0 plane and the z = 0 plane share these points and the CSV keeps both values under their own point numbers: a free repeatability estimate (unlike the wind points, whose repeats are identical copies)"
+  },
+  {
+   "case": "I",
+   "check": "tracer_flux_through_x_2.7_is_0.8_to_1.3_of_the_release",
+   "pass": true,
+   "severity": "info",
+   "flux_over_release": 1.1595687698551718,
+   "ratio_by_x": {
+    "0.065": 3.614,
+    "0.1": 3.095,
+    "0.15": 2.82,
+    "0.2": 2.716,
+    "0.25": 2.338,
+    "0.3": 2.27,
+    "0.45": 2.007,
+    "0.6": 1.638,
+    "0.9": 1.446,
+    "1.2": 1.354,
+    "1.5": 1.267,
+    "2.1": 1.19,
+    "2.7": 1.16
+   },
+   "release_ppm_m3_s": 0.6666666666666667,
+   "method": "separable: C(y, z) = C(0, z) x C(y, 0)/C(0, 0), U(z) from the approach profile, trapezoid; the plume is wider at the ground than aloft, which this overestimates",
+   "note": "an INDEPENDENT test of the release rate against the concentrations: the ratio falls from 3.6 at x = 0.065 m (the separable form fails near the source) to 1.16 at x = 2.7 m"
+  },
+  {
+   "case": "I",
+   "check": "approach_profile_follows_the_1_over_7_power_law_within_5_percent",
+   "pass": true,
+   "severity": "info",
+   "max_rel_deviation": 0.04625630473819475,
+   "fitted_index_z_0p02_to_0p2": 0.115,
+   "fitted_index_z_0p02_to_0p5": 0.1325,
+   "stated_index": 0.14285714285714285,
+   "note": "the workbook's own (z/H)^(1/7) column against the measured U/UH, z = 0.02 .. 0.7 m; the least-squares index is 0.12 (the profile is flatter than 1/7 near the ground)"
   }
  ]
 }
