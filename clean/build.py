@@ -5,8 +5,8 @@
     python clean/build.py --check    # re-run the checks against what is on disk, build nothing
 
 Inputs (never modified):
-    case-a/, case-b/, case-c/   the Zenodo files as cloned
-    case-d/, case-e/                      the clone's workbooks / 3dm (cross-checks only)
+    raw/cases/case-a/, case-b/, case-c/   the Zenodo files as published
+    raw/cases/case-d/, case-e/            the workbooks / 3dm (cross-checks only)
     clean/sources/zenodo_caseD/, clean/sources/zenodo_caseE/
                                                         the official Zenodo files the clone lacks
                                                         (SHA256SUMS.txt beside them; see manifest provenance)
@@ -383,23 +383,23 @@ def interp_log(z, U, zq):
 # --------------------------------------------------------------------------------------------- case facts (from the readmes / data paper; verified in the checks)
 
 CASES = {
-    "A": {"title": "Case A — flow around a 1:1:2 building", "folder": "case-a", "zenodo_concept": "10.5281/zenodo.15050147", "zenodo_version": "10.5281/zenodo.15050148",
+    "A": {"title": "Case A — flow around a 1:1:2 building", "folder": "raw/cases/case-a", "zenodo_concept": "10.5281/zenodo.15050147", "zenodo_version": "10.5281/zenodo.15050148",
           "b": 0.08, "H": 0.16, "U_H_stated": 4.49, "Re_H": 24000, "scale": None,
           "contact": "Takeshi Ishihara <ishihara@bridge.t.u-tokyo.ac.jp>", "collectors": ["Takeshi Ishihara (The University of Tokyo)", "Kazuki Hibi (Numerical Flow Design)"],
           "citation": "Meng, Y., & Hibi, K. (1998). Turbulent measurements of the flow field around a high-rise building. J. Wind Eng. JAWE 76, 55-64. https://doi.org/10.5359/jawe.1998.76_55"},
-    "B": {"title": "Case B — flow around a 1:4:4 slab", "folder": "case-b", "zenodo_concept": "10.5281/zenodo.15401455", "zenodo_version": "10.5281/zenodo.15401456",
+    "B": {"title": "Case B — flow around a 1:4:4 slab", "folder": "raw/cases/case-b", "zenodo_concept": "10.5281/zenodo.15401455", "zenodo_version": "10.5281/zenodo.15401456",
           "depth": 0.05, "width": 0.20, "H": 0.20, "U_H_stated": 5.1, "Re_H": 72000, "scale": None,
           "contact": "Yoshihide Tominaga <tominaga@abe.niit.ac.jp>", "collectors": ["Yoshihide Tominaga (Niigata Institute of Technology)"],
           "citation": "Miyazaki, T., Tominaga, Y. (2003). Wind tunnel experiment on flow field around a building model with a scale ratio of 4:4:1 placed within the surface boundary layer. Proc. Annual Meeting of Hokuriku Chapter, AIJ, 201-204 (in Japanese). https://www.aij.or.jp/paper/detail.html?productId=313933"},
-    "C": {"title": "Case C — flow within a 3 x 3 array of blocks", "folder": "case-c", "zenodo_concept": "10.5281/zenodo.15401791", "zenodo_version": "10.5281/zenodo.15401792",
+    "C": {"title": "Case C — flow within a 3 x 3 array of blocks", "folder": "raw/cases/case-c", "zenodo_concept": "10.5281/zenodo.15401791", "zenodo_version": "10.5281/zenodo.15401792",
           "D": 0.20, "pitch": 0.40, "U_H_stated": 3.65, "Re_H": 52000, "scale": None,
           "contact": "Yoshitami Nonomura <nonomura.yoshitami@yamato-u.ac.jp>", "collectors": ["Yoshitami Nonomura (Yamato University)"],
           "citation": "Nonomura, Y., Kobayashi, N., Tominaga, Y., Mochida, A. (2003). The cross comparison of CFD results for flow field around building models (part 3). Japan Association for Wind Engineering 95, 83-84 (in Japanese). https://doi.org/10.14887/jaweam.2003.0.41.0"},
-    "D": {"title": "Case D — flow around a high-rise building in city blocks", "folder": "case-d", "zenodo_concept": "10.5281/zenodo.15402668", "zenodo_version": "10.5281/zenodo.15402669",
+    "D": {"title": "Case D — flow around a high-rise building in city blocks", "folder": "raw/cases/case-d", "zenodo_concept": "10.5281/zenodo.15402668", "zenodo_version": "10.5281/zenodo.15402669",
           "H": 0.25, "U_H_stated": 6.65, "Re_H": 110000, "scale": 400,
           "contact": "Yoshihide Tominaga <tominaga@abe.niit.ac.jp>", "collectors": ["Yoshihide Tominaga (Niigata Institute of Technology)"],
           "citation": "Kikumoto, H., Okaze, T., Yoshie, R. et al. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083, section 3.4. https://doi.org/10.1002/2475-8876.70083"},
-    "E": {"title": "Case E — flow within an actual urban area in Niigata", "folder": "case-e", "zenodo_concept": "10.5281/zenodo.15429017", "zenodo_version": "10.5281/zenodo.15429018",
+    "E": {"title": "Case E — flow within an actual urban area in Niigata", "folder": "raw/cases/case-e", "zenodo_concept": "10.5281/zenodo.15429017", "zenodo_version": "10.5281/zenodo.15429018",
           "ZR": 250.0, "UR": 7.8, "z_ref": 15.9, "Re": 17000, "scale": 250,
           "contact": "Yoshihide Tominaga <tominaga@abe.niit.ac.jp>", "collectors": ["Yoshihide Tominaga (Niigata Institute of Technology)"],
           "citation": "Tominaga, Y., Mochida, A., Yoshie, R., Kataoka, H., Nozu, T., Yoshikawa, M., Shirasawa, T. (2008). AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings. JWEIA 96, 1749-1761. https://doi.org/10.1016/j.jweia.2008.02.058"},

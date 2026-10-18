@@ -1,5 +1,12 @@
 # CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ
 
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fsustainableurbansystems.com%2FCFD-Test-Cases-Architectural-Institute-of-Japan-AIJ%2F&label=website&up_message=online&down_message=offline)](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/)
+[![Release](https://img.shields.io/github/v/release/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ?label=release&sort=semver)](https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/releases)
+[![API schema](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fsustainableurbansystems.com%2FCFD-Test-Cases-Architectural-Institute-of-Japan-AIJ%2Fapi%2Findex.json&query=%24.schema_version&label=API%20schema&color=blue)](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api-reference/)
+[![Build](https://img.shields.io/github/actions/workflow/status/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/pages.yml?branch=main&label=build)](https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/actions/workflows/pages.yml)
+[![Data licence: CC BY 4.0](https://img.shields.io/badge/data%20licence-CC%20BY%204.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
+[![Data paper](https://img.shields.io/badge/data%20paper-10.1002%2F2475--8876.70083-informational)](https://doi.org/10.1002/2475-8876.70083)
+
 Wind-tunnel reference data from the **AIJ UWE** (Urban Wind Environment) benchmark, cleaned and
 packaged case by case, together with Eddy3D's validation against it. The same material is served as a
 website and as a static API that scripts and agents can query: cleaned measurement tables in SI units
@@ -18,23 +25,20 @@ and one frame per case, cleaned STL geometry in metres, and the validation score
 </tr>
 </table>
 
-**Site:** https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/ ·
-**API:** [`/api/index.json`](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/index.json) ·
-[`/api/llms.txt`](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/llms.txt) for agents ·
-[OpenAPI](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/openapi.json)
-(the same files are in [`docs/api/`](docs/api/)) ·
-**Release:** [v2.0.0](CHANGELOG.md), rebuilt byte for byte from its tag (see *Versions, releases and reproducing them*)
+- **Site:** <https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/>
+- **API:** [`/api/index.json`](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/index.json) · [`/api/llms.txt`](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/llms.txt) for agents · [OpenAPI](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/openapi.json) (the same files are in [`docs/api/`](docs/api/))
+- **Release:** [v2.0.0](CHANGELOG.md), rebuilt byte for byte from its tag (see *Versions, releases and reproducing them*)
 
 | Case | Configuration | Measurements | Reference file |
 |---|---|---|---|
-| A | 1:1:2 building, b = 0.08 m, H = 0.16 m, Re_H ≈ 24,000 | 186 points, U/V/W/k | `case-a/RS-caseA.csv` |
-| B | 1:4:4 slab, 0.05 × 0.20 × 0.20 m, Re_H ≈ 72,000 | 224 points, U/V/W/k | `case-b/RS_caseB.csv` |
-| C | 3 × 3 block array, centre building at 0D / 1D / 2D | 1080 points, pedestrian height | `case-c/RS_caseC.csv` |
-| D | High-rise among blocks | see `case-d/` | `LF_caseD.xls` |
-| E | Niigata district, 1:250, pre/post high-rise | pedestrian height | `case-e/LF_caseE.xls` |
+| A | 1:1:2 building, b = 0.08 m, H = 0.16 m, Re_H ≈ 24,000 | 186 points, U/V/W/k | `raw/cases/case-a/RS-caseA.csv` |
+| B | 1:4:4 slab, 0.05 × 0.20 × 0.20 m, Re_H ≈ 72,000 | 224 points, U/V/W/k | `raw/cases/case-b/RS_caseB.csv` |
+| C | 3 × 3 block array, centre building at 0D / 1D / 2D | 1080 points, pedestrian height | `raw/cases/case-c/RS_caseC.csv` |
+| D | High-rise among blocks | see `raw/cases/case-d/` | `raw/cases/case-d/LF_caseD.xls` |
+| E | Niigata district, 1:250, pre/post high-rise | pedestrian height | `raw/cases/case-e/LF_caseE.xls` |
 
 Sources and instrumentation are documented per case in each folder's `readme_case*.md` and in the data paper,
-[Kikumoto et al. (2026)](https://doi.org/10.1002/2475-8876.70083), which is included here; each case's Zenodo
+[Kikumoto et al. (2026)](https://doi.org/10.1002/2475-8876.70083) (linked, not stored here); each case's Zenodo
 record is linked in its section. [`clean/`](clean/README.md) re-releases all five cases in one schema (SI units,
 one frame per case), regenerated from the published files by a checked, deterministic build.
 
@@ -46,7 +50,7 @@ it agrees is in the numbers and their reading. Anything not marked scored is not
 | OpenFOAM 12, realizable k-ε | scored | scored | scored, 9 configurations | scored, WD 0°, 22.5° and 45° | scored, SW |
 | OpenLB | scored | scored | not comparable at dx = 1.6 m | not comparable at dx = 1.6 m | not comparable at dx = 1.6 m |
 | FluidX3D | scored | scored | not comparable (no ground wall function) | not comparable (no ground wall function) | not comparable (no ground wall function) |
-| ML surrogate (Yel-2.0) | scored | scored | scored | scored | scored |
+| ML surrogate (Yel-2.0) | ✔ | ✔ | ✔ | ✔ | ✔ |
 
 ---
 
@@ -766,11 +770,11 @@ unregistered snapshot stops the build). The changes from 1.0.0 are in `index.jso
 
 | Folder | Contents |
 |---|---|
-| `case-a/` … `case-e/` | each case as published on Zenodo, plus the repository's own working files for it |
+| `raw/cases/case-a/` … `case-e/` | each case as published on Zenodo, plus the repository's own working files for it (`raw/` is what was published, `clean/` what this repository re-releases) |
 | `clean/` | the cleaned re-release of all five cases in one schema, rebuilt by `clean/build.py`; `clean/sources/` mirrors the Zenodo files the case folders lack |
 | `validation/` | Eddy3D's scores and per-point pairs (`results/`), the figures (`figures/`, geometry renders in `figures/geometry/`), and the scripts that draw them (`plot_*.py`, `render_geometry.py`; dependencies in `requirements.txt`) |
 | `docs/` | the Jekyll site; `docs/api/` is the static API, generated by `scripts/build_api.py`, as are `docs/cases/` and the generated includes |
-| `papers/` | the benchmark data paper (open access) and `papers/README.md`, which cites the AIJ guidelines paper by DOI |
+| `papers/` | `papers/README.md` only: the papers are cited and linked by DOI; no PDFs are stored in this repository |
 | `scripts/` | the API builder (`build_api.py`), its JSON Schemas (`api_schemas.py`), the shared data reader (`aijdata.py`) and the pinned build requirements |
 | `CITATION.cff` | how to cite this repository and the data behind it (GitHub's *Cite this repository*) |
 
@@ -780,8 +784,8 @@ the readmes, the Zenodo records and the data paper refer to, and renaming them w
 in a case folder was checked against its Zenodo record (MD5): the images, readmes, STL and the A and B workbooks are
 byte-identical; the CSVs are identical but for line endings, except `RS_caseC.csv`, whose values are identical but
 which carries trailing empty columns from a re-save; the C, D and E workbooks are re-saved but cell-identical. The
-repository's own files are `case-x[-description].ext` in lower case; folders are `case-a` … `case-e`, as the site
-names the cases; papers are `author-year-title.pdf`.
+repository's own files are `case-x[-description].ext` in lower case; folders are `raw/cases/case-a` … `case-e`, as the
+site names the cases (`/cases/case-a/`).
 
 **Renamed on 2026-10-14** (history follows every file; `git log --follow` works):
 
@@ -795,8 +799,14 @@ names the cases; papers are `author-year-title.pdf`.
 | `CaseD_cleaned/CaseD.ghx`, `CaseD(Highrise+Blocks).dxf` | `case-d/case-d.ghx`, `case-d/case-d.dxf` | the repository's own files |
 | `Case E_cleaned/CaseE(Niigata).3dm`, `CaseE(Niigata).ghx` | `case-e/case-e.3dm`, `case-e/case-e.ghx` | the repository's own files |
 | `CaseD_cleaned/Eddy3D vs AIJ.xlsx`, `Case E_cleaned/Eddy3D vs AIJ.xlsx` | `case-d/case-d-eddy3d-prior-comparison.xlsx`, `case-e/case-e-eddy3d-prior-comparison.xlsx` | the earlier Eddy3D comparisons, named for what they are |
-| `Japan Architectural Review - 2026 - Kikumoto - … Urban.pdf` | `papers/kikumoto-2026-experimental-database-cfd-urban-wind-environment.pdf` | author-year-title |
-| `1-s2.0-S0167610508000445-main.pdf` | removed on 2026-10-15; cited by DOI in `papers/README.md` | an Elsevier article, all rights reserved: not ours to redistribute |
+| `Japan Architectural Review - 2026 - Kikumoto - … Urban.pdf` | removed on 2026-10-18; linked by DOI in `papers/README.md` | no PDFs are stored here |
+| `1-s2.0-S0167610508000445-main.pdf` | removed on 2026-10-15; cited by DOI in `papers/README.md`; **purged from the git history on 2026-10-18** | an Elsevier article, all rights reserved: not ours to redistribute |
+
+**Renamed on 2026-10-18:**
+
+| Was | Now | Why |
+|---|---|---|
+| `case-a/` … `case-e/` | `raw/cases/case-a/` … `case-e/` | one folder for what the AIJ published, next to `clean/` for what this repository re-releases; every case, A to M, lands there |
 
 **Renamed on 2026-10-15:**
 

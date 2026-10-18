@@ -51,7 +51,7 @@ Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 
 
 ## Reference data
 
-Source in this repository: `case-e/LF_caseE.xls` (approach flow: `case-e/LF_caseE.xls [sheet Inflow]`).
+Source in this repository: `raw/cases/case-e/LF_caseE.xls` (approach flow: `raw/cases/case-e/LF_caseE.xls [sheet Inflow]`).
 
 The cleaned table has **2560 rows** over **80 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction`, `wind_direction_deg`, `x`, `y`, `z`, `velocity_ratio`.
 

@@ -7,7 +7,7 @@ Two figures, each answering one question:
   cases-ab-openfoam-profiles.png    WHERE does it agree?  Centre-plane vertical profiles of U/U_H at the
                       measurement stations, measured points against the modelled line.
 
-Inputs, all in this repository: the benchmark tables case-a/RS-caseA.csv and case-b/RS_caseB.csv as published,
+Inputs, all in this repository: the benchmark tables raw/cases/case-a/RS-caseA.csv and raw/cases/case-b/RS_caseB.csv as published,
 the model at those points in validation/results/case{A,B}_openfoam12_realizableKE_probes.csv (a snapshot of the
 Eddy3D fixture's reference.probe.csv under C:/Eddy3DVal/aij_{A,B}_realizableKE_L3, same row order as the table,
 refreshed from there when that folder exists) and the scores in validation/results/case{A,B}_openfoam12_realizableKE.json.
@@ -36,9 +36,9 @@ VAL = r"C:/Eddy3DVal"
 MUTED = "#6b6b69"
 
 CASES = [
-    ("A", "case-a", "RS-caseA.csv", 1.0, +1.0, "aij_A_realizableKE_L3",
+    ("A", "raw/cases/case-a", "RS-caseA.csv", 1.0, +1.0, "aij_A_realizableKE_L3",
      "Case A · 1:1:2 building", 0.16, 4.491, (-0.04, 0.04)),
-    ("B", "case-b", "RS_caseB.csv", 0.001, -1.0, "aij_B_realizableKE_L3",
+    ("B", "raw/cases/case-b", "RS_caseB.csv", 0.001, -1.0, "aij_B_realizableKE_L3",
      "Case B · 1:4:4 slab", 0.20, 5.133, (-0.025, 0.025)),
 ]
 

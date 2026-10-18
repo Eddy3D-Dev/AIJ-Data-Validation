@@ -48,7 +48,7 @@ nav_order: 4
 
 ## Reference data
 
-Source in this repository: `case-d/LF_caseD.xls` (approach flow: `case-d/LF_caseD.xls [sheet Inflow]`).
+Source in this repository: `raw/cases/case-d/LF_caseD.xls` (approach flow: `raw/cases/case-d/LF_caseD.xls [sheet Inflow]`).
 
 The cleaned table has **267 rows** over **78 distinct points**; columns `point_id`, `config`, `instrument`, `wind_direction_deg`, `x`, `y`, `z`, `U`, `V`, `W`, `uu`, `vv`, `ww`, `k`, `Vs`.
 

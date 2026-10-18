@@ -8,7 +8,7 @@ Sources, in order of preference:
 1. `clean/` — the canonical cleaned release (Parquet + CSV + manifest.json, built by `clean/build.py`).
    When `clean/manifest.json` names a CSV for a case, the points table is read from it and the
    output records `points_source` as that path.
-2. The raw per-case folders in this repository (`case-a/RS-caseA.csv`, …, the BIFF8
+2. The raw per-case folders in this repository (`raw/cases/case-a/RS-caseA.csv`, …, the BIFF8
    workbooks for D and E). This is the fallback that makes the build work before `clean/` is
    complete, and it applies the same cleaning rules the README documents.
 
@@ -102,10 +102,10 @@ CASES = {
     "A": {
         "id": "A", "slug": "case-a", "title": "Case A — 1:1:2 building",
         "short": "Isolated 1:1:2 building, velocity field (split-fibre hot wire).",
-        "folder": "case-a",
-        "reference_file": "case-a/RS-caseA.csv",
-        "approach_flow_file": "case-a/AF_caseA.csv",
-        "readme": "case-a/readme_caseA.md",
+        "folder": "raw/cases/case-a",
+        "reference_file": "raw/cases/case-a/RS-caseA.csv",
+        "approach_flow_file": "raw/cases/case-a/AF_caseA.csv",
+        "readme": "raw/cases/case-a/readme_caseA.md",
         "render": "validation/figures/geometry/case-a.png",  # the default configuration; see render_file
         "configuration": {
             "building": "1:1:2 (width : depth : height) prism",
@@ -148,10 +148,10 @@ CASES = {
     "B": {
         "id": "B", "slug": "case-b", "title": "Case B — 1:4:4 slab",
         "short": "Isolated 1:4:4 slab, velocity field (split-fibre hot wire).",
-        "folder": "case-b",
-        "reference_file": "case-b/RS_caseB.csv",
-        "approach_flow_file": "case-b/AF_caseB.csv",
-        "readme": "case-b/readme_caseB.md",
+        "folder": "raw/cases/case-b",
+        "reference_file": "raw/cases/case-b/RS_caseB.csv",
+        "approach_flow_file": "raw/cases/case-b/AF_caseB.csv",
+        "readme": "raw/cases/case-b/readme_caseB.md",
         "render": "validation/figures/geometry/case-b.png",  # the default configuration; see render_file
         "configuration": {
             "building": "1:4:4 (depth : width : height) slab",
@@ -194,10 +194,10 @@ CASES = {
     "C": {
         "id": "C", "slug": "case-c", "title": "Case C — 3 × 3 block array",
         "short": "3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestrian-height scalar speed (thermistor), 3 wind directions.",
-        "folder": "case-c",
-        "reference_file": "case-c/RS_caseC.csv",
-        "approach_flow_file": "case-c/AF_caseC.csv",
-        "readme": "case-c/readme_caseC.md",
+        "folder": "raw/cases/case-c",
+        "reference_file": "raw/cases/case-c/RS_caseC.csv",
+        "approach_flow_file": "raw/cases/case-c/AF_caseC.csv",
+        "readme": "raw/cases/case-c/readme_caseC.md",
         "render": "validation/figures/geometry/case-c-2d.png",  # the default configuration; see render_file
         "configuration": {
             "array": "3 x 3 cubes, D = 0.20 m, block centres at x, y in {-0.4, 0, +0.4} m (pitch 0.40 m = 2D, street width D)",
@@ -255,9 +255,9 @@ CASES = {
     "D": {
         "id": "D", "slug": "case-d", "title": "Case D — high-rise among city blocks",
         "short": "1:1:4 tower in a regular array of 82 low blocks, pedestrian-height scalar speed (thermistor, 3 wind directions) plus a 33-point split-fibre velocity field at WD = 0.",
-        "folder": "case-d",
-        "reference_file": "case-d/LF_caseD.xls",
-        "approach_flow_file": "case-d/LF_caseD.xls [sheet Inflow]",
+        "folder": "raw/cases/case-d",
+        "reference_file": "raw/cases/case-d/LF_caseD.xls",
+        "approach_flow_file": "raw/cases/case-d/LF_caseD.xls [sheet Inflow]",
         "readme": None,
         "render": "validation/figures/geometry/case-d.png",  # the default configuration; see render_file
         "configuration": {
@@ -314,10 +314,10 @@ CASES = {
     "E": {
         "id": "E", "slug": "case-e", "title": "Case E — Niigata district",
         "short": "Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 m mid-rises; pedestrian-height velocity ratio (thermistor), 16 wind directions.",
-        "folder": "case-e",
-        "reference_file": "case-e/LF_caseE.xls",
-        "approach_flow_file": "case-e/LF_caseE.xls [sheet Inflow]",
-        "readme": "case-e/readme_caseE.md",
+        "folder": "raw/cases/case-e",
+        "reference_file": "raw/cases/case-e/LF_caseE.xls",
+        "approach_flow_file": "raw/cases/case-e/LF_caseE.xls [sheet Inflow]",
+        "readme": "raw/cases/case-e/readme_caseE.md",
         "render": "validation/figures/geometry/case-e-after.png",  # the default configuration; see render_file
         "configuration": {
             "district": "Niigata City urban area near the Shinano River; dense low-rise stock (median top 6 m, max 30 m)",
@@ -724,7 +724,7 @@ def shells_from_tris(tris, tol=1e-9):
 
 def boxes_d():
     """The 83 shells of BD_caseD.stl, each reduced to its bounding box (they are all boxes)."""
-    tris = read_ascii_stl(os.path.join(REPO, "case-d", "BD_caseD.stl"))
+    tris = read_ascii_stl(os.path.join(REPO, "raw", "cases", "case-d", "BD_caseD.stl"))
     boxes = []
     for shell in shells_from_tris(tris):
         pts = [p for t in shell for p in t]
@@ -743,7 +743,7 @@ def boxes_d():
 def mesh_e(state):
     """Triangles of the Niigata district from the 3dm: 'bc' = buildings, 'ac' = + new construction."""
     import rhino3dm
-    f = rhino3dm.File3dm.Read(os.path.join(REPO, "case-e", "case-e.3dm"))
+    f = rhino3dm.File3dm.Read(os.path.join(REPO, "raw", "cases", "case-e", "case-e.3dm"))
     layers = {l.Index: l.Name for l in f.Layers}
     wanted = {"buildings"} if state == "bc" else {"buildings", "buildings_new_construction"}
     tris = []

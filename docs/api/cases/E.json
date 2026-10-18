@@ -137,7 +137,7 @@
   "note": "derived during scoping, not published by AIJ"
  },
  "approach_flow": {
-  "source": "case-e/LF_caseE.xls [sheet Inflow]",
+  "source": "raw/cases/case-e/LF_caseE.xls [sheet Inflow]",
   "units": {
    "z": "m",
    "U": "m/s",
@@ -324,10 +324,10 @@
  "doi_note": null,
  "citation_requested": "Tominaga, Y. et al. (2008). AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings. JWEIA 96, 1749-1761. https://doi.org/10.1016/j.jweia.2008.02.058",
  "files_in_repository": {
-  "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/case-e",
-  "reference": "case-e/LF_caseE.xls",
-  "approach_flow": "case-e/LF_caseE.xls [sheet Inflow]",
-  "readme": "case-e/readme_caseE.md"
+  "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/raw/cases/case-e",
+  "reference": "raw/cases/case-e/LF_caseE.xls",
+  "approach_flow": "raw/cases/case-e/LF_caseE.xls [sheet Inflow]",
+  "readme": "raw/cases/case-e/readme_caseE.md"
  },
  "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-e-after.png",
  "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-e/"

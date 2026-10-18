@@ -116,7 +116,7 @@
   "note": "derived during scoping, not published by AIJ; a log-law inlet cannot be right at both the measurement plane and the upper profile"
  },
  "approach_flow": {
-  "source": "case-d/LF_caseD.xls [sheet Inflow]",
+  "source": "raw/cases/case-d/LF_caseD.xls [sheet Inflow]",
   "units": {
    "z": "m",
    "U": "m/s",
@@ -304,9 +304,9 @@
  "doi_note": "The case folder ships without the Zenodo record's readme and CSVs; they are mirrored byte for byte under clean/sources/zenodo_caseD/ (people and DOI from that readme and the data paper's reference 50).",
  "citation_requested": "Kikumoto, H. et al. (2026). Japan Architectural Review 9(1), e70083, section 3.4.",
  "files_in_repository": {
-  "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/case-d",
-  "reference": "case-d/LF_caseD.xls",
-  "approach_flow": "case-d/LF_caseD.xls [sheet Inflow]",
+  "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/raw/cases/case-d",
+  "reference": "raw/cases/case-d/LF_caseD.xls",
+  "approach_flow": "raw/cases/case-d/LF_caseD.xls [sheet Inflow]",
   "readme": null
  },
  "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-d.png",

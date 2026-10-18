@@ -63,7 +63,7 @@
   "log_law_error_at_H": "+2.9 %"
  },
  "approach_flow": {
-  "source": "case-b/AF_caseB.csv",
+  "source": "raw/cases/case-b/AF_caseB.csv",
   "units": {
    "z": "m",
    "U": "m/s",
@@ -230,10 +230,10 @@
  "doi_note": null,
  "citation_requested": "Miyazaki, T., Tominaga, Y. (2003). Wind tunnel experiment on flow field around a building model with a scale ratio of 4:4:1 placed within the surface boundary layer. Proc. Annual Meeting of Hokuriku Chapter, AIJ, 201-204 (in Japanese). https://www.aij.or.jp/paper/detail.html?productId=313933",
  "files_in_repository": {
-  "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/case-b",
-  "reference": "case-b/RS_caseB.csv",
-  "approach_flow": "case-b/AF_caseB.csv",
-  "readme": "case-b/readme_caseB.md"
+  "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/raw/cases/case-b",
+  "reference": "raw/cases/case-b/RS_caseB.csv",
+  "approach_flow": "raw/cases/case-b/AF_caseB.csv",
+  "readme": "raw/cases/case-b/readme_caseB.md"
  },
  "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-b.png",
  "page": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/cases/case-b/"
