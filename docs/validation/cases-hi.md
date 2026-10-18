@@ -8,7 +8,7 @@ description: "OpenFOAM 12 against the tunnel for Case H (1:1:2 building, floor p
 
 # Cases H and I, OpenFOAM 12
 
-OpenFOAM 12 runs on the 1:1:2 building with a floor point source (Case H) and on the cube with a roof point source (Case I). Every score of each run, with the per-point files, is on the [Case H]({{ '/cases/case-h/validation/' | relative_url }}) and [Case I]({{ '/cases/case-i/validation/' | relative_url }}) Validation pages.
+OpenFOAM 12 runs on the 1:1:2 building with a floor point source (Case H) and on the cube with a roof point source (Case I). Per-run scores and per-point files: [Case H]({{ '/cases/case-h/validation/' | relative_url }}) and [Case I]({{ '/cases/case-i/validation/' | relative_url }}) Validation pages.
 
 ## Runs
 
@@ -48,9 +48,9 @@ FB is positive when the model is low.
 - **Case I, concentration.** R is 0.92 to 0.95 and FAC2 stays below 0.5. FB +0.40 at 0.3, +0.08 at 0.5 and −0.10 at 0.7. Case H has a negative FB (model high) at all three.
 
 <details markdown="block">
-<summary>Interpretation: Cases H and I, the scores</summary>
+<summary>Interpretation: Cases H and I scores</summary>
 
-- Case H: the mean flow is reproduced, k is not. FAC2 on V and W is low by construction, because those components change sign (see [Cases A and B]({{ '/validation/cases-ab/' | relative_url }})); W's FB of +2.76 is a near-zero mean, so R and the hit rate are the scores to read. The pattern of the tunnel's turbulence at the measured points is not followed (k R 0.11).
+- Case H: the mean flow is reproduced, k is not. FAC2 on V and W is low by construction, because those components change sign (see [Cases A and B]({{ '/validation/cases-ab/' | relative_url }})); W's FB of +2.76 comes from a near-zero mean, so R and the hit rate carry the comparison. The pattern of the tunnel's turbulence at the measured points is not followed (k R 0.11).
 - Case H: the concentration is well correlated and over-predicted. A higher turbulent Schmidt number raises the modelled concentration further.
 - Case I: velocity and k agree closely. V's FB of −2.0 is the near-zero mean again.
 - Case I: the concentration is well correlated, with a wide scatter at low concentration (visible in panel h). The bias changes sign with the Schmidt number: the model is low at 0.3, nearly unbiased at 0.5 and high at 0.7. Case H over-predicts at all three, so the Schmidt number that suits one case does not suit the other.
@@ -74,7 +74,7 @@ FB is positive when the model is low.
 - Reattachment length L_r/H: 2.23 (standard k-ε), 2.51 (realizable k-ε), 2.68 (k-ω SST).
 
 <details markdown="block">
-<summary>Interpretation: Case I, turbulence closures</summary>
+<summary>Interpretation: Case I turbulence closures</summary>
 
 - The mean velocity does not tell the closures apart. k and the concentration do.
 - Under k-ω SST the turbulence is lower from the inlet on.

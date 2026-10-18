@@ -8,7 +8,7 @@ description: "OpenFOAM 12 against the tunnel for Case C, the 3 × 3 block array,
 
 # Case C, OpenFOAM 12
 
-OpenFOAM 12 runs on the 3 × 3 block array. Every score, with the per-point file, is on the [Case C]({{ '/cases/case-c/validation/' | relative_url }}) Validation page.
+OpenFOAM 12 runs on the 3 × 3 block array. Scores and per-point file: [Case C]({{ '/cases/case-c/validation/' | relative_url }}) Validation page.
 
 All nine configurations (centre block 0D / 1D / 2D × WD 0°, 22.5°, 45°), solved at 1:100 on a cylindrical domain (the tunnel's turntable: the array turns with WD, the domain does not), ~310,000 cells per centre-block height, 3000 iterations per direction, the 120 probes at exactly the tunnel's coordinates.
 
@@ -40,18 +40,17 @@ All nine configurations (centre block 0D / 1D / 2D × WD 0°, 22.5°, 45°), sol
 - Upwind and downwind swapped, control: R −0.41 … +0.14 in eight of nine configurations.
 
 <details markdown="block">
-<summary>Interpretation: Case C, the pattern and the deficit</summary>
+<summary>Interpretation: Case C pattern and deficit</summary>
 
 - The pattern is right in every configuration.
-- The model is slow, worst at WD = 0. The map puts the deficit in the streets running along the wind.
-- The deficit is not the scalar-vs-vector question: the tunnel reads above even √(\|U\|² + 2k) at 902 of the 1080 points, and \|U\| alone is lower still.
-- Where the deficit comes from is not settled.
-- The frame is checked by the scores: the two controls above.
+- The model is slow, worst at WD = 0, and the map puts the deficit in the streets running along the wind.
+- The scalar-vs-vector difference does not explain the deficit: the tunnel reads above even √(\|U\|² + 2k) at 902 of the 1080 points, and \|U\| alone is lower still. Where the deficit comes from is not settled.
+- Both frame controls above score far below the runs, so the frame is the right one.
 
 </details>
 
 <details markdown="block">
-<summary>Data notes: approach-flow sampling</summary>
+<summary>Data notes: Approach-flow sampling</summary>
 
 The approach flow at the probe height reads 0.83 of the tunnel's; that reading is a sampling artefact. Upstream of the array the probe height lies below the centre of the first cell of the coarse background mesh, where the probes' cell-to-point interpolation runs linearly to zero at the wall: the sampled |U| is exactly proportional to z there (1.00 m/s at 1 m, 2.01 m/s at 2 m). At z = D the approach matches the tunnel (0.99). At the measurement points the sampling is sound: none of the 240 checked (2D at 0°, 0D at 45°) has its 2 m sample inside the first cell.
 

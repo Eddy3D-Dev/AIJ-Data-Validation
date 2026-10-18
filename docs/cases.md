@@ -8,10 +8,9 @@ description: "The AIJ UWE benchmark cases: what each is, what was measured, the 
 
 # Cases
 
-Each case has three pages. The **case page** has the geometry render, the engine status and the numbers that matter;
-its **Reference data** page has the configuration, the frame and units, the inflow fit, the known data issues and
-the files; its **Validation** page has the scores by engine and the figures. The same facts are served by the API as
-`/api/cases/{id}.json`.
+Each case has three pages: the case page (geometry render, engine status, key numbers), **Data** (configuration, frame
+and units, inflow fit, known data issues, files) and **Validation** (scores by engine, figures). The API serves the same
+facts as `/api/cases/{id}.json`.
 
 {% include cases-table.md %}
 

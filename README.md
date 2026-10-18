@@ -7,10 +7,7 @@
 [![Data licence: CC BY 4.0](https://img.shields.io/badge/data%20licence-CC%20BY%204.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
 [![Data paper](https://img.shields.io/badge/data%20paper-10.1002%2F2475--8876.70083-informational)](https://doi.org/10.1002/2475-8876.70083)
 
-Wind-tunnel and field reference data from the **AIJ UWE** (Urban Wind Environment) benchmark, Cases A to M, cleaned and
-packaged case by case, together with Eddy3D's validation against it where it exists. The same material is served as a
-website and as a static API that scripts and agents can query: cleaned measurement tables in SI units
-and one frame per case, cleaned STL geometry in metres, and the validation scores.
+Validation data from the AIJ (Architectural Institute of Japan) benchmark cases—cleaned and packaged as an API.
 
 <table>
 <tr>
@@ -61,9 +58,11 @@ and one frame per case, cleaned STL geometry in metres, and the validation score
 | M | TPU Atsugi campus, 1:600 tunnel and field tracer release | 330 rows: tunnel velocity and concentration, 18 field runs | `raw/cases/case-m/RS-WT_caseM.csv` |
 
 Sources and instrumentation are documented per case in each folder's `readme_case*.md` and in the data paper,
-[Kikumoto et al. (2026)](https://doi.org/10.1002/2475-8876.70083) (linked, not stored here); each case's Zenodo
-record is linked in its section. [`clean/`](clean/README.md) re-releases all thirteen cases in one schema (SI units,
-one frame per case), regenerated from the published files by a checked, deterministic build.
+[Kikumoto et al. (2026)](https://doi.org/10.1002/2475-8876.70083); each case's Zenodo record is linked in its section.
+[`clean/`](clean/README.md) re-releases all thirteen cases in one schema (SI units, one frame per case), regenerated
+from the published files by a deterministic build.
+
+Data: Kikumoto et al. (2026), CC BY 4.0. Collectors per case under *Cite*.
 
 **Validation status**
 
@@ -83,8 +82,9 @@ one frame per case), regenerated from the published files by a checked, determin
 | L | pending | scored | pending | pending | pending |
 | M | scored, WD 180, three Schmidt numbers | — | pending | pending | pending |
 
-Pending: not run. —: the engine does not apply. UMF (urbanMicroclimateFoam, an OpenFOAM 12 solver) is Eddy3D's engine
-for the non-isothermal Cases J and L; the isothermal OpenFOAM 12 engine was not run on them.
+Scored: a validation run exists and its scores are in `cases/{id}/validation.json`. Pending: not run yet. —: the engine
+does not apply. UMF (urbanMicroclimateFoam, an OpenFOAM 12 solver) is Eddy3D's engine for the non-isothermal Cases J and
+L; the isothermal OpenFOAM 12 engine was not run on them.
 
 Score columns (R, FAC2, FB, hit rate) are defined under *Metrics* in *Validation method*; FB is positive when the model
 is low.
@@ -138,8 +138,8 @@ log law.
 <summary>Interpretation: Case A scores</summary>
 
 - OpenFOAM 12: the streamwise field is right (R ≈ 0.96, FAC2 0.82); k is under-predicted (FB +0.48, R 0.48).
-- FAC2 on V and W is low by construction because those components change sign. The W FB of −1.50 is an artefact of a
-  near-zero mean; read R = +0.71 instead.
+- FAC2 on V and W is low because those components change sign. The W FB of −1.50 follows from a near-zero mean; the W
+  correlation is R = +0.71.
 - OpenLB: a nearly steady solve.
 - FluidX3D: on those 116 points the approach flow alone scores better on every U statistic except the correlation.
 
@@ -262,13 +262,14 @@ intensity at z = D is 0.219.
 - WD = 0, mean Vs, 2D against 0D centre block: windward street 2.398 against 1.172 m/s; leeward street 1.315 against
   1.090 m/s.
 - Repeatability floor from the mirror pairs: mean |ΔVs| 0.088–0.137 m/s (0.024–0.038 U_H).
+- Compare the bracket |U| ≤ Vs ≤ √(|U|² + 2k).
 
 <details markdown="block">
 <summary>Interpretation: Comparing with Vs</summary>
 
-The floor of 0.13 U_H is one a RANS |U| goes well under in a sheltered street, so the comparison is the bracket
-|U| ≤ Vs ≤ √(|U|² + 2k), not one number. The structure to reproduce at WD = 0: the 2D centre block roughly doubles the
-windward street's pedestrian speed over 0D while the leeward street moves little.
+- The floor of 0.13 U_H is one a RANS |U| goes well under in a sheltered street.
+- The structure to reproduce at WD = 0: the 2D centre block roughly doubles the windward street's pedestrian speed over
+  0D while the leeward street moves little.
 
 </details>
 
@@ -302,8 +303,8 @@ Per-point pairs:
 - The pattern is right in every configuration: R 0.80–0.91, FAC2 0.85–0.98.
 - The model is slow, worst at WD = 0 (FB +0.25 … +0.34, hit rate 0.43–0.57; at 22.5° and 45° FB +0.09 … +0.20, hit
   rate 0.68–0.88). The map puts the deficit in the streets running along the wind.
-- It is not the scalar-vs-vector question. The tunnel reads above even √(|U|² + 2k) at 902 of the 1080 points (84 %);
-  |U| alone is lower still.
+- The scalar-vs-vector difference does not explain it. The tunnel reads above even √(|U|² + 2k) at 902 of the 1080
+  points (84 %); |U| alone is lower still.
 - Where the deficit comes from is not settled. The approach flow at the probe height reads 0.83 of the tunnel's; that
   reading is a sampling artefact: upstream of the array the probe height lies below the centre of the first cell of
   the coarse background mesh, where the probes' cell-to-point interpolation runs linearly to zero at the wall (the
@@ -345,17 +346,18 @@ in the data paper). This folder ships without the record's readme and CSVs; they
 their SHA-256 sums, under [`clean/sources/zenodo_caseD/`](clean/sources/zenodo_caseD/), and the CSVs match the
 workbook to 4 × 10⁻¹⁶.
 
-**Reference data.** Everything is inside `case-d/LF_caseD.xls`, a genuine OLE2/BIFF8
+**Reference data.** Everything is inside `case-d/LF_caseD.xls`, an OLE2/BIFF8
 workbook (xlrd 2.x reads it; openpyxl cannot): sheets `Geometry&Points`, `Inflow` (13 heights, z = 5 … 1200 mm,
 U and k), `Results (Exp_S)` (split fibre) and `Results (Exp_T)` (thermistor; unmeasured cells are `-`).
 Coordinates are **millimetres**; the API serves metres. Frame: +x streamwise at WD = 0 (the 0° thermistor field
 is exactly y-mirror symmetric — 33 exact pairs, so only 33 of the 66 values are independent; the split-fibre U is
 positive at the stream-like points and negative in the tower's windward horseshoe). The rotation sense for 22.5°
 and 45° is **+x toward +y, read from Figure 4 of the data paper** — the array is exactly y-mirror symmetric, so
-the data cannot settle it. `BD_caseD.stl` is the geometry: 83 closed shells in model metres, but **dirty** (1572
-facets, 576 duplicates, all 83 roofs wound inward, signed volume 0.011159 m³ against the true 0.021477 m³); the
+the data cannot settle it. `BD_caseD.stl` is the geometry: 83 closed shells in model metres with 1572
+facets, 576 of them duplicates, all 83 roofs wound inward, signed volume 0.011159 m³ against the true 0.021477 m³; the
 API's `geometry.stl` is rebuilt from the shells' boxes (996 facets, watertight, 0.021477 m³). The DXF adds nothing
-over the STL. `case-d-eddy3d-prior-comparison.xlsx` is a prior attempt that scores R = +0.096 against the thermistor.
+over the STL. `case-d-eddy3d-prior-comparison.xlsx` is a prior attempt that scores R = +0.096 against the thermistor; the cause is a
+frame or geometry error. Do not use it as a validation.
 
 **Inflow fit** (log law, κ = 0.41, two windows because the measurement plane z/H = 0.02 sits below the A/B
 window): over z = 0.005 … 2H, u\* = 0.3418 m/s, z₀ = 0.0859 mm (U at 5 mm −11.2 %, profile rms 7.9 %, inlet
@@ -374,16 +376,14 @@ the array; shifting the cloud by 12.5 mm (5 m full scale) puts points 27 and 28 
 <summary>Interpretation: Case D inputs</summary>
 
 - A log-law inlet cannot be right at both the measurement plane and the upper profile.
-- Because the correction is 40 % of the scored quantity's square and the inlet k is half the tunnel's, a low bias should
-  be expected and attributed, not treated as a surprise.
-- The R = +0.096 of the prior comparison workbook is a frame or geometry error, not a validation.
-- The 12.5 mm shift resolves an offset well below one road width. On this evidence the workbook's sensor coordinates
-  and the geometry agree.
+- The correction is 40 % of the scored quantity's square and the inlet k is half the tunnel's, so a low bias is expected.
+- The 12.5 mm shift resolves an offset well below one road width: the workbook's sensor coordinates and the geometry
+  agree.
 
 </details>
 
 **Validation (OpenFOAM 12, realizable k-ε), all three wind directions: 0°, 22.5° and 45°**; each about 15 h on
-8 cores beside a production campaign. 3.6 million cells at 1:400 on a cylinder domain,
+8 cores. 3.6 million cells at 1:400 on a cylinder domain,
 3000 iterations; the last iteration's initial residuals are below 4 × 10⁻³.
 
 <!--fig name="case-d-openfoam-agreement.png" alt="Case D, measured vs modelled" width="800"--><a href="validation/figures/case-d-openfoam-agreement.png"><img src="docs/assets/web/case-d-openfoam-agreement.png" width="800" height="266" loading="lazy" alt="Case D, measured vs modelled"></a><!--/fig-->
@@ -403,24 +403,24 @@ the array; shifting the cloud by 12.5 mm (5 m full scale) puts points 27 and 28 
 
 - WD 0°: the 66 thermistor values are 33 mirror pairs, so only 33 are independent and the mirror control is trivially
   equal there.
-- The fixture asserts R > 0.5 at 0°; a prior Eddy3D attempt at this case scored R 0.10.
+- Rotation sense at 22.5° and 45°: Figure 4's sense scores R 0.80 and FAC2 0.92 at 22.5°, R 0.85 and FAC2 0.89 at
+  45°; mirrored (control), R 0.40 and 0.17.
 
 <details markdown="block">
 <summary>Interpretation: Case D scores</summary>
 
 - The pattern is right: R 0.80–0.85 on the thermistor plane at all three headings and 0.85 on the split-fibre |U|. The
-  frame check passes with room to spare.
+  frame check (R above 0.5 at 0°) passes with room to spare; a prior Eddy3D attempt at this case scored R 0.10.
 - Against the instrument that measures what RANS computes, the model is nearly unbiased. On the 33 split-fibre points
   its |U| has FB +0.07; against the thermistor it is +0.21 with √(|U|²+2k) and +0.36 with |U|. In the tunnel itself the
   thermistor reads 1.34 times the split-fibre |U| over the same 33 points, so most of the thermistor gap is the
-  instrument, not the flow.
+  instrument.
 - Its streamwise component is low (U FB +0.67, R 0.95) while its |U| is not: more of the model's near-ground speed is in
   the lateral and vertical components than the tunnel's.
 - At 22.5° and 45° the solved fields corroborate the rotation sense the data cannot decide. The array is symmetric about
   y = 0, so a wind turned toward +y and one turned toward −y give mirror-image fields, and the measurements alone
-  cannot say which was used; the data paper's Figure 4 draws +y. Scored on the same solutions, Figure 4's sense gives
-  R 0.80 and FAC2 0.92 at 22.5°, R 0.85 and FAC2 0.89 at 45°; the mirror gives R 0.40 and 0.17. At both headings the
-  model is also nearly unbiased against the thermistor (FB +0.05 and +0.09 with √(|U|²+2k)).
+  cannot say which was used; the data paper's Figure 4 draws +y. At both headings the model is also nearly unbiased
+  against the thermistor (FB +0.05 and +0.09 with √(|U|²+2k)).
 
 </details>
 
@@ -471,31 +471,23 @@ existing stock (5,015 meshes, the three sites already cleared), `buildings_new_c
 prisms; the map plate on the Japanese-named general layer, the flat terrain plates and the `probes` layer are not
 buildings. Frame: +x east, +y north (compass rose in `MP_caseE.png`); compass names are the direction the wind
 comes **from**. All 80 points fall in open space (min 0.83 m from a building edge); rotating the cloud by 10°
-puts 18 of them inside buildings. The `probes` layer coordinates are off by a median 2.31 m, max 21 m.
+puts 26 of them inside the official STL's buildings. The `probes` layer coordinates are off by a median 2.31 m, max
+21 m; take sensor coordinates from the workbook.
 
 **Normalisation and resolution.** All 2560 ratios are integer multiples of 0.0198204, which pins the normalising
 velocity at U(15.9 m) = 0.504531 × UR = 3.935 m/s (linear interpolation of the published profile gives 3.929) and
 the data's resolution at ±0.0099 — 3.1 % of the median and ~10 % at the lowest points. The prior
-`case-e-eddy3d-prior-comparison.xlsx` (after construction, wind from N) is low by a least-squares factor of 2.048;
-rescaled, its FAC2 goes 0.338 → 0.863 with R unchanged at 0.661.
+`case-e-eddy3d-prior-comparison.xlsx` (after construction, wind from N) divided by the wrong reference and is low by a
+least-squares factor of 2.048; rescaled, its FAC2 goes 0.338 → 0.863 with R unchanged at 0.661.
 
 **Inflow.** A log law does not fit this 250 m boundary layer (5.3–9.4 % max error over the relevant heights, and
 every fit overshoots U(15.9 m) by 4–7 %); power-law exponents are 0.158 (ground … 60 m) and 0.201 (whole profile).
 Construction signal: mean (ac − bc) = +0.097, largest for SW (mean |Δ| 0.2155), smallest for SSE (0.093).
 
-<details markdown="block">
-<summary>Interpretation: Case E inputs</summary>
-
-- Frame: the 10° rotation test verifies it. Do not take coordinates from the `probes` layer.
-- The prior comparison workbook divided by the wrong reference.
-- A tabulated inlet is the appropriate choice for this boundary layer.
-
-</details>
-
-**Validation (OpenFOAM 12, realizable k-ε), wind from SW** — the direction with the largest construction signal —
+**Validation (OpenFOAM 12, realizable k-ε), wind from SW** (the direction with the largest construction signal),
 before and after construction: 986,540 and 1,006,090 cells on a 504 m-radius cylinder (4 m cells to 80 m, 2 m at the
-buildings), the workbook's measured profile imposed through a tabulated inlet that Eddy3D's CLI gained for this
-case (`wind.inlet: "manual"`), 2000 iterations. The model's speed is divided by its own solved U(15.9 m), which
+buildings), the workbook's measured profile imposed through a tabulated inlet (`wind.inlet: "manual"` in
+Eddy3D's CLI), 2000 iterations. The model's speed is divided by its own solved U(15.9 m), which
 arrives at 0.998 of the imposed value in both states.
 
 <!--fig name="case-e-openfoam-agreement.png" alt="Case E, measured vs modelled, before, after and the change" width="800"--><a href="validation/figures/case-e-openfoam-agreement.png"><img src="docs/assets/web/case-e-openfoam-agreement.png" width="800" height="338" loading="lazy" alt="Case E, measured vs modelled, before, after and the change"></a><!--/fig-->
@@ -517,16 +509,15 @@ arrives at 0.998 of the imposed value in both states.
 <details markdown="block">
 <summary>Interpretation: Case E scores</summary>
 
-- The construction change is the result to read: it is the quantity in which inflow, closure and instrument biases
-  largely cancel. The model puts the speed-up and the shelter of the new buildings where the tunnel measured them, at
-  about 60 % of their size, and far above the control that ignores the construction.
-- The absolute ratios are low, and the cause is not established. The approach column at 1.25 m and 2.5 m reads 0.41 and
+- The construction change is the quantity in which inflow, closure and instrument biases largely cancel. The model puts
+  the speed-up and the shelter of the new buildings where the tunnel measured them, at about 60 % of their size, and far
+  above the control that ignores the construction.
+- The absolute ratios are low and the cause is not established. The approach column at 1.25 m and 2.5 m reads 0.41 and
   0.79 of the imposed table. Both heights lie inside the first cell of the coarse upstream mesh, where the probes
   interpolate linearly to zero at the wall, so those readings say nothing about the approach flow; from 5 m up it
   matches the table (0.98–1.04). At the measurement points the sampling is sound for 75 of the 80 points before
   construction and 79 after; the others have their 2 m sample inside the first cell and read low because of the
-  sampling. The construction change, the difference of the two states, is the more robust result.
-- The other directions are one environment variable away.
+  sampling.
 
 </details>
 
@@ -572,9 +563,9 @@ column: R 0.935; against its SSE column: R 0.077.
 <summary>Interpretation: Case F scores</summary>
 
 The pattern follows the tunnel and the field in both frames and the level depends on the frame (FB +0.04 or +0.13 at the
-9 m plane); the 20 m plane has the lowest R. The tunnel's own 9 m column is the bar no model is expected to clear. The
-solved field's R 0.935 with the NNW column and R 0.077 with the SSE column corroborate reading the direction labels as
-the direction the wind comes from, at this direction. Neither vertical frame is asserted.
+9 m plane); the 20 m plane has the lowest R. The tunnel's own 9 m column, scored as a model of the field, is the level a
+model of the tunnel can be expected to reach. The solved field's R 0.935 with the NNW column and R 0.077 with the SSE
+column corroborate reading the direction labels as the direction the wind comes from, at this direction.
 
 Full reading: [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-fm/).
 
@@ -600,7 +591,7 @@ Full reading: [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases
 
 **Frame.** Origin: the leeward face of the tree belt at ground level, on the vertical section through the belt's centre. x: +x downwind: the belt occupies x in [-2, 0] m, the measurement lines lie behind it at x = 1.75 ... 35 m. y: +y along the belt (y in [-37, 37] m); every point is on y = 0. z: +z up; the belt spans z in [1.2, 7] m; points at z = 1.5, 3, 4.5, 6 m.
 
-**Validation (OpenFOAM 12, realizable k-ε, full scale).** The belt's leaf area density and drag coefficient are not in the dataset, so Eddy3D solved a **drag sweep**: no belt, three vegetation-library crowns of rising Cd·LAD (0.30, 0.625 and 0.875 1/m) on a two-dimensional slab, and the conifer crown on the real 74 m belt as a half domain. Each arm is its own run and none is chosen. Eddy3D's trees have no canopy k source, so k is recorded only. The measurement is U/U_H and k/U_H² (U_H the wind at 7 m); the model is |U| and k over its own U(7 m) at x = −35 m.
+**Validation (OpenFOAM 12, realizable k-ε, full scale).** The belt's leaf area density and drag coefficient are not in the dataset, so Eddy3D solved a **drag sweep**: no belt, three vegetation-library crowns of rising Cd·LAD (0.30, 0.625 and 0.875 1/m) on a two-dimensional slab, and the conifer crown on the real 74 m belt as a half domain. Each arm is its own run. The drag values are a calibration against the 28 points. Eddy3D's trees have no canopy k source. The measurement is U/U_H and k/U_H² (U_H the wind at 7 m); the model is |U| and k over its own U(7 m) at x = −35 m.
 
 | Arm | Cd·LAD [1/m] | U R | U FAC2 | U FB | mean U/U_H | k R | k FAC2 | k FB |
 |---|---|---|---|---|---|---|---|---|
@@ -617,9 +608,9 @@ distance behind the belt; the model's falls.
 <details markdown="block">
 <summary>Interpretation: Case G drag sweep</summary>
 
-- The arm nearest the data is a calibration against these 28 values, not a validation.
-- Drag moves the level and not the pattern. Even the densest crown leaves the mean above the measurement, so the sweep
-  does not bracket the field.
+- The arm nearest the data is the densest one and the edge of the sweep, which does not bracket the field: the densest
+  crown's mean U/U_H is 0.554 against 0.478 measured.
+- Drag changes the level of the mean speed and leaves the pattern (R) where it was.
 
 Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-gk/).
 
@@ -706,9 +697,9 @@ k-ε closures, 0.40 under k-ω SST; c\* R at Sct 0.5 0.96, 0.94 and 0.47. Reatta
 <details markdown="block">
 <summary>Interpretation: Case I scores and closures</summary>
 
-- V's FB is a near-zero mean; read its R of 0.99.
+- V's FB comes from a near-zero mean; its R is 0.99.
 - Mean velocity does not separate the closures; k does, and so does the concentration.
-- This ranks three closures on one cube and one mesh, not in general.
+- This ranks three closures on one cube and one mesh.
 
 Full reading: [Cases H and I](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-hi/).
 
@@ -795,8 +786,7 @@ Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases
 | c\*, Sct 0.7 | +0.950 | 0.394 | −0.983 | 0.099 |
 
 Mean U/U_H: model 0.272, tunnel 0.502. V has a constant offset in the tunnel; a model with V = 0 hits 0.91 of the points.
-The four points within one cube height of the source are 3.7 to 5.1 times too high on average; the model's source is a
-zone of four cells.
+The four points within one cube height of the source are 3.7 to 5.1 times the measured value on average.
 
 <details markdown="block">
 <summary>Interpretation: Case K scores</summary>
@@ -804,7 +794,9 @@ zone of four cells.
 - The velocity pattern is reproduced and the level is low.
 - k is a factor of four low (R 0.33).
 - V's hit rate scores nothing.
-- The concentration is correlated at every Schmidt number (R 0.95) and high (FB −0.69 to −0.98).
+- The concentration is correlated at every Schmidt number (R 0.95) and high (FB −0.69 to −0.98). The excess at the four
+  near-source points follows from the model's source: a zone of four cells (0.75 m across) where the tunnel's outlet is
+  5 mm.
 
 Full reading: [Cases G and K](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-gk/).
 
@@ -897,14 +889,12 @@ Full reading: [Cases J and L](https://sustainableurbansystems.com/CFD-Test-Cases
   carry 0.055 against 0.087 for the two far ones.
 - The tunnel's own WD 175 and WD 185 reach FAC2 0.73 and 0.80 against its WD 180; the model 0.13 to 0.20.
 - Mean streamwise velocity U/U<sub>R</sub>: model 0.026, tunnel 0.164; |U| FB +0.19.
-- The 18 field runs are recorded beside it and not asserted.
 
 <details markdown="block">
 <summary>Interpretation: Case M scores</summary>
 
 - The tracer is under-predicted at every Schmidt number.
 - The mirrored points score better than the real points: the modelled plume is displaced sideways against the tunnel's.
-- The fixture first asserted the ordering of the near points against the far ones; it now records it.
 - The mean streamwise velocity is low while the magnitude is close.
 
 Full reading: [Cases F and M](https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/validation/cases-fm/).
@@ -946,21 +936,6 @@ change sign, the factor-of-two band.
 Normalised by U_H, the benchmark's convention. Hit rate uses D = 0.25, W = 0.05 U_H.
 Reattachment length behind the building: **L_r/H = 1.49** (Case A), **3.27** (Case B).
 
-<details markdown="block">
-<summary>Interpretation: Cases A and B scores</summary>
-
-- The streamwise field is right: R ≈ 0.96 in both cases, FAC2 0.82 / 0.70.
-- k is under-predicted in both (FB ≈ +0.47, R ≈ 0.4), the familiar realizable k-ε behaviour and consistent with what
-  Eddy3D already records for AIJ Case H.
-- FAC2 on V and W is low by construction, not by failure. Those components change sign, so factor-of-two agreement is a
-  harsh measure near zero; R and hit rate are the meaningful columns there. The flat row of model V ≈ 0 in Case B's
-  panel is the symmetry plane: a RANS solution is symmetric, so V ≡ 0 at y = 0, while the tunnel measures small non-zero
-  values.
-- Case A's W FB of −1.50 and its NMSE are artefacts of a near-zero mean (mean measured W is ~0.01 m/s), not a blow-up.
-  Read R = +0.71 instead.
-
-</details>
-
 ### Cases A and B — centre-plane profiles
 
 <!--fig name="cases-ab-openfoam-profiles.png" alt="Centre-plane profiles, Cases A and B" width="800"--><a href="validation/figures/cases-ab-openfoam-profiles.png"><img src="docs/assets/web/cases-ab-openfoam-profiles.png" width="800" height="417" loading="lazy" alt="Centre-plane profiles, Cases A and B"></a><!--/fig-->
@@ -969,10 +944,17 @@ Vertical profiles of U/U_H on the centre plane at the first three measured stati
 station.
 
 <details markdown="block">
-<summary>Interpretation: Cases A and B profiles</summary>
+<summary>Interpretation: Cases A and B scores and profiles</summary>
 
-The model follows the measured profile closely above roof height and in the recovering wake; the near-ground deficit
-immediately behind the building is where the closure does least well.
+- The streamwise field is right: R ≈ 0.96 in both cases, FAC2 0.82 / 0.70.
+- k is under-predicted in both (FB ≈ +0.47, R ≈ 0.4); Case H shows the same under-prediction (FB +0.51).
+- V and W change sign, so factor-of-two agreement is a harsh measure near zero and FAC2 is low on both; R and hit rate
+  carry the comparison there. The flat row of model V ≈ 0 in Case B's panel is the symmetry plane: a RANS solution is
+  symmetric, so V ≡ 0 at y = 0, while the tunnel measures small non-zero values.
+- Case A's W FB of −1.50 and its NMSE follow from a near-zero mean (mean measured W is ~0.01 m/s); the W correlation is
+  R = +0.71.
+- The model follows the measured profile closely above roof height and in the recovering wake; the near-ground deficit
+  immediately behind the building is where the closure does least well.
 
 </details>
 
@@ -1003,8 +985,8 @@ experiments with the same fitted inflow and probed the same measured points, at 
 - Wakes: A L_r = 3.39 H against OpenFOAM's 1.49; B's field fits best sampled H/2 downstream.
 - With the lateral sign flipped V's R becomes −0.65 (A) and −0.83 (B); with U scrambled across the points R drops to
   0.10.
-- At this spacing Case B crashed: OpenLB's STL reader segfaults when lattice nodes sit exactly on its octree planes.
-  Eddy3D moves such a lattice by 10⁻⁴ dx (`LBMCaseXml`); a regression test fails without the move.
+- OpenLB's STL reader segfaults when lattice nodes sit exactly on its octree planes, as in Case B at this spacing;
+  Eddy3D moves such a lattice by 10⁻⁴ dx (`LBMCaseXml`).
 
 <details markdown="block">
 <summary>Interpretation: OpenLB on Cases A and B</summary>
@@ -1072,21 +1054,19 @@ U_H with each case's approach-flow file.
 | E · Vs/U(15.9 m), 16 WD, before + after | 2560 | +1.00 | 0.22 | +0.43 | 0.08 | — |
 | E · the same, SW only (both states) | 160 | +1.07 | 0.20 | +0.53 | 0.04 | \|U\|: FB +0.31, FAC2 0.76, R +0.81, hit rate 0.36 |
 
-- FB +0.67 … +1.00 on the thermistor cases.
+- FB +0.67 … +1.00 on the thermistor cases. The predicted speed is roughly half the tunnel's everywhere.
 - Reversing the wind (θ + 180°) changes the predicted field by at most 1 × 10⁻⁴ U_ref over all 254,016 cells, in every
   case.
-- With the lattice cut at ±250 m the field moves by up to ~1 U_ref between the wind and its reverse; on A, B and D the
-  reversed wind scores as well as the right one or better.
+- With the lattice cut at ±250 m the field moves by up to ~1 U_ref between the wind and its reverse.
 
 <details markdown="block">
 <summary>Interpretation: ML surrogate and wind direction</summary>
 
-It predicts roughly half the tunnel's speed everywhere, and it does not respond to the wind direction. Perturbing one
-input channel at a time shows why: the network responds to spatial *contrast* in a channel, never to its level, and on a
-lattice that fills the window the two direction channels are constant planes. Cut the lattice at ±250 m and the
-direction enters through the step at its edge, but not in the measurement's favour. So these numbers grade the geometry
-the model was given, not a wind it was told; a model that cannot tell upwind from downwind cannot be validated on a
-wake. In Eddy3D, `WindPredictorCMP` should warn when its direction channels carry no contrast.
+Perturbing one input channel at a time shows that the network responds to spatial *contrast* in a channel and has no
+response to its level. On a lattice that fills the window the two direction channels are constant planes, so the
+predicted field does not respond to the wind direction. Cut the lattice at ±250 m and the direction enters through the
+step at its edge; the reversed wind then scores as well as the right one or better on A, B and D. The scores grade the
+geometry given to the model, and a model that cannot tell upwind from downwind cannot be validated on a wake.
 
 </details>
 
@@ -1099,10 +1079,11 @@ W = 0.05 U_H absolute. NMSE, NAD, MG and VG are in `validation/results/*.json` a
 <details markdown="block">
 <summary>How the scores are computed</summary>
 
-- Each case is solved through Eddy3D's production case writer, not a hand-built OpenFOAM case, so what is validated is
-  what a user gets.
+- Each case is solved through Eddy3D's production case writer.
 - Cases C–E: √(|U|² + 2k) and |U| are the two ends of the bracket the measurement has to fall in.
 - The ML surrogate rows use the same metric code and settings as the OpenFOAM rows.
+- Fixture structure checks (ordering of regions, plume decay, symmetry): passed for every run; they set no band on the
+  statistics.
 - Reproduction of the published numbers from the solver output:
   - Case C: an independent re-scoring from the probe files and the original `RS_caseC.csv`, largest difference
     9 × 10⁻¹⁶.
@@ -1131,7 +1112,7 @@ layer. At the measurement points, inside the refined mesh, it affects 0 of 240 p
 Case D (both sheltered and nearly still) and 5 of 80 (before construction) and 1 of 80 (after) in Case E.
 
 <details markdown="block">
-<summary>Data notes: approach flow at pedestrian height</summary>
+<summary>Data notes: Approach flow at pedestrian height</summary>
 
 The approach flow cannot be read at 2 m upstream. Read at that height it appears 17 % slow in Case C and 0.41 and 0.79
 of the table at 1.25 m and 2.5 m in Case E; both are this artefact. Reading the approach flow at pedestrian height needs
@@ -1145,7 +1126,7 @@ a refined upstream column or sampling consistent with the wall function.
 `validation/plot_case_c_openfoam.py`, `validation/plot_case_d_openfoam.py`, `validation/plot_case_e_openfoam.py`,
 `validation/plot_cases_hi_openfoam.py` (Cases H and I), `validation/plot_cases_gk_openfoam.py` (Cases G and K),
 `validation/plot_cases_jl_umf.py` (Cases J and L, on UMF), `validation/plot_cases_fm_openfoam.py` (Cases F and M) and `validation/plot_ml_surrogate.py` (UltraPlot, one style in
-`validation/plotstyle.py`: a colour-blind-safe palette, every PNG at 1200 dpi) build the figures. The Eddy3D
+`validation/plotstyle.py`: a colour-blind-safe palette) build the figures. The Eddy3D
 fixtures are `TestAijCaseAContainerE2E`, `TestAijCaseBContainerE2E`, `TestAijCaseC{0D,1D,2D}ContainerE2E`,
 `TestAijCaseDContainerE2E`, `TestAijCaseEContainerE2E`, `TestAijCaseFContainerE2E`, `TestAijCaseGContainerE2E`, `TestAijCaseHContainerE2E`,
 `TestAijCubeContainerE2E`, `TestAijCaseKContainerE2E`, `TestAijCaseJUmfContainerE2E`, `TestAijCaseLUmfContainerE2E`, `TestAijCaseMContainerE2E` and, for the ML
@@ -1177,15 +1158,8 @@ runs at dx = 1.6 m, read in the undisturbed column at the heights the other case
 | Case E, 2 m among ~6 m buildings (z/H ≈ 0.33) | 3.3–4.1 | 1.00, 1.06 |
 
 A 2 m pedestrian plane needs dx ≤ 0.5 m: 3.2 times finer in every direction, about 33 times the cells and 105 times
-the cell-steps over the same domain. The Case C array and the Niigata district are larger domains than Case A's.
-
-<details markdown="block">
-<summary>Interpretation: OpenLB at pedestrian height</summary>
-
-This CPU image does not run that in useful time. That is a statement about this resolution and this machine; a GPU run
-at dx ≤ 0.5 m would decide it.
-
-</details>
+the cell-steps over the same domain. The Case C array and the Niigata district are larger domains than Case A's. This CPU
+image does not run that in useful time; a GPU run at dx ≤ 0.5 m would decide it.
 
 **FluidX3D on C–E: not comparable (no ground wall function).** In the empty-domain run at H/64, 4–6 H downstream of the
 inlet (where the buildings stand), the flow at the heights the other cases measure at reads, as a fraction of the
@@ -1202,11 +1176,14 @@ across the span the ratio at z/H = 0.10 runs from 0.24 to 0.88 (4 H downstream).
 (0.91–0.99 at Case A's lattice); the Niigata district fits on this GPU only at about 1.6 cells per 2 m (an estimate from
 the lattice sizes, not a run).
 
+FluidX3D has no ground wall function; scoring Cases C to E needs one in the engine.
+
 <details markdown="block">
 <summary>Interpretation: FluidX3D at pedestrian height</summary>
 
-The cause is the ground, not the resolution. Refining makes it worse, not better. Scoring C–E on FluidX3D needs a ground
-wall function in the engine.
+- The ground causes the low ratios, and refining the lattice lowers them: the ratio at z/H = 0.10 is 0.74–0.80 at H/32
+  and 0.58–0.68 at H/64.
+- Case E's height comes closest (0.91–0.99).
 
 </details>
 
@@ -1230,8 +1207,7 @@ the y ≤ 0 half by the tunnel's symmetry convention.
 <details markdown="block">
 <summary>Data notes: Cases A and B lateral velocity</summary>
 
-Both of the first two were found by scoring the files rather than reading them, and both would quietly corrupt a
-comparison. Just outside the windward side face the flow must deflect away from the centreline, toward −y on the y < 0
+Just outside the windward side face the flow must deflect away from the centreline, toward −y on the y < 0
 flank; the same flow feature has opposite sign in the two cases. The R = −0.910 of Case B's V is an anti-correlation no
 turbulence closure produces.
 
@@ -1240,15 +1216,16 @@ turbulence closure produces.
 Cases C to E (each case's section above carries the detail):
 
 3. **Scalar vs vector speed.** C, D and E measure with thermistors — an omnidirectional *scalar* mean speed. Case D's
-   overlapping instruments put the ratio at 1.34 (ratio of means).
+   overlapping instruments put the ratio at 1.34 (ratio of means). Compare the bracket |U| ≤ Vs ≤ √(|U|² + 2k).
 4. **Case C's `CB` column is text** and its header has a trailing comma; its 1080 rows are nine configurations.
    Its wind-direction rotation sense differs by a y-sign flip between the CSV (toward −y) and the paper's figure.
    Scored the other way, the solved field's R against the tunnel falls from 0.83–0.91 to −0.33 … +0.03 at 22.5° and
    45°.
-5. **Case D's STL is dirty** (duplicates, inward roofs); its data is in a BIFF8 `.xls` in millimetres with `-` for
+5. **Case D's STL has duplicate facets and inward roofs**; its data is in a BIFF8 `.xls` in millimetres with `-` for
    unmeasured (the Zenodo CSVs use −999.9, and RS-S's z header is the full-width character `ｚ`); its 22.5°/45°
    rotation sense rests on a figure, because the array's y-symmetry makes it undecidable from the data
-   (QUESTIONS.md Q2). Every sensor point is outside every block, and a 12.5 mm shift is detected.
+   (QUESTIONS.md Q2); solved fields score R 0.80 and 0.85 in that sense at 22.5° and 45°, 0.40 and 0.17 mirrored.
+   Every sensor point is outside every block, and a 12.5 mm shift is detected.
 6. **Case E's velocity ratio is normalised by U(15.9 m) = 3.935 m/s**, not U_H or UR; the data is quantised at
    0.0198; the CSV/STL the readme names are absent from this folder (mirrored from Zenodo under `clean/sources/`;
    its STL is model scale, not watertight, and has point 50 inside a wall); the `probes` layer of the `.3dm` is
@@ -1259,18 +1236,7 @@ Cases C to E (each case's section above carries the detail):
    opposite sign to its horizontal planes; I's V on the y = 0 plane is a numerical zero, not a measurement; K's workbook and
    data paper use different concentration scales; L's `T(K)` column of the tunnel file is in degrees Celsius.
 
-<details markdown="block">
-<summary>Interpretation: Cases C to E notes</summary>
-
-- Scalar vs vector speed: a RANS |U| is low against the thermistor's scalar speed by construction. Compare the bracket
-  |U| ≤ Vs ≤ √(|U|² + 2k).
-- Case C: the CSV's rotation sense is the right one.
-- Case D: the solved fields corroborate the figure's rotation sense (R 0.80 and 0.85 in its sense at 22.5° and 45°, 0.40
-  and 0.17 mirrored). The sensor coordinates agree with the geometry.
-
-</details>
-
-The cleaned tables served by the API apply the unit, sign and frame corrections; the raw files do not.
+The cleaned tables served by the API apply the unit, sign and frame corrections; the raw files do not. Do not apply the corrections again to the published files.
 
 </details>
 
@@ -1440,11 +1406,9 @@ are not part of this rebuild: their results and per-point values are committed a
 <details>
 <summary><b>Cite</b> · licence and attribution</summary>
 
-The measurements belong to their collectors, and the benchmark is edited and distributed by Yoshihide Tominaga,
-Hideki Kikumoto and Tsubasa Okaze. Every dataset is released under
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (stated in each case's readme), so it may be
-redistributed and adapted with attribution. When you use any of it, cite the benchmark paper, the case's dataset
-and the case's original study:
+Data: Kikumoto et al. (2026), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The benchmark is edited and
+distributed by Yoshihide Tominaga, Hideki Kikumoto and Tsubasa Okaze; collectors per case are in the table below.
+Cite the benchmark paper, the case's dataset and the case's original study:
 
 **The benchmark**
 
@@ -1474,9 +1438,8 @@ and the case's original study:
 | M | Yoshie, R., Tachibana, T., Tominaga, Y., Kikumoto, H., Okaze, T. AIJ UWE Benchmark Dataset — Case M (TPU): Wind Tunnel Experiment and Field Observation for Flow and Dispersion within TPU Campus. [doi:10.5281/zenodo.15487857](https://doi.org/10.5281/zenodo.15487857) | Tachibana, T., Yoshie, R., Nakayama, S., Kishida, T., Miyashita, K., Sasaki, R. (2022). Comparison between field measurement and wind tunnel experiments of gas dispersion in an urban area and verification of similarity law. Journal of Wind Engineering 47(3), 39-52 (in Japanese). <http://dx.doi.org/10.5359/jwe.47.39> |
 
 The dataset entries of Cases A to E are as the benchmark paper lists them (its references 17, 36, 40, 50, 53); those of Cases F to M
-are composed from each case's readme (its data collectors, then the editors, and the DOI it names) and have not been checked against the
-paper's reference list. The original studies are the citations each case's readme requests. The cleaning in `clean/` and the validation on this page are
-Eddy3D's ([github.com/SustainableUrbanSystemsLab](https://github.com/SustainableUrbanSystemsLab)); the measurements
-are the collectors'.
+are composed from each case's readme (its data collectors, then the editors, and the DOI it names) and are not checked against the
+paper's reference list. The original studies are the citations each case's readme requests. Cleaning in `clean/` and validation
+scores: Eddy3D ([github.com/SustainableUrbanSystemsLab](https://github.com/SustainableUrbanSystemsLab)).
 
 </details>

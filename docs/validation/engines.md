@@ -43,7 +43,7 @@ OpenLB (Eddy3D's `eddy3dWind`: Smagorinsky, third-order regularised D3Q19, CPU i
 - The resolved k is 0.7 % (A) and 10 % (B) of the measured one; k is not compared.
 - Reattachment length, Case A: L_r = 3.39 H against OpenFOAM's 1.49. Case B: the field fits best sampled H/2 downstream.
 - Controls: with the lateral sign flipped, V's R becomes −0.65 (A) and −0.83 (B); U scrambled across the points drops R to 0.10.
-- At this spacing Case B first crashed: OpenLB's STL reader segfaults when lattice nodes sit exactly on its octree planes. Eddy3D now moves such a lattice by 10⁻⁴ dx (`LBMCaseXml`), with a regression test that fails without the move.
+- OpenLB's STL reader segfaults when lattice nodes sit exactly on its octree planes, as in Case B at this spacing; Eddy3D moves such a lattice by 10⁻⁴ dx (`LBMCaseXml`).
 
 <details markdown="block">
 <summary>Interpretation: OpenLB on Cases A and B</summary>
@@ -92,14 +92,7 @@ Cases C, D and E measure only at pedestrian height. A point is scoreable on Open
 | Case C, z = 0.1 D | 1–1.25 | 0.29, 0.40 |
 | Case E, 2 m among ~6 m buildings (z/H ≈ 0.33) | 3.3–4.1 | 1.00, 1.06 |
 
-A 2 m pedestrian plane needs dx ≤ 0.5 m: 3.2 times finer in every direction, about 33 times the cells and 105 times the cell-steps over the same domain. The Case C array and the Niigata district are larger domains than Case A's. This CPU image does not run that in useful time.
-
-<details markdown="block">
-<summary>Interpretation: OpenLB on Cases C to E</summary>
-
-This is a statement about this resolution and this machine; a GPU run at dx ≤ 0.5 m would decide it.
-
-</details>
+A 2 m pedestrian plane needs dx ≤ 0.5 m: 3.2 times finer in every direction, about 33 times the cells and 105 times the cell-steps over the same domain. The Case C array and the Niigata district are larger domains than Case A's. This CPU image does not run that in useful time; a GPU run at dx ≤ 0.5 m would decide it.
 
 ## Why FluidX3D is not scored on C to E
 
@@ -115,11 +108,12 @@ In the empty-domain run at H/64, 4–6 H downstream of the inlet (where the buil
 - At H/64 the near-wall flow forms stationary streaks, and across the span the ratio at z/H = 0.10 runs from 0.24 to 0.88 (4 H downstream).
 - Case E's height reads 0.91–0.99 at Case A's lattice. The Niigata district fits on this GPU only at about 1.6 cells per 2 m (an estimate from the lattice sizes, not a run).
 
+FluidX3D has no ground wall function; scoring Cases C to E needs one in the engine.
+
 <details markdown="block">
 <summary>Interpretation: FluidX3D on Cases C to E</summary>
 
-- The cause is the ground, not the resolution. Refining makes it worse, not better.
-- Case E's height comes closest.
-- Scoring C–E on FluidX3D needs a ground wall function in the engine.
+- The ground causes the low ratios, and refining the lattice lowers them: the ratio at z/H = 0.10 is 0.74–0.80 at H/32 and 0.58–0.68 at H/64.
+- Case E's height comes closest (0.91–0.99).
 
 </details>

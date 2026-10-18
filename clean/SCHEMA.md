@@ -83,7 +83,7 @@ row and measured counts, and `sense_basis` / `status` saying what fixes the rota
 | A, B | (1, 0) | definition |
 | C | (cos WD, **−sin WD**) | measured from the data: the WD = 45° field is mirror-symmetric about y = −x (mean \|ΔVs\| 0.10–0.13 m/s, the experiment's repeatability) and not about y = +x (0.52–0.80). Figure 3 of the data paper draws the opposite sense — QUESTIONS Q1 |
 | D | (cos WD, **+sin WD**) for 22.5°, 45° | **corroborated by solved fields**: the array is exactly y-mirror symmetric, so the sense cannot be settled from the data; it is taken from Figure 4 of the data paper, and Eddy3D's solved fields score R 0.80 / 0.85 in this sense against 0.40 / 0.17 mirrored (22.5° / 45°) — QUESTIONS Q2 |
-| E | (−sin WD, −cos WD) | definition: FROM-direction, +y north (compass rose in `MP_caseE.png`); frame verified by all 80 points lying in open space and a 10° rotation control putting 26 inside buildings |
+| E | (−sin WD, −cos WD) | definition: FROM-direction, +y north (compass rose in `MP_caseE.png`); frame verified by all 80 points lying in open space and a 10° rotation control putting 26 inside the official STL's buildings |
 
 Note C and D disagree in sense (QUESTIONS Q1, Q2).
 
@@ -100,7 +100,7 @@ that matter) and a power-law fit — reproduced in `build.py`, never typed in.
 
 ASCII STL, LF line endings, outward normals, **metres in the same frame as the points** (so the E
 files are full-scale and ~400 m across). `geometry.json` lists each file, its provenance, triangle
-count, bounding box, watertightness, and — for A–D and G–L — the axis-aligned boxes it is made of, so a
+count, bounding box, watertightness, and, for A–D and G–L, the axis-aligned boxes it is made of, so a
 consumer need not parse an STL at all.
 
 | case | files | made from |
@@ -137,7 +137,7 @@ changed input or a changed `build.py`.
 
 `scripts/aijdata.py` reads `clean/manifest.json`, finds each case's `points_csv`, maps the columns
 by name and serves them unchanged through `docs/api/cases/<id>/points.{json,csv}`
-(`points_source` in each file says so). Column `case_id` is deliberately not named `case`, which
+(`points_source` in each file says so). Column `case_id` is not named `case`, which
 that adapter would read as the configuration.
 
 ## Cases F and M

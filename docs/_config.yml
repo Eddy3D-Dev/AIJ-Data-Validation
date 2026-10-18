@@ -1,5 +1,5 @@
-title: AIJ UWE benchmark
-description: Wind-tunnel reference data from the Architectural Institute of Japan Urban Wind Environment benchmark, cleaned, with Eddy3D's validation against it and a static API.
+title: AIJ UWE
+description: Validation data from the AIJ (Architectural Institute of Japan) benchmark cases—cleaned and packaged as an API.
 url: "https://sustainableurbansystems.com"
 baseurl: "/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ"
 
@@ -43,7 +43,7 @@ nav_external_links:
 
 # The footer line (and the edit link, which differs for generated and hand-written pages) is in
 # docs/_includes/footer_custom.html.
-footer_content: "Measurement data CC BY 4.0, belongs to its collectors and distributors (named per case). Cite the AIJ UWE benchmark and the accompanying papers."
+footer_content: "Data: Kikumoto et al. (2026), CC BY 4.0. Collectors per case on each Data page."
 
 # Callouts: {: .note }, {: .warning } or {: .important } before a paragraph; {: .warning-title } before a
 # blockquote whose first paragraph is the title.

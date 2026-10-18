@@ -28,13 +28,11 @@ FB is positive when the model is low.
 
 - The predicted speed is roughly half the tunnel's everywhere.
 - Reversing the wind changes the predicted field by at most 1 × 10⁻⁴ U_ref over all 254,016 cells, in every case.
-- With the lattice cut at ±250 m, the reversed wind scores as well as the right one or better on A, B and D.
 
 <details markdown="block">
-<summary>Interpretation: wind direction and what the scores grade</summary>
+<summary>Interpretation: Wind direction and what the scores grade</summary>
 
-- The network responds to spatial contrast in a channel, never to its level. On a lattice that fills the window the direction channels are constant planes; with the lattice cut at ±250 m the direction enters through the step at its edge.
-- The predicted field does not respond to the wind direction.
-- These numbers grade the geometry the model was given, not a wind it was told.
+- The network responds to spatial contrast in a channel and has no response to its level. On a lattice that fills the window the direction channels are constant planes; with the lattice cut at ±250 m the direction enters through the step at its edge, and the reversed wind then scores as well as the right one or better on A, B and D.
+- The scores grade the geometry given to the model; the wind direction does not enter.
 
 </details>

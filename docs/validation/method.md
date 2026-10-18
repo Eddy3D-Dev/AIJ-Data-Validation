@@ -8,7 +8,7 @@ description: "How Eddy3D's solvers are scored against the AIJ tunnel data: the m
 
 # Method and metrics
 
-What is scored: the [Validation]({{ '/validation/' | relative_url }}) page.
+Scores: [Validation]({{ '/validation/' | relative_url }}).
 
 ## How the scores are computed
 
@@ -23,6 +23,7 @@ What is scored: the [Validation]({{ '/validation/' | relative_url }}) page.
 - Case F is solved for one wind direction in two vertical frames that are each their own run. Case M (tracer over a real campus) is solved at one heading with the three Schmidt numbers as three runs on one flow.
 - Case B's lateral velocity is sign-corrected before scoring (see [Known data issues]({{ '/known-data-issues/' | relative_url }})).
 - The reattachment length L_r behind the building is read from a wake line at ground level.
+- Fixture structure checks (ordering of regions, plume decay, symmetry): passed for every run; they set no band on the statistics.
 
 ### Metrics
 
@@ -51,7 +52,7 @@ A control is scored with the same metrics as the run.
 - Cases F, G, H, I, J, K, L and M: the scores served are recomputed from the per-point pairs by `validation/dispersion_metrics.py`, a transcription of Eddy3D's `MetaFOAM.DispersionMetrics`. Fed the published CSVs and the fixture's probes, it gives the fixture's own scores to 10⁻⁹ (24 scores of Case F, 43 of Case K, five per arm of Case G, 80 per run of Case J, 48 of Case L, 84 of Case M). The SHA-256 of every file a snapshot was read from is in its results file under `sources`, and the script fails if the check is not met.
 
 <details markdown="block">
-<summary>Interpretation: scoring choices</summary>
+<summary>Interpretation: Scoring choices</summary>
 
 - The scalar-speed pair √(\|U\|² + 2k) and \|U\| are the two ends of the bracket the thermistor measurement has to fall in.
 - The profile shape of a log law is scale-invariant, so the U/U_H values of the 1:100 solves of Cases A and B carry over unchanged.
@@ -66,10 +67,11 @@ These shape the validations of Cases C, D and E.
 - **Inflow profile.** The inlet is a log law. Fitted power-law exponents of the tunnels' profiles are 0.19 (C, D) and 0.16–0.20 (E) against the papers' 0.28 / 0.25. A log-law fit misses the single measurement height by −4 … −11 % depending on the fitting window, and sets the inlet k 26–48 % below the tunnel's (Case D).
 
 <details markdown="block">
-<summary>Interpretation: the two differences</summary>
+<summary>Interpretation: The two differences</summary>
 
 - Steady RANS gives a mean velocity magnitude that is lower than the thermistor's scalar speed by construction.
-- These are declared systematics, and the first thing to quote if the scores come back worse than A and B.
+- Both differences lower the model against Cases C, D and E relative to Cases A and B.
+- The tunnels' profiles of Cases C, D and E are closer to a power law than a log law, and a single near-ground height is where a log-law inlet is least right.
 
 </details>
 
@@ -84,13 +86,6 @@ Fitted to each case's own approach-flow file over z = 0.02 … 2H:
 
 - Cases C, D and E carry their own fitted profiles on their pages. All three score at a single near-ground height.
 - The fits are in `/api/cases/{id}.json` under `inflow_fit`.
-
-<details markdown="block">
-<summary>Interpretation: inflow of Cases C to E</summary>
-
-The tunnels' profiles of Cases C, D and E are closer to a power law than a log law, and a single near-ground height is where a log-law inlet is least right.
-
-</details>
 
 ## Reproducing the figures
 

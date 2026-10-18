@@ -7,7 +7,7 @@ cannot settle. Contacts: `manifest.json → cases.<id>.contact`. Numbers: `check
 
 In `RS_caseC.csv`'s own frame (+x = the WD = 0 flow, confirmed three ways on the data) the WD = 45°
 field is mirror-symmetric about the line **y = −x**: mean |ΔVs| over the 57 mirror pairs is
-0.108 / 0.103 / 0.130 m/s for 0D / 1D / 2D — the experiment's own repeatability floor — while the
+0.108 / 0.103 / 0.130 m/s for 0D / 1D / 2D (the experiment's own repeatability floor), while the
 mirror about y = +x gives 0.52 / 0.77 / 0.80 m/s. So in the CSV the wind rotates from +x **toward
 −y** as WD grows. Figure 3 of the data paper draws the 0 / 22.5 / 45° arrows fanning toward **+y**.
 The two differ by a sign of y, which is invisible at WD = 0.
