@@ -13943,13 +13943,6 @@ solid AIJ_caseM_default
       vertex -203.2776 120.9042 33.37764
     endloop
   endfacet
-  facet normal -0.599359 -0.180277 0.779916
-    outer loop
-      vertex -213.7098 110.0262 33.27582
-      vertex -213.3762 108.867 33.26424
-      vertex -213.0144 107.8596 33.30942
-    endloop
-  endfacet
   facet normal 0.0306857 0.00631211 0.999509
     outer loop
       vertex -151.0404 95.1282 33.32244
@@ -24686,13 +24679,6 @@ solid AIJ_caseM_default
       vertex 86.3838 93.495 33.08898
       vertex 82.4448 94.3596 33.5793
       vertex 82.5468 93.1356 33.53898
-    endloop
-  endfacet
-  facet normal 0.509492 0.209228 0.83465
-    outer loop
-      vertex 93.9972 27.38964 32.80542
-      vertex 93.549 28.44132 32.81538
-      vertex 94.4316 26.2404 32.82834
     endloop
   endfacet
   facet normal -0.103012 -0.0178056 0.994521
@@ -121055,13 +121041,6 @@ solid AIJ_caseM_default
       vertex -36.21996 -226.1934 32.02638
       vertex -36.31962 -233.511 32.0133
       vertex -32.1708 -227.337 32.16918
-    endloop
-  endfacet
-  facet normal 0.450167 -0.49925 0.740337
-    outer loop
-      vertex -42.98466 -240.4434 31.58022
-      vertex -42.2175 -239.6868 31.62396
-      vertex -41.469 -238.8738 31.71708
     endloop
   endfacet
   facet normal -0.039403 0.00124991 0.999223
@@ -218371,7 +218350,7 @@ solid AIJ_caseM_default
       vertex 144 -275.6508 0
     endloop
   endfacet
-  facet normal -0.153526 -2.36565e-15 0.988145
+  facet normal -0.153526 1.02854e-16 0.988145
     outer loop
       vertex 144 -275.6508 0
       vertex 150.0408 -268.9086 0.938544
@@ -244175,13 +244154,6 @@ solid AIJ_caseM_default
   endfacet
   facet normal -1 0 0
     outer loop
-      vertex 142.5378 -105.318 13.66884
-      vertex 142.5378 -106.3038 14.2509
-      vertex 142.5378 -104.2938 13.1577
-    endloop
-  endfacet
-  facet normal -1 0 0
-    outer loop
       vertex 142.5378 -99.8646 12.20484
       vertex 142.5378 -101.0004 12.34896
       vertex 142.5378 -98.7288 27.8667
@@ -250312,7 +250284,7 @@ solid AIJ_caseM_default
       vertex -218.4012 196.854 34.90818
     endloop
   endfacet
-  facet normal -0.809925 0.586533 1.03627e-14
+  facet normal -0.809925 0.586533 -3.81448e-15
     outer loop
       vertex -215.6916 200.5956 34.91598
       vertex -217.0464 198.7248 34.97088
@@ -250823,7 +250795,7 @@ solid AIJ_caseM_default
       vertex 48.12534 -219.1494 33.15024
     endloop
   endfacet
-  facet normal 0.982593 0.185774 2.52714e-16
+  facet normal 0.982593 0.185774 -1.02917e-15
     outer loop
       vertex 48.33282 -220.2468 32.88888
       vertex 48.12534 -219.1494 33.15024
@@ -251075,7 +251047,7 @@ solid AIJ_caseM_default
       vertex 119.4888 200.4372 15.66054
     endloop
   endfacet
-  facet normal -0.999712 0.0240187 4.78406e-15
+  facet normal -0.999712 0.0240187 -2.27718e-15
     outer loop
       vertex 119.5974 204.933 21.6423
       vertex 119.5704 203.8092 15.68916
@@ -251640,13 +251612,6 @@ solid AIJ_caseM_default
       vertex 106.6752 183.8916 17.80164
       vertex 108.2124 182.8812 17.45472
       vertex 109.5534 181.9998 17.30052
-    endloop
-  endfacet
-  facet normal -0.549417 -0.835548 -0.000942989
-    outer loop
-      vertex 108.2124 182.8812 17.45472
-      vertex 106.6752 183.8916 17.80164
-      vertex 107.5416 183.3222 17.53182
     endloop
   endfacet
   facet normal -0.549261 -0.835651 -0
@@ -253243,13 +253208,6 @@ solid AIJ_caseM_default
       vertex 104.4852 164.5284 24.50982
       vertex 106.152 163.359 24.40464
       vertex 106.9866 162.7734 24.38994
-    endloop
-  endfacet
-  facet normal -0.573984 -0.818829 0.00781802
-    outer loop
-      vertex 106.152 163.359 24.40464
-      vertex 104.4852 164.5284 24.50982
-      vertex 105.3168 163.9446 24.41934
     endloop
   endfacet
   facet normal -0.574266 -0.818665 0.00240901
@@ -256185,13 +256143,6 @@ solid AIJ_caseM_default
       vertex 47.36886 220.5684 34.38522
     endloop
   endfacet
-  facet normal -0.853576 -0.520968 -0.000402366
-    outer loop
-      vertex 47.69058 220.0416 33.9714
-      vertex 48.0123 219.5148 33.55752
-      vertex 48.4719 218.7618 33.52116
-    endloop
-  endfacet
   facet normal -0.853568 -0.520982 -0
     outer loop
       vertex 49.3911 217.2558 40.5339
@@ -256857,7 +256808,7 @@ solid AIJ_caseM_default
       vertex -242.385 98.9784 34.07214
     endloop
   endfacet
-  facet normal -0.972801 0.231644 4.1972e-14
+  facet normal -0.972801 0.231644 -1.55722e-13
     outer loop
       vertex -242.1144 100.1148 34.0404
       vertex -242.385 98.9784 34.07214
@@ -257991,14 +257942,14 @@ solid AIJ_caseM_default
       vertex 43.98582 -23.29722 32.43666
     endloop
   endfacet
-  facet normal -0.196116 -0.980581 1.37092e-15
+  facet normal -0.196116 -0.980581 -1.49555e-15
     outer loop
       vertex -202.5912 32.91144 32.02674
       vertex -198.1104 32.01528 32.09982
       vertex -212.6508 34.92336 38.10102
     endloop
   endfacet
-  facet normal -0.196116 -0.980581 9.36164e-16
+  facet normal -0.196116 -0.980581 0
     outer loop
       vertex -212.6508 34.92336 38.10102
       vertex -208.1916 34.03152 32.07912
@@ -258229,7 +258180,7 @@ solid AIJ_caseM_default
       vertex -185.097 -8.1042 37.15596
     endloop
   endfacet
-  facet normal 0.196116 0.980581 1.03691e-15
+  facet normal 0.196116 0.980581 -3.14216e-17
     outer loop
       vertex -190.47 -7.0296 30.95406
       vertex -194.766 -6.1704 31.15398
@@ -258376,14 +258327,14 @@ solid AIJ_caseM_default
       vertex -179.3628 20.4741 31.58496
     endloop
   endfacet
-  facet normal 0.196116 0.980581 -5.37985e-15
+  facet normal 0.196116 0.980581 -3.98109e-14
     outer loop
       vertex -184.59 28.57842 31.51242
       vertex -178.0056 27.26154 31.79166
       vertex -182.3916 28.13874 31.48272
     endloop
   endfacet
-  facet normal 0.196116 0.980581 1.57758e-15
+  facet normal 0.196116 0.980581 -4.55071e-16
     outer loop
       vertex -184.59 28.57842 31.51242
       vertex -188.9808 29.45658 31.74138
@@ -258411,7 +258362,7 @@ solid AIJ_caseM_default
       vertex -177.3384 29.44494 37.97286
     endloop
   endfacet
-  facet normal 0.196116 0.980581 1.10336e-14
+  facet normal 0.196116 0.980581 1.83893e-14
     outer loop
       vertex -183.9396 41.50038 31.73634
       vertex -177.4422 40.2009 32.06238
@@ -258453,7 +258404,7 @@ solid AIJ_caseM_default
       vertex -177.1638 -9.77028 31.42458
     endloop
   endfacet
-  facet normal 0.196116 0.980581 -1.43633e-15
+  facet normal 0.196116 0.980581 1.30575e-16
     outer loop
       vertex -172.5396 -10.69512 31.35006
       vertex -177.1638 -9.77028 31.42458
@@ -259475,7 +259426,7 @@ solid AIJ_caseM_default
       vertex -142.6542 -56.1879 37.40952
     endloop
   endfacet
-  facet normal -0.196116 -0.980581 9.47727e-16
+  facet normal -0.196116 -0.980581 -4.45144e-16
     outer loop
       vertex -142.6542 -56.1879 37.40952
       vertex -140.2686 -56.66502 31.12722
@@ -260581,7 +260532,7 @@ solid AIJ_caseM_default
       vertex -157.764 8.26578 37.38828
     endloop
   endfacet
-  facet normal -0.196116 -0.980581 1.22672e-14
+  facet normal -0.196116 -0.980581 0
     outer loop
       vertex -162.8772 -17.30112 31.01826
       vertex -157.1328 -18.45 31.06662
@@ -272327,7 +272278,7 @@ solid AIJ_caseM_default
       vertex 34.77804 -177.2046 33.87306
     endloop
   endfacet
-  facet normal 0.999574 -0.0291769 -3.50036e-16
+  facet normal 0.999574 -0.0291769 -4.44961e-16
     outer loop
       vertex 34.65576 -181.3938 39.82656
       vertex 34.77804 -177.2046 33.87306
@@ -274112,7 +274063,7 @@ solid AIJ_caseM_default
       vertex 27.82764 -294.4758 27.651
     endloop
   endfacet
-  facet normal -0.856833 0.515594 3.83774e-16
+  facet normal -0.856833 0.515594 1.93951e-16
     outer loop
       vertex 28.26234 -293.7534 19.67334
       vertex 27.82764 -294.4758 27.651
@@ -279446,7 +279397,7 @@ solid AIJ_caseM_default
       vertex 49.4406 -75.6234 40.52028
     endloop
   endfacet
-  facet normal 0.501569 0.865117 -1.29608e-15
+  facet normal 0.501569 0.865117 2.19848e-16
     outer loop
       vertex 50.02014 -75.9594 41.70534
       vertex 50.59968 -76.2954 32.60826
@@ -281987,7 +281938,7 @@ solid AIJ_caseM_default
       vertex -103.9326 -203.0682 30.78012
     endloop
   endfacet
-  facet normal 0.447214 0.894427 -7.07537e-15
+  facet normal 0.447214 0.894427 -3.04175e-15
     outer loop
       vertex -99.3522 -193.9062 33.89142
       vertex -103.1826 -191.991 30.75204
@@ -284437,7 +284388,7 @@ solid AIJ_caseM_default
       vertex -164.2584 -54.6966 30.37854
     endloop
   endfacet
-  facet normal 0.196116 0.980581 -1.14254e-15
+  facet normal 0.196116 0.980581 5.71269e-16
     outer loop
       vertex -164.2584 -54.6966 30.37854
       vertex -168.8976 -53.76876 30.4308
@@ -288952,7 +288903,7 @@ solid AIJ_caseM_default
       vertex -221.454 -84.9402 36.0498
     endloop
   endfacet
-  facet normal 0.201159 0.979559 -3.38069e-15
+  facet normal 0.201159 0.979559 6.15914e-16
     outer loop
       vertex -212.8368 -78.786 36.0498
       vertex -214.8528 -78.372 29.76492
@@ -291591,7 +291542,7 @@ solid AIJ_caseM_default
       vertex -55.33776 156.6822 46.40742
     endloop
   endfacet
-  facet normal 0.996085 0.0883972 0
+  facet normal 0.996085 0.0883972 2.81439e-15
     outer loop
       vertex -55.73562 161.1654 39.10596
       vertex -55.33776 156.6822 46.40742
@@ -294097,7 +294048,7 @@ solid AIJ_caseM_default
       vertex -215.6916 200.5956 34.91598
     endloop
   endfacet
-  facet normal -0.809925 0.586533 1.6835e-15
+  facet normal -0.809925 0.586533 -6.04335e-16
     outer loop
       vertex -214.3368 202.4664 40.90938
       vertex -217.0464 198.7248 34.97088
@@ -296813,7 +296764,7 @@ solid AIJ_caseM_default
       vertex -246.8496 -67.1202 35.59242
     endloop
   endfacet
-  facet normal -0.846072 0.533068 2.7545e-15
+  facet normal -0.846072 0.533068 -2.7545e-15
     outer loop
       vertex -246.8496 -67.1202 35.59242
       vertex -248.1126 -69.1248 29.65656
@@ -299648,7 +299599,7 @@ solid AIJ_caseM_default
       vertex -169.0512 1.800282 31.6401
     endloop
   endfacet
-  facet normal -0.196116 -0.980581 -4.19582e-16
+  facet normal -0.196116 -0.980581 5.03498e-16
     outer loop
       vertex -171.111 -8.49864 37.61106
       vertex -181.2582 -6.4692 37.61106
@@ -299802,7 +299753,7 @@ solid AIJ_caseM_default
       vertex -157.764 8.26578 37.38828
     endloop
   endfacet
-  facet normal 0.196116 0.980581 -1.19099e-16
+  facet normal 0.196116 0.980581 3.02328e-16
     outer loop
       vertex -149.724 6.65778 37.38828
       vertex -152.0202 7.11702 31.4763
@@ -307117,7 +307068,7 @@ solid AIJ_caseM_default
       vertex -79.8888 49.26888 35.44938
     endloop
   endfacet
-  facet normal 0.51852 0.855065 -4.91594e-15
+  facet normal 0.51852 0.855065 -4.88108e-16
     outer loop
       vertex -80.4504 49.60944 33.4947
       vertex -79.8888 49.26888 35.44938
@@ -307549,6 +307500,153 @@ solid AIJ_caseM_default
       vertex -74.1174 41.31738 35.9592
       vertex -78.8904 35.81466 35.9592
       vertex -78.8904 35.81466 55.94322
+    endloop
+  endfacet
+  facet normal -0 1 0
+    outer loop
+      vertex -540 360 0
+      vertex 540 360 0
+      vertex 540 360 -1
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex -540 360 0
+      vertex 540 360 -1
+      vertex -540 360 -1
+    endloop
+  endfacet
+  facet normal -1 0 0
+    outer loop
+      vertex -540 59.4 0
+      vertex -540 360 0
+      vertex -540 360 -1
+    endloop
+  endfacet
+  facet normal -1 0 0
+    outer loop
+      vertex -540 59.4 0
+      vertex -540 360 -1
+      vertex -540 59.4 -1
+    endloop
+  endfacet
+  facet normal -1 0 0
+    outer loop
+      vertex -540 -153.45 0
+      vertex -540 59.4 0
+      vertex -540 59.4 -1
+    endloop
+  endfacet
+  facet normal -1 0 0
+    outer loop
+      vertex -540 -153.45 0
+      vertex -540 59.4 -1
+      vertex -540 -153.45 -1
+    endloop
+  endfacet
+  facet normal -1 0 0
+    outer loop
+      vertex -540 -360 0
+      vertex -540 -153.45 0
+      vertex -540 -153.45 -1
+    endloop
+  endfacet
+  facet normal -1 0 0
+    outer loop
+      vertex -540 -360 0
+      vertex -540 -153.45 -1
+      vertex -540 -360 -1
+    endloop
+  endfacet
+  facet normal -0 -1 0
+    outer loop
+      vertex 168 -360 0
+      vertex -540 -360 0
+      vertex -540 -360 -1
+    endloop
+  endfacet
+  facet normal 0 -1 -0
+    outer loop
+      vertex 168 -360 0
+      vertex -540 -360 -1
+      vertex 168 -360 -1
+    endloop
+  endfacet
+  facet normal -0 -1 0
+    outer loop
+      vertex 540 -360 0
+      vertex 168 -360 0
+      vertex 168 -360 -1
+    endloop
+  endfacet
+  facet normal 0 -1 -0
+    outer loop
+      vertex 540 -360 0
+      vertex 168 -360 -1
+      vertex 540 -360 -1
+    endloop
+  endfacet
+  facet normal 1 0 0
+    outer loop
+      vertex 540 360 0
+      vertex 540 -360 0
+      vertex 540 -360 -1
+    endloop
+  endfacet
+  facet normal 1 0 0
+    outer loop
+      vertex 540 360 0
+      vertex 540 -360 -1
+      vertex 540 360 -1
+    endloop
+  endfacet
+  facet normal 0 0 -1
+    outer loop
+      vertex -130.2857 -64.86429 -1
+      vertex -540 360 -1
+      vertex 540 360 -1
+    endloop
+  endfacet
+  facet normal 0 0 -1
+    outer loop
+      vertex -130.2857 -64.86429 -1
+      vertex -540 59.4 -1
+      vertex -540 360 -1
+    endloop
+  endfacet
+  facet normal -0 0 -1
+    outer loop
+      vertex -130.2857 -64.86429 -1
+      vertex -540 -153.45 -1
+      vertex -540 59.4 -1
+    endloop
+  endfacet
+  facet normal 0 0 -1
+    outer loop
+      vertex -130.2857 -64.86429 -1
+      vertex -540 -360 -1
+      vertex -540 -153.45 -1
+    endloop
+  endfacet
+  facet normal 0 -0 -1
+    outer loop
+      vertex -130.2857 -64.86429 -1
+      vertex 168 -360 -1
+      vertex -540 -360 -1
+    endloop
+  endfacet
+  facet normal 0 0 -1
+    outer loop
+      vertex -130.2857 -64.86429 -1
+      vertex 540 -360 -1
+      vertex 168 -360 -1
+    endloop
+  endfacet
+  facet normal 0 0 -1
+    outer loop
+      vertex -130.2857 -64.86429 -1
+      vertex 540 360 -1
+      vertex 540 -360 -1
     endloop
   endfacet
 endsolid AIJ_caseM_default

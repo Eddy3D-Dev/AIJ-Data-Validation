@@ -17,7 +17,7 @@ Isolated 1:1:2 building, velocity field (split-fibre hot wire).
 
 <figure class="figure render">
 <a href="{{ '/assets/geometry/case-a.png' | relative_url }}"><img src="{{ '/assets/web/case-a.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case A — 1:1:2 building"></a>
-<figcaption>Isolated 1:1:2 building, b = 0.08 m, H = 0.16 m (model scale); the wind blows along +x.<br><a class="original" href="{{ '/assets/geometry/case-a.png' | relative_url }}">1200 dpi original, 0.8 MB</a></figcaption>
+<figcaption>Isolated 1:1:2 building, b = 0.08 m, H = 0.16 m (model scale); the wind blows along +x.</figcaption>
 </figure>
 
 ## At a glance
@@ -31,21 +31,19 @@ Isolated 1:1:2 building, velocity field (split-fibre hot wire).
 | Measurement planes | vertical centre plane y/b = 0, horizontal z/b = 0.125, horizontal z/b = 1.25 |
 | Measured | 186 rows over 186 points: U, V, W, uu, vv, ww, k |
 
-## Agreement with the tunnel
+## Validation
 
-| Engine | Status | R | FAC2 |
-|---|---|---|---|
-| OpenFOAM 12 | <span class="label label-green status">scored</span> | +0.48 … +0.96 | 0.35 … 0.82 |
-| OpenLB | <span class="label label-green status">scored</span> | +0.20 … +0.81 | 0.00 … 0.64 |
-| FluidX3D | <span class="label label-green status">scored</span> | +0.59 … +0.85 | 0.22 … 0.60 |
-| ML surrogate | <span class="label label-green status">scored</span> | -0.13 … +0.43 | 0.26 … 0.62 |
+| Engine | Status | Compared with | R (range) | FAC2 (range) |
+|---|---|---|---|---|
+| OpenFOAM 12 | <span class="label label-green status">scored</span> | Wind tunnel | +0.48 … +0.96 | 0.35 … 0.82 |
+| OpenLB | <span class="label label-green status">scored</span> | Wind tunnel | +0.20 … +0.81 | 0.00 … 0.64 |
+| FluidX3D | <span class="label label-green status">scored</span> | Wind tunnel | +0.59 … +0.85 | 0.22 … 0.60 |
+| ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | -0.13 … +0.43 | 0.26 … 0.62 |
 {: .scores }
-
-R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: every score, its figures and its reading are on the [Validation page]({{ '/cases/case-a/validation/' | relative_url }}).
 
 {: .warning-title }
 > Before you compare
 >
-> The cleaned table is in SI units and one frame, with this case's corrections applied once; do not apply them again to the published files.
->
+> - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
+> - Origin: building centre on the ground plane. Length unit: m (model scale).
 > - 3 known issues in the published files are listed under [Known data issues]({{ '/cases/case-a/data/' | relative_url }}#known-data-issues).

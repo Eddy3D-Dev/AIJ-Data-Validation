@@ -47,7 +47,7 @@ description: "Case F — Shinjuku district: configuration, frame and units, refe
 | x | +x EAST (full-scale metres) |
 | y | +y NORTH (compass rose in MP\_caseF.png) |
 | z | +z up from the TUNNEL FLOOR; the readme\'s rule is ground = z - 10 m (the STL\'s terrain under the points is at z = 5 m) |
-| Wind direction convention | compass FROM-direction (N = 0, E = 90): N blows toward -y; flow\_dir = (-sin WD, -cos WD). Not stated by the sources; supported by the reference-building choice and by upwind roughness, and at NNW corroborated by a solved field (status \'corroborated by a solved field\'; the other directions stay \'unverified\'). |
+| Wind direction convention | compass FROM-direction (N = 0, E = 90), so N blows toward -y; flow\_dir = (-sin WD, -cos WD). Not stated by the sources; supported by the reference-building choice and by upwind roughness, and at NNW by a solved field (status \'corroborated by a solved field\'; the other directions stay \'unverified\'). |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 800.0 |
 | Unit of length | m (FULL scale) |
@@ -145,19 +145,17 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-Each of these changes the result of a comparison if it is not accounted for.
-
 - The 16 field rows of point 14 in RS-FO\_caseF.csv hold the workbook\'s value of the NEXT wind direction clockwise (the series is shifted by one); the cleaned table follows the workbook (clean/QUESTIONS.md QF1).
 - Tunnel and STL coordinates are MODEL scale (1:800); the field\'s are full scale. The case frame is full scale; the tunnel\'s x, y, z and the STL are multiplied by 800.
 - z is height above the tunnel floor. The readme\'s rule \'ground = z - 10 m\' gives the 5 / 9 / 20 m planes, but the STL\'s terrain under all 13 points is at z = 5 m, so the planes stand 10 / 14 / 25 m above it.
-- BD\_caseF.stl is wound inward on every ground, roof and sampled wall facet and is open along the rim of its 725 m disc (812 boundary edges); the served geometry.stl is re-wound outward.
+- BD\_caseF.stl is wound inward on every ground, roof and sampled wall facet and is open along the rim of its 725 m disc (812 boundary edges); the served geometry.stl is re-wound outward and closed with a base slab down to z = -1 m.
 - MP\_caseF.csv names the two reference points the other way round from the workbook, the STL and MP\_caseF.png (the workbook\'s Shinjuku-Mitsui Building is the 225 m tower at (-17.5, 96.0), the KDD Building the 180 m one at (85.8, -347.1)).
 - Field values are the legacy workbook\'s roof-anemometer ratios times 0.940 (NW-NE) or 0.963 (other directions); sigma is the workbook\'s S.D. rounded to 0.01 times that factor, so it moves in steps of 0.0094 / 0.0096.
 - The tunnel did not run E, ESE, WSW or W; the field data cover all 16. The 5 m and 20 m planes exist at some points only (29 and 79 rows).
 - One tunnel value (point 8, SW, 9 m: 0.474) has no counterpart in the workbook\'s results sheet, and the flat \'Sheet1\' table has 0.63 there.
 - Field anemometer heights above the tunnel floor are 13 - 21 m (3 - 11 m above ground by the readme\'s rule); the data paper says 3 - 9 m, so points 13 and 14 (11 m) disagree.
 - The thermistor reads a SCALAR speed and the cup anemometer a 10-minute mean: a RANS |U| is biased low against both.
-- The files do not say whether a wind direction names where the wind comes from. The cleaned tables read it as the direction the wind comes from (N = 0, E = 90) and a solved field corroborates that at NNW: Eddy3D\'s OpenFOAM 12 run for the wind from NNW correlates R 0.935 with the tunnel\'s 9 m column labelled NNW and R 0.077 with its column labelled SSE, the opposite wind (clean/QUESTIONS.md QF9); the other directions are not solved and stay unverified.
+- The files do not say whether a wind direction names where the wind comes from. The cleaned tables read it as the direction the wind comes from (N = 0, E = 90). At NNW a solved field supports that reading: Eddy3D\'s OpenFOAM 12 run for the wind from NNW correlates R 0.935 with the tunnel\'s 9 m column labelled NNW and R 0.077 with its column labelled SSE, the opposite wind (clean/QUESTIONS.md QF9); the other directions are not solved and stay unverified.
 
 ## API
 
@@ -173,8 +171,32 @@ Each of these changes the result of a comparison if it is not accounted for.
 
 ## Attribution
 
-- Data collectors: K. Fujii, Y. Asami, Y. Iwasa et al. (the original 1978 investigation; the readme names no data collectors)
-- Editors and distributors: Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
+- Data collected by K. Fujii, Y. Asami, Y. Iwasa et al. (the original 1978 investigation; the readme names no data collectors).
+- Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15589621](https://doi.org/10.5281/zenodo.15589621)
 - Citation requested: Fujii, K., Asami, Y., Iwasa, Y. et al. (1978). Wind in Shinjuku Sub-Central Area — Comparison Between Field Measurement and Wind Tunnel Experiment. Proc. 5th Symposium on Wind Resistance of Structures, 91-98 (in Japanese).
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case F (Shinjuku): Wind Tunnel Experiment and Field Observation for Flow within an Actual Urban Area in Shinjuku [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15589621
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_f,
+  author    = "Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case F (Shinjuku): Wind Tunnel Experiment and Field Observation for Flow within an Actual Urban Area in Shinjuku}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15589621",
+  url       = "https://doi.org/10.5281/zenodo.15589621",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).

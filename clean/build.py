@@ -45,6 +45,9 @@ from collections import defaultdict
 import numpy as np
 import pandas as pd
 
+from geometry_checks import (BASE_Z, buildings_note, clean_buildings, close_terrain, mesh_3dm, read_ascii_stl, shells_from_tris, stl_stats,  # noqa: F401  (case modules reach them as B.<name>)
+                             write_ascii_stl)
+
 HERE = os.path.dirname(os.path.abspath(__file__))          # .../clean
 REPO = os.path.abspath(os.path.join(HERE, os.pardir))        # the AIJ repository
 SRC = os.path.join(HERE, "sources")
@@ -251,98 +254,6 @@ def tris_of_boxes(boxes):
     return out
 
 
-def read_ascii_stl(path):
-    tris, cur = [], []
-    with io.open(path, encoding="utf-8", errors="replace") as f:
-        for line in f:
-            s = line.strip()
-            if s.startswith("vertex"):
-                cur.append(tuple(float(t) for t in s.split()[1:4]))
-                if len(cur) == 3:
-                    tris.append(tuple(cur))
-                    cur = []
-    return tris
-
-
-def _normal(t):
-    a, b, c = (np.array(v) for v in t)
-    n = np.cross(b - a, c - a)
-    l = np.linalg.norm(n)
-    return (n / l) if l > 0 else np.zeros(3)
-
-
-def write_ascii_stl(path, tris, name):
-    """LF-only ASCII STL; CRLF makes OpenFOAM keep the \\r in the last token of a line."""
-    with io.open(path, "w", encoding="ascii", newline="\n") as f:
-        f.write(f"solid {name}\n")
-        for t in tris:
-            n = _normal(t)
-            f.write(f"  facet normal {n[0]:.6g} {n[1]:.6g} {n[2]:.6g}\n    outer loop\n")
-            for p in t:
-                f.write(f"      vertex {p[0]:.7g} {p[1]:.7g} {p[2]:.7g}\n")
-            f.write("    endloop\n  endfacet\n")
-        f.write(f"endsolid {name}\n")
-
-
-def shells_from_tris(tris, tol=1e-9):
-    key = lambda p: tuple(round(c / tol) for c in p)
-    parent = {}
-
-    def find(a):
-        while parent.setdefault(a, a) != a:
-            parent[a] = parent[parent[a]]
-            a = parent[a]
-        return a
-
-    for t in tris:
-        k0, k1, k2 = (key(p) for p in t)
-        r0, r1, r2 = find(k0), find(k1), find(k2)
-        if r0 != r1:
-            parent[r0] = r1
-        if find(k1) != r2:
-            parent[find(k1)] = r2
-    groups = defaultdict(list)
-    for t in tris:
-        groups[find(key(t[0]))].append(t)
-    return list(groups.values())
-
-
-def stl_stats(tris, tol=1e-7):
-    key = lambda p: tuple(round(c / tol) for c in p)
-    edges = defaultdict(int)
-    vol = 0.0
-    lo = [math.inf] * 3
-    hi = [-math.inf] * 3
-    for a, b, c in tris:
-        ka, kb, kc = key(a), key(b), key(c)
-        for u, v in ((ka, kb), (kb, kc), (kc, ka)):
-            edges[tuple(sorted((u, v)))] += 1
-        vol += (a[0] * (b[1] * c[2] - b[2] * c[1]) - a[1] * (b[0] * c[2] - b[2] * c[0]) + a[2] * (b[0] * c[1] - b[1] * c[0])) / 6.0
-        for p in (a, b, c):
-            for i in range(3):
-                lo[i] = min(lo[i], p[i])
-                hi[i] = max(hi[i], p[i])
-    counts = defaultdict(int)
-    for n in edges.values():
-        counts[n] += 1
-    return {"triangles": len(tris), "bbox_min": [round(v, 6) for v in lo], "bbox_max": [round(v, 6) for v in hi],
-            "signed_volume": round(vol, 9), "edges": len(edges), "edges_shared_by_two_faces": counts.get(2, 0),
-            "edges_boundary": counts.get(1, 0), "edges_non_manifold": sum(v for k, v in counts.items() if k > 2),
-            "watertight": counts.get(2, 0) == len(edges)}
-
-
-def orient_outward(tris, tol=1e-4):
-    out, flipped, shells = [], 0, 0
-    for shell in shells_from_tris(tris, tol=tol):
-        shells += 1
-        if stl_stats(shell)["signed_volume"] < 0:
-            flipped += 1
-            out.extend((a, c, b) for a, b, c in shell)
-        else:
-            out.extend(shell)
-    return out, shells, flipped
-
-
 def points_under_roof(xy: np.ndarray, z: float, tris) -> np.ndarray:
     """For each (x, y): is there a triangle whose XY projection contains it and whose surface sits above z?
 
@@ -420,7 +331,7 @@ def power_law_fit(z, U, zlo, zhi):
 
 
 def interp_log(z, U, zq):
-    """U at zq by linear interpolation in ln z (the honest reading of a tabulated boundary-layer profile)."""
+    """U at zq by linear interpolation in ln z (the natural reading of a tabulated boundary-layer profile)."""
     z, U = np.asarray(z, float), np.asarray(U, float)
     return float(np.interp(math.log(zq), np.log(z), U))
 
@@ -914,28 +825,6 @@ def build_D(prov):
 
 # --------------------------------------------------------------------------------------------- Case E
 
-def mesh_3dm(path, state):
-    import rhino3dm
-    f = rhino3dm.File3dm.Read(path)
-    layers = {l.Index: l.Name for l in f.Layers}
-    wanted = {"buildings"} if state == "bc" else {"buildings", "buildings_new_construction"}
-    tris = []
-    for o in f.Objects:
-        if layers.get(o.Attributes.LayerIndex) not in wanted:
-            continue
-        m = o.Geometry
-        if not isinstance(m, rhino3dm.Mesh):
-            continue
-        vs = [(m.Vertices[i].X, m.Vertices[i].Y, m.Vertices[i].Z) for i in range(len(m.Vertices))]
-        for i in range(len(m.Faces)):
-            face = m.Faces[i]
-            a, b, cc, d = face[0], face[1], face[2], face[3]
-            tris.append((vs[a], vs[b], vs[cc]))
-            if d != cc:
-                tris.append((vs[a], vs[cc], vs[d]))
-    return tris
-
-
 def build_E(prov):
     c = "E"
     ze = os.path.join(SRC, "zenodo_caseE")
@@ -975,13 +864,18 @@ def build_E(prov):
     off_full = [tuple(tuple(v * CASES[c]["scale"] for v in p) for p in t) for t in off]
     s_off = stl_stats(off_full)
     log(f"[E] geometry: BD_caseE.stl (Zenodo, after construction) is MODEL scale — bbox z max 0.24 m = 60 m / 250; scaled x {CASES[c]['scale']} to full-scale metres; stats {s_off}")
-    ac3, sh_ac, fl_ac = orient_outward(mesh_3dm(dm, "ac"))
-    bc3, sh_bc, fl_bc = orient_outward(mesh_3dm(dm, "bc"))
+    raw_ac, raw_bc = mesh_3dm(dm, "ac"), mesh_3dm(dm, "bc")
+    ac3, info_ac = clean_buildings(raw_ac, digits=7)
+    bc3, info_bc = clean_buildings(raw_bc, digits=7)
     s_ac, s_bc = stl_stats(ac3), stl_stats(bc3)
-    log(f"[E] geometry (Eddy3D-derived): case-e.3dm layers 'buildings' (+ 'buildings_new_construction'): ac {s_ac}, {fl_ac}/{sh_ac} shells flipped outward; bc {s_bc}, {fl_bc}/{sh_bc} flipped")
+    log(f"[E] geometry (Eddy3D-derived): case-e.3dm layers 'buildings' (+ 'buildings_new_construction'); ac as read: {stl_stats(raw_ac)}; repaired: {info_ac}; stats {s_ac}")
+    log(f"[E] geometry bc as read: {stl_stats(raw_bc)}; repaired: {info_bc}; stats {s_bc}")
     geo = [("ac", None, off_full, f"official BD_caseE.stl (Zenodo) scaled x{CASES[c]['scale']} from model to full-scale metres; {s_off['triangles']} triangles, {s_off['edges_boundary']} boundary edges (not watertight as published)"),
-           ("ac_3dm", None, ac3, "Eddy3D-side reconstruction from case-e.3dm, layers 'buildings' + 'buildings_new_construction', shells oriented outward"),
-           ("bc_3dm", None, bc3, "Eddy3D-side reconstruction of the BEFORE-construction state from case-e.3dm, layer 'buildings' only (the sites of A, B, C are empty on that layer); no published source exists for this state")]
+           ("ac_3dm", None, ac3, "Eddy3D-side reconstruction from case-e.3dm, layers 'buildings' + 'buildings_new_construction'; " + buildings_note(raw_ac, info_ac, s_ac)),
+           ("bc_3dm", None, bc3, "Eddy3D-side reconstruction of the BEFORE-construction state from case-e.3dm, layer 'buildings' only (the sites of A, B, C are empty on that layer); no published source exists for this state; " + buildings_note(raw_bc, info_bc, s_bc))]
+    r_ac = stl_stats(raw_ac)
+    check(c, "3dm_buildings_are_closed_outward_bodies", s_ac["watertight"] and s_bc["watertight"] and (r_ac["inconsistent_triangles"], r_ac["triangles"]) == (1563, 8436), ac=s_ac, bc=s_bc, repaired_ac=info_ac, repaired_bc=info_bc, wound_against_neighbours_in_the_3dm_ac=[r_ac["inconsistent_triangles"], r_ac["triangles"]],
+          note="every body of both 3dm states is closed, consistently wound and has a positive volume; the wall that two buildings share is removed (they become one body); edges where separate bodies touch are listed as body_contacts")
 
     # ---- checks
     check(c, "row_count_80_x_16_x_2", len(pts) == 2560 and pts.point_id.nunique() == 80, rows=len(pts), points=int(pts.point_id.nunique()))
@@ -1042,7 +936,7 @@ def build_E(prov):
     check(c, "construction_signal_present", abs(float(d.mean())) > 0.05, mean_ac_minus_bc=float(d.mean()), sd=float(d.std()), largest_mean_abs_delta_direction=bydir.index[0], largest=float(bydir.iloc[0]), smallest_direction=bydir.index[-1], smallest=float(bydir.iloc[-1]))
     inflow = {"U_ref_m_s": round(U_ref, 4), "z_ref_m": CASES[c]["z_ref"], "U_ref_basis": "all 2560 ratios are integer multiples of one quantum q; U_ref = 0.01 UR / q (the sheet re-normalised U/UR, itself quantised at 0.01, by UR/U_ref); log-interpolation of the profile gives the value beside it",
               "U_ref_log_interp_m_s": round(U_ref_interp, 4), "quantum": q, "ZR_m": ZR, "UR_m_s": UR,
-              "log_law": {**log_law_fit(afl.z, afl.U, 1.25, 75.0), "note": "does not fit — see rms_residual_rel; a tabulated inlet is the honest choice"},
+              "log_law": {**log_law_fit(afl.z, afl.U, 1.25, 75.0), "note": "does not fit — see rms_residual_rel; a tabulated inlet is the appropriate choice"},
               "power_law": power_law_fit(afl.z, afl.U, 1.25, 60.0), "power_law_whole_profile": power_law_fit(afl.z, afl.U, 1.25, 250.0),
               "epsilon_note": "the sheet defines epsilon(z) = Pk(z) = Cmu^0.5 k(z) dU/dz with Cmu = 0.09"}
     frame = {"origin": "centre of the reproduced area, ground plane ('Geometry&Points' sheet)", "x": "+x EAST (compass rose in MP_caseE.png)", "y": "+y NORTH",
@@ -1233,7 +1127,7 @@ def build():
                                                    "note": "column headers in every CSV are bare names; this file is the units sidecar; the parquet files carry the same map in their schema metadata"})
     manifest = {
         "name": "AIJ UWE benchmark — cleaned release, Cases A-M", "version": RELEASE_VERSION, "schema_version": SCHEMA_VERSION,
-        "licence": {"data": "CC BY 4.0", "url": "https://creativecommons.org/licenses/by/4.0/", "note": "The measurement data belongs to its collectors and distributors, named per case. Cite the benchmark paper and each case's requested citation."},
+        "licence": {"data": "CC BY 4.0", "url": "https://creativecommons.org/licenses/by/4.0/", "note": "Data: Kikumoto et al. (2026), CC BY 4.0. Collectors and requested citation per case."},
         "cite": {"benchmark": "Kikumoto, H., Okaze, T., Yoshie, R. et al. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083",
                  "guidelines": "Tominaga, Y. et al. (2008). AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings. JWEIA 96, 1749-1761. https://doi.org/10.1016/j.jweia.2008.02.058"},
         "built_by": "clean/build.py (deterministic; re-run to regenerate; checks.json carries the validity checks, build.log every transform)",

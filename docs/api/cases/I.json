@@ -1,7 +1,7 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/case.schema.json",
- "schema_version": "2.3.0",
- "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
+ "schema_version": "2.4.0",
+ "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
  "id": "I",
  "slug": "case-i",
@@ -240,7 +240,7 @@
  },
  "known_issues": [
   "Two point sets, no point numbers: the velocity file (91 points: y = 0 plane and z/H = 0.5 plane) and the concentration file (539 points: y = 0 plane and the ground). The table stacks them, one row per instrument and point: velocity rows (instrument ldv) are numbered 1-91 and concentration rows (hydrocarbon_analyser) 92-630, in the files' order. 17 locations have both a velocity and a concentration value.",
-  "V on the y = 0 plane (53 of 91 points) is 0 in the CSV and 1e-9 ... 4e-6 m/s in the workbook: a symmetry value, not a measurement. It is NaN in the table; V is measured only at the 38 off-plane points.",
+  "V on the y = 0 plane (53 of 91 points) is 0 in the CSV and 1e-9 ... 4e-6 m/s in the workbook, a symmetry value. It is NaN in the table; V is measured only at the 38 off-plane points.",
   "The table carries the legacy workbook's values; the CSVs round to 3 decimals (velocity, k) and 1 decimal (concentration, ppm). Every concentration is a multiple of 0.1 ppm: a 0.4 ppm value carries +/-12 % of quantisation.",
   "The paper's c0 = 39.2 ppm needs the ETHANE flow (10 % of the 400 cc/min, 6.67e-7 m3/s); its sentence 'ethane released at 6.67e-6 m3/s' is the mixture. With the mixture flow c0 would be 392 ppm.",
   "The workbook normalises the approach flow with 1.697 m/s and the points with 1.7 m/s (0.18 % apart).",
@@ -264,6 +264,10 @@
  "doi": "10.5281/zenodo.15430018",
  "doi_note": "The readme and the data paper name this one DOI; no separate version DOI is stated.",
  "citation_requested": "Japan Society for Atmospheric Environment (2013). Guidelines for Atmospheric Environment Assessment Methods Using CFD Models (DiMCFD). Japan Society for Atmospheric Environment (in Japanese).",
+ "citation": {
+  "apa": "Kondo, H., Mutou, K., Hori, A., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case I (CubeC): Wind Tunnel Experiment for Flow and Dispersion around a Cubic Building Model [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15430018",
+  "bibtex": "@misc{aijuwe_case_i,\n  author    = \"Kondo, Hiroaki and Mutou, Katsuhiko and Hori, Akihiro and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa\",\n  title     = \"{AIJ UWE Benchmark Dataset -- Case I (CubeC): Wind Tunnel Experiment for Flow and Dispersion around a Cubic Building Model}\",\n  year      = \"2025\",\n  publisher = \"Zenodo\",\n  doi       = \"10.5281/zenodo.15430018\",\n  url       = \"https://doi.org/10.5281/zenodo.15430018\",\n  note      = \"Data set\"\n}"
+ },
  "files_in_repository": {
   "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/raw/cases/case-i",
   "reference": "raw/cases/case-i/RS-w_caseI.csv",

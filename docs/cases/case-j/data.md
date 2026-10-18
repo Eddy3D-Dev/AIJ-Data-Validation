@@ -115,8 +115,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-Each of these changes the result of a comparison if it is not accounted for.
-
 - Temperature is in KELVIN in all three published CSVs; the API serves degrees Celsius (T) and kelvin differences (T\_rms, heat fluxes).
 - The published CSV is the legacy workbook\'s non-dimensional values rounded to 3-4 decimals and scaled back; the table is rebuilt from the workbook. The CSV\'s heat fluxes sit on a 0.0049 K m/s grid and k on 0.00021 m^2/s^2.
 - c0 = 12.283 ppm includes the 5 % ethylene fraction of the released gas (workbook cell Co); q / (U\_H H^2) alone is 245.7 ppm. The data paper states no c0 for Case J.
@@ -142,8 +140,32 @@ Each of these changes the result of a comparison if it is not accounted for.
 
 ## Attribution
 
-- Data collectors: Ryuichiro Yoshie (Tokyo Polytechnic University), Hideyuki Tanaka (Takenaka Corporation), Tsuyoshi Kobayashi (Tokyo Polytechnic University)
-- Editors and distributors: Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
+- Data collected by Ryuichiro Yoshie (Tokyo Polytechnic University), Hideyuki Tanaka (Takenaka Corporation) and Tsuyoshi Kobayashi (Tokyo Polytechnic University), 2016.
+- Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15447887](https://doi.org/10.5281/zenodo.15447887)
 - Citation requested: Yoshie, R. (2016). Wind Tunnel Experiment and Large Eddy Simulation of Pollutant/Thermal Dispersion in Non-isothermal Turbulent Boundary Layer. Adv Environ Wind Eng, 167-196. <https://doi.org/10.1007/978-4-431-55912-2_9>
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Yoshie, R., Tanaka, H., Kobayashi, T., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case J (112CT): Wind Tunnel Experiment for Flow and Dispersion Around a 1:1:2 Shape Building Model under Non-isothermal Conditions [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15447887
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_j,
+  author    = "Yoshie, Ryuichiro and Tanaka, Hideyuki and Kobayashi, Tsuyoshi and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case J (112CT): Wind Tunnel Experiment for Flow and Dispersion Around a 1:1:2 Shape Building Model under Non-isothermal Conditions}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15447887",
+  url       = "https://doi.org/10.5281/zenodo.15447887",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).

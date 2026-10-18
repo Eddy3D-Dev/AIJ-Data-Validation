@@ -17,7 +17,7 @@ Isolated 1:1:2 building with a floor tracer source in an unstably stratified bou
 
 <figure class="figure render">
 <a href="{{ '/assets/geometry/case-j.png' | relative_url }}"><img src="{{ '/assets/web/case-j.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case J — 1:1:2 building, non-isothermal"></a>
-<figcaption>Isolated 1:1:2 building, b = 0.08 m, H = 0.16 m (model scale); the orange ring marks the floor tracer source, 0.25 H behind the building (seen through it); the wind blows along +x.<br><a class="original" href="{{ '/assets/geometry/case-j.png' | relative_url }}">1200 dpi original, 1.4 MB</a></figcaption>
+<figcaption>Isolated 1:1:2 building, b = 0.08 m, H = 0.16 m (model scale); the orange ring marks the floor tracer source, 0.25 H behind the building (seen through it); the wind blows along +x.</figcaption>
 </figure>
 
 ## At a glance
@@ -31,23 +31,21 @@ Isolated 1:1:2 building with a floor tracer source in an unstably stratified bou
 | Measurement planes | vertical centre plane y/H = 0, horizontal z/H = 0.025 (y \<= 0 side only), horizontal z/H = 0.25 |
 | Measured | 444 rows over 444 points: U, V, W, uu, vv, ww, k, C, c\_rms, concentration\_ratio, T, T\_rms, uT, vT, wT |
 
-## Agreement with the tunnel
+## Validation
 
-| Engine | Status | R | FAC2 |
-|---|---|---|---|
-| OpenFOAM 12 | <span class="label label-yellow status">pending</span> | — | — |
-| UMF | <span class="label label-green status">scored</span> | +0.32 … +0.92 | 0.29 … 1.00 |
-| UMF buoyantKEpsilon | <span class="label label-green status">scored</span> | +0.36 … +0.92 | 0.29 … 1.00 |
-| OpenLB | <span class="label label-yellow status">pending</span> | — | — |
-| FluidX3D | <span class="label label-yellow status">pending</span> | — | — |
-| ML surrogate | <span class="label label-yellow status">pending</span> | — | — |
+| Engine | Status | Compared with | R (range) | FAC2 (range) |
+|---|---|---|---|---|
+| OpenFOAM 12 | <span class="label label-yellow status">pending</span> | — | — | — |
+| UMF | <span class="label label-green status">scored</span> | Wind tunnel | +0.32 … +0.92 | 0.29 … 1.00 |
+| UMF buoyantKEpsilon | <span class="label label-green status">scored</span> | Wind tunnel | +0.36 … +0.92 | 0.29 … 1.00 |
+| OpenLB | <span class="label label-yellow status">pending</span> | — | — | — |
+| FluidX3D | <span class="label label-yellow status">pending</span> | — | — | — |
+| ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
-
-R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: every score, its figures and its reading are on the [Validation page]({{ '/cases/case-j/validation/' | relative_url }}).
 
 {: .warning-title }
 > Before you compare
 >
-> The cleaned table is in SI units and one frame, with this case's corrections applied once; do not apply them again to the published files.
->
+> - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
+> - Origin: the building\'s leeward (downwind) wall centre on the ground; x = 0 is the leeward wall. Length unit: m (model scale).
 > - 10 known issues in the published files are listed under [Known data issues]({{ '/cases/case-j/data/' | relative_url }}#known-data-issues).

@@ -1,13 +1,13 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/validation.schema.json",
- "schema_version": "2.3.0",
- "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
+ "schema_version": "2.4.0",
+ "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
  "case": "A",
  "title": "Case A — 1:1:2 building",
  "status": "scored",
  "status_meaning": {
-  "scored": "a validation run exists and its scores are in cases/{id}/validation.json; whether it agrees is in the numbers",
+  "scored": "a validation run exists and its scores are in cases/{id}/validation.json",
   "running": "the solve is in progress; no scores yet",
   "pending": "not run yet",
   "not comparable": "the engine cannot produce the measured quantity at the measured location: OpenLB at the resolution this hardware runs, FluidX3D without a ground wall function; the measurement behind each is on the Validation page"
@@ -127,8 +127,12 @@
    },
    "figures": [
     {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-a-layout.png",
+     "caption": "Case A, measurement lines and planes: A vertical profiles, y/b = 0; B plane z/b = 0.125; C plane z/b = 1.25. Positions in multiples of b."
+    },
+    {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/cases-ab-openfoam-agreement.png",
-     "caption": "Cases A and B, OpenFOAM 12 (realizable k-ε): measured against modelled U, V, W and k at every measured point, normalised by U_H, with the 1:1 line and the factor-of-two band."
+     "caption": "Cases A and B, OpenFOAM 12 (realizable k-ε): measured against modelled U, V, W and k at every measured point, normalised by U_H, with the 1:1 line and the factor-of-two band. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/cases-ab-openfoam-profiles.png",

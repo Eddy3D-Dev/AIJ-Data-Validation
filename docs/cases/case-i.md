@@ -17,7 +17,7 @@ Isolated cube with an ethane point source at the centre of its roof: velocity (l
 
 <figure class="figure render">
 <a href="{{ '/assets/geometry/case-i.png' | relative_url }}"><img src="{{ '/assets/web/case-i.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case I — cube with a roof point source"></a>
-<figcaption>Isolated cube, 0.10 m on a side (model scale); the wind blows along +x. The tracer is released from a 6 mm outlet at the centre of the roof (not drawn).<br><a class="original" href="{{ '/assets/geometry/case-i.png' | relative_url }}">1200 dpi original, 1.0 MB</a></figcaption>
+<figcaption>Isolated cube, 0.10 m on a side (model scale); the wind blows along +x. The tracer is released from a 6 mm outlet at the centre of the roof (not drawn).</figcaption>
 </figure>
 
 ## At a glance
@@ -31,23 +31,21 @@ Isolated cube with an ethane point source at the centre of its roof: velocity (l
 | Measurement planes | velocity: y/H = 0 and z/H = 0.5, concentration: y/H = 0 and z/H = 0 (the ground) |
 | Measured | 630 rows over 630 points: U, V, W, k, C, concentration\_ratio |
 
-## Agreement with the tunnel
+## Validation
 
-| Engine | Status | R | FAC2 |
-|---|---|---|---|
-| OpenFOAM 12 | <span class="label label-green status">scored</span> | +0.90 … +1.00 | 0.36 … 0.92 |
-| OpenFOAM 12 k-ε | <span class="label label-green status">scored</span> | +0.87 … +0.99 | 0.44 … 0.91 |
-| OpenFOAM 12 k-ω SST | <span class="label label-green status">scored</span> | +0.44 … +0.99 | 0.38 … 0.88 |
-| OpenLB | <span class="label label-yellow status">pending</span> | — | — |
-| FluidX3D | <span class="label label-yellow status">pending</span> | — | — |
-| ML surrogate | <span class="label label-yellow status">pending</span> | — | — |
+| Engine | Status | Compared with | R (range) | FAC2 (range) |
+|---|---|---|---|---|
+| OpenFOAM 12 | <span class="label label-green status">scored</span> | Wind tunnel | +0.90 … +1.00 | 0.36 … 0.92 |
+| OpenFOAM 12 k-ε | <span class="label label-green status">scored</span> | Wind tunnel | +0.87 … +0.99 | 0.44 … 0.91 |
+| OpenFOAM 12 k-ω SST | <span class="label label-green status">scored</span> | Wind tunnel | +0.44 … +0.99 | 0.38 … 0.88 |
+| OpenLB | <span class="label label-yellow status">pending</span> | — | — | — |
+| FluidX3D | <span class="label label-yellow status">pending</span> | — | — | — |
+| ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
-
-R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: every score, its figures and its reading are on the [Validation page]({{ '/cases/case-i/validation/' | relative_url }}).
 
 {: .warning-title }
 > Before you compare
 >
-> The cleaned table is in SI units and one frame, with this case's corrections applied once; do not apply them again to the published files.
->
+> - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
+> - Origin: the centre of the cube on the ground plane. Length unit: m (model scale).
 > - 8 known issues in the published files are listed under [Known data issues]({{ '/cases/case-i/data/' | relative_url }}#known-data-issues).

@@ -5,7 +5,7 @@ grand_parent: "Cases"
 nav_order: 2
 has_children: false
 generated: true
-description: "Case J — 1:1:2 building, non-isothermal: Eddy3D's scores against the tunnel data, by engine."
+description: "Case J — 1:1:2 building, non-isothermal: Eddy3D's scores against the measurements, by engine."
 ---
 
 # Case J: validation
@@ -13,11 +13,7 @@ description: "Case J — 1:1:2 building, non-isothermal: Eddy3D's scores against
 
 Engine status: OpenFOAM 12 <span class="label label-yellow status">pending</span> · UMF <span class="label label-green status">scored</span> · UMF buoyantKEpsilon <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
-*Scored* means a run exists and its scores are below, not that it agrees. How to read them is on [the reading page]({{ '/validation/cases-jl/' | relative_url }}); the [Validation]({{ '/validation/' | relative_url }}) overview says what each status means and why an engine is *not comparable*.
-
 ## urbanMicroclimateFoam, realizable k-epsilon (Eddy3D Outdoor+)
-
-Quantity: U, V, W over U\_H = 1.4581 m/s and k over U\_H^2 (the tunnel\'s units, 443 distinct points); theta = (T\_f - T)/(T\_f - T\_H) with T\_f = 318.95 K and T\_H = 285.32 K; c\* = C/c0 (c0 = 12.28 ppm) against the model\'s ethylene mass fraction as ppm over the same c0, for turbulent Schmidt numbers 0.3, 0.5 and 0.7; the 27 points within a quarter of a building height of the source are scored with and without. The scene is the tunnel at Froude scale 62.5.
 
 | Score | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|
@@ -35,22 +31,16 @@ Quantity: U, V, W over U\_H = 1.4581 m/s and k over U\_H^2 (the tunnel\'s units,
 | U, y-symmetric ceiling (control) | +0.993 | 0.971 | +0.000 | 0.925 | 346 |
 {: .scores }
 
-Recorded with this run:
+- Per-point values: [`/api/cases/J/pairs/umf-realizableKE.csv`]({{ '/api/cases/J/pairs/umf-realizableKE.csv' | relative_url }})
+- Reproduce: Eddy3D fixture MetaFOAM.Lib.Tests/TestAijCaseJUmfContainerE2E (1:1:2 building, heated floor, floor point source; urbanMicroclimateFoam, realizable k-ε, 236,408 air cells at Froude scale 62.5, 1500 air iterations, solved 2026-10-18); figures validation/plot\_cases\_jl\_umf.py
 
-- The scene is the tunnel at Froude scale 62.5 (the production case writer cannot mesh a 0.16 m building): lengths times 62.5, velocities times 7.9, temperatures unchanged. That keeps the bulk Richardson number (-0.0856), Pr, the tunnel\'s Kelvin values and the dimensionless tracer, and does not keep Re (1.6e4 in the tunnel, 8e6 here), where UMF\'s wall functions belong and the tunnel\'s laminar-sublayer heat transfer does not exist.
-- UMF\'s first cell is 0.75 m, 12 mm at tunnel scale: the tunnel\'s 24 K drop in air temperature between the floor and the first measurement at 3 mm lies inside it, so near-floor temperature is a wall-function result, and the data\'s tracer peak 4 mm above the 5 mm hole is a source-cell-limited number. The source is a mass rate into one pair of cells, with no release momentum and no heat from the 30.4 degC gas. The 27 points within a quarter of a building height of the source are scored with and without.
-- The building is not adiabatic here: its walls are held at the measured mean surface temperature, 297.62 K, and the measured 4 K vertical gradient up the walls is not modelled. There is no sun, and the radiation exchange is at the least the view-factor model accepts (air-side emissivity 0.01).
-- The tracer is solved steady beside the flow, as three species of one flow. The outlet carried 0.89, 0.75 and 0.62 of the emission for Sct 0.3, 0.5 and 0.7; the fixture\'s bar on this is a factor of two, a detector of wiring errors and not a convergence claim.
+Notes:
+
+- The tracer is solved steady beside the flow, as three species of one flow. The outlet carried 0.89, 0.75 and 0.62 of the emission for Sct 0.3, 0.5 and 0.7, within the factor of two accepted as a check on the wiring.
 - The air region ended at its 1500-iteration cap with the residualControl unmet (no \'solution converged\' line); at the last iteration the initial residuals were 1.3e-2 (U\_y), 1.5e-2 (p\_rgh) and 1.1e-3 to 1.7e-3 (the tracers).
 - The steady closure gives a longer recirculation than the tunnel: reattachment at z/H = 0.25 and 0.025 is 1.35 H and 1.35 H, against the measured 0.68 H and 0.80 H.
-- The measured +y half of the z/H = 0.25 plane runs 11 % slower than the -y half (97 mirror pairs, R 0.955, recomputed from the cleaned table): the y-symmetric ceiling control scores the measurement against the mean of each mirror pair.
-- The fixture\'s structure checks passed. The wake recirculates behind the leeward face and reattaches within 3 H; the approach layer is unstable and the first cell above the heated floor is warmer than the air that entered it; every species is emitted, with clean air 25 m ahead of the building and its maximum at the source, and leaves through the outlet at 0.5 to 2 times the emission.
-
-the tunnel\'s units: velocities by U\_H (1.4581 m/s measured, the Froude-scaled 11.53 m/s modelled), k by U\_H^2, temperature as theta = (T\_f - T)/(T\_f - T\_H) (T\_f = 45.8 degC, T\_f - T\_H = 33.63 K), c\* = C/c0 (c0 = 12.28 ppm) against the modelled ethylene mass fraction as ppm over the same c0; hit rate D = 0.25, W = 0.05 in those units, concentration with one detection limit of 10^-3 of the largest measured value; 443 points (point 153 repeats point 1). Per-point values: [`/api/cases/J/pairs/umf-realizableKE.csv`]({{ '/api/cases/J/pairs/umf-realizableKE.csv' | relative_url }}). Reproduce: Eddy3D fixture MetaFOAM.Lib.Tests/TestAijCaseJUmfContainerE2E (1:1:2 building, heated floor, floor point source; urbanMicroclimateFoam, realizable k-ε, 236,408 air cells at Froude scale 62.5, 1500 air iterations, solved 2026-10-18); figures validation/plot\_cases\_jl\_umf.py; scores recomputed from the pairs by validation/dispersion\_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`.
 
 ## urbanMicroclimateFoam, buoyantKEpsilon (Eddy3D Outdoor+)
-
-Quantity: U, V, W over U\_H = 1.4581 m/s and k over U\_H^2 (the tunnel\'s units, 443 distinct points); theta = (T\_f - T)/(T\_f - T\_H) with T\_f = 318.95 K and T\_H = 285.32 K; c\* = C/c0 (c0 = 12.28 ppm) against the model\'s ethylene mass fraction as ppm over the same c0, for turbulent Schmidt numbers 0.3, 0.5 and 0.7; the 27 points within a quarter of a building height of the source are scored with and without. The scene is the tunnel at Froude scale 62.5.
 
 | Score | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|
@@ -68,19 +58,42 @@ Quantity: U, V, W over U\_H = 1.4581 m/s and k over U\_H^2 (the tunnel\'s units,
 | U, y-symmetric ceiling (control) | +0.993 | 0.971 | +0.000 | 0.925 | 346 |
 {: .scores }
 
-Recorded with this run:
+- Per-point values: [`/api/cases/J/pairs/umf-buoyantKEpsilon.csv`]({{ '/api/cases/J/pairs/umf-buoyantKEpsilon.csv' | relative_url }})
+- Reproduce: Eddy3D fixture MetaFOAM.Lib.Tests/TestAijCaseJUmfContainerE2E (1:1:2 building, heated floor, floor point source; urbanMicroclimateFoam, buoyantKEpsilon, 236,408 air cells at Froude scale 62.5, 1500 air iterations, solved 2026-10-18); figures validation/plot\_cases\_jl\_umf.py
 
-- The scene is the tunnel at Froude scale 62.5 (the production case writer cannot mesh a 0.16 m building): lengths times 62.5, velocities times 7.9, temperatures unchanged. That keeps the bulk Richardson number (-0.0856), Pr, the tunnel\'s Kelvin values and the dimensionless tracer, and does not keep Re (1.6e4 in the tunnel, 8e6 here), where UMF\'s wall functions belong and the tunnel\'s laminar-sublayer heat transfer does not exist.
-- UMF\'s first cell is 0.75 m, 12 mm at tunnel scale: the tunnel\'s 24 K drop in air temperature between the floor and the first measurement at 3 mm lies inside it, so near-floor temperature is a wall-function result, and the data\'s tracer peak 4 mm above the 5 mm hole is a source-cell-limited number. The source is a mass rate into one pair of cells, with no release momentum and no heat from the 30.4 degC gas. The 27 points within a quarter of a building height of the source are scored with and without.
-- The building is not adiabatic here: its walls are held at the measured mean surface temperature, 297.62 K, and the measured 4 K vertical gradient up the walls is not modelled. There is no sun, and the radiation exchange is at the least the view-factor model accepts (air-side emissivity 0.01).
-- The tracer is solved steady beside the flow, as three species of one flow. The outlet carried 0.95, 0.84 and 0.73 of the emission for Sct 0.3, 0.5 and 0.7; the fixture\'s bar on this is a factor of two, a detector of wiring errors and not a convergence claim.
+Notes:
+
+- The tracer is solved steady beside the flow, as three species of one flow. The outlet carried 0.95, 0.84 and 0.73 of the emission for Sct 0.3, 0.5 and 0.7, within the factor of two accepted as a check on the wiring.
 - The air region ended at its 1500-iteration cap with the residualControl unmet (no \'solution converged\' line); at the last iteration the initial residuals were 1.3e-2 (U\_y), 1.1e-2 (p\_rgh) and 1.2e-3 to 1.6e-3 (the tracers).
 - The steady closure gives a longer recirculation than the tunnel: reattachment at z/H = 0.25 and 0.025 is 1.35 H and 1.56 H, against the measured 0.68 H and 0.80 H.
-- The measured +y half of the z/H = 0.25 plane runs 11 % slower than the -y half (97 mirror pairs, R 0.955, recomputed from the cleaned table): the y-symmetric ceiling control scores the measurement against the mean of each mirror pair.
-- The fixture\'s structure checks passed. The wake recirculates behind the leeward face and reattaches within 3 H; the approach layer is unstable and the first cell above the heated floor is warmer than the air that entered it; every species is emitted, with clean air 25 m ahead of the building and its maximum at the source, and leaves through the outlet at 0.5 to 2 times the emission.
 
-the tunnel\'s units: velocities by U\_H (1.4581 m/s measured, the Froude-scaled 11.53 m/s modelled), k by U\_H^2, temperature as theta = (T\_f - T)/(T\_f - T\_H) (T\_f = 45.8 degC, T\_f - T\_H = 33.63 K), c\* = C/c0 (c0 = 12.28 ppm) against the modelled ethylene mass fraction as ppm over the same c0; hit rate D = 0.25, W = 0.05 in those units, concentration with one detection limit of 10^-3 of the largest measured value; 443 points (point 153 repeats point 1). Per-point values: [`/api/cases/J/pairs/umf-buoyantKEpsilon.csv`]({{ '/api/cases/J/pairs/umf-buoyantKEpsilon.csv' | relative_url }}). Reproduce: Eddy3D fixture MetaFOAM.Lib.Tests/TestAijCaseJUmfContainerE2E (1:1:2 building, heated floor, floor point source; urbanMicroclimateFoam, buoyantKEpsilon, 236,408 air cells at Froude scale 62.5, 1500 air iterations, solved 2026-10-18); figures validation/plot\_cases\_jl\_umf.py; scores recomputed from the pairs by validation/dispersion\_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`.
+## All runs
+
+- Quantity: U, V, W over U\_H = 1.4581 m/s and k over U\_H^2 (the tunnel\'s units, 443 distinct points); theta = (T\_f - T)/(T\_f - T\_H) with T\_f = 318.95 K and T\_H = 285.32 K; c\* = C/c0 (c0 = 12.28 ppm) against the model\'s ethylene mass fraction as ppm over the same c0, for turbulent Schmidt numbers 0.3, 0.5 and 0.7; the 27 points within a quarter of a building height of the source are scored with and without. The scene is the tunnel at Froude scale 62.5
+- Normalisation: the tunnel\'s units: velocities by U\_H (1.4581 m/s measured, the Froude-scaled 11.53 m/s modelled), k by U\_H^2, temperature as theta = (T\_f - T)/(T\_f - T\_H) (T\_f = 45.8 degC, T\_f - T\_H = 33.63 K), c\* = C/c0 (c0 = 12.28 ppm) against the modelled ethylene mass fraction as ppm over the same c0; hit rate D = 0.25, W = 0.05 in those units, concentration with one detection limit of 10^-3 of the largest measured value; 443 points (point 153 repeats point 1)
+
+Notes:
+
+- The scene is the tunnel at Froude scale 62.5 (the production case writer cannot mesh a 0.16 m building): lengths times 62.5, velocities times 7.9, temperatures unchanged. That keeps the bulk Richardson number (-0.0856), Pr, the tunnel\'s Kelvin values and the dimensionless tracer, and does not keep Re (1.6e4 in the tunnel, 8e6 here).
+- UMF\'s first cell is 0.75 m, 12 mm at tunnel scale: the tunnel\'s 24 K drop in air temperature between the floor and the first measurement at 3 mm lies inside it. The source is a mass rate into one pair of cells, with no release momentum and no heat from the 30.4 degC gas. The 27 points within a quarter of a building height of the source are scored with and without.
+- The building is not adiabatic here: its walls are held at the measured mean surface temperature, 297.62 K, and the measured 4 K vertical gradient up the walls is not modelled. There is no sun, and the radiation exchange is at the least the view-factor model accepts (air-side emissivity 0.01).
+- The measured +y half of the z/H = 0.25 plane runs 11 % slower than the -y half (97 mirror pairs, R 0.955, recomputed from the cleaned table): the y-symmetric ceiling control scores the measurement against the mean of each mirror pair.
+- The wake recirculates behind the leeward face and reattaches within 3 H; the approach layer is unstable and the first cell above the heated floor is warmer than the air that entered it; every species is emitted, with clean air 25 m ahead of the building and its maximum at the source, and leaves through the outlet at 0.5 to 2 times the emission.
+
+<details markdown="block">
+<summary>Interpretation: Case J wall functions</summary>
+
+At the model\'s Re, UMF\'s wall functions belong and the tunnel\'s laminar-sublayer heat transfer does not exist. Near-floor temperature is a wall-function result, and the data\'s tracer peak 4 mm above the 5 mm hole is a source-cell-limited number.
+
+</details>
+
+<details markdown="block">
+  <summary>How the scores are computed</summary>
+
+- Scores recomputed from the pairs by validation/dispersion\_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`.
+
+</details>
 
 ## Figures
 
-The figures for these runs are shown once, beside their reading: [Cases J and L (UMF)]({{ '/validation/cases-jl/' | relative_url }}).
+Figures: [Cases J and L (UMF)]({{ '/validation/cases-jl/' | relative_url }}).

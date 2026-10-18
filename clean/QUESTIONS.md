@@ -1,14 +1,13 @@
 # Open questions for the data collectors (Ilker / Patrick to forward)
 
 Things the published files, readmes and the data paper (Kikumoto et al. 2026, JAR 9(1) e70083)
-cannot settle, each with what was measured and what one line from the collector would close.
-Contacts are in `manifest.json → cases.<id>.contact`. Numbers below are in `checks.json`.
+cannot settle. Contacts: `manifest.json → cases.<id>.contact`. Numbers: `checks.json`.
 
 ## Q1 — Case C: which way does the turntable turn? (Nonomura)
 
 In `RS_caseC.csv`'s own frame (+x = the WD = 0 flow, confirmed three ways on the data) the WD = 45°
 field is mirror-symmetric about the line **y = −x**: mean |ΔVs| over the 57 mirror pairs is
-0.108 / 0.103 / 0.130 m/s for 0D / 1D / 2D — the experiment's own repeatability floor — while the
+0.108 / 0.103 / 0.130 m/s for 0D / 1D / 2D (the experiment's own repeatability floor), while the
 mirror about y = +x gives 0.52 / 0.77 / 0.80 m/s. So in the CSV the wind rotates from +x **toward
 −y** as WD grows. Figure 3 of the data paper draws the 0 / 22.5 / 45° arrows fanning toward **+y**.
 The two differ by a sign of y, which is invisible at WD = 0.
@@ -108,8 +107,7 @@ measured and withheld (e.g. inside buildings for one configuration)?
 
 ## Questions on Cases F and M
 
-Numbered with the case letter (QF1 …, QM1 …) so that the questions of each case stay together; the numbers
-are in `checks.json` and `manifest.json → cases.F / M`. Contacts: Case F, Tsubasa Okaze; Case M, Ryuichiro Yoshie.
+Numbers: `checks.json` and `manifest.json → cases.F / M`. Contacts: Case F, Tsubasa Okaze; Case M, Ryuichiro Yoshie.
 
 ## QF1 — Case F: is the field series of point 14 shifted by one direction? (Okaze)
 
@@ -147,7 +145,7 @@ street surface, and is the STL the model that was in the tunnel?
 The STL is a disc of radius 725.0 m (0.90625 m model), open along its rim (812 boundary edges, all at z = 0); the readme says
 "radius = 800 m equivalent" and the data paper "a diameter of 1,600 m". A 1.8125 m model would not fit the 1.55 m wide tunnel
 the paper describes. All its ground and roof facets (and a sample of walls) face down, so the file is wound inward; this release
-reverses it. Please confirm the radius that was in the tunnel, and that the file is meant to describe the 1978 configuration.
+reverses it and closes the rim with a 1 m base slab. Please confirm the radius that was in the tunnel, and that the file is meant to describe the 1978 configuration.
 
 ## QF6 — Case F: which reference point is SMB? (Okaze)
 
@@ -232,7 +230,7 @@ meteorological direction, and that the sign of V in `RS-WT_caseM.csv` is positiv
 
 ## Cases G, H and I
 
-Numbered per case (QG, QH, QI) so that the notes of this release's cleaning of Cases G, H and I stay together. What each check measured
+What each check measured
 is in `checks.json` (the check names are given). Contacts: G and I Tominaga, H Yoshie (`manifest.json → cases.<id>.contact`).
 
 ### QG1 — Case G: which heights were measured behind the belt? (Kurotani, Kiyota)

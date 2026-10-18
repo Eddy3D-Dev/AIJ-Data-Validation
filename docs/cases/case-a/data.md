@@ -99,8 +99,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-Each of these changes the result of a comparison if it is not accounted for.
-
 - Lateral velocity V is positive toward +y (checked: V = -2.893 m/s at (-0.040, -0.050, 0.010), just outside the y \< 0 flank, deflecting away from the centreline). Case B uses the OPPOSITE sign; the API flips Case B so both agree.
 - Coordinates are metres (Case B\'s are millimetres in the published file).
 - Case A\'s turbulence columns are rms values (u\_rms, ...). The API serves VARIANCES (uu = u\_rms^2) so A and B share one column meaning.
@@ -119,8 +117,32 @@ Each of these changes the result of a comparison if it is not accounted for.
 
 ## Attribution
 
-- Data collectors: Takeshi Ishihara (The University of Tokyo), Kazuki Hibi (Numerical Flow Design)
-- Editors and distributors: Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
+- Data collected by Takeshi Ishihara (The University of Tokyo) and Kazuki Hibi (Numerical Flow Design), 1998.
+- Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15050147](https://doi.org/10.5281/zenodo.15050147)
 - Citation requested: Meng, Y., & Hibi, K. (1998). Turbulent measurements of the flow field around a high-rise building. Journal of Wind Engineering, JAWE, 76, 55-64. <https://doi.org/10.5359/jawe.1998.76_55>
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Ishihara, T., Hibi, K., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case A (112): Wind Tunnel Experiment for Flow around a 1:1:2 Shape Building Model [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15050147
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_a,
+  author    = "Ishihara, Takeshi and Hibi, Kazuki and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case A (112): Wind Tunnel Experiment for Flow around a 1:1:2 Shape Building Model}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15050147",
+  url       = "https://doi.org/10.5281/zenodo.15050147",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).

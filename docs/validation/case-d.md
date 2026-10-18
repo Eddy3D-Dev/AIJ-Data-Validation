@@ -8,12 +8,17 @@ description: "OpenFOAM 12 against the tunnel for Case D, the high-rise among cit
 
 # Case D, OpenFOAM 12
 
-The reading of the OpenFOAM 12 runs on the high-rise among city blocks. Every score, with the per-point file, is on the [Case D]({{ '/cases/case-d/validation/' | relative_url }}) Validation page.
+OpenFOAM 12 runs on the high-rise among city blocks. Scores and per-point file: [Case D]({{ '/cases/case-d/validation/' | relative_url }}) Validation page.
 
-All three headings: 3.6 million cells at 1:400 on a cylinder domain, 3000
-iterations, the 66 measured thermistor points and the 33 split-fibre points at z/H = 0.02.
+All three headings: 3.6 million cells at 1:400 on a cylinder domain, 3000 iterations, the 66 measured thermistor points and the 33 split-fibre points at z/H = 0.02.
 
-{% include figure.html name="case-d-openfoam-agreement.png" alt="Case D, measured vs modelled" caption="<strong>Figure 1.</strong> Case D, wind directions 0°, 22.5° and 45°: measured against modelled speed on the thermistor plane, and at the split-fibre points (0° only)." %}
+## Measurement layout
+
+{% include figure.html name="case-d-layout.png" alt="Measurement points, Case D" caption="<strong>Figure 1.</strong> Case D, measurement points: A split-fibre probe, WD 0; B thermistor on the site of the central block, |x/H| ≤ 0.2; C thermistor in the streets along y beside it; D thermistor in the streets along x further out. Positions in multiples of H. The split fibre stands at 33 of the 78 places of the thermistors; open dots: the 12 places where the thermistor read nothing; wind directions 0°, 22.5° and 45°." %}
+
+## Measured against modelled
+
+{% include figure.html name="case-d-openfoam-agreement.png" alt="Case D, measured vs modelled" caption="<strong>Figure 2.</strong> Case D, wind directions 0°, 22.5° and 45°: measured against modelled speed on the thermistor plane, and at the split-fibre points (0° only). The dots take the colour of their group in Figure 1." %}
 
 <details markdown="block">
   <summary>Scores for all three headings and both instruments</summary>
@@ -33,21 +38,23 @@ iterations, the 66 measured thermistor points and the 33 split-fibre points at z
 
 </details>
 
-- **The pattern is right**: R 0.80–0.85 on the thermistor plane at all three headings and 0.85 on the split-fibre |U|. The frame check the
-  fixture asserts (R > 0.5 at 0°; a prior Eddy3D attempt at this case scored R 0.10) passes with room to spare.
-- **Against the instrument that measures what RANS computes, the model is nearly unbiased.** On the 33 split-fibre
-  points its |U| has FB +0.07; against the thermistor it is +0.21 with √(|U|²+2k) and +0.36 with |U|. In the
-  tunnel itself the thermistor reads 1.34 times the split-fibre |U| over the same 33 points, so most of the
-  thermistor gap is the instrument, not the flow.
-- **Its streamwise component is low** (U FB +0.67, R 0.95) while its |U| is not: more of the model's
-  near-ground speed is in the lateral and vertical components than the tunnel's.
-- **At 22.5° and 45° the solved fields corroborate the rotation sense the data cannot decide.** The array is
-  symmetric about y = 0, so a wind turned toward +y and one turned toward −y give mirror-image fields, and the
-  measurements alone cannot say which was used; the data paper's Figure 4 draws +y. Scored on the same solutions,
-  Figure 4's sense gives R 0.80 and FAC2 0.92 at 22.5°, R 0.85 and FAC2 0.89 at 45°; the mirror gives R 0.40 and
-  0.17. At both headings the model is also nearly unbiased against the thermistor (FB +0.05 and +0.09 with
-  √(|U|²+2k)).
-- **At 0° the 66 thermistor values are 33 mirror pairs**, so only 33 are independent and the mirror control is
-  trivially equal there.
-- The numbers were reproduced from the solver's probe output against the cleaned table, with the frame mapped
-  independently and separate metric code.
+- Thermistor plane: R 0.80–0.85 at all three headings. Split-fibre \|U\|: R 0.85.
+- Split-fibre points (33): \|U\| FB +0.07. Thermistor (66): FB +0.21 with √(\|U\|²+2k) and +0.36 with \|U\|. In the tunnel the thermistor reads 1.34 times the split-fibre \|U\| over the same 33 points.
+- Split-fibre streamwise U: FB +0.67, R 0.95.
+- Rotation sense at 22.5° and 45°: the array is symmetric about y = 0, so a wind turned toward +y and one turned toward −y give mirror-image fields. The data paper's Figure 4 draws +y.
+  - Figure 4's sense: R 0.80 and FAC2 0.92 at 22.5°; R 0.85 and FAC2 0.89 at 45°.
+  - Mirrored sense (control): R 0.40 at 22.5°, 0.17 at 45°.
+  - FB against the thermistor with √(\|U\|²+2k): +0.05 and +0.09.
+- At 0° the 66 thermistor values are 33 mirror pairs (33 independent values); the mirror control is equal to the score there.
+- FB is positive when the model is low.
+
+<details markdown="block">
+<summary>Interpretation: Case D pattern, instruments and rotation sense</summary>
+
+- The pattern is right. The frame check (R above 0.5 at 0°) passes with room to spare; a prior Eddy3D attempt at this case scored R 0.10 ([Known data issues]({{ '/known-data-issues/' | relative_url }})).
+- Against the instrument that measures what RANS computes, the model is nearly unbiased (split-fibre \|U\|, FB +0.07).
+- Most of the thermistor gap is the instrument: the thermistor reads 1.34 times the split-fibre \|U\| in the tunnel itself.
+- The model's streamwise component is low (U FB +0.67, R 0.95) while its \|U\| is not: more of the model's near-ground speed is in the lateral and vertical components than the tunnel's.
+- At 22.5° and 45° the solved fields corroborate the rotation sense that the measurements alone cannot decide. At both headings the model is also nearly unbiased against the thermistor (FB +0.05 and +0.09 with √(\|U\|²+2k)).
+
+</details>

@@ -111,8 +111,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-Each of these changes the result of a comparison if it is not accounted for.
-
 - The legacy workbook normalises with H = 0.2 m (Case H\'s building), UH = 4.94009 m/s and C0 = 18.218 ppm, not the cube\'s H = 0.06 m and U\_H = 2.33 m/s; its normalised columns are 23.6 times smaller in concentration. The API\'s concentration\_ratio uses the cube\'s c0 = 429.18 ppm.
 - RS\_caseK.csv has no point numbers; point\_id is the row order of the file.
 - The published CSV is the workbook rounded (3 decimals, concentrations 2), with k recomputed from the rounded rms values; the table is rebuilt from the workbook.
@@ -137,8 +135,32 @@ Each of these changes the result of a comparison if it is not accounted for.
 
 ## Attribution
 
-- Data collectors: Ryuichiro Yoshie (Tokyo Polytechnic University), Takumi Tachibana (Wind Engineering Institute)
-- Editors and distributors: Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
+- Data collected by Ryuichiro Yoshie (Tokyo Polytechnic University) and Takumi Tachibana (Wind Engineering Institute), 2016.
+- Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15448050](https://doi.org/10.5281/zenodo.15448050)
 - Citation requested: Yoshie, R. (2016). Wind Tunnel Experiment and Large Eddy Simulation of Pollutant/Thermal Dispersion in Non-isothermal Turbulent Boundary Layer. Adv Environ Wind Eng, 167-196. <https://doi.org/10.1007/978-4-431-55912-2_9>
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Yoshie, R., Tachibana, T., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case K (ArraysC): Wind and Concentration Measurements in Cube Arrays with Point-source Dispersion [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15448050
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_k,
+  author    = "Yoshie, Ryuichiro and Tachibana, Takumi and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case K (ArraysC): Wind and Concentration Measurements in Cube Arrays with Point-source Dispersion}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15448050",
+  url       = "https://doi.org/10.5281/zenodo.15448050",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).

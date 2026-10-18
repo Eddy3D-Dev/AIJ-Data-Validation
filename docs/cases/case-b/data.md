@@ -100,8 +100,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-Each of these changes the result of a comparison if it is not accounted for.
-
 - The published coordinates are MILLIMETRES (x\[mm\]) while velocities are m/s. The API serves metres (coordinate\_scale\_applied = 0.001). Read as metres, every probe lands 1000x too far out.
 - The published lateral velocity V is positive toward -y (V = +3.630 m/s at (-0.025, -0.110, 0.013), just outside the y \< 0 flank where the flow must deflect toward -y). The API multiplies V by -1 (lateral\_sign\_applied = -1) so that V is positive toward +y as in Case A. Scored without this, Case B\'s V comes out at R = -0.910 against R = +0.959 for U on the same points.
 - The RANS solution is symmetric, so model V = 0 on the centre plane while the tunnel measures small non-zero values there.
@@ -120,8 +118,32 @@ Each of these changes the result of a comparison if it is not accounted for.
 
 ## Attribution
 
-- Data collectors: Yoshihide Tominaga (Niigata Institute of Technology)
-- Editors and distributors: Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
+- Data collected by Yoshihide Tominaga (Niigata Institute of Technology), 2003.
+- Edited and distributed by Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15401455](https://doi.org/10.5281/zenodo.15401455)
 - Citation requested: Miyazaki, T., Tominaga, Y. (2003). Wind tunnel experiment on flow field around a building model with a scale ratio of 4:4:1 placed within the surface boundary layer. Proc. Annual Meeting of Hokuriku Chapter, AIJ, 201-204 (in Japanese). <https://www.aij.or.jp/paper/detail.html?productId=313933>
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case B (144): Wind Tunnel Experiment for Flow around a 1:4:4 Shape Building Model [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15401455
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_b,
+  author    = "Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case B (144): Wind Tunnel Experiment for Flow around a 1:4:4 Shape Building Model}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15401455",
+  url       = "https://doi.org/10.5281/zenodo.15401455",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).

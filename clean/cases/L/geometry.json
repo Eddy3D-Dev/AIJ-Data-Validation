@@ -15,7 +15,7 @@
    "configuration": "default",
    "file": "cases/L/geometry.stl",
    "format": "ASCII STL, LF, metres, same frame as points.csv",
-   "source": "the 126 closed shells of BD_caseL.stl ('buildings' solid: 1,512 triangles, watertight, outward normals), each reduced to its box (identical to the 14 x 9 grid of 0.06 m cubes on a 0.12 m pitch); the 'line_source' solid (a flat 0.04 m x 1.02 m patch at z = 0) is not a building and is described in the frame",
+   "source": "the 126 closed shells of BD_caseL.stl ('buildings' solid: 1,512 triangles, no open edge; the 126 bottom faces are wound inward), each reduced to its box (identical to the 14 x 9 grid of 0.06 m cubes on a 0.12 m pitch); the 'line_source' solid (a flat 0.04 m x 1.02 m patch at z = 0) is not a building and is described in the frame",
    "stats": {
     "triangles": 1512,
     "bbox_min": [
@@ -33,6 +33,10 @@
     "edges_shared_by_two_faces": 2268,
     "edges_boundary": 0,
     "edges_non_manifold": 0,
+    "bodies": 126,
+    "body_contacts": 0,
+    "inconsistent_triangles": 0,
+    "min_body_volume": 0.000216,
     "watertight": true
    },
    "boxes": [

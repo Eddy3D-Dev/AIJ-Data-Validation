@@ -1,7 +1,7 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/case.schema.json",
- "schema_version": "2.3.0",
- "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
+ "schema_version": "2.4.0",
+ "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
  "id": "G",
  "slug": "case-g",
@@ -174,7 +174,7 @@
  "known_issues": [
   "FIELD data: full-scale metres, no model, and nothing in m/s. The table carries U/UH (velocity_ratio) and k/UH^2 (k_ratio), UH = the mean speed at 7 m during each period; the approach-flow table carries U/Ub and k/Ub^2 (Ub = U at 9 m) in its U and k columns, which are dimensionless here.",
   "The readme lists the heights of the lee measurement as 1.5, 3.0, 6.0, 9.0 m; the table, the workbook, the drawing and the data paper have 1.5, 3, 4.5, 6 m.",
-  "The tree belt is a POROUS canopy (shading rate 81 % after pruning), not a solid body: the served geometry is its 2 m × 74 m × 7 m envelope with the 1.2 m gap, and a solver needs a canopy (drag) model, not a wall.",
+  "The tree belt is a porous canopy (shading rate 81 % after pruning): the served geometry is its 2 m × 74 m × 7 m envelope with the 1.2 m gap, and a solver needs a canopy (drag) model.",
   "The approach profile (28 Dec 2000, 120 min) and the lee measurements (26 Dec 2000, 10 min or more) are from different days. Behind the belt k/UH^2 is 0.040-0.072 at 5 H, 3-8 times below the approach flow's 0.26-0.31 at the same heights; the files do not say why.",
   "Only 28 numbers per quantity exist, on one centre section, one time-average each, with no repeats and no uncertainty.",
   "The wind direction relative to the belt normal during the measurement is not published; the case is two-dimensional by assumption."
@@ -194,6 +194,10 @@
  "doi": "10.5281/zenodo.15589666",
  "doi_note": "The readme and the data paper name this one DOI; no separate version DOI is stated.",
  "citation_requested": "Kurotani, Y., Kiyota, N., Kobayashi, S. (2001). Windbreak effect of Tsuijimatsu in Izumo Part. 2. Summaries of technical papers of Annual Meeting, Architectural Institute of Japan, D-2 Environmental engineering II, 745-746 (in Japanese).",
+ "citation": {
+  "apa": "Kurotani, Y., Kiyota, N., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case G (Tree): Field Observation for Flow behind Tree Belt [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15589666",
+  "bibtex": "@misc{aijuwe_case_g,\n  author    = \"Kurotani, Yasuo and Kiyota, Nobuyoshi and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa\",\n  title     = \"{AIJ UWE Benchmark Dataset -- Case G (Tree): Field Observation for Flow behind Tree Belt}\",\n  year      = \"2025\",\n  publisher = \"Zenodo\",\n  doi       = \"10.5281/zenodo.15589666\",\n  url       = \"https://doi.org/10.5281/zenodo.15589666\",\n  note      = \"Data set\"\n}"
+ },
  "files_in_repository": {
   "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/raw/cases/case-g",
   "reference": "raw/cases/case-g/RS_caseG.csv",

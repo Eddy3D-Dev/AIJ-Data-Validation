@@ -115,7 +115,7 @@ def build(B, prov):
     analytic = X.cube_boxes(ROWS, COLS, X_FIRST, Y_FIRST, H, PITCH)
     analytic.sort(key=lambda b_: (b_["min"][0], b_["min"][1]))
     sst = B.stl_stats(stris)
-    geo = [("default", boxes, "the 126 closed shells of BD_caseL.stl ('buildings' solid: 1,512 triangles, watertight, outward normals), each reduced to its box (identical to the 14 x 9 grid of 0.06 m cubes on a 0.12 m pitch); "
+    geo = [("default", boxes, "the 126 closed shells of BD_caseL.stl ('buildings' solid: 1,512 triangles, no open edge; the 126 bottom faces are wound inward), each reduced to its box (identical to the 14 x 9 grid of 0.06 m cubes on a 0.12 m pitch); "
                               "the 'line_source' solid (a flat 0.04 m x 1.02 m patch at z = 0) is not a building and is described in the frame")]
     B.log(f"[L] geometry: BD_caseL.stl = 'buildings' {bst['triangles']} triangles, {len(shells)} shells, watertight {bst['watertight']}, signed volume {bst['signed_volume']}, bbox {bst['bbox_min']}..{bst['bbox_max']}; "
           f"'line_source' {sst['triangles']} triangles, bbox {sst['bbox_min']}..{sst['bbox_max']}")
@@ -167,8 +167,11 @@ def build(B, prov):
     same = len(boxes) == len(analytic) == 126 and all(np.allclose(a_["min"], b_["min"], atol=1e-9) and np.allclose(a_["max"], b_["max"], atol=1e-9) for a_, b_ in zip(boxes, analytic))
     check(B, c, "BD_caseL_stl_is_126_cubes_on_a_0.12_m_pitch", same, shells=len(shells), cube_edge_m=H, pitch_m=PITCH, rows_x_columns=[ROWS, COLS], bbox_min=bst["bbox_min"], bbox_max=bst["bbox_max"],
           note="14 rows along x (x = -0.96 .. 0.66) by 9 columns across y (-0.51 .. 0.51); the data paper's '9 rows by 14 columns' counts the other way round; origin = windward wall of row 9")
-    check(B, c, "BD_caseL_stl_buildings_solid_is_watertight_and_outward", bst["watertight"] and abs(bst["signed_volume"] - 126 * H ** 3) < 1e-9, triangles=bst["triangles"], open_edges=bst["edges_boundary"], signed_volume_m3=bst["signed_volume"], analytic_volume_m3=126 * H ** 3,
-          note="positive signed volume = outward winding; no duplicate facets; unlike Cases D and E nothing needs repairing")
+    check(B, c, "BD_caseL_stl_buildings_solid_has_no_open_edge_and_the_analytic_volume", bst["edges_boundary"] == 0 and bst["edges_non_manifold"] == 0 and bst["bodies"] == 126 and abs(bst["signed_volume"] - 126 * H ** 3) < 1e-9,
+          triangles=bst["triangles"], bodies=bst["bodies"], open_edges=bst["edges_boundary"], signed_volume_m3=bst["signed_volume"], analytic_volume_m3=126 * H ** 3,
+          note="every edge is used by two triangles and the signed volume equals 126 H^3; unlike Cases D and E nothing needs repairing, except the bottom faces (next check)")
+    check(B, c, "BD_caseL_stl_bottom_faces_are_wound_inward", bst["inconsistent_triangles"] == 252 and bst["watertight"] is False, warn=True, inconsistent_triangles=bst["inconsistent_triangles"], bodies=bst["bodies"],
+          note="the two bottom triangles (z = 0) of each of the 126 cubes are wound against the other ten, so the file is closed but not consistently wound; the plane z = 0 adds nothing to the signed volume, which is why the volume and the open-edge count do not show it. The served geometry.stl is the 126 boxes, outward")
     inside = X.inside_count(pts, boxes)
     ctrl = X.inside_count(pts, boxes, (0.06, 0.0, 0.0))
     check(B, c, "no_sensor_inside_building", inside == 0, inside=inside, points=n)
@@ -248,6 +251,7 @@ def build(B, prov):
                      "velocity": {"U_H_m_s": uH, "height_m": H}, "temperature": {"theta_f_degC": round(thf, 6), "delta_theta_K": round(dth, 6), "definition": "(T - T_f) / delta_theta"}}
     extra = {"normalisation": normalisation,
              "known_issues": {"RS_T_unit": "RS_caseL.csv 'T(K)' holds degrees Celsius (AF_caseL.csv's 'T(K)' is kelvin); the table carries degC for both",
+                              "stl_bottom_faces": "BD_caseL.stl: the two bottom triangles (z = 0) of each of the 126 cubes (252 triangles) are wound inward; the served geometry.stl is the 126 boxes, outward",
                               "readme_file_names": "the readme's file list names AF_caseK.csv and RS_caseK.csv; the files are AF_caseL.csv and RS_caseL.csv",
                               "readme_building_temperature": "the readme's 'building surface temperature T_b = 14.8 degC' is the air temperature at H; the workbook's <θbuild> is 42.2 degC",
                               "source_size": "readme and data paper 0.037 m x 1.2 m; BD_caseL.stl patch 0.04 m x 1.02 m",

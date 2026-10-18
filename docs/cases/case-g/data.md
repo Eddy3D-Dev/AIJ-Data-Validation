@@ -100,11 +100,9 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-Each of these changes the result of a comparison if it is not accounted for.
-
 - FIELD data: full-scale metres, no model, and nothing in m/s. The table carries U/UH (velocity\_ratio) and k/UH^2 (k\_ratio), UH = the mean speed at 7 m during each period; the approach-flow table carries U/Ub and k/Ub^2 (Ub = U at 9 m) in its U and k columns, which are dimensionless here.
 - The readme lists the heights of the lee measurement as 1.5, 3.0, 6.0, 9.0 m; the table, the workbook, the drawing and the data paper have 1.5, 3, 4.5, 6 m.
-- The tree belt is a POROUS canopy (shading rate 81 % after pruning), not a solid body: the served geometry is its 2 m × 74 m × 7 m envelope with the 1.2 m gap, and a solver needs a canopy (drag) model, not a wall.
+- The tree belt is a porous canopy (shading rate 81 % after pruning): the served geometry is its 2 m × 74 m × 7 m envelope with the 1.2 m gap, and a solver needs a canopy (drag) model.
 - The approach profile (28 Dec 2000, 120 min) and the lee measurements (26 Dec 2000, 10 min or more) are from different days. Behind the belt k/UH^2 is 0.040-0.072 at 5 H, 3-8 times below the approach flow\'s 0.26-0.31 at the same heights; the files do not say why.
 - Only 28 numbers per quantity exist, on one centre section, one time-average each, with no repeats and no uncertainty.
 - The wind direction relative to the belt normal during the measurement is not published; the case is two-dimensional by assumption.
@@ -123,8 +121,32 @@ Each of these changes the result of a comparison if it is not accounted for.
 
 ## Attribution
 
-- Data collectors: Yasuo Kurotani (Shimane University), Nobuyoshi Kiyota (Hiroshima Institute of Technology)
-- Editors and distributors: Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
+- Data collected by Yasuo Kurotani (Shimane University) and Nobuyoshi Kiyota (Hiroshima Institute of Technology), 2001.
+- Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15589666](https://doi.org/10.5281/zenodo.15589666)
 - Citation requested: Kurotani, Y., Kiyota, N., Kobayashi, S. (2001). Windbreak effect of Tsuijimatsu in Izumo Part. 2. Summaries of technical papers of Annual Meeting, Architectural Institute of Japan, D-2 Environmental engineering II, 745-746 (in Japanese).
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Kurotani, Y., Kiyota, N., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case G (Tree): Field Observation for Flow behind Tree Belt [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15589666
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_g,
+  author    = "Kurotani, Yasuo and Kiyota, Nobuyoshi and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case G (Tree): Field Observation for Flow behind Tree Belt}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15589666",
+  url       = "https://doi.org/10.5281/zenodo.15589666",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).

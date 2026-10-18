@@ -17,7 +17,7 @@ Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m ×
 
 <figure class="figure render">
 <a href="{{ '/assets/geometry/case-g.png' | relative_url }}"><img src="{{ '/assets/web/case-g.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case G — flow behind a tree belt"></a>
-<figcaption>The Tsuiji-matsu tree belt, 2 m × 74 m × 7 m with a 1.2 m gap below (full scale; shown as its envelope — a porous canopy, not a solid body); the wind blows along +x and the measurements are behind the belt.<br><a class="original" href="{{ '/assets/geometry/case-g.png' | relative_url }}">1200 dpi original, 0.7 MB</a></figcaption>
+<figcaption>The Tsuiji-matsu tree belt, 2 m × 74 m × 7 m with a 1.2 m gap below (full scale; shown as its envelope, a porous canopy); the wind blows along +x and the measurements are behind the belt.</figcaption>
 </figure>
 
 ## At a glance
@@ -28,22 +28,22 @@ Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m ×
 | Wind directions (°) | 0 |
 | Measured | 28 rows over 28 points: velocity\_ratio, k\_ratio |
 
-## Agreement with the tunnel
+## Validation
 
-| Engine | Status | R | FAC2 |
-|---|---|---|---|
-| OpenFOAM 12 | <span class="label label-green status">scored</span> | +0.21 … +0.50 | 0.68 … 1.00 |
-| OpenLB | <span class="label label-yellow status">pending</span> | — | — |
-| FluidX3D | <span class="label label-yellow status">pending</span> | — | — |
-| ML surrogate | <span class="label label-yellow status">pending</span> | — | — |
+| Engine | Status | Compared with | R (range) | FAC2 (range) |
+|---|---|---|---|---|
+| OpenFOAM 12 | <span class="label label-green status">scored</span> | Field | +0.21 … +0.50 | 0.68 … 1.00 |
+| OpenLB | <span class="label label-yellow status">pending</span> | — | — | — |
+| FluidX3D | <span class="label label-yellow status">pending</span> | — | — | — |
+| ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
 
-R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: every score, its figures and its reading are on the [Validation page]({{ '/cases/case-g/validation/' | relative_url }}).
+LAD and Cd are not in the dataset (only the shading rate, 81 %). The drag values are crowns of the Eddy3D vegetation library; no optimiser is run against the 28 points.
 
 {: .warning-title }
 > Before you compare
 >
-> The cleaned table is in SI units and one frame, with this case's corrections applied once; do not apply them again to the published files.
->
-> - The sense in which the wind direction rotates is a convention to check before comparing at any direction other than 0° (see *Frame and units* on the Data page).
+> - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
+> - Origin: the leeward face of the tree belt at ground level, on the vertical section through the belt\'s centre. Length unit: m (full scale).
+> - Wind direction: one direction, toward +x (perpendicular to the belt); the field wind\'s angle to the belt normal is not published.
 > - 6 known issues in the published files are listed under [Known data issues]({{ '/cases/case-g/data/' | relative_url }}#known-data-issues).

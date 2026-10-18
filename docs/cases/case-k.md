@@ -17,7 +17,7 @@ description: "9 x 9 array of 0.06 m cubes with a tracer point source on the floo
 
 <figure class="figure render">
 <a href="{{ '/assets/geometry/case-k.png' | relative_url }}"><img src="{{ '/assets/web/case-k.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case K — 9 x 9 cube array, point source"></a>
-<figcaption>9 x 9 array of 0.06 m cubes on a 0.12 m pitch (model scale); the orange ring marks the floor tracer source between rows 2 and 3; the wind blows along +x.<br><a class="original" href="{{ '/assets/geometry/case-k.png' | relative_url }}">1200 dpi original, 2.0 MB</a></figcaption>
+<figcaption>9 x 9 array of 0.06 m cubes on a 0.12 m pitch (model scale); the orange ring marks the floor tracer source between rows 2 and 3; the wind blows along +x.</figcaption>
 </figure>
 
 ## At a glance
@@ -31,21 +31,19 @@ description: "9 x 9 array of 0.06 m cubes with a tracer point source on the floo
 | Measurement planes | y/H = 0, +-1, +-2, +-3 (z up to 0.07 m), five heights from 4 mm to 70 mm; the three upper heights only on y = 0 and +-H |
 | Measured | 203 rows over 203 points: U, V, W, uu, vv, ww, k, C, c\_rms, concentration\_ratio |
 
-## Agreement with the tunnel
+## Validation
 
-| Engine | Status | R | FAC2 |
-|---|---|---|---|
-| OpenFOAM 12 | <span class="label label-green status">scored</span> | -0.15 … +0.96 | 0.04 … 0.80 |
-| OpenLB | <span class="label label-yellow status">pending</span> | — | — |
-| FluidX3D | <span class="label label-yellow status">pending</span> | — | — |
-| ML surrogate | <span class="label label-yellow status">pending</span> | — | — |
+| Engine | Status | Compared with | R (range) | FAC2 (range) |
+|---|---|---|---|---|
+| OpenFOAM 12 | <span class="label label-green status">scored</span> | Wind tunnel | -0.15 … +0.96 | 0.04 … 0.80 |
+| OpenLB | <span class="label label-yellow status">pending</span> | — | — | — |
+| FluidX3D | <span class="label label-yellow status">pending</span> | — | — | — |
+| ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
-
-R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: every score, its figures and its reading are on the [Validation page]({{ '/cases/case-k/validation/' | relative_url }}).
 
 {: .warning-title }
 > Before you compare
 >
-> The cleaned table is in SI units and one frame, with this case's corrections applied once; do not apply them again to the published files.
->
+> - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
+> - Origin: bottom centre of the windward wall of the 4th row of the central column: x = 0 is that wall, y = 0 the centre line of the central column. Length unit: m (model scale).
 > - 9 known issues in the published files are listed under [Known data issues]({{ '/cases/case-k/data/' | relative_url }}#known-data-issues).

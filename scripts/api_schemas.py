@@ -64,6 +64,19 @@ POINT = obj(["point_id", "x", "y", "z"], {
                                 "uc", "vc", "wc", "uT", "vT", "wT", "velocity_ratio_sd", "k_ratio")},
 })
 
+# What a geometry file says about itself (geometry.json `stats`, and the geometry index). A BODY is a set of triangles joined through
+# edges that exactly two triangles use.
+GEOMETRY_FACTS = {
+    "watertight": {"type": "boolean", "description": ("true when every body is closed (no boundary edge), consistently wound (every edge is traversed once in "
+                                                      "each direction) and has a positive volume (outward normals)")},
+    "bodies": {"type": "integer", "minimum": 0, "description": "number of bodies (buildings, or the terrain with its buildings)"},
+    "edges_boundary": {"type": "integer", "minimum": 0, "description": "edges used by one triangle: 0 when every body is closed"},
+    "body_contacts": {"type": "integer", "minimum": 0, "description": ("edges that four triangles share where two separate bodies touch; "
+                                                                      "each body still sees the edge as an ordinary two-triangle edge, so a contact does not open a body")},
+    "inconsistent_triangles": {"type": "integer", "minimum": 0, "description": "fewest triangles to reverse to wind every body consistently: 0 in every served file"},
+    "min_body_volume": {"type": "number", "description": "volume of the smallest body (m^3 in the file's units cubed); positive when every body is outward"},
+}
+
 FRAME = obj(["origin", "x", "y", "z"], {k: {"type": "string"} for k in ("origin", "x", "y", "z")})
 
 
@@ -109,7 +122,15 @@ DOCUMENTS = {
         "case_ids": arr(CASE_ID),
         "files": arr(DOWNLOAD),
         "license_detail": obj(["spdx", "url"], {"spdx": {"type": "string"}, "name": {"type": "string"}, "url": URL, "note": {"type": "string"}}),
-        "cite": obj(["benchmark"], {"benchmark": {"type": "string"}}),
+        "cite": obj(["api", "benchmark"], {
+            "benchmark": {"type": "string"}, "guidelines": {"type": "string"}, "per_case": {"type": "string"},
+            "api": obj(["title", "version", "url", "release_url", "doi", "apa", "bibtex", "csl_json"], {
+                "title": {"type": "string"}, "version": SEMVER,
+                "url": dict(URL, description="the pinned address of this release's API: the address to cite"),
+                "release_url": dict(URL, description="the release's page in the repository"),
+                "doi": dict(STR_OR_NULL, description="the DOI of the release's Zenodo record; null until one exists"),
+                "apa": {"type": "string"}, "bibtex": {"type": "string"},
+                "csl_json": dict({"type": "object"}, description="the same citation as a CSL-JSON item")})}),
     }),
     "versions": _doc("versions", "Release list", "Every release of the data and API, newest first, with the address of its files.",
                      ["latest", "latest_base_url", "versions"], {
@@ -143,7 +164,8 @@ DOCUMENTS = {
     }),
     "case": _doc("case", "Case", "One case in full: configuration, frame, units, inflow, point-table summary, geometry, validation status, "
                  "known data issues and attribution.",
-                 ["id", "title", "frame", "units", "approach_flow", "points", "geometry", "validation", "known_issues", "people"], {
+                 ["id", "title", "frame", "units", "approach_flow", "points", "geometry", "validation", "known_issues", "people",
+                  "citation"], {
         "id": CASE_ID, "slug": {"type": "string"}, "title": {"type": "string"}, "summary": {"type": "string"},
         "configuration": {"type": "object"}, "configurations": arr({"type": "object"}),
         "quantities": arr({"type": "string"}), "units": {"type": "object"}, "frame": FRAME, "inflow_fit": {"type": "object"},
@@ -162,6 +184,7 @@ DOCUMENTS = {
         "people": obj(["data_collectors", "editors_distributors"], {"data_collectors": arr({"type": "string"}),
                                                                     "editors_distributors": arr({"type": "string"})}),
         "doi": STR_OR_NULL, "citation_requested": {"type": "string"}, "render": URL, "page": URL,
+        "citation": obj(["apa", "bibtex"], {"apa": {"type": "string"}, "bibtex": {"type": "string"}}),
     }),
     "points": _doc("points", "Point table", "The cleaned measurement table of one case: SI units, one frame, null where not measured.",
                    ["case", "columns", "column_meaning", "n", "points", "units", "frame"], {
@@ -178,15 +201,15 @@ DOCUMENTS = {
             "configuration": {"type": "string"}, "format": {"type": "string"}, "source": {"type": "string"},
             "stats": obj(["triangles", "bbox_min", "bbox_max", "watertight"], {
                 "triangles": {"type": "integer"}, "bbox_min": arr({"type": "number"}, minItems=3, maxItems=3),
-                "bbox_max": arr({"type": "number"}, minItems=3, maxItems=3), "watertight": {"type": "boolean"}}),
+                "bbox_max": arr({"type": "number"}, minItems=3, maxItems=3), **GEOMETRY_FACTS}),
             "render": URL, "render_caption": {"type": "string"},
             "boxes": arr(obj(["min", "max"], {"min": arr({"type": "number"}, minItems=3, maxItems=3),
                                               "max": arr({"type": "number"}, minItems=3, maxItems=3)})),
         })]}, minItems=1),
         "render": URL,
     }),
-    "validation": _doc("validation", "Case validation", "Eddy3D's scores against one case, per engine and run. 'scored' means a run "
-                       "exists, not that it agrees; an engine that is not 'scored' has no result here.",
+    "validation": _doc("validation", "Case validation", "Eddy3D's scores against one case, per engine and run. An engine that is not "
+                       "'scored' has no result here.",
                        ["case", "status", "engines", "results"], {
         "case": CASE_ID, "title": {"type": "string"}, "status": {"enum": ["scored", "pending"]},
         "status_meaning": {"type": "object", "additionalProperties": {"type": "string"}},
@@ -206,7 +229,7 @@ DOCUMENTS = {
         "archive": DOWNLOAD,
         "files": arr({"allOf": [DOWNLOAD, obj(["case", "configuration", "archive_name", "units", "frame", "triangles"], {
             "case": CASE_ID, "configuration": {"type": "string"}, "archive_name": {"type": "string"}, "units": {"type": "string"},
-            "frame": FRAME, "triangles": {"type": "integer"}, "watertight": {"type": "boolean"}})]}),
+            "frame": FRAME, "triangles": {"type": "integer"}, **GEOMETRY_FACTS})]}),
     }),
     "validation-summary": _doc("validation-summary", "Validation summary", "Every case and engine in one table: status, runs and "
                                "their headline scores.", ["engines", "cases"], {

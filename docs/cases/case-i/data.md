@@ -108,10 +108,8 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-Each of these changes the result of a comparison if it is not accounted for.
-
 - Two point sets, no point numbers: the velocity file (91 points: y = 0 plane and z/H = 0.5 plane) and the concentration file (539 points: y = 0 plane and the ground). The table stacks them, one row per instrument and point: velocity rows (instrument ldv) are numbered 1-91 and concentration rows (hydrocarbon\_analyser) 92-630, in the files\' order. 17 locations have both a velocity and a concentration value.
-- V on the y = 0 plane (53 of 91 points) is 0 in the CSV and 1e-9 ... 4e-6 m/s in the workbook: a symmetry value, not a measurement. It is NaN in the table; V is measured only at the 38 off-plane points.
+- V on the y = 0 plane (53 of 91 points) is 0 in the CSV and 1e-9 ... 4e-6 m/s in the workbook, a symmetry value. It is NaN in the table; V is measured only at the 38 off-plane points.
 - The table carries the legacy workbook\'s values; the CSVs round to 3 decimals (velocity, k) and 1 decimal (concentration, ppm). Every concentration is a multiple of 0.1 ppm: a 0.4 ppm value carries +/-12 % of quantisation.
 - The paper\'s c0 = 39.2 ppm needs the ETHANE flow (10 % of the 400 cc/min, 6.67e-7 m3/s); its sentence \'ethane released at 6.67e-6 m3/s\' is the mixture. With the mixture flow c0 would be 392 ppm.
 - The workbook normalises the approach flow with 1.697 m/s and the points with 1.7 m/s (0.18 % apart).
@@ -133,8 +131,32 @@ Each of these changes the result of a comparison if it is not accounted for.
 
 ## Attribution
 
-- Data collectors: Hiroaki Kondo (National Institute of Advanced Industrial Science and Technology), Katsuhiko Mutou (National Institute of Advanced Industrial Science and Technology), Akihiro Hori (National Institute for Environmental Studies)
-- Editors and distributors: Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
+- Data collected by Hiroaki Kondo (National Institute of Advanced Industrial Science and Technology), Katsuhiko Mutou (National Institute of Advanced Industrial Science and Technology) and Akihiro Hori (National Institute for Environmental Studies), 2013.
+- Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15430018](https://doi.org/10.5281/zenodo.15430018)
 - Citation requested: Japan Society for Atmospheric Environment (2013). Guidelines for Atmospheric Environment Assessment Methods Using CFD Models (DiMCFD). Japan Society for Atmospheric Environment (in Japanese).
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Kondo, H., Mutou, K., Hori, A., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case I (CubeC): Wind Tunnel Experiment for Flow and Dispersion around a Cubic Building Model [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15430018
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_i,
+  author    = "Kondo, Hiroaki and Mutou, Katsuhiko and Hori, Akihiro and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case I (CubeC): Wind Tunnel Experiment for Flow and Dispersion around a Cubic Building Model}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15430018",
+  url       = "https://doi.org/10.5281/zenodo.15430018",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).

@@ -83,10 +83,9 @@ row and measured counts, and `sense_basis` / `status` saying what fixes the rota
 | A, B | (1, 0) | definition |
 | C | (cos WD, **−sin WD**) | measured from the data: the WD = 45° field is mirror-symmetric about y = −x (mean \|ΔVs\| 0.10–0.13 m/s, the experiment's repeatability) and not about y = +x (0.52–0.80). Figure 3 of the data paper draws the opposite sense — QUESTIONS Q1 |
 | D | (cos WD, **+sin WD**) for 22.5°, 45° | **corroborated by solved fields**: the array is exactly y-mirror symmetric, so the sense cannot be settled from the data; it is taken from Figure 4 of the data paper, and Eddy3D's solved fields score R 0.80 / 0.85 in this sense against 0.40 / 0.17 mirrored (22.5° / 45°) — QUESTIONS Q2 |
-| E | (−sin WD, −cos WD) | definition: FROM-direction, +y north (compass rose in `MP_caseE.png`); frame verified by all 80 points lying in open space and a 10° rotation control putting 26 inside buildings |
+| E | (−sin WD, −cos WD) | definition: FROM-direction, +y north (compass rose in `MP_caseE.png`); frame verified by all 80 points lying in open space and a 10° rotation control putting 26 inside the official STL's buildings |
 
-Note C and D disagree in sense. That is what the sources say today; it is the first question to
-put to the data collectors.
+Note C and D disagree in sense (QUESTIONS Q1, Q2).
 
 ## 3. Approach flow (`approach_flow.csv` / `.parquet`)
 
@@ -101,8 +100,14 @@ that matter) and a power-law fit — reproduced in `build.py`, never typed in.
 
 ASCII STL, LF line endings, outward normals, **metres in the same frame as the points** (so the E
 files are full-scale and ~400 m across). `geometry.json` lists each file, its provenance, triangle
-count, bounding box, watertightness, and — for A–D and G–L — the axis-aligned boxes it is made of, so a
+count, bounding box, watertightness, and, for A–D and G–L, the axis-aligned boxes it is made of, so a
 consumer need not parse an STL at all.
+
+A **body** is a set of triangles joined through edges that exactly two triangles use. `stats.watertight` is true when every body
+is closed (no boundary edge), consistently wound (every edge is traversed once in each direction) and has a positive volume.
+`stats` also holds `bodies`, `edges_boundary`, `body_contacts` (edges that four triangles share where two separate bodies touch; they
+do not open a body), `inconsistent_triangles` (the fewest triangles to reverse; 0 in every served file) and `min_body_volume`.
+`scripts/check_geometry.py` re-derives all of it from the files.
 
 | case | files | made from |
 |---|---|---|
@@ -110,7 +115,7 @@ consumer need not parse an STL at all.
 | C | `geometry_0D/1D/2D.stl` | nine 0.20 m cubes on a 0.40 m pitch; the pitch is verified against the 120-point grid (the 49 absent nodes of the 13 × 13 lattice are exactly the nine footprints) and read from `MP-z-caseC.png` |
 | D | `geometry.stl` | the 83 closed shells of the published `BD_caseD.stl`, each reduced to its box (the published file has 576 duplicate facets and every roof wound inward; the rebuild is watertight with the analytic volume 0.0214766 m³) |
 | E | `geometry_ac.stl` | the official `BD_caseE.stl` scaled ×250 (after construction; 60,101 triangles; NOT watertight as published, 5,253 open edges) |
-| E | `geometry_ac_3dm.stl`, `geometry_bc_3dm.stl` | Eddy3D-side reconstructions from `case-e.3dm` (layers `buildings` + `buildings_new_construction`); **the before-construction state has no published source** — provisional |
+| E | `geometry_ac_3dm.stl`, `geometry_bc_3dm.stl` | Eddy3D-side reconstructions from `case-e.3dm` (layers `buildings` + `buildings_new_construction`); **the before-construction state has no published source** — provisional. 1,563 of 8,436 triangles (18.5 %) of the building meshes are wound against their neighbours and are re-wound; one wall that two buildings share (4 triangles) is removed; 545 closed bodies after construction, 542 before, 11 edges where two bodies touch |
 
 ## 5. Case E normalisation
 
@@ -138,7 +143,7 @@ changed input or a changed `build.py`.
 
 `scripts/aijdata.py` reads `clean/manifest.json`, finds each case's `points_csv`, maps the columns
 by name and serves them unchanged through `docs/api/cases/<id>/points.{json,csv}`
-(`points_source` in each file says so). Column `case_id` is deliberately not named `case`, which
+(`points_source` in each file says so). Column `case_id` is not named `case`, which
 that adapter would read as the configuration.
 
 ## Cases F and M
@@ -207,8 +212,8 @@ every point is 3 m above the local ground (verified against the STL to ±0.06 m)
 
 | case | file | made from |
 |---|---|---|
-| F | `geometry.stl` | the published `BD_caseF.stl` × 800 (it is model scale: 0.90625 m = 725 m), every triangle reversed (all 21,537 horizontal ground and roof facets faced down); one shell, open only along the rim of the disc (812 boundary edges), 3 zero-area facets kept |
-| M | `geometry.stl` | the published `BD_caseM.stl` × 600 (model scale: 1.8 m × 1.2 m = 1080 m × 720 m), every triangle reversed (3,118 of 3,152 horizontal facets faced down); one shell with 21 boundary and 7 non-manifold edges, kept |
+| F | `geometry.stl` | the published `BD_caseF.stl` × 800 (it is model scale: 0.90625 m = 725 m), every triangle reversed (all 21,537 horizontal ground and roof facets faced down); one shell, open along the rim of the disc (812 boundary edges at z = 0) and closed here with a 1 m base slab (vertical walls down to z = −1 m and a bottom cap, 2,436 added triangles); 3 zero-area facets are removed and their neighbours split |
+| M | `geometry.stl` | the published `BD_caseM.stl` × 600 (model scale: 1.8 m × 1.2 m = 1080 m × 720 m), every triangle reversed (3,118 of 3,152 horizontal facets faced down); one shell with 21 boundary and 7 non-manifold edges: the 7 slivers (0.45 m² together) hung on building roofs are removed and the rim of the panel is closed with a 1 m base slab (21 added triangles) |
 
 ### Approach flow
 
@@ -218,7 +223,7 @@ heights at x = −0.498 m model (−299 m full scale), z = 3 … 360 m full scal
 
 ## Cases G, H and I (a tree belt in the field, a floor source, a roof source)
 
-Added with schema 2.0.0; the columns are the 36 of section 1, nothing new. What these cases add to the rules above.
+Added with schema 2.0.0; the columns are the 36 of section 1, nothing new.
 
 ### Frames and transforms
 
@@ -263,8 +268,7 @@ carried: the table has no column for them), I's 12 (k only).
 
 ### Geometry
 
-Box geometry, `geometry.stl` and its boxes in `geometry.json`: G the belt's 2 × 74 × 7 m envelope with the 1.2 m gap (a **porous canopy**, shading rate 81 %,
-not a solid body), H the 0.10 × 0.10 × 0.20 m building, I the 0.1 m cube. The sources are not part of the geometry; their position is in
+Box geometry, `geometry.stl` and its boxes in `geometry.json`: G the belt's 2 × 74 × 7 m envelope with the 1.2 m gap (a **porous canopy**, shading rate 81 %), H the 0.10 × 0.10 × 0.20 m building, I the 0.1 m cube. The sources are not part of the geometry; their position is in
 `manifest.json → cases.<id>.extra_measurements.source`: H the 4 mm floor hole at (0.05, 0, 0), I the 6 mm roof outlet at (0, 0, 0.1).
 
 ## Cases J, K, L — frames, reference values, extra files
@@ -328,6 +332,6 @@ streamwise station (J: x = −0.4 m, K: −0.493 m, L: −0.4 m).
 |---|---|---|
 | J | `geometry.stl` | the readme's stated dimensions: one box 0.08 × 0.08 × 0.16 m, leeward wall at the origin; 12 triangles, watertight |
 | K | `geometry.stl` | 81 cubes of 0.06 m on a 0.12 m pitch (9 rows from x = −0.36, 9 columns centred on y = 0): generated, because no STL is published. The pitch is read from `MP-y_caseK.png` / `MP-z_caseK.png`; the 203 points bound it to 0.11 – 0.14 m (no point lies inside a cube only between them) and the source position (x = −0.15 m, between rows 2 and 3) to 0.105 – 0.15 m. 972 triangles, watertight |
-| L | `geometry.stl` | the 126 closed shells of the published `BD_caseL.stl` ('buildings' solid: 1,512 triangles, watertight, outward normals, no duplicates) reduced to their boxes, which equal the 14 × 9 grid of 0.06 m cubes on a 0.12 m pitch to 1e-9. The 'line_source' solid (a flat patch 0.04 m × 1.02 m at x = −0.15 m, z = 0) is not a building and is described in `geometry.json` / the frame, not served as a wall |
+| L | `geometry.stl` | the 126 closed shells of the published `BD_caseL.stl` ('buildings' solid: 1,512 triangles, no open edge, no duplicates; the two bottom triangles of each cube are wound inward) reduced to their boxes, which equal the 14 × 9 grid of 0.06 m cubes on a 0.12 m pitch to 1e-9. The 'line_source' solid (a flat patch 0.04 m × 1.02 m at x = −0.15 m, z = 0) is not a building and is described in `geometry.json` / the frame, not served as a wall |
 
 All model scale; no source states a model:full-scale ratio, so the case frame is the model one.

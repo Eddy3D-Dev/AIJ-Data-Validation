@@ -113,8 +113,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-Each of these changes the result of a comparison if it is not accounted for.
-
 - The table carries the legacy workbook\'s values (ratios at full precision x uH = 3.226 m/s), not RS\_caseH.csv\'s: on the z/H = 1/2 and 1/4 planes (and in the approach profile) the CSV\'s U, V, W are the workbook ratios ROUNDED TO 0.01 before the scaling, a 0.032 m/s grid (+/-0.016 m/s).
 - One row per instrument and point: velocity rows (split fibre) and concentration rows (hydrocarbon analyser) with the same point\_id (the CSV\'s No.). The velocity line is x = 0.40 m and the concentration line x = 0.38 m, so 50 points have no velocity and 50 no concentration (-999.9 in the CSV); none of them is inside the building.
 - V of the vertical-plane sheet (point numbers 1-220) is the exact negative of V at the same points in the horizontal-plane sheets (positive toward -y); it is multiplied by -1 so that V is positive toward +y everywhere, as in Cases A and D.
@@ -137,8 +135,32 @@ Each of these changes the result of a comparison if it is not accounted for.
 
 ## Attribution
 
-- Data collectors: Ryuichiro Yoshie (Tokyo Polytechnic University), Takumi Tachibana (Wind Engineering Institute)
-- Editors and distributors: Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
+- Data collected by Ryuichiro Yoshie (Tokyo Polytechnic University) and Takumi Tachibana (Wind Engineering Institute), 2016.
+- Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15429871](https://doi.org/10.5281/zenodo.15429871)
 - Citation requested: Yoshie, R. (2016). Wind Tunnel Experiment and Large Eddy Simulation of Pollutant/Thermal Dispersion in Non-isothermal Turbulent Boundary Layer. Adv Environ Wind Eng, 167-196. <https://doi.org/10.1007/978-4-431-55912-2_9>
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Yoshie, R., Tachibana, T., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case H (112C): Wind Tunnel Experiment for Flow and Dispersion around a 1:1:2 Shape Building Model [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15429871
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_h,
+  author    = "Yoshie, Ryuichiro and Tachibana, Takumi and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case H (112C): Wind Tunnel Experiment for Flow and Dispersion around a 1:1:2 Shape Building Model}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15429871",
+  url       = "https://doi.org/10.5281/zenodo.15429871",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).

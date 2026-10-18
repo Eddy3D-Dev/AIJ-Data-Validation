@@ -12,11 +12,7 @@ The surrogate has been run on Cases A to E. It has not been run on Cases F to M.
 
 {% include figure.html name="ml-surrogate-agreement.png" alt="Measured vs predicted, ML surrogate, Cases A–E" caption="<strong>Figure 1.</strong> Measured vs predicted, ML surrogate, Cases A–E." %}
 
-Eddy3D's Wind Predictor (the public `Yel-2.0` network) predicts \|U_mean\|/U_ref at one height, 1.8 m. Each case is
-scaled so its measurement plane lands there — A ×180, B ×144, C ×90, D ×360, E ×0.9 — its buildings are rasterised
-onto the model's 504 × 504 lattice of 2 m cells with the shipped grid code, the prediction is read at the tunnel's
-own sensor coordinates, and U_ref is converted to U_H with each case's approach-flow file. Same metric code and
-settings as the OpenFOAM rows.
+Eddy3D's Wind Predictor (the public `Yel-2.0` network) predicts \|U_mean\|/U_ref at one height, 1.8 m. Each case is scaled so its measurement plane lands there (A ×180, B ×144, C ×90, D ×360, E ×0.9). Its buildings are rasterised onto the model's 504 × 504 lattice of 2 m cells with the shipped grid code, the prediction is read at the tunnel's own sensor coordinates, and U_ref is converted to U_H with each case's approach-flow file. The metric code and settings are those of the OpenFOAM rows.
 
 | case · quantity | n | FB | FAC2 | R | hit rate | OpenFOAM, same points and quantity |
 |---|---|---|---|---|---|---|
@@ -28,9 +24,15 @@ settings as the OpenFOAM rows.
 | E · Vs/U(15.9 m), 16 WD, before + after | 2560 | +1.00 | 0.22 | +0.43 | 0.08 | — |
 | E · the same, SW only (both states) | 160 | +1.07 | 0.20 | +0.53 | 0.04 | \|U\|: FB +0.31, FAC2 0.76, R +0.81, hit rate 0.36 |
 
-**It predicts roughly half the tunnel's speed everywhere, and it does not respond to the wind direction.** Reversing
-the wind changes the predicted field by at most 1 × 10⁻⁴ U_ref over all 254,016 cells, in every case: the network
-responds to spatial contrast in a channel, never to its level, and on a lattice that fills the window the direction
-channels are constant planes. Cut the lattice at ±250 m and the direction enters through the step at its edge — but
-on A, B and D the reversed wind then scores as well as the right one or better. These numbers grade the geometry
-the model was given, not a wind it was told.
+FB is positive when the model is low.
+
+- The predicted speed is roughly half the tunnel's everywhere.
+- Reversing the wind changes the predicted field by at most 1 × 10⁻⁴ U_ref over all 254,016 cells, in every case.
+
+<details markdown="block">
+<summary>Interpretation: Wind direction and what the scores grade</summary>
+
+- The network responds to spatial contrast in a channel and has no response to its level. On a lattice that fills the window the direction channels are constant planes; with the lattice cut at ±250 m the direction enters through the step at its edge, and the reversed wind then scores as well as the right one or better on A, B and D.
+- The scores grade the geometry given to the model; the wind direction does not enter.
+
+</details>

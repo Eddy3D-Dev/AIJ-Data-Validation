@@ -14,25 +14,29 @@
    "configuration": "default",
    "file": "cases/M/geometry.stl",
    "format": "ASCII STL, LF, metres, same frame as points.csv",
-   "source": "BD_caseM.stl (Zenodo; terrain + buildings of the Atsugi campus) scaled x600 from model to full-scale metres and re-wound outward; 43936 triangles, one shell, 21 boundary and 7 non-manifold edges; z = 0 is the tunnel floor, the campus ground lies at z ~ 32 m",
+   "source": "BD_caseM.stl (Zenodo; terrain + buildings of the Atsugi campus) scaled x600 from model to full-scale metres and re-wound outward; 43,936 triangles, 21 boundary and 7 non-manifold edges; z = 0 is the tunnel floor, the campus ground lies at z ~ 32 m; 7 slivers (together 0.45 m^2) hanging on building-roof edges are removed, and the 1080 m by 720 m panel is closed with a base slab: vertical walls from its rim down to z = -1 m and a bottom cap at z = -1 m (21 added triangles)",
    "stats": {
-    "triangles": 43936,
+    "triangles": 43950,
     "bbox_min": [
      -540.0,
      -360.0,
-     -0.0
+     -1.0
     ],
     "bbox_max": [
      540.0,
      360.0,
      64.9152
     ],
-    "signed_volume": 10746823.83226899,
-    "edges": 65911,
-    "edges_shared_by_two_faces": 65883,
-    "edges_boundary": 21,
-    "edges_non_manifold": 7,
-    "watertight": false
+    "signed_volume": 11524437.305201,
+    "edges": 65925,
+    "edges_shared_by_two_faces": 65925,
+    "edges_boundary": 0,
+    "edges_non_manifold": 0,
+    "bodies": 1,
+    "body_contacts": 0,
+    "inconsistent_triangles": 0,
+    "min_body_volume": 11524437.305201,
+    "watertight": true
    }
   }
  ]

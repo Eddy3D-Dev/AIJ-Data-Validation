@@ -1,13 +1,13 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/validation.schema.json",
- "schema_version": "2.3.0",
- "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
+ "schema_version": "2.4.0",
+ "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
  "case": "D",
  "title": "Case D — high-rise among city blocks",
  "status": "scored",
  "status_meaning": {
-  "scored": "a validation run exists and its scores are in cases/{id}/validation.json; whether it agrees is in the numbers",
+  "scored": "a validation run exists and its scores are in cases/{id}/validation.json",
   "running": "the solve is in progress; no scores yet",
   "pending": "not run yet",
   "not comparable": "the engine cannot produce the measured quantity at the measured location: OpenLB at the resolution this hardware runs, FluidX3D without a ground wall function; the measurement behind each is on the Validation page"
@@ -371,8 +371,12 @@
    },
    "figures": [
     {
+     "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-d-layout.png",
+     "caption": "Case D, measurement points: A split-fibre probe, WD 0; B thermistor on the site of the central block, |x/H| ≤ 0.2; C thermistor in the streets along y beside it; D thermistor in the streets along x further out. Positions in multiples of H. The split fibre stands at 33 of the 78 places of the thermistors; open dots: the 12 places where the thermistor read nothing; wind directions 0°, 22.5° and 45°."
+    },
+    {
      "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/figures/case-d-openfoam-agreement.png",
-     "caption": "Case D, OpenFOAM 12, wind directions 0°, 22.5° and 45°: measured thermistor Vs/U_H against the modelled √(|U|²+2k)/U_H (filled) and |U|/U_H (hollow), and the split-fibre |U| against the modelled |U| at 0°. At 0° the 66 thermistor points are 33 mirror pairs."
+     "caption": "Case D, OpenFOAM 12, wind directions 0°, 22.5° and 45°: measured thermistor Vs/U_H against the modelled √(|U|²+2k)/U_H (filled) and |U|/U_H (hollow), and the split-fibre |U| against the modelled |U| at 0°. At 0° the 66 thermistor points are 33 mirror pairs. Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     }
    ],
    "pairs": {

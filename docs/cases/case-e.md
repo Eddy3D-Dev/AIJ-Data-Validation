@@ -17,7 +17,7 @@ Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 
 
 | | |
 |---|---|
-| <a href="{{ '/assets/geometry/case-e-before.png' | relative_url }}"><img src="{{ '/assets/web/case-e-before.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case E — Niigata district, bc"></a><br><span class="caption">Before construction: the existing district, about 400 m across (full scale).<br><a class="original" href="{{ '/assets/geometry/case-e-before.png' | relative_url }}">1200 dpi original, 2.3 MB</a></span> | <a href="{{ '/assets/geometry/case-e-after.png' | relative_url }}"><img src="{{ '/assets/web/case-e-after.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case E — Niigata district, ac"></a><br><span class="caption">After construction: the 60 m high-rise and the two 18 m mid-rises (blue) added.<br><a class="original" href="{{ '/assets/geometry/case-e-after.png' | relative_url }}">1200 dpi original, 2.2 MB</a></span> |
+| <a href="{{ '/assets/geometry/case-e-before.png' | relative_url }}"><img src="{{ '/assets/web/case-e-before.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case E — Niigata district, bc"></a><br><span class="caption">Before construction: the existing district, about 400 m across (full scale).</span> | <a href="{{ '/assets/geometry/case-e-after.png' | relative_url }}"><img src="{{ '/assets/web/case-e-after.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case E — Niigata district, ac"></a><br><span class="caption">After construction: the 60 m high-rise and the two 18 m mid-rises (blue) added.</span> |
 {: .figures }
 
 <p class="caption">The two states, on one scale (full-scale metres, +x east, +y north); the arrow marks SW, the direction Eddy3D is scored at.</p>
@@ -34,22 +34,20 @@ Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 
 | Measurement height (m) | 2.0 |
 | Measured | 2,560 rows over 80 points: velocity\_ratio |
 
-## Agreement with the tunnel
+## Validation
 
-| Engine | Status | R | FAC2 |
-|---|---|---|---|
-| OpenFOAM 12 | <span class="label label-green status">scored</span> | +0.69 … +0.85 | 0.74 … 0.95 |
-| OpenLB | <span class="label label-grey status">not comparable</span> | — | — |
-| FluidX3D | <span class="label label-grey status">not comparable</span> | — | — |
-| ML surrogate | <span class="label label-green status">scored</span> | +0.23 … +0.43 | 0.22 … 0.84 |
+| Engine | Status | Compared with | R (range) | FAC2 (range) |
+|---|---|---|---|---|
+| OpenFOAM 12 | <span class="label label-green status">scored</span> | Wind tunnel | +0.69 … +0.85 | 0.74 … 0.95 |
+| OpenLB | <span class="label label-grey status">not comparable</span> | — | — | — |
+| FluidX3D | <span class="label label-grey status">not comparable</span> | — | — | — |
+| ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | +0.23 … +0.43 | 0.22 … 0.84 |
 {: .scores }
-
-R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: every score, its figures and its reading are on the [Validation page]({{ '/cases/case-e/validation/' | relative_url }}).
 
 {: .warning-title }
 > Before you compare
 >
-> The cleaned table is in SI units and one frame, with this case's corrections applied once; do not apply them again to the published files.
->
-> - The sense in which the wind direction rotates is a convention to check before comparing at any direction other than 0° (see *Frame and units* on the Data page).
-> - 6 known issues in the published files are listed under [Known data issues]({{ '/cases/case-e/data/' | relative_url }}#known-data-issues).
+> - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
+> - Origin: centre of the reproduced area, ground plane. Length unit: m (FULL scale).
+> - Wind direction: meteorological FROM-direction, clockwise from north; the compass name is the direction the wind comes from (N = 0 deg blows toward -y, E = 90 deg toward -x). This case keeps its geographic frame instead of \'+x along the wind\' because the district is real and its coordinates are the data\'s.
+> - 7 known issues in the published files are listed under [Known data issues]({{ '/cases/case-e/data/' | relative_url }}#known-data-issues).

@@ -20,7 +20,9 @@ copy of each, which the pages and the README embed, linked to its master), docs/
 the include docs/_includes/figure.html), the figure blocks of README.md (between its <!--fig ...--> markers), docs/cases/<slug>.md and
 docs/cases/<slug>/{data,validation}.md (three pages per case), docs/_includes/{case-gallery,cases-table,
 cases-frames,validation-matrix,known-issues-fm,api-changelog}.md, docs/_includes/{version-label,dataset-jsonld}.html and
-docs/llms.txt. Every JSON document names its JSON Schema in `$schema`; the schemas are in scripts/api_schemas.py
+docs/llms.txt. The citations (scripts/citation.py) go into index.json `cite.api`, cases/{id}.json `citation`, the include
+docs/_includes/cite.md, the Cite section of every Data page, the <!--cite--> block of README.md, CITATION.cff and
+.zenodo.json. Every JSON document names its JSON Schema in `$schema`; the schemas are in scripts/api_schemas.py
 and are enforced here before anything is reported OK.
 
 The API is served twice, by the same code. Each release is a frozen copy of the whole API under docs/api/<release>/
@@ -49,7 +51,22 @@ import zipfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import aijdata as D  # noqa: E402
 import api_schemas as S  # noqa: E402
+import citation as C  # noqa: E402
+import page_prose as P  # noqa: E402
 import release as R  # noqa: E402
+
+
+def _load_layout():
+    """validation/layout.py (standard library at import): the measurement groups of each case and the captions of its layout figure."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("aij_layout", os.path.join(D.REPO, "validation", "layout.py"))
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules["aij_layout"] = mod
+    spec.loader.exec_module(mod)
+    return mod
+
+
+LAYOUT = _load_layout()
 
 REPO = D.REPO
 DOCS = os.path.join(REPO, "docs")
@@ -62,11 +79,11 @@ FIGURES = os.path.join(REPO, "validation", "figures")
 FIGURE_INFO = {}                       # file name -> what a page needs to embed the figure; filled by copy_assets()
 RESULTS_DIR = os.path.join(REPO, "validation", "results")
 
-REPO_URL = "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ"
-SITE = "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ"
+REPO_URL = C.REPO_URL
+SITE = C.SITE
 LIVE_BASE = SITE + "/api"         # the unversioned alias: always the newest release
 RAW_BASE = "https://raw.githubusercontent.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/main/docs/api"
-SCHEMA_VERSION = "2.3.0"
+SCHEMA_VERSION = "2.4.0"
 RELEASE = R.version()             # the repository's release (VERSION); the API names it, it does not set it
 RELEASE_DATE = R.release_date()
 PINNED_BASE = f"{LIVE_BASE}/{RELEASE}"   # this release, frozen: nothing under it changes once the release is tagged
@@ -87,6 +104,18 @@ API_BASE = None          # the URL every document in the tree uses for its own f
 FALLBACK_BASE = None     # the same tree, raw from the repository
 
 CHANGELOG = [
+    {"version": "2.4.0", "date": "2026-10-18", "changes": [
+        "Added to index.json: `cite.api`, the citation of the API release (`title`, `version`, `url`, `release_url`, `doi`, `apa`, `bibtex`, "
+        "`csl_json`). `url` is the pinned address of the release, `/api/<release>/index.json`; `doi` is null until Zenodo mints one for the release.",
+        "Added to cases/{id}.json: `citation`, the Zenodo dataset of the case as `apa` and `bibtex`.",
+        "Added to the `stats` of geometry.json and to the entries of the geometry index: `bodies`, `body_contacts`, `inconsistent_triangles` and "
+        "`min_body_volume`, beside `edges_boundary`. `watertight` is true when every body is closed, consistently wound and positive in volume.",
+        "Changed: the `geometry.stl` of Cases E, F and M. Every body is a closed, consistently wound, outward body; Cases F and M stand on a 1 m base "
+        "slab, so the bounding box of each starts at z = -1 m, and `triangles` and `data_version` change with the files.",
+        "Added: the layout figure of each case, `case-<id>-layout.png`, is the first entry of `figures` of the validation results of that case "
+        "(Cases A to M); the agreement figures colour their points by the groups of that figure.",
+        "Why MINOR: nothing is renamed or removed. Every field keeps its meaning; the fields above and the layout figures are additions.",
+    ]},
     {"version": "2.3.0", "date": "2026-10-18", "changes": [
         "Added: release-numbered paths. Every release is a frozen copy of the whole API under `/api/<release>/` (for example "
         "`/api/3.0.0/index.json`, `/api/3.0.0/cases/F.json`). Every URL to a file of the API inside a copy points into the same copy "
@@ -159,14 +188,16 @@ COMPATIBILITY = ("Semantic versioning, twice. `versions.release` versions what i
                  "the newest release: pin an analysis to a release by using that release's base URL. "
                  "`schema_version` versions this JSON contract: within a major version it only adds new fields, "
                  "endpoints and runs, clients must ignore fields they do not know, and a field is renamed or removed "
-                 "only in a new major version, which the changelog names. `data_version` is a fingerprint, not a "
-                 "version: the SHA-256 of the served data.")
+                 "only in a new major version, which the changelog names. `data_version` is a fingerprint: "
+                 "the SHA-256 of the served data.")
 CACHING = ("GitHub Pages sends JSON with a 10-minute max-age and CSV and ZIP files with a 186-day max-age. Every "
            "download URL therefore carries ?v=<first 12 hex digits of the file's SHA-256>: the server ignores the "
            "query, and a changed file gets a new URL. Fetch the JSON documents for the current URLs; check "
            "downloads against `sha256`.")
 
 CASE_SPAN = f"{D.CASE_IDS[0]}-{D.CASE_IDS[-1]}"   # "A-M"
+if f"Cases {CASE_SPAN}:" not in C.TITLE:
+    raise SystemExit(f"scripts/citation.py TITLE names other cases than {CASE_SPAN}")
 
 ENGINES = [
     {"id": "openfoam12-realizableKE", "name": "OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor)", "kind": "RANS"},
@@ -178,9 +209,8 @@ ENGINES = [
     {"id": "fluidx3d", "name": "FluidX3D (Eddy3D GPU LBM)", "kind": "LBM"},
     {"id": "ml-surrogate", "name": "Eddy3D ML wind surrogate (pedestrian height)", "kind": "surrogate"},
 ]
-# "scored" says a run exists and its scores are served, NOT that it agrees; how well it agrees is in the numbers.
 STATUS_MEANING = {
-    "scored": "a validation run exists and its scores are in cases/{id}/validation.json; whether it agrees is in the numbers",
+    "scored": "a validation run exists and its scores are in cases/{id}/validation.json",
     "running": "the solve is in progress; no scores yet",
     "pending": "not run yet",
     "not comparable": ("the engine cannot produce the measured quantity at the measured location: OpenLB at the resolution "
@@ -209,7 +239,7 @@ ENGINE_STATUS = {
     "M": {**_NOT_RUN, "openfoam12-realizableKE": "scored"},
 }
 ENGINE_STATUS = {c: {e["id"]: st[e["id"]] for e in ENGINES if e["id"] in st} for c, st in ENGINE_STATUS.items()}   # in ENGINES order
-QUEUED = "Eddy3D's fixture for this case is written and its solves are queued; no result exists yet."
+QUEUED = "The solves for this case are queued; no result exists yet."
 
 
 def case_engines(case):
@@ -253,11 +283,11 @@ _FOAM_C = {f"WD {wd} {q}": f"vs.{lab}.{key}" for wd, lab in (("0°", "wd-0"), ("
 _ML_REPRO = "Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot_ml_surrogate.py"
 RUNS = [
     *[run(c, "openfoam12-realizableKE", None, f"case{c}_openfoam12_realizableKE.json", _FOAM_A_B,
-          ["cases-ab-openfoam-agreement.png", "cases-ab-openfoam-profiles.png"],
+          [f"case-{c.lower()}-layout.png", "cases-ab-openfoam-agreement.png", "cases-ab-openfoam-profiles.png"],
           f"Eddy3D fixture TestAijCase{c}ContainerE2E; figures validation/plot_cases_ab_openfoam.py",
           f"case{c}_openfoam12_realizableKE_pairs.csv", PAIRS_AB) for c in ("A", "B")],
     *[run("C", "openfoam12-realizableKE", cb, f"caseC_openfoam12_realizableKE_{cb}.json", _FOAM_C,
-          ["case-c-openfoam-agreement.png", "case-c-openfoam-bias-map.png"],
+          ["case-c-layout.png", "case-c-openfoam-agreement.png", "case-c-openfoam-bias-map.png"],
           f"Eddy3D fixture TestAijCaseC{cb}ContainerE2E; figures validation/plot_case_c_openfoam.py",
           "caseC_openfoam12_realizableKE_pairs.csv",
           "config (0D/1D/2D), wind_direction_deg, point_id; x, y, z in m (case frame); measured_over_UH, the thermistor "
@@ -289,7 +319,7 @@ RUNS = [
          "WD 22.5°, rotation sense mirrored (control)": "vs.22.5.mirrored.corrected",
          "WD 45°, thermistor Vs · √(|U|²+2k)": "vs.45.corrected", "WD 45°, thermistor Vs · |U|": "vs.45.uncorrected",
          "WD 45°, rotation sense mirrored (control)": "vs.45.mirrored.corrected"},
-        ["case-d-openfoam-agreement.png"],
+        ["case-d-layout.png", "case-d-openfoam-agreement.png"],
         "Eddy3D fixture TestAijCaseDContainerE2E (EDDY3D_AIJD_HEADINGS=0,22.5,45); figure "
         "validation/plot_case_d_openfoam.py", "caseD_openfoam12_realizableKE_pairs.csv",
         "instrument (thermistor / split_fibre), wind_direction_deg, point_id; x, y, z in m (model frame); "
@@ -299,7 +329,7 @@ RUNS = [
     run("E", "openfoam12-realizableKE", "SW", "caseE_openfoam12_realizableKE.json",
         {"before, √(|U|²+2k)": "vr.bc.SW.rms", "before, |U|": "vr.bc.SW.Umag", "after, √(|U|²+2k)": "vr.ac.SW.rms",
          "after, |U|": "vr.ac.SW.Umag", "no-construction ceiling control": "noConstruction.SW"},
-        ["case-e-openfoam-agreement.png", "case-e-openfoam-bias-map.png"],
+        ["case-e-layout.png", "case-e-openfoam-agreement.png", "case-e-openfoam-bias-map.png"],
         "Eddy3D fixture TestAijCaseEContainerE2E (EDDY3D_AIJ_E_DIRECTIONS=SW, tabulated inlet); figures "
         "validation/plot_case_e_openfoam.py", "caseE_openfoam12_realizableKE_pairs.csv",
         "config (bc before / ac after construction), wind_direction, point_id; x, y, z in full-scale m (+x east, +y north); "
@@ -327,9 +357,9 @@ RUNS = [
          "wind reversed (control)": "negativeControl.reversedWind"},
         ["ml-surrogate-agreement.png"], _ML_REPRO, "caseE_ml_pairs.csv", PAIRS_ML),
     # Cases H and I (Eddy3D's solves, scored against the cleaned tables): the closures other than realizable k-epsilon are separate engine ids
-    run("H", "openfoam12-realizableKE", None, "caseH_openfoam12_realizableKE.json", _HI_HEADLINE, ["cases-hi-openfoam-agreement.png"],
+    run("H", "openfoam12-realizableKE", None, "caseH_openfoam12_realizableKE.json", _HI_HEADLINE, ["case-h-layout.png", "cases-hi-openfoam-agreement.png"],
         _HI_REPRO.format(fixture="TestAijCaseHContainerE2E (realizable k-ε, 1:100)"), "caseH_openfoam12_realizableKE_pairs.csv", PAIRS_H),
-    run("I", "openfoam12-realizableKE", None, "caseI_openfoam12_realizableKE.json", _HI_HEADLINE, ["cases-hi-openfoam-agreement.png", "case-i-openfoam-closures.png"],
+    run("I", "openfoam12-realizableKE", None, "caseI_openfoam12_realizableKE.json", _HI_HEADLINE, ["case-i-layout.png", "cases-hi-openfoam-agreement.png", "case-i-openfoam-closures.png"],
         _HI_REPRO.format(fixture="TestAijCubeContainerE2E (realizable k-ε, 1:60)"), "caseI_openfoam12_realizableKE_pairs.csv", PAIRS_I),
     run("I", "openfoam12-kEpsilon", None, "caseI_openfoam12_kEpsilon.json", _HI_HEADLINE, ["case-i-openfoam-closures.png"],
         _HI_REPRO.format(fixture="TestAijCubeContainerE2E (standard k-ε, 1:60)"), "caseI_openfoam12_kEpsilon_pairs.csv", PAIRS_I),
@@ -366,38 +396,39 @@ _K_HEADLINE = {"U": "velocity.U", "V": "velocity.V", "W": "velocity.W", "k": "k"
 _K_NORM = ("U, V, W by the stated U_H = 2.33 m/s and k by U_H^2, the same divisor on both sides; c* is the measured C/c0 (c0 = q/(U_H H^2) = 429.2 ppm) against the modelled c U_H H^2/Q (full scale, "
            "Q = 1 kg/s) for turbulent Schmidt numbers 0.3, 0.5 and 0.7, with one detection limit of 10^-3 of the largest measured value; hit rate D = 0.25, W = 0.05 in U_H")
 _K_NOTES = [
-    "The inflow is the measured approach profile (3.23 m/s at 0.2 m, z0 fitted to 13.5 mm), not the stated U_H = 2.33 m/s, which is not on that profile: the solved U at z = H is 1.97 m/s, 0.85 of the "
-    "stated U_H (the fixture's inflow.U.modelAtH). Measured and modelled velocities are both divided by 2.33 m/s, so the modelled velocity sits under the measured mean.",
-    "The inlet k from that log law, u*^2/sqrt(Cmu) = 0.77 m^2/s^2, is about 1.7 times the tunnel's 0.33 to 0.45 (the fixture's own remark).",
-    "The first measurement point is the source location: the four points within one cube height of the floor outlet hold the four largest c* (8.73, 5.31, 3.02 and 2.86 against 1.03 for the next), "
-    "and the model's source is the 4 cells (0.75 m across) that a 0.44 m square cuts, not the 5 mm outlet. Those four points are scored with and without.",
+    "The inflow is the measured approach profile (3.23 m/s at 0.2 m, z0 fitted to 13.5 mm). The stated U_H = 2.33 m/s is not on that profile: the solved U at z = H is 1.97 m/s, 0.85 of the "
+    "stated U_H. Measured and modelled velocities are both divided by 2.33 m/s, so the modelled velocity sits under the measured mean.",
+    "The inlet k from that log law, u*^2/sqrt(Cmu) = 0.77 m^2/s^2, is about 1.7 times the tunnel's 0.33 to 0.45.",
+    "The first measurement point is the source location: the four points within one cube height of the floor outlet hold the four largest c* (8.73, 5.31, 3.02 and 2.86 against 1.03 for the next). "
+    "The model's source is the 4 cells (0.75 m across) that a 0.44 m square cuts; the outlet is 5 mm. Those four points are scored with and without.",
     "47 of the 203 points (the z = 4 mm plane, 0.4 m at 1:100) lie inside the first ground cell (0.735 m): their modelled values are that cell's, pulled toward the wall's zero by the point interpolation.",
-    "The measured plume is not y-symmetric (C at -y exceeds C at +y at 74 of 74 mirror pairs; the fixture puts its lateral centroid 0.011 to 0.017 m toward -y at every station) and the solve is. The "
+    "The measured plume is not y-symmetric (C at -y exceeds C at +y at 74 of 74 mirror pairs; its lateral centroid lies 0.011 to 0.017 m toward -y at every station) and the solve is. The "
     "'y-symmetric ceiling' controls score the measurement against the mean of each mirror pair, the best a y-symmetric model can do on this file.",
     "V has a constant offset and almost no antisymmetric part, so it does not score the flow's divergence; a model with V = 0 everywhere hits 0.91 of the points at W = 0.05 U_H, so V's hit rate says nothing.",
     "The solve stopped at the 3000-iteration limit with the residualControl unmet (no 'solution converged' line); the epsilon initial residual at the last iteration was 7e-3.",
-    "The fixture's structure checks passed. The air over the roofs outruns the street along the wind, which outruns the cavity across it; the plume leaves the source, is clean 1 to 1.5 H ahead of the "
-    "array, decays through four cavities and is cleaner over the roofs than in them; the solved velocity is y-symmetric to twice the tunnel's own mirror-pair difference. They set no band on the statistics.",
+    "The air over the roofs outruns the street along the wind, which outruns the cavity across it; the plume leaves the source, is clean 1 to 1.5 H ahead of the array, decays through four cavities and is "
+    "cleaner over the roofs than in them; the solved velocity is y-symmetric to twice the tunnel's own mirror-pair difference.",
 ]
 _G_ARMS = [("open-field", "no belt", 90576, " (control: no belt)"), ("pine", "pine, Cd·LAD 0.30 1/m", 90576, ""), ("conifer", "conifer, Cd·LAD 0.625 1/m", 90576, ""),
            ("screen", "screen, Cd·LAD 0.875 1/m", 90576, ""), ("half-belt-conifer", "the real 74 m belt as a half domain, conifer, Cd·LAD 0.625 1/m", 625252, "")]
 _G_NORM = ("the field's U/U_H and k/U_H^2 (U_H = the wind at the tree height, 7 m, during each period) against the model's |U| and k over the model's own U(7 m) at x = -35 m ('own approach') and, in the "
            "second set of scores, over the imposed U_H = 5.299 m/s ('imposed'); the model is also scored as sqrt(|U|^2 + 2k), because the field is the mean of an instantaneous speed; hit rate D = 0.25, W = 0.05")
+_G_CAL = "LAD and Cd are not in the dataset (only the shading rate, 81 %). The drag values are crowns of the Eddy3D vegetation library; no optimiser is run against the 28 points."
 _G_NOTES = [
-    "LAD and Cd are not in the dataset (only the shading rate, 81 %), so this is a calibration, not a validation. The three crowns are entries of the Eddy3D vegetation library (Cd·LAD 0.30, 0.625 and "
-    "0.875 1/m, loss coefficients 1.2, 2.5 and 3.5), nothing is fitted, and the arm nearest the 28 values only says which library crown the belt resembles. The arms are published side by side, none chosen.",
-    "Eddy3D models trees as a Darcy-Forchheimer momentum sink only: there are no canopy k or epsilon source terms, so the modelled k behind the belt is whatever the inflow and the shear layer over the "
-    "belt produce. It is recorded against the measurement and never asserted.",
+    _G_CAL,
+    "The three crowns are entries of the Eddy3D vegetation library (Cd·LAD 0.30, 0.625 and 0.875 1/m, loss coefficients 1.2, 2.5 and 3.5). The arm nearest the 28 values says which "
+    "library crown the belt resembles.",
+    "Eddy3D models trees as a Darcy-Forchheimer momentum sink only: there are no canopy k or epsilon source terms. The modelled k behind the belt follows from the inflow and the shear layer over the belt.",
     "The slab arms idealise the belt as two-dimensional (the belt through both slip planes, infinite width; the data paper's Figure 7 draws a two-dimensional tree); the half-belt arm is the real 74 m belt "
     "on a half domain with its centre plane on the symmetry plane. Both are scored against the same 28 values.",
     "The tabulated inlet carries the workbook's inflow over a smooth floor (the site's roughness is not in the model), so the approach flow does not stay the imposed profile: in the open-field arm it is "
     "1.19 of it at 1.5 m and 0.995 at 7 m at x = -10 m, and the model's U(7 m) at x = -35 m is 0.976 to 0.984 of the imposed U_H. The headline scores divide the model by that own U(7 m).",
     "The field is the mean of the instantaneous speed of a 3-D sonic anemometer, which exceeds |U| in a turbulent wake: the model is scored as |U| and as sqrt(|U|^2 + 2k), the bracket of Cases C to E.",
     "The approach profile and the wake were measured on different days (28 and 26 December 2000), and the approach k does not match the workbook's own inflow note (k/U_b^2 = 0.20 at 9 m against the "
-    "note's constant 3.02 m^2/s^2, 0.096 U_b^2); the cause is not explained, and k is only recorded (the fixture).",
+    "note's constant 3.02 m^2/s^2, 0.096 U_b^2). The files do not explain the mismatch.",
     "Every arm ran to the 3000-iteration limit with the residualControl unmet; the epsilon initial residual at the last iteration was 2.7e-2 to 3.6e-2 in the slab arms and 3.2e-2 in the half belt.",
-    "The fixture's structure checks passed for every arm with trees: a velocity deficit directly behind the belt against the open field, recovery with distance, a speed-up through the 1.2 m gap, and more "
-    "drag slowing the lee more and pushing more wind through the gap. They set no band on the scores.",
+    "Every arm with trees shows a velocity deficit directly behind the belt against the open field, recovery with distance, a speed-up through the 1.2 m gap, and more drag slowing the lee more and "
+    "pushing more wind through the gap.",
 ]
 _J_HEADLINE = {"U": "velocity.U", "V": "velocity.V", "W": "velocity.W", "k": "k", "θ, floor-referenced temperature": "theta",
                **{f"c*, Sct {s}": f"cstar.c_sct{s.replace('0.', '0')}" for s in ("0.3", "0.5", "0.7")},
@@ -421,14 +452,14 @@ def _j_notes(closure):
         "wall-function result, and the data's tracer peak 4 mm above the 5 mm hole is a source-cell-limited number. The source is a mass rate into one pair of cells, with no release momentum and no heat "
         "from the 30.4 degC gas. The 27 points within a quarter of a building height of the source are scored with and without.",
         "The building is not adiabatic here: its walls are held at the measured mean surface temperature, 297.62 K, and the measured 4 K vertical gradient up the walls is not modelled. There is no sun, and the radiation exchange is at the least the view-factor model accepts (air-side emissivity 0.01).",
-        f"The tracer is solved steady beside the flow, as three species of one flow. The outlet carried {bal[0]:.2f}, {bal[1]:.2f} and {bal[2]:.2f} of the emission for Sct 0.3, 0.5 and 0.7; the fixture's "
-        "bar on this is a factor of two, a detector of wiring errors and not a convergence claim.",
+        f"The tracer is solved steady beside the flow, as three species of one flow. The outlet carried {bal[0]:.2f}, {bal[1]:.2f} and {bal[2]:.2f} of the emission for Sct 0.3, 0.5 and 0.7, "
+        "within the factor of two accepted as a check on the wiring.",
         f"The air region ended at its 1500-iteration cap with the residualControl unmet (no 'solution converged' line); at the last iteration the initial residuals were {uy} (U_y), {prgh} (p_rgh) and "
         f"{tracer} (the tracers).",
         f"The steady closure gives a longer recirculation than the tunnel: reattachment at z/H = 0.25 and 0.025 is {lr[0]:.2f} H and {lr[1]:.2f} H, against the measured 0.68 H and 0.80 H.",
         "The measured +y half of the z/H = 0.25 plane runs 11 % slower than the -y half (97 mirror pairs, R 0.955, recomputed from the cleaned table): the y-symmetric ceiling control scores the measurement "
         "against the mean of each mirror pair.",
-        "The fixture's structure checks passed. The wake recirculates behind the leeward face and reattaches within 3 H; the approach layer is unstable and the first cell above the heated floor is warmer "
+        "The wake recirculates behind the leeward face and reattaches within 3 H; the approach layer is unstable and the first cell above the heated floor is warmer "
         "than the air that entered it; every species is emitted, with clean air 25 m ahead of the building and its maximum at the source, and leaves through the outlet at 0.5 to 2 times the emission.",
     ]
 
@@ -444,35 +475,35 @@ _L_NORM = ("the tunnel's units: velocities by U_H (1.3394 m/s measured, the Frou
            "largest measured value")
 _L_NOTES = [
     "The scene is the tunnel at Froude scale 100 (lengths times 100, velocities times 10, temperatures unchanged), which keeps the bulk Richardson number (-0.034) and the tunnel's Kelvin values and does not keep Re.",
-    "What the model does not represent (the fixture's list): the gas's own heat and the buried slot (a mass rate into 624 whole cells, a strip 3 m wide), the tunnel's near-floor temperature drop (below the "
+    "What the model does not represent: the gas's own heat and the buried slot (a mass rate into 624 whole cells, a strip 3 m wide), the tunnel's near-floor temperature drop (below the "
     "first cell), the measured velocity profile (UMF's inlet is a log law), the tunnel's no-slip side walls and ceiling (slip here), radiation (emissivity 0.01, effectively off) and the 10 mm raised block floor.",
     "51 of the 344 points (z = 4 mm, 0.4 m here) lie inside the first fine cell (0.75 m), a wall-function cell. The 242 points at or above 30 mm are scored separately.",
-    "The street air is nearly stagnant in the model: the mean U/U_H in the streets is 0.045 below 30 mm and 1.11 above 110 mm, against the tunnel's 0.297 and 1.068 as the fixture quotes them; the model's "
+    "The street air is nearly stagnant in the model: the mean U/U_H in the streets is 0.045 below 30 mm and 1.11 above 110 mm, against the tunnel's 0.297 and 1.068; the model's "
     "approach column differs from the tunnel's AF profile by up to 39 % above 30 mm (UMF's inlet is a log law, the tunnel's profile is not).",
-    "The tracer is solved steady beside the flow, as three species of one flow. The outlet carried 0.86, 0.73 and 0.70 of the emission for Sct 0.3, 0.5 and 0.7, the fixture's bar being a factor of two, a "
-    "detector of wiring errors and not a convergence claim. The largest modelled c* over the 344 points is in the source street for every species, at y = -0.12 m (Sct 0.3) and y = +0.18 m (Sct 0.5 "
+    "The tracer is solved steady beside the flow, as three species of one flow. The outlet carried 0.86, 0.73 and 0.70 of the emission for Sct 0.3, 0.5 and 0.7, within the factor of two accepted as a check "
+    "on the wiring. The largest modelled c* over the 344 points is in the source street for every species, at y = -0.12 m (Sct 0.3) and y = +0.18 m (Sct 0.5 "
     "and 0.7), against the tunnel's 1.929 at (-0.15, -0.12, 0.004).",
     "The air region ended at its 1500-iteration cap with the residualControl unmet (no 'solution converged' line); at the last iteration the initial residuals were 2.6e-2 (U_y), 3.0e-2 (p_rgh) and "
     "1.1e-3 to 2.0e-3 (the tracers).",
     "The tunnel is not y-symmetric although the array is: over 110 mirror pairs the mean |U(y) - U(-y)| is 0.143 U_H in the tunnel and 0.058 U_H in the model. V is barely antisymmetric in the tunnel, "
     "so it cannot be scored as a pattern; the sign-flipped control shows what a wrong sign scores.",
-    "The fixture's structure checks passed. The inlet's U_H reaches the array within 20 %; the approach air is warmest at the floor; the street air near the floor is warmer than the approach air at H and "
-    "cools with height; the street flow is slower than the flow above the array; every species emits and its largest value is in the source street. They set no band on the statistics.",
+    "The inlet's U_H reaches the array within 20 %; the approach air is warmest at the floor; the street air near the floor is warmer than the approach air at H and "
+    "cools with height; the street flow is slower than the flow above the array; every species emits and its largest value is in the source street.",
 ]
 RUNS += [
-    run("K", "openfoam12-realizableKE", None, "caseK_openfoam12_realizableKE.json", _K_HEADLINE, ["case-k-openfoam-agreement.png"],
+    run("K", "openfoam12-realizableKE", None, "caseK_openfoam12_realizableKE.json", _K_HEADLINE, ["case-k-layout.png", "case-k-openfoam-agreement.png"],
         _KG_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseKContainerE2E", what="9 x 9 cubes, floor point source, 1:100", cells="972,637"), "caseK_openfoam12_realizableKE_pairs.csv", PAIRS_K,
         normalisation=_K_NORM, notes=_K_NOTES),
     *[run("G", "openfoam12-realizableKE", arm, f"caseG_openfoam12_realizableKE_{arm}.json",
           {f"|U|/U(7 m){sfx}": "score.U.ownApproach", f"√(|U|²+2k)/U(7 m){sfx}": "score.rms.ownApproach", f"k/U(7 m)²{sfx}": "score.k.ownApproach",
            f"|U|/U_H, imposed{sfx}": "score.U.imposedUH", f"√(|U|²+2k)/U_H, imposed{sfx}": "score.rms.imposedUH"},
-          ["case-g-openfoam-sweep.png", "case-g-openfoam-stations.png"],
+          ["case-g-layout.png", "case-g-openfoam-sweep.png", "case-g-openfoam-stations.png"],
           _KG_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseGContainerE2E", what=f"arm: {what}, full scale", cells=f"{cells:,}"), "caseG_openfoam12_realizableKE_pairs.csv", PAIRS_G,
           normalisation=_G_NORM, notes=_G_NOTES) for arm, what, cells, sfx in _G_ARMS],
-    *[run("J", f"umf-{closure}", None, f"caseJ_umf_{closure}.json", _J_HEADLINE, ["case-j-umf-agreement.png", "case-j-umf-tracer.png"],
+    *[run("J", f"umf-{closure}", None, f"caseJ_umf_{closure}.json", _J_HEADLINE, ["case-j-layout.png", "case-j-umf-agreement.png", "case-j-umf-tracer.png"],
           _JL_REPRO.format(fixture="MetaFOAM.Lib.Tests/TestAijCaseJUmfContainerE2E", what="1:1:2 building, heated floor, floor point source", closure=_J_CLOSURES[closure][0], cells="236,408", scale="62.5"),
           f"caseJ_umf_{closure}_pairs.csv", PAIRS_J, normalisation=_J_NORM, notes=_j_notes(closure)) for closure in _J_CLOSURES],
-    run("L", "umf-realizableKE", None, "caseL_umf_realizableKE.json", _L_HEADLINE, ["case-l-umf-agreement.png"],
+    run("L", "umf-realizableKE", None, "caseL_umf_realizableKE.json", _L_HEADLINE, ["case-l-layout.png", "case-l-umf-agreement.png"],
         _JL_REPRO.format(fixture="MetaFOAM.Lib.Tests/TestAijCaseLUmfContainerE2E", what="9 x 14 cubes, heated floor, floor line source", closure="realizable k-ε", cells="754,940", scale="100"),
         "caseL_umf_realizableKE_pairs.csv", PAIRS_L, normalisation=_L_NORM, notes=_L_NOTES),
 ]
@@ -507,7 +538,7 @@ _M_HEADLINE = {"c*": "cstar", "c*, over the imposed speed at the mast's height (
                "U": "velocity.U", "V": "velocity.V", "V, sign flipped (control)": "velocity.V.flipped", "W": "velocity.W", "|U|": "velocity.magnitude", "k": "k"}
 _M_NORM = ("U, V, W and k at the 15 points over the tunnel's U_R = 4.08 m/s on the measurement and over the solved speed at the reference mast on the model (U_R is defined at the mast), k over U_R^2; "
            "c* = C/c0 (c0 = q/(U_R H_R^2) = 132.5 ppm) against the model's c U_R H_R^2/Q (H_R = 0.068 m x 600, Q = 1 kg/s) for turbulent Schmidt number {sct}, with one detection limit of 10^-3 of the "
-           "largest measured value; hit rate D = 0.25, W = 0.05 in those units; the Schmidt numbers are three runs on one flow, published side by side")
+           "largest measured value; hit rate D = 0.25, W = 0.05 in those units; the Schmidt numbers are three runs on one flow")
 
 
 def _res(name):
@@ -524,15 +555,15 @@ def _f_notes(frame):
     mesh = me["meshCheck"]
     anem = me["anemometers"]
     notes = [
-        "One direction of the tunnel's twelve: only wind from NNW was solved, the direction Eddy3D's fixture solves by default (with ENE it has the most tunnel rows, 33). The other eleven tunnel directions "
-        "and the field's other fifteen were not run, so nothing here says how the model does at them.",
+        "One direction of the tunnel's twelve was solved: wind from NNW, which with ENE has the most tunnel rows (33). The other eleven tunnel directions "
+        "and the field's other fifteen were not run.",
         ("Frame 'literal': the model is probed at the published z in the STL's frame. The readme says z is measured from the tunnel floor and the ground is z - 10 m, but the STL's own ground under all 13 points is "
          "5 m, so the 5, 9 and 20 m planes are probed 10, 14 and 25 m above the STL's ground (height_above_stl_ground in the pairs). The other frame, 'agl' (the STL's ground plus 5, 9 and 20 m), is the other run "
          "of this case." if frame == "literal" else
          "Frame 'agl': the model is probed at the STL's own ground under each point plus the instrument height (5, 9 and 20 m for the tunnel, 3 to 11 m for the field). The readme says z is measured from the tunnel "
          "floor and the ground is z - 10 m, but the STL's ground under all 13 points is 5 m, so the published z would sit 5 m higher; that frame is the other run of this case, 'literal'.")
-        + f" Neither is asserted, and the files do not say which one the tunnel meant: the 9 m plane's √(|U|²+2k) scores R {nine(a)['R']:.2f} and FB {nine(a)['Fb']:+.2f} in the literal frame and R {nine(b)['R']:.2f} "
-          f"and FB {nine(b)['Fb']:+.2f} in the agl frame, which is a statement about the datum, not about the model.",
+        + f" The files do not say which frame the tunnel meant: the 9 m plane's √(|U|²+2k) scores R {nine(a)['R']:.2f} and FB {nine(a)['Fb']:+.2f} in the literal frame and R {nine(b)['R']:.2f} "
+          f"and FB {nine(b)['Fb']:+.2f} in the agl frame.",
         f"Both sides are U/U(500 m): the tunnel's ratio is as published, the model's is over its own approach U(500 m) = {me['U500']:.3f} m/s, probed 1100 m upwind of the centre ({me['U500'] / 10:.3f} of the imposed 10 m/s). "
         f"Over the imposed 10 m/s the 9 m plane's √(|U|²+2k) scores R {me['tunnel.9m.rms.byImposedUR']['R']:.2f} and FB {me['tunnel.9m.rms.byImposedUR']['Fb']:+.2f}.",
         "The thermistor reads a scalar speed and so does the cup anemometer: the model is scored as |U|, which is the lower bound, and as √(|U|²+2k), the speed of a velocity with the modelled turbulent kinetic "
@@ -548,59 +579,65 @@ def _f_notes(frame):
         f"The solve ran to its {sl['iterationsRun']}-iteration limit with the residualControl unmet (no 'solution converged' line); the initial residuals at the last iteration were U_x {res['Ux']:.1e}, U_y {res['Uy']:.1e}, "
         f"U_z {res['Uz']:.1e}, p {res['p']:.1e}, epsilon {res['epsilon']:.1e} and k {res['k']:.1e}, and the log has {sl['boundingKLines']:,} 'bounding k' lines.",
         f"The solved field correlates R {a['tunnel.9m.rms']['R']:.2f} with the tunnel's 9 m column for the wind from NNW and R {a['control.sense.opposite']['R']:.2f} with its column for the opposite wind, SSE (agl frame: "
-        f"{b['tunnel.9m.rms']['R']:.2f} and {b['control.sense.opposite']['R']:.2f}). A RANS field knows no compass, so this corroborates the reading of the direction labels as the direction the wind comes from "
+        f"{b['tunnel.9m.rms']['R']:.2f} and {b['control.sense.opposite']['R']:.2f}). A RANS field knows no compass, so this supports reading the direction labels as the direction the wind comes from "
         "(clean/QUESTIONS.md QF9), at this one direction.",
-        f"The model's U/U(500 m) at the workbook's two rooftop anemometers (SMB {anem['smb.Umag']:.2f} for |U|, KDD {anem['kdd.Umag']:.2f}) is recorded in the results file and not scored: the tunnel's anchors for them "
+        f"The model's U/U(500 m) at the workbook's two rooftop anemometers (SMB {anem['smb.Umag']:.2f} for |U|, KDD {anem['kdd.Umag']:.2f}) is in the results file and not scored: the tunnel's anchors for them "
         "exist for the north and south tests only.",
     ]
     if frame == "agl":
-        notes.insert(2, "At the fixture's 4 m surface cells the lowest probes of this frame (the 7 points of the 5 m plane, 1.25 cells above the ground, and the field's point at 3 m) sit in the first cell, where the point "
-                        "interpolation is pulled toward the wall's zero (the fixture's own remark): read those rows as such.")
+        notes.insert(2, "At the 4 m surface cells of the mesh the lowest probes of this frame (the 7 points of the 5 m plane, 1.25 cells above the ground, and the field's point at 3 m) sit in the first cell, where the point "
+                        "interpolation is pulled toward the wall's zero.")
     return notes
 
 
 def _m_notes(sp):
-    r = _res(f"caseM_openfoam12_realizableKE_{sp}.json")
+    runs = {s: _res(f"caseM_openfoam12_realizableKE_{s}.json") for s in ("sct03", "sct05", "sct07")}
+    r = runs[sp]
     sl, mesh = r["solveLog"], r["meshCheck"]
     res = sl["finalInitialResiduals"]
     c = lambda m: f"R {m['R']:+.2f}, FAC2 {m['Fac2']:.2f}, FB {m['Fb']:+.2f}"  # noqa: E731
-    near = "carry more than" if r["cstar.nearBeatsFar"] else "carry less than"
+    each = lambda key, fmt: " / ".join(format(x[key], fmt) for x in runs.values())  # noqa: E731
+    tn, tf = r["cstar.tunnel.nearThreeMean"], r["cstar.tunnel.farTwoMean"]
+    reversed_ = [sct for sct, x in zip(("0.3", "0.5", "0.7"), runs.values()) if not x["cstar.nearBeatsFar"]]
+    # The readings below are written for these numbers; a rebuilt solve that breaks one has to be read again.
+    assert reversed_ == ["0.7"], reversed_
+    assert all(x["control.mirrored"]["R"] > x["cstar"]["R"] and x["control.meanTurned180"] < 1e-3 * x["control.meanReal"] for x in runs.values())
     return [
-        f"One heading and one steady solve: WD 180, the only heading with measured velocities. The tunnel's own neighbouring headings are the noise floor of a single heading: its WD 175 scored as a model of its WD 180 "
-        f"gives {c(r['control.tunnelWD175AsModelOfWD180'])}, its WD 185 {c(r['control.tunnelWD185AsModelOfWD180'])}, and the mean of the two {c(r['control.tunnelNeighbourMeanAsModelOfWD180'])}; 8 of the 15 points change "
-        "by more than a factor of two between WD 175 and WD 185 (computed from the pairs).",
+        f"One heading and one steady solve: WD 180, the only heading with measured velocities. The tunnel's WD 175 scored as a model of its WD 180 gives {c(r['control.tunnelWD175AsModelOfWD180'])}, "
+        f"its WD 185 {c(r['control.tunnelWD185AsModelOfWD180'])}, and the mean of the two {c(r['control.tunnelNeighbourMeanAsModelOfWD180'])}; 8 of the 15 points change by more than a factor of two between "
+        "WD 175 and WD 185 (computed from the pairs).",
         "The turbulent Schmidt number does not change the flow: the three runs of this case are one solve with three passive tracers, so U, V, W and k are the same in all three and only c* differs.",
         f"U_R is the solved speed at the reference mast, {r['referenceSpeed.solvedAtMast']:.3f} m/s, which is {r['reference.180.U.overImposed']:.2f} of the tabulated inlet's speed at the mast's elevation "
         f"({r['reference.U.imposedAtMastElevation']:.3f} m/s) and {r['reference.180.U.overTunnelUR']:.2f} of the tunnel's 4.08 m/s. Over the imposed speed c* scores FB {r['cstar.byImposedMastSpeed']['Fb']:+.2f} and over "
         f"4.08 m/s FB {r['cstar.byPaperUR']['Fb']:+.2f}, against {r['cstar']['Fb']:+.2f} over the solved speed.",
-        "The model is not the tunnel: a cylinder of 540 m radius and 240 m height on the terrain sheet, the tabulated approach profile over a smooth floor, none of the tunnel's side walls (at ±360 m) and 600 m ceiling "
-        "(blockage 5 % in the fixture's count); the 6 mm outlet is 3.6 m at 1:600, and the source here is a 4 m cube on the ground (a zone of 20 cells, 2 m surface cells), 1 kg/s as a volume source with no exit "
+        "Model set-up: a cylinder of 540 m radius and 240 m height on the terrain sheet; the tabulated approach profile over a smooth floor; no counterpart of the tunnel's side walls (at ±360 m) and 600 m ceiling "
+        "(blockage 5 %). The 6 mm outlet is 3.6 m at 1:600; the source here is a 4 m cube on the ground (a zone of 20 cells, 2 m surface cells), 1 kg/s as a volume source with no exit "
         "momentum. The 15 points are 3 m above the ground.",
-        f"The structure the fixture first asserted is recorded: the three points nearest the source {near} the two far downwind ones in this run ({r['cstar.nearThreeMean']:.2f} against {r['cstar.farTwoMean']:.2f}), "
-        f"where the tunnel's are {r['cstar.tunnel.nearThreeMean']:.2f} against {r['cstar.tunnel.farTwoMean']:.2f}. The tunnel obeys it by a factor of about twelve and the model by less (Sct 0.7 reverses it), which Eddy3D "
-        f"reads as a finding about where the model puts the plume and not as a wrong bar: a probe repeated at full precision moved no c* value by more than 0.003. The peak c* is {r['cstar.peakModel']:.2f} against {r['cstar.peakMeasured']:.2f} "
-        f"measured, and {r['cstar.topFiveOverlap']} of the five highest points are shared.",
-        f"Controls on the same solution: the 15 points turned 180° about the source score {c(r['control.turned180'])} (n {r['control.turned180']['Count']}; the model's mean over those points is "
-        f"{r['control.meanTurned180']:.1e} against {r['control.meanReal']:.3f} at the real ones: the tracer goes downwind), and the points mirrored across the plume axis score {c(r['control.mirrored'])}, better "
-        f"than the real points' {c(r['cstar'])}: the modelled plume is displaced sideways against the tunnel's.",
-        f"The field campaign (18 runs) is recorded beside the tunnel, not asserted: the 10 runs within 10° of 180 at 3 m/s or more, each with its own U_R and q and H_R = 41 m as the cleaned table states (the fixture divides by "
-        f"40.8 m, a 1 % difference). The model against the field's geometric mean scores {c(r['field.vsGeometricMean'])}, and lies inside the field's minimum-maximum range at {r['field.insideFieldRange']} of 15 points; "
+        f"Mean c* over the three points nearest the source: {tn:.2f} (tunnel), {each('cstar.nearThreeMean', '.2f')} (model, Sct 0.3 / 0.5 / 0.7); over the two far downwind points: {tf:.2f} (tunnel), "
+        f"{each('cstar.farTwoMean', '.2f')} (model). Peak c*: {r['cstar.peakMeasured']:.2f} (tunnel), {each('cstar.peakModel', '.2f')} (model); "
+        f"{each('cstar.topFiveOverlap', 'd')} of the five highest points are shared with the tunnel.",
+        f"The tunnel's three points nearest the source carry about {tn / tf:.0f} times its two far downwind ones; the modelled plume carries less, and Sct {' and '.join(reversed_)} reverses the order.",
+        f"Controls on the same solution: the points turned 180° about the source score {c(r['control.turned180'])} ({r['control.turned180']['Count']} of the 15 lie in the fluid; the model's mean over those points is "
+        f"{r['control.meanTurned180']:.1e} against {r['control.meanReal']:.3f} at the real ones), and the points mirrored across the plume axis score {c(r['control.mirrored'])} (the real points: {c(r['cstar'])}).",
+        "The tracer goes downwind: the model's mean over the points turned 180° about the source is far below its mean at the real points. The mirrored points score above the real points because the modelled "
+        "plume is displaced sideways against the tunnel's. The tunnel's neighbouring headings WD 175 and WD 185 are the noise floor of a single heading.",
+        f"Field campaign (18 runs): the 10 runs within 10° of 180 at 3 m/s or more, each with its own U_R and q and H_R = 41 m as the cleaned table states (the scores divide by 40.8 m, a 1 % difference). "
+        f"The model against the field's geometric mean scores {c(r['field.vsGeometricMean'])}, and lies inside the field's minimum-maximum range at {r['field.insideFieldRange']} of 15 points; "
         f"the tunnel's WD 180 against the same mean scores {c(r['field.tunnelAsModelOfGeometricMean'])}; the spread of the field at point 1 is a factor of {r['field.spreadAtPoint1']:.1f}.",
         f"The velocity at the 15 points: the mean U/U_R is {r['velocity.U.mean.model']:.3f} modelled against {r['velocity.U.mean.tunnel']:.3f} measured. FB is not defined for V and W (their means are not both positive); V "
         f"correlates at R {r['velocity.V']['R']:+.2f} and flipping its sign gives {r['velocity.V.flipped']['R']:+.2f}.",
         f"The solve ran to its {sl['iterationsRun']}-iteration limit with the residualControl unmet (no 'solution converged' line); the initial residuals at the last iteration were U_x {res['Ux']:.1e}, "
         f"U_z {res['Uz']:.1e}, p {res['p']:.1e}, epsilon {res['epsilon']:.1e}, k {res['k']:.1e} and the tracers {res['c_sct03']:.1e} to {res['c_sct07']:.1e}. checkMesh: {mesh['verdict']} {mesh['cells']:,} cells. "
-        "The first solve of this case was killed by the container runtime for memory (exit 137) and the solve was run again alone; the scores are of the second. Its tracer probe, which printed six decimals, was "
-        "replaced by a probe of the same solved study at seven significant digits (no c* value moved by more than 0.003, Eddy3D's account).",
+        "The tracer probe prints seven significant digits; a probe at six decimals moved no c* value by more than 0.003.",
     ]
 
 
 RUNS += [
-    *[run("F", "openfoam12-realizableKE", frame, f"caseF_openfoam12_realizableKE_{frame}.json", _F_HEADLINE, ["case-f-openfoam-agreement.png", "case-f-openfoam-bias-map.png"],
+    *[run("F", "openfoam12-realizableKE", frame, f"caseF_openfoam12_realizableKE_{frame}.json", _F_HEADLINE, ["case-f-layout.png", "case-f-openfoam-agreement.png", "case-f-openfoam-bias-map.png"],
           _FM_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseFContainerE2E (EDDY3D_AIJ_F_DIRECTIONS=NNW, the default)", what=f"Shinjuku district, 1:800, wind from NNW, frame {frame}",
                            iterations="2000", cells="2,143,488"),
           "caseF_openfoam12_realizableKE_pairs.csv", PAIRS_F, normalisation=_F_NORM, notes=_f_notes(frame)) for frame in ("literal", "agl")],
-    *[run("M", "openfoam12-realizableKE", sp, f"caseM_openfoam12_realizableKE_{sp}.json", _M_HEADLINE, ["case-m-openfoam-agreement.png", "case-m-openfoam-plan.png"],
+    *[run("M", "openfoam12-realizableKE", sp, f"caseM_openfoam12_realizableKE_{sp}.json", _M_HEADLINE, ["case-m-layout.png", "case-m-openfoam-agreement.png", "case-m-openfoam-plan.png"],
           _FM_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseMContainerE2E (WD 180, the default)", what=f"TPU Atsugi campus, 1:600, tunnel WD 180, turbulent Schmidt number {sct}",
                            iterations="3000", cells="1,394,053"),
           "caseM_openfoam12_realizableKE_pairs.csv", PAIRS_M, normalisation=_M_NORM.format(sct=sct), notes=_m_notes(sp)) for sp, sct in (("sct03", "0.3"), ("sct05", "0.5"), ("sct07", "0.7"))],
@@ -659,6 +696,14 @@ FIGURE_CAPTIONS = {
     "ml-surrogate-agreement.png": ("Eddy3D ML surrogate (Yel-2.0): measured against predicted pedestrian-height speed, one "
                                    "panel per case, with the 1:1 line and the factor-of-two band."),
 }
+# The layout figure of each case (validation/plot_layout.py): the caption is written by layout.py from the same groups that colour the agreement figures.
+FIGURE_CAPTIONS.update({f"case-{c.lower()}-layout.png": LAYOUT.caption(c) for c in LAYOUT.SPECS})
+for _fig in ("cases-ab-openfoam-agreement.png", "cases-hi-openfoam-agreement.png", "case-i-openfoam-closures.png", "case-k-openfoam-agreement.png",
+             "case-g-openfoam-sweep.png", "case-j-umf-agreement.png", "case-j-umf-tracer.png", "case-l-umf-agreement.png"):
+    FIGURE_CAPTIONS[_fig] += " Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
+FIGURE_CAPTIONS["case-g-openfoam-stations.png"] += " The letters A to G mark the seven lines of the layout figure."
+for _fig in ("case-c-openfoam-agreement.png", "case-d-openfoam-agreement.png", "case-e-openfoam-agreement.png", "case-f-openfoam-agreement.png", "case-m-openfoam-agreement.png"):
+    FIGURE_CAPTIONS[_fig] += " Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
 
 METRIC_MEANING = {
     "Count": "number of measured points scored",
@@ -707,10 +752,10 @@ COLUMN_MEANING = {
 
 # (path, media type, schema name or None, description); the order is the order of index.json and openapi.json.
 ENDPOINTS = [
-    ("index.json", "application/json", "index", "every endpoint and file with its size and SHA-256, versions, compatibility policy, changelog, licence, citation"),
+    ("index.json", "application/json", "index", "every endpoint and file with its size and SHA-256, versions, compatibility policy, changelog, licence, how to cite the API (cite.api)"),
     ("versions.json", "application/json", "versions", "every release, newest first: version, date, status (latest or superseded), schema and data version, base URL, tag, changelog; always at the unversioned /api/ path"),
     ("cases.json", "application/json", "cases", "every case: id, title, frame, units, counts, engine status, links"),
-    ("cases/{id}.json", "application/json", "case", "one case in full: configurations, frame, units, inflow fit and approach-flow profile, point-table summary, geometry files, validation status, known data issues, attribution"),
+    ("cases/{id}.json", "application/json", "case", "one case in full: configurations, frame, units, inflow fit and approach-flow profile, point-table summary, geometry files, validation status, known data issues, attribution, citation of the case's dataset"),
     ("cases/{id}/points.json", "application/json", "points", "the cleaned measurement table: SI units, one frame, null where not measured"),
     ("cases/{id}/points.csv", "text/csv", None, "the same table as CSV (empty cell = not measured)"),
     ("cases/{id}/approach_flow.csv", "text/csv", None, "the measured approach-flow profile: z (m), U (m/s), and k (m^2/s^2) or u_rms (m/s) where published; Case G's U and k are dimensionless (U/Ub, k/Ub^2)"),
@@ -731,6 +776,11 @@ MEDIA_TYPES = {".json": "application/json", ".csv": "text/csv", ".stl": "model/s
 
 WRITTEN = set()          # every file this build wrote into the current tree (relative); anything else there is stale
 DATA_VERSION = None      # set once the data files are written
+
+
+def release_citation():
+    """The release the citations name: VERSION, its date in CHANGELOG.md and this build's data version."""
+    return C.Release(RELEASE, RELEASE_DATE, DATA_VERSION)
 
 
 # ----------------------------------------------------------------------------- trees
@@ -871,17 +921,17 @@ def points_summary(rows):
 
 
 # Boxes the case states (the building, the belt, the array), in the case frame. F's STL is a 725 m disc drawn as a polygon, so its
-# extent in y is short of the radius by up to 3 mm; M's and F's z start at -0.0 on the ground.
+# extent in y is short of the radius by up to 3 mm; F and M stand on a base slab (geometry_checks.BASE_Z) below the ground at z = 0.
 BBOX_TOLERANCE = {"F": 0.01}
 EXPECTED_BBOX = {
-    "F": ([-725.0, -725.0, 0.0], [725.0, 725.0, 225.0]),               # the 725 m disc of terrain, the 225 m roof of the tallest tower (readme, STL)
+    "F": ([-725.0, -725.0, -1.0], [725.0, 725.0, 225.0]),              # the 725 m disc of terrain on a 1 m base slab, the 225 m roof of the tallest tower (readme, STL)
     "G": ([-2.0, -37.0, 1.2], [0.0, 37.0, 7.0]),                       # the belt: 2 m deep, 74 m long, 7 m tall, 1.2 m gap below
     "H": ([-0.1, -0.05, 0.0], [0.0, 0.05, 0.2]),                       # the 0.10 x 0.10 x 0.20 m building, leeward face at x = 0
     "I": ([-0.05, -0.05, 0.0], [0.05, 0.05, 0.1]),                     # the 0.1 m cube, centred on the origin
     "J": ([-0.08, -0.04, 0.0], [0.0, 0.04, 0.16]),                     # b = 0.08 m, H = 0.16 m
     "K": ([-0.36, -0.51, 0.0], [0.66, 0.51, 0.06]),                    # 9 x 9 cubes of 0.06 m on a 0.12 m pitch
     "L": ([-0.96, -0.51, 0.0], [0.66, 0.51, 0.06]),                    # 14 x 9 cubes of 0.06 m on a 0.12 m pitch
-    "M": ([-540.0, -360.0, 0.0], [540.0, 360.0, 64.9152]),             # the 1.8 x 1.2 m model, x600
+    "M": ([-540.0, -360.0, -1.0], [540.0, 360.0, 64.9152]),            # the 1.8 x 1.2 m model, x600, on a 1 m base slab
 }
 
 
@@ -927,8 +977,8 @@ def write_data(case):
             ok = all(abs(a - b) < tol for a, b in zip(stats["bbox_min"], lo)) and all(abs(a - b) < tol for a, b in zip(stats["bbox_max"], hi))
             if not ok:
                 raise SystemExit(f"geometry check failed for {case}/{cfg}: bbox {stats['bbox_min']}..{stats['bbox_max']} != {lo}..{hi}")
-        if boxes is not None and not stats["watertight"]:
-            raise SystemExit(f"geometry check failed for {case}/{cfg}: box geometry is not edge-manifold")
+        if not stats["watertight"]:
+            raise SystemExit(f"geometry check failed for {case}/{cfg}: not every body is closed, consistently wound and outward ({stats})")
         geometry.append({"configuration": cfg, "rel": rel, "stats": stats, "boxes": boxes, "note": note, "bbox_ok": ok})
     geometry.sort(key=lambda g: g["configuration"] != D.DEFAULT_CONFIGURATION[case])
 
@@ -1041,6 +1091,11 @@ def flat_scores(res, prefix=""):
     return out
 
 
+def _quantity(text):
+    """A snapshot's own description of what it scored, in the words of this page (the snapshot is a fixture's output and stays as written)."""
+    return text and text.replace("the field campaign (18 runs) is recorded beside it", "the 18-run field campaign is compared as well")
+
+
 def validation_entries(case):
     out = []
     for r in RUNS:
@@ -1062,7 +1117,7 @@ def validation_entries(case):
             "lateral_sign_applied_in_fixture": res.get("lateralSign"),
             "recirculation_Lr_over_H": res.get("recirculation.LrOverH",
                                                (res.get("recirculation.z=0.05H") or {}).get("LrOverH")),
-            "quantity": res.get("quantity"),
+            "quantity": _quantity(res.get("quantity")),
             "normalisation": r["normalisation"] or ("velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, "
                                                     "as it is published); hit rate D = 0.25, W = 0.05 in those units"),
             "notes": r["notes"],
@@ -1132,7 +1187,7 @@ def write_case_documents(case, d):
 
     files = []
     for g in d["geometry"]:
-        entry = {"configuration": g["configuration"], **download(g["rel"]), "format": "ASCII STL, LF line endings, outward normals",
+        entry = {"configuration": g["configuration"], **download(g["rel"]), "format": "ASCII STL, LF line endings, outward normals, every body closed and consistently wound",
                  "source": g["note"], "stats": g["stats"], "bbox_matches_stated_dimensions": g["bbox_ok"],
                  "render": render_url(case, g["configuration"]), "render_caption": D.RENDER_CAPTIONS[(case, g["configuration"])]}
         if g["boxes"] is not None:
@@ -1157,7 +1212,7 @@ def write_case_documents(case, d):
         "engines": [{"engine": e["id"], "status": ENGINE_STATUS[case][e["id"]]} for e in case_engines(case)],
         "results": results,
         "note": (None if results else "No validation has been run for this case yet; results is an empty list. "
-                 f"Nothing on this page is a claim about this case. {QUEUED}"),
+                 f"{QUEUED}"),
     })
 
     configs = configurations(case, d["rows"])
@@ -1179,6 +1234,7 @@ def write_case_documents(case, d):
         "known_issues": meta["known_issues"],
         "people": meta["people"], "doi": meta["doi"], "doi_note": meta.get("doi_note"),
         "citation_requested": meta["citation_requested"],
+        "citation": C.case(case, meta),
         "files_in_repository": {"folder": f"{REPO_URL}/tree/main/{meta['folder']}", "reference": meta["reference_file"],
                                 "approach_flow": meta["approach_flow_file"], "readme": meta["readme"]},
         "render": render_url(case),
@@ -1223,12 +1279,12 @@ def write_geometry_index(data):
                 "units": "metres" + (" (full scale)" if case in D.FULL_SCALE else " (model scale)"),
                 "frame": {k: meta["frame"][k] for k in ("origin", "x", "y", "z")},
                 "bbox_min": g["stats"]["bbox_min"], "bbox_max": g["stats"]["bbox_max"],
-                "triangles": g["stats"]["triangles"], "watertight": g["stats"]["watertight"],
+                "triangles": g["stats"]["triangles"], **{k: g["stats"][k] for k in S.GEOMETRY_FACTS},
                 "render": render_url(case, g["configuration"]),
             })
     write_json("geometry.json", "geometry-index", {
         "description": ("Every cleaned STL, one entry per case and configuration. Each file is in its own case's frame "
-                        "and units — points.json of the same case lives in that frame — so they are deliberately not one "
+                        "and units — points.json of the same case lives in that frame — so they are not one "
                         "scene: overlaid, the cases would stack at the origin, and Cases E, F, G and M are full scale while the "
                         "others are model scale. geometry.zip holds the same files under archive_name."),
         "archive": download("geometry.zip"),
@@ -1251,9 +1307,8 @@ def write_validation_summary(percase):
             engines.append({"engine": e["id"], "status": ENGINE_STATUS[case][e["id"]], "runs": runs})
         cases.append({"case": case, "title": D.CASES[case]["title"], "url": url(f"cases/{case}/validation.json"), "engines": engines})
     write_json("validation.json", "validation-summary", {
-        "description": ("Every case and engine in one table. 'scored' means a run exists, not that it agrees: read the "
-                        "scores. Headline scores are the ones to quote; every score, the figures and the per-point pairs "
-                        "are in each case's validation.json."),
+        "description": ("Every case and engine in one table. Headline scores are the ones to quote; every score, the "
+                        "figures and the per-point pairs are in each case's validation.json."),
         "engines": ENGINES, "status_meaning": STATUS_MEANING, "metric_meaning": METRIC_MEANING, "cases": cases,
     })
 
@@ -1318,7 +1373,7 @@ def write_openapi():
     doc = {
         "openapi": "3.1.0",
         "jsonSchemaDialect": S.DRAFT,
-        "info": {"title": "AIJ UWE benchmark — cleaned data API", "version": SCHEMA_VERSION,
+        "info": {"title": "AIJ UWE — cleaned data API", "version": SCHEMA_VERSION,
                  "summary": f"Wind-tunnel and field reference data of the AIJ UWE benchmark (Cases {CASE_SPAN}), cleaned, with Eddy3D's validation against it.",
                  "description": ("Static files, one GET each; nothing is computed on request. Lengths in metres, velocities in "
                                  "m/s, variances and k in m^2/s^2, in one frame per case. " + COMPATIBILITY + " " + CACHING),
@@ -1336,7 +1391,7 @@ def write_openapi():
 
 def llms_text(percase):
     walk = [
-        "# AIJ UWE benchmark — cleaned data API",
+        "# AIJ UWE — cleaned data API",
         "",
         "> Wind-tunnel and field reference data from the Architectural Institute of Japan Urban Wind Environment (UWE)",
         f"> benchmark, Cases {CASE_SPAN}, cleaned into one schema, plus Eddy3D's validation against it. Static files, plain GET.",
@@ -1350,7 +1405,7 @@ def llms_text(percase):
             f"This is the latest alias, which always equals the newest release; the frozen copy of {RELEASE} is {PINNED_BASE}."),
         f"All releases: {endpoint_url('versions.json')}",
         f"API schema version: {SCHEMA_VERSION}. Data version (SHA-256 of the served data): {DATA_VERSION}.",
-        "Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark and the per-case papers.",
+        "Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and requested citation of each case are in cases/{id}.json.",
         "",
         "## How to use this",
         "",
@@ -1366,8 +1421,7 @@ def llms_text(percase):
         "   geometry.json lists the boxes where the geometry IS boxes (A, B, C, D, G, H, I, J, K, L), so you need not parse the STL at all.",
         "6. GET validation.json for every case and engine at once, or cases/{id}/validation.json for one case in full.",
         "   Quote the `headline` scores. An engine whose status is not \"scored\" has NO result for that case: do not",
-        "   infer one. \"scored\" means a run exists, not that it agrees — read the numbers. Each result's `pairs` is",
-        "   the per-point measured and modelled values, so any score can be recomputed. Status today: "
+        "   infer one. Each result's `pairs` is the per-point measured and modelled values, so any score can be recomputed. Status today: "
         + "; ".join(f"{c}: " + ", ".join(f"{e} {s}" for e, s in ENGINE_STATUS[c].items()) for c in D.CASE_IDS) + ".",
         "7. All geometry at once: GET geometry.json (every STL with its case, configuration, units, frame and SHA-256)",
         "   or geometry.zip. Each STL stays in its own case's frame and units; they are NOT one scene.",
@@ -1395,7 +1449,7 @@ def llms_text(percase):
         summ = percase[case]["summ"]
         walk.append(f"- {case}: {meta['title']}. {meta['short']} {summ['rows']} rows, {summ['distinct_points']} points, "
                     f"columns {', '.join(summ['columns'])}. Engines: " + ", ".join(f"{k} {v}" for k, v in ENGINE_STATUS[case].items()) + ".")
-    walk += ["", "## Known data issues", "", "Each of these changes the result of a comparison if it is not accounted for.", ""]
+    walk += ["", "## Known data issues", ""]
     for case in D.CASE_IDS:
         for g in D.CASES[case]["known_issues"]:
             walk.append(f"- [{case}] {g}")
@@ -1403,21 +1457,22 @@ def llms_text(percase):
         "",
         "## Validation method",
         "",
-        "Each case is solved through Eddy3D's production case writer (build-case -> run -> probe), not a hand-built",
-        "OpenFOAM case; the probe sits at exactly the tunnel's measurement coordinates. Scores are normalised by U_H",
+        "Each case is solved through Eddy3D's production case writer (build-case -> run -> probe); the probe sits at",
+        "exactly the tunnel's measurement coordinates. Scores are normalised by U_H",
         "(k by U_H^2; Case E by U at 15.9 m); hit rate uses D = 0.25, W = 0.05 in those units. FAC2 is harsh by",
-        "construction on sign-changing V and W; read R and hit rate there. The lateral sign of Case B is corrected",
+        "construction on sign-changing V and W, where R and hit rate are the usable scores. The lateral sign of Case B is corrected",
         "before scoring. Cases C-E measure an omnidirectional SCALAR speed (thermistor): the model is scored as",
         "sqrt(|U|^2 + 2k) and as |U|, the two ends of the bracket the measurement must fall in.",
         "The ML surrogate predicts |U|/U_ref at 1.8 m; each case is scaled so its measurement plane lands there.",
         "On the full prediction window it does not respond to the wind direction at all (reversing the wind changes",
-        "the field by < 1e-4 U_ref) — its scores grade the geometry it was given, not a wind it was told.",
+        "the field by < 1e-4 U_ref), so its scores grade the geometry it was given.",
         "",
         "## Cite",
         "",
         f"- {D.CITATION['benchmark']}",
         f"- {D.CITATION['guidelines']}",
         "- Each case's own requested citation and Zenodo DOI are in cases/{id}.json.",
+        "- Cite the API: cite.api in index.json",
         "",
     ]
     return "\n".join(walk)
@@ -1430,12 +1485,13 @@ def write_dataset_jsonld(percase):
     dataset = {
         "@context": "https://schema.org",
         "@type": "Dataset",
-        "name": f"AIJ Urban Wind Environment benchmark, Cases {CASE_SPAN} — cleaned wind-tunnel and field data",
+        "name": C.TITLE,
+        "identifier": C.pinned_url(RELEASE),
         "description": ("Wind-tunnel and field reference data of the Architectural Institute of Japan Urban Wind Environment (UWE) "
-                        f"benchmark, Cases {CASE_SPAN} — isolated buildings and arrays of blocks and cubes, a high-rise among city "
+                        f"benchmark, Cases {CASE_SPAN}: isolated buildings and arrays of blocks and cubes, a high-rise among city "
                         "blocks, districts of Niigata, Shinjuku and Atsugi, a tree belt, and tracer-gas dispersion around buildings and cube "
-                        "arrays, some non-isothermal — cleaned into SI units and one frame per case, with cleaned STL geometry and "
-                        "Eddy3D's CFD validation scores where they exist."),
+                        "arrays, some non-isothermal. Cleaned into SI units and one frame per case, with cleaned STL geometry and "
+                        "Eddy3D's CFD validation scores."),
         "url": SITE + "/",
         "sameAs": REPO_URL,
         "version": RELEASE,
@@ -1465,6 +1521,24 @@ def write_dataset_jsonld(percase):
     with io.open(os.path.join(DOCS, "_includes", "dataset-jsonld.html"), "w", encoding="utf-8", newline="\n") as f:
         f.write("<!-- Generated by scripts/build_api.py (write_dataset_jsonld). -->\n"
                 f'<script type="application/ld+json">\n{body}\n</script>\n')
+
+
+def write_citation_files():
+    """The citations that are not part of the API: docs/_includes/cite.md, the <!--cite--> block of README.md, CITATION.cff
+    and .zenodo.json, all rendered by scripts/citation.py for this release."""
+    rel = release_citation()
+    with io.open(os.path.join(DOCS, "_includes", "cite.md"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(C.site_include(rel))
+    path = os.path.join(REPO, "README.md")
+    with io.open(path, encoding="utf-8", newline="") as f:
+        text = f.read()
+    new = C.readme_with_cite(text, rel)
+    if new != text:
+        with io.open(path, "w", encoding="utf-8", newline="\n") as f:
+            f.write(new)
+    for name, body in (("CITATION.cff", C.cff(rel, D.CASES)), (".zenodo.json", C.zenodo_json(D.CASES))):
+        with io.open(os.path.join(REPO, name), "w", encoding="utf-8", newline="\n") as f:
+            f.write(body)
 
 
 def write_changelog_include():
@@ -1511,7 +1585,7 @@ def write_index():
     """Last: index.json lists every other file of the tree with its size and SHA-256."""
     files = sorted(WRITTEN - {"index.json"})
     write_json("index.json", "index", {
-        "name": "AIJ UWE benchmark — cleaned data API",
+        "name": "AIJ UWE — cleaned data API",
         "description": ("Static JSON/CSV/STL endpoints for the Architectural Institute of Japan Urban Wind Environment "
                         f"benchmark (Cases {CASE_SPAN}) and Eddy3D's validation against it. Every file is a plain HTTP GET; nothing is computed on request."),
         "base_url": API_BASE,
@@ -1535,7 +1609,7 @@ def write_index():
         "case_ids": D.CASE_IDS,
         "files": [download(rel) for rel in files],
         "license_detail": D.LICENSE,
-        "cite": D.CITATION,
+        "cite": {"api": C.api(release_citation()), **D.CITATION},
         "agents": {
             "start_here": url("llms.txt"),
             "pin_a_version": f"GET {endpoint_url('versions.json')} and use the base_url of the release you want; paths are the same in every release",
@@ -1684,8 +1758,7 @@ def copy_assets():
         width, height = web_copy(master, web)
         FIGURE_INFO[name] = {"master": f"/assets/{sub_dir}/{name}", "master_bytes": os.path.getsize(master),
                              "master_width": _png_size(master)[0], "master_height": _png_size(master)[1],
-                             "web": f"/assets/web/{name}", "web_bytes": os.path.getsize(web), "width": width, "height": height,
-                             "mb": f"{os.path.getsize(master) / 1e6:.1f}"}
+                             "web": f"/assets/web/{name}", "web_bytes": os.path.getsize(web), "width": width, "height": height}
     os.makedirs(DATA_FILES, exist_ok=True)
     with io.open(os.path.join(DATA_FILES, "figures.json"), "w", encoding="utf-8", newline="\n") as f:
         f.write(json.dumps(FIGURE_INFO, indent=1, ensure_ascii=False, sort_keys=True) + "\n")
@@ -1695,7 +1768,7 @@ def copy_assets():
 
 # README.md is written by hand, except for the figures: each sits between <!--fig name="x.png" alt="..." width="700"-->
 # and <!--/fig--> on one line, and the build writes what is between them (the 1600 px copy at the width given, linked to
-# its 1200 dpi master; label="0" puts the size in a tooltip instead of under the image).
+# the full-size file).
 FIG_MARKER = re.compile(r'<!--fig ((?:\w+="[^"]*"\s*)+)-->(.*?)<!--/fig-->')
 
 
@@ -1705,9 +1778,7 @@ def _readme_figure(attrs, info):
     master = "validation/figures/" + ("geometry/" if f["master"].startswith("/assets/geometry/") else "") + name
     img = (f'<img src="docs/assets/web/{name}" width="{width}" height="{round(width * f["height"] / f["width"])}" '
            f'loading="lazy" alt="{attrs["alt"]}">')
-    if attrs.get("label") == "0":
-        return f'<a href="{master}" title="{_original(f)}">{img}</a>'
-    return f'<a href="{master}">{img}</a><br><sub><a href="{master}">{_original(f)}</a></sub>'
+    return f'<a href="{master}">{img}</a>'
 
 
 def readme_with_figures(text, info):
@@ -1788,15 +1859,43 @@ def _cell(text):
     return _esc(text).replace("|", "\\|")
 
 
-def _md_value(v):
-    """A configuration value as the text of one table cell: escaped once (the cell's pipes too, as in |y|)."""
+def _md_value(v, sink=None):
+    """A configuration value as the text of one table cell: escaped once (the cell's pipes too, as in |y|). The
+    reasoning part of a text (page_prose) is appended to `sink`, for the collapsed section under the table; a text
+    that has one needs a sink."""
     if isinstance(v, dict):
-        return "<br>".join(f"**{_esc(_label(k))}**: {_md_value(x)}" for k, x in v.items())
+        return "<br>".join(f"**{_esc(_label(k))}**: {_md_value(x, sink)}" for k, x in v.items())
     if isinstance(v, list):
         return ", ".join(_cell(x) for x in v)
     if isinstance(v, int) and not isinstance(v, bool) and abs(v) >= 10000:
         return f"{v:,}"
+    if isinstance(v, str):
+        shown, collapsed = P.split(v, cell=True)
+        if collapsed:
+            if sink is None:
+                raise SystemExit(f"a text with a collapsed part where the page has no place for it: {v[:70]!r}")
+            sink.append(collapsed)
+        return _cell(shown)
     return _cell(v)
+
+
+MIN_SECTION = 150      # a collapsed section shorter than this is a fragment: keep its text visible or give it neighbours
+
+
+def _sections(collapsed):
+    """Collapsed sections for [(kind, topic, text)]: one <details> per (kind, topic).
+    `Interpretation: <topic>` holds a reading of a result, `Data notes: <topic>` the evidence behind a data convention.
+    The texts of one topic read as one paragraph."""
+    groups = {}
+    for kind, topic, text in collapsed:
+        if text not in groups.setdefault((kind, topic), []):
+            groups[(kind, topic)].append(text)
+    L = []
+    for (kind, topic), texts in groups.items():
+        if len(" ".join(texts)) < MIN_SECTION:
+            raise SystemExit(f"a collapsed section is a fragment ({P.SUMMARY[kind]}: {topic}): {' '.join(texts)!r}")
+        L += ['<details markdown="block">', f"<summary>{P.SUMMARY[kind]}: {topic}</summary>", "", _esc(" ".join(texts)), "", "</details>", ""]
+    return L
 
 
 def _asset(rel):
@@ -1813,11 +1912,6 @@ def _plain(html):
     return "".join(out).replace('"', "&quot;")
 
 
-def _original(f):
-    """The link text to a figure's 1200 dpi master."""
-    return f"1200 dpi original, {f['master_bytes'] / 1e6:.1f} MB"
-
-
 def _web_img(f, alt):
     return (f'<img src="{_asset(f["web"])}" width="{f["width"]}" height="{f["height"]}" loading="lazy" '
             f'alt="{_plain(alt)}">')
@@ -1825,25 +1919,23 @@ def _web_img(f, alt):
 
 def figure(src, alt, caption, cls="figure"):
     """One image with its caption, as HTML (<figure>), so the caption stays attached to the image. The page shows the
-    1600 px copy; the image and a link under the caption lead to the 1200 dpi master."""
+    1600 px copy; the image links to the full-size file."""
     f = FIGURE_INFO[src.rsplit("/", 1)[-1]]
     return [f'<figure class="{cls}">', f'<a href="{_asset(f["master"])}">{_web_img(f, alt)}</a>',
-            f'<figcaption>{caption}<br><a class="original" href="{_asset(f["master"])}">{_original(f)}</a></figcaption>',
-            "</figure>", ""]
+            f"<figcaption>{caption}</figcaption>", "</figure>", ""]
 
 
 def figure_table(cells, columns, caption=None):
     """Images side by side in a Markdown table marked {: .figures } (see docs/_sass/custom/custom.scss):
     cells are (src, alt, caption, link or None); the header row is blank and hidden by the stylesheet. An image with
-    a link leads there; one without leads to its 1200 dpi master, named under it."""
+    a link leads there; one without leads to the full-size file."""
     L = ["|" + " |" * columns, "|" + "---|" * columns]
     for i in range(0, len(cells), columns):
         row = []
         for src, alt, cap, link in cells[i:i + columns]:
             f = FIGURE_INFO[src.rsplit("/", 1)[-1]]
             img = f'<a href="{_asset(link or f["master"])}">{_web_img(f, alt)}</a>'
-            original = "" if link else f'<br><a class="original" href="{_asset(f["master"])}">{_original(f)}</a>'
-            row.append(f"{img}<br><span class=\"caption\">{cap.replace('|', '&#124;')}{original}</span>")
+            row.append(f"{img}<br><span class=\"caption\">{cap.replace('|', '&#124;')}</span>")
         row += [" "] * (columns - len(row))
         L.append("| " + " | ".join(row) + " |")
     L += ["{: .figures }", ""]
@@ -1897,6 +1989,19 @@ FIGURE_HOME = {
     "case-m-openfoam-agreement.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
     "case-m-openfoam-plan.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
     "ml-surrogate-agreement.png": ("/validation/ml-surrogate/", "ML surrogate"),
+    "case-a-layout.png": ("/validation/cases-ab/", "Cases A and B (OpenFOAM)"),
+    "case-b-layout.png": ("/validation/cases-ab/", "Cases A and B (OpenFOAM)"),
+    "case-g-layout.png": ("/validation/cases-gk/", "Cases G and K (OpenFOAM)"),
+    "case-k-layout.png": ("/validation/cases-gk/", "Cases G and K (OpenFOAM)"),
+    "case-h-layout.png": ("/validation/cases-hi/", "Cases H and I (OpenFOAM)"),
+    "case-i-layout.png": ("/validation/cases-hi/", "Cases H and I (OpenFOAM)"),
+    "case-j-layout.png": ("/validation/cases-jl/", "Cases J and L (UMF)"),
+    "case-l-layout.png": ("/validation/cases-jl/", "Cases J and L (UMF)"),
+    "case-c-layout.png": ("/validation/case-c/", "Case C (OpenFOAM)"),
+    "case-d-layout.png": ("/validation/case-d/", "Case D (OpenFOAM)"),
+    "case-e-layout.png": ("/validation/case-e/", "Case E (OpenFOAM)"),
+    "case-f-layout.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
+    "case-m-layout.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
 }
 ALL_CASES_FIGURE_MIN = 3
 # A score table stays open up to this many rows, a table of configurations up to OPEN_LIST_ROWS; a longer one sits in
@@ -1907,10 +2012,6 @@ OPEN_LIST_ROWS = 8
 # under that key's label. The Data page has everything.
 GLANCE = [("building", "array", "tower", "district"), ("scale",), ("Re_H", "Re_D", "Re"), ("U_H_m_s", "normalisation"),
           ("wind_directions", "wind_directions_deg"), ("measurement_height_m", "measurement_planes")]
-# The hand-written page that reads a case's results (a case without one is read on the Validation overview).
-READING_PAGES = {"A": "/validation/cases-ab/", "B": "/validation/cases-ab/", "C": "/validation/case-c/",
-                 "D": "/validation/case-d/", "E": "/validation/case-e/", "F": "/validation/cases-fm/", "G": "/validation/cases-gk/", "H": "/validation/cases-hi/",
-                 "I": "/validation/cases-hi/", "J": "/validation/cases-jl/", "K": "/validation/cases-gk/", "L": "/validation/cases-jl/", "M": "/validation/cases-fm/"}
 
 
 def _engine_name(engine_id):
@@ -1966,13 +2067,19 @@ def _is_control(label):
     return "control" in label.lower()
 
 
-def _headline_ranges(entries):
-    """{'R': (lo, hi), 'Fac2': (lo, hi)} over the headline scores of these validation entries, controls excluded;
-    None when there is none."""
+def _compared_with(case, label):
+    """'Field' or 'Wind tunnel': what a headline score is compared with. Case G is field data alone; F and M have both, and
+    their field scores are the ones whose label names the field."""
+    return "Field" if case == "G" or (case in ("F", "M") and "field" in label.lower()) else "Wind tunnel"
+
+
+def _headline_ranges(entries, case=None, source=None):
+    """{'R': (lo, hi), 'Fac2': (lo, hi)} over the headline scores of these validation entries, controls excluded, and only
+    those compared with `source` when it is given; None when there is none."""
     vals = {"R": [], "Fac2": []}
     for e in entries:
         for label, key in e["headline"].items():
-            if _is_control(label):
+            if _is_control(label) or (source and _compared_with(case, label) != source):
                 continue
             for m in vals:
                 v = e["scores"][key].get(m)
@@ -2018,9 +2125,9 @@ def build_gallery(percase):
 
 
 def build_cases_table(percase):
-    """docs/_includes/cases-table.md: one row per case, what it is, what was measured, who scored it."""
+    """docs/_includes/cases-table.md: one row per case, what it is, what was measured, which engines have a validation run."""
     L = ["<!-- Generated by scripts/build_api.py. -->", "",
-         "| Case | What it is | Measured | Scored by |", "|---|---|---|---|"]
+         "| Case | What it is | Measured | Validation |", "|---|---|---|---|"]
     for case in D.CASE_IDS:
         meta = D.CASES[case]
         summ = percase[case]["summ"]
@@ -2063,7 +2170,10 @@ def build_validation_matrix(percase):
                 cell += (f'<br><span class="caption">R {_range(ranges["R"], True)}'
                          f'<br>FAC2 {_range(ranges.get("Fac2"), False)}</span>')
             cells.append(cell)
-        L.append(f"| {_link(_cell(meta['title']), _page_url(meta['slug'], 'validation'))} | " + " | ".join(cells) + " |")
+        got = {_compared_with(case, label) for r in percase[case]["results"] for label in r["headline"] if not _is_control(label)}
+        note = "" if got == {"Wind tunnel"} else '<br><span class="caption">compared with ' + " and ".join(
+            {"Wind tunnel": "the wind tunnel", "Field": "the field"}[s] for s in ("Wind tunnel", "Field") if s in got) + "</span>"
+        L.append(f"| {_link(_cell(meta['title']), _page_url(meta['slug'], 'validation'))}{note} | " + " | ".join(cells) + " |")
     _write("_includes/validation-matrix.md", L)
 
 
@@ -2075,7 +2185,7 @@ def build_known_issues():
         if case in "ABCDE":
             continue
         meta = D.CASES[case]
-        L += [f"## Case {case}", "", f"{_esc(meta['title'])}.", ""] + [f"- {_esc(g)}" for g in meta["known_issues"]] + [""]
+        L += [f"## Case {case}", "", f"{_esc(meta['title'])}.", ""] + _issue_list(meta["known_issues"])
     _write("_includes/known-issues-fm.md", L)
 
 
@@ -2089,19 +2199,30 @@ def build_version_label():
         f' · <abbr title="SHA-256 of the served data; the full value is in api/index.json">data {DATA_VERSION[:8]}</abbr></span>'])
 
 
-def _frame_traps(meta):
-    """One sentence per way the cleaned table differs from the published file, read from the case's frame."""
-    frame, traps = meta["frame"], []
-    if frame.get("lateral_sign_applied") not in (None, 1):
-        traps.append(f"The lateral velocity V is multiplied by {frame['lateral_sign_applied']} in the cleaned table "
-                     "(`lateral_sign_applied`): the published file's V has the other sign convention.")
+def _lower_first(s):
+    """'In the CSV's own frame' -> 'in the CSV's own frame' after a label; an acronym or a symbol keeps its form."""
+    return s[0].lower() + s[1:] if re.match(r"[A-Z][a-z]+\b", s) else s
+
+
+def _frame_facts(meta):
+    """One line per fact a comparison depends on, read from the case's frame and units: where the cleaned table
+    differs from the published files, and the wind-direction convention."""
+    frame, facts = meta["frame"], []
+    facts.append(f"Origin: {_esc(frame['origin'])}. Length unit: {_esc(meta['units']['length'])}.")
     if frame.get("coordinate_scale_applied") not in (None, 1, 1.0):
-        traps.append(f"The published coordinates are multiplied by {frame['coordinate_scale_applied']:g} in the cleaned table "
+        facts.append(f"The published coordinates are multiplied by {frame['coordinate_scale_applied']:g} in the cleaned table "
                      "(`coordinate_scale_applied`).")
+    if frame.get("lateral_sign_applied") not in (None, 1):
+        facts.append(f"The lateral velocity V is multiplied by {frame['lateral_sign_applied']} in the cleaned table "
+                     "(`lateral_sign_applied`): the published file's V has the other sign convention.")
     if "wind_direction_rotation" in frame:
-        traps.append("The sense in which the wind direction rotates is a convention to check before comparing at "
-                     "any direction other than 0° (see *Frame and units* on the Data page).")
-    return traps
+        shown, _ = P.split(frame["wind_direction_rotation"], cell=True)
+        facts.append(f"Wind direction: {_esc(_lower_first(shown).rstrip('.'))}.")
+    return facts
+
+
+# One line a case's pages show beside its scores, where the scores alone would be read as more than they are.
+CASE_CAVEATS = {"G": _G_CAL}
 
 
 def _case_page(case, meta, p, shared):
@@ -2128,29 +2249,40 @@ def _case_page(case, meta, p, shared):
         if key:
             L.append(f"| {_cell(_label(key))} | {_md_value(conf[key])} |")
     L.append(f"| Measured | {summ['rows']:,} rows over {summ['distinct_points']:,} points: {_cell(', '.join(meta['quantities']))} |")
-    L += ["", "## Agreement with the tunnel", ""]
+    L += ["", "## Validation", ""]
     if results:
-        L += ["| Engine | Status | R | FAC2 |", "|---|---|---|---|"]
+        L += ["| Engine | Status | Compared with | R (range) | FAC2 (range) |", "|---|---|---|---|---|"]
         for e in case_engines(case):
-            ranges = _headline_ranges([r for r in results if r["engine"] == e["id"]])
-            L.append(f"| {_engine_name(e['id'])} | {status_label(ENGINE_STATUS[case][e['id']])} | "
-                     + (" | ".join((_range(ranges["R"], True), _range(ranges.get("Fac2"), False))) if ranges else "— | —") + " |")
-        L += ["{: .scores }", "",
-              "R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; "
-              "negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: "
-              f"every score, its figures and its reading are on the {_link('Validation page', val_url)}.", ""]
+            mine = [r for r in results if r["engine"] == e["id"]]
+            head = f"| {_engine_name(e['id'])} | {status_label(ENGINE_STATUS[case][e['id']])} | "
+            rows = [(source, _headline_ranges(mine, case, source)) for source in ("Wind tunnel", "Field")]
+            rows = [(source, ranges) for source, ranges in rows if ranges]
+            for source, ranges in rows or [("—", None)]:
+                L.append(head + f"{source} | " + (" | ".join((_range(ranges["R"], True), _range(ranges.get("Fac2"), False))) if ranges else "— | —") + " |")
+        L += ["{: .scores }", ""]
+        if case in CASE_CAVEATS:
+            L += [CASE_CAVEATS[case], ""]
     else:
-        L += [f"**No validation has been run for this case yet.** Nothing on this page is a claim about it. {QUEUED} Engine status: "
+        L += [f"**No validation has been run for this case yet.** {QUEUED} Engine status: "
               + " · ".join(f"{_engine_name(k)} {status_label(v)}" for k, v in ENGINE_STATUS[case].items()), ""]
-    traps = _frame_traps(meta)
     L += ["{: .warning-title }", "> Before you compare", ">",
-          "> The cleaned table is in SI units and one frame, with this case's corrections applied once; "
-          "do not apply them again to the published files.", ">"]
-    for t in traps:
+          "> - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again."]
+    for t in _frame_facts(meta):
         L.append(f"> - {t}")
     L += [f"> - {len(meta['known_issues'])} known issues in the published files are listed under "
           f"{_link('Known data issues', data_url, '#known-data-issues')}.", ""]
     return L
+
+
+def _issue_list(issues):
+    """The known issues as a list of the facts, then the collapsed Data notes behind them; ends with a blank line."""
+    L, collapsed = [], []
+    for g in issues:
+        shown, c = P.split(g)
+        L.append(f"- {_esc(shown)}")
+        if c:
+            collapsed.append(c)
+    return L + [""] + _sections(collapsed)
 
 
 def _case_data_page(case, meta, p):
@@ -2159,16 +2291,20 @@ def _case_data_page(case, meta, p):
     L = _front("Data", 1, parent=meta["title"], grand_parent="Cases", has_children=False,
                description=f"{meta['title']}: configuration, frame and units, reference data, inflow and known data issues.")
     L += [f"# Case {case}: reference data", "{: .no_toc }", ""] + _toc()
+    sink = []
     L += ["## Configuration", "", "| Parameter | Value |", "|---|---|"]
     for k, v in meta["configuration"].items():
-        L.append(f"| {_cell(_label(k))} | {_md_value(v)} |")
-    L += ["", "## Frame and units", "", "| Property | Definition |", "|---|---|"]
+        L.append(f"| {_cell(_label(k))} | {_md_value(v, sink)} |")
+    L += [""] + _sections(sink)
+    sink = []
+    L += ["## Frame and units", "", "| Property | Definition |", "|---|---|"]
     for k, v in meta["frame"].items():
-        L.append(f"| {_cell(_label(k))} | {_md_value(v)} |")
+        L.append(f"| {_cell(_label(k))} | {_md_value(v, sink)} |")
     for k, v in meta["units"].items():
         L.append(f"| Unit of {'k' if k == 'k' else _cell(_label(k).lower())} | {_cell(v)} |")
+    L += [""] + _sections(sink)
     af = meta.get("approach_flow_file")
-    L += ["", "## Reference data", "",
+    L += ["## Reference data", "",
           f"Source in this repository: `{meta['reference_file']}`" + (f" (approach flow: `{af}`)" if af else "") + ".", "",
           f"The cleaned table has **{summ['rows']:,} rows** over **{summ['distinct_points']:,} distinct points**; "
           f"columns `{'`, `'.join(summ['columns'])}`.", ""]
@@ -2197,31 +2333,41 @@ def _case_data_page(case, meta, p):
         L += cols + [""]
     inflow = meta.get("inflow_fit")
     if inflow:
+        sink = []
         L += ["## Inflow", "", "| Property | Value |", "|---|---|"]
         for k, v in inflow.items():
             if k == "windows":
                 for w in v:
                     L.append("| Fit window | " + "; ".join(f"{_cell(_label(a))} {_cell(b)}" for a, b in w.items()) + " |")
             else:
-                L.append(f"| {_cell(_label(k))} | {_md_value(v)} |")
-        L.append("")
-    L += ["## Known data issues", "", "Each of these changes the result of a comparison if it is not accounted for.", ""]
-    for g in meta["known_issues"]:
-        L.append(f"- {_esc(g)}")
-    L += ["", "## API", "", "| Resource | Endpoint |", "|---|---|"]
+                L.append(f"| {_cell(_label(k))} | {_md_value(v, sink)} |")
+        L += [""] + _sections(sink)
+    L += ["## Known data issues", ""] + _issue_list(meta["known_issues"])
+    L += ["## API", "", "| Resource | Endpoint |", "|---|---|"]
     for name, rel in (("Case", f"cases/{case}.json"), ("Points (JSON)", f"cases/{case}/points.json"),
                       ("Points (CSV)", f"cases/{case}/points.csv"), ("Approach flow (CSV)", f"cases/{case}/approach_flow.csv"),
                       ("Geometry", f"cases/{case}/geometry.json"), ("Geometry (STL)", f"cases/{case}/geometry.stl"),
                       ("Validation", f"cases/{case}/validation.json")):
         L.append(f"| {name} | {_link('`/api/' + rel + '`', '/api/' + rel)} |")
-    L += ["", "## Attribution", "", f"- Data collectors: {_esc(', '.join(meta['people']['data_collectors']))}",
-          f"- Editors and distributors: {_esc(', '.join(meta['people']['editors_distributors']))}"]
+    L += ["", "## Attribution", "", f"- {_collected_by(meta)}",
+          f"- Edited and distributed by {_esc(_and_join(meta['people']['editors_distributors']))}."]
     if meta["doi"]:
         L.append(f"- DOI: [{meta['doi']}](https://doi.org/{meta['doi']})")
     elif meta.get("doi_note"):
         L.append(f"- DOI: {_esc(meta['doi_note'])}")
-    L += [f"- Citation requested: {_esc(meta['citation_requested'])}", "- Licence: CC BY 4.0"]
-    return L
+    L += [f"- Citation requested: {_esc(meta['citation_requested'])}", "- Licence: CC BY 4.0", ""]
+    return L + C.case_section(case, meta)
+
+
+def _and_join(names):
+    return names[0] if len(names) == 1 else ", ".join(names[:-1]) + " and " + names[-1]
+
+
+def _collected_by(meta):
+    """'Data collected by <names>, <year>.' The year is the one in the requested citation, unless the names already carry one."""
+    names = _and_join(meta["people"]["data_collectors"])
+    year = re.search(r"\((\d{4})\)", meta["citation_requested"])
+    return f"Data collected by {_esc(names)}" + (f", {year.group(1)}" if year and not re.search(r"\d{4}", names) else "") + "."
 
 
 def _score_table(e):
@@ -2236,24 +2382,45 @@ def _score_table(e):
     return L
 
 
+REPRODUCE_TAIL = "; scores recomputed"       # in a run's `reproduce`: what comes after is how the scores were made, not how to run it
+
+
+def _notes(notes):
+    """Run notes as a list of the facts, then the collapsed Interpretation sections behind them."""
+    L, collapsed = [], []
+    for n in notes:
+        shown, c = P.split(n)
+        if shown:
+            L.append(f"- {_esc(shown)}")
+        if c:
+            collapsed.append(c)
+    return L, collapsed
+
+
 def _case_validation_page(case, meta, p, shared):
     results = p["results"]
     n = D.CASE_IDS.index(case) + 1
     L = _front("Validation", 2, parent=meta["title"], grand_parent="Cases", has_children=False,
-               description=f"{meta['title']}: Eddy3D's scores against the tunnel data, by engine.")
+               description=f"{meta['title']}: Eddy3D's scores against the measurements, by engine.")
     L += [f"# Case {case}: validation", "{: .no_toc }", ""]
     L += ["Engine status: " + " · ".join(f"{_engine_name(k)} {status_label(v)}" for k, v in ENGINE_STATUS[case].items()), ""]
+    if case in CASE_CAVEATS:
+        L += [CASE_CAVEATS[case], ""]
     if not results:
-        L += [f"**No validation has been run for this case yet.** Nothing on this page is a claim about it. {QUEUED}", ""]
+        L += [f"**No validation has been run for this case yet.** {QUEUED}", ""]
         return L
-    L += ["*Scored* means a run exists and its scores are below, not that it agrees. How to read them is on "
-          f"{_link('the reading page', READING_PAGES.get(case, '/validation/'))}; the "
-          f"{_link('Validation', '/validation/')} overview says what each status means and why an engine is *not comparable*.", ""]
     names = {e["id"]: e["name"] for e in ENGINES}
-    figures, fig_no = [], 1
+    # What every run of the page has in common is said once, after the runs.
+    many = len(results) > 1
+    all_quantity = many and len({e["quantity"] for e in results}) == 1 and bool(results[0]["quantity"])
+    all_norm = many and len({e["normalisation"] for e in results}) == 1
+    all_pairs = many and len({e["pairs"]["path"] for e in results}) == 1
+    own_notes = lambda e: [n for n in e["notes"] if n not in CASE_CAVEATS.values()]   # the caveat is printed above  # noqa: E731
+    all_notes = [n for n in own_notes(results[0]) if all(n in e["notes"] for e in results[1:])] if many else []
+    figures, fig_no, tails = [], 1, []
     for e in results:
         L += [f"## {_esc(names[e['engine']])}" + (f", configuration {_esc(e['configuration'])}" if e["configuration"] else ""), ""]
-        if e["quantity"]:
+        if e["quantity"] and not all_quantity:
             L += [f"Quantity: {_esc(e['quantity'])}.", ""]
         if e["recirculation_Lr_over_H"] is not None:
             L += [f"Reattachment length L<sub>r</sub>/H = {e['recirculation_Lr_over_H']:.2f}.", ""]
@@ -2262,12 +2429,48 @@ def _case_validation_page(case, meta, p, shared):
             L += ['<details markdown="block">', f"  <summary>All {len(e['headline'])} headline scores</summary>", ""] + table + ["", "</details>", ""]
         else:
             L += table + [""]
-        if e["notes"]:
-            L += ["Recorded with this run:", ""] + [f"- {_esc(n)}" for n in e["notes"]] + [""]
+        norm, norm_collapsed = [], []
+        if not all_norm:
+            shown, c = P.split(e["normalisation"])
+            norm = [f"- Normalisation: {_esc(shown)}"]
+            norm_collapsed = [c] if c else []
         pairs_rel = e["pairs"]["path"]
-        L += [f"{_esc(e['normalisation'])}. Per-point values: {_link('`/api/' + pairs_rel + '`', '/api/' + pairs_rel)}. "
-              f"Reproduce: {_esc(e['reproduce'])}.", ""]
+        head, sep, tail = e["reproduce"].partition(REPRODUCE_TAIL)
+        if sep and ("scores recomputed" + tail) not in tails:
+            tails.append("scores recomputed" + tail)
+        L += norm
+        if not all_pairs:
+            L.append(f"- Per-point values: {_link('`/api/' + pairs_rel + '`', '/api/' + pairs_rel)}")
+        L += [f"- Reproduce: {_esc(head)}", ""]
+        facts, collapsed = _notes([n for n in own_notes(e) if n not in all_notes])
+        if facts:
+            L += ["Notes:", ""] + facts + [""]
+        L += _sections(norm_collapsed + collapsed)
         figures += [f for f in e["figures"] if f not in figures]
+    if many and (all_quantity or all_norm or all_pairs or all_notes):
+        L += ["## All runs", ""]
+        if all_quantity:
+            L += [f"- Quantity: {_esc(results[0]['quantity'])}"]
+        if all_norm:
+            shown, c = P.split(results[0]["normalisation"])
+            L += [f"- Normalisation: {_esc(shown)}"]
+            norm_collapsed = [c] if c else []
+        else:
+            norm_collapsed = []
+        if all_pairs:
+            pairs_rel = results[0]["pairs"]["path"]
+            L += [f"- Per-point values: {_link('`/api/' + pairs_rel + '`', '/api/' + pairs_rel)}"]
+        L.append("")
+        facts, collapsed = _notes(all_notes)
+        if facts:
+            L += ["Notes:", ""] + facts + [""]
+        L += _sections(norm_collapsed + collapsed)
+    if tails:
+        lines = [f"- {_esc(t[0].upper() + t[1:])}." for t in tails]
+        if len(" ".join(tails)) < MIN_SECTION:   # a line, not a collapsed fragment
+            L += lines + [""]
+        else:
+            L += ['<details markdown="block">', "  <summary>How the scores are computed</summary>", ""] + lines + ["", "</details>", ""]
     own, elsewhere = [], {}
     for fig in figures:
         name = fig["url"].rsplit("/", 1)[-1]
@@ -2285,8 +2488,7 @@ def _case_validation_page(case, meta, p, shared):
         fig_no += 1
     if elsewhere:
         L += ["## Figures", ""] if not own else []
-        L += ["The figures for these runs are shown once, beside their reading: "
-              + "; ".join(f"{_link(label, page)}" for (page, label) in elsewhere) + ".", ""]
+        L += ["Figures: " + "; ".join(f"{_link(label, page)}" for (page, label) in elsewhere) + ".", ""]
     return L
 
 
@@ -2305,6 +2507,8 @@ def build_pages(percase):
         _write(f"cases/{meta['slug']}.md", _case_page(case, meta, p, shared))
         _write(f"cases/{meta['slug']}/data.md", _case_data_page(case, meta, p))
         _write(f"cases/{meta['slug']}/validation.md", _case_validation_page(case, meta, p, shared))
+    if P.unused():
+        raise SystemExit(f"page_prose entries that match no text (rewritten source string?): {P.unused()}")
 
 
 # ----------------------------------------------------------------------------- verify
@@ -2336,8 +2540,9 @@ def _link_problem(sv, base, root, on_disk, index):
         return None
     if sv == f"{LIVE_BASE}/versions.json":
         return None if os.path.isfile(os.path.join(API_ROOT, "versions.json")) else "link to versions.json, which does not exist"
-    if base == LIVE_BASE and sv == f"{LIVE_BASE}/{index['versions']['release']}":
-        return None if os.path.isdir(os.path.join(API_ROOT, index["versions"]["release"])) else f"names {sv}, which does not exist"
+    rel_dir = f"{LIVE_BASE}/{index['versions']['release']}"
+    if base == LIVE_BASE and sv in (rel_dir, rel_dir + "/index.json"):   # the root of the frozen copy, and the pinned address a citation gives
+        return None if os.path.exists(os.path.join(API_ROOT, sv[len(LIVE_BASE) + 1:])) else f"names {sv}, which does not exist"
     if not sv.startswith(base + "/"):
         return f"link {sv} leaves the tree (it must start with {base}/)"
     rel_t, _, query = sv[len(base) + 1:].partition("?v=")
@@ -2464,7 +2669,7 @@ def verify_tree(root, base, strict_assets):
 
 # Header fields and lines a release tree and the alias legitimately word differently (they name themselves).
 TREE_SPECIFIC_INDEX = {"tree", "fallback_note"}
-SAME_IN_BOTH_INDEXES = ("release", "release_base_url", "versions_url")
+SAME_IN_BOTH_INDEXES = ("release", "release_base_url", "versions_url", "cite")
 
 
 def _alias_form(text):
@@ -2611,6 +2816,8 @@ def verify():
     problems += [f"[alias vs release] {p}" for p in verify_alias_matches_release()]
     problems += [f"[registry] {p}" for p in verify_registry()]
     problems += [f"[web copies] {p}" for p in verify_web()]
+    import check_citation
+    problems += [f"[citation] {p}" for p in check_citation.check(REPO)]
     if _read(DOCS, "llms.txt") != _read(API_ROOT, "llms.txt"):
         problems.append("docs/llms.txt and docs/api/llms.txt differ")
     return problems
@@ -2660,6 +2867,7 @@ def build():
     percase = build_tree()
     write_dataset_jsonld(percase)       # the home page describes this release by its frozen addresses
     write_changelog_include()
+    write_citation_files()              # the About include, the README block, CITATION.cff and .zenodo.json
     build_pages(percase)
     use_tree("latest")
     build_tree()

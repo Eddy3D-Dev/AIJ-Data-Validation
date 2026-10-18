@@ -40,6 +40,7 @@ import numpy as np
 import ultraplot as uplt
 
 import dispersion_metrics as DM
+import layout
 import plotstyle as style
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -296,24 +297,25 @@ check_results_match_pairs()
 style.apply()
 
 
-def panel(ax, o, p, log=False, xlab=None, ylab=None):
-    """Measured o against modelled p with the 1:1 line (and the factor-of-two band where the values do not change sign); returns how many are drawn."""
+def panel(ax, o, p, colours, log=False, xlab=None, ylab=None):
+    """Measured o against modelled p with the 1:1 line (and the factor-of-two band where the values do not change sign); returns how many are drawn.
+    `colours`: one colour per pair, the group of the tunnel's line or plane the point was measured on (layout.py)."""
     ok = np.isfinite(o) & np.isfinite(p)
-    o, p = o[ok], p[ok]
+    o, p, colours = o[ok], p[ok], colours[ok]
     if log:                                   # a log axis shows the positive pairs only; the statistics use all of them
         keep = (o > 0) & (p > 0)
-        o, p = o[keep], p[keep]
+        o, p, colours = o[keep], p[keep], colours[keep]
         hi = 10 ** math.ceil(math.log10(max(o.max(), p.max())))
         lo = max(10 ** math.floor(math.log10(min(o.min(), p.min()))), hi * 1e-5)     # five decades at most; pairs below are not drawn
         shown = (o >= lo) & (p >= lo)
-        o, p = o[shown], p[shown]
+        o, p, colours = o[shown], p[shown], colours[shown]
         ax.format(xscale="log", yscale="log")
     else:
         lo, hi = float(min(o.min(), p.min())), float(max(o.max(), p.max()))
         pad = 0.08 * (hi - lo) if hi > lo else 0.1
         lo, hi = lo - pad, hi + pad
     style.one_to_one(ax, lo, hi, factor_two=bool(log or (o > 0).all()))
-    ax.scatter(o, p, s=9 if len(o) > 300 else 14, color=style.OPENFOAM, edgecolor=style.SURFACE, linewidth=0.25, alpha=0.9, zorder=3)
+    ax.scatter(o, p, s=9 if len(o) > 300 else 14, color=list(colours), edgecolor=style.SURFACE, linewidth=0.25, alpha=0.9, zorder=3)
     ax.format(xlim=(lo, hi), ylim=(lo, hi), xlabel=xlab, ylabel=ylab)
     return len(o)
 
@@ -336,16 +338,18 @@ QUANTITIES = [("U", "U_meas", "U_model", "velocity.U", "U/U$_H$"), ("W", "W_meas
 fig, axs = uplt.subplots(nrows=2, ncols=4, refwidth=2.0, refaspect=1, share=False, wspace=4.2, hspace=2.6)
 for row, (case, _, closure, *_rest) in enumerate([RUNS[0], RUNS[1]]):
     pairs, rs = read_pairs(case, closure), res(case, closure)
+    colours = np.array(layout.grouped_colours(case, pairs), dtype=object)      # the line or plane of the tunnel each point was measured on
     for col, (tag, mk, pk, key, label) in enumerate(QUANTITIES):
         ax = axs[row, col]
-        shown = panel(ax, column(pairs, mk), column(pairs, pk), log=(tag == "c"), xlab="Tunnel [–]" if row == 1 else None, ylab="Eddy3D [–]" if col == 0 else None)
+        shown = panel(ax, column(pairs, mk), column(pairs, pk), colours, log=(tag == "c"), xlab="Tunnel [–]" if row == 1 else None, ylab="Eddy3D [–]" if col == 0 else None)
         extra = ""
         if tag == "c":
             extra = "\nFAC2 Sct 0.3 / 0.7: " + " / ".join(f"{rs[f'cstar.c_{sp}']['Fac2']:.2f}" for sp in ("sct03", "sct07"))
         style.stats(ax, stats_text(rs[key], shown if tag == "c" else None, extra), loc=(0.40, 0.36) if tag == "c" else (0.05, 0.80))
 style.finish(fig, "AIJ UWE Cases H and I — Eddy3D (OpenFOAM 12, realizable k-ε) vs wind tunnel",
-             handles=[style.marker(style.OPENFOAM, "Eddy3D at the measured points"), style.line(style.REFERENCE, "1:1", lw=1.0), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")],
-             toplabels=[q[4] for q in QUANTITIES], leftlabels=[RUNS[0][-1], RUNS[1][-1]])
+             handles=[*layout.legend_handles("H", prefix="H"), *layout.legend_handles("I", prefix="I"), style.line(style.REFERENCE, "1:1", lw=1.0),
+                      style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")],
+             ncols=4, toplabels=[q[4] for q in QUANTITIES], leftlabels=[RUNS[0][-1], RUNS[1][-1]])
 style.save(fig, "cases-hi-openfoam-agreement.png")
 
 # ----------------------------------------------------------------------------- figure 2
@@ -355,11 +359,12 @@ fig2, axs2 = uplt.subplots(nrows=3, ncols=3, refwidth=2.0, refaspect=1, share=Fa
 closures = [RUNS[2], RUNS[1], RUNS[3]]
 for row, (case, _, closure, *_rest) in enumerate(closures):
     pairs, rs = read_pairs(case, closure), res(case, closure)
+    colours = np.array(layout.grouped_colours(case, pairs), dtype=object)
     for col, (tag, mk, pk, key, label) in enumerate(QI):
         ax = axs2[row, col]
-        shown = panel(ax, column(pairs, mk), column(pairs, pk), log=(tag == "c"), xlab="Tunnel [–]" if row == 2 else None, ylab="Eddy3D [–]" if col == 0 else None)
+        shown = panel(ax, column(pairs, mk), column(pairs, pk), colours, log=(tag == "c"), xlab="Tunnel [–]" if row == 2 else None, ylab="Eddy3D [–]" if col == 0 else None)
         style.stats(ax, stats_text(rs[key], shown if tag == "c" else None), loc=(0.40, 0.36) if tag == "c" else (0.05, 0.80))
 style.finish(fig2, "AIJ UWE Case I — three turbulence closures on one mesh (OpenFOAM 12) vs wind tunnel",
-             handles=[style.marker(style.OPENFOAM, "Eddy3D at the measured points"), style.line(style.REFERENCE, "1:1", lw=1.0), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")],
-             toplabels=[q[4] for q in QI], leftlabels=["standard k-ε", "realizable k-ε", "k-ω SST"])
+             handles=[*layout.legend_handles("I"), style.line(style.REFERENCE, "1:1", lw=1.0), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")],
+             ncols=3, toplabels=[q[4] for q in QI], leftlabels=["standard k-ε", "realizable k-ε", "k-ω SST"])
 style.save(fig2, "case-i-openfoam-closures.png")

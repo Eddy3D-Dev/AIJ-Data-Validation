@@ -5,15 +5,13 @@ grand_parent: "Cases"
 nav_order: 2
 has_children: false
 generated: true
-description: "Case D — high-rise among city blocks: Eddy3D's scores against the tunnel data, by engine."
+description: "Case D — high-rise among city blocks: Eddy3D's scores against the measurements, by engine."
 ---
 
 # Case D: validation
 {: .no_toc }
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-grey status">not comparable</span> · FluidX3D <span class="label label-grey status">not comparable</span> · ML surrogate <span class="label label-green status">scored</span>
-
-*Scored* means a run exists and its scores are below, not that it agrees. How to read them is on [the reading page]({{ '/validation/case-d/' | relative_url }}); the [Validation]({{ '/validation/' | relative_url }}) overview says what each status means and why an engine is *not comparable*.
 
 ## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor)
 
@@ -31,7 +29,8 @@ Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> 
 | WD 45°, rotation sense mirrored (control) | +0.170 | 0.697 | +0.090 | 0.242 | 66 |
 {: .scores }
 
-velocities by U\_H, k by U\_H^2 (the benchmark\'s own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/D/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/D/pairs/openfoam12-realizableKE.csv' | relative_url }}). Reproduce: Eddy3D fixture TestAijCaseDContainerE2E (EDDY3D\_AIJD\_HEADINGS=0,22.5,45); figure validation/plot\_case\_d\_openfoam.py.
+- Per-point values: [`/api/cases/D/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/D/pairs/openfoam12-realizableKE.csv' | relative_url }})
+- Reproduce: Eddy3D fixture TestAijCaseDContainerE2E (EDDY3D\_AIJD\_HEADINGS=0,22.5,45); figure validation/plot\_case\_d\_openfoam.py
 
 ## Eddy3D ML wind surrogate (pedestrian height)
 
@@ -43,8 +42,13 @@ velocities by U\_H, k by U\_H^2 (the benchmark\'s own convention; Case E by U at
 | wind reversed (control) | +0.492 | 0.470 | +0.555 | 0.197 | 66 |
 {: .scores }
 
-velocities by U\_H, k by U\_H^2 (the benchmark\'s own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/D/pairs/ml-surrogate.csv`]({{ '/api/cases/D/pairs/ml-surrogate.csv' | relative_url }}). Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot\_ml\_surrogate.py.
+- Per-point values: [`/api/cases/D/pairs/ml-surrogate.csv`]({{ '/api/cases/D/pairs/ml-surrogate.csv' | relative_url }})
+- Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot\_ml\_surrogate.py
+
+## All runs
+
+- Normalisation: velocities by U\_H, k by U\_H^2 (the benchmark\'s own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units
 
 ## Figures
 
-The figures for these runs are shown once, beside their reading: [Case D (OpenFOAM)]({{ '/validation/case-d/' | relative_url }}); [ML surrogate]({{ '/validation/ml-surrogate/' | relative_url }}).
+Figures: [Case D (OpenFOAM)]({{ '/validation/case-d/' | relative_url }}); [ML surrogate]({{ '/validation/ml-surrogate/' | relative_url }}).

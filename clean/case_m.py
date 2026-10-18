@@ -181,8 +181,13 @@ def build(B, prov):
     s_geo = B.stl_stats(tris)
     B.log(f"[M] geometry: BD_caseM.stl is MODEL scale (bbox x ±0.9 m, y ±0.6 m, z 0 ... 0.1082 m; z = 0 is the tunnel floor); scaled x {SCALE:g}; horizontal ground/roof facets face DOWN as published "
           f"({down0} down, {up0} up): the surface is wound inward, all triangles reversed ({down1} down, {up1} up now); stats {s_geo}")
-    geo = [("default", None, tris, f"BD_caseM.stl (Zenodo; terrain + buildings of the Atsugi campus) scaled x{SCALE:g} from model to full-scale metres and re-wound outward; {s_geo['triangles']} triangles, one shell, "
-            f"{s_geo['edges_boundary']} boundary and {s_geo['edges_non_manifold']} non-manifold edges; z = 0 is the tunnel floor, the campus ground lies at z ~ 32 m")]
+    served, closed = B.close_terrain(tris, digits=7)
+    s_served = B.stl_stats(served)
+    B.log(f"[M] geometry served: closed with a base slab ({closed}); stats {s_served}")
+    geo = [("default", None, served, f"BD_caseM.stl (Zenodo; terrain + buildings of the Atsugi campus) scaled x{SCALE:g} from model to full-scale metres and re-wound outward; {s_geo['triangles']:,} triangles, "
+            f"{s_geo['edges_boundary']} boundary and {s_geo['edges_non_manifold']} non-manifold edges; z = 0 is the tunnel floor, the campus ground lies at z ~ 32 m; "
+            f"{closed['flaps_removed']} slivers (together {closed['flap_area']:.2f} m^2) hanging on building-roof edges are removed, and the 1080 m by 720 m panel is closed with a base slab: "
+            f"vertical walls from its rim down to z = {B.BASE_Z:g} m and a bottom cap at z = {B.BASE_Z:g} m ({closed['base_triangles']} added triangles)")]
 
     # ------------------------------------------------------------------ checks: rows and cross-checks with the CSVs
     check(c, "workbook_column_groups_are_180_then_175_180_185", hdr == [180, 175, 180, 185], column_group_wind_directions=hdr)
@@ -303,7 +308,11 @@ def build(B, prov):
     check(c, "published_stl_is_wound_inward", down0 > 0.95 * (down0 + up0) and up1 > 0.95 * (down1 + up1), warn=True, facing_down_as_published=down0, facing_up_as_published=up0, facing_up_after_reversal=up1,
           note="all but 34 of the 3,152 horizontal ground/roof facets face down in the file (stored normals agree with the winding); reversed here so normals point into the air")
     check(c, "stl_open_edges_counted", s_geo["edges_boundary"] == 21 and s_geo["edges_non_manifold"] == 7, warn=True, boundary_edges=s_geo["edges_boundary"], non_manifold_edges=s_geo["edges_non_manifold"],
-          note="the surface is one shell; 21 boundary edges and 7 non-manifold edges (the latter on building roofs) are kept as published")
+          note="the surface is one shell; 21 boundary edges (7 on the panel rim at z = 0, 14 on the 7 slivers) and 7 non-manifold edges (on building roofs, where a sliver hangs on an edge): counted on the published file; the served geometry removes the slivers and closes the rim")
+    check(c, "served_geometry_is_one_closed_outward_body", s_served["watertight"] and s_served["bodies"] == 1 and s_served["edges_boundary"] == 0 and s_served["bbox_min"][2] == B.BASE_Z
+          and closed["flaps_removed"] == s_geo["edges_non_manifold"] and closed["degenerate_removed"] == 0, bodies=s_served["bodies"], boundary_edges=s_served["edges_boundary"], flaps_removed=closed["flaps_removed"],
+          flap_area_m2=closed["flap_area"], base_triangles=closed["base_triangles"], signed_volume_m3=s_served["signed_volume"],
+          note="the 7 non-manifold edges are slivers (a triangle with two free edges hung on a roof edge, 0.45 m^2 together) and are removed; the 7 rim edges of the panel at z = 0 are closed by the base slab")
     check(c, "stl_domain_is_1_8_by_1_2_m_model", np.allclose(s_geo["bbox_min"][:2], [-540, -360]) and np.allclose(s_geo["bbox_max"][:2], [540, 360]), bbox_full_scale_m=[s_geo["bbox_min"], s_geo["bbox_max"]],
           note="the STL is a 1080 m x 720 m rectangle (terrain with the upwind taper); the buildings fill the ~300 m radius (0.5 m model) of the readme")
     # ------------------------------------------------------------------ inflow, normalisation, frame

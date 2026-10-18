@@ -18,7 +18,8 @@
   "geometry",
   "validation",
   "known_issues",
-  "people"
+  "people",
+  "citation"
  ],
  "properties": {
   "$schema": {
@@ -363,6 +364,21 @@
   "page": {
    "type": "string",
    "format": "uri"
+  },
+  "citation": {
+   "type": "object",
+   "required": [
+    "apa",
+    "bibtex"
+   ],
+   "properties": {
+    "apa": {
+     "type": "string"
+    },
+    "bibtex": {
+     "type": "string"
+    }
+   }
   }
  }
 }

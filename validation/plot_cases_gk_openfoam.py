@@ -44,6 +44,7 @@ import numpy as np
 import ultraplot as uplt
 
 import dispersion_metrics as DM
+import layout
 import plotstyle as style
 from snapshot_common import (RESULTS, SPECIES, check_snapshot, clean_table, column, fnum, is_score as is_metric, non_scores, panel, raw_table, read_json, read_lf, read_pairs,
                              sha256, stats_text, validation_root, write_json, write_lf, write_pairs, mirror_mean)
@@ -371,18 +372,19 @@ for arm, *_ in G_ARMS:
 style.apply()
 k_res = read_json(os.path.join(RESULTS, f"{K_STEM}.json"))
 near = column(k_pairs, "near_source") == 1
+k_colours = layout.grouped_colours("K", k_pairs)          # the line of the tunnel (y/H = 0, +-1, +-2, +-3) each point was measured on
 K_PANELS = [("U", "U_meas", "U_model", "velocity.U", "U/U$_H$", False), ("W", "W_meas", "W_model", "velocity.W", "W/U$_H$", False),
             ("k", "k_meas", "k_model", "k", "k/U$_H^2$", False)] + \
            [(f"c{sp}", "cstar_meas", f"cstar_{sp}", f"cstar.c_{sp}", f"c* = C/c$_0$, {lab}", True) for sp, lab in SPECIES]
 fig, axs = uplt.subplots(nrows=2, ncols=3, refwidth=2.1, refaspect=1, share=False, wspace=4.2, hspace=3.4)
 for i, (tag, mk, pk, key, label, log) in enumerate(K_PANELS):
     ax = axs[i // 3, i % 3]
-    shown = panel(ax, column(k_pairs, mk), column(k_pairs, pk), style.OPENFOAM, log=log, xlab="Tunnel [–]" if i // 3 == 1 else None,
+    shown = panel(ax, column(k_pairs, mk), column(k_pairs, pk), k_colours, log=log, xlab="Tunnel [–]" if i // 3 == 1 else None,
                   ylab="Eddy3D [–]" if i % 3 == 0 else None, hollow=near if log else None)
     ax.format(title=label)
     style.stats(ax, stats_text(k_res[key], shown if log else None), loc=(0.40, 0.36) if log else (0.05, 0.80))
 style.finish(fig, "AIJ UWE Case K — Eddy3D (OpenFOAM 12, realizable k-ε) vs wind tunnel, 9 × 9 cube array with a floor source",
-             handles=[style.marker(style.OPENFOAM, "Eddy3D at the measured points"), style.marker(style.OPENFOAM, "within one cube height of the source", filled=False),
+             handles=[*layout.legend_handles("K"), style.marker(style.REFERENCE, "within one cube height of the source", filled=False),
                       style.line(style.REFERENCE, "1:1", lw=1.0), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")])
 style.save(fig, "case-k-openfoam-agreement.png")
 
@@ -392,6 +394,7 @@ G_LABEL = {"open-field": "no belt (control)", "pine": "pine · Cd·LAD 0.30", "c
            "half-belt-conifer": "half belt · 0.625"}
 cmap = uplt.Colormap(style.SEQUENTIAL)
 G_COLOUR = {"open-field": style.REFERENCE, "pine": cmap(0.05), "conifer": cmap(0.30), "screen": cmap(0.55), "half-belt-conifer": cmap(0.30)}
+g_colours = {arm: layout.grouped_colours("G", g_by_arm[arm]) for arm, *_ in G_ARMS}      # the line behind the belt (x/H = 0.25 ... 5) of each point
 fig, axs = uplt.subplots(nrows=2, ncols=5, refwidth=1.6, refaspect=1, share=False, wspace=4.0, hspace=3.4)
 for col, (arm, *_r) in enumerate(G_ARMS):
     rows = g_by_arm[arm]
@@ -399,13 +402,13 @@ for col, (arm, *_r) in enumerate(G_ARMS):
         ax = axs[row, col]
         o, p = column(rows, mk), column(rows, pk)
         style.one_to_one(ax, *lim)
-        ax.scatter(o, p, s=14, color=style.OPENFOAM if arm != "open-field" else style.REFERENCE, edgecolor=style.SURFACE, linewidth=0.25, alpha=0.9, zorder=3)
+        ax.scatter(o, p, s=14, color=g_colours[arm], edgecolor=style.SURFACE, linewidth=0.25, alpha=0.9, zorder=3)
         ax.format(xlim=lim, ylim=lim, xlabel="Field [–]" if row == 1 else None, ylabel=("|U|/U(7 m) [–]" if row == 0 else "k/U(7 m)$^2$ [–]") if col == 0 else None,
                   title=G_LABEL[arm] if row == 0 else None)
         style.stats(ax, stats_text(g_res[arm][key]), loc=(0.05, 0.95) if row == 0 else (0.05, 0.95))
 style.finish(fig, "AIJ UWE Case G — Eddy3D (OpenFOAM 12, realizable k-ε) vs field, drag sweep behind a black-pine belt",
-             handles=[style.marker(style.OPENFOAM, "Eddy3D at the 28 measured points"), style.marker(style.REFERENCE, "no belt (control)"),
-                      style.line(style.REFERENCE, "1:1", lw=1.0), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")])
+             handles=[*layout.legend_handles("G"), style.line(style.REFERENCE, "1:1", lw=1.0), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")],
+             ncols=5)
 style.save(fig, "case-g-openfoam-sweep.png")
 
 fig, axs = uplt.subplots(nrows=1, ncols=2, refwidth=3.0, refaspect=1.2, share=False, wspace=5.0)
@@ -417,6 +420,7 @@ for ax, (mkey, okey, ylab) in zip(axs, [("modelU", "observedU", "mean U/U$_H$ ov
         ax.plot(xs, [s[mkey] for s in st], color=G_COLOUR[arm], lw=1.8, ls="--" if arm == "half-belt-conifer" else "-")
     ax.plot(xs, [s[okey] for s in stations], color=style.MEASURED, lw=0, marker="o", ms=6, mec=style.SURFACE, mew=0.4, zorder=5)
     ax.format(xlabel="distance behind the leeward face x/H [–]", ylabel=ylab, xlim=(0, 5.3), ylim=(0, None))
+    layout.letters_above(ax, "G", xs)       # A to G: the seven lines of case-g-layout.png
 style.finish(fig, "AIJ UWE Case G — mean speed and mean k by station behind the belt, field and Eddy3D's drag sweep",
              handles=[style.marker(style.MEASURED, "field")] + [style.line(G_COLOUR[a], G_LABEL[a], ls="--" if a == "half-belt-conifer" else "-") for a, *_r in G_ARMS], ncols=3)
 style.save(fig, "case-g-openfoam-stations.png")

@@ -47,7 +47,7 @@ description: "Case M — TPU Atsugi campus: configuration, frame and units, refe
 | x | +x NORTH (full-scale metres) |
 | y | +y WEST (compass rose of MP\_caseM.png: N at +x, W at +y); the frame is right-handed |
 | z | +z up from the TUNNEL FLOOR; the campus ground lies at z ~ 32 m |
-| Wind direction convention | meteorological FROM-direction: 180° blows toward +x; flow\_dir = (-cos WD, +sin WD), so a larger WD turns the plume toward -y. Measured on the tunnel\'s 175 / 180 / 185° and on the 18 field runs. |
+| Wind direction convention | meteorological FROM-direction, so 180° blows toward +x; flow\_dir = (-cos WD, +sin WD), and a larger WD turns the plume toward -y. Measured on the tunnel\'s 175 / 180 / 185° and on the 18 field runs. |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 600.0 |
 | Unit of length | m (FULL scale) |
@@ -138,8 +138,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-Each of these changes the result of a comparison if it is not accounted for.
-
 - Field concentrations are in ppq (1e-15 volume fraction) and the tunnel\'s in ppm: 1 ppq = 1e-9 ppm. The cleaned table converts the field\'s to ppm and carries C / c0 for both, with the run\'s own c0 in the field.
 - Every field run has its own reference speed U\_R, mean direction WD\_R and tracer flow q (clean/manifest.json -\> cases.M.extra\_measurements.field\_runs); the row\'s wind\_direction\_deg is WD\_R.
 - The tunnel measured velocity only at 180°; at 175° and 185° the CSV has -999.9 in all seven velocity columns.
@@ -148,7 +146,7 @@ Each of these changes the result of a comparison if it is not accounted for.
 - H\_R = 41 m is the anemometer height above the ground; the main roof under the reference point is about 33 m above it. c0 uses H\_R = 0.068 m (41 m / 600 = 0.06833 m would give 131.2 ppm, -1 %).
 - The field has an ambient floor of 8 - 11 ppq at points 11 - 15 in every run (not subtracted); the tunnel\'s concentration has a zero offset (two negative means at point 12) and an rms floor of 7 ppm.
 - Only 11 of the 18 field runs are within 5° of 180°, the tunnel\'s direction; runs 1, 2 and 9 have U\_R of 1.4 - 1.8 m/s.
-- BD\_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges; the served geometry.stl is multiplied by 600 and re-wound outward.
+- BD\_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges (7 on the rim of the panel, 14 on 7 slivers hanging on building roofs); the served geometry.stl is multiplied by 600, re-wound outward, without the slivers and closed with a base slab down to z = -1 m.
 - The approach-flow heights are above the empty tunnel floor: at the profile station the model\'s taper is 0.052 m high, above the 10 lowest profile heights.
 
 ## API
@@ -165,8 +163,32 @@ Each of these changes the result of a comparison if it is not accounted for.
 
 ## Attribution
 
-- Data collectors: Ryuichiro Yoshie (Tokyo Polytechnic University), Takumi Tachibana (Wind Engineering Institute)
-- Editors and distributors: Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
+- Data collected by Ryuichiro Yoshie (Tokyo Polytechnic University) and Takumi Tachibana (Wind Engineering Institute), 2022.
+- Edited and distributed by Yoshihide Tominaga (Niigata Institute of Technology), Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15487857](https://doi.org/10.5281/zenodo.15487857)
 - Citation requested: Tachibana, T., Yoshie, R., Nakayama, S., Kishida, T., Miyashita, K., Sasaki, R. (2022). Comparison between field measurement and wind tunnel experiments of gas dispersion in an urban area and verification of similarity law. Journal of Wind Engineering 47(3), 39-52 (in Japanese). <http://dx.doi.org/10.5359/jwe.47.39>
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Yoshie, R., Tachibana, T., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case M (TPU): Wind Tunnel Experiment and Field Observation for Flow and Dispersion within TPU Campus [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15487857
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_m,
+  author    = "Yoshie, Ryuichiro and Tachibana, Takumi and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case M (TPU): Wind Tunnel Experiment and Field Observation for Flow and Dispersion within TPU Campus}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15487857",
+  url       = "https://doi.org/10.5281/zenodo.15487857",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).

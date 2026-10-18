@@ -1,7 +1,7 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/case.schema.json",
- "schema_version": "2.3.0",
- "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
+ "schema_version": "2.4.0",
+ "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
  "id": "M",
  "slug": "case-m",
@@ -233,7 +233,7 @@
   "x": "+x NORTH (full-scale metres)",
   "y": "+y WEST (compass rose of MP_caseM.png: N at +x, W at +y); the frame is right-handed",
   "z": "+z up from the TUNNEL FLOOR; the campus ground lies at z ~ 32 m",
-  "wind_direction_rotation": "meteorological FROM-direction: 180° blows toward +x; flow_dir = (-cos WD, +sin WD), so a larger WD turns the plume toward -y. Measured on the tunnel's 175 / 180 / 185° and on the 18 field runs.",
+  "wind_direction_rotation": "meteorological FROM-direction, so 180° blows toward +x; flow_dir = (-cos WD, +sin WD), and a larger WD turns the plume toward -y. Measured on the tunnel's 175 / 180 / 185° and on the 18 field runs.",
   "lateral_sign_applied": 1,
   "coordinate_scale_applied": 600.0
  },
@@ -596,9 +596,9 @@
   "files": [
    {
     "configuration": "default",
-    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/geometry.stl?v=cfc68cf63ea1",
-    "triangles": 43936,
-    "watertight": false
+    "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/geometry.stl?v=e4e0a2044536",
+    "triangles": 43950,
+    "watertight": true
    }
   ]
  },
@@ -621,7 +621,7 @@
   "H_R = 41 m is the anemometer height above the ground; the main roof under the reference point is about 33 m above it. c0 uses H_R = 0.068 m (41 m / 600 = 0.06833 m would give 131.2 ppm, -1 %).",
   "The field has an ambient floor of 8 - 11 ppq at points 11 - 15 in every run (not subtracted); the tunnel's concentration has a zero offset (two negative means at point 12) and an rms floor of 7 ppm.",
   "Only 11 of the 18 field runs are within 5° of 180°, the tunnel's direction; runs 1, 2 and 9 have U_R of 1.4 - 1.8 m/s.",
-  "BD_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges; the served geometry.stl is multiplied by 600 and re-wound outward.",
+  "BD_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges (7 on the rim of the panel, 14 on 7 slivers hanging on building roofs); the served geometry.stl is multiplied by 600, re-wound outward, without the slivers and closed with a base slab down to z = -1 m.",
   "The approach-flow heights are above the empty tunnel floor: at the profile station the model's taper is 0.052 m high, above the 10 lowest profile heights."
  ],
  "people": {
@@ -639,6 +639,10 @@
  "doi": "10.5281/zenodo.15487857",
  "doi_note": null,
  "citation_requested": "Tachibana, T., Yoshie, R., Nakayama, S., Kishida, T., Miyashita, K., Sasaki, R. (2022). Comparison between field measurement and wind tunnel experiments of gas dispersion in an urban area and verification of similarity law. Journal of Wind Engineering 47(3), 39-52 (in Japanese). http://dx.doi.org/10.5359/jwe.47.39",
+ "citation": {
+  "apa": "Yoshie, R., Tachibana, T., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case M (TPU): Wind Tunnel Experiment and Field Observation for Flow and Dispersion within TPU Campus [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15487857",
+  "bibtex": "@misc{aijuwe_case_m,\n  author    = \"Yoshie, Ryuichiro and Tachibana, Takumi and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa\",\n  title     = \"{AIJ UWE Benchmark Dataset -- Case M (TPU): Wind Tunnel Experiment and Field Observation for Flow and Dispersion within TPU Campus}\",\n  year      = \"2025\",\n  publisher = \"Zenodo\",\n  doi       = \"10.5281/zenodo.15487857\",\n  url       = \"https://doi.org/10.5281/zenodo.15487857\",\n  note      = \"Data set\"\n}"
+ },
  "files_in_repository": {
   "folder": "https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/tree/main/raw/cases/case-m",
   "reference": "raw/cases/case-m/RS-WT_caseM.csv",

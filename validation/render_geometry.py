@@ -18,6 +18,11 @@ painted back to front (painter's algorithm), which is correct for convex, non-in
 Why coplanar triangles are merged into quads first: stroking a triangle's edges draws the diagonal across
 every face, which reads as a crease that is not there. Coplanar pairs sharing an edge become one quad, so an
 outline is a building edge and nothing else.
+
+The drawing does not depend on how a triangle is wound: pairs are found over undirected edges and compared by
+|n1 . n2|, a quad is built from vertex positions, shading uses |n . light| and nothing is culled, so a triangle
+wound the wrong way cannot drop a wall (the __main__ check reverses triangles of a cube and merges it again).
+The base slab that closes the terrain of Cases F and M lies below the ground and is not drawn.
 """
 from __future__ import annotations
 
@@ -43,6 +48,7 @@ WIND = ps.VERMILLION
 GRID = ps.FOOTPRINT
 BODY = np.array(to_rgb(ps.FOOTPRINT_FOCUS))   # neutral massing, shaded per face
 ACCENT = np.array(to_rgb(ps.BLUE))            # the subject of the case
+TERRAIN = 0.22 * np.array(to_rgb(ps.GREEN)) + 0.78   # the ground of Cases F and M: a light tint of ultraplot's green, apart from the grey buildings
 EDGE = ps.SURFACE
 
 # One camera for every case. The azimuth is negative so that +x (the wind at WD = 0) runs left to right on
@@ -106,6 +112,85 @@ def merge_coplanar(tris, tol=1e-6):
     return polys
 
 
+def grow_walls(tris, tall, tol=1e-6):
+    """Colour a wall as one: a wall facet that shares an edge with a tall wall facet in the same plane is tall too. A mesher splits one
+    wall into facets, and those whose highest vertex lies under the threshold (the foot of a tower, 68 to 98 m) would be drawn as
+    grey wedges in a blue tower, which reads as a missing piece of wall."""
+    n = np.array([_normal(t) for t in tris])
+    wall = np.abs(n[:, 2]) < 0.1
+    scale = 1.0 + np.abs(tris).max()
+    key = lambda v: tuple(np.round(v / (tol * scale)).astype(np.int64))  # noqa: E731
+    edges = {}
+    for t in range(len(tris)):
+        k = [key(tris[t, i]) for i in range(3)]
+        for a, b in ((0, 1), (1, 2), (2, 0)):
+            edges.setdefault(tuple(sorted((k[a], k[b]))), []).append(t)
+    pairs = [(a, b) for o in edges.values() if len(o) == 2 for a, b in [o] if wall[a] and wall[b] and abs(float(n[a] @ n[b])) > 0.9999]
+    tall = tall.copy()
+    changed = True
+    while changed:
+        changed = False
+        for a, b in pairs:
+            if tall[a] != tall[b]:
+                tall[a] = tall[b] = True
+                changed = True
+    return tall
+
+
+def building_mask(tris, tol=1e-6, wall_nz=0.1):
+    """True for the triangles of buildings in a terrain-and-buildings mesh (Cases F and M, one welded surface).
+
+    Walls are the vertical facets. The other facets form land patches, joined across edges that no wall interrupts: the ground is one big
+    patch (slopes and ramps join its terraces); a roof is a small patch that walls meet at their top edge (the floor of a pit is a small patch they meet at their foot). A wall is a building's
+    unless every wall facet of its plane that has a free top edge meets ground there (a cliff, or the side of a pit)."""
+    tris = np.asarray(tris, float)
+    n = np.array([_normal(t) for t in tris])
+    wall = np.abs(n[:, 2]) < wall_nz
+    scale = 1.0 + np.abs(tris).max()
+    key = lambda v: tuple(np.round(v / (tol * scale)).astype(np.int64))  # noqa: E731
+    edges = {}
+    for t in range(len(tris)):
+        k = [key(tris[t, i]) for i in range(3)]
+        for a, b in ((0, 1), (1, 2), (2, 0)):
+            edges.setdefault(tuple(sorted((k[a], k[b]))), []).append((t, a, b))
+    nbrs = [[] for _ in range(len(tris))]   # (neighbour, is the shared edge the top edge of this wall facet)
+    for owners in edges.values():
+        if len(owners) == 2:
+            for (t, a, b), (o, _, _) in zip(owners, owners[::-1]):
+                top = bool(wall[t]) and 0.5 * (tris[t, a, 2] + tris[t, b, 2]) > tris[t, :, 2].mean()
+                nbrs[t].append((o, top))
+
+    def patches(joined):
+        label = -np.ones(len(tris), int)
+        for seed in range(len(tris)):
+            if label[seed] < 0 and joined(seed, seed):
+                label[seed] = seed
+                stack = [seed]
+                while stack:
+                    t = stack.pop()
+                    for o, _ in nbrs[t]:
+                        if label[o] < 0 and joined(t, o):
+                            label[o] = seed
+                            stack.append(o)
+        return label
+
+    land = patches(lambda t, o: not wall[t] and not wall[o])
+    plane = patches(lambda t, o: wall[t] and wall[o] and abs(float(n[t] @ n[o])) > 0.9999)
+    plan = 0.5 * np.abs(n[:, 2]) * np.linalg.norm(np.cross(tris[:, 1] - tris[:, 0], tris[:, 2] - tris[:, 0]), axis=1)
+    area = {p: plan[land == p].sum() for p in set(land[land >= 0])}
+    ground = {p for p, a in area.items() if a > 0.02 * sum(area.values())}   # no building roof is 2 % of the domain
+    ground_land = np.isin(land, list(ground))
+    meets, roofs = {}, set()   # wall plane -> [meets a roof at a top edge, meets the ground at a top edge]; patches met at a top edge
+    for w in np.flatnonzero(wall):
+        for o, top in nbrs[w]:
+            if top and not wall[o]:
+                meets.setdefault(plane[w], [False, False])[int(ground_land[o])] = True
+                if not ground_land[o]:
+                    roofs.add(land[o])
+    cliff = np.array([wall[t] and meets.get(plane[t], [False, False]) == [False, True] for t in range(len(tris))])
+    return (wall & ~cliff) | np.isin(land, list(roofs))
+
+
 def draw(ax, groups, edges):
     """groups: [(triangles, base colour)], painted back to front across all groups together."""
     polys, cols = [], []
@@ -161,6 +246,8 @@ def scene(case):
     out = []
     for cfg, tris, boxes, _ in D.case_geometry(case):
         tris = np.asarray(tris, float)
+        if case in ("F", "M"):
+            tris = tris[tris[:, :, 2].min(axis=1) > D.G.BASE_Z / 2]   # without the base slab (skirt and cap), which is never in view
         if case in ("A", "B", "J"):
             groups = [(tris, ACCENT)]
         elif case == "C":
@@ -172,10 +259,15 @@ def scene(case):
             tall = [b for b in boxes if b["max"][2] > 0.6 * ztop]
             groups = [(boxes_tris([b for b in boxes if b not in tall]), BODY), (boxes_tris(tall), ACCENT)]
         elif case == "F":
-            tall = tris[:, :, 2].max(axis=1) > 100.0          # the high-rise group (full-scale metres)
-            groups = [(tris[~tall], BODY), (tris[tall], ACCENT)]
+            built = building_mask(tris)
+            ground, tris = tris[~built], tris[built]
+            tall = grow_walls(tris, tris[:, :, 2].max(axis=1) > 100.0)   # the high-rise group (full-scale metres)
+            groups = [(ground, TERRAIN), (tris[~tall], BODY), (tris[tall], ACCENT)]
         elif case in ("G", "H", "I"):     # one body, the subject of the case
             groups = [(tris, ACCENT)]
+        elif case == "M":
+            built = building_mask(tris)
+            groups = [(tris[~built], TERRAIN), (tris[built], BODY)]
         else:
             groups = [(tris, BODY)]
         out.append((cfg, groups, "seal" if case in ("F", "M") else case != "E"))
@@ -292,7 +384,12 @@ def render_case(case):
 
 if __name__ == "__main__":
     ps.apply()
-    cube = merge_coplanar(boxes_tris([{"min": [0, 0, 0], "max": [1, 1, 1]}]))
+    unit = boxes_tris([{"min": [0, 0, 0], "max": [1, 1, 1]}])
+    cube = merge_coplanar(unit)
     assert len(cube) == 6 and all(len(q) == 4 for q in cube), "a unit cube must merge to six quads"
+    quads = lambda polys: {frozenset(tuple(np.round(v, 6)) for v in q) for q in polys}   # noqa: E731
+    wound = unit.copy()
+    wound[[1, 4, 7, 10]] = wound[[1, 4, 7, 10]][:, ::-1]   # four triangles wound the other way
+    assert quads(merge_coplanar(wound)) == quads(cube), "the merge must not depend on how a triangle is wound"
     for c in D.CASE_IDS:
         print(c, render_case(c))

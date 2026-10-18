@@ -15,8 +15,11 @@
   function current() { return jtd.getTheme() === "dark" ? "dark" : "light"; }
   function label(button) {
     var dark = current() === "dark";
-    button.textContent = dark ? "Light mode" : "Dark mode";
+    var text = dark ? "Switch to light mode" : "Switch to dark mode";
+    button.setAttribute("data-mode", dark ? "dark" : "light");
     button.setAttribute("aria-pressed", dark ? "true" : "false");
+    button.setAttribute("aria-label", text);
+    button.setAttribute("title", text);
   }
   var wanted = saved() || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
   if (wanted === "dark") { jtd.setTheme("dark"); }

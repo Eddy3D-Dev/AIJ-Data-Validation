@@ -42,16 +42,23 @@ description: "Case D — high-rise among city blocks: configuration, frame and u
 | Property | Definition |
 |---|---|
 | Origin | tower centre on the ground plane (the array\'s bounding box is centred on it) |
-| x | +x streamwise at WD = 0 (the 0 deg thermistor field is exactly y-mirror symmetric; the split-fibre U is positive at the stream-like points and negative in the tower\'s windward horseshoe) |
+| x | +x streamwise at WD = 0 |
 | y | +y lateral |
 | z | +z up; all points at z = 0.005 |
-| Wind direction convention | +x toward +y, read from Figure 4 of the data paper. The array is exactly y-mirror symmetric, so the measurements alone cannot settle the rotation sense (headings +theta and -theta give exact mirror fields); solved Eddy3D fields corroborate Figure 4\'s sense: R 0.80 (22.5 deg) and 0.85 (45 deg) in it, 0.40 and 0.17 mirrored. |
+| Wind direction convention | +x toward +y, read from Figure 4 of the data paper. Solved Eddy3D fields score R 0.80 (22.5 deg) and 0.85 (45 deg) in Figure 4\'s sense, 0.40 and 0.17 mirrored. |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 0.001 |
 | Unit of length | m (model scale; converted from the workbook\'s millimetres) |
 | Unit of velocity | m/s |
 | Unit of variance | m^2/s^2 |
 | Unit of k | m^2/s^2 |
+
+<details markdown="block">
+<summary>Data notes: Frame and wind direction</summary>
+
+The 0 deg thermistor field is exactly y-mirror symmetric; the split-fibre U is positive at the stream-like points and negative in the tower\'s windward horseshoe. The array is exactly y-mirror symmetric, so the measurements alone cannot settle the rotation sense (headings +theta and -theta give exact mirror fields).
+
+</details>
 
 ## Reference data
 
@@ -100,23 +107,28 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | log law, kappa = 0.41, least squares on the workbook\'s 13-point profile (z = 5 ... 1200 mm); two windows, because the measurement plane z/H = 0.02 sits below the 0.02 ... 2H window used for Cases A and B |
+| Method | log law, kappa = 0.41, least squares on the workbook\'s 13-point profile (z = 5 ... 1200 mm); two windows |
 | Fit window | z range 0.005 ... 2H; Friction velocity u\* (m/s) 0.3418; Roughness length z₀ (mm) 0.0859; error at z 5mm -11.2 %; profile rms 7.9 %; inlet k m2 s2 0.3895; inlet k vs tunnel -26 % to -48 % |
 | Fit window | z range 0.02 ... 2H; Friction velocity u\* (m/s) 0.424; Roughness length z₀ (mm) 0.4033; error at z 5mm -30.0 %; profile rms 12.5 % / 4.7 %; inlet k m2 s2 0.5991; inlet k vs tunnel +13 % to -20 % |
 | Power-law exponent, fitted | 0.189 |
 | Power-law exponent, data paper | 0.25 |
-| Note | derived during scoping, not published by AIJ; a log-law inlet cannot be right at both the measurement plane and the upper profile |
+| Note | derived during scoping, not published by AIJ |
+
+<details markdown="block">
+<summary>Interpretation: Inflow fit</summary>
+
+The fit has two windows because the measurement plane z/H = 0.02 sits below the 0.02 ... 2H window used for Cases A and B. A log-law inlet cannot be right at both the measurement plane and the upper profile.
+
+</details>
 
 ## Known data issues
 
-Each of these changes the result of a comparison if it is not accounted for.
-
-- All of Case D\'s data lives in LF\_caseD.xls, a genuine OLE2/BIFF8 workbook (read it with xlrd 2.x; openpyxl cannot). Sheets: \'Geometry&Points\', \'Inflow\', \'Results (Exp\_S)\' (split fibre, WD = 0), \'Results (Exp\_T)\' (thermistor, 0 / 22.5 / 45 deg).
+- All of Case D\'s data lives in LF\_caseD.xls, an OLE2/BIFF8 workbook (read it with xlrd 2.x; openpyxl cannot). Sheets: \'Geometry&Points\', \'Inflow\', \'Results (Exp\_S)\' (split fibre, WD = 0), \'Results (Exp\_T)\' (thermistor, 0 / 22.5 / 45 deg).
 - Coordinates are millimetres in the workbook; the API serves metres.
-- The shipped BD\_caseD.stl is dirty: 1572 facets of which 576 are duplicates, and all 83 roofs are wound inward (signed volume 0.011159 m^3 against the true 0.021477 m^3). The API\'s geometry.stl is rebuilt from the 83 shells\' bounding boxes: 996 facets, watertight, volume 0.021477 m^3.
+- The shipped BD\_caseD.stl has 1572 facets of which 576 are duplicates, and all 83 roofs are wound inward (signed volume 0.011159 m^3 against the true 0.021477 m^3). The API\'s geometry.stl is rebuilt from the 83 shells\' bounding boxes: 996 facets, watertight, volume 0.021477 m^3.
 - The thermistor reads a SCALAR speed. Over the 33 points where both instruments overlap at WD = 0, the ratio of mean thermistor speed to mean |U| is 1.342 (the mean of the per-point ratios is 1.50). sqrt(|U|^2 + 2k) from the split-fibre data matches the thermistor to FB +0.058, R 0.947; |U| alone to FB +0.292, R 0.872.
 - Unmeasured thermistor cells are \'-\' in the workbook (null here). At WD = 0 the 66 measured values are 33 exact mirror pairs, so only 33 are independent; at 22.5 and 45 deg all 66 are independent.
-- A prior Eddy3D comparison kept in the folder (case-d-eddy3d-prior-comparison.xlsx) scores R = +0.096 against the thermistor: a frame or geometry error, not a closure result. It is not a validation.
+- A prior Eddy3D comparison kept in the folder (case-d-eddy3d-prior-comparison.xlsx) scores R = +0.096 against the thermistor. The score comes from a frame or geometry error; do not use it as a validation.
 
 ## API
 
@@ -132,8 +144,32 @@ Each of these changes the result of a comparison if it is not accounted for.
 
 ## Attribution
 
-- Data collectors: Yoshihide Tominaga (Niigata Institute of Technology)
-- Editors and distributors: Hideki Kikumoto (The University of Tokyo), Tsubasa Okaze (Institute of Science Tokyo)
+- Data collected by Yoshihide Tominaga (Niigata Institute of Technology), 2026.
+- Edited and distributed by Hideki Kikumoto (The University of Tokyo) and Tsubasa Okaze (Institute of Science Tokyo).
 - DOI: [10.5281/zenodo.15402668](https://doi.org/10.5281/zenodo.15402668)
 - Citation requested: Kikumoto, H. et al. (2026). Japan Architectural Review 9(1), e70083, section 3.4.
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case D (Highrise): Wind Tunnel Experiment for Flow around a High-rise Building in City Blocks [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15402668
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_d,
+  author    = "Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case D (Highrise): Wind Tunnel Experiment for Flow around a High-rise Building in City Blocks}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15402668",
+  url       = "https://doi.org/10.5281/zenodo.15402668",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).

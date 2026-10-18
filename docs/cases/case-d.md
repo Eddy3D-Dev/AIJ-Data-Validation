@@ -17,7 +17,7 @@ description: "1:1:4 tower in a regular array of 82 low blocks, pedestrian-height
 
 <figure class="figure render">
 <a href="{{ '/assets/geometry/case-d.png' | relative_url }}"><img src="{{ '/assets/web/case-d.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case D — high-rise among city blocks"></a>
-<figcaption>A 0.25 m tower (blue) among 82 low blocks over 1.40 m × 1.35 m (1:400 model scale); the arrow is WD = 0°.<br><a class="original" href="{{ '/assets/geometry/case-d.png' | relative_url }}">1200 dpi original, 2.2 MB</a></figcaption>
+<figcaption>A 0.25 m tower (blue) among 82 low blocks over 1.40 m × 1.35 m (1:400 model scale); the arrow is WD = 0°.</figcaption>
 </figure>
 
 ## At a glance
@@ -32,23 +32,21 @@ description: "1:1:4 tower in a regular array of 82 low blocks, pedestrian-height
 | Measurement height (m) | 0.005 |
 | Measured | 267 rows over 78 points: Vs, U, V, W, uu, vv, ww, k |
 
-## Agreement with the tunnel
+## Validation
 
-| Engine | Status | R | FAC2 |
-|---|---|---|---|
-| OpenFOAM 12 | <span class="label label-green status">scored</span> | +0.78 … +0.95 | 0.48 … 0.92 |
-| OpenLB | <span class="label label-grey status">not comparable</span> | — | — |
-| FluidX3D | <span class="label label-grey status">not comparable</span> | — | — |
-| ML surrogate | <span class="label label-green status">scored</span> | +0.22 … +0.59 | 0.34 … 0.64 |
+| Engine | Status | Compared with | R (range) | FAC2 (range) |
+|---|---|---|---|---|
+| OpenFOAM 12 | <span class="label label-green status">scored</span> | Wind tunnel | +0.78 … +0.95 | 0.48 … 0.92 |
+| OpenLB | <span class="label label-grey status">not comparable</span> | — | — | — |
+| FluidX3D | <span class="label label-grey status">not comparable</span> | — | — | — |
+| ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | +0.22 … +0.59 | 0.34 … 0.64 |
 {: .scores }
-
-R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: every score, its figures and its reading are on the [Validation page]({{ '/cases/case-d/validation/' | relative_url }}).
 
 {: .warning-title }
 > Before you compare
 >
-> The cleaned table is in SI units and one frame, with this case's corrections applied once; do not apply them again to the published files.
->
+> - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
+> - Origin: tower centre on the ground plane (the array\'s bounding box is centred on it). Length unit: m (model scale; converted from the workbook\'s millimetres).
 > - The published coordinates are multiplied by 0.001 in the cleaned table (`coordinate_scale_applied`).
-> - The sense in which the wind direction rotates is a convention to check before comparing at any direction other than 0° (see *Frame and units* on the Data page).
+> - Wind direction: +x toward +y, read from Figure 4 of the data paper. Solved Eddy3D fields score R 0.80 (22.5 deg) and 0.85 (45 deg) in Figure 4\'s sense, 0.40 and 0.17 mirrored.
 > - 6 known issues in the published files are listed under [Known data issues]({{ '/cases/case-d/data/' | relative_url }}#known-data-issues).
