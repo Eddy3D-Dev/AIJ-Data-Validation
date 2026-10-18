@@ -81,7 +81,7 @@ def log_facts(log):
                "the iteration limit: the log has no 'solution converged' line (residualControl not met)")
     return {"iterationsRun": int(re.findall(r"^Time = (\d+)s", text, re.M)[-1]), "stoppedBy": stopped,
             "finalInitialResiduals": {m.group(1): float(m.group(2)) for m in re.finditer(r"Solving for (\w+), Initial residual = ([0-9.eE+-]+)", last)},
-            "solverSeconds": float(clock[0]), "clockSeconds": int(clock[1]), "iterationsThatBoundedK": text.count("bounding k,")}
+            "solverSeconds": float(clock[0]), "clockSeconds": int(clock[1]), "boundingKLines": text.count("bounding k,")}
 
 
 def mesh_facts(path):
@@ -333,7 +333,7 @@ def m_field(manifest_runs):
         geo.append(float(np.exp(np.log(pos).mean())) if len(pos) else math.nan)
         lo.append(float(v.min()))
         hi.append(float(v.max()))
-    return band, np.array(geo), np.array(lo), np.array(hi)
+    return band, {n: speed[n] for n in band}, np.array(geo), np.array(lo), np.array(hi)
 
 
 def m_rows(src):
@@ -347,7 +347,7 @@ def m_rows(src):
     approach = m_probe_rows(os.path.join(src, "approach_180.probe.csv"))
     ur = float(approach[0]["U_mag"])                                        # the first row is the reference mast
     manifest = read_json(os.path.join(REPO, "clean", "manifest.json"))
-    band, geo, lo, hi = m_field(manifest["cases"]["M"]["extra_measurements"]["field_runs"])
+    band, speeds, geo, lo, hi = m_field(manifest["cases"]["M"]["extra_measurements"]["field_runs"])
     rows = []
     for i, p in enumerate(probe):
         pid = str(i + 1)
@@ -367,7 +367,7 @@ def m_rows(src):
             row[f"cstar_{sp}_mirrored"] = m_cstar(float(mirrored[i][f"c_{sp}"]), ur)
         row.update({"cstar_field_geomean": float(geo[i]), "cstar_field_min": float(lo[i]), "cstar_field_max": float(hi[i])})
         rows.append(row)
-    return rows, ur, band
+    return rows, ur, band, speeds
 
 
 def m_scores(rows, sp, ur, imposed):
@@ -404,7 +404,7 @@ def m_snapshot(root):
     for name, dest in (("mp_180.probe.csv", "probes"), ("approach_180.probe.csv", "approach"), ("controlTurned_180.probe.csv", "turned_probes"), ("controlMirrored_180.probe.csv", "mirrored_probes")):
         write_lf(os.path.join(RESULTS, f"{M_STEM}_{dest}.csv"), read_lf(os.path.join(src, name)))
     fx = read_json(os.path.join(src, "results.json"))
-    rows, ur, band = m_rows(src)
+    rows, ur, band, speeds = m_rows(src)
     write_pairs(os.path.join(RESULTS, f"{M_STEM}_pairs.csv"), M_PAIR_FIELDS, rows)
     imposed = fx["reference.U.imposedAtMastElevation"]
     study = os.path.join(src, "study", "case_180")
@@ -412,11 +412,10 @@ def m_snapshot(root):
                                                                          "controlMirrored_180.probe.csv", "controlMirrored_180.points.csv", "approach_180.probe.csv",
                                                                          "approach_180.points.csv", "model_180.csv", "results.json", "geometry/buildings.stl", "geometry/terrain.stl",
                                                                          "geometry/source.stl", "study/case_180/run_01_foamRun.txt", "study/mesh/06_checkMesh.txt")}
-    sources["clean/manifest.json (cases.M.extra_measurements.field_runs: each field run's U_R and WD_R)"] = sha256(os.path.join(REPO, "clean", "manifest.json"))
     keep = non_scores(fx, drop=M_RUN_DROP)
     for sp, label in SPECIES:
         res = {**keep, "configuration": sp, "sct": float(label.split()[-1]), "quantity": M_QUANTITY.format(sct=label.split()[-1]), "points.measured": len(rows),
-               "referenceSpeed.solvedAtMast": ur, "referenceSpeed.tunnel": M_UR_TUNNEL, "referenceHeight.full": M_HR, "field.band.runs": band, "field.band.minSpeed": M_BAND_MIN_SPEED,
+               "referenceSpeed.solvedAtMast": ur, "referenceSpeed.tunnel": M_UR_TUNNEL, "referenceHeight.full": M_HR, "field.band.runs": band, "field.band.speedsMps": {str(n): v for n, v in speeds.items()}, "field.band.minSpeed": M_BAND_MIN_SPEED,
                "field.band.halfWidthDegrees": M_BAND_HALF, "pairs": f"{M_STEM}_pairs.csv", "probes": f"{M_STEM}_probes.csv", "approach": f"{M_STEM}_approach.csv",
                "controlProbes": [f"{M_STEM}_turned_probes.csv", f"{M_STEM}_mirrored_probes.csv"], "solveLog": log_facts(os.path.join(study, "run_01_foamRun.txt")),
                "meshCheck": mesh_facts(os.path.join(src, "study", "mesh", "06_checkMesh.txt")),
@@ -443,7 +442,7 @@ def m_fixture_keys(sp):
 def m_control(root, fx):
     """Case M scored the way the fixture scores it: RS-WT_caseM.csv (rounded) and RS-FO_caseM.csv with the fixture's H_R = 40.8 m for the field, the fixture's probes. Its results.json to 1e-9."""
     src = os.path.join(root, M_STUDY)
-    rows, ur, _ = m_rows(src)
+    rows, ur, _, _ = m_rows(src)
     tunnel = {}
     for r in read_raw_rows("case-m", "RS-WT_caseM.csv"):
         tunnel[(int(r["WD (deg)"]), int(r["No."]))] = {k.split(" (")[0].strip(): float(v) for k, v in r.items() if k not in ("No.",) and v.strip() != ""}

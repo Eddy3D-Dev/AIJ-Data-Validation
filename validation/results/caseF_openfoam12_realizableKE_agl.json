@@ -94,7 +94,7 @@
   },
   "solverSeconds": 4092.457,
   "clockSeconds": 4155,
-  "iterationsThatBoundedK": 1988
+  "boundingKLines": 1988
  },
  "meshCheck": {
   "cells": 2143488,

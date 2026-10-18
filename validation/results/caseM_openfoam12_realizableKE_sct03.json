@@ -72,6 +72,18 @@
   15,
   16
  ],
+ "field.band.speedsMps": {
+  "5": 3.966666666666667,
+  "6": 4.1000000000000005,
+  "7": 4.633333333333333,
+  "8": 4.433333333333333,
+  "11": 3.5,
+  "12": 4.666666666666667,
+  "13": 5.833333333333333,
+  "14": 7.033333333333334,
+  "15": 6.5,
+  "16": 6.733333333333333
+ },
  "field.band.minSpeed": 3.0,
  "field.band.halfWidthDegrees": 10.0,
  "pairs": "caseM_openfoam12_realizableKE_pairs.csv",
@@ -97,7 +109,7 @@
   },
   "solverSeconds": 4094.8076,
   "clockSeconds": 4158,
-  "iterationsThatBoundedK": 3017
+  "boundingKLines": 3017
  },
  "meshCheck": {
   "cells": 1394053,
@@ -122,8 +134,7 @@
   "aij_M_realizableKE_L3_s3/geometry/terrain.stl": "cd02caf3f64326e04180a7148caf003d5986f4958e6bc6fcc6a5a4fe16665b5c",
   "aij_M_realizableKE_L3_s3/geometry/source.stl": "2f67061aa8ab565bfed094366f8755f6aeee63e47461249ff0fcb4581e936151",
   "aij_M_realizableKE_L3_s3/study/case_180/run_01_foamRun.txt": "0762f337f9f55044122867fa5c48ffa39abb240d10924639bb037f3807b7a44b",
-  "aij_M_realizableKE_L3_s3/study/mesh/06_checkMesh.txt": "92b1b5a7c824cbba937afef10caa2f673394b40726d380a116f858ded19caf7a",
-  "clean/manifest.json (cases.M.extra_measurements.field_runs: each field run's U_R and WD_R)": "b2f44546564bfb59d6322111498891772b4f3fc63c6cd53f03f66b3874d5a114"
+  "aij_M_realizableKE_L3_s3/study/mesh/06_checkMesh.txt": "92b1b5a7c824cbba937afef10caa2f673394b40726d380a116f858ded19caf7a"
  },
  "cstar": {
   "Count": 15,
