@@ -64,6 +64,28 @@ The cleaned table has **2,560 rows** over **80 distinct points**; columns `point
 | before construction, 16 wind directions | 80 per direction |
 | after construction, 16 wind directions | 80 per direction |
 
+## Columns
+
+The columns of the cleaned table (`points.csv`, `points.json`), in order.
+
+<details markdown="block">
+  <summary>The 10 columns and what each holds</summary>
+
+| Column | Meaning |
+|---|---|
+| `point_id` | the tunnel's own measurement point number |
+| `config` | configuration key: 'default', Case C centre building '0D'/'1D'/'2D', Case E state 'bc' (before) / 'ac' (after construction) |
+| `instrument` | 'split\_fibre' (vector components) or 'thermistor' (omnidirectional scalar speed) |
+| `wind_direction` | compass name of the direction the wind comes FROM (Case E) |
+| `wind_direction_deg` | AIJ wind direction in degrees; 0 is the case's reference direction (see frame) |
+| `x` | m, case frame |
+| `y` | m, case frame |
+| `z` | m above ground, case frame |
+| `velocity_ratio` | dimensionless, mean speed over the case's reference speed (Case E: Vs / U(15.9 m), U(15.9 m) = 3.935 m/s; see the case's normalisation) |
+| `campaign` | 'wind\_tunnel' (model scale) or 'field' (a full-scale observation: Cases F, G, M) |
+
+</details>
+
 ## Inflow
 
 | Property | Value |

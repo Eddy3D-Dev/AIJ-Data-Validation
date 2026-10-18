@@ -1474,6 +1474,12 @@ def _case_data_page(case, meta, p):
         L += ['<details markdown="block">', f"  <summary>The {len(rows)} configurations and their points</summary>", ""] + table + ["", "</details>", ""]
     else:
         L += table + [""]
+    cols = ["| Column | Meaning |", "|---|---|"] + [f"| `{c}` | {_cell(COLUMN_MEANING.get(c, ''))} |" for c in summ["columns"]]
+    L += ["## Columns", "", "The columns of the cleaned table (`points.csv`, `points.json`), in order.", ""]
+    if len(cols) - 2 > OPEN_LIST_ROWS:
+        L += ['<details markdown="block">', f"  <summary>The {len(cols) - 2} columns and what each holds</summary>", ""] + cols + ["", "</details>", ""]
+    else:
+        L += cols + [""]
     inflow = meta.get("inflow_fit")
     if inflow:
         L += ["## Inflow", "", "| Property | Value |", "|---|---|"]

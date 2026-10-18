@@ -76,6 +76,27 @@ The cleaned table has **1,080 rows** over **120 distinct points**; columns `poin
 
 </details>
 
+## Columns
+
+The columns of the cleaned table (`points.csv`, `points.json`), in order.
+
+<details markdown="block">
+  <summary>The 9 columns and what each holds</summary>
+
+| Column | Meaning |
+|---|---|
+| `point_id` | the tunnel's own measurement point number |
+| `config` | configuration key: 'default', Case C centre building '0D'/'1D'/'2D', Case E state 'bc' (before) / 'ac' (after construction) |
+| `instrument` | 'split\_fibre' (vector components) or 'thermistor' (omnidirectional scalar speed) |
+| `wind_direction_deg` | AIJ wind direction in degrees; 0 is the case's reference direction (see frame) |
+| `x` | m, case frame |
+| `y` | m, case frame |
+| `z` | m above ground, case frame |
+| `Vs` | m/s, mean omnidirectional scalar wind speed (thermistor); Case D also lists \|U\| of the split-fibre probe under Vs for its 33 vector points |
+| `campaign` | 'wind\_tunnel' (model scale) or 'field' (a full-scale observation: Cases F, G, M) |
+
+</details>
+
 ## Inflow
 
 | Property | Value |

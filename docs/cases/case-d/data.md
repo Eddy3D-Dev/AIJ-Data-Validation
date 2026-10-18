@@ -68,6 +68,34 @@ Unmeasured cells (null): U 234, V 234, W 234, uu 234, vv 234, ww 234, k 234, Vs 
 | thermistor, WD 45° | 78 (66 measured) |
 | split fibre, WD 0° | 33 (33 measured) |
 
+## Columns
+
+The columns of the cleaned table (`points.csv`, `points.json`), in order.
+
+<details markdown="block">
+  <summary>The 16 columns and what each holds</summary>
+
+| Column | Meaning |
+|---|---|
+| `point_id` | the tunnel's own measurement point number |
+| `config` | configuration key: 'default', Case C centre building '0D'/'1D'/'2D', Case E state 'bc' (before) / 'ac' (after construction) |
+| `instrument` | 'split\_fibre' (vector components) or 'thermistor' (omnidirectional scalar speed) |
+| `wind_direction_deg` | AIJ wind direction in degrees; 0 is the case's reference direction (see frame) |
+| `x` | m, case frame |
+| `y` | m, case frame |
+| `z` | m above ground, case frame |
+| `U` | m/s, mean velocity along +x |
+| `V` | m/s, mean velocity along +y (sign unified: positive toward +y) |
+| `W` | m/s, mean velocity along +z |
+| `uu` | m^2/s^2, variance of u |
+| `vv` | m^2/s^2, variance of v |
+| `ww` | m^2/s^2, variance of w |
+| `k` | m^2/s^2, turbulent kinetic energy |
+| `Vs` | m/s, mean omnidirectional scalar wind speed (thermistor); Case D also lists \|U\| of the split-fibre probe under Vs for its 33 vector points |
+| `campaign` | 'wind\_tunnel' (model scale) or 'field' (a full-scale observation: Cases F, G, M) |
+
+</details>
+
 ## Inflow
 
 | Property | Value |
