@@ -65,6 +65,12 @@ POINT_COLUMNS = ["point_id", "config", "instrument", "wind_direction", "wind_dir
                  "x", "y", "z", "U", "V", "W", "uu", "vv", "ww", "k", "Vs", "velocity_ratio",
                  "campaign", "run", "uv", "uw", "vw", "C", "c_rms", "concentration_ratio", "T", "T_rms", "uc", "vc", "wc", "uT", "vT", "wT", "velocity_ratio_sd", "k_ratio"]
 
+TEXT_COLUMNS = ("config", "instrument", "wind_direction", "campaign", "run")   # the other columns are numbers (point_id an integer)
+
+# Cases whose frame is in full-scale metres (Case E's district, the field and full-scale observations of F, G and M); the
+# others are in model-scale metres. clean/build.py has the same set for geometry.json.
+FULL_SCALE = {"E", "F", "G", "M"}
+
 COMPASS = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
            "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
 
@@ -437,6 +443,7 @@ def _row(**kw):
     r["campaign"] = "wind_tunnel"
     r["instrument"] = ""
     r["wind_direction"] = ""
+    r["run"] = ""
     r["wind_direction_deg"] = 0.0
     r.update(kw)
     return r
@@ -602,7 +609,9 @@ def _points_clean(case):
         with io.open(path, encoding="utf-8-sig", newline="") as f:
             rd = csv.DictReader(f)
             names = {n: n.split("(")[0].split("[")[0].strip().lower() for n in rd.fieldnames or []}
-            mapping = {}
+            # The cleaned tables use the canonical names: match them exactly first (the case matters: C is a concentration, T a
+            # temperature, and neither is c or t). The synonyms below are for a file that does not.
+            mapping = {c: c for c in POINT_COLUMNS if c in names}
             for canon, syns in _SYNONYMS.items():
                 for raw, low in names.items():
                     if low in syns and canon not in mapping:
@@ -614,7 +623,7 @@ def _points_clean(case):
                 row = _row()
                 for canon, raw in mapping.items():
                     v = r.get(raw)
-                    if canon in ("config", "instrument", "wind_direction"):
+                    if canon in TEXT_COLUMNS:
                         row[canon] = (v or "").strip() or row[canon]
                     elif canon == "point_id":
                         fv = _f(v)

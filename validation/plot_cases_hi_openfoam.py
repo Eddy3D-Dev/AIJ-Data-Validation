@@ -25,8 +25,8 @@ were computed against the CSVs, in the third digit. Case H's vertical-plane V is
 Probe frame. The fixtures solve the case turned so that the wind blows along world +y, at 1:100 (H) and 1:60 (I):
 world = scale x (-Y, X, Z) of the case frame, so U = U_y, V = -U_x, W = U_z.
 
-Colours follow plotstyle.py: the measurement is black on the axes' meaning, the OpenFOAM model is slot 1 (blue #2a78d6);
-reference geometry (1:1 line, factor-of-two band) is recessive grey.
+Colours follow plotstyle.py: the OpenFOAM model is its engine colour (OPENFOAM); reference geometry (1:1 line,
+factor-of-two band) is recessive grey.
 """
 from __future__ import annotations
 
@@ -115,14 +115,14 @@ def export_pairs(case, closure, uh_t, uh_m, h_full, probes):
         probe_for = {i: probes["reference"][i - 1] for i in ids}
     else:                # RS-w_caseI.csv then RS-c_caseI.csv, the cleaned table's numbering 1-91 and 92-630
         wind = [i for i in ids if "ldv" in byid[i]]
-        conc = [i for i in ids if "hydrocarbon_analyzer" in byid[i]]
+        conc = [i for i in ids if "hydrocarbon_analyser" in byid[i]]
         probe_for = {**{i: probes["referenceWind"][n] for n, i in enumerate(wind)}, **{i: probes["referenceConc"][n] for n, i in enumerate(conc)}}
     fields = PAIR_FIELDS if case == "I" else [f for f in PAIR_FIELDS if f != "instrument"]
     rows = []
     for i in ids:
         d = byid[i]
         vel = d.get("split_fibre") or d.get("ldv")
-        con = d.get("hydrocarbon_analyzer")
+        con = d.get("hydrocarbon_analyser")
         p = probe_for[i]
         x, y, z = (float((vel or con)[c]) for c in "xyz")
         assert abs(p["X"] - x) < 6e-3 and abs(p["Y"] - y) < 6e-3 and abs(p["Z"] - z) < 6e-3, (case, closure, i, (x, y, z), (p["X"], p["Y"], p["Z"]))

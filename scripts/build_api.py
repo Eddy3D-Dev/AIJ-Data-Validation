@@ -17,7 +17,7 @@ so CI can rebuild and diff. Inputs:
 
 Outputs: docs/api/** (the API), docs/assets/{figures,geometry}/, docs/cases/<slug>.md and
 docs/cases/<slug>/{data,validation}.md (three pages per case), docs/_includes/{case-gallery,cases-table,
-cases-frames,validation-matrix,api-changelog}.md, docs/_includes/{version-label,dataset-jsonld}.html and
+cases-frames,validation-matrix,known-issues-fm,api-changelog}.md, docs/_includes/{version-label,dataset-jsonld}.html and
 docs/llms.txt. Every JSON document names its JSON Schema in `$schema`; the schemas are in scripts/api_schemas.py
 and are enforced here before anything is reported OK.
 
@@ -93,8 +93,19 @@ CHANGELOG = [
         "of `versions.release`; equal to `base_url` inside that copy) and `versions_url`. In a frozen copy `base_url` and "
         "`fallback_base_url` name that copy, and `release.base_url` (the raw files at the release tag) now ends in the "
         "release number; paths below it are unchanged.",
-        "Why MINOR: nothing is renamed or removed. Every unversioned URL and field keeps its meaning; the layout, a "
-        "document, a schema and three index.json fields are additions.",
+        "Added: Cases F to M, thirteen cases in all (the `case_ids` of index.json): their cases.json entries, `cases/{id}.json`, "
+        "points, approach flow, geometry (STL) and validation documents, and `pairs` files for the runs that exist. Six of them "
+        "(F, G, J, K, L, M) have no validation run yet: every engine is `pending` and `results` is empty. `cases.json` and "
+        "`validation.json` list thirteen cases (the schemas fixed the length at five).",
+        "Added: the point table's columns of schema 2.0.0 (the cleaned release) are served in `points.json` and `points.csv`: "
+        "`campaign` and `run`, `uv` `uw` `vw`, `C` `c_rms` `concentration_ratio`, `T` `T_rms`, `uc` `vc` `wc`, `uT` `vT` `wT`, "
+        "`velocity_ratio_sd` and `k_ratio`; `instrument` takes the new values `cup_anemometer`, `sonic_anemometer`, `ldv`, "
+        "`hydrocarbon_analyser` and `sorbent_gc_ecd`. A document lists only the columns a case has.",
+        "Added: two engines, `openfoam12-kEpsilon` and `openfoam12-kOmegaSST`, which exist for Case I only (the closures other than "
+        "realizable k-epsilon, solved on one mesh). `engines` in `cases.json` and `cases/{id}.json` lists an engine only for the "
+        "cases it applies to.",
+        "Why MINOR: nothing is renamed or removed. Every unversioned URL and field keeps its meaning; the layout, the cases, "
+        "documents, a schema, columns, engines and three index.json fields are additions.",
     ]},
     {"version": "2.2.0", "date": "2026-10-18", "changes": [
         "Added: `versions.release`, the semantic version of the published data and API (the repository's VERSION; "
@@ -142,8 +153,12 @@ CACHING = ("GitHub Pages sends JSON with a 10-minute max-age and CSV and ZIP fil
            "query, and a changed file gets a new URL. Fetch the JSON documents for the current URLs; check "
            "downloads against `sha256`.")
 
+CASE_SPAN = f"{D.CASE_IDS[0]}-{D.CASE_IDS[-1]}"   # "A-M"
+
 ENGINES = [
     {"id": "openfoam12-realizableKE", "name": "OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor)", "kind": "RANS"},
+    {"id": "openfoam12-kEpsilon", "name": "OpenFOAM 12, standard k-epsilon (Eddy3D Outdoor)", "kind": "RANS"},
+    {"id": "openfoam12-kOmegaSST", "name": "OpenFOAM 12, k-omega SST (Eddy3D Outdoor)", "kind": "RANS"},
     {"id": "openlb", "name": "OpenLB (Eddy3D LBM)", "kind": "LBM"},
     {"id": "fluidx3d", "name": "FluidX3D (Eddy3D GPU LBM)", "kind": "LBM"},
     {"id": "ml-surrogate", "name": "Eddy3D ML wind surrogate (pedestrian height)", "kind": "surrogate"},
@@ -157,13 +172,37 @@ STATUS_MEANING = {
                        "this hardware runs, FluidX3D without a ground wall function; the measurement behind each is on the "
                        "Validation page"),
 }
+# The closures other than realizable k-epsilon were solved for Case I alone: they are listed for the cases they apply to
+# (ENGINE_STATUS has no entry for them elsewhere) and left out of the all-cases matrix.
+CLOSURE_VARIANTS = {"openfoam12-kEpsilon", "openfoam12-kOmegaSST"}
+_NOT_RUN = {"openfoam12-realizableKE": "pending", "openlb": "pending", "fluidx3d": "pending", "ml-surrogate": "pending"}
 ENGINE_STATUS = {
     "A": {"openfoam12-realizableKE": "scored", "openlb": "scored", "fluidx3d": "scored", "ml-surrogate": "scored"},
     "B": {"openfoam12-realizableKE": "scored", "openlb": "scored", "fluidx3d": "scored", "ml-surrogate": "scored"},
     "C": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "not comparable", "ml-surrogate": "scored"},
     "D": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "not comparable", "ml-surrogate": "scored"},
     "E": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "not comparable", "ml-surrogate": "scored"},
+    # Cases F to M: Eddy3D's fixtures for F, G, J, K, L and M are written and their solves are queued, so every engine is
+    # pending there; H and I have OpenFOAM runs (I under three closures). Nothing else has been run on F to M.
+    "F": dict(_NOT_RUN),
+    "G": dict(_NOT_RUN),
+    "H": {**_NOT_RUN, "openfoam12-realizableKE": "scored"},
+    "I": {**_NOT_RUN, "openfoam12-realizableKE": "scored", "openfoam12-kEpsilon": "scored", "openfoam12-kOmegaSST": "scored"},
+    "J": dict(_NOT_RUN),
+    "K": dict(_NOT_RUN),
+    "L": dict(_NOT_RUN),
+    "M": dict(_NOT_RUN),
 }
+ENGINE_STATUS = {c: {e["id"]: st[e["id"]] for e in ENGINES if e["id"] in st} for c, st in ENGINE_STATUS.items()}   # in ENGINES order
+QUEUED = "Eddy3D's fixture for this case is written and its solves are queued; no result exists yet."
+
+
+def case_engines(case):
+    """The engines that apply to a case, in ENGINES order: those with a status for it."""
+    return [e for e in ENGINES if e["id"] in ENGINE_STATUS[case]]
+
+
+MATRIX_ENGINES = [e for e in ENGINES if e["id"] not in CLOSURE_VARIANTS]
 
 # ----------------------------------------------------------------------------- runs
 # Every validation run snapshotted in validation/results/: its case, engine and configuration, the scores
@@ -186,7 +225,7 @@ PAIRS_H = ("point_id (the table's, the CSV's No.); x, y, z in m (case frame); U,
            "velocities divided by U_H (measured by the tunnel's 3.226 m/s, modelled by the 3.23 m/s the solve was driven with), k by U_H^2, V in the unified sign "
            "(positive toward +y); cstar_meas, the measured concentration ratio C/c0 (c0 = 45.18 ppm), and cstar_sct03 / _sct05 / _sct07, the modelled "
            "c* = c U_H H^2 / Q for turbulent Schmidt numbers 0.3, 0.5 and 0.7 (one row per published point, empty where the quantity was not measured)")
-PAIRS_I = ("instrument (ldv or hydrocarbon_analyzer), point_id (the table's: wind points 1-91, concentration points 92-630); x, y, z in m (case frame); U, V, W and k "
+PAIRS_I = ("instrument (ldv or hydrocarbon_analyser), point_id (the table's: wind points 1-91, concentration points 92-630); x, y, z in m (case frame); U, V, W and k "
            "measured (_meas: the cleaned workbook values; V is empty on the y = 0 plane) and modelled (_model), velocities by U_H = 1.7 m/s, k by U_H^2; cstar_meas, "
            "the measured C/c0 (c0 = 39.22 ppm), and cstar_sct03 / _sct05 / _sct07, the modelled c* for turbulent Schmidt numbers 0.3, 0.5 and 0.7 (a wind row has "
            "no concentration columns and a concentration row no velocity columns)")
@@ -361,7 +400,7 @@ COLUMN_MEANING = {
 ENDPOINTS = [
     ("index.json", "application/json", "index", "every endpoint and file with its size and SHA-256, versions, compatibility policy, changelog, licence, citation"),
     ("versions.json", "application/json", "versions", "every release, newest first: version, date, status (latest or superseded), schema and data version, base URL, tag, changelog; always at the unversioned /api/ path"),
-    ("cases.json", "application/json", "cases", "the five cases: id, title, frame, units, counts, engine status, links"),
+    ("cases.json", "application/json", "cases", "every case: id, title, frame, units, counts, engine status, links"),
     ("cases/{id}.json", "application/json", "case", "one case in full: configurations, frame, units, inflow fit and approach-flow profile, point-table summary, geometry files, validation status, known data issues, attribution"),
     ("cases/{id}/points.json", "application/json", "points", "the cleaned measurement table: SI units, one frame, null where not measured"),
     ("cases/{id}/points.csv", "text/csv", None, "the same table as CSV (empty cell = not measured)"),
@@ -522,8 +561,25 @@ def points_summary(rows):
     }
 
 
+# Boxes the case states (the building, the belt, the array), in the case frame. F's STL is a 725 m disc drawn as a polygon, so its
+# extent in y is short of the radius by up to 3 mm; M's and F's z start at -0.0 on the ground.
+BBOX_TOLERANCE = {"F": 0.01}
+EXPECTED_BBOX = {
+    "F": ([-725.0, -725.0, 0.0], [725.0, 725.0, 225.0]),               # the 725 m disc of terrain, the 225 m roof of the tallest tower (readme, STL)
+    "G": ([-2.0, -37.0, 1.2], [0.0, 37.0, 7.0]),                       # the belt: 2 m deep, 74 m long, 7 m tall, 1.2 m gap below
+    "H": ([-0.1, -0.05, 0.0], [0.0, 0.05, 0.2]),                       # the 0.10 x 0.10 x 0.20 m building, leeward face at x = 0
+    "I": ([-0.05, -0.05, 0.0], [0.05, 0.05, 0.1]),                     # the 0.1 m cube, centred on the origin
+    "J": ([-0.08, -0.04, 0.0], [0.0, 0.04, 0.16]),                     # b = 0.08 m, H = 0.16 m
+    "K": ([-0.36, -0.51, 0.0], [0.66, 0.51, 0.06]),                    # 9 x 9 cubes of 0.06 m on a 0.12 m pitch
+    "L": ([-0.96, -0.51, 0.0], [0.66, 0.51, 0.06]),                    # 14 x 9 cubes of 0.06 m on a 0.12 m pitch
+    "M": ([-540.0, -360.0, 0.0], [540.0, 360.0, 64.9152]),             # the 1.8 x 1.2 m model, x600
+}
+
+
 def expected_bbox(case, cfg):
     c = D.CASES[case]["configuration"]
+    if case in EXPECTED_BBOX:
+        return EXPECTED_BBOX[case]
     if case == "A":
         return [-c["b_m"] / 2, -c["b_m"] / 2, 0.0], [c["b_m"] / 2, c["b_m"] / 2, c["H_m"]]
     if case == "B":
@@ -558,7 +614,8 @@ def write_data(case):
         lo, hi = expected_bbox(case, cfg)
         ok = None
         if lo is not None:
-            ok = all(abs(a - b) < 1e-6 for a, b in zip(stats["bbox_min"], lo)) and all(abs(a - b) < 1e-6 for a, b in zip(stats["bbox_max"], hi))
+            tol = BBOX_TOLERANCE.get(case, 1e-6)
+            ok = all(abs(a - b) < tol for a, b in zip(stats["bbox_min"], lo)) and all(abs(a - b) < tol for a, b in zip(stats["bbox_max"], hi))
             if not ok:
                 raise SystemExit(f"geometry check failed for {case}/{cfg}: bbox {stats['bbox_min']}..{stats['bbox_max']} != {lo}..{hi}")
         if boxes is not None and not stats["watertight"]:
@@ -729,8 +786,20 @@ def configurations(case, rows):
     elif case == "E":
         for st in ("bc", "ac"):
             configs.append({"config": st, "wind_directions": D.COMPASS, "points_per_direction": sum(1 for r in rows if r["config"] == st and r["wind_direction"] == "N")})
-    else:
+    elif case in ("A", "B"):
         configs.append({"config": "default", "wind_direction_deg": 0.0, "points": len(rows)})
+    else:
+        # Cases F to M: one entry per campaign, instrument, run and direction the table holds, in table order.
+        groups = {}
+        for r in rows:
+            groups.setdefault((r["config"], r["campaign"], r["instrument"], r["run"], r["wind_direction"], r["wind_direction_deg"]), []).append(r)
+        for (cfg, camp, inst, run, name, wd), sel in groups.items():
+            c = {"config": cfg, "campaign": camp, "instrument": inst}
+            if run:
+                c["run"] = run
+            if name:
+                c["wind_direction"] = name
+            configs.append({**c, "wind_direction_deg": wd, "points": len(sel)})
     return configs
 
 
@@ -738,7 +807,7 @@ def write_case_documents(case, d):
     meta = D.CASES[case]
     summ = d["summ"]
     cols = summ["columns"]
-    units_label = "metres" + (" (full scale)" if case == "E" else " (model scale)")
+    units_label = "metres" + (" (full scale)" if case in D.FULL_SCALE else " (model scale)")
 
     write_json(f"cases/{case}/points.json", "points", {
         "case": case, "title": meta["title"],
@@ -775,10 +844,10 @@ def write_case_documents(case, d):
         "case": case, "title": meta["title"],
         "status": "scored" if results else "pending",
         "status_meaning": STATUS_MEANING,
-        "engines": [{"engine": e["id"], "status": ENGINE_STATUS[case][e["id"]]} for e in ENGINES],
+        "engines": [{"engine": e["id"], "status": ENGINE_STATUS[case][e["id"]]} for e in case_engines(case)],
         "results": results,
         "note": (None if results else "No validation has been run for this case yet; results is an empty list. "
-                 "Nothing on this page is a claim about this case."),
+                 f"Nothing on this page is a claim about this case. {QUEUED}"),
     })
 
     configs = configurations(case, d["rows"])
@@ -831,8 +900,8 @@ def write_cases_index(percase):
 
 
 def write_geometry_index(data):
-    """One index of every STL. The STLs are NOT merged into one scene: each case has its own origin, A-D are
-    model scale while E is full scale (about 1000 times larger), and C's three centre-block variants and E's
+    """One index of every STL. The STLs are NOT merged into one scene: each case has its own origin, E, F, G and M are
+    full scale (hundreds of times larger than the model-scale cases), and C's three centre-block variants and E's
     before/after states are alternatives that cannot share one CFD domain."""
     items = []
     for case in D.CASE_IDS:
@@ -841,7 +910,7 @@ def write_geometry_index(data):
             items.append({
                 "case": case, "configuration": g["configuration"], **download(g["rel"]),
                 "archive_name": archive_name(case, g["configuration"]),
-                "units": "metres" + (" (full scale)" if case == "E" else " (model scale)"),
+                "units": "metres" + (" (full scale)" if case in D.FULL_SCALE else " (model scale)"),
                 "frame": {k: meta["frame"][k] for k in ("origin", "x", "y", "z")},
                 "bbox_min": g["stats"]["bbox_min"], "bbox_max": g["stats"]["bbox_max"],
                 "triangles": g["stats"]["triangles"], "watertight": g["stats"]["watertight"],
@@ -850,8 +919,8 @@ def write_geometry_index(data):
     write_json("geometry.json", "geometry-index", {
         "description": ("Every cleaned STL, one entry per case and configuration. Each file is in its own case's frame "
                         "and units — points.json of the same case lives in that frame — so they are deliberately not one "
-                        "scene: overlaid, the cases would stack at the origin, and Case E is full scale while A-D are "
-                        "model scale. geometry.zip holds the same files under archive_name."),
+                        "scene: overlaid, the cases would stack at the origin, and Cases E, F, G and M are full scale while the "
+                        "others are model scale. geometry.zip holds the same files under archive_name."),
         "archive": download("geometry.zip"),
         "files": items,
     })
@@ -861,7 +930,7 @@ def write_validation_summary(percase):
     cases = []
     for case in D.CASE_IDS:
         engines = []
-        for e in ENGINES:
+        for e in case_engines(case):
             runs = []
             for res in percase[case]["results"]:
                 if res["engine"] != e["id"]:
@@ -940,13 +1009,13 @@ def write_openapi():
         "openapi": "3.1.0",
         "jsonSchemaDialect": S.DRAFT,
         "info": {"title": "AIJ UWE benchmark — cleaned data API", "version": SCHEMA_VERSION,
-                 "summary": "Wind-tunnel reference data of the AIJ UWE benchmark (Cases A-E), cleaned, with Eddy3D's validation against it.",
+                 "summary": f"Wind-tunnel and field reference data of the AIJ UWE benchmark (Cases {CASE_SPAN}), cleaned, with Eddy3D's validation against it.",
                  "description": ("Static files, one GET each; nothing is computed on request. Lengths in metres, velocities in "
                                  "m/s, variances and k in m^2/s^2, in one frame per case. " + COMPATIBILITY + " " + CACHING),
                  "license": {"name": D.LICENSE["name"], "identifier": D.LICENSE["spdx"]}},
         "servers": [{"url": API_BASE, "description": ("release " + RELEASE + ", frozen" if TREE == "release" else "the latest release")},
                     {"url": FALLBACK_BASE, "description": "the same files, raw from the repository (fallback)"}],
-        "tags": [{"name": "discovery", "description": "where everything is"}, {"name": "cases", "description": "the five cases"},
+        "tags": [{"name": "discovery", "description": "where everything is"}, {"name": "cases", "description": f"the {len(D.CASE_IDS)} cases"},
                  {"name": "points", "description": "measurement tables"}, {"name": "geometry", "description": "STL geometry"},
                  {"name": "validation", "description": "Eddy3D's scores and the per-point pairs behind them"}],
         "paths": paths,
@@ -959,8 +1028,8 @@ def llms_text(percase):
     walk = [
         "# AIJ UWE benchmark — cleaned data API",
         "",
-        "> Wind-tunnel reference data from the Architectural Institute of Japan Urban Wind Environment (UWE)",
-        "> benchmark, Cases A-E, cleaned into one schema, plus Eddy3D's validation against it. Static files, plain GET.",
+        "> Wind-tunnel and field reference data from the Architectural Institute of Japan Urban Wind Environment (UWE)",
+        f"> benchmark, Cases {CASE_SPAN}, cleaned into one schema, plus Eddy3D's validation against it. Static files, plain GET.",
         "",
         f"Base URL: {API_BASE}",
         f"Fallback (raw files from the repository): {FALLBACK_BASE}",
@@ -976,13 +1045,15 @@ def llms_text(percase):
         "## How to use this",
         "",
         "1. GET index.json — every endpoint and file (with size and SHA-256), versions, changelog, citation.",
-        "2. GET cases.json — the five cases with their frame, units, counts and links. Pick an id (A, B, C, D, E).",
+        f"2. GET cases.json — every case with its frame, units, counts and links. Pick an id ({', '.join(D.CASE_IDS)}).",
         "3. GET cases/{id}.json — read `frame`, `units` and `known_issues` BEFORE the numbers; they differ per case.",
-        "4. GET cases/{id}/points.json (or points.csv) — every value is SI (m, m/s, m^2/s^2) in ONE frame per case;",
-        "   unmeasured values are null. Case E's quantity is a dimensionless velocity ratio.",
-        "5. GET cases/{id}/geometry.stl — ASCII STL in metres, outward normals, origin at the building / array centre,",
-        "   +x along the wind at WD = 0 (Cases A-D). Case E keeps its geographic frame (+x east, +y north, full-scale metres).",
-        "   geometry.json lists the boxes where the geometry IS boxes (A, B, C, D), so you need not parse the STL at all.",
+        "4. GET cases/{id}/points.json (or points.csv) — every value is SI (m, m/s, m^2/s^2; concentrations in ppm, temperatures in",
+        "   degC) in ONE frame per case; unmeasured values are null. Cases E, F and G publish dimensionless ratios (velocity_ratio,",
+        "   k_ratio), not speeds in m/s; Case M has wind-tunnel and field rows (`campaign`). Read `units` and the normalisation first.",
+        "5. GET cases/{id}/geometry.stl — ASCII STL in metres, outward normals, in the case's own frame (cases/{id}.json `frame`).",
+        "   Cases A-D and H-L are model-scale with +x along the wind at WD = 0; E to G and M are full-scale: E and F keep their",
+        "   geographic frame (+x east, +y north), G has +x downwind, and M has +x north and +y west.",
+        "   geometry.json lists the boxes where the geometry IS boxes (A, B, C, D, G, H, I, J, K, L), so you need not parse the STL at all.",
         "6. GET validation.json for every case and engine at once, or cases/{id}/validation.json for one case in full.",
         "   Quote the `headline` scores. An engine whose status is not \"scored\" has NO result for that case: do not",
         "   infer one. \"scored\" means a run exists, not that it agrees — read the numbers. Each result's `pairs` is",
@@ -1049,11 +1120,12 @@ def write_dataset_jsonld(percase):
     dataset = {
         "@context": "https://schema.org",
         "@type": "Dataset",
-        "name": "AIJ Urban Wind Environment benchmark, Cases A-E — cleaned wind-tunnel data",
-        "description": ("Wind-tunnel reference data of the Architectural Institute of Japan Urban Wind Environment (UWE) "
-                        "benchmark, Cases A-E — an isolated 1:1:2 building, an isolated 1:4:4 slab, a 3 x 3 block array, a "
-                        "high-rise among city blocks, and a district of Niigata before and after a high-rise — cleaned into "
-                        "SI units and one frame per case, with cleaned STL geometry and Eddy3D's CFD validation scores."),
+        "name": f"AIJ Urban Wind Environment benchmark, Cases {CASE_SPAN} — cleaned wind-tunnel and field data",
+        "description": ("Wind-tunnel and field reference data of the Architectural Institute of Japan Urban Wind Environment (UWE) "
+                        f"benchmark, Cases {CASE_SPAN} — isolated buildings and arrays of blocks and cubes, a high-rise among city "
+                        "blocks, districts of Niigata, Shinjuku and Atsugi, a tree belt, and tracer-gas dispersion around buildings and cube "
+                        "arrays, some non-isothermal — cleaned into SI units and one frame per case, with cleaned STL geometry and "
+                        "Eddy3D's CFD validation scores where they exist."),
         "url": SITE + "/",
         "sameAs": REPO_URL,
         "version": RELEASE,
@@ -1061,13 +1133,14 @@ def write_dataset_jsonld(percase):
         "license": D.LICENSE["url"],
         "isAccessibleForFree": True,
         "keywords": ["computational fluid dynamics", "CFD validation", "wind tunnel", "urban wind environment",
-                     "pedestrian wind", "Architectural Institute of Japan", "benchmark"],
+                     "pedestrian wind", "tracer gas dispersion", "Architectural Institute of Japan", "benchmark"],
         "creator": [{"@type": "Person", "name": n.split(" (")[0]} for n in editors],
         "citation": D.CITATION["benchmark"],
         "isBasedOn": [f"https://doi.org/{D.CASES[c]['doi']}" for c in D.CASE_IDS if D.CASES[c]["doi"]],
-        "measurementTechnique": ["hot-wire anemometry (split-fibre probes)", "thermistor anemometry"],
+        "measurementTechnique": ["hot-wire anemometry (split-fibre probes)", "thermistor anemometry", "laser Doppler velocimetry",
+                                 "sonic and cup anemometry (field)", "hydrocarbon analyser and sorbent-tube sampling (tracer gas)"],
         "variableMeasured": ["mean velocity components U, V, W", "velocity variances", "turbulent kinetic energy k",
-                             "mean scalar wind speed", "velocity ratio"],
+                             "mean scalar wind speed", "velocity ratio", "tracer-gas concentration", "air temperature and turbulent fluxes"],
         "distribution": [
             {"@type": "DataDownload", "name": f"{D.CASES[c]['title']}, measurement table",
              "encodingFormat": "text/csv", "contentUrl": download(f"cases/{c}/points.csv")["url"]} for c in D.CASE_IDS
@@ -1130,7 +1203,7 @@ def write_index():
     write_json("index.json", "index", {
         "name": "AIJ UWE benchmark — cleaned data API",
         "description": ("Static JSON/CSV/STL endpoints for the Architectural Institute of Japan Urban Wind Environment "
-                        "benchmark (Cases A-E) and Eddy3D's validation against it. Every file is a plain HTTP GET; nothing is computed on request."),
+                        f"benchmark (Cases {CASE_SPAN}) and Eddy3D's validation against it. Every file is a plain HTTP GET; nothing is computed on request."),
         "base_url": API_BASE,
         "tree": TREE,
         "release_base_url": PINNED_BASE,
@@ -1320,13 +1393,14 @@ def _cell(text):
 
 
 def _md_value(v):
+    """A configuration value as the text of one table cell: escaped once (the cell's pipes too, as in |y|)."""
     if isinstance(v, dict):
         return "<br>".join(f"**{_esc(_label(k))}**: {_md_value(x)}" for k, x in v.items())
     if isinstance(v, list):
-        return ", ".join(_esc(x) for x in v)
+        return ", ".join(_cell(x) for x in v)
     if isinstance(v, int) and not isinstance(v, bool) and abs(v) >= 10000:
         return f"{v:,}"
-    return _esc(v)
+    return _cell(v)
 
 
 def _asset(rel):
@@ -1383,7 +1457,8 @@ RENDER_GROUP_CAPTIONS = {
     "E": "The two states, on one scale (full-scale metres, +x east, +y north); the arrow marks SW, the direction Eddy3D is scored at.",
 }
 
-ENGINE_SHORT = {"openfoam12-realizableKE": "OpenFOAM 12", "openlb": "OpenLB", "fluidx3d": "FluidX3D", "ml-surrogate": "ML surrogate"}
+ENGINE_SHORT = {"openfoam12-realizableKE": "OpenFOAM 12", "openfoam12-kEpsilon": "OpenFOAM 12 k-ε", "openfoam12-kOmegaSST": "OpenFOAM 12 k-ω SST",
+                "openlb": "OpenLB", "fluidx3d": "FluidX3D", "ml-surrogate": "ML surrogate"}
 STATUS_CLASS = {"scored": "label-green", "running": "label-blue", "pending": "label-yellow", "not comparable": "label-grey"}
 # Where the hand-written validation pages show each figure, beside its reading. A case's own Validation page links
 # there instead of repeating the figure, so a figure is on the site once. A figure that is not listed is shown on the
@@ -1398,6 +1473,8 @@ FIGURE_HOME = {
     "case-d-openfoam-agreement.png": ("/validation/case-d/", "Case D (OpenFOAM)"),
     "case-e-openfoam-agreement.png": ("/validation/case-e/", "Case E (OpenFOAM)"),
     "case-e-openfoam-bias-map.png": ("/validation/case-e/", "Case E (OpenFOAM)"),
+    "cases-hi-openfoam-agreement.png": ("/validation/cases-hi/", "Cases H and I (OpenFOAM)"),
+    "case-i-openfoam-closures.png": ("/validation/cases-hi/", "Cases H and I (OpenFOAM)"),
     "ml-surrogate-agreement.png": ("/validation/ml-surrogate/", "ML surrogate"),
 }
 ALL_CASES_FIGURE_MIN = 3
@@ -1411,7 +1488,7 @@ GLANCE = [("building", "array", "tower", "district"), ("scale",), ("Re_H", "Re_D
           ("wind_directions", "wind_directions_deg"), ("measurement_height_m", "measurement_planes")]
 # The hand-written page that reads a case's results (a case without one is read on the Validation overview).
 READING_PAGES = {"A": "/validation/cases-ab/", "B": "/validation/cases-ab/", "C": "/validation/case-c/",
-                 "D": "/validation/case-d/", "E": "/validation/case-e/"}
+                 "D": "/validation/case-d/", "E": "/validation/case-e/", "H": "/validation/cases-hi/", "I": "/validation/cases-hi/"}
 
 
 def _engine_name(engine_id):
@@ -1525,7 +1602,7 @@ def build_cases_table(percase):
     for case in D.CASE_IDS:
         meta = D.CASES[case]
         summ = percase[case]["summ"]
-        scored = [_engine_name(e["id"]) for e in ENGINES if ENGINE_STATUS[case][e["id"]] == "scored"]
+        scored = [_engine_name(e["id"]) for e in case_engines(case) if ENGINE_STATUS[case][e["id"]] == "scored"]
         measured = f"{summ['rows']:,} rows over {summ['distinct_points']:,} points; {_cell(', '.join(meta['quantities']))}"
         L.append(f"| {_link(_cell(meta['title']), _page_url(meta['slug']))} | {_cell(meta['short'])} | {measured} | "
                  f"{', '.join(scored) if scored else 'none yet'} |")
@@ -1548,11 +1625,11 @@ def build_validation_matrix(percase):
     """docs/_includes/validation-matrix.md: every case against every engine, status and the range of the headline
     R and FAC2 (negative controls excluded). Five columns of short cells: it needs no sideways scrolling."""
     L = ["<!-- Generated by scripts/build_api.py. -->", "",
-         "| Case | " + " | ".join(_engine_name(e["id"]) for e in ENGINES) + " |", "|---" * (len(ENGINES) + 1) + "|"]
+         "| Case | " + " | ".join(_engine_name(e["id"]) for e in MATRIX_ENGINES) + " |", "|---" * (len(MATRIX_ENGINES) + 1) + "|"]
     for case in D.CASE_IDS:
         meta = D.CASES[case]
         cells = []
-        for e in ENGINES:
+        for e in MATRIX_ENGINES:
             status = ENGINE_STATUS[case][e["id"]]
             entries = [r for r in percase[case]["results"] if r["engine"] == e["id"]]
             cell = status_label(status)
@@ -1563,6 +1640,18 @@ def build_validation_matrix(percase):
             cells.append(cell)
         L.append(f"| {_link(_cell(meta['title']), _page_url(meta['slug'], 'validation'))} | " + " | ".join(cells) + " |")
     _write("_includes/validation-matrix.md", L)
+
+
+def build_known_issues():
+    """docs/_includes/known-issues-fm.md: the known issues of the cases whose sections are not hand-written (F to M), one
+    section per case, from the same lists the Data pages and llms.txt carry."""
+    L = ["<!-- Generated by scripts/build_api.py from each case's known_issues. -->", ""]
+    for case in D.CASE_IDS:
+        if case in "ABCDE":
+            continue
+        meta = D.CASES[case]
+        L += [f"## Case {case}", "", f"{_esc(meta['title'])}.", ""] + [f"- {_esc(g)}" for g in meta["known_issues"]] + [""]
+    _write("_includes/known-issues-fm.md", L)
 
 
 def build_version_label():
@@ -1612,12 +1701,12 @@ def _case_page(case, meta, p, shared):
     for keys in GLANCE:
         key = next((k for k in keys if k in conf), None)
         if key:
-            L.append(f"| {_cell(_label(key))} | {_cell(_md_value(conf[key]))} |")
+            L.append(f"| {_cell(_label(key))} | {_md_value(conf[key])} |")
     L.append(f"| Measured | {summ['rows']:,} rows over {summ['distinct_points']:,} points: {_cell(', '.join(meta['quantities']))} |")
     L += ["", "## Agreement with the tunnel", ""]
     if results:
         L += ["| Engine | Status | R | FAC2 |", "|---|---|---|---|"]
-        for e in ENGINES:
+        for e in case_engines(case):
             ranges = _headline_ranges([r for r in results if r["engine"] == e["id"]])
             L.append(f"| {_engine_name(e['id'])} | {status_label(ENGINE_STATUS[case][e['id']])} | "
                      + (" | ".join((_range(ranges["R"], True), _range(ranges.get("Fac2"), False))) if ranges else "— | —") + " |")
@@ -1626,7 +1715,7 @@ def _case_page(case, meta, p, shared):
               "negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: "
               f"every score, its figures and its reading are on the {_link('Validation page', val_url)}.", ""]
     else:
-        L += ["**No validation has been run for this case yet.** Nothing on this page is a claim about it. Engine status: "
+        L += [f"**No validation has been run for this case yet.** Nothing on this page is a claim about it. {QUEUED} Engine status: "
               + " · ".join(f"{_engine_name(k)} {status_label(v)}" for k, v in ENGINE_STATUS[case].items()), ""]
     traps = _frame_traps(meta)
     L += ["{: .warning-title }", "> Before you compare", ">",
@@ -1730,7 +1819,7 @@ def _case_validation_page(case, meta, p, shared):
     L += [f"# Case {case}: validation", "{: .no_toc }", ""]
     L += ["Engine status: " + " · ".join(f"{_engine_name(k)} {status_label(v)}" for k, v in ENGINE_STATUS[case].items()), ""]
     if not results:
-        L += ["**No validation has been run for this case yet.** Nothing on this page is a claim about it.", ""]
+        L += [f"**No validation has been run for this case yet.** Nothing on this page is a claim about it. {QUEUED}", ""]
         return L
     L += ["*Scored* means a run exists and its scores are below, not that it agrees. How to read them is on "
           f"{_link('the reading page', READING_PAGES.get(case, '/validation/'))}; the "
@@ -1782,6 +1871,7 @@ def build_pages(percase):
     build_cases_table(percase)
     build_cases_frames()
     build_validation_matrix(percase)
+    build_known_issues()
     build_version_label()
     for case in D.CASE_IDS:
         meta, p = D.CASES[case], percase[case]

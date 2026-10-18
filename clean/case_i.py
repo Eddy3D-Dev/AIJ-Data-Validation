@@ -41,7 +41,7 @@ META = {
                       "the paper rounds it to 39.2) = q / (U_H H^2) for q = the ETHANE flow, 10 % of the 400 cc/min released (6.67e-7 m3/s), not the 6.67e-6 m3/s the paper quotes for the mixture."),
 }
 
-INSTRUMENT_W, INSTRUMENT_C = "ldv", "hydrocarbon_analyzer"
+INSTRUMENT_W, INSTRUMENT_C = "ldv", "hydrocarbon_analyser"
 QUANTITY = {INSTRUMENT_W: ["U", "V", "W"], INSTRUMENT_C: ["C"]}
 
 
@@ -113,7 +113,7 @@ def build(B, prov):
         out.append(B.row(case_id=c, instrument=INSTRUMENT_W, point_id=n, x=r.x, y=r.y, z=r.z, U=w.U, V=v, W=w.W, k=w.TKE))
     for n, (r, w) in enumerate(zip(cc.itertuples(), cc_wb), start=len(cw) + 1):
         out.append(B.row(case_id=c, instrument=INSTRUMENT_C, point_id=n, x=r.x, y=r.y, z=r.z, C=w.C, concentration_ratio=w.C / c0))
-    B.log("[I] transform: one row per (instrument, point); wind rows (ldv: U V W k) numbered 1-91 and concentration rows (hydrocarbon_analyzer: C, C/c0) numbered 92-630, each in its CSV's row order; "
+    B.log("[I] transform: one row per (instrument, point); wind rows (ldv: U V W k) numbered 1-91 and concentration rows (hydrocarbon_analyser: C, C/c0) numbered 92-630, each in its CSV's row order; "
           f"values from the workbook (the CSVs agree to their 3 dp / 1 dp rounding); V on the y = 0 plane ({vy0} points) set to NaN: the workbook has |V| < 4e-6 m/s there, a symmetry value, not a measurement")
     pts = pd.DataFrame(out, columns=B.POINT_COLUMNS)
     W_, C_ = pts[pts.instrument == INSTRUMENT_W], pts[pts.instrument == INSTRUMENT_C]

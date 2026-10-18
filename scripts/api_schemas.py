@@ -50,7 +50,7 @@ METRIC = obj(["Count", "Fb", "R"], {
     "Mg": NUM_OR_NULL, "Vg": NUM_OR_NULL, "GeometricPairs": {"type": ["integer", "null"]}, "R": NUM_OR_NULL,
 })
 
-ENGINE_ID = {"enum": ["openfoam12-realizableKE", "openlb", "fluidx3d", "ml-surrogate"]}
+ENGINE_ID = {"enum": ["openfoam12-realizableKE", "openfoam12-kEpsilon", "openfoam12-kOmegaSST", "openlb", "fluidx3d", "ml-surrogate"]}
 STATUS = {"enum": ["scored", "running", "pending", "not comparable"]}
 CASE_ID = {"enum": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"]}
 
@@ -130,7 +130,7 @@ DOCUMENTS = {
             "note": {"type": "string"},
             "tag": {"type": "string", "pattern": r"^v\d+\.\d+\.\d+$"}, "tag_url": URL, "changelog_url": URL}), minItems=1),
     }),
-    "cases": _doc("cases", "Case list", "The five cases with their frame, units, counts, engine status and links.", ["cases"], {
+    "cases": _doc("cases", "Case list", "Every case with its frame, units, counts, engine status and links.", ["cases"], {
         "cases": arr(obj(["id", "slug", "title", "frame", "units", "counts", "engines", "links"], {
             "id": CASE_ID, "slug": {"type": "string"}, "title": {"type": "string"}, "summary": {"type": "string"},
             "frame": FRAME, "units": {"type": "object"},
@@ -139,7 +139,7 @@ DOCUMENTS = {
             "doi": STR_OR_NULL,
             "links": obj(["case", "points", "points_csv", "geometry", "geometry_stl", "validation"],
                          {k: URL for k in ("case", "points", "points_csv", "geometry", "geometry_stl", "validation", "page", "render")}),
-        }), minItems=5, maxItems=5),
+        }), minItems=len(CASE_ID["enum"]), maxItems=len(CASE_ID["enum"])),
     }),
     "case": _doc("case", "Case", "One case in full: configuration, frame, units, inflow, point-table summary, geometry, validation status, "
                  "known data issues and attribution.",
@@ -222,7 +222,7 @@ DOCUMENTS = {
                         "label": {"type": "string"}, "score": {"type": "string"}, "Count": {"type": "integer"},
                         "R": NUM_OR_NULL, "Fac2": NUM_OR_NULL, "Fb": NUM_OR_NULL, "HitRate": NUM_OR_NULL}))})),
             })),
-        }), minItems=5, maxItems=5),
+        }), minItems=len(CASE_ID["enum"]), maxItems=len(CASE_ID["enum"])),
     }),
 }
 

@@ -41,7 +41,7 @@ META = {
                       "The workbook's reference speed U0 = 5.279 m/s is the free stream, not U_H."),
 }
 
-INSTRUMENT_V, INSTRUMENT_C = "split_fibre", "hydrocarbon_analyzer"
+INSTRUMENT_V, INSTRUMENT_C = "split_fibre", "hydrocarbon_analyser"
 QUANTITY = {INSTRUMENT_V: ["U", "V", "W"], INSTRUMENT_C: ["C"]}
 
 
@@ -129,7 +129,7 @@ def build(B, prov):
                              uu=(m.urms * uH) ** 2, vv=(m.vrms * uH) ** 2, ww=(m.wrms * uH) ** 2, k=m.k * uH ** 2))
         if not math.isnan(m.c):
             out.append(B.row(case_id=c, instrument=INSTRUMENT_C, point_id=r.No, x=r.x, y=r.y, z=r.z, C=m.c, c_rms=m.sc, concentration_ratio=m.c / c0))
-    B.log("[H] transform: one row per (instrument, point): split_fibre rows carry U V W uu vv ww k, hydrocarbon_analyzer rows carry C c_rms concentration_ratio; the CSV's "
+    B.log("[H] transform: one row per (instrument, point): split_fibre rows carry U V W uu vv ww k, hydrocarbon_analyser rows carry C c_rms concentration_ratio; the CSV's "
           "-999.9 and the workbook's blanks mean the instrument was not run on that line, and such rows are omitted; point_id = the CSV's No.; values = workbook x uH; V of the vertical-plane sheet (point numbers 1-220) is multiplied by -1 (checks vertical_plane_V_*)")
     pts = pd.DataFrame(out, columns=B.POINT_COLUMNS)
 
