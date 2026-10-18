@@ -3,7 +3,7 @@ title: "For agents"
 parent: API
 nav_order: 3
 permalink: /agents/
-description: "A walk through the AIJ UWE benchmark API for scripts and AI agents, and the rules that keep a comparison honest."
+description: "A walk through the AIJ UWE benchmark API for scripts and AI agents, and the rules for a comparison."
 ---
 
 # Using this from an agent or a script
@@ -34,11 +34,11 @@ names in `$schema`.
 5. **`GET /api/cases/{id}/geometry.json`**, then the STL it links: metres, outward normals, origin at the building or
    array centre. Where the geometry is boxes (A–D and G–L), the JSON carries the box list, so you need not parse STL.
 6. **`GET /api/validation.json`**: every case and engine in one table. **An engine whose status is not `scored` has
-   no result for that case; do not infer one.** `scored` means a run exists, not that it agrees. For one case in
-   full, `GET /api/cases/{id}/validation.json`: every score, the `headline` scores to quote, the figures, and
+   no result for that case; do not infer one.** For one case in full,
+   `GET /api/cases/{id}/validation.json`: every score, the `headline` scores to quote, the figures, and
    `pairs`, the per-point measured and modelled values behind the scores.
 
-## Rules that keep a comparison honest
+## Rules for a comparison
 
 - Pin the release when a result must be reproducible. Take the `base_url` of the release you used from
   `/api/versions.json` (for example `.../api/3.0.0`) and fetch every path from it instead of from `/api/`. The

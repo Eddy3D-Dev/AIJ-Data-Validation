@@ -17,7 +17,6 @@ the files; its **Validation** page has the scores by engine and the figures. The
 
 ## Frames and units
 
-Each case has its own frame and unit. Read these before putting two cases in one comparison; the API's
-`points.json` and STL files of a case share its frame.
+Each case has its own frame and unit. The API's `points.json` and STL files of a case share its frame.
 
 {% include cases-frames.md %}

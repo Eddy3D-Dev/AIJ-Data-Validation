@@ -21,11 +21,6 @@ benchmark, Cases A to M, cleaned and packaged case by case, with Eddy3D's valida
 
 {% include cases-table.md %}
 
-*Scored by* names the engines with a published run for the case. *Scored* means a run exists and its scores are served,
-not that it agrees: how well it agrees is in the numbers and their reading on the
-[Validation]({{ '/validation/' | relative_url }}) pages. An engine that is not listed has no result for the case, and
-nothing here is a claim about it.
-
 ## Where to go
 
 - **[Cases]({{ '/cases/' | relative_url }})**: a page per case with its render, status and key numbers, then its reference data and its validation.
