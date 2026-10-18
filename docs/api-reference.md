@@ -1,7 +1,9 @@
 ---
-title: API
+title: "API"
 nav_order: 5
 permalink: /api-reference/
+has_children: true
+description: "The static JSON, CSV and STL API of the AIJ UWE benchmark: conventions, endpoints, examples, versions."
 ---
 
 # API
@@ -22,7 +24,7 @@ cleaned data and served by GitHub Pages. Plain HTTP GET, no keys, CORS-open (`Ac
 | Key | Meaning |
 |---|---|
 | `$schema` | the URL of the document's JSON Schema (draft 2020-12). The build validates every document against it. |
-| `schema_version` | the version of this JSON contract, semantic versioning (see [Versioning](#versioning-and-changes)). The release of the data is `versions.release` in `index.json`. |
+| `schema_version` | the version of this JSON contract, semantic versioning (see [Versions and changes]({{ '/api-reference/versions/' | relative_url }})). The release of the data is `versions.release` in `index.json`. |
 | `data_version` | a SHA-256 over every served measurement, geometry and score file. It changes when, and only when, the data changes. Quote it with any number you take from here. |
 | `license` | `CC-BY-4.0`, the SPDX identifier. The data belongs to its collectors; cite them (see *Cite* on the home page). |
 
@@ -47,7 +49,7 @@ URLs to fetch. In `index.json` such an endpoint says `templated: true` and lists
 `urls`, for example `.../api/schemas/case.schema.json`. A single-file endpoint carries one `url`.
 
 **Errors.** A path that does not exist returns HTTP 404 with GitHub Pages' HTML page, not JSON. Case ids are
-`A`–`E`. The other path parameters are enumerated in `openapi.json`.
+listed in `cases.json`. The other path parameters are enumerated in `openapi.json`.
 
 **Clients.** The custom domain is served through Cloudflare, which rejects some clients with HTTP 403. These
 include Python's `urllib` with its default User-Agent and some AI crawlers; `curl`, `wget`, `requests`, `httpx` and
@@ -62,7 +64,7 @@ certificate type. The body is ASCII STL regardless; read it as such.
 | Endpoint | What it returns |
 |---|---|
 | [`GET /api/index.json`]({{ '/api/index.json' | relative_url }}) | every endpoint and every file with its size and SHA-256; versions, compatibility policy, changelog, licence, citation |
-| [`GET /api/cases.json`]({{ '/api/cases.json' | relative_url }}) | the five cases: id, title, frame, units, counts, engine status, links |
+| [`GET /api/cases.json`]({{ '/api/cases.json' | relative_url }}) | every case: id, title, frame, units, counts, engine status, links |
 | `GET /api/cases/{id}.json` | one case in full: configurations (Case C's 9, Case E's before/after), frame, units, inflow fit and approach-flow profile, point-table summary, geometry files, validation status, `known_issues`, attribution |
 | `GET /api/cases/{id}/points.json` | the cleaned measurement table: SI units, one frame, `null` where not measured; `columns` and `column_meaning` define each field |
 | `GET /api/cases/{id}/points.csv` | the same table as CSV (an empty cell is `null`) |
@@ -95,150 +97,5 @@ An engine that is not `scored` has no result for that case.
 | D | 267 rows: 234 thermistor (78 points × 3 directions, 36 unmeasured) and 33 split-fibre with U, V, W, uu, vv, ww, k | 83 boxes, 996 triangles, watertight, rebuilt from the shipped STL | ML surrogate; OpenFOAM solving |
 | E | 2,560 rows: velocity ratio over `config` bc/ac × 16 directions × 80 points; full-scale metres | 2 STLs from the 3dm (before: 8,400 triangles; after: 8,436), outward-oriented; not watertight (touching buildings share edges) | OpenFOAM 12 realizable k-ε, wind from SW, before and after; ML surrogate |
 
-## Examples
-
-### curl
-
-```bash
-BASE=https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api
-
-curl -s $BASE/index.json | jq '.versions, (.endpoints[].path)'
-curl -s $BASE/cases.json | jq '.cases[] | {id, title, counts, engines}'
-curl -s $BASE/cases/B.json | jq '{frame, units, known_issues}'
-curl -s $BASE/validation.json | jq '.cases[] | {case, engines: [.engines[] | {engine, status}]}'
-
-# Downloads: take the URL from the document, then check the SHA-256.
-url=$(curl -s $BASE/cases/B.json | jq -r '.points.csv.url')
-sha=$(curl -s $BASE/cases/B.json | jq -r '.points.csv.sha256')
-curl -s -o caseB.csv "$url" && echo "$sha  caseB.csv" | sha256sum -c -
-
-curl -s $BASE/cases/D/geometry.json | jq '.files[0].boxes | length'      # 83
-curl -s $BASE/cases/C/validation.json | jq '.results[] | {run_id, headline}'
-curl -s -o aij_geometry.zip "$(curl -s $BASE/geometry.json | jq -r '.archive.url')"
-```
-
-### Python
-
-Standard library only. This script runs as written against the live API.
-
-```python
-import csv, hashlib, io, json, statistics, urllib.request
-
-BASE = "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api"
-
-
-def fetch(url):
-    # A descriptive User-Agent: the site's CDN rejects urllib's default one (see Clients above).
-    req = urllib.request.Request(url, headers={"User-Agent": "aij-uwe-example/1.0"})
-    with urllib.request.urlopen(req) as r:
-        return r.read()
-
-
-def get_json(path):
-    return json.loads(fetch(f"{BASE}/{path}"))
-
-
-def download(d):
-    """Fetch a download object and check it arrived intact."""
-    body = fetch(d["url"])
-    assert hashlib.sha256(body).hexdigest() == d["sha256"], f"{d['path']} is corrupt or stale"
-    return body
-
-
-index = get_json("index.json")
-print(index["versions"])                              # API version, data version (a SHA-256 of the data)
-
-case = get_json("cases/B.json")
-print(case["frame"]["x"])                             # read the frame and the known issues BEFORE the numbers
-print(case["known_issues"][0][:80])
-
-pts = get_json("cases/B/points.json")
-U_H = case["configuration"]["U_H_m_s"]
-centre = [p for p in pts["points"] if abs(p["y"]) < 1e-9 and p["U"] is not None]
-print(len(centre), "centre-plane points; U/U_H at the first:", round(centre[0]["U"] / U_H, 3))
-
-rows = list(csv.DictReader(io.StringIO(download(case["points"]["csv"]).decode())))
-print(len(rows), "rows in points.csv; columns", list(rows[0]))
-
-geom = get_json("cases/D/geometry.json")
-print(len(geom["files"][0]["boxes"]), "boxes in Case D")       # boxes where the geometry is boxes: no STL parsing
-stl = download(geom["files"][0])                                # ...or the STL itself, checked against its SHA-256
-
-summary = get_json("validation.json")                           # every case and engine in one table
-for c in summary["cases"]:
-    print(c["case"], {e["engine"]: e["status"] for e in c["engines"]})
-
-# Recompute a published score from the per-point pairs behind it.
-val = get_json("cases/A/validation.json")
-run = next(r for r in val["results"] if r["run_id"] == "A.openfoam12-realizableKE")
-pairs = list(csv.DictReader(io.StringIO(download(run["pairs"]).decode())))
-R = statistics.correlation([float(p["U_meas"]) for p in pairs], [float(p["U_model"]) for p in pairs])
-print("R of U/U_H recomputed:", round(R, 4), "published:", round(run["scores"]["velocity.U"]["R"], 4))
-```
-
-The last line prints `R of U/U_H recomputed: 0.9548 published: 0.9548`.
-
-### Geometry conventions
-
-- Metres. A–D are model scale, the scale the tunnel measured at. E is full scale, the scale of its 3dm and
-  workbook. `units` in `geometry.json` states which.
-- The origin is the building centre (A, B) or the array centre (C, D) on the ground plane. For E it is the centre
-  of the reproduced area.
-- +x runs along the wind at WD = 0 for A–D. E keeps its geographic frame (+x east, +y north), and its directions
-  are meteorological: the direction the wind comes **from**, N = 0°, clockwise.
-- Outward normals, LF line endings, one `solid` per file. A–D are watertight; E's buildings touch, so its shells
-  share edges and are not.
-- The build checks every STL: triangle count, edge-manifold census, and the bounding box against the stated
-  dimensions. `validation/render_geometry.py` draws each one from the same code that writes it, and those are the
-  renders on the case pages.
-
-## Versioning and changes
-
-Two semantic versions and one fingerprint, all in `index.json` under `versions`:
-
-| | what it versions | moves when |
-|---|---|---|
-| `versions.release` | what is served: the API files and the cleaned tables, as one release (the repository's `VERSION`, tag `vX.Y.Z`) | MAJOR: a file, field or column renamed or removed, a CSV column added or reordered, a unit or frame changed; MINOR: something added; PATCH: a value or text corrected |
-| `schema_version` (also `versions.schema`) | the JSON contract of these documents | MAJOR: a field renamed or removed; MINOR: a field or endpoint added; the changelog below |
-| `data_version` (also `versions.data`) | nothing: it is the SHA-256 of the served data, a fingerprint | whenever a served measurement, geometry or score file changes |
-
-`release` in `index.json` gives the release's date, tag, release page, changelog and `base_url`: the raw files of
-exactly that release, which never change. Fetch from it to pin an analysis to one release:
-
-```bash
-REL=$(curl -s -A "aij-client/1.0" $BASE/index.json | jq -r .release.base_url)   # .../v2.0.0/docs/api
-curl -s "$REL/cases/A/points.csv" | head -3
-```
-
-Within a major `schema_version` the API only adds: new fields, new endpoints, new runs. Clients must ignore
-fields they do not know. A field is renamed or removed only in a new major version, listed below. `index.json`
-serves the same changelog as `changelog`; the releases are in [`CHANGELOG.md`](https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/blob/main/CHANGELOG.md).
-
-{% include api-changelog.md %}
-
-## Regenerating and checking
-
-```bash
-# everything (cleaned tables, figures, API), in the pinned image: what CI runs
-docker run --rm -v "$PWD:/w" -w /w "$(cat scripts/BUILD_IMAGE)" bash scripts/build_all.sh
-
-# the API alone
-pip install --require-hashes -r requirements.lock
-python scripts/build_api.py          # builds docs/api/, the case pages and the site includes, then verifies
-python scripts/build_api.py --check  # verify only
-```
-
-The build is a pure function of the repository: no timestamps and no commit hashes, so rebuilding unchanged inputs
-gives byte-identical files. On every push and pull request, CI rebuilds everything in Python 3.12.12 (an image
-pinned by digest) with every package pinned by hash, and fails if anything differs from what is committed or if
-served content changed without the release version moving. The site deploys only after that check passes, and a
-new `VERSION` is then tagged and released. Verification covers:
-
-- every document against its JSON Schema, and `openapi.json` against the OpenAPI 3.1 specification;
-- every file's size and SHA-256 against `index.json`, and every file served against the files listed;
-- every link inside every document, including that each `?v=` matches the file it points at;
-- the point counts, the STL triangle counts and the archive's contents.
-
-The point tables come from `clean/` (`points_source` in each `points.json` says which file). The scores and pairs
-come from the snapshots in `validation/results/`, each registered in `RUNS` in `scripts/build_api.py`; an
-unregistered snapshot stops the build.
+Examples in `curl` and Python are on the [Examples]({{ '/api-reference/examples/' | relative_url }}) page; the
+versions, the changelog and how the files are regenerated are under [Versions and changes]({{ '/api-reference/versions/' | relative_url }}).

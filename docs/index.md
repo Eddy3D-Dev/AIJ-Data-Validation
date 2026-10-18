@@ -1,41 +1,37 @@
 ---
-title: Home
+title: "Home"
 nav_order: 1
+description: "Wind-tunnel reference data from the Architectural Institute of Japan Urban Wind Environment benchmark, cleaned case by case, with Eddy3D's validation against it and a static API."
 ---
 
-# AIJ UWE benchmark — cleaned data, validation, API
+# AIJ UWE benchmark
+{: .no_toc }
 
-Wind-tunnel reference data from the **AIJ UWE** (Architectural Institute of Japan, Urban Wind Environment)
-benchmark, cleaned and packaged case by case, together with Eddy3D's validation against it. Everything here
-is also served as a [static API]({{ '/api-reference/' | relative_url }}) for scripts and agents.
+Wind-tunnel reference data from the **AIJ UWE** (Architectural Institute of Japan, Urban Wind Environment) benchmark,
+cleaned and packaged case by case, with Eddy3D's validation against it.
+{: .fs-6 .fw-300 .lede }
+
+[Browse the cases]({{ '/cases/' | relative_url }}){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Use the API]({{ '/api-reference/' | relative_url }}){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 } [Data paper (DOI)](https://doi.org/10.1002/2475-8876.70083){: .btn .fs-5 .mb-4 .mb-md-0 }
+
+## The cases
 
 {% include case-gallery.md %}
 
-| Case | Configuration | Measurements | Scored |
-|---|---|---|---|
-| [A]({{ '/cases/case-a/' | relative_url }}) | 1:1:2 building, b = 0.08 m, H = 0.16 m, Re_H ≈ 24,000 | 186 points, U/V/W/k | OpenFOAM 12, OpenLB, FluidX3D, ML |
-| [B]({{ '/cases/case-b/' | relative_url }}) | 1:4:4 slab, 0.05 × 0.20 × 0.20 m, Re_H ≈ 72,000 | 224 points, U/V/W/k | OpenFOAM 12, OpenLB, FluidX3D, ML |
-| [C]({{ '/cases/case-c/' | relative_url }}) | 3 × 3 block array, centre building at 0D / 1D / 2D, 3 wind directions | 1080 points, pedestrian height, scalar speed | OpenFOAM 12, ML |
-| [D]({{ '/cases/case-d/' | relative_url }}) | High-rise among 82 blocks, 1:400, 3 wind directions | 78 points × 3 (thermistor) + 33 (split fibre) | OpenFOAM 12 (WD 0°, 22.5°, 45°), ML |
-| [E]({{ '/cases/case-e/' | relative_url }}) | Niigata district, 1:250, pre/post high-rise, 16 wind directions | 80 points × 16 × 2, velocity ratio | OpenFOAM 12 (SW), ML |
+## Cases at a glance
 
-*Scored* means a run exists and its scores are published here — not that it agrees; how well it agrees is in the
-numbers and their reading on the [Validation]({{ '/validation/' | relative_url }}) page. OpenLB and FluidX3D are
-scored on A and B. Neither is scored on C–E, where every measurement sits at pedestrian height: OpenLB's lattice is
-too coarse there on this machine, and FluidX3D's ground has no wall function (both measured, on the Validation page). Anything not marked scored is not a claim.
+{% include cases-table.md %}
+
+*Scored by* names the engines with a published run for the case. *Scored* means a run exists and its scores are served,
+not that it agrees: how well it agrees is in the numbers and their reading on the
+[Validation]({{ '/validation/' | relative_url }}) pages. An engine that is not listed has no result for the case, and
+nothing here is a claim about it.
 
 ## Where to go
 
-- **[Cases]({{ '/cases/' | relative_url }})** — one page per case: geometry render, configuration facts, the reference data's
-  layout and frame, the inflow fit, the known data issues, and the validation results where they exist.
-- **[Validation]({{ '/validation/' | relative_url }})** — how Eddy3D is scored against the tunnel, the scores for A–E, the ML surrogate, and why some engines are not scored.
-- **[Known data issues]({{ '/known-data-issues/' | relative_url }})** — what in the published files changes a comparison if it is not accounted for (units, signs, frames, scalar vs vector speed), and how the cleaned tables correct it.
-- **[API]({{ '/api-reference/' | relative_url }})** — every endpoint with `curl` and Python examples: cleaned points (SI, one frame), cleaned STL geometry in metres (per case, or all of it in one archive), validation scores.
-- **[For agents]({{ '/agents/' | relative_url }})** — the walk through the API, and [`/api/llms.txt`]({{ '/api/llms.txt' | relative_url }}).
+- **[Cases]({{ '/cases/' | relative_url }})**: a page per case with its render, status and key numbers, then its reference data and its validation.
+- **[Validation]({{ '/validation/' | relative_url }})**: every case against every engine in one table, the method, and the reading of each result.
+- **[Known data issues]({{ '/known-data-issues/' | relative_url }})**: what in the published files changes a comparison if it is not accounted for (units, signs, frames, scalar vs vector speed).
+- **[API]({{ '/api-reference/' | relative_url }})**: every endpoint with `curl` and Python examples, and the walk for [agents]({{ '/agents/' | relative_url }}).
+- **[About and cite]({{ '/about/' | relative_url }})**: how to cite the benchmark and each case, the licence, and how a release is reproduced.
 
-## Licence and attribution
-
-The measurement data belongs to its collectors and distributors, named per case (CC BY 4.0). Cite the AIJ UWE
-benchmark — Kikumoto et al. (2026), *Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan*,
-Japan Architectural Review 9(1) e70083, [doi:10.1002/2475-8876.70083](https://doi.org/10.1002/2475-8876.70083)
-— and each case's dataset and requested citation, linked on its case page.
+The measurement data belongs to its collectors and distributors, named per case (CC BY 4.0).
