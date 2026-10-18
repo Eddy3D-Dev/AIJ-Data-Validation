@@ -137,6 +137,16 @@ def run(case, engine, configuration, results, headline, figures, reproduce, pair
             "run_id": f"{case}.{engine}" + (f".{configuration}" if configuration else "")}
 
 
+PAIRS_H = ("point_id (the table's, the CSV's No.); x, y, z in m (case frame); U, V, W and k measured (_meas: the cleaned workbook values) and modelled (_model), "
+           "velocities divided by U_H (measured by the tunnel's 3.226 m/s, modelled by the 3.23 m/s the solve was driven with), k by U_H^2, V in the unified sign "
+           "(positive toward +y); cstar_meas, the measured concentration ratio C/c0 (c0 = 45.18 ppm), and cstar_sct03 / _sct05 / _sct07, the modelled "
+           "c* = c U_H H^2 / Q for turbulent Schmidt numbers 0.3, 0.5 and 0.7 (one row per published point, empty where the quantity was not measured)")
+PAIRS_I = ("instrument (ldv or hydrocarbon_analyzer), point_id (the table's: wind points 1-91, concentration points 92-630); x, y, z in m (case frame); U, V, W and k "
+           "measured (_meas: the cleaned workbook values; V is empty on the y = 0 plane) and modelled (_model), velocities by U_H = 1.7 m/s, k by U_H^2; cstar_meas, "
+           "the measured C/c0 (c0 = 39.22 ppm), and cstar_sct03 / _sct05 / _sct07, the modelled c* for turbulent Schmidt numbers 0.3, 0.5 and 0.7 (a wind row has "
+           "no concentration columns and a concentration row no velocity columns)")
+_HI_REPRO = "Eddy3D fixture {fixture} (numerics level 3, 3000 iterations); figures validation/plot_cases_hi_openfoam.py; scores recomputed from the pairs by validation/dispersion_metrics.py"
+_HI_HEADLINE = {"U": "velocity.U", "V": "velocity.V", "W": "velocity.W", "k": "k", "c*, Sct 0.3": "cstar.c_sct03", "c*, Sct 0.5": "cstar.c_sct05", "c*, Sct 0.7": "cstar.c_sct07"}
 _FOAM_A_B = {"U": "velocity.U", "V": "velocity.V", "W": "velocity.W", "k": "k"}
 _FOAM_C = {f"WD {wd} {q}": f"vs.{lab}.{key}" for wd, lab in (("0°", "wd-0"), ("22.5°", "wd22_5"), ("45°", "wd45"))
            for q, key in (("√(|U|²+2k)", "scalar"), ("|U|", "vector"))}
@@ -216,6 +226,15 @@ RUNS = [
          "after − before": "delta.afterMinusBefore", "after, lattice cut at ±250 m": "halfExtent250.forward",
          "wind reversed (control)": "negativeControl.reversedWind"},
         ["ml-surrogate-agreement.png"], _ML_REPRO, "caseE_ml_pairs.csv", PAIRS_ML),
+    # Cases H and I (Eddy3D's solves, scored against the cleaned tables): the closures other than realizable k-epsilon are separate engine ids
+    run("H", "openfoam12-realizableKE", None, "caseH_openfoam12_realizableKE.json", _HI_HEADLINE, ["cases-hi-openfoam-agreement.png"],
+        _HI_REPRO.format(fixture="TestAijCaseHContainerE2E (realizable k-ε, 1:100)"), "caseH_openfoam12_realizableKE_pairs.csv", PAIRS_H),
+    run("I", "openfoam12-realizableKE", None, "caseI_openfoam12_realizableKE.json", _HI_HEADLINE, ["cases-hi-openfoam-agreement.png", "case-i-openfoam-closures.png"],
+        _HI_REPRO.format(fixture="TestAijCubeContainerE2E (realizable k-ε, 1:60)"), "caseI_openfoam12_realizableKE_pairs.csv", PAIRS_I),
+    run("I", "openfoam12-kEpsilon", None, "caseI_openfoam12_kEpsilon.json", _HI_HEADLINE, ["case-i-openfoam-closures.png"],
+        _HI_REPRO.format(fixture="TestAijCubeContainerE2E (standard k-ε, 1:60)"), "caseI_openfoam12_kEpsilon_pairs.csv", PAIRS_I),
+    run("I", "openfoam12-kOmegaSST", None, "caseI_openfoam12_kOmegaSST.json", _HI_HEADLINE, ["case-i-openfoam-closures.png"],
+        _HI_REPRO.format(fixture="TestAijCubeContainerE2E (k-ω SST, 1:60)"), "caseI_openfoam12_kOmegaSST_pairs.csv", PAIRS_I),
 ]
 
 # One caption per validation figure, used on the case pages and served with each result.
@@ -240,6 +259,11 @@ FIGURE_CAPTIONS = {
     "case-d-openfoam-agreement.png": ("Case D, OpenFOAM 12, wind directions 0°, 22.5° and 45°: measured thermistor Vs/U_H against the "
                                       "modelled √(|U|²+2k)/U_H (filled) and |U|/U_H (hollow), and the split-fibre |U| against "
                                       "the modelled |U| at 0°. At 0° the 66 thermistor points are 33 mirror pairs."),
+    "cases-hi-openfoam-agreement.png": ("Cases H and I, OpenFOAM 12 (realizable k-ε): measured against modelled U, W, k and the dimensionless "
+                                        "concentration c* = C/c0 (turbulent Schmidt number 0.5; log axes show the positive pairs only), with the 1:1 line and the "
+                                        "factor-of-two band where the values do not change sign."),
+    "case-i-openfoam-closures.png": ("Case I, OpenFOAM 12 under standard k-ε, realizable k-ε and k-ω SST on one mesh: measured against modelled U, k and c* "
+                                     "(Sct 0.5)."),
     "ml-surrogate-agreement.png": ("Eddy3D ML surrogate (Yel-2.0): measured against predicted pedestrian-height speed, one "
                                    "panel per case, with the 1:1 line and the factor-of-two band."),
 }
