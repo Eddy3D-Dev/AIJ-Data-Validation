@@ -138,8 +138,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-Each of these changes the result of a comparison if it is not accounted for.
-
 - Field concentrations are in ppq (1e-15 volume fraction) and the tunnel\'s in ppm: 1 ppq = 1e-9 ppm. The cleaned table converts the field\'s to ppm and carries C / c0 for both, with the run\'s own c0 in the field.
 - Every field run has its own reference speed U\_R, mean direction WD\_R and tracer flow q (clean/manifest.json -\> cases.M.extra\_measurements.field\_runs); the row\'s wind\_direction\_deg is WD\_R.
 - The tunnel measured velocity only at 180°; at 175° and 185° the CSV has -999.9 in all seven velocity columns.

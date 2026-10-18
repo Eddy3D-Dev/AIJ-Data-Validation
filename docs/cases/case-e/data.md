@@ -47,11 +47,18 @@ description: "Case E — Niigata district: configuration, frame and units, refer
 | x | +x EAST (full-scale metres) |
 | y | +y NORTH (compass rose in MP\_caseE.png) |
 | z | +z up; all points at z = 2.0 |
-| Wind direction convention | Meteorological: the compass name is the direction the wind comes FROM (N = 0 deg blows toward -y, E = 90 deg toward -x), clockwise from north. This case keeps its geographic frame instead of \'+x along the wind\' because the district is real and its coordinates are the data\'s. |
+| Wind direction convention | Meteorological: the compass name is the direction the wind comes FROM (N = 0 deg blows toward -y, E = 90 deg toward -x), clockwise from north. This case keeps its geographic frame instead of \'+x along the wind\' |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 1.0 |
 | Unit of length | m (FULL scale) |
 | Unit of velocity ratio | dimensionless |
+
+<details markdown="block">
+<summary>Data notes: Wind direction convention</summary>
+
+The district is real and its coordinates are the data\'s.
+
+</details>
 
 ## Reference data
 
@@ -98,14 +105,26 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-Each of these changes the result of a comparison if it is not accounted for.
-
-- The velocity ratio is normalised by the inflow velocity at 15.9 m (= 3.935 m/s), NOT by U\_H and NOT by UR = 7.8 m/s. A prior Eddy3D comparison in the folder divided by the wrong reference and came out low by a factor of 2.048 (FAC2 0.338 -\> 0.863 once rescaled, R unchanged at 0.661).
+- The velocity ratio is normalised by the inflow velocity at 15.9 m (= 3.935 m/s), NOT by U\_H and NOT by UR = 7.8 m/s.
 - All 2560 published ratios are integer multiples of 0.0198204 (55 distinct levels): the data\'s own resolution is +/-0.0099, 3.1 % of the median value and about 10 % at the lowest points.
 - The readme describes AF\_caseE.csv, RS\_caseE.csv and BD\_caseE.stl, but this repository holds only the .3dm, .ghx, .xls and the MP drawing; everything here is extracted from the workbook and the 3dm.
 - case-e.3dm is FULL-SCALE metres (MP\_caseE.png is drawn at model scale, +/-0.8 m). Use layers \'buildings\' (5,015 meshes, before construction) and \'buildings\_new\_construction\' (3 prisms); exclude the map plate on the Japanese-named general layer, the terrain plates (the site is flat) and \'probes\'.
 - Do not take the measurement coordinates from the 3dm\'s \'probes\' layer: its 80 spheres sit a median 2.31 m (max 21 m) from the workbook\'s points, which are authoritative (all 80 fall in open space, min 0.83 m from a building edge).
-- The measured quantity is a scalar (thermistor) speed; a RANS |U| is biased low against it in a dense canopy. The construction signal (ac - bc) is largest for SW (mean |d| 0.2155) and smallest for SSE (0.093).
+- The measured quantity is a scalar (thermistor) speed. The construction signal (ac - bc) is largest for SW (mean |d| 0.2155) and smallest for SSE (0.093).
+
+<details markdown="block">
+<summary>Data notes: Prior comparison</summary>
+
+A prior Eddy3D comparison in the folder divided by the wrong reference and came out low by a factor of 2.048 (FAC2 0.338 -\> 0.863 once rescaled, R unchanged at 0.661).
+
+</details>
+
+<details markdown="block">
+<summary>Interpretation: Scalar speed</summary>
+
+A RANS |U| is biased low against the thermistor speed in a dense canopy.
+
+</details>
 
 ## API
 

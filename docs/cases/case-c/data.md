@@ -44,14 +44,28 @@ description: "Case C — 3 × 3 block array: configuration, frame and units, ref
 | Property | Definition |
 |---|---|
 | Origin | array centre on the ground plane (centre of the middle block) |
-| x | +x streamwise at WD = 0 (checked three ways on the data: y -\> -y is a symmetry, the x \<= -0.25 band is faster than x \>= +0.25 in every configuration, and the regression slope of Vs is most negative within 0.8-4.3 deg of +x) |
+| x | +x streamwise at WD = 0 |
 | y | +y lateral |
 | z | +z up; all points at z = 0.02 |
-| Wind direction convention | In the CSV\'s own frame WD rotates the wind from +x TOWARD -y (the WD = 45 field is mirror-symmetric about y = -x to within the experiment\'s repeatability, 0.10-0.13 m/s, and not about y = +x, 0.5-0.8 m/s). Figure 3 of the data paper draws the fan rotating toward +y. The two disagree by a y-sign flip; this release keeps the CSV frame, which is the frame the point coordinates live in. The disagreement is invisible at WD = 0. |
+| Wind direction convention | In the CSV\'s own frame WD rotates the wind from +x TOWARD -y. Figure 3 of the data paper draws the fan rotating toward +y. The two disagree by a y-sign flip; this release keeps the CSV frame. The disagreement is invisible at WD = 0. |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 1.0 |
 | Unit of length | m (model scale) |
 | Unit of velocity | m/s |
+
+<details markdown="block">
+<summary>Data notes: Frame</summary>
+
+Checked three ways on the data: y -\> -y is a symmetry, the x \<= -0.25 band is faster than x \>= +0.25 in every configuration, and the regression slope of Vs is most negative within 0.8-4.3 deg of +x.
+
+</details>
+
+<details markdown="block">
+<summary>Data notes: Wind direction convention</summary>
+
+The WD = 45 field is mirror-symmetric about y = -x to within the experiment\'s repeatability, 0.10-0.13 m/s, and not about y = +x, 0.5-0.8 m/s. The CSV frame is the frame the point coordinates live in.
+
+</details>
 
 ## Reference data
 
@@ -101,24 +115,45 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | log law, kappa = 0.41, least squares on AF\_caseC.csv (16 points, z = 0.01 ... 1.2 m); two windows, because Case C scores at ONE height (z = 0.02 m) and the near-ground half of the fit matters |
+| Method | log law, kappa = 0.41, least squares on AF\_caseC.csv (16 points, z = 0.01 ... 1.2 m); two windows |
 | Fit window | z range m \[0.02, 0.4\]; Friction velocity u\* (m/s) 0.25598; Roughness length z₀ (mm) 0.4797; error at U D +3.08 %; error at z 0.02 -4.31 %; scored ratio bias -7.17 % |
 | Fit window | z range m \[0.01, 0.4\]; Friction velocity u\* (m/s) 0.22853; Roughness length z₀ (mm) 0.2362; error at U D +2.83 %; error at z 0.02 +1.65 %; scored ratio bias -1.15 % |
 | Power-law exponent, fitted | 0.19 |
 | Power-law exponent, data paper | 0.28 |
 | Turbulence intensity at D | 0.219 |
-| Note | derived during scoping, not published by AIJ; the tunnel profile is closer to a power law than a log law, so a log-law inlet carries a ~2.3 % rms residual over the fitted range |
+| Note | derived during scoping, not published by AIJ |
+
+<details markdown="block">
+<summary>Interpretation: Inflow fit</summary>
+
+The fit has two windows because Case C scores at ONE height (z = 0.02 m) and the near-ground half of the fit matters.
+
+The tunnel profile is closer to a power law than a log law, so a log-law inlet carries a ~2.3 % rms residual over the fitted range.
+
+</details>
 
 ## Known data issues
 
-Each of these changes the result of a comparison if it is not accounted for.
-
-- The measured quantity Vs is the MEAN OMNIDIRECTIONAL SCALAR speed from a thermistor, not |mean velocity vector|. A RANS |U| is biased low against it; the data paper suggests comparing sqrt(|U|^2 + 2k) as a conservative correction (over all 1080 rows no Vs is below 0.13 U\_H).
+- The measured quantity Vs is the MEAN OMNIDIRECTIONAL SCALAR speed from a thermistor, not |mean velocity vector|. The data paper suggests comparing sqrt(|U|^2 + 2k) as a conservative correction (over all 1080 rows no Vs is below 0.13 U\_H).
 - The \'CB\' column is TEXT (\'0D\', \'1D\', \'2D\'); a reader that parses every field as a number gets NaN for it. The header ends with a trailing comma (an empty 8th column).
 - 1080 rows = 3 wind directions x 3 centre buildings x 120 points, not 3 configurations. In the 0D configuration the 25 centre grid nodes are still absent although the ground there is free: the grid is held constant across configurations.
-- 24 of the 120 points sit exactly on a building face plane (|x| = 0.30 or |y| = 0.30) in the open gap between two blocks: legitimate fluid points, but a probe\'s cell lookup is delicate there.
+- 24 of the 120 points sit exactly on a building face plane (|x| = 0.30 or |y| = 0.30) in the open gap between two blocks.
 - Point numbers 1, 2, 3, 34, 35, 36, 37, 46, 55, 100, 101, 102 do not occur (No. runs 4 ... 132 with nine interior gaps).
 - Experimental repeatability, from the mirror-symmetric point pairs: mean |dVs| 0.088-0.137 m/s (0.024-0.038 U\_H).
+
+<details markdown="block">
+<summary>Interpretation: Scalar speed</summary>
+
+A RANS |U| is biased low against Vs.
+
+</details>
+
+<details markdown="block">
+<summary>Data notes: Points on a face plane</summary>
+
+Legitimate fluid points, but a probe\'s cell lookup is delicate there.
+
+</details>
 
 ## API
 

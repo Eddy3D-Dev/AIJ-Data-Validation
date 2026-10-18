@@ -42,11 +42,16 @@ description: "14 rows by 9 columns of 0.06 m cubes with a tracer line source on 
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — |
 {: .scores }
 
-R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: every score, its figures and its reading are on the [Validation page]({{ '/cases/case-l/validation/' | relative_url }}).
-
 {: .warning-title }
 > Before you compare
 >
-> The cleaned table is in SI units and one frame, with this case's corrections applied once; do not apply them again to the published files.
->
+> - The cleaned table is in SI units and one frame, with this case's corrections applied once.
+> - Origin: bottom centre of the windward wall of the 9th row (of 14) of the central column: x = 0 is that wall, y = 0 the centre line of the central column. Length unit: m (model scale).
 > - 9 known issues in the published files are listed under [Known data issues]({{ '/cases/case-l/data/' | relative_url }}#known-data-issues).
+
+<details markdown="block">
+<summary>Interpretation: Using the cleaned table</summary>
+
+Do not apply the corrections again to the published files.
+
+</details>

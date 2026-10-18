@@ -38,12 +38,17 @@ Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m ×
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — |
 {: .scores }
 
-R and FAC2 are the range over the headline scores of an engine's runs (velocity components, k, wind directions; negative controls left out). *Scored* means a run exists and its scores are served, not that it agrees: every score, its figures and its reading are on the [Validation page]({{ '/cases/case-g/validation/' | relative_url }}).
-
 {: .warning-title }
 > Before you compare
 >
-> The cleaned table is in SI units and one frame, with this case's corrections applied once; do not apply them again to the published files.
->
-> - The sense in which the wind direction rotates is a convention to check before comparing at any direction other than 0° (see *Frame and units* on the Data page).
+> - The cleaned table is in SI units and one frame, with this case's corrections applied once.
+> - Origin: the leeward face of the tree belt at ground level, on the vertical section through the belt\'s centre. Length unit: m (full scale).
+> - Wind direction: one direction, toward +x (perpendicular to the belt); the field wind\'s angle to the belt normal is not published.
 > - 6 known issues in the published files are listed under [Known data issues]({{ '/cases/case-g/data/' | relative_url }}#known-data-issues).
+
+<details markdown="block">
+<summary>Interpretation: Using the cleaned table</summary>
+
+Do not apply the corrections again to the published files.
+
+</details>
