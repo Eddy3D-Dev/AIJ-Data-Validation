@@ -136,3 +136,27 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 - DOI: [10.5281/zenodo.15430018](https://doi.org/10.5281/zenodo.15430018)
 - Citation requested: Japan Society for Atmospheric Environment (2013). Guidelines for Atmospheric Environment Assessment Methods Using CFD Models (DiMCFD). Japan Society for Atmospheric Environment (in Japanese).
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Kondo, H., Mutou, K., Hori, A., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case I (CubeC): Wind Tunnel Experiment for Flow and Dispersion around a Cubic Building Model [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15430018
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_i,
+  author    = "Kondo, Hiroaki and Mutou, Katsuhiko and Hori, Akihiro and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case I (CubeC): Wind Tunnel Experiment for Flow and Dispersion around a Cubic Building Model}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15430018",
+  url       = "https://doi.org/10.5281/zenodo.15430018",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).

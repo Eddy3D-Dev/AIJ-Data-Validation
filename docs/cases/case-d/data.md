@@ -149,3 +149,27 @@ The fit has two windows because the measurement plane z/H = 0.02 sits below the 
 - DOI: [10.5281/zenodo.15402668](https://doi.org/10.5281/zenodo.15402668)
 - Citation requested: Kikumoto, H. et al. (2026). Japan Architectural Review 9(1), e70083, section 3.4.
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case D (Highrise): Wind Tunnel Experiment for Flow around a High-rise Building in City Blocks [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15402668
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_d,
+  author    = "Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case D (Highrise): Wind Tunnel Experiment for Flow around a High-rise Building in City Blocks}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15402668",
+  url       = "https://doi.org/10.5281/zenodo.15402668",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).

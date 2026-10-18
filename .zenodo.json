@@ -1,0 +1,92 @@
+{
+  "title": "AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API",
+  "description": "Cleaned wind-tunnel and field data of the AIJ Urban Wind Environment benchmark, Cases A-M, with their geometry and Eddy3D's validation scores, served as static JSON, CSV and STL files.",
+  "upload_type": "dataset",
+  "creators": [
+    {
+      "name": "Sustainable Urban Systems Lab"
+    }
+  ],
+  "license": "cc-by-4.0",
+  "keywords": [
+    "computational fluid dynamics",
+    "CFD validation",
+    "wind tunnel",
+    "urban wind environment",
+    "pedestrian wind",
+    "Architectural Institute of Japan"
+  ],
+  "access_right": "open",
+  "related_identifiers": [
+    {
+      "relation": "isDescribedBy",
+      "identifier": "10.1002/2475-8876.70083",
+      "scheme": "doi"
+    },
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "10.5281/zenodo.15050147",
+      "scheme": "doi"
+    },
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "10.5281/zenodo.15401455",
+      "scheme": "doi"
+    },
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "10.5281/zenodo.15401791",
+      "scheme": "doi"
+    },
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "10.5281/zenodo.15402668",
+      "scheme": "doi"
+    },
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "10.5281/zenodo.15429017",
+      "scheme": "doi"
+    },
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "10.5281/zenodo.15589621",
+      "scheme": "doi"
+    },
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "10.5281/zenodo.15589666",
+      "scheme": "doi"
+    },
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "10.5281/zenodo.15429871",
+      "scheme": "doi"
+    },
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "10.5281/zenodo.15430018",
+      "scheme": "doi"
+    },
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "10.5281/zenodo.15447887",
+      "scheme": "doi"
+    },
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "10.5281/zenodo.15448050",
+      "scheme": "doi"
+    },
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "10.5281/zenodo.15487637",
+      "scheme": "doi"
+    },
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "10.5281/zenodo.15487857",
+      "scheme": "doi"
+    }
+  ]
+}

@@ -176,3 +176,27 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 - DOI: [10.5281/zenodo.15589621](https://doi.org/10.5281/zenodo.15589621)
 - Citation requested: Fujii, K., Asami, Y., Iwasa, Y. et al. (1978). Wind in Shinjuku Sub-Central Area — Comparison Between Field Measurement and Wind Tunnel Experiment. Proc. 5th Symposium on Wind Resistance of Structures, 91-98 (in Japanese).
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case F (Shinjuku): Wind Tunnel Experiment and Field Observation for Flow within an Actual Urban Area in Shinjuku [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15589621
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_f,
+  author    = "Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case F (Shinjuku): Wind Tunnel Experiment and Field Observation for Flow within an Actual Urban Area in Shinjuku}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15589621",
+  url       = "https://doi.org/10.5281/zenodo.15589621",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).

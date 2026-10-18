@@ -140,3 +140,27 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 - DOI: [10.5281/zenodo.15448050](https://doi.org/10.5281/zenodo.15448050)
 - Citation requested: Yoshie, R. (2016). Wind Tunnel Experiment and Large Eddy Simulation of Pollutant/Thermal Dispersion in Non-isothermal Turbulent Boundary Layer. Adv Environ Wind Eng, 167-196. <https://doi.org/10.1007/978-4-431-55912-2_9>
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Yoshie, R., Tachibana, T., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case K (ArraysC): Wind and Concentration Measurements in Cube Arrays with Point-source Dispersion [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15448050
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_k,
+  author    = "Yoshie, Ryuichiro and Tachibana, Takumi and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case K (ArraysC): Wind and Concentration Measurements in Cube Arrays with Point-source Dispersion}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15448050",
+  url       = "https://doi.org/10.5281/zenodo.15448050",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).

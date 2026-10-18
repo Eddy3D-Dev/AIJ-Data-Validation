@@ -151,3 +151,27 @@ The fit has two windows because Case C scores at ONE height (z = 0.02 m) and the
 - DOI: [10.5281/zenodo.15401791](https://doi.org/10.5281/zenodo.15401791)
 - Citation requested: Nonomura, Y., Kobayashi, N., Tominaga, Y., Mochida, A. (2003). The cross comparison of CFD results for flow field around building models (part 3). Japan Association for Wind Engineering, 95, 83-84 (in Japanese). <https://doi.org/10.14887/jaweam.2003.0.41.0>
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Nonomura, Y., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case C (Blocks): Wind Tunnel Experiment for Flow within Simple Building Blocks [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15401791
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_c,
+  author    = "Nonomura, Yoshitami and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case C (Blocks): Wind Tunnel Experiment for Flow within Simple Building Blocks}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15401791",
+  url       = "https://doi.org/10.5281/zenodo.15401791",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).

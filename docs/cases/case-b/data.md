@@ -123,3 +123,27 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 - DOI: [10.5281/zenodo.15401455](https://doi.org/10.5281/zenodo.15401455)
 - Citation requested: Miyazaki, T., Tominaga, Y. (2003). Wind tunnel experiment on flow field around a building model with a scale ratio of 4:4:1 placed within the surface boundary layer. Proc. Annual Meeting of Hokuriku Chapter, AIJ, 201-204 (in Japanese). <https://www.aij.or.jp/paper/detail.html?productId=313933>
 - Licence: CC BY 4.0
+
+### Cite
+
+**APA**
+
+```text
+Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case B (144): Wind Tunnel Experiment for Flow around a 1:4:4 Shape Building Model [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15401455
+```
+
+**BibTeX**
+
+```bibtex
+@misc{aijuwe_case_b,
+  author    = "Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa",
+  title     = "{AIJ UWE Benchmark Dataset -- Case B (144): Wind Tunnel Experiment for Flow around a 1:4:4 Shape Building Model}",
+  year      = "2025",
+  publisher = "Zenodo",
+  doi       = "10.5281/zenodo.15401455",
+  url       = "https://doi.org/10.5281/zenodo.15401455",
+  note      = "Data set"
+}
+```
+
+API: see [About]({{ '/about/#cite' | relative_url }}).
