@@ -197,3 +197,42 @@ details {
     color: #8a6200;
   }
 }
+
+// ---------------------------------------------------------------------------------------------------------
+// Colour scheme toggle: an icon in the page header (header_custom.html); head_custom.html sets data-mode.
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  margin: 0 0.5rem;
+  padding: 0;
+  color: $link-color;
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .icon-sun { display: none; }
+
+  &[data-mode="dark"] {
+    .icon-moon { display: none; }
+    .icon-sun { display: inline; }
+  }
+
+  &:hover { background: rgba(127, 127, 127, 0.18); }
+  &:focus-visible { outline: 2px solid $link-color; outline-offset: 2px; }
+}
