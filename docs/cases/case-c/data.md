@@ -47,7 +47,7 @@ description: "Case C — 3 × 3 block array: configuration, frame and units, ref
 | x | +x streamwise at WD = 0 (checked three ways on the data: y -\> -y is a symmetry, the x \<= -0.25 band is faster than x \>= +0.25 in every configuration, and the regression slope of Vs is most negative within 0.8-4.3 deg of +x) |
 | y | +y lateral |
 | z | +z up; all points at z = 0.02 |
-| Wind direction convention | In the CSV's own frame WD rotates the wind from +x TOWARD -y (the WD = 45 field is mirror-symmetric about y = -x to within the experiment's repeatability, 0.10-0.13 m/s, and not about y = +x, 0.5-0.8 m/s). Figure 3 of the data paper draws the fan rotating toward +y. The two disagree by a y-sign flip; this release keeps the CSV frame, which is the frame the point coordinates live in. The disagreement is invisible at WD = 0. |
+| Wind direction convention | In the CSV\'s own frame WD rotates the wind from +x TOWARD -y (the WD = 45 field is mirror-symmetric about y = -x to within the experiment\'s repeatability, 0.10-0.13 m/s, and not about y = +x, 0.5-0.8 m/s). Figure 3 of the data paper draws the fan rotating toward +y. The two disagree by a y-sign flip; this release keeps the CSV frame, which is the frame the point coordinates live in. The disagreement is invisible at WD = 0. |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 1.0 |
 | Unit of length | m (model scale) |
@@ -85,15 +85,15 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Column | Meaning |
 |---|---|
-| `point_id` | the tunnel's own measurement point number |
-| `config` | configuration key: 'default', Case C centre building '0D'/'1D'/'2D', Case E state 'bc' (before) / 'ac' (after construction) |
-| `instrument` | 'split\_fibre' (vector components) or 'thermistor' (omnidirectional scalar speed) |
-| `wind_direction_deg` | AIJ wind direction in degrees; 0 is the case's reference direction (see frame) |
+| `point_id` | the tunnel\'s own measurement point number |
+| `config` | configuration key: \'default\', Case C centre building \'0D\'/\'1D\'/\'2D\', Case E state \'bc\' (before) / \'ac\' (after construction) |
+| `instrument` | \'split\_fibre\' (vector components) or \'thermistor\' (omnidirectional scalar speed) |
+| `wind_direction_deg` | AIJ wind direction in degrees; 0 is the case\'s reference direction (see frame) |
 | `x` | m, case frame |
 | `y` | m, case frame |
 | `z` | m above ground, case frame |
 | `Vs` | m/s, mean omnidirectional scalar wind speed (thermistor); Case D also lists \|U\| of the split-fibre probe under Vs for its 33 vector points |
-| `campaign` | 'wind\_tunnel' (model scale) or 'field' (a full-scale observation: Cases F, G, M) |
+| `campaign` | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
 
 </details>
 
@@ -114,9 +114,9 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 Each of these changes the result of a comparison if it is not accounted for.
 
 - The measured quantity Vs is the MEAN OMNIDIRECTIONAL SCALAR speed from a thermistor, not |mean velocity vector|. A RANS |U| is biased low against it; the data paper suggests comparing sqrt(|U|^2 + 2k) as a conservative correction (over all 1080 rows no Vs is below 0.13 U\_H).
-- The 'CB' column is TEXT ('0D', '1D', '2D'); a reader that parses every field as a number gets NaN for it. The header ends with a trailing comma (an empty 8th column).
+- The \'CB\' column is TEXT (\'0D\', \'1D\', \'2D\'); a reader that parses every field as a number gets NaN for it. The header ends with a trailing comma (an empty 8th column).
 - 1080 rows = 3 wind directions x 3 centre buildings x 120 points, not 3 configurations. In the 0D configuration the 25 centre grid nodes are still absent although the ground there is free: the grid is held constant across configurations.
-- 24 of the 120 points sit exactly on a building face plane (|x| = 0.30 or |y| = 0.30) in the open gap between two blocks: legitimate fluid points, but a probe's cell lookup is delicate there.
+- 24 of the 120 points sit exactly on a building face plane (|x| = 0.30 or |y| = 0.30) in the open gap between two blocks: legitimate fluid points, but a probe\'s cell lookup is delicate there.
 - Point numbers 1, 2, 3, 34, 35, 36, 37, 46, 55, 100, 101, 102 do not occur (No. runs 4 ... 132 with nine interior gaps).
 - Experimental repeatability, from the mirror-symmetric point pairs: mean |dVs| 0.088-0.137 m/s (0.024-0.038 U\_H).
 

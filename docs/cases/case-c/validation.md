@@ -29,7 +29,7 @@ Quantity: Vs (thermistor) scored against sqrt(|U|^2 + 2k) \[scalar\] and |U| \[v
 | WD 45° \|U\| | +0.801 | 0.800 | +0.307 | 0.533 | 120 |
 {: .scores }
 
-velocities by U\_H, k by U\_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/C/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/C/pairs/openfoam12-realizableKE.csv' | relative_url }}). Reproduce: Eddy3D fixture TestAijCaseC0DContainerE2E; figures validation/plot\_case\_c\_openfoam.py.
+velocities by U\_H, k by U\_H^2 (the benchmark\'s own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/C/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/C/pairs/openfoam12-realizableKE.csv' | relative_url }}). Reproduce: Eddy3D fixture TestAijCaseC0DContainerE2E; figures validation/plot\_case\_c\_openfoam.py.
 
 ## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration 1D
 
@@ -45,7 +45,7 @@ Quantity: Vs (thermistor) scored against sqrt(|U|^2 + 2k) \[scalar\] and |U| \[v
 | WD 45° \|U\| | +0.873 | 0.850 | +0.353 | 0.433 | 120 |
 {: .scores }
 
-velocities by U\_H, k by U\_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/C/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/C/pairs/openfoam12-realizableKE.csv' | relative_url }}). Reproduce: Eddy3D fixture TestAijCaseC1DContainerE2E; figures validation/plot\_case\_c\_openfoam.py.
+velocities by U\_H, k by U\_H^2 (the benchmark\'s own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/C/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/C/pairs/openfoam12-realizableKE.csv' | relative_url }}). Reproduce: Eddy3D fixture TestAijCaseC1DContainerE2E; figures validation/plot\_case\_c\_openfoam.py.
 
 ## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration 2D
 
@@ -61,7 +61,7 @@ Quantity: Vs (thermistor) scored against sqrt(|U|^2 + 2k) \[scalar\] and |U| \[v
 | WD 45° \|U\| | +0.912 | 0.900 | +0.243 | 0.608 | 120 |
 {: .scores }
 
-velocities by U\_H, k by U\_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/C/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/C/pairs/openfoam12-realizableKE.csv' | relative_url }}). Reproduce: Eddy3D fixture TestAijCaseC2DContainerE2E; figures validation/plot\_case\_c\_openfoam.py.
+velocities by U\_H, k by U\_H^2 (the benchmark\'s own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/C/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/C/pairs/openfoam12-realizableKE.csv' | relative_url }}). Reproduce: Eddy3D fixture TestAijCaseC2DContainerE2E; figures validation/plot\_case\_c\_openfoam.py.
 
 ## Eddy3D ML wind surrogate (pedestrian height)
 
@@ -72,7 +72,7 @@ velocities by U\_H, k by U\_H^2 (the benchmark's own convention; Case E by U at 
 | wind reversed (control) | -0.441 | 0.725 | +0.367 | 0.392 | 120 |
 {: .scores }
 
-velocities by U\_H, k by U\_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/C/pairs/ml-surrogate.csv`]({{ '/api/cases/C/pairs/ml-surrogate.csv' | relative_url }}). Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot\_ml\_surrogate.py.
+velocities by U\_H, k by U\_H^2 (the benchmark\'s own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/C/pairs/ml-surrogate.csv`]({{ '/api/cases/C/pairs/ml-surrogate.csv' | relative_url }}). Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot\_ml\_surrogate.py.
 
 ## Figures
 

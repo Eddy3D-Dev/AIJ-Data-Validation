@@ -15,9 +15,11 @@ so CI can rebuild and diff. Inputs:
                               per run in RUNS below
 - validation/figures/         the figures and geometry renders the site shows
 
-Outputs: docs/api/** (the API), docs/assets/{figures,geometry}/, docs/cases/*.md, docs/_includes/
-{case-gallery.md, dataset-jsonld.html} and docs/llms.txt. Every JSON document names its JSON Schema in
-`$schema`; the schemas are in scripts/api_schemas.py and are enforced here before anything is reported OK.
+Outputs: docs/api/** (the API), docs/assets/{figures,geometry}/, docs/cases/<slug>.md and
+docs/cases/<slug>/{data,validation}.md (three pages per case), docs/_includes/{case-gallery,cases-table,
+cases-frames,validation-matrix,api-changelog}.md, docs/_includes/{version-label,dataset-jsonld}.html and
+docs/llms.txt. Every JSON document names its JSON Schema in `$schema`; the schemas are in scripts/api_schemas.py
+and are enforced here before anything is reported OK.
 """
 from __future__ import annotations
 
@@ -1107,7 +1109,7 @@ def _esc(text):
             url, tail = re.match(r"(.*?)([.,;:]*)$", piece).groups()
             out.append(f"<{url}>" + tail)
             continue
-        for ch in "\\*_<>[]":
+        for ch in "\\*_<>[]'\"":              # quotes too: kramdown's smart quotes turn '-' into two opening quotes
             piece = piece.replace(ch, "\\" + ch)
         out.append(piece)
     return "".join(out)

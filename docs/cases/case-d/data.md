@@ -41,14 +41,14 @@ description: "Case D — high-rise among city blocks: configuration, frame and u
 
 | Property | Definition |
 |---|---|
-| Origin | tower centre on the ground plane (the array's bounding box is centred on it) |
-| x | +x streamwise at WD = 0 (the 0 deg thermistor field is exactly y-mirror symmetric; the split-fibre U is positive at the stream-like points and negative in the tower's windward horseshoe) |
+| Origin | tower centre on the ground plane (the array\'s bounding box is centred on it) |
+| x | +x streamwise at WD = 0 (the 0 deg thermistor field is exactly y-mirror symmetric; the split-fibre U is positive at the stream-like points and negative in the tower\'s windward horseshoe) |
 | y | +y lateral |
 | z | +z up; all points at z = 0.005 |
-| Wind direction convention | +x toward +y, read from Figure 4 of the data paper. The array is exactly y-mirror symmetric, so the measurements alone cannot settle the rotation sense (headings +theta and -theta give exact mirror fields); solved Eddy3D fields corroborate Figure 4's sense: R 0.80 (22.5 deg) and 0.85 (45 deg) in it, 0.40 and 0.17 mirrored. |
+| Wind direction convention | +x toward +y, read from Figure 4 of the data paper. The array is exactly y-mirror symmetric, so the measurements alone cannot settle the rotation sense (headings +theta and -theta give exact mirror fields); solved Eddy3D fields corroborate Figure 4\'s sense: R 0.80 (22.5 deg) and 0.85 (45 deg) in it, 0.40 and 0.17 mirrored. |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 0.001 |
-| Unit of length | m (model scale; converted from the workbook's millimetres) |
+| Unit of length | m (model scale; converted from the workbook\'s millimetres) |
 | Unit of velocity | m/s |
 | Unit of variance | m^2/s^2 |
 | Unit of k | m^2/s^2 |
@@ -77,10 +77,10 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Column | Meaning |
 |---|---|
-| `point_id` | the tunnel's own measurement point number |
-| `config` | configuration key: 'default', Case C centre building '0D'/'1D'/'2D', Case E state 'bc' (before) / 'ac' (after construction) |
-| `instrument` | 'split\_fibre' (vector components) or 'thermistor' (omnidirectional scalar speed) |
-| `wind_direction_deg` | AIJ wind direction in degrees; 0 is the case's reference direction (see frame) |
+| `point_id` | the tunnel\'s own measurement point number |
+| `config` | configuration key: \'default\', Case C centre building \'0D\'/\'1D\'/\'2D\', Case E state \'bc\' (before) / \'ac\' (after construction) |
+| `instrument` | \'split\_fibre\' (vector components) or \'thermistor\' (omnidirectional scalar speed) |
+| `wind_direction_deg` | AIJ wind direction in degrees; 0 is the case\'s reference direction (see frame) |
 | `x` | m, case frame |
 | `y` | m, case frame |
 | `z` | m above ground, case frame |
@@ -92,7 +92,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `ww` | m^2/s^2, variance of w |
 | `k` | m^2/s^2, turbulent kinetic energy |
 | `Vs` | m/s, mean omnidirectional scalar wind speed (thermistor); Case D also lists \|U\| of the split-fibre probe under Vs for its 33 vector points |
-| `campaign` | 'wind\_tunnel' (model scale) or 'field' (a full-scale observation: Cases F, G, M) |
+| `campaign` | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
 
 </details>
 
@@ -100,7 +100,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | log law, kappa = 0.41, least squares on the workbook's 13-point profile (z = 5 ... 1200 mm); two windows, because the measurement plane z/H = 0.02 sits below the 0.02 ... 2H window used for Cases A and B |
+| Method | log law, kappa = 0.41, least squares on the workbook\'s 13-point profile (z = 5 ... 1200 mm); two windows, because the measurement plane z/H = 0.02 sits below the 0.02 ... 2H window used for Cases A and B |
 | Fit window | z range 0.005 ... 2H; Friction velocity u\* (m/s) 0.3418; Roughness length z₀ (mm) 0.0859; error at z 5mm -11.2 %; profile rms 7.9 %; inlet k m2 s2 0.3895; inlet k vs tunnel -26 % to -48 % |
 | Fit window | z range 0.02 ... 2H; Friction velocity u\* (m/s) 0.424; Roughness length z₀ (mm) 0.4033; error at z 5mm -30.0 %; profile rms 12.5 % / 4.7 %; inlet k m2 s2 0.5991; inlet k vs tunnel +13 % to -20 % |
 | Power-law exponent, fitted | 0.189 |
@@ -111,11 +111,11 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 Each of these changes the result of a comparison if it is not accounted for.
 
-- All of Case D's data lives in LF\_caseD.xls, a genuine OLE2/BIFF8 workbook (read it with xlrd 2.x; openpyxl cannot). Sheets: 'Geometry&Points', 'Inflow', 'Results (Exp\_S)' (split fibre, WD = 0), 'Results (Exp\_T)' (thermistor, 0 / 22.5 / 45 deg).
+- All of Case D\'s data lives in LF\_caseD.xls, a genuine OLE2/BIFF8 workbook (read it with xlrd 2.x; openpyxl cannot). Sheets: \'Geometry&Points\', \'Inflow\', \'Results (Exp\_S)\' (split fibre, WD = 0), \'Results (Exp\_T)\' (thermistor, 0 / 22.5 / 45 deg).
 - Coordinates are millimetres in the workbook; the API serves metres.
-- The shipped BD\_caseD.stl is dirty: 1572 facets of which 576 are duplicates, and all 83 roofs are wound inward (signed volume 0.011159 m^3 against the true 0.021477 m^3). The API's geometry.stl is rebuilt from the 83 shells' bounding boxes: 996 facets, watertight, volume 0.021477 m^3.
+- The shipped BD\_caseD.stl is dirty: 1572 facets of which 576 are duplicates, and all 83 roofs are wound inward (signed volume 0.011159 m^3 against the true 0.021477 m^3). The API\'s geometry.stl is rebuilt from the 83 shells\' bounding boxes: 996 facets, watertight, volume 0.021477 m^3.
 - The thermistor reads a SCALAR speed. Over the 33 points where both instruments overlap at WD = 0, the ratio of mean thermistor speed to mean |U| is 1.342 (the mean of the per-point ratios is 1.50). sqrt(|U|^2 + 2k) from the split-fibre data matches the thermistor to FB +0.058, R 0.947; |U| alone to FB +0.292, R 0.872.
-- Unmeasured thermistor cells are '-' in the workbook (null here). At WD = 0 the 66 measured values are 33 exact mirror pairs, so only 33 are independent; at 22.5 and 45 deg all 66 are independent.
+- Unmeasured thermistor cells are \'-\' in the workbook (null here). At WD = 0 the 66 measured values are 33 exact mirror pairs, so only 33 are independent; at 22.5 and 45 deg all 66 are independent.
 - A prior Eddy3D comparison kept in the folder (case-d-eddy3d-prior-comparison.xlsx) scores R = +0.096 against the thermistor: a frame or geometry error, not a closure result. It is not a validation.
 
 ## API

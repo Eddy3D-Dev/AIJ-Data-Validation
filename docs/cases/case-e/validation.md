@@ -26,7 +26,7 @@ Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> 
 | no-construction ceiling control | +0.099 | 0.787 | +0.368 | 0.350 | 80 |
 {: .scores }
 
-velocities by U\_H, k by U\_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/E/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/E/pairs/openfoam12-realizableKE.csv' | relative_url }}). Reproduce: Eddy3D fixture TestAijCaseEContainerE2E (EDDY3D\_AIJ\_E\_DIRECTIONS=SW, tabulated inlet); figures validation/plot\_case\_e\_openfoam.py.
+velocities by U\_H, k by U\_H^2 (the benchmark\'s own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/E/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/E/pairs/openfoam12-realizableKE.csv' | relative_url }}). Reproduce: Eddy3D fixture TestAijCaseEContainerE2E (EDDY3D\_AIJ\_E\_DIRECTIONS=SW, tabulated inlet); figures validation/plot\_case\_e\_openfoam.py.
 
 ## Eddy3D ML wind surrogate (pedestrian height)
 
@@ -39,7 +39,7 @@ velocities by U\_H, k by U\_H^2 (the benchmark's own convention; Case E by U at 
 | wind reversed (control) | +0.425 | 0.284 | +0.853 | 0.105 | 1280 |
 {: .scores }
 
-velocities by U\_H, k by U\_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/E/pairs/ml-surrogate.csv`]({{ '/api/cases/E/pairs/ml-surrogate.csv' | relative_url }}). Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot\_ml\_surrogate.py.
+velocities by U\_H, k by U\_H^2 (the benchmark\'s own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units. Per-point values: [`/api/cases/E/pairs/ml-surrogate.csv`]({{ '/api/cases/E/pairs/ml-surrogate.csv' | relative_url }}). Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot\_ml\_surrogate.py.
 
 ## Figures
 

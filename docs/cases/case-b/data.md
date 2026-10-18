@@ -42,7 +42,7 @@ description: "Case B — 1:4:4 slab: configuration, frame and units, reference d
 |---|---|
 | Origin | building centre on the ground plane |
 | x | +x streamwise (the wind at WD = 0 blows toward +x); slab spans x in \[-0.025, 0.025\] |
-| y | +y lateral; slab spans y in \[-0.10, 0.10\]; points published on the y \<= 0 half by the tunnel's symmetry convention |
+| y | +y lateral; slab spans y in \[-0.10, 0.10\]; points published on the y \<= 0 half by the tunnel\'s symmetry convention |
 | z | +z up from the ground; roof at z = 0.20 |
 | Lateral sign applied | -1 |
 | Coordinate scale applied | 0.001 |
@@ -70,10 +70,10 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Column | Meaning |
 |---|---|
-| `point_id` | the tunnel's own measurement point number |
-| `config` | configuration key: 'default', Case C centre building '0D'/'1D'/'2D', Case E state 'bc' (before) / 'ac' (after construction) |
-| `instrument` | 'split\_fibre' (vector components) or 'thermistor' (omnidirectional scalar speed) |
-| `wind_direction_deg` | AIJ wind direction in degrees; 0 is the case's reference direction (see frame) |
+| `point_id` | the tunnel\'s own measurement point number |
+| `config` | configuration key: \'default\', Case C centre building \'0D\'/\'1D\'/\'2D\', Case E state \'bc\' (before) / \'ac\' (after construction) |
+| `instrument` | \'split\_fibre\' (vector components) or \'thermistor\' (omnidirectional scalar speed) |
+| `wind_direction_deg` | AIJ wind direction in degrees; 0 is the case\'s reference direction (see frame) |
 | `x` | m, case frame |
 | `y` | m, case frame |
 | `z` | m above ground, case frame |
@@ -84,7 +84,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `vv` | m^2/s^2, variance of v |
 | `ww` | m^2/s^2, variance of w |
 | `k` | m^2/s^2, turbulent kinetic energy |
-| `campaign` | 'wind\_tunnel' (model scale) or 'field' (a full-scale observation: Cases F, G, M) |
+| `campaign` | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
 
 </details>
 
@@ -92,7 +92,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | log law, kappa = 0.41, least squares over z = 0.02 ... 2H on the case's own approach-flow file |
+| Method | log law, kappa = 0.41, least squares over z = 0.02 ... 2H on the case\'s own approach-flow file |
 | Friction velocity u\* (m/s) | 0.399 |
 | Roughness length z₀ (mm) | 0.882 |
 | U\_H, measured (m/s) | 5.133 |
@@ -103,7 +103,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 Each of these changes the result of a comparison if it is not accounted for.
 
 - The published coordinates are MILLIMETRES (x\[mm\]) while velocities are m/s. The API serves metres (coordinate\_scale\_applied = 0.001). Read as metres, every probe lands 1000x too far out.
-- The published lateral velocity V is positive toward -y (V = +3.630 m/s at (-0.025, -0.110, 0.013), just outside the y \< 0 flank where the flow must deflect toward -y). The API multiplies V by -1 (lateral\_sign\_applied = -1) so that V is positive toward +y as in Case A. Scored without this, Case B's V comes out at R = -0.910 against R = +0.959 for U on the same points.
+- The published lateral velocity V is positive toward -y (V = +3.630 m/s at (-0.025, -0.110, 0.013), just outside the y \< 0 flank where the flow must deflect toward -y). The API multiplies V by -1 (lateral\_sign\_applied = -1) so that V is positive toward +y as in Case A. Scored without this, Case B\'s V comes out at R = -0.910 against R = +0.959 for U on the same points.
 - The RANS solution is symmetric, so model V = 0 on the centre plane while the tunnel measures small non-zero values there.
 
 ## API

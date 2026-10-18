@@ -5,5 +5,5 @@
 | [Case A — 1:1:2 building]({{ '/cases/case-a/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | building centre on the ground plane |
 | [Case B — 1:4:4 slab]({{ '/cases/case-b/data/' | relative_url }}#frame-and-units) | m (model scale; converted from the published millimetres) | m/s | building centre on the ground plane |
 | [Case C — 3 × 3 block array]({{ '/cases/case-c/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | array centre on the ground plane (centre of the middle block) |
-| [Case D — high-rise among city blocks]({{ '/cases/case-d/data/' | relative_url }}#frame-and-units) | m (model scale; converted from the workbook's millimetres) | m/s | tower centre on the ground plane (the array's bounding box is centred on it) |
+| [Case D — high-rise among city blocks]({{ '/cases/case-d/data/' | relative_url }}#frame-and-units) | m (model scale; converted from the workbook\'s millimetres) | m/s | tower centre on the ground plane (the array\'s bounding box is centred on it) |
 | [Case E — Niigata district]({{ '/cases/case-e/data/' | relative_url }}#frame-and-units) | m (FULL scale) | dimensionless | centre of the reproduced area, ground plane |
