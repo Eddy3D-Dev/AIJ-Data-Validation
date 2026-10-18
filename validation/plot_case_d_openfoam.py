@@ -23,6 +23,7 @@ import os
 import numpy as np
 import ultraplot as uplt
 
+import layout
 import plotstyle as style
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -120,20 +121,21 @@ for c, h in enumerate(solved + ["split"]):
     o = np.array([p["measured_over_UH"] for p in pts])
     scalar = np.array([p["scalar_over_UH"] for p in pts])
     vector = np.array([p["vector_over_UH"] for p in pts])
+    colours = layout.grouped_colours("D", pts)            # the instrument and the place of each point: layout.py, the letters of case-d-layout.png
     style.one_to_one(ax, lo, hi)
     if h == "split":
         # the instrument measures |U| itself: compare the model's |U|, filled
-        ax.scatter(o, vector, s=22, color=style.OPENFOAM, edgecolor=style.SURFACE, linewidth=0.4, zorder=3)
+        ax.scatter(o, vector, s=22, color=colours, edgecolor=style.SURFACE, linewidth=0.4, zorder=3)
     else:
-        ax.scatter(o, vector, s=22, facecolor="none", edgecolor=style.OPENFOAM, linewidth=0.8, alpha=0.8, zorder=2)
-        ax.scatter(o, scalar, s=22, color=style.OPENFOAM, edgecolor=style.SURFACE, linewidth=0.4, zorder=3)
+        ax.scatter(o, vector, s=22, facecolor="none", edgecolor=colours, linewidth=0.8, alpha=0.8, zorder=2)
+        ax.scatter(o, scalar, s=22, color=colours, edgecolor=style.SURFACE, linewidth=0.4, zorder=3)
     style.stats(ax, f"R {score['R']:+.2f}\nFAC2 {score['Fac2']:.2f}\nFB {score['Fb']:+.2f}\nn {score['Count']}")
     ax.format(xlim=(lo, hi), ylim=(lo, hi), title=title)
 style.outer_ticks(axs, 1, len(solved) + 1)
+legend = layout.legend_rows("D", [style.marker(style.REFERENCE, "Eddy3D √(|U|²+2k)"), style.marker(style.REFERENCE, "Eddy3D |U|", filled=False),
+                                  style.line(style.REFERENCE, "1:1", lw=1.0), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")])
 style.finish(fig, "AIJ UWE Case D — Eddy3D (OpenFOAM 12, realizable k-ε) vs wind tunnel, z/H = 0.02",
-             handles=[style.marker(style.OPENFOAM, "Eddy3D √(|U|²+2k)"),
-                      style.marker(style.OPENFOAM, "Eddy3D |U|", filled=False),
-                      style.line(style.REFERENCE, "1:1", lw=1.0), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")],
+             handles=legend[0], ncols=legend[1],
              xlabel="Tunnel speed/U$_H$ [–]  (thermistor Vs; split fibre |U|)", ylabel="Eddy3D speed/U$_H$ [–]")
 style.save(fig, "case-d-openfoam-agreement.png")
 print("headings", solved)

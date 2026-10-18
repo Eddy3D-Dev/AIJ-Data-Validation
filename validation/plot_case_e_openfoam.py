@@ -34,6 +34,7 @@ import os
 import numpy as np
 import ultraplot as uplt
 
+import layout
 import plotstyle as style
 from matplotlib.collections import PolyCollection
 
@@ -116,9 +117,10 @@ for i, (state, title) in enumerate(STATES):
     o = np.array([p["measured_ratio"] for p in pts])
     scalar = np.array([p["scalar_ratio"] for p in pts])
     vector = np.array([p["vector_ratio"] for p in pts])
+    colours = layout.grouped_colours("E", pts)            # the distance to the three new buildings (layout.py, the letters of case-e-layout.png)
     style.one_to_one(ax, 0, hi)
-    ax.scatter(o, vector, s=22, facecolor="none", edgecolor=style.OPENFOAM, linewidth=0.8, alpha=0.8, zorder=2)
-    ax.scatter(o, scalar, s=22, color=style.OPENFOAM, edgecolor=style.SURFACE, linewidth=0.4, zorder=3)
+    ax.scatter(o, vector, s=22, facecolor="none", edgecolor=colours, linewidth=0.8, alpha=0.8, zorder=2)
+    ax.scatter(o, scalar, s=22, color=colours, edgecolor=style.SURFACE, linewidth=0.4, zorder=3)
     m = scores[f"vr.{state}.{DIRECTION}.rms"]
     style.stats(ax, f"R {m['R']:+.2f}\nFAC2 {m['Fac2']:.2f}\nFB {m['Fb']:+.2f}")
     ax.format(xlim=(0, hi), ylim=(0, hi), xlabel="Tunnel velocity ratio [–]",
@@ -134,15 +136,16 @@ lim = 1.1 * float(max(np.abs(d_obs).max(), np.abs(d_s).max(), np.abs(d_v).max())
 ax.axhline(0, color=style.REFERENCE, lw=0.8, zorder=1)
 ax.axvline(0, color=style.REFERENCE, lw=0.8, zorder=1)
 ax.plot([-lim, lim], [-lim, lim], color=style.REFERENCE, lw=1.0, zorder=1)
-ax.scatter(d_obs, d_v, s=22, facecolor="none", edgecolor=style.OPENFOAM, linewidth=0.8, alpha=0.8, zorder=2)
-ax.scatter(d_obs, d_s, s=22, color=style.OPENFOAM, edgecolor=style.SURFACE, linewidth=0.4, zorder=3)
+colours = layout.grouped_colours("E", pairs["ac"])        # the same 80 places in both states
+ax.scatter(d_obs, d_v, s=22, facecolor="none", edgecolor=colours, linewidth=0.8, alpha=0.8, zorder=2)
+ax.scatter(d_obs, d_s, s=22, color=colours, edgecolor=style.SURFACE, linewidth=0.4, zorder=3)
 style.stats(ax, f"R {scores[f'delta.{DIRECTION}.R.rms']:+.2f}  √(|U|²+2k)\nR {scores[f'delta.{DIRECTION}.R']:+.2f}  |U|")
 ax.format(xlim=(-lim, lim), ylim=(-lim, lim), xlabel="Tunnel: after − before [–]", ylabel="Eddy3D: after − before [–]",
           title="What the construction changes")
+legend = layout.legend_rows("E", [style.marker(style.REFERENCE, "Eddy3D √(|U|²+2k)"), style.marker(style.REFERENCE, "Eddy3D |U|", filled=False),
+                                  style.line(style.REFERENCE, "1:1", lw=1.0), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")])
 style.finish(fig, "AIJ UWE Case E — Eddy3D (OpenFOAM 12, realizable k-ε, tabulated inlet) vs wind tunnel, z = 2 m",
-             handles=[style.marker(style.OPENFOAM, "Eddy3D √(|U|²+2k)"),
-                      style.marker(style.OPENFOAM, "Eddy3D |U|", filled=False),
-                      style.line(style.REFERENCE, "1:1", lw=1.0), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")])
+             handles=legend[0], ncols=legend[1])
 style.save(fig, "case-e-openfoam-agreement.png")
 
 # ----------------------------------------------------------------------------- figure 2
