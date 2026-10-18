@@ -75,6 +75,7 @@ CASE = {
     "known_issues": [
         "RS_caseL.csv's temperature column is headed 'T(K)' but holds DEGREES CELSIUS (12.85 .. 29.86); AF_caseL.csv's 'T(K)' is kelvin (283 .. 295). The API serves degrees Celsius for both.",
         "The published CSV is the workbook rounded to 2-4 decimals; the table is rebuilt from the workbook. Its 'tc' column (temperature-concentration covariance, K ppm) and the workbook's 'Usc' (the vector magnitude of the mean velocity) are not in the table.",
+        "BD_caseL.stl: the two bottom triangles (z = 0) of each of the 126 cubes (252 triangles) are wound inward; the served geometry.stl is the 126 boxes, outward.",
         "The readme's file list names AF_caseK.csv and RS_caseK.csv; the files are AF_caseL.csv and RS_caseL.csv.",
         "The readme's 'building surface temperature T_b = 14.8 degC' is the approach-flow air temperature at z = H; the workbook gives the building surface as 42.2 degC.",
         "The line source is 0.037 m x 1.2 m in the readme and data paper but a 0.04 m x 1.02 m patch in BD_caseL.stl.",
@@ -104,7 +105,7 @@ def _cubes():
 def geometry(D, case):
     """[(configuration, triangles, boxes, note)]: the 126 cubes of BD_caseL.stl."""
     boxes = _cubes()
-    return [("default", D.tris_of_boxes(boxes), boxes, "the 126 cubes of BD_caseL.stl (checked equal to this 14 x 9 grid of 0.06 m cubes on a 0.12 m pitch in clean/checks.json; the published file is watertight and outward-wound); the line-source patch of that file is not a building and is not included")]
+    return [("default", D.tris_of_boxes(boxes), boxes, "the 126 cubes of BD_caseL.stl (checked equal to this 14 x 9 grid of 0.06 m cubes on a 0.12 m pitch in clean/checks.json; the published file has no open edge but its 126 bottom faces are wound inward); the line-source patch of that file is not a building and is not included")]
 
 
 def approach_flow(D, case):

@@ -1,7 +1,7 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/schemas/geometry.schema.json",
  "schema_version": "2.3.0",
- "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
+ "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
  "case": "M",
  "title": "Case M — TPU Atsugi campus",
@@ -23,31 +23,35 @@
  "files": [
   {
    "configuration": "default",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/geometry.stl?v=cfc68cf63ea1",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/geometry.stl?v=e4e0a2044536",
    "path": "cases/M/geometry.stl",
    "media_type": "model/stl",
-   "bytes": 8474091,
-   "sha256": "cfc68cf63ea1b18cc44cb4b1b79a8cdb0506967983d23f2b31521c0a4d0f15ff",
-   "format": "ASCII STL, LF line endings, outward normals",
-   "source": "BD_caseM.stl (terrain + buildings) scaled x600 from model to full-scale metres; 3118 of 3152 horizontal facets faced down as published, so every triangle is reversed to point outward; one shell with 21 boundary and 7 non-manifold edges",
+   "bytes": 8475730,
+   "sha256": "e4e0a2044536248881898be3bf926b0c0da18b125b29403d2c260c95a5931525",
+   "format": "ASCII STL, LF line endings, outward normals, every body closed and consistently wound",
+   "source": "BD_caseM.stl (terrain + buildings) scaled x600 from model to full-scale metres; 3118 of 3152 horizontal facets faced down as published, so every triangle is reversed to point outward; the published STL has 21 boundary and 7 non-manifold edges: 7 slivers (together 0.45 m^2) hanging on building-roof edges are removed, and the 1080 m by 720 m panel is closed with a base slab: vertical walls from its rim down to z = -1 m and a bottom cap at z = -1 m (21 added triangles)",
    "stats": {
-    "triangles": 43936,
+    "triangles": 43950,
     "bbox_min": [
      -540.0,
      -360.0,
-     -0.0
+     -1.0
     ],
     "bbox_max": [
      540.0,
      360.0,
      64.9152
     ],
-    "signed_volume": 10746823.83226899,
-    "edges": 65911,
-    "edges_shared_by_two_faces": 65883,
-    "edges_boundary": 21,
-    "edges_non_manifold": 7,
-    "watertight": false
+    "signed_volume": 11524435.200124165,
+    "edges": 65925,
+    "edges_shared_by_two_faces": 65925,
+    "edges_boundary": 0,
+    "edges_non_manifold": 0,
+    "bodies": 1,
+    "body_contacts": 0,
+    "inconsistent_triangles": 0,
+    "min_body_volume": 11524435.200124165,
+    "watertight": true
    },
    "bbox_matches_stated_dimensions": true,
    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-m.png",

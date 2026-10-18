@@ -1,5 +1,5 @@
 {
- "total": 289,
+ "total": 293,
  "failed": 0,
  "warnings": 16,
  "note": "an entry with \"pass\": false and \"warning\": true (severity 'warning') is a known, documented discrepancy in the published sources (README.md / QUESTIONS.md), not a failure: 'warnings' counts them, 'failed' counts severity 'error' only, and a warning never fails the build",
@@ -731,6 +731,131 @@
   },
   {
    "case": "E",
+   "check": "3dm_buildings_are_closed_outward_bodies",
+   "pass": true,
+   "severity": "info",
+   "ac": {
+    "triangles": 8432,
+    "bbox_min": [
+     -201.5,
+     -201.0,
+     0.0
+    ],
+    "bbox_max": [
+     203.0,
+     197.3,
+     60.0
+    ],
+    "signed_volume": 356615.421791195,
+    "edges": 12637,
+    "edges_shared_by_two_faces": 12626,
+    "edges_boundary": 0,
+    "edges_non_manifold": 11,
+    "bodies": 545,
+    "body_contacts": 11,
+    "inconsistent_triangles": 0,
+    "min_body_volume": 4.125,
+    "watertight": true
+   },
+   "bc": {
+    "triangles": 8396,
+    "bbox_min": [
+     -201.5,
+     -201.0,
+     0.0
+    ],
+    "bbox_max": [
+     203.0,
+     197.3,
+     30.0
+    ],
+    "signed_volume": 311533.071995195,
+    "edges": 12583,
+    "edges_shared_by_two_faces": 12572,
+    "edges_boundary": 0,
+    "edges_non_manifold": 11,
+    "bodies": 542,
+    "body_contacts": 11,
+    "inconsistent_triangles": 0,
+    "min_body_volume": 4.125,
+    "watertight": true
+   },
+   "repaired_ac": {
+    "bodies": 545,
+    "triangles_reversed": 6631,
+    "bodies_reversed": 523,
+    "conflicting_edges": 0,
+    "party_walls": [
+     [
+      [
+       [
+        7.5,
+        -75.0,
+        0.0
+       ],
+       [
+        7.5,
+        -75.0,
+        3.0
+       ],
+       [
+        3.5,
+        -76.5,
+        0.0
+       ],
+       [
+        3.5,
+        -76.5,
+        3.0
+       ]
+      ],
+      4,
+      12.816005617976296
+     ]
+    ]
+   },
+   "repaired_bc": {
+    "bodies": 542,
+    "triangles_reversed": 6601,
+    "bodies_reversed": 520,
+    "conflicting_edges": 0,
+    "party_walls": [
+     [
+      [
+       [
+        7.5,
+        -75.0,
+        0.0
+       ],
+       [
+        7.5,
+        -75.0,
+        3.0
+       ],
+       [
+        3.5,
+        -76.5,
+        0.0
+       ],
+       [
+        3.5,
+        -76.5,
+        3.0
+       ]
+      ],
+      4,
+      12.816005617976296
+     ]
+    ]
+   },
+   "wound_against_neighbours_in_the_3dm_ac": [
+    1563,
+    8436
+   ],
+   "note": "every body of both 3dm states is closed, consistently wound and has a positive volume; the wall that two buildings share is removed (they become one body); edges where separate bodies touch are listed as body_contacts"
+  },
+  {
+   "case": "E",
    "check": "row_count_80_x_16_x_2",
    "pass": true,
    "severity": "info",
@@ -850,7 +975,7 @@
     ],
     [
      203.0,
-     197.300003,
+     197.3,
      60.0
     ]
    ],
@@ -1313,7 +1438,18 @@
     0.0
    ],
    "zero_area_facets": 3,
-   "note": "all 812 boundary edges lie on the 725 m circle at z = 0 (the surface is terrain + buildings, open at the rim); the zero-area facets are kept as published"
+   "note": "all 812 boundary edges lie on the 725 m circle at z = 0 (the surface is terrain + buildings, open at the rim); counted on the published file: the served geometry closes the rim with a base slab and removes the zero-area facets (T-junction fillers)"
+  },
+  {
+   "case": "F",
+   "check": "served_geometry_is_one_closed_outward_body",
+   "pass": true,
+   "severity": "info",
+   "bodies": 1,
+   "boundary_edges": 0,
+   "base_triangles": 2436,
+   "signed_volume_m3": 13344848.220919304,
+   "note": "the surface above the floor is unchanged except 3 zero-area triangles; the base slab adds a skirt of 2 triangles per rim edge and a bottom cap of 1 per rim edge"
   },
   {
    "case": "F",
@@ -3276,14 +3412,24 @@
   },
   {
    "case": "L",
-   "check": "BD_caseL_stl_buildings_solid_is_watertight_and_outward",
+   "check": "BD_caseL_stl_buildings_solid_has_no_open_edge_and_the_analytic_volume",
    "pass": true,
    "severity": "info",
    "triangles": 1512,
+   "bodies": 126,
    "open_edges": 0,
    "signed_volume_m3": 0.027216,
    "analytic_volume_m3": 0.027216,
-   "note": "positive signed volume = outward winding; no duplicate facets; unlike Cases D and E nothing needs repairing"
+   "note": "every edge is used by two triangles and the signed volume equals 126 H^3; unlike Cases D and E nothing needs repairing, except the bottom faces (next check)"
+  },
+  {
+   "case": "L",
+   "check": "BD_caseL_stl_bottom_faces_are_wound_inward",
+   "pass": true,
+   "severity": "info",
+   "inconsistent_triangles": 252,
+   "bodies": 126,
+   "note": "the two bottom triangles (z = 0) of each of the 126 cubes are wound against the other ten, so the file is closed but not consistently wound; the plane z = 0 adds nothing to the signed volume, which is why the volume and the open-edge count do not show it. The served geometry.stl is the 126 boxes, outward"
   },
   {
    "case": "L",
@@ -3843,7 +3989,20 @@
    "severity": "info",
    "boundary_edges": 21,
    "non_manifold_edges": 7,
-   "note": "the surface is one shell; 21 boundary edges and 7 non-manifold edges (the latter on building roofs) are kept as published"
+   "note": "the surface is one shell; 21 boundary edges (7 on the panel rim at z = 0, 14 on the 7 slivers) and 7 non-manifold edges (on building roofs, where a sliver hangs on an edge): counted on the published file; the served geometry removes the slivers and closes the rim"
+  },
+  {
+   "case": "M",
+   "check": "served_geometry_is_one_closed_outward_body",
+   "pass": true,
+   "severity": "info",
+   "bodies": 1,
+   "boundary_edges": 0,
+   "flaps_removed": 7,
+   "flap_area_m2": 0.45155176201688796,
+   "base_triangles": 21,
+   "signed_volume_m3": 11524437.305201,
+   "note": "the 7 non-manifold edges are slivers (a triangle with two free edges hung on a roof edge, 0.45 m^2 together) and are removed; the 7 rim edges of the panel at z = 0 are closed by the base slab"
   },
   {
    "case": "M",

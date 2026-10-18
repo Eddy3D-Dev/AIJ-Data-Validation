@@ -14,25 +14,29 @@
    "configuration": "default",
    "file": "cases/F/geometry.stl",
    "format": "ASCII STL, LF, metres, same frame as points.csv",
-   "source": "BD_caseF.stl (Zenodo; terrain + buildings of Nov 1978) scaled x800 from model to full-scale metres and re-wound outward; 53814 triangles, one shell, open only along the rim of the 725 m disc (812 boundary edges), z = 0 is the tunnel floor",
+   "source": "BD_caseF.stl (Zenodo; terrain + buildings of Nov 1978) scaled x800 from model to full-scale metres and re-wound outward; 53,814 triangles, open along the rim of the 725 m disc (812 boundary edges at z = 0, the tunnel floor); closed here with a base slab: vertical walls from the rim down to z = -1 m and a bottom cap at z = -1 m (2,436 added triangles); 3 zero-area triangles are removed and the neighbour across each is split",
    "stats": {
-    "triangles": 53814,
+    "triangles": 56250,
     "bbox_min": [
      -725.0,
      -724.9976,
-     -0.0
+     -1.0
     ],
     "bbox_max": [
      725.0,
      724.9984,
      225.0
     ],
-    "signed_volume": 11693570.075203538,
-    "edges": 81127,
-    "edges_shared_by_two_faces": 80315,
-    "edges_boundary": 812,
+    "signed_volume": 13344848.220919304,
+    "edges": 84375,
+    "edges_shared_by_two_faces": 84375,
+    "edges_boundary": 0,
     "edges_non_manifold": 0,
-    "watertight": false
+    "bodies": 1,
+    "body_contacts": 0,
+    "inconsistent_triangles": 0,
+    "min_body_volume": 13344848.220919304,
+    "watertight": true
    }
   }
  ]

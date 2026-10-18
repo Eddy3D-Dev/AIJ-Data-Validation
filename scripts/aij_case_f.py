@@ -62,7 +62,7 @@ CASE = {
         "The 16 field rows of point 14 in RS-FO_caseF.csv hold the workbook's value of the NEXT wind direction clockwise (the series is shifted by one); the cleaned table follows the workbook (clean/QUESTIONS.md QF1).",
         "Tunnel and STL coordinates are MODEL scale (1:800); the field's are full scale. The case frame is full scale; the tunnel's x, y, z and the STL are multiplied by 800.",
         "z is height above the tunnel floor. The readme's rule 'ground = z - 10 m' gives the 5 / 9 / 20 m planes, but the STL's terrain under all 13 points is at z = 5 m, so the planes stand 10 / 14 / 25 m above it.",
-        "BD_caseF.stl is wound inward on every ground, roof and sampled wall facet and is open along the rim of its 725 m disc (812 boundary edges); the served geometry.stl is re-wound outward.",
+        "BD_caseF.stl is wound inward on every ground, roof and sampled wall facet and is open along the rim of its 725 m disc (812 boundary edges); the served geometry.stl is re-wound outward and closed with a base slab down to z = -1 m.",
         "MP_caseF.csv names the two reference points the other way round from the workbook, the STL and MP_caseF.png (the workbook's Shinjuku-Mitsui Building is the 225 m tower at (-17.5, 96.0), the KDD Building the 180 m one at (85.8, -347.1)).",
         "Field values are the legacy workbook's roof-anemometer ratios times 0.940 (NW-NE) or 0.963 (other directions); sigma is the workbook's S.D. rounded to 0.01 times that factor, so it moves in steps of 0.0094 / 0.0096.",
         "The tunnel did not run E, ESE, WSW or W; the field data cover all 16. The 5 m and 20 m planes exist at some points only (29 and 79 rows).",
@@ -90,15 +90,18 @@ def _horizontal_down_up(tris):
 
 
 def geometry(D, case):
-    """[(configuration, triangles, boxes, note)]: BD_caseF.stl x800 (model -> full-scale metres), re-wound outward."""
+    """[(configuration, triangles, boxes, note)]: BD_caseF.stl x800 (model -> full-scale metres), re-wound outward and closed with a base slab."""
     raw = D.read_ascii_stl(os.path.join(D.REPO, CASE["folder"], "BD_caseF.stl"))
     tris = [tuple(tuple(v * SCALE for v in p) for p in t) for t in raw]
     down, up = _horizontal_down_up(tris)
-    if down > up:
-        tris = [(a, c, b) for a, b, c in tris]
-    return [("default", tris, None,
-             f"BD_caseF.stl (terrain + buildings, November 1978) scaled x800 from model to full-scale metres; {down} of {down + up} horizontal facets faced down as published, "
-             "so every triangle is reversed to point outward; one shell, open along the rim of the 725 m disc")]
+    rim = D.stl_stats(tris)["edges_boundary"]
+    tris, closed = D.G.close_terrain(tris, digits=6)
+    note = (f"BD_caseF.stl (terrain + buildings, November 1978) scaled x800 from model to full-scale metres; {down} of {down + up} horizontal facets faced down as published, "
+            f"so every triangle is reversed to point outward; the published STL is open along the rim of the 725 m disc ({rim} boundary edges at z = 0, the tunnel floor) and is closed here with a base slab: "
+            f"vertical walls from the rim down to z = {D.G.BASE_Z:g} m and a bottom cap at z = {D.G.BASE_Z:g} m ({closed['base_triangles']:,} added triangles)")
+    if closed["degenerate_removed"]:
+        note += f"; {closed['degenerate_removed']} zero-area triangles are removed and the neighbour across each is split"
+    return [("default", tris, None, note)]
 
 
 def approach_flow(D, case):

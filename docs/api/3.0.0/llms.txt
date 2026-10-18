@@ -8,7 +8,7 @@ Fallback (raw files from the repository): https://raw.githubusercontent.com/Sust
 Repository: https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ
 Release: 3.0.0 (2026-10-18). This is the frozen copy of that release: its files never change and every URL below stays inside it.
 All releases: https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/versions.json
-API schema version: 2.3.0. Data version (SHA-256 of the served data): a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d.
+API schema version: 2.3.0. Data version (SHA-256 of the served data): be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52.
 Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark and the per-case papers.
 
 ## How to use this
@@ -117,19 +117,19 @@ Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark an
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/B/geometry.stl?v=e6de70eeb17d
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/C/geometry.stl?v=b8c31c57c453
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/D/geometry.stl?v=531895531271
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/geometry.stl?v=f59d27738a49
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F/geometry.stl?v=18bcb1a0bcb1
+  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/geometry.stl?v=c29624fdae6d
+  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/F/geometry.stl?v=8799740aa324
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/G/geometry.stl?v=09d23c794155
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/H/geometry.stl?v=4836687efff9
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/I/geometry.stl?v=ff61cbb22798
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/J/geometry.stl?v=1bd33d8d3531
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/K/geometry.stl?v=f0f8a3adfa29
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/L/geometry.stl?v=20864bc75187
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/geometry.stl?v=cfc68cf63ea1
+  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/M/geometry.stl?v=e4e0a2044536
 - cases/{id}/geometry_{configuration}.stl (base URL + path, one file per value) — the other configurations' STLs (C: 0D, 1D; E: bc, before construction):
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/C/geometry_0D.stl?v=0f08bcd4dd6b
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/C/geometry_1D.stl?v=ac92c8ed427c
-  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/geometry_bc.stl?v=25d8af3a7617
+  - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/E/geometry_bc.stl?v=9b944d97a817
 - cases/{id}/validation.json (base URL + path, one file per value) — Eddy3D's scores per engine and run, with figures and the per-point pairs:
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/A/validation.json
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0/cases/B/validation.json
@@ -228,12 +228,13 @@ Each of these changes the result of a comparison if it is not accounted for.
 - [E] All 2560 published ratios are integer multiples of 0.0198204 (55 distinct levels): the data's own resolution is +/-0.0099, 3.1 % of the median value and about 10 % at the lowest points.
 - [E] The readme describes AF_caseE.csv, RS_caseE.csv and BD_caseE.stl, but this repository holds only the .3dm, .ghx, .xls and the MP drawing; everything here is extracted from the workbook and the 3dm.
 - [E] case-e.3dm is FULL-SCALE metres (MP_caseE.png is drawn at model scale, +/-0.8 m). Use layers 'buildings' (5,015 meshes, before construction) and 'buildings_new_construction' (3 prisms); exclude the map plate on the Japanese-named general layer, the terrain plates (the site is flat) and 'probes'.
+- [E] case-e.3dm: 1,563 of 8,436 triangles (18.5 %) of the building meshes are wound against their neighbours; all are re-wound here.
 - [E] Do not take the measurement coordinates from the 3dm's 'probes' layer: its 80 spheres sit a median 2.31 m (max 21 m) from the workbook's points, which are authoritative (all 80 fall in open space, min 0.83 m from a building edge).
 - [E] The measured quantity is a scalar (thermistor) speed; a RANS |U| is biased low against it in a dense canopy. The construction signal (ac - bc) is largest for SW (mean |d| 0.2155) and smallest for SSE (0.093).
 - [F] The 16 field rows of point 14 in RS-FO_caseF.csv hold the workbook's value of the NEXT wind direction clockwise (the series is shifted by one); the cleaned table follows the workbook (clean/QUESTIONS.md QF1).
 - [F] Tunnel and STL coordinates are MODEL scale (1:800); the field's are full scale. The case frame is full scale; the tunnel's x, y, z and the STL are multiplied by 800.
 - [F] z is height above the tunnel floor. The readme's rule 'ground = z - 10 m' gives the 5 / 9 / 20 m planes, but the STL's terrain under all 13 points is at z = 5 m, so the planes stand 10 / 14 / 25 m above it.
-- [F] BD_caseF.stl is wound inward on every ground, roof and sampled wall facet and is open along the rim of its 725 m disc (812 boundary edges); the served geometry.stl is re-wound outward.
+- [F] BD_caseF.stl is wound inward on every ground, roof and sampled wall facet and is open along the rim of its 725 m disc (812 boundary edges); the served geometry.stl is re-wound outward and closed with a base slab down to z = -1 m.
 - [F] MP_caseF.csv names the two reference points the other way round from the workbook, the STL and MP_caseF.png (the workbook's Shinjuku-Mitsui Building is the 225 m tower at (-17.5, 96.0), the KDD Building the 180 m one at (85.8, -347.1)).
 - [F] Field values are the legacy workbook's roof-anemometer ratios times 0.940 (NW-NE) or 0.963 (other directions); sigma is the workbook's S.D. rounded to 0.01 times that factor, so it moves in steps of 0.0094 / 0.0096.
 - [F] The tunnel did not run E, ESE, WSW or W; the field data cover all 16. The 5 m and 20 m planes exist at some points only (29 and 79 rows).
@@ -283,6 +284,7 @@ Each of these changes the result of a comparison if it is not accounted for.
 - [K] Workbook units: x and y in millimetres in both data sheets; z in millimetres in 'Measurement data' but metres in 'Inflow'.
 - [L] RS_caseL.csv's temperature column is headed 'T(K)' but holds DEGREES CELSIUS (12.85 .. 29.86); AF_caseL.csv's 'T(K)' is kelvin (283 .. 295). The API serves degrees Celsius for both.
 - [L] The published CSV is the workbook rounded to 2-4 decimals; the table is rebuilt from the workbook. Its 'tc' column (temperature-concentration covariance, K ppm) and the workbook's 'Usc' (the vector magnitude of the mean velocity) are not in the table.
+- [L] BD_caseL.stl: the two bottom triangles (z = 0) of each of the 126 cubes (252 triangles) are wound inward; the served geometry.stl is the 126 boxes, outward.
 - [L] The readme's file list names AF_caseK.csv and RS_caseK.csv; the files are AF_caseL.csv and RS_caseL.csv.
 - [L] The readme's 'building surface temperature T_b = 14.8 degC' is the approach-flow air temperature at z = H; the workbook gives the building surface as 42.2 degC.
 - [L] The line source is 0.037 m x 1.2 m in the readme and data paper but a 0.04 m x 1.02 m patch in BD_caseL.stl.
@@ -298,7 +300,7 @@ Each of these changes the result of a comparison if it is not accounted for.
 - [M] H_R = 41 m is the anemometer height above the ground; the main roof under the reference point is about 33 m above it. c0 uses H_R = 0.068 m (41 m / 600 = 0.06833 m would give 131.2 ppm, -1 %).
 - [M] The field has an ambient floor of 8 - 11 ppq at points 11 - 15 in every run (not subtracted); the tunnel's concentration has a zero offset (two negative means at point 12) and an rms floor of 7 ppm.
 - [M] Only 11 of the 18 field runs are within 5° of 180°, the tunnel's direction; runs 1, 2 and 9 have U_R of 1.4 - 1.8 m/s.
-- [M] BD_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges; the served geometry.stl is multiplied by 600 and re-wound outward.
+- [M] BD_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges (7 on the rim of the panel, 14 on 7 slivers hanging on building roofs); the served geometry.stl is multiplied by 600, re-wound outward, without the slivers and closed with a base slab down to z = -1 m.
 - [M] The approach-flow heights are above the empty tunnel floor: at the profile station the model's taper is 0.052 m high, above the 10 lowest profile heights.
 
 ## Validation method

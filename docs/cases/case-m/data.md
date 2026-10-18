@@ -146,7 +146,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 - H\_R = 41 m is the anemometer height above the ground; the main roof under the reference point is about 33 m above it. c0 uses H\_R = 0.068 m (41 m / 600 = 0.06833 m would give 131.2 ppm, -1 %).
 - The field has an ambient floor of 8 - 11 ppq at points 11 - 15 in every run (not subtracted); the tunnel\'s concentration has a zero offset (two negative means at point 12) and an rms floor of 7 ppm.
 - Only 11 of the 18 field runs are within 5° of 180°, the tunnel\'s direction; runs 1, 2 and 9 have U\_R of 1.4 - 1.8 m/s.
-- BD\_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges; the served geometry.stl is multiplied by 600 and re-wound outward.
+- BD\_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges (7 on the rim of the panel, 14 on 7 slivers hanging on building roofs); the served geometry.stl is multiplied by 600, re-wound outward, without the slivers and closed with a base slab down to z = -1 m.
 - The approach-flow heights are above the empty tunnel floor: at the profile station the model\'s taper is 0.052 m high, above the 10 lowest profile heights.
 
 ## API

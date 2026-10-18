@@ -145,7 +145,7 @@ street surface, and is the STL the model that was in the tunnel?
 The STL is a disc of radius 725.0 m (0.90625 m model), open along its rim (812 boundary edges, all at z = 0); the readme says
 "radius = 800 m equivalent" and the data paper "a diameter of 1,600 m". A 1.8125 m model would not fit the 1.55 m wide tunnel
 the paper describes. All its ground and roof facets (and a sample of walls) face down, so the file is wound inward; this release
-reverses it. Please confirm the radius that was in the tunnel, and that the file is meant to describe the 1978 configuration.
+reverses it and closes the rim with a 1 m base slab. Please confirm the radius that was in the tunnel, and that the file is meant to describe the 1978 configuration.
 
 ## QF6 — Case F: which reference point is SMB? (Okaze)
 

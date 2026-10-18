@@ -219,8 +219,13 @@ def build(B, prov):
     B.log(f"[F] geometry: BD_caseF.stl is MODEL scale (bbox ±0.90625 m = ±725 m full scale; the lowest elevation is the tunnel floor); scaled x {SCALE:g}; "
           f"every horizontal ground/roof facet faces DOWN as published ({down0} down, {up0} up), i.e. the whole surface is wound inward: all triangles reversed "
           f"({down1} down, {up1} up now); stats {s_geo}")
-    geo = [("default", None, tris, "BD_caseF.stl (Zenodo; terrain + buildings of Nov 1978) scaled x800 from model to full-scale metres and re-wound outward; "
-            f"{s_geo['triangles']} triangles, one shell, open only along the rim of the 725 m disc ({s_geo['edges_boundary']} boundary edges), z = 0 is the tunnel floor")]
+    served, closed = B.close_terrain(tris, digits=7)
+    s_served = B.stl_stats(served)
+    B.log(f"[F] geometry served: closed with a base slab ({closed}); stats {s_served}")
+    geo = [("default", None, served, "BD_caseF.stl (Zenodo; terrain + buildings of Nov 1978) scaled x800 from model to full-scale metres and re-wound outward; "
+            f"{s_geo['triangles']:,} triangles, open along the rim of the 725 m disc ({s_geo['edges_boundary']} boundary edges at z = 0, the tunnel floor); closed here with a base slab: "
+            f"vertical walls from the rim down to z = {B.BASE_Z:g} m and a bottom cap at z = {B.BASE_Z:g} m ({closed['base_triangles']:,} added triangles)"
+            + (f"; {closed['degenerate_removed']} zero-area triangles are removed and the neighbour across each is split" if closed["degenerate_removed"] else ""))]
 
     # ------------------------------------------------------------------ checks
     cnt = {k: int(v) for k, v in T_.groupby("config").size().items()}
@@ -384,7 +389,11 @@ def build(B, prov):
     zero_area = int((np.linalg.norm(np.cross(Tm[:, 1] - Tm[:, 0], Tm[:, 2] - Tm[:, 0]), axis=1) < 1e-9).sum())
     check(c, "stl_closed_except_the_rim", s_geo["edges_non_manifold"] == 0 and s_geo["edges_boundary"] == 812 and rr.min() > 724.99 and rr.max() < 725.01 and np.abs(rz).max() < 1e-6, boundary_edges=s_geo["edges_boundary"],
           non_manifold_edges=s_geo["edges_non_manifold"], boundary_vertex_radius_m=[float(rr.min()), float(rr.max())], boundary_vertex_z_m=[float(rz.min()), float(rz.max())], zero_area_facets=zero_area,
-          note="all 812 boundary edges lie on the 725 m circle at z = 0 (the surface is terrain + buildings, open at the rim); the zero-area facets are kept as published")
+          note="all 812 boundary edges lie on the 725 m circle at z = 0 (the surface is terrain + buildings, open at the rim); counted on the published file: the served geometry closes the rim with a base slab and removes the zero-area facets (T-junction fillers)")
+
+    check(c, "served_geometry_is_one_closed_outward_body", s_served["watertight"] and s_served["bodies"] == 1 and s_served["edges_boundary"] == 0 and s_served["bbox_min"][2] == B.BASE_Z
+          and closed["base_triangles"] == 3 * s_geo["edges_boundary"], bodies=s_served["bodies"], boundary_edges=s_served["edges_boundary"], base_triangles=closed["base_triangles"], signed_volume_m3=s_served["signed_volume"],
+          note=f"the surface above the floor is unchanged except {closed['degenerate_removed']} zero-area triangles; the base slab adds a skirt of 2 triangles per rim edge and a bottom cap of 1 per rim edge")
 
     # ---- the wind-direction sense: compass FROM-directions. Upwind roughness is the independent evidence.
     north = [no for no in points if fd.loc[no, "y"] >= 150.0]

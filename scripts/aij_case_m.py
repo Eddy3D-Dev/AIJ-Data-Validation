@@ -65,7 +65,7 @@ CASE = {
         "H_R = 41 m is the anemometer height above the ground; the main roof under the reference point is about 33 m above it. c0 uses H_R = 0.068 m (41 m / 600 = 0.06833 m would give 131.2 ppm, -1 %).",
         "The field has an ambient floor of 8 - 11 ppq at points 11 - 15 in every run (not subtracted); the tunnel's concentration has a zero offset (two negative means at point 12) and an rms floor of 7 ppm.",
         "Only 11 of the 18 field runs are within 5° of 180°, the tunnel's direction; runs 1, 2 and 9 have U_R of 1.4 - 1.8 m/s.",
-        "BD_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges; the served geometry.stl is multiplied by 600 and re-wound outward.",
+        "BD_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges (7 on the rim of the panel, 14 on 7 slivers hanging on building roofs); the served geometry.stl is multiplied by 600, re-wound outward, without the slivers and closed with a base slab down to z = -1 m.",
         "The approach-flow heights are above the empty tunnel floor: at the profile station the model's taper is 0.052 m high, above the 10 lowest profile heights.",
     ],
 }
@@ -87,15 +87,17 @@ def _horizontal_down_up(tris):
 
 
 def geometry(D, case):
-    """[(configuration, triangles, boxes, note)]: BD_caseM.stl x600 (model -> full-scale metres), re-wound outward."""
+    """[(configuration, triangles, boxes, note)]: BD_caseM.stl x600 (model -> full-scale metres), re-wound outward, slivers removed, closed with a base slab."""
     raw = D.read_ascii_stl(os.path.join(D.REPO, CASE["folder"], "BD_caseM.stl"))
     tris = [tuple(tuple(v * SCALE for v in p) for p in t) for t in raw]
     down, up = _horizontal_down_up(tris)
-    if down > up:
-        tris = [(a, c, b) for a, b, c in tris]
+    pub = D.stl_stats(tris)
+    tris, closed = D.G.close_terrain(tris, digits=6)
     return [("default", tris, None,
              f"BD_caseM.stl (terrain + buildings) scaled x600 from model to full-scale metres; {down} of {down + up} horizontal facets faced down as published, "
-             "so every triangle is reversed to point outward; one shell with 21 boundary and 7 non-manifold edges")]
+             f"so every triangle is reversed to point outward; the published STL has {pub['edges_boundary']} boundary and {pub['edges_non_manifold']} non-manifold edges: "
+             f"{closed['flaps_removed']} slivers (together {closed['flap_area']:.2f} m^2) hanging on building-roof edges are removed, and the 1080 m by 720 m panel is closed with a base slab: "
+             f"vertical walls from its rim down to z = {D.G.BASE_Z:g} m and a bottom cap at z = {D.G.BASE_Z:g} m ({closed['base_triangles']} added triangles)")]
 
 
 def approach_flow(D, case):

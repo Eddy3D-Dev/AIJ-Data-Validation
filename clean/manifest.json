@@ -1214,6 +1214,10 @@
      "edges_shared_by_two_faces": 738,
      "edges_boundary": 0,
      "edges_non_manifold": 756,
+     "bodies": 1121,
+     "body_contacts": 756,
+     "inconsistent_triangles": 82,
+     "min_body_volume": -0.0001875,
      "watertight": false
     },
     "thermistor_mirror_symmetry": {
@@ -1707,8 +1711,8 @@
     {
      "configuration": "ac_3dm",
      "file": "cases/E/geometry_ac_3dm.stl",
-     "triangles": 8436,
-     "watertight": false,
+     "triangles": 8432,
+     "watertight": true,
      "bbox_min": [
       -201.5,
       -201.0,
@@ -1716,7 +1720,7 @@
      ],
      "bbox_max": [
       203.0,
-      197.300003,
+      197.3,
       60.0
      ],
      "boxes": null
@@ -1724,8 +1728,8 @@
     {
      "configuration": "bc_3dm",
      "file": "cases/E/geometry_bc_3dm.stl",
-     "triangles": 8400,
-     "watertight": false,
+     "triangles": 8396,
+     "watertight": true,
      "bbox_min": [
       -201.5,
       -201.0,
@@ -1733,7 +1737,7 @@
      ],
      "bbox_max": [
       203.0,
-      197.300003,
+      197.3,
       30.0
      ],
      "boxes": null
@@ -2434,12 +2438,12 @@
     {
      "configuration": "default",
      "file": "cases/F/geometry.stl",
-     "triangles": 53814,
-     "watertight": false,
+     "triangles": 56250,
+     "watertight": true,
      "bbox_min": [
       -725.0,
       -724.9976,
-      -0.0
+      -1.0
      ],
      "bbox_max": [
       725.0,
@@ -2691,11 +2695,15 @@
        724.9984,
        225.0
       ],
-      "signed_volume": -11693570.075203538,
+      "signed_volume": -11693570.075203555,
       "edges": 81127,
       "edges_shared_by_two_faces": 80315,
       "edges_boundary": 812,
       "edges_non_manifold": 0,
+      "bodies": 1,
+      "body_contacts": 0,
+      "inconsistent_triangles": 0,
+      "min_body_volume": -11693570.075203555,
       "watertight": false
      },
      "as_published": {
@@ -4667,6 +4675,7 @@
    ],
    "known_issues": {
     "RS_T_unit": "RS_caseL.csv 'T(K)' holds degrees Celsius (AF_caseL.csv's 'T(K)' is kelvin); the table carries degC for both",
+    "stl_bottom_faces": "BD_caseL.stl: the two bottom triangles (z = 0) of each of the 126 cubes (252 triangles) are wound inward; the served geometry.stl is the 126 boxes, outward",
     "readme_file_names": "the readme's file list names AF_caseK.csv and RS_caseK.csv; the files are AF_caseL.csv and RS_caseL.csv",
     "readme_building_temperature": "the readme's 'building surface temperature T_b = 14.8 degC' is the air temperature at H; the workbook's <θbuild> is 42.2 degC",
     "source_size": "readme and data paper 0.037 m x 1.2 m; BD_caseL.stl patch 0.04 m x 1.02 m",
@@ -5149,12 +5158,12 @@
     {
      "configuration": "default",
      "file": "cases/M/geometry.stl",
-     "triangles": 43936,
-     "watertight": false,
+     "triangles": 43950,
+     "watertight": true,
      "bbox_min": [
       -540.0,
       -360.0,
-      -0.0
+      -1.0
      ],
      "bbox_max": [
       540.0,
@@ -5315,6 +5324,10 @@
       "edges_shared_by_two_faces": 65883,
       "edges_boundary": 21,
       "edges_non_manifold": 7,
+      "bodies": 8,
+      "body_contacts": 7,
+      "inconsistent_triangles": 0,
+      "min_body_volume": -0.049753876,
       "watertight": false
      },
      "as_published": {

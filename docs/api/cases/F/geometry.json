@@ -1,7 +1,7 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/geometry.schema.json",
  "schema_version": "2.3.0",
- "data_version": "a3b3555182df594d614beff495809c17f0476a18f6946fbaf9666321fb98a49d",
+ "data_version": "be415e94ac63e804ef5b339161abdca0314aab5deaf40dc8fb8f3283087caa52",
  "license": "CC-BY-4.0",
  "case": "F",
  "title": "Case F — Shinjuku district",
@@ -23,31 +23,35 @@
  "files": [
   {
    "configuration": "default",
-   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/geometry.stl?v=18bcb1a0bcb1",
+   "url": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/F/geometry.stl?v=8799740aa324",
    "path": "cases/F/geometry.stl",
    "media_type": "model/stl",
-   "bytes": 9255612,
-   "sha256": "18bcb1a0bcb1f9576241f5d501a8de8e06e493504fc9e66426d52f530871b16c",
-   "format": "ASCII STL, LF line endings, outward normals",
-   "source": "BD_caseF.stl (terrain + buildings, November 1978) scaled x800 from model to full-scale metres; 21537 of 21575 horizontal facets faced down as published, so every triangle is reversed to point outward; one shell, open along the rim of the 725 m disc",
+   "bytes": 9661421,
+   "sha256": "8799740aa324b9494a3962197ebaa82bc3f3f8ddce138e9d2777bc9cd7660c0c",
+   "format": "ASCII STL, LF line endings, outward normals, every body closed and consistently wound",
+   "source": "BD_caseF.stl (terrain + buildings, November 1978) scaled x800 from model to full-scale metres; 21537 of 21575 horizontal facets faced down as published, so every triangle is reversed to point outward; the published STL is open along the rim of the 725 m disc (812 boundary edges at z = 0, the tunnel floor) and is closed here with a base slab: vertical walls from the rim down to z = -1 m and a bottom cap at z = -1 m (2,436 added triangles); 10 zero-area triangles are removed and the neighbour across each is split",
    "stats": {
-    "triangles": 53814,
+    "triangles": 56250,
     "bbox_min": [
      -725.0,
-     -724.9976,
-     -0.0
+     -724.998,
+     -1.0
     ],
     "bbox_max": [
      725.0,
-     724.9984,
+     724.998,
      225.0
     ],
-    "signed_volume": 11693570.075203538,
-    "edges": 81127,
-    "edges_shared_by_two_faces": 80315,
-    "edges_boundary": 812,
+    "signed_volume": 13344850.393472837,
+    "edges": 84375,
+    "edges_shared_by_two_faces": 84375,
+    "edges_boundary": 0,
     "edges_non_manifold": 0,
-    "watertight": false
+    "bodies": 1,
+    "body_contacts": 0,
+    "inconsistent_triangles": 0,
+    "min_body_volume": 13344850.393472837,
+    "watertight": true
    },
    "bbox_matches_stated_dimensions": true,
    "render": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/assets/geometry/case-f.png",

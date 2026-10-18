@@ -153,7 +153,20 @@ m.query("campaign == 'field' and abs(wind_direction_deg - 180) <= 5").groupby("p
 - The official `BD_caseE.stl` (now in `sources/zenodo_caseE/`) is **model scale** (×250 here), **not watertight** (5,253 open edges), after-construction only. The before-construction geometry here is an Eddy3D reconstruction from the 3dm with no published source.
 - **Point 50 at (−45.5, −45.0) is 0.17 m inside a wall of the official STL** and 2.06 m clear in the 3dm; the other 79 are in open space in both (a warning in `checks.json`; `QUESTIONS.md` Q3). A probe at point 50 against the official STL will fail or read inside a building.
 - Do not take sensor coordinates from the 3dm's `probes` layer (hand-placed spheres, median 2.3 m off); the workbook's `Geometry&Points` sheet is authoritative and all 80 of its points pass the open-space test, while a 10° rotation of the cloud puts 26 inside the official STL's buildings.
+- `case-e.3dm`: 1,563 of 8,436 triangles (18.5 %) of the building meshes are wound against their neighbours; all are re-wound here.
 - Construction signal: mean (ac − bc) = +0.097; largest for SW (mean |Δ| 0.216), smallest for SSE (0.093).
+
+<details markdown="block">
+  <summary>Data notes: Case E geometry</summary>
+
+- 546 of the 548 bodies of the after-construction mesh (543 of 545 before construction) have triangles wound against their neighbours; a body is a set of triangles joined through edges that exactly two triangles use.
+- 475 of the 503 building shells are wound inward in the 3dm. The earlier build reversed whole shells by signed volume; a shell wound partly inward stays inconsistent after that, and a viewer that culls back faces draws its reversed triangles as missing walls.
+- Every building is now wound consistently (each edge is traversed once in each direction) with a positive volume: 545 closed bodies after construction, 542 before, the smallest 4.125 m³.
+- One wall that two buildings share (4.27 m × 3 m, x 3.5 to 7.5 m, y −76.5 to −75 m) is modelled twice, once per building, with different diagonals, so the copies never joined their buildings. The 4 triangles of both copies are removed and the two buildings are one body.
+- 11 edges where two separate buildings touch (15 before the wall is removed) are counted as `body_contacts`; each building still sees them as ordinary two-triangle edges, so a contact does not open a body.
+- `cases/E/geometry.json` reports `bodies`, `edges_boundary`, `body_contacts`, `inconsistent_triangles` and `min_body_volume`; `watertight` is true when every body is closed, consistently wound and positive in volume.
+
+</details>
 
 **F**
 
@@ -163,7 +176,7 @@ m.query("campaign == 'field' and abs(wind_direction_deg - 180) <= 5").groupby("p
 - **The field values are the workbook times one factor per sector.** CSV = round(f × workbook): f = 0.9397 for NW, NNW, N, NNE, NE (reference: the SMB roof anemometer) and 0.9629 for the other eleven directions (KDD). All 192 rows of the 12 aligned points reproduce exactly, for the mean and for σ. The factors are the ratio of the roof anemometer to the 500 m wind and are stated nowhere in the sources (QF8).
 - **σ is quantised.** The workbook's S.D. is rounded to 0.01 before it is multiplied by f, so `velocity_ratio_sd` takes 13 (SMB) or 17 (KDD) values in steps of 0.0094 or 0.0096, 4 to 20 % of the value.
 - **`MP_caseF.csv` has the two reference buildings swapped.** It puts "SMB" at (85.8, −347.1) and "KDD" at (−17.5, 96.0); the workbook, `MP_caseF.png` (D = SMB, C = KDD) and the STL say the opposite (QF6).
-- **`BD_caseF.stl` is wound inward everywhere.** All 21,537 horizontal ground and roof facets (of 21,575) face down, as do all 403 sampled walls; the stored normals agree with the winding. Reversed here. The surface is closed except along the rim of a **725 m**-radius disc (812 boundary edges), while the readme and the data paper say 800 m / 1,600 m diameter, and a 1.8 m model would not fit the 1.55 m tunnel they describe (QF5).
+- **`BD_caseF.stl` is wound inward everywhere.** All 21,537 horizontal ground and roof facets (of 21,575) face down, as do all 403 sampled walls; the stored normals agree with the winding. Reversed here. The surface is closed except along the rim of a **725 m**-radius disc (812 boundary edges, all at z = 0), which `geometry.stl` here closes with a 1 m base slab (vertical walls from the rim down to z = −1 m and a bottom cap, 2,436 added triangles; the published STL is open at the rim). The readme and the data paper say 800 m / 1,600 m diameter, and a 1.8 m model would not fit the 1.55 m tunnel they describe (QF5).
 - **Unexplained cells.** The workbook's "Other" column (109 values) is neither the 5 m nor the 20 m plane, and holds 9 values for ESE, which the tunnel did not run (QF3); one 9 m tunnel value (point 8, SW: 0.474) has a blank in the workbook's results sheet and 0.63 in its flat table (QF2); in 10 workbook rows Mean + S.D. and Mean − S.D. are not symmetric about the mean by up to 0.11, and the CSV's σ is the lower half-width (QF10).
 - **Field heights.** The 13 points' anemometers stand 3, 7, 8, 9 or 11 m above ground by the readme's rule; the data paper says 3 to 9 m, so points 13 and 14 (11 m) disagree (QF7). Only the 9 m plane is directly comparable with the tunnel at 8 points.
 - **The tunnel's 9 m plane is complete (13 × 12), the 5 m and 20 m planes are not (29 and 79 rows).** Where the three planes can be compared U/R mostly rises with height (median 20 m / 9 m = 1.41), but 4 of 29 pairs have the 5 m value above the 9 m one.
@@ -241,7 +254,7 @@ m.query("campaign == 'field' and abs(wind_direction_deg - 180) <= 5").groupby("p
 
 - **`RS_caseL.csv`'s `T(K)` column is degrees Celsius** (12.85 – 29.86 = the workbook's θ to 0.005); `AF_caseL.csv`'s is kelvin (283 – 295). Read as kelvin the points would be 260 K colder than the floor.
 - The CSV is the workbook rounded to the printed decimals, checked for all 20 columns; `Usc` of the workbook is |U| (derived) and `tc` (⟨θ′c′⟩, K·ppm) has no schema column.
-- **Geometry from `BD_caseL.stl`:** 126 cubes of 0.06 m, 14 rows along x (x = −0.96 … 0.66) by 9 columns across y (±0.51), pitch 0.12 m; watertight, outward, no duplicates. The data paper's "9 rows by 14 columns" counts the other way round. The STL's source patch is 0.04 m × 1.02 m; the readme and data paper say 0.037 m × 1.2 m.
+- **Geometry from `BD_caseL.stl`:** 126 cubes of 0.06 m, 14 rows along x (x = −0.96 … 0.66) by 9 columns across y (±0.51), pitch 0.12 m; no open edge and no duplicates, but the two bottom triangles (z = 0) of each cube, 252 in all, are wound inward (the signed volume cannot show it: z = 0 adds nothing to it); `geometry.stl` here is the 126 boxes, outward. The data paper's "9 rows by 14 columns" counts the other way round. The STL's source patch is 0.04 m × 1.02 m; the readme and data paper say 0.037 m × 1.2 m.
 - **The readme's file list names `AF_caseK.csv` and `RS_caseK.csv`; its "building surface temperature T_b = 14.8 °C" is the air temperature at H** (workbook θ_H = 14.75 °C; the workbook gives θ_build = 42.2 °C).
 - **Layout matches the data paper to the point:** 27 locations × 8 heights + 14 × 4 + 24 × 3 = 344.
 - **q, ppm and the line width are consistent:** the tracer flux ∫(U C + u′c′) dz through four cross-sections, averaged over the street lines (y = ±0.06) and the cube-column line (y = 0), is 0.98, 1.00, 0.96, 0.86 of q / 1.2 m (the street lines alone carry 1.3 – 1.9, the column line 0.2 – 0.4).
@@ -259,7 +272,7 @@ m.query("campaign == 'field' and abs(wind_direction_deg - 180) <= 5").groupby("p
 - **The approach-flow heights are above the empty floor.** The profile station x = −0.498 m stands on the model's upwind taper, 0.0521 m (31 m) above the floor: the 10 lowest of the 40 heights are below the model's ground there (QM5).
 - **Reference height.** H_R = 41 m is the anemometer's height above the ground; the roof under it is 33 m above that ground. c0 uses H_R = 0.068 m (41/600 = 0.06833 m would give 131.2 ppm). The tracer source is on the ground in the workbook, `LC_caseM.csv` and the STL, while the readme says "on a rooftop" (QM1, QM2).
 - **Floors.** Every field run reads 8 to 11 ppq at point 12 whatever the wind (and 8 to 9 ppq minima at points 11, 13, 14, 15): 0.0014 to 0.0069 of the runs' c0, not subtracted (QM3). The tunnel's concentration has two negative means (point 12) and an rms of 7 ppm where the mean is below 1.
-- **`BD_caseM.stl` is wound inward** on 3,118 of its 3,152 horizontal facets and has 21 boundary and 7 non-manifold edges; reversed here, edges kept.
+- **`BD_caseM.stl` is wound inward** on 3,118 of its 3,152 horizontal facets and has 21 boundary and 7 non-manifold edges (7 on the rim of the 1080 m by 720 m panel at z = 0, 14 on 7 slivers of 0.45 m² together hung on building roofs); reversed here, the slivers removed and the rim closed with a 1 m base slab (21 added triangles; the published STL is open at the rim).
 
 **All thermistor cases (C, D, E and the tunnel side of F)**: the measured quantity is the mean of the instantaneous *scalar*
 speed; steady RANS gives the magnitude of the *mean* vector. A RANS |U| in a sheltered street goes far lower than the
@@ -274,14 +287,14 @@ speed; steady RANS gives the magnitude of the *mean* vector. A RANS |U| in a she
 | C | released | released (boxes, pitch verified) | **measured from the data; contradicts the paper's figure** | Q1 |
 | D | released (official Zenodo CSVs + workbook) | released (rebuilt boxes) | 0° settled; 22.5°/45° corroborated by solved fields | Q2 |
 | E | released (workbook, full precision) | **provisional**: official STL open-edged & model-scale; bc state reconstructed | settled (compass) | Q3 |
-| F | coordinates, ratios and inflow released; **provisional**: 16 field values of point 14 (direction labels disagree with the workbook, QF1) and one tunnel value (QF2) | released: `BD_caseF.stl` scaled ×800 and re-wound outward, open along the rim of a 725 m disc; the vertical reference is provisional (QF4) | convention + data corroboration; NNW **corroborated by a solved field** (R 0.935 against 0.077 for the opposite wind), the other directions unverified (QF9) | — |
+| F | coordinates, ratios and inflow released; **provisional**: 16 field values of point 14 (direction labels disagree with the workbook, QF1) and one tunnel value (QF2) | released: `BD_caseF.stl` scaled ×800, re-wound outward and closed with a 1 m base slab below the rim of a 725 m disc; the vertical reference is provisional (QF4) | convention + data corroboration; NNW **corroborated by a solved field** (R 0.935 against 0.077 for the opposite wind), the other directions unverified (QF9) | — |
 | G | released | released (box: the envelope of a porous canopy) | `unverified`: field data, the wind's angle to the belt is not published (QG3) | field data, nothing in m/s |
 | H | released | released (box) | settled (measured: U < 0 in the recirculation behind the leeward face) | — |
 | I | released | released (box) | settled (measured: U < 0 in the recirculation behind the leeward face) | — |
 | J | released | released (box) | settled (definition: +x streamwise) | — |
 | K | released | released (81 boxes, pitch read from the drawings) | settled (definition: +x streamwise) | — |
 | L | released | released (126 boxes from `BD_caseL.stl`) | settled (definition: +x streamwise) | — |
-| M | released | released: `BD_caseM.stl` scaled ×600 and re-wound outward, 21 boundary and 7 non-manifold edges | settled (measured: the plume's lateral centroid moves toward −y as WD grows) | — |
+| M | released | released: `BD_caseM.stl` scaled ×600, re-wound outward, 7 slivers removed and closed with a 1 m base slab | settled (measured: the plume's lateral centroid moves toward −y as WD grows) | — |
 
 Zenodo version DOIs are not stated by the readmes of G, H and I, so `doi_version` is empty for them.
 
@@ -327,7 +340,7 @@ Checks added (names in `checks.json`; the cases' modules are `case_j.py`, `case_
 - *Counts and layout:* row counts and point numbers; J's 465 workbook rows = 443 locations (22 shared, identical) + the one duplicate; L's census against the data paper (27 × 8 + 14 × 4 + 24 × 3); K's and L's y and z levels against the MP drawings; coordinates of CSV and workbook equal.
 - *CSV against workbook:* J reproduces the CSV exactly as round(round(ratio, 3|4) × scale, d) (negative control: one decimal coarser fails); K and L within half a unit of the last printed digit in every column; every normalised workbook column reproduces its dimensional one (K: with H = 0.2 m, UH = 4.94 m/s; L: with the cell constants); K's CSV k equals the half-sum of the rounded rms.
 - *Physics:* k = ½ Σ variances (all three); the signs of the turbulent fluxes are those of an unstable layer (w′θ′ > 0, T falling with height, u′w′ < 0; J, L); c0 recomputed from q, gas fraction, U_H and H against the workbook cell (J, L) and K's two definitions; Rb recomputed from the workbook's temperatures (J: −0.0857 against −0.0856; L: −0.0344 against −0.035); temperatures against the readme and data paper; U_H from the profile (J 1.46, L 1.3394, K 2.24 against the stated 2.33: a warning); tracer flux through cross-sections against q (L: 0.86 – 1.0 of q / W; K: a lower bound, 0.40 – 0.67 of q); concentration peaks at the source (J, K: the point 4 mm above the outlet; L: on the line).
-- *Geometry and frame:* no sensor inside a building and a shifted-points control that does land inside (J, K, L); K's pitch scan; L's STL = the 14 × 9 grid, watertight, outward, volume 126 H³; J's surface-temperature points on the building faces and their mean equal the workbook's θ_build; V sign (J); WD = 0 flow along +x (all).
+- *Geometry and frame:* no sensor inside a building and a shifted-points control that does land inside (J, K, L); K's pitch scan; L's STL = the 14 × 9 grid, closed, volume 126 H³; J's surface-temperature points on the building faces and their mean equal the workbook's θ_build; V sign (J); WD = 0 flow along +x (all).
 - *Warnings* (documented, never fail the build): the variance/σ discrepancy, the fill-series uncertainty cells, the mean concentration below its uncertainty and the profile change along the tunnel (J); the stated U_H, C not mirror-symmetric and V an offset (K); readme building temperature, source patch size and mirror asymmetry (L); the readme's Reynolds number (J).
 
 ## 7. Cite

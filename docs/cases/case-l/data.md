@@ -123,6 +123,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 - RS\_caseL.csv\'s temperature column is headed \'T(K)\' but holds DEGREES CELSIUS (12.85 .. 29.86); AF\_caseL.csv\'s \'T(K)\' is kelvin (283 .. 295). The API serves degrees Celsius for both.
 - The published CSV is the workbook rounded to 2-4 decimals; the table is rebuilt from the workbook. Its \'tc\' column (temperature-concentration covariance, K ppm) and the workbook\'s \'Usc\' (the vector magnitude of the mean velocity) are not in the table.
+- BD\_caseL.stl: the two bottom triangles (z = 0) of each of the 126 cubes (252 triangles) are wound inward; the served geometry.stl is the 126 boxes, outward.
 - The readme\'s file list names AF\_caseK.csv and RS\_caseK.csv; the files are AF\_caseL.csv and RS\_caseL.csv.
 - The readme\'s \'building surface temperature T\_b = 14.8 degC\' is the approach-flow air temperature at z = H; the workbook gives the building surface as 42.2 degC.
 - The line source is 0.037 m x 1.2 m in the readme and data paper but a 0.04 m x 1.02 m patch in BD\_caseL.stl.
