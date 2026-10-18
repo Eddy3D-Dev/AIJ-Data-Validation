@@ -8,7 +8,7 @@ Fallback (raw files from the repository): https://raw.githubusercontent.com/Sust
 Repository: https://github.com/SustainableUrbanSystemsLab/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ
 Release: 3.0.0 (2026-10-18). This is the latest alias, which always equals the newest release; the frozen copy of 3.0.0 is https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/3.0.0.
 All releases: https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/versions.json
-API schema version: 2.3.0. Data version (SHA-256 of the served data): 9f4727b2432b495eb9d4bcdfeda3ab5c6ed726d4de450b71b449955800da3e42.
+API schema version: 2.3.0. Data version (SHA-256 of the served data): eb01c1bfc4272848d68fe9913f82781fe85d4e53c90f7a747185a7c3603093bd.
 Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark and the per-case papers.
 
 ## How to use this
@@ -84,7 +84,7 @@ Licence: CC-BY-4.0 — the data belongs to its collectors; cite the benchmark an
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/K/points.csv?v=8708f3251861
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/L/points.csv?v=b575fe11d107
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/M/points.csv?v=8d32dc8f762b
-- cases/{id}/approach_flow.csv (base URL + path, one file per value) — the measured approach-flow profile: z (m), U (m/s), and k (m^2/s^2) or u_rms (m/s) where published:
+- cases/{id}/approach_flow.csv (base URL + path, one file per value) — the measured approach-flow profile: z (m), U (m/s), and k (m^2/s^2) or u_rms (m/s) where published; Case G's U and k are dimensionless (U/Ub, k/Ub^2):
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/A/approach_flow.csv?v=2f3b37fa8e43
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/B/approach_flow.csv?v=126a620f5698
   - https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/cases/C/approach_flow.csv?v=98849731e877

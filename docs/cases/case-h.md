@@ -16,8 +16,8 @@ Isolated 1:1:2 building with an ethylene point source on the floor behind it: ve
 [Reference data]({{ '/cases/case-h/data/' | relative_url }}){: .btn .btn-primary } [Validation]({{ '/cases/case-h/validation/' | relative_url }}){: .btn } [Case as JSON]({{ '/api/cases/H.json' | relative_url }}){: .btn }
 
 <figure class="figure render">
-<img src="{{ '/assets/geometry/case-h.png' | relative_url }}" alt="Case H — 1:1:2 building with a floor point source">
-<figcaption>Isolated 1:1:2 building, 0.10 m × 0.10 m × 0.20 m (model scale); the wind blows along +x. The tracer comes from a 4 mm floor hole 0.25 H behind the leeward face (not drawn).</figcaption>
+<a href="{{ '/assets/geometry/case-h.png' | relative_url }}"><img src="{{ '/assets/web/case-h.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case H — 1:1:2 building with a floor point source"></a>
+<figcaption>Isolated 1:1:2 building, 0.10 m × 0.10 m × 0.20 m (model scale); the wind blows along +x. The tracer comes from a 4 mm floor hole 0.25 H behind the leeward face (not drawn).<br><a class="original" href="{{ '/assets/geometry/case-h.png' | relative_url }}">1200 dpi original, 0.9 MB</a></figcaption>
 </figure>
 
 ## At a glance

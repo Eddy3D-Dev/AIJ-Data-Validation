@@ -16,8 +16,8 @@ Isolated 1:1:2 building, velocity field (split-fibre hot wire).
 [Reference data]({{ '/cases/case-a/data/' | relative_url }}){: .btn .btn-primary } [Validation]({{ '/cases/case-a/validation/' | relative_url }}){: .btn } [Case as JSON]({{ '/api/cases/A.json' | relative_url }}){: .btn }
 
 <figure class="figure render">
-<img src="{{ '/assets/geometry/case-a.png' | relative_url }}" alt="Case A — 1:1:2 building">
-<figcaption>Isolated 1:1:2 building, b = 0.08 m, H = 0.16 m (model scale); the wind blows along +x.</figcaption>
+<a href="{{ '/assets/geometry/case-a.png' | relative_url }}"><img src="{{ '/assets/web/case-a.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case A — 1:1:2 building"></a>
+<figcaption>Isolated 1:1:2 building, b = 0.08 m, H = 0.16 m (model scale); the wind blows along +x.<br><a class="original" href="{{ '/assets/geometry/case-a.png' | relative_url }}">1200 dpi original, 0.8 MB</a></figcaption>
 </figure>
 
 ## At a glance

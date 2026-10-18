@@ -17,7 +17,7 @@ Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 
 
 | | |
 |---|---|
-| ![Case E — Niigata district, bc]({{ '/assets/geometry/case-e-before.png' | relative_url }})<br><span class="caption">Before construction: the existing district, about 400 m across (full scale).</span> | ![Case E — Niigata district, ac]({{ '/assets/geometry/case-e-after.png' | relative_url }})<br><span class="caption">After construction: the 60 m high-rise and the two 18 m mid-rises (blue) added.</span> |
+| <a href="{{ '/assets/geometry/case-e-before.png' | relative_url }}"><img src="{{ '/assets/web/case-e-before.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case E — Niigata district, bc"></a><br><span class="caption">Before construction: the existing district, about 400 m across (full scale).<br><a class="original" href="{{ '/assets/geometry/case-e-before.png' | relative_url }}">1200 dpi original, 2.3 MB</a></span> | <a href="{{ '/assets/geometry/case-e-after.png' | relative_url }}"><img src="{{ '/assets/web/case-e-after.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case E — Niigata district, ac"></a><br><span class="caption">After construction: the 60 m high-rise and the two 18 m mid-rises (blue) added.<br><a class="original" href="{{ '/assets/geometry/case-e-after.png' | relative_url }}">1200 dpi original, 2.2 MB</a></span> |
 {: .figures }
 
 <p class="caption">The two states, on one scale (full-scale metres, +x east, +y north); the arrow marks SW, the direction Eddy3D is scored at.</p>

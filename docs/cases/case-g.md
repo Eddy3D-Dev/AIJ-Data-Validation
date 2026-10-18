@@ -16,8 +16,8 @@ Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m ×
 [Reference data]({{ '/cases/case-g/data/' | relative_url }}){: .btn .btn-primary } [Validation]({{ '/cases/case-g/validation/' | relative_url }}){: .btn } [Case as JSON]({{ '/api/cases/G.json' | relative_url }}){: .btn }
 
 <figure class="figure render">
-<img src="{{ '/assets/geometry/case-g.png' | relative_url }}" alt="Case G — flow behind a tree belt">
-<figcaption>The Tsuiji-matsu tree belt, 2 m × 74 m × 7 m with a 1.2 m gap below (full scale; shown as its envelope — a porous canopy, not a solid body); the wind blows along +x and the measurements are behind the belt.</figcaption>
+<a href="{{ '/assets/geometry/case-g.png' | relative_url }}"><img src="{{ '/assets/web/case-g.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case G — flow behind a tree belt"></a>
+<figcaption>The Tsuiji-matsu tree belt, 2 m × 74 m × 7 m with a 1.2 m gap below (full scale; shown as its envelope — a porous canopy, not a solid body); the wind blows along +x and the measurements are behind the belt.<br><a class="original" href="{{ '/assets/geometry/case-g.png' | relative_url }}">1200 dpi original, 0.7 MB</a></figcaption>
 </figure>
 
 ## At a glance

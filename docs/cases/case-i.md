@@ -16,8 +16,8 @@ Isolated cube with an ethane point source at the centre of its roof: velocity (l
 [Reference data]({{ '/cases/case-i/data/' | relative_url }}){: .btn .btn-primary } [Validation]({{ '/cases/case-i/validation/' | relative_url }}){: .btn } [Case as JSON]({{ '/api/cases/I.json' | relative_url }}){: .btn }
 
 <figure class="figure render">
-<img src="{{ '/assets/geometry/case-i.png' | relative_url }}" alt="Case I — cube with a roof point source">
-<figcaption>Isolated cube, 0.10 m on a side (model scale); the wind blows along +x. The tracer is released from a 6 mm outlet at the centre of the roof (not drawn).</figcaption>
+<a href="{{ '/assets/geometry/case-i.png' | relative_url }}"><img src="{{ '/assets/web/case-i.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case I — cube with a roof point source"></a>
+<figcaption>Isolated cube, 0.10 m on a side (model scale); the wind blows along +x. The tracer is released from a 6 mm outlet at the centre of the roof (not drawn).<br><a class="original" href="{{ '/assets/geometry/case-i.png' | relative_url }}">1200 dpi original, 1.0 MB</a></figcaption>
 </figure>
 
 ## At a glance

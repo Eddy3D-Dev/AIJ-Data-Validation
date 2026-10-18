@@ -56,6 +56,8 @@ The point table gained columns, which is why this release is MAJOR.
 
 - API `cases.json` and `validation.json` list thirteen cases; an engine is listed for a case only where it applies.
 - README, the site and `CITATION.cff` cover Cases A to M; `CITATION.cff` lists the dataset of each case.
+- `clean/checks.json`: each of the 16 documented warnings (`"pass": false`, severity `warning`) also carries `"warning": true`, and the
+  note says that `failed` counts errors only.
 - `clean/manifest.json`: every provenance entry gained `eol`. `lf-normalised` means the SHA-256 and the byte count are those of
   the text file with CRLF folded to LF, so a fresh clone and a Windows checkout record the same numbers; `as-is` means
   the file was hashed as stored (binary files and the byte-exact mirrors in `clean/sources/`).
@@ -65,8 +67,19 @@ The point table gained columns, which is why this release is MAJOR.
 - Markdown that rendered differently in Jekyll and on GitHub: lists and tables not preceded by a blank line, a table row
   with an unescaped pipe in `clean/SCHEMA.md`, bare URLs, and the API changelog include, whose text with `<word>`
   was read as an HTML tag.
+- Units of Case G's approach flow: `cases/G.json` `approach_flow.units` said m/s and m^2/s^2, but the table holds U/Ub and k/Ub^2, which are
+  dimensionless; the API now takes the units of each case's approach flow from its registry entry (`approach_flow_units`), and the
+  `U` and `k` entries of `clean/units.json` name Case G as the exception. The meanings of `config`, `instrument`, `wind_direction`,
+  `wind_direction_deg`, `x`, `y`, `z`, `V`, `velocity_ratio` and `C` in `clean/units.json` and the manifest now cover Cases F to M.
+- Validation scores of Cases H and I: FB, NMSE and NAD are `null` for a signed velocity component whose observed and predicted
+  means differ in sign or are not both positive (H `velocity.W`: NMSE was -91; I `velocity.V`: -4.5e6 under realizable k-ε and
+  -2.8e6 under standard k-ε), where they were numbers that mean nothing; R, FAC2, the hit rate and the counts are unchanged. The scores
+  of Cases A to E are the Eddy3D fixtures' own and are served as written.
+- `docs/api/versions.json`: the fallback of release 2.0.0 is the raw files at tag `v2.0.0` (frozen), not the copy on `main`.
 - The figure build is deterministic: `scripts/build_all.sh` pins the numerical libraries to one thread. With several, the Case D
-  agreement figure came out as one of two layouts, a pixel apart, from run to run on the same machine.
+  agreement figure came out as one of two layouts, a pixel apart, from run to run on the same machine. Pinning the threads did not
+  settle the Case E agreement figure, which still alternated between two files: ultraplot solves every layout with kiwisolver, whose
+  result differs in the last digits from build to build, and `validation/plotstyle.py` now selects ultraplot's legacy solver, which does not.
 
 ### Repository notes
 
@@ -76,6 +89,11 @@ These change no served byte.
   Zenodo records (CC BY 4.0). Their text files are stored with LF line endings, like those of Cases A to E
   (`.gitattributes`): 23 of the Zenodo originals (22 CSV files and the STL of Case L) use CRLF, and the MD5 check against the
   records was made on those CRLF originals, so a stored copy matches its record only after converting back to CRLF.
+- Every figure and geometry render is still drawn and served at 1200 dpi (`docs/assets/figures/`, `docs/assets/geometry/`; the API's `figures`
+  and `render` entries point there). The site pages and the README now embed a 1600 px copy (`docs/assets/web/`, written by
+  `scripts/build_api.py`, byte-identical on every build) with `width`, `height` and `loading="lazy"`, and link it to the 1200 dpi
+  original, named with its size. Image bytes on the home page: 18.9 MB before, 2.1 MB after; distinct images in the README: 66.7 MB
+  before, 8.6 MB after.
 - No PDFs are stored: the data paper (Kikumoto et al. 2026) and the AIJ guidelines paper (Tominaga et al. 2008) are cited
   and linked by DOI in `papers/README.md`. The Elsevier PDF of the guidelines paper (all rights reserved, removed from the tree in
   2.0.0) was also purged from the repository's git history, which rewrote the commits up to the 2.0.0 tag: a clone made

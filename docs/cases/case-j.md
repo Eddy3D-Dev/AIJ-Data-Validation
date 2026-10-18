@@ -16,8 +16,8 @@ Isolated 1:1:2 building with a floor tracer source in an unstably stratified bou
 [Reference data]({{ '/cases/case-j/data/' | relative_url }}){: .btn .btn-primary } [Validation]({{ '/cases/case-j/validation/' | relative_url }}){: .btn } [Case as JSON]({{ '/api/cases/J.json' | relative_url }}){: .btn }
 
 <figure class="figure render">
-<img src="{{ '/assets/geometry/case-j.png' | relative_url }}" alt="Case J — 1:1:2 building, non-isothermal">
-<figcaption>Isolated 1:1:2 building, b = 0.08 m, H = 0.16 m (model scale); the orange ring marks the floor tracer source, 0.25 H behind the building (seen through it); the wind blows along +x.</figcaption>
+<a href="{{ '/assets/geometry/case-j.png' | relative_url }}"><img src="{{ '/assets/web/case-j.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case J — 1:1:2 building, non-isothermal"></a>
+<figcaption>Isolated 1:1:2 building, b = 0.08 m, H = 0.16 m (model scale); the orange ring marks the floor tracer source, 0.25 H behind the building (seen through it); the wind blows along +x.<br><a class="original" href="{{ '/assets/geometry/case-j.png' | relative_url }}">1200 dpi original, 1.4 MB</a></figcaption>
 </figure>
 
 ## At a glance

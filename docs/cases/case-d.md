@@ -16,8 +16,8 @@ description: "1:1:4 tower in a regular array of 82 low blocks, pedestrian-height
 [Reference data]({{ '/cases/case-d/data/' | relative_url }}){: .btn .btn-primary } [Validation]({{ '/cases/case-d/validation/' | relative_url }}){: .btn } [Case as JSON]({{ '/api/cases/D.json' | relative_url }}){: .btn }
 
 <figure class="figure render">
-<img src="{{ '/assets/geometry/case-d.png' | relative_url }}" alt="Case D — high-rise among city blocks">
-<figcaption>A 0.25 m tower (blue) among 82 low blocks over 1.40 m × 1.35 m (1:400 model scale); the arrow is WD = 0°.</figcaption>
+<a href="{{ '/assets/geometry/case-d.png' | relative_url }}"><img src="{{ '/assets/web/case-d.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case D — high-rise among city blocks"></a>
+<figcaption>A 0.25 m tower (blue) among 82 low blocks over 1.40 m × 1.35 m (1:400 model scale); the arrow is WD = 0°.<br><a class="original" href="{{ '/assets/geometry/case-d.png' | relative_url }}">1200 dpi original, 2.2 MB</a></figcaption>
 </figure>
 
 ## At a glance

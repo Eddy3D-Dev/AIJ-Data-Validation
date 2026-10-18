@@ -16,8 +16,8 @@ Isolated 1:4:4 slab, velocity field (split-fibre hot wire).
 [Reference data]({{ '/cases/case-b/data/' | relative_url }}){: .btn .btn-primary } [Validation]({{ '/cases/case-b/validation/' | relative_url }}){: .btn } [Case as JSON]({{ '/api/cases/B.json' | relative_url }}){: .btn }
 
 <figure class="figure render">
-<img src="{{ '/assets/geometry/case-b.png' | relative_url }}" alt="Case B — 1:4:4 slab">
-<figcaption>Isolated 1:4:4 slab, 0.05 m along the wind, 0.20 m across, 0.20 m tall (model scale); the wind blows along +x.</figcaption>
+<a href="{{ '/assets/geometry/case-b.png' | relative_url }}"><img src="{{ '/assets/web/case-b.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case B — 1:4:4 slab"></a>
+<figcaption>Isolated 1:4:4 slab, 0.05 m along the wind, 0.20 m across, 0.20 m tall (model scale); the wind blows along +x.<br><a class="original" href="{{ '/assets/geometry/case-b.png' | relative_url }}">1200 dpi original, 0.8 MB</a></figcaption>
 </figure>
 
 ## At a glance

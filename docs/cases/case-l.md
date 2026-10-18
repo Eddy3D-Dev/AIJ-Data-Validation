@@ -16,8 +16,8 @@ description: "14 rows by 9 columns of 0.06 m cubes with a tracer line source on 
 [Reference data]({{ '/cases/case-l/data/' | relative_url }}){: .btn .btn-primary } [Validation]({{ '/cases/case-l/validation/' | relative_url }}){: .btn } [Case as JSON]({{ '/api/cases/L.json' | relative_url }}){: .btn }
 
 <figure class="figure render">
-<img src="{{ '/assets/geometry/case-l.png' | relative_url }}" alt="Case L — 9 x 14 cube array, line source, non-isothermal">
-<figcaption>14 x 9 array of 0.06 m cubes on a 0.12 m pitch (model scale); the orange line is the floor tracer source between rows 7 and 8; the wind blows along +x.</figcaption>
+<a href="{{ '/assets/geometry/case-l.png' | relative_url }}"><img src="{{ '/assets/web/case-l.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case L — 9 x 14 cube array, line source, non-isothermal"></a>
+<figcaption>14 x 9 array of 0.06 m cubes on a 0.12 m pitch (model scale); the orange line is the floor tracer source between rows 7 and 8; the wind blows along +x.<br><a class="original" href="{{ '/assets/geometry/case-l.png' | relative_url }}">1200 dpi original, 2.3 MB</a></figcaption>
 </figure>
 
 ## At a glance

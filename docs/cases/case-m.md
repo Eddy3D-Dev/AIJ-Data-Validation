@@ -16,8 +16,8 @@ Tracer-gas release on the Tokyo Polytechnic University Atsugi campus: 1:600 tunn
 [Reference data]({{ '/cases/case-m/data/' | relative_url }}){: .btn .btn-primary } [Validation]({{ '/cases/case-m/validation/' | relative_url }}){: .btn } [Case as JSON]({{ '/api/cases/M.json' | relative_url }}){: .btn }
 
 <figure class="figure render">
-<img src="{{ '/assets/geometry/case-m.png' | relative_url }}" alt="Case M — TPU Atsugi campus">
-<figcaption>TPU Atsugi campus: terrain and buildings of the 1:600 model (full-scale metres, 1080 m by 720 m); the arrow is the wind at WD = 180°, blowing toward +x (north).</figcaption>
+<a href="{{ '/assets/geometry/case-m.png' | relative_url }}"><img src="{{ '/assets/web/case-m.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case M — TPU Atsugi campus"></a>
+<figcaption>TPU Atsugi campus: terrain and buildings of the 1:600 model (full-scale metres, 1080 m by 720 m); the arrow is the wind at WD = 180°, blowing toward +x (north).<br><a class="original" href="{{ '/assets/geometry/case-m.png' | relative_url }}">1200 dpi original, 1.8 MB</a></figcaption>
 </figure>
 
 ## At a glance

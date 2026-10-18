@@ -140,12 +140,12 @@
 [G] approach flow: AF_caseG.csv, 4 heights, U/Ub and k/Ub^2 carried as published: the U and k columns of this case's approach-flow table are DIMENSIONLESS (Ub = U at 9 m = 1); no absolute speed is published
 [G] workbook 'Geometry' sheet inflow notes: ['inflow boundary', 'U(z)=Ub(z/Hb)0.22', 'K=3.02[m2/s2]', 'The value of e is given from Pk=e. ']
   [PASS] G row_count_7_lines_x_4_heights  {"rows": 28, "expected": 28, "source": "readme / data paper section 3.7"}
-  [PASS] G point_ids_are_the_csv_row_order_1_to_28
+  [PASS] G point_ids_are_the_csv_row_order_1_to_28  {"rows": 28, "min_point_id": 1, "max_point_id": 28, "distinct_point_ids": 28}
   [PASS] G measurement_lines_are_the_readme_multiples_of_H  {"lines_m": [1.75, 3.5, 7.0, 14.0, 21.0, 28.0, 35.0], "expected_m": [1.75, 3.5, 7.0, 14.0, 21.0, 28.0, 35.0], "note": "readme: 0.25H, 0.5H, 1.0H, 2.0H, 3.0H, 4.0H, 5.0H behind the tree, H = 7 m"}
   [PASS] G heights_are_1.5_3_4.5_6_as_the_paper_and_the_drawing_say  {"heights_m": [1.5, 3.0, 4.5, 6.0], "note": "the readme lists the heights of the lee measurement as 1.5, 3.0, 6.0, 9.0 m (a copy of the approach-flow heights); the CSV, the workbook, MP_caseG.png and the data paper (section 3.7) all say 1.5, 3, 4.5, 6 m. QUESTIONS.md QG1"}
-  [PASS] G no_sensor_inside_the_canopy_envelope
+  [PASS] G no_sensor_inside_the_canopy_envelope  {"points": 28, "inside": 0}
   [PASS] G control_points_shifted_3m_upwind_are_detected_inside  {"inside_after_shift": 4, "shift_m": [-3.0, 0, 0], "note": "the 0.25H line (x = 1.75 m, four heights) lands at x = -1.25 m inside the belt; the other lines land at x >= 0.5 m, outside"}
-  [PASS] G no_sentinels_or_nan
+  [PASS] G no_sentinels_or_nan  {"cells": 140, "nan_cells": 0, "min_value": 0.0}
   [PASS] G csv_agrees_with_workbook_to_the_csv_rounding  {"max_abs_dU_over_UH": 0.00048351987915179473, "max_abs_dk_over_UH2": 4.698479321612464e-05, "max_abs_dx_m": 0.0, "note": "RS_caseG.csv rounds U/UH to 3 dp and k/UH^2 to 4 dp; the workbook is the value released here"}
   [PASS] G approach_flow_unity_at_9m_by_definition  {"U_over_Ub_at_9m": 1.0}
   [PASS] G approach_flow_power_law_index_matches_the_stated_0.22  {"fitted": 0.2073, "stated": 0.22, "fit": {"z_range_m": [1.5, 9.0], "points": 4, "alpha": 0.2073, "max_rel_error": 0.0202}, "note": "4 heights published to 2 dp, so the fitted index carries about +/-0.01 of rounding alone"}
@@ -247,7 +247,7 @@
   [PASS] J WD0_flow_is_along_x  {"approach_flow_U_positive_rows": 20, "mean_U_upwind_of_building": 0.9450055, "C_weighted_mean_x_minus_source": 0.00574490396, "note": "U > 0 in the approach flow, and the plume is carried toward +x"}
   [PASS] J lateral_sign_V_negative_on_the_windward_y_negative_flank_and_positive_in_the_wake  {"flank_V": [-0.1181475, -0.752645, -0.8217125, -0.7421775, -0.05856, -0.3111625, -0.46578, -0.5921625], "wake_V": [0.0672975, 0.08293, 0.139645, 0.104325, 0.1682925, 0.1390725, 0.1321925, 0.1132025, 0.08771, 0.0633275, 0.0493125, 0.0413125], "note": "beside the upstream half of the y < 0 flank the flow turns away from the centreline (V < 0); behind the building it closes toward it (V > 0): V is positive toward +y as in Cases A and D"}
   [PASS] J building_surface_temperature_matches_workbook  {"points": 121, "max_abs_diff_degC": 4.61852778e-14, "mean_surface_degC": 24.472314, "workbook_theta_build": 24.472314}
-  [PASS] J building_surface_temperature_mean_equals_workbook_theta_build
+  [PASS] J building_surface_temperature_mean_equals_workbook_theta_build  {"mean_surface_degC": 24.472314, "workbook_theta_build": 24.472314, "abs_difference_degC": 2.48689958e-14, "points": 121}
   [PASS] J building_surface_points_lie_on_the_building_faces  {"points": 121, "bbox_min": [-0.08, -0.04, 0.004], "bbox_max": [0.0, 0.04, 0.16]}
   [PASS] J turbulent_flux_signs_are_those_of_an_unstable_layer  {"approach_flow_wT_positive_fraction": 1.0, "approach_flow_T_decreases_with_height_at_every_station": true, "approach_flow_uw_negative_fraction": 0.933333333, "points_wT_positive_fraction": 0.945945946, "note": "w'theta' > 0 (upward heat flux over the heated floor), T falls with z, u'w' < 0: the signs the published columns must have if they are in the usual convention"}
   [PASS] J approach_flow_csv_is_workbook_station_x_minus_2.5H_rounded  {"rows": 20, "ratio_decimals_that_reproduce_the_csv": {"U": 3, "V": 3, "W": 3, "u_rms": 4, "v_rms": 4, "w_rms": 4, "uv": 4, "uw": 4, "k": 4, "t_rms": 4, "ut": 4, "vt": 4, "wt": 4}, "columns_not_reproduced": [], "stations_x_over_H": [-2.5, 0.0, 2.5], "note": "AF_caseJ.csv is the first of the workbook's three empty-tunnel stations (x/H = -2.5, 0, +2.5); the other two are in cases/J/approach_flow_full.csv"}

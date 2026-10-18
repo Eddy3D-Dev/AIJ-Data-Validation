@@ -1,7 +1,7 @@
 {
  "$schema": "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ/api/schemas/validation.schema.json",
  "schema_version": "2.3.0",
- "data_version": "9f4727b2432b495eb9d4bcdfeda3ab5c6ed726d4de450b71b449955800da3e42",
+ "data_version": "eb01c1bfc4272848d68fe9913f82781fe85d4e53c90f7a747185a7c3603093bd",
  "license": "CC-BY-4.0",
  "case": "I",
  "title": "Case I — cube with a roof point source",
@@ -66,7 +66,7 @@
     "Vg": "geometric variance",
     "GeometricPairs": "pairs with both values positive (used for Mg/Vg)",
     "R": "Pearson correlation coefficient",
-    "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive)"
+    "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive; Fb, Nmse and Nad of a signed velocity component of Case H or I whose observed and predicted means are not both positive)"
    },
    "headline": {
     "U": "velocity.U",
@@ -96,9 +96,9 @@
      "Count": 38,
      "MeanObserved": 6.481489164091975e-07,
      "MeanPredicted": -0.00015873065015479973,
-     "Fb": -2.016400269766273,
-     "Nmse": -4533145.704392029,
-     "Nad": -110.4936431760394,
+     "Fb": null,
+     "Nmse": null,
+     "Nad": null,
      "Fac2": 0.8947368421052632,
      "HitRate": 1.0,
      "Mg": 1.4644627124620233,
@@ -227,7 +227,7 @@
     "Vg": "geometric variance",
     "GeometricPairs": "pairs with both values positive (used for Mg/Vg)",
     "R": "Pearson correlation coefficient",
-    "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive)"
+    "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive; Fb, Nmse and Nad of a signed velocity component of Case H or I whose observed and predicted means are not both positive)"
    },
    "headline": {
     "U": "velocity.U",
@@ -257,9 +257,9 @@
      "Count": 38,
      "MeanObserved": 6.481489164091975e-07,
      "MeanPredicted": -0.0005224458204334363,
-     "Fb": -2.004968584198736,
-     "Nmse": -2785075.182035992,
-     "Nad": -47.161147494319145,
+     "Fb": null,
+     "Nmse": null,
+     "Nad": null,
      "Fac2": 0.7894736842105263,
      "HitRate": 0.8947368421052632,
      "Mg": 1.55946469419027,
@@ -384,7 +384,7 @@
     "Vg": "geometric variance",
     "GeometricPairs": "pairs with both values positive (used for Mg/Vg)",
     "R": "Pearson correlation coefficient",
-    "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive)"
+    "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive; Fb, Nmse and Nad of a signed velocity component of Case H or I whose observed and predicted means are not both positive)"
    },
    "headline": {
     "U": "velocity.U",

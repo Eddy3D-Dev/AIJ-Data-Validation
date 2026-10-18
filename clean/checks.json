@@ -2,7 +2,7 @@
  "total": 289,
  "failed": 0,
  "warnings": 16,
- "note": "severity 'warning' = a known, documented discrepancy in the published sources (README.md / QUESTIONS.md); it never fails the build",
+ "note": "an entry with \"pass\": false and \"warning\": true (severity 'warning') is a known, documented discrepancy in the published sources (README.md / QUESTIONS.md), not a failure: 'warnings' counts them, 'failed' counts severity 'error' only, and a warning never fails the build",
  "checks": [
   {
    "case": "A",
@@ -785,6 +785,7 @@
    "check": "no_sensor_inside_building_official_stl_x250",
    "pass": false,
    "severity": "warning",
+   "warning": true,
    "inside": 1,
    "points": 80,
    "inside_point_ids": [
@@ -1000,6 +1001,7 @@
    "check": "field_anemometer_heights_within_the_papers_3_to_9_m",
    "pass": false,
    "severity": "warning",
+   "warning": true,
    "heights_above_ground_m": [
     3.0,
     7.0,
@@ -1237,6 +1239,7 @@
    "check": "mp_csv_labels_SMB_and_KDD_agree_with_the_workbook",
    "pass": false,
    "severity": "warning",
+   "warning": true,
    "mp_csv_SMB_xy_m": [
     85.8,
     -347.1
@@ -1375,7 +1378,11 @@
    "case": "G",
    "check": "point_ids_are_the_csv_row_order_1_to_28",
    "pass": true,
-   "severity": "info"
+   "severity": "info",
+   "rows": 28,
+   "min_point_id": 1,
+   "max_point_id": 28,
+   "distinct_point_ids": 28
   },
   {
    "case": "G",
@@ -1419,7 +1426,9 @@
    "case": "G",
    "check": "no_sensor_inside_the_canopy_envelope",
    "pass": true,
-   "severity": "info"
+   "severity": "info",
+   "points": 28,
+   "inside": 0
   },
   {
    "case": "G",
@@ -1438,7 +1447,10 @@
    "case": "G",
    "check": "no_sentinels_or_nan",
    "pass": true,
-   "severity": "info"
+   "severity": "info",
+   "cells": 140,
+   "nan_cells": 0,
+   "min_value": 0.0
   },
   {
    "case": "G",
@@ -1504,6 +1516,7 @@
    "check": "far_lee_turbulence_recovers_to_at_least_half_the_approach_flow",
    "pass": false,
    "severity": "warning",
+   "warning": true,
    "k_over_UH2_at_5H": [
     0.0404,
     0.0428,
@@ -2329,6 +2342,7 @@
    "check": "published_variance_vs_published_sigma_squared",
    "pass": false,
    "severity": "warning",
+   "warning": true,
    "max_abs_diff_m2_s2": {
     "uu": 0.00468666739,
     "vv": 0.000295851674,
@@ -2393,6 +2407,7 @@
    "check": "reynolds_number_readme_vs_paper",
    "pass": false,
    "severity": "warning",
+   "warning": true,
    "Re_from_UH_H_nu_1_43e_5": 16335.6643,
    "Re_data_paper": 16000.0,
    "Re_readme": 43000,
@@ -2520,7 +2535,11 @@
    "case": "J",
    "check": "building_surface_temperature_mean_equals_workbook_theta_build",
    "pass": true,
-   "severity": "info"
+   "severity": "info",
+   "mean_surface_degC": 24.472314,
+   "workbook_theta_build": 24.472314,
+   "abs_difference_degC": 2.48689958e-14,
+   "points": 121
   },
   {
    "case": "J",
@@ -2593,6 +2612,7 @@
    "check": "empty_tunnel_profile_is_the_same_at_all_three_stations",
    "pass": false,
    "severity": "warning",
+   "warning": true,
    "x_over_H_-2.5": {
     "U_over_UH_at_z_eq_H": 1.00002332,
     "U_over_UH_at_z_eq_0.01875H": 0.329137576
@@ -2612,6 +2632,7 @@
    "check": "expanded_uncertainty_cells_are_valid",
    "pass": false,
    "severity": "warning",
+   "warning": true,
    "cells_that_are_an_excel_fill_series": 193,
    "sheet": "xy-plane2(Unstable state)",
    "column": "AH",
@@ -2630,6 +2651,7 @@
    "check": "mean_concentration_exceeds_its_expanded_uncertainty_everywhere",
    "pass": false,
    "severity": "warning",
+   "warning": true,
    "rows": 465,
    "rows_where_C_does_not_exceed_Ue": 197,
    "csv_point_ids_with_C_exactly_zero": [
@@ -2766,6 +2788,7 @@
    "check": "U_H_from_profile_matches_stated",
    "pass": false,
    "severity": "warning",
+   "warning": true,
    "U_H_profile_log_interpolated": 2.23767152,
    "U_H_stated": 2.33,
    "z_m": 0.06,
@@ -2940,6 +2963,7 @@
    "check": "y_mirror_pairs_agree_in_C",
    "pass": false,
    "severity": "warning",
+   "warning": true,
    "pairs": 74,
    "rel_mean_abs_diff_C": 0.435310011,
    "note": "the mean concentration is not mirror-symmetric: the +y and -y values of the same point differ by this fraction on average, so it is not a repeatability estimate"
@@ -2949,6 +2973,7 @@
    "check": "lateral_velocity_is_an_offset_not_an_antisymmetric_field",
    "pass": false,
    "severity": "warning",
+   "warning": true,
    "mean_even_part_m_s": 0.0567459459,
    "mean_odd_part_m_s": 0.0169532432,
    "approach_flow_mean_V_m_s": 0.0411764706,
@@ -3219,6 +3244,7 @@
    "check": "readme_building_surface_temperature_is_the_air_temperature_at_H",
    "pass": false,
    "severity": "warning",
+   "warning": true,
    "readme_T_b_degC": 14.8,
    "workbook_theta_build_degC": 42.2041667,
    "workbook_theta_H_degC": 14.7523872,
@@ -3284,6 +3310,7 @@
    "check": "source_patch_in_stl_matches_readme",
    "pass": false,
    "severity": "warning",
+   "warning": true,
    "stl_size_x_y_m": [
     0.04,
     1.02
@@ -3364,6 +3391,7 @@
    "check": "y_mirror_pairs_agree",
    "pass": false,
    "severity": "warning",
+   "warning": true,
    "pairs": 110,
    "rel_mean_abs_diff_U": 0.256216262,
    "rel_mean_abs_diff_k": 0.228572879,
@@ -3782,6 +3810,7 @@
    "check": "approach_flow_heights_below_the_stl_ground_at_the_profile_station",
    "pass": false,
    "severity": "warning",
+   "warning": true,
    "stl_ground_at_profile_m_model": 0.05208483263871378,
    "heights_below_it": 10,
    "of": 40,

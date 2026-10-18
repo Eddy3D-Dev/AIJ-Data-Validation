@@ -295,7 +295,7 @@
      "points"
     ],
     "summary": "The measured approach-flow profile",
-    "description": "the measured approach-flow profile: z (m), U (m/s), and k (m^2/s^2) or u_rms (m/s) where published",
+    "description": "the measured approach-flow profile: z (m), U (m/s), and k (m^2/s^2) or u_rms (m/s) where published; Case G's U and k are dimensionless (U/Ub, k/Ub^2)",
     "responses": {
      "200": {
       "description": "OK",

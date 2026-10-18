@@ -16,8 +16,8 @@ description: "9 x 9 array of 0.06 m cubes with a tracer point source on the floo
 [Reference data]({{ '/cases/case-k/data/' | relative_url }}){: .btn .btn-primary } [Validation]({{ '/cases/case-k/validation/' | relative_url }}){: .btn } [Case as JSON]({{ '/api/cases/K.json' | relative_url }}){: .btn }
 
 <figure class="figure render">
-<img src="{{ '/assets/geometry/case-k.png' | relative_url }}" alt="Case K — 9 x 9 cube array, point source">
-<figcaption>9 x 9 array of 0.06 m cubes on a 0.12 m pitch (model scale); the orange ring marks the floor tracer source between rows 2 and 3; the wind blows along +x.</figcaption>
+<a href="{{ '/assets/geometry/case-k.png' | relative_url }}"><img src="{{ '/assets/web/case-k.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case K — 9 x 9 cube array, point source"></a>
+<figcaption>9 x 9 array of 0.06 m cubes on a 0.12 m pitch (model scale); the orange ring marks the floor tracer source between rows 2 and 3; the wind blows along +x.<br><a class="original" href="{{ '/assets/geometry/case-k.png' | relative_url }}">1200 dpi original, 2.0 MB</a></figcaption>
 </figure>
 
 ## At a glance

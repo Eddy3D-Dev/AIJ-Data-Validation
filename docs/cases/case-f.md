@@ -16,8 +16,8 @@ Shinjuku sub-centre, Tokyo, November 1978: 1:800 tunnel (thermistor, 5 / 9 / 20 
 [Reference data]({{ '/cases/case-f/data/' | relative_url }}){: .btn .btn-primary } [Validation]({{ '/cases/case-f/validation/' | relative_url }}){: .btn } [Case as JSON]({{ '/api/cases/F.json' | relative_url }}){: .btn }
 
 <figure class="figure render">
-<img src="{{ '/assets/geometry/case-f.png' | relative_url }}" alt="Case F — Shinjuku district">
-<figcaption>Shinjuku sub-centre, November 1978: terrain and buildings of the 1:800 model over a disc of 725 m radius (full-scale metres); north is +y, the towers over 100 m are blue.</figcaption>
+<a href="{{ '/assets/geometry/case-f.png' | relative_url }}"><img src="{{ '/assets/web/case-f.png' | relative_url }}" width="1600" height="800" loading="lazy" alt="Case F — Shinjuku district"></a>
+<figcaption>Shinjuku sub-centre, November 1978: terrain and buildings of the 1:800 model over a disc of 725 m radius (full-scale metres); north is +y, the towers over 100 m are blue.<br><a class="original" href="{{ '/assets/geometry/case-f.png' | relative_url }}">1200 dpi original, 1.9 MB</a></figcaption>
 </figure>
 
 ## At a glance
