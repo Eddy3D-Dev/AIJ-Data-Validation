@@ -2185,7 +2185,7 @@ def build_cases_table(percase):
         summ = percase[case]["summ"]
         scored = [_engine_name(e["id"]) for e in case_engines(case) if ENGINE_STATUS[case][e["id"]] == "scored"]
         measured = f"{summ['rows']:,} rows over {summ['distinct_points']:,} points; {NM.column_symbols(meta['quantities'])}"
-        L.append(f"| {_link(_esc(meta['title']), _page_url(meta['slug']))} | {_cell(meta['short'])} | {measured} | "
+        L.append(f"| {_link('Case ' + case, _page_url(meta['slug']))} | {_cell(meta['short'])} | {measured} | "
                  f"{', '.join(scored) if scored else 'none yet'} |")
     _write("_includes/cases-table.md", L)
 
@@ -2197,7 +2197,7 @@ def build_cases_frames():
         meta = D.CASES[case]
         units = meta["units"]
         measured = units.get("velocity", next((v for k, v in units.items() if k != "length"), ""))
-        L.append(f"| {_link(_esc(meta['title']), _page_url(meta['slug'], 'data'), '#frame-and-units')} | {_cell(units.get('length', ''))} | "
+        L.append(f"| {_link('Case ' + case, _page_url(meta['slug'], 'data'), '#frame-and-units')} | {_cell(units.get('length', ''))} | "
                  f"{_cell(measured)} | {_cell(meta['frame'].get('origin', ''))} |")
     _write("_includes/cases-frames.md", L)
 
@@ -2226,7 +2226,7 @@ def build_validation_matrix(percase):
         got = {_compared_with(case, label) for r in percase[case]["results"] for label in r["headline"] if not _is_control(label)}
         note = "" if got == {"Wind tunnel"} else '<br><span class="caption">compared with ' + " and ".join(
             {"Wind tunnel": "the wind tunnel", "Field": "the field"}[s] for s in ("Wind tunnel", "Field") if s in got) + "</span>"
-        L.append(f"| {_link(_esc(meta['title']), _page_url(meta['slug'], 'validation'))}{note} | " + " | ".join(cells) + " |")
+        L.append(f"| {_link('Case ' + case, _page_url(meta['slug'], 'validation'))}{note} | " + " | ".join(cells) + " |")
     _write("_includes/validation-matrix.md", L)
 
 

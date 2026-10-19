@@ -2,16 +2,16 @@
 
 | Case | Length unit | Measured in | Origin |
 |---|---|---|---|
-| [Case A — 1:1:2 building]({{ '/cases/case-a/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | building centre on the ground plane |
-| [Case B — 1:4:4 slab]({{ '/cases/case-b/data/' | relative_url }}#frame-and-units) | m (model scale; converted from the published millimetres) | m/s | building centre on the ground plane |
-| [Case C — 3 × 3 block array]({{ '/cases/case-c/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | array centre on the ground plane (centre of the middle block) |
-| [Case D — high-rise among city blocks]({{ '/cases/case-d/data/' | relative_url }}#frame-and-units) | m (model scale; converted from the workbook\'s millimetres) | m/s | tower centre on the ground plane (the array\'s bounding box is centred on it) |
-| [Case E — Niigata district]({{ '/cases/case-e/data/' | relative_url }}#frame-and-units) | m (FULL scale) | dimensionless | centre of the reproduced area, ground plane |
-| [Case F — Shinjuku district]({{ '/cases/case-f/data/' | relative_url }}#frame-and-units) | m (FULL scale) | dimensionless | centre of the reproduced district, tunnel floor plane |
-| [Case G — flow behind a tree belt]({{ '/cases/case-g/data/' | relative_url }}#frame-and-units) | m (full scale) | dimensionless, $$U/U_H$$ | the leeward face of the tree belt at ground level, on the vertical section through the belt\'s centre |
-| [Case H — 1:1:2 building with a floor point source]({{ '/cases/case-h/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | the centre of the building\'s leeward face on the ground plane |
-| [Case I — cube with a roof point source]({{ '/cases/case-i/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | the centre of the cube on the ground plane |
-| [Case J — 1:1:2 building, non-isothermal]({{ '/cases/case-j/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | the building\'s leeward (downwind) wall centre on the ground; $$x = 0$$ is the leeward wall |
-| [Case K — 9 x 9 cube array, point source]({{ '/cases/case-k/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | bottom centre of the windward wall of the 4th row of the central column: $$x = 0$$ is that wall, $$y = 0$$ the centre line of the central column |
-| [Case L — 9 x 14 cube array, line source, non-isothermal]({{ '/cases/case-l/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | bottom centre of the windward wall of the 9th row (of 14) of the central column: $$x = 0$$ is that wall, $$y = 0$$ the centre line of the central column |
-| [Case M — TPU Atsugi campus]({{ '/cases/case-m/data/' | relative_url }}#frame-and-units) | m (FULL scale) | m/s (the tunnel\'s) | centre of the tunnel turntable on the floor plane (ground surface there at $$z = 33.07\thinspace\mathrm{m}$$) |
+| [Case A]({{ '/cases/case-a/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | building centre on the ground plane |
+| [Case B]({{ '/cases/case-b/data/' | relative_url }}#frame-and-units) | m (model scale; converted from the published millimetres) | m/s | building centre on the ground plane |
+| [Case C]({{ '/cases/case-c/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | array centre on the ground plane (centre of the middle block) |
+| [Case D]({{ '/cases/case-d/data/' | relative_url }}#frame-and-units) | m (model scale; converted from the workbook\'s millimetres) | m/s | tower centre on the ground plane (the array\'s bounding box is centred on it) |
+| [Case E]({{ '/cases/case-e/data/' | relative_url }}#frame-and-units) | m (FULL scale) | dimensionless | centre of the reproduced area, ground plane |
+| [Case F]({{ '/cases/case-f/data/' | relative_url }}#frame-and-units) | m (FULL scale) | dimensionless | centre of the reproduced district, tunnel floor plane |
+| [Case G]({{ '/cases/case-g/data/' | relative_url }}#frame-and-units) | m (full scale) | dimensionless, $$U/U_H$$ | the leeward face of the tree belt at ground level, on the vertical section through the belt\'s centre |
+| [Case H]({{ '/cases/case-h/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | the centre of the building\'s leeward face on the ground plane |
+| [Case I]({{ '/cases/case-i/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | the centre of the cube on the ground plane |
+| [Case J]({{ '/cases/case-j/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | the building\'s leeward (downwind) wall centre on the ground; $$x = 0$$ is the leeward wall |
+| [Case K]({{ '/cases/case-k/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | bottom centre of the windward wall of the 4th row of the central column: $$x = 0$$ is that wall, $$y = 0$$ the centre line of the central column |
+| [Case L]({{ '/cases/case-l/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | bottom centre of the windward wall of the 9th row (of 14) of the central column: $$x = 0$$ is that wall, $$y = 0$$ the centre line of the central column |
+| [Case M]({{ '/cases/case-m/data/' | relative_url }}#frame-and-units) | m (FULL scale) | m/s (the tunnel\'s) | centre of the tunnel turntable on the floor plane (ground surface there at $$z = 33.07\thinspace\mathrm{m}$$) |
