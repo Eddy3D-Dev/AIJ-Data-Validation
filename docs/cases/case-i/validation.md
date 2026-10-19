@@ -13,7 +13,11 @@ description: "Case I — cube with a roof point source: Eddy3D's scores against 
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenFOAM 12 k-ε <span class="label label-green status">scored</span> · OpenFOAM 12 k-ω SST <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
-## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor)
+{% include validation/case-i.md %}
+
+## Scores, run by run
+
+### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor)
 
 Reattachment length $$L_r/H$$ = 2.51.
 
@@ -33,7 +37,7 @@ Reattachment length $$L_r/H$$ = 2.51.
 - Per-point values: [`/api/cases/I/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/I/pairs/openfoam12-realizableKE.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCubeContainerE2E (realizable k-ε, 1:60) (numerics level 3, 3000 iterations); figures validation/plot\_cases\_hi\_openfoam.py
 
-## OpenFOAM 12, standard k-epsilon (Eddy3D Outdoor)
+### OpenFOAM 12, standard k-epsilon (Eddy3D Outdoor)
 
 Reattachment length $$L_r/H$$ = 2.23.
 
@@ -53,7 +57,7 @@ Reattachment length $$L_r/H$$ = 2.23.
 - Per-point values: [`/api/cases/I/pairs/openfoam12-kEpsilon.csv`]({{ '/api/cases/I/pairs/openfoam12-kEpsilon.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCubeContainerE2E (standard k-ε, 1:60) (numerics level 3, 3000 iterations); figures validation/plot\_cases\_hi\_openfoam.py
 
-## OpenFOAM 12, k-omega SST (Eddy3D Outdoor)
+### OpenFOAM 12, k-omega SST (Eddy3D Outdoor)
 
 Reattachment length $$L_r/H$$ = 2.68.
 
@@ -73,12 +77,8 @@ Reattachment length $$L_r/H$$ = 2.68.
 - Per-point values: [`/api/cases/I/pairs/openfoam12-kOmegaSST.csv`]({{ '/api/cases/I/pairs/openfoam12-kOmegaSST.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCubeContainerE2E (k-ω SST, 1:60) (numerics level 3, 3000 iterations); figures validation/plot\_cases\_hi\_openfoam.py
 
-## All runs
+### All runs
 
 - Normalisation: velocities by $$U_H$$, $$k$$ by $$U_H^2$$ (the benchmark\'s own convention; Case E by $$U$$ at 15.9 m, as it is published); hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units
 
 - Scores recomputed from the pairs by validation/dispersion\_metrics.py.
-
-## Figures
-
-Figures: [Cases H and I (OpenFOAM)]({{ '/validation/cases-hi/' | relative_url }}).

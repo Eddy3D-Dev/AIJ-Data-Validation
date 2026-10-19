@@ -1,7 +1,7 @@
 ---
 title: "ML surrogate"
 parent: Validation
-nav_order: 11
+nav_order: 4
 summary: "the Wind Predictor against Cases A to E"
 description: "Eddy3D's ML wind surrogate (Wind Predictor, Yel-2.0) against the tunnel data of Cases A to E."
 ---

@@ -9,6 +9,26 @@
   "web_bytes": 311967,
   "width": 1600
  },
+ "case-a-openfoam-agreement.png": {
+  "height": 548,
+  "master": "/assets/figures/case-a-openfoam-agreement.png",
+  "master_bytes": 1911479,
+  "master_height": 4332,
+  "master_width": 12648,
+  "web": "/assets/web/case-a-openfoam-agreement.png",
+  "web_bytes": 250384,
+  "width": 1600
+ },
+ "case-a-openfoam-profiles.png": {
+  "height": 855,
+  "master": "/assets/figures/case-a-openfoam-profiles.png",
+  "master_bytes": 722523,
+  "master_height": 4740,
+  "master_width": 8868,
+  "web": "/assets/web/case-a-openfoam-profiles.png",
+  "web_bytes": 176430,
+  "width": 1600
+ },
  "case-a.png": {
   "height": 800,
   "master": "/assets/geometry/case-a.png",
@@ -27,6 +47,26 @@
   "master_width": 9120,
   "web": "/assets/web/case-b-layout.png",
   "web_bytes": 283246,
+  "width": 1600
+ },
+ "case-b-openfoam-agreement.png": {
+  "height": 552,
+  "master": "/assets/figures/case-b-openfoam-agreement.png",
+  "master_bytes": 2059836,
+  "master_height": 4332,
+  "master_width": 12552,
+  "web": "/assets/web/case-b-openfoam-agreement.png",
+  "web_bytes": 269649,
+  "width": 1600
+ },
+ "case-b-openfoam-profiles.png": {
+  "height": 896,
+  "master": "/assets/figures/case-b-openfoam-profiles.png",
+  "master_bytes": 718673,
+  "master_height": 4740,
+  "master_width": 8460,
+  "web": "/assets/web/case-b-openfoam-profiles.png",
+  "web_bytes": 190431,
   "width": 1600
  },
  "case-b.png": {
@@ -269,6 +309,16 @@
   "web_bytes": 477382,
   "width": 1600
  },
+ "case-h-openfoam-agreement.png": {
+  "height": 564,
+  "master": "/assets/figures/case-h-openfoam-agreement.png",
+  "master_bytes": 3775601,
+  "master_height": 4392,
+  "master_width": 12456,
+  "web": "/assets/web/case-h-openfoam-agreement.png",
+  "web_bytes": 312370,
+  "width": 1600
+ },
  "case-h.png": {
   "height": 800,
   "master": "/assets/geometry/case-h.png",
@@ -287,6 +337,16 @@
   "master_width": 9120,
   "web": "/assets/web/case-i-layout.png",
   "web_bytes": 642897,
+  "width": 1600
+ },
+ "case-i-openfoam-agreement.png": {
+  "height": 560,
+  "master": "/assets/figures/case-i-openfoam-agreement.png",
+  "master_bytes": 2368292,
+  "master_height": 4392,
+  "master_width": 12552,
+  "web": "/assets/web/case-i-openfoam-agreement.png",
+  "web_bytes": 258013,
   "width": 1600
  },
  "case-i-openfoam-closures.png": {
@@ -457,36 +517,6 @@
   "master_width": 12732,
   "web": "/assets/web/cases-ab-engine-comparison.png",
   "web_bytes": 626049,
-  "width": 1600
- },
- "cases-ab-openfoam-agreement.png": {
-  "height": 882,
-  "master": "/assets/figures/cases-ab-openfoam-agreement.png",
-  "master_bytes": 3718830,
-  "master_height": 7128,
-  "master_width": 12924,
-  "web": "/assets/web/cases-ab-openfoam-agreement.png",
-  "web_bytes": 462044,
-  "width": 1600
- },
- "cases-ab-openfoam-profiles.png": {
-  "height": 834,
-  "master": "/assets/figures/cases-ab-openfoam-profiles.png",
-  "master_bytes": 1043710,
-  "master_height": 4908,
-  "master_width": 9420,
-  "web": "/assets/web/cases-ab-openfoam-profiles.png",
-  "web_bytes": 253938,
-  "width": 1600
- },
- "cases-hi-openfoam-agreement.png": {
-  "height": 934,
-  "master": "/assets/figures/cases-hi-openfoam-agreement.png",
-  "master_bytes": 5898699,
-  "master_height": 7488,
-  "master_width": 12828,
-  "web": "/assets/web/cases-hi-openfoam-agreement.png",
-  "web_bytes": 511018,
   "width": 1600
  },
  "ml-surrogate-agreement.png": {

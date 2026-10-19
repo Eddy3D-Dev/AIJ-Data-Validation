@@ -1,10 +1,10 @@
 """Validation figures for the AIJ UWE benchmark cases solved with Eddy3D / OpenFOAM.
 
-Two figures, each answering one question:
+Two figures per case (x = a, b), each answering one question:
 
-  cases-ab-openfoam-agreement.png   Does the model agree with the tunnel?  Measured vs modelled, one panel
-                      per quantity per case, with the 1:1 line and the factor-of-two band.
-  cases-ab-openfoam-profiles.png    WHERE does it agree?  Centre-plane vertical profiles of U/U_H at the
+  case-x-openfoam-agreement.png   Does the model agree with the tunnel?  Measured vs modelled, one panel
+                      per quantity, with the 1:1 line and the factor-of-two band.
+  case-x-openfoam-profiles.png    WHERE does it agree?  Centre-plane vertical profiles of U/U_H at the
                       measurement stations, measured points against the modelled line.
 
 Inputs, all in this repository: the benchmark tables raw/cases/case-a/RS-caseA.csv and raw/cases/case-b/RS_caseB.csv as published,
@@ -106,13 +106,13 @@ if os.path.isdir(VAL):
 QUANTITIES = [("U", "U/U$_H$"), ("V", "V/U$_H$"), ("W", "W/U$_H$"), ("k", "k/U$_H^2$")]
 
 style.apply()
-fig, axs = uplt.subplots(nrows=2, ncols=4, refwidth=2.0, refaspect=1, share=False, wspace=4.2, hspace=2.4)
-
-for row, (tag, folder, ref_file, cscale, lsign, study, title, H, Uh, _bx) in enumerate(CASES):
+# One figure per case, so each case's Validation page shows its own points only.
+for tag, folder, ref_file, cscale, lsign, study, title, H, Uh, _bx in CASES:
+    fig, axs = uplt.subplots(nrows=1, ncols=4, refwidth=2.0, refaspect=1, share=False, wspace=4.2)
     meas = read_reference(os.path.join(REPO, folder, ref_file), cscale, lsign)
     model = read_probe(probes_path(tag))
     for col, (q, label) in enumerate(QUANTITIES):
-        ax = axs[row, col]
+        ax = axs[col]
         norm = Uh * Uh if q == "k" else Uh
         o = np.array([m[q] for m in meas]) / norm
         p = np.array([m[q] for m in model]) / norm
@@ -130,21 +130,19 @@ for row, (tag, folder, ref_file, cscale, lsign, study, title, H, Uh, _bx) in enu
 
         m = metrics(tag, "k" if q == "k" else f"velocity.{q}")
         style.stats(ax, f"R {m['R']:+.2f}\nFAC2 {m['Fac2']:.2f}\nFB {m['Fb']:+.2f}")
-        ax.format(xlim=(lo, hi), ylim=(lo, hi), xlabel="Tunnel [–]" if row == len(CASES) - 1 else None,
-                  ylabel="Eddy3D [–]" if col == 0 else None)
+        ax.format(xlim=(lo, hi), ylim=(lo, hi), xlabel="Tunnel [–]", ylabel="Eddy3D [–]" if col == 0 else None)
 
-style.finish(fig, "AIJ UWE Cases A and B — Eddy3D (OpenFOAM 12, realizable k-ε) vs wind tunnel",
-             handles=[*layout.legend_handles("A", prefix="A"), style.line(style.REFERENCE, "1:1", lw=1.0),
-                      *layout.legend_handles("B", prefix="B"), style.line("none", " "), style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")], ncols=4,
-             toplabels=[label for _, label in QUANTITIES], leftlabels=[c[6] for c in CASES])
-style.save(fig, "cases-ab-openfoam-agreement.png")
+    style.finish(fig, f"AIJ UWE {title} — Eddy3D (OpenFOAM 12, realizable k-ε) vs wind tunnel",
+                 handles=[*layout.legend_handles(tag), style.line(style.REFERENCE, "1:1", lw=1.0),
+                          style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")], ncols=3,
+                 toplabels=[label for _, label in QUANTITIES])
+    style.save(fig, f"case-{tag.lower()}-openfoam-agreement.png")
 
 
 # ----------------------------------------------------------------------------- figure 2
-fig2, axs2 = uplt.subplots(nrows=1, ncols=2, refwidth=3.4, refaspect=1.25, share=False, wspace=2.0)
-
-for i, (tag, folder, ref_file, cscale, lsign, study, title, H, Uh, bx) in enumerate(CASES):
-    ax = axs2[i]
+for tag, folder, ref_file, cscale, lsign, study, title, H, Uh, bx in CASES:
+    fig2, axs2 = uplt.subplots(nrows=1, ncols=1, refwidth=3.4, refaspect=1.25, share=False)
+    ax = axs2[0]
     meas = read_reference(os.path.join(REPO, folder, ref_file), cscale, lsign)
     model = read_probe(probes_path(tag))
 
@@ -180,13 +178,11 @@ for i, (tag, folder, ref_file, cscale, lsign, study, title, H, Uh, bx) in enumer
 
     ax.axhline(1.0, color=style.REFERENCE, lw=0.8, ls="--", zorder=1)
     lo, hi = (min(lohi) - 0.28, max(lohi) + 0.28) if lohi else (0, 3)
-    ax.format(title=title, xlabel="U/U$_H$ [–], offset by 1 per station", ylabel="z/H [–]" if i == 0 else None,
+    ax.format(xlabel="U/U$_H$ [–], offset by 1 per station", ylabel="z/H [–]",
               ylim=(0, 2.25), xlim=(lo, hi))
-    if i:
-        ax.tick_params(labelleft=False)
 
-style.finish(fig2, "AIJ UWE Cases A and B — centre-plane profiles behind the building (y = 0)",
-             handles=[style.marker(style.MEASURED, "Wind tunnel"),
-                      style.line(style.OPENFOAM, "Eddy3D (OpenFOAM 12, realizable k-ε)"),
-                      style.line(style.REFERENCE, "roof height, z = H", lw=0.8, ls="--")])
-style.save(fig2, "cases-ab-openfoam-profiles.png")
+    style.finish(fig2, f"AIJ UWE {title} — centre-plane profiles behind the building (y = 0)",
+                 handles=[style.marker(style.MEASURED, "Wind tunnel"),
+                          style.line(style.OPENFOAM, "Eddy3D (OpenFOAM 12, realizable k-ε)"),
+                          style.line(style.REFERENCE, "roof height, z = H", lw=0.8, ls="--")])
+    style.save(fig2, f"case-{tag.lower()}-openfoam-profiles.png")

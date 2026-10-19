@@ -1,0 +1,253 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/geometry.schema.json",
+ "title": "Case geometry",
+ "description": "The STL files of one case, their statistics and, where the geometry is boxes, the boxes.",
+ "type": "object",
+ "required": [
+  "$schema",
+  "schema_version",
+  "data_version",
+  "license",
+  "case",
+  "units",
+  "frame",
+  "default_configuration",
+  "configurations",
+  "files"
+ ],
+ "properties": {
+  "$schema": {
+   "type": "string",
+   "format": "uri"
+  },
+  "schema_version": {
+   "type": "string",
+   "pattern": "^\\d+\\.\\d+\\.\\d+$",
+   "description": "the API's version (semantic versioning); see index.json changelog"
+  },
+  "data_version": {
+   "type": "string",
+   "pattern": "^[0-9a-f]{64}$",
+   "description": "SHA-256 over every served measurement, geometry and score file; changes when, and only when, the data does"
+  },
+  "license": {
+   "const": "CC-BY-4.0",
+   "description": "SPDX identifier of the data's licence"
+  },
+  "case": {
+   "enum": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M"
+   ]
+  },
+  "title": {
+   "type": "string"
+  },
+  "units": {
+   "type": "string"
+  },
+  "frame": {
+   "type": "object",
+   "required": [
+    "origin",
+    "x",
+    "y",
+    "z"
+   ],
+   "properties": {
+    "origin": {
+     "type": "string"
+    },
+    "x": {
+     "type": "string"
+    },
+    "y": {
+     "type": "string"
+    },
+    "z": {
+     "type": "string"
+    }
+   }
+  },
+  "default_configuration": {
+   "type": "string"
+  },
+  "configurations": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "is_boxes": {
+   "type": "boolean"
+  },
+  "files": {
+   "type": "array",
+   "items": {
+    "allOf": [
+     {
+      "type": "object",
+      "required": [
+       "url",
+       "path",
+       "media_type",
+       "bytes",
+       "sha256"
+      ],
+      "properties": {
+       "url": {
+        "type": "string",
+        "format": "uri",
+        "description": "absolute URL; the ?v= query is the file's SHA-256 prefix, so a changed file has a new URL"
+       },
+       "path": {
+        "type": "string",
+        "description": "path below the API base"
+       },
+       "media_type": {
+        "type": "string"
+       },
+       "bytes": {
+        "type": "integer",
+        "minimum": 0
+       },
+       "sha256": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+       }
+      }
+     },
+     {
+      "type": "object",
+      "required": [
+       "configuration",
+       "stats",
+       "render"
+      ],
+      "properties": {
+       "configuration": {
+        "type": "string"
+       },
+       "format": {
+        "type": "string"
+       },
+       "source": {
+        "type": "string"
+       },
+       "stats": {
+        "type": "object",
+        "required": [
+         "triangles",
+         "bbox_min",
+         "bbox_max",
+         "watertight"
+        ],
+        "properties": {
+         "triangles": {
+          "type": "integer"
+         },
+         "bbox_min": {
+          "type": "array",
+          "items": {
+           "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+         },
+         "bbox_max": {
+          "type": "array",
+          "items": {
+           "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+         },
+         "watertight": {
+          "type": "boolean",
+          "description": "true when every body is closed (no boundary edge), consistently wound (every edge is traversed once in each direction) and has a positive volume (outward normals)"
+         },
+         "bodies": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "number of bodies (buildings, or the terrain with its buildings)"
+         },
+         "edges_boundary": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "edges used by one triangle: 0 when every body is closed"
+         },
+         "body_contacts": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "edges that four triangles share where two separate bodies touch; each body still sees the edge as an ordinary two-triangle edge, so a contact does not open a body"
+         },
+         "inconsistent_triangles": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "fewest triangles to reverse to wind every body consistently: 0 in every served file"
+         },
+         "min_body_volume": {
+          "type": "number",
+          "description": "volume of the smallest body (m^3 in the file's units cubed); positive when every body is outward"
+         }
+        }
+       },
+       "render": {
+        "type": "string",
+        "format": "uri"
+       },
+       "render_caption": {
+        "type": "string"
+       },
+       "boxes": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "required": [
+          "min",
+          "max"
+         ],
+         "properties": {
+          "min": {
+           "type": "array",
+           "items": {
+            "type": "number"
+           },
+           "minItems": 3,
+           "maxItems": 3
+          },
+          "max": {
+           "type": "array",
+           "items": {
+            "type": "number"
+           },
+           "minItems": 3,
+           "maxItems": 3
+          }
+         }
+        }
+       }
+      }
+     }
+    ]
+   },
+   "minItems": 1
+  },
+  "render": {
+   "type": "string",
+   "format": "uri"
+  }
+ }
+}
