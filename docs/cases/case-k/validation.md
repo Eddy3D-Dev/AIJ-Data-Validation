@@ -35,20 +35,20 @@ Quantity: $$U$$, $$V$$, $$W$$ over the stated $$U_H$$ = 2.33 m/s and $$k$$ over 
 
 {% include nomenclature-scores.md %}
 
-- Normalisation: $$U$$, $$V$$, $$W$$ by the stated $$U_H$$ = 2.33 m/s and $$k$$ by $$U_H^2$$, the same divisor on both sides; $$c^\ast$$ is the measured $$C/c_0$$ ($$c_0 = \dfrac{q}{U_H H^2}$$ = 429.2 ppm) against the modelled $$c\thinspace U_H H^2/Q$$ (full scale, Q = 1 kg/s) for turbulent Schmidt numbers 0.3, 0.5 and 0.7, with one detection limit of 10^-3 of the largest measured value; hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in $$U_H$$
+- Normalisation: $$U$$, $$V$$, $$W$$ by the stated $$U_H$$ = 2.33 m/s and $$k$$ by $$U_H^2$$, the same divisor on both sides; $$c^\ast$$ is the measured $$C/c_0$$ ($$c_0 = \dfrac{q}{U_H H^2}$$ = 429.2 ppm) against the modelled $$c\thinspace U_H H^2/Q$$ (full scale, $$Q = 1\thinspace\mathrm{kg/s}$$) for turbulent Schmidt numbers 0.3, 0.5 and 0.7, with one detection limit of $$10^{-3}$$ of the largest measured value; hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in $$U_H$$
 - Per-point values: [`/api/cases/K/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/K/pairs/openfoam12-realizableKE.csv' | relative_url }})
 - Reproduce: Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseKContainerE2E (9 x 9 cubes, floor point source, 1:100; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 972,637 cells, solved 2026-10-18); figures validation/plot\_cases\_gk\_openfoam.py
 
 Notes:
 
-- The inflow is the measured approach profile (3.23 m/s at 0.2 m, $$z_0$$ fitted to 13.5 mm). The stated $$U_H$$ = 2.33 m/s is not on that profile: the solved $$U$$ at z = H is 1.97 m/s, 0.85 of the stated $$U_H$$. Measured and modelled velocities are both divided by 2.33 m/s.
-- The inlet $$k$$ from that log law, $$u_\ast$$^2/sqrt(Cmu) = 0.77 m²/s², is about 1.7 times the tunnel\'s 0.33 to 0.45.
+- The inflow is the measured approach profile (3.23 m/s at 0.2 m, $$z_0$$ fitted to 13.5 mm). The stated $$U_H$$ = 2.33 m/s is not on that profile: the solved $$U$$ at $$z = H$$ is 1.97 m/s, 0.85 of the stated $$U_H$$. Measured and modelled velocities are both divided by 2.33 m/s.
+- The inlet $$k$$ from that log law, $$u_\ast^2/\sqrt{C_\mu}$$ = 0.77 m²/s², is about 1.7 times the tunnel\'s 0.33 to 0.45.
 - The first measurement point is the source location: the four points within one cube height of the floor outlet hold the four largest $$c^\ast$$ (8.73, 5.31, 3.02 and 2.86 against 1.03 for the next). The model\'s source is the 4 cells (0.75 m across) that a 0.44 m square cuts; the outlet is 5 mm. Those four points are scored with and without.
-- 47 of the 203 points (the z = 4 mm plane, 0.4 m at 1:100) lie inside the first ground cell (0.735 m): their modelled values are that cell\'s, pulled toward the wall\'s zero by the point interpolation.
-- The measured plume is not y-symmetric (C at -y exceeds C at +y at 74 of 74 mirror pairs; its lateral centroid lies 0.011 to 0.017 m toward -y at every station) and the solve is. The \'y-symmetric ceiling\' controls score the measurement against the mean of each mirror pair.
+- 47 of the 203 points (the $$z = 4\thinspace\mathrm{mm}$$ plane, 0.4 m at 1:100) lie inside the first ground cell (0.735 m): their modelled values are that cell\'s, pulled toward the wall\'s zero by the point interpolation.
+- The measured plume is not y-symmetric (C at -y exceeds C at $$+y$$ at 74 of 74 mirror pairs; its lateral centroid lies 0.011 to 0.017 m toward -y at every station) and the solve is. The \'y-symmetric ceiling\' controls score the measurement against the mean of each mirror pair.
 - $$V$$ has a constant offset and almost no antisymmetric part; a model with $$V$$ = 0 everywhere hits 0.91 of the points at $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$.
 - The solve stopped at the 3000-iteration limit with the residualControl unmet (no \'solution converged\' line); the epsilon initial residual at the last iteration was 7e-3.
-- The air over the roofs outruns the street along the wind, which outruns the cavity across it; the plume leaves the source, is clean 1 to 1.5 H ahead of the array, decays through four cavities and is cleaner over the roofs than in them; the solved velocity is y-symmetric to twice the tunnel\'s own mirror-pair difference.
+- The air over the roofs outruns the street along the wind, which outruns the cavity across it; the plume leaves the source, is clean 1 to $$1.5\thinspace H$$ ahead of the array, decays through four cavities and is cleaner over the roofs than in them; the solved velocity is y-symmetric to twice the tunnel\'s own mirror-pair difference.
 
 <details markdown="block">
 <summary>Interpretation: Case K scores</summary>

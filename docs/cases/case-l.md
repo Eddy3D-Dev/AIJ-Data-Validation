@@ -24,7 +24,7 @@ description: "14 rows by 9 columns of 0.06 m cubes with a tracer line source on 
 
 | Fact | Value |
 |---|---|
-| Array | 14 rows (along x) by 9 columns (across y) of cubes, H = 0.06 m, pitch 0.12 m (street width = H, plan area ratio 25 %), published as BD\_caseL.stl; the data paper calls it \'9 rows by 14 columns\' |
+| Array | 14 rows (along x) by 9 columns (across y) of cubes, $$H = 0.06\thinspace\mathrm{m}$$, pitch 0.12 m (street width = H, plan area ratio 25 %), published as BD\_caseL.stl; the data paper calls it \'9 rows by 14 columns\' |
 | Reynolds number $$\mathrm{Re_H}$$ | 5600 |
 | $$U_H$$ (m/s) | 1.339415 |
 | Wind directions (°) | 0 |
@@ -50,5 +50,5 @@ description: "14 rows by 9 columns of 0.06 m cubes with a tracer line source on 
 > Before you compare
 >
 > - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
-> - Origin: bottom centre of the windward wall of the 9th row (of 14) of the central column: x = 0 is that wall, y = 0 the centre line of the central column. Length unit: m (model scale).
+> - Origin: bottom centre of the windward wall of the 9th row (of 14) of the central column: $$x = 0$$ is that wall, $$y = 0$$ the centre line of the central column. Length unit: m (model scale).
 > - 10 known issues in the published files are listed under [Known data issues]({{ '/cases/case-l/data/' | relative_url }}#known-data-issues).

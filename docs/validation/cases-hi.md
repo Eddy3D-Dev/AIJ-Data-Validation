@@ -14,17 +14,17 @@ OpenFOAM 12 runs on the 1:1:2 building with a floor point source (Case H) and on
 
 - Eddy3D production runs, realizable k-ε at numerics level 3 and 3000 iterations, at 1:100 (H) and 1:60 (I), with the probe at the tunnel's own coordinates. Case I was also solved with standard k-ε and with k-ω SST on the same mesh.
 - Velocities are divided by $$U_H$$, $$k$$ by $$U_H^2$$. Each side uses its own $$U_H$$: the tunnel's (H 3.226 m/s, I 1.7 m/s) for the measurement, the value the solve was driven with (H 3.23 m/s, I 1.7 m/s) for the model.
-- Concentration: the cleaned table's $$C/c_0$$ ($$c_0$$ = 45.18 ppm in H, 39.22 ppm in I) against the model's $$c^\ast = c\thinspace U_H H^2/Q$$, scored at the turbulent Schmidt numbers 0.3, 0.5 and 0.7 (the figures show 0.5). One detection limit, 10⁻³ of the largest measured value.
+- Concentration: the cleaned table's $$C/c_0$$ ($$c_0$$ = 45.18 ppm in H, 39.22 ppm in I) against the model's $$c^\ast = c\thinspace U_H H^2/Q$$, scored at the turbulent Schmidt numbers 0.3, 0.5 and 0.7 (the figures show 0.5). One detection limit, $$10^{-3}$$ of the largest measured value.
 
 ## Measurement layout
 
-{% include figure.html name="case-h-layout.png" alt="Measurement lines and planes, Case H" caption="<strong>Figure 1.</strong> Case H, measurement lines and planes: A vertical profiles, y/H = 0; B plane z/H = 0.0625; C plane z/H = 0.25; D plane z/H = 0.5. Positions in multiples of H." %}
+{% include figure.html name="case-h-layout.png" alt="Measurement lines and planes, Case H" caption="<strong>Figure 1.</strong> Case H, measurement lines and planes: A vertical profiles, $$y/H = 0$$; B plane $$z/H = 0.0625$$; C plane $$z/H = 0.25$$; D plane $$z/H = 0.5$$. Positions in multiples of $$H$$." %}
 
-{% include figure.html name="case-i-layout.png" alt="Measurement lines and planes, Case I" caption="<strong>Figure 2.</strong> Case I, measurement lines and planes: A concentration, vertical profiles, y/H = 0; B concentration, plane z/H = 0; C velocity, vertical profiles, y/H = 0; D velocity, plane z/H = 0.5. Positions in multiples of H; panels c and d: x/H = -2 to 5." %}
+{% include figure.html name="case-i-layout.png" alt="Measurement lines and planes, Case I" caption="<strong>Figure 2.</strong> Case I, measurement lines and planes: A concentration, vertical profiles, $$y/H = 0$$; B concentration, plane $$z/H = 0$$; C velocity, vertical profiles, $$y/H = 0$$; D velocity, plane $$z/H = 0.5$$. Positions in multiples of $$H$$; panels c and d: $$x/H = -2\text{ to }5$$." %}
 
 ## Scores
 
-{% include figure.html name="cases-hi-openfoam-agreement.png" alt="Measured vs modelled, Cases H and I" caption="<strong>Figure 3.</strong> Measured vs modelled U, W, k and c*, Cases H (top) and I (bottom), realizable k-ε; the dots take the colour of the line or plane they were measured on, as in Figures 1 and 2. The concentration panels show the positive pairs only." %}
+{% include figure.html name="cases-hi-openfoam-agreement.png" alt="Measured vs modelled, Cases H and I" caption="<strong>Figure 3.</strong> Measured vs modelled $$U$$, $$W$$, $$k$$ and $$c^\ast$$, Cases H (top) and I (bottom), realizable k-ε; the dots take the colour of the line or plane they were measured on, as in Figures 1 and 2. The concentration panels show the positive pairs only." %}
 
 Realizable k-ε, normalised by $$U_H$$.
 
@@ -52,7 +52,7 @@ FB is positive when the model is low.
 
 - **Case H, flow.** R is 0.90, 0.94 and 0.89 for $$U$$, $$V$$ and $$W$$. $$W$$: FB +2.76 on a near-zero mean. $$k$$: R 0.11, FB +0.51.
 - **Case H, concentration.** R is 0.95 at every Schmidt number. FB is −0.83 at 0.5, and the modelled $$c^\ast$$ at the measured points peaks at 238 against a measured peak of 66. FB is −0.60, −0.83 and −0.93 for 0.3, 0.5 and 0.7; FAC2 falls from 0.69 to 0.59.
-- **Case I, flow.** $$U$$: R 1.00, FAC2 0.88. $$W$$: R 0.97. $$k$$: R 0.91, FAC2 0.92. $$V$$ is scored at the 38 points off the y = 0 plane; on the plane the workbook holds numerical zeros, which are left out. $$V$$: FB −2.0 on a near-zero mean, R 0.99.
+- **Case I, flow.** $$U$$: R 1.00, FAC2 0.88. $$W$$: R 0.97. $$k$$: R 0.91, FAC2 0.92. $$V$$ is scored at the 38 points off the $$y = 0$$ plane; on the plane the workbook holds numerical zeros, which are left out. $$V$$: FB −2.0 on a near-zero mean, R 0.99.
 - **Case I, concentration.** R is 0.92 to 0.95 and FAC2 stays below 0.5. FB +0.40 at 0.3, +0.08 at 0.5 and −0.10 at 0.7. Case H has a negative FB (model high) at all three.
 
 <details markdown="block">
@@ -67,7 +67,7 @@ FB is positive when the model is low.
 
 ## Turbulence closures on Case I
 
-{% include figure.html name="case-i-openfoam-closures.png" alt="Case I under three turbulence closures" caption="<strong>Figure 4.</strong> Case I under standard k-ε, realizable k-ε and k-ω SST on one mesh, dots coloured as in Figure 2: measured vs modelled U, k and c* (Sct 0.5)." %}
+{% include figure.html name="case-i-openfoam-closures.png" alt="Case I under three turbulence closures" caption="<strong>Figure 4.</strong> Case I under standard k-ε, realizable k-ε and k-ω SST on one mesh, dots coloured as in Figure 2: measured vs modelled $$U$$, $$k$$ and $$c^\ast$$ ($$\mathrm{Sc_t}$$ 0.5)." %}
 
 | Closure | $$U$$ R | $$U$$ FAC2 | $$k$$ R | $$k$$ FAC2 | $$k$$ FB | $$c^\ast$$ ($$\mathrm{Sc_t}$$ 0.5) R | $$c^\ast$$ FAC2 | $$c^\ast$$ FB |
 |---|---|---|---|---|---|---|---|---|

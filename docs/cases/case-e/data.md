@@ -46,9 +46,9 @@ description: "Case E — Niigata district: configuration, frame and units, refer
 | Property | Definition |
 |---|---|
 | Origin | centre of the reproduced area, ground plane |
-| x | +x EAST (full-scale metres) |
-| y | +y NORTH (compass rose in MP\_caseE.png) |
-| z | +z up; all points at z = 2.0 |
+| x | $$+x$$ EAST (full-scale metres) |
+| y | $$+y$$ NORTH (compass rose in MP\_caseE.png) |
+| z | $$+z$$ up; all points at $$z = 2.0$$ |
 | Wind direction convention | meteorological FROM-direction, clockwise from north; the compass name is the direction the wind comes from (N = 0 deg blows toward -y, E = 90 deg toward -x). This case keeps its geographic frame instead of \'+x along the wind\' because the district is real and its coordinates are the data\'s. |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 1.0 |
@@ -96,7 +96,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | the workbook publishes $$z/Z_R$$, $$U/U_R$$, $$k/U_R^2$$ with $$Z_R$$ = 250 m, $$U_R$$ = 7.8 m/s and epsilon = Cmu^0.5 $$k$$ dU/dz (Cmu = 0.09); de-normalised to full-scale metres and m/s here |
+| Method | the workbook publishes $$z/Z_R$$, $$U/U_R$$, $$k/U_R^2$$ with $$Z_R$$ = 250 m, $$U_R$$ = 7.8 m/s and $$\varepsilon = C_\mu^{0.5}\thinspace k\thinspace \mathrm{d}U/\mathrm{d}z$$ ($$C_\mu$$ = 0.09); de-normalised to full-scale metres and m/s here |
 | $$U_{\mathrm{ref}}$$ at 15.9 m (m/s) | 3.935 |
 | Log law | does not fit: $$\kappa$$ = 0.41 fits reach 5.3-9.4 % max error over the relevant height range and overshoot $$U(15.9\text{ m})$$ by 4-7 % |
 | Power-law exponent | **ground to 60m**: 0.158<br>**whole profile**: 0.201 |

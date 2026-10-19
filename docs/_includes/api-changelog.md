@@ -5,7 +5,7 @@
 - Added to index.json: `cite.api`, the citation of the API release (`title`, `version`, `url`, `release_url`, `doi`, `apa`, `bibtex`, `csl_json`). `url` is the pinned address of the release, `/api/<release>/index.json`; `doi` is null until Zenodo mints one for the release.
 - Added to cases/{id}.json: `citation`, the Zenodo dataset of the case as `apa` and `bibtex`.
 - Added to the `stats` of geometry.json and to the entries of the geometry index: `bodies`, `body_contacts`, `inconsistent_triangles` and `min_body_volume`, beside `edges_boundary`. `watertight` is true when every body is closed, consistently wound and positive in volume.
-- Changed: the `geometry.stl` of Cases E, F and M. Every body is a closed, consistently wound, outward body; Cases F and M stand on a 1 m base slab, so the bounding box of each starts at z = -1 m, and `triangles` and `data_version` change with the files.
+- Changed: the `geometry.stl` of Cases E, F and M. Every body is a closed, consistently wound, outward body; Cases F and M stand on a 1 m base slab, so the bounding box of each starts at $$z = -1\thinspace\mathrm{m}$$, and `triangles` and `data_version` change with the files.
 - Added: the layout figure of each case, `case-<id>-layout.png`, is the first entry of `figures` of the validation results of that case (Cases A to M); the agreement figures colour their points by the groups of that figure.
 
 ### 2.3.0 (2026-10-18)

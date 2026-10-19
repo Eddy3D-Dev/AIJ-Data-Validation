@@ -28,7 +28,7 @@ Isolated 1:4:4 slab, velocity field (split-fibre hot wire).
 | Reynolds number $$\mathrm{Re_H}$$ | 72,000 |
 | $$U_H$$ (m/s) | 5.133 |
 | Wind directions (°) | 0 |
-| Measurement planes | vertical centre plane y/H = 0, horizontal z/H = 1/16 |
+| Measurement planes | vertical centre plane $$y/H = 0$$, horizontal $$z/H = 1/16$$ |
 | Measured | 224 rows over 224 points: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$ |
 
 {% include nomenclature.md %}

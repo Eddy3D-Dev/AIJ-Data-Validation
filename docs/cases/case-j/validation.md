@@ -39,8 +39,8 @@ Engine status: OpenFOAM 12 <span class="label label-yellow status">pending</span
 Notes:
 
 - The tracer is solved steady beside the flow, as three species of one flow. The outlet carried 0.89, 0.75 and 0.62 of the emission for $$\mathrm{Sc_t}$$ 0.3, 0.5 and 0.7, within the factor of two accepted as a check on the wiring.
-- The air region ended at its 1500-iteration cap with the residualControl unmet (no \'solution converged\' line); at the last iteration the initial residuals were 1.3e-2 (U\_y), 1.5e-2 (p\_rgh) and 1.1e-3 to 1.7e-3 (the tracers).
-- The steady closure gives a longer recirculation than the tunnel: reattachment at z/H = 0.25 and 0.025 is 1.35 H and 1.35 H, against the measured 0.68 H and 0.80 H.
+- The air region ended at its 1500-iteration cap with the residualControl unmet (no \'solution converged\' line); at the last iteration the initial residuals were 1.3e-2 ($$U_y$$), 1.5e-2 (`p_rgh`) and 1.1e-3 to 1.7e-3 (the tracers).
+- The steady closure gives a longer recirculation than the tunnel: reattachment at $$z/H = 0.25\text{ and }0.025$$ is $$1.35\thinspace H$$ and $$1.35\thinspace H$$, against the measured $$0.68\thinspace H$$ and $$0.80\thinspace H$$.
 
 ## urbanMicroclimateFoam, buoyantKEpsilon (Eddy3D Outdoor+)
 
@@ -68,21 +68,21 @@ Notes:
 Notes:
 
 - The tracer is solved steady beside the flow, as three species of one flow. The outlet carried 0.95, 0.84 and 0.73 of the emission for $$\mathrm{Sc_t}$$ 0.3, 0.5 and 0.7, within the factor of two accepted as a check on the wiring.
-- The air region ended at its 1500-iteration cap with the residualControl unmet (no \'solution converged\' line); at the last iteration the initial residuals were 1.3e-2 (U\_y), 1.1e-2 (p\_rgh) and 1.2e-3 to 1.6e-3 (the tracers).
-- The steady closure gives a longer recirculation than the tunnel: reattachment at z/H = 0.25 and 0.025 is 1.35 H and 1.56 H, against the measured 0.68 H and 0.80 H.
+- The air region ended at its 1500-iteration cap with the residualControl unmet (no \'solution converged\' line); at the last iteration the initial residuals were 1.3e-2 ($$U_y$$), 1.1e-2 (`p_rgh`) and 1.2e-3 to 1.6e-3 (the tracers).
+- The steady closure gives a longer recirculation than the tunnel: reattachment at $$z/H = 0.25\text{ and }0.025$$ is $$1.35\thinspace H$$ and $$1.56\thinspace H$$, against the measured $$0.68\thinspace H$$ and $$0.80\thinspace H$$.
 
 ## All runs
 
 - Quantity: $$U$$, $$V$$, $$W$$ over $$U_H$$ = 1.4581 m/s and $$k$$ over $$U_H^2$$ (the tunnel\'s units, 443 distinct points); theta = ($$T_f - T$$)/($$T_f - T_H$$) with $$T_f$$ = 318.95 K and $$T_H$$ = 285.32 K; $$c^\ast = C/c_0$$ ($$c_0$$ = 12.28 ppm) against the model\'s ethylene mass fraction as ppm over the same $$c_0$$, for turbulent Schmidt numbers 0.3, 0.5 and 0.7; the 27 points within a quarter of a building height of the source are scored with and without. The scene is the tunnel at Froude scale 62.5
-- Normalisation: the tunnel\'s units: velocities by $$U_H$$ (1.4581 m/s measured, the Froude-scaled 11.53 m/s modelled), $$k$$ by $$U_H^2$$, temperature as theta = ($$T_f - T$$)/($$T_f - T_H$$) ($$T_f$$ = 45.8 degC, $$T_f - T_H$$ = 33.63 K), $$c^\ast = C/c_0$$ ($$c_0$$ = 12.28 ppm) against the modelled ethylene mass fraction as ppm over the same $$c_0$$; hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units, concentration with one detection limit of 10^-3 of the largest measured value; 443 points (point 153 repeats point 1)
+- Normalisation: the tunnel\'s units: velocities by $$U_H$$ (1.4581 m/s measured, the Froude-scaled 11.53 m/s modelled), $$k$$ by $$U_H^2$$, temperature as theta = ($$T_f - T$$)/($$T_f - T_H$$) ($$T_f$$ = 45.8 degC, $$T_f - T_H$$ = 33.63 K), $$c^\ast = C/c_0$$ ($$c_0$$ = 12.28 ppm) against the modelled ethylene mass fraction as ppm over the same $$c_0$$; hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units, concentration with one detection limit of $$10^{-3}$$ of the largest measured value; 443 points (point 153 repeats point 1)
 
 Notes:
 
 - The scene is the tunnel at Froude scale 62.5 (the production case writer cannot mesh a 0.16 m building): lengths times 62.5, velocities times 7.9, temperatures unchanged. That keeps the bulk Richardson number (-0.0856), Pr, the tunnel\'s Kelvin values and the dimensionless tracer, and does not keep Re (1.6e4 in the tunnel, 8e6 here).
 - UMF\'s first cell is 0.75 m, 12 mm at tunnel scale: the tunnel\'s 24 K drop in air temperature between the floor and the first measurement at 3 mm lies inside it. The source is a mass rate into one pair of cells, with no release momentum and no heat from the 30.4 degC gas. The 27 points within a quarter of a building height of the source are scored with and without.
 - The building is not adiabatic here: its walls are held at the measured mean surface temperature, 297.62 K, and the measured 4 K vertical gradient up the walls is not modelled. There is no sun, and the radiation exchange is at the least the view-factor model accepts (air-side emissivity 0.01).
-- The measured +y half of the z/H = 0.25 plane runs 11 % slower than the -y half (97 mirror pairs, R 0.955, recomputed from the cleaned table): the y-symmetric ceiling control scores the measurement against the mean of each mirror pair.
-- The wake recirculates behind the leeward face and reattaches within 3 H; the approach layer is unstable and the first cell above the heated floor is warmer than the air that entered it; every species is emitted, with clean air 25 m ahead of the building and its maximum at the source, and leaves through the outlet at 0.5 to 2 times the emission.
+- The measured $$+y$$ half of the $$z/H = 0.25$$ plane runs 11 % slower than the -y half (97 mirror pairs, R 0.955, recomputed from the cleaned table): the y-symmetric ceiling control scores the measurement against the mean of each mirror pair.
+- The wake recirculates behind the leeward face and reattaches within $$3\thinspace H$$; the approach layer is unstable and the first cell above the heated floor is warmer than the air that entered it; every species is emitted, with clean air 25 m ahead of the building and its maximum at the source, and leaves through the outlet at 0.5 to 2 times the emission.
 
 <details markdown="block">
 <summary>Interpretation: Case J wall functions</summary>

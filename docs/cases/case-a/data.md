@@ -30,10 +30,10 @@ description: "Case A — 1:1:2 building: configuration, frame and units, referen
 | Reynolds number $$\mathrm{Re_H}$$ | 24,000 |
 | $$U_H$$ (m/s) | 4.491 |
 | Wind directions (°) | 0 |
-| Measurement planes | vertical centre plane y/b = 0, horizontal z/b = 0.125, horizontal z/b = 1.25 |
+| Measurement planes | vertical centre plane $$y/b = 0$$, horizontal $$z/b = 0.125$$, horizontal $$z/b = 1.25$$ |
 | Instrument | hot-wire anemometer, split-fibre probes (DANTEC 55R55 streamwise, 55R57 spanwise/vertical), 1000 Hz, 60 s per point, 500 Hz low-pass |
 | Wind tunnel | Technical Research Institute, Shimizu Corporation, Tokyo |
-| Scale, note | model scale; Eddy3D solves it at 1:100 (b = 8 m, H = 16 m) with the tunnel velocities |
+| Scale, note | model scale; Eddy3D solves it at 1:100 ($$b = 8\thinspace\mathrm{m}$$, $$H = 16\thinspace\mathrm{m}$$) with the tunnel velocities |
 
 {% include nomenclature.md %}
 
@@ -42,9 +42,9 @@ description: "Case A — 1:1:2 building: configuration, frame and units, referen
 | Property | Definition |
 |---|---|
 | Origin | building centre on the ground plane |
-| x | +x streamwise (the wind at WD = 0 blows toward +x); building spans x in \[-0.04, 0.04\] |
-| y | +y lateral; building spans y in \[-0.04, 0.04\]; points published on the y \<= 0 half by the tunnel\'s symmetry convention |
-| z | +z up from the ground; roof at z = 0.16 |
+| x | $$+x$$ streamwise (the wind at $$\mathrm{WD} = 0$$ blows toward $$+x$$); building spans $$x \in \lbrack -0.04,\thinspace 0.04\rbrack$$ |
+| y | $$+y$$ lateral; building spans $$y \in \lbrack -0.04,\thinspace 0.04\rbrack$$; points published on the y \<= 0 half by the tunnel\'s symmetry convention |
+| z | $$+z$$ up from the ground; roof at $$z = 0.16$$ |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 1.0 |
 | Unit of length | m (model scale) |
@@ -80,9 +80,9 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `x` |  | m, case frame |
 | `y` |  | m, case frame |
 | `z` |  | m above ground, case frame |
-| `U` | $$U$$ | m/s, mean velocity along +x |
-| `V` | $$V$$ | m/s, mean velocity along +y (sign unified: positive toward +y) |
-| `W` | $$W$$ | m/s, mean velocity along +z |
+| `U` | $$U$$ | m/s, mean velocity along $$+x$$ |
+| `V` | $$V$$ | m/s, mean velocity along $$+y$$ (sign unified: positive toward $$+y$$) |
+| `W` | $$W$$ | m/s, mean velocity along $$+z$$ |
 | `uu` | $$\overline{u'u'}$$ | m²/s², variance of u |
 | `vv` | $$\overline{v'v'}$$ | m²/s², variance of v |
 | `ww` | $$\overline{w'w'}$$ | m²/s², variance of w |
@@ -97,7 +97,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | log law, $$\kappa$$ = 0.41, least squares over z = 0.02 ... 2H on the case\'s own approach-flow file |
+| Method | log law, $$\kappa$$ = 0.41, least squares over $$z = 0.02\thinspace\ldots\thinspace 2H$$ on the case\'s own approach-flow file |
 | Friction velocity $$u_\ast$$ (m/s) | 0.343 |
 | Roughness length $$z_0$$ (mm) | 0.668 |
 | $$U_H$$, measured (m/s) | 4.491 |
@@ -107,9 +107,9 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-- Lateral velocity $$V$$ is positive toward +y (checked: $$V$$ = -2.893 m/s at (-0.040, -0.050, 0.010), just outside the y \< 0 flank, deflecting away from the centreline). Case B uses the OPPOSITE sign; the API flips Case B so both agree.
+- Lateral velocity $$V$$ is positive toward $$+y$$ (checked: $$V$$ = -2.893 m/s at (-0.040, -0.050, 0.010), just outside the $$y \lt 0$$ flank, deflecting away from the centreline). Case B uses the OPPOSITE sign; the API flips Case B so both agree.
 - Coordinates are metres (Case B\'s are millimetres in the published file).
-- Case A\'s turbulence columns are rms values ($$u_{\mathrm{rms}}$$, ...). The API serves VARIANCES (uu = $$u_{\mathrm{rms}}^2$$) so A and B share one column meaning.
+- Case A\'s turbulence columns are rms values ($$u_{\mathrm{rms}}$$, ...). The API serves VARIANCES ($$\overline{u'u'} = u_{\mathrm{rms}}^2$$) so A and B share one column meaning.
 
 ## API
 

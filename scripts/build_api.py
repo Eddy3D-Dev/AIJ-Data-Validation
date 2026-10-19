@@ -1547,7 +1547,7 @@ def write_changelog_include():
         for c in entry["changes"]:   # the text is Markdown here and plain text in index.json: a bare <word> would open an HTML tag
             if re.search(r"<[A-Za-z/!?]", re.sub(r"`[^`]*`", "", c)):
                 raise SystemExit(f"CHANGELOG {entry['version']}: put the text with a '<' in `code` so Markdown does not read it as HTML: {c[:80]}")
-        L += [f"### {entry['version']} ({entry['date']})", ""] + [f"- {c}" for c in entry["changes"]] + [""]
+        L += [f"### {entry['version']} ({entry['date']})", ""] + [MT.markdown(f"- {c}") for c in entry["changes"]] + [""]
     with io.open(os.path.join(DOCS, "_includes", "api-changelog.md"), "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(L))
 

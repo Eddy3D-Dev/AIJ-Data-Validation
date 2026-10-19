@@ -10,7 +10,7 @@ description: "1:1:4 tower in a regular array of 82 low blocks, pedestrian-height
 
 # Case D — high-rise among city blocks
 
-1:1:4 tower in a regular array of 82 low blocks, pedestrian-height scalar speed (thermistor, 3 wind directions) plus a 33-point split-fibre velocity field at WD = 0.
+1:1:4 tower in a regular array of 82 low blocks, pedestrian-height scalar speed (thermistor, 3 wind directions) plus a 33-point split-fibre velocity field at $$\mathrm{WD} = 0$$.
 {: .fs-5 .fw-300 .lede }
 
 [Reference data]({{ '/cases/case-d/data/' | relative_url }}){: .btn .btn-primary } [Validation]({{ '/cases/case-d/validation/' | relative_url }}){: .btn } [Case as JSON]({{ '/api/cases/D.json' | relative_url }}){: .btn }
@@ -24,8 +24,8 @@ description: "1:1:4 tower in a regular array of 82 low blocks, pedestrian-height
 
 | Fact | Value |
 |---|---|
-| Tower | 0.25H x 0.25H x H = 62.5 x 62.5 x 250 mm (1:1:4) |
-| Scale | 1:400 (H = 100 m full scale; the 5 mm measurement plane = 2 m) |
+| Tower | $$0.25H\thinspace\times\thinspace 0.25H\thinspace\times\thinspace H = 62.5\thinspace\times\thinspace 62.5\thinspace\times\thinspace 250\thinspace\mathrm{mm}$$ (1:1:4) |
+| Scale | 1:400 ($$H = 100\thinspace\mathrm{m}$$ full scale; the 5 mm measurement plane = 2 m) |
 | Reynolds number $$\mathrm{Re_H}$$ | 110,000 |
 | $$U_H$$ (m/s) | 6.65 |
 | Wind directions (°) | 0, 22.5, 45 |
@@ -52,5 +52,5 @@ description: "1:1:4 tower in a regular array of 82 low blocks, pedestrian-height
 > - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
 > - Origin: tower centre on the ground plane (the array\'s bounding box is centred on it). Length unit: m (model scale; converted from the workbook\'s millimetres).
 > - The published coordinates are multiplied by 0.001 in the cleaned table (`coordinate_scale_applied`).
-> - Wind direction: +x toward +y, read from Figure 4 of the data paper. Solved Eddy3D fields score R 0.80 (22.5 deg) and 0.85 (45 deg) in Figure 4\'s sense, 0.40 and 0.17 mirrored.
+> - Wind direction: $$+x$$ toward $$+y$$, read from Figure 4 of the data paper. Solved Eddy3D fields score R 0.80 (22.5 deg) and 0.85 (45 deg) in Figure 4\'s sense, 0.40 and 0.17 mirrored.
 > - 6 known issues in the published files are listed under [Known data issues]({{ '/cases/case-d/data/' | relative_url }}#known-data-issues).

@@ -47,7 +47,7 @@ Reattachment length $$L_r/H$$ = 2.71.
 {% include nomenclature-scores.md %}
 
 - Per-point values: [`/api/cases/B/pairs/openlb.csv`]({{ '/api/cases/B/pairs/openlb.csv' | relative_url }})
-- Reproduce: Eddy3D fixture TestAijCaseBOpenLbContainerE2E (OpenLB eddy3dWind, CPU image, dx = 1.6 m); figure validation/plot\_cases\_ab\_engines.py
+- Reproduce: Eddy3D fixture TestAijCaseBOpenLbContainerE2E (OpenLB eddy3dWind, CPU image, $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$); figure validation/plot\_cases\_ab\_engines.py
 
 ## FluidX3D (Eddy3D GPU LBM)
 
@@ -64,13 +64,13 @@ Reattachment length $$L_r/H$$ = 2.63.
 {% include nomenclature-scores.md %}
 
 - Per-point values: [`/api/cases/B/pairs/fluidx3d.csv`]({{ '/api/cases/B/pairs/fluidx3d.csv' | relative_url }})
-- Reproduce: Eddy3D fixture TestAijCaseBFluidX3DE2E (Eddy3DCli.Tests/Validation/TestAijVelocityFluidX3DE2E; FluidX3D GPU lattice Boltzmann, D3Q19 Smagorinsky LES, dx = H/64, 100 + 500 $$H/U_H$$ spin-up + averaging, with an empty-domain control on the same lattice); figure validation/plot\_cases\_ab\_engines.py
+- Reproduce: Eddy3D fixture TestAijCaseBFluidX3DE2E (Eddy3DCli.Tests/Validation/TestAijVelocityFluidX3DE2E; FluidX3D GPU lattice Boltzmann, D3Q19 Smagorinsky LES, $$\mathrm{d}x = H/64$$, 100 + 500 $$H/U_H$$ spin-up + averaging, with an empty-domain control on the same lattice); figure validation/plot\_cases\_ab\_engines.py
 
 ## Eddy3D ML wind surrogate (pedestrian height)
 
 | Score | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|
-| $$\lvert\mathbf{U}\rvert$$ (z = H/16 plane) | -0.236 | 0.361 | +0.821 | 0.172 | 122 |
+| $$\lvert\mathbf{U}\rvert$$ ($$z = H/16$$ plane) | -0.236 | 0.361 | +0.821 | 0.172 | 122 |
 | $$\lvert\mathbf{U}\rvert$$, lattice cut at ±250 m | +0.010 | 0.459 | +0.463 | 0.189 | 122 |
 | wind reversed (control) | -0.236 | 0.361 | +0.821 | 0.172 | 122 |
 {: .scores }

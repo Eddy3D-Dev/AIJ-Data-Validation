@@ -26,7 +26,7 @@ description: "3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestr
 
 | Fact | Value |
 |---|---|
-| Array | 3 x 3 cubes, D = 0.20 m, block centres at x, y in {-0.4, 0, +0.4} m (pitch 0.40 m = 2D, street width D) |
+| Array | 3 x 3 cubes, $$D = 0.20\thinspace\mathrm{m}$$, block centres at x, y in {-0.4, 0, +0.4} m (pitch 0.40 m = 2D, street width D) |
 | Reynolds number $$\mathrm{Re_D}$$ | 52,000 |
 | $$U_H$$ (m/s) | 3.654 |
 | Wind directions (°) | 0, 22.5, 45 |
@@ -52,5 +52,5 @@ description: "3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestr
 >
 > - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
 > - Origin: array centre on the ground plane (centre of the middle block). Length unit: m (model scale).
-> - Wind direction: in the CSV\'s own frame WD rotates the wind from +x TOWARD -y. Figure 3 of the data paper draws the fan rotating toward +y. The two disagree by a y-sign flip; this release keeps the CSV frame. The disagreement is invisible at WD = 0.
+> - Wind direction: in the CSV\'s own frame WD rotates the wind from $$+x$$ TOWARD -y. Figure 3 of the data paper draws the fan rotating toward $$+y$$. The two disagree by a y-sign flip; this release keeps the CSV frame. The disagreement is invisible at $$\mathrm{WD} = 0$$.
 > - 6 known issues in the published files are listed under [Known data issues]({{ '/cases/case-c/data/' | relative_url }}#known-data-issues).

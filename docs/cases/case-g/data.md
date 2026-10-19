@@ -32,7 +32,7 @@ description: "Case G — flow behind a tree belt: configuration, frame and units
 | Campaign | field (full scale) |
 | location | Taisha-machi, Hikawa-gun, Shimane, Japan; west end of an elementary-school playground |
 | Wind directions (°) | 0 |
-| measurement lines | 0.25 H, 0.5 H, 1 H, 2 H, 3 H, 4 H, 5 H behind the belt = x 1.75, 3.5, 7, 14, 21, 28, 35 m (H = 7 m) |
+| measurement lines | $$0.25\thinspace H$$, $$0.5\thinspace H$$, $$1\thinspace H$$, $$2\thinspace H$$, $$3\thinspace H$$, $$4\thinspace H$$, $$5\thinspace H$$ behind the belt = x 1.75, 3.5, 7, 14, 21, 28, 35 m ($$H = 7\thinspace\mathrm{m}$$) |
 | measurement heights m | 1.5, 3.0, 4.5, 6.0 |
 | Points | 28 |
 | Instrument | 3-D ultrasonic anemometers (KAIJO DA-600 with TR-90Tx) at four heights on a movable tower, 5 Hz, 10 min or more per line (26 Dec 2000); approach flow 120 min (28 Dec 2000) at 1.5, 3, 6, 9 m |
@@ -47,10 +47,10 @@ description: "Case G — flow behind a tree belt: configuration, frame and units
 | Property | Definition |
 |---|---|
 | Origin | the leeward face of the tree belt at ground level, on the vertical section through the belt\'s centre |
-| x | +x downwind: the belt occupies x in \[-2, 0\] m, the measurement lines lie behind it at x = 1.75 ... 35 m |
-| y | +y along the belt (y in \[-37, 37\] m); every point is on y = 0 |
-| z | +z up; the belt spans z in \[1.2, 7\] m; points at z = 1.5, 3, 4.5, 6 m |
-| Wind direction convention | one direction, toward +x (perpendicular to the belt); the field wind\'s angle to the belt normal is not published |
+| x | $$+x$$ downwind: the belt occupies $$x \in \lbrack -2,\thinspace 0\rbrack\thinspace\mathrm{m}$$, the measurement lines lie behind it at $$x = 1.75\thinspace\ldots\thinspace 35\thinspace\mathrm{m}$$ |
+| y | $$+y$$ along the belt ($$y \in \lbrack -37,\thinspace 37\rbrack\thinspace\mathrm{m}$$); every point is on $$y = 0$$ |
+| z | $$+z$$ up; the belt spans $$z \in \lbrack 1.2,\thinspace 7\rbrack\thinspace\mathrm{m}$$; points at $$z = 1.5,\thinspace 3,\thinspace 4.5,\thinspace 6\thinspace\mathrm{m}$$ |
+| Wind direction convention | one direction, toward $$+x$$ (perpendicular to the belt); the field wind\'s angle to the belt normal is not published |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 1.0 |
 | Unit of length | m (full scale) |
@@ -111,7 +111,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 - FIELD data: full-scale metres, no model, and nothing in m/s. The table carries $$U/U_H$$ (`velocity_ratio`) and $$k/U_H^2$$ (`k_ratio`), $$U_H$$ = the mean speed at 7 m during each period; the approach-flow table carries $$U/U_b$$ and $$k/U_b^2$$ ($$U_b$$ = $$U$$ at 9 m) in its $$U$$ and $$k$$ columns, which are dimensionless here.
 - The readme lists the heights of the lee measurement as 1.5, 3.0, 6.0, 9.0 m; the table, the workbook, the drawing and the data paper have 1.5, 3, 4.5, 6 m.
 - The tree belt is a porous canopy (shading rate 81 % after pruning): the served geometry is its 2 m × 74 m × 7 m envelope with the 1.2 m gap, and a solver needs a canopy (drag) model.
-- The approach profile (28 Dec 2000, 120 min) and the lee measurements (26 Dec 2000, 10 min or more) are from different days. Behind the belt $$k/U_H^2$$ is 0.040-0.072 at 5 H, 3-8 times below the approach flow\'s 0.26-0.31 at the same heights; the files do not say why.
+- The approach profile (28 Dec 2000, 120 min) and the lee measurements (26 Dec 2000, 10 min or more) are from different days. Behind the belt $$k/U_H^2$$ is 0.040-0.072 at $$5\thinspace H$$, 3-8 times below the approach flow\'s 0.26-0.31 at the same heights; the files do not say why.
 - Only 28 numbers per quantity exist, on one centre section, one time-average each, with no repeats and no uncertainty.
 - The wind direction relative to the belt normal during the measurement is not published; the case is two-dimensional by assumption.
 

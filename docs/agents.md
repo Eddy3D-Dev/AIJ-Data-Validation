@@ -21,8 +21,8 @@ names in `$schema`.
    `/api/versions.json` lists every release with the `base_url` of its frozen copy (see the first rule below).
 2. **`GET /api/cases.json`**: every case with its frame, units, counts, engine status and links. Pick an `id`.
 3. **`GET /api/cases/{id}.json`**: read `frame`, `units` and `known_issues` **before** the numbers, because they
-   differ per case. A–D and H–L are model-scale metres with +x along the wind. E, F, G and M are full-scale metres: E and
-   F with +x east, +y north and meteorological directions, G with +x downwind, M with +x north and +y west.
+   differ per case. A–D and H–L are model-scale metres with $$+x$$ along the wind. E, F, G and M are full-scale metres: E and
+   F with $$+x$$ east, $$+y$$ north and meteorological directions, G with $$+x$$ downwind, M with $$+x$$ north and $$+y$$ west.
    `configurations` lists the values `config`, `campaign`, `instrument`, `run` and `wind_direction_deg` take in the
    point table.
 4. **`GET /api/cases/{id}/points.json`** (or the `points.csv` download): every value is SI (m, m/s, m²/s²), in one

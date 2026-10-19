@@ -15,7 +15,7 @@ Scores: [Validation]({{ '/validation/' | relative_url }}).
 - Each case is solved through Eddy3D's production case writer (`build-case → run → probe`). The probe sits at the tunnel's own measurement coordinates; no interpolation enters the comparison.
 - The measured side of every pair is the cleaned table (the legacy workbook at full precision). Eddy3D's fixtures score against the published CSVs, which round the workbooks; their scores differ from the scores on these pages in the third digit.
 - Normalisation (the benchmark's convention): velocities by $$U_H$$, $$k$$ by $$U_H^2$$.
-- Cases A and B are solved at 1:100 with the tunnel's own velocities. The log-law inlet is fitted to each case's own approach-flow file over z = 0.02 … 2H (`u*`, `z₀` below).
+- Cases A and B are solved at 1:100 with the tunnel's own velocities. The log-law inlet is fitted to each case's own approach-flow file over $$z = 0.02\thinspace\ldots\thinspace 2H$$ (`u*`, `z₀` below).
 - Cases C–E measure an omnidirectional *scalar* speed with thermistors; the model is scored as $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ and as $$\lvert\mathbf{U}\rvert$$. Case F (thermistor and field, scalar speed over $$U(500\text{ m})$$) is scored the same way.
 - Cases H, I, J, K, L and M add a tracer concentration. The measured $$C/c_0$$ is scored against the model's $$c^\ast = c\thinspace U_H H^2/Q$$ (Case M: $$c\thinspace U_R H_R^2/Q$$) at three turbulent Schmidt numbers, 0.3, 0.5 and 0.7. See [Cases H and I]({{ '/validation/cases-hi/' | relative_url }}), [Cases G and K]({{ '/validation/cases-gk/' | relative_url }}), [Cases J and L]({{ '/validation/cases-jl/' | relative_url }}) and [Cases F and M]({{ '/validation/cases-fm/' | relative_url }}).
 - Cases J and L add a temperature, scored as the floor-referenced fraction $$\theta = (T_f - T)/(T_f - T_H)$$ (the workbook's normalisation; 0 at the floor, 1 in the approach air at the building height). They are solved at a Froude scale on Eddy3D's buoyant engine.
@@ -39,11 +39,11 @@ A control is scored with the same metrics as the run.
 
 ### How the scores were checked against the solvers' own output
 
-- Case C: a re-scoring from the probe files and the original `RS_caseC.csv` reproduces every number (largest difference 9 × 10⁻¹⁶).
+- Case C: a re-scoring from the probe files and the original `RS_caseC.csv` reproduces every number (largest difference $$9 \times 10^{-16}$$).
 - Case D: the numbers were reproduced from the solver's probe output against the cleaned table, with the frame mapped independently and separate metric code.
-- OpenLB: reproduced from the solver's probe output against the original Zenodo CSVs (largest difference 1 × 10⁻¹⁵).
-- FluidX3D: reproduced from the solver's probe output against the cleaned tables, with the comparable set derived independently (largest difference 3 × 10⁻¹²).
-- Cases F, G, H, I, J, K, L and M: the scores served are recomputed from the per-point pairs by `validation/dispersion_metrics.py`, a transcription of Eddy3D's `MetaFOAM.DispersionMetrics`. Fed the published CSVs and the probes of Eddy3D's test, it gives that test's own scores to 10⁻⁹ (24 scores of Case F, 43 of Case K, five per arm of Case G, 80 per run of Case J, 48 of Case L, 84 of Case M). The SHA-256 of every file a snapshot was read from is in its results file under `sources`, and the script fails if the check is not met.
+- OpenLB: reproduced from the solver's probe output against the original Zenodo CSVs (largest difference $$1 \times 10^{-15}$$).
+- FluidX3D: reproduced from the solver's probe output against the cleaned tables, with the comparable set derived independently (largest difference $$3 \times 10^{-12}$$).
+- Cases F, G, H, I, J, K, L and M: the scores served are recomputed from the per-point pairs by `validation/dispersion_metrics.py`, a transcription of Eddy3D's `MetaFOAM.DispersionMetrics`. Fed the published CSVs and the probes of Eddy3D's test, it gives that test's own scores to $$10^{-9}$$ (24 scores of Case F, 43 of Case K, five per arm of Case G, 80 per run of Case J, 48 of Case L, 84 of Case M). The SHA-256 of every file a snapshot was read from is in its results file under `sources`, and the script fails if the check is not met.
 
 <details markdown="block">
 <summary>Interpretation: Scoring choices</summary>
@@ -71,7 +71,7 @@ These shape the validations of Cases C, D and E.
 
 ## Inflow
 
-Fitted to each case's own approach-flow file over z = 0.02 … 2H:
+Fitted to each case's own approach-flow file over $$z = 0.02\thinspace\ldots\thinspace 2H$$:
 
 | Case | $$u_\ast$$ (m/s) | $$z_0$$ (mm) | $$U_H$$ measured (m/s) | log-law error |
 |---|---|---|---|---|

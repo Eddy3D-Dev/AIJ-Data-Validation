@@ -16,8 +16,8 @@ Eddy3D's Wind Predictor (the public `Yel-2.0` network) predicts $$\lvert\mathbf{
 
 | case · quantity | n | FB | FAC2 | R | hit rate | OpenFOAM, same points and quantity |
 |---|---|---|---|---|---|---|
-| A · $$\lvert\mathbf{U}\rvert/U_H$$, z = 0.01 m plane | 65 | +0.77 | 0.26 | −0.13 | 0.09 | FB +0.27, FAC2 0.85, R +0.90, hit rate 0.45 |
-| B · $$\lvert\mathbf{U}\rvert/U_H$$, z = H/16 plane | 122 | +0.82 | 0.36 | −0.24 | 0.17 | FB +0.12, FAC2 0.84, R +0.87, hit rate 0.57 |
+| A · $$\lvert\mathbf{U}\rvert/U_H$$, $$z = 0.01\thinspace\mathrm{m}$$ plane | 65 | +0.77 | 0.26 | −0.13 | 0.09 | FB +0.27, FAC2 0.85, R +0.90, hit rate 0.45 |
+| B · $$\lvert\mathbf{U}\rvert/U_H$$, $$z = H/16$$ plane | 122 | +0.82 | 0.36 | −0.24 | 0.17 | FB +0.12, FAC2 0.84, R +0.87, hit rate 0.57 |
 | C · $$V_{\mathrm{s}}/U_H$$, 9 configurations | 1080 | +0.67 | 0.44 | +0.21 | 0.18 | $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$: FB +0.18, FAC2 0.93, R +0.87, hit rate 0.69 |
 | D · $$V_{\mathrm{s}}/U_H$$, thermistor, 3 WD | 198 | +0.67 | 0.34 | +0.33 | 0.17 | WD 0°, 22.5° and 45° (66 points each): $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ FB +0.21 / +0.05 / +0.09, FAC2 0.73 / 0.92 / 0.89, R +0.80 / +0.80 / +0.85 |
 | D · $$\lvert\mathbf{U}\rvert/U_H$$, split fibre, WD 0 | 33 | +0.23 | 0.52 | +0.59 | 0.24 | FB +0.07, FAC2 0.76, R +0.85, hit rate 0.52 |
@@ -29,7 +29,7 @@ Eddy3D's Wind Predictor (the public `Yel-2.0` network) predicts $$\lvert\mathbf{
 FB is positive when the model is low.
 
 - FB is +0.23 to +1.07: the mean predicted speed is 0.79 to 0.30 of the mean measured speed.
-- Reversing the wind changes the predicted field by at most 1 × 10⁻⁴ $$U_{\mathrm{ref}}$$ over all 254,016 cells, in every case.
+- Reversing the wind changes the predicted field by at most $$1 \times 10^{-4}$$ $$U_{\mathrm{ref}}$$ over all 254,016 cells, in every case.
 
 <details markdown="block">
 <summary>Interpretation: Wind direction and what the scores grade</summary>

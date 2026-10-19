@@ -44,7 +44,7 @@ Quantity: $$U$$, $$V$$, $$W$$ and $$k$$ at the 15 points of the tunnel\'s WD 180
 
 </details>
 
-- Normalisation: $$U$$, $$V$$, $$W$$ and $$k$$ at the 15 points over the tunnel\'s $$U_R$$ = 4.08 m/s on the measurement and over the solved speed at the reference mast on the model ($$U_R$$ is defined at the mast), $$k$$ over $$U_R^2$$; $$c^\ast = C/c_0$$ ($$c_0 = \dfrac{q}{U_R H_R^2}$$ = 132.5 ppm) against the model\'s $$c\thinspace U_R H_R^2/Q$$ ($$H_R$$ = 0.068 m x 600, Q = 1 kg/s) for turbulent Schmidt number 0.3, with one detection limit of 10^-3 of the largest measured value; hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units; the Schmidt numbers are three runs on one flow
+- Normalisation: $$U$$, $$V$$, $$W$$ and $$k$$ at the 15 points over the tunnel\'s $$U_R$$ = 4.08 m/s on the measurement and over the solved speed at the reference mast on the model ($$U_R$$ is defined at the mast), $$k$$ over $$U_R^2$$; $$c^\ast = C/c_0$$ ($$c_0 = \dfrac{q}{U_R H_R^2}$$ = 132.5 ppm) against the model\'s $$c\thinspace U_R H_R^2/Q$$ ($$H_R$$ = 0.068 m x 600, $$Q = 1\thinspace\mathrm{kg/s}$$) for turbulent Schmidt number 0.3, with one detection limit of $$10^{-3}$$ of the largest measured value; hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units; the Schmidt numbers are three runs on one flow
 - Reproduce: Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseMContainerE2E (WD 180, the default) (TPU Atsugi campus, 1:600, tunnel WD 180, turbulent Schmidt number 0.3; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 1,394,053 cells, solved 2026-10-18); figures validation/plot\_cases\_fm\_openfoam.py
 
 Notes:
@@ -84,7 +84,7 @@ Quantity: $$U$$, $$V$$, $$W$$ and $$k$$ at the 15 points of the tunnel\'s WD 180
 
 </details>
 
-- Normalisation: $$U$$, $$V$$, $$W$$ and $$k$$ at the 15 points over the tunnel\'s $$U_R$$ = 4.08 m/s on the measurement and over the solved speed at the reference mast on the model ($$U_R$$ is defined at the mast), $$k$$ over $$U_R^2$$; $$c^\ast = C/c_0$$ ($$c_0 = \dfrac{q}{U_R H_R^2}$$ = 132.5 ppm) against the model\'s $$c\thinspace U_R H_R^2/Q$$ ($$H_R$$ = 0.068 m x 600, Q = 1 kg/s) for turbulent Schmidt number 0.5, with one detection limit of 10^-3 of the largest measured value; hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units; the Schmidt numbers are three runs on one flow
+- Normalisation: $$U$$, $$V$$, $$W$$ and $$k$$ at the 15 points over the tunnel\'s $$U_R$$ = 4.08 m/s on the measurement and over the solved speed at the reference mast on the model ($$U_R$$ is defined at the mast), $$k$$ over $$U_R^2$$; $$c^\ast = C/c_0$$ ($$c_0 = \dfrac{q}{U_R H_R^2}$$ = 132.5 ppm) against the model\'s $$c\thinspace U_R H_R^2/Q$$ ($$H_R$$ = 0.068 m x 600, $$Q = 1\thinspace\mathrm{kg/s}$$) for turbulent Schmidt number 0.5, with one detection limit of $$10^{-3}$$ of the largest measured value; hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units; the Schmidt numbers are three runs on one flow
 - Reproduce: Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseMContainerE2E (WD 180, the default) (TPU Atsugi campus, 1:600, tunnel WD 180, turbulent Schmidt number 0.5; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 1,394,053 cells, solved 2026-10-18); figures validation/plot\_cases\_fm\_openfoam.py
 
 Notes:
@@ -124,7 +124,7 @@ Quantity: $$U$$, $$V$$, $$W$$ and $$k$$ at the 15 points of the tunnel\'s WD 180
 
 </details>
 
-- Normalisation: $$U$$, $$V$$, $$W$$ and $$k$$ at the 15 points over the tunnel\'s $$U_R$$ = 4.08 m/s on the measurement and over the solved speed at the reference mast on the model ($$U_R$$ is defined at the mast), $$k$$ over $$U_R^2$$; $$c^\ast = C/c_0$$ ($$c_0 = \dfrac{q}{U_R H_R^2}$$ = 132.5 ppm) against the model\'s $$c\thinspace U_R H_R^2/Q$$ ($$H_R$$ = 0.068 m x 600, Q = 1 kg/s) for turbulent Schmidt number 0.7, with one detection limit of 10^-3 of the largest measured value; hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units; the Schmidt numbers are three runs on one flow
+- Normalisation: $$U$$, $$V$$, $$W$$ and $$k$$ at the 15 points over the tunnel\'s $$U_R$$ = 4.08 m/s on the measurement and over the solved speed at the reference mast on the model ($$U_R$$ is defined at the mast), $$k$$ over $$U_R^2$$; $$c^\ast = C/c_0$$ ($$c_0 = \dfrac{q}{U_R H_R^2}$$ = 132.5 ppm) against the model\'s $$c\thinspace U_R H_R^2/Q$$ ($$H_R$$ = 0.068 m x 600, $$Q = 1\thinspace\mathrm{kg/s}$$) for turbulent Schmidt number 0.7, with one detection limit of $$10^{-3}$$ of the largest measured value; hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units; the Schmidt numbers are three runs on one flow
 - Reproduce: Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseMContainerE2E (WD 180, the default) (TPU Atsugi campus, 1:600, tunnel WD 180, turbulent Schmidt number 0.7; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 1,394,053 cells, solved 2026-10-18); figures validation/plot\_cases\_fm\_openfoam.py
 
 Notes:
@@ -144,7 +144,7 @@ Notes:
 - Model set-up: a cylinder of 540 m radius and 240 m height on the terrain sheet; the tabulated approach profile over a smooth floor; no counterpart of the tunnel\'s side walls (at ±360 m) and 600 m ceiling (blockage 5 %). The 6 mm outlet is 3.6 m at 1:600; the source here is a 4 m cube on the ground (a zone of 20 cells, 2 m surface cells), 1 kg/s as a volume source with no exit momentum. The 15 points are 3 m above the ground.
 - Mean $$c^\ast$$ over the three points nearest the source: 2.52 (tunnel), 0.26 / 0.11 / 0.05 (model, $$\mathrm{Sc_t}$$ 0.3 / 0.5 / 0.7); over the two far downwind points: 0.21 (tunnel), 0.11 / 0.10 / 0.09 (model). Peak $$c^\ast$$: 3.04 (tunnel), 1.27 / 1.37 / 1.38 (model); 3 / 3 / 3 of the five highest points are shared with the tunnel.
 - The velocity at the 15 points: the mean $$U/U_R$$ is 0.026 modelled against 0.164 measured. FB is not defined for $$V$$ and $$W$$ (their means are not both positive); $$V$$ correlates at R +0.73 and flipping its sign gives -0.73.
-- The solve ran to its 3000-iteration limit with the residualControl unmet (no \'solution converged\' line); the initial residuals at the last iteration were U\_x 6.1e-04, U\_z 6.9e-04, p 1.0e-04, epsilon 1.9e-02, $$k$$ 1.6e-04 and the tracers 8.1e-06 to 1.1e-05. checkMesh: Mesh OK. 1,394,053 cells. The tracer probe prints seven significant digits; a probe at six decimals moved no $$c^\ast$$ value by more than 0.003.
+- The solve ran to its 3000-iteration limit with the residualControl unmet (no \'solution converged\' line); the initial residuals at the last iteration were $$U_x$$ 6.1e-04, $$U_z$$ 6.9e-04, $$p$$ 1.0e-04, $$\varepsilon$$ 1.9e-02, $$k$$ 1.6e-04 and the tracers 8.1e-06 to 1.1e-05. checkMesh: Mesh OK. 1,394,053 cells. The tracer probe prints seven significant digits; a probe at six decimals moved no $$c^\ast$$ value by more than 0.003.
 
 <details markdown="block">
 <summary>Interpretation: Case M near-source ordering</summary>

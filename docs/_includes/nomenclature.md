@@ -5,63 +5,66 @@
 
 **Geometry, reference scales and release**
 
-| Symbol | Column | Meaning | Unit |
-|---|---|---|---|
-| $$H$$, $$b$$, $$D$$ |  | height of the building, cube, tower or tree belt; width of the building; edge of the cubes of Case C: the lengths the cases are drawn and normalised by | m |
-| $$U_H$$ |  | reference speed: the mean approach-flow speed at the height $$H$$ (each Data page gives the value used) | m/s |
-| $$U_R$$, $$H_R$$, $$Z_R$$ |  | reference speed and height of a workbook: Case E, $$U_R$$ at $$Z_R$$ = 250 m full scale (1 m in the model); Case M, $$U_R$$ and $$H_R$$ at the reference point of the tunnel and of each field run | m/s, m |
-| $$U_{\mathrm{ref}}$$, $$L_{\mathrm{ref}}$$ |  | reference speed and length of a case's normalisation: $$U_H$$ and $$H$$ ($$U_R$$ and $$H_R$$ in Case M); for the velocity ratios the approach speed at 15.9 m (Case E) or at 500 m (Case F) | m/s, m |
-| $$U_b$$ |  | Case G: mean approach-flow speed at 9 m, the normalisation of its approach-flow table | m/s |
-| $$q$$, $$c_{\mathrm{gas}}$$ |  | tracer release of the experiment: volume flow of the released gas, and its tracer content ($$10^6$$ ppm when pure); $$Q$$ is the source strength given to a solve | m³/s, ppm |
-| $$\mathrm{Re_H}$$, $$\mathrm{Re_D}$$ |  | Reynolds numbers $$U_H H/\nu$$ and $$U_H D/\nu$$ ($$\nu$$: kinematic viscosity of air) | — |
-| $$u_\ast$$, $$z_0$$, $$\kappa$$ |  | friction velocity and roughness length of the log law fitted to the approach flow, and the von Kármán constant (0.41) | m/s, mm, — |
-| $$\mathrm{WD}$$ | `wind_direction_deg` | wind direction (each frame says how it is counted); $$\mathrm{WD_R}$$ is the mean direction of a field run at its reference point (Case M) | ° |
-| $$x$$, $$y$$, $$z$$ | `x`, `y`, `z` | coordinates in the case's frame, $$z$$ up from the floor of the tunnel or from the ground | m |
-| $$L_r$$ |  | reattachment length behind the building, read from a wake line at ground level; reported as $$L_r/H$$ | m |
+- $$H$$, $$b$$, $$D$$ (m) — height of the building, cube, tower or tree belt; width of the building; edge of the cubes of Case C: the lengths the cases are drawn and normalised by
+- $$U_H$$ (m/s) — reference speed: the mean approach-flow speed at the height $$H$$ (each Data page gives the value used)
+- $$U_R$$, $$H_R$$, $$Z_R$$ (m/s, m) — reference speed and height of a workbook: Case E, $$U_R$$ at $$Z_R$$ = 250 m full scale (1 m in the model); Case M, $$U_R$$ and $$H_R$$ at the reference point of the tunnel and of each field run
+- $$U_{\mathrm{ref}}$$, $$L_{\mathrm{ref}}$$ (m/s, m) — reference speed and length of a case's normalisation: $$U_H$$ and $$H$$ ($$U_R$$ and $$H_R$$ in Case M); for the velocity ratios the approach speed at 15.9 m (Case E) or at 500 m (Case F)
+- $$U_b$$ (m/s) — Case G: mean approach-flow speed at 9 m, the normalisation of its approach-flow table
+- $$q$$, $$c_{\mathrm{gas}}$$ (m³/s, ppm) — tracer release of the experiment: volume flow of the released gas, and its tracer content ($$10^6$$ ppm when pure); $$Q$$ is the source strength given to a solve
+- $$R_b$$ (dimensionless) — bulk Richardson number of the heated-floor cases J and L (negative: unstable stratification)
+- $$\mathrm{Re_H}$$, $$\mathrm{Re_D}$$ (dimensionless) — Reynolds numbers $$U_H H/\nu$$ and $$U_H D/\nu$$ ($$\nu$$: kinematic viscosity of air)
+- $$u_\ast$$, $$z_0$$, $$\kappa$$ (m/s, mm, dimensionless) — friction velocity and roughness length of the log law fitted to the approach flow, and the von Kármán constant (0.41)
+- $$\mathrm{WD}$$ (column `wind_direction_deg`; °) — wind direction (each frame says how it is counted); $$\mathrm{WD_R}$$ is the mean direction of a field run at its reference point (Case M)
+- $$x$$, $$y$$, $$z$$ (columns `x`, `y`, `z`; m) — coordinates in the case's frame ($$+x$$, $$+y$$ and $$+z$$ are the positive directions; each Data page says which way $$+x$$ points), $$z$$ up from the floor of the tunnel or from the ground
+- $$\mathrm{d}x$$ (m) — lattice spacing of the OpenLB and FluidX3D runs, in metres or as a fraction of $$H$$ ($$H/64$$)
+- $$L_r$$ (m) — reattachment length behind the building, read from a wake line at ground level; reported as $$L_r/H$$
 
 **Velocity and turbulence**
 
-| Symbol | Column | Meaning | Unit |
-|---|---|---|---|
-| $$U$$, $$V$$, $$W$$ | `U`, `V`, `W` | mean velocity along $$+x$$, $$+y$$, $$+z$$; $$V$$ is positive toward $$+y$$ in every case | m/s |
-| $$\lvert\mathbf{U}\rvert$$ |  | magnitude of the mean velocity vector, $$\sqrt{U^2+V^2+W^2}$$ | m/s |
-| $$V_{\mathrm{s}}$$ | `Vs` | mean omnidirectional scalar speed of a thermistor (never a vector magnitude) | m/s |
-| $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$ | `uu`, `vv`, `ww` | velocity variances (overbar: time average, prime: fluctuation about it) | m²/s² |
-| $$\overline{u'v'}$$, $$\overline{u'w'}$$, $$\overline{v'w'}$$ | `uv`, `uw`, `vw` | Reynolds shear stresses | m²/s² |
-| $$k = \tfrac{1}{2}\left(\overline{u'u'}+\overline{v'v'}+\overline{w'w'}\right)$$ | `k` | turbulent kinetic energy | m²/s² |
-| $$U/U_{\mathrm{ref}}$$ | `velocity_ratio` | mean speed over the case's reference speed ($$V_{\mathrm{s}}/U_{\mathrm{ref}}$$ for a thermistor) | — |
-| $$\sigma_{U/U_{\mathrm{ref}}}$$ | `velocity_ratio_sd` | standard deviation of `velocity_ratio` over the observations behind a field value (Case F) | — |
-| $$k/U_{\mathrm{ref}}^2$$ | `k_ratio` | turbulent kinetic energy over the square of the reference speed, where only normalised values are published (Case G) | — |
+- $$U$$, $$V$$, $$W$$ (columns `U`, `V`, `W`; m/s) — mean velocity along $$+x$$, $$+y$$, $$+z$$; $$V$$ is positive toward $$+y$$ in every case
+- $$\lvert\mathbf{U}\rvert$$ (m/s) — magnitude of the mean velocity vector, $$\sqrt{U^2+V^2+W^2}$$
+- $$V_{\mathrm{s}}$$ (column `Vs`; m/s) — mean omnidirectional scalar speed of a thermistor (never a vector magnitude)
+- $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$ (columns `uu`, `vv`, `ww`; m²/s²) — velocity variances (overbar: time average, prime: fluctuation about it)
+- $$\overline{u'v'}$$, $$\overline{u'w'}$$, $$\overline{v'w'}$$ (columns `uv`, `uw`, `vw`; m²/s²) — Reynolds shear stresses
+- $$k = \tfrac{1}{2}\left(\overline{u'u'}+\overline{v'v'}+\overline{w'w'}\right)$$ (column `k`; m²/s²) — turbulent kinetic energy
+- $$U/U_{\mathrm{ref}}$$ (column `velocity_ratio`; dimensionless) — mean speed over the case's reference speed ($$V_{\mathrm{s}}/U_{\mathrm{ref}}$$ for a thermistor)
+- $$\sigma_{U/U_{\mathrm{ref}}}$$ (column `velocity_ratio_sd`; dimensionless) — standard deviation of `velocity_ratio` over the observations behind a field value (Case F)
+- $$k/U_{\mathrm{ref}}^2$$ (column `k_ratio`; dimensionless) — turbulent kinetic energy over the square of the reference speed, where only normalised values are published (Case G)
 
 **Concentration and temperature**
 
-| Symbol | Column | Meaning | Unit |
-|---|---|---|---|
-| $$C$$ | `C` | mean tracer-gas concentration as published (volume fraction × 10⁶ of the released gas diluted in air) | ppm |
-| $$c_{\mathrm{rms}}$$ | `c_rms` | root mean square of the concentration fluctuation | ppm |
-| $$c_0$$ |  | reference concentration, defined for each case on its Data page: $$c_0 = \dfrac{c_{\mathrm{gas}}\thinspace q}{U_H H^2}$$ ($$U_R H_R^2$$ in the denominator in Case M) | ppm |
-| $$c^\ast$$ | `concentration_ratio` | dimensionless concentration $$c^\ast = C/c_0$$; the value of a solve is $$c\thinspace U_H H^2/Q$$ for its mean concentration $$c$$ and its source strength $$Q$$ | — |
-| $$\mathrm{Sc_t}$$ |  | turbulent Schmidt number of a solve (0.3, 0.5 and 0.7) | — |
-| $$T$$, $$T_{\mathrm{rms}}$$ | `T`, `T_rms` | mean air temperature as published (Cases J and L) and the root mean square of its fluctuation | °C, K |
-| $$\overline{u'c'}$$, $$\overline{v'c'}$$, $$\overline{w'c'}$$ | `uc`, `vc`, `wc` | turbulent concentration fluxes | ppm·m/s |
-| $$\overline{u'\theta'}$$, $$\overline{v'\theta'}$$, $$\overline{w'\theta'}$$ | `uT`, `vT`, `wT` | turbulent heat fluxes ($$\theta'$$: the temperature fluctuation) | K·m/s |
-| $$\theta = \dfrac{T_f - T}{T_f - T_H}$$ |  | floor-referenced temperature the solves of Cases J and L are scored on: 0 at the floor, 1 in the approach air at $$H$$; $$T_f$$ is the floor temperature and $$T_H$$ the temperature of the approach flow at $$H$$ | — |
+- $$C$$ (column `C`; ppm) — mean tracer-gas concentration as published (volume fraction $$\times 10^6$$ of the released gas diluted in air)
+- $$c_{\mathrm{rms}}$$ (column `c_rms`; ppm) — root mean square of the concentration fluctuation
+- $$c_0$$ (ppm) — reference concentration, defined for each case on its Data page: $$c_0 = \dfrac{c_{\mathrm{gas}}\thinspace q}{U_H H^2}$$ ($$U_R H_R^2$$ in the denominator in Case M)
+- $$c^\ast$$ (column `concentration_ratio`; dimensionless) — dimensionless concentration $$c^\ast = C/c_0$$; the value of a solve is $$c\thinspace U_H H^2/Q$$ for its mean concentration $$c$$ and its source strength $$Q$$
+- $$\mathrm{Sc_t}$$ (dimensionless) — turbulent Schmidt number of a solve (0.3, 0.5 and 0.7)
+- $$T$$, $$T_{\mathrm{rms}}$$ (columns `T`, `T_rms`; °C, K) — mean air temperature as published (Cases J and L) and the root mean square of its fluctuation
+- $$\overline{u'c'}$$, $$\overline{v'c'}$$, $$\overline{w'c'}$$ (columns `uc`, `vc`, `wc`; ppm·m/s) — turbulent concentration fluxes
+- $$\overline{u'\theta'}$$, $$\overline{v'\theta'}$$, $$\overline{w'\theta'}$$ (columns `uT`, `vT`, `wT`; K·m/s) — turbulent heat fluxes ($$\theta'$$: the temperature fluctuation)
+- $$\theta = \dfrac{T_f - T}{T_f - T_H}$$ (dimensionless) — floor-referenced temperature the solves of Cases J and L are scored on: 0 at the floor, 1 in the approach air at $$H$$; $$T_f$$ is the floor temperature and $$T_H$$ the temperature of the approach flow at $$H$$
 
 **Scores**
 
-- $$n$$, the number of pairs scored: the points at which the measured and the modelled value both exist; a pair is the measured value $$o_i$$ and the modelled value $$p_i$$ at one point; $$\overline{o}$$ and $$\overline{p}$$ are the means over the pairs.
-- $$R = \dfrac{\sum_i (o_i-\overline{o})(p_i-\overline{p})}{\sqrt{\sum_i (o_i-\overline{o})^2 \sum_i (p_i-\overline{p})^2}}$$, Pearson's correlation coefficient of the pairs.
-- $$\mathrm{FAC2}$$, the fraction of pairs with $$0.5 \le p_i/o_i \le 2$$. The ratio keeps its sign, so a model of the other sign than the measurement is a miss; for a concentration, a pair with both values at or below the detection limit also counts.
-- $$\mathrm{FB} = \dfrac{\overline{o}-\overline{p}}{0.5\thinspace(\overline{o}+\overline{p})}$$, the fractional bias, positive when the model under-predicts. It is undefined (shown as —) for a signed component unless the measured and the modelled mean are both positive; $$R$$, $$\mathrm{FAC2}$$, the hit rate and $$n$$ stay.
-- $$\mathrm{HR}$$, the hit rate: the fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, with $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}}$$ equal to $$0.05\thinspace U_H$$ for a velocity component, to the detection limit for a concentration, and absent for $$k$$. VDI 3783-9 calls the hit rate $$q$$ and the tolerances $$D$$ and $$W$$; on this site those letters keep their other meanings.
-- NMSE, NAD, MG and VG are in `validation/results/*.json` and in the API's `validation.json`. NMSE and NAD divide by the means like $$\mathrm{FB}$$, so they are undefined for a signed component unless the measured and the modelled mean are both positive.
-- $$\mathrm{NMSE} = \dfrac{\overline{(o-p)^2}}{\overline{o}\thinspace \overline{p}}$$, the normalised mean square error.
-- $$\mathrm{NAD} = \dfrac{\overline{\lvert o-p\rvert}}{\overline{o}+\overline{p}}$$, the normalised absolute difference.
-- $$\mathrm{MG} = \exp\overline{(\ln o-\ln p)}$$, the geometric mean bias.
-- $$\mathrm{VG} = \exp\overline{(\ln o-\ln p)^2}$$, the geometric variance.
+- $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
+- $$R$$ — Pearson correlation coefficient of the pairs
+- $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
+- $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
+- $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
+- $$\mathrm{NMSE} = \dfrac{\overline{(o-p)^2}}{\overline{o}\thinspace \overline{p}}$$ — normalised mean square error
+- $$\mathrm{NAD} = \dfrac{\overline{\lvert o-p\rvert}}{\overline{o}+\overline{p}}$$ — normalised absolute difference
+- $$\mathrm{MG} = \exp\overline{(\ln o-\ln p)}$$ — geometric mean bias
+- $$\mathrm{VG} = \exp\overline{(\ln o-\ln p)^2}$$ — geometric variance
+- The ratio of $$\mathrm{FAC2}$$ keeps its sign, so a model of the other sign than the measurement is a miss; $$\mathrm{FB}$$, $$\mathrm{NMSE}$$ and $$\mathrm{NAD}$$ divide by the means, so they are undefined (shown as —) for a signed component unless the measured and the modelled mean are both positive
+- VDI 3783-9 calls the hit rate $$q$$ and the tolerances $$D$$ and $$W$$; on this site those letters keep their other meanings ($$q$$ the tracer release rate, $$D$$ the block size of Case C, $$W$$ the vertical velocity)
 - The detection limit of a concentration is one value per case, $$10^{-3}$$ of the largest measured value. It sets $$\delta_{\mathrm{abs}}$$ of the hit rate and the both-below rule of $$\mathrm{FAC2}$$, and floors the values in $$\mathrm{MG}$$ and $$\mathrm{VG}$$.
 - The scores $$\mathrm{FB}$$, $$\mathrm{FAC2}$$, $$\mathrm{NMSE}$$, $$\mathrm{NAD}$$, $$\mathrm{MG}$$ and $$\mathrm{VG}$$ follow Chang & Hanna (2004); the hit rate follows VDI 3783-9.
 
-The quantities scored: $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$U_H$$; $$k$$ (turbulent kinetic energy) over $$U_H^2$$; the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$ against a thermistor's $$V_{\mathrm{s}}$$; $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7; $$\theta$$ (floor-referenced temperature).
+**Quantities scored**
+
+- $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$U_H$$
+- $$k$$ (turbulent kinetic energy) over $$U_H^2$$
+- the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
+- $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
+- $$\theta$$ (floor-referenced temperature)
 
 </details>

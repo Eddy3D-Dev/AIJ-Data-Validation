@@ -10,13 +10,13 @@ description: "OpenFOAM 12 against the wind tunnel and the field for Case F (Shin
 
 OpenFOAM 12 runs on the Shinjuku sub-centre of Tokyo (Case F: a 1978 high-rise district, thermistor speed in a 1:800 tunnel and a year of field cup anemometers) and on the tracer release over the Atsugi campus of Tokyo Polytechnic University (Case M: ethylene in a 1:600 tunnel, with 18 field runs). Per-run scores and per-point files: [Case F]({{ '/cases/case-f/validation/' | relative_url }}) and [Case M]({{ '/cases/case-m/validation/' | relative_url }}) Validation pages.
 
-Both are Eddy3D production runs solved on 2026-10-18, realizable k-ε at numerics level 3, **one steady solve each** on one mesh: Case F for the wind from NNW only (2,143,488 cells, 2000 iterations), Case M for the tunnel's heading WD 180 only (1,394,053 cells, 3000 iterations). Both stopped at the iteration limit with the SIMPLE residual control unmet; the initial residual of epsilon at the last iteration was 1.0 × 10⁻³ in Case F ($$U_z$$ 2.6 × 10⁻³) and 1.9 × 10⁻² in Case M.
+Both are Eddy3D production runs solved on 2026-10-18, realizable k-ε at numerics level 3, **one steady solve each** on one mesh: Case F for the wind from NNW only (2,143,488 cells, 2000 iterations), Case M for the tunnel's heading WD 180 only (1,394,053 cells, 3000 iterations). Both stopped at the iteration limit with the SIMPLE residual control unmet; the initial residual of epsilon at the last iteration was $$1.0 \times 10^{-3}$$ in Case F ($$U_z$$ $$2.6 \times 10^{-3}$$) and $$1.9 \times 10^{-2}$$ in Case M.
 
 ## Runs
 
 - **Case F** is scored in the benchmark's own ratio, $$U/U(500\text{ m})$$. The tunnel's thermistor and the field's cup anemometer read a *scalar* speed, so the model is scored as $$\lvert\mathbf{U}\rvert$$ and as $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$; both are in the tables. The model is divided by **its own** approach speed at 500 m, 9.862 m/s (probed 1100 m upwind of the centre, 0.986 of the imposed 10 m/s); over the imposed 10 m/s the scores are in the files. The tunnel measured at 5, 9 and 20 m above ground at 13 points (7, 13 and 13 of them have a value for NNW) and the field at 13 points, 3 to 11 m up.
 - **Two vertical frames.** The readme says z is measured from the tunnel floor and the ground is z − 10 m, but the STL's own ground under all 13 points is 5 m. *Literal* probes the model at the published z in the STL's frame, which is 10, 14 and 25 m above the STL's ground for the three planes; *agl* probes the STL's ground plus 5, 9 and 20 m. The files do not say which one the tunnel meant, so both are scored, as two runs of one engine (`configuration` literal and agl).
-- **Case M** is scored at WD 180 against the wind-tunnel run: $$U$$, $$V$$, $$W$$ and $$k$$ over the tunnel's $$U_R$$ = 4.08 m/s on the measurement and over the **solved** speed at the reference mast (4.686 m/s) on the model, because $$U_R$$ is defined at the mast. The concentration is the measured $$C/c_0$$ ($$c_0$$ = 132.5 ppm) against the model's $$c^\ast = c\thinspace U_R H_R^2/Q$$ with the same solved $$U_R$$, for the turbulent Schmidt numbers 0.3, 0.5 and 0.7: three passive tracers on one flow, **three runs** (`configuration` sct03, sct05, sct07); the flow scores are the same in all three. One detection limit, 10⁻³ of the largest measured value.
+- **Case M** is scored at WD 180 against the wind-tunnel run: $$U$$, $$V$$, $$W$$ and $$k$$ over the tunnel's $$U_R$$ = 4.08 m/s on the measurement and over the **solved** speed at the reference mast (4.686 m/s) on the model, because $$U_R$$ is defined at the mast. The concentration is the measured $$C/c_0$$ ($$c_0$$ = 132.5 ppm) against the model's $$c^\ast = c\thinspace U_R H_R^2/Q$$ with the same solved $$U_R$$, for the turbulent Schmidt numbers 0.3, 0.5 and 0.7: three passive tracers on one flow, **three runs** (`configuration` sct03, sct05, sct07); the flow scores are the same in all three. One detection limit, $$10^{-3}$$ of the largest measured value.
 
 <details markdown="block">
 <summary>Data notes: Scores here and Eddy3D's own</summary>
@@ -35,7 +35,7 @@ Both are Eddy3D production runs solved on 2026-10-18, realizable k-ε at numeric
 
 ### Measured against modelled
 
-{% include figure.html name="case-f-openfoam-agreement.png" alt="Case F, measured vs modelled speed over U(500 m)" caption="<strong>Figure 2.</strong> Case F, wind from NNW: the tunnel's and the field's U/U(500 m) against the modelled √(|U|²+2k) (filled) and |U| (hollow), in the published-z frame (top) and the STL-ground frame (bottom). The bars are the standard deviation of the field's 10-minute means. The dots take the colour of their group in Figure 1." %}
+{% include figure.html name="case-f-openfoam-agreement.png" alt="Case F, measured vs modelled speed over U(500 m)" caption="<strong>Figure 2.</strong> Case F, wind from NNW: the tunnel's and the field's $$U/U(500\text{ m})$$ against the modelled $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ (filled) and $$\lvert\mathbf{U}\rvert$$ (hollow), in the published-z frame (top) and the STL-ground frame (bottom). The bars are the standard deviation of the field's 10-minute means. The dots take the colour of their group in Figure 1." %}
 
 $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ over $$U(500\text{ m})$$:
 
@@ -106,7 +106,7 @@ FB is positive when the model is low.
 
 </details>
 
-{% include figure.html name="case-f-openfoam-bias-map.png" alt="Case F, where the model is slow or fast" caption="<strong>Figure 3.</strong> Case F, wind from NNW: log₂(model / tunnel) of √(|U|²+2k) at the 13 points of the 9 m plane on the plan of the district, in the two vertical frames; the arrow is the wind." %}
+{% include figure.html name="case-f-openfoam-bias-map.png" alt="Case F, where the model is slow or fast" caption="<strong>Figure 3.</strong> Case F, wind from NNW: $$\log_2(\text{model}/\text{tunnel})$$ of $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ at the 13 points of the 9 m plane on the plan of the district, in the two vertical frames; the arrow is the wind." %}
 
 ## Case M
 
@@ -116,7 +116,7 @@ FB is positive when the model is low.
 
 ### Measured against modelled
 
-{% include figure.html name="case-m-openfoam-agreement.png" alt="Case M, measured vs modelled velocity, k and concentration" caption="<strong>Figure 5.</strong> Case M, WD 180: measured vs modelled U, V, W, k and c* at three turbulent Schmidt numbers (log axes show the positive pairs within eight decades). The last panel is the tunnel's own WD 175 and WD 185 against its WD 180. The dots take the colour of their group in Figure 4." %}
+{% include figure.html name="case-m-openfoam-agreement.png" alt="Case M, measured vs modelled velocity, k and concentration" caption="<strong>Figure 5.</strong> Case M, WD 180: measured vs modelled $$U$$, $$V$$, $$W$$, $$k$$ and $$c^\ast$$ at three turbulent Schmidt numbers (log axes show the positive pairs within eight decades). The last panel is the tunnel's own WD 175 and WD 185 against its WD 180. The dots take the colour of their group in Figure 4." %}
 
 | Quantity | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|
@@ -160,7 +160,7 @@ The concentration across the three Schmidt numbers:
 
 - **Tracer.** R is 0.41, 0.25 and 0.20 and FAC2 0.20, 0.20 and 0.13 from $$\mathrm{Sc_t}$$ 0.3 to 0.7; the mean $$c^\ast$$ is 0.18, 0.13 and 0.12 against the tunnel's 1.00 (FB +1.40 to +1.58), the peak 1.27 to 1.38 against 3.04, and three of the five highest points are shared. Over the imposed speed at the mast's height (3.934 m/s) FB is +1.48 and over the tunnel's 4.08 m/s +1.46 at $$\mathrm{Sc_t}$$ 0.3 (the solved speed at the mast is 4.686 m/s, 1.19 of the imposed one).
 - **Near and far points.** The three points nearest the source carry $$c^\ast$$ 2.52 in the tunnel and 0.26, 0.11 and 0.05 in the model; the two far downwind ones 0.21 in the tunnel and 0.11, 0.10 and 0.09 in the model. The tunnel's near points exceed its far ones by a factor of about twelve; the model's by 2.3 and 1.1 at $$\mathrm{Sc_t}$$ 0.3 and 0.5, and at $$\mathrm{Sc_t}$$ 0.7 they carry *less* (0.055 against 0.087).
-- **Controls on the plume.** The points turned 180° about the source (14 of the 15 lie in the fluid) score R −0.05 to −0.06 (the model's mean over them is 7 × 10⁻⁶ against 0.19 at the real points, $$\mathrm{Sc_t}$$ 0.3). The points mirrored across the plume axis score R +0.65 to +0.68, FAC2 0.40 to 0.47, against R +0.20 to +0.41 at the real points.
+- **Controls on the plume.** The points turned 180° about the source (14 of the 15 lie in the fluid) score R −0.05 to −0.06 (the model's mean over them is $$7 \times 10^{-6}$$ against 0.19 at the real points, $$\mathrm{Sc_t}$$ 0.3). The points mirrored across the plume axis score R +0.65 to +0.68, FAC2 0.40 to 0.47, against R +0.20 to +0.41 at the real points.
 - **Neighbouring headings.** The tunnel's own WD 175 and WD 185 scored as models of its WD 180 reach FAC2 0.73 and 0.80 (R 0.93 and 0.98), and the mean of the two 1.00 (R 0.998). 8 of the 15 points change by more than a factor of two between WD 175 and WD 185 (up to 11 at point 14). The model's FAC2 is 0.13 to 0.20.
 - **Field campaign.** The 10 of 18 runs within 10° of 180 at 3 m/s or more, each with its own $$U_R$$ and tracer flow, give a geometric-mean $$c^\ast$$ at each point; the spread of the field at point 1 is a factor of 4.5. The model against that mean scores R 0.46, 0.29 and 0.22, FAC2 0.07 and FB +1.01 to +1.29, and lies inside the field's minimum–maximum range at 2 of the 15 points. The tunnel's WD 180 against the same mean scores R 0.98, FAC2 0.60 and FB −0.59: the tunnel is higher than the field's geometric mean at the same points (mean $$c^\ast$$ 1.00 against 0.54).
 - **Velocity.** $$\lvert\mathbf{U}\rvert$$: R 0.60, FAC2 0.73, FB +0.19, means 0.206 modelled against 0.247 measured. $$U$$: R 0.71, FAC2 0.27, FB +1.46, the mean $$U/U_R$$ 0.026 modelled against 0.164 measured. $$V$$: R 0.73; flipping its sign gives −0.73. $$W$$: R 0.18. $$k$$: R 0.45, FAC2 0.13 and FB +1.13 (mean $$k/U_R^2$$ 0.008 against 0.029).
@@ -175,7 +175,7 @@ The concentration across the three Schmidt numbers:
 
 </details>
 
-{% include figure.html name="case-m-openfoam-plan.png" alt="Case M, the tracer on the plan of the campus" caption="<strong>Figure 6.</strong> Case M, WD 180: log₁₀ of c* at the 15 points on the plan of the campus, the tunnel and the three Schmidt numbers on one scale (open: below 10⁻³ or zero). The star is the gas source and the square the reference mast; the arrow is the wind." %}
+{% include figure.html name="case-m-openfoam-plan.png" alt="Case M, the tracer on the plan of the campus" caption="<strong>Figure 6.</strong> Case M, WD 180: $$\log_{10}$$ of $$c^\ast$$ at the 15 points on the plan of the campus, the tunnel and the three Schmidt numbers on one scale (open: below $$10^{-3}$$ or zero). The star is the gas source and the square the reference mast; the arrow is the wind." %}
 
 ## Not run
 

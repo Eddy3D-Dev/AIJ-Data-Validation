@@ -37,7 +37,7 @@ ATOMS = [      # scales and the other symbols that carry an index or a Greek let
     (rf"U{US}ref", r"U_{\mathrm{ref}}"), (rf"L{US}ref", r"L_{\mathrm{ref}}"),
     (rf"([uvw]){US}rms", None), (rf"T{US}f", "T_f"), (rf"T{US}H", "T_H"), (rf"T{US}b", "T_b"), (rf"T{US}rms", r"T_{\mathrm{rms}}"), (rf"c{US}rms", r"c_{\mathrm{rms}}"),
     (rf"Re{US}H", r"\mathrm{Re_H}"), (rf"Re{US}D", r"\mathrm{Re_D}"), (rf"L{US}r", "L_r"), (rf"WD{US}R", r"\mathrm{WD_R}"),
-    (r"c(?:0|₀)", "c_0"), (r"C0", "C_0"), (r"z(?:0|₀)", "z_0"),
+    (r"c(?:0|₀)", "c_0"), (r"C0", "C_0"), (r"z(?:0|₀)", "z_0"), (r"U0", "U_0"), (r"uH", "u_H"), (r"C(?:mu|μ)", r"C_\mu"), (rf"U{US}[xyz]", None), (rf"θ{US}H", r"\theta_H"), (rf"θ{US}f", r"\theta_f"),
 ]
 ATOM = "(?:" + "|".join(f"(?:{rx})" for rx, _ in ATOMS) + ")"
 SYMBOL = rf"(?:{BAR}U(?:{US}mean)?{BAR}|Vs|Ve|H|{ATOM}|[UVWkC])"                       # what may stand over a reference scale
@@ -52,7 +52,7 @@ def atom(s):
     for rx, tex in ATOMS:
         mt = re.fullmatch(rx, s)
         if mt:
-            return tex or rf"{mt.group(1)}_{{\mathrm{{rms}}}}"
+            return tex or (rf"{mt.group(1)}_{{\mathrm{{rms}}}}" if mt.groups() else s.replace("\\", ""))
     return None
 
 
@@ -197,7 +197,7 @@ def _tolerances(mt):
     return "m", rf"{N.ABS} = 0.05" + (r"\thinspace U_H" if "U" in s else "")
 
 
-@rule("temperature-difference", rf"{B}(?P<a>T{US}f|T{US}H|T{US}b)\s*{MINUS}\s*(?P<b>T{US}f|T{US}H|T{US}b|T){E}")
+@rule("temperature-difference", rf"{B}(?P<a>T{US}f|T{US}H|T{US}b|θ{US}H|θ{US}f)\s*{MINUS}\s*(?P<b>T{US}f|T{US}H|T{US}b|T|θ{US}H|θ{US}f){E}")
 def _temperature_difference(mt):
     return "m", f"{atom(mt['a'])} - {atom(mt['b']) or 'T'}"
 
@@ -235,9 +235,199 @@ def _case_quantity(mt):
     return "m", mt.group(0)
 
 
-@rule("identifier", rf"{B}(?:velocity{US}ratio{US}sd|velocity{US}ratio|concentration{US}ratio|k{US}ratio){E}")
+@rule("identifier", rf"{B}(?:velocity{US}ratio{US}sd|velocity{US}ratio|concentration{US}ratio|k{US}ratio|p{US}rgh){E}")
 def _identifier(mt):
     return "c", mt.group(0).replace("\\", "")
+
+
+# ----------------------------------------------------------------------------- the workbook's names, coordinates, powers of ten
+
+@rule("variance-from-rms", rf"{B}(?P<v>uu|vv|ww)\s*=\s*(?P<c>[uvw]){US}rms\^2{E}")
+def _variance_from_rms(mt):
+    return "m", rf"{N.COLUMN_TEX[mt['v']]} = {mt['c']}_{{\mathrm{{rms}}}}^2"
+
+
+@rule("bare-columns", rf"{B}(?:uu|vv|ww|uv|uw|vw|uc|vc|wc|uT|vT|wT){E}")
+def _bare_columns(mt):
+    return "m", N.COLUMN_TEX[mt.group(0)]
+
+
+@rule("kinetic-energy", r"½\(uu\+vv\+ww\)")
+def _kinetic_energy(mt):
+    return "m", r"\tfrac{1}{2}\left(\overline{u'u'}+\overline{v'v'}+\overline{w'w'}\right)"
+
+
+@rule("workbook-squares", r"<(?P<c>[uvw])'2>")
+def _workbook_squares(mt):
+    return "m", rf"\overline{{{mt['c']}'^2}}"
+
+
+@rule("workbook-speed", r"<usc>")
+def _workbook_speed(mt):
+    return "m", r"\langle u_{\mathrm{sc}}\rangle"
+
+
+@rule("workbook-sigma", rf"{B}(?:sigma|σ){US}(?P<s>usc|u|v|w){E}")
+def _workbook_sigma(mt):
+    return "m", r"\sigma_{\mathrm{usc}}" if mt["s"] == "usc" else rf"\sigma_{mt['s']}"
+
+
+SUPER = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹⁻", "0123456789-")
+SGN = r"[-−+±]"
+UNIT = r"(?:\s(?:kg/s|m/s|mm|cm|m)(?![\w/²³]))"
+TERM = rf"(?:{SGN}?(?:{NUM}(?:/{NUM})?(?:\s?[HDb](?![\w/]))?°?|[HD](?:/{NUM})?(?![\w/]))|{SGN}[xyz](?![\w/])){UNIT}?"      # 0.25, 1/16 H, 2b, 22.5°, H/16, -x, 0.2 m
+SEPARATOR = r"(?:,?\sand\s|,\s|\sx\s|\s\.\.\.?\s|\s…\s|\sto\s)"
+VALUES = rf"{TERM}(?:(?:\sx\s{TERM})+|(?:,\s{TERM}){{2,}}|(?:,\s{TERM})*,?\sand\s{TERM}|(?:\s\.\.\.?\s|\s…\s|\sto\s){TERM})?"     # a value, a list of three or more, "a, b and c", a range
+RELATION = r"(?:=|<|>|≤|≥|≈)"
+TERM_RX = re.compile(rf"(?P<s>{SGN})?(?P<v>{NUM}(?:/{NUM})?|[HD](?:/{NUM})?|[xyz])(?:(?P<sp>\s?)(?P<h>[HDb]))?(?P<deg>°)?(?:\s(?P<u>kg/s|m/s|mm|cm|m))?")
+SEPARATOR_RX = re.compile(rf"({SEPARATOR})")
+RELATION_TEX = {"=": "=", "<": r"\lt", ">": r"\gt", "≤": r"\le", "≥": r"\ge", "≈": r"\approx"}
+
+
+def terms(text):
+    """The LaTeX of a value, a list or a range of values: `0.25`, `-2 to 5`, `0.02 .. 2H`, `1/16 H`, `0.20 m`, `±1`."""
+    out = []
+    for piece in SEPARATOR_RX.split(text):
+        if SEPARATOR_RX.fullmatch(piece):
+            key = "and" if piece.strip().endswith("and") else piece.strip()
+            out.append({",": r",\thinspace ", "to": r"\text{ to }", "and": r"\text{ and }", "x": r"\thinspace\times\thinspace "}.get(key, r"\thinspace\ldots\thinspace "))
+            continue
+        mt = TERM_RX.fullmatch(piece)
+        out.append({None: "", "-": "-", "−": "-", "+": "+", "±": r"\pm "}[mt["s"]] + mt["v"]
+                   + ((r"\thinspace " if mt["sp"] else "") + mt["h"] if mt["h"] else "")
+                   + (r"^\circ" if mt["deg"] else "")
+                   + (rf"\thinspace\mathrm{{{mt['u']}}}" if mt["u"] else ""))
+    return "".join(out)
+
+
+LHS_TEX = {"dx": r"\mathrm{d}x", "WD": r"\mathrm{WD}", "Rb": "R_b"}
+
+
+@rule("coordinate-relation", rf"{B}(?P<lhs>{BAR}?[xyz](?:\s?/\s?[HbD])?{BAR}?|dx|(?:{NUM}\s?)?[HbD](?:\sx\s(?:{NUM}\s?)?[HbD])*|WD|R|Q|Rb)(?P<rest>(?:\s{RELATION}\s{VALUES})+)(?![\w\"”])")
+def _coordinate_relation(mt):
+    lhs = mt["lhs"].replace("\\", "").replace(" ", "")
+    if lhs in LHS_TEX:
+        lhs = LHS_TEX[lhs]
+    elif re.fullmatch(rf"(?:{NUM})?[HbD](?:x(?:{NUM})?[HbD])*", lhs):
+        lhs = r"\thinspace\times\thinspace ".join(re.sub(rf"^({NUM})\s?([HbD])$", lambda g: g[1] + (r"\thinspace " if re.match(rf"{NUM}\s[HbD]$", item) else "") + g[2], item)
+                                                  for item in mt["lhs"].split(" x "))
+    elif lhs.startswith("|"):
+        lhs = rf"\lvert {lhs.strip('|')}\rvert"
+    parts = re.split(rf"\s({RELATION})\s", mt["rest"])
+    return "m", lhs + "".join(f" {RELATION_TEX[rel]} {terms(rhs)}" for rel, rhs in zip(parts[1::2], parts[2::2]))
+
+
+@rule("coordinate-interval", rf"{B}(?P<c>[xyz](?:,\s[xyz])*)\s(?:in|∈)\s\[(?P<a>{TERM}),\s(?P<b>{TERM})\](?:\s(?P<u>mm|cm|m)(?![\w/²³]))?")
+def _coordinate_interval(mt):
+    unit = rf"\thinspace\mathrm{{{mt['u']}}}" if mt["u"] else ""
+    return "m", rf"{mt['c'].replace(', ', r',\thinspace ')} \in \lbrack {terms(mt['a'])},\thinspace {terms(mt['b'])}\rbrack{unit}"
+
+
+@rule("reynolds-number", rf"{B}Re\s≈\s(?P<n>\d{{1,3}}(?:,\d{{3}})+|{NUM})(?:\s×\s10(?P<e>[⁻⁰¹²³⁴⁵⁶⁷⁸⁹]+))?{E}")
+def _reynolds_number(mt):
+    return "m", r"\mathrm{Re} \approx " + mt["n"].replace(",", r"\thinspace ") + (rf" \times 10^{{{mt['e'].translate(SUPER)}}}" if mt["e"] else "")
+
+
+@rule("atom-multiple", rf"{B}(?P<atom>{ATOM})\s=\s(?P<n>{NUM})\s?H(?![\w/])")
+def _atom_multiple(mt):
+    return "m", f"{atom(mt['atom'])} = {mt['n']}" + (r"\thinspace H" if " " in mt["n"] or mt.group(0).endswith(" H") else "H")
+
+
+@rule("field-at", rf"{B}(?P<f>[UkC])\((?P<c>[xyz])\s=\s(?P<v>{VALUES})\)")
+def _field_at(mt):
+    return "m", f"{mt['f']}({mt['c']} = {terms(mt['v'])})"
+
+
+@rule("coordinate-triple", rf"{B}x,\s?y,?\s(?:and\s)?z{E}")
+def _coordinate_triple(mt):
+    sep = re.findall(r",\s?|,?\sand\s", mt.group(0))
+    return "mm", [("m", "x"), ("t", sep[0]), ("m", "y"), ("t", sep[1]), ("m", "z")]
+
+
+@rule("coordinate-ratio", rf"{B}(?P<c>[xyz])\s?/\s?(?P<d>[HbD]|Z{US}?R){E}")
+def _coordinate_ratio(mt):
+    return "m", f"{mt['c']}/{atom(mt['d']) or mt['d']}"
+
+
+@rule("direction", r"(?<!\w)[+−][xyz](?![\w/])")
+def _direction(mt):
+    return "m", mt.group(0).replace("−", "-")
+
+
+@rule("frame-map", rf"{B}(?P<a>[UVW])\s=\s(?P<s>[-−]?)U{US}(?P<b>[xyz]){E}")
+def _frame_map(mt):
+    return "m", f"{mt['a']} = {'-' if mt['s'] else ''}U_{mt['b']}"
+
+
+@rule("power-law-profile", r"\(z/H\)\^\(1/7\)")
+def _power_law_profile(mt):
+    return "m", "(z/H)^{1/7}"
+
+
+@rule("multiples-of", r"(?<=multiples of )[HbD](?![\w/])")
+def _multiples_of(mt):
+    return "m", mt.group(0)
+
+
+@rule("grid-spacing", rf"{B}H/(?P<n>{NUM}){E}")
+def _grid_spacing(mt):
+    return "m", f"H/{mt['n']}"
+
+
+@rule("multiple-of-H", rf"{B}(?P<n>{NUM})(?:–(?P<n2>{NUM}))?\s?H(?![\w/])")
+def _multiple_of_h(mt):
+    n = mt["n"] + (rf"\text{{–}}{mt['n2']}" if mt["n2"] else "")
+    return "m", rf"{n}\thinspace H" if " " in mt.group(0) else f"{n}H"
+
+
+POWER_OPERATOR = {"×": r"\times", "·": r"\cdot"}
+
+
+@rule("power-of-ten", rf"{B}(?:(?:(?P<m>{NUM})\s?)?(?P<x>[×·])\s?)?10(?P<e>[⁻⁰¹²³⁴⁵⁶⁷⁸⁹]+|\^-?\d+)(?P<dx>\sdx(?![\w]))?{E}")
+def _power_of_ten(mt):
+    exponent = mt["e"].translate(SUPER).lstrip("^")
+    lead = (f"{mt['m']} " if mt["m"] else "") + POWER_OPERATOR[mt["x"]] + " " if mt["x"] else ""
+    return "m", f"{lead}10^{{{exponent}}}" + (r"\thinspace\mathrm{d}x" if mt["dx"] else "")
+
+
+@rule("plus-minus-scale", r"±(?P<s>[HD])(?![\w/])")
+def _plus_minus_scale(mt):
+    return "m", rf"\pm {mt['s']}"
+
+
+@rule("signed-angle", r"(?<!\w)[+−]θ(?![\w′])")
+def _signed_angle(mt):
+    return "m", mt.group(0).replace("−", "-").replace("θ", r"\theta")
+
+
+@rule("difference-magnitude", rf"{BAR}Δ(?P<q>Vs|U)?{BAR}")
+def _difference_magnitude(mt):
+    return "m", r"\lvert\Delta" + {None: "", "Vs": r" V_{\mathrm{s}}", "U": " U"}[mt["q"]] + r"\rvert"
+
+
+@rule("residual-field", rf"{B}(?P<f>p|epsilon)(?=\s\d\.\de[-+]\d\d)")
+def _residual_field(mt):
+    return "m", "p" if mt["f"] == "p" else r"\varepsilon"
+
+
+@rule("turbulent-dissipation", rf"{B}epsilon\s*=\s*C(?:mu|μ)\^0\.5\s+k\s+dU/dz{E}")
+def _turbulent_dissipation(mt):
+    return "m", r"\varepsilon = C_\mu^{0.5}\thinspace k\thinspace \mathrm{d}U/\mathrm{d}z"
+
+
+@rule("turbulent-length", rf"{B}u{ST}\^2/sqrt\(C(?:mu|μ)\)")
+def _turbulent_length(mt):
+    return "m", r"u_\ast^2/\sqrt{C_\mu}"
+
+
+@rule("log-ratio", r"log₂\(model / tunnel\)")
+def _log_ratio(mt):
+    return "m", r"\log_2(\text{model}/\text{tunnel})"
+
+
+@rule("log-decade", rf"{B}log₁₀(?!\w)")
+def _log_decade(mt):
+    return "m", r"\log_{10}"
 
 
 @rule("atom", rf"{B}(?P<atom>{ATOM})(?P<exp>{SQ})?{E}")
@@ -357,13 +547,13 @@ def segments(text, lead=False, before="", after=""):
     return out
 
 
-BARE = {"U", "V", "W", "k", "T", "Vs"}
+BARE = {"U", "V", "W", "k", "T", "Vs", "x", "y", "z"}
 
 
 def to_markdown(text, escape, lead=False, bare=False):
     """A plain-text string as Markdown: the text between formulas through `escape`, a formula as $$...$$. `bare`: the string is a whole table
     cell, so one symbol alone is a symbol."""
-    parts = [("m", N.COLUMN_TEX[text.strip()])] if bare and text.strip() in BARE else segments(text, lead=lead)
+    parts = [("m", N.COLUMN_TEX.get(text.strip(), text.strip()))] if bare and text.strip() in BARE else segments(text, lead=lead)
     return "".join(N.m(s) if kind == "m" else f"`{s}`" if kind == "c" else escape(s) for kind, s in parts)
 
 
@@ -375,6 +565,16 @@ SUBSUP = [(re.compile(p), r) for p, r in (
     (r"(?<![A-Za-z0-9_])([UTHL])<sub>(H|R|f|r|b)</sub>(?:<sup>2</sup>|²)", r"\1_\2^2"),
     (r"(?<![A-Za-z0-9_])([UTHL])<sub>(H|R|f|r|b)</sub>", r"\1_\2"),
 )]
+
+
+FIGURE = re.compile(r"\{%-?\s*include figure\.html\b")
+CAPTION = re.compile(r'(caption=")([^"]*)(")')
+
+
+def caption(line):
+    """The caption of a `{% include figure.html ... caption="..." %}` line (Markdown for kramdown, as the include sets it in a figcaption), or None."""
+    mt = FIGURE.match(line.strip()) and CAPTION.search(line)
+    return mt.group(2) if mt else None
 
 
 def markdown(text):
@@ -392,6 +592,8 @@ def markdown(text):
                 fence = None
         elif re.match(r"^\s*(`{3,}|~{3,})", line):
             fence = re.match(r"^\s*(`{3,}|~{3,})", line).group(1)
+        elif FIGURE.match(s):
+            line = CAPTION.sub(lambda mt: mt.group(1) + _line(mt.group(2)) + mt.group(3), line)
         elif s and not s.startswith(("#", "<", "{%", "{:")) and not re.match(r"^\|?\s*:?-{3,}", s):
             line = _row(line) if s.startswith("|") else _line(line)
         out.append(line)
@@ -430,6 +632,9 @@ def _cell(raw, first):
     return _line(raw, lead=first)
 
 
+MERGE = re.compile(r"\$\$([^$]+?)\$\$ = \$\$(\d+(?:\.\d+)?(?:\\thinspace )?H)\$\$")
+
+
 def _line(line, lead=False):
     for rx, r in SUBSUP:
         line = rx.sub(r, line)
@@ -445,7 +650,7 @@ def _line(line, lead=False):
         out.append(_piece(line, pos, a, lead and pos == 0))
         out.append(line[a:b])
         pos = b
-    return "".join(out)
+    return MERGE.sub(r"$$\1 = \2$$", "".join(out))
 
 
 def _piece(line, a, b, lead):
@@ -470,11 +675,21 @@ LEFT = [(re.compile(rx), what) for rx, what in (
     (rf"{B}T{US}(?:f|H|b|rms){E}", "T_f, T_H, T_rms"), (rf"{B}c{US}rms{E}", "c_rms"), (rf"{B}Re{US}[HD]{E}", "Re_H, Re_D"),
     (rf"{B}L{US}r{E}", "L_r"), (rf"{B}(?![ms]{SQ})[A-Za-z]{SQ}", "a squared symbol"), (r"√", "a square root"), (rf"{B}Sct{E}", "Sct"),
     (r"κ\s=\s0\.41", "kappa"), (rf"{BAR}U{BAR}", "|U|"), (rf"{B}D\s=\s0\.25{E}", "D = 0.25"), (rf"{B}W\s=\s0\.05", "W = 0.05"),
+    (rf"{B}(?:uu|vv|ww|uv|uw|vw|uc|vc|wc|uT|vT|wT){E}", "uu, vv, ww, uv, uw, vw, uc, uT"), (rf"{B}[xyz]\s?/\s?[HbD]{E}", "x/H"), (rf"{B}H/\d", "H/64"),
+    (rf"{B}[xyz]\s[=<>≤≥]\s[-−+±]?[\dHDxyz]", "a coordinate (z = 0.1)"), (rf"{B}[xyz]\sin\s\[", "a coordinate interval"),
+    (r"10\^-?\d|10[⁻⁰¹²³⁴⁵⁶⁷⁸⁹]", "a power of ten"), (rf"{B}C(?:mu|μ){E}", "Cmu"), (rf"{B}U0{E}", "U0"), (r"\(z/H\)\^", "a power law"),
+    (rf"<[uvw]'2>|<usc>|{B}sigma_|{B}θ{US}[Hf]|{B}uH{E}", "a workbook name"),
+    (rf"{B}(?:WD|[HbR]|Rb|dx)\s=\s[-−+]?\d", "a scale or a score (H = 0.2 m)"),
+    (r"multiples of [HbD](?![\w/])", "multiples of H"), (r"log[₂₁]", "log"), (r"(?<![\w'\"‘“])[+−][xyz](?![\w/])", "+x"),
 )]
 
 
 def leftovers(line):
-    """[(column, what)] of the plain-text math that one line of Markdown still holds outside code, links, HTML and formulas."""
+    """[(column, what)] of the plain-text math that one line of Markdown still holds outside code, links, HTML and formulas. A figure include is
+    read by its caption."""
+    cap = caption(line)
+    if cap is not None:
+        line = cap
     line = CODE.sub(lambda mt: " " * len(mt.group(0)), line)
     line = SKIP.sub(lambda mt: " " * len(mt.group(0)), line)
     return sorted((mt.start(), what) for rx, what in LEFT for mt in rx.finditer(line))
@@ -517,6 +732,55 @@ def self_test():
         ("T_f - T_H = 33.63 K", "$$T_f - T_H$$ = 33.63 K"),
         ("the flux u′θ′ and ⟨θ′c′⟩", r"the flux $$\overline{u'\theta'}$$ and $$\overline{\theta'c'}$$"),
         ("concentration\\_ratio = C / c0 and k_ratio", r"`concentration_ratio` = $$C/c_0$$ and `k_ratio`"),
+        ('(uu = u_rms^2) so A and B share one column; uv and wT',
+         r"($$\overline{u'u'} = u_{\mathrm{rms}}^2$$) so A and B share one column; $$\overline{u'v'}$$ and $$\overline{w'\theta'}$$"),
+        ('plane y/H = 0, z/H = 1/16 and z/b = 0.125, y/H = ±1',
+         r"plane $$y/H = 0$$, $$z/H = 1/16$$ and $$z/b = 0.125$$, $$y/H = \pm 1$$"),
+        ('x/H = -2 to 5 and |x/H| ≤ 0.2 and x/H = 0.25, 0.5, 1',
+         r"$$x/H = -2\text{ to }5$$ and $$\lvert x/H\rvert \le 0.2$$ and $$x/H = 0.25,\thinspace 0.5,\thinspace 1$$"),
+        ('z = 0.02 .. 2H, z = 0.019 H is, z = H/16 plane, z = -1 m, z = 0.1 D',
+         r"$$z = 0.02\thinspace\ldots\thinspace 2H$$, $$z = 0.019\thinspace H$$ is, $$z = H/16$$ plane, $$z = -1\thinspace\mathrm{m}$$, $$z = 0.1\thinspace D$$"),
+        ('z in [1.2, 7] m; x, y ∈ [−0.04, 0.04]',
+         r"$$z \in \lbrack 1.2,\thinspace 7\rbrack\thinspace\mathrm{m}$$; $$x,\thinspace y \in \lbrack -0.04,\thinspace 0.04\rbrack$$"),
+        ('street x < 0; y ≤ 0 half; y = -x to; z ≈ 32 m',
+         r"street $$x \lt 0$$; $$y \le 0$$ half; $$y = -x$$ to; $$z \approx 32\thinspace\mathrm{m}$$"),
+        ('frame +x, +y and +z up; x, y, z in m',
+         r"frame $$+x$$, $$+y$$ and $$+z$$ up; $$x$$, $$y$$, $$z$$ in m"),
+        ('limit 10^-3, 9 × 10⁻¹⁶, volume fraction × 10⁶ and 10⁻⁴ dx',
+         r"limit $$10^{-3}$$, $$9 \times 10^{-16}$$, volume fraction $$\times 10^{6}$$ and $$10^{-4}\thinspace\mathrm{d}x$$"),
+        ('epsilon = Cmu^0.5 k dU/dz (Cmu = 0.09) and u*^2/sqrt(Cmu)',
+         r"$$\varepsilon = C_\mu^{0.5}\thinspace k\thinspace \mathrm{d}U/\mathrm{d}z$$ ($$C_\mu$$ = 0.09) and $$u_\ast^2/\sqrt{C_\mu}$$"),
+        ('(z/H)^(1/7) with U0 = 4 m/s',
+         r"$$(z/H)^{1/7}$$ with $$U_0$$ = 4 m/s"),
+        ("<u'2> and sigma_u, <usc> / sigma_usc",
+         r"$$\overline{u'^2}$$ and $$\sigma_u$$, $$\langle u_{\mathrm{sc}}\rangle$$ / $$\sigma_{\mathrm{usc}}$$"),
+        ('mean |ΔVs| and |ΔU| and |Δ|',
+         r"mean $$\lvert\Delta V_{\mathrm{s}}\rvert$$ and $$\lvert\Delta U\rvert$$ and $$\lvert\Delta\rvert$$"),
+        ('log₂(model / tunnel) and log₁₀ of c*',
+         r"$$\log_2(\text{model}/\text{tunnel})$$ and $$\log_{10}$$ of $$c^\ast$$"),
+        ('residuals U_x 1.0e-04, p 3.0e-05, epsilon 1.0e-03 and p_rgh',
+         r"residuals $$U_x$$ 1.0e-04, $$p$$ 3.0e-05, $$\varepsilon$$ 1.0e-03 and `p_rgh`"),
+        ('U = U_y, V = -U_x',
+         r"$$U = U_y$$, $$V = -U_x$$"),
+        ('Re ≈ 1.1 × 10⁵ and Re ≈ 17,000',
+         r"$$\mathrm{Re} \approx 1.1 \times 10^{5}$$ and $$\mathrm{Re} \approx 17\thinspace 000$$"),
+        ('x = -0.15, 100 % ethylene; z = 15, 19 and 30 m',
+         r"$$x = -0.15$$, 100 % ethylene; $$z = 15,\thinspace 19\text{ and }30\thinspace\mathrm{m}$$"),
+        ('L_r = 3.39 H at dx = 1.6 m (H/10), 4–6 H and (10 H)',
+         r"$$L_r = 3.39\thinspace H$$ at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ ($$H/10$$), $$4\text{–}6\thinspace H$$ and ($$10\thinspace H$$)"),
+        ('k (= ½(uu+vv+ww) here); +θ and −θ',
+         r"$$k$$ (= $$\tfrac{1}{2}\left(\overline{u'u'}+\overline{v'v'}+\overline{w'w'}\right)$$ here); $$+\theta$$ and $$-\theta$$"),
+        ('across a span of ±H and ±250 m',
+         r'across a span of $$\pm H$$ and ±250 m'),
+        ('H = 0.06 m, pitch 0.12 m; H = 2b = 0.16 m; 0.25 H = 0.05 m; Tower 0.25H x 0.25H x H = 62.5 x 62.5 x 250 mm',
+         r'$$H = 0.06\thinspace\mathrm{m}$$, pitch 0.12 m; $$H = 2b = 0.16\thinspace\mathrm{m}$$; $$0.25\thinspace H = 0.05\thinspace\mathrm{m}$$; Tower $$0.25H\thinspace\times\thinspace 0.25H\thinspace\times\thinspace H = 62.5\thinspace\times\thinspace 62.5\thinspace\times\thinspace 250\thinspace\mathrm{mm}$$'),
+        ('at WD = 0° and WD = 22.5° and 45°, R = -0.910, Q = 1 kg/s, Rb = -0.086 but N = 0, E = 90',
+         r'at $$\mathrm{WD} = 0^\circ$$ and $$\mathrm{WD} = 22.5^\circ\text{ and }45^\circ$$, $$R = -0.910$$, $$Q = 1\thinspace\mathrm{kg/s}$$, $$R_b = -0.086$$ but N = 0, E = 90'),
+        ('the difference θ_H − θ_f and T_b - T_f',
+         r'the difference $$\theta_H - \theta_f$$ and $$T_b - T_f$$'),
+        ('Positions in multiples of H and in multiples of b.', r'Positions in multiples of $$H$$ and in multiples of $$b$$.'),
+        ('a second case x = 0 and y = 0',
+         r"a second case $$x = 0$$ and $$y = 0$$"),
     ]
     for src, want in cases:
         got = _plain(src)

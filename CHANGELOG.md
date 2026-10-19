@@ -24,7 +24,10 @@ Documentation and tooling; no served byte changed (`docs/api/` and the cleaned t
 - Every symbol and formula on the site and in the READMEs is LaTeX between `$$ ... $$`, which GitHub and the site's kramdown both read
   (the site loads MathJax): $$c_0 = \dfrac{q}{U_H H^2}$$, $$C/c_0$$, $$\overline{u'u'}$$ instead of `uu`, $$c_{\mathrm{rms}}$$. A column name stays in code font
   where it is an identifier. The served files keep their plain strings.
-- One nomenclature (`scripts/nomenclature.py`) says what each symbol, column and score means: `docs/_includes/nomenclature.md` under every table of
+- Coordinates and positions ($$y/H = 0$$, $$z = 0.019\thinspace H$$, $$x \in \lbrack -0.1,\thinspace 0\rbrack$$, $$H/64$$), powers of ten ($$10^{-3}$$),
+  the variances ($$\overline{u'u'} = u_{\mathrm{rms}}^2$$), $$C_\mu$$, $$U_x$$ and the captions of the validation figures are LaTeX too; `scripts/mathtext.py`
+  and the `plain-math` rule of `scripts/check_markdown.py` know these forms, so none can come back as plain text.
+- One nomenclature (`scripts/nomenclature.py`) says, as bullet points, what each symbol, column and score means: `docs/_includes/nomenclature.md` under every table of
   quantities, `nomenclature-scores.md` under every table of scores ($$n$$, $$R$$, $$\mathrm{FAC2}$$, $$\mathrm{FB}$$, the hit rate), `metrics.md` as the
   Metrics section of the Method page; the READMEs get the same texts between `<!--nomenclature ...-->` markers.
 - The hit rate is $$\mathrm{HR}$$ with the tolerances $$\delta_{\mathrm{rel}}$$ and $$\delta_{\mathrm{abs}}$$ (VDI 3783-9: $$q$$, $$D$$, $$W$$), so that $$q$$ is
@@ -96,8 +99,8 @@ Additive: new figures, fields and citation endpoints, and fixes. The API schema 
   repair; they are re-wound. One wall that two buildings share (4 triangles) is removed, which joins the two into one body: 545 bodies
   after construction (8,432 triangles), 542 before (8,396), and 11 edges where two bodies touch.
 - Cases F and M: `geometry.stl` is one closed outward body. F is closed with a 1 m base slab (vertical walls from the rim of the 725 m disc
-  down to z = −1 m and a bottom cap, 2,436 added triangles; the zero-area triangles at T-junctions are removed and their neighbours split); M loses 7
-  slivers (0.45 m² together) on building roofs and is closed the same way (21 added triangles). The bounding box starts at z = −1 m.
+  down to $$z = -1\thinspace\mathrm{m}$$ and a bottom cap, 2,436 added triangles; the zero-area triangles at T-junctions are removed and their neighbours split); M loses 7
+  slivers (0.45 m² together) on building roofs and is closed the same way (21 added triangles). The bounding box starts at $$z = -1\thinspace\mathrm{m}$$.
 - `BD_caseL.stl`, as published, has the two bottom triangles of each of its 126 cubes wound inward (Known data issues); the served
   `geometry.stl` is the 126 boxes and was never affected.
 - Wording of the API descriptions and `llms.txt`, of the `notes` of the runs in `validation.json` (Cases F, G, J, K, L and M), of the wind-direction texts
@@ -164,7 +167,7 @@ The point table gained columns, which is why this release is MAJOR.
   against its WD 180, and the 18 field runs recorded beside the tunnel. The ordering the fixture first asserted (the points nearest the source carry
   more than the far ones) is recorded and stated in the run notes as a model finding.
 - Every score of the runs of Cases F, G, K, J, L and M is recomputed from the per-point pairs by `validation/dispersion_metrics.py`, never copied
-  from Eddy3D's log; fed the published CSVs and the fixtures' own probes it reproduces the fixtures' scores to 10⁻⁹ (the script fails
+  from Eddy3D's log; fed the published CSVs and the fixtures' own probes it reproduces the fixtures' scores to $$10^{-9}$$ (the script fails
   otherwise), and the scores here differ from the logged ones where the measured side moved from the rounded CSVs to the workbooks.
   The SHA-256 of every file a snapshot was read from is in its results file under `sources`.
 - Release-numbered API paths: every release is a frozen copy of the whole API under `/api/<release>/` (for example

@@ -10,11 +10,11 @@ description: "OpenFOAM 12 against the tunnel for Case D, the high-rise among cit
 
 OpenFOAM 12 runs on the high-rise among city blocks. Scores and per-point file: [Case D]({{ '/cases/case-d/validation/' | relative_url }}) Validation page.
 
-All three headings: 3.6 million cells at 1:400 on a cylinder domain, 3000 iterations, the 66 measured thermistor points and the 33 split-fibre points at z/H = 0.02.
+All three headings: 3.6 million cells at 1:400 on a cylinder domain, 3000 iterations, the 66 measured thermistor points and the 33 split-fibre points at $$z/H = 0.02$$.
 
 ## Measurement layout
 
-{% include figure.html name="case-d-layout.png" alt="Measurement points, Case D" caption="<strong>Figure 1.</strong> Case D, measurement points: A split-fibre probe, WD 0; B thermistor on the site of the central block, |x/H| ≤ 0.2; C thermistor in the streets along y beside it; D thermistor in the streets along x further out. Positions in multiples of H. The split fibre stands at 33 of the 78 places of the thermistors; open dots: the 12 places where the thermistor read nothing; wind directions 0°, 22.5° and 45°." %}
+{% include figure.html name="case-d-layout.png" alt="Measurement points, Case D" caption="<strong>Figure 1.</strong> Case D, measurement points: A split-fibre probe, WD 0; B thermistor on the site of the central block, $$\lvert x/H\rvert \le 0.2$$; C thermistor in the streets along y beside it; D thermistor in the streets along x further out. Positions in multiples of $$H$$. The split fibre stands at 33 of the 78 places of the thermistors; open dots: the 12 places where the thermistor read nothing; wind directions 0°, 22.5° and 45°." %}
 
 ## Measured against modelled
 
@@ -43,7 +43,7 @@ All three headings: 3.6 million cells at 1:400 on a cylinder domain, 3000 iterat
 - Thermistor plane: R 0.80–0.85 at all three headings. Split-fibre $$\lvert\mathbf{U}\rvert$$: R 0.85.
 - Split-fibre points (33): $$\lvert\mathbf{U}\rvert$$ FB +0.07. Thermistor (66): FB +0.21 with $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ and +0.36 with $$\lvert\mathbf{U}\rvert$$. In the tunnel the thermistor reads 1.34 times the split-fibre $$\lvert\mathbf{U}\rvert$$ over the same 33 points.
 - Split-fibre streamwise $$U$$: FB +0.67, R 0.95.
-- Rotation sense at 22.5° and 45°: the array is symmetric about y = 0, so a wind turned toward +y and one turned toward −y give mirror-image fields. The data paper's Figure 4 draws +y.
+- Rotation sense at 22.5° and 45°: the array is symmetric about $$y = 0$$, so a wind turned toward $$+y$$ and one turned toward $$-y$$ give mirror-image fields. The data paper's Figure 4 draws $$+y$$.
   - Figure 4's sense: R 0.80 and FAC2 0.92 at 22.5°; R 0.85 and FAC2 0.89 at 45°.
   - Mirrored sense (control): R 0.40 at 22.5°, 0.17 at 45°.
   - FB against the thermistor with $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$: +0.05 and +0.09.

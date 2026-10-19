@@ -23,8 +23,8 @@ solves are scored on.
 
 scripts/build_api.py writes three texts from the entries below, so a definition cannot differ from page to page:
 
-    docs/_includes/nomenclature.md          every symbol, column and score, in a closed <details>: under a table of quantities or columns
-    docs/_includes/nomenclature-scores.md   the scores in one paragraph, and the quantities they are computed on: under a table of scores
+    docs/_includes/nomenclature.md          every symbol, column and score, as bullet points in a closed <details>: under a table of quantities or columns
+    docs/_includes/nomenclature-scores.md   the scores as bullet points, and the quantities they are computed on: under a table of scores
     docs/_includes/metrics.md               the scores in full, with their formulas: the Metrics section of the Method page
 
 and the same texts between `<!--nomenclature full-->`, `<!--nomenclature scores-->` or `<!--nomenclature metrics-->` and
@@ -94,7 +94,7 @@ _VELOCITY = [
     (m(r"k/U_{\mathrm{ref}}^2"), "`k_ratio`", "turbulent kinetic energy over the square of the reference speed, where only normalised values are published (Case G)", "—"),
 ]
 _SCALARS = [
-    (m("C"), "`C`", "mean tracer-gas concentration as published (volume fraction × 10⁶ of the released gas diluted in air)", "ppm"),
+    (m("C"), "`C`", "mean tracer-gas concentration as published (volume fraction " + m(r"\times 10^6") + " of the released gas diluted in air)", "ppm"),
     (m(r"c_{\mathrm{rms}}"), "`c_rms`", "root mean square of the concentration fluctuation", "ppm"),
     (m("c_0"), "",
      "reference concentration, defined for each case on its Data page: " + m(r"c_0 = \dfrac{c_{\mathrm{gas}}\thinspace q}{U_H H^2}") + " (" + m("U_R H_R^2")
@@ -125,11 +125,15 @@ _SCALES = [
     (m("q") + ", " + m(r"c_{\mathrm{gas}}"), "",
      "tracer release of the experiment: volume flow of the released gas, and its tracer content (" + m("10^6") + " ppm when pure); " + m("Q")
      + " is the source strength given to a solve", "m³/s, ppm"),
+    (m("R_b"), "", "bulk Richardson number of the heated-floor cases J and L (negative: unstable stratification)", "—"),
     (m(r"\mathrm{Re_H}") + ", " + m(r"\mathrm{Re_D}"), "", "Reynolds numbers " + m(r"U_H H/\nu") + " and " + m(r"U_H D/\nu") + " (" + m(r"\nu") + ": kinematic viscosity of air)", "—"),
     (m(r"u_\ast") + ", " + m("z_0") + ", " + m(r"\kappa"), "", "friction velocity and roughness length of the log law fitted to the approach flow, and the von Kármán constant (0.41)", "m/s, mm, —"),
     (m(r"\mathrm{WD}"), "`wind_direction_deg`",
      "wind direction (each frame says how it is counted); " + m(r"\mathrm{WD_R}") + " is the mean direction of a field run at its reference point (Case M)", "°"),
-    (m("x") + ", " + m("y") + ", " + m("z"), "`x`, `y`, `z`", "coordinates in the case's frame, " + m("z") + " up from the floor of the tunnel or from the ground", "m"),
+    (m("x") + ", " + m("y") + ", " + m("z"), "`x`, `y`, `z`",
+     "coordinates in the case's frame (" + m("+x") + ", " + m("+y") + " and " + m("+z") + " are the positive directions; each Data page says which way " + m("+x")
+     + " points), " + m("z") + " up from the floor of the tunnel or from the ground", "m"),
+    (m(r"\mathrm{d}x"), "", "lattice spacing of the OpenLB and FluidX3D runs, in metres or as a fraction of " + m("H") + " (" + m("H/64") + ")", "m"),
     (m("L_r"), "", "reattachment length behind the building, read from a wake line at ground level; reported as " + m("L_r/H"), "m"),
 ]
 # The scores, as bullets: each begins with its own symbol. validation/dispersion_metrics.py is where they are computed.
@@ -147,26 +151,64 @@ _SCORES = [
 # In the API's validation.json and named on the Method page, not in a table of the site.
 _API_NOTE = ("NMSE, NAD, MG and VG are in `validation/results/*.json` and in the API's `validation.json`. NMSE and NAD divide by the means like "
              + m(r"\mathrm{FB}") + ", so they are undefined for a signed component unless the measured and the modelled mean are both positive")
+NMSE = rf"\mathrm{{NMSE}} = \dfrac{{\overline{{(o-p)^2}}}}{{{O}\thinspace {P}}}"
+NAD = rf"\mathrm{{NAD}} = \dfrac{{\overline{{\lvert o-p\rvert}}}}{{{O}+{P}}}"
+MG, VG = r"\mathrm{MG} = \exp\overline{(\ln o-\ln p)}", r"\mathrm{VG} = \exp\overline{(\ln o-\ln p)^2}"
 _SCORES_API = [
-    m(rf"\mathrm{{NMSE}} = \dfrac{{\overline{{(o-p)^2}}}}{{{O}\thinspace {P}}}") + ", the normalised mean square error",
-    m(rf"\mathrm{{NAD}} = \dfrac{{\overline{{\lvert o-p\rvert}}}}{{{O}+{P}}}") + ", the normalised absolute difference",
-    m(r"\mathrm{MG} = \exp\overline{(\ln o-\ln p)}") + ", the geometric mean bias",
-    m(r"\mathrm{VG} = \exp\overline{(\ln o-\ln p)^2}") + ", the geometric variance",
+    m(NMSE) + ", the normalised mean square error",
+    m(NAD) + ", the normalised absolute difference",
+    m(MG) + ", the geometric mean bias",
+    m(VG) + ", the geometric variance",
 ]
 _SOURCES = ("The scores " + m(r"\mathrm{FB}") + ", " + m(r"\mathrm{FAC2}") + ", " + m(r"\mathrm{NMSE}") + ", " + m(r"\mathrm{NAD}") + ", " + m(r"\mathrm{MG}") + " and "
             + m(r"\mathrm{VG}") + " follow Chang & Hanna (2004); the hit rate follows VDI 3783-9")
 _DETECTION = ("The detection limit of a concentration is one value per case, " + m("10^{-3}") + " of the largest measured value. It sets " + m(ABS)
               + " of the hit rate and the both-below rule of " + m(r"\mathrm{FAC2}") + ", and floors the values in " + m(r"\mathrm{MG}") + " and " + m(r"\mathrm{VG}") + ".")
-_QUANTITIES = ("The quantities scored: " + m("U") + ", " + m("V") + " and " + m("W") + " (mean velocity components) over " + m("U_H") + "; " + m("k")
-               + " (turbulent kinetic energy) over " + m("U_H^2") + "; the speed " + m(r"\lvert\mathbf{U}\rvert") + " and " + m(r"\sqrt{\lvert\mathbf{U}\rvert^2+2k}")
-               + " against a thermistor's " + m(r"V_{\mathrm{s}}") + "; " + m(r"c^\ast = C/c_0") + " (dimensionless concentration) at turbulent Schmidt numbers "
-               + m(r"\mathrm{Sc_t}") + " of 0.3, 0.5 and 0.7; " + m(r"\theta") + " (floor-referenced temperature).")
+_QUANTITIES = [
+    m("U") + ", " + m("V") + " and " + m("W") + " (mean velocity components) over " + m("U_H"),
+    m("k") + " (turbulent kinetic energy) over " + m("U_H^2"),
+    "the speed " + m(r"\lvert\mathbf{U}\rvert") + " and " + m(r"\sqrt{\lvert\mathbf{U}\rvert^2+2k}") + ", against a thermistor's " + m(r"V_{\mathrm{s}}"),
+    m(r"c^\ast = C/c_0") + " (dimensionless concentration) at turbulent Schmidt numbers " + m(r"\mathrm{Sc_t}") + " of 0.3, 0.5 and 0.7",
+    m(r"\theta") + " (floor-referenced temperature)",
+]
+# The legend under a table of scores: one line per score.
+_LEGEND = [
+    m("n") + " — number of pairs of a measured value " + m("o_i") + " and a modelled value " + m("p_i") + " at one point",
+    m("R") + " — Pearson correlation coefficient of the pairs",
+    m(r"\mathrm{FAC2}") + " — fraction of pairs with " + m(r"0.5 \le p_i/o_i \le 2"),
+    m(r"\mathrm{FB}") + " — fractional bias " + m(FB) + ", positive when the model is low",
+    m(r"\mathrm{HR}") + " (hit rate) — fraction of pairs with " + m(HIT_REL) + " or " + m(HIT_ABS) + ", where " + m(rf"{REL} = 0.25") + " and "
+    + m(rf"{ABS} = 0.05\thinspace U_H") + " for a velocity component",
+]
+_LEGEND_API = [
+    m(NMSE) + " — normalised mean square error",
+    m(NAD) + " — normalised absolute difference",
+    m(MG) + " — geometric mean bias",
+    m(VG) + " — geometric variance",
+]
+_LEGEND_NOTES = [
+    "The ratio of " + m(r"\mathrm{FAC2}") + " keeps its sign, so a model of the other sign than the measurement is a miss; " + m(r"\mathrm{FB}") + ", " + m(r"\mathrm{NMSE}")
+    + " and " + m(r"\mathrm{NAD}") + " divide by the means, so they are undefined (shown as —) for a signed component unless the measured and the modelled mean are both positive",
+    "VDI 3783-9 calls the hit rate " + m("q") + " and the tolerances " + m("D") + " and " + m("W") + "; on this site those letters keep their other meanings (" + m("q")
+    + " the tracer release rate, " + m("D") + " the block size of Case C, " + m("W") + " the vertical velocity)",
+]
 
 
 # ----------------------------------------------------------------------------- the three texts
 
-def _table(rows):
-    return (["| Symbol | Column | Meaning | Unit |", "|---|---|---|---|"] + [f"| {s} | {c} | {t} | {u} |" for s, c, t, u in rows])
+def _meta(column, unit):
+    """` (columns `x`, `y`; m/s)`: the table columns an entry stands for and its unit, or nothing."""
+    parts = []
+    if column:
+        parts.append(("columns " if column.count("`") > 2 else "column ") + column)
+    if unit:
+        parts.append(", ".join("dimensionless" if u.strip() == "—" else u.strip() for u in unit.split(",")))
+    return " (" + "; ".join(parts) + ")" if parts else ""
+
+
+def _bullets(rows):
+    """The entries as bullet points: `- symbols (columns; unit) — meaning`."""
+    return [f"- {s}{_meta(c, u)} — {t}" for s, c, t, u in rows]
 
 
 def _details(summary, body):
@@ -179,21 +221,18 @@ def metrics():
 
 
 def full():
-    """Every symbol, column and score, in a <details>."""
-    L = ["**Geometry, reference scales and release**", ""] + _table(_SCALES)
-    L += ["", "**Velocity and turbulence**", ""] + _table(_VELOCITY)
-    L += ["", "**Concentration and temperature**", ""] + _table(_SCALARS)
-    L += ["", "**Scores**", ""] + metrics() + ["", _QUANTITIES]
+    """Every symbol, column and score, as bullet points in a <details>."""
+    L = ["**Geometry, reference scales and release**", ""] + _bullets(_SCALES)
+    L += ["", "**Velocity and turbulence**", ""] + _bullets(_VELOCITY)
+    L += ["", "**Concentration and temperature**", ""] + _bullets(_SCALARS)
+    L += ["", "**Scores**", ""] + [f"- {t}" for t in _LEGEND + _LEGEND_API + _LEGEND_NOTES] + ["- " + _DETECTION, f"- {_SOURCES}."]
+    L += ["", "**Quantities scored**", ""] + [f"- {t}" for t in _QUANTITIES]
     return _details("Nomenclature: symbols, columns and scores", L)
 
 
 def scores():
-    """The scores in one paragraph, and the quantities they are computed on: under a table of scores."""
-    legend = ("**Nomenclature.** " + m("n") + ": number of pairs of a measured value " + m("o_i") + " and a modelled value " + m("p_i") + " at one point; "
-              + m("R") + ": Pearson correlation coefficient; " + m(r"\mathrm{FAC2}") + ": fraction of pairs with " + m(r"0.5 \le p_i/o_i \le 2") + "; "
-              + m(r"\mathrm{FB}") + ": fractional bias " + m(FB) + ", positive when the model is low; hit rate " + m(r"\mathrm{HR}") + ": fraction of pairs with "
-              + m(HIT_REL) + " or " + m(HIT_ABS) + ", where " + m(rf"{REL} = 0.25") + " and " + m(rf"{ABS} = 0.05\thinspace U_H") + " for a velocity component.")
-    return [legend, "", _QUANTITIES]
+    """The scores as bullet points, and the quantities they are computed on: under a table of scores."""
+    return (["**Nomenclature**", ""] + [f"- {t}" for t in _LEGEND] + ["", "**Quantities scored**", ""] + [f"- {t}" for t in _QUANTITIES])
 
 
 KINDS = {"full": full, "scores": scores, "metrics": metrics}

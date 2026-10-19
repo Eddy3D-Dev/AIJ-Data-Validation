@@ -49,5 +49,5 @@ LAD and Cd are not in the dataset (only the shading rate, 81 %). The drag values
 >
 > - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
 > - Origin: the leeward face of the tree belt at ground level, on the vertical section through the belt\'s centre. Length unit: m (full scale).
-> - Wind direction: one direction, toward +x (perpendicular to the belt); the field wind\'s angle to the belt normal is not published.
+> - Wind direction: one direction, toward $$+x$$ (perpendicular to the belt); the field wind\'s angle to the belt normal is not published.
 > - 6 known issues in the published files are listed under [Known data issues]({{ '/cases/case-g/data/' | relative_url }}#known-data-issues).

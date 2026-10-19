@@ -49,7 +49,7 @@ Tracer-gas release on the Tokyo Polytechnic University Atsugi campus: 1:600 tunn
 > Before you compare
 >
 > - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
-> - Origin: centre of the tunnel turntable on the floor plane (ground surface there at z = 33.07 m). Length unit: m (FULL scale).
+> - Origin: centre of the tunnel turntable on the floor plane (ground surface there at $$z = 33.07\thinspace\mathrm{m}$$). Length unit: m (FULL scale).
 > - The published coordinates are multiplied by 600 in the cleaned table (`coordinate_scale_applied`).
-> - Wind direction: meteorological FROM-direction, so 180° blows toward +x; flow\_dir = (-cos WD, +sin WD), and a larger WD turns the plume toward -y. Measured on the tunnel\'s 175 / 180 / 185° and on the 18 field runs.
+> - Wind direction: meteorological FROM-direction, so 180° blows toward $$+x$$; flow\_dir = (-cos WD, +sin WD), and a larger WD turns the plume toward -y. Measured on the tunnel\'s 175 / 180 / 185° and on the 18 field runs.
 > - 10 known issues in the published files are listed under [Known data issues]({{ '/cases/case-m/data/' | relative_url }}#known-data-issues).
