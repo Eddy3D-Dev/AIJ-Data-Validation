@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/validation.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -283,20 +283,20 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-c-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-c-layout.png",
      "caption": "Case C, measurement points: A street x < 0 beside the centre block; B street x > 0 beside the centre block; C street y > 0 beside the centre block; D street y < 0 beside the centre block; E crossings beyond the corners of the centre block. Positions in multiples of D. Centre block absent (0D), D or 2D high; wind directions 0°, 22.5° and 45°."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-c-openfoam-agreement.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-c-openfoam-agreement.png",
      "caption": "Case C, OpenFOAM 12: measured Vs/U_H against the modelled √(|U|²+2k)/U_H (filled) and |U|/U_H (hollow), one panel per configuration (centre block × wind direction). Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-c-openfoam-bias-map.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-c-openfoam-bias-map.png",
      "caption": "Case C, OpenFOAM 12: log₂(model / tunnel) of the scalar speed at each of the 120 points on the plan of the array, per configuration — where the model is slow and where it is fast."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/pairs/openfoam12-realizableKE.csv?v=f3d2b649b543",
+    "url": "https://aij.eddy3d.com/api/cases/C/pairs/openfoam12-realizableKE.csv?v=f3d2b649b543",
     "path": "cases/C/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 90478,
@@ -560,20 +560,20 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-c-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-c-layout.png",
      "caption": "Case C, measurement points: A street x < 0 beside the centre block; B street x > 0 beside the centre block; C street y > 0 beside the centre block; D street y < 0 beside the centre block; E crossings beyond the corners of the centre block. Positions in multiples of D. Centre block absent (0D), D or 2D high; wind directions 0°, 22.5° and 45°."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-c-openfoam-agreement.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-c-openfoam-agreement.png",
      "caption": "Case C, OpenFOAM 12: measured Vs/U_H against the modelled √(|U|²+2k)/U_H (filled) and |U|/U_H (hollow), one panel per configuration (centre block × wind direction). Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-c-openfoam-bias-map.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-c-openfoam-bias-map.png",
      "caption": "Case C, OpenFOAM 12: log₂(model / tunnel) of the scalar speed at each of the 120 points on the plan of the array, per configuration — where the model is slow and where it is fast."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/pairs/openfoam12-realizableKE.csv?v=f3d2b649b543",
+    "url": "https://aij.eddy3d.com/api/cases/C/pairs/openfoam12-realizableKE.csv?v=f3d2b649b543",
     "path": "cases/C/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 90478,
@@ -837,20 +837,20 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-c-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-c-layout.png",
      "caption": "Case C, measurement points: A street x < 0 beside the centre block; B street x > 0 beside the centre block; C street y > 0 beside the centre block; D street y < 0 beside the centre block; E crossings beyond the corners of the centre block. Positions in multiples of D. Centre block absent (0D), D or 2D high; wind directions 0°, 22.5° and 45°."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-c-openfoam-agreement.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-c-openfoam-agreement.png",
      "caption": "Case C, OpenFOAM 12: measured Vs/U_H against the modelled √(|U|²+2k)/U_H (filled) and |U|/U_H (hollow), one panel per configuration (centre block × wind direction). Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-c-openfoam-bias-map.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-c-openfoam-bias-map.png",
      "caption": "Case C, OpenFOAM 12: log₂(model / tunnel) of the scalar speed at each of the 120 points on the plan of the array, per configuration — where the model is slow and where it is fast."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/pairs/openfoam12-realizableKE.csv?v=f3d2b649b543",
+    "url": "https://aij.eddy3d.com/api/cases/C/pairs/openfoam12-realizableKE.csv?v=f3d2b649b543",
     "path": "cases/C/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 90478,
@@ -1083,12 +1083,12 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-c-ml-agreement.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-c-ml-agreement.png",
      "caption": "Case C, Eddy3D ML surrogate (Yel-2.0): measured against predicted pedestrian-height speed, with the 1:1 line and the factor-of-two band."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/pairs/ml-surrogate.csv?v=6a2b60658913",
+    "url": "https://aij.eddy3d.com/api/cases/C/pairs/ml-surrogate.csv?v=6a2b60658913",
     "path": "cases/C/pairs/ml-surrogate.csv",
     "media_type": "text/csv",
     "bytes": 72957,

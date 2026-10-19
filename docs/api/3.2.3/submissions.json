@@ -1,0 +1,109 @@
+{
+ "$schema": "https://aij.eddy3d.com/api/3.2.3/schemas/submissions.schema.json",
+ "schema_version": "2.5.0",
+ "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
+ "license": "CC-BY-4.0",
+ "description": "Every solver submitted under submissions/ in the repository, scored by this build from the values it gave at the published points (cases/{id}/probes.csv). The inputs are self-reported; the scoring is this repository's, the same metrics and conventions as Eddy3D's results in validation.json. A submission scores the points it gave: `coverage` says how many of the measured points that is.",
+ "how_to_submit": "https://aij.eddy3d.com/byos/",
+ "status_meaning": {
+  "scored": "the submission gave values for this case and they were scored"
+ },
+ "metric_meaning": {
+  "Count": "number of measured points scored",
+  "MeanObserved": "mean of the measured, normalised quantity",
+  "MeanPredicted": "mean of the modelled, normalised quantity",
+  "Fb": "fractional bias, 2 (mean_obs - mean_pred) / (mean_obs + mean_pred); positive = model low",
+  "Nmse": "normalised mean square error",
+  "Nad": "normalised absolute difference",
+  "Fac2": "fraction of points within a factor of two (harsh near zero for sign-changing V and W)",
+  "HitRate": "fraction of points within D = 0.25 relative or W = 0.05 U_H absolute",
+  "Mg": "geometric mean bias",
+  "Vg": "geometric variance",
+  "GeometricPairs": "pairs with both values positive (used for Mg/Vg)",
+  "R": "Pearson correlation coefficient",
+  "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive; Fb, Nmse and Nad of a signed velocity component of Case H or I whose observed and predicted means are not both positive)"
+ },
+ "submissions": [
+  {
+   "slug": "example-openfoam12",
+   "solver": "OpenFOAM simpleFoam (Eddy3D Outdoor case writer)",
+   "version": "12",
+   "author": "Sustainable Urban Systems Lab",
+   "url": "https://openfoam.org",
+   "example": true,
+   "inlet": "log law fitted to AF_caseA.csv (u* = 0.343 m/s, z0 = 0.668 mm, kappa 0.41), the inlet cases/A.json recommends",
+   "turbulence_model": "realizable k-epsilon",
+   "ml_description": null,
+   "cases": [
+    {
+     "case": "A",
+     "title": "Case A — 1:1:2 building",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "U",
+       "score": "velocity.U",
+       "Count": 186,
+       "R": 0.9548412675647306,
+       "Fac2": 0.8172043010752689,
+       "Fb": 0.1849501728346505,
+       "HitRate": 0.5860215053763441,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "V",
+       "score": "velocity.V",
+       "Count": 186,
+       "R": 0.9609755519503335,
+       "Fac2": 0.34946236559139787,
+       "Fb": null,
+       "HitRate": 0.8924731182795699,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "W",
+       "score": "velocity.W",
+       "Count": 186,
+       "R": 0.7082287378700073,
+       "Fac2": 0.3978494623655914,
+       "Fb": -1.501177624963596,
+       "HitRate": 0.8010752688172043,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "|U|",
+       "score": "speed",
+       "Count": 186,
+       "R": 0.9402059410514126,
+       "Fac2": 0.8763440860215054,
+       "Fb": 0.1439352706779557,
+       "HitRate": 0.6344086021505376,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/3.2.3/submissions/example-openfoam12/A.csv?v=4eec5b1fe73a",
+      "path": "submissions/example-openfoam12/A.csv",
+      "media_type": "text/csv",
+      "bytes": 21480,
+      "sha256": "4eec5b1fe73a82f78f5312644aa06f5af0e41f958ebe23c07839d0d67299dd76"
+     }
+    }
+   ],
+   "submission_url": "https://aij.eddy3d.com/api/3.2.3/submissions/example-openfoam12.json",
+   "page": "https://aij.eddy3d.com/community/example-openfoam12/"
+  }
+ ]
+}

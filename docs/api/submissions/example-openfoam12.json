@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/submission.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/submission.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -23,7 +23,7 @@
  "provenance": "self-reported inputs (the values in submissions/<slug>/cases/<id>/probes.csv), scored by this repository's build with validation/score_submissions.py; not an Eddy3D result and not checked by the maintainers beyond the scoring",
  "scored_with": {
   "script": "validation/score_submissions.py",
-  "release": "3.2.2",
+  "release": "3.2.3",
   "conventions": "velocities and the speed over U_ref, k over U_ref^2 (Cases E, F and G publish ratios already); U, V, W, |U| and the thermistor bracket scored as signed velocities (FAC2's ratio keeps the sign; hit rate D = 0.25, W = 0.05); k by the plain definitions (D = 0.25 only); a thermistor, cup or sonic reading (a mean scalar speed) scored against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar), the two ends of its bracket; c* = C/c0 with one detection limit per case, 1e-3 of the largest measured value; theta = (T_floor - T)/(T_floor - T_H) scored like a positive velocity. The same conventions score the served Eddy3D results (docs/validation/method.md).",
   "metric_meaning": {
    "Count": "number of measured points scored",
@@ -102,7 +102,7 @@
     }
    ],
    "values": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/submissions/example-openfoam12/A.csv?v=4eec5b1fe73a",
+    "url": "https://aij.eddy3d.com/api/submissions/example-openfoam12/A.csv?v=4eec5b1fe73a",
     "path": "submissions/example-openfoam12/A.csv",
     "media_type": "text/csv",
     "bytes": 21480,
@@ -271,5 +271,5 @@
    "units_given": "normalised"
   }
  ],
- "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/community/example-openfoam12/"
+ "page": "https://aij.eddy3d.com/community/example-openfoam12/"
 }

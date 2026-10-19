@@ -1,6 +1,6 @@
 {
  "$schema": "https://json-schema.org/draft/2020-12/schema",
- "$id": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/cases.schema.json",
+ "$id": "https://aij.eddy3d.com/api/schemas/cases.schema.json",
  "title": "Case list",
  "description": "Every case with its frame, units, counts, engine status and links.",
  "type": "object",

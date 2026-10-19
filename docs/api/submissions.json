@@ -1,10 +1,10 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/submissions.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/submissions.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
  "description": "Every solver submitted under submissions/ in the repository, scored by this build from the values it gave at the published points (cases/{id}/probes.csv). The inputs are self-reported; the scoring is this repository's, the same metrics and conventions as Eddy3D's results in validation.json. A submission scores the points it gave: `coverage` says how many of the measured points that is.",
- "how_to_submit": "https://eddy3d-dev.github.io/AIJ-Data-Validation/byos/",
+ "how_to_submit": "https://aij.eddy3d.com/byos/",
  "status_meaning": {
   "scored": "the submission gave values for this case and they were scored"
  },
@@ -94,7 +94,7 @@
       }
      ],
      "values": {
-      "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/submissions/example-openfoam12/A.csv?v=4eec5b1fe73a",
+      "url": "https://aij.eddy3d.com/api/submissions/example-openfoam12/A.csv?v=4eec5b1fe73a",
       "path": "submissions/example-openfoam12/A.csv",
       "media_type": "text/csv",
       "bytes": 21480,
@@ -102,8 +102,8 @@
      }
     }
    ],
-   "submission_url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/submissions/example-openfoam12.json",
-   "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/community/example-openfoam12/"
+   "submission_url": "https://aij.eddy3d.com/api/submissions/example-openfoam12.json",
+   "page": "https://aij.eddy3d.com/community/example-openfoam12/"
   }
  ]
 }

@@ -201,7 +201,7 @@ def _patches(kind):
             "    top             { type slip; }\n    sides           { type slip; }\n}\n")
 
 
-def inflow_openfoam_text(case, meta, af_rows, af_cols, probes, site="https://eddy3d-dev.github.io/AIJ-Data-Validation", release=""):
+def inflow_openfoam_text(case, meta, af_rows, af_cols, probes, site="https://aij.eddy3d.com", release=""):
     """One text holding 0/U, 0/k, 0/epsilon, 0/nut and system/probes for the case's first wind direction, each after a `==== <path>` line.
 
     The inlet is the recommendation of inflow_block (a log law with k and epsilon from the ABL relations, or the tabulated profile);

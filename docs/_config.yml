@@ -1,7 +1,7 @@
 title: AIJ UWE
 description: Validation data from the AIJ (Architectural Institute of Japan) benchmark cases—cleaned and packaged as an API.
-url: "https://eddy3d-dev.github.io"
-baseurl: "/AIJ-Data-Validation"
+url: "https://aij.eddy3d.com"
+baseurl: ""
 
 # GitHub's Jekyll build: remote theme (pinned to a release, so a new theme version cannot change the site by
 # itself), whitelisted plugins only, no build step beyond Jekyll.
@@ -10,6 +10,7 @@ plugins:
   - jekyll-remote-theme
   - jekyll-include-cache
   - jekyll-redirect-from
+  - jekyll-sitemap
 
 permalink: pretty
 color_scheme: light
@@ -39,7 +40,7 @@ mathjax:
 
 # aux_links are written to the page as they are, so they carry the baseurl themselves.
 aux_links:
-  "API": "/AIJ-Data-Validation/api-reference/"
+  "API": "/api-reference/"
   "Releases": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/releases"
   "Repository": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation"
 
@@ -64,6 +65,8 @@ callouts:
 
 # Everything under api/ is static data; keep Jekyll from touching it beyond copying. Every other page gets the theme's
 # default layout (GitHub's jekyll-default-layout does the same; this does not depend on that plugin).
+include:
+  - .well-known
 keep_files:
   - api
 defaults:

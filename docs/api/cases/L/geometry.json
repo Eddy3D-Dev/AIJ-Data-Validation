@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/geometry.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/geometry.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -22,7 +22,7 @@
  "files": [
   {
    "configuration": "default",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/geometry.stl?v=20864bc75187",
+   "url": "https://aij.eddy3d.com/api/cases/L/geometry.stl?v=20864bc75187",
    "path": "cases/L/geometry.stl",
    "media_type": "model/stl",
    "bytes": 213909,
@@ -53,7 +53,7 @@
     "watertight": true
    },
    "bbox_matches_stated_dimensions": true,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-l.png",
+   "render": "https://aij.eddy3d.com/assets/geometry/case-l.png",
    "render_caption": "14 x 9 array of 0.06 m cubes on a 0.12 m pitch (model scale); the orange line is the floor tracer source between rows 7 and 8; the wind blows along +x.",
    "boxes": [
     {
@@ -1573,5 +1573,5 @@
    "analytic_volume": 0.027216
   }
  ],
- "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-l.png"
+ "render": "https://aij.eddy3d.com/assets/geometry/case-l.png"
 }

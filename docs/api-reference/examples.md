@@ -13,7 +13,7 @@ The endpoints are described on the [API]({{ '/api-reference/' | relative_url }})
 ## curl
 
 ```bash
-BASE=https://eddy3d-dev.github.io/AIJ-Data-Validation/api   # newest release; append /3.2.1 to pin
+BASE=https://aij.eddy3d.com/api   # newest release; append /3.2.1 to pin
 
 curl -s $BASE/index.json | jq '.versions, (.endpoints[].path)'
 curl -s $BASE/cases.json | jq '.cases[] | {id, title, counts, engines}'
@@ -38,7 +38,7 @@ Standard library only. This script runs as written against the live API.
 import csv, hashlib, io, json, statistics, urllib.request
 
 # The newest release. To pin the analysis to one release, append its number (any in /api/versions.json): ".../api/3.2.1".
-BASE = "https://eddy3d-dev.github.io/AIJ-Data-Validation/api"
+BASE = "https://aij.eddy3d.com/api"
 
 
 def fetch(url):

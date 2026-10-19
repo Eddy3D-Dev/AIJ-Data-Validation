@@ -1,11 +1,11 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/geometry-index.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/geometry-index.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
  "description": "Every cleaned STL, one entry per case and configuration. Each file is in its own case's frame and units — points.json of the same case lives in that frame — so they are not one scene: overlaid, the cases would stack at the origin, and Cases E, F, G and M are full scale while the others are model scale. geometry.zip holds the same files under archive_name.",
  "archive": {
-  "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/geometry.zip?v=9ed663e1d97c",
+  "url": "https://aij.eddy3d.com/api/geometry.zip?v=9ed663e1d97c",
   "path": "geometry.zip",
   "media_type": "application/zip",
   "bytes": 3091670,
@@ -15,7 +15,7 @@
   {
    "case": "A",
    "configuration": "default",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/geometry.stl?v=89acdfbbff84",
+   "url": "https://aij.eddy3d.com/api/cases/A/geometry.stl?v=89acdfbbff84",
    "path": "cases/A/geometry.stl",
    "media_type": "model/stl",
    "bytes": 1756,
@@ -45,12 +45,12 @@
    "body_contacts": 0,
    "inconsistent_triangles": 0,
    "min_body_volume": 0.001024,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-a.png"
+   "render": "https://aij.eddy3d.com/assets/geometry/case-a.png"
   },
   {
    "case": "B",
    "configuration": "default",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/geometry.stl?v=e6de70eeb17d",
+   "url": "https://aij.eddy3d.com/api/cases/B/geometry.stl?v=e6de70eeb17d",
    "path": "cases/B/geometry.stl",
    "media_type": "model/stl",
    "bytes": 1738,
@@ -80,12 +80,12 @@
    "body_contacts": 0,
    "inconsistent_triangles": 0,
    "min_body_volume": 0.002,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-b.png"
+   "render": "https://aij.eddy3d.com/assets/geometry/case-b.png"
   },
   {
    "case": "C",
    "configuration": "2D",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry.stl?v=b8c31c57c453",
+   "url": "https://aij.eddy3d.com/api/cases/C/geometry.stl?v=b8c31c57c453",
    "path": "cases/C/geometry.stl",
    "media_type": "model/stl",
    "bytes": 14576,
@@ -115,12 +115,12 @@
    "body_contacts": 0,
    "inconsistent_triangles": 0,
    "min_body_volume": 0.008,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-c-2d.png"
+   "render": "https://aij.eddy3d.com/assets/geometry/case-c-2d.png"
   },
   {
    "case": "C",
    "configuration": "0D",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry_0D.stl?v=0f08bcd4dd6b",
+   "url": "https://aij.eddy3d.com/api/cases/C/geometry_0D.stl?v=0f08bcd4dd6b",
    "path": "cases/C/geometry_0D.stl",
    "media_type": "model/stl",
    "bytes": 12961,
@@ -150,12 +150,12 @@
    "body_contacts": 0,
    "inconsistent_triangles": 0,
    "min_body_volume": 0.008,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-c-0d.png"
+   "render": "https://aij.eddy3d.com/assets/geometry/case-c-0d.png"
   },
   {
    "case": "C",
    "configuration": "1D",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry_1D.stl?v=ac92c8ed427c",
+   "url": "https://aij.eddy3d.com/api/cases/C/geometry_1D.stl?v=ac92c8ed427c",
    "path": "cases/C/geometry_1D.stl",
    "media_type": "model/stl",
    "bytes": 14576,
@@ -185,12 +185,12 @@
    "body_contacts": 0,
    "inconsistent_triangles": 0,
    "min_body_volume": 0.008,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-c-1d.png"
+   "render": "https://aij.eddy3d.com/assets/geometry/case-c-1d.png"
   },
   {
    "case": "D",
    "configuration": "default",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/geometry.stl?v=531895531271",
+   "url": "https://aij.eddy3d.com/api/cases/D/geometry.stl?v=531895531271",
    "path": "cases/D/geometry.stl",
    "media_type": "model/stl",
    "bytes": 144878,
@@ -220,12 +220,12 @@
    "body_contacts": 0,
    "inconsistent_triangles": 0,
    "min_body_volume": 0.00025,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-d.png"
+   "render": "https://aij.eddy3d.com/assets/geometry/case-d.png"
   },
   {
    "case": "E",
    "configuration": "ac",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/geometry.stl?v=c29624fdae6d",
+   "url": "https://aij.eddy3d.com/api/cases/E/geometry.stl?v=c29624fdae6d",
    "path": "cases/E/geometry.stl",
    "media_type": "model/stl",
    "bytes": 1210554,
@@ -255,12 +255,12 @@
    "body_contacts": 11,
    "inconsistent_triangles": 0,
    "min_body_volume": 4.125,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-e-after.png"
+   "render": "https://aij.eddy3d.com/assets/geometry/case-e-after.png"
   },
   {
    "case": "E",
    "configuration": "bc",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/geometry_bc.stl?v=9b944d97a817",
+   "url": "https://aij.eddy3d.com/api/cases/E/geometry_bc.stl?v=9b944d97a817",
    "path": "cases/E/geometry_bc.stl",
    "media_type": "model/stl",
    "bytes": 1205426,
@@ -290,12 +290,12 @@
    "body_contacts": 11,
    "inconsistent_triangles": 0,
    "min_body_volume": 4.125,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-e-before.png"
+   "render": "https://aij.eddy3d.com/assets/geometry/case-e-before.png"
   },
   {
    "case": "F",
    "configuration": "default",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/geometry.stl?v=8799740aa324",
+   "url": "https://aij.eddy3d.com/api/cases/F/geometry.stl?v=8799740aa324",
    "path": "cases/F/geometry.stl",
    "media_type": "model/stl",
    "bytes": 9661421,
@@ -325,12 +325,12 @@
    "body_contacts": 0,
    "inconsistent_triangles": 0,
    "min_body_volume": 13344850.393472837,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-f.png"
+   "render": "https://aij.eddy3d.com/assets/geometry/case-f.png"
   },
   {
    "case": "G",
    "configuration": "default",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/geometry.stl?v=09d23c794155",
+   "url": "https://aij.eddy3d.com/api/cases/G/geometry.stl?v=09d23c794155",
    "path": "cases/G/geometry.stl",
    "media_type": "model/stl",
    "bytes": 1558,
@@ -360,12 +360,12 @@
    "body_contacts": 0,
    "inconsistent_triangles": 0,
    "min_body_volume": 858.4,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-g.png"
+   "render": "https://aij.eddy3d.com/assets/geometry/case-g.png"
   },
   {
    "case": "H",
    "configuration": "default",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/geometry.stl?v=4836687efff9",
+   "url": "https://aij.eddy3d.com/api/cases/H/geometry.stl?v=4836687efff9",
    "path": "cases/H/geometry.stl",
    "media_type": "model/stl",
    "bytes": 1666,
@@ -395,12 +395,12 @@
    "body_contacts": 0,
    "inconsistent_triangles": 0,
    "min_body_volume": 0.002,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-h.png"
+   "render": "https://aij.eddy3d.com/assets/geometry/case-h.png"
   },
   {
    "case": "I",
    "configuration": "default",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/geometry.stl?v=ff61cbb22798",
+   "url": "https://aij.eddy3d.com/api/cases/I/geometry.stl?v=ff61cbb22798",
    "path": "cases/I/geometry.stl",
    "media_type": "model/stl",
    "bytes": 1738,
@@ -430,12 +430,12 @@
    "body_contacts": 0,
    "inconsistent_triangles": 0,
    "min_body_volume": 0.001,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-i.png"
+   "render": "https://aij.eddy3d.com/assets/geometry/case-i.png"
   },
   {
    "case": "J",
    "configuration": "default",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/geometry.stl?v=1bd33d8d3531",
+   "url": "https://aij.eddy3d.com/api/cases/J/geometry.stl?v=1bd33d8d3531",
    "path": "cases/J/geometry.stl",
    "media_type": "model/stl",
    "bytes": 1702,
@@ -465,12 +465,12 @@
    "body_contacts": 0,
    "inconsistent_triangles": 0,
    "min_body_volume": 0.001024,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-j.png"
+   "render": "https://aij.eddy3d.com/assets/geometry/case-j.png"
   },
   {
    "case": "K",
    "configuration": "default",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/geometry.stl?v=f0f8a3adfa29",
+   "url": "https://aij.eddy3d.com/api/cases/K/geometry.stl?v=f0f8a3adfa29",
    "path": "cases/K/geometry.stl",
    "media_type": "model/stl",
    "bytes": 136698,
@@ -500,12 +500,12 @@
    "body_contacts": 0,
    "inconsistent_triangles": 0,
    "min_body_volume": 0.000216,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-k.png"
+   "render": "https://aij.eddy3d.com/assets/geometry/case-k.png"
   },
   {
    "case": "L",
    "configuration": "default",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/geometry.stl?v=20864bc75187",
+   "url": "https://aij.eddy3d.com/api/cases/L/geometry.stl?v=20864bc75187",
    "path": "cases/L/geometry.stl",
    "media_type": "model/stl",
    "bytes": 213909,
@@ -535,12 +535,12 @@
    "body_contacts": 0,
    "inconsistent_triangles": 0,
    "min_body_volume": 0.000216,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-l.png"
+   "render": "https://aij.eddy3d.com/assets/geometry/case-l.png"
   },
   {
    "case": "M",
    "configuration": "default",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/geometry.stl?v=e4e0a2044536",
+   "url": "https://aij.eddy3d.com/api/cases/M/geometry.stl?v=e4e0a2044536",
    "path": "cases/M/geometry.stl",
    "media_type": "model/stl",
    "bytes": 8475730,
@@ -570,7 +570,7 @@
    "body_contacts": 0,
    "inconsistent_triangles": 0,
    "min_body_volume": 11524435.200124165,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-m.png"
+   "render": "https://aij.eddy3d.com/assets/geometry/case-m.png"
   }
  ]
 }

@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/validation.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -273,20 +273,20 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-f-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-f-layout.png",
      "caption": "Case F, measurement points: A tunnel plane 5 m above ground; B tunnel plane 9 m above ground; C tunnel plane 20 m above ground; D field cup anemometers, 3 to 11 m above ground. Positions in metres, full scale. SMB and KDD: the reference buildings. The field anemometers stand at the places of the tunnel points."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-f-openfoam-agreement.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-f-openfoam-agreement.png",
      "caption": "Case F, OpenFOAM 12 (realizable k-ε), wind from NNW: the tunnel's and the field's U/U(500 m) against the modelled √(|U|²+2k) (filled) and |U| (hollow) over the model's own U(500 m), in two vertical frames (top: the published z in the STL's frame; bottom: the STL's ground plus the instrument height), for the 9 m plane, all 33 tunnel points (planes at 5, 9 and 20 m) and the 13 field observations (bars: the standard deviation of the 10-minute means). Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-f-openfoam-bias-map.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-f-openfoam-bias-map.png",
      "caption": "Case F, OpenFOAM 12, wind from NNW: log₂(model / tunnel) of the scalar speed at the tunnel's 13 points of the 9 m plane on the plan of the district (full-scale metres, north up; the arrow is the wind), in the two vertical frames."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/pairs/openfoam12-realizableKE.csv?v=e81e010859e6",
+    "url": "https://aij.eddy3d.com/api/cases/F/pairs/openfoam12-realizableKE.csv?v=e81e010859e6",
     "path": "cases/F/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 9531,
@@ -541,20 +541,20 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-f-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-f-layout.png",
      "caption": "Case F, measurement points: A tunnel plane 5 m above ground; B tunnel plane 9 m above ground; C tunnel plane 20 m above ground; D field cup anemometers, 3 to 11 m above ground. Positions in metres, full scale. SMB and KDD: the reference buildings. The field anemometers stand at the places of the tunnel points."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-f-openfoam-agreement.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-f-openfoam-agreement.png",
      "caption": "Case F, OpenFOAM 12 (realizable k-ε), wind from NNW: the tunnel's and the field's U/U(500 m) against the modelled √(|U|²+2k) (filled) and |U| (hollow) over the model's own U(500 m), in two vertical frames (top: the published z in the STL's frame; bottom: the STL's ground plus the instrument height), for the 9 m plane, all 33 tunnel points (planes at 5, 9 and 20 m) and the 13 field observations (bars: the standard deviation of the 10-minute means). Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-f-openfoam-bias-map.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-f-openfoam-bias-map.png",
      "caption": "Case F, OpenFOAM 12, wind from NNW: log₂(model / tunnel) of the scalar speed at the tunnel's 13 points of the 9 m plane on the plan of the district (full-scale metres, north up; the arrow is the wind), in the two vertical frames."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/pairs/openfoam12-realizableKE.csv?v=e81e010859e6",
+    "url": "https://aij.eddy3d.com/api/cases/F/pairs/openfoam12-realizableKE.csv?v=e81e010859e6",
     "path": "cases/F/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 9531,

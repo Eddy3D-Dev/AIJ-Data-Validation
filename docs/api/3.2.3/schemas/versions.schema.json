@@ -1,0 +1,129 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://aij.eddy3d.com/api/3.2.3/schemas/versions.schema.json",
+ "title": "Release list",
+ "description": "Every release of the data and API, newest first, with the address of its files.",
+ "type": "object",
+ "required": [
+  "$schema",
+  "schema_version",
+  "data_version",
+  "license",
+  "latest",
+  "latest_base_url",
+  "versions"
+ ],
+ "properties": {
+  "$schema": {
+   "type": "string",
+   "format": "uri"
+  },
+  "schema_version": {
+   "type": "string",
+   "pattern": "^\\d+\\.\\d+\\.\\d+$",
+   "description": "the API's version (semantic versioning); see index.json changelog"
+  },
+  "data_version": {
+   "type": "string",
+   "pattern": "^[0-9a-f]{64}$",
+   "description": "SHA-256 over every served measurement, geometry and score file; changes when, and only when, the data does"
+  },
+  "license": {
+   "const": "CC-BY-4.0",
+   "description": "SPDX identifier of the data's licence"
+  },
+  "description": {
+   "type": "string"
+  },
+  "latest": {
+   "type": "string",
+   "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$",
+   "description": "the newest release; the unversioned /api/ paths equal it"
+  },
+  "latest_base_url": {
+   "type": "string",
+   "format": "uri",
+   "description": "the unversioned alias of the newest release"
+  },
+  "versions": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "version",
+     "date",
+     "status",
+     "schema_version",
+     "data_version",
+     "base_url",
+     "index_url",
+     "self_contained",
+     "tag",
+     "tag_url",
+     "changelog_url"
+    ],
+    "properties": {
+     "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+     },
+     "date": {
+      "type": "string",
+      "format": "date"
+     },
+     "status": {
+      "enum": [
+       "latest",
+       "superseded"
+      ]
+     },
+     "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+     },
+     "data_version": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+     },
+     "base_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "where this release's files are frozen: GET base_url + a path from its index.json"
+     },
+     "index_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "the index.json of this release"
+     },
+     "fallback_base_url": {
+      "type": [
+       "string",
+       "null"
+      ],
+      "format": "uri"
+     },
+     "self_contained": {
+      "type": "boolean",
+      "description": "true if every URL to a file of the API inside this release's documents points back into base_url (versions.json, served only at the unversioned path, aside)"
+     },
+     "note": {
+      "type": "string"
+     },
+     "tag": {
+      "type": "string",
+      "pattern": "^v\\d+\\.\\d+\\.\\d+$"
+     },
+     "tag_url": {
+      "type": "string",
+      "format": "uri"
+     },
+     "changelog_url": {
+      "type": "string",
+      "format": "uri"
+     }
+    }
+   },
+   "minItems": 1
+  }
+ }
+}

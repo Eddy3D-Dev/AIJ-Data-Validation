@@ -17,7 +17,7 @@ import check_citation as K  # noqa: E402
 import citation as C  # noqa: E402
 
 REL = C.Release("1.2.3", "2030-01-02", "abcdef012345" + "0" * 52)
-ROOT = "https://eddy3d-dev.github.io/AIJ-Data-Validation/api"
+ROOT = "https://aij.eddy3d.com/api"
 T = "AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API"
 
 API_APA = f"Karadag, I., & Kastner, P. (2030). {T} (Version 1.2.3) [Data set]. Sustainable Urban Systems Lab. {ROOT}/1.2.3/index.json"

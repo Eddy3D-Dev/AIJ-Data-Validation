@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/validation.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -152,24 +152,24 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-layout.png",
      "caption": "Case G, measurement lines and planes: A to G vertical profiles, x/H = 0.25, 0.5, 1, 2, 3, 4, 5. Positions in multiples of H."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-sweep.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-openfoam-sweep.png",
      "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-stations.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-openfoam-stations.png",
      "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-profiles.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-openfoam-profiles.png",
      "caption": "Case G, OpenFOAM 12, conifer crown of the drag sweep: the field's U/U_H against the modelled |U| over the model's own U(7 m) at four of the seven masts behind the belt, offset by 1 per mast."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
+    "url": "https://aij.eddy3d.com/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
     "path": "cases/G/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 21505,
@@ -302,24 +302,24 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-layout.png",
      "caption": "Case G, measurement lines and planes: A to G vertical profiles, x/H = 0.25, 0.5, 1, 2, 3, 4, 5. Positions in multiples of H."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-sweep.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-openfoam-sweep.png",
      "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-stations.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-openfoam-stations.png",
      "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-profiles.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-openfoam-profiles.png",
      "caption": "Case G, OpenFOAM 12, conifer crown of the drag sweep: the field's U/U_H against the modelled |U| over the model's own U(7 m) at four of the seven masts behind the belt, offset by 1 per mast."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
+    "url": "https://aij.eddy3d.com/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
     "path": "cases/G/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 21505,
@@ -452,24 +452,24 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-layout.png",
      "caption": "Case G, measurement lines and planes: A to G vertical profiles, x/H = 0.25, 0.5, 1, 2, 3, 4, 5. Positions in multiples of H."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-sweep.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-openfoam-sweep.png",
      "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-stations.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-openfoam-stations.png",
      "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-profiles.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-openfoam-profiles.png",
      "caption": "Case G, OpenFOAM 12, conifer crown of the drag sweep: the field's U/U_H against the modelled |U| over the model's own U(7 m) at four of the seven masts behind the belt, offset by 1 per mast."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
+    "url": "https://aij.eddy3d.com/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
     "path": "cases/G/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 21505,
@@ -602,24 +602,24 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-layout.png",
      "caption": "Case G, measurement lines and planes: A to G vertical profiles, x/H = 0.25, 0.5, 1, 2, 3, 4, 5. Positions in multiples of H."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-sweep.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-openfoam-sweep.png",
      "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-stations.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-openfoam-stations.png",
      "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-profiles.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-openfoam-profiles.png",
      "caption": "Case G, OpenFOAM 12, conifer crown of the drag sweep: the field's U/U_H against the modelled |U| over the model's own U(7 m) at four of the seven masts behind the belt, offset by 1 per mast."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
+    "url": "https://aij.eddy3d.com/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
     "path": "cases/G/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 21505,
@@ -752,24 +752,24 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-layout.png",
      "caption": "Case G, measurement lines and planes: A to G vertical profiles, x/H = 0.25, 0.5, 1, 2, 3, 4, 5. Positions in multiples of H."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-sweep.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-openfoam-sweep.png",
      "caption": "Case G, OpenFOAM 12 (realizable k-ε), the drag sweep: the field's U/U_H and k/U_H² at the 28 points against the modelled |U| and k over the model's own U(7 m), one column per arm: no belt, three crowns of rising Cd·LAD and the real 74 m belt as a half domain. LAD and Cd are not in the dataset. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-stations.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-openfoam-stations.png",
      "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-profiles.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-openfoam-profiles.png",
      "caption": "Case G, OpenFOAM 12, conifer crown of the drag sweep: the field's U/U_H against the modelled |U| over the model's own U(7 m) at four of the seven masts behind the belt, offset by 1 per mast."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
+    "url": "https://aij.eddy3d.com/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
     "path": "cases/G/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 21505,

@@ -1,0 +1,24 @@
+# auth.md: aij.eddy3d.com
+
+**Audience:** AI agents and automated clients.
+
+**No authentication.** The site and the API under `/api/` are public, read-only and need no account, key or token.
+There is no registration or provisioning endpoint, no OAuth server and no credential to obtain, so there is no
+protected-resource or authorization-server metadata to publish.
+
+## How to use it
+
+- Send plain `GET` requests; the files are static. Start at [`/api/index.json`](https://aij.eddy3d.com/api/index.json),
+  [`/api/llms.txt`](https://aij.eddy3d.com/api/llms.txt) or the OpenAPI description
+  [`/api/openapi.json`](https://aij.eddy3d.com/api/openapi.json).
+- Identify yourself with a descriptive `User-Agent`, honour [`/robots.txt`](https://aij.eddy3d.com/robots.txt) and its content signals,
+  and cache: files carry a `?v=<hash>` and do not change within a release.
+- To pin an analysis, use a release's own base URL ([`/api/versions.json`](https://aij.eddy3d.com/api/versions.json)).
+
+## Licence
+
+CC-BY-4.0 for the data (attribution: [`/api-reference/`](https://aij.eddy3d.com/api-reference/) and `CITATION.cff`).
+
+## Contact
+
+<https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions>

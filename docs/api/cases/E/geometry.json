@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/geometry.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/geometry.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -24,7 +24,7 @@
  "files": [
   {
    "configuration": "ac",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/geometry.stl?v=c29624fdae6d",
+   "url": "https://aij.eddy3d.com/api/cases/E/geometry.stl?v=c29624fdae6d",
    "path": "cases/E/geometry.stl",
    "media_type": "model/stl",
    "bytes": 1210554,
@@ -55,12 +55,12 @@
     "watertight": true
    },
    "bbox_matches_stated_dimensions": null,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-e-after.png",
+   "render": "https://aij.eddy3d.com/assets/geometry/case-e-after.png",
    "render_caption": "After construction: the 60 m high-rise and the two 18 m mid-rises (blue) added."
   },
   {
    "configuration": "bc",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/geometry_bc.stl?v=9b944d97a817",
+   "url": "https://aij.eddy3d.com/api/cases/E/geometry_bc.stl?v=9b944d97a817",
    "path": "cases/E/geometry_bc.stl",
    "media_type": "model/stl",
    "bytes": 1205426,
@@ -91,9 +91,9 @@
     "watertight": true
    },
    "bbox_matches_stated_dimensions": null,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-e-before.png",
+   "render": "https://aij.eddy3d.com/assets/geometry/case-e-before.png",
    "render_caption": "Before construction: the existing district, about 400 m across (full scale)."
   }
  ],
- "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-e-after.png"
+ "render": "https://aij.eddy3d.com/assets/geometry/case-e-after.png"
 }

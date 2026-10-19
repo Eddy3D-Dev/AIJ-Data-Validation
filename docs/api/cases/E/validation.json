@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/validation.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -170,20 +170,20 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-e-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-e-layout.png",
      "caption": "Case E, measurement points: A within 30 m of the 60 m building; B within 30 m of the two 18 m buildings; C elsewhere. Positions in metres, full scale. Dark footprints: the three buildings added in the after state."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-e-openfoam-agreement.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-e-openfoam-agreement.png",
      "caption": "Case E, OpenFOAM 12, wind from SW: measured velocity ratio against the modelled √(|U|²+2k)/U_ref (filled) and |U|/U_ref (hollow), before and after construction, and the change the construction makes. Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-e-openfoam-bias-map.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-e-openfoam-bias-map.png",
      "caption": "Case E, OpenFOAM 12, wind from SW: log₂(model / tunnel) of the scalar speed at the 80 points on the plan of the district, before and after construction."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/pairs/openfoam12-realizableKE.csv?v=fa16bc3bcd62",
+    "url": "https://aij.eddy3d.com/api/cases/E/pairs/openfoam12-realizableKE.csv?v=fa16bc3bcd62",
     "path": "cases/E/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 11927,
@@ -1020,12 +1020,12 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-e-ml-agreement.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-e-ml-agreement.png",
      "caption": "Case E, Eddy3D ML surrogate (Yel-2.0): measured against predicted pedestrian-height speed, with the 1:1 line and the factor-of-two band."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/pairs/ml-surrogate.csv?v=90b71f5762aa",
+    "url": "https://aij.eddy3d.com/api/cases/E/pairs/ml-surrogate.csv?v=90b71f5762aa",
     "path": "cases/E/pairs/ml-surrogate.csv",
     "media_type": "text/csv",
     "bytes": 167034,

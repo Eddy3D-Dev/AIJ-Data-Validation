@@ -1,6 +1,6 @@
 ==== 0/U
 /*--------------------------------*- C++ -*----------------------------------*\
-  cases/M/inflow_openfoam.txt of the AIJ UWE API (release 3.2.2), written by scripts/build_api.py; the walk: https://eddy3d-dev.github.io/AIJ-Data-Validation/byos/
+  cases/M/inflow_openfoam.txt of the AIJ UWE API (release 3.2.3), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
   RECOMMENDED inlet (this repository's choice, not the benchmark's): the measured approach-flow profile (approach_flow.csv, the benchmark's data) as a table; U is m/s, z is m. flowDir is the case's wind direction 175 deg by the convention x_north_y_west (cases/M.json inflow.flow_direction); the case has 3 direction(s): rotate flowDir for another.
   OpenFOAM 12 (openfoam.org) syntax. ESI OpenFOAM v2xxx: the three atmBoundaryLayerInlet* conditions and nutkAtmRoughWallFunction take the same entries there; fixedProfile is openfoam.org only (use timeVaryingMappedFixedValue or codedFixedValue).
 \*---------------------------------------------------------------------------*/
@@ -72,7 +72,7 @@ boundaryField
 
 ==== 0/k
 /*--------------------------------*- C++ -*----------------------------------*\
-  cases/M/inflow_openfoam.txt of the AIJ UWE API (release 3.2.2), written by scripts/build_api.py; the walk: https://eddy3d-dev.github.io/AIJ-Data-Validation/byos/
+  cases/M/inflow_openfoam.txt of the AIJ UWE API (release 3.2.3), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
   RECOMMENDED: the measured k as a table; k is m^2/s^2
 \*---------------------------------------------------------------------------*/
 FoamFile
@@ -143,7 +143,7 @@ boundaryField
 
 ==== 0/epsilon
 /*--------------------------------*- C++ -*----------------------------------*\
-  cases/M/inflow_openfoam.txt of the AIJ UWE API (release 3.2.2), written by scripts/build_api.py; the walk: https://eddy3d-dev.github.io/AIJ-Data-Validation/byos/
+  cases/M/inflow_openfoam.txt of the AIJ UWE API (release 3.2.3), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
   RECOMMENDED: epsilon = Cmu^0.5 k dU/dz from the tabulated U and k (central differences)
 \*---------------------------------------------------------------------------*/
 FoamFile
@@ -214,7 +214,7 @@ boundaryField
 
 ==== system/probes
 /*--------------------------------*- C++ -*----------------------------------*\
-  cases/M/inflow_openfoam.txt of the AIJ UWE API (release 3.2.2), written by scripts/build_api.py; the walk: https://eddy3d-dev.github.io/AIJ-Data-Validation/byos/
+  cases/M/inflow_openfoam.txt of the AIJ UWE API (release 3.2.3), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
   the benchmark's measurement points (cases/M/probes.csv, the data), in the case frame and units: include from controlDict functions
 \*---------------------------------------------------------------------------*/
 FoamFile

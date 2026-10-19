@@ -24,7 +24,7 @@ from collections import namedtuple
 
 ORG = "Sustainable Urban Systems Lab"
 REPO_URL = "https://github.com/Eddy3D-Dev/AIJ-Data-Validation"
-SITE = "https://eddy3d-dev.github.io/AIJ-Data-Validation"
+SITE = "https://aij.eddy3d.com"
 TITLE = ("AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, "
          "geometry and validation API")
 ABSTRACT = ("Cleaned wind-tunnel and field data of the AIJ Urban Wind Environment benchmark, Cases A-M, with their "

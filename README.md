@@ -1,8 +1,8 @@
 # AIJ-Data-Validation
 
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Feddy3d-dev.github.io%2FAIJ-Data-Validation%2F&label=website&up_message=online&down_message=offline)](https://eddy3d-dev.github.io/AIJ-Data-Validation/)
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Faij.eddy3d.com%2F&label=website&up_message=online&down_message=offline)](https://aij.eddy3d.com/)
 [![Release](https://img.shields.io/github/v/release/Eddy3D-Dev/AIJ-Data-Validation?label=release&sort=semver)](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/releases)
-[![API schema](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Feddy3d-dev.github.io%2FAIJ-Data-Validation%2Fapi%2Findex.json&query=%24.schema_version&label=API%20schema&color=blue)](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/)
+[![API schema](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Faij.eddy3d.com%2Fapi%2Findex.json&query=%24.schema_version&label=API%20schema&color=blue)](https://aij.eddy3d.com/api-reference/)
 [![Build](https://img.shields.io/github/actions/workflow/status/Eddy3D-Dev/AIJ-Data-Validation/pages.yml?branch=main&label=build)](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/actions/workflows/pages.yml)
 [![Data licence: CC BY 4.0](https://img.shields.io/badge/data%20licence-CC%20BY%204.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
 [![Data paper](https://img.shields.io/badge/data%20paper-10.1002%2F2475--8876.70083-informational)](https://doi.org/10.1002/2475-8876.70083)
@@ -37,9 +37,9 @@ Validation data from the AIJ (Architectural Institute of Japan) benchmark cases�
 </tr>
 </table>
 
-- **Site:** <https://eddy3d-dev.github.io/AIJ-Data-Validation/>
-- **API:** [`/api/index.json`](https://eddy3d-dev.github.io/AIJ-Data-Validation/api/index.json) · [`/api/llms.txt`](https://eddy3d-dev.github.io/AIJ-Data-Validation/api/llms.txt) for agents · [OpenAPI](https://eddy3d-dev.github.io/AIJ-Data-Validation/api/openapi.json) (the same files are in [`docs/api/`](docs/api/)); every release is also frozen under `/api/<release>/`, listed in [`/api/versions.json`](https://eddy3d-dev.github.io/AIJ-Data-Validation/api/versions.json)
-- **Validate your own solver:** [the walk](https://eddy3d-dev.github.io/AIJ-Data-Validation/byos/) with `validation/score_submissions.py`, the [inlet contract](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/inflow/), and the [community results](https://eddy3d-dev.github.io/AIJ-Data-Validation/community/) of submitted solvers ([CONTRIBUTING.md](CONTRIBUTING.md))
+- **Site:** <https://aij.eddy3d.com/>
+- **API:** [`/api/index.json`](https://aij.eddy3d.com/api/index.json) · [`/api/llms.txt`](https://aij.eddy3d.com/api/llms.txt) for agents · [OpenAPI](https://aij.eddy3d.com/api/openapi.json) (the same files are in [`docs/api/`](docs/api/)); every release is also frozen under `/api/<release>/`, listed in [`/api/versions.json`](https://aij.eddy3d.com/api/versions.json)
+- **Validate your own solver:** [the walk](https://aij.eddy3d.com/byos/) with `validation/score_submissions.py`, the [inlet contract](https://aij.eddy3d.com/validation/inflow/), and the [community results](https://aij.eddy3d.com/community/) of submitted solvers ([CONTRIBUTING.md](CONTRIBUTING.md))
 - **Licence:** code MIT ([LICENSE](LICENSE)); data CC BY 4.0 ([LICENSE-DATA](LICENSE-DATA))
 - **Release:** [v3.2.0](CHANGELOG.md), rebuilt byte for byte from its tag (see *Versions, releases and reproducing them*)
 
@@ -50,19 +50,19 @@ Validation data from the AIJ (Architectural Institute of Japan) benchmark cases�
 **API, APA**
 
 ```text
-Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.2.2) [Data set]. Sustainable Urban Systems Lab. https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.2/index.json
+Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.2.3) [Data set]. Sustainable Urban Systems Lab. https://aij.eddy3d.com/api/3.2.3/index.json
 ```
 
 **API, BibTeX**
 
 ```bibtex
-@misc{aijuwe_api_3_2_2,
+@misc{aijuwe_api_3_2_3,
   author    = "Karadag, Ilker and Kastner, Patrick",
   title     = "{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}",
   year      = "2026",
-  version   = "3.2.2",
+  version   = "3.2.3",
   publisher = "Sustainable Urban Systems Lab",
-  url       = "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.2/index.json",
+  url       = "https://aij.eddy3d.com/api/3.2.3/index.json",
   note      = "Data set; data version ecbbeee22eb3"
 }
 ```
@@ -906,7 +906,7 @@ The pattern follows the tunnel and the field in both frames and the level depend
 model of the tunnel can be expected to reach. The solved field's R 0.935 with the NNW column and R 0.077 with the SSE
 column corroborate reading the direction labels as the direction the wind comes from, at this direction.
 
-Full reading: [Case F validation](https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-f/validation/).
+Full reading: [Case F validation](https://aij.eddy3d.com/cases/case-f/validation/).
 
 </details>
 
@@ -914,7 +914,7 @@ Full reading: [Case F validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 <!--fig name="case-f-openfoam-agreement.png" alt="Case F, measured vs modelled speed" width="800"--><a href="validation/figures/case-f-openfoam-agreement.png"><img src="docs/assets/web/case-f-openfoam-agreement.png" width="800" height="475" loading="lazy" alt="Case F, measured vs modelled speed"></a><!--/fig-->
 
-**Known issues.** 11 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/F.json`](docs/api/cases/F.json).
+**Known issues.** 11 in the published files, listed on the [Known data issues](https://aij.eddy3d.com/known-data-issues/) page and in [`cases/F.json`](docs/api/cases/F.json).
 
 **API.** [`cases/F.json`](docs/api/cases/F.json) · [`points.json`](docs/api/cases/F/points.json) / [`points.csv`](docs/api/cases/F/points.csv) · [`geometry.stl`](docs/api/cases/F/geometry.stl) (56,250 triangles, closed with a 1 m base slab) · [`validation.json`](docs/api/cases/F/validation.json)
 
@@ -974,7 +974,7 @@ distance behind the belt; the model's falls.
   crown's mean $$U/U_H$$ is 0.554 against 0.478 measured.
 - Drag changes the level of the mean speed and leaves the pattern (R) where it was.
 
-Full reading: [Case G validation](https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-g/validation/).
+Full reading: [Case G validation](https://aij.eddy3d.com/cases/case-g/validation/).
 
 </details>
 
@@ -982,7 +982,7 @@ Full reading: [Case G validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 <!--fig name="case-g-openfoam-sweep.png" alt="Case G, measured vs modelled, drag sweep" width="800"--><a href="validation/figures/case-g-openfoam-sweep.png"><img src="docs/assets/web/case-g-openfoam-sweep.png" width="800" height="380" loading="lazy" alt="Case G, measured vs modelled, drag sweep"></a><!--/fig-->
 
-**Known issues.** 6 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/G.json`](docs/api/cases/G.json).
+**Known issues.** 6 in the published files, listed on the [Known data issues](https://aij.eddy3d.com/known-data-issues/) page and in [`cases/G.json`](docs/api/cases/G.json).
 
 <!--fig name="case-g-openfoam-profiles.png" alt="Case G, vertical profiles" width="800"--><a href="validation/figures/case-g-openfoam-profiles.png"><img src="docs/assets/web/case-g-openfoam-profiles.png" width="800" height="760" loading="lazy" alt="Case G, vertical profiles"></a><!--/fig-->
 
@@ -1042,7 +1042,7 @@ Full reading: [Case G validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 - The concentration is well correlated and over-predicted at every Schmidt number (FB −0.60 to −0.93).
 - FAC2 on $$V$$ and $$W$$ is low by construction, and $$W$$'s FB is a near-zero mean.
 
-Full reading: [Case H validation](https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-h/validation/).
+Full reading: [Case H validation](https://aij.eddy3d.com/cases/case-h/validation/).
 
 </details>
 
@@ -1050,7 +1050,7 @@ Full reading: [Case H validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 <!--fig name="case-h-openfoam-agreement.png" alt="Case H, measured vs modelled" width="800"--><a href="validation/figures/case-h-openfoam-agreement.png"><img src="docs/assets/web/case-h-openfoam-agreement.png" width="800" height="282" loading="lazy" alt="Case H, measured vs modelled"></a><!--/fig-->
 
-**Known issues.** 7 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/H.json`](docs/api/cases/H.json).
+**Known issues.** 7 in the published files, listed on the [Known data issues](https://aij.eddy3d.com/known-data-issues/) page and in [`cases/H.json`](docs/api/cases/H.json).
 
 <!--fig name="case-h-openfoam-profiles.png" alt="Case H, vertical profiles" width="800"--><a href="validation/figures/case-h-openfoam-profiles.png"><img src="docs/assets/web/case-h-openfoam-profiles.png" width="800" height="703" loading="lazy" alt="Case H, vertical profiles"></a><!--/fig-->
 
@@ -1113,7 +1113,7 @@ k-ε closures, 0.40 under k-ω SST; $$c^\ast$$ R at $$\mathrm{Sc_t}$$ 0.5 0.96, 
 - Mean velocity does not separate the closures; $$k$$ does, and so does the concentration.
 - This ranks three closures on one cube and one mesh.
 
-Full reading: [Case I validation](https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-i/validation/).
+Full reading: [Case I validation](https://aij.eddy3d.com/cases/case-i/validation/).
 
 </details>
 
@@ -1123,7 +1123,7 @@ Full reading: [Case I validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 <!--fig name="case-i-openfoam-closures.png" alt="Case I under three turbulence closures" width="800"--><a href="validation/figures/case-i-openfoam-closures.png"><img src="docs/assets/web/case-i-openfoam-closures.png" width="800" height="796" loading="lazy" alt="Case I under three turbulence closures"></a><!--/fig-->
 
-**Known issues.** 8 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/I.json`](docs/api/cases/I.json).
+**Known issues.** 8 in the published files, listed on the [Known data issues](https://aij.eddy3d.com/known-data-issues/) page and in [`cases/I.json`](docs/api/cases/I.json).
 
 <!--fig name="case-i-openfoam-profiles.png" alt="Case I, vertical profiles" width="800"--><a href="validation/figures/case-i-openfoam-profiles.png"><img src="docs/assets/web/case-i-openfoam-profiles.png" width="800" height="713" loading="lazy" alt="Case I, vertical profiles"></a><!--/fig-->
 
@@ -1188,7 +1188,7 @@ than the tunnel by 3.5 K on average (3.6 K under bKε).
 - The tracer's bias changes sign with the Schmidt number.
 - The two closures differ little in the flow and more in the tracer.
 
-Full reading: [Case J validation](https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-j/validation/).
+Full reading: [Case J validation](https://aij.eddy3d.com/cases/case-j/validation/).
 
 </details>
 
@@ -1196,7 +1196,7 @@ Full reading: [Case J validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 <!--fig name="case-j-umf-agreement.png" alt="Case J, measured vs modelled, two closures" width="800"--><a href="validation/figures/case-j-umf-agreement.png"><img src="docs/assets/web/case-j-umf-agreement.png" width="800" height="448" loading="lazy" alt="Case J, measured vs modelled, two closures"></a><!--/fig-->
 
-**Known issues.** 10 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/J.json`](docs/api/cases/J.json).
+**Known issues.** 10 in the published files, listed on the [Known data issues](https://aij.eddy3d.com/known-data-issues/) page and in [`cases/J.json`](docs/api/cases/J.json).
 
 <!--fig name="case-j-openfoam-profiles.png" alt="Case J, vertical profiles" width="800"--><a href="validation/figures/case-j-openfoam-profiles.png"><img src="docs/assets/web/case-j-openfoam-profiles.png" width="800" height="707" loading="lazy" alt="Case J, vertical profiles"></a><!--/fig-->
 
@@ -1262,7 +1262,7 @@ The four points within one cube height of the source are 3.7 to 5.1 times the me
   near-source points follows from the model's source: a zone of four cells (0.75 m across) where the tunnel's outlet is
   5 mm.
 
-Full reading: [Case K validation](https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-k/validation/).
+Full reading: [Case K validation](https://aij.eddy3d.com/cases/case-k/validation/).
 
 </details>
 
@@ -1270,7 +1270,7 @@ Full reading: [Case K validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 <!--fig name="case-k-openfoam-agreement.png" alt="Case K, measured vs modelled" width="800"--><a href="validation/figures/case-k-openfoam-agreement.png"><img src="docs/assets/web/case-k-openfoam-agreement.png" width="800" height="407" loading="lazy" alt="Case K, measured vs modelled"></a><!--/fig-->
 
-**Known issues.** 9 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/K.json`](docs/api/cases/K.json).
+**Known issues.** 9 in the published files, listed on the [Known data issues](https://aij.eddy3d.com/known-data-issues/) page and in [`cases/K.json`](docs/api/cases/K.json).
 
 <!--fig name="case-k-openfoam-profiles.png" alt="Case K, vertical profiles" width="800"--><a href="validation/figures/case-k-openfoam-profiles.png"><img src="docs/assets/web/case-k-openfoam-profiles.png" width="800" height="703" loading="lazy" alt="Case K, vertical profiles"></a><!--/fig-->
 
@@ -1335,7 +1335,7 @@ than the tunnel by 1.2 K on average.
 - $$V$$ and $$W$$ carry no pattern; $$k$$ is low (R 0.15).
 - The tracer is correlated (R 0.75 to 0.80) and high (FB −0.50 to −0.73).
 
-Full reading: [Case L validation](https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-l/validation/).
+Full reading: [Case L validation](https://aij.eddy3d.com/cases/case-l/validation/).
 
 </details>
 
@@ -1343,7 +1343,7 @@ Full reading: [Case L validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 <!--fig name="case-l-umf-agreement.png" alt="Case L, measured vs modelled" width="800"--><a href="validation/figures/case-l-umf-agreement.png"><img src="docs/assets/web/case-l-umf-agreement.png" width="800" height="446" loading="lazy" alt="Case L, measured vs modelled"></a><!--/fig-->
 
-**Known issues.** 10 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/L.json`](docs/api/cases/L.json).
+**Known issues.** 10 in the published files, listed on the [Known data issues](https://aij.eddy3d.com/known-data-issues/) page and in [`cases/L.json`](docs/api/cases/L.json).
 
 <!--fig name="case-l-openfoam-profiles.png" alt="Case L, vertical profiles" width="800"--><a href="validation/figures/case-l-openfoam-profiles.png"><img src="docs/assets/web/case-l-openfoam-profiles.png" width="800" height="706" loading="lazy" alt="Case L, vertical profiles"></a><!--/fig-->
 
@@ -1411,7 +1411,7 @@ Full reading: [Case L validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 - The mirrored points score better than the real points: the modelled plume is displaced sideways against the tunnel's.
 - The mean streamwise velocity is low while the magnitude is close.
 
-Full reading: [Case M validation](https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-m/validation/).
+Full reading: [Case M validation](https://aij.eddy3d.com/cases/case-m/validation/).
 
 </details>
 
@@ -1419,7 +1419,7 @@ Full reading: [Case M validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 <!--fig name="case-m-openfoam-agreement.png" alt="Case M, measured vs modelled velocity and concentration" width="800"--><a href="validation/figures/case-m-openfoam-agreement.png"><img src="docs/assets/web/case-m-openfoam-agreement.png" width="800" height="434" loading="lazy" alt="Case M, measured vs modelled velocity and concentration"></a><!--/fig-->
 
-**Known issues.** 10 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/M.json`](docs/api/cases/M.json).
+**Known issues.** 10 in the published files, listed on the [Known data issues](https://aij.eddy3d.com/known-data-issues/) page and in [`cases/M.json`](docs/api/cases/M.json).
 
 **API.** [`cases/M.json`](docs/api/cases/M.json) · [`points.json`](docs/api/cases/M/points.json) / [`points.csv`](docs/api/cases/M/points.csv) · [`geometry.stl`](docs/api/cases/M/geometry.stl) (43,950 triangles, closed with a 1 m base slab) · [`validation.json`](docs/api/cases/M/validation.json)
 
@@ -2090,7 +2090,7 @@ The cleaned tables served by the API apply the unit, sign and frame corrections;
 <summary><b>API</b></summary>
 
 Every endpoint is a file under `docs/api/`, generated by `scripts/build_api.py` and served by GitHub Pages at
-`https://eddy3d-dev.github.io/AIJ-Data-Validation/api/…` (and raw from this
+`https://aij.eddy3d.com/api/…` (and raw from this
 repository at `https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/main/docs/api/…`).
 Plain GET, CORS-open. Every JSON document opens with `$schema` (its JSON Schema), `schema_version` (the API version,
 now 2.4.0), `data_version` (a SHA-256 of the served data, which changes only when the data does) and `license`
@@ -2195,7 +2195,7 @@ pinned example are on the site's API page.
 <!--/nomenclature-->
 
 ```bash
-BASE=https://eddy3d-dev.github.io/AIJ-Data-Validation/api
+BASE=https://aij.eddy3d.com/api
 curl -s $BASE/validation.json | jq '.cases[] | {case, engines: [.engines[] | {engine, status}]}'
 curl -s $BASE/cases/B.json | jq '{frame, units, known_issues}'
 curl -s -o caseB.csv "$(curl -s $BASE/cases/B.json | jq -r '.points.csv.url')"
@@ -2280,7 +2280,7 @@ site names the cases (`/cases/case-a/`).
 
 **One version for what this repository serves.** [`VERSION`](VERSION) holds it; [`CHANGELOG.md`](CHANGELOG.md)
 lists every release; `CITATION.cff`, [`clean/manifest.json`](clean/manifest.json) and the API (`versions.release` and `release` in
-[`/api/index.json`](https://eddy3d-dev.github.io/AIJ-Data-Validation/api/index.json)) carry the same number. It follows Semantic Versioning with the rules of the
+[`/api/index.json`](https://aij.eddy3d.com/api/index.json)) carry the same number. It follows Semantic Versioning with the rules of the
 [Data Package version recipe](https://datapackage.org/recipes/data-package-version/), applied to the API under
 `docs/api/` and the cleaned tables under `clean/`:
 

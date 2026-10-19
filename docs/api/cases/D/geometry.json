@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/geometry.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/geometry.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -23,7 +23,7 @@
  "files": [
   {
    "configuration": "default",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/geometry.stl?v=531895531271",
+   "url": "https://aij.eddy3d.com/api/cases/D/geometry.stl?v=531895531271",
    "path": "cases/D/geometry.stl",
    "media_type": "model/stl",
    "bytes": 144878,
@@ -54,7 +54,7 @@
     "watertight": true
    },
    "bbox_matches_stated_dimensions": true,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-d.png",
+   "render": "https://aij.eddy3d.com/assets/geometry/case-d.png",
    "render_caption": "A 0.25 m tower (blue) among 82 low blocks over 1.40 m × 1.35 m (1:400 model scale); the arrow is WD = 0°.",
    "boxes": [
     {
@@ -1058,5 +1058,5 @@
    "analytic_volume": 0.021476563
   }
  ],
- "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-d.png"
+ "render": "https://aij.eddy3d.com/assets/geometry/case-d.png"
 }

@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/geometry.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/geometry.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -23,7 +23,7 @@
  "files": [
   {
    "configuration": "default",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/geometry.stl?v=e4e0a2044536",
+   "url": "https://aij.eddy3d.com/api/cases/M/geometry.stl?v=e4e0a2044536",
    "path": "cases/M/geometry.stl",
    "media_type": "model/stl",
    "bytes": 8475730,
@@ -54,9 +54,9 @@
     "watertight": true
    },
    "bbox_matches_stated_dimensions": true,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-m.png",
+   "render": "https://aij.eddy3d.com/assets/geometry/case-m.png",
    "render_caption": "TPU Atsugi campus: terrain and buildings of the 1:600 model (full-scale metres, 1080 m by 720 m); the arrow is the wind at WD = 180°, blowing toward +x (north)."
   }
  ],
- "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-m.png"
+ "render": "https://aij.eddy3d.com/assets/geometry/case-m.png"
 }

@@ -5,7 +5,7 @@ a wrong value, a broken file or a feature goes to an [issue](https://github.com/
 
 ## 1. Submit your solver's results
 
-Score your solver as [Validate your own solver](https://eddy3d-dev.github.io/AIJ-Data-Validation/byos/) describes,
+Score your solver as [Validate your own solver](https://aij.eddy3d.com/byos/) describes,
 put the folder under `submissions/<your-slug>/` (`submission.yaml` and `cases/<id>/probes.csv`), run
 `python validation/score_submissions.py submissions/<your-slug>` from your checkout, and open a pull request that adds the folder and nothing else. CI rebuilds
 the repository, scores the folder in the pinned image, and the build writes `validation/results/submissions/<slug>/<id>.json`

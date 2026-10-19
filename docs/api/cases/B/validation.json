@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/validation.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -127,20 +127,20 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-b-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-b-layout.png",
      "caption": "Case B, measurement lines and planes: A vertical profiles, y/H = 0; B plane z/H = 0.0625. Positions in multiples of H."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-b-openfoam-agreement.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-b-openfoam-agreement.png",
      "caption": "Case B, OpenFOAM 12 (realizable k-ε): measured against modelled U, V, W and k at every measured point, normalised by U_H, with the 1:1 line and the factor-of-two band. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-b-openfoam-profiles.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-b-openfoam-profiles.png",
      "caption": "Case B, OpenFOAM 12: centre-plane vertical profiles of U/U_H at the measurement stations, measured points against the modelled line."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/pairs/openfoam12-realizableKE.csv?v=9f7c10ff5544",
+    "url": "https://aij.eddy3d.com/api/cases/B/pairs/openfoam12-realizableKE.csv?v=9f7c10ff5544",
     "path": "cases/B/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 32157,
@@ -572,12 +572,12 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-b-engine-comparison.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-b-engine-comparison.png",
      "caption": "Case B, every engine on the same points: measured against modelled U/U_H and V/U_H, one row per engine (OpenFOAM 12; OpenLB at dx = 1.6 m; FluidX3D at H/64). FluidX3D is scored on the filled points, the heights where its empty-domain control holds the imposed log law; the hollow points near the ground are excluded."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/pairs/openlb.csv?v=9b2950d76b99",
+    "url": "https://aij.eddy3d.com/api/cases/B/pairs/openlb.csv?v=9b2950d76b99",
     "path": "cases/B/pairs/openlb.csv",
     "media_type": "text/csv",
     "bytes": 32181,
@@ -1035,12 +1035,12 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-b-engine-comparison.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-b-engine-comparison.png",
      "caption": "Case B, every engine on the same points: measured against modelled U/U_H and V/U_H, one row per engine (OpenFOAM 12; OpenLB at dx = 1.6 m; FluidX3D at H/64). FluidX3D is scored on the filled points, the heights where its empty-domain control holds the imposed log law; the hollow points near the ground are excluded."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/pairs/fluidx3d.csv?v=c4af803fd09e",
+    "url": "https://aij.eddy3d.com/api/cases/B/pairs/fluidx3d.csv?v=c4af803fd09e",
     "path": "cases/B/pairs/fluidx3d.csv",
     "media_type": "text/csv",
     "bytes": 31939,
@@ -1175,12 +1175,12 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-b-ml-agreement.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-b-ml-agreement.png",
      "caption": "Case B, Eddy3D ML surrogate (Yel-2.0): measured against predicted pedestrian-height speed, with the 1:1 line and the factor-of-two band."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/pairs/ml-surrogate.csv?v=eb9a9c3970e7",
+    "url": "https://aij.eddy3d.com/api/cases/B/pairs/ml-surrogate.csv?v=eb9a9c3970e7",
     "path": "cases/B/pairs/ml-surrogate.csv",
     "media_type": "text/csv",
     "bytes": 8302,

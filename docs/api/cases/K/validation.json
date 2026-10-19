@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/validation.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -522,20 +522,20 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-k-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-k-layout.png",
      "caption": "Case K, measurement lines and planes: A vertical profiles, y/H = 0; B vertical profiles, y/H = ±1; C vertical profiles, y/H = ±2; D vertical profiles, y/H = ±3. Positions in multiples of H."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-k-openfoam-agreement.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-k-openfoam-agreement.png",
      "caption": "Case K, OpenFOAM 12 (realizable k-ε): measured against modelled U, W and k, and the dimensionless concentration c* = C/c0 at turbulent Schmidt numbers 0.3, 0.5 and 0.7 (log axes show the positive pairs within five decades only), with the 1:1 line and the factor-of-two band where the values do not change sign. The four points within one cube height of the source are open. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-k-openfoam-profiles.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-k-openfoam-profiles.png",
      "caption": "Case K, OpenFOAM 12: vertical profiles of U/U_H on the centre plane y = 0 at up to four stations along the measured lines, measured points against the modelled line, offset by 1 per station."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/pairs/openfoam12-realizableKE.csv?v=746a236c4635",
+    "url": "https://aij.eddy3d.com/api/cases/K/pairs/openfoam12-realizableKE.csv?v=746a236c4635",
     "path": "cases/K/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 51566,

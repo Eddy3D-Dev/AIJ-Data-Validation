@@ -3071,12 +3071,12 @@ def verify_web():
     return problems
 
 
-LEGACY_SITE = "https://sustainableurbansystems.com/CFD-Test-Cases-Architectural-Institute-of-Japan-AIJ"   # where releases up to 3.1.0 were tagged
+GITHUB_SITE = "https://eddy3d-dev.github.io/AIJ-Data-Validation"   # where releases up to 3.2.2 were tagged (GitHub redirects it to the site)
 
 
 def release_base(v):
-    """The address a frozen release tree names inside itself: the releases up to 3.1.0 were tagged while the site lived at LEGACY_SITE."""
-    return f"{LEGACY_SITE}/api/{v}" if tuple(int(x) for x in v.split(".")) <= (3, 1, 0) else f"{LIVE_BASE}/{v}"
+    """The address a frozen release tree names inside itself: the releases up to 3.2.2 were tagged while the site lived at GITHUB_SITE."""
+    return f"{GITHUB_SITE}/api/{v}" if tuple(int(x) for x in v.split(".")) <= (3, 2, 2) else f"{LIVE_BASE}/{v}"
 
 
 def verify():

@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/geometry.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/geometry.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -23,7 +23,7 @@
  "files": [
   {
    "configuration": "default",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/geometry.stl?v=8799740aa324",
+   "url": "https://aij.eddy3d.com/api/cases/F/geometry.stl?v=8799740aa324",
    "path": "cases/F/geometry.stl",
    "media_type": "model/stl",
    "bytes": 9661421,
@@ -54,9 +54,9 @@
     "watertight": true
    },
    "bbox_matches_stated_dimensions": true,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-f.png",
+   "render": "https://aij.eddy3d.com/assets/geometry/case-f.png",
    "render_caption": "Shinjuku sub-centre, November 1978: terrain and buildings of the 1:800 model over a disc of 725 m radius (full-scale metres); north is +y, the towers over 100 m are blue."
   }
  ],
- "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-f.png"
+ "render": "https://aij.eddy3d.com/assets/geometry/case-f.png"
 }

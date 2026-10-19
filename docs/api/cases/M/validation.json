@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/validation.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -319,20 +319,20 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-m-layout.png",
      "caption": "Case M, measurement points: A near field, within 100 m of the release point; B mid field, 100 to 300 m from the release point; C far field, beyond 300 m. Positions in metres, full scale. Star: release point; R: reference point; dotted circles: 100 m and 300 m from the release point."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-openfoam-agreement.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-m-openfoam-agreement.png",
      "caption": "Case M, OpenFOAM 12 (realizable k-ε), WD 180: measured against modelled U, V, W and k over the tunnel's U_R and the solved speed at the mast, and the dimensionless concentration c* = C/c0 at turbulent Schmidt numbers 0.3, 0.5 and 0.7 (log axes show the positive pairs within eight decades only); the last panel is the tunnel's own WD 175 and WD 185 against its WD 180, the noise floor of a single heading. Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-openfoam-plan.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-m-openfoam-plan.png",
      "caption": "Case M, OpenFOAM 12, WD 180: log₁₀ of c* at the 15 points on the plan of the campus (north up; the arrow is the wind), the tunnel and the three Schmidt numbers on one scale; a point below 10⁻³ (or zero) is open. The star is the gas source and the square the reference mast."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27",
+    "url": "https://aij.eddy3d.com/api/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27",
     "path": "cases/M/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 7915,
@@ -632,20 +632,20 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-m-layout.png",
      "caption": "Case M, measurement points: A near field, within 100 m of the release point; B mid field, 100 to 300 m from the release point; C far field, beyond 300 m. Positions in metres, full scale. Star: release point; R: reference point; dotted circles: 100 m and 300 m from the release point."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-openfoam-agreement.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-m-openfoam-agreement.png",
      "caption": "Case M, OpenFOAM 12 (realizable k-ε), WD 180: measured against modelled U, V, W and k over the tunnel's U_R and the solved speed at the mast, and the dimensionless concentration c* = C/c0 at turbulent Schmidt numbers 0.3, 0.5 and 0.7 (log axes show the positive pairs within eight decades only); the last panel is the tunnel's own WD 175 and WD 185 against its WD 180, the noise floor of a single heading. Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-openfoam-plan.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-m-openfoam-plan.png",
      "caption": "Case M, OpenFOAM 12, WD 180: log₁₀ of c* at the 15 points on the plan of the campus (north up; the arrow is the wind), the tunnel and the three Schmidt numbers on one scale; a point below 10⁻³ (or zero) is open. The star is the gas source and the square the reference mast."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27",
+    "url": "https://aij.eddy3d.com/api/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27",
     "path": "cases/M/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 7915,
@@ -945,20 +945,20 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-m-layout.png",
      "caption": "Case M, measurement points: A near field, within 100 m of the release point; B mid field, 100 to 300 m from the release point; C far field, beyond 300 m. Positions in metres, full scale. Star: release point; R: reference point; dotted circles: 100 m and 300 m from the release point."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-openfoam-agreement.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-m-openfoam-agreement.png",
      "caption": "Case M, OpenFOAM 12 (realizable k-ε), WD 180: measured against modelled U, V, W and k over the tunnel's U_R and the solved speed at the mast, and the dimensionless concentration c* = C/c0 at turbulent Schmidt numbers 0.3, 0.5 and 0.7 (log axes show the positive pairs within eight decades only); the last panel is the tunnel's own WD 175 and WD 185 against its WD 180, the noise floor of a single heading. Dots take the colour of the group of points they belong to: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-m-openfoam-plan.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-m-openfoam-plan.png",
      "caption": "Case M, OpenFOAM 12, WD 180: log₁₀ of c* at the 15 points on the plan of the campus (north up; the arrow is the wind), the tunnel and the three Schmidt numbers on one scale; a point below 10⁻³ (or zero) is open. The star is the gas source and the square the reference mast."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27",
+    "url": "https://aij.eddy3d.com/api/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27",
     "path": "cases/M/pairs/openfoam12-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 7915,

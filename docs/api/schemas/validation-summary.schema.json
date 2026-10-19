@@ -1,6 +1,6 @@
 {
  "$schema": "https://json-schema.org/draft/2020-12/schema",
- "$id": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation-summary.schema.json",
+ "$id": "https://aij.eddy3d.com/api/schemas/validation-summary.schema.json",
  "title": "Validation summary",
  "description": "Every case and engine in one table: status, runs and their headline scores.",
  "type": "object",

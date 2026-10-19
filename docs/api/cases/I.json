@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/case.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/case.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -149,7 +149,7 @@
    }
   ],
   "csv": {
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/approach_flow.csv?v=8c9a2fa1669a",
+   "url": "https://aij.eddy3d.com/api/cases/I/approach_flow.csv?v=8c9a2fa1669a",
    "path": "cases/I/approach_flow.csv",
    "media_type": "text/csv",
    "bytes": 373,
@@ -159,7 +159,7 @@
  "inflow": {
   "benchmark_data": {
    "approach_flow_csv": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/approach_flow.csv?v=8c9a2fa1669a",
+    "url": "https://aij.eddy3d.com/api/cases/I/approach_flow.csv?v=8c9a2fa1669a",
     "path": "cases/I/approach_flow.csv",
     "media_type": "text/csv",
     "bytes": 373,
@@ -234,9 +234,9 @@
   "domain": "the extents, blockage and cell sizes of Eddy3D's domains are not in its snapshots and are not stated here; mesh.cells and the scale are, where the snapshot has them"
  },
  "points": {
-  "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/points.json",
+  "url": "https://aij.eddy3d.com/api/cases/I/points.json",
   "csv": {
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/points.csv?v=2864fee9eb19",
+   "url": "https://aij.eddy3d.com/api/cases/I/points.csv?v=2864fee9eb19",
    "path": "cases/I/points.csv",
    "media_type": "text/csv",
    "bytes": 54044,
@@ -294,7 +294,7 @@
  },
  "probes": {
   "csv": {
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/probes.csv?v=67f76ec18f93",
+   "url": "https://aij.eddy3d.com/api/cases/I/probes.csv?v=67f76ec18f93",
    "path": "cases/I/probes.csv",
    "media_type": "text/csv",
    "bytes": 46628,
@@ -363,18 +363,18 @@
   }
  },
  "geometry": {
-  "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/geometry.json",
+  "url": "https://aij.eddy3d.com/api/cases/I/geometry.json",
   "files": [
    {
     "configuration": "default",
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/geometry.stl?v=ff61cbb22798",
+    "url": "https://aij.eddy3d.com/api/cases/I/geometry.stl?v=ff61cbb22798",
     "triangles": 12,
     "watertight": true
    }
   ]
  },
  "validation": {
-  "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/validation.json",
+  "url": "https://aij.eddy3d.com/api/cases/I/validation.json",
   "status": "scored",
   "engines": {
    "openfoam12-realizableKE": "scored",
@@ -420,6 +420,6 @@
   "approach_flow": "raw/cases/case-i/AF_caseI.csv",
   "readme": "raw/cases/case-i/readme_caseI.md"
  },
- "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-i.png",
- "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-i/"
+ "render": "https://aij.eddy3d.com/assets/geometry/case-i.png",
+ "page": "https://aij.eddy3d.com/cases/case-i/"
 }

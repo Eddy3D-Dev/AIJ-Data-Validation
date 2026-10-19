@@ -1,6 +1,6 @@
 {
  "$schema": "https://json-schema.org/draft/2020-12/schema",
- "$id": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation.schema.json",
+ "$id": "https://aij.eddy3d.com/api/schemas/validation.schema.json",
  "title": "Case validation",
  "description": "Eddy3D's scores against one case, per engine and run. An engine that is not 'scored' has no result here.",
  "type": "object",

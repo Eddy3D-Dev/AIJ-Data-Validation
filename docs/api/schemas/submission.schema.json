@@ -1,6 +1,6 @@
 {
  "$schema": "https://json-schema.org/draft/2020-12/schema",
- "$id": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/submission.schema.json",
+ "$id": "https://aij.eddy3d.com/api/schemas/submission.schema.json",
  "title": "Submission",
  "description": "One submitted solver in full: its submission.yaml, and every score, coverage and group per case.",
  "type": "object",

@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/points.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/points.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -66,7 +66,7 @@
  },
  "n": 330,
  "csv": {
-  "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/points.csv?v=8d32dc8f762b",
+  "url": "https://aij.eddy3d.com/api/cases/M/points.csv?v=8d32dc8f762b",
   "path": "cases/M/points.csv",
   "media_type": "text/csv",
   "bytes": 34920,

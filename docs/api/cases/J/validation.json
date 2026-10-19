@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/validation.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -1230,24 +1230,24 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-j-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-j-layout.png",
      "caption": "Case J, measurement lines and planes: A vertical profiles, y/H = 0; B plane z/H = 0.025; C plane z/H = 0.25. Positions in multiples of H."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-j-umf-agreement.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-j-umf-agreement.png",
      "caption": "Case J, urbanMicroclimateFoam (Froude scale 62.5) under realizable k-ε and buoyantKEpsilon: measured against modelled U, W, k and the floor-referenced temperature θ = (T_f − T)/(T_f − T_H), in the tunnel's units, with the 1:1 line and the factor-of-two band where the values do not change sign. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-j-umf-tracer.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-j-umf-tracer.png",
      "caption": "Case J, urbanMicroclimateFoam: measured against modelled c* = C/c0 for turbulent Schmidt numbers 0.3, 0.5 and 0.7 under both closures (log axes show the positive pairs within seven decades only). The points within a quarter of a building height of the source are open. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-j-openfoam-profiles.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-j-openfoam-profiles.png",
      "caption": "Case J, OpenFOAM 12 (urbanMicroclimateFoam), realizable k-ε: vertical profiles of U/U_H on the centre plane y = 0 at up to four stations along the measured lines, measured points against the modelled line, offset by 1 per station."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/pairs/umf-realizableKE.csv?v=cb34fb5fc9c7",
+    "url": "https://aij.eddy3d.com/api/cases/J/pairs/umf-realizableKE.csv?v=cb34fb5fc9c7",
     "path": "cases/J/pairs/umf-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 148389,
@@ -2450,24 +2450,24 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-j-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-j-layout.png",
      "caption": "Case J, measurement lines and planes: A vertical profiles, y/H = 0; B plane z/H = 0.025; C plane z/H = 0.25. Positions in multiples of H."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-j-umf-agreement.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-j-umf-agreement.png",
      "caption": "Case J, urbanMicroclimateFoam (Froude scale 62.5) under realizable k-ε and buoyantKEpsilon: measured against modelled U, W, k and the floor-referenced temperature θ = (T_f − T)/(T_f − T_H), in the tunnel's units, with the 1:1 line and the factor-of-two band where the values do not change sign. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-j-umf-tracer.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-j-umf-tracer.png",
      "caption": "Case J, urbanMicroclimateFoam: measured against modelled c* = C/c0 for turbulent Schmidt numbers 0.3, 0.5 and 0.7 under both closures (log axes show the positive pairs within seven decades only). The points within a quarter of a building height of the source are open. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-j-openfoam-profiles.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-j-openfoam-profiles.png",
      "caption": "Case J, OpenFOAM 12 (urbanMicroclimateFoam), realizable k-ε: vertical profiles of U/U_H on the centre plane y = 0 at up to four stations along the measured lines, measured points against the modelled line, offset by 1 per station."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/pairs/umf-buoyantKEpsilon.csv?v=87ba413bfa96",
+    "url": "https://aij.eddy3d.com/api/cases/J/pairs/umf-buoyantKEpsilon.csv?v=87ba413bfa96",
     "path": "cases/J/pairs/umf-buoyantKEpsilon.csv",
     "media_type": "text/csv",
     "bytes": 148414,

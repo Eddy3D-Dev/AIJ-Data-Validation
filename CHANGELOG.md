@@ -15,6 +15,21 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [3.2.3] - 2026-10-19
+
+The site and the API move to <https://aij.eddy3d.com>.
+
+### Changed
+
+- Every address the API, the site, the README and the citation give is `https://aij.eddy3d.com/...` in place of
+  `https://eddy3d-dev.github.io/AIJ-Data-Validation/...`; GitHub redirects the old addresses. The frozen copy of 3.2.1 keeps
+  the addresses it was released with.
+
+### Added
+
+- Site: `/robots.txt` (rules for AI crawlers, content signals, the sitemap), `/sitemap.xml`, `/.well-known/api-catalog`
+  ([RFC 9727](https://www.rfc-editor.org/rfc/rfc9727)) and `/auth.md` (the site and the API need no authentication).
+
 ## [3.2.2] - 2026-10-19
 
 Every engine on each case's page, and a leaderboard. API copies are kept from 3.2.1 on.

@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/geometry.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/geometry.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -22,7 +22,7 @@
  "files": [
   {
    "configuration": "default",
-   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/geometry.stl?v=1bd33d8d3531",
+   "url": "https://aij.eddy3d.com/api/cases/J/geometry.stl?v=1bd33d8d3531",
    "path": "cases/J/geometry.stl",
    "media_type": "model/stl",
    "bytes": 1702,
@@ -53,7 +53,7 @@
     "watertight": true
    },
    "bbox_matches_stated_dimensions": true,
-   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-j.png",
+   "render": "https://aij.eddy3d.com/assets/geometry/case-j.png",
    "render_caption": "Isolated 1:1:2 building, b = 0.08 m, H = 0.16 m (model scale); the orange ring marks the floor tracer source, 0.25 H behind the building (seen through it); the wind blows along +x.",
    "boxes": [
     {
@@ -73,5 +73,5 @@
    "analytic_volume": 0.001024
   }
  ],
- "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-j.png"
+ "render": "https://aij.eddy3d.com/assets/geometry/case-j.png"
 }

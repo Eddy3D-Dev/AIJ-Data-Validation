@@ -1,5 +1,5 @@
 {
- "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation.schema.json",
+ "$schema": "https://aij.eddy3d.com/api/schemas/validation.schema.json",
  "schema_version": "2.5.0",
  "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
@@ -785,20 +785,20 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-l-layout.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-l-layout.png",
      "caption": "Case L, measurement lines and planes: A street profiles near the source, 8 heights; B profiles above the roofs, 4 heights; C street profiles around, 3 heights. Positions in multiples of H."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-l-umf-agreement.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-l-umf-agreement.png",
      "caption": "Case L, urbanMicroclimateFoam (Froude scale 100, realizable k-ε): measured against modelled U, W, k, θ, V and c* at three turbulent Schmidt numbers at the 344 points, in the tunnel's units (log axes show the positive pairs within seven decades only). Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-l-openfoam-profiles.png",
+     "url": "https://aij.eddy3d.com/assets/figures/case-l-openfoam-profiles.png",
      "caption": "Case L, OpenFOAM 12 (urbanMicroclimateFoam): vertical profiles of U/U_H on the centre plane y = 0 at up to four stations along the measured lines, measured points against the modelled line, offset by 1 per station."
     }
    ],
    "pairs": {
-    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/pairs/umf-realizableKE.csv?v=a0aedc557c46",
+    "url": "https://aij.eddy3d.com/api/cases/L/pairs/umf-realizableKE.csv?v=a0aedc557c46",
     "path": "cases/L/pairs/umf-realizableKE.csv",
     "media_type": "text/csv",
     "bytes": 140895,
