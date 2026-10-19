@@ -96,6 +96,21 @@ async function start(root) {
   const cache = {};
   let view = mf.views[0], all = [], groupVals = {}, q = 0, items = [], hover = -1, pinned = -1, extent = 1, centre = new THREE.Vector3();
   const sel = () => (hover >= 0 ? hover : pinned);
+  let line = null;                                              // the measurement line of the selected point: {axis, idx}
+  const AXES = ["x", "y", "z"];
+  // The points measured on one line with the selected one: those that share two of its coordinates, at least three of them. A
+  // vertical profile (same x and y) is tried first, then a line along x, then along y; a point on a plane only is on no line.
+  function lineOf(i) {
+    const d = items[i];
+    if (!d) return null;
+    const tol = extent * 1e-4;
+    for (const [axis, fixed] of [[2, [0, 1]], [0, [1, 2]], [1, [0, 2]]]) {
+      const idx = [];
+      items.forEach((e, j) => { if (fixed.every((k) => Math.abs(e.pos[k] - d.pos[k]) <= tol)) idx.push(j); });
+      if (idx.length >= 3) return { axis, idx: idx.sort((a, b) => items[a].pos[axis] - items[b].pos[axis]) };
+    }
+    return null;
+  }
 
   async function loadView(v) {
     view = v;
@@ -130,6 +145,7 @@ async function start(root) {
   }
 
   function rebuild() {
+    line = null;
     const av = available();
     if (!av.includes(q)) q = av[0] ?? 0;
     qEl.innerHTML = "";
@@ -187,11 +203,21 @@ async function start(root) {
     ctx.strokeStyle = textColour; ctx.globalAlpha = 0.6;                       // 1:1
     ctx.beginPath(); ctx.moveTo(sx(dom[0]), sy(dom[0])); ctx.lineTo(sx(dom[1]), sy(dom[1])); ctx.stroke();
     ctx.globalAlpha = 1;
-    items.forEach((d, i) => {
-      ctx.beginPath(); ctx.arc(sx(d.m), sy(d.p), i === sel() ? 6 : 3.6, 0, 7);
+    const onLine = new Set(line ? line.idx : []);
+    if (line) {                                                  // the selected point's line, in order along it
+      ctx.beginPath();
+      line.idx.forEach((j, k) => (k ? ctx.lineTo : ctx.moveTo).call(ctx, sx(items[j].m), sy(items[j].p)));
+      ctx.strokeStyle = textColour; ctx.globalAlpha = 0.55; ctx.lineWidth = 1.2; ctx.stroke(); ctx.globalAlpha = 1;
+    }
+    const order = items.map((_, i) => i).sort((a, b) => onLine.has(a) - onLine.has(b));   // the line's points on top
+    order.forEach((i) => {
+      const d = items[i], hit = i === sel(), lit = hit || onLine.has(i);
+      ctx.globalAlpha = line && !lit ? 0.2 : 1;
+      ctx.beginPath(); ctx.arc(sx(d.m), sy(d.p), hit ? 6 : lit ? 4.6 : 3.6, 0, 7);
       ctx.fillStyle = css(d.col); ctx.fill();
-      ctx.strokeStyle = i === sel() ? textColour : "rgba(0,0,0,.45)"; ctx.lineWidth = i === sel() ? 2 : 0.7; ctx.stroke();
+      ctx.strokeStyle = lit ? textColour : "rgba(0,0,0,.45)"; ctx.lineWidth = hit ? 2 : lit ? 1.3 : 0.7; ctx.stroke();
     });
+    ctx.globalAlpha = 1;
   }
   function nearest2d(ev) {
     const b = canvas.getBoundingClientRect(), x = ev.clientX - b.left, y = ev.clientY - b.top;
@@ -203,7 +229,7 @@ async function start(root) {
   canvas.addEventListener("pointerleave", () => setHover(-1));
   canvas.addEventListener("click", (e) => { const i = nearest2d(e); pinned = i === pinned ? -1 : i; update(); recentre(); });
   function setHover(i) { if (i !== hover) { hover = i; update(); } }
-  function update() { drawScatter(); selection3d(); showReadout(); dirty = true; }
+  function update() { line = lineOf(sel()); drawScatter(); selection3d(); showReadout(); dirty = true; }
 
   // ---- 3D
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -278,6 +304,12 @@ async function start(root) {
     if (cloud) cloud.material.opacity = d ? 0.3 : 1;            // the other points step back
     if (!d) return;
     const p = new THREE.Vector3(...d.pos);
+    if (line) {                                                  // the whole line the point was measured on
+      const pts = line.idx.map((j) => new THREE.Vector3(...items[j].pos));
+      selGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({ color: 0xff9f00 })));
+      const bead = new THREE.SphereGeometry(extent * 0.007, 10, 8), beadMat = new THREE.MeshBasicMaterial({ color: 0xff9f00 });
+      pts.forEach((q) => { const m = new THREE.Mesh(bead, beadMat); m.position.copy(q); selGroup.add(m); });
+    }
     const ball = new THREE.Mesh(new THREE.SphereGeometry(extent * 0.014, 16, 12), new THREE.MeshBasicMaterial({ color: 0xffd400 }));
     ball.position.copy(p);
     selGroup.add(ball);
@@ -352,6 +384,13 @@ async function start(root) {
     const H = mf.H;
     const where = ["x", "y", "z"].map((a, k) => `${a} = ${fmt(d.pos[k], 3)}${H ? ` (${fmt(d.pos[k] / H, 2)} H)` : ""}`).join(", ");
     const grp = mf.groups.map((g) => `${g.replace(/_/g, " ")} ${d.r[g]}`).join(", ");
+    let along = "";
+    if (line) {
+      const fixed = [0, 1, 2].filter((k) => k !== line.axis).map((k) => `${AXES[k]} = ${fmt(d.pos[k], 3)}${H ? ` (${fmt(d.pos[k] / H, 2)} H)` : ""}`).join(", ");
+      const err = line.idx.map((j) => items[j].p - items[j].m), mean = err.reduce((a, b) => a + b, 0) / err.length;
+      along = `<br><span class="key" style="background:#ff9f00"></span>On a ${line.axis === 2 ? "vertical profile" : `line along ${AXES[line.axis]}`} at ${fixed}:
+        ${line.idx.length} points, mean model − measured of ${mf.quantities[q].label} ${fmt(mean)}.`;
+    }
     const rows = mf.quantities.map((Q, i) => {
       const m = num(d.r[Q.meas]), p = num(d.r[Q.model]);
       if (!Number.isFinite(m) || !Number.isFinite(p)) return "";
@@ -366,7 +405,7 @@ async function start(root) {
       vec = `<p>${key("#222")}measured |U| ${fmt(m.length())} ${key(view.colour)}model |U| ${fmt(p.length())} ${key(ERROR_COLOUR)}difference |ΔU| ${fmt(diff.length())}
         (${m.length() ? fmt((diff.length() / m.length()) * 100, 0) : "–"} % of the measured), direction apart by ${fmt(ang, 0)}°. The arrows in 3D are scaled to the longer of the two vectors at this point (a fifth of the view).</p>`;
     }
-    readout.innerHTML = `<p><b>${view.label}</b>${grp ? ", " + grp : ""}${d.r.point_id ? `, point ${d.r.point_id}` : ""}<br>${where}${mf.units ? ` in ${mf.units.split(" (")[0]}` : ""}</p>
+    readout.innerHTML = `<p><b>${view.label}</b>${grp ? ", " + grp : ""}${d.r.point_id ? `, point ${d.r.point_id}` : ""}<br>${where}${mf.units ? ` in ${mf.units.split(" (")[0]}` : ""}${along}</p>
       <table><tr><th></th><th>measured</th><th>model</th><th>model − measured</th><th></th></tr>${rows}</table>${vec}`;
   }
 
