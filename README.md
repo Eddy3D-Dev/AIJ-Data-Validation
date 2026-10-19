@@ -50,19 +50,19 @@ Validation data from the AIJ (Architectural Institute of Japan) benchmark cases�
 **API, APA**
 
 ```text
-Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.2.1) [Data set]. Sustainable Urban Systems Lab. https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/index.json
+Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.2.2) [Data set]. Sustainable Urban Systems Lab. https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.2/index.json
 ```
 
 **API, BibTeX**
 
 ```bibtex
-@misc{aijuwe_api_3_2_1,
+@misc{aijuwe_api_3_2_2,
   author    = "Karadag, Ilker and Kastner, Patrick",
   title     = "{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}",
   year      = "2026",
-  version   = "3.2.1",
+  version   = "3.2.2",
   publisher = "Sustainable Urban Systems Lab",
-  url       = "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/index.json",
+  url       = "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.2/index.json",
   note      = "Data set; data version ecbbeee22eb3"
 }
 ```
@@ -273,7 +273,7 @@ is low.
 ---
 
 <details>
-<summary><b>Case A — 1:1:2 building</b> · 186 points, <i>U</i>/<i>V</i>/<i>W</i>/<i>k</i> · scored: OpenFOAM 12, OpenLB, FluidX3D, ML</summary>
+<summary><b>Case A — 1:1:2 building</b></summary>
 
 <p><!--fig name="case-a.png" alt="Case A geometry" width="700"--><a href="validation/figures/geometry/case-a.png"><img src="docs/assets/web/case-a.png" width="700" height="350" loading="lazy" alt="Case A geometry"></a><!--/fig--><br>
 <em>Isolated 1:1:2 building, b = 0.08 m, H = 0.16 m (model scale); the wind blows along +x.</em></p>
@@ -364,7 +364,7 @@ log law.
 </details>
 
 <details>
-<summary><b>Case B — 1:4:4 slab</b> · 224 points, <i>U</i>/<i>V</i>/<i>W</i>/<i>k</i> · scored: OpenFOAM 12, OpenLB, FluidX3D, ML</summary>
+<summary><b>Case B — 1:4:4 slab</b></summary>
 
 <p><!--fig name="case-b.png" alt="Case B geometry" width="700"--><a href="validation/figures/geometry/case-b.png"><img src="docs/assets/web/case-b.png" width="700" height="350" loading="lazy" alt="Case B geometry"></a><!--/fig--><br>
 <em>Isolated 1:4:4 slab, 0.05 m along the wind, 0.20 m across, 0.20 m tall (model scale); the wind blows along +x.</em></p>
@@ -453,7 +453,7 @@ log law.
 </details>
 
 <details>
-<summary><b>Case C — 3 × 3 block array</b> · 1080 points, scalar speed at pedestrian height, 9 configurations · scored: OpenFOAM 12, ML</summary>
+<summary><b>Case C — 3 × 3 block array</b></summary>
 
 <table>
 <tr>
@@ -597,7 +597,7 @@ FB +0.67, FAC2 0.44, R +0.21, hit rate 0.18. Method: *ML surrogate* under *Valid
 </details>
 
 <details>
-<summary><b>Case D — high-rise among city blocks</b> · 78 points × 3 directions (thermistor) + 33 points <i>U</i>/<i>V</i>/<i>W</i>/<i>k</i> · scored: OpenFOAM 12 (WD 0°, 22.5° and 45°), ML</summary>
+<summary><b>Case D — high-rise among city blocks</b></summary>
 
 <p><!--fig name="case-d.png" alt="Case D geometry" width="700"--><a href="validation/figures/geometry/case-d.png"><img src="docs/assets/web/case-d.png" width="700" height="350" loading="lazy" alt="Case D geometry"></a><!--/fig--><br>
 <em>A 0.25 m tower (blue) among 82 low blocks over 1.40 m × 1.35 m (1:400 model scale); the arrow is WD = 0°.</em></p>
@@ -730,7 +730,7 @@ on the thermistor plane (198 points, 3 directions) and FB +0.23, FAC2 0.52, R +0
 </details>
 
 <details>
-<summary><b>Case E — Niigata district</b> · 80 points × 16 directions × before/after, velocity ratio · scored: OpenFOAM 12 (SW), ML</summary>
+<summary><b>Case E — Niigata district</b></summary>
 
 <table>
 <tr>
@@ -852,7 +852,7 @@ of the 863 pairs the tunnel resolves ($$\lvert\Delta\rvert$$ > 0.05). Method: *M
 </details>
 
 <details>
-<summary><b>Case F — Shinjuku district</b> · 472 ratios at 13 points · scored: OpenFOAM 12 (wind from NNW, two vertical frames)</summary>
+<summary><b>Case F — Shinjuku district</b></summary>
 
 <p><!--fig name="case-f.png" alt="Case F geometry" width="700"--><a href="validation/figures/geometry/case-f.png"><img src="docs/assets/web/case-f.png" width="700" height="350" loading="lazy" alt="Case F geometry"></a><!--/fig--><br>
 <em>Shinjuku sub-centre, November 1978: terrain and buildings of the 1:800 model over a disc of 725 m radius (full-scale metres); north is +y, the towers over 100 m are blue.</em></p>
@@ -921,7 +921,7 @@ Full reading: [Case F validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 </details>
 
 <details>
-<summary><b>Case G — flow behind a tree belt</b> · 28 points, <i>U</i>/<i>U</i><sub>H</sub> and <i>k</i>/<i>U</i><sub>H</sub><sup>2</sup> · scored: OpenFOAM 12 (a drag sweep)</summary>
+<summary><b>Case G — flow behind a tree belt</b></summary>
 
 <p><!--fig name="case-g.png" alt="Case G geometry" width="700"--><a href="validation/figures/geometry/case-g.png"><img src="docs/assets/web/case-g.png" width="700" height="350" loading="lazy" alt="Case G geometry"></a><!--/fig--><br>
 <em>The Tsuiji-matsu tree belt, 2 m × 74 m × 7 m with a 1.2 m gap below (full scale; shown as its envelope, a porous canopy); the wind blows along +x and the measurements are behind the belt.</em></p>
@@ -991,7 +991,7 @@ Full reading: [Case G validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 </details>
 
 <details>
-<summary><b>Case H — 1:1:2 building with a floor point source</b> · 1,652 rows, velocity and concentration · scored: OpenFOAM 12</summary>
+<summary><b>Case H — 1:1:2 building with a floor point source</b></summary>
 
 <p><!--fig name="case-h.png" alt="Case H geometry" width="700"--><a href="validation/figures/geometry/case-h.png"><img src="docs/assets/web/case-h.png" width="700" height="350" loading="lazy" alt="Case H geometry"></a><!--/fig--><br>
 <em>Isolated 1:1:2 building, 0.10 m × 0.10 m × 0.20 m (model scale); the wind blows along +x. The tracer comes from a 4 mm floor hole 0.25 H behind the leeward face (not drawn).</em></p>
@@ -1059,7 +1059,7 @@ Full reading: [Case H validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 </details>
 
 <details>
-<summary><b>Case I — cube with a roof point source</b> · 630 rows, velocity and concentration · scored: OpenFOAM 12 (three closures)</summary>
+<summary><b>Case I — cube with a roof point source</b></summary>
 
 <p><!--fig name="case-i.png" alt="Case I geometry" width="700"--><a href="validation/figures/geometry/case-i.png"><img src="docs/assets/web/case-i.png" width="700" height="350" loading="lazy" alt="Case I geometry"></a><!--/fig--><br>
 <em>Isolated cube, 0.10 m on a side (model scale); the wind blows along +x. The tracer is released from a 6 mm outlet at the centre of the roof (not drawn).</em></p>
@@ -1132,7 +1132,7 @@ Full reading: [Case I validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 </details>
 
 <details>
-<summary><b>Case J — 1:1:2 building, non-isothermal</b> · 444 rows, velocity, temperature, concentration, fluxes · scored: UMF (two closures)</summary>
+<summary><b>Case J — 1:1:2 building, non-isothermal</b></summary>
 
 <p><!--fig name="case-j.png" alt="Case J geometry" width="700"--><a href="validation/figures/geometry/case-j.png"><img src="docs/assets/web/case-j.png" width="700" height="350" loading="lazy" alt="Case J geometry"></a><!--/fig--><br>
 <em>Isolated 1:1:2 building, b = 0.08 m, H = 0.16 m (model scale); the orange ring marks the floor tracer source, 0.25 H behind the building (seen through it); the wind blows along +x.</em></p>
@@ -1205,7 +1205,7 @@ Full reading: [Case J validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 </details>
 
 <details>
-<summary><b>Case K — 9 x 9 cube array, point source</b> · 203 rows, velocity and concentration · scored: OpenFOAM 12</summary>
+<summary><b>Case K — 9 x 9 cube array, point source</b></summary>
 
 <p><!--fig name="case-k.png" alt="Case K geometry" width="700"--><a href="validation/figures/geometry/case-k.png"><img src="docs/assets/web/case-k.png" width="700" height="350" loading="lazy" alt="Case K geometry"></a><!--/fig--><br>
 <em>9 x 9 array of 0.06 m cubes on a 0.12 m pitch (model scale); the orange ring marks the floor tracer source between rows 2 and 3; the wind blows along +x.</em></p>
@@ -1279,7 +1279,7 @@ Full reading: [Case K validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 </details>
 
 <details>
-<summary><b>Case L — 9 x 14 cube array, line source, non-isothermal</b> · 344 rows, velocity, temperature, concentration, fluxes · scored: UMF</summary>
+<summary><b>Case L — 9 x 14 cube array, line source, non-isothermal</b></summary>
 
 <p><!--fig name="case-l.png" alt="Case L geometry" width="700"--><a href="validation/figures/geometry/case-l.png"><img src="docs/assets/web/case-l.png" width="700" height="350" loading="lazy" alt="Case L geometry"></a><!--/fig--><br>
 <em>14 rows along x by 9 columns across y of 0.06 m cubes on a 0.12 m pitch (model scale); the orange line is the floor tracer source between rows 7 and 8; the wind blows along +x.</em></p>
@@ -1352,7 +1352,7 @@ Full reading: [Case L validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 </details>
 
 <details>
-<summary><b>Case M — TPU Atsugi campus</b> · 330 rows, tunnel and field · scored: OpenFOAM 12 (WD 180, three Schmidt numbers)</summary>
+<summary><b>Case M — TPU Atsugi campus</b></summary>
 
 <p><!--fig name="case-m.png" alt="Case M geometry" width="700"--><a href="validation/figures/geometry/case-m.png"><img src="docs/assets/web/case-m.png" width="700" height="350" loading="lazy" alt="Case M geometry"></a><!--/fig--><br>
 <em>TPU Atsugi campus: terrain and buildings of the 1:600 model (full-scale metres, 1080 m by 720 m); the arrow is the wind at WD = 180°, blowing toward +x (north).</em></p>
@@ -1428,7 +1428,7 @@ Full reading: [Case M validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 ---
 
 <details>
-<summary><b>Validation method</b> · how Eddy3D is scored, the figures, the ML surrogate, what is scored and why</summary>
+<summary><b>Validation method</b></summary>
 
 Each case is solved through Eddy3D's production case writer (`build-case → run → probe`). The probe sits at **exactly
 the tunnel's own measurement coordinates**, so no interpolation enters the comparison. Cases C–E measure an
@@ -2036,7 +2036,7 @@ FluidX3D has no ground wall function; scoring Cases C to E needs one in the engi
 </details>
 
 <details>
-<summary><b>Known data issues</b> · what in the published files changes a comparison if it is not accounted for</summary>
+<summary><b>Known data issues</b></summary>
 
 1. **Cases A and B report the lateral velocity $$V$$ with opposite sign conventions.** Case A measures
    **$$V$$ = −2.893 m/s** at (−0.040, −0.050, 0.010) with its edge at $$y = -0.04$$; Case B measures **$$V$$ = +3.630 m/s** at
@@ -2087,7 +2087,7 @@ The cleaned tables served by the API apply the unit, sign and frame corrections;
 </details>
 
 <details>
-<summary><b>API</b> · static endpoints for scripts and agents</summary>
+<summary><b>API</b></summary>
 
 Every endpoint is a file under `docs/api/`, generated by `scripts/build_api.py` and served by GitHub Pages at
 `https://eddy3d-dev.github.io/AIJ-Data-Validation/api/…` (and raw from this
@@ -2217,7 +2217,7 @@ unregistered snapshot stops the build). The changes from 1.0.0 are in `index.jso
 </details>
 
 <details>
-<summary><b>Repository layout and file names</b> · what is where, the naming rule, what was renamed</summary>
+<summary><b>Repository layout and file names</b></summary>
 
 | Folder | Contents |
 |---|---|
@@ -2276,7 +2276,7 @@ site names the cases (`/cases/case-a/`).
 </details>
 
 <details>
-<summary><b>Versions, releases and reproducing them</b> · what a version number promises, and how to rebuild any release byte for byte</summary>
+<summary><b>Versions, releases and reproducing them</b></summary>
 
 **One version for what this repository serves.** [`VERSION`](VERSION) holds it; [`CHANGELOG.md`](CHANGELOG.md)
 lists every release; `CITATION.cff`, [`clean/manifest.json`](clean/manifest.json) and the API (`versions.release` and `release` in

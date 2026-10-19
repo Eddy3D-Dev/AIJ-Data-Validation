@@ -1,0 +1,77 @@
+{
+ "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.2/schemas/geometry.schema.json",
+ "schema_version": "2.5.0",
+ "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
+ "license": "CC-BY-4.0",
+ "case": "I",
+ "title": "Case I — cube with a roof point source",
+ "units": "metres (model scale)",
+ "frame": {
+  "origin": "the centre of the cube on the ground plane",
+  "x": "+x streamwise (the wind blows toward +x); the cube spans x in [-0.05, 0.05]; wind points x = -0.15 ... 0.25 m, concentration points x = 0.065 ... 2.7 m",
+  "y": "+y lateral; the cube spans y in [-0.05, 0.05]; concentration points reach |y| = 0.44 m on the ground",
+  "z": "+z up; roof at z = 0.1 m; the outlet at (0, 0, 0.1)",
+  "lateral_sign_applied": 1,
+  "coordinate_scale_applied": 1.0
+ },
+ "default_configuration": "default",
+ "configurations": [
+  "default"
+ ],
+ "is_boxes": true,
+ "files": [
+  {
+   "configuration": "default",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.2/cases/I/geometry.stl?v=ff61cbb22798",
+   "path": "cases/I/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1738,
+   "sha256": "ff61cbb22798b0a8e10ed47f20da3cb2c7fa489e4483414cf9789364c47b659c",
+   "format": "ASCII STL, LF line endings, outward normals, every body closed and consistently wound",
+   "source": "generated from the stated 0.1 m cube centred on the origin (MP-y-c_caseI.png, MP-z-c_caseI.png)",
+   "stats": {
+    "triangles": 12,
+    "bbox_min": [
+     -0.05,
+     -0.05,
+     0.0
+    ],
+    "bbox_max": [
+     0.05,
+     0.05,
+     0.1
+    ],
+    "signed_volume": 0.001,
+    "edges": 18,
+    "edges_shared_by_two_faces": 18,
+    "edges_boundary": 0,
+    "edges_non_manifold": 0,
+    "bodies": 1,
+    "body_contacts": 0,
+    "inconsistent_triangles": 0,
+    "min_body_volume": 0.001,
+    "watertight": true
+   },
+   "bbox_matches_stated_dimensions": true,
+   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-i.png",
+   "render_caption": "Isolated cube, 0.10 m on a side (model scale); the wind blows along +x. The tracer is released from a 6 mm outlet at the centre of the roof (not drawn).",
+   "boxes": [
+    {
+     "min": [
+      -0.05,
+      -0.05,
+      0.0
+     ],
+     "max": [
+      0.05,
+      0.05,
+      0.1
+     ]
+    }
+   ],
+   "box_count": 1,
+   "analytic_volume": 0.001
+  }
+ ],
+ "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-i.png"
+}

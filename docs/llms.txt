@@ -6,7 +6,7 @@
 Base URL: https://eddy3d-dev.github.io/AIJ-Data-Validation/api
 Fallback (raw files from the repository): https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/main/docs/api
 Repository: https://github.com/Eddy3D-Dev/AIJ-Data-Validation
-Release: 3.2.1 (2026-10-19). This is the latest alias, which always equals the newest release; the frozen copy of 3.2.1 is https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1.
+Release: 3.2.2 (2026-10-19). This is the latest alias, which always equals the newest release; the frozen copy of 3.2.2 is https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.2.
 All releases: https://eddy3d-dev.github.io/AIJ-Data-Validation/api/versions.json
 API schema version: 2.5.0. Data version (SHA-256 of the served data): ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62.
 Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and requested citation of each case are in cases/{id}.json.
@@ -153,19 +153,19 @@ Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and reques
   - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/probes.csv?v=abee3cd8c088
   - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/probes.csv?v=877ae498c348
 - cases/{id}/inflow_openfoam.txt (base URL + path, one file per value) — the recommended inlet as OpenFOAM 12 files in one text (0/U, 0/k, 0/epsilon, 0/nut, system/probes with the case's points); the benchmark's data is the measured profile, the inlet is this repository's choice:
-  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/inflow_openfoam.txt?v=9398d3a8abdc
-  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/inflow_openfoam.txt?v=04d1258bab97
-  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/inflow_openfoam.txt?v=c7190d2cd689
-  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/inflow_openfoam.txt?v=3cf923b91ef8
-  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/inflow_openfoam.txt?v=7a72f69947be
-  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/inflow_openfoam.txt?v=2b36d787bfd3
-  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/inflow_openfoam.txt?v=30468e35683f
-  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/inflow_openfoam.txt?v=00be50e3d138
-  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/inflow_openfoam.txt?v=2a01a010fd6a
-  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/inflow_openfoam.txt?v=c45e53ef8ac0
-  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/inflow_openfoam.txt?v=e33508452727
-  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/inflow_openfoam.txt?v=51b87a85f91f
-  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/inflow_openfoam.txt?v=aef315a4496a
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/inflow_openfoam.txt?v=b78bc1b83d93
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/inflow_openfoam.txt?v=a30da4baa00f
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/inflow_openfoam.txt?v=2dc504619717
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/inflow_openfoam.txt?v=876bf4fca4c0
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/inflow_openfoam.txt?v=8358c82a3c0c
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/inflow_openfoam.txt?v=110e2f11b3a1
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/inflow_openfoam.txt?v=d84c67e315ad
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/inflow_openfoam.txt?v=b397e8fdcd6c
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/inflow_openfoam.txt?v=5771b17305e2
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/inflow_openfoam.txt?v=e18f1714c73c
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/inflow_openfoam.txt?v=cf11807776f8
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/inflow_openfoam.txt?v=75a6aa3b340d
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/inflow_openfoam.txt?v=d00aec043b1f
 - cases/{id}/validation.json (base URL + path, one file per value) — Eddy3D's scores per engine and run, with figures and the per-point pairs:
   - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/validation.json
   - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/validation.json

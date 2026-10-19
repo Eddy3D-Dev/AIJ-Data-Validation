@@ -126,7 +126,7 @@ def required_level(tag, changes):
     need, why = "patch", "served content changed"
     for status, path in changes:
         if status.startswith("D") and RELEASE_TREE.match(path):
-            continue        # the copies of 2.0.0 to 3.2.0 were withdrawn at 3.2.1, before anyone used them; the alias still serves every file
+            continue        # the copies of 2.0.0 to 3.2.0 were withdrawn at 3.2.2, before anyone used them; the alias still serves every file
         if status.startswith("D"):
             return "major", f"{path} was removed or renamed"
         if status.startswith("A") and LEVELS.index(need) < 1 and not RELEASE_TREE.match(path):
