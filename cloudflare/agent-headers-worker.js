@@ -2,14 +2,15 @@
 //   1. Link response headers on the homepage (RFC 8288, RFC 9727 section 3): api-catalog, service-desc, service-doc.
 //   2. Content-Type: application/linkset+json on /.well-known/api-catalog (RFC 9727).
 //
-// Deploy once for all three sites (Workers & Pages > Create > Worker, paste this file), then add a route for each:
+// Deploy once for all the sites (Workers & Pages > Create > Worker, paste this file), then add a route for each:
 //   www.eddy3d.com/*   docs.eddy3d.com/*   aij.eddy3d.com/*
+//   patrickkastner.me/*   sustainableurbansystems.com/*
 // The hostnames must be proxied (orange cloud). Markdown negotiation is a Cloudflare setting, not code:
 // Speed > Optimization > Content Optimization > "Markdown for Agents" (plan permitting).
 
 const AIJ = "https://aij.eddy3d.com";
 
-// The AIJ API is the one public API of the project; the other two sites point at it.
+// The AIJ API is the one public API of the project; the other sites point at it.
 const LINKS = {
   "aij.eddy3d.com": [
     '</.well-known/api-catalog>; rel="api-catalog"',
