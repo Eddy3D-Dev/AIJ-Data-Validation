@@ -31,10 +31,10 @@ description: "Case B — 1:4:4 slab: configuration, frame and units, reference d
 | Reynolds number $$\mathrm{Re_H}$$ | 72,000 |
 | $$U_H$$ (m/s) | 5.133 |
 | Wind directions (°) | 0 |
-| Measurement planes | vertical centre plane y/H = 0, horizontal z/H = 1/16 |
+| Measurement planes | vertical centre plane $$y/H = 0$$, horizontal $$z/H = 1/16$$ |
 | Instrument | hot-wire anemometer, split-fibre probe, 100 Hz, 60 s per point |
 | Wind tunnel | Niigata Institute of Technology, Kashiwazaki |
-| Scale, note | model scale; Eddy3D solves it at 1:100 (H = 20 m) with the tunnel velocities |
+| Scale, note | model scale; Eddy3D solves it at 1:100 ($$H = 20\thinspace\mathrm{m}$$) with the tunnel velocities |
 
 {% include nomenclature.md %}
 
@@ -43,9 +43,9 @@ description: "Case B — 1:4:4 slab: configuration, frame and units, reference d
 | Property | Definition |
 |---|---|
 | Origin | building centre on the ground plane |
-| x | +x streamwise (the wind at WD = 0 blows toward +x); slab spans x in \[-0.025, 0.025\] |
-| y | +y lateral; slab spans y in \[-0.10, 0.10\]; points published on the y \<= 0 half by the tunnel\'s symmetry convention |
-| z | +z up from the ground; roof at z = 0.20 |
+| x | $$+x$$ streamwise (the wind at $$\mathrm{WD} = 0$$ blows toward $$+x$$); slab spans $$x \in \lbrack -0.025,\thinspace 0.025\rbrack$$ |
+| y | $$+y$$ lateral; slab spans $$y \in \lbrack -0.10,\thinspace 0.10\rbrack$$; points published on the y \<= 0 half by the tunnel\'s symmetry convention |
+| z | $$+z$$ up from the ground; roof at $$z = 0.20$$ |
 | Lateral sign applied | -1 |
 | Coordinate scale applied | 0.001 |
 | Unit of length | m (model scale; converted from the published millimetres) |
@@ -81,9 +81,9 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `x` |  | m, case frame |
 | `y` |  | m, case frame |
 | `z` |  | m above ground, case frame |
-| `U` | $$U$$ | m/s, mean velocity along +x |
-| `V` | $$V$$ | m/s, mean velocity along +y (sign unified: positive toward +y) |
-| `W` | $$W$$ | m/s, mean velocity along +z |
+| `U` | $$U$$ | m/s, mean velocity along $$+x$$ |
+| `V` | $$V$$ | m/s, mean velocity along $$+y$$ (sign unified: positive toward $$+y$$) |
+| `W` | $$W$$ | m/s, mean velocity along $$+z$$ |
 | `uu` | $$\overline{u'u'}$$ | m²/s², variance of u |
 | `vv` | $$\overline{v'v'}$$ | m²/s², variance of v |
 | `ww` | $$\overline{w'w'}$$ | m²/s², variance of w |
@@ -98,7 +98,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | log law, $$\kappa$$ = 0.41, least squares over z = 0.02 ... 2H on the case\'s own approach-flow file |
+| Method | log law, $$\kappa$$ = 0.41, least squares over $$z = 0.02\thinspace\ldots\thinspace 2H$$ on the case\'s own approach-flow file |
 | Friction velocity $$u_\ast$$ (m/s) | 0.399 |
 | Roughness length $$z_0$$ (mm) | 0.882 |
 | $$U_H$$, measured (m/s) | 5.133 |
@@ -109,7 +109,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 ## Known data issues
 
 - The published coordinates are MILLIMETRES (x\[mm\]) while velocities are m/s. The API serves metres (coordinate\_scale\_applied = 0.001). Read as metres, every probe lands 1000x too far out.
-- The published lateral velocity $$V$$ is positive toward -y ($$V$$ = +3.630 m/s at (-0.025, -0.110, 0.013), just outside the y \< 0 flank where the flow must deflect toward -y). The API multiplies $$V$$ by -1 (lateral\_sign\_applied = -1) so that $$V$$ is positive toward +y as in Case A. Scored without this, Case B\'s $$V$$ comes out at R = -0.910 against R = +0.959 for $$U$$ on the same points.
+- The published lateral velocity $$V$$ is positive toward -y ($$V$$ = +3.630 m/s at (-0.025, -0.110, 0.013), just outside the $$y \lt 0$$ flank where the flow must deflect toward -y). The API multiplies $$V$$ by -1 (lateral\_sign\_applied = -1) so that $$V$$ is positive toward $$+y$$ as in Case A. Scored without this, Case B\'s $$V$$ comes out at $$R = -0.910$$ against $$R = +0.959$$ for $$U$$ on the same points.
 - The RANS solution is symmetric, so model $$V$$ = 0 on the centre plane while the tunnel measures small non-zero values there.
 
 ## API

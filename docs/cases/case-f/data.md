@@ -46,9 +46,9 @@ description: "Case F — Shinjuku district: configuration, frame and units, refe
 | Property | Definition |
 |---|---|
 | Origin | centre of the reproduced district, tunnel floor plane |
-| x | +x EAST (full-scale metres) |
-| y | +y NORTH (compass rose in MP\_caseF.png) |
-| z | +z up from the TUNNEL FLOOR; the readme\'s rule is ground = z - 10 m (the STL\'s terrain under the points is at z = 5 m) |
+| x | $$+x$$ EAST (full-scale metres) |
+| y | $$+y$$ NORTH (compass rose in MP\_caseF.png) |
+| z | $$+z$$ up from the TUNNEL FLOOR; the readme\'s rule is ground = z - 10 m (the STL\'s terrain under the points is at $$z = 5\thinspace\mathrm{m}$$) |
 | Wind direction convention | compass FROM-direction (N = 0, E = 90), so N blows toward -y; flow\_dir = (-sin WD, -cos WD). Not stated by the sources; supported by the reference-building choice and by upwind roughness, and at NNW by a solved field (status \'corroborated by a solved field\'; the other directions stay \'unverified\'). |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 800.0 |
@@ -154,9 +154,9 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 ## Known data issues
 
 - The 16 field rows of point 14 in RS-FO\_caseF.csv hold the workbook\'s value of the NEXT wind direction clockwise (the series is shifted by one); the cleaned table follows the workbook (clean/QUESTIONS.md QF1).
-- Tunnel and STL coordinates are MODEL scale (1:800); the field\'s are full scale. The case frame is full scale; the tunnel\'s x, y, z and the STL are multiplied by 800.
-- z is height above the tunnel floor. The readme\'s rule \'ground = z - 10 m\' gives the 5 / 9 / 20 m planes, but the STL\'s terrain under all 13 points is at z = 5 m, so the planes stand 10 / 14 / 25 m above it.
-- BD\_caseF.stl is wound inward on every ground, roof and sampled wall facet and is open along the rim of its 725 m disc (812 boundary edges); the served geometry.stl is re-wound outward and closed with a base slab down to z = -1 m.
+- Tunnel and STL coordinates are MODEL scale (1:800); the field\'s are full scale. The case frame is full scale; the tunnel\'s $$x$$, $$y$$, $$z$$ and the STL are multiplied by 800.
+- z is height above the tunnel floor. The readme\'s rule \'ground = z - 10 m\' gives the 5 / 9 / 20 m planes, but the STL\'s terrain under all 13 points is at $$z = 5\thinspace\mathrm{m}$$, so the planes stand 10 / 14 / 25 m above it.
+- BD\_caseF.stl is wound inward on every ground, roof and sampled wall facet and is open along the rim of its 725 m disc (812 boundary edges); the served geometry.stl is re-wound outward and closed with a base slab down to $$z = -1\thinspace\mathrm{m}$$.
 - MP\_caseF.csv names the two reference points the other way round from the workbook, the STL and MP\_caseF.png (the workbook\'s Shinjuku-Mitsui Building is the 225 m tower at (-17.5, 96.0), the KDD Building the 180 m one at (85.8, -347.1)).
 - Field values are the legacy workbook\'s roof-anemometer ratios times 0.940 (NW-NE) or 0.963 (other directions); sigma is the workbook\'s S.D. rounded to 0.01 times that factor, so it moves in steps of 0.0094 / 0.0096.
 - The tunnel did not run E, ESE, WSW or W; the field data cover all 16. The 5 m and 20 m planes exist at some points only (29 and 79 rows).

@@ -24,17 +24,17 @@ description: "Case C — 3 × 3 block array: configuration, frame and units, ref
 
 | Parameter | Value |
 |---|---|
-| Array | 3 x 3 cubes, D = 0.20 m, block centres at x, y in {-0.4, 0, +0.4} m (pitch 0.40 m = 2D, street width D) |
+| Array | 3 x 3 cubes, $$D = 0.20\thinspace\mathrm{m}$$, block centres at x, y in {-0.4, 0, +0.4} m (pitch 0.40 m = 2D, street width D) |
 | Block size D (m) | 0.2 |
 | Centre building | **0D**: no centre building<br>**1D**: 0.2 x 0.2 x 0.2 m (same as the surroundings)<br>**2D**: 0.2 x 0.2 x 0.4 m |
 | Wind directions (°) | 0, 22.5, 45 |
 | Configurations | 9 |
 | Configurations, note | 3 centre-building heights x 3 wind directions; all nine share the identical 120-point set |
 | Measurement height (m) | 0.02 |
-| Measurement height, note | z = 0.1 D for every point (2.0 m at the 1:100 scale Eddy3D solves it at) |
+| Measurement height, note | $$z = 0.1\thinspace D$$ for every point (2.0 m at the 1:100 scale Eddy3D solves it at) |
 | Reynolds number $$\mathrm{Re_D}$$ | 52,000 |
 | $$U_H$$ (m/s) | 3.654 |
-| $$U_H$$, note | $$U$$ at z = D = 0.20 m from AF\_caseC.csv; the data paper states $$U_H$$ = 3.65 m/s |
+| $$U_H$$, note | $$U$$ at $$z = D = 0.20\thinspace\mathrm{m}$$ from AF\_caseC.csv; the data paper states $$U_H$$ = 3.65 m/s |
 | Instrument | thermistor anemometer (omnidirectional scalar speed), 1 Hz, 30 s per point; approach flow by I-type hot wire, 500 Hz, 30 s |
 | Wind tunnel | Technology Development Division, Fujita Corporation, Tokyo |
 | Pitch, note | The 0.40 m pitch is read from MP-z-caseC.png and Figure 3 of the data paper (street = D); the 120-point grid alone bounds the pitch to (0.35, 0.40\] m (the 49 absent nodes of the 13 x 13 grid are exactly the nine footprints for 0.375 m as well as 0.40 m). |
@@ -46,19 +46,21 @@ description: "Case C — 3 × 3 block array: configuration, frame and units, ref
 | Property | Definition |
 |---|---|
 | Origin | array centre on the ground plane (centre of the middle block) |
-| x | +x streamwise at WD = 0 |
-| y | +y lateral |
-| z | +z up; all points at z = 0.02 |
-| Wind direction convention | In the CSV\'s own frame WD rotates the wind from +x TOWARD -y. Figure 3 of the data paper draws the fan rotating toward +y. The two disagree by a y-sign flip; this release keeps the CSV frame. The disagreement is invisible at WD = 0. |
+| x | $$+x$$ streamwise at $$\mathrm{WD} = 0$$ |
+| y | $$+y$$ lateral |
+| z | $$+z$$ up; all points at $$z = 0.02$$ |
+| Wind direction convention | In the CSV\'s own frame WD rotates the wind from $$+x$$ TOWARD -y. Figure 3 of the data paper draws the fan rotating toward $$+y$$. The two disagree by a y-sign flip; this release keeps the CSV frame. The disagreement is invisible at $$\mathrm{WD} = 0$$. |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 1.0 |
 | Unit of length | m (model scale) |
 | Unit of velocity | m/s |
 
+{% include nomenclature.md %}
+
 <details markdown="block">
 <summary>Data notes: Frame and wind direction</summary>
 
-Checked three ways on the data: y -\> -y is a symmetry, the x \<= -0.25 band is faster than x \>= +0.25 in every configuration, and the regression slope of $$V_{\mathrm{s}}$$ is most negative within 0.8-4.3 deg of +x. The WD = 45 field is mirror-symmetric about y = -x to within the experiment\'s repeatability, 0.10-0.13 m/s, and not about y = +x, 0.5-0.8 m/s. The CSV frame is the frame the point coordinates live in.
+Checked three ways on the data: y -\> -y is a symmetry, the x \<= -0.25 band is faster than x \>= +0.25 in every configuration, and the regression slope of $$V_{\mathrm{s}}$$ is most negative within 0.8-4.3 deg of $$+x$$. The $$\mathrm{WD} = 45$$ field is mirror-symmetric about $$y = -x$$ to within the experiment\'s repeatability, 0.10-0.13 m/s, and not about $$y = +x$$, 0.5-0.8 m/s. The CSV frame is the frame the point coordinates live in.
 
 </details>
 
@@ -112,7 +114,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | log law, $$\kappa$$ = 0.41, least squares on AF\_caseC.csv (16 points, z = 0.01 ... 1.2 m); two windows |
+| Method | log law, $$\kappa$$ = 0.41, least squares on AF\_caseC.csv (16 points, $$z = 0.01\thinspace\ldots\thinspace 1.2\thinspace\mathrm{m}$$); two windows |
 | Fit window | z range m \[0.02, 0.4\]; Friction velocity $$u_\ast$$ (m/s) 0.25598; Roughness length $$z_0$$ (mm) 0.4797; error at $$U$$ D +3.08 %; error at z 0.02 -4.31 %; scored ratio bias -7.17 % |
 | Fit window | z range m \[0.01, 0.4\]; Friction velocity $$u_\ast$$ (m/s) 0.22853; Roughness length $$z_0$$ (mm) 0.2362; error at $$U$$ D +2.83 %; error at z 0.02 +1.65 %; scored ratio bias -1.15 % |
 | Power-law exponent, fitted | 0.19 |
@@ -125,7 +127,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 <details markdown="block">
 <summary>Interpretation: Inflow fit</summary>
 
-The fit has two windows because Case C scores at ONE height (z = 0.02 m) and the near-ground half of the fit matters. The tunnel profile is closer to a power law than a log law, so a log-law inlet carries a ~2.3 % rms residual over the fitted range.
+The fit has two windows because Case C scores at ONE height ($$z = 0.02\thinspace\mathrm{m}$$) and the near-ground half of the fit matters. The tunnel profile is closer to a power law than a log law, so a log-law inlet carries a ~2.3 % rms residual over the fitted range.
 
 </details>
 
@@ -134,7 +136,7 @@ The fit has two windows because Case C scores at ONE height (z = 0.02 m) and the
 - The measured quantity $$V_{\mathrm{s}}$$ is the MEAN OMNIDIRECTIONAL SCALAR speed from a thermistor, not \|mean velocity vector\|. A RANS $$\lvert\mathbf{U}\rvert$$ is biased low against it; the data paper suggests comparing $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ as a conservative correction (over all 1080 rows no $$V_{\mathrm{s}}$$ is below 0.13 $$U_H$$).
 - The \'CB\' column is TEXT (\'0D\', \'1D\', \'2D\'); a reader that parses every field as a number gets NaN for it. The header ends with a trailing comma (an empty 8th column).
 - 1080 rows = 3 wind directions x 3 centre buildings x 120 points, not 3 configurations. In the 0D configuration the 25 centre grid nodes are still absent although the ground there is free: the grid is held constant across configurations.
-- 24 of the 120 points sit exactly on a building face plane (\|x\| = 0.30 or \|y\| = 0.30) in the open gap between two blocks: legitimate fluid points, but a probe\'s cell lookup is delicate there.
+- 24 of the 120 points sit exactly on a building face plane ($$\lvert x\rvert = 0.30$$ or $$\lvert y\rvert = 0.30$$) in the open gap between two blocks: legitimate fluid points, but a probe\'s cell lookup is delicate there.
 - Point numbers 1, 2, 3, 34, 35, 36, 37, 46, 55, 100, 101, 102 do not occur (No. runs 4 ... 132 with nine interior gaps).
 - Experimental repeatability, from the mirror-symmetric point pairs: mean \|dVs\| 0.088-0.137 m/s (0.024-0.038 $$U_H$$).
 

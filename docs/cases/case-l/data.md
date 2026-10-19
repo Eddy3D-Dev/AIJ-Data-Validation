@@ -24,7 +24,7 @@ description: "Case L — 9 x 14 cube array, line source, non-isothermal: configu
 
 | Parameter | Value |
 |---|---|
-| Array | 14 rows (along x) by 9 columns (across y) of cubes, H = 0.06 m, pitch 0.12 m (street width = H, plan area ratio 25 %), published as BD\_caseL.stl; the data paper calls it \'9 rows by 14 columns\' |
+| Array | 14 rows (along x) by 9 columns (across y) of cubes, $$H = 0.06\thinspace\mathrm{m}$$, pitch 0.12 m (street width = H, plan area ratio 25 %), published as BD\_caseL.stl; the data paper calls it \'9 rows by 14 columns\' |
 | Height H (m) | 0.06 |
 | pitch m | 0.12 |
 | cubes | 126 |
@@ -33,8 +33,8 @@ description: "Case L — 9 x 14 cube array, line source, non-isothermal: configu
 | Wind directions (°) | 0 |
 | Measurement planes | 8 heights (4 .. 150 mm) at 27 locations in the streets near the source, 4 heights (70 .. 150 mm) at 14 locations above the blocks, 3 heights (4 .. 30 mm) at 24 locations around |
 | Points | 344 |
-| stratification | unstable: floor 45.0 degC, air at z = H 14.75 degC (difference 30.3 K), bulk Richardson number -0.035 (workbook; the readme says -0.04); the workbook gives the building surface as 42.2 degC |
-| source | floor line source across the tunnel at x = -0.15 m between rows 7 and 8: readme 0.037 m x 1.2 m, BD\_caseL.stl patch 0.04 m x 1.02 m; 100 % ethylene, 8.33e-6 m³/s (500 cc/min) at 35 degC |
+| stratification | unstable: floor 45.0 degC, air at $$z = H$$ 14.75 degC (difference 30.3 K), bulk Richardson number -0.035 (workbook; the readme says -0.04); the workbook gives the building surface as 42.2 degC |
+| source | floor line source across the tunnel at $$x = -0.15\thinspace\mathrm{m}$$ between rows 7 and 8: readme 0.037 m x 1.2 m, BD\_caseL.stl patch 0.04 m x 1.02 m; 100 % ethylene, 8.33e-6 m³/s (500 cc/min) at 35 degC |
 | concentration normalisation | $$c_0 = \dfrac{q}{U_H H^2}$$ = 1728.23 ppm (the workbook\'s value) |
 | Instrument | split-fibre hot wire (velocity), cold wire (temperature), high-speed hydrocarbon analyser (concentration), 1000 Hz with a 200 Hz low-pass filter, 60 s per point |
 | Wind tunnel | thermally stratified wind tunnel, Tokyo Polytechnic University (Atsugi); 1.2 m wide, 1.0 m high; 26 aluminium angles 9 mm high every 200 mm as roughness; model floor 10 mm above the tunnel floor |
@@ -46,10 +46,10 @@ description: "Case L — 9 x 14 cube array, line source, non-isothermal: configu
 
 | Property | Definition |
 |---|---|
-| Origin | bottom centre of the windward wall of the 9th row (of 14) of the central column: x = 0 is that wall, y = 0 the centre line of the central column |
-| x | +x streamwise (the wind blows toward +x); row $$k$$ spans x in \[0.12 ($$k$$-9), 0.12 ($$k$$-9) + 0.06\], so the array spans x in \[-0.96, 0.66\] |
-| y | +y lateral; column centres at y = 0, +-0.12, ... +-0.48 (the array spans y in \[-0.51, 0.51\]) |
-| z | +z up from the model floor; cube tops at z = 0.06; heated floor at z = 0 |
+| Origin | bottom centre of the windward wall of the 9th row (of 14) of the central column: $$x = 0$$ is that wall, $$y = 0$$ the centre line of the central column |
+| x | $$+x$$ streamwise (the wind blows toward $$+x$$); row $$k$$ spans x in \[0.12 ($$k$$-9), 0.12 ($$k$$-9) + 0.06\], so the array spans $$x \in \lbrack -0.96,\thinspace 0.66\rbrack$$ |
+| y | $$+y$$ lateral; column centres at $$y = 0$$, +-0.12, ... +-0.48 (the array spans $$y \in \lbrack -0.51,\thinspace 0.51\rbrack$$) |
+| z | $$+z$$ up from the model floor; cube tops at $$z = 0.06$$; heated floor at $$z = 0$$ |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 1.0 |
 | Unit of length | m (model scale) |
@@ -87,9 +87,9 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `x` |  | m, case frame |
 | `y` |  | m, case frame |
 | `z` |  | m above ground, case frame |
-| `U` | $$U$$ | m/s, mean velocity along +x |
-| `V` | $$V$$ | m/s, mean velocity along +y (sign unified: positive toward +y) |
-| `W` | $$W$$ | m/s, mean velocity along +z |
+| `U` | $$U$$ | m/s, mean velocity along $$+x$$ |
+| `V` | $$V$$ | m/s, mean velocity along $$+y$$ (sign unified: positive toward $$+y$$) |
+| `W` | $$W$$ | m/s, mean velocity along $$+z$$ |
 | `uu` | $$\overline{u'u'}$$ | m²/s², variance of u |
 | `vv` | $$\overline{v'v'}$$ | m²/s², variance of v |
 | `ww` | $$\overline{w'w'}$$ | m²/s², variance of w |
@@ -117,7 +117,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | least squares, $$\kappa$$ = 0.41, z = 0.02 .. 0.32 m (about 5 H) on the workbook\'s Inflow sheet (CSV = its rounding) |
+| Method | least squares, $$\kappa$$ = 0.41, $$z = 0.02\thinspace\ldots\thinspace 0.32\thinspace\mathrm{m}$$ (about $$5\thinspace H$$) on the workbook\'s Inflow sheet (CSV = its rounding) |
 | Friction velocity $$u_\ast$$ (m/s) | 0.06999 |
 | Roughness length $$z_0$$ (mm) | 0.0265 |
 | $$U_H$$, measured (m/s) | 1.3394 |
@@ -131,13 +131,13 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 - RS\_caseL.csv\'s temperature column is headed \'T(K)\' but holds DEGREES CELSIUS (12.85 .. 29.86); AF\_caseL.csv\'s \'T(K)\' is kelvin (283 .. 295). The API serves degrees Celsius for both.
 - The published CSV is the workbook rounded to 2-4 decimals; the table is rebuilt from the workbook. Its \'tc\' column (temperature-concentration covariance, K ppm) and the workbook\'s \'Usc\' (the vector magnitude of the mean velocity) are not in the table.
-- BD\_caseL.stl: the two bottom triangles (z = 0) of each of the 126 cubes (252 triangles) are wound inward; the served geometry.stl is the 126 boxes, outward.
+- BD\_caseL.stl: the two bottom triangles ($$z = 0$$) of each of the 126 cubes (252 triangles) are wound inward; the served geometry.stl is the 126 boxes, outward.
 - The readme\'s file list names AF\_caseK.csv and RS\_caseK.csv; the files are AF\_caseL.csv and RS\_caseL.csv.
-- The readme\'s \'building surface temperature $$T_b$$ = 14.8 degC\' is the approach-flow air temperature at z = H; the workbook gives the building surface as 42.2 degC.
+- The readme\'s \'building surface temperature $$T_b$$ = 14.8 degC\' is the approach-flow air temperature at $$z = H$$; the workbook gives the building surface as 42.2 degC.
 - The line source is 0.037 m x 1.2 m in the readme and data paper but a 0.04 m x 1.02 m patch in BD\_caseL.stl.
-- The +y and -y halves are not mirror images: the same point differs in $$U$$ by 26 %, in $$k$$ by 23 %, in C by 36 % on average, and $$U$$ is 0.11 m/s lower and T 1.3 K higher at +y at z = 0.15 m (0.09 m above the roofs), so the tunnel flow has a lateral gradient; do not assume symmetry.
+- The $$+y$$ and -y halves are not mirror images: the same point differs in $$U$$ by 26 %, in $$k$$ by 23 %, in C by 36 % on average, and $$U$$ is 0.11 m/s lower and T 1.3 K higher at $$+y$$ at $$z = 0.15\thinspace\mathrm{m}$$ (0.09 m above the roofs), so the tunnel flow has a lateral gradient; do not assume symmetry.
 - The workbook carries no expanded uncertainty (the data paper mentions one for Case J only).
-- AF\_caseL.csv lists the profile from the top (z = 0.32 m) down and has no $$k$$.
+- AF\_caseL.csv lists the profile from the top ($$z = 0.32\thinspace\mathrm{m}$$) down and has no $$k$$.
 - The measured tracer flux through the cross-sections equals q / 1.2 m to 0.86 .. 1.0 (street and cube-column lines averaged), which fixes q and the unit ppm; the cube-column line alone carries only 0.2 .. 0.4 of it.
 
 ## API

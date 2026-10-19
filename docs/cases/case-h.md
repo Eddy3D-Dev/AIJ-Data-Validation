@@ -28,7 +28,7 @@ Isolated 1:1:2 building with an ethylene point source on the floor behind it: ve
 | Reynolds number $$\mathrm{Re_H}$$ | 43,000 |
 | $$U_H$$ (m/s) | 3.226 |
 | Wind directions (°) | 0 |
-| Measurement planes | vertical centre plane y/H = 0, horizontal z/H = 1/16 (y in \[-0.2, 0.2\]), horizontal z/H = 1/4 and 1/2 (y in \[0, 0.2\]) |
+| Measurement planes | vertical centre plane $$y/H = 0$$, horizontal $$z/H = 1/16$$ ($$y \in \lbrack -0.2,\thinspace 0.2\rbrack$$), horizontal $$z/H = 1/4\text{ and }1/2$$ ($$y \in \lbrack 0,\thinspace 0.2\rbrack$$) |
 | Measured | 1,652 rows over 876 points: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$, $$C$$, $$c_{\mathrm{rms}}$$, $$c^\ast$$ |
 
 {% include nomenclature.md %}

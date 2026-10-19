@@ -28,7 +28,7 @@ Isolated 1:1:2 building, velocity field (split-fibre hot wire).
 | Reynolds number $$\mathrm{Re_H}$$ | 24,000 |
 | $$U_H$$ (m/s) | 4.491 |
 | Wind directions (°) | 0 |
-| Measurement planes | vertical centre plane y/b = 0, horizontal z/b = 0.125, horizontal z/b = 1.25 |
+| Measurement planes | vertical centre plane $$y/b = 0$$, horizontal $$z/b = 0.125$$, horizontal $$z/b = 1.25$$ |
 | Measured | 186 rows over 186 points: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$ |
 
 {% include nomenclature.md %}

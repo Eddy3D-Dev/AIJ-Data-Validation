@@ -471,7 +471,7 @@ def check_plain_math(numbered):
         if line.strip() == "$$":
             display = not display
             continue
-        if display or (NOT_PROSE.match(line) and not line.lstrip().startswith("|")):
+        if display or (NOT_PROSE.match(line) and not line.lstrip().startswith("|") and MT.caption(line) is None):     # a figure include: its caption is prose
             continue
         for col, what in MT.leftovers(line):
             errors.append((n, f"plain-math: {what} written as plain text; write it between $$ ... $$ (python scripts/mathtext.py --write FILE converts it)"))
@@ -616,6 +616,11 @@ def self_test():
         ("code `$$x$$` and `$BASE` stay\n", []),
         ("the speed U_H and c0 and U\\_H^2\n", ["plain-math"]),
         ("the speed `U_H` and [U_H](README.md) stay in code and links\n", []),
+        ("variances (uu = $$u_{\\mathrm{rms}}^2$$) of Case A\n", ["plain-math"]),
+        ("the plane y/H = 0 and z = 0.1 and 10^-3 and H/64 and Cmu\n", ["plain-math"]),
+        ("the plane $$y/H = 0$$, $$z = 0.1\\thinspace\\mathrm{m}$$, $$10^{-3}$$, $$H/64$$ and $$C_\\mu$$\n", []),
+        ('text\n\n{% include figure.html name="x.png" alt="a" caption="<strong>F.</strong> a plane y/H = 0 of c*" %}\n\ntext\n', ["plain-math"]),
+        ('text\n\n{% include figure.html name="x.png" alt="a y/H" caption="<strong>F.</strong> a plane $$y/H = 0$$ of $$c^\\ast$$" %}\n\ntext\n', []),
         ("| R | FAC2 |\n|---|---|\n| 1 | 2 |\n", ["nomenclature"]),
         ("| R | FAC2 |\n|---|---|\n| 1 | 2 |\n\n<!--nomenclature scores-->\n\n<!--/nomenclature-->\n", []),
         ("| Symbol |\n|---|\n| $$U_H$$ |\n", ["nomenclature"]),

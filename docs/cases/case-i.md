@@ -28,7 +28,7 @@ Isolated cube with an ethane point source at the centre of its roof: velocity (l
 | Reynolds number $$\mathrm{Re_H}$$ | 11,000 |
 | $$U_H$$ (m/s) | 1.7 |
 | Wind directions (°) | 0 |
-| Measurement planes | velocity: y/H = 0 and z/H = 0.5, concentration: y/H = 0 and z/H = 0 (the ground) |
+| Measurement planes | velocity: $$y/H = 0$$ and $$z/H = 0.5$$, concentration: $$y/H = 0$$ and $$z/H = 0$$ (the ground) |
 | Measured | 630 rows over 630 points: $$U$$, $$V$$, $$W$$, $$k$$, $$C$$, $$c^\ast$$ |
 
 {% include nomenclature.md %}

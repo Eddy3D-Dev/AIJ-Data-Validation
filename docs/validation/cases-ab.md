@@ -12,9 +12,9 @@ OpenFOAM 12 runs on the 1:1:2 building (Case A) and the 1:4:4 slab (Case B). Per
 
 ## Measurement layout
 
-{% include figure.html name="case-a-layout.png" alt="Measurement lines and planes, Case A" caption="<strong>Figure 1.</strong> Case A, measurement lines and planes: A vertical profiles, y/b = 0; B plane z/b = 0.125; C plane z/b = 1.25. Positions in multiples of b." %}
+{% include figure.html name="case-a-layout.png" alt="Measurement lines and planes, Case A" caption="<strong>Figure 1.</strong> Case A, measurement lines and planes: A vertical profiles, $$y/b = 0$$; B plane $$z/b = 0.125$$; C plane $$z/b = 1.25$$. Positions in multiples of $$b$$." %}
 
-{% include figure.html name="case-b-layout.png" alt="Measurement lines and planes, Case B" caption="<strong>Figure 2.</strong> Case B, measurement lines and planes: A vertical profiles, y/H = 0; B plane z/H = 0.0625. Positions in multiples of H." %}
+{% include figure.html name="case-b-layout.png" alt="Measurement lines and planes, Case B" caption="<strong>Figure 2.</strong> Case B, measurement lines and planes: A vertical profiles, $$y/H = 0$$; B plane $$z/H = 0.0625$$. Positions in multiples of $$H$$." %}
 
 ## Measured against modelled
 
@@ -40,7 +40,7 @@ Measured against modelled for each quantity, with the 1:1 line and, where the qu
 - Reattachment length behind the building: $$L_r/H$$ = 1.49 (Case A), 3.27 (Case B).
 - $$V$$ and $$W$$ change sign.
 - Case A, $$W$$: the mean measured $$W$$ is ~0.01 m/s.
-- Case B, $$V$$: the model's $$V$$ is 0 on the centre plane (y = 0, a symmetry plane); the tunnel measures small non-zero values there.
+- Case B, $$V$$: the model's $$V$$ is 0 on the centre plane ($$y = 0$$, a symmetry plane); the tunnel measures small non-zero values there.
 
 ## Centre-plane profiles
 
@@ -51,11 +51,11 @@ Vertical profiles of $$U/U_H$$ on the centre plane at the first three measured s
 <details markdown="block">
 <summary>Interpretation: Cases A and B scores and profiles</summary>
 
-- The streamwise field is right: R ≈ 0.96 in both cases, FAC2 0.82 and 0.70.
-- $$k$$ is under-predicted in both (FB ≈ +0.47, R ≈ 0.4); Case H shows the same under-prediction (FB +0.51).
+- The streamwise field is right: $$R \approx 0.96$$ in both cases, FAC2 0.82 and 0.70.
+- $$k$$ is under-predicted in both (FB ≈ +0.47, $$R \approx 0.4$$); Case H shows the same under-prediction (FB +0.51).
 - $$V$$ and $$W$$ change sign, so factor-of-two agreement is a harsh measure near zero and FAC2 is low on both; R and hit rate carry the comparison there.
-- The flat row of model $$V$$ ≈ 0 in Case B's panel is the symmetry plane: a RANS solution is symmetric, so $$V$$ ≡ 0 at y = 0.
-- Case A's $$W$$ FB of −1.50 and its NMSE follow from a near-zero mean; the correlation is R = +0.71.
+- The flat row of model $$V$$ ≈ 0 in Case B's panel is the symmetry plane: a RANS solution is symmetric, so $$V$$ ≡ 0 at $$y = 0$$.
+- Case A's $$W$$ FB of −1.50 and its NMSE follow from a near-zero mean; the correlation is $$R = +0.71$$.
 - The model follows the measured profile closely above roof height and in the recovering wake; the near-ground deficit immediately behind the building is where the closure does least well.
 
 </details>

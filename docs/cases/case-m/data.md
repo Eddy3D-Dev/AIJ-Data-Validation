@@ -45,11 +45,11 @@ description: "Case M — TPU Atsugi campus: configuration, frame and units, refe
 
 | Property | Definition |
 |---|---|
-| Origin | centre of the tunnel turntable on the floor plane (ground surface there at z = 33.07 m) |
-| x | +x NORTH (full-scale metres) |
-| y | +y WEST (compass rose of MP\_caseM.png: N at +x, W at +y); the frame is right-handed |
-| z | +z up from the TUNNEL FLOOR; the campus ground lies at z ~ 32 m |
-| Wind direction convention | meteorological FROM-direction, so 180° blows toward +x; flow\_dir = (-cos WD, +sin WD), and a larger WD turns the plume toward -y. Measured on the tunnel\'s 175 / 180 / 185° and on the 18 field runs. |
+| Origin | centre of the tunnel turntable on the floor plane (ground surface there at $$z = 33.07\thinspace\mathrm{m}$$) |
+| x | $$+x$$ NORTH (full-scale metres) |
+| y | $$+y$$ WEST (compass rose of MP\_caseM.png: N at $$+x$$, W at $$+y$$); the frame is right-handed |
+| z | $$+z$$ up from the TUNNEL FLOOR; the campus ground lies at z ~ 32 m |
+| Wind direction convention | meteorological FROM-direction, so 180° blows toward $$+x$$; flow\_dir = (-cos WD, +sin WD), and a larger WD turns the plume toward -y. Measured on the tunnel\'s 175 / 180 / 185° and on the 18 field runs. |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 600.0 |
 | Unit of length | m (FULL scale) |
@@ -114,9 +114,9 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `x` |  | m, case frame |
 | `y` |  | m, case frame |
 | `z` |  | m above ground, case frame |
-| `U` | $$U$$ | m/s, mean velocity along +x |
-| `V` | $$V$$ | m/s, mean velocity along +y (sign unified: positive toward +y) |
-| `W` | $$W$$ | m/s, mean velocity along +z |
+| `U` | $$U$$ | m/s, mean velocity along $$+x$$ |
+| `V` | $$V$$ | m/s, mean velocity along $$+y$$ (sign unified: positive toward $$+y$$) |
+| `W` | $$W$$ | m/s, mean velocity along $$+z$$ |
 | `uu` | $$\overline{u'u'}$$ | m²/s², variance of u |
 | `vv` | $$\overline{v'v'}$$ | m²/s², variance of v |
 | `ww` | $$\overline{w'w'}$$ | m²/s², variance of w |
@@ -135,7 +135,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | power law on the workbook\'s 40 heights (z 0.005 ... 0.6 m model) at x = -0.498 m; the data paper states exponent 0.27 |
+| Method | power law on the workbook\'s 40 heights (z 0.005 ... 0.6 m model) at $$x = -0.498\thinspace\mathrm{m}$$; the data paper states exponent 0.27 |
 | Power-law exponent, fitted | 0.272 |
 | Power-law exponent, data paper | 0.27 |
 | $$U$$ at R height m s | 3.94 |
@@ -154,7 +154,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 - $$H_R$$ = 41 m is the anemometer height above the ground; the main roof under the reference point is about 33 m above it. $$c_0$$ uses $$H_R$$ = 0.068 m (41 m / 600 = 0.06833 m would give 131.2 ppm, -1 %).
 - The field has an ambient floor of 8 - 11 ppq at points 11 - 15 in every run (not subtracted); the tunnel\'s concentration has a zero offset (two negative means at point 12) and an rms floor of 7 ppm.
 - Only 11 of the 18 field runs are within 5° of 180°, the tunnel\'s direction; runs 1, 2 and 9 have $$U_R$$ of 1.4 - 1.8 m/s.
-- BD\_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges (7 on the rim of the panel, 14 on 7 slivers hanging on building roofs); the served geometry.stl is multiplied by 600, re-wound outward, without the slivers and closed with a base slab down to z = -1 m.
+- BD\_caseM.stl is MODEL scale, wound inward on its ground and roof facets, and has 21 boundary and 7 non-manifold edges (7 on the rim of the panel, 14 on 7 slivers hanging on building roofs); the served geometry.stl is multiplied by 600, re-wound outward, without the slivers and closed with a base slab down to $$z = -1\thinspace\mathrm{m}$$.
 - The approach-flow heights are above the empty tunnel floor: at the profile station the model\'s taper is 0.052 m high, above the 10 lowest profile heights.
 
 ## API

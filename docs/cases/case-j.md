@@ -24,11 +24,11 @@ Isolated 1:1:2 building with a floor tracer source in an unstably stratified bou
 
 | Fact | Value |
 |---|---|
-| Building | 1:1:2 (width : depth : height) prism, b = 0.08 m, H = 2b = 0.16 m |
+| Building | 1:1:2 (width : depth : height) prism, $$b = 0.08\thinspace\mathrm{m}$$, $$H = 2b = 0.16\thinspace\mathrm{m}$$ |
 | Reynolds number $$\mathrm{Re_H}$$ | 16,000 |
 | $$U_H$$ (m/s) | 1.4581 |
 | Wind directions (°) | 0 |
-| Measurement planes | vertical centre plane y/H = 0, horizontal z/H = 0.025 (y \<= 0 side only), horizontal z/H = 0.25 |
+| Measurement planes | vertical centre plane $$y/H = 0$$, horizontal $$z/H = 0.025$$ (y \<= 0 side only), horizontal $$z/H = 0.25$$ |
 | Measured | 444 rows over 444 points: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$, $$C$$, $$c_{\mathrm{rms}}$$, $$c^\ast$$, $$T$$, $$T_{\mathrm{rms}}$$, $$\overline{u'\theta'}$$, $$\overline{v'\theta'}$$, $$\overline{w'\theta'}$$ |
 
 {% include nomenclature.md %}
@@ -51,5 +51,5 @@ Isolated 1:1:2 building with a floor tracer source in an unstably stratified bou
 > Before you compare
 >
 > - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
-> - Origin: the building\'s leeward (downwind) wall centre on the ground; x = 0 is the leeward wall. Length unit: m (model scale).
+> - Origin: the building\'s leeward (downwind) wall centre on the ground; $$x = 0$$ is the leeward wall. Length unit: m (model scale).
 > - 10 known issues in the published files are listed under [Known data issues]({{ '/cases/case-j/data/' | relative_url }}#known-data-issues).

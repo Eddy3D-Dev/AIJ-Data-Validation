@@ -116,8 +116,8 @@ new URL, so no cache can serve a stale copy. GitHub Pages caches CSV and ZIP fil
 documents give, and check what you download against `sha256`. `index.json` lists every file in the API this way.
 
 **Units and frames.** SI throughout: m, m/s, m²/s². Each case has one frame, and its `points.json` and STL files
-share it. A–D and H–L are model-scale metres with +x along the wind at WD = 0. E, F, G and M are full-scale metres: E and F
-with +x east, +y north and meteorological wind directions, G with +x downwind, M with +x north and +y west. Read `frame`,
+share it. A–D and H–L are model-scale metres with $$+x$$ along the wind at $$\mathrm{WD} = 0$$. E, F, G and M are full-scale metres: E and F
+with $$+x$$ east, $$+y$$ north and meteorological wind directions, G with $$+x$$ downwind, M with $$+x$$ north and $$+y$$ west. Read `frame`,
 `units` and `known_issues` in `cases/{id}.json` before using any number.
 
 **Templated endpoints.** Paths such as `cases/{id}.json` and `schemas/{name}.schema.json` are templates, not
@@ -168,8 +168,8 @@ The engine ids are `openfoam12-realizableKE`, `openfoam12-kEpsilon` and `openfoa
 
 | Case | Points | Geometry | Validation |
 |---|---|---|---|
-| A | 186 rows: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$ (variances; metres) | 1 box, 12 triangles: 0.08 × 0.08 × 0.16 m | OpenFOAM 12 realizable k-ε; OpenLB at dx = 1.6 m; FluidX3D at H/64; ML surrogate |
-| B | 224 rows: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$ (converted from mm; $$V$$ sign-unified to +y) | 1 box, 12 triangles: 0.05 × 0.20 × 0.20 m | OpenFOAM 12 realizable k-ε; OpenLB at dx = 1.6 m; FluidX3D at H/64; ML surrogate |
+| A | 186 rows: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$ (variances; metres) | 1 box, 12 triangles: 0.08 × 0.08 × 0.16 m | OpenFOAM 12 realizable k-ε; OpenLB at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$; FluidX3D at $$H/64$$; ML surrogate |
+| B | 224 rows: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$ (converted from mm; $$V$$ sign-unified to $$+y$$) | 1 box, 12 triangles: 0.05 × 0.20 × 0.20 m | OpenFOAM 12 realizable k-ε; OpenLB at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$; FluidX3D at $$H/64$$; ML surrogate |
 | C | 1,080 rows: $$V_{\mathrm{s}}$$ over 9 configurations (`config` 0D/1D/2D × `wind_direction_deg` 0/22.5/45) | 3 STLs (0D: 8 cubes; 1D, 2D: 9 boxes) with box lists | OpenFOAM 12 realizable k-ε, each configuration ($$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ and $$\lvert\mathbf{U}\rvert$$ at each wind direction); ML surrogate |
 | D | 267 rows: 234 thermistor (78 points × 3 directions, 36 unmeasured) and 33 split-fibre with $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$ | 83 boxes, 996 triangles, watertight, rebuilt from the shipped STL | OpenFOAM 12 realizable k-ε at WD 0°, 22.5° and 45°; ML surrogate |
 | E | 2,560 rows: velocity ratio over `config` bc/ac × 16 directions × 80 points; full-scale metres | 2 STLs from the 3dm (before: 8,396 triangles, 542 bodies; after: 8,432, 545 bodies), every body closed and outward; 11 edges where two buildings touch | OpenFOAM 12 realizable k-ε, wind from SW, before and after; ML surrogate |

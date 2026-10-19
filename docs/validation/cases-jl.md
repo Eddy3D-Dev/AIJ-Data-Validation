@@ -12,10 +12,10 @@ Cases J and L are non-isothermal: a floor held at about 45 °C (45.8 °C in J, 4
 
 ## Runs
 
-- **What each run is.** Solved on 2026-10-18. Case J: the 1:1:2 building on a floor 33.6 K warmer than the approach air at building height, 236,408 air cells, under UMF's two closures, realizable k-ε (the shipped one) and `buoyantKEpsilon` (which carries the buoyancy production the neutral closure lacks); two engine ids, `umf-realizableKE` and `umf-buoyantKEpsilon`. Case L: 126 cubes (14 rows × 9 columns), 754,940 air cells, realizable k-ε. The air region of every run stopped at its 1500-iteration cap with the residual control unmet; at the last iteration the initial residuals of $$U_y$$ and p\_rgh were of the order of 10⁻² and those of the tracers 10⁻³. Each case was solved on one mesh, with a steady tracer solved beside the flow as three species (turbulent Schmidt numbers 0.3, 0.5 and 0.7, all published).
-- **Froude scale.** The production case writer cannot mesh a 0.16 m building, so each scene is the tunnel scaled by 62.5 (J) or 100 (L): lengths times the scale, velocities times its square root, temperatures unchanged. The Richardson number, Pr and the Kelvin values are kept; the Reynolds number is not (1.6 × 10⁴ in the tunnel of Case J, 8 × 10⁶ in the scene). Every pair is in the tunnel's units: coordinates divided by the scale, velocities by the scene's $$U_H$$, $$k$$ by its square.
+- **What each run is.** Solved on 2026-10-18. Case J: the 1:1:2 building on a floor 33.6 K warmer than the approach air at building height, 236,408 air cells, under UMF's two closures, realizable k-ε (the shipped one) and `buoyantKEpsilon` (which carries the buoyancy production the neutral closure lacks); two engine ids, `umf-realizableKE` and `umf-buoyantKEpsilon`. Case L: 126 cubes (14 rows × 9 columns), 754,940 air cells, realizable k-ε. The air region of every run stopped at its 1500-iteration cap with the residual control unmet; at the last iteration the initial residuals of $$U_y$$ and `p_rgh` were of the order of $$10^{-2}$$ and those of the tracers $$10^{-3}$$. Each case was solved on one mesh, with a steady tracer solved beside the flow as three species (turbulent Schmidt numbers 0.3, 0.5 and 0.7, all published).
+- **Froude scale.** The production case writer cannot mesh a 0.16 m building, so each scene is the tunnel scaled by 62.5 (J) or 100 (L): lengths times the scale, velocities times its square root, temperatures unchanged. The Richardson number, Pr and the Kelvin values are kept; the Reynolds number is not ($$1.6 \times 10^{4}$$ in the tunnel of Case J, $$8 \times 10^{6}$$ in the scene). Every pair is in the tunnel's units: coordinates divided by the scale, velocities by the scene's $$U_H$$, $$k$$ by its square.
 - **Temperature** is scored as the floor-referenced fraction $$\theta = (T_f - T)/(T_f - T_H)$$, 0 at the floor and 1 in the approach air at the building height (the workbook's own normalisation). $$\theta$$ lies between 0.4 and 1.1. The temperature errors in kelvin are in the files (`temperature.all`).
-- **Concentration** is the measured $$C/c_0$$ ($$c_0$$ = 12.28 ppm in J, 1728 ppm in L) against the model's ethylene mass fraction as ppm over the same $$c_0$$, with one detection limit of 10⁻³ of the largest measured value.
+- **Concentration** is the measured $$C/c_0$$ ($$c_0$$ = 12.28 ppm in J, 1728 ppm in L) against the model's ethylene mass fraction as ppm over the same $$c_0$$, with one detection limit of $$10^{-3}$$ of the largest measured value.
 - **Measured side.** Case J's point 153 repeats point 1 (the crossing of two planes, identical values) and is left out: 443 points.
 - **Tracer mass balance.** The outlet carried 0.62 to 0.95 of the emission in Case J (0.89, 0.75 and 0.62 under rk-ε; 0.95, 0.84 and 0.73 under bKε, for $$\mathrm{Sc_t}$$ 0.3, 0.5 and 0.7) and 0.86, 0.73 and 0.70 in Case L.
 - FB is positive when the model is low, and is left out (—) for a signed component whose measured and modelled means are not both positive.
@@ -33,11 +33,11 @@ Cases J and L are non-isothermal: a floor held at about 45 °C (45.8 °C in J, 4
 
 ### Measurement layout
 
-{% include figure.html name="case-j-layout.png" alt="Measurement lines and planes, Case J" caption="<strong>Figure 1.</strong> Case J, measurement lines and planes: A vertical profiles, y/H = 0; B plane z/H = 0.025; C plane z/H = 0.25. Positions in multiples of H." %}
+{% include figure.html name="case-j-layout.png" alt="Measurement lines and planes, Case J" caption="<strong>Figure 1.</strong> Case J, measurement lines and planes: A vertical profiles, $$y/H = 0$$; B plane $$z/H = 0.025$$; C plane $$z/H = 0.25$$. Positions in multiples of $$H$$." %}
 
 ### Measured against modelled
 
-{% include figure.html name="case-j-umf-agreement.png" alt="Case J, measured vs modelled velocity, k and temperature" caption="<strong>Figure 2.</strong> Case J under realizable k-ε (top) and buoyantKEpsilon (bottom): measured vs modelled U, W, k and the floor-referenced temperature θ; the dots take the colour of the line or plane they were measured on, as in Figure 1." %}
+{% include figure.html name="case-j-umf-agreement.png" alt="Case J, measured vs modelled velocity, k and temperature" caption="<strong>Figure 2.</strong> Case J under realizable k-ε (top) and buoyantKEpsilon (bottom): measured vs modelled $$U$$, $$W$$, $$k$$ and the floor-referenced temperature $$\theta$$; the dots take the colour of the line or plane they were measured on, as in Figure 1." %}
 
 | Quantity | R (rk-ε) | FAC2 | FB | R (bKε) | FAC2 | FB |
 |---|---|---|---|---|---|---|
@@ -58,17 +58,17 @@ Cases J and L are non-isothermal: a floor held at about 45 °C (45.8 °C in J, 4
 
 n is 443 (416 without the 27 points within a quarter of a building height of the source); rk-ε is realizable k-ε and bKε is buoyantKEpsilon.
 
-- **Flow.** $$U$$: R = 0.92 under both closures, FAC2 0.73 and 0.76; the mean $$U/U_H$$ is 0.465 and 0.477 modelled against 0.564 measured. FB in the wake (rk-ε and bKε): +0.36 and +0.29 in the near wake, +0.48 and +0.43 in the far wake. Reattachment at z/H = 0.25 and 0.025 is 1.35 H and 1.35 H (rk-ε) or 1.35 H and 1.56 H (bKε), against the measured 0.68 H and 0.80 H. Scored against the mean of each mirror pair, the measurement has R = 0.99 for $$U$$; the +y half of the z/H = 0.25 plane is 11 % slower than the −y half (97 pairs, R 0.955).
+- **Flow.** $$U$$: $$R = 0.92$$ under both closures, FAC2 0.73 and 0.76; the mean $$U/U_H$$ is 0.465 and 0.477 modelled against 0.564 measured. FB in the wake (rk-ε and bKε): +0.36 and +0.29 in the near wake, +0.48 and +0.43 in the far wake. Reattachment at $$z/H = 0.25\text{ and }0.025$$ is $$1.35\thinspace H$$ and $$1.35\thinspace H$$ (rk-ε) or $$1.35\thinspace H$$ and $$1.56\thinspace H$$ (bKε), against the measured $$0.68\thinspace H$$ and $$0.80\thinspace H$$. Scored against the mean of each mirror pair, the measurement has $$R = 0.99$$ for $$U$$; the $$+y$$ half of the $$z/H = 0.25$$ plane is 11 % slower than the $$-y$$ half (97 pairs, R 0.955).
 - **$$k$$.** R is 0.32 and 0.36; the means are 0.030 and 0.031 modelled, 0.029 measured.
-- **Temperature.** $$\theta$$: R = 0.92 and hit rate 0.82 and 0.81. In kelvin the mean bias is +3.46 K (rk-ε) and +3.63 K (bKε), the root-mean-square error 4.53 K and 4.80 K, R = 0.92. The model's first cell is 12 mm at tunnel scale; the tunnel's 24 K drop between the floor and the first measurement at 3 mm lies inside it.
-- **Tracer.** R is 0.92 to 0.90 (rk-ε) and 0.89 to 0.85 (bKε) from $$\mathrm{Sc_t}$$ 0.3 to 0.7. Under rk-ε the model is low at $$\mathrm{Sc_t}$$ 0.3 (FB +0.065) and high at 0.5 and 0.7 (−0.162, −0.256). The modelled peak at the measured points is 275, 339 and 373 against a measured peak of 437. By region at $$\mathrm{Sc_t}$$ 0.5 under rk-ε (R, FAC2): above the roof +0.78 and 0.33 (75 points), beside the building +0.82 and 0.40 (60), the near wake +0.90 and 0.75 (168), the far wake +0.89 and 0.82 (56), upstream −0.18 and 0.05 (84). Upstream the tunnel measures a background of 0.018 $$c_0$$ on average (about 0.2 ppm, below the workbook's expanded uncertainty noted in the known data issues) and the model has a mean of 4 × 10⁻⁵ $$c_0$$ and a largest value of 1.4 × 10⁻³ at $$\mathrm{Sc_t}$$ 0.5 under rk-ε.
+- **Temperature.** $$\theta$$: $$R = 0.92$$ and hit rate 0.82 and 0.81. In kelvin the mean bias is +3.46 K (rk-ε) and +3.63 K (bKε), the root-mean-square error 4.53 K and 4.80 K, $$R = 0.92$$. The model's first cell is 12 mm at tunnel scale; the tunnel's 24 K drop between the floor and the first measurement at 3 mm lies inside it.
+- **Tracer.** R is 0.92 to 0.90 (rk-ε) and 0.89 to 0.85 (bKε) from $$\mathrm{Sc_t}$$ 0.3 to 0.7. Under rk-ε the model is low at $$\mathrm{Sc_t}$$ 0.3 (FB +0.065) and high at 0.5 and 0.7 (−0.162, −0.256). The modelled peak at the measured points is 275, 339 and 373 against a measured peak of 437. By region at $$\mathrm{Sc_t}$$ 0.5 under rk-ε (R, FAC2): above the roof +0.78 and 0.33 (75 points), beside the building +0.82 and 0.40 (60), the near wake +0.90 and 0.75 (168), the far wake +0.89 and 0.82 (56), upstream −0.18 and 0.05 (84). Upstream the tunnel measures a background of 0.018 $$c_0$$ on average (about 0.2 ppm, below the workbook's expanded uncertainty noted in the known data issues) and the model has a mean of $$4 \times 10^{-5}$$ $$c_0$$ and a largest value of $$1.4 \times 10^{-3}$$ at $$\mathrm{Sc_t}$$ 0.5 under rk-ε.
 - **Closures compared.** buoyantKEpsilon against realizable k-ε: $$U$$'s R 0.924 against 0.921, $$U$$'s FAC2 0.761 against 0.731, $$k$$'s R 0.36 against 0.32. The tracer's R is lower by 0.025 to 0.044 and FB lower by 0.11 to 0.12.
 
 <details markdown="block">
 <summary>Interpretation: Case J flow, temperature and tracer</summary>
 
 - The flow is reproduced in pattern and low in level. The deficit is largest in the wake. The steady closures give a recirculation that is too long.
-- The tunnel's mirror-pair ceiling (R = 0.99) is above the model's R of 0.92.
+- The tunnel's mirror-pair ceiling ($$R = 0.99$$) is above the model's R of 0.92.
 - $$k$$ is not reproduced. The means are close, so the agreement in FB is not agreement in pattern.
 - The model is warmer than the tunnel. Near-floor temperature is a wall-function result, because the tunnel's 24 K drop lies inside the model's first cell.
 - The tracer pattern is correlated at every Schmidt number, and the bias changes sign. The near-source points are low; in Cases H and K they are high.
@@ -77,17 +77,17 @@ n is 443 (416 without the 27 points within a quarter of a building height of the
 
 </details>
 
-{% include figure.html name="case-j-umf-tracer.png" alt="Case J, measured vs modelled tracer concentration" caption="<strong>Figure 3.</strong> Case J, dots coloured as in Figure 1: measured vs modelled c* at three turbulent Schmidt numbers under both closures. The concentration panels show the positive pairs within seven decades; the points within a quarter of a building height of the source are open." %}
+{% include figure.html name="case-j-umf-tracer.png" alt="Case J, measured vs modelled tracer concentration" caption="<strong>Figure 3.</strong> Case J, dots coloured as in Figure 1: measured vs modelled $$c^\ast$$ at three turbulent Schmidt numbers under both closures. The concentration panels show the positive pairs within seven decades; the points within a quarter of a building height of the source are open." %}
 
 ## Case L
 
 ### Measurement layout
 
-{% include figure.html name="case-l-layout.png" alt="Measurement lines and planes, Case L" caption="<strong>Figure 4.</strong> Case L, measurement lines and planes: A street profiles near the source, 8 heights; B profiles above the roofs, 4 heights; C street profiles around, 3 heights. Positions in multiples of H." %}
+{% include figure.html name="case-l-layout.png" alt="Measurement lines and planes, Case L" caption="<strong>Figure 4.</strong> Case L, measurement lines and planes: A street profiles near the source, 8 heights; B profiles above the roofs, 4 heights; C street profiles around, 3 heights. Positions in multiples of $$H$$." %}
 
 ### Measured against modelled
 
-{% include figure.html name="case-l-umf-agreement.png" alt="Case L, measured vs modelled" caption="<strong>Figure 5.</strong> Case L under realizable k-ε: measured vs modelled U, W, k, θ, V and c* at three turbulent Schmidt numbers, in the tunnel's units; the dots take the colour of their class in Figure 4." %}
+{% include figure.html name="case-l-umf-agreement.png" alt="Case L, measured vs modelled" caption="<strong>Figure 5.</strong> Case L under realizable k-ε: measured vs modelled $$U$$, $$W$$, $$k$$, $$\theta$$, $$V$$ and $$c^\ast$$ at three turbulent Schmidt numbers, in the tunnel's units; the dots take the colour of their class in Figure 4." %}
 
 | Quantity | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|
@@ -114,12 +114,12 @@ n is 443 (416 without the 27 points within a quarter of a building height of the
 
 {% include nomenclature-scores.md %}
 
-The 51 points at z = 4 mm lie inside the model's first fine cell (0.75 m, 0.4 m at 1:100), a wall-function cell; the 242 points at or above 30 mm are scored separately.
+The 51 points at $$z = 4\thinspace\mathrm{mm}$$ lie inside the model's first fine cell (0.75 m, 0.4 m at 1:100), a wall-function cell; the 242 points at or above 30 mm are scored separately.
 
-- **Flow.** $$U$$: R = 0.92, and the mean $$U/U_H$$ is 0.499 modelled against 0.654 measured; at or above 30 mm R is 0.90 and FAC2 0.80. Against the undisturbed approach column, the model's R is higher ($$U$$: 0.918 against 0.861; $$\theta$$: 0.936 against 0.925). The model's mean $$U/U_H$$ in the streets is 0.045 below 30 mm and 1.11 above 110 mm, against the tunnel's 0.297 and 1.068. $$V$$ and $$W$$: R is −0.04 and −0.03, and with the sign of $$V$$ flipped it is +0.04.
-- **$$k$$.** R = 0.15 (0.47 at or above 30 mm), FB +0.64.
-- **Temperature.** $$\theta$$: R = 0.94, hit rate 0.99. The mean bias is +1.17 K, the mean absolute error 1.59 K and the root-mean-square error 2.11 K.
-- **Tracer.** R is 0.80, 0.77 and 0.75 from $$\mathrm{Sc_t}$$ 0.3 to 0.7 (0.81 to 0.82 at or above 30 mm); FAC2 falls from 0.76 to 0.60 and FB from −0.50 to −0.73. The largest modelled $$c^\ast$$ is 3.3, 4.0 and 5.0 (at y = −0.12, +0.18 and +0.18 m, in the source street) against the tunnel's 1.93 at (−0.15, −0.12, 0.004).
+- **Flow.** $$U$$: $$R = 0.92$$, and the mean $$U/U_H$$ is 0.499 modelled against 0.654 measured; at or above 30 mm R is 0.90 and FAC2 0.80. Against the undisturbed approach column, the model's R is higher ($$U$$: 0.918 against 0.861; $$\theta$$: 0.936 against 0.925). The model's mean $$U/U_H$$ in the streets is 0.045 below 30 mm and 1.11 above 110 mm, against the tunnel's 0.297 and 1.068. $$V$$ and $$W$$: R is −0.04 and −0.03, and with the sign of $$V$$ flipped it is +0.04.
+- **$$k$$.** $$R = 0.15$$ (0.47 at or above 30 mm), FB +0.64.
+- **Temperature.** $$\theta$$: $$R = 0.94$$, hit rate 0.99. The mean bias is +1.17 K, the mean absolute error 1.59 K and the root-mean-square error 2.11 K.
+- **Tracer.** R is 0.80, 0.77 and 0.75 from $$\mathrm{Sc_t}$$ 0.3 to 0.7 (0.81 to 0.82 at or above 30 mm); FAC2 falls from 0.76 to 0.60 and FB from −0.50 to −0.73. The largest modelled $$c^\ast$$ is 3.3, 4.0 and 5.0 (at $$y = -0.12,\thinspace +0.18\text{ and }+0.18\thinspace\mathrm{m}$$, in the source street) against the tunnel's 1.93 at (−0.15, −0.12, 0.004).
 
 <details markdown="block">
 <summary>Interpretation: Case L flow, temperature and tracer</summary>
@@ -140,7 +140,7 @@ The 51 points at z = 4 mm lie inside the model's first fine cell (0.75 m, 0.4 m 
 <details markdown="block">
 <summary>Interpretation: Limits of these runs</summary>
 
-- The air region reached its cap with residuals near 10⁻², so these numbers are those of an unconverged steady solve on one mesh.
+- The air region reached its cap with residuals near $$10^{-2}$$, so these numbers are those of an unconverged steady solve on one mesh.
 - The tracer balance closes within a factor of two; why part of the emission is missing at the outlet was not investigated.
 
 </details>

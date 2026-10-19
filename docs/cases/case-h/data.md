@@ -29,11 +29,11 @@ description: "Case H — 1:1:2 building with a floor point source: configuration
 | Height H (m) | 0.2 |
 | Reynolds number $$\mathrm{Re_H}$$ | 43,000 |
 | $$U_H$$ (m/s) | 3.226 |
-| $$U_H$$, note | the workbook\'s uH; the readme and the data paper state 3.23 m/s; the workbook\'s free-stream reference U0 is 5.279 m/s |
+| $$U_H$$, note | the workbook\'s $$u_H$$; the readme and the data paper state 3.23 m/s; the workbook\'s free-stream reference $$U_0$$ is 5.279 m/s |
 | Wind directions (°) | 0 |
-| source | 4 mm hole in the floor 0.25 H = 0.05 m behind the leeward face at (0.05, 0, 0); ethylene (C2H4), 100 %, 350 cc/min = 5.83e-6 m³/s |
+| source | 4 mm hole in the floor $$0.25\thinspace H = 0.05\thinspace\mathrm{m}$$ behind the leeward face at (0.05, 0, 0); ethylene (C2H4), 100 %, 350 cc/min = 5.83e-6 m³/s |
 | reference concentration | $$c_0 = \dfrac{c_{\mathrm{gas}}\thinspace q}{U_H H^2}$$ = 45.18 ppm (45.2 in the paper); `concentration_ratio` = $$C/c_0$$ |
-| Measurement planes | vertical centre plane y/H = 0, horizontal z/H = 1/16 (y in \[-0.2, 0.2\]), horizontal z/H = 1/4 and 1/2 (y in \[0, 0.2\]) |
+| Measurement planes | vertical centre plane $$y/H = 0$$, horizontal $$z/H = 1/16$$ ($$y \in \lbrack -0.2,\thinspace 0.2\rbrack$$), horizontal $$z/H = 1/4\text{ and }1/2$$ ($$y \in \lbrack 0,\thinspace 0.2\rbrack$$) |
 | Points | 876 |
 | Instrument | velocity: constant-temperature anemometer (DANTEC 90C10) with a split-fibre probe (55R55, 55R56, 55R57), 1000 Hz, 120 s; concentration: high-speed total hydrocarbon analyser, 1000 Hz, 120 s |
 | Wind tunnel | Eiffel-type boundary-layer wind tunnel, Tokyo Polytechnic University, Atsugi (1.0 m high, 1.2 m wide) |
@@ -46,9 +46,9 @@ description: "Case H — 1:1:2 building with a floor point source: configuration
 | Property | Definition |
 |---|---|
 | Origin | the centre of the building\'s leeward face on the ground plane |
-| x | +x streamwise (the wind blows toward +x); the building spans x in \[-0.1, 0\]; points at x = -0.2 ... 0.4 m |
-| y | +y lateral; the building spans y in \[-0.05, 0.05\]; the z = 1/16 H plane covers y in \[-0.2, 0.2\] |
-| z | +z up; roof at z = 0.2 m; points at z = 0.01 ... 0.3 m |
+| x | $$+x$$ streamwise (the wind blows toward $$+x$$); the building spans $$x \in \lbrack -0.1,\thinspace 0\rbrack$$; points at $$x = -0.2\thinspace\ldots\thinspace 0.4\thinspace\mathrm{m}$$ |
+| y | $$+y$$ lateral; the building spans $$y \in \lbrack -0.05,\thinspace 0.05\rbrack$$; the $$z = 1/16\thinspace H$$ plane covers $$y \in \lbrack -0.2,\thinspace 0.2\rbrack$$ |
+| z | $$+z$$ up; roof at $$z = 0.2\thinspace\mathrm{m}$$; points at $$z = 0.01\thinspace\ldots\thinspace 0.3\thinspace\mathrm{m}$$ |
 | Lateral sign applied | -1 for point numbers 1-220 (the vertical-plane sheet of the workbook), +1 elsewhere |
 | Coordinate scale applied | 1.0 |
 | Unit of length | m (model scale) |
@@ -89,9 +89,9 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `x` |  | m, case frame |
 | `y` |  | m, case frame |
 | `z` |  | m above ground, case frame |
-| `U` | $$U$$ | m/s, mean velocity along +x |
-| `V` | $$V$$ | m/s, mean velocity along +y (sign unified: positive toward +y) |
-| `W` | $$W$$ | m/s, mean velocity along +z |
+| `U` | $$U$$ | m/s, mean velocity along $$+x$$ |
+| `V` | $$V$$ | m/s, mean velocity along $$+y$$ (sign unified: positive toward $$+y$$) |
+| `W` | $$W$$ | m/s, mean velocity along $$+z$$ |
 | `uu` | $$\overline{u'u'}$$ | m²/s², variance of u |
 | `vv` | $$\overline{v'v'}$$ | m²/s², variance of v |
 | `ww` | $$\overline{w'w'}$$ | m²/s², variance of w |
@@ -109,7 +109,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | log law, $$\kappa$$ = 0.41, least squares over z = 0.02 ... 2H on the workbook\'s 17-point approach profile (x = -0.493 m) |
+| Method | log law, $$\kappa$$ = 0.41, least squares over $$z = 0.02\thinspace\ldots\thinspace 2H$$ on the workbook\'s 17-point approach profile ($$x = -0.493\thinspace\mathrm{m}$$) |
 | Friction velocity $$u_\ast$$ (m/s) | 0.4065 |
 | Roughness length $$z_0$$ (mm) | 7.449 |
 | $$U_H$$, measured (m/s) | 3.226 |
@@ -121,10 +121,10 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-- The table carries the legacy workbook\'s values (ratios at full precision x uH = 3.226 m/s), not RS\_caseH.csv\'s: on the z/H = 1/2 and 1/4 planes (and in the approach profile) the CSV\'s $$U$$, $$V$$, $$W$$ are the workbook ratios ROUNDED TO 0.01 before the scaling, a 0.032 m/s grid (+/-0.016 m/s).
-- One row per instrument and point: velocity rows (split fibre) and concentration rows (hydrocarbon analyser) with the same point\_id (the CSV\'s No.). The velocity line is x = 0.40 m and the concentration line x = 0.38 m, so 50 points have no velocity and 50 no concentration (-999.9 in the CSV); none of them is inside the building.
-- $$V$$ of the vertical-plane sheet (point numbers 1-220) is the exact negative of $$V$$ at the same points in the horizontal-plane sheets (positive toward -y); it is multiplied by -1 so that $$V$$ is positive toward +y everywhere, as in Cases A and D.
-- The y = 0, z = 0.1 line (13 locations) is in two sheets and appears twice in the table, as exact copies once $$V$$ is flipped; they are not independent repeat measurements.
+- The table carries the legacy workbook\'s values (ratios at full precision x $$u_H$$ = 3.226 m/s), not RS\_caseH.csv\'s: on the $$z/H = 1/2\text{ and }1/4$$ planes (and in the approach profile) the CSV\'s $$U$$, $$V$$, $$W$$ are the workbook ratios ROUNDED TO 0.01 before the scaling, a 0.032 m/s grid (+/-0.016 m/s).
+- One row per instrument and point: velocity rows (split fibre) and concentration rows (hydrocarbon analyser) with the same point\_id (the CSV\'s No.). The velocity line is $$x = 0.40\thinspace\mathrm{m}$$ and the concentration line $$x = 0.38\thinspace\mathrm{m}$$, so 50 points have no velocity and 50 no concentration (-999.9 in the CSV); none of them is inside the building.
+- $$V$$ of the vertical-plane sheet (point numbers 1-220) is the exact negative of $$V$$ at the same points in the horizontal-plane sheets (positive toward -y); it is multiplied by -1 so that $$V$$ is positive toward $$+y$$ everywhere, as in Cases A and D.
+- The $$y = 0$$, $$z = 0.1$$ line (13 locations) is in two sheets and appears twice in the table, as exact copies once $$V$$ is flipped; they are not independent repeat measurements.
 - Concentration is the analyser\'s reading: upwind of the building (where the true value is zero) it is +/-0.1 ppm, and 97 of 826 values are negative (minimum -0.83 ppm). Log-based statistics (geometric mean, geometric variance) need a floor.
 - The published header misspells $$w_{\mathrm{rms}}$$ as \'w\_rsm\'; the workbook\'s inflow sheet labels z as \'mm\' but holds metres.
 - The profile\'s $$\overline{u'w'}$$ and $$\overline{u'v'}$$ are published but the approach-flow table has no column for them.

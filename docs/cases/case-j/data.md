@@ -24,16 +24,16 @@ description: "Case J — 1:1:2 building, non-isothermal: configuration, frame an
 
 | Parameter | Value |
 |---|---|
-| Building | 1:1:2 (width : depth : height) prism, b = 0.08 m, H = 2b = 0.16 m |
+| Building | 1:1:2 (width : depth : height) prism, $$b = 0.08\thinspace\mathrm{m}$$, $$H = 2b = 0.16\thinspace\mathrm{m}$$ |
 | Width b (m) | 0.08 |
 | Height H (m) | 0.16 |
 | Reynolds number $$\mathrm{Re_H}$$ | 16,000 |
 | $$U_H$$ (m/s) | 1.4581 |
 | Wind directions (°) | 0 |
-| Measurement planes | vertical centre plane y/H = 0, horizontal z/H = 0.025 (y \<= 0 side only), horizontal z/H = 0.25 |
+| Measurement planes | vertical centre plane $$y/H = 0$$, horizontal $$z/H = 0.025$$ (y \<= 0 side only), horizontal $$z/H = 0.25$$ |
 | Points | 444 |
-| stratification | unstable: heated floor 45.8 degC, air at z = H 12.2 degC (difference 33.6 K), bulk Richardson number -0.086; building surface 22.0 .. 28.9 degC (mean 24.5 degC, 121 points in clean/cases/J/surface\_temperature.csv) |
-| source | 5 mm floor outlet at (0.04, 0, 0), 0.25 H beyond the leeward wall; 5 % ethylene in air at 30.4 degC, 9.17e-6 m³/s |
+| stratification | unstable: heated floor 45.8 degC, air at $$z = H$$ 12.2 degC (difference 33.6 K), bulk Richardson number -0.086; building surface 22.0 .. 28.9 degC (mean 24.5 degC, 121 points in clean/cases/J/surface\_temperature.csv) |
+| source | 5 mm floor outlet at (0.04, 0, 0), $$0.25\thinspace H$$ beyond the leeward wall; 5 % ethylene in air at 30.4 degC, 9.17e-6 m³/s |
 | concentration normalisation | $$c_0 = \dfrac{0.05\thinspace q}{U_H H^2}$$ = 12.283 ppm (the workbook\'s value; the 5 % gas fraction is in it) |
 | Instrument | split-fibre hot wire (velocity), cold wire (temperature), high-speed hydrocarbon analyser (concentration), 1000 Hz, 120 s per point |
 | Wind tunnel | thermally stratified wind tunnel, Tokyo Polytechnic University (Atsugi); 1.2 m wide, 1.0 m high |
@@ -45,10 +45,10 @@ description: "Case J — 1:1:2 building, non-isothermal: configuration, frame an
 
 | Property | Definition |
 |---|---|
-| Origin | the building\'s leeward (downwind) wall centre on the ground; x = 0 is the leeward wall |
-| x | +x streamwise (the wind blows toward +x); the building spans x in \[-0.08, 0\]; the floor source is at x = +0.04 |
-| y | +y lateral; the building spans y in \[-0.04, 0.04\]; the z/H = 0.025 plane is measured on the y \<= 0 side only |
-| z | +z up; roof at z = 0.16; heated floor at z = 0 |
+| Origin | the building\'s leeward (downwind) wall centre on the ground; $$x = 0$$ is the leeward wall |
+| x | $$+x$$ streamwise (the wind blows toward $$+x$$); the building spans $$x \in \lbrack -0.08,\thinspace 0\rbrack$$; the floor source is at $$x = +0.04$$ |
+| y | $$+y$$ lateral; the building spans $$y \in \lbrack -0.04,\thinspace 0.04\rbrack$$; the $$z/H = 0.025$$ plane is measured on the y \<= 0 side only |
+| z | $$+z$$ up; roof at $$z = 0.16$$; heated floor at $$z = 0$$ |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 1.0 |
 | Unit of length | m (model scale) |
@@ -86,9 +86,9 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `x` |  | m, case frame |
 | `y` |  | m, case frame |
 | `z` |  | m above ground, case frame |
-| `U` | $$U$$ | m/s, mean velocity along +x |
-| `V` | $$V$$ | m/s, mean velocity along +y (sign unified: positive toward +y) |
-| `W` | $$W$$ | m/s, mean velocity along +z |
+| `U` | $$U$$ | m/s, mean velocity along $$+x$$ |
+| `V` | $$V$$ | m/s, mean velocity along $$+y$$ (sign unified: positive toward $$+y$$) |
+| `W` | $$W$$ | m/s, mean velocity along $$+z$$ |
 | `uu` | $$\overline{u'u'}$$ | m²/s², variance of u |
 | `vv` | $$\overline{v'v'}$$ | m²/s², variance of v |
 | `ww` | $$\overline{w'w'}$$ | m²/s², variance of w |
@@ -111,7 +111,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | least squares, $$\kappa$$ = 0.41, z = 0.02 .. 2H on AF\_caseJ.csv |
+| Method | least squares, $$\kappa$$ = 0.41, $$z = 0.02\thinspace\ldots\thinspace 2H$$ on AF\_caseJ.csv |
 | Friction velocity $$u_\ast$$ (m/s) | 0.09369 |
 | Roughness length $$z_0$$ (mm) | 0.3051 |
 | $$U_H$$, measured (m/s) | 1.46 |
@@ -127,10 +127,10 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 - The published CSV is the legacy workbook\'s non-dimensional values rounded to 3-4 decimals and scaled back; the table is rebuilt from the workbook. The CSV\'s heat fluxes sit on a 0.0049 K m/s grid and $$k$$ on 0.00021 m²/s².
 - $$c_0$$ = 12.283 ppm includes the 5 % ethylene fraction of the released gas (workbook cell Co); $$q/(U_H H^2)$$ alone is 245.7 ppm. The data paper states no $$c_0$$ for Case J.
 - RS\_caseJ.csv lists the location (-0.16, 0, 0.004) twice (No. 1 and 153, identical values): a score over the table counts that point twice.
-- The workbook\'s \<u\'2\> is not always the square of its sigma\_u (up to 3 % in single rows); the table uses the variances, which reproduce $$k$$.
+- The workbook\'s $$\overline{u'^2}$$ is not always the square of its $$\sigma_u$$ (up to 3 % in single rows); the table uses the variances, which reproduce $$k$$.
 - The workbook lists an expanded uncertainty beside every quantity (no column here; clean/manifest.json cases.J.extra\_measurements.expanded\_uncertainty). The mean concentration is below its own uncertainty (about 1 ppm) at 42 % of the rows, and 193 uncertainty cells of the w\'theta\' flux are an Excel fill series, not values.
-- The empty-tunnel profile changes along the tunnel: $$U$$ at z = 0.019 H is 0.33 $$U_H$$ at x/H = -2.5 (the published AF\_caseJ.csv), 0.58 at the building\'s own position. The workbook has all three stations (clean/cases/J/approach\_flow\_full.csv).
-- The +y and -y halves are not mirror images: over the 97 mirror pairs of the z/H = 0.25 plane $$U$$ at +y is 11 % lower (means 0.558 and 0.629 $$U_H$$, R between the halves 0.955), so a y-symmetric model has a ceiling on this file.
+- The empty-tunnel profile changes along the tunnel: $$U$$ at $$z = 0.019\thinspace H$$ is 0.33 $$U_H$$ at $$x/H = -2.5$$ (the published AF\_caseJ.csv), 0.58 at the building\'s own position. The workbook has all three stations (clean/cases/J/approach\_flow\_full.csv).
+- The $$+y$$ and -y halves are not mirror images: over the 97 mirror pairs of the $$z/H = 0.25$$ plane $$U$$ at $$+y$$ is 11 % lower (means 0.558 and 0.629 $$U_H$$, R between the halves 0.955), so a y-symmetric model has a ceiling on this file.
 - The readme\'s Reynolds number (43,000) is Case H\'s; $$U_H H/\nu$$ = 1.6e4 as the data paper states.
 - $$\overline{u'v'}$$, $$\overline{u'w'}$$, $$\overline{v'w'}$$ are not published at the points; $$\overline{u'c'}$$, $$\overline{v'c'}$$, $$\overline{w'c'}$$ were not measured.
 

@@ -32,9 +32,9 @@ The cleaned tables served by the API apply the corrections (units, signs, frames
 {: .warning-title }
 > Each case has its own frame and unit
 >
-> A–D and H–L: model-scale metres, +x along the wind at WD = 0.
-> E, F, G and M: full-scale metres. E and F: +x east, +y north, meteorological (from-) directions. G: +x downwind.
-> M: +x north, +y west. In F and M the heights are above the tunnel floor, not the ground.
+> A–D and H–L: model-scale metres, $$+x$$ along the wind at $$\mathrm{WD} = 0$$.
+> E, F, G and M: full-scale metres. E and F: $$+x$$ east, $$+y$$ north, meteorological (from-) directions. G: $$+x$$ downwind.
+> M: $$+x$$ north, $$+y$$ west. In F and M the heights are above the tunnel floor, not the ground.
 > `frame` in `/api/cases/{id}.json` states it.
 
 {: .warning-title }
@@ -48,28 +48,28 @@ The cleaned tables served by the API apply the corrections (units, signs, frames
 
 ## Case A
 
-- $$V$$ is positive toward +y ($$V$$ = −2.893 m/s at (−0.040, −0.050, 0.010), just outside the y < 0 flank).
-- Coordinates are metres; turbulence columns are rms values. The API serves variances (uu = $$u_{\mathrm{rms}}^2$$) so A and B share
+- $$V$$ is positive toward $$+y$$ ($$V$$ = −2.893 m/s at (−0.040, −0.050, 0.010), just outside the $$y \lt 0$$ flank).
+- Coordinates are metres; turbulence columns are rms values. The API serves variances ($$\overline{u'u'}$$ = $$u_{\mathrm{rms}}^2$$) so A and B share
   one column meaning.
 
 ## Case B
 
-- $$V$$ is positive toward −y, the opposite of Case A. The API flips it (`lateral_sign_applied: -1`).
+- $$V$$ is positive toward $$-y$$, the opposite of Case A. The API flips it (`lateral_sign_applied: -1`).
 - Coordinates are millimetres (`x[mm]`); velocities are m/s. Read as metres, every probe lands 1000× too far out. The
   API serves metres (`coordinate_scale_applied: 0.001`).
 - Geometry was taken from each case's own measurement-point drawing (`MP-z_case*.png`). Both buildings are centred on
-  the origin; points are published on the y ≤ 0 half by the tunnel's symmetry convention.
+  the origin; points are published on the $$y \le 0$$ half by the tunnel's symmetry convention.
 
 <details markdown="block">
 <summary>Data notes: Cases A and B, sign of V and geometry source</summary>
 
-Just outside the windward side face the flow must deflect away from the centreline, toward −y on the y < 0 flank.
+Just outside the windward side face the flow must deflect away from the centreline, toward $$-y$$ on the $$y \lt 0$$ flank.
 
-- Case A: $$V$$ = **−2.893 m/s** at (−0.040, −0.050, 0.010), edge at y = −0.04.
-- Case B: $$V$$ = **+3.630 m/s** at (−0.025, −0.110, 0.013), edge at y = −0.100.
+- Case A: $$V$$ = **−2.893 m/s** at (−0.040, −0.050, 0.010), edge at $$y = -0.04$$.
+- Case B: $$V$$ = **+3.630 m/s** at (−0.025, −0.110, 0.013), edge at $$y = -0.100$$.
 
-Same flow feature, opposite sign, so Case B's $$V$$ is positive toward −y. Scored without the flip, Case B's $$V$$ gives
-R = −0.910 against an R = +0.959 streamwise control on the same points, an anti-correlation no turbulence closure
+Same flow feature, opposite sign, so Case B's $$V$$ is positive toward $$-y$$. Scored without the flip, Case B's $$V$$ gives
+$$R = -0.910$$ against an $$R = +0.959$$ streamwise control on the same points, an anti-correlation no turbulence closure
 produces.
 
 The geometry was not inferred from the CSV extents.
@@ -83,17 +83,17 @@ The geometry was not inferred from the CSV extents.
 - 1080 rows = 3 wind directions × 3 centre buildings × 120 points: nine configurations. In the 0D configuration the 25
   centre grid nodes are still absent although the ground there is free.
 - The CSV and Figure 3 of the data paper disagree on the sense of the WD rotation. This release keeps the CSV frame:
-  WD rotates the wind from +x toward −y. WD = 0 is not affected.
-- 24 of the 120 points sit exactly on a building face plane (\|x\| = 0.30 or \|y\| = 0.30), in the gap between blocks.
+  WD rotates the wind from $$+x$$ toward $$-y$$. $$\mathrm{WD} = 0$$ is not affected.
+- 24 of the 120 points sit exactly on a building face plane ($$\lvert x\rvert = 0.30$$ or $$\lvert y\rvert = 0.30$$), in the gap between blocks.
 - The 0.40 m pitch is read from the drawing and the paper (street = D); the point grid alone bounds it to (0.35, 0.40].
-- Repeatability floor from the mirror-symmetric pairs: mean \|ΔVs\| 0.088–0.137 m/s (0.024–0.038 $$U_H$$).
+- Repeatability floor from the mirror-symmetric pairs: mean $$\lvert\Delta V_{\mathrm{s}}\rvert$$ 0.088–0.137 m/s (0.024–0.038 $$U_H$$).
 
 <details markdown="block">
 <summary>Data notes: Sense of the WD rotation</summary>
 
-In the CSV's own frame the WD = 45° field is mirror-symmetric about y = −x to within the experiment's repeatability
-(0.10–0.13 m/s) and not about y = +x (0.5–0.8 m/s), so WD rotates the wind from +x toward −y. Figure 3 of the data
-paper draws the fan the other way. The question is invisible at WD = 0.
+In the CSV's own frame the $$\mathrm{WD} = 45^\circ$$ field is mirror-symmetric about $$y = -x$$ to within the experiment's repeatability
+(0.10–0.13 m/s) and not about $$y = +x$$ (0.5–0.8 m/s), so WD rotates the wind from $$+x$$ toward $$-y$$. Figure 3 of the data
+paper draws the fan the other way. The question is invisible at $$\mathrm{WD} = 0$$.
 
 The solved field settles it: scored in the CSV's sense, R against the tunnel is 0.83–0.91 at 22.5° and 45°; in the
 figure's sense it falls to −0.33 … +0.03.
@@ -107,16 +107,16 @@ figure's sense it falls to −0.33 … +0.03.
 - The shipped `BD_caseD.stl` has 1572 facets, 576 of them duplicates, and all 83 roofs wound inward (signed volume
   0.011159 m³ against the true 0.021477 m³). The API's `geometry.stl` is rebuilt from the 83 shells' boxes: 996
   facets, watertight, volume 0.021477 m³.
-- Unmeasured thermistor cells are `-` (null in the API). At WD = 0 the 66 measured values are 33 exact mirror pairs.
-- The data do not fix the rotation sense for 22.5° and 45° (the array is exactly y-mirror symmetric, so +θ and −θ give
-  exact mirror fields). This release rotates +x toward +y, following Figure 4 of the data paper. Solved Eddy3D fields
+- Unmeasured thermistor cells are `-` (null in the API). At $$\mathrm{WD} = 0$$ the 66 measured values are 33 exact mirror pairs.
+- The data do not fix the rotation sense for 22.5° and 45° (the array is exactly y-mirror symmetric, so $$+\theta$$ and $$-\theta$$ give
+  exact mirror fields). This release rotates $$+x$$ toward $$+y$$, following Figure 4 of the data paper. Solved Eddy3D fields
   score R 0.80 (22.5°) and 0.85 (45°) in that sense, 0.40 and 0.17 mirrored.
 - All 78 points lie outside every block and inside the array; shifting the cloud by 12.5 mm (5 m full scale) in x or y
   puts two points inside a block.
 - The Zenodo record ([10.5281/zenodo.15402668](https://doi.org/10.5281/zenodo.15402668)) also ships CSVs: unmeasured
   is −999.9 there, and `RS-S_caseD.csv`'s z header is the full-width character `ｚ`. They match the workbook to
-  4 × 10⁻¹⁶; the repository mirrors them under `clean/sources/zenodo_caseD/`.
-- `case-d-eddy3d-prior-comparison.xlsx` (kept in the folder) scores R = +0.096 against the thermistor; the cause is a
+  $$4 \times 10^{-16}$$; the repository mirrors them under `clean/sources/zenodo_caseD/`.
+- `case-d-eddy3d-prior-comparison.xlsx` (kept in the folder) scores $$R = +0.096$$ against the thermistor; the cause is a
   frame or geometry error. Do not use it as a validation.
 
 ## Case E

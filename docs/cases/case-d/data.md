@@ -24,17 +24,17 @@ description: "Case D — high-rise among city blocks: configuration, frame and u
 
 | Parameter | Value |
 |---|---|
-| Tower | 0.25H x 0.25H x H = 62.5 x 62.5 x 250 mm (1:1:4) |
+| Tower | $$0.25H\thinspace\times\thinspace 0.25H\thinspace\times\thinspace H = 62.5\thinspace\times\thinspace 62.5\thinspace\times\thinspace 250\thinspace\mathrm{mm}$$ (1:1:4) |
 | Height H (m) | 0.25 |
-| Blocks | 82 blocks of 0.4H x 0.4H x 0.1H = 100 x 100 x 25 mm |
-| Roads | 0.1H / 0.2H / 0.3H = 25 / 50 / 75 mm; 9 columns in x (pitch alternating 175 / 150 mm), 11 rows in y (pitch 125 mm); corners cut by the turntable circle |
+| Blocks | 82 blocks of $$0.4H\thinspace\times\thinspace 0.4H\thinspace\times\thinspace 0.1H = 100\thinspace\times\thinspace 100\thinspace\times\thinspace 25\thinspace\mathrm{mm}$$ |
+| Roads | $$0.1H$$ / $$0.2H$$ / $$0.3H = 25$$ / 50 / 75 mm; 9 columns in x (pitch alternating 175 / 150 mm), 11 rows in y (pitch 125 mm); corners cut by the turntable circle |
 | Array extent (m) | **x**: -0.7, 0.7<br>**y**: -0.675, 0.675<br>**z**: 0, 0.25 |
-| Scale | 1:400 (H = 100 m full scale; the 5 mm measurement plane = 2 m) |
+| Scale | 1:400 ($$H = 100\thinspace\mathrm{m}$$ full scale; the 5 mm measurement plane = 2 m) |
 | Reynolds number $$\mathrm{Re_H}$$ | 110,000 |
 | $$U_H$$ (m/s) | 6.65 |
 | Wind directions (°) | 0, 22.5, 45 |
 | Measurement height (m) | 0.005 |
-| Instrument | thermistor anemometer (78 points x 3 directions; 66 measured per direction, 12 points in the band around the tower unmeasured) and split-fibre probe (33 points at WD = 0: $$U$$, $$V$$, $$W$$, variances, $$k$$) |
+| Instrument | thermistor anemometer (78 points x 3 directions; 66 measured per direction, 12 points in the band around the tower unmeasured) and split-fibre probe (33 points at $$\mathrm{WD} = 0$$: $$U$$, $$V$$, $$W$$, variances, $$k$$) |
 | Wind tunnel | see the data paper (Kikumoto et al. 2026, section 3.4) |
 
 {% include nomenclature.md %}
@@ -44,10 +44,10 @@ description: "Case D — high-rise among city blocks: configuration, frame and u
 | Property | Definition |
 |---|---|
 | Origin | tower centre on the ground plane (the array\'s bounding box is centred on it) |
-| x | +x streamwise at WD = 0 |
-| y | +y lateral |
-| z | +z up; all points at z = 0.005 |
-| Wind direction convention | +x toward +y, read from Figure 4 of the data paper. Solved Eddy3D fields score R 0.80 (22.5 deg) and 0.85 (45 deg) in Figure 4\'s sense, 0.40 and 0.17 mirrored. |
+| x | $$+x$$ streamwise at $$\mathrm{WD} = 0$$ |
+| y | $$+y$$ lateral |
+| z | $$+z$$ up; all points at $$z = 0.005$$ |
+| Wind direction convention | $$+x$$ toward $$+y$$, read from Figure 4 of the data paper. Solved Eddy3D fields score R 0.80 (22.5 deg) and 0.85 (45 deg) in Figure 4\'s sense, 0.40 and 0.17 mirrored. |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 0.001 |
 | Unit of length | m (model scale; converted from the workbook\'s millimetres) |
@@ -95,9 +95,9 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `x` |  | m, case frame |
 | `y` |  | m, case frame |
 | `z` |  | m above ground, case frame |
-| `U` | $$U$$ | m/s, mean velocity along +x |
-| `V` | $$V$$ | m/s, mean velocity along +y (sign unified: positive toward +y) |
-| `W` | $$W$$ | m/s, mean velocity along +z |
+| `U` | $$U$$ | m/s, mean velocity along $$+x$$ |
+| `V` | $$V$$ | m/s, mean velocity along $$+y$$ (sign unified: positive toward $$+y$$) |
+| `W` | $$W$$ | m/s, mean velocity along $$+z$$ |
 | `uu` | $$\overline{u'u'}$$ | m²/s², variance of u |
 | `vv` | $$\overline{v'v'}$$ | m²/s², variance of v |
 | `ww` | $$\overline{w'w'}$$ | m²/s², variance of w |
@@ -113,9 +113,9 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | log law, $$\kappa$$ = 0.41, least squares on the workbook\'s 13-point profile (z = 5 ... 1200 mm); two windows |
-| Fit window | z range 0.005 ... 2H; Friction velocity $$u_\ast$$ (m/s) 0.3418; Roughness length $$z_0$$ (mm) 0.0859; error at z 5mm -11.2 %; profile rms 7.9 %; inlet $$k$$ m2 s2 0.3895; inlet $$k$$ vs tunnel -26 % to -48 % |
-| Fit window | z range 0.02 ... 2H; Friction velocity $$u_\ast$$ (m/s) 0.424; Roughness length $$z_0$$ (mm) 0.4033; error at z 5mm -30.0 %; profile rms 12.5 % / 4.7 %; inlet $$k$$ m2 s2 0.5991; inlet $$k$$ vs tunnel +13 % to -20 % |
+| Method | log law, $$\kappa$$ = 0.41, least squares on the workbook\'s 13-point profile ($$z = 5\thinspace\ldots\thinspace 1200\thinspace\mathrm{mm}$$); two windows |
+| Fit window | z range 0.005 ... $$2H$$; Friction velocity $$u_\ast$$ (m/s) 0.3418; Roughness length $$z_0$$ (mm) 0.0859; error at z 5mm -11.2 %; profile rms 7.9 %; inlet $$k$$ m2 s2 0.3895; inlet $$k$$ vs tunnel -26 % to -48 % |
+| Fit window | z range 0.02 ... $$2H$$; Friction velocity $$u_\ast$$ (m/s) 0.424; Roughness length $$z_0$$ (mm) 0.4033; error at z 5mm -30.0 %; profile rms 12.5 % / 4.7 %; inlet $$k$$ m2 s2 0.5991; inlet $$k$$ vs tunnel +13 % to -20 % |
 | Power-law exponent, fitted | 0.189 |
 | Power-law exponent, data paper | 0.25 |
 | Note | derived during scoping, not published by AIJ |
@@ -125,18 +125,18 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 <details markdown="block">
 <summary>Interpretation: Inflow fit</summary>
 
-The fit has two windows because the measurement plane z/H = 0.02 sits below the 0.02 ... 2H window used for Cases A and B. A log-law inlet cannot be right at both the measurement plane and the upper profile.
+The fit has two windows because the measurement plane $$z/H = 0.02$$ sits below the 0.02 ... $$2H$$ window used for Cases A and B. A log-law inlet cannot be right at both the measurement plane and the upper profile.
 
 </details>
 
 ## Known data issues
 
-- All of Case D\'s data lives in LF\_caseD.xls, an OLE2/BIFF8 workbook (read it with xlrd 2.x; openpyxl cannot). Sheets: \'Geometry&Points\', \'Inflow\', \'Results (Exp\_S)\' (split fibre, WD = 0), \'Results (Exp\_T)\' (thermistor, 0 / 22.5 / 45 deg).
+- All of Case D\'s data lives in LF\_caseD.xls, an OLE2/BIFF8 workbook (read it with xlrd 2.x; openpyxl cannot). Sheets: \'Geometry&Points\', \'Inflow\', \'Results (Exp\_S)\' (split fibre, $$\mathrm{WD} = 0$$), \'Results (Exp\_T)\' (thermistor, 0 / 22.5 / 45 deg).
 - Coordinates are millimetres in the workbook; the API serves metres.
 - The shipped BD\_caseD.stl has 1572 facets of which 576 are duplicates, and all 83 roofs are wound inward (signed volume 0.011159 m³ against the true 0.021477 m³). The API\'s geometry.stl is rebuilt from the 83 shells\' bounding boxes: 996 facets, watertight, volume 0.021477 m³.
-- The thermistor reads a SCALAR speed. Over the 33 points where both instruments overlap at WD = 0, the ratio of mean thermistor speed to mean $$\lvert\mathbf{U}\rvert$$ is 1.342 (the mean of the per-point ratios is 1.50). $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ from the split-fibre data matches the thermistor to FB +0.058, R 0.947; $$\lvert\mathbf{U}\rvert$$ alone to FB +0.292, R 0.872.
-- Unmeasured thermistor cells are \'-\' in the workbook (null here). At WD = 0 the 66 measured values are 33 exact mirror pairs, so only 33 are independent; at 22.5 and 45 deg all 66 are independent.
-- A prior Eddy3D comparison kept in the folder (case-d-eddy3d-prior-comparison.xlsx) scores R = +0.096 against the thermistor. The score comes from a frame or geometry error; do not use it as a validation.
+- The thermistor reads a SCALAR speed. Over the 33 points where both instruments overlap at $$\mathrm{WD} = 0$$, the ratio of mean thermistor speed to mean $$\lvert\mathbf{U}\rvert$$ is 1.342 (the mean of the per-point ratios is 1.50). $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ from the split-fibre data matches the thermistor to FB +0.058, R 0.947; $$\lvert\mathbf{U}\rvert$$ alone to FB +0.292, R 0.872.
+- Unmeasured thermistor cells are \'-\' in the workbook (null here). At $$\mathrm{WD} = 0$$ the 66 measured values are 33 exact mirror pairs, so only 33 are independent; at 22.5 and 45 deg all 66 are independent.
+- A prior Eddy3D comparison kept in the folder (case-d-eddy3d-prior-comparison.xlsx) scores $$R = +0.096$$ against the thermistor. The score comes from a frame or geometry error; do not use it as a validation.
 
 ## API
 

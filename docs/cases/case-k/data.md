@@ -24,18 +24,18 @@ description: "Case K — 9 x 9 cube array, point source: configuration, frame an
 
 | Parameter | Value |
 |---|---|
-| Array | 9 rows (along x) by 9 columns (across y) of cubes, H = 0.06 m, pitch 0.12 m (street width = H, plan area ratio 25 %); the pitch is read from the MP drawings |
+| Array | 9 rows (along x) by 9 columns (across y) of cubes, $$H = 0.06\thinspace\mathrm{m}$$, pitch 0.12 m (street width = H, plan area ratio 25 %); the pitch is read from the MP drawings |
 | Height H (m) | 0.06 |
 | pitch m | 0.12 |
 | cubes | 81 |
 | Reynolds number $$\mathrm{Re_H}$$ | 9800 |
 | $$U_H$$ (m/s) | 2.33 |
-| $$U_H$$, note | stated by the readme and data paper; the approach-flow file (Case H\'s) gives 2.24 m/s at z = 0.06 m |
+| $$U_H$$, note | stated by the readme and data paper; the approach-flow file (Case H\'s) gives 2.24 m/s at $$z = 0.06\thinspace\mathrm{m}$$ |
 | Wind directions (°) | 0 |
-| Measurement planes | y/H = 0, +-1, +-2, +-3 (z up to 0.07 m), five heights from 4 mm to 70 mm; the three upper heights only on y = 0 and +-H |
+| Measurement planes | $$y/H = 0$$, +-1, +-2, +-3 (z up to 0.07 m), five heights from 4 mm to 70 mm; the three upper heights only on $$y = 0$$ and +-H |
 | Points | 203 |
 | source | 5 mm floor outlet at (-0.15, 0, 0), between rows 2 and 3 on the centre line; 100 % ethylene, 3.6e-6 m³/s |
-| concentration normalisation | $$c_0 = \dfrac{q}{U_H H^2}$$ = 429.18 ppm with the cube\'s H and $$U_H$$; the legacy workbook uses H = 0.2 m and $$U_H$$ = 4.94 m/s instead ($$C_0$$ = 18.218 ppm), see known issues |
+| concentration normalisation | $$c_0 = \dfrac{q}{U_H H^2}$$ = 429.18 ppm with the cube\'s H and $$U_H$$; the legacy workbook uses $$H = 0.2\thinspace\mathrm{m}$$ and $$U_H$$ = 4.94 m/s instead ($$C_0$$ = 18.218 ppm), see known issues |
 | Instrument | split-fibre hot wire (velocity), high-speed hydrocarbon analyser (concentration), 1000 Hz with a 200 Hz low-pass filter, 60 s per point |
 | Wind tunnel | Eiffel-type wind tunnel, Tokyo Polytechnic University (Atsugi); 1.2 m wide, 1.0 m high |
 | Scale, note | model scale; the sources state no model:full scale ratio |
@@ -46,10 +46,10 @@ description: "Case K — 9 x 9 cube array, point source: configuration, frame an
 
 | Property | Definition |
 |---|---|
-| Origin | bottom centre of the windward wall of the 4th row of the central column: x = 0 is that wall, y = 0 the centre line of the central column |
-| x | +x streamwise (the wind blows toward +x); row $$k$$ spans x in \[0.12 ($$k$$-4), 0.12 ($$k$$-4) + 0.06\], so the array spans x in \[-0.36, 0.66\] |
-| y | +y lateral; column centres at y = 0, +-0.12, ... +-0.48 (the array spans y in \[-0.51, 0.51\]) |
-| z | +z up; cube tops at z = 0.06 |
+| Origin | bottom centre of the windward wall of the 4th row of the central column: $$x = 0$$ is that wall, $$y = 0$$ the centre line of the central column |
+| x | $$+x$$ streamwise (the wind blows toward $$+x$$); row $$k$$ spans x in \[0.12 ($$k$$-4), 0.12 ($$k$$-4) + 0.06\], so the array spans $$x \in \lbrack -0.36,\thinspace 0.66\rbrack$$ |
+| y | $$+y$$ lateral; column centres at $$y = 0$$, +-0.12, ... +-0.48 (the array spans $$y \in \lbrack -0.51,\thinspace 0.51\rbrack$$) |
+| z | $$+z$$ up; cube tops at $$z = 0.06$$ |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 1.0 |
 | Unit of length | m (model scale) |
@@ -86,9 +86,9 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `x` |  | m, case frame |
 | `y` |  | m, case frame |
 | `z` |  | m above ground, case frame |
-| `U` | $$U$$ | m/s, mean velocity along +x |
-| `V` | $$V$$ | m/s, mean velocity along +y (sign unified: positive toward +y) |
-| `W` | $$W$$ | m/s, mean velocity along +z |
+| `U` | $$U$$ | m/s, mean velocity along $$+x$$ |
+| `V` | $$V$$ | m/s, mean velocity along $$+y$$ (sign unified: positive toward $$+y$$) |
+| `W` | $$W$$ | m/s, mean velocity along $$+z$$ |
 | `uu` | $$\overline{u'u'}$$ | m²/s², variance of u |
 | `vv` | $$\overline{v'v'}$$ | m²/s², variance of v |
 | `ww` | $$\overline{w'w'}$$ | m²/s², variance of w |
@@ -106,26 +106,26 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | least squares, $$\kappa$$ = 0.41, z = 0.02 .. 0.6 m (10 H) on AF\_caseK.csv: the profile is Case H\'s, tabulated for a 0.2 m building, so the window is a choice |
+| Method | least squares, $$\kappa$$ = 0.41, $$z = 0.02\thinspace\ldots\thinspace 0.6\thinspace\mathrm{m}$$ ($$10\thinspace H$$) on AF\_caseK.csv: the profile is Case H\'s, tabulated for a 0.2 m building, so the window is a choice |
 | Friction velocity $$u_\ast$$ (m/s) | 0.40706 |
 | Roughness length $$z_0$$ (mm) | 7.4385 |
 | $$U_H$$, measured (m/s) | 2.2377 |
 | $$U$$ H stated m s | 2.33 |
 | Log-law error at H | -7.4 % |
 | log law rms residual | 2.5 % |
-| Note | the file is the approach flow of Case H (identical rows); the workbook normalises it with uH = $$U(0.2\text{ m})$$ = 3.23 m/s and H = 0.2 m |
+| Note | the file is the approach flow of Case H (identical rows); the workbook normalises it with $$u_H$$ = $$U(0.2\text{ m})$$ = 3.23 m/s and $$H = 0.2\thinspace\mathrm{m}$$ |
 
 {% include nomenclature.md %}
 
 ## Known data issues
 
-- The legacy workbook normalises with H = 0.2 m (Case H\'s building), $$U_H$$ = 4.94009 m/s and $$C_0$$ = 18.218 ppm, not the cube\'s H = 0.06 m and $$U_H$$ = 2.33 m/s; its normalised columns are 23.6 times smaller in concentration. The API\'s `concentration_ratio` uses the cube\'s $$c_0$$ = 429.18 ppm.
+- The legacy workbook normalises with $$H = 0.2\thinspace\mathrm{m}$$ (Case H\'s building), $$U_H$$ = 4.94009 m/s and $$C_0$$ = 18.218 ppm, not the cube\'s $$H = 0.06\thinspace\mathrm{m}$$ and $$U_H$$ = 2.33 m/s; its normalised columns are 23.6 times smaller in concentration. The API\'s `concentration_ratio` uses the cube\'s $$c_0$$ = 429.18 ppm.
 - RS\_caseK.csv has no point numbers; point\_id is the row order of the file.
 - The published CSV is the workbook rounded (3 decimals, concentrations 2), with $$k$$ recomputed from the rounded rms values; the table is rebuilt from the workbook.
-- AF\_caseK.csv is Case H\'s approach-flow file, row for row (x = -0.493 m, tabulated for a 0.2 m building); it gives 2.24 m/s at z = 0.06 m against the stated $$U_H$$ = 2.33.
-- The lateral velocity $$V$$ is dominated by a cross-flow offset (about 0.06 m/s, also in the empty tunnel); the +y and -y halves cannot confirm its sign.
-- The mean concentration is not mirror-symmetric (the +y and -y values of one point differ by 44 % on average), so the mirror pairs are not a repeatability estimate; velocity and $$k$$ are (3 % and 5 %).
-- The workbook\'s \<usc\> / sigma\_usc (\'velocity magnitude\', never below $$\lvert\mathbf{U}\rvert$$) is not in the table.
+- AF\_caseK.csv is Case H\'s approach-flow file, row for row ($$x = -0.493\thinspace\mathrm{m}$$, tabulated for a 0.2 m building); it gives 2.24 m/s at $$z = 0.06\thinspace\mathrm{m}$$ against the stated $$U_H$$ = 2.33.
+- The lateral velocity $$V$$ is dominated by a cross-flow offset (about 0.06 m/s, also in the empty tunnel); the $$+y$$ and -y halves cannot confirm its sign.
+- The mean concentration is not mirror-symmetric (the $$+y$$ and -y values of one point differ by 44 % on average), so the mirror pairs are not a repeatability estimate; velocity and $$k$$ are (3 % and 5 %).
+- The workbook\'s $$\langle u_{\mathrm{sc}}\rangle$$ / $$\sigma_{\mathrm{usc}}$$ (\'velocity magnitude\', never below $$\lvert\mathbf{U}\rvert$$) is not in the table.
 - Data paper section 3.11 describes the measurements as \'approximately 30 points at eight heights downwind of the line source\'; Case K has 203 points at five heights and a point source.
 - Workbook units: x and y in millimetres in both data sheets; z in millimetres in \'Measurement data\' but metres in \'Inflow\'.
 

@@ -34,64 +34,67 @@ of a case before its numbers (section 4).
 
 **Geometry, reference scales and release**
 
-| Symbol | Column | Meaning | Unit |
-|---|---|---|---|
-| $$H$$, $$b$$, $$D$$ |  | height of the building, cube, tower or tree belt; width of the building; edge of the cubes of Case C: the lengths the cases are drawn and normalised by | m |
-| $$U_H$$ |  | reference speed: the mean approach-flow speed at the height $$H$$ (each Data page gives the value used) | m/s |
-| $$U_R$$, $$H_R$$, $$Z_R$$ |  | reference speed and height of a workbook: Case E, $$U_R$$ at $$Z_R$$ = 250 m full scale (1 m in the model); Case M, $$U_R$$ and $$H_R$$ at the reference point of the tunnel and of each field run | m/s, m |
-| $$U_{\mathrm{ref}}$$, $$L_{\mathrm{ref}}$$ |  | reference speed and length of a case's normalisation: $$U_H$$ and $$H$$ ($$U_R$$ and $$H_R$$ in Case M); for the velocity ratios the approach speed at 15.9 m (Case E) or at 500 m (Case F) | m/s, m |
-| $$U_b$$ |  | Case G: mean approach-flow speed at 9 m, the normalisation of its approach-flow table | m/s |
-| $$q$$, $$c_{\mathrm{gas}}$$ |  | tracer release of the experiment: volume flow of the released gas, and its tracer content ($$10^6$$ ppm when pure); $$Q$$ is the source strength given to a solve | m³/s, ppm |
-| $$\mathrm{Re_H}$$, $$\mathrm{Re_D}$$ |  | Reynolds numbers $$U_H H/\nu$$ and $$U_H D/\nu$$ ($$\nu$$: kinematic viscosity of air) | — |
-| $$u_\ast$$, $$z_0$$, $$\kappa$$ |  | friction velocity and roughness length of the log law fitted to the approach flow, and the von Kármán constant (0.41) | m/s, mm, — |
-| $$\mathrm{WD}$$ | `wind_direction_deg` | wind direction (each frame says how it is counted); $$\mathrm{WD_R}$$ is the mean direction of a field run at its reference point (Case M) | ° |
-| $$x$$, $$y$$, $$z$$ | `x`, `y`, `z` | coordinates in the case's frame, $$z$$ up from the floor of the tunnel or from the ground | m |
-| $$L_r$$ |  | reattachment length behind the building, read from a wake line at ground level; reported as $$L_r/H$$ | m |
+- $$H$$, $$b$$, $$D$$ (m) — height of the building, cube, tower or tree belt; width of the building; edge of the cubes of Case C: the lengths the cases are drawn and normalised by
+- $$U_H$$ (m/s) — reference speed: the mean approach-flow speed at the height $$H$$ (each Data page gives the value used)
+- $$U_R$$, $$H_R$$, $$Z_R$$ (m/s, m) — reference speed and height of a workbook: Case E, $$U_R$$ at $$Z_R$$ = 250 m full scale (1 m in the model); Case M, $$U_R$$ and $$H_R$$ at the reference point of the tunnel and of each field run
+- $$U_{\mathrm{ref}}$$, $$L_{\mathrm{ref}}$$ (m/s, m) — reference speed and length of a case's normalisation: $$U_H$$ and $$H$$ ($$U_R$$ and $$H_R$$ in Case M); for the velocity ratios the approach speed at 15.9 m (Case E) or at 500 m (Case F)
+- $$U_b$$ (m/s) — Case G: mean approach-flow speed at 9 m, the normalisation of its approach-flow table
+- $$q$$, $$c_{\mathrm{gas}}$$ (m³/s, ppm) — tracer release of the experiment: volume flow of the released gas, and its tracer content ($$10^6$$ ppm when pure); $$Q$$ is the source strength given to a solve
+- $$R_b$$ (dimensionless) — bulk Richardson number of the heated-floor cases J and L (negative: unstable stratification)
+- $$\mathrm{Re_H}$$, $$\mathrm{Re_D}$$ (dimensionless) — Reynolds numbers $$U_H H/\nu$$ and $$U_H D/\nu$$ ($$\nu$$: kinematic viscosity of air)
+- $$u_\ast$$, $$z_0$$, $$\kappa$$ (m/s, mm, dimensionless) — friction velocity and roughness length of the log law fitted to the approach flow, and the von Kármán constant (0.41)
+- $$\mathrm{WD}$$ (column `wind_direction_deg`; °) — wind direction (each frame says how it is counted); $$\mathrm{WD_R}$$ is the mean direction of a field run at its reference point (Case M)
+- $$x$$, $$y$$, $$z$$ (columns `x`, `y`, `z`; m) — coordinates in the case's frame ($$+x$$, $$+y$$ and $$+z$$ are the positive directions; each Data page says which way $$+x$$ points), $$z$$ up from the floor of the tunnel or from the ground
+- $$\mathrm{d}x$$ (m) — lattice spacing of the OpenLB and FluidX3D runs, in metres or as a fraction of $$H$$ ($$H/64$$)
+- $$L_r$$ (m) — reattachment length behind the building, read from a wake line at ground level; reported as $$L_r/H$$
 
 **Velocity and turbulence**
 
-| Symbol | Column | Meaning | Unit |
-|---|---|---|---|
-| $$U$$, $$V$$, $$W$$ | `U`, `V`, `W` | mean velocity along $$+x$$, $$+y$$, $$+z$$; $$V$$ is positive toward $$+y$$ in every case | m/s |
-| $$\lvert\mathbf{U}\rvert$$ |  | magnitude of the mean velocity vector, $$\sqrt{U^2+V^2+W^2}$$ | m/s |
-| $$V_{\mathrm{s}}$$ | `Vs` | mean omnidirectional scalar speed of a thermistor (never a vector magnitude) | m/s |
-| $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$ | `uu`, `vv`, `ww` | velocity variances (overbar: time average, prime: fluctuation about it) | m²/s² |
-| $$\overline{u'v'}$$, $$\overline{u'w'}$$, $$\overline{v'w'}$$ | `uv`, `uw`, `vw` | Reynolds shear stresses | m²/s² |
-| $$k = \tfrac{1}{2}\left(\overline{u'u'}+\overline{v'v'}+\overline{w'w'}\right)$$ | `k` | turbulent kinetic energy | m²/s² |
-| $$U/U_{\mathrm{ref}}$$ | `velocity_ratio` | mean speed over the case's reference speed ($$V_{\mathrm{s}}/U_{\mathrm{ref}}$$ for a thermistor) | — |
-| $$\sigma_{U/U_{\mathrm{ref}}}$$ | `velocity_ratio_sd` | standard deviation of `velocity_ratio` over the observations behind a field value (Case F) | — |
-| $$k/U_{\mathrm{ref}}^2$$ | `k_ratio` | turbulent kinetic energy over the square of the reference speed, where only normalised values are published (Case G) | — |
+- $$U$$, $$V$$, $$W$$ (columns `U`, `V`, `W`; m/s) — mean velocity along $$+x$$, $$+y$$, $$+z$$; $$V$$ is positive toward $$+y$$ in every case
+- $$\lvert\mathbf{U}\rvert$$ (m/s) — magnitude of the mean velocity vector, $$\sqrt{U^2+V^2+W^2}$$
+- $$V_{\mathrm{s}}$$ (column `Vs`; m/s) — mean omnidirectional scalar speed of a thermistor (never a vector magnitude)
+- $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$ (columns `uu`, `vv`, `ww`; m²/s²) — velocity variances (overbar: time average, prime: fluctuation about it)
+- $$\overline{u'v'}$$, $$\overline{u'w'}$$, $$\overline{v'w'}$$ (columns `uv`, `uw`, `vw`; m²/s²) — Reynolds shear stresses
+- $$k = \tfrac{1}{2}\left(\overline{u'u'}+\overline{v'v'}+\overline{w'w'}\right)$$ (column `k`; m²/s²) — turbulent kinetic energy
+- $$U/U_{\mathrm{ref}}$$ (column `velocity_ratio`; dimensionless) — mean speed over the case's reference speed ($$V_{\mathrm{s}}/U_{\mathrm{ref}}$$ for a thermistor)
+- $$\sigma_{U/U_{\mathrm{ref}}}$$ (column `velocity_ratio_sd`; dimensionless) — standard deviation of `velocity_ratio` over the observations behind a field value (Case F)
+- $$k/U_{\mathrm{ref}}^2$$ (column `k_ratio`; dimensionless) — turbulent kinetic energy over the square of the reference speed, where only normalised values are published (Case G)
 
 **Concentration and temperature**
 
-| Symbol | Column | Meaning | Unit |
-|---|---|---|---|
-| $$C$$ | `C` | mean tracer-gas concentration as published (volume fraction × 10⁶ of the released gas diluted in air) | ppm |
-| $$c_{\mathrm{rms}}$$ | `c_rms` | root mean square of the concentration fluctuation | ppm |
-| $$c_0$$ |  | reference concentration, defined for each case on its Data page: $$c_0 = \dfrac{c_{\mathrm{gas}}\thinspace q}{U_H H^2}$$ ($$U_R H_R^2$$ in the denominator in Case M) | ppm |
-| $$c^\ast$$ | `concentration_ratio` | dimensionless concentration $$c^\ast = C/c_0$$; the value of a solve is $$c\thinspace U_H H^2/Q$$ for its mean concentration $$c$$ and its source strength $$Q$$ | — |
-| $$\mathrm{Sc_t}$$ |  | turbulent Schmidt number of a solve (0.3, 0.5 and 0.7) | — |
-| $$T$$, $$T_{\mathrm{rms}}$$ | `T`, `T_rms` | mean air temperature as published (Cases J and L) and the root mean square of its fluctuation | °C, K |
-| $$\overline{u'c'}$$, $$\overline{v'c'}$$, $$\overline{w'c'}$$ | `uc`, `vc`, `wc` | turbulent concentration fluxes | ppm·m/s |
-| $$\overline{u'\theta'}$$, $$\overline{v'\theta'}$$, $$\overline{w'\theta'}$$ | `uT`, `vT`, `wT` | turbulent heat fluxes ($$\theta'$$: the temperature fluctuation) | K·m/s |
-| $$\theta = \dfrac{T_f - T}{T_f - T_H}$$ |  | floor-referenced temperature the solves of Cases J and L are scored on: 0 at the floor, 1 in the approach air at $$H$$; $$T_f$$ is the floor temperature and $$T_H$$ the temperature of the approach flow at $$H$$ | — |
+- $$C$$ (column `C`; ppm) — mean tracer-gas concentration as published (volume fraction $$\times 10^6$$ of the released gas diluted in air)
+- $$c_{\mathrm{rms}}$$ (column `c_rms`; ppm) — root mean square of the concentration fluctuation
+- $$c_0$$ (ppm) — reference concentration, defined for each case on its Data page: $$c_0 = \dfrac{c_{\mathrm{gas}}\thinspace q}{U_H H^2}$$ ($$U_R H_R^2$$ in the denominator in Case M)
+- $$c^\ast$$ (column `concentration_ratio`; dimensionless) — dimensionless concentration $$c^\ast = C/c_0$$; the value of a solve is $$c\thinspace U_H H^2/Q$$ for its mean concentration $$c$$ and its source strength $$Q$$
+- $$\mathrm{Sc_t}$$ (dimensionless) — turbulent Schmidt number of a solve (0.3, 0.5 and 0.7)
+- $$T$$, $$T_{\mathrm{rms}}$$ (columns `T`, `T_rms`; °C, K) — mean air temperature as published (Cases J and L) and the root mean square of its fluctuation
+- $$\overline{u'c'}$$, $$\overline{v'c'}$$, $$\overline{w'c'}$$ (columns `uc`, `vc`, `wc`; ppm·m/s) — turbulent concentration fluxes
+- $$\overline{u'\theta'}$$, $$\overline{v'\theta'}$$, $$\overline{w'\theta'}$$ (columns `uT`, `vT`, `wT`; K·m/s) — turbulent heat fluxes ($$\theta'$$: the temperature fluctuation)
+- $$\theta = \dfrac{T_f - T}{T_f - T_H}$$ (dimensionless) — floor-referenced temperature the solves of Cases J and L are scored on: 0 at the floor, 1 in the approach air at $$H$$; $$T_f$$ is the floor temperature and $$T_H$$ the temperature of the approach flow at $$H$$
 
 **Scores**
 
-- $$n$$, the number of pairs scored: the points at which the measured and the modelled value both exist; a pair is the measured value $$o_i$$ and the modelled value $$p_i$$ at one point; $$\overline{o}$$ and $$\overline{p}$$ are the means over the pairs.
-- $$R = \dfrac{\sum_i (o_i-\overline{o})(p_i-\overline{p})}{\sqrt{\sum_i (o_i-\overline{o})^2 \sum_i (p_i-\overline{p})^2}}$$, Pearson's correlation coefficient of the pairs.
-- $$\mathrm{FAC2}$$, the fraction of pairs with $$0.5 \le p_i/o_i \le 2$$. The ratio keeps its sign, so a model of the other sign than the measurement is a miss; for a concentration, a pair with both values at or below the detection limit also counts.
-- $$\mathrm{FB} = \dfrac{\overline{o}-\overline{p}}{0.5\thinspace(\overline{o}+\overline{p})}$$, the fractional bias, positive when the model under-predicts. It is undefined (shown as —) for a signed component unless the measured and the modelled mean are both positive; $$R$$, $$\mathrm{FAC2}$$, the hit rate and $$n$$ stay.
-- $$\mathrm{HR}$$, the hit rate: the fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, with $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}}$$ equal to $$0.05\thinspace U_H$$ for a velocity component, to the detection limit for a concentration, and absent for $$k$$. VDI 3783-9 calls the hit rate $$q$$ and the tolerances $$D$$ and $$W$$; on this site those letters keep their other meanings.
-- NMSE, NAD, MG and VG are in `validation/results/*.json` and in the API's `validation.json`. NMSE and NAD divide by the means like $$\mathrm{FB}$$, so they are undefined for a signed component unless the measured and the modelled mean are both positive.
-- $$\mathrm{NMSE} = \dfrac{\overline{(o-p)^2}}{\overline{o}\thinspace \overline{p}}$$, the normalised mean square error.
-- $$\mathrm{NAD} = \dfrac{\overline{\lvert o-p\rvert}}{\overline{o}+\overline{p}}$$, the normalised absolute difference.
-- $$\mathrm{MG} = \exp\overline{(\ln o-\ln p)}$$, the geometric mean bias.
-- $$\mathrm{VG} = \exp\overline{(\ln o-\ln p)^2}$$, the geometric variance.
+- $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
+- $$R$$ — Pearson correlation coefficient of the pairs
+- $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
+- $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
+- $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
+- $$\mathrm{NMSE} = \dfrac{\overline{(o-p)^2}}{\overline{o}\thinspace \overline{p}}$$ — normalised mean square error
+- $$\mathrm{NAD} = \dfrac{\overline{\lvert o-p\rvert}}{\overline{o}+\overline{p}}$$ — normalised absolute difference
+- $$\mathrm{MG} = \exp\overline{(\ln o-\ln p)}$$ — geometric mean bias
+- $$\mathrm{VG} = \exp\overline{(\ln o-\ln p)^2}$$ — geometric variance
+- The ratio of $$\mathrm{FAC2}$$ keeps its sign, so a model of the other sign than the measurement is a miss; $$\mathrm{FB}$$, $$\mathrm{NMSE}$$ and $$\mathrm{NAD}$$ divide by the means, so they are undefined (shown as —) for a signed component unless the measured and the modelled mean are both positive
+- VDI 3783-9 calls the hit rate $$q$$ and the tolerances $$D$$ and $$W$$; on this site those letters keep their other meanings ($$q$$ the tracer release rate, $$D$$ the block size of Case C, $$W$$ the vertical velocity)
 - The detection limit of a concentration is one value per case, $$10^{-3}$$ of the largest measured value. It sets $$\delta_{\mathrm{abs}}$$ of the hit rate and the both-below rule of $$\mathrm{FAC2}$$, and floors the values in $$\mathrm{MG}$$ and $$\mathrm{VG}$$.
 - The scores $$\mathrm{FB}$$, $$\mathrm{FAC2}$$, $$\mathrm{NMSE}$$, $$\mathrm{NAD}$$, $$\mathrm{MG}$$ and $$\mathrm{VG}$$ follow Chang & Hanna (2004); the hit rate follows VDI 3783-9.
 
-The quantities scored: $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$U_H$$; $$k$$ (turbulent kinetic energy) over $$U_H^2$$; the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$ against a thermistor's $$V_{\mathrm{s}}$$; $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7; $$\theta$$ (floor-referenced temperature).
+**Quantities scored**
+
+- $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$U_H$$
+- $$k$$ (turbulent kinetic energy) over $$U_H^2$$
+- the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
+- $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
+- $$\theta$$ (floor-referenced temperature)
 
 </details>
 
@@ -159,19 +162,19 @@ m.query("campaign == 'field' and abs(wind_direction_deg - 180) <= 5").groupby("p
 
 | case | what | instrument | rows | configs × directions | frame origin | coordinate scale |
 |---|---|---|---|---|---|---|
-| A | 1:1:2 building, b = 0.08 m, H = 0.16 m, $$U_H$$ 4.491 m/s | split fibre: $$U$$ $$V$$ $$W$$, $$\overline{u'u'}$$ vv $$\overline{w'w'}$$, $$k$$ | 186 | 1 × {0°} | building centre | model m |
+| A | 1:1:2 building, $$b = 0.08\thinspace\mathrm{m}$$, $$H = 0.16\thinspace\mathrm{m}$$, $$U_H$$ 4.491 m/s | split fibre: $$U$$ $$V$$ $$W$$, $$\overline{u'u'}$$ $$\overline{v'v'}$$ $$\overline{w'w'}$$, $$k$$ | 186 | 1 × {0°} | building centre | model m |
 | B | 1:4:4 slab 0.05 × 0.20 × 0.20 m, $$U_H$$ 5.133 | split fibre | 224 | 1 × {0°} | slab centre | model m (published in **mm**) |
-| C | 3 × 3 array of 0.20 m cubes, pitch 0.40 m, centre block 0D/1D/2D, $$U_H$$ 3.654 at z = D | thermistor $$V_{\mathrm{s}}$$ at z = 0.02 | 1,080 | 3 × {0, 22.5, 45°} × 120 pts | array centre | model m |
-| D | 1:1:4 tower (62.5 × 62.5 × 250 mm) in 82 blocks (100 × 100 × 25 mm), $$U_H$$ 6.65 | thermistor $$V_{\mathrm{s}}$$ (78 pts × 3 dirs) + split fibre (33 pts, 0°) at z = 5 mm | 267 | 1 × {0, 22.5, 45°} | tower centre | model m, 1:400 |
-| E | Niigata district 1:250, before/after a 60 m + two 18 m buildings | thermistor velocity ratio at z = 2 m, 80 pts | 2,560 | {bc, ac} × 16 compass | area centre, +x east +y north | **full-scale** m |
-| F | Shinjuku sub-centre, Tokyo, 1978 stage of construction, 1:800; 13 points: tunnel 3 planes × 12 directions + field 16 directions | thermistor velocity ratio (tunnel, 5, 9 and 20 m above ground); cup anemometer (field) | 472 (tunnel 264, field 208) | {default (9 m), h5, h20} × 12 tunnel directions; 16 field directions | district centre, +x east, +y north | **full-scale** m (tunnel × 800) |
-| G | Tsuiji-matsu tree belt, 74 × 2 × 7 m with a 1.2 m gap, **field**, 7 lines behind it × 4 heights | sonic anemometer: $$U/U_H$$, $$k/U_H^2$$ | 28 | 1 × {0°} | belt's leeward face, +x downwind | **full-scale** m |
-| H | 1:1:2 building 0.10 × 0.10 × 0.20 m, $$U_H$$ 3.226 m/s, ethylene source on the floor 0.25 H behind it, $$c_0$$ 45.18 ppm | split fibre $$U$$ $$V$$ $$W$$ $$\overline{u'u'}$$ $$\overline{v'v'}$$ $$\overline{w'w'}$$ $$k$$; hydrocarbon analyser $$C$$, $$c_{\mathrm{rms}}$$ | 1,652 (826 + 826 at 876 points) | 1 × {0°} | centre of the leeward face | model m |
+| C | 3 × 3 array of 0.20 m cubes, pitch 0.40 m, centre block 0D/1D/2D, $$U_H$$ 3.654 at $$z = D$$ | thermistor $$V_{\mathrm{s}}$$ at $$z = 0.02$$ | 1,080 | 3 × {0, 22.5, 45°} × 120 pts | array centre | model m |
+| D | 1:1:4 tower (62.5 × 62.5 × 250 mm) in 82 blocks (100 × 100 × 25 mm), $$U_H$$ 6.65 | thermistor $$V_{\mathrm{s}}$$ (78 pts × 3 dirs) + split fibre (33 pts, 0°) at $$z = 5\thinspace\mathrm{mm}$$ | 267 | 1 × {0, 22.5, 45°} | tower centre | model m, 1:400 |
+| E | Niigata district 1:250, before/after a 60 m + two 18 m buildings | thermistor velocity ratio at $$z = 2\thinspace\mathrm{m}$$, 80 pts | 2,560 | {bc, ac} × 16 compass | area centre, $$+x$$ east $$+y$$ north | **full-scale** m |
+| F | Shinjuku sub-centre, Tokyo, 1978 stage of construction, 1:800; 13 points: tunnel 3 planes × 12 directions + field 16 directions | thermistor velocity ratio (tunnel, 5, 9 and 20 m above ground); cup anemometer (field) | 472 (tunnel 264, field 208) | {default (9 m), h5, h20} × 12 tunnel directions; 16 field directions | district centre, $$+x$$ east, $$+y$$ north | **full-scale** m (tunnel × 800) |
+| G | Tsuiji-matsu tree belt, 74 × 2 × 7 m with a 1.2 m gap, **field**, 7 lines behind it × 4 heights | sonic anemometer: $$U/U_H$$, $$k/U_H^2$$ | 28 | 1 × {0°} | belt's leeward face, $$+x$$ downwind | **full-scale** m |
+| H | 1:1:2 building 0.10 × 0.10 × 0.20 m, $$U_H$$ 3.226 m/s, ethylene source on the floor $$0.25\thinspace H$$ behind it, $$c_0$$ 45.18 ppm | split fibre $$U$$ $$V$$ $$W$$ $$\overline{u'u'}$$ $$\overline{v'v'}$$ $$\overline{w'w'}$$ $$k$$; hydrocarbon analyser $$C$$, $$c_{\mathrm{rms}}$$ | 1,652 (826 + 826 at 876 points) | 1 × {0°} | centre of the leeward face | model m |
 | I | cube 0.10 m, $$U_H$$ 1.7 m/s, ethane source at the centre of the roof, $$c_0$$ 39.22 ppm | LDA $$U$$ $$V$$ $$W$$ $$k$$ (91 points); hydrocarbon analyser C (539 points) | 630 | 1 × {0°} | cube centre | model m |
-| J | 1:1:2 building b = 0.08 m, H = 0.16 m; unstable (floor 45.8 °C, air at H 12.2 °C, Rb = −0.086); $$U_H$$ = 1.4581 m/s; 5 mm floor outlet at x = +0.04, 5 % ethylene; points on y = 0, z/H = 0.025 and z/H = 0.25 | split fibre $$U$$ $$V$$ $$W$$ $$\overline{u'u'}$$ $$\overline{v'v'}$$ $$\overline{w'w'}$$ $$k$$, T $$T_{\mathrm{rms}}$$, $$\overline{u'\theta'}$$ vT $$\overline{w'\theta'}$$, $$C$$ $$c_{\mathrm{rms}}$$ | 444 (443 locations) | 1 × {0°} | leeward wall centre | model m |
-| K | 9 × 9 cubes H = 0.06 m, pitch 0.12 m, isothermal; $$U_H$$ = 2.33 m/s; 5 mm floor outlet at x = −0.15, 100 % ethylene; points in the streets and over the first rows | split fibre $$U$$ $$V$$ $$W$$ $$\overline{u'u'}$$ $$\overline{v'v'}$$ $$\overline{w'w'}$$ $$k$$, C $$c_{\mathrm{rms}}$$ | 203 | 1 × {0°} | windward wall of row 4, central column | model m |
-| L | 9 × 14 cubes H = 0.06 m, pitch 0.12 m; unstable (floor 45.0 °C, air at H 14.75 °C, Rb = −0.035); $$U_H$$ = 1.3394 m/s; line source across the tunnel at x = −0.15, 100 % ethylene | split fibre as J plus uv $$\overline{u'w'}$$, $$\overline{u'c'}$$ vc wc | 344: 27 street locations × 8 heights, 14 roof locations × 4, 24 × 3 | 1 × {0°} | windward wall of row 9 (of 14), central column | model m |
-| M | Tokyo Polytechnic University Atsugi campus, 1:600 tunnel and 18 field runs, 15 points 3 m above ground, tracer release | split fibre (tunnel); hydrocarbon analyser (tunnel concentration); sorbent tubes read by GC-ECD (field concentration) | 330 (split fibre 15, concentration 45, field 270) | tunnel velocity at 180°, tunnel concentration at 175, 180 and 185°; field: 18 runs | turntable centre, +x north, +y west | **full-scale** m (tunnel × 600) |
+| J | 1:1:2 building $$b = 0.08\thinspace\mathrm{m}$$, $$H = 0.16\thinspace\mathrm{m}$$; unstable (floor 45.8 °C, air at H 12.2 °C, $$R_b = -0.086$$); $$U_H$$ = 1.4581 m/s; 5 mm floor outlet at $$x = +0.04$$, 5 % ethylene; points on $$y = 0$$, $$z/H = 0.025$$ and $$z/H = 0.25$$ | split fibre $$U$$ $$V$$ $$W$$ $$\overline{u'u'}$$ $$\overline{v'v'}$$ $$\overline{w'w'}$$ $$k$$, T $$T_{\mathrm{rms}}$$, $$\overline{u'\theta'}$$ $$\overline{v'\theta'}$$ $$\overline{w'\theta'}$$, $$C$$ $$c_{\mathrm{rms}}$$ | 444 (443 locations) | 1 × {0°} | leeward wall centre | model m |
+| K | 9 × 9 cubes $$H = 0.06\thinspace\mathrm{m}$$, pitch 0.12 m, isothermal; $$U_H$$ = 2.33 m/s; 5 mm floor outlet at $$x = -0.15$$, 100 % ethylene; points in the streets and over the first rows | split fibre $$U$$ $$V$$ $$W$$ $$\overline{u'u'}$$ $$\overline{v'v'}$$ $$\overline{w'w'}$$ $$k$$, C $$c_{\mathrm{rms}}$$ | 203 | 1 × {0°} | windward wall of row 4, central column | model m |
+| L | 9 × 14 cubes $$H = 0.06\thinspace\mathrm{m}$$, pitch 0.12 m; unstable (floor 45.0 °C, air at H 14.75 °C, $$R_b = -0.035$$); $$U_H$$ = 1.3394 m/s; line source across the tunnel at $$x = -0.15$$, 100 % ethylene | split fibre as J plus $$\overline{u'v'}$$ $$\overline{u'w'}$$, $$\overline{u'c'}$$ $$\overline{v'c'}$$ $$\overline{w'c'}$$ | 344: 27 street locations × 8 heights, 14 roof locations × 4, 24 × 3 | 1 × {0°} | windward wall of row 9 (of 14), central column | model m |
+| M | Tokyo Polytechnic University Atsugi campus, 1:600 tunnel and 18 field runs, 15 points 3 m above ground, tracer release | split fibre (tunnel); hydrocarbon analyser (tunnel concentration); sorbent tubes read by GC-ECD (field concentration) | 330 (split fibre 15, concentration 45, field 270) | tunnel velocity at 180°, tunnel concentration at 175, 180 and 185°; field: 18 runs | turntable centre, $$+x$$ north, $$+y$$ west | **full-scale** m (tunnel × 600) |
 
 <!--nomenclature full-->
 
@@ -180,64 +183,67 @@ m.query("campaign == 'field' and abs(wind_direction_deg - 180) <= 5").groupby("p
 
 **Geometry, reference scales and release**
 
-| Symbol | Column | Meaning | Unit |
-|---|---|---|---|
-| $$H$$, $$b$$, $$D$$ |  | height of the building, cube, tower or tree belt; width of the building; edge of the cubes of Case C: the lengths the cases are drawn and normalised by | m |
-| $$U_H$$ |  | reference speed: the mean approach-flow speed at the height $$H$$ (each Data page gives the value used) | m/s |
-| $$U_R$$, $$H_R$$, $$Z_R$$ |  | reference speed and height of a workbook: Case E, $$U_R$$ at $$Z_R$$ = 250 m full scale (1 m in the model); Case M, $$U_R$$ and $$H_R$$ at the reference point of the tunnel and of each field run | m/s, m |
-| $$U_{\mathrm{ref}}$$, $$L_{\mathrm{ref}}$$ |  | reference speed and length of a case's normalisation: $$U_H$$ and $$H$$ ($$U_R$$ and $$H_R$$ in Case M); for the velocity ratios the approach speed at 15.9 m (Case E) or at 500 m (Case F) | m/s, m |
-| $$U_b$$ |  | Case G: mean approach-flow speed at 9 m, the normalisation of its approach-flow table | m/s |
-| $$q$$, $$c_{\mathrm{gas}}$$ |  | tracer release of the experiment: volume flow of the released gas, and its tracer content ($$10^6$$ ppm when pure); $$Q$$ is the source strength given to a solve | m³/s, ppm |
-| $$\mathrm{Re_H}$$, $$\mathrm{Re_D}$$ |  | Reynolds numbers $$U_H H/\nu$$ and $$U_H D/\nu$$ ($$\nu$$: kinematic viscosity of air) | — |
-| $$u_\ast$$, $$z_0$$, $$\kappa$$ |  | friction velocity and roughness length of the log law fitted to the approach flow, and the von Kármán constant (0.41) | m/s, mm, — |
-| $$\mathrm{WD}$$ | `wind_direction_deg` | wind direction (each frame says how it is counted); $$\mathrm{WD_R}$$ is the mean direction of a field run at its reference point (Case M) | ° |
-| $$x$$, $$y$$, $$z$$ | `x`, `y`, `z` | coordinates in the case's frame, $$z$$ up from the floor of the tunnel or from the ground | m |
-| $$L_r$$ |  | reattachment length behind the building, read from a wake line at ground level; reported as $$L_r/H$$ | m |
+- $$H$$, $$b$$, $$D$$ (m) — height of the building, cube, tower or tree belt; width of the building; edge of the cubes of Case C: the lengths the cases are drawn and normalised by
+- $$U_H$$ (m/s) — reference speed: the mean approach-flow speed at the height $$H$$ (each Data page gives the value used)
+- $$U_R$$, $$H_R$$, $$Z_R$$ (m/s, m) — reference speed and height of a workbook: Case E, $$U_R$$ at $$Z_R$$ = 250 m full scale (1 m in the model); Case M, $$U_R$$ and $$H_R$$ at the reference point of the tunnel and of each field run
+- $$U_{\mathrm{ref}}$$, $$L_{\mathrm{ref}}$$ (m/s, m) — reference speed and length of a case's normalisation: $$U_H$$ and $$H$$ ($$U_R$$ and $$H_R$$ in Case M); for the velocity ratios the approach speed at 15.9 m (Case E) or at 500 m (Case F)
+- $$U_b$$ (m/s) — Case G: mean approach-flow speed at 9 m, the normalisation of its approach-flow table
+- $$q$$, $$c_{\mathrm{gas}}$$ (m³/s, ppm) — tracer release of the experiment: volume flow of the released gas, and its tracer content ($$10^6$$ ppm when pure); $$Q$$ is the source strength given to a solve
+- $$R_b$$ (dimensionless) — bulk Richardson number of the heated-floor cases J and L (negative: unstable stratification)
+- $$\mathrm{Re_H}$$, $$\mathrm{Re_D}$$ (dimensionless) — Reynolds numbers $$U_H H/\nu$$ and $$U_H D/\nu$$ ($$\nu$$: kinematic viscosity of air)
+- $$u_\ast$$, $$z_0$$, $$\kappa$$ (m/s, mm, dimensionless) — friction velocity and roughness length of the log law fitted to the approach flow, and the von Kármán constant (0.41)
+- $$\mathrm{WD}$$ (column `wind_direction_deg`; °) — wind direction (each frame says how it is counted); $$\mathrm{WD_R}$$ is the mean direction of a field run at its reference point (Case M)
+- $$x$$, $$y$$, $$z$$ (columns `x`, `y`, `z`; m) — coordinates in the case's frame ($$+x$$, $$+y$$ and $$+z$$ are the positive directions; each Data page says which way $$+x$$ points), $$z$$ up from the floor of the tunnel or from the ground
+- $$\mathrm{d}x$$ (m) — lattice spacing of the OpenLB and FluidX3D runs, in metres or as a fraction of $$H$$ ($$H/64$$)
+- $$L_r$$ (m) — reattachment length behind the building, read from a wake line at ground level; reported as $$L_r/H$$
 
 **Velocity and turbulence**
 
-| Symbol | Column | Meaning | Unit |
-|---|---|---|---|
-| $$U$$, $$V$$, $$W$$ | `U`, `V`, `W` | mean velocity along $$+x$$, $$+y$$, $$+z$$; $$V$$ is positive toward $$+y$$ in every case | m/s |
-| $$\lvert\mathbf{U}\rvert$$ |  | magnitude of the mean velocity vector, $$\sqrt{U^2+V^2+W^2}$$ | m/s |
-| $$V_{\mathrm{s}}$$ | `Vs` | mean omnidirectional scalar speed of a thermistor (never a vector magnitude) | m/s |
-| $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$ | `uu`, `vv`, `ww` | velocity variances (overbar: time average, prime: fluctuation about it) | m²/s² |
-| $$\overline{u'v'}$$, $$\overline{u'w'}$$, $$\overline{v'w'}$$ | `uv`, `uw`, `vw` | Reynolds shear stresses | m²/s² |
-| $$k = \tfrac{1}{2}\left(\overline{u'u'}+\overline{v'v'}+\overline{w'w'}\right)$$ | `k` | turbulent kinetic energy | m²/s² |
-| $$U/U_{\mathrm{ref}}$$ | `velocity_ratio` | mean speed over the case's reference speed ($$V_{\mathrm{s}}/U_{\mathrm{ref}}$$ for a thermistor) | — |
-| $$\sigma_{U/U_{\mathrm{ref}}}$$ | `velocity_ratio_sd` | standard deviation of `velocity_ratio` over the observations behind a field value (Case F) | — |
-| $$k/U_{\mathrm{ref}}^2$$ | `k_ratio` | turbulent kinetic energy over the square of the reference speed, where only normalised values are published (Case G) | — |
+- $$U$$, $$V$$, $$W$$ (columns `U`, `V`, `W`; m/s) — mean velocity along $$+x$$, $$+y$$, $$+z$$; $$V$$ is positive toward $$+y$$ in every case
+- $$\lvert\mathbf{U}\rvert$$ (m/s) — magnitude of the mean velocity vector, $$\sqrt{U^2+V^2+W^2}$$
+- $$V_{\mathrm{s}}$$ (column `Vs`; m/s) — mean omnidirectional scalar speed of a thermistor (never a vector magnitude)
+- $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$ (columns `uu`, `vv`, `ww`; m²/s²) — velocity variances (overbar: time average, prime: fluctuation about it)
+- $$\overline{u'v'}$$, $$\overline{u'w'}$$, $$\overline{v'w'}$$ (columns `uv`, `uw`, `vw`; m²/s²) — Reynolds shear stresses
+- $$k = \tfrac{1}{2}\left(\overline{u'u'}+\overline{v'v'}+\overline{w'w'}\right)$$ (column `k`; m²/s²) — turbulent kinetic energy
+- $$U/U_{\mathrm{ref}}$$ (column `velocity_ratio`; dimensionless) — mean speed over the case's reference speed ($$V_{\mathrm{s}}/U_{\mathrm{ref}}$$ for a thermistor)
+- $$\sigma_{U/U_{\mathrm{ref}}}$$ (column `velocity_ratio_sd`; dimensionless) — standard deviation of `velocity_ratio` over the observations behind a field value (Case F)
+- $$k/U_{\mathrm{ref}}^2$$ (column `k_ratio`; dimensionless) — turbulent kinetic energy over the square of the reference speed, where only normalised values are published (Case G)
 
 **Concentration and temperature**
 
-| Symbol | Column | Meaning | Unit |
-|---|---|---|---|
-| $$C$$ | `C` | mean tracer-gas concentration as published (volume fraction × 10⁶ of the released gas diluted in air) | ppm |
-| $$c_{\mathrm{rms}}$$ | `c_rms` | root mean square of the concentration fluctuation | ppm |
-| $$c_0$$ |  | reference concentration, defined for each case on its Data page: $$c_0 = \dfrac{c_{\mathrm{gas}}\thinspace q}{U_H H^2}$$ ($$U_R H_R^2$$ in the denominator in Case M) | ppm |
-| $$c^\ast$$ | `concentration_ratio` | dimensionless concentration $$c^\ast = C/c_0$$; the value of a solve is $$c\thinspace U_H H^2/Q$$ for its mean concentration $$c$$ and its source strength $$Q$$ | — |
-| $$\mathrm{Sc_t}$$ |  | turbulent Schmidt number of a solve (0.3, 0.5 and 0.7) | — |
-| $$T$$, $$T_{\mathrm{rms}}$$ | `T`, `T_rms` | mean air temperature as published (Cases J and L) and the root mean square of its fluctuation | °C, K |
-| $$\overline{u'c'}$$, $$\overline{v'c'}$$, $$\overline{w'c'}$$ | `uc`, `vc`, `wc` | turbulent concentration fluxes | ppm·m/s |
-| $$\overline{u'\theta'}$$, $$\overline{v'\theta'}$$, $$\overline{w'\theta'}$$ | `uT`, `vT`, `wT` | turbulent heat fluxes ($$\theta'$$: the temperature fluctuation) | K·m/s |
-| $$\theta = \dfrac{T_f - T}{T_f - T_H}$$ |  | floor-referenced temperature the solves of Cases J and L are scored on: 0 at the floor, 1 in the approach air at $$H$$; $$T_f$$ is the floor temperature and $$T_H$$ the temperature of the approach flow at $$H$$ | — |
+- $$C$$ (column `C`; ppm) — mean tracer-gas concentration as published (volume fraction $$\times 10^6$$ of the released gas diluted in air)
+- $$c_{\mathrm{rms}}$$ (column `c_rms`; ppm) — root mean square of the concentration fluctuation
+- $$c_0$$ (ppm) — reference concentration, defined for each case on its Data page: $$c_0 = \dfrac{c_{\mathrm{gas}}\thinspace q}{U_H H^2}$$ ($$U_R H_R^2$$ in the denominator in Case M)
+- $$c^\ast$$ (column `concentration_ratio`; dimensionless) — dimensionless concentration $$c^\ast = C/c_0$$; the value of a solve is $$c\thinspace U_H H^2/Q$$ for its mean concentration $$c$$ and its source strength $$Q$$
+- $$\mathrm{Sc_t}$$ (dimensionless) — turbulent Schmidt number of a solve (0.3, 0.5 and 0.7)
+- $$T$$, $$T_{\mathrm{rms}}$$ (columns `T`, `T_rms`; °C, K) — mean air temperature as published (Cases J and L) and the root mean square of its fluctuation
+- $$\overline{u'c'}$$, $$\overline{v'c'}$$, $$\overline{w'c'}$$ (columns `uc`, `vc`, `wc`; ppm·m/s) — turbulent concentration fluxes
+- $$\overline{u'\theta'}$$, $$\overline{v'\theta'}$$, $$\overline{w'\theta'}$$ (columns `uT`, `vT`, `wT`; K·m/s) — turbulent heat fluxes ($$\theta'$$: the temperature fluctuation)
+- $$\theta = \dfrac{T_f - T}{T_f - T_H}$$ (dimensionless) — floor-referenced temperature the solves of Cases J and L are scored on: 0 at the floor, 1 in the approach air at $$H$$; $$T_f$$ is the floor temperature and $$T_H$$ the temperature of the approach flow at $$H$$
 
 **Scores**
 
-- $$n$$, the number of pairs scored: the points at which the measured and the modelled value both exist; a pair is the measured value $$o_i$$ and the modelled value $$p_i$$ at one point; $$\overline{o}$$ and $$\overline{p}$$ are the means over the pairs.
-- $$R = \dfrac{\sum_i (o_i-\overline{o})(p_i-\overline{p})}{\sqrt{\sum_i (o_i-\overline{o})^2 \sum_i (p_i-\overline{p})^2}}$$, Pearson's correlation coefficient of the pairs.
-- $$\mathrm{FAC2}$$, the fraction of pairs with $$0.5 \le p_i/o_i \le 2$$. The ratio keeps its sign, so a model of the other sign than the measurement is a miss; for a concentration, a pair with both values at or below the detection limit also counts.
-- $$\mathrm{FB} = \dfrac{\overline{o}-\overline{p}}{0.5\thinspace(\overline{o}+\overline{p})}$$, the fractional bias, positive when the model under-predicts. It is undefined (shown as —) for a signed component unless the measured and the modelled mean are both positive; $$R$$, $$\mathrm{FAC2}$$, the hit rate and $$n$$ stay.
-- $$\mathrm{HR}$$, the hit rate: the fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, with $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}}$$ equal to $$0.05\thinspace U_H$$ for a velocity component, to the detection limit for a concentration, and absent for $$k$$. VDI 3783-9 calls the hit rate $$q$$ and the tolerances $$D$$ and $$W$$; on this site those letters keep their other meanings.
-- NMSE, NAD, MG and VG are in `validation/results/*.json` and in the API's `validation.json`. NMSE and NAD divide by the means like $$\mathrm{FB}$$, so they are undefined for a signed component unless the measured and the modelled mean are both positive.
-- $$\mathrm{NMSE} = \dfrac{\overline{(o-p)^2}}{\overline{o}\thinspace \overline{p}}$$, the normalised mean square error.
-- $$\mathrm{NAD} = \dfrac{\overline{\lvert o-p\rvert}}{\overline{o}+\overline{p}}$$, the normalised absolute difference.
-- $$\mathrm{MG} = \exp\overline{(\ln o-\ln p)}$$, the geometric mean bias.
-- $$\mathrm{VG} = \exp\overline{(\ln o-\ln p)^2}$$, the geometric variance.
+- $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
+- $$R$$ — Pearson correlation coefficient of the pairs
+- $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
+- $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
+- $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
+- $$\mathrm{NMSE} = \dfrac{\overline{(o-p)^2}}{\overline{o}\thinspace \overline{p}}$$ — normalised mean square error
+- $$\mathrm{NAD} = \dfrac{\overline{\lvert o-p\rvert}}{\overline{o}+\overline{p}}$$ — normalised absolute difference
+- $$\mathrm{MG} = \exp\overline{(\ln o-\ln p)}$$ — geometric mean bias
+- $$\mathrm{VG} = \exp\overline{(\ln o-\ln p)^2}$$ — geometric variance
+- The ratio of $$\mathrm{FAC2}$$ keeps its sign, so a model of the other sign than the measurement is a miss; $$\mathrm{FB}$$, $$\mathrm{NMSE}$$ and $$\mathrm{NAD}$$ divide by the means, so they are undefined (shown as —) for a signed component unless the measured and the modelled mean are both positive
+- VDI 3783-9 calls the hit rate $$q$$ and the tolerances $$D$$ and $$W$$; on this site those letters keep their other meanings ($$q$$ the tracer release rate, $$D$$ the block size of Case C, $$W$$ the vertical velocity)
 - The detection limit of a concentration is one value per case, $$10^{-3}$$ of the largest measured value. It sets $$\delta_{\mathrm{abs}}$$ of the hit rate and the both-below rule of $$\mathrm{FAC2}$$, and floors the values in $$\mathrm{MG}$$ and $$\mathrm{VG}$$.
 - The scores $$\mathrm{FB}$$, $$\mathrm{FAC2}$$, $$\mathrm{NMSE}$$, $$\mathrm{NAD}$$, $$\mathrm{MG}$$ and $$\mathrm{VG}$$ follow Chang & Hanna (2004); the hit rate follows VDI 3783-9.
 
-The quantities scored: $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$U_H$$; $$k$$ (turbulent kinetic energy) over $$U_H^2$$; the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$ against a thermistor's $$V_{\mathrm{s}}$$; $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7; $$\theta$$ (floor-referenced temperature).
+**Quantities scored**
+
+- $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$U_H$$
+- $$k$$ (turbulent kinetic energy) over $$U_H^2$$
+- the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
+- $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
+- $$\theta$$ (floor-referenced temperature)
 
 </details>
 
@@ -249,30 +255,30 @@ The quantities scored: $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$
 
 - **G, H and I.** Three more cases in the same schema (`SCHEMA.md`, section *Cases G, H and I*): the Tsuiji-matsu **tree belt**, a **field** observation with 28 normalised points (G); the 1:1:2 **building with a floor source**, 876 points of velocity and concentration (H); the **cube with a roof source**, 91 wind and 539 concentration points (I). Data collectors, DOIs and requested citations are in `manifest.json`; each cleaner is `case_g.py`, `case_h.py`, `case_i.py` (`build.py` imports them), their checks are in `checks.json` (G 14, H 31, I 24; every one passes, one warning in G), the open questions are `QUESTIONS.md` QG1-QG4, QH1-QH3, QI1-QI3.
 
-- **J, K, L — Tokyo Polytechnic University non-isothermal and cube-array experiments.** Three Zenodo records of Yoshie and co-workers (J 10.5281/zenodo.15447887, K 10.5281/zenodo.15448050, L 10.5281/zenodo.15487637), cleaned the same way as A–E: one table (`cases/J|K|L/points.csv`), one wind direction (0°, flow toward +x), SI units, the approach-flow profile, the geometry, `directions.csv`, and the checks below in `checks.json`. Frames, reference values and extra files are in `SCHEMA.md` ("Cases J, K, L"); what the sources cannot settle is in `QUESTIONS.md` (QJ1 – QJ5, QK1 – QK6, QL1 – QL6).
+- **J, K, L — Tokyo Polytechnic University non-isothermal and cube-array experiments.** Three Zenodo records of Yoshie and co-workers (J 10.5281/zenodo.15447887, K 10.5281/zenodo.15448050, L 10.5281/zenodo.15487637), cleaned the same way as A–E: one table (`cases/J|K|L/points.csv`), one wind direction (0°, flow toward $$+x$$), SI units, the approach-flow profile, the geometry, `directions.csv`, and the checks below in `checks.json`. Frames, reference values and extra files are in `SCHEMA.md` ("Cases J, K, L"); what the sources cannot settle is in `QUESTIONS.md` (QJ1 – QJ5, QK1 – QK6, QL1 – QL6).
 
 ## 4. Known data issues — what the published files do that this release corrects, and what it cannot
 
 **A**
 
 - Turbulence is published as **rms**; the table holds **variances** (rms²) so A and B share one column meaning. $$k$$ = ½ Σ variances to 2e-3 (publication rounding).
-- Points are on the y ≤ 0 half only (symmetry convention). $$V$$ is positive toward +y.
+- Points are on the $$y \le 0$$ half only (symmetry convention). $$V$$ is positive toward $$+y$$.
 
 **B**
 
 - Coordinates are **millimetres** in `RS_caseB.csv` (`x[mm]`) while velocities are m/s. Converted to metres here. Read as metres, every probe lands 1000× too far out.
-- **The published $$V$$ is positive toward −y** ($$V$$ = +3.630 just outside the y = −100 mm flank where the flow must deflect outward; Case A reads −2.893 there). Flipped here so $$V$$ is positive toward +y like A and D. Scored without the flip, B's $$V$$ anti-correlates with a model at R ≈ −0.9.
-- **Seven locations were measured twice**: the foot of each vertical-section profile (points 12, 43, 56, 69, 82, 95, 108 at z = 12.5 mm, y = 0) and the horizontal plane's centreline (110, 147, 160, 173, 186, 199, 212). Both rows are kept under their own point numbers; |ΔU| is 0.05–0.14 m/s (mean 0.105), a free repeatability estimate. Do not key on coordinates.
+- **The published $$V$$ is positive toward $$-y$$** ($$V$$ = +3.630 just outside the $$y = -100\thinspace\mathrm{mm}$$ flank where the flow must deflect outward; Case A reads −2.893 there). Flipped here so $$V$$ is positive toward $$+y$$ like A and D. Scored without the flip, B's $$V$$ anti-correlates with a model at $$R \approx -0.9$$.
+- **Seven locations were measured twice**: the foot of each vertical-section profile (points 12, 43, 56, 69, 82, 95, 108 at $$z = 12.5\thinspace\mathrm{mm}$$, $$y = 0$$) and the horizontal plane's centreline (110, 147, 160, 173, 186, 199, 212). Both rows are kept under their own point numbers; $$\lvert\Delta U\rvert$$ is 0.05–0.14 m/s (mean 0.105), a free repeatability estimate. Do not key on coordinates.
 
 **C**
 
 - `CB` is **text** (`0D`/`1D`/`2D`) and the header ends with a trailing comma; here `config`.
-- 1,080 rows = **9 configurations** (3 centre blocks × 3 directions) sharing one 120-point set. The 25 centre nodes are absent even for 0D (grid held constant); 24 points lie exactly on a building face plane (|x| or |y| = 0.30) in the gap between blocks — fluid points, but a probe's cell lookup is delicate there.
+- 1,080 rows = **9 configurations** (3 centre blocks × 3 directions) sharing one 120-point set. The 25 centre nodes are absent even for 0D (grid held constant); 24 points lie exactly on a building face plane (|x| or $$\lvert y\rvert = 0.30$$) in the gap between blocks — fluid points, but a probe's cell lookup is delicate there.
 - Point numbers run 4…132 with gaps 34–37, 46, 55, 100–102 (and 1–3 below the range), exactly the readme's list.
-- **Rotation sense:** in the CSV frame WD turns the wind from +x toward **−y** (measured: the 45° field mirrors about y = −x at 0.10–0.13 m/s, not about y = +x at 0.5–0.8). Figure 3 of the data paper draws it toward +y. Invisible at WD = 0; decides everything at 22.5° and 45°. `QUESTIONS.md` Q1.
+- **Rotation sense:** in the CSV frame WD turns the wind from $$+x$$ toward **$$-y$$** (measured: the 45° field mirrors about $$y = -x$$ at 0.10–0.13 m/s, not about $$y = +x$$ at 0.5–0.8). Figure 3 of the data paper draws it toward $$+y$$. Invisible at $$\mathrm{WD} = 0$$; decides everything at 22.5° and 45°. `QUESTIONS.md` Q1.
 - $$V_{\mathrm{s}}$$ is an **omnidirectional scalar** mean speed. No value of 1,080 is below 0.13 $$U_H$$. Case D measures the gap to $$\lvert\mathbf{U}\rvert$$ (1.34 ratio of means).
 - The legacy workbook's velocity ratios are not exactly $$V_{\mathrm{s}}$$ / U(0.02): $$V_{\mathrm{s}}$$ / ratio spans 2.41–2.45 m/s. The 2-dp $$V_{\mathrm{s}}$$ of the CSV is the released value; do not "recover" a third decimal from the ratios.
-- Repeatability from the mirror pairs: mean |ΔVs| 0.09–0.13 m/s = 0.024–0.036 $$U_H$$.
+- Repeatability from the mirror pairs: mean $$\lvert\Delta V_{\mathrm{s}}\rvert$$ 0.09–0.13 m/s = 0.024–0.036 $$U_H$$.
 
 **D**
 
@@ -282,19 +288,19 @@ The quantities scored: $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$
 - The split-fibre `Vs` column (and the workbook's "Scalar Vel.") is $$\sqrt{U^2+V^2+W^2}$$ to 1e-15, the vector magnitude of the split-fibre probe, and is dropped. The thermistor's readings at those 33 points are in the thermistor rows; they average 1.34× the magnitude, and $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ from the split-fibre data reproduces them to FB +0.06.
 - The 0° thermistor field is an **exact** y-mirror (33 pairs, ΔVs = 0): half was measured and mirrored, so only 33 of 66 values are independent. The array is exactly y-symmetric, so the **22.5°/45° rotation sense is undecidable from the data**; the sense in `directions.csv` follows Figure 4 of the data paper (`QUESTIONS.md` Q2). Solved Eddy3D fields score R 0.80 and 0.85 in that sense at 22.5° and 45°, 0.40 and 0.17 mirrored.
 - The published `BD_caseD.stl` has 576 duplicate facets and all 83 roofs wound inward (signed volume half the true one); `geometry.stl` here is the 83 boxes, watertight, analytic volume.
-- The measurement plane z/H = 0.02 sits below the 0.02…2H window a log law is usually fitted over; the two fits in `manifest.json` differ by 5× in $$z_0$$ and by 20 points in $$U$$ at the plane. The inlet $$k$$ implied by atmBoundaryLayer (0.39–0.65 m²/s²) is below the tunnel's 0.53–0.75; a log-law inlet cannot be right at both the plane and aloft.
-- The repository's `raw/cases/case-d/case-d-eddy3d-prior-comparison.xlsx` is a prior attempt at R = +0.10 against the thermistor; the cause is a frame or geometry error. Do not use it as a validation.
+- The measurement plane $$z/H = 0.02$$ sits below the 0.02…2H window a log law is usually fitted over; the two fits in `manifest.json` differ by 5× in $$z_0$$ and by 20 points in $$U$$ at the plane. The inlet $$k$$ implied by atmBoundaryLayer (0.39–0.65 m²/s²) is below the tunnel's 0.53–0.75; a log-law inlet cannot be right at both the plane and aloft.
+- The repository's `raw/cases/case-d/case-d-eddy3d-prior-comparison.xlsx` is a prior attempt at $$R = +0.10$$ against the thermistor; the cause is a frame or geometry error. Do not use it as a validation.
 
 **E (provisional geometry — see manifest `status_note`)**
 
-- Coordinates are **full-scale metres**, +x east, +y north, origin at the centre of the area; wind directions are compass FROM-directions (N blows toward −y). z = 2 m (0.008 m model).
+- Coordinates are **full-scale metres**, $$+x$$ east, $$+y$$ north, origin at the centre of the area; wind directions are compass FROM-directions (N blows toward $$-y$$). $$z = 2\thinspace\mathrm{m}$$ (0.008 m model).
 - The ratio is normalised by **$$U(15.9\text{ m})$$ = 3.935 m/s** (the Niigata met-station height), not by $$U_H$$ and not by $$U_R$$ = 7.8 m/s. Divide by $$U_R$$ and every prediction is low by 1.98×; the repository's prior `raw/cases/case-e/case-e-eddy3d-prior-comparison.xlsx` did exactly that.
 - **Quantised:** every ratio is a multiple of 0.0198204 (55 levels); resolution ±0.0099 = 3 % of the median, 10 % of the smallest values; a tolerance below one quantum measures the publisher's rounding. Zenodo's `RS_caseE.csv` is the workbook rounded further, to 2 dp; this release uses the workbook.
 - The official `BD_caseE.stl` (now in `sources/zenodo_caseE/`) is **model scale** (×250 here), **not watertight** (5,253 open edges), after-construction only. The before-construction geometry here is an Eddy3D reconstruction from the 3dm with no published source.
 - **Point 50 at (−45.5, −45.0) is 0.17 m inside a wall of the official STL** and 2.06 m clear in the 3dm; the other 79 are in open space in both (a warning in `checks.json`; `QUESTIONS.md` Q3). A probe at point 50 against the official STL will fail or read inside a building.
 - Do not take sensor coordinates from the 3dm's `probes` layer (hand-placed spheres, median 2.3 m off); the workbook's `Geometry&Points` sheet is authoritative and all 80 of its points pass the open-space test, while a 10° rotation of the cloud puts 26 inside the official STL's buildings.
 - `case-e.3dm`: 1,563 of 8,436 triangles (18.5 %) of the building meshes are wound against their neighbours; all are re-wound here.
-- Construction signal: mean (ac − bc) = +0.097; largest for SW (mean |Δ| 0.216), smallest for SSE (0.093).
+- Construction signal: mean (ac − bc) = +0.097; largest for SW (mean $$\lvert\Delta\rvert$$ 0.216), smallest for SSE (0.093).
 
 <details markdown="block">
   <summary>Data notes: Case E geometry</summary>
@@ -311,16 +317,16 @@ The quantities scored: $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$
 **F**
 
 - **Two coordinate scales in one dataset.** `RS-WT_caseF.csv` and `BD_caseF.stl` are model-scale metres (1:800), `RS-FO_caseF.csv` is full scale. Multiplying the tunnel's by 800 reproduces the field's coordinates to 6e-14 m, which also confirms the scale. Read the tunnel's as metres and every point lands 800 times too close to the origin.
-- **`z` is above the tunnel floor, not the ground.** The readme's rule is ground = z − 10 m (planes at 15, 19, 30 m are 5, 9, 20 m above ground). The STL's terrain under all 13 points is at z = 5 m, so the planes stand 10, 14 and 25 m above it. A CFD case built on the STL and the table's z is 5 m higher than the readme describes (QF4).
+- **`z` is above the tunnel floor, not the ground.** The readme's rule is ground = z − 10 m (planes at 15, 19, 30 m are 5, 9, 20 m above ground). The STL's terrain under all 13 points is at $$z = 5\thinspace\mathrm{m}$$, so the planes stand 10, 14 and 25 m above it. A CFD case built on the STL and the table's z is 5 m higher than the readme describes (QF4).
 - **Point 14 of the field file is shifted by one wind direction.** In `RS-FO_caseF.csv` each of the 16 rows of point 14 holds the legacy workbook's value of the next direction clockwise (N holds NNE, …, NNW holds N), while the other 12 points match the workbook 16 of 16 rows unshifted. This release follows the workbook (re-derived with the CSV's own rounding rule; the published numbers are kept in `manifest.json`) (QF1).
 - **The field values are the workbook times one factor per sector.** CSV = round(f × workbook): f = 0.9397 for NW, NNW, N, NNE, NE (reference: the SMB roof anemometer) and 0.9629 for the other eleven directions (KDD). All 192 rows of the 12 aligned points reproduce exactly, for the mean and for σ. The factors are the ratio of the roof anemometer to the 500 m wind and are stated nowhere in the sources (QF8).
 - **σ is quantised.** The workbook's S.D. is rounded to 0.01 before it is multiplied by f, so `velocity_ratio_sd` takes 13 (SMB) or 17 (KDD) values in steps of 0.0094 or 0.0096, 4 to 20 % of the value.
 - **`MP_caseF.csv` has the two reference buildings swapped.** It puts "SMB" at (85.8, −347.1) and "KDD" at (−17.5, 96.0); the workbook, `MP_caseF.png` (D = SMB, C = KDD) and the STL say the opposite (QF6).
-- **`BD_caseF.stl` is wound inward everywhere.** All 21,537 horizontal ground and roof facets (of 21,575) face down, as do all 403 sampled walls; the stored normals agree with the winding. Reversed here. The surface is closed except along the rim of a **725 m**-radius disc (812 boundary edges, all at z = 0), which `geometry.stl` here closes with a 1 m base slab (vertical walls from the rim down to z = −1 m and a bottom cap, 2,436 added triangles; the published STL is open at the rim). The readme and the data paper say 800 m / 1,600 m diameter, and a 1.8 m model would not fit the 1.55 m tunnel they describe (QF5).
+- **`BD_caseF.stl` is wound inward everywhere.** All 21,537 horizontal ground and roof facets (of 21,575) face down, as do all 403 sampled walls; the stored normals agree with the winding. Reversed here. The surface is closed except along the rim of a **725 m**-radius disc (812 boundary edges, all at $$z = 0$$), which `geometry.stl` here closes with a 1 m base slab (vertical walls from the rim down to $$z = -1\thinspace\mathrm{m}$$ and a bottom cap, 2,436 added triangles; the published STL is open at the rim). The readme and the data paper say 800 m / 1,600 m diameter, and a 1.8 m model would not fit the 1.55 m tunnel they describe (QF5).
 - **Unexplained cells.** The workbook's "Other" column (109 values) is neither the 5 m nor the 20 m plane, and holds 9 values for ESE, which the tunnel did not run (QF3); one 9 m tunnel value (point 8, SW: 0.474) has a blank in the workbook's results sheet and 0.63 in its flat table (QF2); in 10 workbook rows Mean + S.D. and Mean − S.D. are not symmetric about the mean by up to 0.11, and the CSV's σ is the lower half-width (QF10).
 - **Field heights.** The 13 points' anemometers stand 3, 7, 8, 9 or 11 m above ground by the readme's rule; the data paper says 3 to 9 m, so points 13 and 14 (11 m) disagree (QF7). Only the 9 m plane is directly comparable with the tunnel at 8 points.
 - **The tunnel's 9 m plane is complete (13 × 12), the 5 m and 20 m planes are not (29 and 79 rows).** Where the three planes can be compared $$U$$/R mostly rises with height (median 20 m / 9 m = 1.41), but 4 of 29 pairs have the 5 m value above the 9 m one.
-- **The wind-direction sense is an assumption.** Compass FROM-directions, +y north.
+- **The wind-direction sense is an assumption.** Compass FROM-directions, $$+y$$ north.
 
 <details markdown="block">
 <summary>Interpretation: Case F</summary>
@@ -330,7 +336,7 @@ The quantities scored: $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$
 - A tolerance on σ below one step measures the rounding.
 - Reference buildings: the roofs under the two points are 225 m and 180 m high, differing by the 45 m that SMB (210 m)
   and KDD (165 m) differ by, and the taller is at the workbook's SMB (QF6).
-- Wind-direction sense: corroborated by the reference-building choice and by the 10 points north of y = 150 m reading
+- Wind-direction sense: corroborated by the reference-building choice and by the 10 points north of $$y = 150\thinspace\mathrm{m}$$ reading
   higher for the southern labels than for the northern (tunnel 0.31 against 0.22, field 0.30 against 0.19): upwind of
   them lies open plaza for S and dense low-rise for N. A solved field corroborates the sense at NNW (R 0.935 with the tunnel's NNW column against 0.077 with its SSE column); the other directions are not solved (QF9).
 
@@ -347,19 +353,19 @@ The quantities scored: $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$
 
 **H**
 
-- **Two sources, one released.** The table carries the workbook's ratios × uH = 3.226 m/s, not `RS_caseH.csv`'s values: on the z/H = 1/2 and 1/4 planes (and in the approach profile) the CSV's $$U$$, $$V$$, $$W$$ are the ratios rounded to 0.01 then scaled, a 0.032 m/s grid (632 values off by more than the 2 dp rounding, up to 0.021 m/s).
-- **$$V$$ on the vertical plane has the opposite sign** to the horizontal planes at all 40 shared points (exactly); 207 velocity rows of point numbers 1-220 are multiplied by -1 so $$V$$ is positive toward +y, the horizontal planes' convention (upwind flank check, r = +0.66 continuity with the neighbours). Case B's trap again.
-- **-999.9 is not the building interior**: it marks the line a probe was not run on. Velocity was measured on x = 0.40 m and concentration on x = 0.38 m (50 points each way); no point is inside the body.
-- 29 workbook rows (the y = 0 centre-line repeats of two horizontal planes) are not in the CSV; the y = 0, z = 0.1 m line IS, twice, as exact copies once $$V$$ is aligned (13 + 13 values double-counted, not independent repeats).
+- **Two sources, one released.** The table carries the workbook's ratios × $$u_H$$ = 3.226 m/s, not `RS_caseH.csv`'s values: on the $$z/H = 1/2\text{ and }1/4$$ planes (and in the approach profile) the CSV's $$U$$, $$V$$, $$W$$ are the ratios rounded to 0.01 then scaled, a 0.032 m/s grid (632 values off by more than the 2 dp rounding, up to 0.021 m/s).
+- **$$V$$ on the vertical plane has the opposite sign** to the horizontal planes at all 40 shared points (exactly); 207 velocity rows of point numbers 1-220 are multiplied by -1 so $$V$$ is positive toward $$+y$$, the horizontal planes' convention (upwind flank check, r = +0.66 continuity with the neighbours). Case B's trap again.
+- **-999.9 is not the building interior**: it marks the line a probe was not run on. Velocity was measured on $$x = 0.40\thinspace\mathrm{m}$$ and concentration on $$x = 0.38\thinspace\mathrm{m}$$ (50 points each way); no point is inside the body.
+- 29 workbook rows (the $$y = 0$$ centre-line repeats of two horizontal planes) are not in the CSV; the $$y = 0$$, $$z = 0.1\thinspace\mathrm{m}$$ line IS, twice, as exact copies once $$V$$ is aligned (13 + 13 values double-counted, not independent repeats).
 - Concentration carries the analyser's offset: upwind of the building it reads ±0.1 ppm and 97 of 826 values are negative (minimum -0.83 ppm). Geometric statistics of the concentration need a floor.
-- The tracer's mass balance is checked against the data: the separable plume flux through x = 0.38 m is 0.80 of the release; the concentration peak (3,001 ppm = 66.4 $$c_0$$) is at the source's x = 0.05 m. The lateral line stops at |y| = 0.2 m, where C is still 32 % of the centre.
-- Smaller: `w_rsm` in the CSV header, the workbook's inflow `z(mm)` column is metres, 12.5 mm typed 13 and x = 380 typed 400 in places, $$c_0$$ 45.1798 in the parameter sheet against 45.1773 in its own `<c>/Co` column, uH 3.226 against the stated 3.23.
+- The tracer's mass balance is checked against the data: the separable plume flux through $$x = 0.38\thinspace\mathrm{m}$$ is 0.80 of the release; the concentration peak (3,001 ppm = 66.4 $$c_0$$) is at the source's $$x = 0.05\thinspace\mathrm{m}$$. The lateral line stops at $$\lvert y\rvert = 0.2\thinspace\mathrm{m}$$, where C is still 32 % of the centre.
+- Smaller: `w_rsm` in the CSV header, the workbook's inflow `z(mm)` column is metres, 12.5 mm typed 13 and $$x = 380$$ typed 400 in places, $$c_0$$ 45.1798 in the parameter sheet against 45.1773 in its own `<c>/Co` column, $$u_H$$ 3.226 against the stated 3.23.
 
 **I**
 
 - **Two files, two point sets, no numbers**: stacked, one row per instrument, wind rows 1-91, concentration rows 92-630. 17 locations have both.
-- **$$V$$ on the y = 0 plane is not a measurement**: 1e-9 ... 4e-6 m/s in the workbook (0 in the CSV) at 53 of 91 points, against 0.02-0.39 m/s elsewhere; NaN here.
-- **$$c_0$$ = 39.2 ppm needs the ethane flow** (10 % of 400 cc/min = 6.67e-7 m³/s); the paper's "6.67e-6 m³/s" is the mixture and would give 392 ppm. The release velocity gives M = 0.139 (stated 0.14). The far-field mass balance closes at 1.16 of the release at x = 2.7 m (the separable estimate overshoots; 3.6 at the first station).
+- **$$V$$ on the $$y = 0$$ plane is not a measurement**: 1e-9 ... 4e-6 m/s in the workbook (0 in the CSV) at 53 of 91 points, against 0.02-0.39 m/s elsewhere; NaN here.
+- **$$c_0$$ = 39.2 ppm needs the ethane flow** (10 % of 400 cc/min = 6.67e-7 m³/s); the paper's "6.67e-6 m³/s" is the mixture and would give 392 ppm. The release velocity gives M = 0.139 (stated 0.14). The far-field mass balance closes at 1.16 of the release at $$x = 2.7\thinspace\mathrm{m}$$ (the separable estimate overshoots; 3.6 at the first station).
 - The workbook uses $$U_H$$ = 1.7 m/s for the points and 1.697 m/s for the approach flow; the approach profile is within 4.6 % of the 1/7 power law but its best index is 0.115.
 - `AF_caseI.csv` ends in 53 `,,` rows and two stray cells (`0.5*`, `1.5*`) that a reader taking every non-blank row for data accepts.
 - Concentrations are multiples of 0.1 ppm (a 0.4 ppm value carries ±12 %); 13 ground-centreline points are measured twice, up to 8.5 % apart; the four wind points the workbook lists twice are identical and appear once.
@@ -367,23 +373,23 @@ The quantities scored: $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$
 
 **J**
 
-- **Temperature is kelvin** in `RS_caseJ.csv`, `AF_caseJ.csv` and `BD-ST_caseJ.csv`; the table carries °C (the workbook's θ_f = 45.8 °C is the CSV's 318.95 K).
-- **The CSV is quantised.** It equals the workbook's non-dimensional values rounded to 10⁻³ ($$U$$, $$V$$, $$W$$) or 10⁻⁴ and multiplied back by $$U_H$$ = 1.4581 m/s, Δθ = 33.6 K or $$c_0$$: reproduced with **zero** differing cells in 14 columns × 444 rows (and not by one decimal coarser). So the published heat fluxes sit on a grid of 0.0049 K·m/s (≈ 10 % of a typical value), $$k$$ on 0.00021 m²/s². The table uses the workbook.
+- **Temperature is kelvin** in `RS_caseJ.csv`, `AF_caseJ.csv` and `BD-ST_caseJ.csv`; the table carries °C (the workbook's $$\theta_f$$ = 45.8 °C is the CSV's 318.95 K).
+- **The CSV is quantised.** It equals the workbook's non-dimensional values rounded to $$10^{-3}$$ ($$U$$, $$V$$, $$W$$) or $$10^{-4}$$ and multiplied back by $$U_H$$ = 1.4581 m/s, Δθ = 33.6 K or $$c_0$$: reproduced with **zero** differing cells in 14 columns × 444 rows (and not by one decimal coarser). So the published heat fluxes sit on a grid of 0.0049 K·m/s (≈ 10 % of a typical value), $$k$$ on 0.00021 m²/s². The table uses the workbook.
 - **$$c_0$$ = 12.283 ppm contains the 5 % ethylene fraction** (workbook cell; = $$0.05\thinspace q/(U_H H^2)$$ to 1e-15). Dividing by $$q/(U_H H^2)$$ alone gives 245.7 ppm, a factor of 20. The data paper states a $$c_0$$ for Cases H (45.2 ppm, pure) and I (39.2 ppm, 10 % ethane, fraction included) but not for J.
 - **One location twice:** No. 1 and No. 153 are the same row (−0.16, 0, 0.004). The CSV merged the other 21 locations the workbook lists in two sheets; both rows are kept (as for B's repeats), but a score over the table counts that point twice.
-- **σ and variance columns disagree:** the workbook's `<u′²>` columns are not always the square of its σ columns (up to 3.2 % in uu, 47 of 443 locations with a component off by more than 1 %). `k` is built from the variances (relative error 9e-5), which the table uses.
+- **σ and variance columns disagree:** the workbook's `<u′²>` columns are not always the square of its σ columns (up to 3.2 % in $$\overline{u'u'}$$, 47 of 443 locations with a component off by more than 1 %). `k` is built from the variances (relative error 9e-5), which the table uses.
 - **Expanded uncertainty is in the workbook** next to every quantity (non-dimensional units; none in the CSV): median 0.031 m/s for $$U$$, 0.27 K for T, 0.010 K·m/s for $$\overline{u'\theta'}$$, about 1 ppm (0.083 $$c_0$$) plus ≈ 5 % of the value for C. The mean concentration does not exceed its own uncertainty at 197 of the 465 workbook rows, and four CSV rows read exactly 0.0 (analyser baseline). **193 uncertainty cells of the $$\overline{w'\theta'}$$ flux in the sheet `xy-plane2` are an Excel fill series** (1.0037, 2.0037 … 193.0037 = 0.0037 + a running integer), not values. Summary and locations: `manifest.json → cases.J.extra_measurements.expanded_uncertainty`.
-- **The empty-tunnel profile changes along the tunnel:** $$U$$ at z = 0.019 H is 0.33 $$U_H$$ at x/H = −2.5 (the published `AF_caseJ.csv`), 0.58 at x/H = 0 and 0.50 at +2.5; at z = H it is 1.00, 1.03, 1.04. The workbook has all three (`cases/J/approach_flow_full.csv`).
-- The readme's Reynolds number 43,000 is Case H's (3.23 m/s × 0.2 m); $$U_H$$ H / ν = 1.6·10⁴ as the data paper says.
-- The readme's `T_b = 285.32 K` is the approach-flow air temperature at z = H (workbook θ_H = 12.17 °C), not the building, whose measured surface (121 points, `BD-ST_caseJ.csv`) averages 24.47 °C (22.0 – 28.9 °C).
+- **The empty-tunnel profile changes along the tunnel:** $$U$$ at $$z = 0.019\thinspace H$$ is 0.33 $$U_H$$ at $$x/H = -2.5$$ (the published `AF_caseJ.csv`), 0.58 at $$x/H = 0\text{ and }0.50$$ at +2.5; at $$z = H$$ it is 1.00, 1.03, 1.04. The workbook has all three (`cases/J/approach_flow_full.csv`).
+- The readme's Reynolds number 43,000 is Case H's (3.23 m/s × 0.2 m); $$U_H$$ H / ν = $$1.6 \cdot 10^{4}$$ as the data paper says.
+- The readme's `T_b = 285.32 K` is the approach-flow air temperature at $$z = H$$ (workbook $$\theta_H$$ = 12.17 °C), not the building, whose measured surface (121 points, `BD-ST_caseJ.csv`) averages 24.47 °C (22.0 – 28.9 °C).
 - No shear stresses at the points (only the approach flow has $$\overline{u'v'}$$, $$\overline{u'w'}$$); the lateral sign of $$V$$ is confirmed ($$V$$ < 0 on the windward y < 0 flank, > 0 behind).
 
 **K**
 
-- **The workbook normalises with another building:** H = 0.2 m, $$U_H$$ = 4.94009 m/s, $$C_0$$ = 18.218 ppm (its normalised columns reproduce its dimensional ones exactly with those), not the cube's H = 0.06 m, $$U_H$$ = 2.33 m/s. With the readme's numbers $$c_0$$ = 429.18 ppm, 23.6 times larger; the table uses that and the manifest gives both (`QUESTIONS.md` QK1). The approach-flow file gives 2.24 m/s at z = 0.06 m, 4 % under the stated 2.33.
+- **The workbook normalises with another building:** $$H = 0.2\thinspace\mathrm{m}$$, $$U_H$$ = 4.94009 m/s, $$C_0$$ = 18.218 ppm (its normalised columns reproduce its dimensional ones exactly with those), not the cube's $$H = 0.06\thinspace\mathrm{m}$$, $$U_H$$ = 2.33 m/s. With the readme's numbers $$c_0$$ = 429.18 ppm, 23.6 times larger; the table uses that and the manifest gives both (`QUESTIONS.md` QK1). The approach-flow file gives 2.24 m/s at $$z = 0.06\thinspace\mathrm{m}$$, 4 % under the stated 2.33.
 - **`AF_caseK.csv` is Case H's file** (17 rows, identical); the data paper says the approach flows were the same.
 - **No point numbers**: `RS_caseK.csv` has none; `point_id` is the file's row order. The header has a space before every unit (`x (m)`).
-- The CSV is the workbook rounded (velocities 3 dp, C 2 dp) with **$$k$$ recomputed from the rounded rms**; the workbook $$k$$ is used (max difference 1.2·10⁻³).
+- The CSV is the workbook rounded (velocities 3 dp, C 2 dp) with **$$k$$ recomputed from the rounded rms**; the workbook $$k$$ is used (max difference $$1.2 \cdot 10^{-3}$$).
 - The workbook's units: x, y in mm in both data sheets, z in mm in `Measurement data` but **metres** in `Inflow` (headed `z(mm)`).
 - The workbook's `<usc>` ("velocity magnitude", never below $$\lvert\mathbf{U}\rvert$$: 1.03 – 3.9 × $$\lvert\mathbf{U}\rvert$$) is not carried.
 - The array: 81 cubes on a 0.12 m pitch is read from the drawings; the points bound the pitch to 0.11 – 0.14 m (4 and 8 points fall inside cubes at 0.11 and 0.14).
@@ -394,25 +400,25 @@ The quantities scored: $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$
 
 - **`RS_caseL.csv`'s `T(K)` column is degrees Celsius** (12.85 – 29.86 = the workbook's $$\theta$$ to 0.005); `AF_caseL.csv`'s is kelvin (283 – 295). Read as kelvin the points would be 260 K colder than the floor.
 - The CSV is the workbook rounded to the printed decimals, checked for all 20 columns; `Usc` of the workbook is $$\lvert\mathbf{U}\rvert$$ (derived) and `tc` ($$\overline{\theta'c'}$$, K·ppm) has no schema column.
-- **Geometry from `BD_caseL.stl`:** 126 cubes of 0.06 m, 14 rows along x (x = −0.96 … 0.66) by 9 columns across y (±0.51), pitch 0.12 m; no open edge and no duplicates, but the two bottom triangles (z = 0) of each cube, 252 in all, are wound inward (the signed volume cannot show it: z = 0 adds nothing to it); `geometry.stl` here is the 126 boxes, outward. The data paper's "9 rows by 14 columns" counts the other way round. The STL's source patch is 0.04 m × 1.02 m; the readme and data paper say 0.037 m × 1.2 m.
-- **The readme's file list names `AF_caseK.csv` and `RS_caseK.csv`; its "building surface temperature $$T_b$$ = 14.8 °C" is the air temperature at H** (workbook θ_H = 14.75 °C; the workbook gives θ_build = 42.2 °C).
+- **Geometry from `BD_caseL.stl`:** 126 cubes of 0.06 m, 14 rows along x ($$x = -0.96\thinspace\ldots\thinspace 0.66$$) by 9 columns across y (±0.51), pitch 0.12 m; no open edge and no duplicates, but the two bottom triangles ($$z = 0$$) of each cube, 252 in all, are wound inward (the signed volume cannot show it: $$z = 0$$ adds nothing to it); `geometry.stl` here is the 126 boxes, outward. The data paper's "9 rows by 14 columns" counts the other way round. The STL's source patch is 0.04 m × 1.02 m; the readme and data paper say 0.037 m × 1.2 m.
+- **The readme's file list names `AF_caseK.csv` and `RS_caseK.csv`; its "building surface temperature $$T_b$$ = 14.8 °C" is the air temperature at H** (workbook $$\theta_H$$ = 14.75 °C; the workbook gives θ_build = 42.2 °C).
 - **Layout matches the data paper to the point:** 27 locations × 8 heights + 14 × 4 + 24 × 3 = 344.
-- **q, ppm and the line width are consistent:** the tracer flux ∫($$U$$ C + $$\overline{u'c'}$$) dz through four cross-sections, averaged over the street lines (y = ±0.06) and the cube-column line (y = 0), is 0.98, 1.00, 0.96, 0.86 of q / 1.2 m (the street lines alone carry 1.3 – 1.9, the column line 0.2 – 0.4).
-- **Not mirror-symmetric:** the same point at +y and −y differs in $$U$$ by 26 %, in $$k$$ by 23 %, in C by 36 % on average, and at z = 0.15 m (0.09 m above the roofs) $$U$$ is 0.11 m/s lower and T 1.3 K higher at +y. The tunnel flow has a lateral gradient; do not assume symmetry in a model.
+- **q, ppm and the line width are consistent:** the tracer flux ∫($$U$$ C + $$\overline{u'c'}$$) dz through four cross-sections, averaged over the street lines ($$y = \pm 0.06$$) and the cube-column line ($$y = 0$$), is 0.98, 1.00, 0.96, 0.86 of q / 1.2 m (the street lines alone carry 1.3 – 1.9, the column line 0.2 – 0.4).
+- **Not mirror-symmetric:** the same point at $$+y$$ and $$-y$$ differs in $$U$$ by 26 %, in $$k$$ by 23 %, in C by 36 % on average, and at $$z = 0.15\thinspace\mathrm{m}$$ (0.09 m above the roofs) $$U$$ is 0.11 m/s lower and T 1.3 K higher at $$+y$$. The tunnel flow has a lateral gradient; do not assume symmetry in a model.
 - The workbook, unlike J's, carries no expanded uncertainty; the approach-flow CSV lists the profile from the top and has no $$k$$.
 
 **M**
 
-- **Units.** Field concentrations are in **ppq** (10⁻¹⁵) and the tunnel's in ppm. The table converts the field's to ppm (× 10⁻⁹) and carries $$C/c_0$$ for both, with each run's own $$c_0$$ (1,444 … 7,379 ppq) in the field and 132.514 ppm in the tunnel.
-- **Each field run is its own experiment.** $$U_R$$ runs from 1.4 to 7.0 m/s, the mean direction at the reference point from 78° to 200.7° and the tracer flow from 1.64 to 1.75 × 10⁻⁸ m³/s (mean 1.2 % above the stated 5 L/min of 200 ppm). Only 11 of the 18 runs are within 5° of the tunnel's 180°; runs 1, 2 and 9 have $$U_R$$ of 1.4 to 1.8 m/s. The per-run conditions are in the manifest, not in the table.
+- **Units.** Field concentrations are in **ppq** ($$10^{-15}$$) and the tunnel's in ppm. The table converts the field's to ppm ($$\times 10^{-9}$$) and carries $$C/c_0$$ for both, with each run's own $$c_0$$ (1,444 … 7,379 ppq) in the field and 132.514 ppm in the tunnel.
+- **Each field run is its own experiment.** $$U_R$$ runs from 1.4 to 7.0 m/s, the mean direction at the reference point from 78° to 200.7° and the tracer flow from 1.64 to $$1.75 \times 10^{-8}$$ m³/s (mean 1.2 % above the stated 5 L/min of 200 ppm). Only 11 of the 18 runs are within 5° of the tunnel's 180°; runs 1, 2 and 9 have $$U_R$$ of 1.4 to 1.8 m/s. The per-run conditions are in the manifest, not in the table.
 - **The CSVs are the legacy workbook rounded**, and the workbook is carried: velocities to 0.01 m/s and concentration to 0.1 ppm in `RS-WT_caseM.csv` against 15 digits. The CSV's $$k$$ is half the sum of the 2-dp RMS values, up to 0.0052 m²/s² from the same quantity of the workbook's values; $$k$$ here is computed from the workbook.
 - **Velocity was measured at 180° only.** At 175° and 185° all seven velocity columns are −999.9; concentration exists at all three directions.
-- **The frame is not the usual one.** +x is north and +y west (compass rose of `MP_caseM.png`); WD = 180° blows toward +x. The downwind plume's concentration-weighted lateral centroid moves toward −y as WD grows (−19.0, −28.1, −33.5 m at 175°, 180°, 185° in the tunnel; R = −0.82 between $$\mathrm{WD_R}$$ and the centroid over the 18 field runs).
-- **`z` is above the tunnel floor.** The campus ground is at z ≈ 32 m (the terrain falls to 3.6 m on the east side); every point is 3 m above the local ground of the STL (±0.06 m).
-- **The approach-flow heights are above the empty floor.** The profile station x = −0.498 m stands on the model's upwind taper, 0.0521 m (31 m) above the floor: the 10 lowest of the 40 heights are below the model's ground there (QM5).
+- **The frame is not the usual one.** $$+x$$ is north and $$+y$$ west (compass rose of `MP_caseM.png`); $$\mathrm{WD} = 180^\circ$$ blows toward $$+x$$. The downwind plume's concentration-weighted lateral centroid moves toward $$-y$$ as WD grows (−19.0, −28.1, −33.5 m at 175°, 180°, 185° in the tunnel; $$R = -0.82$$ between $$\mathrm{WD_R}$$ and the centroid over the 18 field runs).
+- **`z` is above the tunnel floor.** The campus ground is at $$z \approx 32\thinspace\mathrm{m}$$ (the terrain falls to 3.6 m on the east side); every point is 3 m above the local ground of the STL (±0.06 m).
+- **The approach-flow heights are above the empty floor.** The profile station $$x = -0.498\thinspace\mathrm{m}$$ stands on the model's upwind taper, 0.0521 m (31 m) above the floor: the 10 lowest of the 40 heights are below the model's ground there (QM5).
 - **Reference height.** $$H_R$$ = 41 m is the anemometer's height above the ground; the roof under it is 33 m above that ground. $$c_0$$ uses $$H_R$$ = 0.068 m (41/600 = 0.06833 m would give 131.2 ppm). The tracer source is on the ground in the workbook, `LC_caseM.csv` and the STL, while the readme says "on a rooftop" (QM1, QM2).
 - **Floors.** Every field run reads 8 to 11 ppq at point 12 whatever the wind (and 8 to 9 ppq minima at points 11, 13, 14, 15): 0.0014 to 0.0069 of the runs' $$c_0$$, not subtracted (QM3). The tunnel's concentration has two negative means (point 12) and an rms of 7 ppm where the mean is below 1.
-- **`BD_caseM.stl` is wound inward** on 3,118 of its 3,152 horizontal facets and has 21 boundary and 7 non-manifold edges (7 on the rim of the 1080 m by 720 m panel at z = 0, 14 on 7 slivers of 0.45 m² together hung on building roofs); reversed here, the slivers removed and the rim closed with a 1 m base slab (21 added triangles; the published STL is open at the rim).
+- **`BD_caseM.stl` is wound inward** on 3,118 of its 3,152 horizontal facets and has 21 boundary and 7 non-manifold edges (7 on the rim of the 1080 m by 720 m panel at $$z = 0$$, 14 on 7 slivers of 0.45 m² together hung on building roofs); reversed here, the slivers removed and the rim closed with a 1 m base slab (21 added triangles; the published STL is open at the rim).
 
 **All thermistor cases (C, D, E and the tunnel side of F)**: the measured quantity is the mean of the instantaneous *scalar*
 speed; steady RANS gives the magnitude of the *mean* vector. A RANS $$\lvert\mathbf{U}\rvert$$ in a sheltered street goes far lower than the
@@ -431,10 +437,10 @@ speed; steady RANS gives the magnitude of the *mean* vector. A RANS $$\lvert\mat
 | G | released | released (box: the envelope of a porous canopy) | `unverified`: field data, the wind's angle to the belt is not published (QG3) | field data, nothing in m/s |
 | H | released | released (box) | settled (measured: $$U$$ < 0 in the recirculation behind the leeward face) | — |
 | I | released | released (box) | settled (measured: $$U$$ < 0 in the recirculation behind the leeward face) | — |
-| J | released | released (box) | settled (definition: +x streamwise) | — |
-| K | released | released (81 boxes, pitch read from the drawings) | settled (definition: +x streamwise) | — |
-| L | released | released (126 boxes from `BD_caseL.stl`) | settled (definition: +x streamwise) | — |
-| M | released | released: `BD_caseM.stl` scaled ×600, re-wound outward, 7 slivers removed and closed with a 1 m base slab | settled (measured: the plume's lateral centroid moves toward −y as WD grows) | — |
+| J | released | released (box) | settled (definition: $$+x$$ streamwise) | — |
+| K | released | released (81 boxes, pitch read from the drawings) | settled (definition: $$+x$$ streamwise) | — |
+| L | released | released (126 boxes from `BD_caseL.stl`) | settled (definition: $$+x$$ streamwise) | — |
+| M | released | released: `BD_caseM.stl` scaled ×600, re-wound outward, 7 slivers removed and closed with a 1 m base slab | settled (measured: the plume's lateral centroid moves toward $$-y$$ as WD grows) | — |
 
 <!--nomenclature full-->
 
@@ -443,64 +449,67 @@ speed; steady RANS gives the magnitude of the *mean* vector. A RANS $$\lvert\mat
 
 **Geometry, reference scales and release**
 
-| Symbol | Column | Meaning | Unit |
-|---|---|---|---|
-| $$H$$, $$b$$, $$D$$ |  | height of the building, cube, tower or tree belt; width of the building; edge of the cubes of Case C: the lengths the cases are drawn and normalised by | m |
-| $$U_H$$ |  | reference speed: the mean approach-flow speed at the height $$H$$ (each Data page gives the value used) | m/s |
-| $$U_R$$, $$H_R$$, $$Z_R$$ |  | reference speed and height of a workbook: Case E, $$U_R$$ at $$Z_R$$ = 250 m full scale (1 m in the model); Case M, $$U_R$$ and $$H_R$$ at the reference point of the tunnel and of each field run | m/s, m |
-| $$U_{\mathrm{ref}}$$, $$L_{\mathrm{ref}}$$ |  | reference speed and length of a case's normalisation: $$U_H$$ and $$H$$ ($$U_R$$ and $$H_R$$ in Case M); for the velocity ratios the approach speed at 15.9 m (Case E) or at 500 m (Case F) | m/s, m |
-| $$U_b$$ |  | Case G: mean approach-flow speed at 9 m, the normalisation of its approach-flow table | m/s |
-| $$q$$, $$c_{\mathrm{gas}}$$ |  | tracer release of the experiment: volume flow of the released gas, and its tracer content ($$10^6$$ ppm when pure); $$Q$$ is the source strength given to a solve | m³/s, ppm |
-| $$\mathrm{Re_H}$$, $$\mathrm{Re_D}$$ |  | Reynolds numbers $$U_H H/\nu$$ and $$U_H D/\nu$$ ($$\nu$$: kinematic viscosity of air) | — |
-| $$u_\ast$$, $$z_0$$, $$\kappa$$ |  | friction velocity and roughness length of the log law fitted to the approach flow, and the von Kármán constant (0.41) | m/s, mm, — |
-| $$\mathrm{WD}$$ | `wind_direction_deg` | wind direction (each frame says how it is counted); $$\mathrm{WD_R}$$ is the mean direction of a field run at its reference point (Case M) | ° |
-| $$x$$, $$y$$, $$z$$ | `x`, `y`, `z` | coordinates in the case's frame, $$z$$ up from the floor of the tunnel or from the ground | m |
-| $$L_r$$ |  | reattachment length behind the building, read from a wake line at ground level; reported as $$L_r/H$$ | m |
+- $$H$$, $$b$$, $$D$$ (m) — height of the building, cube, tower or tree belt; width of the building; edge of the cubes of Case C: the lengths the cases are drawn and normalised by
+- $$U_H$$ (m/s) — reference speed: the mean approach-flow speed at the height $$H$$ (each Data page gives the value used)
+- $$U_R$$, $$H_R$$, $$Z_R$$ (m/s, m) — reference speed and height of a workbook: Case E, $$U_R$$ at $$Z_R$$ = 250 m full scale (1 m in the model); Case M, $$U_R$$ and $$H_R$$ at the reference point of the tunnel and of each field run
+- $$U_{\mathrm{ref}}$$, $$L_{\mathrm{ref}}$$ (m/s, m) — reference speed and length of a case's normalisation: $$U_H$$ and $$H$$ ($$U_R$$ and $$H_R$$ in Case M); for the velocity ratios the approach speed at 15.9 m (Case E) or at 500 m (Case F)
+- $$U_b$$ (m/s) — Case G: mean approach-flow speed at 9 m, the normalisation of its approach-flow table
+- $$q$$, $$c_{\mathrm{gas}}$$ (m³/s, ppm) — tracer release of the experiment: volume flow of the released gas, and its tracer content ($$10^6$$ ppm when pure); $$Q$$ is the source strength given to a solve
+- $$R_b$$ (dimensionless) — bulk Richardson number of the heated-floor cases J and L (negative: unstable stratification)
+- $$\mathrm{Re_H}$$, $$\mathrm{Re_D}$$ (dimensionless) — Reynolds numbers $$U_H H/\nu$$ and $$U_H D/\nu$$ ($$\nu$$: kinematic viscosity of air)
+- $$u_\ast$$, $$z_0$$, $$\kappa$$ (m/s, mm, dimensionless) — friction velocity and roughness length of the log law fitted to the approach flow, and the von Kármán constant (0.41)
+- $$\mathrm{WD}$$ (column `wind_direction_deg`; °) — wind direction (each frame says how it is counted); $$\mathrm{WD_R}$$ is the mean direction of a field run at its reference point (Case M)
+- $$x$$, $$y$$, $$z$$ (columns `x`, `y`, `z`; m) — coordinates in the case's frame ($$+x$$, $$+y$$ and $$+z$$ are the positive directions; each Data page says which way $$+x$$ points), $$z$$ up from the floor of the tunnel or from the ground
+- $$\mathrm{d}x$$ (m) — lattice spacing of the OpenLB and FluidX3D runs, in metres or as a fraction of $$H$$ ($$H/64$$)
+- $$L_r$$ (m) — reattachment length behind the building, read from a wake line at ground level; reported as $$L_r/H$$
 
 **Velocity and turbulence**
 
-| Symbol | Column | Meaning | Unit |
-|---|---|---|---|
-| $$U$$, $$V$$, $$W$$ | `U`, `V`, `W` | mean velocity along $$+x$$, $$+y$$, $$+z$$; $$V$$ is positive toward $$+y$$ in every case | m/s |
-| $$\lvert\mathbf{U}\rvert$$ |  | magnitude of the mean velocity vector, $$\sqrt{U^2+V^2+W^2}$$ | m/s |
-| $$V_{\mathrm{s}}$$ | `Vs` | mean omnidirectional scalar speed of a thermistor (never a vector magnitude) | m/s |
-| $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$ | `uu`, `vv`, `ww` | velocity variances (overbar: time average, prime: fluctuation about it) | m²/s² |
-| $$\overline{u'v'}$$, $$\overline{u'w'}$$, $$\overline{v'w'}$$ | `uv`, `uw`, `vw` | Reynolds shear stresses | m²/s² |
-| $$k = \tfrac{1}{2}\left(\overline{u'u'}+\overline{v'v'}+\overline{w'w'}\right)$$ | `k` | turbulent kinetic energy | m²/s² |
-| $$U/U_{\mathrm{ref}}$$ | `velocity_ratio` | mean speed over the case's reference speed ($$V_{\mathrm{s}}/U_{\mathrm{ref}}$$ for a thermistor) | — |
-| $$\sigma_{U/U_{\mathrm{ref}}}$$ | `velocity_ratio_sd` | standard deviation of `velocity_ratio` over the observations behind a field value (Case F) | — |
-| $$k/U_{\mathrm{ref}}^2$$ | `k_ratio` | turbulent kinetic energy over the square of the reference speed, where only normalised values are published (Case G) | — |
+- $$U$$, $$V$$, $$W$$ (columns `U`, `V`, `W`; m/s) — mean velocity along $$+x$$, $$+y$$, $$+z$$; $$V$$ is positive toward $$+y$$ in every case
+- $$\lvert\mathbf{U}\rvert$$ (m/s) — magnitude of the mean velocity vector, $$\sqrt{U^2+V^2+W^2}$$
+- $$V_{\mathrm{s}}$$ (column `Vs`; m/s) — mean omnidirectional scalar speed of a thermistor (never a vector magnitude)
+- $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$ (columns `uu`, `vv`, `ww`; m²/s²) — velocity variances (overbar: time average, prime: fluctuation about it)
+- $$\overline{u'v'}$$, $$\overline{u'w'}$$, $$\overline{v'w'}$$ (columns `uv`, `uw`, `vw`; m²/s²) — Reynolds shear stresses
+- $$k = \tfrac{1}{2}\left(\overline{u'u'}+\overline{v'v'}+\overline{w'w'}\right)$$ (column `k`; m²/s²) — turbulent kinetic energy
+- $$U/U_{\mathrm{ref}}$$ (column `velocity_ratio`; dimensionless) — mean speed over the case's reference speed ($$V_{\mathrm{s}}/U_{\mathrm{ref}}$$ for a thermistor)
+- $$\sigma_{U/U_{\mathrm{ref}}}$$ (column `velocity_ratio_sd`; dimensionless) — standard deviation of `velocity_ratio` over the observations behind a field value (Case F)
+- $$k/U_{\mathrm{ref}}^2$$ (column `k_ratio`; dimensionless) — turbulent kinetic energy over the square of the reference speed, where only normalised values are published (Case G)
 
 **Concentration and temperature**
 
-| Symbol | Column | Meaning | Unit |
-|---|---|---|---|
-| $$C$$ | `C` | mean tracer-gas concentration as published (volume fraction × 10⁶ of the released gas diluted in air) | ppm |
-| $$c_{\mathrm{rms}}$$ | `c_rms` | root mean square of the concentration fluctuation | ppm |
-| $$c_0$$ |  | reference concentration, defined for each case on its Data page: $$c_0 = \dfrac{c_{\mathrm{gas}}\thinspace q}{U_H H^2}$$ ($$U_R H_R^2$$ in the denominator in Case M) | ppm |
-| $$c^\ast$$ | `concentration_ratio` | dimensionless concentration $$c^\ast = C/c_0$$; the value of a solve is $$c\thinspace U_H H^2/Q$$ for its mean concentration $$c$$ and its source strength $$Q$$ | — |
-| $$\mathrm{Sc_t}$$ |  | turbulent Schmidt number of a solve (0.3, 0.5 and 0.7) | — |
-| $$T$$, $$T_{\mathrm{rms}}$$ | `T`, `T_rms` | mean air temperature as published (Cases J and L) and the root mean square of its fluctuation | °C, K |
-| $$\overline{u'c'}$$, $$\overline{v'c'}$$, $$\overline{w'c'}$$ | `uc`, `vc`, `wc` | turbulent concentration fluxes | ppm·m/s |
-| $$\overline{u'\theta'}$$, $$\overline{v'\theta'}$$, $$\overline{w'\theta'}$$ | `uT`, `vT`, `wT` | turbulent heat fluxes ($$\theta'$$: the temperature fluctuation) | K·m/s |
-| $$\theta = \dfrac{T_f - T}{T_f - T_H}$$ |  | floor-referenced temperature the solves of Cases J and L are scored on: 0 at the floor, 1 in the approach air at $$H$$; $$T_f$$ is the floor temperature and $$T_H$$ the temperature of the approach flow at $$H$$ | — |
+- $$C$$ (column `C`; ppm) — mean tracer-gas concentration as published (volume fraction $$\times 10^6$$ of the released gas diluted in air)
+- $$c_{\mathrm{rms}}$$ (column `c_rms`; ppm) — root mean square of the concentration fluctuation
+- $$c_0$$ (ppm) — reference concentration, defined for each case on its Data page: $$c_0 = \dfrac{c_{\mathrm{gas}}\thinspace q}{U_H H^2}$$ ($$U_R H_R^2$$ in the denominator in Case M)
+- $$c^\ast$$ (column `concentration_ratio`; dimensionless) — dimensionless concentration $$c^\ast = C/c_0$$; the value of a solve is $$c\thinspace U_H H^2/Q$$ for its mean concentration $$c$$ and its source strength $$Q$$
+- $$\mathrm{Sc_t}$$ (dimensionless) — turbulent Schmidt number of a solve (0.3, 0.5 and 0.7)
+- $$T$$, $$T_{\mathrm{rms}}$$ (columns `T`, `T_rms`; °C, K) — mean air temperature as published (Cases J and L) and the root mean square of its fluctuation
+- $$\overline{u'c'}$$, $$\overline{v'c'}$$, $$\overline{w'c'}$$ (columns `uc`, `vc`, `wc`; ppm·m/s) — turbulent concentration fluxes
+- $$\overline{u'\theta'}$$, $$\overline{v'\theta'}$$, $$\overline{w'\theta'}$$ (columns `uT`, `vT`, `wT`; K·m/s) — turbulent heat fluxes ($$\theta'$$: the temperature fluctuation)
+- $$\theta = \dfrac{T_f - T}{T_f - T_H}$$ (dimensionless) — floor-referenced temperature the solves of Cases J and L are scored on: 0 at the floor, 1 in the approach air at $$H$$; $$T_f$$ is the floor temperature and $$T_H$$ the temperature of the approach flow at $$H$$
 
 **Scores**
 
-- $$n$$, the number of pairs scored: the points at which the measured and the modelled value both exist; a pair is the measured value $$o_i$$ and the modelled value $$p_i$$ at one point; $$\overline{o}$$ and $$\overline{p}$$ are the means over the pairs.
-- $$R = \dfrac{\sum_i (o_i-\overline{o})(p_i-\overline{p})}{\sqrt{\sum_i (o_i-\overline{o})^2 \sum_i (p_i-\overline{p})^2}}$$, Pearson's correlation coefficient of the pairs.
-- $$\mathrm{FAC2}$$, the fraction of pairs with $$0.5 \le p_i/o_i \le 2$$. The ratio keeps its sign, so a model of the other sign than the measurement is a miss; for a concentration, a pair with both values at or below the detection limit also counts.
-- $$\mathrm{FB} = \dfrac{\overline{o}-\overline{p}}{0.5\thinspace(\overline{o}+\overline{p})}$$, the fractional bias, positive when the model under-predicts. It is undefined (shown as —) for a signed component unless the measured and the modelled mean are both positive; $$R$$, $$\mathrm{FAC2}$$, the hit rate and $$n$$ stay.
-- $$\mathrm{HR}$$, the hit rate: the fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, with $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}}$$ equal to $$0.05\thinspace U_H$$ for a velocity component, to the detection limit for a concentration, and absent for $$k$$. VDI 3783-9 calls the hit rate $$q$$ and the tolerances $$D$$ and $$W$$; on this site those letters keep their other meanings.
-- NMSE, NAD, MG and VG are in `validation/results/*.json` and in the API's `validation.json`. NMSE and NAD divide by the means like $$\mathrm{FB}$$, so they are undefined for a signed component unless the measured and the modelled mean are both positive.
-- $$\mathrm{NMSE} = \dfrac{\overline{(o-p)^2}}{\overline{o}\thinspace \overline{p}}$$, the normalised mean square error.
-- $$\mathrm{NAD} = \dfrac{\overline{\lvert o-p\rvert}}{\overline{o}+\overline{p}}$$, the normalised absolute difference.
-- $$\mathrm{MG} = \exp\overline{(\ln o-\ln p)}$$, the geometric mean bias.
-- $$\mathrm{VG} = \exp\overline{(\ln o-\ln p)^2}$$, the geometric variance.
+- $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
+- $$R$$ — Pearson correlation coefficient of the pairs
+- $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
+- $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
+- $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
+- $$\mathrm{NMSE} = \dfrac{\overline{(o-p)^2}}{\overline{o}\thinspace \overline{p}}$$ — normalised mean square error
+- $$\mathrm{NAD} = \dfrac{\overline{\lvert o-p\rvert}}{\overline{o}+\overline{p}}$$ — normalised absolute difference
+- $$\mathrm{MG} = \exp\overline{(\ln o-\ln p)}$$ — geometric mean bias
+- $$\mathrm{VG} = \exp\overline{(\ln o-\ln p)^2}$$ — geometric variance
+- The ratio of $$\mathrm{FAC2}$$ keeps its sign, so a model of the other sign than the measurement is a miss; $$\mathrm{FB}$$, $$\mathrm{NMSE}$$ and $$\mathrm{NAD}$$ divide by the means, so they are undefined (shown as —) for a signed component unless the measured and the modelled mean are both positive
+- VDI 3783-9 calls the hit rate $$q$$ and the tolerances $$D$$ and $$W$$; on this site those letters keep their other meanings ($$q$$ the tracer release rate, $$D$$ the block size of Case C, $$W$$ the vertical velocity)
 - The detection limit of a concentration is one value per case, $$10^{-3}$$ of the largest measured value. It sets $$\delta_{\mathrm{abs}}$$ of the hit rate and the both-below rule of $$\mathrm{FAC2}$$, and floors the values in $$\mathrm{MG}$$ and $$\mathrm{VG}$$.
 - The scores $$\mathrm{FB}$$, $$\mathrm{FAC2}$$, $$\mathrm{NMSE}$$, $$\mathrm{NAD}$$, $$\mathrm{MG}$$ and $$\mathrm{VG}$$ follow Chang & Hanna (2004); the hit rate follows VDI 3783-9.
 
-The quantities scored: $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$U_H$$; $$k$$ (turbulent kinetic energy) over $$U_H^2$$; the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$ against a thermistor's $$V_{\mathrm{s}}$$; $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7; $$\theta$$ (floor-referenced temperature).
+**Quantities scored**
+
+- $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$U_H$$
+- $$k$$ (turbulent kinetic energy) over $$U_H^2$$
+- the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
+- $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
+- $$\theta$$ (floor-referenced temperature)
 
 </details>
 
@@ -515,12 +524,12 @@ Every check is in `checks.json` (filter on `case`) and every transform in `build
 **A to E**
 
 Negative control (2026-10-14, scratch copy): with B's mm→m conversion and $$V$$ flip removed and C's y axis mirrored, the
-extents, lateral-sign, legacy-workbook and WD = 45° symmetry checks all go red.
+extents, lateral-sign, legacy-workbook and $$\mathrm{WD} = 45^\circ$$ symmetry checks all go red.
 
 **G, H and I**
 
 Negative controls (2026-10-18, scratch copies of the cleaners): leaving H's vertical-plane $$V$$ unflipped, shifting H's frame 0.05 m downwind, reading G's workbook matrix with the wrong
-row, leaving I's y = 0 $$V$$ unblanked and moving I's cube 0.05 m each turn the named checks red (`the_y0_z0.5H_line_appears_twice_as_exact_copies_once_V_is_flipped`,
+row, leaving I's $$y = 0$$ $$V$$ unblanked and moving I's cube 0.05 m each turn the named checks red (`the_y0_z0.5H_line_appears_twice_as_exact_copies_once_V_is_flipped`,
 `no_sensor_inside_building` / `extents_sane` / `concentration_peak_sits_at_the_source_*`, `csv_agrees_with_workbook_to_the_csv_rounding`,
 `V_on_the_y0_plane_is_numerically_zero_not_measured`, `control_points_shifted_0.1m_upwind_are_detected_inside`).
 
@@ -548,9 +557,9 @@ LC-coordinate checks red; M's scale 600 → 500 turns the 3 m-height and domain 
 Checks added (names in `checks.json`; the cases' modules are `case_j.py`, `case_k.py`, `case_l.py`, shared code in `jkl_common.py`):
 
 - *Counts and layout:* row counts and point numbers; J's 465 workbook rows = 443 locations (22 shared, identical) + the one duplicate; L's census against the data paper (27 × 8 + 14 × 4 + 24 × 3); K's and L's y and z levels against the MP drawings; coordinates of CSV and workbook equal.
-- *CSV against workbook:* J reproduces the CSV exactly as round(round(ratio, 3|4) × scale, d) (negative control: one decimal coarser fails); K and L within half a unit of the last printed digit in every column; every normalised workbook column reproduces its dimensional one (K: with H = 0.2 m, $$U_H$$ = 4.94 m/s; L: with the cell constants); K's CSV $$k$$ equals the half-sum of the rounded rms.
+- *CSV against workbook:* J reproduces the CSV exactly as round(round(ratio, 3|4) × scale, d) (negative control: one decimal coarser fails); K and L within half a unit of the last printed digit in every column; every normalised workbook column reproduces its dimensional one (K: with $$H = 0.2\thinspace\mathrm{m}$$, $$U_H$$ = 4.94 m/s; L: with the cell constants); K's CSV $$k$$ equals the half-sum of the rounded rms.
 - *Physics:* $$k$$ = ½ Σ variances (all three); the signs of the turbulent fluxes are those of an unstable layer ($$\overline{w'\theta'}$$ > 0, T falling with height, $$\overline{u'w'}$$ < 0; J, L); $$c_0$$ recomputed from q, gas fraction, $$U_H$$ and H against the workbook cell (J, L) and K's two definitions; Rb recomputed from the workbook's temperatures (J: −0.0857 against −0.0856; L: −0.0344 against −0.035); temperatures against the readme and data paper; $$U_H$$ from the profile (J 1.46, L 1.3394, K 2.24 against the stated 2.33: a warning); tracer flux through cross-sections against q (L: 0.86 – 1.0 of q / W; K: a lower bound, 0.40 – 0.67 of q); concentration peaks at the source (J, K: the point 4 mm above the outlet; L: on the line).
-- *Geometry and frame:* no sensor inside a building and a shifted-points control that does land inside (J, K, L); K's pitch scan; L's STL = the grid of 14 rows along x by 9 columns across y, closed, volume 126 H³; J's surface-temperature points on the building faces and their mean equal the workbook's θ_build; $$V$$ sign (J); WD = 0 flow along +x (all).
+- *Geometry and frame:* no sensor inside a building and a shifted-points control that does land inside (J, K, L); K's pitch scan; L's STL = the grid of 14 rows along x by 9 columns across y, closed, volume 126 H³; J's surface-temperature points on the building faces and their mean equal the workbook's θ_build; $$V$$ sign (J); $$\mathrm{WD} = 0$$ flow along $$+x$$ (all).
 - *Warnings* (documented, never fail the build): the variance/σ discrepancy, the fill-series uncertainty cells, the mean concentration below its uncertainty and the profile change along the tunnel (J); the stated $$U_H$$, C not mirror-symmetric and $$V$$ an offset (K); readme building temperature, source patch size and mirror asymmetry (L); the readme's Reynolds number (J).
 
 ## 7. Cite

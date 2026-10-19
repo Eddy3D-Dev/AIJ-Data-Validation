@@ -32,14 +32,14 @@ Before and after the construction of a 60 m tower and two 18 m blocks, each stat
 
 {% include figure.html name="case-e-openfoam-bias-map.png" alt="Case E, where the model is slow or fast" caption="<strong>Figure 3.</strong> Case E, where the model is slow or fast." %}
 
-- Construction change (after − before): R = 0.84; the sign is right at 75 % of the points where the tunnel resolved a change; the modelled change is about 60 % of the measured size.
-- Control that ignores the construction (the tunnel's *before* as a model of its *after*): R = 0.10.
+- Construction change (after − before): $$R = 0.84$$; the sign is right at 75 % of the points where the tunnel resolved a change; the modelled change is about 60 % of the measured size.
+- Control that ignores the construction (the tunnel's *before* as a model of its *after*): $$R = 0.10$$.
 - FB is positive when the model is low.
 
 <details markdown="block">
 <summary>Interpretation: Case E absolute ratios and the construction change</summary>
 
-- In the change after − before, inflow, closure and instrument biases largely cancel. R = 0.84 is far above the control that ignores the construction.
+- In the change after − before, inflow, closure and instrument biases largely cancel. $$R = 0.84$$ is far above the control that ignores the construction.
 - The absolute ratios are low and the cause is not established.
 
 </details>

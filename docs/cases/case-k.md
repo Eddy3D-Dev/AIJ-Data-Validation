@@ -24,11 +24,11 @@ description: "9 x 9 array of 0.06 m cubes with a tracer point source on the floo
 
 | Fact | Value |
 |---|---|
-| Array | 9 rows (along x) by 9 columns (across y) of cubes, H = 0.06 m, pitch 0.12 m (street width = H, plan area ratio 25 %); the pitch is read from the MP drawings |
+| Array | 9 rows (along x) by 9 columns (across y) of cubes, $$H = 0.06\thinspace\mathrm{m}$$, pitch 0.12 m (street width = H, plan area ratio 25 %); the pitch is read from the MP drawings |
 | Reynolds number $$\mathrm{Re_H}$$ | 9800 |
 | $$U_H$$ (m/s) | 2.33 |
 | Wind directions (°) | 0 |
-| Measurement planes | y/H = 0, +-1, +-2, +-3 (z up to 0.07 m), five heights from 4 mm to 70 mm; the three upper heights only on y = 0 and +-H |
+| Measurement planes | $$y/H = 0$$, +-1, +-2, +-3 (z up to 0.07 m), five heights from 4 mm to 70 mm; the three upper heights only on $$y = 0$$ and +-H |
 | Measured | 203 rows over 203 points: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$, $$C$$, $$c_{\mathrm{rms}}$$, $$c^\ast$$ |
 
 {% include nomenclature.md %}
@@ -49,5 +49,5 @@ description: "9 x 9 array of 0.06 m cubes with a tracer point source on the floo
 > Before you compare
 >
 > - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
-> - Origin: bottom centre of the windward wall of the 4th row of the central column: x = 0 is that wall, y = 0 the centre line of the central column. Length unit: m (model scale).
+> - Origin: bottom centre of the windward wall of the 4th row of the central column: $$x = 0$$ is that wall, $$y = 0$$ the centre line of the central column. Length unit: m (model scale).
 > - 9 known issues in the published files are listed under [Known data issues]({{ '/cases/case-k/data/' | relative_url }}#known-data-issues).
