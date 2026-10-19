@@ -31,6 +31,9 @@ Documentation and tooling; no served byte changed (`docs/api/` and the cleaned t
   the tracer release rate, $$D$$ the block size and $$W$$ the vertical velocity only; tables that headed the hit rate `q` say "hit rate".
 - `scripts/check_markdown.py` checks how a formula is written and where it stands, that a table of scores or symbols has its nomenclature, and that no
   symbol comes back as plain text.
+- Site: the colour scheme button has a third mode, "system" (the default): the page follows the device's light or dark setting, also while it is open and in
+  every open tab. A click goes system, the scheme the page is not in, the scheme it is in, system; the icon (monitor, sun, moon) shows the mode. The math follows
+  the scheme without a rule of its own (MathJax's SVG is drawn in the text colour). `theme_toggle.html` holds the one button that the header and the small-screen corner use.
 
 ## [3.1.3] - 2026-10-18
 
