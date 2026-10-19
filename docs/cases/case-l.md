@@ -8,7 +8,7 @@ generated: true
 description: "14 rows by 9 columns of 0.06 m cubes with a tracer line source on the floor across the tunnel, in an unstably stratified boundary layer: velocity, temperature, concentration and their fluxes at 344 points in the streets and over the roofs."
 ---
 
-# Case L — 9 x 14 cube array, line source, non-isothermal
+# Case L
 
 14 rows by 9 columns of 0.06 m cubes with a tracer line source on the floor across the tunnel, in an unstably stratified boundary layer: velocity, temperature, concentration and their fluxes at 344 points in the streets and over the roofs.
 {: .fs-5 .fw-300 .lede }

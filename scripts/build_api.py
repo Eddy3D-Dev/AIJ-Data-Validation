@@ -2267,7 +2267,7 @@ def _case_page(case, meta, p, shared):
     base, data_url, val_url = _page_url(meta["slug"]), _page_url(meta["slug"], "data"), _page_url(meta["slug"], "validation")
     n = D.CASE_IDS.index(case) + 1
     L = _front(meta["title"], n, parent="Cases", has_children=True, has_toc=False, description=meta["short"])
-    L += [f"# {meta['title']}", "", f"{_tex(meta['short'])}", "{: .fs-5 .fw-300 .lede }", "",
+    L += [f"# Case {case}", "", f"{_tex(meta['short'])}", "{: .fs-5 .fw-300 .lede }", "",
           f"{_link('Reference data', data_url)}{{: .btn .btn-primary }} {_link('Validation', val_url)}{{: .btn }} "
           f"{_link('Case as JSON', f'/api/cases/{case}.json')}{{: .btn }}", ""]
     cfgs = [cfg for (c, cfg) in D.RENDER_CAPTIONS if c == case]

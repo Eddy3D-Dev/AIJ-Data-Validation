@@ -8,7 +8,7 @@ generated: true
 description: "Isolated 1:1:2 building with an ethylene point source on the floor behind it: velocity (split-fibre hot wire) and concentration (hydrocarbon analyser) at 876 points."
 ---
 
-# Case H — 1:1:2 building with a floor point source
+# Case H
 
 Isolated 1:1:2 building with an ethylene point source on the floor behind it: velocity (split-fibre hot wire) and concentration (hydrocarbon analyser) at 876 points.
 {: .fs-5 .fw-300 .lede }

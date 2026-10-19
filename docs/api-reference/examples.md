@@ -94,19 +94,24 @@ The last line prints `R of U/U_H recomputed: 0.9548 published: 0.9548`.
 
 ## Geometry conventions
 
-- Metres. A–D and H–L are model scale, the scale the tunnel measured at. E, F, G and M are full scale: E at the scale
-  of its 3dm and workbook, F and M (measured at 1:800 and 1:600) scaled up, G a field observation. `units` in
-  `geometry.json` states which.
-- The origin is a point of each case's own: the building centre (A, B), the array centre (C, D), the centre of the
-  reproduced area (E, F), the leeward face of the belt (G) or of the building (H, J), the cube's centre (I), a cube of
-  the array (K, L) or the turntable's centre (M). `frame.origin` in the case document names it. In F and M the
-  heights are above the tunnel floor, not the ground.
-- $$+x$$ runs along the wind at $$\mathrm{WD} = 0$$ for A–D and H–L, and downwind for G. E and F keep their geographic frame ($$+x$$ east,
-  $$+y$$ north), and their directions are meteorological: the direction the wind comes **from**, N = 0°, clockwise.
-  M's frame is $$+x$$ north, $$+y$$ west.
-- Outward normals, LF line endings, one `solid` per file. Every file is watertight: each body is closed, consistently
-  wound and positive in volume. Where two bodies touch along an edge (11 edges in E) the edge counts as a `body_contacts`
-  entry in `geometry.json`. F and M are one body each, closed with a 1 m base slab below $$z = 0$$.
-- The build checks every STL: triangle count, bodies, boundary edges, winding, signed volume, and the bounding box against the stated
-  dimensions; `scripts/check_geometry.py` parses the written files again and fails on any open or inconsistently wound body. `validation/render_geometry.py` draws each one from the same code that writes it, and those are the
-  renders on the case pages.
+Every STL is in metres. `units` in `geometry.json` says whether the file is at model scale (what the tunnel measured) or full scale; `frame.origin` in the case document names the origin.
+
+| Cases | Scale | Origin | $$+x$$ |
+|---|---|---|---|
+| A, B | model | building centre | along the wind at $$\mathrm{WD} = 0$$ |
+| C, D | model | array centre | along the wind at $$\mathrm{WD} = 0$$ |
+| E | full (as its 3dm and workbook) | centre of the reproduced area | east ($$+y$$ north) |
+| F | full (scaled up from 1:800) | centre of the reproduced area | east ($$+y$$ north) |
+| G | full (field) | leeward face of the belt | downwind |
+| H, J | model | leeward face of the building | along the wind at $$\mathrm{WD} = 0$$ |
+| I | model | cube centre | along the wind at $$\mathrm{WD} = 0$$ |
+| K, L | model | a cube of the array | along the wind at $$\mathrm{WD} = 0$$ |
+| M | full (scaled up from 1:600) | turntable centre | north ($$+y$$ west) |
+
+{% include nomenclature.md %}
+
+E and F keep their geographic frame, and their wind directions are meteorological: the direction the wind comes **from**, N = 0°, clockwise. In F and M the heights are above the tunnel floor, not the ground.
+
+**The files.** Outward normals, LF line endings, one `solid` per file. Every file is watertight: each body is closed, consistently wound and positive in volume. Where two bodies touch along an edge (11 edges in E) the edge is listed under `body_contacts` in `geometry.json`. F and M are one body each, closed with a 1 m base slab below $$z = 0$$.
+
+**The checks.** The build checks every STL: triangle count, bodies, boundary edges, winding, signed volume, and the bounding box against the stated dimensions. `scripts/check_geometry.py` parses the written files again and fails on any open or inconsistently wound body. `validation/render_geometry.py` draws each file from the same code that writes it; those are the renders on the case pages.

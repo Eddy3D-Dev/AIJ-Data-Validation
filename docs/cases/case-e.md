@@ -8,7 +8,7 @@ generated: true
 description: "Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 m mid-rises; pedestrian-height velocity ratio (thermistor), 16 wind directions."
 ---
 
-# Case E — Niigata district
+# Case E
 
 Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 m mid-rises; pedestrian-height velocity ratio (thermistor), 16 wind directions.
 {: .fs-5 .fw-300 .lede }

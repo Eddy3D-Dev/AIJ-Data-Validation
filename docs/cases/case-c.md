@@ -8,7 +8,7 @@ generated: true
 description: "3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestrian-height scalar speed (thermistor), 3 wind directions."
 ---
 
-# Case C — 3 × 3 block array
+# Case C
 
 3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestrian-height scalar speed (thermistor), 3 wind directions.
 {: .fs-5 .fw-300 .lede }
