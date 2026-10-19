@@ -8,7 +8,7 @@ generated: true
 description: "Isolated cube with an ethane point source at the centre of its roof: velocity (laser Doppler, 91 points) and concentration (hydrocarbon analyser, 539 points)."
 ---
 
-# Case I — cube with a roof point source
+# Case I
 
 Isolated cube with an ethane point source at the centre of its roof: velocity (laser Doppler, 91 points) and concentration (hydrocarbon analyser, 539 points).
 {: .fs-5 .fw-300 .lede }

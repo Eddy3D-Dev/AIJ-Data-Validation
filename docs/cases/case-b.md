@@ -8,7 +8,7 @@ generated: true
 description: "Isolated 1:4:4 slab, velocity field (split-fibre hot wire)."
 ---
 
-# Case B — 1:4:4 slab
+# Case B
 
 Isolated 1:4:4 slab, velocity field (split-fibre hot wire).
 {: .fs-5 .fw-300 .lede }

@@ -8,7 +8,7 @@ generated: true
 description: "Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m × 2 m × 7 m with a 1.2 m gap below): normalised mean speed and k at 28 points on the centre section (sonic anemometers)."
 ---
 
-# Case G — flow behind a tree belt
+# Case G
 
 Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m × 2 m × 7 m with a 1.2 m gap below): normalised mean speed and $$k$$ at 28 points on the centre section (sonic anemometers).
 {: .fs-5 .fw-300 .lede }

@@ -8,7 +8,7 @@ generated: true
 description: "Tracer-gas release on the Tokyo Polytechnic University Atsugi campus: 1:600 tunnel (velocity at 180°, ethylene concentration at 175°, 180° and 185°) and 18 field runs with PMCH, 15 points 3 m above ground."
 ---
 
-# Case M — TPU Atsugi campus
+# Case M
 
 Tracer-gas release on the Tokyo Polytechnic University Atsugi campus: 1:600 tunnel (velocity at 180°, ethylene concentration at 175°, 180° and 185°) and 18 field runs with PMCH, 15 points 3 m above ground.
 {: .fs-5 .fw-300 .lede }

@@ -8,7 +8,7 @@ generated: true
 description: "Isolated 1:1:2 building with a floor tracer source in an unstably stratified boundary layer: velocity, temperature, tracer concentration and their turbulent fluxes at 444 points on three planes."
 ---
 
-# Case J — 1:1:2 building, non-isothermal
+# Case J
 
 Isolated 1:1:2 building with a floor tracer source in an unstably stratified boundary layer: velocity, temperature, tracer concentration and their turbulent fluxes at 444 points on three planes.
 {: .fs-5 .fw-300 .lede }

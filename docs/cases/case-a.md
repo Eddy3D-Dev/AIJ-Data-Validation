@@ -8,7 +8,7 @@ generated: true
 description: "Isolated 1:1:2 building, velocity field (split-fibre hot wire)."
 ---
 
-# Case A — 1:1:2 building
+# Case A
 
 Isolated 1:1:2 building, velocity field (split-fibre hot wire).
 {: .fs-5 .fw-300 .lede }

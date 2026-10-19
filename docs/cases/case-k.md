@@ -8,7 +8,7 @@ generated: true
 description: "9 x 9 array of 0.06 m cubes with a tracer point source on the floor between rows 2 and 3: velocity and tracer concentration at 203 points in the streets and over the first rows."
 ---
 
-# Case K — 9 x 9 cube array, point source
+# Case K
 
 9 x 9 array of 0.06 m cubes with a tracer point source on the floor between rows 2 and 3: velocity and tracer concentration at 203 points in the streets and over the first rows.
 {: .fs-5 .fw-300 .lede }
