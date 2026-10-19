@@ -265,27 +265,3 @@ div.language-bibtex pre.highlight {
 @media (hover: none) {
   div.highlighter-rouge > button { opacity: 1; }
 }
-
-// The point explorer (assets/js/explorer.js): a scatter beside a 3D view of the same points.
-.explorer {
-  margin: 1rem 0 1.5rem;
-  .explorer-note { font-size: 0.8rem; opacity: 0.75; }
-  .ex-controls { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; margin-bottom: 0.6rem; font-size: 0.8rem; }
-  .ex-controls select { font: inherit; padding: 0.15rem 0.3rem; }
-  .ex-q { display: flex; flex-wrap: wrap; gap: 0.25rem; }
-  .ex-q button { font: inherit; font-size: 0.78rem; padding: 0.15rem 0.55rem; border: 1px solid currentColor; border-radius: 1rem; background: none; color: inherit; cursor: pointer; opacity: 0.6; }
-  .ex-q button.on { opacity: 1; font-weight: 600; background: rgba(128, 128, 128, 0.18); }
-  .ex-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0.75rem; }
-  @media (max-width: 800px) { .ex-body { grid-template-columns: minmax(0, 1fr); } }
-  .ex-panel { border: 1px solid rgba(128, 128, 128, 0.4); border-radius: 4px; position: relative; overflow: hidden; }
-  .ex-scatter, .ex-3d { width: 100%; height: 26rem; display: block; }
-  .ex-title { position: absolute; top: 0.3rem; left: 0.5rem; font-size: 0.72rem; opacity: 0.7; pointer-events: none; }
-  .ex-legend { position: absolute; top: 0.3rem; right: 0.5rem; font-size: 0.7rem; opacity: 0.85; pointer-events: none; }
-  .ex-legend .bar { display: inline-block; width: 6rem; height: 0.5rem; vertical-align: middle; margin: 0 0.3rem; background: linear-gradient(90deg, #2166ac, #f7f7f7, #b2182b); border: 1px solid rgba(128, 128, 128, 0.5); }
-  .ex-readout { margin-top: 0.6rem; font-size: 0.78rem; overflow-x: auto; min-height: 12rem; }
-  .ex-readout table { border-collapse: collapse; width: auto; }
-  .ex-readout th, .ex-readout td { padding: 0.1rem 0.6rem 0.1rem 0; text-align: right; font-variant-numeric: tabular-nums; border: none; }
-  .ex-readout th:first-child, .ex-readout td:first-child { text-align: left; }
-  .ex-readout .key { display: inline-block; width: 0.7rem; height: 0.2rem; margin-right: 0.3rem; vertical-align: middle; }
-  .ex-hint { font-size: 0.75rem; opacity: 0.7; }
-}

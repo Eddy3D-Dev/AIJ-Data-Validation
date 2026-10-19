@@ -1,7 +1,27 @@
-<div class="explorer" data-case="{{ include.case }}" data-base="{{ '/' | relative_url }}" data-manifest="{{ '/assets/explorer/' | append: include.case | append: '.json' | relative_url }}">
+{%- assign v = site.time | date: '%s' -%}
+<style>
+/* The point explorer (assets/js/explorer.js). Here, with the page, and not in the theme's stylesheet, which browsers keep for weeks. */
+.explorer { margin: 1rem 0 1.5rem; }
+.explorer .explorer-note { font-size: .8rem; opacity: .75; }
+.explorer .ex-controls { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; margin-bottom: .6rem; font-size: .8rem; }
+.explorer .ex-controls select { font: inherit; padding: .15rem .3rem; }
+.explorer .ex-q { display: flex; flex-wrap: wrap; gap: .25rem; }
+.explorer .ex-q button { font: inherit; font-size: .78rem; padding: .15rem .55rem; border: 1px solid currentColor; border-radius: 1rem; background: none; color: inherit; cursor: pointer; opacity: .6; }
+.explorer .ex-q button.on { opacity: 1; font-weight: 600; background: rgba(128,128,128,.18); }
+.explorer .ex-title { position: absolute; top: .3rem; left: .5rem; font-size: .72rem; opacity: .7; pointer-events: none; }
+.explorer .ex-legend { position: absolute; top: .3rem; right: .5rem; font-size: .7rem; opacity: .85; pointer-events: none; }
+.explorer .ex-legend .bar { display: inline-block; width: 5rem; height: .5rem; vertical-align: middle; margin: 0 .3rem; background: linear-gradient(90deg, #2166ac, #f7f7f7, #b2182b); border: 1px solid rgba(128,128,128,.5); }
+.explorer .ex-readout { margin-top: .6rem; font-size: .78rem; overflow-x: auto; min-height: 9rem; }
+.explorer .ex-readout table { border-collapse: collapse; width: auto; }
+.explorer .ex-readout th, .explorer .ex-readout td { padding: .1rem .6rem .1rem 0; text-align: right; font-variant-numeric: tabular-nums; border: none; }
+.explorer .ex-readout th:first-child, .explorer .ex-readout td:first-child { text-align: left; }
+.explorer .ex-readout .key { display: inline-block; width: .7rem; height: .2rem; margin-right: .3rem; vertical-align: middle; }
+.explorer .ex-hint { font-size: .75rem; opacity: .7; }
+</style>
+<div class="explorer" data-case="{{ include.case }}" data-base="{{ '/' | relative_url }}" data-manifest="{{ '/assets/explorer/' | append: include.case | append: '.json' | relative_url }}?v={{ v }}">
   <p class="explorer-note">Hover a point to see where it sits in 3D and how the model differs from the measurement; click to pin it. This needs JavaScript, and the figures on this page show the same scores.</p>
 </div>
 <script type="importmap">
 { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
 </script>
-<script type="module" src="{{ '/assets/js/explorer.js' | relative_url }}"></script>
+<script type="module" src="{{ '/assets/js/explorer.js' | relative_url }}?v={{ v }}"></script>

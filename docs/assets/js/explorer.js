@@ -10,6 +10,11 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 const LOW = [0x21, 0x66, 0xac], MID = [0xf7, 0xf7, 0xf7], HIGH = [0xb2, 0x18, 0x2b];   // model low | agrees | model high
 const HEAVY = 4e6;                                                                      // bytes of STL loaded only on request
 const ERROR_COLOUR = "#d62728";
+// The layout that sizes the two views is inline, not in a stylesheet: the canvases are drawn at their container's size, and a
+// stylesheet a browser still holds from before (the site's CSS is cached for weeks) must not be able to change that.
+const BODY = "display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));gap:.75rem";
+const PANEL = "position:relative;height:22rem;overflow:hidden;border:1px solid rgba(128,128,128,.4);border-radius:4px";
+const FILL = "display:block;position:absolute;inset:0;width:100%;height:100%";
 
 const num = (v) => (v === undefined || v === "" || v === "nan" || v === "NaN" ? NaN : Number(v));
 const fmt = (v, d = 3) => (Number.isFinite(v) ? (Math.abs(v) >= 1000 || (Math.abs(v) < 0.001 && v !== 0) ? v.toExponential(2) : v.toFixed(d)) : "–");
@@ -60,6 +65,7 @@ function niceTicks(lo, hi, n = 5) {
 
 async function start(root) {
   const base = root.dataset.base;
+  const stamp = new URL(root.dataset.manifest, location.href).search;   // the build's ?v=, so a new release is not read from a cache
   const mf = await (await fetch(root.dataset.manifest)).json();
   if (!mf.views.length) return;
   root.innerHTML = "";
@@ -73,9 +79,9 @@ async function start(root) {
       <button class="ex-reset" type="button" style="font:inherit;font-size:.78rem">Reset view</button>
       <span class="ex-geo"></span>
     </div>
-    <div class="ex-body">
-      <div class="ex-panel"><canvas class="ex-scatter"></canvas><div class="ex-title"></div><div class="ex-legend">model low<span class="bar"></span>model high</div></div>
-      <div class="ex-panel"><div class="ex-3d"></div><div class="ex-title">${mf.title}: drag to turn, scroll to zoom</div></div>
+    <div class="ex-body" style="${BODY}">
+      <div class="ex-panel" style="${PANEL}"><canvas class="ex-scatter" style="${FILL}"></canvas><div class="ex-title"></div><div class="ex-legend">model low<span class="bar"></span>model high</div></div>
+      <div class="ex-panel" style="${PANEL}"><div class="ex-3d" style="${FILL}"></div><div class="ex-title">${mf.title}: drag to turn, scroll to zoom</div></div>
     </div>
     <div class="ex-readout"><span class="ex-hint">Hover a point in either view.</span></div>`;
   root.appendChild(ui);
@@ -93,7 +99,7 @@ async function start(root) {
 
   async function loadView(v) {
     view = v;
-    cache[v.id] = cache[v.id] || parseCSV(await (await fetch(base + v.pairs)).text());
+    cache[v.id] = cache[v.id] || parseCSV(await (await fetch(base + v.pairs + stamp)).text());
     all = cache[v.id];
     groupVals = {};
     groupsEl.innerHTML = "";
@@ -160,7 +166,7 @@ async function start(root) {
 
   function drawScatter() {
     const dpr = window.devicePixelRatio || 1;
-    W = canvas.clientWidth; Hh = canvas.clientHeight;
+    W = canvas.parentElement.clientWidth; Hh = canvas.parentElement.clientHeight;   // the panel's size, never the canvas's own
     canvas.width = W * dpr; canvas.height = Hh * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, Hh);
@@ -325,7 +331,7 @@ async function start(root) {
         return;
       }
       geoEl.textContent = "loading geometry…";
-      const pos = parseSTL(await (await fetch(base + g.path)).arrayBuffer());
+      const pos = parseSTL(await (await fetch(base + g.path + stamp)).arrayBuffer());
       const geo = new THREE.BufferGeometry();
       geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
       geo.computeVertexNormals();
@@ -366,14 +372,15 @@ async function start(root) {
 
   // ---- loop and size
   function size() {
-    const w = host3d.clientWidth, h = host3d.clientHeight;
+    const w = host3d.parentElement.clientWidth, h = host3d.parentElement.clientHeight;
+    if (!w || !h) return;
     renderer.setSize(w, h, false);
     renderer.domElement.style.width = "100%"; renderer.domElement.style.height = "100%";
     camera.aspect = w / h; camera.updateProjectionMatrix();
     drawScatter();
     dirty = true;
   }
-  new ResizeObserver(size).observe(host3d);
+  ui.querySelectorAll(".ex-panel").forEach((panel) => new ResizeObserver(size).observe(panel));
   renderer.setAnimationLoop(() => { if (dirty) { renderer.render(scene, camera); dirty = false; } });
   root.explorer = { scene, selGroup, camera, get items() { return items; } };   // for tests and the console
   viewSel.onchange = () => loadView(mf.views[+viewSel.value]);
