@@ -1,7 +1,7 @@
 ---
 title: "OpenLB and FluidX3D"
 parent: Validation
-nav_order: 10
+nav_order: 3
 summary: "the lattice-Boltzmann engines on Cases A and B, and why they are not scored on C to E"
 description: "OpenLB and FluidX3D against the tunnel for Cases A and B, and the measurements that make them not comparable on Cases C to E."
 ---

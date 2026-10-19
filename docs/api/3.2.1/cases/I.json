@@ -1,0 +1,426 @@
+{
+ "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/case.schema.json",
+ "schema_version": "2.5.0",
+ "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
+ "license": "CC-BY-4.0",
+ "id": "I",
+ "slug": "case-i",
+ "title": "Case I — cube with a roof point source",
+ "summary": "Isolated cube with an ethane point source at the centre of its roof: velocity (laser Doppler, 91 points) and concentration (hydrocarbon analyser, 539 points).",
+ "configuration": {
+  "building": "cube, 0.10 m on a side (= H)",
+  "H_m": 0.1,
+  "Re_H": 11000,
+  "U_H_m_s": 1.7,
+  "U_H_note": "the readme and the velocity sheet; the approach flow at z = H is 1.6969 m/s and the workbook's inflow sheet divides by 1.697",
+  "wind_directions_deg": [
+   0
+  ],
+  "source": "6 mm circular outlet at the centre of the roof (0, 0, 0.1); 10 % ethane in the mixture, 400 cc/min (= 6.67e-6 m3/s of mixture, 6.67e-7 m3/s of ethane); release velocity 0.236 m/s, M = Ve/UH = 0.14",
+  "reference_concentration": "c0 = q / (UH H^2) = 39.22 ppm (39.2 in the paper), q the ETHANE flow; concentration_ratio = C / c0",
+  "measurement_planes": [
+   "velocity: y/H = 0 and z/H = 0.5",
+   "concentration: y/H = 0 and z/H = 0 (the ground)"
+  ],
+  "points": {
+   "velocity": 91,
+   "concentration": 539
+  },
+  "instrument": "velocity: laser Doppler anemometer (Dantec BSA F60), 200 Hz, 240 s; concentration: hydrocarbon analyser (Kimoto HADA-01), 1 Hz, 120 s",
+  "tunnel": "AIST wind tunnel, 20 m long, 3.0 × 2.0 m cross-section; approach flow described as a 1/7 power law (data paper section 3.9)",
+  "scale_note": "model scale; the source states no model:full-scale ratio; Eddy3D solves it at 1:60 (a 6 m cube)"
+ },
+ "configurations": [
+  {
+   "config": "default",
+   "campaign": "wind_tunnel",
+   "instrument": "hydrocarbon_analyser",
+   "wind_direction_deg": 0.0,
+   "points": 539
+  },
+  {
+   "config": "default",
+   "campaign": "wind_tunnel",
+   "instrument": "ldv",
+   "wind_direction_deg": 0.0,
+   "points": 91
+  }
+ ],
+ "quantities": [
+  "U",
+  "V",
+  "W",
+  "k",
+  "C",
+  "concentration_ratio"
+ ],
+ "units": {
+  "length": "m (model scale)",
+  "velocity": "m/s",
+  "k": "m^2/s^2",
+  "C": "ppm",
+  "concentration_ratio": "dimensionless, C/c0"
+ },
+ "frame": {
+  "origin": "the centre of the cube on the ground plane",
+  "x": "+x streamwise (the wind blows toward +x); the cube spans x in [-0.05, 0.05]; wind points x = -0.15 ... 0.25 m, concentration points x = 0.065 ... 2.7 m",
+  "y": "+y lateral; the cube spans y in [-0.05, 0.05]; concentration points reach |y| = 0.44 m on the ground",
+  "z": "+z up; roof at z = 0.1 m; the outlet at (0, 0, 0.1)",
+  "lateral_sign_applied": 1,
+  "coordinate_scale_applied": 1.0
+ },
+ "inflow_fit": {
+  "method": "log law, kappa = 0.41, least squares over z = 0.02 ... 0.4 m on the workbook's 12-point approach profile",
+  "u_star_m_s": 0.0928,
+  "z0_mm": 0.0455,
+  "U_H_measured_m_s": 1.6969,
+  "log_law_error_at_H": "+2.6 %",
+  "power_law_index_fitted": 0.115,
+  "power_law_index_paper": "1/7",
+  "note": "derived during cleaning, not published by AIJ; the workbook's own (z/H)^(1/7) column is within 4.6 % of the measured profile over z = 0.02 ... 0.7 m"
+ },
+ "approach_flow": {
+  "source": "clean/cases/I/approach_flow.csv",
+  "units": {
+   "z": "m",
+   "U": "m/s",
+   "k": "m^2/s^2"
+  },
+  "rows": [
+   {
+    "z": 0.02,
+    "U": 1.410805268,
+    "k": 0.02862328007
+   },
+   {
+    "z": 0.03,
+    "U": 1.486440767,
+    "k": 0.02695613668
+   },
+   {
+    "z": 0.05,
+    "U": 1.592673769,
+    "k": 0.0265687637
+   },
+   {
+    "z": 0.07,
+    "U": 1.649049814,
+    "k": 0.02501186631
+   },
+   {
+    "z": 0.1,
+    "U": 1.69691823,
+    "k": 0.02445471605
+   },
+   {
+    "z": 0.15,
+    "U": 1.775785221,
+    "k": 0.02504867734
+   },
+   {
+    "z": 0.2,
+    "U": 1.856113662,
+    "k": 0.0244094042
+   },
+   {
+    "z": 0.3,
+    "U": 2.014237306,
+    "k": 0.01845787949
+   },
+   {
+    "z": 0.4,
+    "U": 2.129044702,
+    "k": 0.006970357446
+   },
+   {
+    "z": 0.5,
+    "U": 2.162160589,
+    "k": 0.00139850971
+   },
+   {
+    "z": 0.6,
+    "U": 2.154229352,
+    "k": 0.0007702948147
+   },
+   {
+    "z": 0.7,
+    "U": 2.141737563,
+    "k": 0.0006540322754
+   }
+  ],
+  "csv": {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/approach_flow.csv?v=8c9a2fa1669a",
+   "path": "cases/I/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 373,
+   "sha256": "8c9a2fa1669ad55cfb86b2b158a9fd8556e6edcc0184c8baf85ccaba94defa43"
+  }
+ },
+ "inflow": {
+  "benchmark_data": {
+   "approach_flow_csv": {
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/approach_flow.csv?v=8c9a2fa1669a",
+    "path": "cases/I/approach_flow.csv",
+    "media_type": "text/csv",
+    "bytes": 373,
+    "sha256": "8c9a2fa1669ad55cfb86b2b158a9fd8556e6edcc0184c8baf85ccaba94defa43"
+   },
+   "columns": [
+    "z",
+    "U",
+    "k"
+   ],
+   "units": {
+    "z": "m",
+    "U": "m/s",
+    "k": "m^2/s^2"
+   },
+   "rows": 12,
+   "fit": {
+    "method": "log law, kappa = 0.41, least squares over z = 0.02 ... 0.4 m on the workbook's 12-point approach profile",
+    "u_star_m_s": 0.0928,
+    "z0_mm": 0.0455,
+    "U_H_measured_m_s": 1.6969,
+    "log_law_error_at_H": "+2.6 %",
+    "power_law_index_fitted": 0.115,
+    "power_law_index_paper": "1/7",
+    "note": "derived during cleaning, not published by AIJ; the workbook's own (z/H)^(1/7) column is within 4.6 % of the measured profile over z = 0.02 ... 0.7 m"
+   },
+   "note": "the measured profile and the fit of it are the benchmark's data as cleaned here; everything under `recommended` is a choice"
+  },
+  "recommended": {
+   "status": "RECOMMENDED by this repository (not part of the benchmark): a log-law inlet fitted to the case's own approach-flow file, with k and epsilon from the standard neutral ABL relations. Any inlet may be submitted; say which in submission.yaml",
+   "profile": "U(z) = u*/kappa ln((z + z0)/z0); k = u*^2 / sqrt(Cmu); epsilon = u*^3 / (kappa (z + z0))",
+   "u_star_m_s": 0.0928,
+   "z0_m": 4.55e-05,
+   "kappa": 0.41,
+   "Cmu": 0.09,
+   "k_m2_s2": 0.02870613333333333,
+   "fit": "log law, kappa = 0.41, least squares over z = 0.02 ... 0.4 m on the workbook's 12-point approach profile",
+   "U_ref_m_s": 1.7,
+   "z_ref_m": 0.1,
+   "openfoam": "atmBoundaryLayerInletVelocity / atmBoundaryLayerInletK / atmBoundaryLayerInletEpsilon with Uref, Zref, z0 and d = 0; nutkAtmRoughWallFunction with the same z0 on the ground: cases/{id}/inflow_openfoam.txt holds them"
+  },
+  "flow_direction": {
+   "convention": "along_x",
+   "meaning": "+x is along the wind at WD = 0: flowDir (1 0 0); another WD rotates it about +z by the case's rotation sense (frame.wind_direction_rotation)",
+   "wind_directions_deg": [
+    0.0
+   ]
+  },
+  "eddy3d_runs": [
+   {
+    "run_id": "I.openfoam12-realizableKE",
+    "engine": "openfoam12-realizableKE",
+    "scale": 60,
+    "UhModel": 1.7,
+    "UhTunnel": 1.7
+   },
+   {
+    "run_id": "I.openfoam12-kEpsilon",
+    "engine": "openfoam12-kEpsilon",
+    "scale": 60,
+    "UhModel": 1.7,
+    "UhTunnel": 1.7
+   },
+   {
+    "run_id": "I.openfoam12-kOmegaSST",
+    "engine": "openfoam12-kOmegaSST",
+    "scale": 60,
+    "UhModel": 1.7,
+    "UhTunnel": 1.7
+   }
+  ],
+  "domain": "the extents, blockage and cell sizes of Eddy3D's domains are not in its snapshots and are not stated here; mesh.cells and the scale are, where the snapshot has them"
+ },
+ "points": {
+  "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/points.json",
+  "csv": {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/points.csv?v=2864fee9eb19",
+   "path": "cases/I/points.csv",
+   "media_type": "text/csv",
+   "bytes": 54044,
+   "sha256": "2864fee9eb1972e691babaf0f7a9cc61019cfbb9697c5b11ab7e1cae789751a1"
+  },
+  "source": "clean/cases/I/points.csv",
+  "rows": 630,
+  "distinct_points": 630,
+  "columns": [
+   "point_id",
+   "config",
+   "instrument",
+   "wind_direction_deg",
+   "x",
+   "y",
+   "z",
+   "U",
+   "V",
+   "W",
+   "k",
+   "campaign",
+   "C",
+   "concentration_ratio"
+  ],
+  "counts": {
+   "config": {
+    "default": 630
+   },
+   "instrument": {
+    "hydrocarbon_analyser": 539,
+    "ldv": 91
+   },
+   "wind_direction_deg": {
+    "0.0": 630
+   }
+  },
+  "nulls": {
+   "U": 539,
+   "V": 592,
+   "W": 539,
+   "k": 539,
+   "C": 91,
+   "concentration_ratio": 91
+  },
+  "bbox_min": [
+   -0.15,
+   -0.44,
+   0.0
+  ],
+  "bbox_max": [
+   2.7,
+   0.4,
+   0.5
+  ]
+ },
+ "probes": {
+  "csv": {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/probes.csv?v=67f76ec18f93",
+   "path": "cases/I/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 46628,
+   "sha256": "67f76ec18f932368acaafde40dbdc3cffb1018cfd7360c5a3cf72e14dff3b1ee"
+  },
+  "rows": 630,
+  "columns": [
+   "point_id",
+   "config",
+   "campaign",
+   "instrument",
+   "run",
+   "wind_direction_deg",
+   "x",
+   "y",
+   "z",
+   "scored_as"
+  ],
+  "columns_meaning": "the key columns of a scored file (point_id with config, campaign, instrument, run and wind_direction_deg as the case has them), x, y, z in m (case frame), and scored_as: the families the row is scored in (vector, k, thermistor_bracket, concentration, theta, joined by +)"
+ },
+ "scoring": {
+  "U_ref_m_s": 1.7,
+  "U_ref_meaning": "U_H, the approach speed at the cube height",
+  "theta": null,
+  "scored_as": {
+   "vector": "U, V, W and the speed |U| against the split-fibre, LDV or hot-wire components (velocity.U, velocity.V, velocity.W, speed)",
+   "k": "the turbulent kinetic energy (k)",
+   "thermistor_bracket": "a mean scalar speed (thermistor, cup or sonic anemometer) against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar)",
+   "concentration": "the dimensionless concentration c* = C/c0 (cstar)",
+   "theta": "the floor-referenced temperature fraction (theta)"
+  },
+  "value_columns": [
+   "U",
+   "V",
+   "W",
+   "speed",
+   "k",
+   "cstar",
+   "theta",
+   "T"
+  ],
+  "key_columns": [
+   "config",
+   "campaign",
+   "instrument",
+   "run",
+   "wind_direction_deg",
+   "point_id"
+  ],
+  "conventions": "velocities and the speed over U_ref, k over U_ref^2 (Cases E, F and G publish ratios already); U, V, W, |U| and the thermistor bracket scored as signed velocities (FAC2's ratio keeps the sign; hit rate D = 0.25, W = 0.05); k by the plain definitions (D = 0.25 only); a thermistor, cup or sonic reading (a mean scalar speed) scored against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar), the two ends of its bracket; c* = C/c0 with one detection limit per case, 1e-3 of the largest measured value; theta = (T_floor - T)/(T_floor - T_H) scored like a positive velocity. The same conventions score the served Eddy3D results (docs/validation/method.md).",
+  "tool": "python validation/score_submissions.py <folder>, from a checkout of the repository (requirements.txt)",
+  "metric_meaning": {
+   "Count": "number of measured points scored",
+   "MeanObserved": "mean of the measured, normalised quantity",
+   "MeanPredicted": "mean of the modelled, normalised quantity",
+   "Fb": "fractional bias, 2 (mean_obs - mean_pred) / (mean_obs + mean_pred); positive = model low",
+   "Nmse": "normalised mean square error",
+   "Nad": "normalised absolute difference",
+   "Fac2": "fraction of points within a factor of two (harsh near zero for sign-changing V and W)",
+   "HitRate": "fraction of points within D = 0.25 relative or W = 0.05 U_H absolute",
+   "Mg": "geometric mean bias",
+   "Vg": "geometric variance",
+   "GeometricPairs": "pairs with both values positive (used for Mg/Vg)",
+   "R": "Pearson correlation coefficient",
+   "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive; Fb, Nmse and Nad of a signed velocity component of Case H or I whose observed and predicted means are not both positive)"
+  }
+ },
+ "geometry": {
+  "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/geometry.json",
+  "files": [
+   {
+    "configuration": "default",
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/geometry.stl?v=ff61cbb22798",
+    "triangles": 12,
+    "watertight": true
+   }
+  ]
+ },
+ "validation": {
+  "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/validation.json",
+  "status": "scored",
+  "engines": {
+   "openfoam12-realizableKE": "scored",
+   "openfoam12-kEpsilon": "scored",
+   "openfoam12-kOmegaSST": "scored",
+   "openlb": "pending",
+   "fluidx3d": "pending",
+   "ml-surrogate": "pending"
+  }
+ },
+ "known_issues": [
+  "Two point sets, no point numbers: the velocity file (91 points: y = 0 plane and z/H = 0.5 plane) and the concentration file (539 points: y = 0 plane and the ground). The table stacks them, one row per instrument and point: velocity rows (instrument ldv) are numbered 1-91 and concentration rows (hydrocarbon_analyser) 92-630, in the files' order. 17 locations have both a velocity and a concentration value.",
+  "V on the y = 0 plane (53 of 91 points) is 0 in the CSV and 1e-9 ... 4e-6 m/s in the workbook, a symmetry value. It is NaN in the table; V is measured only at the 38 off-plane points.",
+  "The table carries the legacy workbook's values; the CSVs round to 3 decimals (velocity, k) and 1 decimal (concentration, ppm). Every concentration is a multiple of 0.1 ppm: a 0.4 ppm value carries +/-12 % of quantisation.",
+  "The paper's c0 = 39.2 ppm needs the ETHANE flow (10 % of the 400 cc/min, 6.67e-7 m3/s); its sentence 'ethane released at 6.67e-6 m3/s' is the mixture. With the mixture flow c0 would be 392 ppm.",
+  "The workbook normalises the approach flow with 1.697 m/s and the points with 1.7 m/s (0.18 % apart).",
+  "AF_caseI.csv ends in 53 rows of ',,' and two stray cells, '0.5*' and '1.5*' (chart axis labels): a reader that does not test z for a number takes them for data.",
+  "Thirteen ground-centreline locations (x, 0, 0) are measured twice (they are on both the y = 0 and the z = 0 plane) with values up to 8.5 % apart; both are kept. The four y = 0, z = 0.05 wind points that appear twice in the workbook are identical copies and appear once.",
+  "Only the TKE is published, no variances and no concentration fluctuation: k cannot be checked against the components."
+ ],
+ "people": {
+  "data_collectors": [
+   "Hiroaki Kondo (National Institute of Advanced Industrial Science and Technology)",
+   "Katsuhiko Mutou (National Institute of Advanced Industrial Science and Technology)",
+   "Akihiro Hori (National Institute for Environmental Studies)"
+  ],
+  "editors_distributors": [
+   "Yoshihide Tominaga (Niigata Institute of Technology)",
+   "Hideki Kikumoto (The University of Tokyo)",
+   "Tsubasa Okaze (Institute of Science Tokyo)"
+  ],
+  "contact": "Yoshihide Tominaga <tominaga@abe.niit.ac.jp>"
+ },
+ "doi": "10.5281/zenodo.15430018",
+ "doi_note": "The readme and the data paper name this one DOI; no separate version DOI is stated.",
+ "citation_requested": "Japan Society for Atmospheric Environment (2013). Guidelines for Atmospheric Environment Assessment Methods Using CFD Models (DiMCFD). Japan Society for Atmospheric Environment (in Japanese).",
+ "citation": {
+  "apa": "Kondo, H., Mutou, K., Hori, A., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case I (CubeC): Wind Tunnel Experiment for Flow and Dispersion around a Cubic Building Model [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15430018",
+  "bibtex": "@misc{aijuwe_case_i,\n  author    = \"Kondo, Hiroaki and Mutou, Katsuhiko and Hori, Akihiro and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa\",\n  title     = \"{AIJ UWE Benchmark Dataset -- Case I (CubeC): Wind Tunnel Experiment for Flow and Dispersion around a Cubic Building Model}\",\n  year      = \"2025\",\n  publisher = \"Zenodo\",\n  doi       = \"10.5281/zenodo.15430018\",\n  url       = \"https://doi.org/10.5281/zenodo.15430018\",\n  note      = \"Data set\"\n}"
+ },
+ "files_in_repository": {
+  "folder": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/tree/main/raw/cases/case-i",
+  "reference": "raw/cases/case-i/RS-w_caseI.csv",
+  "approach_flow": "raw/cases/case-i/AF_caseI.csv",
+  "readme": "raw/cases/case-i/readme_caseI.md"
+ },
+ "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-i.png",
+ "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-i/"
+}

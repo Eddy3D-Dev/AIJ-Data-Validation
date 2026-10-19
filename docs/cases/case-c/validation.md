@@ -6,6 +6,8 @@ nav_order: 2
 has_children: false
 generated: true
 description: "Case C — 3 × 3 block array: Eddy3D's scores against the measurements, by engine."
+redirect_from:
+  - /validation/case-c/
 ---
 
 # Case C: validation
@@ -13,7 +15,11 @@ description: "Case C — 3 × 3 block array: Eddy3D's scores against the measure
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-grey status">not comparable</span> · FluidX3D <span class="label label-grey status">not comparable</span> · ML surrogate <span class="label label-green status">scored</span>
 
-## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration 0D
+{% include validation/case-c.md %}
+
+## Scores, run by run
+
+### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration 0D
 
 Quantity: $$V_{\mathrm{s}}$$ (thermistor) scored against $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ \[scalar\] and $$\lvert\mathbf{U}\rvert$$ \[vector\]; both normalised by $$U_H$$ = $$U(z = D)$$ = 3.654 m/s.
 
@@ -32,7 +38,7 @@ Quantity: $$V_{\mathrm{s}}$$ (thermistor) scored against $$\sqrt{\lvert\mathbf{U
 - Per-point values: [`/api/cases/C/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/C/pairs/openfoam12-realizableKE.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCaseC0DContainerE2E; figures validation/plot\_case\_c\_openfoam.py
 
-## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration 1D
+### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration 1D
 
 Quantity: $$V_{\mathrm{s}}$$ (thermistor) scored against $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ \[scalar\] and $$\lvert\mathbf{U}\rvert$$ \[vector\]; both normalised by $$U_H$$ = $$U(z = D)$$ = 3.654 m/s.
 
@@ -51,7 +57,7 @@ Quantity: $$V_{\mathrm{s}}$$ (thermistor) scored against $$\sqrt{\lvert\mathbf{U
 - Per-point values: [`/api/cases/C/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/C/pairs/openfoam12-realizableKE.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCaseC1DContainerE2E; figures validation/plot\_case\_c\_openfoam.py
 
-## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration 2D
+### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration 2D
 
 Quantity: $$V_{\mathrm{s}}$$ (thermistor) scored against $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ \[scalar\] and $$\lvert\mathbf{U}\rvert$$ \[vector\]; both normalised by $$U_H$$ = $$U(z = D)$$ = 3.654 m/s.
 
@@ -70,7 +76,7 @@ Quantity: $$V_{\mathrm{s}}$$ (thermistor) scored against $$\sqrt{\lvert\mathbf{U
 - Per-point values: [`/api/cases/C/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/C/pairs/openfoam12-realizableKE.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCaseC2DContainerE2E; figures validation/plot\_case\_c\_openfoam.py
 
-## Eddy3D ML wind surrogate (pedestrian height)
+### Eddy3D ML wind surrogate (pedestrian height)
 
 | Score | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|
@@ -84,10 +90,10 @@ Quantity: $$V_{\mathrm{s}}$$ (thermistor) scored against $$\sqrt{\lvert\mathbf{U
 - Per-point values: [`/api/cases/C/pairs/ml-surrogate.csv`]({{ '/api/cases/C/pairs/ml-surrogate.csv' | relative_url }})
 - Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot\_ml\_surrogate.py
 
-## All runs
+### All runs
 
 - Normalisation: velocities by $$U_H$$, $$k$$ by $$U_H^2$$ (the benchmark\'s own convention; Case E by $$U$$ at 15.9 m, as it is published); hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units
 
 ## Figures
 
-Figures: [Case C (OpenFOAM)]({{ '/validation/case-c/' | relative_url }}); [ML surrogate]({{ '/validation/ml-surrogate/' | relative_url }}).
+Figures: [ML surrogate]({{ '/validation/ml-surrogate/' | relative_url }}).

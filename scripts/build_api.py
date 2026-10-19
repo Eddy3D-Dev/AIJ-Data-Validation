@@ -302,7 +302,7 @@ _FOAM_C = {f"WD {wd} {q}": f"vs.{lab}.{key}" for wd, lab in (("0°", "wd-0"), ("
 _ML_REPRO = "Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot_ml_surrogate.py"
 RUNS = [
     *[run(c, "openfoam12-realizableKE", None, f"case{c}_openfoam12_realizableKE.json", _FOAM_A_B,
-          [f"case-{c.lower()}-layout.png", "cases-ab-openfoam-agreement.png", "cases-ab-openfoam-profiles.png"],
+          [f"case-{c.lower()}-layout.png", f"case-{c.lower()}-openfoam-agreement.png", f"case-{c.lower()}-openfoam-profiles.png"],
           f"Eddy3D fixture TestAijCase{c}ContainerE2E; figures validation/plot_cases_ab_openfoam.py",
           f"case{c}_openfoam12_realizableKE_pairs.csv", PAIRS_AB) for c in ("A", "B")],
     *[run("C", "openfoam12-realizableKE", cb, f"caseC_openfoam12_realizableKE_{cb}.json", _FOAM_C,
@@ -376,9 +376,9 @@ RUNS = [
          "wind reversed (control)": "negativeControl.reversedWind"},
         ["ml-surrogate-agreement.png"], _ML_REPRO, "caseE_ml_pairs.csv", PAIRS_ML),
     # Cases H and I (Eddy3D's solves, scored against the cleaned tables): the closures other than realizable k-epsilon are separate engine ids
-    run("H", "openfoam12-realizableKE", None, "caseH_openfoam12_realizableKE.json", _HI_HEADLINE, ["case-h-layout.png", "cases-hi-openfoam-agreement.png"],
+    run("H", "openfoam12-realizableKE", None, "caseH_openfoam12_realizableKE.json", _HI_HEADLINE, ["case-h-layout.png", "case-h-openfoam-agreement.png"],
         _HI_REPRO.format(fixture="TestAijCaseHContainerE2E (realizable k-ε, 1:100)"), "caseH_openfoam12_realizableKE_pairs.csv", PAIRS_H),
-    run("I", "openfoam12-realizableKE", None, "caseI_openfoam12_realizableKE.json", _HI_HEADLINE, ["case-i-layout.png", "cases-hi-openfoam-agreement.png", "case-i-openfoam-closures.png"],
+    run("I", "openfoam12-realizableKE", None, "caseI_openfoam12_realizableKE.json", _HI_HEADLINE, ["case-i-layout.png", "case-i-openfoam-agreement.png", "case-i-openfoam-closures.png"],
         _HI_REPRO.format(fixture="TestAijCubeContainerE2E (realizable k-ε, 1:60)"), "caseI_openfoam12_realizableKE_pairs.csv", PAIRS_I),
     run("I", "openfoam12-kEpsilon", None, "caseI_openfoam12_kEpsilon.json", _HI_HEADLINE, ["case-i-openfoam-closures.png"],
         _HI_REPRO.format(fixture="TestAijCubeContainerE2E (standard k-ε, 1:60)"), "caseI_openfoam12_kEpsilon_pairs.csv", PAIRS_I),
@@ -664,10 +664,10 @@ RUNS += [
 
 # One caption per validation figure, used on the case pages and served with each result.
 FIGURE_CAPTIONS = {
-    "cases-ab-openfoam-agreement.png": ("Cases A and B, OpenFOAM 12 (realizable k-ε): measured against modelled U, V, W and k at "
-                                        "every measured point, normalised by U_H, with the 1:1 line and the factor-of-two band."),
-    "cases-ab-openfoam-profiles.png": ("Cases A and B, OpenFOAM 12: centre-plane vertical profiles of U/U_H at the measurement "
-                                       "stations, measured points against the modelled line."),
+    **{f"case-{c.lower()}-openfoam-agreement.png": (f"Case {c}, OpenFOAM 12 (realizable k-ε): measured against modelled U, V, W and k at "
+                                                     "every measured point, normalised by U_H, with the 1:1 line and the factor-of-two band.") for c in "AB"},
+    **{f"case-{c.lower()}-openfoam-profiles.png": (f"Case {c}, OpenFOAM 12: centre-plane vertical profiles of U/U_H at the measurement "
+                                                    "stations, measured points against the modelled line.") for c in "AB"},
     "case-c-openfoam-agreement.png": ("Case C, OpenFOAM 12: measured Vs/U_H against the modelled √(|U|²+2k)/U_H (filled) and "
                                       "|U|/U_H (hollow), one panel per configuration (centre block × wind direction)."),
     "case-c-openfoam-bias-map.png": ("Case C, OpenFOAM 12: log₂(model / tunnel) of the scalar speed at each of the 120 points "
@@ -684,9 +684,9 @@ FIGURE_CAPTIONS = {
     "case-d-openfoam-agreement.png": ("Case D, OpenFOAM 12, wind directions 0°, 22.5° and 45°: measured thermistor Vs/U_H against the "
                                       "modelled √(|U|²+2k)/U_H (filled) and |U|/U_H (hollow), and the split-fibre |U| against "
                                       "the modelled |U| at 0°. At 0° the 66 thermistor points are 33 mirror pairs."),
-    "cases-hi-openfoam-agreement.png": ("Cases H and I, OpenFOAM 12 (realizable k-ε): measured against modelled U, W, k and the dimensionless "
-                                        "concentration c* = C/c0 (turbulent Schmidt number 0.5; log axes show the positive pairs only), with the 1:1 line and the "
-                                        "factor-of-two band where the values do not change sign."),
+    **{f"case-{c.lower()}-openfoam-agreement.png": (f"Case {c}, OpenFOAM 12 (realizable k-ε): measured against modelled U, W, k and the dimensionless "
+                                                     "concentration c* = C/c0 (turbulent Schmidt number 0.5; log axes show the positive pairs only), with the 1:1 line and the "
+                                                     "factor-of-two band where the values do not change sign.") for c in "HI"},
     "case-i-openfoam-closures.png": ("Case I, OpenFOAM 12 under standard k-ε, realizable k-ε and k-ω SST on one mesh: measured against modelled U, k and c* "
                                      "(Sct 0.5)."),
     "case-k-openfoam-agreement.png": ("Case K, OpenFOAM 12 (realizable k-ε): measured against modelled U, W and k, and the dimensionless concentration c* = C/c0 at turbulent Schmidt "
@@ -717,7 +717,8 @@ FIGURE_CAPTIONS = {
 }
 # The layout figure of each case (validation/plot_layout.py): the caption is written by layout.py from the same groups that colour the agreement figures.
 FIGURE_CAPTIONS.update({f"case-{c.lower()}-layout.png": LAYOUT.caption(c) for c in LAYOUT.SPECS})
-for _fig in ("cases-ab-openfoam-agreement.png", "cases-hi-openfoam-agreement.png", "case-i-openfoam-closures.png", "case-k-openfoam-agreement.png",
+for _fig in ("case-a-openfoam-agreement.png", "case-b-openfoam-agreement.png", "case-h-openfoam-agreement.png", "case-i-openfoam-agreement.png",
+             "case-i-openfoam-closures.png", "case-k-openfoam-agreement.png",
              "case-g-openfoam-sweep.png", "case-j-umf-agreement.png", "case-j-umf-tracer.png", "case-l-umf-agreement.png"):
     FIGURE_CAPTIONS[_fig] += " Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
 FIGURE_CAPTIONS["case-g-openfoam-stations.png"] += " The letters A to G mark the seven lines of the layout figure."
@@ -1778,6 +1779,20 @@ def web_copy(src, dst):
         Image.MAX_IMAGE_PIXELS = limit
 
 
+def _frozen_figures():
+    """Figure files a frozen release under docs/api/<version>/ links to. They stay served as they are, so an earlier
+    release's figure URLs keep working after its figures are redrawn under other names."""
+    names = set()
+    for d in os.listdir(os.path.join(DOCS, "api")):
+        if re.fullmatch(r"\d+\.\d+\.\d+", d):
+            for root, _, files in os.walk(os.path.join(DOCS, "api", d)):
+                for f in files:
+                    if f == "validation.json":
+                        with io.open(os.path.join(root, f), encoding="utf-8") as fh:
+                            names.update(re.findall(r"/assets/figures/([\w.-]+\.png)", fh.read()))
+    return names
+
+
 def copy_assets():
     """docs/assets/geometry/ = every render, docs/assets/figures/ = every figure a run names, docs/assets/web/ = a 1600 px
     copy of each (same file name), docs/_data/figures.json = what a page needs to embed them; nothing else."""
@@ -1793,7 +1808,7 @@ def copy_assets():
         src = os.path.join(FIGURES, "geometry") if sub_dir == "geometry" else FIGURES
         dst = os.path.join(ASSETS, sub_dir)
         os.makedirs(dst, exist_ok=True)
-        for stale in set(os.listdir(dst)) - names:
+        for stale in set(os.listdir(dst)) - names - (_frozen_figures() if sub_dir == "figures" else set()):
             os.remove(os.path.join(dst, stale))
         for name in sorted(names):
             shutil.copyfile(os.path.join(src, name), os.path.join(dst, name))
@@ -2030,46 +2045,19 @@ ENGINE_SHORT = {"openfoam12-realizableKE": "OpenFOAM 12", "openfoam12-kEpsilon":
                 "umf-realizableKE": "UMF", "umf-buoyantKEpsilon": "UMF buoyantKEpsilon",
                 "openlb": "OpenLB", "fluidx3d": "FluidX3D", "ml-surrogate": "ML surrogate"}
 STATUS_CLASS = {"scored": "label-green", "running": "label-blue", "pending": "label-yellow", "not comparable": "label-grey"}
-# Where the hand-written validation pages show each figure, beside its reading. A case's own Validation page links
-# there instead of repeating the figure, so a figure is on the site once. A figure that is not listed is shown on the
-# case's Validation page, unless it illustrates runs of ALL_CASES_FIGURE_MIN or more cases: then it is an all-cases
-# figure, and the case pages link to the Validation overview instead of each repeating it.
+# A case's Validation page opens with its hand-written reading, docs/_includes/validation/<slug>.md (measurement layout,
+# figures, what the scores say), when there is one; the figures the reading shows are not repeated below it. Figures
+# of the engine pages are shown there, and the case pages link to them instead of repeating them. A figure that is in
+# neither is shown on the case's Validation page, unless it illustrates runs of ALL_CASES_FIGURE_MIN or more cases:
+# then it is an all-cases figure, and the case pages link to the Validation overview instead of each repeating it.
+READINGS = os.path.join(DOCS, "_includes", "validation")
 FIGURE_HOME = {
-    "cases-ab-openfoam-agreement.png": ("/validation/cases-ab/", "Cases A and B (OpenFOAM)"),
-    "cases-ab-openfoam-profiles.png": ("/validation/cases-ab/", "Cases A and B (OpenFOAM)"),
     "cases-ab-engine-comparison.png": ("/validation/engines/", "OpenLB and FluidX3D"),
-    "case-c-openfoam-agreement.png": ("/validation/case-c/", "Case C (OpenFOAM)"),
-    "case-c-openfoam-bias-map.png": ("/validation/case-c/", "Case C (OpenFOAM)"),
-    "case-d-openfoam-agreement.png": ("/validation/case-d/", "Case D (OpenFOAM)"),
-    "case-e-openfoam-agreement.png": ("/validation/case-e/", "Case E (OpenFOAM)"),
-    "case-e-openfoam-bias-map.png": ("/validation/case-e/", "Case E (OpenFOAM)"),
-    "cases-hi-openfoam-agreement.png": ("/validation/cases-hi/", "Cases H and I (OpenFOAM)"),
-    "case-i-openfoam-closures.png": ("/validation/cases-hi/", "Cases H and I (OpenFOAM)"),
-    "case-k-openfoam-agreement.png": ("/validation/cases-gk/", "Cases G and K (OpenFOAM)"),
-    "case-g-openfoam-sweep.png": ("/validation/cases-gk/", "Cases G and K (OpenFOAM)"),
-    "case-g-openfoam-stations.png": ("/validation/cases-gk/", "Cases G and K (OpenFOAM)"),
-    "case-j-umf-agreement.png": ("/validation/cases-jl/", "Cases J and L (UMF)"),
-    "case-j-umf-tracer.png": ("/validation/cases-jl/", "Cases J and L (UMF)"),
-    "case-l-umf-agreement.png": ("/validation/cases-jl/", "Cases J and L (UMF)"),
-    "case-f-openfoam-agreement.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
-    "case-f-openfoam-bias-map.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
-    "case-m-openfoam-agreement.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
-    "case-m-openfoam-plan.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
     "ml-surrogate-agreement.png": ("/validation/ml-surrogate/", "ML surrogate"),
-    "case-a-layout.png": ("/validation/cases-ab/", "Cases A and B (OpenFOAM)"),
-    "case-b-layout.png": ("/validation/cases-ab/", "Cases A and B (OpenFOAM)"),
-    "case-g-layout.png": ("/validation/cases-gk/", "Cases G and K (OpenFOAM)"),
-    "case-k-layout.png": ("/validation/cases-gk/", "Cases G and K (OpenFOAM)"),
-    "case-h-layout.png": ("/validation/cases-hi/", "Cases H and I (OpenFOAM)"),
-    "case-i-layout.png": ("/validation/cases-hi/", "Cases H and I (OpenFOAM)"),
-    "case-j-layout.png": ("/validation/cases-jl/", "Cases J and L (UMF)"),
-    "case-l-layout.png": ("/validation/cases-jl/", "Cases J and L (UMF)"),
-    "case-c-layout.png": ("/validation/case-c/", "Case C (OpenFOAM)"),
-    "case-d-layout.png": ("/validation/case-d/", "Case D (OpenFOAM)"),
-    "case-e-layout.png": ("/validation/case-e/", "Case E (OpenFOAM)"),
-    "case-f-layout.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
-    "case-m-layout.png": ("/validation/cases-fm/", "Cases F and M (OpenFOAM)"),
 }
+# The pages that once read two cases together, or one case apart from its own page, now redirect to the case's page.
+REDIRECT_FROM = {"A": ["/validation/cases-ab/"], "C": ["/validation/case-c/"], "D": ["/validation/case-d/"], "E": ["/validation/case-e/"],
+                 "F": ["/validation/cases-fm/"], "G": ["/validation/cases-gk/"], "H": ["/validation/cases-hi/"], "J": ["/validation/cases-jl/"]}
 ALL_CASES_FIGURE_MIN = 3
 # A score table stays open up to this many rows, a table of configurations up to OPEN_LIST_ROWS; a longer one sits in
 # a closed <details>.
@@ -2089,7 +2077,7 @@ def status_label(status):
     return f'<span class="label {STATUS_CLASS[status]} status">{status}</span>'
 
 
-def _front(title, nav_order, parent=None, grand_parent=None, has_children=None, has_toc=None, description=None):
+def _front(title, nav_order, parent=None, grand_parent=None, has_children=None, has_toc=None, description=None, redirect_from=()):
     """Front matter of a generated page. `generated: true` makes the footer point at this script, not at the page."""
     L = ["---", f'title: "{title}"']
     if parent:
@@ -2104,6 +2092,8 @@ def _front(title, nav_order, parent=None, grand_parent=None, has_children=None, 
     L.append("generated: true")
     if description:
         L.append(f'description: "{description.replace(chr(34), chr(39))}"')
+    if redirect_from:
+        L += ["redirect_from:"] + [f"  - {r}" for r in redirect_from]
     return L + ["---", ""]
 
 
@@ -2489,11 +2479,20 @@ def _case_validation_page(case, meta, p, shared):
     results = p["results"]
     n = D.CASE_IDS.index(case) + 1
     L = _front("Validation", 2, parent=meta["title"], grand_parent="Cases", has_children=False,
-               description=f"{meta['title']}: Eddy3D's scores against the measurements, by engine.")
+               description=f"{meta['title']}: Eddy3D's scores against the measurements, by engine.",
+               redirect_from=REDIRECT_FROM.get(case, ()))
     L += [f"# Case {case}: validation", "{: .no_toc }", ""]
     L += ["Engine status: " + " · ".join(f"{_engine_name(k)} {status_label(v)}" for k, v in ENGINE_STATUS[case].items()), ""]
     if case in CASE_CAVEATS:
         L += [CASE_CAVEATS[case], ""]
+    reading = os.path.join(READINGS, f"{meta['slug']}.md")
+    in_reading = set()
+    if os.path.exists(reading):
+        with io.open(reading, encoding="utf-8") as f:
+            in_reading = set(re.findall(r'name="([\w.-]+\.png)"', f.read()))
+        L += [f"{{% include validation/{meta['slug']}.md %}}", ""]
+    # Under a reading, the runs' tables are one section of it.
+    h = "###" if in_reading else "##"
     if not results:
         L += [f"**No validation has been run for this case yet.** {QUEUED}", ""]
         return L
@@ -2506,8 +2505,10 @@ def _case_validation_page(case, meta, p, shared):
     own_notes = lambda e: [n for n in e["notes"] if n not in CASE_CAVEATS.values()]   # the caveat is printed above  # noqa: E731
     all_notes = [n for n in own_notes(results[0]) if all(n in e["notes"] for e in results[1:])] if many else []
     figures, fig_no, tails = [], 1, []
+    if in_reading:
+        L += ["## Scores, run by run", ""]
     for e in results:
-        L += [f"## {_esc(names[e['engine']])}" + (f", configuration {_esc(e['configuration'])}" if e["configuration"] else ""), ""]
+        L += [f"{h} {_esc(names[e['engine']])}" + (f", configuration {_esc(e['configuration'])}" if e["configuration"] else ""), ""]
         if e["quantity"] and not all_quantity:
             L += [f"Quantity: {_tex(e['quantity'])}.", ""]
         if e["recirculation_Lr_over_H"] is not None:
@@ -2536,7 +2537,7 @@ def _case_validation_page(case, meta, p, shared):
         L += _sections(norm_collapsed + collapsed)
         figures += [f for f in e["figures"] if f not in figures]
     if many and (all_quantity or all_norm or all_pairs or all_notes):
-        L += ["## All runs", ""]
+        L += [f"{h} All runs", ""]
         if all_quantity:
             L += [f"- Quantity: {_tex(results[0]['quantity'])}"]
         if all_norm:
@@ -2562,12 +2563,16 @@ def _case_validation_page(case, meta, p, shared):
     own, elsewhere = [], {}
     for fig in figures:
         name = fig["url"].rsplit("/", 1)[-1]
+        if name in in_reading:
+            continue
         if name in FIGURE_HOME:
             elsewhere.setdefault(FIGURE_HOME[name], []).append(fig)
         elif name in shared:
             elsewhere.setdefault(("/validation/", "Validation"), []).append(fig)
         else:
             own.append(fig)
+    if own and in_reading:
+        raise SystemExit(f"Case {case}: figures {[f['url'] for f in own]} are neither in its reading nor on an engine page; the reading numbers its figures")
     if own:
         L += ["## Figures", ""]
     for fig in own:

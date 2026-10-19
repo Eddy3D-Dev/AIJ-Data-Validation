@@ -6,6 +6,8 @@ nav_order: 2
 has_children: false
 generated: true
 description: "Case D — high-rise among city blocks: Eddy3D's scores against the measurements, by engine."
+redirect_from:
+  - /validation/case-d/
 ---
 
 # Case D: validation
@@ -13,7 +15,11 @@ description: "Case D — high-rise among city blocks: Eddy3D's scores against th
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-grey status">not comparable</span> · FluidX3D <span class="label label-grey status">not comparable</span> · ML surrogate <span class="label label-green status">scored</span>
 
-## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor)
+{% include validation/case-d.md %}
+
+## Scores, run by run
+
+### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor)
 
 | Score | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|
@@ -34,7 +40,7 @@ Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> 
 - Per-point values: [`/api/cases/D/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/D/pairs/openfoam12-realizableKE.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCaseDContainerE2E (EDDY3D\_AIJD\_HEADINGS=0,22.5,45); figure validation/plot\_case\_d\_openfoam.py
 
-## Eddy3D ML wind surrogate (pedestrian height)
+### Eddy3D ML wind surrogate (pedestrian height)
 
 | Score | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|
@@ -49,10 +55,10 @@ Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> 
 - Per-point values: [`/api/cases/D/pairs/ml-surrogate.csv`]({{ '/api/cases/D/pairs/ml-surrogate.csv' | relative_url }})
 - Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot\_ml\_surrogate.py
 
-## All runs
+### All runs
 
 - Normalisation: velocities by $$U_H$$, $$k$$ by $$U_H^2$$ (the benchmark\'s own convention; Case E by $$U$$ at 15.9 m, as it is published); hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units
 
 ## Figures
 
-Figures: [Case D (OpenFOAM)]({{ '/validation/case-d/' | relative_url }}); [ML surrogate]({{ '/validation/ml-surrogate/' | relative_url }}).
+Figures: [ML surrogate]({{ '/validation/ml-surrogate/' | relative_url }}).

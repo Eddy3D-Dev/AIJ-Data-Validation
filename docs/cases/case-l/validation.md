@@ -13,7 +13,11 @@ description: "Case L — 9 x 14 cube array, line source, non-isothermal: Eddy3D'
 
 Engine status: OpenFOAM 12 <span class="label label-yellow status">pending</span> · UMF <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
-## urbanMicroclimateFoam, realizable k-epsilon (Eddy3D Outdoor+)
+{% include validation/case-l.md %}
+
+## Scores, run by run
+
+### urbanMicroclimateFoam, realizable k-epsilon (Eddy3D Outdoor+)
 
 Quantity: $$U$$, $$V$$, $$W$$, the speed $$\lvert\mathbf{U}\rvert$$ over $$U_H$$ = 1.3394 m/s and $$k$$ over $$U_H^2$$ (the tunnel\'s units, 344 points); theta = ($$T_f - T$$)/($$T_f - T_H$$) with $$T_f$$ = 45.01 degC and $$T_f - T_H$$ = 30.26 K; $$c^\ast = C/c_0$$ ($$c_0$$ = 1728 ppm) against the model\'s ethylene mass fraction as ppm over the same $$c_0$$, for turbulent Schmidt numbers 0.3, 0.5 and 0.7; also the 242 points at or above 30 mm, the first four fine cells above the floor. The scene is the tunnel at Froude scale 100.
 
@@ -68,7 +72,3 @@ Notes:
 - Scores recomputed from the pairs by validation/dispersion\_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`.
 
 </details>
-
-## Figures
-
-Figures: [Cases J and L (UMF)]({{ '/validation/cases-jl/' | relative_url }}).

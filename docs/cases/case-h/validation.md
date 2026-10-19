@@ -6,6 +6,8 @@ nav_order: 2
 has_children: false
 generated: true
 description: "Case H — 1:1:2 building with a floor point source: Eddy3D's scores against the measurements, by engine."
+redirect_from:
+  - /validation/cases-hi/
 ---
 
 # Case H: validation
@@ -13,7 +15,11 @@ description: "Case H — 1:1:2 building with a floor point source: Eddy3D's scor
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
-## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor)
+{% include validation/case-h.md %}
+
+## Scores, run by run
+
+### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor)
 
 Reattachment length $$L_r/H$$ = 1.36.
 
@@ -35,7 +41,3 @@ Reattachment length $$L_r/H$$ = 1.36.
 - Reproduce: Eddy3D fixture TestAijCaseHContainerE2E (realizable k-ε, 1:100) (numerics level 3, 3000 iterations); figures validation/plot\_cases\_hi\_openfoam.py
 
 - Scores recomputed from the pairs by validation/dispersion\_metrics.py.
-
-## Figures
-
-Figures: [Cases H and I (OpenFOAM)]({{ '/validation/cases-hi/' | relative_url }}).

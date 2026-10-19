@@ -1,9 +1,10 @@
 """Validation figures for AIJ UWE Cases H and I (building / cube with a point source) solved with Eddy3D / OpenFOAM.
 
-Two figures, each answering one question:
+Three figures, each answering one question:
 
-  cases-hi-openfoam-agreement.png   Does the model agree with the tunnel?  Measured against modelled U, W, k and the
-                      dimensionless concentration c*, one row per case, with the 1:1 line and the factor-of-two band.
+  case-h-openfoam-agreement.png,
+  case-i-openfoam-agreement.png     Does the model agree with the tunnel?  Measured against modelled U, W, k and the
+                      dimensionless concentration c*, one figure per case, with the 1:1 line and the factor-of-two band.
   case-i-openfoam-closures.png      Does the turbulence closure matter?  Case I under standard k-epsilon, realizable
                       k-epsilon and k-omega SST on the same mesh: U, k and c*.
 
@@ -335,22 +336,24 @@ def res(case, closure):
 
 QUANTITIES = [("U", "U_meas", "U_model", "velocity.U", "U/U$_H$"), ("W", "W_meas", "W_model", "velocity.W", "W/U$_H$"),
               ("k", "k_meas", "k_model", "k", "k/U$_H^2$"), ("c", "cstar_meas", "cstar_sct05", "cstar.c_sct05", "c* = C/c$_0$ (Sct 0.5)")]
-fig, axs = uplt.subplots(nrows=2, ncols=4, refwidth=2.0, refaspect=1, share=False, wspace=4.2, hspace=2.6)
-for row, (case, _, closure, *_rest) in enumerate([RUNS[0], RUNS[1]]):
+# One figure per case, so each case's Validation page shows its own points only.
+for case, _, closure, *_rest in (RUNS[0], RUNS[1]):
+    title = _rest[-1]
     pairs, rs = read_pairs(case, closure), res(case, closure)
     colours = np.array(layout.grouped_colours(case, pairs), dtype=object)      # the line or plane of the tunnel each point was measured on
+    fig, axs = uplt.subplots(nrows=1, ncols=4, refwidth=2.0, refaspect=1, share=False, wspace=4.2)
     for col, (tag, mk, pk, key, label) in enumerate(QUANTITIES):
-        ax = axs[row, col]
-        shown = panel(ax, column(pairs, mk), column(pairs, pk), colours, log=(tag == "c"), xlab="Tunnel [–]" if row == 1 else None, ylab="Eddy3D [–]" if col == 0 else None)
+        ax = axs[col]
+        shown = panel(ax, column(pairs, mk), column(pairs, pk), colours, log=(tag == "c"), xlab="Tunnel [–]", ylab="Eddy3D [–]" if col == 0 else None)
         extra = ""
         if tag == "c":
             extra = "\nFAC2 Sct 0.3 / 0.7: " + " / ".join(f"{rs[f'cstar.c_{sp}']['Fac2']:.2f}" for sp in ("sct03", "sct07"))
         style.stats(ax, stats_text(rs[key], shown if tag == "c" else None, extra), loc=(0.40, 0.36) if tag == "c" else (0.05, 0.80), halo="auto")
-style.finish(fig, "AIJ UWE Cases H and I — Eddy3D (OpenFOAM 12, realizable k-ε) vs wind tunnel",
-             handles=[*layout.legend_handles("H", prefix="H"), *layout.legend_handles("I", prefix="I"), style.line(style.REFERENCE, "1:1", lw=1.0),
-                      style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")],
-             ncols=4, toplabels=[q[4] for q in QUANTITIES], leftlabels=[RUNS[0][-1], RUNS[1][-1]])
-style.save(fig, "cases-hi-openfoam-agreement.png")
+    style.finish(fig, f"AIJ UWE {title} — Eddy3D (OpenFOAM 12, realizable k-ε) vs wind tunnel",
+                 handles=[*layout.legend_handles(case), style.line(style.REFERENCE, "1:1", lw=1.0),
+                          style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")],
+                 ncols=3, toplabels=[q[4] for q in QUANTITIES])
+    style.save(fig, f"case-{case.lower()}-openfoam-agreement.png")
 
 # ----------------------------------------------------------------------------- figure 2
 QI = [("U", "U_meas", "U_model", "velocity.U", "U/U$_H$"), ("k", "k_meas", "k_model", "k", "k/U$_H^2$"),

@@ -131,12 +131,12 @@
      "caption": "Case A, measurement lines and planes: A vertical profiles, y/b = 0; B plane z/b = 0.125; C plane z/b = 1.25. Positions in multiples of b."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/cases-ab-openfoam-agreement.png",
-     "caption": "Cases A and B, OpenFOAM 12 (realizable k-ε): measured against modelled U, V, W and k at every measured point, normalised by U_H, with the 1:1 line and the factor-of-two band. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-a-openfoam-agreement.png",
+     "caption": "Case A, OpenFOAM 12 (realizable k-ε): measured against modelled U, V, W and k at every measured point, normalised by U_H, with the 1:1 line and the factor-of-two band. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/cases-ab-openfoam-profiles.png",
-     "caption": "Cases A and B, OpenFOAM 12: centre-plane vertical profiles of U/U_H at the measurement stations, measured points against the modelled line."
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-a-openfoam-profiles.png",
+     "caption": "Case A, OpenFOAM 12: centre-plane vertical profiles of U/U_H at the measurement stations, measured points against the modelled line."
     }
    ],
    "pairs": {

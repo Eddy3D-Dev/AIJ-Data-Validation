@@ -50,19 +50,19 @@ Validation data from the AIJ (Architectural Institute of Japan) benchmark cases�
 **API, APA**
 
 ```text
-Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.2.0) [Data set]. Sustainable Urban Systems Lab. https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/index.json
+Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.2.1) [Data set]. Sustainable Urban Systems Lab. https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/index.json
 ```
 
 **API, BibTeX**
 
 ```bibtex
-@misc{aijuwe_api_3_2_0,
+@misc{aijuwe_api_3_2_1,
   author    = "Karadag, Ilker and Kastner, Patrick",
   title     = "{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}",
   year      = "2026",
-  version   = "3.2.0",
+  version   = "3.2.1",
   publisher = "Sustainable Urban Systems Lab",
-  url       = "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/index.json",
+  url       = "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/index.json",
   note      = "Data set; data version ecbbeee22eb3"
 }
 ```
@@ -294,7 +294,13 @@ points published on the $$y \le 0$$ half.
 error +2.0 %.
 
 **Validation (OpenFOAM 12, realizable k-ε).** Normalised by $$U_H$$; hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$.
-Reattachment length **$$L_r/H$$ = 1.49**. Mean measured $$W$$ is ~0.01 m/s. Figures: *Validation method*.
+Reattachment length **$$L_r/H$$ = 1.49**. Mean measured $$W$$ is ~0.01 m/s.
+
+<!--fig name="case-a-layout.png" alt="Case A, measurement lines and planes" width="800"--><a href="validation/figures/case-a-layout.png"><img src="docs/assets/web/case-a-layout.png" width="800" height="882" loading="lazy" alt="Case A, measurement lines and planes"></a><!--/fig-->
+
+<!--fig name="case-a-openfoam-agreement.png" alt="Case A, measured vs modelled" width="800"--><a href="validation/figures/case-a-openfoam-agreement.png"><img src="docs/assets/web/case-a-openfoam-agreement.png" width="800" height="274" loading="lazy" alt="Case A, measured vs modelled"></a><!--/fig-->
+
+<!--fig name="case-a-openfoam-profiles.png" alt="Case A, centre-plane profiles" width="800"--><a href="validation/figures/case-a-openfoam-profiles.png"><img src="docs/assets/web/case-a-openfoam-profiles.png" width="800" height="428" loading="lazy" alt="Case A, centre-plane profiles"></a><!--/fig-->
 
 | | $$U$$ | $$V$$ | $$W$$ | $$k$$ |
 |---|---|---|---|---|
@@ -328,7 +334,7 @@ prediction height: $$\lvert\mathbf{U}\rvert/U_H$$ FB +0.77, FAC2 0.26, R −0.13
 is reversed. Method: *ML surrogate* under *Validation method*.
 
 **OpenLB** at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ ($$H/10$$): $$U/U_H$$ R +0.76, FAC2 0.43 over all 186 points, FAC2 0.65 over the 121 at least two
-cells above its no-slip floor. $$L_r = 3.39\thinspace H$$. Method: *every engine on the same points*.
+cells above its no-slip floor. $$L_r = 3.39\thinspace H$$. Method: *OpenLB and FluidX3D — every engine on Cases A and B*.
 
 **FluidX3D** at $$\mathrm{d}x = H/64$$: $$U/U_H$$ R +0.84, FAC2 0.60 on the 116 points where its empty-domain control holds the
 log law.
@@ -373,7 +379,13 @@ toward $$+y$$, as in Case A.
 error +2.9 %.
 
 **Validation (OpenFOAM 12, realizable k-ε).** Normalised by $$U_H$$; hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$.
-Reattachment length **$$L_r/H$$ = 3.27**. Figures: *Validation method*.
+Reattachment length **$$L_r/H$$ = 3.27**.
+
+<!--fig name="case-b-layout.png" alt="Case B, measurement lines and planes" width="800"--><a href="validation/figures/case-b-layout.png"><img src="docs/assets/web/case-b-layout.png" width="800" height="883" loading="lazy" alt="Case B, measurement lines and planes"></a><!--/fig-->
+
+<!--fig name="case-b-openfoam-agreement.png" alt="Case B, measured vs modelled" width="800"--><a href="validation/figures/case-b-openfoam-agreement.png"><img src="docs/assets/web/case-b-openfoam-agreement.png" width="800" height="276" loading="lazy" alt="Case B, measured vs modelled"></a><!--/fig-->
+
+<!--fig name="case-b-openfoam-profiles.png" alt="Case B, centre-plane profiles" width="800"--><a href="validation/figures/case-b-openfoam-profiles.png"><img src="docs/assets/web/case-b-openfoam-profiles.png" width="800" height="448" loading="lazy" alt="Case B, centre-plane profiles"></a><!--/fig-->
 
 | | $$U$$ | $$V$$ | $$W$$ | $$k$$ |
 |---|---|---|---|---|
@@ -872,7 +884,7 @@ The pattern follows the tunnel and the field in both frames and the level depend
 model of the tunnel can be expected to reach. The solved field's R 0.935 with the NNW column and R 0.077 with the SSE
 column corroborate reading the direction labels as the direction the wind comes from, at this direction.
 
-Full reading: [Cases F and M](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/cases-fm/).
+Full reading: [Case F validation](https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-f/validation/).
 
 </details>
 
@@ -939,7 +951,7 @@ distance behind the belt; the model's falls.
   crown's mean $$U/U_H$$ is 0.554 against 0.478 measured.
 - Drag changes the level of the mean speed and leaves the pattern (R) where it was.
 
-Full reading: [Cases G and K](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/cases-gk/).
+Full reading: [Case G validation](https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-g/validation/).
 
 </details>
 
@@ -1004,13 +1016,13 @@ Full reading: [Cases G and K](https://eddy3d-dev.github.io/AIJ-Data-Validation/v
 - The concentration is well correlated and over-predicted at every Schmidt number (FB −0.60 to −0.93).
 - FAC2 on $$V$$ and $$W$$ is low by construction, and $$W$$'s FB is a near-zero mean.
 
-Full reading: [Cases H and I](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/cases-hi/).
+Full reading: [Case H validation](https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-h/validation/).
 
 </details>
 
 <!--fig name="case-h-layout.png" alt="Case H, measurement lines and planes" width="800"--><a href="validation/figures/case-h-layout.png"><img src="docs/assets/web/case-h-layout.png" width="800" height="902" loading="lazy" alt="Case H, measurement lines and planes"></a><!--/fig-->
 
-<!--fig name="cases-hi-openfoam-agreement.png" alt="Cases H and I, measured vs modelled" width="800"--><a href="validation/figures/cases-hi-openfoam-agreement.png"><img src="docs/assets/web/cases-hi-openfoam-agreement.png" width="800" height="467" loading="lazy" alt="Cases H and I, measured vs modelled"></a><!--/fig-->
+<!--fig name="case-h-openfoam-agreement.png" alt="Case H, measured vs modelled" width="800"--><a href="validation/figures/case-h-openfoam-agreement.png"><img src="docs/assets/web/case-h-openfoam-agreement.png" width="800" height="282" loading="lazy" alt="Case H, measured vs modelled"></a><!--/fig-->
 
 **Known issues.** 7 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/H.json`](docs/api/cases/H.json).
 
@@ -1072,11 +1084,13 @@ k-ε closures, 0.40 under k-ω SST; $$c^\ast$$ R at $$\mathrm{Sc_t}$$ 0.5 0.96, 
 - Mean velocity does not separate the closures; $$k$$ does, and so does the concentration.
 - This ranks three closures on one cube and one mesh.
 
-Full reading: [Cases H and I](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/cases-hi/).
+Full reading: [Case I validation](https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-i/validation/).
 
 </details>
 
 <!--fig name="case-i-layout.png" alt="Case I, measurement lines and planes" width="800"--><a href="validation/figures/case-i-layout.png"><img src="docs/assets/web/case-i-layout.png" width="800" height="1474" loading="lazy" alt="Case I, measurement lines and planes"></a><!--/fig-->
+
+<!--fig name="case-i-openfoam-agreement.png" alt="Case I, measured vs modelled" width="800"--><a href="validation/figures/case-i-openfoam-agreement.png"><img src="docs/assets/web/case-i-openfoam-agreement.png" width="800" height="280" loading="lazy" alt="Case I, measured vs modelled"></a><!--/fig-->
 
 <!--fig name="case-i-openfoam-closures.png" alt="Case I under three turbulence closures" width="800"--><a href="validation/figures/case-i-openfoam-closures.png"><img src="docs/assets/web/case-i-openfoam-closures.png" width="800" height="796" loading="lazy" alt="Case I under three turbulence closures"></a><!--/fig-->
 
@@ -1142,7 +1156,7 @@ than the tunnel by 3.5 K on average (3.6 K under bKε).
 - The tracer's bias changes sign with the Schmidt number.
 - The two closures differ little in the flow and more in the tracer.
 
-Full reading: [Cases J and L](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/cases-jl/).
+Full reading: [Case J validation](https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-j/validation/).
 
 </details>
 
@@ -1213,7 +1227,7 @@ The four points within one cube height of the source are 3.7 to 5.1 times the me
   near-source points follows from the model's source: a zone of four cells (0.75 m across) where the tunnel's outlet is
   5 mm.
 
-Full reading: [Cases G and K](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/cases-gk/).
+Full reading: [Case K validation](https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-k/validation/).
 
 </details>
 
@@ -1283,7 +1297,7 @@ than the tunnel by 1.2 K on average.
 - $$V$$ and $$W$$ carry no pattern; $$k$$ is low (R 0.15).
 - The tracer is correlated (R 0.75 to 0.80) and high (FB −0.50 to −0.73).
 
-Full reading: [Cases J and L](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/cases-jl/).
+Full reading: [Case L validation](https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-l/validation/).
 
 </details>
 
@@ -1356,7 +1370,7 @@ Full reading: [Cases J and L](https://eddy3d-dev.github.io/AIJ-Data-Validation/v
 - The mirrored points score better than the real points: the modelled plume is displaced sideways against the tunnel's.
 - The mean streamwise velocity is low while the magnitude is close.
 
-Full reading: [Cases F and M](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/cases-fm/).
+Full reading: [Case M validation](https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-m/validation/).
 
 </details>
 
@@ -1377,73 +1391,10 @@ Full reading: [Cases F and M](https://eddy3d-dev.github.io/AIJ-Data-Validation/v
 
 Each case is solved through Eddy3D's production case writer (`build-case → run → probe`). The probe sits at **exactly
 the tunnel's own measurement coordinates**, so no interpolation enters the comparison. Cases C–E measure an
-omnidirectional *scalar* speed with thermistors, so the model is scored as $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ and as $$\lvert\mathbf{U}\rvert$$. Case C's figures are
-in its own section above.
+omnidirectional *scalar* speed with thermistors, so the model is scored as $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ and as $$\lvert\mathbf{U}\rvert$$. Each case's figures
+are in its own section above.
 
-### Cases A and B — measured against modelled
-
-<!--fig name="case-a-layout.png" alt="Case A, measurement lines and planes" width="800"--><a href="validation/figures/case-a-layout.png"><img src="docs/assets/web/case-a-layout.png" width="800" height="882" loading="lazy" alt="Case A, measurement lines and planes"></a><!--/fig-->
-
-<!--fig name="case-b-layout.png" alt="Case B, measurement lines and planes" width="800"--><a href="validation/figures/case-b-layout.png"><img src="docs/assets/web/case-b-layout.png" width="800" height="883" loading="lazy" alt="Case B, measurement lines and planes"></a><!--/fig-->
-
-<!--fig name="cases-ab-openfoam-agreement.png" alt="Measured vs modelled, Cases A and B" width="800"--><a href="validation/figures/cases-ab-openfoam-agreement.png"><img src="docs/assets/web/cases-ab-openfoam-agreement.png" width="800" height="441" loading="lazy" alt="Measured vs modelled, Cases A and B"></a><!--/fig-->
-
-Measured against modelled for each quantity, with the 1:1 line and, where the quantity does not
-change sign, the factor-of-two band.
-
-| | A — $$U$$ | A — $$V$$ | A — $$W$$ | A — $$k$$ | B — $$U$$ | B — $$V$$ | B — $$W$$ | B — $$k$$ |
-|---|---|---|---|---|---|---|---|---|
-| **R** | +0.955 | +0.961 | +0.708 | +0.480 | +0.959 | +0.910 | +0.929 | +0.399 |
-| **FAC2** | 0.817 | 0.349 | 0.398 | 0.667 | 0.701 | 0.281 | 0.536 | 0.562 |
-| **FB** | +0.185 | −0.207 | −1.501 | +0.478 | +0.240 | +0.370 | +0.263 | +0.463 |
-| **hit rate** | 0.586 | 0.892 | 0.801 | 0.177 | 0.562 | 0.612 | 0.808 | 0.223 |
-
-<!--nomenclature scores-->
-
-**Nomenclature**
-
-- $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
-- $$R$$ — Pearson correlation coefficient of the pairs
-- $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
-- $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
-- $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
-
-**Quantities scored**
-
-- $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$U_H$$
-- $$k$$ (turbulent kinetic energy) over $$U_H^2$$
-- the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
-- $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
-- $$\theta$$ (floor-referenced temperature)
-
-<!--/nomenclature-->
-
-Normalised by $$U_H$$, the benchmark's convention. Hit rate uses $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$.
-Reattachment length behind the building: **$$L_r/H$$ = 1.49** (Case A), **3.27** (Case B).
-
-### Cases A and B — centre-plane profiles
-
-<!--fig name="cases-ab-openfoam-profiles.png" alt="Centre-plane profiles, Cases A and B" width="800"--><a href="validation/figures/cases-ab-openfoam-profiles.png"><img src="docs/assets/web/cases-ab-openfoam-profiles.png" width="800" height="417" loading="lazy" alt="Centre-plane profiles, Cases A and B"></a><!--/fig-->
-
-Vertical profiles of $$U/U_H$$ on the centre plane at the first three measured stations behind the building, offset per
-station.
-
-<details markdown="block">
-<summary>Interpretation: Cases A and B scores and profiles</summary>
-
-- The streamwise field is right: $$R \approx 0.96$$ in both cases, FAC2 0.82 / 0.70.
-- $$k$$ is under-predicted in both (FB ≈ +0.47, $$R \approx 0.4$$); Case H shows the same under-prediction (FB +0.51).
-- $$V$$ and $$W$$ change sign, so factor-of-two agreement is a harsh measure near zero and FAC2 is low on both; R and hit rate
-  carry the comparison there. The flat row of model $$V$$ ≈ 0 in Case B's panel is the symmetry plane: a RANS solution is
-  symmetric, so $$V$$ ≡ 0 at $$y = 0$$, while the tunnel measures small non-zero values.
-- Case A's $$W$$ FB of −1.50 and its NMSE follow from a near-zero mean (mean measured $$W$$ is ~0.01 m/s); the $$W$$ correlation is
-  $$R = +0.71$$.
-- The model follows the measured profile closely above roof height and in the recovering wake; the near-ground deficit
-  immediately behind the building is where the closure does least well.
-
-</details>
-
-### Cases A and B — every engine on the same points
+### OpenLB and FluidX3D — every engine on Cases A and B
 
 <!--fig name="cases-ab-engine-comparison.png" alt="Measured vs modelled U and V, Cases A and B, one row per engine" width="800"--><a href="validation/figures/cases-ab-engine-comparison.png"><img src="docs/assets/web/cases-ab-engine-comparison.png" width="800" height="595" loading="lazy" alt="Measured vs modelled U and V, Cases A and B, one row per engine"></a><!--/fig-->
 

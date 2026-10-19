@@ -13,7 +13,11 @@ description: "Case M — TPU Atsugi campus: Eddy3D's scores against the measurem
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
-## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration sct03
+{% include validation/case-m.md %}
+
+## Scores, run by run
+
+### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration sct03
 
 Quantity: $$U$$, $$V$$, $$W$$ and $$k$$ at the 15 points of the tunnel\'s WD 180 run over the tunnel\'s $$U_R$$ = 4.08 m/s (measured) and over the solved speed at the reference mast (modelled; $$U_R$$ is defined at the mast), and the dimensionless concentration $$c^\ast = C/c_0$$ ($$c_0 = \dfrac{q}{U_R H_R^2}$$ = 132.5 ppm) against the model\'s $$c\thinspace U_R H_R^2/Q$$ for turbulent Schmidt number 0.3; the 18-run field campaign is compared as well.
 
@@ -53,7 +57,7 @@ Notes:
 - Controls on the same solution: the points turned 180° about the source score R -0.05, FAC2 0.07, FB +2.00 (14 of the 15 lie in the fluid; the model\'s mean over those points is 7.3e-06 against 0.186 at the real ones), and the points mirrored across the plume axis score R +0.68, FAC2 0.47, FB +0.32 (the real points: R +0.41, FAC2 0.20, FB +1.40).
 - Field campaign (18 runs): the 10 runs within 10° of 180 at 3 m/s or more, each with its own $$U_R$$ and q and $$H_R$$ = 41 m as the cleaned table states (the scores divide by 40.8 m, a 1 % difference). The model against the field\'s geometric mean scores R +0.46, FAC2 0.07, FB +1.01, and lies inside the field\'s minimum-maximum range at 2 of 15 points; the tunnel\'s WD 180 against the same mean scores R +0.98, FAC2 0.60, FB -0.59; the spread of the field at point 1 is a factor of 4.5.
 
-## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration sct05
+### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration sct05
 
 Quantity: $$U$$, $$V$$, $$W$$ and $$k$$ at the 15 points of the tunnel\'s WD 180 run over the tunnel\'s $$U_R$$ = 4.08 m/s (measured) and over the solved speed at the reference mast (modelled; $$U_R$$ is defined at the mast), and the dimensionless concentration $$c^\ast = C/c_0$$ ($$c_0 = \dfrac{q}{U_R H_R^2}$$ = 132.5 ppm) against the model\'s $$c\thinspace U_R H_R^2/Q$$ for turbulent Schmidt number 0.5; the 18-run field campaign is compared as well.
 
@@ -93,7 +97,7 @@ Notes:
 - Controls on the same solution: the points turned 180° about the source score R -0.06, FAC2 0.07, FB +2.00 (14 of the 15 lie in the fluid; the model\'s mean over those points is 9.2e-06 against 0.143 at the real ones), and the points mirrored across the plume axis score R +0.65, FAC2 0.40, FB +0.22 (the real points: R +0.25, FAC2 0.20, FB +1.52).
 - Field campaign (18 runs): the 10 runs within 10° of 180 at 3 m/s or more, each with its own $$U_R$$ and q and $$H_R$$ = 41 m as the cleaned table states (the scores divide by 40.8 m, a 1 % difference). The model against the field\'s geometric mean scores R +0.28, FAC2 0.07, FB +1.20, and lies inside the field\'s minimum-maximum range at 2 of 15 points; the tunnel\'s WD 180 against the same mean scores R +0.98, FAC2 0.60, FB -0.59; the spread of the field at point 1 is a factor of 4.5.
 
-## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration sct07
+### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration sct07
 
 Quantity: $$U$$, $$V$$, $$W$$ and $$k$$ at the 15 points of the tunnel\'s WD 180 run over the tunnel\'s $$U_R$$ = 4.08 m/s (measured) and over the solved speed at the reference mast (modelled; $$U_R$$ is defined at the mast), and the dimensionless concentration $$c^\ast = C/c_0$$ ($$c_0 = \dfrac{q}{U_R H_R^2}$$ = 132.5 ppm) against the model\'s $$c\thinspace U_R H_R^2/Q$$ for turbulent Schmidt number 0.7; the 18-run field campaign is compared as well.
 
@@ -133,7 +137,7 @@ Notes:
 - Controls on the same solution: the points turned 180° about the source score R -0.06, FAC2 0.07, FB +2.00 (14 of the 15 lie in the fluid; the model\'s mean over those points is 1.0e-05 against 0.125 at the real ones), and the points mirrored across the plume axis score R +0.65, FAC2 0.40, FB +0.18 (the real points: R +0.20, FAC2 0.13, FB +1.58).
 - Field campaign (18 runs): the 10 runs within 10° of 180 at 3 m/s or more, each with its own $$U_R$$ and q and $$H_R$$ = 41 m as the cleaned table states (the scores divide by 40.8 m, a 1 % difference). The model against the field\'s geometric mean scores R +0.22, FAC2 0.07, FB +1.29, and lies inside the field\'s minimum-maximum range at 2 of 15 points; the tunnel\'s WD 180 against the same mean scores R +0.98, FAC2 0.60, FB -0.59; the spread of the field at point 1 is a factor of 4.5.
 
-## All runs
+### All runs
 
 - Per-point values: [`/api/cases/M/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/M/pairs/openfoam12-realizableKE.csv' | relative_url }})
 
@@ -166,7 +170,3 @@ The tracer goes downwind: the model\'s mean over the points turned 180° about t
 - Scores recomputed from the pairs by validation/dispersion\_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`.
 
 </details>
-
-## Figures
-
-Figures: [Cases F and M (OpenFOAM)]({{ '/validation/cases-fm/' | relative_url }}).

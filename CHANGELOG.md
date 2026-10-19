@@ -15,6 +15,20 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [3.2.1] - 2026-10-19
+
+One page per case. Each case's Validation page carries its whole reading; no page reads two cases together.
+
+### Changed
+
+- `/api/cases/{A,B,H,I}/validation.json`: the OpenFOAM 12 figures are drawn one per case, `case-{a,b}-openfoam-agreement.png`,
+  `case-{a,b}-openfoam-profiles.png` and `case-{h,i}-openfoam-agreement.png`, in place of the figures that drew Cases A and B,
+  and Cases H and I, together. The earlier figures stay served at their URLs for the releases that name them.
+- Site: the measurement layout, the figures and the interpretation of each case are on its own Validation page
+  (`/cases/case-x/validation/`). The pages that read two cases together (Cases A and B, F and M, G and K, H and I, J and L) and
+  the separate pages of Cases C, D and E are gone; their addresses redirect to the case's page. The Validation section keeps the
+  pages that span cases: the method, the inflow, OpenLB and FluidX3D, and the ML surrogate.
+
 ## [3.2.0] - 2026-10-18
 
 Validate your own solver. The benchmark becomes usable by anyone scoring a wind solver or ML model: the points to probe,

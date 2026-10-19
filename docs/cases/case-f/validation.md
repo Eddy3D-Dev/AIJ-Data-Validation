@@ -6,6 +6,8 @@ nav_order: 2
 has_children: false
 generated: true
 description: "Case F — Shinjuku district: Eddy3D's scores against the measurements, by engine."
+redirect_from:
+  - /validation/cases-fm/
 ---
 
 # Case F: validation
@@ -13,7 +15,11 @@ description: "Case F — Shinjuku district: Eddy3D's scores against the measurem
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
-## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration literal
+{% include validation/case-f.md %}
+
+## Scores, run by run
+
+### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration literal
 
 Quantity: the thermistor\'s (tunnel) and the cup anemometer\'s (field) mean speed over $$U(500\text{ m})$$ against the model\'s $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ over its own approach $$U(500\text{ m})$$ = 9.862 m/s (probed 1100 m upwind of the centre; the imposed $$U(500\text{ m})$$ is 10 m/s), at the 33 tunnel points (planes at 5, 9 and 20 m) and the 13 field observations of wind from NNW; frame literal.
 
@@ -48,7 +54,7 @@ Notes:
 - Frame \'literal\': the model is probed at the published z in the STL\'s frame. The readme says z is measured from the tunnel floor and the ground is z - 10 m, but the STL\'s own ground under all 13 points is 5 m, so the 5, 9 and 20 m planes are probed 10, 14 and 25 m above the STL\'s ground (height\_above\_stl\_ground in the pairs). The other frame, \'agl\' (the STL\'s ground plus 5, 9 and 20 m), is the other run of this case. The files do not say which frame the tunnel meant: the 9 m plane\'s $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ scores R 0.93 and FB +0.04 in the literal frame and R 0.94 and FB +0.13 in the agl frame.
 - Both sides are $$U/U(500\text{ m})$$: the tunnel\'s ratio is as published, the model\'s is over its own approach $$U(500\text{ m})$$ = 9.862 m/s, probed 1100 m upwind of the centre (0.986 of the imposed 10 m/s). Over the imposed 10 m/s the 9 m plane\'s $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ scores R 0.93 and FB +0.05.
 
-## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration agl
+### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration agl
 
 Quantity: the thermistor\'s (tunnel) and the cup anemometer\'s (field) mean speed over $$U(500\text{ m})$$ against the model\'s $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ over its own approach $$U(500\text{ m})$$ = 9.862 m/s (probed 1100 m upwind of the centre; the imposed $$U(500\text{ m})$$ is 10 m/s), at the 33 tunnel points (planes at 5, 9 and 20 m) and the 13 field observations of wind from NNW; frame agl.
 
@@ -84,7 +90,7 @@ Notes:
 - At the 4 m surface cells of the mesh the lowest probes of this frame (the 7 points of the 5 m plane, 1.25 cells above the ground, and the field\'s point at 3 m) sit in the first cell, where the point interpolation is pulled toward the wall\'s zero.
 - Both sides are $$U/U(500\text{ m})$$: the tunnel\'s ratio is as published, the model\'s is over its own approach $$U(500\text{ m})$$ = 9.862 m/s, probed 1100 m upwind of the centre (0.986 of the imposed 10 m/s). Over the imposed 10 m/s the 9 m plane\'s $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ scores R 0.94 and FB +0.14.
 
-## All runs
+### All runs
 
 - Normalisation: the thermistor\'s (tunnel) and the cup anemometer\'s (field) mean speed over $$U(500\text{ m})$$, the benchmark\'s own ratio, against the model\'s $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ over its own approach $$U(500\text{ m})$$ = 9.862 m/s (the imposed $$U(500\text{ m})$$ is 10 m/s); hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units; 33 tunnel points and 13 field observations of wind from NNW; FB is positive when the model is low
 - Per-point values: [`/api/cases/F/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/F/pairs/openfoam12-realizableKE.csv' | relative_url }})
@@ -113,7 +119,3 @@ The modelled $$\lvert\mathbf{U}\rvert$$ is the lower bound. $$\sqrt{\lvert\mathb
 - Scores recomputed from the pairs by validation/dispersion\_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`.
 
 </details>
-
-## Figures
-
-Figures: [Cases F and M (OpenFOAM)]({{ '/validation/cases-fm/' | relative_url }}).

@@ -6,6 +6,8 @@ nav_order: 2
 has_children: false
 generated: true
 description: "Case J — 1:1:2 building, non-isothermal: Eddy3D's scores against the measurements, by engine."
+redirect_from:
+  - /validation/cases-jl/
 ---
 
 # Case J: validation
@@ -13,7 +15,11 @@ description: "Case J — 1:1:2 building, non-isothermal: Eddy3D's scores against
 
 Engine status: OpenFOAM 12 <span class="label label-yellow status">pending</span> · UMF <span class="label label-green status">scored</span> · UMF buoyantKEpsilon <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
-## urbanMicroclimateFoam, realizable k-epsilon (Eddy3D Outdoor+)
+{% include validation/case-j.md %}
+
+## Scores, run by run
+
+### urbanMicroclimateFoam, realizable k-epsilon (Eddy3D Outdoor+)
 
 | Score | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|
@@ -42,7 +48,7 @@ Notes:
 - The air region ended at its 1500-iteration cap with the residualControl unmet (no \'solution converged\' line); at the last iteration the initial residuals were 1.3e-2 ($$U_y$$), 1.5e-2 (`p_rgh`) and 1.1e-3 to 1.7e-3 (the tracers).
 - The steady closure gives a longer recirculation than the tunnel: reattachment at $$z/H = 0.25\text{ and }0.025$$ is $$1.35\thinspace H$$ and $$1.35\thinspace H$$, against the measured $$0.68\thinspace H$$ and $$0.80\thinspace H$$.
 
-## urbanMicroclimateFoam, buoyantKEpsilon (Eddy3D Outdoor+)
+### urbanMicroclimateFoam, buoyantKEpsilon (Eddy3D Outdoor+)
 
 | Score | R | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|
@@ -71,7 +77,7 @@ Notes:
 - The air region ended at its 1500-iteration cap with the residualControl unmet (no \'solution converged\' line); at the last iteration the initial residuals were 1.3e-2 ($$U_y$$), 1.1e-2 (`p_rgh`) and 1.2e-3 to 1.6e-3 (the tracers).
 - The steady closure gives a longer recirculation than the tunnel: reattachment at $$z/H = 0.25\text{ and }0.025$$ is $$1.35\thinspace H$$ and $$1.56\thinspace H$$, against the measured $$0.68\thinspace H$$ and $$0.80\thinspace H$$.
 
-## All runs
+### All runs
 
 - Quantity: $$U$$, $$V$$, $$W$$ over $$U_H$$ = 1.4581 m/s and $$k$$ over $$U_H^2$$ (the tunnel\'s units, 443 distinct points); theta = ($$T_f - T$$)/($$T_f - T_H$$) with $$T_f$$ = 318.95 K and $$T_H$$ = 285.32 K; $$c^\ast = C/c_0$$ ($$c_0$$ = 12.28 ppm) against the model\'s ethylene mass fraction as ppm over the same $$c_0$$, for turbulent Schmidt numbers 0.3, 0.5 and 0.7; the 27 points within a quarter of a building height of the source are scored with and without. The scene is the tunnel at Froude scale 62.5
 - Normalisation: the tunnel\'s units: velocities by $$U_H$$ (1.4581 m/s measured, the Froude-scaled 11.53 m/s modelled), $$k$$ by $$U_H^2$$, temperature as theta = ($$T_f - T$$)/($$T_f - T_H$$) ($$T_f$$ = 45.8 degC, $$T_f - T_H$$ = 33.63 K), $$c^\ast = C/c_0$$ ($$c_0$$ = 12.28 ppm) against the modelled ethylene mass fraction as ppm over the same $$c_0$$; hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units, concentration with one detection limit of $$10^{-3}$$ of the largest measured value; 443 points (point 153 repeats point 1)
@@ -97,7 +103,3 @@ At the model\'s Re, UMF\'s wall functions belong and the tunnel\'s laminar-subla
 - Scores recomputed from the pairs by validation/dispersion\_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`.
 
 </details>
-
-## Figures
-
-Figures: [Cases J and L (UMF)]({{ '/validation/cases-jl/' | relative_url }}).

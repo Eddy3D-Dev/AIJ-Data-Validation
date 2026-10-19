@@ -13,7 +13,11 @@ description: "Case K — 9 x 9 cube array, point source: Eddy3D's scores against
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
-## OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor)
+{% include validation/case-k.md %}
+
+## Scores, run by run
+
+### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor)
 
 Quantity: $$U$$, $$V$$, $$W$$ over the stated $$U_H$$ = 2.33 m/s and $$k$$ over $$U_H^2$$ (split fibre, 203 points); $$c^\ast = C/c_0$$ ($$c_0 = \dfrac{q}{U_H H^2}$$ = 429.2 ppm) against the model\'s $$c\thinspace U_H H^2/Q$$ for turbulent Schmidt numbers 0.3, 0.5 and 0.7; the four points within one cube height of the source are scored with and without.
 
@@ -63,7 +67,3 @@ The modelled velocity sits under the measured mean. The y-symmetric ceiling is t
 - Scores recomputed from the pairs by validation/dispersion\_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`.
 
 </details>
-
-## Figures
-
-Figures: [Cases G and K (OpenFOAM)]({{ '/validation/cases-gk/' | relative_url }}).

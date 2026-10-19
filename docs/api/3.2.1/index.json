@@ -1,0 +1,1722 @@
+{
+ "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/index.schema.json",
+ "schema_version": "2.5.0",
+ "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
+ "license": "CC-BY-4.0",
+ "name": "AIJ UWE — cleaned data API",
+ "description": "Static JSON/CSV/STL endpoints for the Architectural Institute of Japan Urban Wind Environment benchmark (Cases A-M) and Eddy3D's validation against it. Every file is a plain HTTP GET; nothing is computed on request.",
+ "base_url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1",
+ "tree": "release",
+ "release_base_url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1",
+ "versions_url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/versions.json",
+ "fallback_base_url": "https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/v3.2.1/docs/api/3.2.1",
+ "fallback_note": "the same files, served raw from the repository at the tag v3.2.1, which never moves (use when the Pages site is not reachable)",
+ "repository": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation",
+ "site": "https://eddy3d-dev.github.io/AIJ-Data-Validation",
+ "versions": {
+  "release": "3.2.1",
+  "schema": "2.5.0",
+  "data": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
+  "clean_manifest": "3.2.1"
+ },
+ "release": {
+  "version": "3.2.1",
+  "date": "2026-10-19",
+  "tag": "v3.2.1",
+  "url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/releases/tag/v3.2.1",
+  "base_url": "https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/v3.2.1/docs/api/3.2.1",
+  "changelog": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/v3.2.1/CHANGELOG.md"
+ },
+ "compatibility": "Semantic versioning, twice. `versions.release` versions what is served (MAJOR: a file, field or column renamed or removed, or a unit or frame changed; MINOR: something added; PATCH: a value corrected). Every release is also a frozen copy of the whole API under `/api/<release>/` whose files never change (`release_base_url`; all releases in versions.json), and the unversioned /api/ paths always equal the newest release: pin an analysis to a release by using that release's base URL. `schema_version` versions this JSON contract: within a major version it only adds new fields, endpoints and runs, clients must ignore fields they do not know, and a field is renamed or removed only in a new major version, which the changelog names. `data_version` is a fingerprint: the SHA-256 of the served data.",
+ "caching": "GitHub Pages sends JSON with a 10-minute max-age and CSV and ZIP files with a 186-day max-age. Every download URL therefore carries ?v=<first 12 hex digits of the file's SHA-256>: the server ignores the query, and a changed file gets a new URL. Fetch the JSON documents for the current URLs; check downloads against `sha256`.",
+ "changelog": [
+  {
+   "version": "2.5.0",
+   "date": "2026-10-18",
+   "changes": [
+    "Added: cases/{id}/probes.csv, the published points to probe, one row per measured row of the point table: the key columns a scored file carries (point_id, config, campaign, instrument, run, wind_direction_deg), x y z in the case frame, and `scored_as`, the families the row is scored in (vector, k, thermistor_bracket, concentration, theta). Linked from cases/{id}.json `probes`.",
+    "Added to cases/{id}.json: `scoring` (the reference speed the measured side is divided by, the constants of theta, the conventions and the metric meanings: what validation/score_submissions.py scores with) and `inflow` (the benchmark's approach-flow data and fit under `benchmark_data`; the inlet this repository RECOMMENDS under `recommended`, a log law from the fit with k and epsilon from the neutral ABL relations, or the tabulated profile where no log law fits; the flow-direction convention; what Eddy3D's runs used, quoted from their snapshots).",
+    "Added: submissions.json and submissions/{slug}.json, the community results: every folder under submissions/ in the repository, scored in this build by validation/score_submissions.py (run it from a checkout to score your own), with each submission's own values at the published points served as submissions/{slug}/{id}.csv. A submission names its `solver` as free text (a slug); Eddy3D's engines keep the `engine` enum and the validation documents. The repository's own example (`example: true`) is served like any other and marked.",
+    "Added: cases/{id}/inflow_openfoam.txt, the recommended inlet as OpenFOAM 12 files in one text: 0/U, 0/k and 0/epsilon (atmBoundaryLayerInlet* where a log law fits, fixedProfile tables where not), 0/nut with the nutkAtmRoughWallFunction ground patch, and system/probes, a probes function object with the case's published points.",
+    "Changed: index.json `license_detail` says what the licence covers: the data CC BY 4.0 (LICENSE-DATA), the code MIT (LICENSE)."
+   ]
+  },
+  {
+   "version": "2.4.0",
+   "date": "2026-10-18",
+   "changes": [
+    "Added to index.json: `cite.api`, the citation of the API release (`title`, `version`, `url`, `release_url`, `doi`, `apa`, `bibtex`, `csl_json`). `url` is the pinned address of the release, `/api/<release>/index.json`; `doi` is null until Zenodo mints one for the release.",
+    "Added to cases/{id}.json: `citation`, the Zenodo dataset of the case as `apa` and `bibtex`.",
+    "Added to the `stats` of geometry.json and to the entries of the geometry index: `bodies`, `body_contacts`, `inconsistent_triangles` and `min_body_volume`, beside `edges_boundary`. `watertight` is true when every body is closed, consistently wound and positive in volume.",
+    "Changed: the `geometry.stl` of Cases E, F and M. Every body is a closed, consistently wound, outward body; Cases F and M stand on a 1 m base slab, so the bounding box of each starts at z = -1 m, and `triangles` and `data_version` change with the files.",
+    "Added: the layout figure of each case, `case-<id>-layout.png`, is the first entry of `figures` of the validation results of that case (Cases A to M); the agreement figures colour their points by the groups of that figure."
+   ]
+  },
+  {
+   "version": "2.3.0",
+   "date": "2026-10-18",
+   "changes": [
+    "Added: release-numbered paths. Every release is a frozen copy of the whole API under `/api/<release>/` (for example `/api/3.0.0/index.json`, `/api/3.0.0/cases/F.json`). Every URL to a file of the API inside a copy points into the same copy (versions.json, served only at the unversioned path, aside), so a client that starts there never leaves it, and nothing under it changes once the release is tagged. The unversioned `/api/` paths are unchanged and always equal the newest release (the `latest` alias).",
+    "Added: `/api/versions.json` (schema `versions`), the list of every release, newest first: version, date, status (`latest` or `superseded`), schema_version, data_version, base_url, tag, release page and changelog. Release 2.0.0 predates the layout and is not regenerated: `/api/2.0.0/` holds the files of its tag byte for byte, with only their own addresses rewritten into the copy (scripts/host_release.py derives it and the release check re-derives it).",
+    "Added to index.json: `tree` (`release` in a frozen copy, `latest` in the alias), `release_base_url` (the frozen copy of `versions.release`; equal to `base_url` inside that copy) and `versions_url`. In a frozen copy `base_url` and `fallback_base_url` name that copy, and `release.base_url` (the raw files at the release tag) now ends in the release number; paths below it are unchanged.",
+    "Added: Cases F to M, thirteen cases in all (the `case_ids` of index.json): their cases.json entries, `cases/{id}.json`, points, approach flow, geometry (STL) and validation documents, and `pairs` files for the runs that exist. Every case has at least one scored run; an engine that has none for a case is `pending` there. `cases.json` and `validation.json` list thirteen cases (the schemas fixed the length at five).",
+    "Added: the point table's columns of schema 2.0.0 (the cleaned release) are served in `points.json` and `points.csv`: `campaign` and `run`, `uv` `uw` `vw`, `C` `c_rms` `concentration_ratio`, `T` `T_rms`, `uc` `vc` `wc`, `uT` `vT` `wT`, `velocity_ratio_sd` and `k_ratio`; `instrument` takes the new values `cup_anemometer`, `sonic_anemometer`, `ldv`, `hydrocarbon_analyser` and `sorbent_gc_ecd`. A document lists only the columns a case has.",
+    "Added: four engines, `openfoam12-kEpsilon` and `openfoam12-kOmegaSST`, which exist for Case I only (the closures other than realizable k-epsilon, solved on one mesh), and `umf-realizableKE` and `umf-buoyantKEpsilon`, Eddy3D's buoyant microclimate engine (urbanMicroclimateFoam, an OpenFOAM 12 solver) under its two closures, which exist for Cases J and L (`umf-buoyantKEpsilon` for J only). `engines` in `cases.json` and `cases/{id}.json` lists an engine only for the cases it applies to.",
+    "Added to each result of validation.json: `notes`, a list of the caveats that come with the run (what the model leaves out, what the measurement cannot say, how the solve ended); empty where the run has none recorded. Cases F, G and M have several runs on one engine (Case F: one per vertical frame, Case G: one per arm of a drag sweep, Case M: one per turbulent Schmidt number, each as `configuration`), all sharing the engine's pairs file; the first column of Case F's and Case G's names the frame or the arm, and Case M's holds the three Schmidt numbers as columns."
+   ]
+  },
+  {
+   "version": "2.2.0",
+   "date": "2026-10-18",
+   "changes": [
+    "Added: `versions.release`, the semantic version of the published data and API (the repository's VERSION; tag vX.Y.Z; rules in CHANGELOG.md), and `release` with its date, tag, release page and `base_url`, the raw files of exactly that release (the tag never moves). `schema_version` stays the version of this JSON contract."
+   ]
+  },
+  {
+   "version": "2.1.0",
+   "date": "2026-10-15",
+   "changes": [
+    "Correction: index.json gave each templated endpoint (cases/{id}.json, schemas/{name}.schema.json, ...) its URI template under `url`, which is not a URL and answered 404 when followed. A templated endpoint now says `templated: true` and lists every concrete file under `urls`; `url` is given only for single-file endpoints, and no URL anywhere contains a brace. llms.txt lists the concrete files the same way."
+   ]
+  },
+  {
+   "version": "2.0.0",
+   "date": "2026-10-15",
+   "changes": [
+    "Breaking: cases/{id}.json `gotchas` is renamed `known_issues`.",
+    "Breaking: `licence` is replaced by `license`, the SPDX identifier CC-BY-4.0; index.json `licence_detail` is `license_detail`.",
+    "Breaking: `generated_from` and `generated_at` are removed. `data_version`, a SHA-256 over every served measurement, geometry and score file, changes when, and only when, the data does; the build is reproducible byte for byte.",
+    "Breaking: links to JSON resources are named `url` (was `file`, `endpoint`, `endpoint_json`); file downloads are objects with `url`, `path`, `media_type`, `bytes` and `sha256` (points `csv`, approach-flow `csv`, run `pairs`, geometry files, the archive, and every entry of index.json `files`).",
+    "Breaking: a validation result's `figures` is a list of {url, caption}.",
+    "Added: validation.json, every case and engine in one table with each run's headline scores.",
+    "Added: cases/{id}/pairs/{engine}.csv, the per-point measured and modelled values behind every scored run, so any score can be recomputed; linked from each result as `pairs`.",
+    "Added: cases/{id}/approach_flow.csv, the measured approach-flow profile in SI units.",
+    "Added: schemas/{name}.schema.json, the JSON Schema (draft 2020-12) of every document, named by its `$schema` and embedded in openapi.json.",
+    "Added: `run_id` on every validation result; geometry renders and captions in geometry.json.",
+    "Added: download URLs carry `?v=<SHA-256 prefix>`, so a changed file has a new URL and no cache serves a stale copy.",
+    "Added: /llms.txt at the site root, and schema.org Dataset metadata on the home page."
+   ]
+  },
+  {
+   "version": "1.0.0",
+   "date": "2026-10-14",
+   "changes": [
+    "First release."
+   ]
+  }
+ ],
+ "endpoints": [
+  {
+   "path": "index.json",
+   "method": "GET",
+   "media_type": "application/json",
+   "description": "every endpoint and file with its size and SHA-256, versions, compatibility policy, changelog, licence, how to cite the API (cite.api)",
+   "schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/index.schema.json",
+   "templated": false,
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/index.json"
+  },
+  {
+   "path": "versions.json",
+   "method": "GET",
+   "media_type": "application/json",
+   "description": "every release, newest first: version, date, status (latest or superseded), schema and data version, base URL, tag, changelog; always at the unversioned /api/ path",
+   "schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/versions.schema.json",
+   "templated": false,
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/versions.json"
+  },
+  {
+   "path": "cases.json",
+   "method": "GET",
+   "media_type": "application/json",
+   "description": "every case: id, title, frame, units, counts, engine status, links",
+   "schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/cases.schema.json",
+   "templated": false,
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases.json"
+  },
+  {
+   "path": "cases/{id}.json",
+   "method": "GET",
+   "media_type": "application/json",
+   "description": "one case in full: configurations, frame, units, inflow fit and approach-flow profile, point-table summary, geometry files, validation status, known data issues, attribution, citation of the case's dataset",
+   "schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/case.schema.json",
+   "templated": true,
+   "urls": [
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M.json"
+   ]
+  },
+  {
+   "path": "cases/{id}/points.json",
+   "method": "GET",
+   "media_type": "application/json",
+   "description": "the cleaned measurement table: SI units, one frame, null where not measured",
+   "schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/points.schema.json",
+   "templated": true,
+   "urls": [
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/points.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/points.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/points.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/points.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/points.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/points.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/points.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/points.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/points.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/points.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/points.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/points.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/points.json"
+   ]
+  },
+  {
+   "path": "cases/{id}/points.csv",
+   "method": "GET",
+   "media_type": "text/csv",
+   "description": "the same table as CSV (empty cell = not measured)",
+   "schema": null,
+   "templated": true,
+   "urls": [
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/points.csv?v=a46201996b22",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/points.csv?v=dec97c21217a",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/points.csv?v=7448f0ceae37",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/points.csv?v=596246341e73",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/points.csv?v=e6e89432e706",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/points.csv?v=09b109e58dd3",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/points.csv?v=914883bf7fec",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/points.csv?v=ef5fafc61b8e",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/points.csv?v=2864fee9eb19",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/points.csv?v=444b7aaa1791",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/points.csv?v=8708f3251861",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/points.csv?v=b575fe11d107",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/points.csv?v=8d32dc8f762b"
+   ]
+  },
+  {
+   "path": "cases/{id}/approach_flow.csv",
+   "method": "GET",
+   "media_type": "text/csv",
+   "description": "the measured approach-flow profile: z (m), U (m/s), and k (m^2/s^2) or u_rms (m/s) where published; Case G's U and k are dimensionless (U/Ub, k/Ub^2)",
+   "schema": null,
+   "templated": true,
+   "urls": [
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/approach_flow.csv?v=2f3b37fa8e43",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/approach_flow.csv?v=126a620f5698",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/approach_flow.csv?v=98849731e877",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/approach_flow.csv?v=c8239428b9b9",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/approach_flow.csv?v=4971944cd8e9",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/approach_flow.csv?v=66aefe558a82",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/approach_flow.csv?v=45a11857cdf9",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/approach_flow.csv?v=ce516d4054a5",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/approach_flow.csv?v=8c9a2fa1669a",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/approach_flow.csv?v=076668c06f1c",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/approach_flow.csv?v=5d197b5001ba",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/approach_flow.csv?v=c428993827d4",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/approach_flow.csv?v=0042caa39493"
+   ]
+  },
+  {
+   "path": "cases/{id}/geometry.json",
+   "method": "GET",
+   "media_type": "application/json",
+   "description": "the case's STL files with statistics, renders, and the boxes where the geometry is boxes",
+   "schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/geometry.schema.json",
+   "templated": true,
+   "urls": [
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/geometry.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/geometry.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/geometry.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/geometry.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/geometry.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/geometry.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/geometry.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/geometry.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/geometry.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/geometry.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/geometry.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/geometry.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/geometry.json"
+   ]
+  },
+  {
+   "path": "cases/{id}/geometry.stl",
+   "method": "GET",
+   "media_type": "model/stl",
+   "description": "cleaned ASCII STL of the default configuration: metres, case frame, outward normals",
+   "schema": null,
+   "templated": true,
+   "urls": [
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/geometry.stl?v=89acdfbbff84",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/geometry.stl?v=e6de70eeb17d",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/geometry.stl?v=b8c31c57c453",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/geometry.stl?v=531895531271",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/geometry.stl?v=c29624fdae6d",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/geometry.stl?v=8799740aa324",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/geometry.stl?v=09d23c794155",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/geometry.stl?v=4836687efff9",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/geometry.stl?v=ff61cbb22798",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/geometry.stl?v=1bd33d8d3531",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/geometry.stl?v=f0f8a3adfa29",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/geometry.stl?v=20864bc75187",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/geometry.stl?v=e4e0a2044536"
+   ]
+  },
+  {
+   "path": "cases/{id}/geometry_{configuration}.stl",
+   "method": "GET",
+   "media_type": "model/stl",
+   "description": "the other configurations' STLs (C: 0D, 1D; E: bc, before construction)",
+   "schema": null,
+   "templated": true,
+   "urls": [
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/geometry_0D.stl?v=0f08bcd4dd6b",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/geometry_1D.stl?v=ac92c8ed427c",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/geometry_bc.stl?v=9b944d97a817"
+   ]
+  },
+  {
+   "path": "cases/{id}/probes.csv",
+   "method": "GET",
+   "media_type": "text/csv",
+   "description": "the published points to probe for a comparison: the key columns of a scored file, x y z in the case frame, and what each row is scored as",
+   "schema": null,
+   "templated": true,
+   "urls": [
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/probes.csv?v=b2a57394ad1d",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/probes.csv?v=025b8113dcde",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/probes.csv?v=5b794e8356f0",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/probes.csv?v=4617e9e0d4e1",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/probes.csv?v=e248607ca6fe",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/probes.csv?v=d7dbd73343b9",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/probes.csv?v=219c5a86d3e8",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/probes.csv?v=450e304dc11d",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/probes.csv?v=67f76ec18f93",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/probes.csv?v=da4854c6791c",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/probes.csv?v=16f8836953ce",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/probes.csv?v=abee3cd8c088",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/probes.csv?v=877ae498c348"
+   ]
+  },
+  {
+   "path": "cases/{id}/inflow_openfoam.txt",
+   "method": "GET",
+   "media_type": "text/plain",
+   "description": "the recommended inlet as OpenFOAM 12 files in one text (0/U, 0/k, 0/epsilon, 0/nut, system/probes with the case's points); the benchmark's data is the measured profile, the inlet is this repository's choice",
+   "schema": null,
+   "templated": true,
+   "urls": [
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/inflow_openfoam.txt?v=9398d3a8abdc",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/inflow_openfoam.txt?v=04d1258bab97",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/inflow_openfoam.txt?v=c7190d2cd689",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/inflow_openfoam.txt?v=3cf923b91ef8",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/inflow_openfoam.txt?v=7a72f69947be",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/inflow_openfoam.txt?v=2b36d787bfd3",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/inflow_openfoam.txt?v=30468e35683f",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/inflow_openfoam.txt?v=00be50e3d138",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/inflow_openfoam.txt?v=2a01a010fd6a",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/inflow_openfoam.txt?v=c45e53ef8ac0",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/inflow_openfoam.txt?v=e33508452727",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/inflow_openfoam.txt?v=51b87a85f91f",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/inflow_openfoam.txt?v=aef315a4496a"
+   ]
+  },
+  {
+   "path": "cases/{id}/validation.json",
+   "method": "GET",
+   "media_type": "application/json",
+   "description": "Eddy3D's scores per engine and run, with figures and the per-point pairs",
+   "schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/validation.schema.json",
+   "templated": true,
+   "urls": [
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/validation.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/validation.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/validation.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/validation.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/validation.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/validation.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/validation.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/validation.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/validation.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/validation.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/validation.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/validation.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/validation.json"
+   ]
+  },
+  {
+   "path": "cases/{id}/pairs/{engine}.csv",
+   "method": "GET",
+   "media_type": "text/csv",
+   "description": "per-point measured and modelled values of one engine's runs on the case (columns described by the result's pairs_columns)",
+   "schema": null,
+   "templated": true,
+   "urls": [
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/pairs/fluidx3d.csv?v=fb16be8c5800",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/pairs/ml-surrogate.csv?v=6177f32a94f4",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/pairs/openfoam12-realizableKE.csv?v=0695411d68cf",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/pairs/openlb.csv?v=974bf65cfd71",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/pairs/fluidx3d.csv?v=c4af803fd09e",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/pairs/ml-surrogate.csv?v=eb9a9c3970e7",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/pairs/openfoam12-realizableKE.csv?v=9f7c10ff5544",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/pairs/openlb.csv?v=9b2950d76b99",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/pairs/ml-surrogate.csv?v=6a2b60658913",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/pairs/openfoam12-realizableKE.csv?v=f3d2b649b543",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/pairs/ml-surrogate.csv?v=9dd71c9ce66b",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/pairs/openfoam12-realizableKE.csv?v=fab4f6f21ad5",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/pairs/ml-surrogate.csv?v=90b71f5762aa",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/pairs/openfoam12-realizableKE.csv?v=fa16bc3bcd62",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/pairs/openfoam12-realizableKE.csv?v=e81e010859e6",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/pairs/openfoam12-realizableKE.csv?v=915d369f503f",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/pairs/openfoam12-kEpsilon.csv?v=6e6ba0f446e8",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/pairs/openfoam12-kOmegaSST.csv?v=549a7aa4117e",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/pairs/openfoam12-realizableKE.csv?v=d1bafd9c68e2",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/pairs/umf-buoyantKEpsilon.csv?v=87ba413bfa96",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/pairs/umf-realizableKE.csv?v=cb34fb5fc9c7",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/pairs/openfoam12-realizableKE.csv?v=746a236c4635",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/pairs/umf-realizableKE.csv?v=a0aedc557c46",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27"
+   ]
+  },
+  {
+   "path": "validation.json",
+   "method": "GET",
+   "media_type": "application/json",
+   "description": "every case and engine in one table: status, runs, headline scores",
+   "schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/validation-summary.schema.json",
+   "templated": false,
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/validation.json"
+  },
+  {
+   "path": "geometry.json",
+   "method": "GET",
+   "media_type": "application/json",
+   "description": "every STL of every case in one list: case, configuration, units, frame, bounding box, size, SHA-256",
+   "schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/geometry-index.schema.json",
+   "templated": false,
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/geometry.json"
+  },
+  {
+   "path": "geometry.zip",
+   "method": "GET",
+   "media_type": "application/zip",
+   "description": "every STL in one archive (each keeps its own case's frame and units: they are not one scene)",
+   "schema": null,
+   "templated": false,
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/geometry.zip"
+  },
+  {
+   "path": "submissions.json",
+   "method": "GET",
+   "media_type": "application/json",
+   "description": "the community results: every submitted solver with its headline scores per case, scored by this build from the submitted values",
+   "schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/submissions.schema.json",
+   "templated": false,
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/submissions.json"
+  },
+  {
+   "path": "submissions/{slug}.json",
+   "method": "GET",
+   "media_type": "application/json",
+   "description": "one submission in full: its submission.yaml, and every score, coverage and group per case",
+   "schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/submission.schema.json",
+   "templated": true,
+   "urls": [
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/submissions/example-openfoam12.json"
+   ]
+  },
+  {
+   "path": "submissions/{slug}/{id}.csv",
+   "method": "GET",
+   "media_type": "text/csv",
+   "description": "the values a submission gave at the published points of one case (the key columns of probes.csv plus its value columns)",
+   "schema": null,
+   "templated": true,
+   "urls": [
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/submissions/example-openfoam12/A.csv?v=4eec5b1fe73a"
+   ]
+  },
+  {
+   "path": "schemas/{name}.schema.json",
+   "method": "GET",
+   "media_type": "application/schema+json",
+   "description": "the JSON Schema (draft 2020-12) of each JSON document",
+   "schema": null,
+   "templated": true,
+   "urls": [
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/case.schema.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/cases.schema.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/geometry-index.schema.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/geometry.schema.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/index.schema.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/points.schema.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/submission.schema.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/submissions.schema.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/validation-summary.schema.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/validation.schema.json",
+    "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/versions.schema.json"
+   ]
+  },
+  {
+   "path": "openapi.json",
+   "method": "GET",
+   "media_type": "application/json",
+   "description": "OpenAPI 3.1 description of every endpoint",
+   "schema": null,
+   "templated": false,
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/openapi.json"
+  },
+  {
+   "path": "llms.txt",
+   "method": "GET",
+   "media_type": "text/plain",
+   "description": "plain-text entry point for agents",
+   "schema": null,
+   "templated": false,
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/llms.txt"
+  }
+ ],
+ "case_ids": [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M"
+ ],
+ "files": [
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases.json?v=c7e0eb3f716d",
+   "path": "cases.json",
+   "media_type": "application/json",
+   "bytes": 43119,
+   "sha256": "c7e0eb3f716dde99c87f8c0347e3a69af0b6083c8b2fb966cb8a734d77f27419"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A.json?v=bcc469650ae5",
+   "path": "cases/A.json",
+   "media_type": "application/json",
+   "bytes": 14526,
+   "sha256": "bcc469650ae5395ec64f64b9ed4403e3bdb511524f6215d283bc9817cbb57a93"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/approach_flow.csv?v=2f3b37fa8e43",
+   "path": "cases/A/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 557,
+   "sha256": "2f3b37fa8e43e307e807a5114bf2a8b2ad3ea6396cb17d6adc112663b69ea19f"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/geometry.json?v=5f80fd5e4f55",
+   "path": "cases/A/geometry.json",
+   "media_type": "application/json",
+   "bytes": 2269,
+   "sha256": "5f80fd5e4f553c6f8423f73bd7967a6167897134336e179b4de4fc7d42d2276f"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/geometry.stl?v=89acdfbbff84",
+   "path": "cases/A/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1756,
+   "sha256": "89acdfbbff84039fd8ef98ca472cdb4953e63b01504740b0fc0b57259005ea12"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/inflow_openfoam.txt?v=9398d3a8abdc",
+   "path": "cases/A/inflow_openfoam.txt",
+   "media_type": "text/plain",
+   "bytes": 27651,
+   "sha256": "9398d3a8abdc4f3819de439b70fbc0ec1cc56d0a2cd2803a7355b6a3751fb958"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/pairs/fluidx3d.csv?v=fb16be8c5800",
+   "path": "cases/A/pairs/fluidx3d.csv",
+   "media_type": "text/csv",
+   "bytes": 26280,
+   "sha256": "fb16be8c5800dd4cbc17ba460ad72fe9946624e8b023db3c58fe63799c972054"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/pairs/ml-surrogate.csv?v=6177f32a94f4",
+   "path": "cases/A/pairs/ml-surrogate.csv",
+   "media_type": "text/csv",
+   "bytes": 4650,
+   "sha256": "6177f32a94f40e95ab2521d96665721393a5976ec098188abe2869cb8b3967ec"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/pairs/openfoam12-realizableKE.csv?v=0695411d68cf",
+   "path": "cases/A/pairs/openfoam12-realizableKE.csv",
+   "media_type": "text/csv",
+   "bytes": 26318,
+   "sha256": "0695411d68cf99235b19c7f48b3224f6f947e673e5a9b80181d6064ee02e9d24"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/pairs/openlb.csv?v=974bf65cfd71",
+   "path": "cases/A/pairs/openlb.csv",
+   "media_type": "text/csv",
+   "bytes": 26424,
+   "sha256": "974bf65cfd7138a87d48e15eb8c44005849a6538e42016e5dc98a7d5c4e9d641"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/points.csv?v=a46201996b22",
+   "path": "cases/A/points.csv",
+   "media_type": "text/csv",
+   "bytes": 19729,
+   "sha256": "a46201996b22620e9ceae7ac558d8bafc44f3ac3ed7073c2efca70bc57ad5239"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/points.json?v=d02a01b658f7",
+   "path": "cases/A/points.json",
+   "media_type": "application/json",
+   "bytes": 58528,
+   "sha256": "d02a01b658f7fab17dde898c2922f6337a0868bf7431522c1fb767c64522c0d5"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/probes.csv?v=b2a57394ad1d",
+   "path": "cases/A/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 11673,
+   "sha256": "b2a57394ad1dbf36499f3248c3348ce666434bbb3715675b6ed0e1d5db81f3d6"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/A/validation.json?v=cc26d72d4173",
+   "path": "cases/A/validation.json",
+   "media_type": "application/json",
+   "bytes": 46517,
+   "sha256": "cc26d72d4173b8de61e6c3e464df16138c322490c91a030a79f1a74b845f7e00"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B.json?v=3ccb02150647",
+   "path": "cases/B.json",
+   "media_type": "application/json",
+   "bytes": 13414,
+   "sha256": "3ccb02150647b52f58369fa344bea387dbb0b1d07fa13deb89ed375d16757754"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/approach_flow.csv?v=126a620f5698",
+   "path": "cases/B/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 200,
+   "sha256": "126a620f56983e720ad25d3678369754477837fcc8d04bfdba2c5eaffc93f200"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/geometry.json?v=a8d9d6381c82",
+   "path": "cases/B/geometry.json",
+   "media_type": "application/json",
+   "bytes": 2274,
+   "sha256": "a8d9d6381c82a086dee01a51697042fdd1827c58d532d99b3d0b62f4e4950d48"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/geometry.stl?v=e6de70eeb17d",
+   "path": "cases/B/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1738,
+   "sha256": "e6de70eeb17dfa4d7312223dc3dcc58e996e2573b37fb77d7820b52b7bca354b"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/inflow_openfoam.txt?v=04d1258bab97",
+   "path": "cases/B/inflow_openfoam.txt",
+   "media_type": "text/plain",
+   "bytes": 32043,
+   "sha256": "04d1258bab9798b7afc7e712b7d64de81517916d99a04c7675501fd65da75576"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/pairs/fluidx3d.csv?v=c4af803fd09e",
+   "path": "cases/B/pairs/fluidx3d.csv",
+   "media_type": "text/csv",
+   "bytes": 31939,
+   "sha256": "c4af803fd09e91d65f7853e5adfa9d912c2a8118662172ed5f9fc9449765255e"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/pairs/ml-surrogate.csv?v=eb9a9c3970e7",
+   "path": "cases/B/pairs/ml-surrogate.csv",
+   "media_type": "text/csv",
+   "bytes": 8302,
+   "sha256": "eb9a9c3970e76ef7ffc059038bd006708cb8295c1e3c12af83600c47c679bee8"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/pairs/openfoam12-realizableKE.csv?v=9f7c10ff5544",
+   "path": "cases/B/pairs/openfoam12-realizableKE.csv",
+   "media_type": "text/csv",
+   "bytes": 32157,
+   "sha256": "9f7c10ff554477ffcfdc7e5717b2c7afbe2c0eb58cf0883d79bd202ce96126d7"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/pairs/openlb.csv?v=9b2950d76b99",
+   "path": "cases/B/pairs/openlb.csv",
+   "media_type": "text/csv",
+   "bytes": 32181,
+   "sha256": "9b2950d76b99f88e93633602b758e802e309ba3616c5284603fd35ee8d8260ff"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/points.csv?v=dec97c21217a",
+   "path": "cases/B/points.csv",
+   "media_type": "text/csv",
+   "bytes": 22093,
+   "sha256": "dec97c21217ae3886005264dca7096205c23bf80fb07320c80f66e238716f390"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/points.json?v=573669eaed35",
+   "path": "cases/B/points.json",
+   "media_type": "application/json",
+   "bytes": 68413,
+   "sha256": "573669eaed35196902469bf753cdf1d8423e495b693c871c7d4b96a2d6b17f11"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/probes.csv?v=025b8113dcde",
+   "path": "cases/B/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 14325,
+   "sha256": "025b8113dcde572a3fac4c99296bcca965642290ca62e7ba0bd94b0e74dd5d9e"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/B/validation.json?v=fe90ec50ae3c",
+   "path": "cases/B/validation.json",
+   "media_type": "application/json",
+   "bytes": 44059,
+   "sha256": "fe90ec50ae3cb5e409c82b006fc7c3a44873b1f2d80a71e5b027c9ac5c617dcf"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C.json?v=f87f5ddcf80a",
+   "path": "cases/C.json",
+   "media_type": "application/json",
+   "bytes": 17875,
+   "sha256": "f87f5ddcf80a3006247b84578a214da0330413737c52fb1d86bb1cb87a6820c8"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/approach_flow.csv?v=98849731e877",
+   "path": "cases/C/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 268,
+   "sha256": "98849731e877fe940be821a1aa18469c8d4b94a5e54fd1e23c19f9337c39ea2a"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/geometry.json?v=e98eb1804df8",
+   "path": "cases/C/geometry.json",
+   "media_type": "application/json",
+   "bytes": 8096,
+   "sha256": "e98eb1804df819f25a3704ca53b95206c327cf3afa83ef4306472ad5520f11dc"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/geometry.stl?v=b8c31c57c453",
+   "path": "cases/C/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 14576,
+   "sha256": "b8c31c57c453a6cfc97023ad274c1f36b5250bff6662c5fb1d97d7129e52f751"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/geometry_0D.stl?v=0f08bcd4dd6b",
+   "path": "cases/C/geometry_0D.stl",
+   "media_type": "model/stl",
+   "bytes": 12961,
+   "sha256": "0f08bcd4dd6bd11414a66f1d8d4f80986864e80e72043019e855f04041d2db4a"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/geometry_1D.stl?v=ac92c8ed427c",
+   "path": "cases/C/geometry_1D.stl",
+   "media_type": "model/stl",
+   "bytes": 14576,
+   "sha256": "ac92c8ed427cf8f16d5ce9839449dad4bc5cc96c6690e90586b7a7f703652d13"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/inflow_openfoam.txt?v=c7190d2cd689",
+   "path": "cases/C/inflow_openfoam.txt",
+   "media_type": "text/plain",
+   "bytes": 121666,
+   "sha256": "c7190d2cd689f8a8a58a68e1d1e65e15cf9ae2905d839c99906e3f378127cdbd"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/pairs/ml-surrogate.csv?v=6a2b60658913",
+   "path": "cases/C/pairs/ml-surrogate.csv",
+   "media_type": "text/csv",
+   "bytes": 72957,
+   "sha256": "6a2b60658913b7e56072bb08d521c5b4adcc12c065975c75b48f36a3b09676ab"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/pairs/openfoam12-realizableKE.csv?v=f3d2b649b543",
+   "path": "cases/C/pairs/openfoam12-realizableKE.csv",
+   "media_type": "text/csv",
+   "bytes": 90478,
+   "sha256": "f3d2b649b5439ec17e735bd157ccfd8f5904657f27ddabf72162bdbc2e7d6a78"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/points.csv?v=7448f0ceae37",
+   "path": "cases/C/points.csv",
+   "media_type": "text/csv",
+   "bytes": 58159,
+   "sha256": "7448f0ceae37f076ba00da6b542797d81e9edd92fdecc7b49dd6813577550a80"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/points.json?v=1823625ffb99",
+   "path": "cases/C/points.json",
+   "media_type": "application/json",
+   "bytes": 212888,
+   "sha256": "1823625ffb999bf3d1a29e75b8e97e15985bcc375427250a8fcf5cc026547613"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/probes.csv?v=5b794e8356f0",
+   "path": "cases/C/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 74469,
+   "sha256": "5b794e8356f0d8fd97f30098f7ff04105ad5685d12bd3a816be0fce58204fb2c"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/C/validation.json?v=22a4e4167286",
+   "path": "cases/C/validation.json",
+   "media_type": "application/json",
+   "bytes": 42227,
+   "sha256": "22a4e41672863585208d6860a261271ce01c02ca138c1dcbdf81156c59a0ac07"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D.json?v=5b5a733c282a",
+   "path": "cases/D.json",
+   "media_type": "application/json",
+   "bytes": 16955,
+   "sha256": "5b5a733c282a0c1d09d15e824ae8e31d8388f1381e8f3eac7f9dde317da6f185"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/approach_flow.csv?v=c8239428b9b9",
+   "path": "cases/D/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 529,
+   "sha256": "c8239428b9b9ae37e33a2b35226b2519ebf6ae9fa5d1f3b3f8ea0733ae6da5dc"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/geometry.json?v=3d1761a5277f",
+   "path": "cases/D/geometry.json",
+   "media_type": "application/json",
+   "bytes": 13370,
+   "sha256": "3d1761a5277fe3a44c390c3529a31cb76de03964abde2f06b32626963624bf30"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/geometry.stl?v=531895531271",
+   "path": "cases/D/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 144878,
+   "sha256": "5318955312711ea5419c67d2a8fe6c28868f9bce02ce9e3661e9a79228d6f257"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/inflow_openfoam.txt?v=3cf923b91ef8",
+   "path": "cases/D/inflow_openfoam.txt",
+   "media_type": "text/plain",
+   "bytes": 34710,
+   "sha256": "3cf923b91ef82098d6c9caba06b792ea84d0de6edee98612676ab39b59f09360"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/pairs/ml-surrogate.csv?v=9dd71c9ce66b",
+   "path": "cases/D/pairs/ml-surrogate.csv",
+   "media_type": "text/csv",
+   "bytes": 18339,
+   "sha256": "9dd71c9ce66b91156c9daf63a6a9c5908f5090ba76a3078fcccbdb58088d40fd"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/pairs/openfoam12-realizableKE.csv?v=fab4f6f21ad5",
+   "path": "cases/D/pairs/openfoam12-realizableKE.csv",
+   "media_type": "text/csv",
+   "bytes": 27892,
+   "sha256": "fab4f6f21ad5faf4109af19a4f43352d670ceb22d6bd70e555f3f2df4b930943"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/points.csv?v=596246341e73",
+   "path": "cases/D/points.csv",
+   "media_type": "text/csv",
+   "bytes": 20257,
+   "sha256": "596246341e73398b75fb76c9eebfab38d34e4c2dcf161a8c6e3f7c7d5e1ee570"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/points.json?v=98ba437678ab",
+   "path": "cases/D/points.json",
+   "media_type": "application/json",
+   "bytes": 85096,
+   "sha256": "98ba437678ab39db8c6e3ae523b2d48d175164301548916a2cb2364a84adffb7"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/probes.csv?v=4617e9e0d4e1",
+   "path": "cases/D/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 18025,
+   "sha256": "4617e9e0d4e1d18a4a2fe2f1b5c5c0c9b2c6ba5605932fd4315864b4ea70dc46"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/D/validation.json?v=61515eb3cc73",
+   "path": "cases/D/validation.json",
+   "media_type": "application/json",
+   "bytes": 23213,
+   "sha256": "61515eb3cc735b2d12221782ed8e3dee441d5e3c0eb37cf58e7e1792490662d5"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E.json?v=3a3782d02362",
+   "path": "cases/E.json",
+   "media_type": "application/json",
+   "bytes": 16243,
+   "sha256": "3a3782d023620c2e8c0d8260b08a3a8f795ef041482466f5fedace7afc68f5cd"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/approach_flow.csv?v=4971944cd8e9",
+   "path": "cases/E/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 351,
+   "sha256": "4971944cd8e9e09965961f6fd54627806708c04899f49b96df2f0efa229c4170"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/geometry.json?v=2eb69a42348d",
+   "path": "cases/E/geometry.json",
+   "media_type": "application/json",
+   "bytes": 4106,
+   "sha256": "2eb69a42348da842ed6913cc3c0c45ba73d47e9a0faae3dc656909f6a1151e0b"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/geometry.stl?v=c29624fdae6d",
+   "path": "cases/E/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1210554,
+   "sha256": "c29624fdae6dbebecbb666ca1bf7b64a0c4c5f0d73cbf947d5c80d6427e96c06"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/geometry_bc.stl?v=9b944d97a817",
+   "path": "cases/E/geometry_bc.stl",
+   "media_type": "model/stl",
+   "bytes": 1205426,
+   "sha256": "9b944d97a8171394cd6440873f6250436ca11c7264a62f715bcb8e785e241ba2"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/inflow_openfoam.txt?v=7a72f69947be",
+   "path": "cases/E/inflow_openfoam.txt",
+   "media_type": "text/plain",
+   "bytes": 267445,
+   "sha256": "7a72f69947bef2c3d10102ee81dcdcc97d52d0dca879da699253fda3d7182e35"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/pairs/ml-surrogate.csv?v=90b71f5762aa",
+   "path": "cases/E/pairs/ml-surrogate.csv",
+   "media_type": "text/csv",
+   "bytes": 167034,
+   "sha256": "90b71f5762aa2735f5a0206f5190ed2639627840407f931411ddba3f50689cdb"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/pairs/openfoam12-realizableKE.csv?v=fa16bc3bcd62",
+   "path": "cases/E/pairs/openfoam12-realizableKE.csv",
+   "media_type": "text/csv",
+   "bytes": 11927,
+   "sha256": "fa16bc3bcd6247d441ef092ad5544ea32cb552d36a994efc414f1dd720515ee9"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/points.csv?v=e6e89432e706",
+   "path": "cases/E/points.csv",
+   "media_type": "text/csv",
+   "bytes": 164232,
+   "sha256": "e6e89432e706de1b807258178150dfa0376f19caa558d2c7f8106778422c11d8"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/points.json?v=8c6c075405e6",
+   "path": "cases/E/points.json",
+   "media_type": "application/json",
+   "bytes": 619589,
+   "sha256": "8c6c075405e68100e23b4ee655b1db31b52d79153807a3a33e5b36405f434aa4"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/probes.csv?v=e248607ca6fe",
+   "path": "cases/E/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 177771,
+   "sha256": "e248607ca6fe771edd8b9f4366b22d483f6383540cc6d220a162ad159ffe3669"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/E/validation.json?v=0ee44c09cd33",
+   "path": "cases/E/validation.json",
+   "media_type": "application/json",
+   "bytes": 33894,
+   "sha256": "0ee44c09cd33eb82470899d3df03a03d92f6bc8b660c766fe179abab7055a106"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F.json?v=7c24c3edaed2",
+   "path": "cases/F.json",
+   "media_type": "application/json",
+   "bytes": 23872,
+   "sha256": "7c24c3edaed23b4e8a46dddcb164f2033f2efedd99df467c53f4e6c06e939083"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/approach_flow.csv?v=66aefe558a82",
+   "path": "cases/F/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 273,
+   "sha256": "66aefe558a82a5e35b569f68bef7411d360266a82fdce773367458d0a6ef0f5f"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/geometry.json?v=fe1a75ab424c",
+   "path": "cases/F/geometry.json",
+   "media_type": "application/json",
+   "bytes": 2974,
+   "sha256": "fe1a75ab424cb4407ab5a0e95b09392d3360d4f9c0cd7db1924b8c4039b91367"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/geometry.stl?v=8799740aa324",
+   "path": "cases/F/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 9661421,
+   "sha256": "8799740aa324b9494a3962197ebaa82bc3f3f8ddce138e9d2777bc9cd7660c0c"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/inflow_openfoam.txt?v=2b36d787bfd3",
+   "path": "cases/F/inflow_openfoam.txt",
+   "media_type": "text/plain",
+   "bytes": 54555,
+   "sha256": "2b36d787bfd324972bb3f19921a151af9df94c44636e34a753b978291f074f92"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/pairs/openfoam12-realizableKE.csv?v=e81e010859e6",
+   "path": "cases/F/pairs/openfoam12-realizableKE.csv",
+   "media_type": "text/csv",
+   "bytes": 9531,
+   "sha256": "e81e010859e6d51666aab0260a6c00b259faed3e119db44dbb1fa9faeacfbd0e"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/points.csv?v=09b109e58dd3",
+   "path": "cases/F/points.csv",
+   "media_type": "text/csv",
+   "bytes": 31181,
+   "sha256": "09b109e58dd39fb744e69de7adab7df216762c2bfa49fbabe4b94b2a7fbe543a"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/points.json?v=ff23b1180a08",
+   "path": "cases/F/points.json",
+   "media_type": "application/json",
+   "bytes": 130088,
+   "sha256": "ff23b1180a0835d87105abc23da50c3b520688095b3b3bb07619f750d8af8437"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/probes.csv?v=d7dbd73343b9",
+   "path": "cases/F/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 34936,
+   "sha256": "d7dbd73343b936559b85391887158c5b9fcd9555967742dd1a8185b005404cc2"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/F/validation.json?v=8d052c9efe95",
+   "path": "cases/F/validation.json",
+   "media_type": "application/json",
+   "bytes": 33077,
+   "sha256": "8d052c9efe95398df82f137a51673cd5c84914d892a6ce5e50d7df8aff0531c1"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G.json?v=bdd39df916f2",
+   "path": "cases/G.json",
+   "media_type": "application/json",
+   "bytes": 17294,
+   "sha256": "bdd39df916f2131e200a13d9d491bad8534b070bb0611fd5638f9dcc6d70eafc"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/approach_flow.csv?v=45a11857cdf9",
+   "path": "cases/G/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 59,
+   "sha256": "45a11857cdf9f7b02d4bf81103178099cebe416b53d20741255da7064f97ff40"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/geometry.json?v=55eb93c8e7d4",
+   "path": "cases/G/geometry.json",
+   "media_type": "application/json",
+   "bytes": 2703,
+   "sha256": "55eb93c8e7d4709e1fa339c9f4f6b3049f665c33d678c9e325a0a09b15354d3e"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/geometry.stl?v=09d23c794155",
+   "path": "cases/G/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1558,
+   "sha256": "09d23c79415538941986395e14fc0da1cae5326d2bcd53a773c811dedf9b5692"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/inflow_openfoam.txt?v=30468e35683f",
+   "path": "cases/G/inflow_openfoam.txt",
+   "media_type": "text/plain",
+   "bytes": 7509,
+   "sha256": "30468e35683fde636fbbf77379abb3654bd5881a562bc0add38417c5ee1af8cc"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
+   "path": "cases/G/pairs/openfoam12-realizableKE.csv",
+   "media_type": "text/csv",
+   "bytes": 21505,
+   "sha256": "fda9fe2f217ef6006b23ab80f8f1e2c06acce22021b44bd8ae6d5e1db311064f"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/points.csv?v=914883bf7fec",
+   "path": "cases/G/points.csv",
+   "media_type": "text/csv",
+   "bytes": 2246,
+   "sha256": "914883bf7fec7e7c3a0345a57694b2b14edf34e6d2786e9083b9459fe4737e19"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/points.json?v=8ba70da69746",
+   "path": "cases/G/points.json",
+   "media_type": "application/json",
+   "bytes": 9288,
+   "sha256": "8ba70da697469d7a1daa0a4139f0e526db6286b2f6341ba63bb46131ed5b1a6d"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/probes.csv?v=219c5a86d3e8",
+   "path": "cases/G/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 2046,
+   "sha256": "219c5a86d3e86e1de0e05c9b45caf999ca7345a1a6c78bbf24be3fac681b1b74"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/G/validation.json?v=66e33de3fac9",
+   "path": "cases/G/validation.json",
+   "media_type": "application/json",
+   "bytes": 49615,
+   "sha256": "66e33de3fac9aee92fa5c8729d3c75600f44d173154e0f63e6f242237df0943a"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H.json?v=d6144c76fc53",
+   "path": "cases/H.json",
+   "media_type": "application/json",
+   "bytes": 16604,
+   "sha256": "d6144c76fc5381846fed1276f067d1fe97da93feb5754579560b388b93f1402e"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/approach_flow.csv?v=ce516d4054a5",
+   "path": "cases/H/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 821,
+   "sha256": "ce516d4054a526799b327372e30e954b2adf59658c9b6eb25b2f76cf792225b0"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/geometry.json?v=7ed41a269436",
+   "path": "cases/H/geometry.json",
+   "media_type": "application/json",
+   "bytes": 2569,
+   "sha256": "7ed41a2694369d3ca8b14dcb8ab9cd55db21ca856c3cf982e87a1d46c270943f"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/geometry.stl?v=4836687efff9",
+   "path": "cases/H/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1666,
+   "sha256": "4836687efff9d49c4c80e540dcec255ba78e3aef7a90679bee6a9945b0eea9e7"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/inflow_openfoam.txt?v=00be50e3d138",
+   "path": "cases/H/inflow_openfoam.txt",
+   "media_type": "text/plain",
+   "bytes": 198421,
+   "sha256": "00be50e3d138e3e4e157a7b02d2a30a9641b4e64fceabcc0dbf5d4cc3dc8f7ec"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/pairs/openfoam12-realizableKE.csv?v=915d369f503f",
+   "path": "cases/H/pairs/openfoam12-realizableKE.csv",
+   "media_type": "text/csv",
+   "bytes": 171977,
+   "sha256": "915d369f503f429b65b55a15dd74932c96ca59c3a02cb26d9c3162b36331e751"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/points.csv?v=ef5fafc61b8e",
+   "path": "cases/H/points.csv",
+   "media_type": "text/csv",
+   "bytes": 204220,
+   "sha256": "ef5fafc61b8ea8defdec24cf23252edd1d3acdbce1daeda2295da2a31d60f06a"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/points.json?v=45ffe4d31336",
+   "path": "cases/H/points.json",
+   "media_type": "application/json",
+   "bytes": 646347,
+   "sha256": "45ffe4d313361441a6c87f4c39090f0710e4251cba9b5c4975dbe8874a4dce71"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/probes.csv?v=450e304dc11d",
+   "path": "cases/H/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 118607,
+   "sha256": "450e304dc11dcebbaf627bea576b2c1850097e8ddf768d1f843f0d95fd1ecb1d"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/H/validation.json?v=129deb25f4c3",
+   "path": "cases/H/validation.json",
+   "media_type": "application/json",
+   "bytes": 12541,
+   "sha256": "129deb25f4c3e162fb866960abffef2354fef38402d9e0035633d7fa8f8210ee"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I.json?v=c705a5b139ac",
+   "path": "cases/I.json",
+   "media_type": "application/json",
+   "bytes": 16340,
+   "sha256": "c705a5b139ac185ed9cc93408dbc31dc191cb7714d008caa308c79dfad7f9958"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/approach_flow.csv?v=8c9a2fa1669a",
+   "path": "cases/I/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 373,
+   "sha256": "8c9a2fa1669ad55cfb86b2b158a9fd8556e6edcc0184c8baf85ccaba94defa43"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/geometry.json?v=3005e1c76eb2",
+   "path": "cases/I/geometry.json",
+   "media_type": "application/json",
+   "bytes": 2464,
+   "sha256": "3005e1c76eb26022cfdc5fc39fc82223b8b4238e19f1645944b8088a0fcdcc46"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/geometry.stl?v=ff61cbb22798",
+   "path": "cases/I/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1738,
+   "sha256": "ff61cbb22798b0a8e10ed47f20da3cb2c7fa489e4483414cf9789364c47b659c"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/inflow_openfoam.txt?v=2a01a010fd6a",
+   "path": "cases/I/inflow_openfoam.txt",
+   "media_type": "text/plain",
+   "bytes": 79093,
+   "sha256": "2a01a010fd6aa07c703dd46af5b90412a38f5d3363e94087a52132fc98c13286"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/pairs/openfoam12-kEpsilon.csv?v=6e6ba0f446e8",
+   "path": "cases/I/pairs/openfoam12-kEpsilon.csv",
+   "media_type": "text/csv",
+   "bytes": 114105,
+   "sha256": "6e6ba0f446e82cd3764f4974c8c198c013b70cc1fc813b59168d5f969b95d5c1"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/pairs/openfoam12-kOmegaSST.csv?v=549a7aa4117e",
+   "path": "cases/I/pairs/openfoam12-kOmegaSST.csv",
+   "media_type": "text/csv",
+   "bytes": 113367,
+   "sha256": "549a7aa4117e2bb58e0811e90b6e2d344f49528a2f635ee9cd17757884ff0ce4"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/pairs/openfoam12-realizableKE.csv?v=d1bafd9c68e2",
+   "path": "cases/I/pairs/openfoam12-realizableKE.csv",
+   "media_type": "text/csv",
+   "bytes": 114311,
+   "sha256": "d1bafd9c68e224012f10c18859f7c88101b37543d739b801815120ec586487d1"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/points.csv?v=2864fee9eb19",
+   "path": "cases/I/points.csv",
+   "media_type": "text/csv",
+   "bytes": 54044,
+   "sha256": "2864fee9eb1972e691babaf0f7a9cc61019cfbb9697c5b11ab7e1cae789751a1"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/points.json?v=4fc2c0438ef7",
+   "path": "cases/I/points.json",
+   "media_type": "application/json",
+   "bytes": 193922,
+   "sha256": "4fc2c0438ef730a3f0cd42051f5a647582e5888d663fe15e3e806b1b3da970ce"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/probes.csv?v=67f76ec18f93",
+   "path": "cases/I/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 46628,
+   "sha256": "67f76ec18f932368acaafde40dbdc3cffb1018cfd7360c5a3cf72e14dff3b1ee"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/I/validation.json?v=fbcbc5e3ae48",
+   "path": "cases/I/validation.json",
+   "media_type": "application/json",
+   "bytes": 22502,
+   "sha256": "fbcbc5e3ae48435373f68fc8aafd7b3faea1031662d96e2fc539a445b797e963"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J.json?v=013fe997a08c",
+   "path": "cases/J.json",
+   "media_type": "application/json",
+   "bytes": 17145,
+   "sha256": "013fe997a08c9f0311a7951fca98b55e757a82c3874112fa874742511f4f7501"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/approach_flow.csv?v=076668c06f1c",
+   "path": "cases/J/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 469,
+   "sha256": "076668c06f1c98252006e9d9aaa100ca106ab3a4766565012e12ee4948dd5198"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/geometry.json?v=87adf000b488",
+   "path": "cases/J/geometry.json",
+   "media_type": "application/json",
+   "bytes": 2546,
+   "sha256": "87adf000b48874b03f49cf1ba188173b4689609c0d3210d4f70605a13b91a5bd"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/geometry.stl?v=1bd33d8d3531",
+   "path": "cases/J/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1702,
+   "sha256": "1bd33d8d3531e7c9637e1b0bffa697a9193b502ec30333a59229afb75b09d5ef"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/inflow_openfoam.txt?v=c45e53ef8ac0",
+   "path": "cases/J/inflow_openfoam.txt",
+   "media_type": "text/plain",
+   "bytes": 56288,
+   "sha256": "c45e53ef8ac008dfca331312495098b0e231e3460eed92cc9b5e5e231ce478f5"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/pairs/umf-buoyantKEpsilon.csv?v=87ba413bfa96",
+   "path": "cases/J/pairs/umf-buoyantKEpsilon.csv",
+   "media_type": "text/csv",
+   "bytes": 148414,
+   "sha256": "87ba413bfa960822acbcb7d1fbcb8879d19dfb0474f873fe87f9606918d7d0f3"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/pairs/umf-realizableKE.csv?v=cb34fb5fc9c7",
+   "path": "cases/J/pairs/umf-realizableKE.csv",
+   "media_type": "text/csv",
+   "bytes": 148389,
+   "sha256": "cb34fb5fc9c7d9a520fb13f942e7594af1a4ee0e6877c71ac6ea7b63034435e3"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/points.csv?v=444b7aaa1791",
+   "path": "cases/J/points.csv",
+   "media_type": "text/csv",
+   "bytes": 99060,
+   "sha256": "444b7aaa179115570e89110e2da80564c0469437de7be787adee53c3047aef6c"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/points.json?v=5eb09eba43d0",
+   "path": "cases/J/points.json",
+   "media_type": "application/json",
+   "bytes": 234341,
+   "sha256": "5eb09eba43d07b0b765621389e0c4a213707abdc1dc43a9aaede6295fb0d2388"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/probes.csv?v=da4854c6791c",
+   "path": "cases/J/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 37058,
+   "sha256": "da4854c6791c40676d7851fc1f091d57323bf99a17f60c4c9841fcdc2f680224"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/J/validation.json?v=813ecfb7e43e",
+   "path": "cases/J/validation.json",
+   "media_type": "application/json",
+   "bytes": 86075,
+   "sha256": "813ecfb7e43eae03bbd09c0628a29652c64078ed758455ae04326e36e2b1fbb2"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K.json?v=fadb6ae598fa",
+   "path": "cases/K.json",
+   "media_type": "application/json",
+   "bytes": 16137,
+   "sha256": "fadb6ae598fab3eb1c048b3311167f47d26c2508160ba5ca5a60a611c2aa391e"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/approach_flow.csv?v=5d197b5001ba",
+   "path": "cases/K/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 380,
+   "sha256": "5d197b5001ba9c13e463c3dbf809945b1f8194eab418d9307cf73f1f2d33ad88"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/geometry.json?v=ffa13a66aa78",
+   "path": "cases/K/geometry.json",
+   "media_type": "application/json",
+   "bytes": 12733,
+   "sha256": "ffa13a66aa78061c84e46959c76157483f82aca713862053f31ebda40b390c4a"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/geometry.stl?v=f0f8a3adfa29",
+   "path": "cases/K/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 136698,
+   "sha256": "f0f8a3adfa290e86df4bf4f8efb5466cb1d8d3fd7424a24be80f39fd3370ce41"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/inflow_openfoam.txt?v=e33508452727",
+   "path": "cases/K/inflow_openfoam.txt",
+   "media_type": "text/plain",
+   "bytes": 29952,
+   "sha256": "e33508452727d6d4efcba6efd8653fa584f357962b17d8e977384f55cb15772f"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/pairs/openfoam12-realizableKE.csv?v=746a236c4635",
+   "path": "cases/K/pairs/openfoam12-realizableKE.csv",
+   "media_type": "text/csv",
+   "bytes": 51566,
+   "sha256": "746a236c46354c1c00f33b2aaf07759b1880266ed71d56e0ebc467348a8e5639"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/points.csv?v=8708f3251861",
+   "path": "cases/K/points.csv",
+   "media_type": "text/csv",
+   "bytes": 32978,
+   "sha256": "8708f3251861d675fcfe23d03d238885bae813003f65372430b5ee0cfd60f3d6"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/points.json?v=f0567091dbe7",
+   "path": "cases/K/points.json",
+   "media_type": "application/json",
+   "bytes": 85574,
+   "sha256": "f0567091dbe7bab1e828ba9d0f62b12419a911bd2aa8be13d56b9eda76bcee26"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/probes.csv?v=16f8836953ce",
+   "path": "cases/K/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 15746,
+   "sha256": "16f8836953ceb02eeb32a05b16bfa4d0d37c2d5f2b5d9ac957a17e057ba83b2f"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/K/validation.json?v=ed1c17b75ab4",
+   "path": "cases/K/validation.json",
+   "media_type": "application/json",
+   "bytes": 21791,
+   "sha256": "ed1c17b75ab42759b1c22165d421ab2b9c4fe4647e34a84bba2fa320b4d452b0"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L.json?v=952306a58efa",
+   "path": "cases/L.json",
+   "media_type": "application/json",
+   "bytes": 17537,
+   "sha256": "952306a58efa244add03494f2799d4c0c57e16f7d792eef8e36c762437652432"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/approach_flow.csv?v=c428993827d4",
+   "path": "cases/L/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 406,
+   "sha256": "c428993827d4593111756048f761c0d8c1308bc5d35f33130a8676c34a80b077"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/geometry.json?v=6e0d4941ad1c",
+   "path": "cases/L/geometry.json",
+   "media_type": "application/json",
+   "bytes": 18613,
+   "sha256": "6e0d4941ad1c20a7833b56e94e6dfe1622524941ae00a7da2dff3a8b3f39b141"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/geometry.stl?v=20864bc75187",
+   "path": "cases/L/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 213909,
+   "sha256": "20864bc7518792c737eb094c784508f259788d5835badf908edd2fe6ad044a3f"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/inflow_openfoam.txt?v=51b87a85f91f",
+   "path": "cases/L/inflow_openfoam.txt",
+   "media_type": "text/plain",
+   "bytes": 45610,
+   "sha256": "51b87a85f91f0048de30213b4359c91ea56177571c248bf4e9e4761fa6ebb265"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/pairs/umf-realizableKE.csv?v=a0aedc557c46",
+   "path": "cases/L/pairs/umf-realizableKE.csv",
+   "media_type": "text/csv",
+   "bytes": 140895,
+   "sha256": "a0aedc557c468c98b69eaa7ae8eb3061fd3ac6729d8d0e7dfe2242b152d4bcef"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/points.csv?v=b575fe11d107",
+   "path": "cases/L/points.csv",
+   "media_type": "text/csv",
+   "bytes": 94162,
+   "sha256": "b575fe11d107f31aacb2052bb31783d90964d5f90068fc5d8a8566f1004ef1f7"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/points.json?v=ad32e1002fac",
+   "path": "cases/L/points.json",
+   "media_type": "application/json",
+   "bytes": 217293,
+   "sha256": "ad32e1002facf5823258c2a1c54db4ac31342d9d8ded72dc20d143ff85127b3c"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/probes.csv?v=abee3cd8c088",
+   "path": "cases/L/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 28823,
+   "sha256": "abee3cd8c0886634b6b733d8fc95aceb84045d4aba2b6faa9e7a8435bc4dfef2"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/L/validation.json?v=8534a694ca87",
+   "path": "cases/L/validation.json",
+   "media_type": "application/json",
+   "bytes": 30101,
+   "sha256": "8534a694ca874cf9690acaa60a169cc4130ca63b9ad8c8f4c2df05142ff05003"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M.json?v=375f92fd29ca",
+   "path": "cases/M.json",
+   "media_type": "application/json",
+   "bytes": 22772,
+   "sha256": "375f92fd29ca7e06a95bea327f39d9eecc240cd4ba0a37d63463534999c9de80"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/approach_flow.csv?v=0042caa39493",
+   "path": "cases/M/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 903,
+   "sha256": "0042caa394930c19454a0b2667dbda1e2a762641d7d57f443329e1088eb376ee"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/geometry.json?v=40364378eb51",
+   "path": "cases/M/geometry.json",
+   "media_type": "application/json",
+   "bytes": 2841,
+   "sha256": "40364378eb51bb0f219395cb765fa648ed65aeec9a023c4a2224e0bf67e6096f"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/geometry.stl?v=e4e0a2044536",
+   "path": "cases/M/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 8475730,
+   "sha256": "e4e0a2044536248881898be3bf926b0c0da18b125b29403d2c260c95a5931525"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/inflow_openfoam.txt?v=aef315a4496a",
+   "path": "cases/M/inflow_openfoam.txt",
+   "media_type": "text/plain",
+   "bytes": 49758,
+   "sha256": "aef315a4496a4459f4969a160084645426cb4db8cba456efd65151a7a68312b8"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27",
+   "path": "cases/M/pairs/openfoam12-realizableKE.csv",
+   "media_type": "text/csv",
+   "bytes": 7915,
+   "sha256": "9ea7d94ddd274178aea045fbec4945c15b0480299dbec65c385e935ba906cdc1"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/points.csv?v=8d32dc8f762b",
+   "path": "cases/M/points.csv",
+   "media_type": "text/csv",
+   "bytes": 34920,
+   "sha256": "8d32dc8f762bb8ae49e0b2252121df12bf2f94c98e724f252e887a368b18bb20"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/points.json?v=e571dba89ed8",
+   "path": "cases/M/points.json",
+   "media_type": "application/json",
+   "bytes": 133387,
+   "sha256": "e571dba89ed82c7c06e63484b0a85b23e1404101055c46ecb01eb633a7d33014"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/probes.csv?v=877ae498c348",
+   "path": "cases/M/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 27943,
+   "sha256": "877ae498c348fb598f1ba06c88cb4152ac9240c29b746ab9e62cc532eff56de8"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/cases/M/validation.json?v=fe01eb6b8a3e",
+   "path": "cases/M/validation.json",
+   "media_type": "application/json",
+   "bytes": 53835,
+   "sha256": "fe01eb6b8a3e0454648f35d0f202a077b4b18459ae45ec6506c342b0eb567d8e"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/geometry.json?v=ed4ba1643f3c",
+   "path": "geometry.json",
+   "media_type": "application/json",
+   "bytes": 19304,
+   "sha256": "ed4ba1643f3c51e4d2da8751d713f3cd43f52af1fb3fe408d84c34c2ddd6b827"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/geometry.zip?v=9ed663e1d97c",
+   "path": "geometry.zip",
+   "media_type": "application/zip",
+   "bytes": 3091670,
+   "sha256": "9ed663e1d97cd167b478dd1ec8cb96689362b39b4efecb95cdd00b9b3dbcae40"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/llms.txt?v=a95f04c1d306",
+   "path": "llms.txt",
+   "media_type": "text/plain",
+   "bytes": 51886,
+   "sha256": "a95f04c1d30681126f7979cd59f58895ef6f2ae6d16dd12fe1a20b30e06d69a9"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/openapi.json?v=7bb3fe13d2de",
+   "path": "openapi.json",
+   "media_type": "application/json",
+   "bytes": 93636,
+   "sha256": "7bb3fe13d2ded8e38b7a03979e41077db7d05c78be172df05bc3f049936b09d8"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/case.schema.json?v=5420cf2dda73",
+   "path": "schemas/case.schema.json",
+   "media_type": "application/schema+json",
+   "bytes": 9216,
+   "sha256": "5420cf2dda73071e9336ce03a82863065809e646aaa3ede0854a0004e8c98cc8"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/cases.schema.json?v=6590d1328830",
+   "path": "schemas/cases.schema.json",
+   "media_type": "application/schema+json",
+   "bytes": 3368,
+   "sha256": "6590d13288300a9813eba3bc28ee7d6c0f9066cd761e9fc141f8de19d4b9bcf8"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/geometry-index.schema.json?v=d5aa1c86b5cb",
+   "path": "schemas/geometry-index.schema.json",
+   "media_type": "application/schema+json",
+   "bytes": 4683,
+   "sha256": "d5aa1c86b5cbb5dd43e1ab8ff4930ba6582115953432340e64b6e1baa3cda962"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/geometry.schema.json?v=689537f5c69f",
+   "path": "schemas/geometry.schema.json",
+   "media_type": "application/schema+json",
+   "bytes": 5543,
+   "sha256": "689537f5c69fcf5a3f6d91efd12f5960a3e80066c3c957164453c8a56bfb9a72"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/index.schema.json?v=4ac043930945",
+   "path": "schemas/index.schema.json",
+   "media_type": "application/schema+json",
+   "bytes": 7612,
+   "sha256": "4ac043930945ab346ab503bfda0650b07542fe8f4c600b22df02a402a0ee5e5a"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/points.schema.json?v=edf4b5433b07",
+   "path": "schemas/points.schema.json",
+   "media_type": "application/schema+json",
+   "bytes": 5044,
+   "sha256": "edf4b5433b075f3c3a07901e863f994d36b38eb28dc15a1ccd6368e5c071836c"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/submission.schema.json?v=d18d73eaf1fb",
+   "path": "schemas/submission.schema.json",
+   "media_type": "application/schema+json",
+   "bytes": 4526,
+   "sha256": "d18d73eaf1fb22b956d95067fa35fbd3542436f3efad30f14423fcad0666a023"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/submissions.schema.json?v=5cf28d5ceaac",
+   "path": "schemas/submissions.schema.json",
+   "media_type": "application/schema+json",
+   "bytes": 5121,
+   "sha256": "5cf28d5ceaac8fca910ee7ad3e909c29df70a8795ded4d9f35fa6e56c036e1e0"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/validation-summary.schema.json?v=696a28bd34ca",
+   "path": "schemas/validation-summary.schema.json",
+   "media_type": "application/schema+json",
+   "bytes": 4355,
+   "sha256": "696a28bd34ca7b670cf7cd5c4bbb6399a37482604f9eaae1eb2923865473b560"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/validation.schema.json?v=be45a2682b3d",
+   "path": "schemas/validation.schema.json",
+   "media_type": "application/schema+json",
+   "bytes": 5805,
+   "sha256": "be45a2682b3d930aedee728424ac2cf4fa0f196bd5509e35793846cc23e71078"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/schemas/versions.schema.json?v=6d3893a00f9d",
+   "path": "schemas/versions.schema.json",
+   "media_type": "application/schema+json",
+   "bytes": 3100,
+   "sha256": "6d3893a00f9d7946f39f5b730246faf5fc10c2b58e05504f5ffe78db55ee315e"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/submissions.json?v=c333eb0a40c1",
+   "path": "submissions.json",
+   "media_type": "application/json",
+   "bytes": 4154,
+   "sha256": "c333eb0a40c19da10f52671763e2aa5839d7dc26a21228e351da736ab2e23fee"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/submissions/example-openfoam12.json?v=0b4797646d29",
+   "path": "submissions/example-openfoam12.json",
+   "media_type": "application/json",
+   "bytes": 8958,
+   "sha256": "0b4797646d290d36db01dd86de9770e36462c51bfa28604c0ce2b00fe3f7e669"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/submissions/example-openfoam12/A.csv?v=4eec5b1fe73a",
+   "path": "submissions/example-openfoam12/A.csv",
+   "media_type": "text/csv",
+   "bytes": 21480,
+   "sha256": "4eec5b1fe73a82f78f5312644aa06f5af0e41f958ebe23c07839d0d67299dd76"
+  },
+  {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/validation.json?v=084147d186a9",
+   "path": "validation.json",
+   "media_type": "application/json",
+   "bytes": 83995,
+   "sha256": "084147d186a9481fbc81c369ba42464d0e3bb33536c56520f8f49df1db531887"
+  }
+ ],
+ "license_detail": {
+  "spdx": "CC-BY-4.0",
+  "name": "Creative Commons Attribution 4.0 International",
+  "url": "https://creativecommons.org/licenses/by/4.0/",
+  "note": "Data: Kikumoto et al. (2026), CC BY 4.0 (LICENSE-DATA in the repository): the measurements, the cleaned tables, the geometry and every file this API serves. Collectors per case in cases/{id}.json. The code of the repository (the build, the validation scripts and the aij package) is MIT (LICENSE)."
+ },
+ "cite": {
+  "api": {
+   "title": "AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API",
+   "version": "3.2.1",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/index.json",
+   "release_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/releases/tag/v3.2.1",
+   "doi": null,
+   "apa": "Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.2.1) [Data set]. Sustainable Urban Systems Lab. https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/index.json",
+   "bibtex": "@misc{aijuwe_api_3_2_1,\n  author    = \"Karadag, Ilker and Kastner, Patrick\",\n  title     = \"{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}\",\n  year      = \"2026\",\n  version   = \"3.2.1\",\n  publisher = \"Sustainable Urban Systems Lab\",\n  url       = \"https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/index.json\",\n  note      = \"Data set; data version ecbbeee22eb3\"\n}",
+   "csl_json": {
+    "id": "aijuwe-api-3.2.1",
+    "type": "dataset",
+    "title": "AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API",
+    "author": [
+     {
+      "family": "Karadag",
+      "given": "Ilker"
+     },
+     {
+      "family": "Kastner",
+      "given": "Patrick"
+     }
+    ],
+    "issued": {
+     "date-parts": [
+      [
+       2026,
+       10,
+       19
+      ]
+     ]
+    },
+    "version": "3.2.1",
+    "publisher": "Sustainable Urban Systems Lab",
+    "URL": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/index.json",
+    "note": "Data version ecbbeee22eb3"
+   }
+  },
+  "benchmark": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083",
+  "guidelines": "Tominaga, Y., Mochida, A., Yoshie, R., Kataoka, H., Nozu, T., Yoshikawa, M., Shirasawa, T. (2008). AIJ guidelines for practical applications of CFD to pedestrian wind environment around buildings. J. Wind Eng. Ind. Aerodyn. 96, 1749-1761. https://doi.org/10.1016/j.jweia.2008.02.058",
+  "per_case": "Each case lists its own data collectors, Zenodo DOI and requested citation."
+ },
+ "agents": {
+  "start_here": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.1/llms.txt",
+  "pin_a_version": "GET https://eddy3d-dev.github.io/AIJ-Data-Validation/api/versions.json and use the base_url of the release you want; paths are the same in every release",
+  "walk": [
+   "GET index.json",
+   "GET cases.json and pick an id",
+   "GET cases/{id}.json for frame, units and known_issues",
+   "GET cases/{id}/points.json (SI units, one frame) and cases/{id}/geometry.stl (metres)",
+   "GET validation.json or cases/{id}/validation.json before quoting any Eddy3D score; an engine that is not 'scored' has no result",
+   "GET cases/{id}/probes.csv, cases/{id}/inflow_openfoam.txt and cases/{id}.json scoring and inflow to score your own solver (python validation/score_submissions.py, from a checkout)",
+   "GET submissions.json for the community results (submitted values, scored by this repository's build)"
+  ]
+ }
+}
