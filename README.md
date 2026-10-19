@@ -39,7 +39,9 @@ Validation data from the AIJ (Architectural Institute of Japan) benchmark casesâ
 
 - **Site:** <https://eddy3d-dev.github.io/AIJ-Data-Validation/>
 - **API:** [`/api/index.json`](https://eddy3d-dev.github.io/AIJ-Data-Validation/api/index.json) Â· [`/api/llms.txt`](https://eddy3d-dev.github.io/AIJ-Data-Validation/api/llms.txt) for agents Â· [OpenAPI](https://eddy3d-dev.github.io/AIJ-Data-Validation/api/openapi.json) (the same files are in [`docs/api/`](docs/api/)); every release is also frozen under `/api/<release>/`, listed in [`/api/versions.json`](https://eddy3d-dev.github.io/AIJ-Data-Validation/api/versions.json)
-- **Release:** [v3.1.0](CHANGELOG.md), rebuilt byte for byte from its tag (see *Versions, releases and reproducing them*)
+- **Validate your own solver:** [the walk](https://eddy3d-dev.github.io/AIJ-Data-Validation/byos/) with `validation/score_submissions.py`, the [inlet contract](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/inflow/), and the [community results](https://eddy3d-dev.github.io/AIJ-Data-Validation/community/) of submitted solvers ([CONTRIBUTING.md](CONTRIBUTING.md))
+- **Licence:** code MIT ([LICENSE](LICENSE)); data CC BY 4.0 ([LICENSE-DATA](LICENSE-DATA))
+- **Release:** [v3.2.0](CHANGELOG.md), rebuilt byte for byte from its tag (see *Versions, releases and reproducing them*)
 
 ## Cite
 
@@ -48,20 +50,20 @@ Validation data from the AIJ (Architectural Institute of Japan) benchmark casesâ
 **API, APA**
 
 ```text
-Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.1.3) [Data set]. Sustainable Urban Systems Lab. https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.3/index.json
+Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.2.0) [Data set]. Sustainable Urban Systems Lab. https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/index.json
 ```
 
 **API, BibTeX**
 
 ```bibtex
-@misc{aijuwe_api_3_1_3,
+@misc{aijuwe_api_3_2_0,
   author    = "Karadag, Ilker and Kastner, Patrick",
   title     = "{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}",
   year      = "2026",
-  version   = "3.1.3",
+  version   = "3.2.0",
   publisher = "Sustainable Urban Systems Lab",
-  url       = "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.3/index.json",
-  note      = "Data set; data version 6c8b16ff73fa"
+  url       = "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/index.json",
+  note      = "Data set; data version ecbbeee22eb3"
 }
 ```
 

@@ -1,7 +1,7 @@
 {
  "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/points.schema.json",
- "schema_version": "2.4.0",
- "data_version": "6c8b16ff73fa45f1aae99db9c2299e63d3fff6602e06a47434ddc86424661be7",
+ "schema_version": "2.5.0",
+ "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
  "case": "I",
  "title": "Case I — cube with a roof point source",

@@ -1,0 +1,15 @@
+# The repository's own worked example: Eddy3D's Case A OpenFOAM 12 probes, copied from the served pairs file
+# (api/cases/A/pairs/openfoam12-realizableKE.csv), so the pipeline is proven end to end. Not a community result.
+example: true
+solver: OpenFOAM simpleFoam (Eddy3D Outdoor case writer)
+version: "12"
+url: https://openfoam.org
+author: Sustainable Urban Systems Lab
+licence: CC-BY-4.0
+contact: https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions
+inlet: log law fitted to AF_caseA.csv (u* = 0.343 m/s, z0 = 0.668 mm, kappa 0.41), the inlet cases/A.json recommends
+mesh: snappyHexMesh, 1:100 scale, numerics level 3 (Eddy3D fixture TestAijCaseAContainerE2E)
+turbulence_model: realizable k-epsilon
+compute: 3000 iterations, steady, one workstation
+units: normalised
+notes: the values are the served pairs of Eddy3D's run, so the scores equal validation.json's for Case A

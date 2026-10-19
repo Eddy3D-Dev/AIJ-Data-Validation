@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or discussion
+    url: https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions
+    about: How to use the data or the scoring script, how a score was made, anything that is not a defect.

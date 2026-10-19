@@ -15,12 +15,38 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
-## [Unreleased]
+## [3.2.0] - 2026-10-18
 
-Documentation and tooling; no served byte changed (`docs/api/` and the cleaned tables are as in 3.1.3), so there is no new release.
+Validate your own solver. The benchmark becomes usable by anyone scoring a wind solver or ML model: the points to probe,
+the inlet contract and the scoring constants are served per case, `validation/score_submissions.py` scores a folder of values exactly as
+the served results are scored, and submissions are scored by the build and served as community results. API schema 2.5.0.
+
+### Added
+
+- `validation/score_submissions.py`: scores a folder of your values at the published points, run from a checkout (nothing beyond
+  `requirements.txt`). It scores with `validation/dispersion_metrics.py` as the plot scripts do, and its `--self-test` (run by the build)
+  re-scores every served run from its pairs and matches 224 headline scores to $$10^{-9}$$ (Case E to $$10^{-6}$$: its served scores came
+  from the published CSV, which rounds the workbook).
+- `/api/cases/{id}/probes.csv`: the published points to probe, with the key columns a scored file carries, $$x$$ $$y$$ $$z$$ in the case frame and
+  `scored_as` (vector, k, thermistor_bracket, concentration, theta).
+- `/api/cases/{id}.json` `scoring` (the reference speed, the constants of $$\theta$$, the conventions, the metric meanings) and `inflow` (the
+  benchmark's approach-flow data; the inlet this repository recommends, a log law with $$k$$ and $$\varepsilon$$ from the neutral ABL relations or
+  the tabulated profile where no log law fits; the flow-direction convention; what Eddy3D's runs used, quoted from their snapshots).
+- `/api/cases/{id}/inflow_openfoam.txt`: the recommended inlet as OpenFOAM 12 files in one text (`0/U`, `0/k`, `0/epsilon`, `0/nut`, `system/probes`
+  with the case's points).
+- `/api/submissions.json` and `/api/submissions/{slug}.json`: every folder under `submissions/`, scored by the build with that script from
+  the values it gave (served as `/api/submissions/{slug}/{id}.csv`), with the coverage of every score. One example submission, `example-openfoam12`
+  (Eddy3D's Case A probes, `example: true`), proves the pipeline.
+- Site: [Validate your own solver](https://eddy3d-dev.github.io/AIJ-Data-Validation/byos/) (ten steps, Case A end to end), [Community results](https://eddy3d-dev.github.io/AIJ-Data-Validation/community/)
+  (its own matrix, separate from Eddy3D's; self-reported inputs, scored by this repository's CI), the [inlet contract](https://eddy3d-dev.github.io/AIJ-Data-Validation/validation/inflow/)
+  page, and a page per submission.
+- Repository: `LICENSE` (code, MIT) and `LICENSE-DATA` (data, CC BY 4.0, with the attribution), `CONTRIBUTING.md`, issue templates and a pull
+  request template with the release checklist.
 
 ### Changed
 
+- `index.json` `license_detail` says what each licence covers: the data CC BY 4.0, the code MIT.
+- Documentation since 3.1.3 (no served byte of its own), the LaTeX sweep:
 - Every symbol and formula on the site and in the READMEs is LaTeX between `$$ ... $$`, which GitHub and the site's kramdown both read
   (the site loads MathJax): $$c_0 = \dfrac{q}{U_H H^2}$$, $$C/c_0$$, $$\overline{u'u'}$$ instead of `uu`, $$c_{\mathrm{rms}}$$. A column name stays in code font
   where it is an identifier. The served files keep their plain strings.

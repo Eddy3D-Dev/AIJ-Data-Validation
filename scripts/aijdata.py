@@ -82,7 +82,9 @@ LICENSE = {
     "spdx": "CC-BY-4.0",
     "name": "Creative Commons Attribution 4.0 International",
     "url": "https://creativecommons.org/licenses/by/4.0/",
-    "note": "Data: Kikumoto et al. (2026), CC BY 4.0. Collectors per case in cases/{id}.json.",
+    "note": ("Data: Kikumoto et al. (2026), CC BY 4.0 (LICENSE-DATA in the repository): the measurements, the cleaned tables, the geometry and "
+             "every file this API serves. Collectors per case in cases/{id}.json. The code of the repository (the build, the validation scripts "
+             "and the aij package) is MIT (LICENSE)."),
 }
 
 CITATION = {
