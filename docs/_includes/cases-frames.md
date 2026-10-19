@@ -8,7 +8,7 @@
 | [Case D — high-rise among city blocks]({{ '/cases/case-d/data/' | relative_url }}#frame-and-units) | m (model scale; converted from the workbook\'s millimetres) | m/s | tower centre on the ground plane (the array\'s bounding box is centred on it) |
 | [Case E — Niigata district]({{ '/cases/case-e/data/' | relative_url }}#frame-and-units) | m (FULL scale) | dimensionless | centre of the reproduced area, ground plane |
 | [Case F — Shinjuku district]({{ '/cases/case-f/data/' | relative_url }}#frame-and-units) | m (FULL scale) | dimensionless | centre of the reproduced district, tunnel floor plane |
-| [Case G — flow behind a tree belt]({{ '/cases/case-g/data/' | relative_url }}#frame-and-units) | m (full scale) | dimensionless, U/UH | the leeward face of the tree belt at ground level, on the vertical section through the belt\'s centre |
+| [Case G — flow behind a tree belt]({{ '/cases/case-g/data/' | relative_url }}#frame-and-units) | m (full scale) | dimensionless, $$U/U_H$$ | the leeward face of the tree belt at ground level, on the vertical section through the belt\'s centre |
 | [Case H — 1:1:2 building with a floor point source]({{ '/cases/case-h/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | the centre of the building\'s leeward face on the ground plane |
 | [Case I — cube with a roof point source]({{ '/cases/case-i/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | the centre of the cube on the ground plane |
 | [Case J — 1:1:2 building, non-isothermal]({{ '/cases/case-j/data/' | relative_url }}#frame-and-units) | m (model scale) | m/s | the building\'s leeward (downwind) wall centre on the ground; x = 0 is the leeward wall |

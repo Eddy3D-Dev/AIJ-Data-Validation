@@ -1,10 +1,11 @@
 {%- comment -%}
   One figure of a hand-written page: the 1600 px web copy, linked to the full-size image. Parameters: name (the figure's
-  file name), alt, caption (HTML). The sizes come from docs/_data/figures.json, which scripts/build_api.py writes; the
-  generated pages write the same markup from figure() in that script.
+  file name), alt, caption (Markdown, formulas between $$ and $$: kramdown reads the caption as it stands in the figcaption).
+  The sizes come from docs/_data/figures.json, which scripts/build_api.py writes; the generated pages write the same
+  markup from figure() in that script.
 {%- endcomment -%}
 {%- assign f = site.data.figures[include.name] -%}
 <figure class="figure">
 <a href="{{ f.master | relative_url }}"><img src="{{ f.web | relative_url }}" width="{{ f.width }}" height="{{ f.height }}" loading="lazy" alt="{{ include.alt | escape }}"></a>
-<figcaption>{{ include.caption }}</figcaption>
+<figcaption markdown="span">{{ include.caption }}</figcaption>
 </figure>

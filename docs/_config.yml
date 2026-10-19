@@ -30,6 +30,13 @@ search:
   button: true
   focus_shortcut_key: "k"
 
+# Math: a formula is written between $$ and $$ (scripts/nomenclature.py says what one may contain); kramdown turns it into \( ... \) or
+# \[ ... \], and docs/_includes/head_custom.html loads MathJax to typeset it. The file is pinned by version and checked by its hash.
+# Remove `mathjax:` and no page loads it.
+mathjax:
+  src: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"
+  integrity: "sha384-KKWa9jJ1MZvssLeOoXG6FiOAZfAgmzsIIfw8BXwI9+kYm0lPCbC6yTQPBC00F1/L"
+
 # aux_links are written to the page as they are, so they carry the baseurl themselves.
 aux_links:
   "API": "/AIJ-Data-Validation/api-reference/"

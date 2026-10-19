@@ -15,6 +15,26 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [Unreleased]
+
+Documentation and tooling; no served byte changed (`docs/api/` and the cleaned tables are as in 3.1.3), so there is no new release.
+
+### Changed
+
+- Every symbol and formula on the site and in the READMEs is LaTeX between `$$ ... $$`, which GitHub and the site's kramdown both read
+  (the site loads MathJax): $$c_0 = \dfrac{q}{U_H H^2}$$, $$C/c_0$$, $$\overline{u'u'}$$ instead of `uu`, $$c_{\mathrm{rms}}$$. A column name stays in code font
+  where it is an identifier. The served files keep their plain strings.
+- One nomenclature (`scripts/nomenclature.py`) says what each symbol, column and score means: `docs/_includes/nomenclature.md` under every table of
+  quantities, `nomenclature-scores.md` under every table of scores ($$n$$, $$R$$, $$\mathrm{FAC2}$$, $$\mathrm{FB}$$, the hit rate), `metrics.md` as the
+  Metrics section of the Method page; the READMEs get the same texts between `<!--nomenclature ...-->` markers.
+- The hit rate is $$\mathrm{HR}$$ with the tolerances $$\delta_{\mathrm{rel}}$$ and $$\delta_{\mathrm{abs}}$$ (VDI 3783-9: $$q$$, $$D$$, $$W$$), so that $$q$$ is
+  the tracer release rate, $$D$$ the block size and $$W$$ the vertical velocity only; tables that headed the hit rate `q` say "hit rate".
+- `scripts/check_markdown.py` checks how a formula is written and where it stands, that a table of scores or symbols has its nomenclature, and that no
+  symbol comes back as plain text.
+- Site: the colour scheme button has a third mode, "system" (the default): the page follows the device's light or dark setting, also while it is open and in
+  every open tab. A click goes system, the scheme the page is not in, the scheme it is in, system; the icon (monitor, sun, moon) shows the mode. The math follows
+  the scheme without a rule of its own (MathJax's SVG is drawn in the text colour). `theme_toggle.html` holds the one button that the header and the small-screen corner use.
+
 ## [3.1.3] - 2026-10-18
 
 Wording; no value changed.
@@ -82,7 +102,7 @@ Additive: new figures, fields and citation endpoints, and fixes. The API schema 
   `geometry.stl` is the 126 boxes and was never affected.
 - Wording of the API descriptions and `llms.txt`, of the `notes` of the runs in `validation.json` (Cases F, G, J, K, L and M), of the wind-direction texts
   (Cases D, E, F and M) and of the known-issue texts (Cases D and F); no value changed. `status_meaning.scored` reads "a validation run exists and its scores are in cases/{id}/validation.json".
-- Case M's `notes` state the probe precision: seven significant digits, no c\* value moved by more than 0.003 against a six-decimal probe. Its controls text says that 14 of the 15 turned points lie in the fluid.
+- Case M's `notes` state the probe precision: seven significant digits, no $$c^\ast$$ value moved by more than 0.003 against a six-decimal probe. Its controls text says that 14 of the 15 turned points lie in the fluid.
 
 ### Changed
 
@@ -116,30 +136,30 @@ The point table gained columns, which is why this release is MAJOR.
   realizable k-ε, standard k-ε and k-ω SST. The API lists the two closures as the engines `openfoam12-kEpsilon` and
   `openfoam12-kOmegaSST`, for Case I only.
 - Validation of Case K (9 × 9 cube array, floor point source): OpenFOAM 12, realizable k-ε, numerics level 3, 972,637 cells, 3000
-  iterations, solved 2026-10-18, scored at the tunnel's 203 points: U, V, W, k and the concentration c\* at turbulent Schmidt numbers 0.3,
+  iterations, solved 2026-10-18, scored at the tunnel's 203 points: $$U$$, $$V$$, $$W$$, $$k$$ and the concentration $$c^\ast$$ at turbulent Schmidt numbers 0.3,
   0.5 and 0.7 (three species on one flow, all published), with and without the four points at the source, and the
   y-symmetric ceiling of the measurement. The solve ran to its iteration limit with the residual control unmet.
 - Validation of Case G (tree belt, field data): OpenFOAM 12, realizable k-ε, a drag sweep because the canopy's leaf area density and drag
   coefficient are not in the dataset: no belt, three vegetation-library crowns (Cd·LAD 0.30, 0.625 and 0.875 1/m) on a two-dimensional
   slab, and the conifer crown on the real belt as a half domain. Five runs of one engine, each its own `configuration`, none chosen;
-  U and k at the 28 points over the model's own U(7 m) and over the imposed U_H, and the run notes say that the arm nearest the data is a
-  calibration and that Eddy3D's trees have no canopy k source.
+  $$U$$ and $$k$$ at the 28 points over the model's own $$U(7\text{ m})$$ and over the imposed $$U_H$$, and the run notes say that the arm nearest the data is a
+  calibration and that Eddy3D's trees have no canopy $$k$$ source.
 - Validation of Case J (1:1:2 building on a heated floor, floor tracer source) and Case L (9 × 14 cube array on a heated floor, line
   source) on Eddy3D's buoyant microclimate engine, urbanMicroclimateFoam (UMF), at Froude scales 62.5 and 100, solved 2026-10-18 (J:
   236,408 air cells, L: 754,940, the air region stopped at its 1500-iteration cap). J under realizable k-ε and `buoyantKEpsilon`, L under
-  realizable k-ε; U, V, W, k, the floor-referenced temperature θ and the concentration at three Schmidt numbers, in the tunnel's units.
+  realizable k-ε; $$U$$, $$V$$, $$W$$, $$k$$, the floor-referenced temperature $$\theta$$ and the concentration at three Schmidt numbers, in the tunnel's units.
   The API lists UMF as the engines `umf-realizableKE` (J, L) and `umf-buoyantKEpsilon` (J), and each validation result has `notes`.
 - Validation of Case F (Shinjuku district: a 1978 high-rise district, thermistor speed in a 1:800 tunnel at 5, 9 and 20 m and a year of field cup
   anemometers): OpenFOAM 12, realizable k-ε, numerics level 3, 2,143,488 cells, 2000 iterations, solved 2026-10-18 for the wind from NNW only
-  (the other eleven tunnel directions were not run). The tunnel's 33 points and the field's 13 are scored as |U| and √(|U|²+2k) over the model's own
-  U(500 m), in two vertical frames that are two runs of one engine (`configuration` `literal`: the published z in the STL's frame; `agl`: the STL's
+  (the other eleven tunnel directions were not run). The tunnel's 33 points and the field's 13 are scored as $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ over the model's own
+  $$U(500\text{ m})$$, in two vertical frames that are two runs of one engine (`configuration` `literal`: the published z in the STL's frame; `agl`: the STL's
   ground plus the instrument height; the files do not say which the tunnel meant, so neither is asserted), with the tunnel's 9 m column as a model of
   the field and the solved field's correlation with the tunnel's column for the opposite wind (SSE) as controls. That control corroborates the
   compass reading of the wind directions at NNW: the direction table of `clean/` marks the NNW rows `corroborated by a solved field`, the other
   directions stay `unverified`.
 - Validation of Case M (TPU Atsugi campus, tracer release over real terrain): OpenFOAM 12, realizable k-ε, numerics level 3, 1,394,053 cells, 3000
-  iterations, solved 2026-10-18 for the tunnel's heading WD 180 only, scored at the 15 points: c\* at turbulent Schmidt numbers 0.3, 0.5 and 0.7 (three
-  runs on one flow, `configuration` `sct03`, `sct05`, `sct07`, none chosen) and U, V, W and k over the solved speed at the reference mast, with the
+  iterations, solved 2026-10-18 for the tunnel's heading WD 180 only, scored at the 15 points: $$c^\ast$$ at turbulent Schmidt numbers 0.3, 0.5 and 0.7 (three
+  runs on one flow, `configuration` `sct03`, `sct05`, `sct07`, none chosen) and $$U$$, $$V$$, $$W$$ and $$k$$ over the solved speed at the reference mast, with the
   fixture's two controls (the points turned 180° about the source and mirrored across the plume axis), the tunnel's own WD 175 and WD 185 scored
   against its WD 180, and the 18 field runs recorded beside the tunnel. The ordering the fixture first asserted (the points nearest the source carry
   more than the far ones) is recorded and stated in the run notes as a model finding.
@@ -172,7 +192,7 @@ The point table gained columns, which is why this release is MAJOR.
 - Markdown that rendered differently in Jekyll and on GitHub: lists and tables not preceded by a blank line, a table row
   with an unescaped pipe in `clean/SCHEMA.md`, bare URLs, and the API changelog include, whose text with `<word>`
   was read as an HTML tag.
-- Units of Case G's approach flow: `cases/G.json` `approach_flow.units` said m/s and m^2/s^2, but the table holds U/Ub and k/Ub^2, which are
+- Units of Case G's approach flow: `cases/G.json` `approach_flow.units` said m/s and m²/s², but the table holds $$U/U_b$$ and $$k/U_b^2$$, which are
   dimensionless; the API now takes the units of each case's approach flow from its registry entry (`approach_flow_units`), and the
   `U` and `k` entries of `clean/units.json` name Case G as the exception. The meanings of `config`, `instrument`, `wind_direction`,
   `wind_direction_deg`, `x`, `y`, `z`, `V`, `velocity_ratio` and `C` in `clean/units.json` and the manifest now cover Cases F to M.

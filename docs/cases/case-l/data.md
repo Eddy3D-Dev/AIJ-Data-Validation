@@ -28,34 +28,38 @@ description: "Case L — 9 x 14 cube array, line source, non-isothermal: configu
 | Height H (m) | 0.06 |
 | pitch m | 0.12 |
 | cubes | 126 |
-| Reynolds number Re\_H | 5600 |
-| U\_H (m/s) | 1.339415 |
+| Reynolds number $$\mathrm{Re_H}$$ | 5600 |
+| $$U_H$$ (m/s) | 1.339415 |
 | Wind directions (°) | 0 |
 | Measurement planes | 8 heights (4 .. 150 mm) at 27 locations in the streets near the source, 4 heights (70 .. 150 mm) at 14 locations above the blocks, 3 heights (4 .. 30 mm) at 24 locations around |
 | Points | 344 |
 | stratification | unstable: floor 45.0 degC, air at z = H 14.75 degC (difference 30.3 K), bulk Richardson number -0.035 (workbook; the readme says -0.04); the workbook gives the building surface as 42.2 degC |
-| source | floor line source across the tunnel at x = -0.15 m between rows 7 and 8: readme 0.037 m x 1.2 m, BD\_caseL.stl patch 0.04 m x 1.02 m; 100 % ethylene, 8.33e-6 m3/s (500 cc/min) at 35 degC |
-| concentration normalisation | c0 = q / (U\_H H^2) = 1728.23 ppm (the workbook\'s value) |
+| source | floor line source across the tunnel at x = -0.15 m between rows 7 and 8: readme 0.037 m x 1.2 m, BD\_caseL.stl patch 0.04 m x 1.02 m; 100 % ethylene, 8.33e-6 m³/s (500 cc/min) at 35 degC |
+| concentration normalisation | $$c_0 = \dfrac{q}{U_H H^2}$$ = 1728.23 ppm (the workbook\'s value) |
 | Instrument | split-fibre hot wire (velocity), cold wire (temperature), high-speed hydrocarbon analyser (concentration), 1000 Hz with a 200 Hz low-pass filter, 60 s per point |
 | Wind tunnel | thermally stratified wind tunnel, Tokyo Polytechnic University (Atsugi); 1.2 m wide, 1.0 m high; 26 aluminium angles 9 mm high every 200 mm as roughness; model floor 10 mm above the tunnel floor |
 | Scale, note | model scale; the sources state no model:full scale ratio |
+
+{% include nomenclature.md %}
 
 ## Frame and units
 
 | Property | Definition |
 |---|---|
 | Origin | bottom centre of the windward wall of the 9th row (of 14) of the central column: x = 0 is that wall, y = 0 the centre line of the central column |
-| x | +x streamwise (the wind blows toward +x); row k spans x in \[0.12 (k-9), 0.12 (k-9) + 0.06\], so the array spans x in \[-0.96, 0.66\] |
+| x | +x streamwise (the wind blows toward +x); row $$k$$ spans x in \[0.12 ($$k$$-9), 0.12 ($$k$$-9) + 0.06\], so the array spans x in \[-0.96, 0.66\] |
 | y | +y lateral; column centres at y = 0, +-0.12, ... +-0.48 (the array spans y in \[-0.51, 0.51\]) |
 | z | +z up from the model floor; cube tops at z = 0.06; heated floor at z = 0 |
 | Lateral sign applied | 1 |
 | Coordinate scale applied | 1.0 |
 | Unit of length | m (model scale) |
 | Unit of velocity | m/s |
-| Unit of variance | m^2/s^2 |
-| Unit of k | m^2/s^2 |
+| Unit of variance | m²/s² |
+| Unit of $$k$$ | m²/s² |
 | Unit of concentration | ppm of the released ethylene |
-| Unit of temperature | degC (T); K (T\_rms); heat fluxes K m/s; concentration fluxes ppm m/s |
+| Unit of temperature | degC (T); K ($$T_{\mathrm{rms}}$$); heat fluxes K m/s; concentration fluxes ppm m/s |
+
+{% include nomenclature.md %}
 
 ## Reference data
 
@@ -74,36 +78,38 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 <details markdown="block">
   <summary>The 28 columns and what each holds</summary>
 
-| Column | Meaning |
-|---|---|
-| `point_id` | the tunnel\'s own measurement point number |
-| `config` | configuration key: \'default\', Case C centre building \'0D\'/\'1D\'/\'2D\', Case E state \'bc\' (before) / \'ac\' (after construction) |
-| `instrument` | \'split\_fibre\' (vector components) or \'thermistor\' (omnidirectional scalar speed) |
-| `wind_direction_deg` | AIJ wind direction in degrees; 0 is the case\'s reference direction (see frame) |
-| `x` | m, case frame |
-| `y` | m, case frame |
-| `z` | m above ground, case frame |
-| `U` | m/s, mean velocity along +x |
-| `V` | m/s, mean velocity along +y (sign unified: positive toward +y) |
-| `W` | m/s, mean velocity along +z |
-| `uu` | m^2/s^2, variance of u |
-| `vv` | m^2/s^2, variance of v |
-| `ww` | m^2/s^2, variance of w |
-| `k` | m^2/s^2, turbulent kinetic energy |
-| `campaign` | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
-| `uv` | m^2/s^2, Reynolds shear stress \<u\'v\'\> as published |
-| `uw` | m^2/s^2, Reynolds shear stress \<u\'w\'\> as published |
-| `C` | ppm, mean tracer-gas concentration as published (volume fraction x 1e6 of the released gas diluted in air) |
-| `c_rms` | ppm, rms of the concentration fluctuation |
-| `concentration_ratio` | C / c0, c0 = q / (U\_ref L\_ref^2) as the benchmark defines it for the case (manifest cases.\<id\>.normalisation) |
-| `T` | degC, mean air temperature as published (Cases J, L) |
-| `T_rms` | K, rms of the temperature fluctuation |
-| `uc` | ppm m/s, turbulent concentration flux \<u\'c\'\> |
-| `vc` | ppm m/s, turbulent concentration flux \<v\'c\'\> |
-| `wc` | ppm m/s, turbulent concentration flux \<w\'c\'\> |
-| `uT` | K m/s, turbulent heat flux \<u\'theta\'\> |
-| `vT` | K m/s, turbulent heat flux \<v\'theta\'\> |
-| `wT` | K m/s, turbulent heat flux \<w\'theta\'\> |
+| Column | Symbol | Meaning |
+|---|---|---|
+| `point_id` |  | the tunnel\'s own measurement point number |
+| `config` |  | configuration key: \'default\', Case C centre building \'0D\'/\'1D\'/\'2D\', Case E state \'bc\' (before) / \'ac\' (after construction) |
+| `instrument` |  | \'split\_fibre\' (vector components) or \'thermistor\' (omnidirectional scalar speed) |
+| `wind_direction_deg` |  | AIJ wind direction in degrees; 0 is the case\'s reference direction (see frame) |
+| `x` |  | m, case frame |
+| `y` |  | m, case frame |
+| `z` |  | m above ground, case frame |
+| `U` | $$U$$ | m/s, mean velocity along +x |
+| `V` | $$V$$ | m/s, mean velocity along +y (sign unified: positive toward +y) |
+| `W` | $$W$$ | m/s, mean velocity along +z |
+| `uu` | $$\overline{u'u'}$$ | m²/s², variance of u |
+| `vv` | $$\overline{v'v'}$$ | m²/s², variance of v |
+| `ww` | $$\overline{w'w'}$$ | m²/s², variance of w |
+| `k` | $$k$$ | m²/s², turbulent kinetic energy |
+| `campaign` |  | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
+| `uv` | $$\overline{u'v'}$$ | m²/s², Reynolds shear stress \<u\'v\'\> as published |
+| `uw` | $$\overline{u'w'}$$ | m²/s², Reynolds shear stress \<u\'w\'\> as published |
+| `C` | $$C$$ | ppm, mean tracer-gas concentration as published (volume fraction x 1e6 of the released gas diluted in air) |
+| `c_rms` | $$c_{\mathrm{rms}}$$ | ppm, rms of the concentration fluctuation |
+| `concentration_ratio` | $$c^\ast$$ | $$C/c_0$$, $$c_0 = \dfrac{q}{U_{\mathrm{ref}} L_{\mathrm{ref}}^2}$$ as the benchmark defines it for the case (manifest cases.\<id\>.normalisation) |
+| `T` | $$T$$ | degC, mean air temperature as published (Cases J, L) |
+| `T_rms` | $$T_{\mathrm{rms}}$$ | K, rms of the temperature fluctuation |
+| `uc` | $$\overline{u'c'}$$ | ppm m/s, turbulent concentration flux \<u\'c\'\> |
+| `vc` | $$\overline{v'c'}$$ | ppm m/s, turbulent concentration flux \<v\'c\'\> |
+| `wc` | $$\overline{w'c'}$$ | ppm m/s, turbulent concentration flux \<w\'c\'\> |
+| `uT` | $$\overline{u'\theta'}$$ | K m/s, turbulent heat flux \<u\'theta\'\> |
+| `vT` | $$\overline{v'\theta'}$$ | K m/s, turbulent heat flux \<v\'theta\'\> |
+| `wT` | $$\overline{w'\theta'}$$ | K m/s, turbulent heat flux \<w\'theta\'\> |
+
+{% include nomenclature.md %}
 
 </details>
 
@@ -111,13 +117,15 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | least squares, kappa = 0.41, z = 0.02 .. 0.32 m (about 5 H) on the workbook\'s Inflow sheet (CSV = its rounding) |
-| Friction velocity u\* (m/s) | 0.06999 |
-| Roughness length z₀ (mm) | 0.0265 |
-| U\_H, measured (m/s) | 1.3394 |
+| Method | least squares, $$\kappa$$ = 0.41, z = 0.02 .. 0.32 m (about 5 H) on the workbook\'s Inflow sheet (CSV = its rounding) |
+| Friction velocity $$u_\ast$$ (m/s) | 0.06999 |
+| Roughness length $$z_0$$ (mm) | 0.0265 |
+| $$U_H$$, measured (m/s) | 1.3394 |
 | Log-law error at H | -1.6 % |
 | log law rms residual | 2.2 % |
 | Note | derived during scoping, not published by AIJ; the boundary layer is unstably stratified, so a neutral log law is only a rough description |
+
+{% include nomenclature.md %}
 
 ## Known data issues
 
@@ -125,11 +133,11 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 - The published CSV is the workbook rounded to 2-4 decimals; the table is rebuilt from the workbook. Its \'tc\' column (temperature-concentration covariance, K ppm) and the workbook\'s \'Usc\' (the vector magnitude of the mean velocity) are not in the table.
 - BD\_caseL.stl: the two bottom triangles (z = 0) of each of the 126 cubes (252 triangles) are wound inward; the served geometry.stl is the 126 boxes, outward.
 - The readme\'s file list names AF\_caseK.csv and RS\_caseK.csv; the files are AF\_caseL.csv and RS\_caseL.csv.
-- The readme\'s \'building surface temperature T\_b = 14.8 degC\' is the approach-flow air temperature at z = H; the workbook gives the building surface as 42.2 degC.
+- The readme\'s \'building surface temperature $$T_b$$ = 14.8 degC\' is the approach-flow air temperature at z = H; the workbook gives the building surface as 42.2 degC.
 - The line source is 0.037 m x 1.2 m in the readme and data paper but a 0.04 m x 1.02 m patch in BD\_caseL.stl.
-- The +y and -y halves are not mirror images: the same point differs in U by 26 %, in k by 23 %, in C by 36 % on average, and U is 0.11 m/s lower and T 1.3 K higher at +y at z = 0.15 m (0.09 m above the roofs), so the tunnel flow has a lateral gradient; do not assume symmetry.
+- The +y and -y halves are not mirror images: the same point differs in $$U$$ by 26 %, in $$k$$ by 23 %, in C by 36 % on average, and $$U$$ is 0.11 m/s lower and T 1.3 K higher at +y at z = 0.15 m (0.09 m above the roofs), so the tunnel flow has a lateral gradient; do not assume symmetry.
 - The workbook carries no expanded uncertainty (the data paper mentions one for Case J only).
-- AF\_caseL.csv lists the profile from the top (z = 0.32 m) down and has no k.
+- AF\_caseL.csv lists the profile from the top (z = 0.32 m) down and has no $$k$$.
 - The measured tracer flux through the cross-sections equals q / 1.2 m to 0.86 .. 1.0 (street and cube-column lines averaged), which fixes q and the unit ppm; the cube-column line alone carries only 0.2 .. 0.4 of it.
 
 ## API

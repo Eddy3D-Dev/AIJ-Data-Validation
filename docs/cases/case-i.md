@@ -25,11 +25,13 @@ Isolated cube with an ethane point source at the centre of its roof: velocity (l
 | Fact | Value |
 |---|---|
 | Building | cube, 0.10 m on a side (= H) |
-| Reynolds number Re\_H | 11,000 |
-| U\_H (m/s) | 1.7 |
+| Reynolds number $$\mathrm{Re_H}$$ | 11,000 |
+| $$U_H$$ (m/s) | 1.7 |
 | Wind directions (°) | 0 |
 | Measurement planes | velocity: y/H = 0 and z/H = 0.5, concentration: y/H = 0 and z/H = 0 (the ground) |
-| Measured | 630 rows over 630 points: U, V, W, k, C, concentration\_ratio |
+| Measured | 630 rows over 630 points: $$U$$, $$V$$, $$W$$, $$k$$, $$C$$, $$c^\ast$$ |
+
+{% include nomenclature.md %}
 
 ## Validation
 
@@ -42,6 +44,8 @@ Isolated cube with an ethane point source at the centre of its roof: velocity (l
 | FluidX3D | <span class="label label-yellow status">pending</span> | — | — | — |
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
+
+{% include nomenclature-scores.md %}
 
 {: .warning-title }
 > Before you compare

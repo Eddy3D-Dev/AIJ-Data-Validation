@@ -29,10 +29,12 @@ Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 
 | District | Niigata City urban area near the Shinano River; dense low-rise stock (median top 6 m, max 30 m) |
 | Scale | 1:250 |
 | Reynolds number | 17,000 |
-| Normalisation | velocity ratio = mean scalar speed at 2 m / inflow velocity at 15.9 m (the Niigata meteorological station height); U(15.9 m) = 0.504531 x UR = 3.935 m/s with UR = 7.8 m/s at ZR = 250 m |
-| Wind directions | N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW |
+| Normalisation | velocity ratio = mean scalar speed at 2 m / inflow velocity at 15.9 m (the Niigata meteorological station height); $$U(15.9\text{ m})$$ = 0.504531 x $$U_R$$ = 3.935 m/s with $$U_R$$ = 7.8 m/s at $$Z_R$$ = 250 m |
+| Wind directions | N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, $$W$$, WNW, NW, NNW |
 | Measurement height (m) | 2.0 |
-| Measured | 2,560 rows over 80 points: velocity\_ratio |
+| Measured | 2,560 rows over 80 points: $$U/U_{\mathrm{ref}}$$ |
+
+{% include nomenclature.md %}
 
 ## Validation
 
@@ -43,6 +45,8 @@ Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 
 | FluidX3D | <span class="label label-grey status">not comparable</span> | — | — | — |
 | ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | +0.23 … +0.43 | 0.22 … 0.84 |
 {: .scores }
+
+{% include nomenclature-scores.md %}
 
 {: .warning-title }
 > Before you compare

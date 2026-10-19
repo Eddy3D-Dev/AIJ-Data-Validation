@@ -27,13 +27,15 @@ description: "Case A — 1:1:2 building: configuration, frame and units, referen
 | Building | 1:1:2 (width : depth : height) prism |
 | Width b (m) | 0.08 |
 | Height H (m) | 0.16 |
-| Reynolds number Re\_H | 24,000 |
-| U\_H (m/s) | 4.491 |
+| Reynolds number $$\mathrm{Re_H}$$ | 24,000 |
+| $$U_H$$ (m/s) | 4.491 |
 | Wind directions (°) | 0 |
 | Measurement planes | vertical centre plane y/b = 0, horizontal z/b = 0.125, horizontal z/b = 1.25 |
 | Instrument | hot-wire anemometer, split-fibre probes (DANTEC 55R55 streamwise, 55R57 spanwise/vertical), 1000 Hz, 60 s per point, 500 Hz low-pass |
 | Wind tunnel | Technical Research Institute, Shimizu Corporation, Tokyo |
 | Scale, note | model scale; Eddy3D solves it at 1:100 (b = 8 m, H = 16 m) with the tunnel velocities |
+
+{% include nomenclature.md %}
 
 ## Frame and units
 
@@ -47,8 +49,10 @@ description: "Case A — 1:1:2 building: configuration, frame and units, referen
 | Coordinate scale applied | 1.0 |
 | Unit of length | m (model scale) |
 | Unit of velocity | m/s |
-| Unit of variance | m^2/s^2 |
-| Unit of k | m^2/s^2 |
+| Unit of variance | m²/s² |
+| Unit of $$k$$ | m²/s² |
+
+{% include nomenclature.md %}
 
 ## Reference data
 
@@ -67,23 +71,25 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 <details markdown="block">
   <summary>The 15 columns and what each holds</summary>
 
-| Column | Meaning |
-|---|---|
-| `point_id` | the tunnel\'s own measurement point number |
-| `config` | configuration key: \'default\', Case C centre building \'0D\'/\'1D\'/\'2D\', Case E state \'bc\' (before) / \'ac\' (after construction) |
-| `instrument` | \'split\_fibre\' (vector components) or \'thermistor\' (omnidirectional scalar speed) |
-| `wind_direction_deg` | AIJ wind direction in degrees; 0 is the case\'s reference direction (see frame) |
-| `x` | m, case frame |
-| `y` | m, case frame |
-| `z` | m above ground, case frame |
-| `U` | m/s, mean velocity along +x |
-| `V` | m/s, mean velocity along +y (sign unified: positive toward +y) |
-| `W` | m/s, mean velocity along +z |
-| `uu` | m^2/s^2, variance of u |
-| `vv` | m^2/s^2, variance of v |
-| `ww` | m^2/s^2, variance of w |
-| `k` | m^2/s^2, turbulent kinetic energy |
-| `campaign` | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
+| Column | Symbol | Meaning |
+|---|---|---|
+| `point_id` |  | the tunnel\'s own measurement point number |
+| `config` |  | configuration key: \'default\', Case C centre building \'0D\'/\'1D\'/\'2D\', Case E state \'bc\' (before) / \'ac\' (after construction) |
+| `instrument` |  | \'split\_fibre\' (vector components) or \'thermistor\' (omnidirectional scalar speed) |
+| `wind_direction_deg` |  | AIJ wind direction in degrees; 0 is the case\'s reference direction (see frame) |
+| `x` |  | m, case frame |
+| `y` |  | m, case frame |
+| `z` |  | m above ground, case frame |
+| `U` | $$U$$ | m/s, mean velocity along +x |
+| `V` | $$V$$ | m/s, mean velocity along +y (sign unified: positive toward +y) |
+| `W` | $$W$$ | m/s, mean velocity along +z |
+| `uu` | $$\overline{u'u'}$$ | m²/s², variance of u |
+| `vv` | $$\overline{v'v'}$$ | m²/s², variance of v |
+| `ww` | $$\overline{w'w'}$$ | m²/s², variance of w |
+| `k` | $$k$$ | m²/s², turbulent kinetic energy |
+| `campaign` |  | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
+
+{% include nomenclature.md %}
 
 </details>
 
@@ -91,17 +97,19 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 | Property | Value |
 |---|---|
-| Method | log law, kappa = 0.41, least squares over z = 0.02 ... 2H on the case\'s own approach-flow file |
-| Friction velocity u\* (m/s) | 0.343 |
-| Roughness length z₀ (mm) | 0.668 |
-| U\_H, measured (m/s) | 4.491 |
+| Method | log law, $$\kappa$$ = 0.41, least squares over z = 0.02 ... 2H on the case\'s own approach-flow file |
+| Friction velocity $$u_\ast$$ (m/s) | 0.343 |
+| Roughness length $$z_0$$ (mm) | 0.668 |
+| $$U_H$$, measured (m/s) | 4.491 |
 | Log-law error at H | +2.0 % |
+
+{% include nomenclature.md %}
 
 ## Known data issues
 
-- Lateral velocity V is positive toward +y (checked: V = -2.893 m/s at (-0.040, -0.050, 0.010), just outside the y \< 0 flank, deflecting away from the centreline). Case B uses the OPPOSITE sign; the API flips Case B so both agree.
+- Lateral velocity $$V$$ is positive toward +y (checked: $$V$$ = -2.893 m/s at (-0.040, -0.050, 0.010), just outside the y \< 0 flank, deflecting away from the centreline). Case B uses the OPPOSITE sign; the API flips Case B so both agree.
 - Coordinates are metres (Case B\'s are millimetres in the published file).
-- Case A\'s turbulence columns are rms values (u\_rms, ...). The API serves VARIANCES (uu = u\_rms^2) so A and B share one column meaning.
+- Case A\'s turbulence columns are rms values ($$u_{\mathrm{rms}}$$, ...). The API serves VARIANCES (uu = $$u_{\mathrm{rms}}^2$$) so A and B share one column meaning.
 
 ## API
 

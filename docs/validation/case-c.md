@@ -23,7 +23,7 @@ All nine configurations (centre block 0D / 1D / 2D × WD 0°, 22.5°, 45°), sol
 <details markdown="block">
   <summary>Scores for all nine configurations (R, FAC2, FB, hit rate; |U| alone)</summary>
 
-| centre block | WD | R | FAC2 | FB | hit rate | \|U\| alone: FB / R |
+| centre block | WD | R | FAC2 | FB | hit rate | $$\lvert\mathbf{U}\rvert$$ alone: FB / R |
 |---|---|---|---|---|---|---|
 | 0D | 0° | +0.824 | 0.908 | +0.266 | 0.567 | +0.466 / +0.804 |
 | 0D | 22.5° | +0.857 | 0.983 | +0.106 | 0.750 | +0.295 / +0.846 |
@@ -35,13 +35,15 @@ All nine configurations (centre block 0D / 1D / 2D × WD 0°, 22.5°, 45°), sol
 | 2D | 22.5° | +0.906 | 0.983 | +0.091 | 0.875 | +0.240 / +0.894 |
 | 2D | 45° | +0.909 | 0.958 | +0.103 | 0.883 | +0.243 / +0.912 |
 
+{% include nomenclature-scores.md %}
+
 </details>
 
 {% include figure.html name="case-c-openfoam-bias-map.png" alt="Case C, where the model is slow or fast" caption="<strong>Figure 3.</strong> Case C, where the model is slow or fast." %}
 
 - R 0.80–0.91 and FAC2 0.85–0.98 in every configuration.
 - FB +0.25 … +0.34 at WD = 0 (hit rate 0.43–0.57); FB +0.09 … +0.20 at 22.5° and 45° (hit rate 0.68–0.88). FB is positive when the model is low.
-- The tunnel's speed is above the model's √(\|U\|² + 2k) at 902 of the 1080 points (84 %); the model's \|U\| alone is lower still.
+- The tunnel's speed is above the model's $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ at 902 of the 1080 points (84 %); the model's $$\lvert\mathbf{U}\rvert$$ alone is lower still.
 - Rotation sense mirrored (the paper figure's y mirror), control: R −0.33 … +0.03 at 22.5° and 45°.
 - Upwind and downwind swapped, control: R −0.41 … +0.14 in eight of nine configurations.
 
@@ -50,7 +52,7 @@ All nine configurations (centre block 0D / 1D / 2D × WD 0°, 22.5°, 45°), sol
 
 - The pattern is right in every configuration.
 - The model is slow, worst at WD = 0, and the map puts the deficit in the streets running along the wind.
-- The scalar-vs-vector difference does not explain the deficit: the tunnel reads above even √(\|U\|² + 2k) at 902 of the 1080 points, and \|U\| alone is lower still. Where the deficit comes from is not settled.
+- The scalar-vs-vector difference does not explain the deficit: the tunnel reads above even $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ at 902 of the 1080 points, and $$\lvert\mathbf{U}\rvert$$ alone is lower still. Where the deficit comes from is not settled.
 - Both frame controls above score far below the runs, so the frame is the right one.
 
 </details>
@@ -58,6 +60,6 @@ All nine configurations (centre block 0D / 1D / 2D × WD 0°, 22.5°, 45°), sol
 <details markdown="block">
 <summary>Data notes: Approach-flow sampling</summary>
 
-The approach flow at the probe height reads 0.83 of the tunnel's; that reading is a sampling artefact. Upstream of the array the probe height lies below the centre of the first cell of the coarse background mesh, where the probes' cell-to-point interpolation runs linearly to zero at the wall: the sampled \|U\| is exactly proportional to z there (1.00 m/s at 1 m, 2.01 m/s at 2 m). At z = D the approach matches the tunnel (0.99). At the measurement points the sampling is sound: none of the 240 checked (2D at 0°, 0D at 45°) has its 2 m sample inside the first cell.
+The approach flow at the probe height reads 0.83 of the tunnel's; that reading is a sampling artefact. Upstream of the array the probe height lies below the centre of the first cell of the coarse background mesh, where the probes' cell-to-point interpolation runs linearly to zero at the wall: the sampled $$\lvert\mathbf{U}\rvert$$ is exactly proportional to z there (1.00 m/s at 1 m, 2.01 m/s at 2 m). At z = D the approach matches the tunnel (0.99). At the measurement points the sampling is sound: none of the 240 checked (2D at 0°, 0D at 45°) has its 2 m sample inside the first cell.
 
 </details>

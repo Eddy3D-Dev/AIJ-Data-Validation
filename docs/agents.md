@@ -27,8 +27,8 @@ names in `$schema`.
    point table.
 4. **`GET /api/cases/{id}/points.json`** (or the `points.csv` download): every value is SI (m, m/s, m²/s²), in one
    frame per case. Unmeasured values are `null` (an empty cell in CSV). `columns` lists the fields present, and
-   `column_meaning` defines each. Case E's quantity is a dimensionless `velocity_ratio` (Vs / U(15.9 m), with
-   U(15.9 m) = 3.935 m/s); Cases F and G are ratios too (`velocity_ratio`, `k_ratio`), against a reference stated in the case's
+   `column_meaning` defines each. Case E's quantity is a dimensionless `velocity_ratio` ($$V_{\mathrm{s}}/U(15.9\text{ m})$$, with
+   $$U(15.9\text{ m})$$ = 3.935 m/s); Cases F and G are ratios too (`velocity_ratio`, `k_ratio`), against a reference stated in the case's
    `normalisation`. Cases H to M add a tracer concentration `C` in ppm, with `concentration_ratio` normalised as
    the case states, and J and L add temperature and turbulent fluxes.
 5. **`GET /api/cases/{id}/geometry.json`**, then the STL it links: metres, outward normals, origin at the building or
@@ -46,15 +46,15 @@ names in `$schema`.
   release, while a release's copy never changes and every API URL inside its documents points back into it. Quote the
   release number together with `data_version`. If a release lists `self_contained: false`, its documents link outside
   its copy: build its URLs from `base_url` and the `path` in its `index.json`.
-- Normalise by the case's own U_H (`configuration.U_H_m_s`), or for Case E by U(15.9 m); normalise k by U_H². Cases F
+- Normalise by the case's own $$U_H$$ (`configuration.U_H_m_s`), or for Case E by $$U(15.9\text{ m})$$; normalise $$k$$ by $$U_H^2$$. Cases F
   and G are published as ratios already: read their `normalisation` before comparing.
-- Compare a thermistor quantity (C, D, E, F: `Vs`, `velocity_ratio`) against the bracket \|U\| ≤ Vs ≤ √(\|U\|² + 2k), not
-  against |U| alone.
-- Compare a concentration through `concentration_ratio` and the case's own `normalisation` (c₀ is defined per case, and in
+- Compare a thermistor quantity (C, D, E, F: `Vs`, `velocity_ratio`) against the bracket $$\lvert\mathbf{U}\rvert$$ ≤ $$V_{\mathrm{s}}$$ ≤ $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$, not
+  against $$\lvert\mathbf{U}\rvert$$ alone.
+- Compare a concentration through `concentration_ratio` and the case's own `normalisation` ($$c_0$$ is defined per case, and in
   Case K the workbook and the data paper use different reference scales). Case M's tunnel and field rows are two
   campaigns: filter on `campaign`.
 - Probe at the published coordinates; never interpolate the reference.
-- The served tables already apply each case's corrections: Case B's V is sign-unified and its coordinates are in
+- The served tables already apply each case's corrections: Case B's $$V$$ is sign-unified and its coordinates are in
   metres. Do not apply those corrections a second time when starting from the raw files.
 - Use the download URLs the documents give rather than building them yourself, and check each file against its
   `sha256`.

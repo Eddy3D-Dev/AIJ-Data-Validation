@@ -52,6 +52,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import aijdata as D  # noqa: E402
 import api_schemas as S  # noqa: E402
 import citation as C  # noqa: E402
+import mathtext as MT  # noqa: E402
+import nomenclature as NM  # noqa: E402
 import page_prose as P  # noqa: E402
 import release as R  # noqa: E402
 
@@ -1785,14 +1787,19 @@ def readme_with_figures(text, info):
     return FIG_MARKER.sub(one, text)
 
 
+README_FILES = ["README.md", "clean/README.md", "clean/SCHEMA.md", "clean/QUESTIONS.md"]     # GitHub renders these without Jekyll
+
+
 def sync_readme():
-    path = os.path.join(REPO, "README.md")
-    with io.open(path, encoding="utf-8", newline="") as f:
-        text = f.read()
-    new = readme_with_figures(text, FIGURE_INFO)
-    if new != text:
-        with io.open(path, "w", encoding="utf-8", newline="\n") as f:
-            f.write(new)
+    """The figures of README.md and the nomenclature blocks of the files GitHub renders without Jekyll, written from their sources."""
+    for rel in README_FILES:
+        path = os.path.join(REPO, rel)
+        with io.open(path, encoding="utf-8", newline="") as f:
+            text = f.read()
+        new = NM.with_blocks(readme_with_figures(text, FIGURE_INFO) if rel == "README.md" else text)
+        if new != text:
+            with io.open(path, "w", encoding="utf-8", newline="\n") as f:
+                f.write(new)
 
 
 # ----------------------------------------------------------------------------- site pages
@@ -1833,9 +1840,17 @@ def _config_part(k, v):
     return str(v).replace("_", " ")
 
 
-def _esc(text):
+def _escape(piece):
+    for ch in "\\*_<>[]|'\"":             # quotes too: kramdown's smart quotes turn '-' into two opening quotes
+        piece = piece.replace(ch, "\\" + ch)
+    return piece
+
+
+def _esc(text, math=False, lead=False, bare=False):
     """Plain text from the data, safe in Markdown on GitHub and in kramdown: emphasis, HTML, link and pipe characters are
-    backslash-escaped (a line with a bare pipe is a table to kramdown), and a Liquid delimiter (which the site build would try to run) stops the build."""
+    backslash-escaped (a line with a bare pipe is a table to kramdown), and a Liquid delimiter (which the site build would try to run) stops the build.
+    `math`: the symbols and formulas in it become LaTeX between $$ (scripts/mathtext.py); `lead`: a symbol at its head is a symbol (a score label),
+    `bare`: the whole text is a table cell, so a bare symbol is a symbol."""
     text = str(text)
     if "{{" in text or "{%" in text:
         raise SystemExit(f"a Liquid delimiter in text that becomes a page: {text[:80]!r}")
@@ -1845,15 +1860,18 @@ def _esc(text):
             url, tail = re.match(r"(.*?)([.,;:]*)$", piece).groups()
             out.append(f"<{url}>" + tail)
             continue
-        for ch in "\\*_<>[]|'\"":             # quotes too: kramdown's smart quotes turn '-' into two opening quotes
-            piece = piece.replace(ch, "\\" + ch)
-        out.append(piece)
+        out.append(MT.to_markdown(piece, _escape, lead=lead and i == 0, bare=bare) if math else _escape(piece))
     return "".join(out)
 
 
-def _cell(text):
-    """A table cell's text: _esc, which also escapes the pipe that would end the cell."""
-    return _esc(text)
+def _tex(text, **kw):
+    """_esc with the math of the text as LaTeX: what a page says about the quantities."""
+    return _esc(text, math=True, **kw)
+
+
+def _cell(text, **kw):
+    """A table cell's text: _tex, which also escapes the pipe that would end the cell."""
+    return _tex(text, **kw)
 
 
 def _md_value(v, sink=None):
@@ -1861,7 +1879,7 @@ def _md_value(v, sink=None):
     reasoning part of a text (page_prose) is appended to `sink`, for the collapsed section under the table; a text
     that has one needs a sink."""
     if isinstance(v, dict):
-        return "<br>".join(f"**{_esc(_label(k))}**: {_md_value(x, sink)}" for k, x in v.items())
+        return "<br>".join(f"**{_tex(_label(k))}**: {_md_value(x, sink)}" for k, x in v.items())
     if isinstance(v, list):
         return ", ".join(_cell(x) for x in v)
     if isinstance(v, int) and not isinstance(v, bool) and abs(v) >= 10000:
@@ -1891,7 +1909,7 @@ def _sections(collapsed):
     for (kind, topic), texts in groups.items():
         if len(" ".join(texts)) < MIN_SECTION:
             raise SystemExit(f"a collapsed section is a fragment ({P.SUMMARY[kind]}: {topic}): {' '.join(texts)!r}")
-        L += ['<details markdown="block">', f"<summary>{P.SUMMARY[kind]}: {topic}</summary>", "", _esc(" ".join(texts)), "", "</details>", ""]
+        L += ['<details markdown="block">', f"<summary>{P.SUMMARY[kind]}: {topic}</summary>", "", _tex(" ".join(texts)), "", "</details>", ""]
     return L
 
 
@@ -1914,12 +1932,13 @@ def _web_img(f, alt):
             f'alt="{_plain(alt)}">')
 
 
-def figure(src, alt, caption, cls="figure"):
+def figure(src, alt, caption, cls="figure", markdown=False):
     """One image with its caption, as HTML (<figure>), so the caption stays attached to the image. The page shows the
-    1600 px copy; the image links to the full-size file."""
+    1600 px copy; the image links to the full-size file. `markdown`: the caption is Markdown (with formulas), which kramdown
+    reads inside <figcaption markdown="span">; GitHub shows these pages as source, where the images are broken anyway."""
     f = FIGURE_INFO[src.rsplit("/", 1)[-1]]
     return [f'<figure class="{cls}">', f'<a href="{_asset(f["master"])}">{_web_img(f, alt)}</a>',
-            f"<figcaption>{caption}</figcaption>", "</figure>", ""]
+            f'<figcaption{" markdown=" + chr(34) + "span" + chr(34) if markdown else ""}>{caption}</figcaption>', "</figure>", ""]
 
 
 def figure_table(cells, columns, caption=None):
@@ -2052,6 +2071,21 @@ def _link(text, url, anchor=""):
     return f"[{text}]({_asset(url)}{anchor})"
 
 
+SCORE_COLUMN = re.compile(r"\|\s*(?:R|FAC2|FB|Hit rate|n)(?: \(range\))?\s*(?=\|)")
+
+
+def _legend(table):
+    """The include that goes under a table (scripts/nomenclature.py): the scores for a table of scores, the whole nomenclature for a table that
+    shows a symbol (it is the lines [header, delimiter, rows...]); nothing for a table that shows none. A blank line first, none after."""
+    if SCORE_COLUMN.search(table[0]):
+        kind = "scores"
+    elif any("$$" in line for line in table):
+        kind = "full"
+    else:
+        return []
+    return ["", "{% include " + NM.INCLUDES[kind] + " %}"]
+
+
 def _toc():
     """just-the-docs' collapsible table of contents of a page's headings."""
     return ['<details open markdown="block">', "  <summary>", "    Contents", "  </summary>", "  {: .text-delta }",
@@ -2112,8 +2146,8 @@ def build_gallery(percase):
         meta = D.CASES[case]
         summ = percase[case]["summ"]
         counts = dict(points=f"{summ['distinct_points']:,}", rows=f"{summ['rows']:,}")
-        cap = (GALLERY_CAPTIONS[case].format(**counts) if case in GALLERY_CAPTIONS
-               else f"{_esc(meta['short'])} · {counts['rows']} rows")
+        cap = (_tex(GALLERY_CAPTIONS[case].format(**counts)) if case in GALLERY_CAPTIONS
+               else f"{_tex(meta['short'])} · {counts['rows']} rows")
         cells.append((f"/assets/geometry/{D.render_file(case)}", meta["title"], f"<strong>{meta['title']}</strong><br>{cap}",
                       _page_url(meta["slug"])))
     _write("_includes/case-gallery.md",
@@ -2129,8 +2163,8 @@ def build_cases_table(percase):
         meta = D.CASES[case]
         summ = percase[case]["summ"]
         scored = [_engine_name(e["id"]) for e in case_engines(case) if ENGINE_STATUS[case][e["id"]] == "scored"]
-        measured = f"{summ['rows']:,} rows over {summ['distinct_points']:,} points; {_cell(', '.join(meta['quantities']))}"
-        L.append(f"| {_link(_cell(meta['title']), _page_url(meta['slug']))} | {_cell(meta['short'])} | {measured} | "
+        measured = f"{summ['rows']:,} rows over {summ['distinct_points']:,} points; {NM.column_symbols(meta['quantities'])}"
+        L.append(f"| {_link(_esc(meta['title']), _page_url(meta['slug']))} | {_cell(meta['short'])} | {measured} | "
                  f"{', '.join(scored) if scored else 'none yet'} |")
     _write("_includes/cases-table.md", L)
 
@@ -2142,7 +2176,7 @@ def build_cases_frames():
         meta = D.CASES[case]
         units = meta["units"]
         measured = units.get("velocity", next((v for k, v in units.items() if k != "length"), ""))
-        L.append(f"| {_link(_cell(meta['title']), _page_url(meta['slug'], 'data'), '#frame-and-units')} | {_cell(units.get('length', ''))} | "
+        L.append(f"| {_link(_esc(meta['title']), _page_url(meta['slug'], 'data'), '#frame-and-units')} | {_cell(units.get('length', ''))} | "
                  f"{_cell(measured)} | {_cell(meta['frame'].get('origin', ''))} |")
     _write("_includes/cases-frames.md", L)
 
@@ -2170,8 +2204,14 @@ def build_validation_matrix(percase):
         got = {_compared_with(case, label) for r in percase[case]["results"] for label in r["headline"] if not _is_control(label)}
         note = "" if got == {"Wind tunnel"} else '<br><span class="caption">compared with ' + " and ".join(
             {"Wind tunnel": "the wind tunnel", "Field": "the field"}[s] for s in ("Wind tunnel", "Field") if s in got) + "</span>"
-        L.append(f"| {_link(_cell(meta['title']), _page_url(meta['slug'], 'validation'))}{note} | " + " | ".join(cells) + " |")
+        L.append(f"| {_link(_esc(meta['title']), _page_url(meta['slug'], 'validation'))}{note} | " + " | ".join(cells) + " |")
     _write("_includes/validation-matrix.md", L)
+
+
+def build_nomenclature():
+    """docs/_includes/nomenclature.md, nomenclature-scores.md and metrics.md: the one nomenclature (scripts/nomenclature.py), as the pages include it."""
+    for kind, name in NM.INCLUDES.items():
+        _write(f"_includes/{name}", NM.include_text(kind).rstrip("\n").split("\n"))
 
 
 def build_known_issues():
@@ -2205,7 +2245,7 @@ def _frame_facts(meta):
     """One line per fact a comparison depends on, read from the case's frame and units: where the cleaned table
     differs from the published files, and the wind-direction convention."""
     frame, facts = meta["frame"], []
-    facts.append(f"Origin: {_esc(frame['origin'])}. Length unit: {_esc(meta['units']['length'])}.")
+    facts.append(f"Origin: {_tex(frame['origin'])}. Length unit: {_tex(meta['units']['length'])}.")
     if frame.get("coordinate_scale_applied") not in (None, 1, 1.0):
         facts.append(f"The published coordinates are multiplied by {frame['coordinate_scale_applied']:g} in the cleaned table "
                      "(`coordinate_scale_applied`).")
@@ -2214,7 +2254,7 @@ def _frame_facts(meta):
                      "(`lateral_sign_applied`): the published file's V has the other sign convention.")
     if "wind_direction_rotation" in frame:
         shown, _ = P.split(frame["wind_direction_rotation"], cell=True)
-        facts.append(f"Wind direction: {_esc(_lower_first(shown).rstrip('.'))}.")
+        facts.append(f"Wind direction: {_tex(_lower_first(shown).rstrip('.'))}.")
     return facts
 
 
@@ -2227,7 +2267,7 @@ def _case_page(case, meta, p, shared):
     base, data_url, val_url = _page_url(meta["slug"]), _page_url(meta["slug"], "data"), _page_url(meta["slug"], "validation")
     n = D.CASE_IDS.index(case) + 1
     L = _front(meta["title"], n, parent="Cases", has_children=True, has_toc=False, description=meta["short"])
-    L += [f"# {meta['title']}", "", f"{_esc(meta['short'])}", "{: .fs-5 .fw-300 .lede }", "",
+    L += [f"# {meta['title']}", "", f"{_tex(meta['short'])}", "{: .fs-5 .fw-300 .lede }", "",
           f"{_link('Reference data', data_url)}{{: .btn .btn-primary }} {_link('Validation', val_url)}{{: .btn }} "
           f"{_link('Case as JSON', f'/api/cases/{case}.json')}{{: .btn }}", ""]
     cfgs = [cfg for (c, cfg) in D.RENDER_CAPTIONS if c == case]
@@ -2239,24 +2279,24 @@ def _case_page(case, meta, p, shared):
         group = RENDER_GROUP_CAPTIONS.get(case, f"The configurations of {meta['title']}, on one scale.")
         L += figure_table([(f"/assets/geometry/{D.render_file(case, cfg)}", f"{meta['title']}, {cfg}",
                             D.RENDER_CAPTIONS[(case, cfg)], None) for cfg in cfgs], min(len(cfgs), 3), group)
-    L += ["## At a glance", "", "| Fact | Value |", "|---|---|"]
+    glance = ["| Fact | Value |", "|---|---|"]
     conf = meta["configuration"]
     for keys in GLANCE:
         key = next((k for k in keys if k in conf), None)
         if key:
-            L.append(f"| {_cell(_label(key))} | {_md_value(conf[key])} |")
-    L.append(f"| Measured | {summ['rows']:,} rows over {summ['distinct_points']:,} points: {_cell(', '.join(meta['quantities']))} |")
-    L += ["", "## Validation", ""]
+            glance.append(f"| {_cell(_label(key))} | {_md_value(conf[key])} |")
+    glance.append(f"| Measured | {summ['rows']:,} rows over {summ['distinct_points']:,} points: {NM.column_symbols(meta['quantities'])} |")
+    L += ["## At a glance", ""] + glance + _legend(glance) + ["", "## Validation", ""]
     if results:
-        L += ["| Engine | Status | Compared with | R (range) | FAC2 (range) |", "|---|---|---|---|---|"]
+        status = ["| Engine | Status | Compared with | R (range) | FAC2 (range) |", "|---|---|---|---|---|"]
         for e in case_engines(case):
             mine = [r for r in results if r["engine"] == e["id"]]
             head = f"| {_engine_name(e['id'])} | {status_label(ENGINE_STATUS[case][e['id']])} | "
             rows = [(source, _headline_ranges(mine, case, source)) for source in ("Wind tunnel", "Field")]
             rows = [(source, ranges) for source, ranges in rows if ranges]
             for source, ranges in rows or [("—", None)]:
-                L.append(head + f"{source} | " + (" | ".join((_range(ranges["R"], True), _range(ranges.get("Fac2"), False))) if ranges else "— | —") + " |")
-        L += ["{: .scores }", ""]
+                status.append(head + f"{source} | " + (" | ".join((_range(ranges["R"], True), _range(ranges.get("Fac2"), False))) if ranges else "— | —") + " |")
+        L += status + ["{: .scores }"] + _legend(status) + [""]
         if case in CASE_CAVEATS:
             L += [CASE_CAVEATS[case], ""]
     else:
@@ -2276,7 +2316,7 @@ def _issue_list(issues):
     L, collapsed = [], []
     for g in issues:
         shown, c = P.split(g)
-        L.append(f"- {_esc(shown)}")
+        L.append(f"- {_tex(shown)}")
         if c:
             collapsed.append(c)
     return L + [""] + _sections(collapsed)
@@ -2289,17 +2329,17 @@ def _case_data_page(case, meta, p):
                description=f"{meta['title']}: configuration, frame and units, reference data, inflow and known data issues.")
     L += [f"# Case {case}: reference data", "{: .no_toc }", ""] + _toc()
     sink = []
-    L += ["## Configuration", "", "| Parameter | Value |", "|---|---|"]
+    table = ["| Parameter | Value |", "|---|---|"]
     for k, v in meta["configuration"].items():
-        L.append(f"| {_cell(_label(k))} | {_md_value(v, sink)} |")
-    L += [""] + _sections(sink)
+        table.append(f"| {_cell(_label(k))} | {_md_value(v, sink)} |")
+    L += ["## Configuration", ""] + table + _legend(table) + [""] + _sections(sink)
     sink = []
-    L += ["## Frame and units", "", "| Property | Definition |", "|---|---|"]
+    table = ["| Property | Definition |", "|---|---|"]
     for k, v in meta["frame"].items():
-        L.append(f"| {_cell(_label(k))} | {_md_value(v, sink)} |")
+        table.append(f"| {_cell(_label(k))} | {_md_value(v, sink)} |")
     for k, v in meta["units"].items():
-        L.append(f"| Unit of {'k' if k == 'k' else _cell(_label(k).lower())} | {_cell(v)} |")
-    L += [""] + _sections(sink)
+        table.append(f"| Unit of {NM.m(NM.COLUMN_TEX[k]) if k in NM.COLUMN_TEX else _cell(_label(k).lower())} | {_cell(v)} |")
+    L += ["## Frame and units", ""] + table + _legend(table) + [""] + _sections(sink)
     af = meta.get("approach_flow_file")
     L += ["## Reference data", "",
           f"Source in this repository: [`{meta['reference_file']}`]({REPO_URL}/blob/main/{meta['reference_file']})"
@@ -2307,7 +2347,7 @@ def _case_data_page(case, meta, p):
           f"The cleaned table has **{summ['rows']:,} rows** over **{summ['distinct_points']:,} distinct points**; "
           f"columns `{'`, `'.join(summ['columns'])}`.", ""]
     if summ["nulls"]:
-        L += ["Unmeasured cells (null): " + ", ".join(f"{k} {v}" for k, v in summ["nulls"].items()) + ".", ""]
+        L += ["Unmeasured cells (null): " + ", ".join(f"`{k}` {v}" for k, v in summ["nulls"].items()) + ".", ""]
     rows = []
     for c in configs:
         key = ", ".join(_config_part(k, v) for k, v in c.items() if k not in ("points", "measured", "points_per_direction", "wind_directions"))
@@ -2317,29 +2357,30 @@ def _case_data_page(case, meta, p):
         if "wind_directions" in c:
             key += ", 16 wind directions"
             val = f"{val} per direction"
-        rows.append(f"| {_cell(key)} | {val} |")
+        rows.append(f"| {_esc(key)} | {val} |")
     table = ["| Configuration | Points |", "|---|---|"] + rows
     if len(rows) > OPEN_LIST_ROWS:
         L += ['<details markdown="block">', f"  <summary>The {len(rows)} configurations and their points</summary>", ""] + table + ["", "</details>", ""]
     else:
         L += table + [""]
-    cols = ["| Column | Meaning |", "|---|---|"] + [f"| `{c}` | {_cell(COLUMN_MEANING.get(c, ''))} |" for c in summ["columns"]]
+    cols = ["| Column | Symbol | Meaning |", "|---|---|---|"] + [
+        f"| `{c}` | {NM.m(NM.COLUMN_TEX[c]) if c in NM.COLUMN_TEX else ''} | {_cell(COLUMN_MEANING.get(c, ''))} |" for c in summ["columns"]]
     L += ["## Columns", "", "The columns of the cleaned table (`points.csv`, `points.json`), in order.", ""]
     if len(cols) - 2 > OPEN_LIST_ROWS:
-        L += ['<details markdown="block">', f"  <summary>The {len(cols) - 2} columns and what each holds</summary>", ""] + cols + ["", "</details>", ""]
+        L += ['<details markdown="block">', f"  <summary>The {len(cols) - 2} columns and what each holds</summary>", ""] + cols + _legend(cols) + ["", "</details>", ""]
     else:
-        L += cols + [""]
+        L += cols + _legend(cols) + [""]
     inflow = meta.get("inflow_fit")
     if inflow:
         sink = []
-        L += ["## Inflow", "", "| Property | Value |", "|---|---|"]
+        table = ["| Property | Value |", "|---|---|"]
         for k, v in inflow.items():
             if k == "windows":
                 for w in v:
-                    L.append("| Fit window | " + "; ".join(f"{_cell(_label(a))} {_cell(b)}" for a, b in w.items()) + " |")
+                    table.append("| Fit window | " + "; ".join(f"{_cell(_label(a))} {_cell(b)}" for a, b in w.items()) + " |")
             else:
-                L.append(f"| {_cell(_label(k))} | {_md_value(v, sink)} |")
-        L += [""] + _sections(sink)
+                table.append(f"| {_cell(_label(k))} | {_md_value(v, sink)} |")
+        L += ["## Inflow", ""] + table + _legend(table) + [""] + _sections(sink)
     L += ["## Known data issues", ""] + _issue_list(meta["known_issues"])
     L += ["## API", "", "| Resource | Endpoint |", "|---|---|"]
     for name, rel in (("Case", f"cases/{case}.json"), ("Points (JSON)", f"cases/{case}/points.json"),
@@ -2372,10 +2413,10 @@ def _score_table(e):
     for label, key in e["headline"].items():
         s = e["scores"][key]
         num = lambda m, f: "—" if s.get(m) is None else f"{s[m]:{f}}"  # noqa: E731
-        L.append(f"| {_cell(label)} | {num('R', '+.3f')} | {num('Fac2', '.3f')} | {num('Fb', '+.3f')} | "
+        L.append(f"| {_cell(label, lead=True, bare=True)} | {num('R', '+.3f')} | {num('Fac2', '.3f')} | {num('Fb', '+.3f')} | "
                  f"{num('HitRate', '.3f')} | {num('Count', 'd')} |")
     L.append("{: .scores }")
-    return L
+    return L + _legend(L)
 
 
 REPRODUCE_TAIL = "; scores recomputed"       # in a run's `reproduce`: what comes after is how the scores were made, not how to run it
@@ -2387,7 +2428,7 @@ def _notes(notes):
     for n in notes:
         shown, c = P.split(n)
         if shown:
-            L.append(f"- {_esc(shown)}")
+            L.append(f"- {_tex(shown)}")
         if c:
             collapsed.append(c)
     return L, collapsed
@@ -2417,9 +2458,9 @@ def _case_validation_page(case, meta, p, shared):
     for e in results:
         L += [f"## {_esc(names[e['engine']])}" + (f", configuration {_esc(e['configuration'])}" if e["configuration"] else ""), ""]
         if e["quantity"] and not all_quantity:
-            L += [f"Quantity: {_esc(e['quantity'])}.", ""]
+            L += [f"Quantity: {_tex(e['quantity'])}.", ""]
         if e["recirculation_Lr_over_H"] is not None:
-            L += [f"Reattachment length L<sub>r</sub>/H = {e['recirculation_Lr_over_H']:.2f}.", ""]
+            L += [f"Reattachment length {NM.m('L_r/H')} = {e['recirculation_Lr_over_H']:.2f}.", ""]
         table = _score_table(e)
         if len(e["headline"]) > OPEN_TABLE_ROWS:
             L += ['<details markdown="block">', f"  <summary>All {len(e['headline'])} headline scores</summary>", ""] + table + ["", "</details>", ""]
@@ -2428,7 +2469,7 @@ def _case_validation_page(case, meta, p, shared):
         norm, norm_collapsed = [], []
         if not all_norm:
             shown, c = P.split(e["normalisation"])
-            norm = [f"- Normalisation: {_esc(shown)}"]
+            norm = [f"- Normalisation: {_tex(shown)}"]
             norm_collapsed = [c] if c else []
         pairs_rel = e["pairs"]["path"]
         head, sep, tail = e["reproduce"].partition(REPRODUCE_TAIL)
@@ -2437,7 +2478,7 @@ def _case_validation_page(case, meta, p, shared):
         L += norm
         if not all_pairs:
             L.append(f"- Per-point values: {_link('`/api/' + pairs_rel + '`', '/api/' + pairs_rel)}")
-        L += [f"- Reproduce: {_esc(head)}", ""]
+        L += [f"- Reproduce: {_tex(head)}", ""]
         facts, collapsed = _notes([n for n in own_notes(e) if n not in all_notes])
         if facts:
             L += ["Notes:", ""] + facts + [""]
@@ -2446,10 +2487,10 @@ def _case_validation_page(case, meta, p, shared):
     if many and (all_quantity or all_norm or all_pairs or all_notes):
         L += ["## All runs", ""]
         if all_quantity:
-            L += [f"- Quantity: {_esc(results[0]['quantity'])}"]
+            L += [f"- Quantity: {_tex(results[0]['quantity'])}"]
         if all_norm:
             shown, c = P.split(results[0]["normalisation"])
-            L += [f"- Normalisation: {_esc(shown)}"]
+            L += [f"- Normalisation: {_tex(shown)}"]
             norm_collapsed = [c] if c else []
         else:
             norm_collapsed = []
@@ -2462,7 +2503,7 @@ def _case_validation_page(case, meta, p, shared):
             L += ["Notes:", ""] + facts + [""]
         L += _sections(norm_collapsed + collapsed)
     if tails:
-        lines = [f"- {_esc(t[0].upper() + t[1:])}." for t in tails]
+        lines = [f"- {_tex(t[0].upper() + t[1:])}." for t in tails]
         if len(" ".join(tails)) < MIN_SECTION:   # a line, not a collapsed fragment
             L += lines + [""]
         else:
@@ -2480,7 +2521,7 @@ def _case_validation_page(case, meta, p, shared):
         L += ["## Figures", ""]
     for fig in own:
         name = fig["url"].rsplit("/", 1)[-1]
-        L += figure(f"/assets/figures/{name}", fig["caption"], f"<strong>Figure {fig_no}.</strong> {fig['caption']}")
+        L += figure(f"/assets/figures/{name}", fig["caption"], f"<strong>Figure {fig_no}.</strong> {_tex(fig['caption'])}", markdown=True)
         fig_no += 1
     if elsewhere:
         L += ["## Figures", ""] if not own else []
@@ -2498,6 +2539,7 @@ def build_pages(percase):
     build_validation_matrix(percase)
     build_known_issues()
     build_version_label()
+    build_nomenclature()
     for case in D.CASE_IDS:
         meta, p = D.CASES[case], percase[case]
         _write(f"cases/{meta['slug']}.md", _case_page(case, meta, p, shared))

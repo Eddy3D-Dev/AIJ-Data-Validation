@@ -16,9 +16,13 @@ Validation data from the AIJ (Architectural Institute of Japan) benchmark casesâ
 
 {% include case-gallery.md %}
 
+{% include nomenclature.md %}
+
 ## Cases at a glance
 
 {% include cases-table.md %}
+
+{% include nomenclature.md %}
 
 ## Where to go
 

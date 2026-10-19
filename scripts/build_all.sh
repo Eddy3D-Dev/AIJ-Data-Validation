@@ -8,7 +8,8 @@
 # this and fails on any difference. Outputs: clean/ (the cleaned tables), validation/figures/ (the figures and
 # geometry renders, drawn from the snapshots in validation/results/), and docs/ (the API, the generated pages, and a 1600 px web copy of every figure under docs/assets/web/).
 # Then the citations are tested and checked against each other (scripts/citation.py is their one source), and the last step
-# checks that every Markdown file, generated or not, renders the same on GitHub and in Jekyll.
+# checks that every Markdown file, generated or not, renders the same on GitHub and in Jekyll, and that its math is written as LaTeX
+# between $$ ... $$ (scripts/mathtext.py, scripts/nomenclature.py).
 set -euo pipefail
 # One thread for the numerical libraries: with several, a figure's layout solve (the Case D agreement figure) came out as one of
 # two layouts, a pixel apart, from run to run on the same machine, and a build that is a pure function must not.
@@ -26,5 +27,6 @@ python scripts/test_geometry.py
 python scripts/test_citation.py
 python scripts/check_citation.py --self-test
 python scripts/check_citation.py
+python scripts/mathtext.py --self-test   # plain-text math -> LaTeX: the rules that the generator and the checker share
 python scripts/check_markdown.py --self-test
 python scripts/check_markdown.py

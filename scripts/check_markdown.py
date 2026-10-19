@@ -30,6 +30,15 @@ one such disagreement, or a mistake neither renderer forgives:
   link             a relative link or image whose file, page or heading does not exist
   front-matter     docs pages: an unquoted value holding ": " (a YAML error), no title, a parent that is no page
   liquid           docs pages: a Liquid tag this checker cannot follow, or an include not set off by blank lines
+  math-form        a formula between $$ ... $$ that GitHub or kramdown would read differently: a * ~ | < > & or ` in it, a
+                   backslash before punctuation (GitHub drops it), a space inside the dollar signs, a Liquid delimiter
+  math-place       a formula where GitHub reads none: after a letter, a quote, a bracket, a slash or a code span, before a
+                   letter, a digit or an underscore, in a heading, a link text, a <summary> or a block of raw HTML
+  math-open        a $$ that closes nothing, or a display formula that is never closed
+  stray-dollar     a single $ in running text (GitHub may pair it with another and read math)
+  plain-math       a symbol or formula written as plain text (U_H, c0, c*, |U|, sqrt(...)); scripts/mathtext.py writes the LaTeX
+  nomenclature     a table of scores without the scores' nomenclature under it, a table of symbols without the nomenclature
+                   (scripts/nomenclature.py): an include in docs pages, a <!--nomenclature ...--> block elsewhere
 
 Files under docs/ are Jekyll pages (kramdown with GFM input, as GitHub Pages builds them); every other file is
 rendered by GitHub alone, so only the rules that concern GitHub apply to it.
@@ -40,6 +49,10 @@ import glob
 import os
 import re
 import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import mathtext as MT  # noqa: E402
+import nomenclature as N  # noqa: E402
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS = os.path.join(REPO, "docs")
@@ -180,6 +193,10 @@ def expand_includes(lines, errors, base_dir):
         path = os.path.join(base_dir, "_includes", name)
         if not os.path.isfile(path):
             errors.append((n, f"liquid: include {name} does not exist"))
+        elif name in N.INCLUDES.values():
+            if (out and out[-1][1].strip()) or (n < len(lines) and lines[n].strip()):
+                errors.append((n, f"liquid: {{% include {name} %}} needs a blank line before and after it"))
+            out.append((n, "<!--nomenclature-->"))        # the include is checked as a file of its own
         elif not name.endswith(".md"):
             out.append((n, ""))                      # an HTML include (version label, JSON-LD, a figure): no Markdown in it
         else:
@@ -365,7 +382,150 @@ def check_text(text, path="<text>", jekyll=False, site=None, base_dir=DOCS):
     if in_fence:
         errors.append((fence_line, "fence: this code fence is never closed"))
     errors += check_links_and_urls(numbered, path, jekyll, site)
+    errors += check_math(numbered, jekyll)
+    errors += check_plain_math(numbered)
+    raw = list(zip(range(1, len(lines) + 1), lines))
+    if jekyll:
+        raw = raw[parse_front_matter(lines)[1]:]
+    errors += check_legends(raw, path, jekyll)
     return sorted({e for e in errors if e[0] != DROP})
+
+
+MATH = re.compile(r"\$\$(.+?)\$\$")
+CODE_MASK = re.compile(r"(`+)(?:(?!\1).)+?\1")
+SCORE_WORDS = re.compile(r"\bFAC2\b|\bFB\b|\b[Hh]it rate\b")
+GENERATED_TABLES = {"validation-matrix.md": "scores", "cases-table.md": "full", "cases-frames.md": "full", "case-gallery.md": "full"}   # includes that hold a table
+INCLUDE_KIND = {name: kind for kind, name in N.INCLUDES.items()}
+NOT_PROSE = re.compile(r"^\s*(?:<|#|\{%|\{:|\||\[[^\]]+\]:)")
+
+
+def prose_lines(numbered):
+    """[(line number, text)] of the lines that are Markdown prose: not in a code fence, a comment, a block of HTML or a heading, no Liquid."""
+    out, in_fence, in_comment = [], False, False
+    for n, raw in numbered:
+        if FENCE.match(raw):
+            in_fence = not in_fence
+            continue
+        if in_fence or n == DROP:
+            continue
+        if "<!--" in raw or in_comment:
+            in_comment = "-->" not in raw
+            continue
+        out.append((n, raw))
+    return out
+
+
+def check_math(numbered, jekyll):
+    """The math rules: how a formula is written (math-form), where it stands (math-place), that it is closed (math-open, stray-dollar)."""
+    errors, display = [], None
+    for n, line in prose_lines(numbered):
+        text = line.strip()
+        if display is not None:
+            if text == "$$":
+                display = None
+            elif N.RISKY.search(text):
+                errors.append((n, "math-form: a display formula may not hold a * ~ | < > & or backtick, or a backslash before punctuation"))
+            continue
+        if text == "$$":
+            display = n
+            continue
+        if "$" not in line:
+            continue
+        masked = CODE_MASK.sub(lambda mt: "\x01" * len(mt.group(0)), line)
+        if text.startswith("<"):
+            if "$$" in masked and not (jekyll and text.startswith('<figcaption markdown="span">')):
+                errors.append((n, "math-place: a formula inside a block of raw HTML (GitHub shows it as written, and kramdown too)"))
+            continue
+        if text.startswith("#"):
+            if "$" in masked:
+                errors.append((n, "math-place: a formula in a heading (its anchor and the table of contents would hold LaTeX); write it as text"))
+            continue
+        if re.search(r"\[[^\]]*\$\$[^\]]*\]\(", masked):
+            errors.append((n, "math-place: a formula inside a link text (GitHub reads none); put it beside the link"))
+        for mt in MATH.finditer(masked):
+            inner, a, b = mt.group(1), mt.start(), mt.end()
+            if inner != inner.strip():
+                errors.append((n, "math-form: a space inside the dollar signs (GitHub reads no math)"))
+            elif N.RISKY.search(inner):
+                errors.append((n, f"math-form: {inner[:50]!r} holds a * ~ | < > & or backtick, a backslash before punctuation or a Liquid delimiter; "
+                                  "use \\ast, \\cdot, \\lvert, \\le, \\lbrace, \\thinspace"))
+            before, after = masked[:a], masked[b:]
+            if before and not (before[-1] in " \t(|" or before.endswith("**")):
+                errors.append((n, f"math-place: a formula after {before[-1]!r} (GitHub reads math only after a space or a parenthesis): {inner[:30]!r}"))
+            if after and re.match(r"[A-Za-z0-9_]", after[0]):
+                errors.append((n, f"math-place: a formula before {after[0]!r} (GitHub reads no math before a letter, a digit or an underscore): {inner[:30]!r}"))
+        rest = MATH.sub("", masked)
+        if "$$" in rest:
+            errors.append((n, "math-open: a $$ that closes nothing on its line"))
+        elif "$" in rest:
+            errors.append((n, "stray-dollar: a single $ in text (GitHub pairs two as math); write \\$ or reword"))
+    if display is not None:
+        errors.append((display, "math-open: this display formula ($$ on a line of its own) is never closed"))
+    return errors
+
+
+def check_plain_math(numbered):
+    """Plain-text symbols and formulas that scripts/mathtext.py knows how to write as LaTeX (plain-math)."""
+    errors, display = [], False
+    for n, line in prose_lines(numbered):
+        if line.strip() == "$$":
+            display = not display
+            continue
+        if display or (NOT_PROSE.match(line) and not line.lstrip().startswith("|")):
+            continue
+        for col, what in MT.leftovers(line):
+            errors.append((n, f"plain-math: {what} written as plain text; write it between $$ ... $$ (python scripts/mathtext.py --write FILE converts it)"))
+    return errors
+
+
+def check_legends(raw, path, jekyll):
+    """Every table of scores has the scores' nomenclature under it, every other table that shows a symbol has the whole nomenclature, and a
+    generated table that a page includes has the one that belongs to it. Docs pages write an include, the other files a block that the build fills."""
+    rel = os.path.relpath(path, REPO).replace(os.sep, "/") if os.path.isabs(path) else path
+    if rel.startswith("docs/_includes/") or rel.startswith("docs/api/"):
+        return []
+    errors, in_fence, in_block, i = [], False, False, 0
+
+    def legend_after(k):
+        while k < len(raw) and (not raw[k][1].strip() or IAL.match(raw[k][1])):
+            k += 1
+        text = raw[k][1].strip() if k < len(raw) else ""
+        mt = re.match(r"^\{%-?\s*include\s+([\w.-]+)", text)
+        if jekyll and mt and mt.group(1) in INCLUDE_KIND:
+            return INCLUDE_KIND[mt.group(1)]
+        mt = re.match(r"^<!--nomenclature (full|scores)-->$", text)
+        return mt.group(1) if mt else None
+
+    where = ("an include line {% include nomenclature-scores.md %} or {% include nomenclature.md %}" if jekyll
+             else "a block <!--nomenclature scores--> or <!--nomenclature full-->, then <!--/nomenclature-->, which scripts/build_api.py fills")
+    while i < len(raw):
+        n, line = raw[i]
+        if FENCE.match(line):
+            in_fence = not in_fence
+        mt = re.match(r"^<!--nomenclature (full|scores|metrics)-->$", line.strip())
+        if mt:
+            in_block = True
+        elif line.strip() == "<!--/nomenclature-->":
+            in_block = False
+        if in_fence or in_block:
+            i += 1
+            continue
+        inc = re.match(r"^\{%-?\s*include\s+([\w.-]+)", line.strip()) if jekyll else None
+        if inc and inc.group(1) in GENERATED_TABLES:
+            if legend_after(i + 1) != GENERATED_TABLES[inc.group(1)]:
+                errors.append((n, f"nomenclature: the table of {inc.group(1)} needs the {GENERATED_TABLES[inc.group(1)]} nomenclature under it: {where}"))
+        elif "|" in line and i + 1 < len(raw) and TABLE_DELIM.match(raw[i + 1][1]):
+            j = i + 2
+            while j < len(raw) and raw[j][1].strip() and "|" in raw[j][1]:
+                j += 1
+            text = "\n".join(x for _, x in raw[i:j])
+            need = "scores" if SCORE_WORDS.search(text) else "full" if "$$" in text else None
+            if need and legend_after(j) != need:
+                errors.append((n, f"nomenclature: this table shows {'scores' if need == 'scores' else 'a symbol'}; the {need} nomenclature goes under it: {where}"))
+            i = j
+            continue
+        i += 1
+    return errors
 
 
 def check_links_and_urls(numbered, path, jekyll, site):
@@ -433,12 +593,34 @@ def self_test():
         ("1. one\n   - two\n", []),
         ("- a\n  - b\n- c\n", []),
         ("#Title\n", ["heading"]),
-        ("a paragraph\n\n|U| is low\n", ["pipe-line"]),
-        ("a paragraph\n|U| is low\n", []),
+        ("a paragraph\n\n|d| is low\n", ["pipe-line"]),
+        ("a paragraph\n|d| is low\n", []),
         ("<div>\n**bold**\n</div>\n", ["html-markdown"]),
         ("<div>\n\n**bold**\n\n</div>\n", []),                 # GitHub renders it when set off by blank lines
         ("see [x](nonexistent-file.md)\n", ["link"]),
         ("text\n> quote\n", ["block-start"]),
+        ("the speed $$U_H$$ and $$k/U_H^2$$ and $$\\lvert x \\rvert$$.\n", []),
+        ("a paragraph with $$c_0 = \\dfrac{q}{U_H H^2}$$ in it\n\n$$\nc_0 = \\dfrac{q}{U_H H^2}\n$$\n", []),
+        ("the star $$c^*$$ here\n", ["math-form"]),
+        ("the bar $$|x|$$ here\n", ["math-form"]),
+        ("the braces $$\\{a\\}$$ here\n", ["math-form"]),
+        ("a space $$ x $$ inside\n", ["math-form"]),
+        ("after a letter a$$x$$ and \"$$x$$\" quoted and ($$x$$) and [$$x$$] and 2$$x$$\n", ["math-place"]),
+        ("a formula $$x$$s and $$x$$2 before letters\n", ["math-place"]),
+        ("[the link $$x$$](https://example.org)\n", ["math-place"]),
+        ("## A heading with $$x$$\n", ["math-place"]),
+        ("<td>a cell with $$x$$</td>\n", ["math-place"]),
+        ("an open $$x pair\n", ["math-open"]),
+        ("$$\nx\n", ["math-open"]),
+        ("costs $5 and $6\n", ["stray-dollar"]),
+        ("code `$$x$$` and `$BASE` stay\n", []),
+        ("the speed U_H and c0 and U\\_H^2\n", ["plain-math"]),
+        ("the speed `U_H` and [U_H](README.md) stay in code and links\n", []),
+        ("| R | FAC2 |\n|---|---|\n| 1 | 2 |\n", ["nomenclature"]),
+        ("| R | FAC2 |\n|---|---|\n| 1 | 2 |\n\n<!--nomenclature scores-->\n\n<!--/nomenclature-->\n", []),
+        ("| Symbol |\n|---|\n| $$U_H$$ |\n", ["nomenclature"]),
+        ("| Symbol |\n|---|\n| $$U_H$$ |\n\n<!--nomenclature full-->\n\n<!--/nomenclature-->\n", []),
+        ("| Symbol |\n|---|\n| $$U_H$$ |\n\n<!--nomenclature scores-->\n\n<!--/nomenclature-->\n", ["nomenclature"]),
     ]
     jekyll = [
         ("<div>\n**bold**\n</div>\n", ["html-markdown"]),
@@ -452,13 +634,21 @@ def self_test():
         ("text\n\n{: .note }\n\ntext\n", ["ial"]),
         ("text\n\n> a\n>\n> - x\n> - y\n", []),
         ("text\n\n> a\n> - x\n", ["list-start"]),
-        ("text\n\n- Split-fibre |U|: FB +0.07\n", ["pipe-text"]),
+        ("text\n\n- Split-fibre |d|: FB +0.07\n", ["pipe-text"]),
         ("text\n\n> speed, not |mean velocity vector|.\n", ["pipe-text"]),
-        ("text\n\n- Split-fibre \\|U\\|: FB +0.07\n- the code `a|b` stays\n", []),
-        ("text\n\nfirst line\nsecond |U| line\n", []),
+        ("text\n\n- Split-fibre \\|d\\|: FB +0.07\n- the code `a|b` stays\n", []),
+        ("text\n\nfirst line\nsecond |d| line\n", []),
         ("[x]({{ '/nowhere/' | relative_url }})\n", []),     # no Site given: the link rule needs the site's pages
         ('text\n\n{% include figure.html name="x.png" alt="a | b" caption="<strong>F.</strong> c" %}\n\ntext\n', []),   # an HTML include with parameters
         ('text\n\n{% include nowhere.html name="x.png" %}\n\ntext\n', ["liquid"]),
+        ('<figure class="f">\n<figcaption markdown="span">caption $$U_H$$</figcaption>\n</figure>\n', []),
+        ('<figure class="f">\n<figcaption>caption $$U_H$$</figcaption>\n</figure>\n', ["math-place"]),
+        ("| R | FAC2 |\n|---|---|\n| 1 | 2 |\n\n{% include nomenclature-scores.md %}\n\ntext\n", []),
+        ("| R | FAC2 |\n|---|---|\n| 1 | 2 |\n{: .scores }\n\n{% include nomenclature-scores.md %}\n\ntext\n", []),
+        ("| R | FAC2 |\n|---|---|\n| 1 | 2 |\n\ntext\n", ["nomenclature"]),
+        ("| Symbol |\n|---|\n| $$U_H$$ |\n\n{% include nomenclature.md %}\n\ntext\n", []),
+        ("text\n\n{% include validation-matrix.md %}\n\ntext\n", ["nomenclature"]),
+        ("text\n\n{% include validation-matrix.md %}\n\n{% include nomenclature-scores.md %}\n\ntext\n", []),
     ]
     for cases, is_jekyll in ((github, False), (jekyll, True)):
         for text, want in cases:

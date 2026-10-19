@@ -25,11 +25,13 @@ Isolated 1:1:2 building, velocity field (split-fibre hot wire).
 | Fact | Value |
 |---|---|
 | Building | 1:1:2 (width : depth : height) prism |
-| Reynolds number Re\_H | 24,000 |
-| U\_H (m/s) | 4.491 |
+| Reynolds number $$\mathrm{Re_H}$$ | 24,000 |
+| $$U_H$$ (m/s) | 4.491 |
 | Wind directions (°) | 0 |
 | Measurement planes | vertical centre plane y/b = 0, horizontal z/b = 0.125, horizontal z/b = 1.25 |
-| Measured | 186 rows over 186 points: U, V, W, uu, vv, ww, k |
+| Measured | 186 rows over 186 points: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$ |
+
+{% include nomenclature.md %}
 
 ## Validation
 
@@ -40,6 +42,8 @@ Isolated 1:1:2 building, velocity field (split-fibre hot wire).
 | FluidX3D | <span class="label label-green status">scored</span> | Wind tunnel | +0.59 … +0.85 | 0.22 … 0.60 |
 | ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | -0.13 … +0.43 | 0.26 … 0.62 |
 {: .scores }
+
+{% include nomenclature-scores.md %}
 
 {: .warning-title }
 > Before you compare

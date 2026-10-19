@@ -10,7 +10,7 @@ description: "OpenFOAM 12 against the tunnel for Case E, the Niigata district, w
 
 OpenFOAM 12 runs on the Niigata district, wind from SW. Scores and per-point file: [Case E]({{ '/cases/case-e/validation/' | relative_url }}) Validation page.
 
-Before and after the construction of a 60 m tower and two 18 m blocks, each state on a 504 m-radius cylinder (about one million cells, 2 m at the buildings), the tunnel's own profile imposed as a table (`wind.inlet: "manual"`), the model's speed over its own solved U(15.9 m).
+Before and after the construction of a 60 m tower and two 18 m blocks, each state on a 504 m-radius cylinder (about one million cells, 2 m at the buildings), the tunnel's own profile imposed as a table (`wind.inlet: "manual"`), the model's speed over its own solved $$U(15.9\text{ m})$$.
 
 ## Measurement layout
 
@@ -20,13 +20,15 @@ Before and after the construction of a 60 m tower and two 18 m blocks, each stat
 
 {% include figure.html name="case-e-openfoam-agreement.png" alt="Case E, measured vs modelled, before, after and the change" caption="<strong>Figure 2.</strong> Case E, measured vs modelled, before, after and the change. The dots take the colour of their group in Figure 1." %}
 
-| | FAC2 | FB | q | R |
+| | FAC2 | FB | hit rate | R |
 |---|---|---|---|---|
-| before · √(\|U\|²+2k) | 0.95 | +0.12 | 0.61 | 0.69 |
-| before · \|U\| | 0.79 | +0.27 | 0.41 | 0.69 |
-| after · √(\|U\|²+2k) | 0.89 | +0.23 | 0.47 | 0.85 |
-| after · \|U\| | 0.74 | +0.34 | 0.30 | 0.84 |
+| before · $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | 0.95 | +0.12 | 0.61 | 0.69 |
+| before · $$\lvert\mathbf{U}\rvert$$ | 0.79 | +0.27 | 0.41 | 0.69 |
+| after · $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | 0.89 | +0.23 | 0.47 | 0.85 |
+| after · $$\lvert\mathbf{U}\rvert$$ | 0.74 | +0.34 | 0.30 | 0.84 |
 | ceiling control: the tunnel's *before*, scored as a model of its *after* | 0.79 | +0.37 | 0.35 | 0.10 |
+
+{% include nomenclature-scores.md %}
 
 {% include figure.html name="case-e-openfoam-bias-map.png" alt="Case E, where the model is slow or fast" caption="<strong>Figure 3.</strong> Case E, where the model is slow or fast." %}
 

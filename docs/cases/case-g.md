@@ -10,7 +10,7 @@ description: "Field observation behind the Tsuiji-matsu tree belt (a porous wind
 
 # Case G — flow behind a tree belt
 
-Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m × 2 m × 7 m with a 1.2 m gap below): normalised mean speed and k at 28 points on the centre section (sonic anemometers).
+Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m × 2 m × 7 m with a 1.2 m gap below): normalised mean speed and $$k$$ at 28 points on the centre section (sonic anemometers).
 {: .fs-5 .fw-300 .lede }
 
 [Reference data]({{ '/cases/case-g/data/' | relative_url }}){: .btn .btn-primary } [Validation]({{ '/cases/case-g/validation/' | relative_url }}){: .btn } [Case as JSON]({{ '/api/cases/G.json' | relative_url }}){: .btn }
@@ -24,9 +24,11 @@ Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m ×
 
 | Fact | Value |
 |---|---|
-| Normalisation | velocity\_ratio = U/UH and k\_ratio = k/UH^2, UH = the mean wind speed at 7 m during each measurement period (interpolated with the approach flow\'s power law, index 0.22); nothing is published in m/s |
+| Normalisation | `velocity_ratio` = $$U/U_H$$ and `k_ratio` = $$k/U_H^2$$, $$U_H$$ = the mean wind speed at 7 m during each measurement period (interpolated with the approach flow\'s power law, index 0.22); nothing is published in m/s |
 | Wind directions (°) | 0 |
-| Measured | 28 rows over 28 points: velocity\_ratio, k\_ratio |
+| Measured | 28 rows over 28 points: $$U/U_{\mathrm{ref}}$$, $$k/U_{\mathrm{ref}}^2$$ |
+
+{% include nomenclature.md %}
 
 ## Validation
 
@@ -37,6 +39,8 @@ Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m ×
 | FluidX3D | <span class="label label-yellow status">pending</span> | — | — | — |
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
+
+{% include nomenclature-scores.md %}
 
 LAD and Cd are not in the dataset (only the shading rate, 81 %). The drag values are crowns of the Eddy3D vegetation library.
 

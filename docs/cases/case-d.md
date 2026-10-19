@@ -26,11 +26,13 @@ description: "1:1:4 tower in a regular array of 82 low blocks, pedestrian-height
 |---|---|
 | Tower | 0.25H x 0.25H x H = 62.5 x 62.5 x 250 mm (1:1:4) |
 | Scale | 1:400 (H = 100 m full scale; the 5 mm measurement plane = 2 m) |
-| Reynolds number Re\_H | 110,000 |
-| U\_H (m/s) | 6.65 |
+| Reynolds number $$\mathrm{Re_H}$$ | 110,000 |
+| $$U_H$$ (m/s) | 6.65 |
 | Wind directions (°) | 0, 22.5, 45 |
 | Measurement height (m) | 0.005 |
-| Measured | 267 rows over 78 points: Vs, U, V, W, uu, vv, ww, k |
+| Measured | 267 rows over 78 points: $$V_{\mathrm{s}}$$, $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$ |
+
+{% include nomenclature.md %}
 
 ## Validation
 
@@ -41,6 +43,8 @@ description: "1:1:4 tower in a regular array of 82 low blocks, pedestrian-height
 | FluidX3D | <span class="label label-grey status">not comparable</span> | — | — | — |
 | ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | +0.22 … +0.59 | 0.34 … 0.64 |
 {: .scores }
+
+{% include nomenclature-scores.md %}
 
 {: .warning-title }
 > Before you compare

@@ -25,11 +25,13 @@ Isolated 1:4:4 slab, velocity field (split-fibre hot wire).
 | Fact | Value |
 |---|---|
 | Building | 1:4:4 (depth : width : height) slab |
-| Reynolds number Re\_H | 72,000 |
-| U\_H (m/s) | 5.133 |
+| Reynolds number $$\mathrm{Re_H}$$ | 72,000 |
+| $$U_H$$ (m/s) | 5.133 |
 | Wind directions (°) | 0 |
 | Measurement planes | vertical centre plane y/H = 0, horizontal z/H = 1/16 |
-| Measured | 224 rows over 224 points: U, V, W, uu, vv, ww, k |
+| Measured | 224 rows over 224 points: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$ |
+
+{% include nomenclature.md %}
 
 ## Validation
 
@@ -40,6 +42,8 @@ Isolated 1:4:4 slab, velocity field (split-fibre hot wire).
 | FluidX3D | <span class="label label-green status">scored</span> | Wind tunnel | +0.85 … +0.95 | 0.48 … 0.64 |
 | ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | -0.24 … +0.01 | 0.36 … 0.46 |
 {: .scores }
+
+{% include nomenclature-scores.md %}
 
 {: .warning-title }
 > Before you compare

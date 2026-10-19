@@ -25,11 +25,13 @@ description: "14 rows by 9 columns of 0.06 m cubes with a tracer line source on 
 | Fact | Value |
 |---|---|
 | Array | 14 rows (along x) by 9 columns (across y) of cubes, H = 0.06 m, pitch 0.12 m (street width = H, plan area ratio 25 %), published as BD\_caseL.stl; the data paper calls it \'9 rows by 14 columns\' |
-| Reynolds number Re\_H | 5600 |
-| U\_H (m/s) | 1.339415 |
+| Reynolds number $$\mathrm{Re_H}$$ | 5600 |
+| $$U_H$$ (m/s) | 1.339415 |
 | Wind directions (°) | 0 |
 | Measurement planes | 8 heights (4 .. 150 mm) at 27 locations in the streets near the source, 4 heights (70 .. 150 mm) at 14 locations above the blocks, 3 heights (4 .. 30 mm) at 24 locations around |
-| Measured | 344 rows over 344 points: U, V, W, uu, vv, ww, k, uv, uw, C, c\_rms, concentration\_ratio, T, T\_rms, uc, vc, wc, uT, vT, wT |
+| Measured | 344 rows over 344 points: $$U$$, $$V$$, $$W$$, $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$, $$k$$, $$\overline{u'v'}$$, $$\overline{u'w'}$$, $$C$$, $$c_{\mathrm{rms}}$$, $$c^\ast$$, $$T$$, $$T_{\mathrm{rms}}$$, $$\overline{u'c'}$$, $$\overline{v'c'}$$, $$\overline{w'c'}$$, $$\overline{u'\theta'}$$, $$\overline{v'\theta'}$$, $$\overline{w'\theta'}$$ |
+
+{% include nomenclature.md %}
 
 ## Validation
 
@@ -41,6 +43,8 @@ description: "14 rows by 9 columns of 0.06 m cubes with a tracer line source on 
 | FluidX3D | <span class="label label-yellow status">pending</span> | — | — | — |
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
+
+{% include nomenclature-scores.md %}
 
 {: .warning-title }
 > Before you compare
