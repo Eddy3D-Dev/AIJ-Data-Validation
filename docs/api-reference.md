@@ -154,7 +154,10 @@ certificate type. The body is ASCII STL regardless; read it as such.
 | [`GET /api/validation.json`]({{ '/api/validation.json' | relative_url }}) | every case and engine in one table: status, runs, and each run's headline R, FAC2, FB and hit rate |
 | [`GET /api/geometry.json`]({{ '/api/geometry.json' | relative_url }}) | every STL of every case in one list: case, configuration, units, frame, bounding box, size, SHA-256 |
 | [`GET /api/geometry.zip`]({{ '/api/geometry.zip' | relative_url }}) | every STL in one archive. Each file keeps its own case's frame and units. Overlaid, the files would stack at the origin; E, F, G and M are full scale and the others model scale; C's three centre blocks and E's two states are alternatives |
-| `GET /api/schemas/{name}.schema.json` | the JSON Schema of each document: `index`, `versions`, `cases`, `case`, `points`, `geometry`, `validation`, `validation-summary`, `geometry-index` |
+| `GET /api/cases/{id}/probes.csv` | the published points to probe for a comparison of your own solver: the key columns a scored file carries, $$x$$ $$y$$ $$z$$ in the case frame, and `scored_as` ([Validate your own solver]({{ '/byos/' | relative_url }})) |
+| [`GET /api/submissions.json`]({{ '/api/submissions.json' | relative_url }}) | the community results: every submitted solver with its headline scores per case, scored by the build from the submitted values ([Community results]({{ '/community/' | relative_url }})) |
+| `GET /api/submissions/{slug}.json` | one submission in full: its `submission.yaml`, and every score, coverage and group per case; `submissions/{slug}/{id}.csv` is the values it gave |
+| `GET /api/schemas/{name}.schema.json` | the JSON Schema of each document: `index`, `versions`, `cases`, `case`, `points`, `geometry`, `validation`, `validation-summary`, `geometry-index`, `submissions`, `submission` |
 | [`GET /api/openapi.json`]({{ '/api/openapi.json' | relative_url }}) | OpenAPI 3.1 description of every endpoint, with the schemas embedded |
 | [`GET /api/llms.txt`]({{ '/api/llms.txt' | relative_url }}) | plain-text entry point for agents (also at [`/llms.txt`]({{ '/llms.txt' | relative_url }})) |
 

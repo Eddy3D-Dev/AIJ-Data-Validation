@@ -50,6 +50,7 @@ import zipfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import aijdata as D  # noqa: E402
+import byos as B  # noqa: E402
 import api_schemas as S  # noqa: E402
 import citation as C  # noqa: E402
 import mathtext as MT  # noqa: E402
@@ -85,7 +86,7 @@ REPO_URL = C.REPO_URL
 SITE = C.SITE
 LIVE_BASE = SITE + "/api"         # the unversioned alias: always the newest release
 RAW_BASE = "https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/main/docs/api"
-SCHEMA_VERSION = "2.4.0"
+SCHEMA_VERSION = "2.5.0"
 RELEASE = R.version()             # the repository's release (VERSION); the API names it, it does not set it
 RELEASE_DATE = R.release_date()
 PINNED_BASE = f"{LIVE_BASE}/{RELEASE}"   # this release, frozen: nothing under it changes once the release is tagged
@@ -106,6 +107,25 @@ API_BASE = None          # the URL every document in the tree uses for its own f
 FALLBACK_BASE = None     # the same tree, raw from the repository
 
 CHANGELOG = [
+    {"version": "2.5.0", "date": "2026-10-18", "changes": [
+        "Added: cases/{id}/probes.csv, the published points to probe, one row per measured row of the point table: the key columns a scored "
+        "file carries (point_id, config, campaign, instrument, run, wind_direction_deg), x y z in the case frame, and `scored_as`, the families "
+        "the row is scored in (vector, k, thermistor_bracket, concentration, theta). Linked from cases/{id}.json `probes`.",
+        "Added to cases/{id}.json: `scoring` (the reference speed the measured side is divided by, the constants of theta, the conventions "
+        "and the metric meanings: what validation/score_submissions.py scores with) and `inflow` (the benchmark's approach-flow data and fit under "
+        "`benchmark_data`; the inlet this repository RECOMMENDS under `recommended`, a log law from the fit with k and epsilon from the "
+        "neutral ABL relations, or the tabulated profile where no log law fits; the flow-direction convention; what Eddy3D's runs used, "
+        "quoted from their snapshots).",
+        "Added: submissions.json and submissions/{slug}.json, the community results: every folder under submissions/ in the repository, "
+        "scored in this build by validation/score_submissions.py (run it from a checkout to score your own), with each "
+        "submission's own values at the published points served as submissions/{slug}/{id}.csv. A submission names its `solver` as free "
+        "text (a slug); Eddy3D's engines keep the `engine` enum and the validation documents. The repository's own example "
+        "(`example: true`) is served like any other and marked.",
+        "Added: cases/{id}/inflow_openfoam.txt, the recommended inlet as OpenFOAM 12 files in one text: 0/U, 0/k and 0/epsilon "
+        "(atmBoundaryLayerInlet* where a log law fits, fixedProfile tables where not), 0/nut with the nutkAtmRoughWallFunction ground patch, and "
+        "system/probes, a probes function object with the case's published points.",
+        "Changed: index.json `license_detail` says what the licence covers: the data CC BY 4.0 (LICENSE-DATA), the code MIT (LICENSE).",
+    ]},
     {"version": "2.4.0", "date": "2026-10-18", "changes": [
         "Added to index.json: `cite.api`, the citation of the API release (`title`, `version`, `url`, `release_url`, `doi`, `apa`, `bibtex`, "
         "`csl_json`). `url` is the pinned address of the release, `/api/<release>/index.json`; `doi` is null until Zenodo mints one for the release.",
@@ -761,11 +781,16 @@ ENDPOINTS = [
     ("cases/{id}/geometry.json", "application/json", "geometry", "the case's STL files with statistics, renders, and the boxes where the geometry is boxes"),
     ("cases/{id}/geometry.stl", "model/stl", None, "cleaned ASCII STL of the default configuration: metres, case frame, outward normals"),
     ("cases/{id}/geometry_{configuration}.stl", "model/stl", None, "the other configurations' STLs (C: 0D, 1D; E: bc, before construction)"),
+    ("cases/{id}/probes.csv", "text/csv", None, "the published points to probe for a comparison: the key columns of a scored file, x y z in the case frame, and what each row is scored as"),
+    ("cases/{id}/inflow_openfoam.txt", "text/plain", None, "the recommended inlet as OpenFOAM 12 files in one text (0/U, 0/k, 0/epsilon, 0/nut, system/probes with the case's points); the benchmark's data is the measured profile, the inlet is this repository's choice"),
     ("cases/{id}/validation.json", "application/json", "validation", "Eddy3D's scores per engine and run, with figures and the per-point pairs"),
     ("cases/{id}/pairs/{engine}.csv", "text/csv", None, "per-point measured and modelled values of one engine's runs on the case (columns described by the result's pairs_columns)"),
     ("validation.json", "application/json", "validation-summary", "every case and engine in one table: status, runs, headline scores"),
     ("geometry.json", "application/json", "geometry-index", "every STL of every case in one list: case, configuration, units, frame, bounding box, size, SHA-256"),
     ("geometry.zip", "application/zip", None, "every STL in one archive (each keeps its own case's frame and units: they are not one scene)"),
+    ("submissions.json", "application/json", "submissions", "the community results: every submitted solver with its headline scores per case, scored by this build from the submitted values"),
+    ("submissions/{slug}.json", "application/json", "submission", "one submission in full: its submission.yaml, and every score, coverage and group per case"),
+    ("submissions/{slug}/{id}.csv", "text/csv", None, "the values a submission gave at the published points of one case (the key columns of probes.csv plus its value columns)"),
     ("schemas/{name}.schema.json", "application/schema+json", None, "the JSON Schema (draft 2020-12) of each JSON document"),
     ("openapi.json", "application/json", None, "OpenAPI 3.1 description of every endpoint"),
     ("llms.txt", "text/plain", None, "plain-text entry point for agents"),
@@ -775,6 +800,7 @@ MEDIA_TYPES = {".json": "application/json", ".csv": "text/csv", ".stl": "model/s
 
 WRITTEN = set()          # every file this build wrote into the current tree (relative); anything else there is stale
 DATA_VERSION = None      # set once the data files are written
+COMMUNITY = None         # the scored submissions, for the community pages (write_submissions)
 
 
 def release_citation():
@@ -984,7 +1010,10 @@ def write_data(case):
     for r in RUNS:
         if r["case"] == case:
             copy_file(os.path.join(RESULTS_DIR, r["pairs"]), f"cases/{case}/pairs/{r['engine']}.csv")
-    return {"rows": rows, "src": src, "summ": summ, "af": af, "af_src": af_src, "af_cols": af_cols, "geometry": geometry}
+    probes = B.probes_rows(case, rows, B.scoring_block(case, METRIC_MEANING))
+    write_csv(f"cases/{case}/probes.csv", B.PROBES_COLUMNS, probes)
+    write_text(f"cases/{case}/inflow_openfoam.txt", B.inflow_openfoam_text(case, D.CASES[case], af, af_cols, probes, SITE, RELEASE))
+    return {"rows": rows, "src": src, "summ": summ, "af": af, "af_src": af_src, "af_cols": af_cols, "geometry": geometry, "probes": len(probes)}
 
 
 def write_archive(data):
@@ -1215,6 +1244,7 @@ def write_case_documents(case, d):
     })
 
     configs = configurations(case, d["rows"])
+    af_units = {c: {**{"z": "m", "U": "m/s", "k": "m^2/s^2", "u_rms": "m/s"}, **meta.get("approach_flow_units", {})}[c] for c in d["af_cols"]}
     write_json(f"cases/{case}.json", "case", {
         "id": case, "slug": meta["slug"], "title": meta["title"], "summary": meta["short"],
         "configuration": meta["configuration"],
@@ -1222,9 +1252,13 @@ def write_case_documents(case, d):
         "quantities": meta["quantities"],
         "units": meta["units"], "frame": meta["frame"],
         "inflow_fit": meta["inflow_fit"],
-        "approach_flow": {"source": d["af_src"], "units": {c: {**{"z": "m", "U": "m/s", "k": "m^2/s^2", "u_rms": "m/s"}, **meta.get("approach_flow_units", {})}[c] for c in d["af_cols"]},
+        "approach_flow": {"source": d["af_src"], "units": af_units,
                           "rows": d["af"], "csv": download(f"cases/{case}/approach_flow.csv")},
+        "inflow": B.inflow_block(case, meta, d["af"], d["af_cols"], af_units, download(f"cases/{case}/approach_flow.csv"),
+                                 B.eddy3d_run_facts([r for r in RUNS if r["case"] == case], RESULTS_DIR)),
         "points": {"url": url(f"cases/{case}/points.json"), "csv": download(f"cases/{case}/points.csv"), "source": d["src"], **summ},
+        "probes": {"csv": download(f"cases/{case}/probes.csv"), "rows": d["probes"], "columns": B.PROBES_COLUMNS, "columns_meaning": B.PROBES_COLUMNS_MEANING},
+        "scoring": B.scoring_block(case, METRIC_MEANING),
         "geometry": {"url": url(f"cases/{case}/geometry.json"),
                      "files": [{"configuration": f["configuration"], "url": f["url"], "triangles": f["stats"]["triangles"],
                                 "watertight": f["stats"]["watertight"]} for f in files]},
@@ -1328,6 +1362,8 @@ def write_openapi():
                    "schema": {"type": "string", "enum": [e["id"] for e in ENGINES]}},
         "name": {"name": "name", "in": "path", "required": True, "description": "a document schema",
                  "schema": {"type": "string", "enum": list(S.DOCUMENTS)}},
+        "slug": {"name": "slug", "in": "path", "required": True, "description": "a submission (a folder under submissions/ in the repository)",
+                 "schema": {"type": "string", "pattern": S.SLUG_PATTERN}},
         "v": {"name": "v", "in": "query", "required": False, "schema": {"type": "string", "pattern": "^[0-9a-f]{12}$"},
               "description": "the file's SHA-256 prefix, as in the URLs the JSON documents give; ignored by the server, it keeps caches from serving a stale copy"},
     }
@@ -1341,6 +1377,9 @@ def write_openapi():
         "validation.json": ("getValidationSummary", "validation"), "geometry.json": ("listGeometry", "geometry"),
         "geometry.zip": ("getGeometryArchive", "geometry"), "schemas/{name}.schema.json": ("getSchema", "discovery"),
         "openapi.json": ("getOpenApi", "discovery"), "llms.txt": ("getLlmsTxt", "discovery"),
+        "cases/{id}/probes.csv": ("getProbesCsv", "points"), "cases/{id}/inflow_openfoam.txt": ("getInflowOpenfoam", "points"),
+        "submissions.json": ("listSubmissions", "community"), "submissions/{slug}.json": ("getSubmission", "community"),
+        "submissions/{slug}/{id}.csv": ("getSubmissionCsv", "community"),
     }
     names = {n: "".join(w.capitalize() for w in n.split("-")) for n in S.DOCUMENTS}
     stl_note = (" GitHub Pages labels .stl responses `application/vnd.ms-pki.stl` (a certificate type); the body is "
@@ -1360,8 +1399,8 @@ def write_openapi():
         op = {"operationId": op_id, "tags": [tag], "summary": desc[0].upper() + desc[1:].split(":")[0],
               "description": desc + (stl_note if media == "model/stl" else ""),
               "responses": {"200": {"description": "OK", "content": {media: body}}, "404": not_found}}
-        ps = [params[p] for p in ("id", "configuration", "engine", "name") if "{" + p + "}" in path]
-        if not path.endswith(".json") and path != "llms.txt" or path.endswith(".schema.json"):
+        ps = [params[p] for p in ("id", "configuration", "engine", "name", "slug") if "{" + p + "}" in path]
+        if not path.endswith((".json", ".txt")) or path.endswith(".schema.json"):
             ps.append(params["v"])
         if ps:
             op["parameters"] = ps
@@ -1381,7 +1420,8 @@ def write_openapi():
                     {"url": FALLBACK_BASE, "description": "the same files, raw from the repository (fallback)"}],
         "tags": [{"name": "discovery", "description": "where everything is"}, {"name": "cases", "description": f"the {len(D.CASE_IDS)} cases"},
                  {"name": "points", "description": "measurement tables"}, {"name": "geometry", "description": "STL geometry"},
-                 {"name": "validation", "description": "Eddy3D's scores and the per-point pairs behind them"}],
+                 {"name": "validation", "description": "Eddy3D's scores and the per-point pairs behind them"},
+                 {"name": "community", "description": "submitted solvers, scored by this build from their values at the published points"}],
         "paths": paths,
         "components": {"schemas": components},
     }
@@ -1431,6 +1471,15 @@ def llms_text(percase):
         "10. To make a result reproducible, pin the release: GET versions.json, take the base_url of the release you used,",
         "   and fetch every path below from it instead of from the unversioned base. A release's files never change, and",
         "   every URL to an API file inside its documents points back into it. Quote the release number with any number you report.",
+        "11. To score YOUR OWN solver or model: GET cases/{id}/probes.csv (the points to probe and what each is scored as), probe your",
+        "   field there, add your values as columns (U V W speed k cstar theta T), and score with validation/score_submissions.py from a",
+        "   checkout of the repository (python validation/score_submissions.py <folder>; nothing beyond requirements.txt), which applies",
+        "   cases/{id}.json `scoring` (reference speed, conventions) with the metrics that score the served results.",
+        "   cases/{id}.json `inflow` is the inlet contract: `benchmark_data` is the measured profile, `recommended` is this repository's",
+        f"   choice (a log law from the fit, k and epsilon from the ABL relations); cases/{{id}}/inflow_openfoam.txt is it as OpenFOAM files. The walk is {SITE}/byos/.",
+        "12. Community results: GET submissions.json (every submitted solver, scored by this repository's build from the values it gave at",
+        "   the published points; self-reported inputs, scored here) and submissions/{slug}.json. They are not Eddy3D's results: those stay",
+        "   in validation.json. A submission marked example is the repository's own worked example.",
         "",
         "## Endpoints",
         "",
@@ -1614,7 +1663,9 @@ def write_index():
             "pin_a_version": f"GET {endpoint_url('versions.json')} and use the base_url of the release you want; paths are the same in every release",
             "walk": ["GET index.json", "GET cases.json and pick an id", "GET cases/{id}.json for frame, units and known_issues",
                      "GET cases/{id}/points.json (SI units, one frame) and cases/{id}/geometry.stl (metres)",
-                     "GET validation.json or cases/{id}/validation.json before quoting any Eddy3D score; an engine that is not 'scored' has no result"],
+                     "GET validation.json or cases/{id}/validation.json before quoting any Eddy3D score; an engine that is not 'scored' has no result",
+                     "GET cases/{id}/probes.csv, cases/{id}/inflow_openfoam.txt and cases/{id}.json scoring and inflow to score your own solver (python validation/score_submissions.py, from a checkout)",
+                     "GET submissions.json for the community results (submitted values, scored by this repository's build)"],
         },
     })
 
@@ -2549,6 +2600,101 @@ def build_pages(percase):
         raise SystemExit(f"page_prose entries that match no text (rewritten source string?): {P.unused()}")
 
 
+# ----------------------------------------------------------------------------- submissions (the community results)
+
+def write_submissions(subs, data):
+    """submissions.json and submissions/<slug>.json: every folder under submissions/, scored here with the aij package against the
+    cleaned tables (the results go to validation/results/submissions/<slug>/, one file per case, and CI checks they are what the
+    build gives). Returns [(slug, meta, {case: result})] for the site pages."""
+    points = {c: data[c]["rows"] for c in D.CASE_IDS}
+    out, items = [], []
+    for slug, meta, cases in subs:
+        meta, results = B.score_submission(slug, points)
+        per_case = []
+        for case, res in results.items():
+            per_case.append({"case": case, "title": D.CASES[case]["title"], "status": "scored",
+                             "headline": [{"label": label, "score": key, **{m: res["scores"][key].get(m) for m in ("Count", "R", "Fac2", "Fb", "HitRate")},
+                                           "coverage": res["coverage"][key]} for label, key in res["headline"].items()],
+                             "values": download(f"submissions/{slug}/{case}.csv")})
+        doc = {"slug": slug, "submission": meta, "example": bool(meta.get("example")),
+               "provenance": "self-reported inputs (the values in submissions/<slug>/cases/<id>/probes.csv), scored by this repository's build with "
+                             "validation/score_submissions.py; not an Eddy3D result and not checked by the maintainers beyond the scoring",
+               "scored_with": {"script": "validation/score_submissions.py", "release": RELEASE, "conventions": B.CONVENTIONS, "metric_meaning": METRIC_MEANING},
+               "folder": f"{REPO_URL}/tree/main/submissions/{slug}",
+               "cases": [{**c, "scores": results[c["case"]]["scores"], "coverage": results[c["case"]]["coverage"], "groups": results[c["case"]]["groups"],
+                          "U_ref_m_s": results[c["case"]]["U_ref_m_s"], "units_given": results[c["case"]]["units_given"]} for c in per_case],
+               "page": f"{SITE}/community/{slug}/"}
+        write_json(f"submissions/{slug}.json", "submission", doc)
+        items.append({"slug": slug, "solver": meta["solver"], "version": str(meta["version"]), "author": meta["author"], "url": meta["url"], "example": bool(meta.get("example")),
+                      "inlet": meta["inlet"], "turbulence_model": meta.get("turbulence_model"), "ml_description": meta.get("ml_description"),
+                      "cases": per_case, "submission_url": url(f"submissions/{slug}.json"), "page": f"{SITE}/community/{slug}/"})
+        out.append((slug, meta, results))
+    stale = B.stale_submission_results([s for s, _, _ in subs])
+    if stale:
+        raise SystemExit(f"validation/results/submissions/ holds results of no submission: {stale}; delete them")
+    write_json("submissions.json", "submissions", {
+        "description": ("Every solver submitted under submissions/ in the repository, scored by this build from the values it gave at the "
+                        "published points (cases/{id}/probes.csv). The inputs are self-reported; the scoring is this repository's, the same "
+                        "metrics and conventions as Eddy3D's results in validation.json. A submission scores the points it gave: `coverage` "
+                        "says how many of the measured points that is."),
+        "how_to_submit": f"{SITE}/byos/", "status_meaning": {"scored": "the submission gave values for this case and they were scored"},
+        "metric_meaning": METRIC_MEANING, "submissions": items,
+    })
+    return out
+
+
+def build_community(community):
+    """docs/_includes/community-matrix.md and docs/community/<slug>.md: the submitted solvers against the cases, separate from Eddy3D's matrix."""
+    L = ["<!-- Generated by scripts/build_api.py. -->", "", "| Solver | " + " | ".join(D.CASE_IDS) + " |", "|---" * (len(D.CASE_IDS) + 1) + "|"]
+    for slug, meta, results in community:
+        name = f"{_esc(meta['solver'])} {_esc(str(meta['version']))}"
+        tag = ' <span class="label label-grey">example</span>' if meta.get("example") else ""
+        cells = []
+        for case in D.CASE_IDS:
+            res = results.get(case)
+            if not res:
+                cells.append("—")
+                continue
+            r = [s["R"] for s in res["scores"].values() if s["R"] is not None]
+            f2 = [s["Fac2"] for s in res["scores"].values() if s["Fac2"] is not None]
+            n = sum(c["scored"] for c in res["coverage"].values())
+            N = sum(c["measured"] for c in res["coverage"].values())
+            cells.append(status_label("scored") + f'<br><span class="caption">R {_range((min(r), max(r)) if r else None, True)}<br>FAC2 {_range((min(f2), max(f2)) if f2 else None, False)}'
+                         f"<br>{n}/{N} points</span>")
+        L.append(f"| {_link(name, f'/community/{slug}/')}{tag} | " + " | ".join(cells) + " |")
+    if not community:
+        L.append("| *(no submission yet)* | " + " | ".join("—" for _ in D.CASE_IDS) + " |")
+    _write("_includes/community-matrix.md", L)
+    for n, (slug, meta, results) in enumerate(community, 1):
+        title = f"{meta['solver']} {meta['version']}"
+        P_ = _front(title, n, parent="Community results", has_children=False, description=f"{title}: a community submission scored against the AIJ cases by this repository's build.")
+        P_ += [f"# {_esc(title)}", ""]
+        if meta.get("example"):
+            P_ += ["{: .note }", "This is the repository's own worked example (Eddy3D's Case A OpenFOAM probes, copied from the served pairs). It shows the pipeline; it is not a community result.", ""]
+        P_ += ["Self-reported inputs, scored by this repository's build ([method]({{ '/validation/method/' | relative_url }})). The submitted values are under "
+               f"[`submissions/{slug}/`]({REPO_URL}/tree/main/submissions/{slug}) and served as [`/api/submissions/{slug}.json`]({{{{ '/api/submissions/{slug}.json' | relative_url }}}}).", ""]
+        facts = ["| Field | Value |", "|---|---|"]
+        for k in ("solver", "version", "url", "author", "licence", "contact", "inlet", "mesh", "turbulence_model", "ml_description", "compute", "units", "notes"):
+            if meta.get(k) not in (None, ""):
+                facts.append(f"| {_esc(k)} | {_cell(str(meta[k]))} |")
+        P_ += facts + _legend(facts) + [""]
+        for case, res in results.items():
+            P_ += [f"## Case {case}: {_esc(D.CASES[case]['title'])}", ""]
+            for g in res["groups"]:
+                if g["key"]:
+                    P_ += [f"### {_esc(', '.join(f'{k} {v}' for k, v in g['group'].items() if v not in (None, '')))}", ""]
+                T = ["| Score | R | FAC2 | FB | Hit rate | n | coverage |", "|---|---|---|---|---|---|---|"]
+                for key, label, _, _ in B.SC.QUANTITIES:
+                    if key not in g["scores"]:
+                        continue
+                    s, c = g["scores"][key], g["coverage"][key]
+                    num = lambda m, f: "—" if s.get(m) is None else f"{s[m]:{f}}"  # noqa: E731
+                    T.append(f"| {_cell(label, lead=True, bare=True)} | {num('R', '+.3f')} | {num('Fac2', '.3f')} | {num('Fb', '+.3f')} | {num('HitRate', '.3f')} | {num('Count', 'd')} | {c['scored']}/{c['measured']} |")
+                T.append("{: .scores }")
+                P_ += T + _legend(T) + [""]
+        _write(f"community/{slug}.md", P_)
+
+
 # ----------------------------------------------------------------------------- verify
 
 TEMPLATED_URL = re.compile(r"https?://[^\s\"'<>]*\{[^\s\"'<>]*")
@@ -2760,6 +2906,9 @@ def verify_alias_matches_release():
             ta, tr = a.decode("utf-8"), _alias_form(r.decode("utf-8"))
             if ta[ta.index("\n## "):] != tr[tr.index("\n## "):]:
                 problems.append(f"llms.txt of the alias and of release {RELEASE} disagree below their headers")
+        elif rel.endswith(".txt"):                 # the OpenFOAM inlet texts name the site, not a tree: byte-equal in both
+            if a != r:
+                problems.append(f"{rel} of the alias and of release {RELEASE} differ")
         elif _normal(json.loads(r)) != json.loads(a):
             problems.append(f"{rel} of the alias and of release {RELEASE} differ beyond their addresses")
     return problems
@@ -2874,9 +3023,13 @@ def verify():
 def build_tree():
     """Write the tree selected by use_tree(): the data files, then the JSON documents, then its index. Returns what
     the site's generated pages need."""
-    global DATA_VERSION
+    global DATA_VERSION, COMMUNITY
     # Phase 1: the data files. Their hashes define data_version, which every JSON document carries.
     data = {case: write_data(case) for case in D.CASE_IDS}
+    subs = B.submissions()
+    for slug, meta, cases in subs:
+        for case in cases:
+            copy_file(os.path.join(B.SUBMISSIONS_DIR, slug, "cases", case, "probes.csv"), f"submissions/{slug}/{case}.csv")
     write_archive(data)
     dv = compute_data_version()
     if DATA_VERSION not in (None, dv):
@@ -2893,6 +3046,7 @@ def build_tree():
     write_cases_index(percase)
     write_geometry_index(data)
     write_validation_summary(percase)
+    COMMUNITY = write_submissions(subs, data)
     write_schemas()
     write_openapi()
     write_text("llms.txt", llms_text(percase))
@@ -2911,7 +3065,8 @@ def build():
     # The frozen copy of this release first, then the latest alias, which is the same files addressed without the release.
     use_tree("release")
     percase = build_tree()
-    write_dataset_jsonld(percase)       # the home page describes this release by its frozen addresses
+    write_dataset_jsonld(percase)
+    build_community(COMMUNITY)       # the home page describes this release by its frozen addresses
     write_changelog_include()
     write_citation_files()              # the About include, the README block, CITATION.cff and .zenodo.json
     build_pages(percase)

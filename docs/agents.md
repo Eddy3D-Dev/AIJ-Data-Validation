@@ -62,6 +62,14 @@ names in `$schema`.
   HTTP 403. If you are refused anyway, `fallback_base_url` serves byte-identical files from the repository.
 - Cite the release you pinned and quote its version: `cite.api` in that release's `index.json`.
 
+## Scoring your own solver
+
+`GET /api/cases/{id}/probes.csv` is the list of points to probe, and `scoring` and `inflow` in `/api/cases/{id}.json` are
+the constants and the inlet contract. `/api/cases/{id}/inflow_openfoam.txt` is that inlet as OpenFOAM
+files. `python validation/score_submissions.py <folder>`, from a checkout, scores a folder of your values. The walk is [Validate your own solver]({{ '/byos/' | relative_url }});
+submitted results are served at `/api/submissions.json` and shown on [Community results]({{ '/community/' | relative_url }}),
+apart from Eddy3D's own.
+
 ## Cite
 
 The API: `cite.api` in `/api/index.json` (`apa`, `bibtex`, `csl_json`). A case's dataset: `citation` and `doi` in `/api/cases/{id}.json`. The same citations, with the data paper's, are on the [About and cite]({{ '/about/#cite' | relative_url }}) page.

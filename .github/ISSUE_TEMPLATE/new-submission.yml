@@ -1,0 +1,23 @@
+name: New submission
+description: Announce or ask about a solver or model you want to submit to the community results (the submission itself is a pull request).
+labels: [submission]
+body:
+  - type: input
+    id: solver
+    attributes:
+      label: Solver or model
+      description: Name, version and URL.
+    validations:
+      required: true
+  - type: input
+    id: cases
+    attributes:
+      label: Cases
+      description: Which cases, configurations and quantities you scored (partial is fine; coverage is shown).
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Inlet, mesh and anything the maintainers should know
+      description: Did you use the recommended inlet (cases/{id}/inflow_openfoam.txt) or your own? Output of `python validation/score_submissions.py <folder>` if it fails.

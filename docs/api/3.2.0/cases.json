@@ -1,0 +1,1030 @@
+{
+ "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/schemas/cases.schema.json",
+ "schema_version": "2.5.0",
+ "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
+ "license": "CC-BY-4.0",
+ "cases": [
+  {
+   "id": "A",
+   "slug": "case-a",
+   "title": "Case A — 1:1:2 building",
+   "summary": "Isolated 1:1:2 building, velocity field (split-fibre hot wire).",
+   "configuration": {
+    "building": "1:1:2 (width : depth : height) prism",
+    "b_m": 0.08,
+    "H_m": 0.16,
+    "Re_H": 24000,
+    "U_H_m_s": 4.491,
+    "wind_directions_deg": [
+     0
+    ],
+    "measurement_planes": [
+     "vertical centre plane y/b = 0",
+     "horizontal z/b = 0.125",
+     "horizontal z/b = 1.25"
+    ],
+    "instrument": "hot-wire anemometer, split-fibre probes (DANTEC 55R55 streamwise, 55R57 spanwise/vertical), 1000 Hz, 60 s per point, 500 Hz low-pass",
+    "tunnel": "Technical Research Institute, Shimizu Corporation, Tokyo",
+    "scale_note": "model scale; Eddy3D solves it at 1:100 (b = 8 m, H = 16 m) with the tunnel velocities"
+   },
+   "quantities": [
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k"
+   ],
+   "units": {
+    "length": "m (model scale)",
+    "velocity": "m/s",
+    "variance": "m^2/s^2",
+    "k": "m^2/s^2"
+   },
+   "frame": {
+    "origin": "building centre on the ground plane",
+    "x": "+x streamwise (the wind at WD = 0 blows toward +x); building spans x in [-0.04, 0.04]",
+    "y": "+y lateral; building spans y in [-0.04, 0.04]; points published on the y <= 0 half by the tunnel's symmetry convention",
+    "z": "+z up from the ground; roof at z = 0.16"
+   },
+   "counts": {
+    "rows": 186,
+    "distinct_points": 186,
+    "configurations": 1
+   },
+   "engines": {
+    "openfoam12-realizableKE": "scored",
+    "openlb": "scored",
+    "fluidx3d": "scored",
+    "ml-surrogate": "scored"
+   },
+   "doi": "10.5281/zenodo.15050147",
+   "links": {
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/A.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/A/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/A/points.csv?v=a46201996b22",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/A/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/A/geometry.stl?v=89acdfbbff84",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/A/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-a/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-a.png"
+   }
+  },
+  {
+   "id": "B",
+   "slug": "case-b",
+   "title": "Case B — 1:4:4 slab",
+   "summary": "Isolated 1:4:4 slab, velocity field (split-fibre hot wire).",
+   "configuration": {
+    "building": "1:4:4 (depth : width : height) slab",
+    "depth_m": 0.05,
+    "width_m": 0.2,
+    "H_m": 0.2,
+    "Re_H": 72000,
+    "U_H_m_s": 5.133,
+    "wind_directions_deg": [
+     0
+    ],
+    "measurement_planes": [
+     "vertical centre plane y/H = 0",
+     "horizontal z/H = 1/16"
+    ],
+    "instrument": "hot-wire anemometer, split-fibre probe, 100 Hz, 60 s per point",
+    "tunnel": "Niigata Institute of Technology, Kashiwazaki",
+    "scale_note": "model scale; Eddy3D solves it at 1:100 (H = 20 m) with the tunnel velocities"
+   },
+   "quantities": [
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k"
+   ],
+   "units": {
+    "length": "m (model scale; converted from the published millimetres)",
+    "velocity": "m/s",
+    "variance": "m^2/s^2",
+    "k": "m^2/s^2"
+   },
+   "frame": {
+    "origin": "building centre on the ground plane",
+    "x": "+x streamwise (the wind at WD = 0 blows toward +x); slab spans x in [-0.025, 0.025]",
+    "y": "+y lateral; slab spans y in [-0.10, 0.10]; points published on the y <= 0 half by the tunnel's symmetry convention",
+    "z": "+z up from the ground; roof at z = 0.20"
+   },
+   "counts": {
+    "rows": 224,
+    "distinct_points": 224,
+    "configurations": 1
+   },
+   "engines": {
+    "openfoam12-realizableKE": "scored",
+    "openlb": "scored",
+    "fluidx3d": "scored",
+    "ml-surrogate": "scored"
+   },
+   "doi": "10.5281/zenodo.15401455",
+   "links": {
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/B.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/B/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/B/points.csv?v=dec97c21217a",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/B/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/B/geometry.stl?v=e6de70eeb17d",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/B/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-b/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-b.png"
+   }
+  },
+  {
+   "id": "C",
+   "slug": "case-c",
+   "title": "Case C — 3 × 3 block array",
+   "summary": "3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestrian-height scalar speed (thermistor), 3 wind directions.",
+   "configuration": {
+    "array": "3 x 3 cubes, D = 0.20 m, block centres at x, y in {-0.4, 0, +0.4} m (pitch 0.40 m = 2D, street width D)",
+    "D_m": 0.2,
+    "centre_building": {
+     "0D": "no centre building",
+     "1D": "0.2 x 0.2 x 0.2 m (same as the surroundings)",
+     "2D": "0.2 x 0.2 x 0.4 m"
+    },
+    "wind_directions_deg": [
+     0,
+     22.5,
+     45
+    ],
+    "configurations": 9,
+    "configurations_note": "3 centre-building heights x 3 wind directions; all nine share the identical 120-point set",
+    "measurement_height_m": 0.02,
+    "measurement_height_note": "z = 0.1 D for every point (2.0 m at the 1:100 scale Eddy3D solves it at)",
+    "Re_D": 52000,
+    "U_H_m_s": 3.654,
+    "U_H_note": "U at z = D = 0.20 m from AF_caseC.csv; the data paper states U_H = 3.65 m/s",
+    "instrument": "thermistor anemometer (omnidirectional scalar speed), 1 Hz, 30 s per point; approach flow by I-type hot wire, 500 Hz, 30 s",
+    "tunnel": "Technology Development Division, Fujita Corporation, Tokyo",
+    "pitch_note": "The 0.40 m pitch is read from MP-z-caseC.png and Figure 3 of the data paper (street = D); the 120-point grid alone bounds the pitch to (0.35, 0.40] m (the 49 absent nodes of the 13 x 13 grid are exactly the nine footprints for 0.375 m as well as 0.40 m)."
+   },
+   "quantities": [
+    "Vs"
+   ],
+   "units": {
+    "length": "m (model scale)",
+    "velocity": "m/s"
+   },
+   "frame": {
+    "origin": "array centre on the ground plane (centre of the middle block)",
+    "x": "+x streamwise at WD = 0 (checked three ways on the data: y -> -y is a symmetry, the x <= -0.25 band is faster than x >= +0.25 in every configuration, and the regression slope of Vs is most negative within 0.8-4.3 deg of +x)",
+    "y": "+y lateral",
+    "z": "+z up; all points at z = 0.02"
+   },
+   "counts": {
+    "rows": 1080,
+    "distinct_points": 120,
+    "configurations": 9
+   },
+   "engines": {
+    "openfoam12-realizableKE": "scored",
+    "openlb": "not comparable",
+    "fluidx3d": "not comparable",
+    "ml-surrogate": "scored"
+   },
+   "doi": "10.5281/zenodo.15401791",
+   "links": {
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/C.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/C/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/C/points.csv?v=7448f0ceae37",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/C/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/C/geometry.stl?v=b8c31c57c453",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/C/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-c/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-c-2d.png"
+   }
+  },
+  {
+   "id": "D",
+   "slug": "case-d",
+   "title": "Case D — high-rise among city blocks",
+   "summary": "1:1:4 tower in a regular array of 82 low blocks, pedestrian-height scalar speed (thermistor, 3 wind directions) plus a 33-point split-fibre velocity field at WD = 0.",
+   "configuration": {
+    "tower": "0.25H x 0.25H x H = 62.5 x 62.5 x 250 mm (1:1:4)",
+    "H_m": 0.25,
+    "blocks": "82 blocks of 0.4H x 0.4H x 0.1H = 100 x 100 x 25 mm",
+    "roads": "0.1H / 0.2H / 0.3H = 25 / 50 / 75 mm; 9 columns in x (pitch alternating 175 / 150 mm), 11 rows in y (pitch 125 mm); corners cut by the turntable circle",
+    "array_extent_m": {
+     "x": [
+      -0.7,
+      0.7
+     ],
+     "y": [
+      -0.675,
+      0.675
+     ],
+     "z": [
+      0,
+      0.25
+     ]
+    },
+    "scale": "1:400 (H = 100 m full scale; the 5 mm measurement plane = 2 m)",
+    "Re_H": 110000,
+    "U_H_m_s": 6.65,
+    "wind_directions_deg": [
+     0,
+     22.5,
+     45
+    ],
+    "measurement_height_m": 0.005,
+    "instrument": "thermistor anemometer (78 points x 3 directions; 66 measured per direction, 12 points in the band around the tower unmeasured) and split-fibre probe (33 points at WD = 0: U, V, W, variances, k)",
+    "tunnel": "see the data paper (Kikumoto et al. 2026, section 3.4)"
+   },
+   "quantities": [
+    "Vs",
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k"
+   ],
+   "units": {
+    "length": "m (model scale; converted from the workbook's millimetres)",
+    "velocity": "m/s",
+    "variance": "m^2/s^2",
+    "k": "m^2/s^2"
+   },
+   "frame": {
+    "origin": "tower centre on the ground plane (the array's bounding box is centred on it)",
+    "x": "+x streamwise at WD = 0 (the 0 deg thermistor field is exactly y-mirror symmetric; the split-fibre U is positive at the stream-like points and negative in the tower's windward horseshoe)",
+    "y": "+y lateral",
+    "z": "+z up; all points at z = 0.005"
+   },
+   "counts": {
+    "rows": 267,
+    "distinct_points": 78,
+    "configurations": 4
+   },
+   "engines": {
+    "openfoam12-realizableKE": "scored",
+    "openlb": "not comparable",
+    "fluidx3d": "not comparable",
+    "ml-surrogate": "scored"
+   },
+   "doi": "10.5281/zenodo.15402668",
+   "links": {
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/D.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/D/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/D/points.csv?v=596246341e73",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/D/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/D/geometry.stl?v=531895531271",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/D/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-d/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-d.png"
+   }
+  },
+  {
+   "id": "E",
+   "slug": "case-e",
+   "title": "Case E — Niigata district",
+   "summary": "Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 m mid-rises; pedestrian-height velocity ratio (thermistor), 16 wind directions.",
+   "configuration": {
+    "district": "Niigata City urban area near the Shinano River; dense low-rise stock (median top 6 m, max 30 m)",
+    "scale": "1:250",
+    "states": {
+     "bc": "before construction (sites of A, B, C empty)",
+     "ac": "after construction of A (60 m high-rise), B and C (18 m mid-rises)"
+    },
+    "new_buildings": {
+     "A": "60 m high-rise, bbox x [-79.3, -49.1], y [-17.1, 18.3]",
+     "B": "18 m, bbox x [41.5, 61.0], y [-18.5, 8.5]",
+     "C": "18 m, bbox x [64.0, 83.5], y [-8.0, 19.0]"
+    },
+    "wind_directions": [
+     "N",
+     "NNE",
+     "NE",
+     "ENE",
+     "E",
+     "ESE",
+     "SE",
+     "SSE",
+     "S",
+     "SSW",
+     "SW",
+     "WSW",
+     "W",
+     "WNW",
+     "NW",
+     "NNW"
+    ],
+    "wind_directions_deg": [
+     0.0,
+     22.5,
+     45.0,
+     67.5,
+     90.0,
+     112.5,
+     135.0,
+     157.5,
+     180.0,
+     202.5,
+     225.0,
+     247.5,
+     270.0,
+     292.5,
+     315.0,
+     337.5
+    ],
+    "measurement_height_m": 2.0,
+    "measurement_height_note": "2 m full scale = 0.008 m model scale",
+    "points": 80,
+    "values": 2560,
+    "Re": 17000,
+    "normalisation": "velocity ratio = mean scalar speed at 2 m / inflow velocity at 15.9 m (the Niigata meteorological station height); U(15.9 m) = 0.504531 x UR = 3.935 m/s with UR = 7.8 m/s at ZR = 250 m",
+    "instrument": "thermistor anemometer, 100 Hz, 60 s per point, mean scalar wind speed",
+    "tunnel": "Niigata Institute of Technology, Kashiwazaki"
+   },
+   "quantities": [
+    "velocity_ratio"
+   ],
+   "units": {
+    "length": "m (FULL scale)",
+    "velocity_ratio": "dimensionless"
+   },
+   "frame": {
+    "origin": "centre of the reproduced area, ground plane",
+    "x": "+x EAST (full-scale metres)",
+    "y": "+y NORTH (compass rose in MP_caseE.png)",
+    "z": "+z up; all points at z = 2.0"
+   },
+   "counts": {
+    "rows": 2560,
+    "distinct_points": 80,
+    "configurations": 2
+   },
+   "engines": {
+    "openfoam12-realizableKE": "scored",
+    "openlb": "not comparable",
+    "fluidx3d": "not comparable",
+    "ml-surrogate": "scored"
+   },
+   "doi": "10.5281/zenodo.15429017",
+   "links": {
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/E.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/E/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/E/points.csv?v=e6e89432e706",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/E/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/E/geometry.stl?v=c29624fdae6d",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/E/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-e/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-e-after.png"
+   }
+  },
+  {
+   "id": "F",
+   "slug": "case-f",
+   "title": "Case F — Shinjuku district",
+   "summary": "Shinjuku sub-centre, Tokyo, November 1978: 1:800 tunnel (thermistor, 5 / 9 / 20 m) and a year of field cup anemometers; velocity ratio to the 500 m wind, 12 tunnel and 16 field directions.",
+   "configuration": {
+    "district": "Shinjuku sub-centre during construction of the high-rise group, building configuration of November 1978",
+    "scale": "1:800",
+    "model": "terrain and buildings in a disc of radius 725 m (BD_caseF.stl; the readme and the data paper say 800 m / 1600 m diameter)",
+    "points": 13,
+    "point_numbers": "1-3, 5-11, 13-15 (4 and 12 absent; points 16 and later belong to later construction stages and are not in the dataset)",
+    "wind_directions": [
+     "N",
+     "NNE",
+     "NE",
+     "ENE",
+     "SE",
+     "SSE",
+     "S",
+     "SSW",
+     "SW",
+     "WNW",
+     "NW",
+     "NNW"
+    ],
+    "wind_directions_field": [
+     "N",
+     "NNE",
+     "NE",
+     "ENE",
+     "E",
+     "ESE",
+     "SE",
+     "SSE",
+     "S",
+     "SSW",
+     "SW",
+     "WSW",
+     "W",
+     "WNW",
+     "NW",
+     "NNW"
+    ],
+    "measurement_planes_above_ground_m": [
+     5,
+     9,
+     20
+    ],
+    "measurement_planes_z_m": [
+     15,
+     19,
+     30
+    ],
+    "ground_offset_m": 10,
+    "normalisation": "velocity ratio = mean speed / the approaching mean speed at the boundary-layer height 500 m (full scale); the field values were converted to it with the tunnel (readme). U(500 m) is 10 m/s in the data paper and 10.65 m/s implied by the profile",
+    "instrument": "tunnel: thermistor anemometer, 30 s averaging; field: three-cup anemometer with wind vane, 10-minute means above 5 m/s at the reference roof, December 1977 - November 1978",
+    "tunnel": "Shimizu Corporation wind tunnel; cross-section 1.55 m wide, 2.2 m high; power-law inflow, exponent 1/4",
+    "reference_roofs": {
+     "SMB": "Shinjuku-Mitsui Building, roof G.L.+210 m, anemometer G.L.+237 m, for NW-NE",
+     "KDD": "KDD Building, roof G.L.+165 m, anemometer G.L.+187 m, for the other directions"
+    }
+   },
+   "quantities": [
+    "velocity_ratio",
+    "velocity_ratio_sd"
+   ],
+   "units": {
+    "length": "m (FULL scale)",
+    "velocity_ratio": "dimensionless",
+    "velocity_ratio_sd": "dimensionless"
+   },
+   "frame": {
+    "origin": "centre of the reproduced district, tunnel floor plane",
+    "x": "+x EAST (full-scale metres)",
+    "y": "+y NORTH (compass rose in MP_caseF.png)",
+    "z": "+z up from the TUNNEL FLOOR; the readme's rule is ground = z - 10 m (the STL's terrain under the points is at z = 5 m)"
+   },
+   "counts": {
+    "rows": 472,
+    "distinct_points": 13,
+    "configurations": 40
+   },
+   "engines": {
+    "openfoam12-realizableKE": "scored",
+    "openlb": "pending",
+    "fluidx3d": "pending",
+    "ml-surrogate": "pending"
+   },
+   "doi": "10.5281/zenodo.15589621",
+   "links": {
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/F.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/F/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/F/points.csv?v=09b109e58dd3",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/F/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/F/geometry.stl?v=8799740aa324",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/F/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-f/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-f.png"
+   }
+  },
+  {
+   "id": "G",
+   "slug": "case-g",
+   "title": "Case G — flow behind a tree belt",
+   "summary": "Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m × 2 m × 7 m with a 1.2 m gap below): normalised mean speed and k at 28 points on the centre section (sonic anemometers).",
+   "configuration": {
+    "belt": "Tsuiji-matsu (Japanese black pine), trimmed to a rectangle; 74 m long (y), 2 m deep (x), 7 m tall, 1.2 m bottom gap; shading rate 81 % after pruning (data paper section 3.7)",
+    "H_m": 7.0,
+    "depth_m": 2.0,
+    "width_m": 74.0,
+    "gap_m": 1.2,
+    "campaign": "field (full scale)",
+    "location": "Taisha-machi, Hikawa-gun, Shimane, Japan; west end of an elementary-school playground",
+    "wind_directions_deg": [
+     0
+    ],
+    "measurement_lines": "0.25 H, 0.5 H, 1 H, 2 H, 3 H, 4 H, 5 H behind the belt = x 1.75, 3.5, 7, 14, 21, 28, 35 m (H = 7 m)",
+    "measurement_heights_m": [
+     1.5,
+     3.0,
+     4.5,
+     6.0
+    ],
+    "points": 28,
+    "instrument": "3-D ultrasonic anemometers (KAIJO DA-600 with TR-90Tx) at four heights on a movable tower, 5 Hz, 10 min or more per line (26 Dec 2000); approach flow 120 min (28 Dec 2000) at 1.5, 3, 6, 9 m",
+    "normalisation": "velocity_ratio = U/UH and k_ratio = k/UH^2, UH = the mean wind speed at 7 m during each measurement period (interpolated with the approach flow's power law, index 0.22); nothing is published in m/s",
+    "approach_flow_normalisation": "AF_caseG.csv is U/Ub and k/Ub^2 with Ub = U at 9 m; divide by UH/Ub = 0.946 (power law 0.22) for the table's normalisation",
+    "scale_note": "full scale: a field observation, there is no model"
+   },
+   "quantities": [
+    "velocity_ratio",
+    "k_ratio"
+   ],
+   "units": {
+    "length": "m (full scale)",
+    "velocity_ratio": "dimensionless, U/UH",
+    "k_ratio": "dimensionless, k/UH^2"
+   },
+   "frame": {
+    "origin": "the leeward face of the tree belt at ground level, on the vertical section through the belt's centre",
+    "x": "+x downwind: the belt occupies x in [-2, 0] m, the measurement lines lie behind it at x = 1.75 ... 35 m",
+    "y": "+y along the belt (y in [-37, 37] m); every point is on y = 0",
+    "z": "+z up; the belt spans z in [1.2, 7] m; points at z = 1.5, 3, 4.5, 6 m"
+   },
+   "counts": {
+    "rows": 28,
+    "distinct_points": 28,
+    "configurations": 1
+   },
+   "engines": {
+    "openfoam12-realizableKE": "scored",
+    "openlb": "pending",
+    "fluidx3d": "pending",
+    "ml-surrogate": "pending"
+   },
+   "doi": "10.5281/zenodo.15589666",
+   "links": {
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/G.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/G/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/G/points.csv?v=914883bf7fec",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/G/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/G/geometry.stl?v=09d23c794155",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/G/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-g/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-g.png"
+   }
+  },
+  {
+   "id": "H",
+   "slug": "case-h",
+   "title": "Case H — 1:1:2 building with a floor point source",
+   "summary": "Isolated 1:1:2 building with an ethylene point source on the floor behind it: velocity (split-fibre hot wire) and concentration (hydrocarbon analyser) at 876 points.",
+   "configuration": {
+    "building": "1:1:2 (width : depth : height) prism, 0.10 × 0.10 × 0.20 m",
+    "b_m": 0.1,
+    "H_m": 0.2,
+    "Re_H": 43000,
+    "U_H_m_s": 3.226,
+    "U_H_note": "the workbook's uH; the readme and the data paper state 3.23 m/s; the workbook's free-stream reference U0 is 5.279 m/s",
+    "wind_directions_deg": [
+     0
+    ],
+    "source": "4 mm hole in the floor 0.25 H = 0.05 m behind the leeward face at (0.05, 0, 0); ethylene (C2H4), 100 %, 350 cc/min = 5.83e-6 m3/s",
+    "reference_concentration": "c0 = cgas q / (UH H^2) = 45.18 ppm (45.2 in the paper); concentration_ratio = C / c0",
+    "measurement_planes": [
+     "vertical centre plane y/H = 0",
+     "horizontal z/H = 1/16 (y in [-0.2, 0.2])",
+     "horizontal z/H = 1/4 and 1/2 (y in [0, 0.2])"
+    ],
+    "points": 876,
+    "instrument": "velocity: constant-temperature anemometer (DANTEC 90C10) with a split-fibre probe (55R55, 55R56, 55R57), 1000 Hz, 120 s; concentration: high-speed total hydrocarbon analyser, 1000 Hz, 120 s",
+    "tunnel": "Eiffel-type boundary-layer wind tunnel, Tokyo Polytechnic University, Atsugi (1.0 m high, 1.2 m wide)",
+    "scale_note": "model scale; the source states no model:full-scale ratio; Eddy3D solves it at 1:100"
+   },
+   "quantities": [
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "C",
+    "c_rms",
+    "concentration_ratio"
+   ],
+   "units": {
+    "length": "m (model scale)",
+    "velocity": "m/s",
+    "variance": "m^2/s^2",
+    "k": "m^2/s^2",
+    "C": "ppm",
+    "concentration_ratio": "dimensionless, C/c0"
+   },
+   "frame": {
+    "origin": "the centre of the building's leeward face on the ground plane",
+    "x": "+x streamwise (the wind blows toward +x); the building spans x in [-0.1, 0]; points at x = -0.2 ... 0.4 m",
+    "y": "+y lateral; the building spans y in [-0.05, 0.05]; the z = 1/16 H plane covers y in [-0.2, 0.2]",
+    "z": "+z up; roof at z = 0.2 m; points at z = 0.01 ... 0.3 m"
+   },
+   "counts": {
+    "rows": 1652,
+    "distinct_points": 876,
+    "configurations": 2
+   },
+   "engines": {
+    "openfoam12-realizableKE": "scored",
+    "openlb": "pending",
+    "fluidx3d": "pending",
+    "ml-surrogate": "pending"
+   },
+   "doi": "10.5281/zenodo.15429871",
+   "links": {
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/H.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/H/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/H/points.csv?v=ef5fafc61b8e",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/H/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/H/geometry.stl?v=4836687efff9",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/H/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-h/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-h.png"
+   }
+  },
+  {
+   "id": "I",
+   "slug": "case-i",
+   "title": "Case I — cube with a roof point source",
+   "summary": "Isolated cube with an ethane point source at the centre of its roof: velocity (laser Doppler, 91 points) and concentration (hydrocarbon analyser, 539 points).",
+   "configuration": {
+    "building": "cube, 0.10 m on a side (= H)",
+    "H_m": 0.1,
+    "Re_H": 11000,
+    "U_H_m_s": 1.7,
+    "U_H_note": "the readme and the velocity sheet; the approach flow at z = H is 1.6969 m/s and the workbook's inflow sheet divides by 1.697",
+    "wind_directions_deg": [
+     0
+    ],
+    "source": "6 mm circular outlet at the centre of the roof (0, 0, 0.1); 10 % ethane in the mixture, 400 cc/min (= 6.67e-6 m3/s of mixture, 6.67e-7 m3/s of ethane); release velocity 0.236 m/s, M = Ve/UH = 0.14",
+    "reference_concentration": "c0 = q / (UH H^2) = 39.22 ppm (39.2 in the paper), q the ETHANE flow; concentration_ratio = C / c0",
+    "measurement_planes": [
+     "velocity: y/H = 0 and z/H = 0.5",
+     "concentration: y/H = 0 and z/H = 0 (the ground)"
+    ],
+    "points": {
+     "velocity": 91,
+     "concentration": 539
+    },
+    "instrument": "velocity: laser Doppler anemometer (Dantec BSA F60), 200 Hz, 240 s; concentration: hydrocarbon analyser (Kimoto HADA-01), 1 Hz, 120 s",
+    "tunnel": "AIST wind tunnel, 20 m long, 3.0 × 2.0 m cross-section; approach flow described as a 1/7 power law (data paper section 3.9)",
+    "scale_note": "model scale; the source states no model:full-scale ratio; Eddy3D solves it at 1:60 (a 6 m cube)"
+   },
+   "quantities": [
+    "U",
+    "V",
+    "W",
+    "k",
+    "C",
+    "concentration_ratio"
+   ],
+   "units": {
+    "length": "m (model scale)",
+    "velocity": "m/s",
+    "k": "m^2/s^2",
+    "C": "ppm",
+    "concentration_ratio": "dimensionless, C/c0"
+   },
+   "frame": {
+    "origin": "the centre of the cube on the ground plane",
+    "x": "+x streamwise (the wind blows toward +x); the cube spans x in [-0.05, 0.05]; wind points x = -0.15 ... 0.25 m, concentration points x = 0.065 ... 2.7 m",
+    "y": "+y lateral; the cube spans y in [-0.05, 0.05]; concentration points reach |y| = 0.44 m on the ground",
+    "z": "+z up; roof at z = 0.1 m; the outlet at (0, 0, 0.1)"
+   },
+   "counts": {
+    "rows": 630,
+    "distinct_points": 630,
+    "configurations": 2
+   },
+   "engines": {
+    "openfoam12-realizableKE": "scored",
+    "openfoam12-kEpsilon": "scored",
+    "openfoam12-kOmegaSST": "scored",
+    "openlb": "pending",
+    "fluidx3d": "pending",
+    "ml-surrogate": "pending"
+   },
+   "doi": "10.5281/zenodo.15430018",
+   "links": {
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/I.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/I/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/I/points.csv?v=2864fee9eb19",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/I/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/I/geometry.stl?v=ff61cbb22798",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/I/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-i/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-i.png"
+   }
+  },
+  {
+   "id": "J",
+   "slug": "case-j",
+   "title": "Case J — 1:1:2 building, non-isothermal",
+   "summary": "Isolated 1:1:2 building with a floor tracer source in an unstably stratified boundary layer: velocity, temperature, tracer concentration and their turbulent fluxes at 444 points on three planes.",
+   "configuration": {
+    "building": "1:1:2 (width : depth : height) prism, b = 0.08 m, H = 2b = 0.16 m",
+    "b_m": 0.08,
+    "H_m": 0.16,
+    "Re_H": 16000,
+    "U_H_m_s": 1.4581,
+    "wind_directions_deg": [
+     0
+    ],
+    "measurement_planes": [
+     "vertical centre plane y/H = 0",
+     "horizontal z/H = 0.025 (y <= 0 side only)",
+     "horizontal z/H = 0.25"
+    ],
+    "points": 444,
+    "stratification": "unstable: heated floor 45.8 degC, air at z = H 12.2 degC (difference 33.6 K), bulk Richardson number -0.086; building surface 22.0 .. 28.9 degC (mean 24.5 degC, 121 points in clean/cases/J/surface_temperature.csv)",
+    "source": "5 mm floor outlet at (0.04, 0, 0), 0.25 H beyond the leeward wall; 5 % ethylene in air at 30.4 degC, 9.17e-6 m3/s",
+    "concentration_normalisation": "c0 = 0.05 q / (U_H H^2) = 12.283 ppm (the workbook's value; the 5 % gas fraction is in it)",
+    "instrument": "split-fibre hot wire (velocity), cold wire (temperature), high-speed hydrocarbon analyser (concentration), 1000 Hz, 120 s per point",
+    "tunnel": "thermally stratified wind tunnel, Tokyo Polytechnic University (Atsugi); 1.2 m wide, 1.0 m high",
+    "scale_note": "model scale; the sources state no model:full scale ratio"
+   },
+   "quantities": [
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "C",
+    "c_rms",
+    "concentration_ratio",
+    "T",
+    "T_rms",
+    "uT",
+    "vT",
+    "wT"
+   ],
+   "units": {
+    "length": "m (model scale)",
+    "velocity": "m/s",
+    "variance": "m^2/s^2",
+    "k": "m^2/s^2",
+    "concentration": "ppm of the released ethylene",
+    "temperature": "degC (T); K (T_rms); heat fluxes K m/s"
+   },
+   "frame": {
+    "origin": "the building's leeward (downwind) wall centre on the ground; x = 0 is the leeward wall",
+    "x": "+x streamwise (the wind blows toward +x); the building spans x in [-0.08, 0]; the floor source is at x = +0.04",
+    "y": "+y lateral; the building spans y in [-0.04, 0.04]; the z/H = 0.025 plane is measured on the y <= 0 side only",
+    "z": "+z up; roof at z = 0.16; heated floor at z = 0"
+   },
+   "counts": {
+    "rows": 444,
+    "distinct_points": 444,
+    "configurations": 1
+   },
+   "engines": {
+    "openfoam12-realizableKE": "pending",
+    "umf-realizableKE": "scored",
+    "umf-buoyantKEpsilon": "scored",
+    "openlb": "pending",
+    "fluidx3d": "pending",
+    "ml-surrogate": "pending"
+   },
+   "doi": "10.5281/zenodo.15447887",
+   "links": {
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/J.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/J/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/J/points.csv?v=444b7aaa1791",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/J/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/J/geometry.stl?v=1bd33d8d3531",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/J/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-j/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-j.png"
+   }
+  },
+  {
+   "id": "K",
+   "slug": "case-k",
+   "title": "Case K — 9 x 9 cube array, point source",
+   "summary": "9 x 9 array of 0.06 m cubes with a tracer point source on the floor between rows 2 and 3: velocity and tracer concentration at 203 points in the streets and over the first rows.",
+   "configuration": {
+    "array": "9 rows (along x) by 9 columns (across y) of cubes, H = 0.06 m, pitch 0.12 m (street width = H, plan area ratio 25 %); the pitch is read from the MP drawings",
+    "H_m": 0.06,
+    "pitch_m": 0.12,
+    "cubes": 81,
+    "Re_H": 9800,
+    "U_H_m_s": 2.33,
+    "U_H_note": "stated by the readme and data paper; the approach-flow file (Case H's) gives 2.24 m/s at z = 0.06 m",
+    "wind_directions_deg": [
+     0
+    ],
+    "measurement_planes": [
+     "y/H = 0, +-1, +-2, +-3 (z up to 0.07 m)",
+     "five heights from 4 mm to 70 mm; the three upper heights only on y = 0 and +-H"
+    ],
+    "points": 203,
+    "source": "5 mm floor outlet at (-0.15, 0, 0), between rows 2 and 3 on the centre line; 100 % ethylene, 3.6e-6 m3/s",
+    "concentration_normalisation": "c0 = q / (U_H H^2) = 429.18 ppm with the cube's H and U_H; the legacy workbook uses H = 0.2 m and UH = 4.94 m/s instead (C0 = 18.218 ppm), see known issues",
+    "instrument": "split-fibre hot wire (velocity), high-speed hydrocarbon analyser (concentration), 1000 Hz with a 200 Hz low-pass filter, 60 s per point",
+    "tunnel": "Eiffel-type wind tunnel, Tokyo Polytechnic University (Atsugi); 1.2 m wide, 1.0 m high",
+    "scale_note": "model scale; the sources state no model:full scale ratio"
+   },
+   "quantities": [
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "C",
+    "c_rms",
+    "concentration_ratio"
+   ],
+   "units": {
+    "length": "m (model scale)",
+    "velocity": "m/s",
+    "variance": "m^2/s^2",
+    "k": "m^2/s^2",
+    "concentration": "ppm of the released ethylene"
+   },
+   "frame": {
+    "origin": "bottom centre of the windward wall of the 4th row of the central column: x = 0 is that wall, y = 0 the centre line of the central column",
+    "x": "+x streamwise (the wind blows toward +x); row k spans x in [0.12 (k-4), 0.12 (k-4) + 0.06], so the array spans x in [-0.36, 0.66]",
+    "y": "+y lateral; column centres at y = 0, +-0.12, ... +-0.48 (the array spans y in [-0.51, 0.51])",
+    "z": "+z up; cube tops at z = 0.06"
+   },
+   "counts": {
+    "rows": 203,
+    "distinct_points": 203,
+    "configurations": 1
+   },
+   "engines": {
+    "openfoam12-realizableKE": "scored",
+    "openlb": "pending",
+    "fluidx3d": "pending",
+    "ml-surrogate": "pending"
+   },
+   "doi": "10.5281/zenodo.15448050",
+   "links": {
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/K.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/K/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/K/points.csv?v=8708f3251861",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/K/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/K/geometry.stl?v=f0f8a3adfa29",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/K/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-k/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-k.png"
+   }
+  },
+  {
+   "id": "L",
+   "slug": "case-l",
+   "title": "Case L — 9 x 14 cube array, line source, non-isothermal",
+   "summary": "14 rows by 9 columns of 0.06 m cubes with a tracer line source on the floor across the tunnel, in an unstably stratified boundary layer: velocity, temperature, concentration and their fluxes at 344 points in the streets and over the roofs.",
+   "configuration": {
+    "array": "14 rows (along x) by 9 columns (across y) of cubes, H = 0.06 m, pitch 0.12 m (street width = H, plan area ratio 25 %), published as BD_caseL.stl; the data paper calls it '9 rows by 14 columns'",
+    "H_m": 0.06,
+    "pitch_m": 0.12,
+    "cubes": 126,
+    "Re_H": 5600,
+    "U_H_m_s": 1.339415,
+    "wind_directions_deg": [
+     0
+    ],
+    "measurement_planes": [
+     "8 heights (4 .. 150 mm) at 27 locations in the streets near the source",
+     "4 heights (70 .. 150 mm) at 14 locations above the blocks",
+     "3 heights (4 .. 30 mm) at 24 locations around"
+    ],
+    "points": 344,
+    "stratification": "unstable: floor 45.0 degC, air at z = H 14.75 degC (difference 30.3 K), bulk Richardson number -0.035 (workbook; the readme says -0.04); the workbook gives the building surface as 42.2 degC",
+    "source": "floor line source across the tunnel at x = -0.15 m between rows 7 and 8: readme 0.037 m x 1.2 m, BD_caseL.stl patch 0.04 m x 1.02 m; 100 % ethylene, 8.33e-6 m3/s (500 cc/min) at 35 degC",
+    "concentration_normalisation": "c0 = q / (U_H H^2) = 1728.23 ppm (the workbook's value)",
+    "instrument": "split-fibre hot wire (velocity), cold wire (temperature), high-speed hydrocarbon analyser (concentration), 1000 Hz with a 200 Hz low-pass filter, 60 s per point",
+    "tunnel": "thermally stratified wind tunnel, Tokyo Polytechnic University (Atsugi); 1.2 m wide, 1.0 m high; 26 aluminium angles 9 mm high every 200 mm as roughness; model floor 10 mm above the tunnel floor",
+    "scale_note": "model scale; the sources state no model:full scale ratio"
+   },
+   "quantities": [
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "uv",
+    "uw",
+    "C",
+    "c_rms",
+    "concentration_ratio",
+    "T",
+    "T_rms",
+    "uc",
+    "vc",
+    "wc",
+    "uT",
+    "vT",
+    "wT"
+   ],
+   "units": {
+    "length": "m (model scale)",
+    "velocity": "m/s",
+    "variance": "m^2/s^2",
+    "k": "m^2/s^2",
+    "concentration": "ppm of the released ethylene",
+    "temperature": "degC (T); K (T_rms); heat fluxes K m/s; concentration fluxes ppm m/s"
+   },
+   "frame": {
+    "origin": "bottom centre of the windward wall of the 9th row (of 14) of the central column: x = 0 is that wall, y = 0 the centre line of the central column",
+    "x": "+x streamwise (the wind blows toward +x); row k spans x in [0.12 (k-9), 0.12 (k-9) + 0.06], so the array spans x in [-0.96, 0.66]",
+    "y": "+y lateral; column centres at y = 0, +-0.12, ... +-0.48 (the array spans y in [-0.51, 0.51])",
+    "z": "+z up from the model floor; cube tops at z = 0.06; heated floor at z = 0"
+   },
+   "counts": {
+    "rows": 344,
+    "distinct_points": 344,
+    "configurations": 1
+   },
+   "engines": {
+    "openfoam12-realizableKE": "pending",
+    "umf-realizableKE": "scored",
+    "openlb": "pending",
+    "fluidx3d": "pending",
+    "ml-surrogate": "pending"
+   },
+   "doi": "10.5281/zenodo.15487637",
+   "links": {
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/L.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/L/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/L/points.csv?v=b575fe11d107",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/L/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/L/geometry.stl?v=20864bc75187",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/L/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-l/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-l.png"
+   }
+  },
+  {
+   "id": "M",
+   "slug": "case-m",
+   "title": "Case M — TPU Atsugi campus",
+   "summary": "Tracer-gas release on the Tokyo Polytechnic University Atsugi campus: 1:600 tunnel (velocity at 180°, ethylene concentration at 175°, 180° and 185°) and 18 field runs with PMCH, 15 points 3 m above ground.",
+   "configuration": {
+    "site": "Tokyo Polytechnic University, Atsugi campus; terrain falls from about 32 m (campus plateau) to 3.6 m at the east edge; tallest building about 32 m",
+    "scale": "1:600",
+    "points": 15,
+    "measurement_height_m": 3,
+    "measurement_height_note": "3 m above the local ground, full scale (0.005 m model)",
+    "wind_directions_deg": [
+     175,
+     180,
+     185
+    ],
+    "wind_direction_velocity_deg": 180,
+    "field_runs": 18,
+    "field_wind_directions_deg": "78 ... 200.7 (mean direction at the reference point per run); 11 of 18 within 5° of 180°",
+    "reference": {
+     "U_R_m_s": 4.08,
+     "H_R_m_model": 0.068,
+     "H_R_m_full": 41,
+     "R": "rooftop of the main building: the point is 41 m above the ground, 8 m above the roof in the STL"
+    },
+    "tracer": {
+     "tunnel": "C2H4, 100 %, 6 mm outlet, 150 cc/min = 2.5e-6 m3/s (0.09 m/s)",
+     "field": "PMCH (C7F14), 200 ppm, 5 L/min, 1.5 m above ground, 25-26 Feb 2014, 18 runs of 10 min sampling"
+    },
+    "normalisation": "concentration ratio = C / c0, c0 = q / (U_R H_R^2): 132.5 ppm in the tunnel (the paper rounds to 1.33e2); per run in the field (1,444 ... 7,379 ppq)",
+    "instrument": "tunnel: DANTEC split-fibre probe (1000 Hz, 240 s) and high-speed hydrocarbon analyser; field: sorbent tubes with GC-ECD, sonic anemometer SAT-600 at the reference point",
+    "tunnel": "Eiffel-type boundary-layer wind tunnel, Tokyo Polytechnic University; cross-section 1.0 m high, 1.2 m wide; power law exponent 0.27 (AIJ Loads category IV) with an upwind taper for the topography"
+   },
+   "quantities": [
+    "U",
+    "V",
+    "W",
+    "uu",
+    "vv",
+    "ww",
+    "k",
+    "C",
+    "c_rms",
+    "concentration_ratio"
+   ],
+   "units": {
+    "length": "m (FULL scale)",
+    "velocity": "m/s (the tunnel's)",
+    "variance": "m^2/s^2",
+    "concentration": "ppm (the field's ppq converted)",
+    "concentration_ratio": "dimensionless"
+   },
+   "frame": {
+    "origin": "centre of the tunnel turntable on the floor plane (ground surface there at z = 33.07 m)",
+    "x": "+x NORTH (full-scale metres)",
+    "y": "+y WEST (compass rose of MP_caseM.png: N at +x, W at +y); the frame is right-handed",
+    "z": "+z up from the TUNNEL FLOOR; the campus ground lies at z ~ 32 m"
+   },
+   "counts": {
+    "rows": 330,
+    "distinct_points": 15,
+    "configurations": 22
+   },
+   "engines": {
+    "openfoam12-realizableKE": "scored",
+    "openlb": "pending",
+    "fluidx3d": "pending",
+    "ml-surrogate": "pending"
+   },
+   "doi": "10.5281/zenodo.15487857",
+   "links": {
+    "case": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/M.json",
+    "points": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/M/points.json",
+    "points_csv": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/M/points.csv?v=8d32dc8f762b",
+    "geometry": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/M/geometry.json",
+    "geometry_stl": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/M/geometry.stl?v=e4e0a2044536",
+    "validation": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/M/validation.json",
+    "page": "https://eddy3d-dev.github.io/AIJ-Data-Validation/cases/case-m/",
+    "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-m.png"
+   }
+  }
+ ]
+}

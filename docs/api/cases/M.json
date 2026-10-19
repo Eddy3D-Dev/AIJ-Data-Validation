@@ -1,7 +1,7 @@
 {
  "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/case.schema.json",
- "schema_version": "2.4.0",
- "data_version": "6c8b16ff73fa45f1aae99db9c2299e63d3fff6602e06a47434ddc86424661be7",
+ "schema_version": "2.5.0",
+ "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
  "license": "CC-BY-4.0",
  "id": "M",
  "slug": "case-m",
@@ -503,6 +503,78 @@
    "sha256": "0042caa394930c19454a0b2667dbda1e2a762641d7d57f443329e1088eb376ee"
   }
  },
+ "inflow": {
+  "benchmark_data": {
+   "approach_flow_csv": {
+    "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/approach_flow.csv?v=0042caa39493",
+    "path": "cases/M/approach_flow.csv",
+    "media_type": "text/csv",
+    "bytes": 903,
+    "sha256": "0042caa394930c19454a0b2667dbda1e2a762641d7d57f443329e1088eb376ee"
+   },
+   "columns": [
+    "z",
+    "U",
+    "k",
+    "u_rms"
+   ],
+   "units": {
+    "z": "m",
+    "U": "m/s",
+    "k": "m^2/s^2",
+    "u_rms": "m/s"
+   },
+   "rows": 40,
+   "fit": {
+    "method": "power law on the workbook's 40 heights (z 0.005 ... 0.6 m model) at x = -0.498 m; the data paper states exponent 0.27",
+    "power_law_exponent_fitted": 0.272,
+    "power_law_exponent_paper": 0.27,
+    "U_at_R_height_m_s": 3.94,
+    "U_R_m_s": 4.08,
+    "note": "z is height above the empty tunnel floor; at the profile station the model's taper is already 0.052 m high, so the 10 lowest heights lie below it"
+   },
+   "note": "the measured profile and the fit of it are the benchmark's data as cleaned here; everything under `recommended` is a choice"
+  },
+  "recommended": {
+   "status": "RECOMMENDED by this repository (not part of the benchmark): no log law fits this case (inflow_fit says why); use the measured approach-flow profile as a tabulated inlet (approach_flow.csv). Any inlet may be submitted; say which in submission.yaml",
+   "profile": "U(z) and, where published, k(z) tabulated from approach_flow.csv; epsilon = Cmu^0.5 k dU/dz where k is published, else from your own closure",
+   "kappa": 0.41,
+   "Cmu": 0.09,
+   "U_ref_m_s": 4.08,
+   "z_ref_m": null,
+   "openfoam": "fixedProfile (OpenFOAM.org) with the table, or timeVaryingMappedFixedValue: cases/{id}/inflow_openfoam.txt holds the table"
+  },
+  "flow_direction": {
+   "convention": "x_north_y_west",
+   "meaning": "meteorological FROM-direction theta: flowDir (-cos theta, +sin theta, 0)",
+   "wind_directions_deg": [
+    175.0,
+    180.0,
+    185.0
+   ]
+  },
+  "eddy3d_runs": [
+   {
+    "run_id": "M.openfoam12-realizableKE.sct03",
+    "engine": "openfoam12-realizableKE",
+    "inlet": "manual (AF_caseM.csv: 40 heights, 3-360 m, tunnel velocities unscaled, smooth floor)",
+    "scale": 600
+   },
+   {
+    "run_id": "M.openfoam12-realizableKE.sct05",
+    "engine": "openfoam12-realizableKE",
+    "inlet": "manual (AF_caseM.csv: 40 heights, 3-360 m, tunnel velocities unscaled, smooth floor)",
+    "scale": 600
+   },
+   {
+    "run_id": "M.openfoam12-realizableKE.sct07",
+    "engine": "openfoam12-realizableKE",
+    "inlet": "manual (AF_caseM.csv: 40 heights, 3-360 m, tunnel velocities unscaled, smooth floor)",
+    "scale": 600
+   }
+  ],
+  "domain": "the extents, blockage and cell sizes of Eddy3D's domains are not in its snapshots and are not stated here; mesh.cells and the scale are, where the snapshot has them"
+ },
  "points": {
   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/points.json",
   "csv": {
@@ -590,6 +662,76 @@
    96.30792,
    35.92863
   ]
+ },
+ "probes": {
+  "csv": {
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/probes.csv?v=877ae498c348",
+   "path": "cases/M/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 27943,
+   "sha256": "877ae498c348fb598f1ba06c88cb4152ac9240c29b746ab9e62cc532eff56de8"
+  },
+  "rows": 330,
+  "columns": [
+   "point_id",
+   "config",
+   "campaign",
+   "instrument",
+   "run",
+   "wind_direction_deg",
+   "x",
+   "y",
+   "z",
+   "scored_as"
+  ],
+  "columns_meaning": "the key columns of a scored file (point_id with config, campaign, instrument, run and wind_direction_deg as the case has them), x, y, z in m (case frame), and scored_as: the families the row is scored in (vector, k, thermistor_bracket, concentration, theta, joined by +)"
+ },
+ "scoring": {
+  "U_ref_m_s": 4.08,
+  "U_ref_meaning": "U_R, the tunnel's speed at the reference mast (the field rows carry their own U_R per run)",
+  "theta": null,
+  "scored_as": {
+   "vector": "U, V, W and the speed |U| against the split-fibre, LDV or hot-wire components (velocity.U, velocity.V, velocity.W, speed)",
+   "k": "the turbulent kinetic energy (k)",
+   "thermistor_bracket": "a mean scalar speed (thermistor, cup or sonic anemometer) against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar)",
+   "concentration": "the dimensionless concentration c* = C/c0 (cstar)",
+   "theta": "the floor-referenced temperature fraction (theta)"
+  },
+  "value_columns": [
+   "U",
+   "V",
+   "W",
+   "speed",
+   "k",
+   "cstar",
+   "theta",
+   "T"
+  ],
+  "key_columns": [
+   "config",
+   "campaign",
+   "instrument",
+   "run",
+   "wind_direction_deg",
+   "point_id"
+  ],
+  "conventions": "velocities and the speed over U_ref, k over U_ref^2 (Cases E, F and G publish ratios already); U, V, W, |U| and the thermistor bracket scored as signed velocities (FAC2's ratio keeps the sign; hit rate D = 0.25, W = 0.05); k by the plain definitions (D = 0.25 only); a thermistor, cup or sonic reading (a mean scalar speed) scored against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar), the two ends of its bracket; c* = C/c0 with one detection limit per case, 1e-3 of the largest measured value; theta = (T_floor - T)/(T_floor - T_H) scored like a positive velocity. The same conventions score the served Eddy3D results (docs/validation/method.md).",
+  "tool": "python validation/score_submissions.py <folder>, from a checkout of the repository (requirements.txt)",
+  "metric_meaning": {
+   "Count": "number of measured points scored",
+   "MeanObserved": "mean of the measured, normalised quantity",
+   "MeanPredicted": "mean of the modelled, normalised quantity",
+   "Fb": "fractional bias, 2 (mean_obs - mean_pred) / (mean_obs + mean_pred); positive = model low",
+   "Nmse": "normalised mean square error",
+   "Nad": "normalised absolute difference",
+   "Fac2": "fraction of points within a factor of two (harsh near zero for sign-changing V and W)",
+   "HitRate": "fraction of points within D = 0.25 relative or W = 0.05 U_H absolute",
+   "Mg": "geometric mean bias",
+   "Vg": "geometric variance",
+   "GeometricPairs": "pairs with both values positive (used for Mg/Vg)",
+   "R": "Pearson correlation coefficient",
+   "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive; Fb, Nmse and Nad of a signed velocity component of Case H or I whose observed and predicted means are not both positive)"
+  }
  },
  "geometry": {
   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/geometry.json",

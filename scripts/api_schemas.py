@@ -52,6 +52,8 @@ METRIC = obj(["Count", "Fb", "R"], {
 
 ENGINE_ID = {"enum": ["openfoam12-realizableKE", "openfoam12-kEpsilon", "openfoam12-kOmegaSST", "umf-realizableKE", "umf-buoyantKEpsilon", "openlb", "fluidx3d", "ml-surrogate"]}
 STATUS = {"enum": ["scored", "running", "pending", "not comparable"]}
+SLUG_PATTERN = r"^[a-z0-9][a-z0-9-]{1,63}$"
+SLUG = {"type": "string", "pattern": SLUG_PATTERN, "description": "a submission: the name of its folder under submissions/ in the repository"}
 CASE_ID = {"enum": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"]}
 
 POINT = obj(["point_id", "x", "y", "z"], {
@@ -169,6 +171,17 @@ DOCUMENTS = {
         "id": CASE_ID, "slug": {"type": "string"}, "title": {"type": "string"}, "summary": {"type": "string"},
         "configuration": {"type": "object"}, "configurations": arr({"type": "object"}),
         "quantities": arr({"type": "string"}), "units": {"type": "object"}, "frame": FRAME, "inflow_fit": {"type": "object"},
+        "inflow": obj(["benchmark_data", "recommended", "flow_direction"], {
+            "benchmark_data": dict({"type": "object"}, description="the measured approach flow and the fit of it: the benchmark's data as cleaned here"),
+            "recommended": dict({"type": "object"}, description="the inlet this repository recommends (its choice, not the benchmark's); `status` says so"),
+            "flow_direction": obj(["convention"], {"convention": {"enum": ["along_x", "geographic_x_east_y_north", "x_north_y_west"]}, "meaning": {"type": "string"}}),
+            "eddy3d_runs": arr({"type": "object"}), "domain": {"type": "string"}}),
+        "probes": obj(["csv", "rows", "columns"], {"csv": DOWNLOAD, "rows": {"type": "integer"}, "columns": arr({"type": "string"}), "columns_meaning": {"type": "string"}}),
+        "scoring": obj(["U_ref_m_s", "U_ref_meaning", "value_columns", "key_columns", "conventions"], {
+            "U_ref_m_s": dict(NUM_OR_NULL, description="the measured velocities are divided by this (k by its square); null where the table holds ratios"),
+            "U_ref_meaning": {"type": "string"}, "theta": {"type": ["object", "null"]}, "scored_as": {"type": "object"},
+            "value_columns": arr({"type": "string"}), "key_columns": arr({"type": "string"}), "conventions": {"type": "string"},
+            "metric_meaning": {"type": "object"}, "tool": {"type": "string"}}),
         "approach_flow": obj(["source", "units", "rows", "csv"], {
             "source": {"type": "string"}, "units": {"type": "object"},
             "rows": arr(obj(["z", "U"], {"z": {"type": "number"}, "U": {"type": "number"}, "k": NUM_OR_NULL, "u_rms": NUM_OR_NULL})),
@@ -230,6 +243,32 @@ DOCUMENTS = {
         "files": arr({"allOf": [DOWNLOAD, obj(["case", "configuration", "archive_name", "units", "frame", "triangles"], {
             "case": CASE_ID, "configuration": {"type": "string"}, "archive_name": {"type": "string"}, "units": {"type": "string"},
             "frame": FRAME, "triangles": {"type": "integer"}, **GEOMETRY_FACTS})]}),
+    }),
+    "submissions": _doc("submissions", "Community results", "Every submitted solver with its headline scores per case, scored by this build "
+                        "from the values it gave at the published points.", ["submissions"], {
+        "description": {"type": "string"}, "how_to_submit": URL, "status_meaning": {"type": "object"}, "metric_meaning": {"type": "object"},
+        "submissions": arr(obj(["slug", "solver", "version", "author", "example", "cases", "submission_url"], {
+            "slug": SLUG, "solver": {"type": "string"}, "version": {"type": "string"}, "author": {"type": "string"}, "url": {"type": "string"},
+            "example": {"type": "boolean", "description": "true for the repository's own worked example, which is not a community result"},
+            "inlet": {"type": "string"}, "turbulence_model": STR_OR_NULL, "ml_description": STR_OR_NULL,
+            "cases": arr(obj(["case", "status", "headline", "values"], {
+                "case": CASE_ID, "title": {"type": "string"}, "status": {"const": "scored"},
+                "headline": arr(obj(["label", "score", "Count", "R", "Fac2", "Fb", "HitRate", "coverage"], {
+                    "label": {"type": "string"}, "score": {"type": "string"}, "Count": {"type": "integer"},
+                    "R": NUM_OR_NULL, "Fac2": NUM_OR_NULL, "Fb": NUM_OR_NULL, "HitRate": NUM_OR_NULL,
+                    "coverage": obj(["scored", "measured"], {"scored": {"type": "integer"}, "measured": {"type": "integer"}})})),
+                "values": DOWNLOAD})),
+            "submission_url": URL, "page": URL})),
+    }),
+    "submission": _doc("submission", "Submission", "One submitted solver in full: its submission.yaml, and every score, coverage and group per case.",
+                       ["slug", "submission", "example", "provenance", "cases"], {
+        "slug": SLUG, "submission": {"type": "object"}, "example": {"type": "boolean"}, "provenance": {"type": "string"},
+        "scored_with": {"type": "object"}, "folder": URL, "page": URL,
+        "cases": arr(obj(["case", "status", "headline", "scores", "coverage", "groups", "values"], {
+            "case": CASE_ID, "title": {"type": "string"}, "status": {"const": "scored"},
+            "headline": arr({"type": "object"}), "scores": {"type": "object", "additionalProperties": METRIC},
+            "coverage": {"type": "object"}, "groups": arr({"type": "object"}), "values": DOWNLOAD,
+            "U_ref_m_s": NUM_OR_NULL, "units_given": {"enum": ["normalised", "si"]}})),
     }),
     "validation-summary": _doc("validation-summary", "Validation summary", "Every case and engine in one table: status, runs and "
                                "their headline scores.", ["engines", "cases"], {

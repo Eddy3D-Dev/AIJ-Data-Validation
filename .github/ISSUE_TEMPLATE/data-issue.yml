@@ -1,0 +1,23 @@
+name: Data issue
+description: A value, file, frame, unit or score that looks wrong in the cleaned data or the API.
+labels: [data]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Where
+      description: The API path or file (for example cases/B/points.csv, row with point_id 12) and the release (index.json versions.release).
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What is wrong
+      description: The value you see, the value you expect, and the published file or paper that says so.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: A quote from the published CSV or workbook, a figure number of the data paper, or a calculation.

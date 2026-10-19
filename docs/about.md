@@ -1,6 +1,6 @@
 ---
 title: "About and cite"
-nav_order: 6
+nav_order: 8
 description: "What this site and repository are, the citations of this API, the data paper and each case, the licence, and how a release is reproduced."
 ---
 

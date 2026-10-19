@@ -1,0 +1,188 @@
+{
+ "case": "A",
+ "engine": "example-openfoam12",
+ "units_given": "normalised",
+ "U_ref_m_s": 4.491,
+ "U_ref_meaning": "U_H, the approach speed at the building height H = 0.16 m",
+ "conventions": "velocities and the speed over U_ref, k over U_ref^2 (Cases E, F and G publish ratios already); U, V, W, |U| and the thermistor bracket scored as signed velocities (FAC2's ratio keeps the sign; hit rate D = 0.25, W = 0.05); k by the plain definitions (D = 0.25 only); a thermistor, cup or sonic reading (a mean scalar speed) scored against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar), the two ends of its bracket; c* = C/c0 with one detection limit per case, 1e-3 of the largest measured value; theta = (T_floor - T)/(T_floor - T_H) scored like a positive velocity. The same conventions score the served Eddy3D results (docs/validation/method.md).",
+ "value_columns_given": [
+  "U",
+  "V",
+  "W"
+ ],
+ "key_columns_given": [
+  "config",
+  "campaign",
+  "instrument",
+  "run",
+  "wind_direction_deg",
+  "point_id"
+ ],
+ "model_rows": 186,
+ "model_rows_unmatched": 0,
+ "groups": [
+  {
+   "key": "",
+   "group": {},
+   "points_measured": 186,
+   "scores": {
+    "velocity.U": {
+     "Count": 186,
+     "MeanObserved": 0.6348264031048956,
+     "MeanPredicted": 0.5273536978377305,
+     "Fb": 0.1849501728346505,
+     "Nmse": 0.07800835684057233,
+     "Nad": 0.10891773191564721,
+     "Fac2": 0.8172043010752689,
+     "HitRate": 0.5860215053763441,
+     "Mg": 1.2758313559148735,
+     "Vg": 1.7376005317453764,
+     "GeometricPairs": 158,
+     "R": 0.9548412675647306
+    },
+    "velocity.V": {
+     "Count": 186,
+     "MeanObserved": -0.040433315855127216,
+     "MeanPredicted": -0.049759690228725076,
+     "Fb": null,
+     "Nmse": null,
+     "Nad": null,
+     "Fac2": 0.34946236559139787,
+     "HitRate": 0.8924731182795699,
+     "Mg": 6.204495097304645,
+     "Vg": 31996.757808134254,
+     "GeometricPairs": 51,
+     "R": 0.9609755519503335
+    },
+    "velocity.W": {
+     "Count": 186,
+     "MeanObserved": 0.0013814965654127852,
+     "MeanPredicted": 0.00969656756763228,
+     "Fb": -1.501177624963596,
+     "Nmse": 318.23623106215155,
+     "Nad": 3.398335601772029,
+     "Fac2": 0.3978494623655914,
+     "HitRate": 0.8010752688172043,
+     "Mg": 0.9450322342366085,
+     "Vg": 3.0149459855402783,
+     "GeometricPairs": 67,
+     "R": 0.7082287378700073
+    },
+    "speed": {
+     "Count": 186,
+     "MeanObserved": 0.6738722238666145,
+     "MeanPredicted": 0.5833900322900697,
+     "Fb": 0.1439352706779557,
+     "Nmse": 0.0586836473682487,
+     "Nad": 0.09249363050804778,
+     "Fac2": 0.8763440860215054,
+     "HitRate": 0.6344086021505376,
+     "Mg": 1.2338433977280352,
+     "Vg": 1.3911090653766376,
+     "GeometricPairs": 186,
+     "R": 0.9402059410514126
+    }
+   },
+   "coverage": {
+    "velocity.U": {
+     "scored": 186,
+     "measured": 186
+    },
+    "velocity.V": {
+     "scored": 186,
+     "measured": 186
+    },
+    "velocity.W": {
+     "scored": 186,
+     "measured": 186
+    },
+    "speed": {
+     "scored": 186,
+     "measured": 186
+    }
+   }
+  }
+ ],
+ "headline": {
+  "U": "velocity.U",
+  "V": "velocity.V",
+  "W": "velocity.W",
+  "|U|": "speed"
+ },
+ "scores": {
+  "velocity.U": {
+   "Count": 186,
+   "MeanObserved": 0.6348264031048956,
+   "MeanPredicted": 0.5273536978377305,
+   "Fb": 0.1849501728346505,
+   "Nmse": 0.07800835684057233,
+   "Nad": 0.10891773191564721,
+   "Fac2": 0.8172043010752689,
+   "HitRate": 0.5860215053763441,
+   "Mg": 1.2758313559148735,
+   "Vg": 1.7376005317453764,
+   "GeometricPairs": 158,
+   "R": 0.9548412675647306
+  },
+  "velocity.V": {
+   "Count": 186,
+   "MeanObserved": -0.040433315855127216,
+   "MeanPredicted": -0.049759690228725076,
+   "Fb": null,
+   "Nmse": null,
+   "Nad": null,
+   "Fac2": 0.34946236559139787,
+   "HitRate": 0.8924731182795699,
+   "Mg": 6.204495097304645,
+   "Vg": 31996.757808134254,
+   "GeometricPairs": 51,
+   "R": 0.9609755519503335
+  },
+  "velocity.W": {
+   "Count": 186,
+   "MeanObserved": 0.0013814965654127852,
+   "MeanPredicted": 0.00969656756763228,
+   "Fb": -1.501177624963596,
+   "Nmse": 318.23623106215155,
+   "Nad": 3.398335601772029,
+   "Fac2": 0.3978494623655914,
+   "HitRate": 0.8010752688172043,
+   "Mg": 0.9450322342366085,
+   "Vg": 3.0149459855402783,
+   "GeometricPairs": 67,
+   "R": 0.7082287378700073
+  },
+  "speed": {
+   "Count": 186,
+   "MeanObserved": 0.6738722238666145,
+   "MeanPredicted": 0.5833900322900697,
+   "Fb": 0.1439352706779557,
+   "Nmse": 0.0586836473682487,
+   "Nad": 0.09249363050804778,
+   "Fac2": 0.8763440860215054,
+   "HitRate": 0.6344086021505376,
+   "Mg": 1.2338433977280352,
+   "Vg": 1.3911090653766376,
+   "GeometricPairs": 186,
+   "R": 0.9402059410514126
+  }
+ },
+ "coverage": {
+  "velocity.U": {
+   "scored": 186,
+   "measured": 186
+  },
+  "velocity.V": {
+   "scored": 186,
+   "measured": 186
+  },
+  "velocity.W": {
+   "scored": 186,
+   "measured": 186
+  },
+  "speed": {
+   "scored": 186,
+   "measured": 186
+  }
+ }
+}

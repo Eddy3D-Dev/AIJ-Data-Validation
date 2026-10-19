@@ -1,0 +1,27 @@
+# Data licence: CC BY 4.0
+
+The data of this repository are licensed under the Creative Commons Attribution 4.0 International licence
+(CC BY 4.0): https://creativecommons.org/licenses/by/4.0/
+
+This covers the measurements under `raw/` as the Architectural Institute of Japan published them, the cleaned tables
+under `clean/`, the geometry files, and every file the API under `docs/api/` serves, including the validation scores,
+the per-point pairs and the figures derived from the measurements. The code of the repository is licensed separately
+under the MIT licence (`LICENSE`).
+
+## Attribution
+
+The measurements are the AIJ Urban Wind Environment benchmark, Cases A to M. Cite the data paper:
+
+Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A.,
+Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment:
+Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083.
+https://doi.org/10.1002/2475-8876.70083
+
+Each case lists its own data collectors, Zenodo DOI and requested citation in `/api/cases/{id}.json` and on its Data
+page. The cleaned release and the API are cited as given in `CITATION.cff` and `/api/index.json` (`cite.api`).
+
+## What CC BY 4.0 asks of you
+
+You may share and adapt the data for any purpose, including commercially, as long as you give appropriate credit
+(the citations above), link to the licence, and say whether you changed anything. The full text of the licence is at
+https://creativecommons.org/licenses/by/4.0/legalcode.

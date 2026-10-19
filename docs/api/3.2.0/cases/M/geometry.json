@@ -1,0 +1,62 @@
+{
+ "$schema": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/schemas/geometry.schema.json",
+ "schema_version": "2.5.0",
+ "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
+ "license": "CC-BY-4.0",
+ "case": "M",
+ "title": "Case M — TPU Atsugi campus",
+ "units": "metres (full scale)",
+ "frame": {
+  "origin": "centre of the tunnel turntable on the floor plane (ground surface there at z = 33.07 m)",
+  "x": "+x NORTH (full-scale metres)",
+  "y": "+y WEST (compass rose of MP_caseM.png: N at +x, W at +y); the frame is right-handed",
+  "z": "+z up from the TUNNEL FLOOR; the campus ground lies at z ~ 32 m",
+  "wind_direction_rotation": "meteorological FROM-direction, so 180° blows toward +x; flow_dir = (-cos WD, +sin WD), and a larger WD turns the plume toward -y. Measured on the tunnel's 175 / 180 / 185° and on the 18 field runs.",
+  "lateral_sign_applied": 1,
+  "coordinate_scale_applied": 600.0
+ },
+ "default_configuration": "default",
+ "configurations": [
+  "default"
+ ],
+ "is_boxes": false,
+ "files": [
+  {
+   "configuration": "default",
+   "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0/cases/M/geometry.stl?v=e4e0a2044536",
+   "path": "cases/M/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 8475730,
+   "sha256": "e4e0a2044536248881898be3bf926b0c0da18b125b29403d2c260c95a5931525",
+   "format": "ASCII STL, LF line endings, outward normals, every body closed and consistently wound",
+   "source": "BD_caseM.stl (terrain + buildings) scaled x600 from model to full-scale metres; 3118 of 3152 horizontal facets faced down as published, so every triangle is reversed to point outward; the published STL has 21 boundary and 7 non-manifold edges: 7 slivers (together 0.45 m^2) hanging on building-roof edges are removed, and the 1080 m by 720 m panel is closed with a base slab: vertical walls from its rim down to z = -1 m and a bottom cap at z = -1 m (21 added triangles)",
+   "stats": {
+    "triangles": 43950,
+    "bbox_min": [
+     -540.0,
+     -360.0,
+     -1.0
+    ],
+    "bbox_max": [
+     540.0,
+     360.0,
+     64.9152
+    ],
+    "signed_volume": 11524435.200124165,
+    "edges": 65925,
+    "edges_shared_by_two_faces": 65925,
+    "edges_boundary": 0,
+    "edges_non_manifold": 0,
+    "bodies": 1,
+    "body_contacts": 0,
+    "inconsistent_triangles": 0,
+    "min_body_volume": 11524435.200124165,
+    "watertight": true
+   },
+   "bbox_matches_stated_dimensions": true,
+   "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-m.png",
+   "render_caption": "TPU Atsugi campus: terrain and buildings of the 1:600 model (full-scale metres, 1080 m by 720 m); the arrow is the wind at WD = 180°, blowing toward +x (north)."
+  }
+ ],
+ "render": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/geometry/case-m.png"
+}

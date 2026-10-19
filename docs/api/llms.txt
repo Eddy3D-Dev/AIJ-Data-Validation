@@ -6,9 +6,9 @@
 Base URL: https://eddy3d-dev.github.io/AIJ-Data-Validation/api
 Fallback (raw files from the repository): https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/main/docs/api
 Repository: https://github.com/Eddy3D-Dev/AIJ-Data-Validation
-Release: 3.1.3 (2026-10-18). This is the latest alias, which always equals the newest release; the frozen copy of 3.1.3 is https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.1.3.
+Release: 3.2.0 (2026-10-18). This is the latest alias, which always equals the newest release; the frozen copy of 3.2.0 is https://eddy3d-dev.github.io/AIJ-Data-Validation/api/3.2.0.
 All releases: https://eddy3d-dev.github.io/AIJ-Data-Validation/api/versions.json
-API schema version: 2.4.0. Data version (SHA-256 of the served data): 6c8b16ff73fa45f1aae99db9c2299e63d3fff6602e06a47434ddc86424661be7.
+API schema version: 2.5.0. Data version (SHA-256 of the served data): ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62.
 Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and requested citation of each case are in cases/{id}.json.
 
 ## How to use this
@@ -35,6 +35,15 @@ Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and reques
 10. To make a result reproducible, pin the release: GET versions.json, take the base_url of the release you used,
    and fetch every path below from it instead of from the unversioned base. A release's files never change, and
    every URL to an API file inside its documents points back into it. Quote the release number with any number you report.
+11. To score YOUR OWN solver or model: GET cases/{id}/probes.csv (the points to probe and what each is scored as), probe your
+   field there, add your values as columns (U V W speed k cstar theta T), and score with validation/score_submissions.py from a
+   checkout of the repository (python validation/score_submissions.py <folder>; nothing beyond requirements.txt), which applies
+   cases/{id}.json `scoring` (reference speed, conventions) with the metrics that score the served results.
+   cases/{id}.json `inflow` is the inlet contract: `benchmark_data` is the measured profile, `recommended` is this repository's
+   choice (a log law from the fit, k and epsilon from the ABL relations); cases/{id}/inflow_openfoam.txt is it as OpenFOAM files. The walk is https://eddy3d-dev.github.io/AIJ-Data-Validation/byos/.
+12. Community results: GET submissions.json (every submitted solver, scored by this repository's build from the values it gave at
+   the published points; self-reported inputs, scored here) and submissions/{slug}.json. They are not Eddy3D's results: those stay
+   in validation.json. A submission marked example is the repository's own worked example.
 
 ## Endpoints
 
@@ -129,6 +138,34 @@ Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and reques
   - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry_0D.stl?v=0f08bcd4dd6b
   - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/geometry_1D.stl?v=ac92c8ed427c
   - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/geometry_bc.stl?v=9b944d97a817
+- cases/{id}/probes.csv (base URL + path, one file per value) — the published points to probe for a comparison: the key columns of a scored file, x y z in the case frame, and what each row is scored as:
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/probes.csv?v=b2a57394ad1d
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/probes.csv?v=025b8113dcde
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/probes.csv?v=5b794e8356f0
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/probes.csv?v=4617e9e0d4e1
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/probes.csv?v=e248607ca6fe
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/probes.csv?v=d7dbd73343b9
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/probes.csv?v=219c5a86d3e8
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/probes.csv?v=450e304dc11d
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/probes.csv?v=67f76ec18f93
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/probes.csv?v=da4854c6791c
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/probes.csv?v=16f8836953ce
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/probes.csv?v=abee3cd8c088
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/probes.csv?v=877ae498c348
+- cases/{id}/inflow_openfoam.txt (base URL + path, one file per value) — the recommended inlet as OpenFOAM 12 files in one text (0/U, 0/k, 0/epsilon, 0/nut, system/probes with the case's points); the benchmark's data is the measured profile, the inlet is this repository's choice:
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/inflow_openfoam.txt?v=622f3a2e6a7f
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/inflow_openfoam.txt?v=3e631308edbe
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/C/inflow_openfoam.txt?v=79ef88eaf49c
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/D/inflow_openfoam.txt?v=3e16c570e397
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/E/inflow_openfoam.txt?v=2b8d64b9f966
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/F/inflow_openfoam.txt?v=5e2e4c98cc17
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/G/inflow_openfoam.txt?v=a35ecd0f597c
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/H/inflow_openfoam.txt?v=6f5c0f28eb28
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/I/inflow_openfoam.txt?v=d07955375be2
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/J/inflow_openfoam.txt?v=4426b1df1c62
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/K/inflow_openfoam.txt?v=9fe8a0907ac3
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/L/inflow_openfoam.txt?v=bdef47e766bc
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/M/inflow_openfoam.txt?v=cad127900333
 - cases/{id}/validation.json (base URL + path, one file per value) — Eddy3D's scores per engine and run, with figures and the per-point pairs:
   - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/A/validation.json
   - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/cases/B/validation.json
@@ -172,6 +209,11 @@ Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and reques
 - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/validation.json — every case and engine in one table: status, runs, headline scores
 - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/geometry.json — every STL of every case in one list: case, configuration, units, frame, bounding box, size, SHA-256
 - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/geometry.zip — every STL in one archive (each keeps its own case's frame and units: they are not one scene)
+- https://eddy3d-dev.github.io/AIJ-Data-Validation/api/submissions.json — the community results: every submitted solver with its headline scores per case, scored by this build from the submitted values
+- submissions/{slug}.json (base URL + path, one file per value) — one submission in full: its submission.yaml, and every score, coverage and group per case:
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/submissions/example-openfoam12.json
+- submissions/{slug}/{id}.csv (base URL + path, one file per value) — the values a submission gave at the published points of one case (the key columns of probes.csv plus its value columns):
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/submissions/example-openfoam12/A.csv?v=4eec5b1fe73a
 - schemas/{name}.schema.json (base URL + path, one file per value) — the JSON Schema (draft 2020-12) of each JSON document:
   - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/case.schema.json
   - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/cases.schema.json
@@ -179,6 +221,8 @@ Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and reques
   - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/geometry.schema.json
   - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/index.schema.json
   - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/points.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/submission.schema.json
+  - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/submissions.schema.json
   - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation-summary.schema.json
   - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/validation.schema.json
   - https://eddy3d-dev.github.io/AIJ-Data-Validation/api/schemas/versions.schema.json
