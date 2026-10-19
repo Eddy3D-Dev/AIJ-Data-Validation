@@ -1,6 +1,6 @@
 ---
 title: "Data"
-parent: "Case J — 1:1:2 building, non-isothermal"
+parent: "Case J"
 grand_parent: "Cases"
 nav_order: 1
 has_children: false

@@ -1,0 +1,68 @@
+{
+ "H": null,
+ "case": "M",
+ "coordinates": [
+  "x",
+  "y",
+  "z"
+ ],
+ "geometry": [
+  {
+   "bytes": 8475730,
+   "configuration": "default",
+   "default": true,
+   "path": "api/cases/M/geometry.stl"
+  }
+ ],
+ "groups": [],
+ "quantities": [
+  {
+   "label": "U",
+   "meas": "U_meas",
+   "model": "U_model"
+  },
+  {
+   "label": "V",
+   "meas": "V_meas",
+   "model": "V_model"
+  },
+  {
+   "label": "W",
+   "meas": "W_meas",
+   "model": "W_model"
+  },
+  {
+   "label": "|U|",
+   "meas": "speed_meas",
+   "model": "speed_model"
+  },
+  {
+   "label": "k",
+   "meas": "k_meas",
+   "model": "k_model"
+  },
+  {
+   "label": "c* (Sct 0.5)",
+   "meas": "cstar_meas",
+   "model": "cstar_sct05"
+  }
+ ],
+ "title": "Case M — TPU Atsugi campus",
+ "units": "metres (full scale)",
+ "vector": [
+  "U_meas",
+  "V_meas",
+  "W_meas",
+  "U_model",
+  "V_model",
+  "W_model"
+ ],
+ "views": [
+  {
+   "colour": "#0072b2",
+   "id": "openfoam12-realizableKE",
+   "label": "OpenFOAM 12",
+   "pairs": "api/cases/M/pairs/openfoam12-realizableKE.csv"
+  }
+ ]
+}

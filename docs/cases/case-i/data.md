@@ -1,6 +1,6 @@
 ---
 title: "Data"
-parent: "Case I — cube with a roof point source"
+parent: "Case I"
 grand_parent: "Cases"
 nav_order: 1
 has_children: false

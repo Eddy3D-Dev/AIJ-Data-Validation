@@ -1,6 +1,6 @@
 ---
 title: "Validation"
-parent: "Case B — 1:4:4 slab"
+parent: "Case B"
 grand_parent: "Cases"
 nav_order: 2
 has_children: false
@@ -25,6 +25,10 @@ Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> 
 ## Measurement locations
 
 {% include validation/case-b/layout.md %}
+
+## Explore the points
+
+{% include explorer.html case="B" %}
 
 ## OpenFOAM 12
 

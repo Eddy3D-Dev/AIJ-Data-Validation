@@ -1,11 +1,11 @@
 ---
-title: "Case D — high-rise among city blocks"
+title: "Case D"
 parent: "Cases"
 nav_order: 4
 has_children: true
 has_toc: false
 generated: true
-description: "1:1:4 tower in a regular array of 82 low blocks, pedestrian-height scalar speed (thermistor, 3 wind directions) plus a 33-point split-fibre velocity field at WD = 0."
+description: "Case D — high-rise among city blocks: 1:1:4 tower in a regular array of 82 low blocks, pedestrian-height scalar speed (thermistor, 3 wind directions) plus a 33-point split-fibre velocity field at WD = 0."
 ---
 
 # Case D

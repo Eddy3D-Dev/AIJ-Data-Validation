@@ -1,6 +1,6 @@
 ---
 title: "Validation"
-parent: "Case J — 1:1:2 building, non-isothermal"
+parent: "Case J"
 grand_parent: "Cases"
 nav_order: 2
 has_children: false
@@ -27,6 +27,10 @@ Engine status: OpenFOAM 12 (UMF) <span class="label label-green status">scored</
 ## Measurement locations
 
 {% include validation/case-j/layout.md %}
+
+## Explore the points
+
+{% include explorer.html case="J" %}
 
 ## OpenFOAM 12
 

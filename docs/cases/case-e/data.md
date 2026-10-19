@@ -1,6 +1,6 @@
 ---
 title: "Data"
-parent: "Case E — Niigata district"
+parent: "Case E"
 grand_parent: "Cases"
 nav_order: 1
 has_children: false

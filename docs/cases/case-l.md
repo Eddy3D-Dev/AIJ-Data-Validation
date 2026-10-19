@@ -1,11 +1,11 @@
 ---
-title: "Case L — 9 x 14 cube array, line source, non-isothermal"
+title: "Case L"
 parent: "Cases"
 nav_order: 12
 has_children: true
 has_toc: false
 generated: true
-description: "14 rows by 9 columns of 0.06 m cubes with a tracer line source on the floor across the tunnel, in an unstably stratified boundary layer: velocity, temperature, concentration and their fluxes at 344 points in the streets and over the roofs."
+description: "Case L — 9 x 14 cube array, line source, non-isothermal: 14 rows by 9 columns of 0.06 m cubes with a tracer line source on the floor across the tunnel, in an unstably stratified boundary layer: velocity, temperature, concentration and their fluxes at 344 points in the streets and over the roofs."
 ---
 
 # Case L

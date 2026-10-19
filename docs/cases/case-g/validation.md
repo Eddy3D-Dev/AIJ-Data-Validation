@@ -1,6 +1,6 @@
 ---
 title: "Validation"
-parent: "Case G — flow behind a tree belt"
+parent: "Case G"
 grand_parent: "Cases"
 nav_order: 2
 has_children: false
@@ -29,6 +29,10 @@ LAD and Cd are not in the dataset (only the shading rate, 81 %). The drag values
 ## Measurement locations
 
 {% include validation/case-g/layout.md %}
+
+## Explore the points
+
+{% include explorer.html case="G" %}
 
 ## OpenFOAM 12
 

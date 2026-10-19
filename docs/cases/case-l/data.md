@@ -1,6 +1,6 @@
 ---
 title: "Data"
-parent: "Case L — 9 x 14 cube array, line source, non-isothermal"
+parent: "Case L"
 grand_parent: "Cases"
 nav_order: 1
 has_children: false

@@ -1,6 +1,6 @@
 ---
 title: "Data"
-parent: "Case C — 3 × 3 block array"
+parent: "Case C"
 grand_parent: "Cases"
 nav_order: 1
 has_children: false

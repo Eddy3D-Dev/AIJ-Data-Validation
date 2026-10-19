@@ -1,6 +1,6 @@
 ---
 title: "Validation"
-parent: "Case K — 9 x 9 cube array, point source"
+parent: "Case K"
 grand_parent: "Cases"
 nav_order: 2
 has_children: false
@@ -25,6 +25,10 @@ Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> 
 ## Measurement locations
 
 {% include validation/case-k/layout.md %}
+
+## Explore the points
+
+{% include explorer.html case="K" %}
 
 ## OpenFOAM 12
 

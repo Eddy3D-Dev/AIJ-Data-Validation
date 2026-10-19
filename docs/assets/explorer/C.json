@@ -1,0 +1,56 @@
+{
+ "H": null,
+ "case": "C",
+ "coordinates": [
+  "x",
+  "y",
+  "z"
+ ],
+ "geometry": [
+  {
+   "bytes": 14576,
+   "configuration": "2D",
+   "default": true,
+   "path": "api/cases/C/geometry.stl"
+  },
+  {
+   "bytes": 12961,
+   "configuration": "0D",
+   "default": false,
+   "path": "api/cases/C/geometry_0D.stl"
+  },
+  {
+   "bytes": 14576,
+   "configuration": "1D",
+   "default": false,
+   "path": "api/cases/C/geometry_1D.stl"
+  }
+ ],
+ "groups": [
+  "config",
+  "wind_direction_deg"
+ ],
+ "quantities": [
+  {
+   "label": "Vs vs √(|U|²+2k)",
+   "meas": "measured_over_UH",
+   "model": "scalar_over_UH"
+  },
+  {
+   "label": "Vs vs |U|",
+   "meas": "measured_over_UH",
+   "model": "vector_over_UH"
+  }
+ ],
+ "title": "Case C — 3 × 3 block array",
+ "units": "metres (model scale)",
+ "vector": null,
+ "views": [
+  {
+   "colour": "#0072b2",
+   "id": "openfoam12-realizableKE",
+   "label": "OpenFOAM 12",
+   "pairs": "api/cases/C/pairs/openfoam12-realizableKE.csv"
+  }
+ ]
+}

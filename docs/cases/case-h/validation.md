@@ -1,6 +1,6 @@
 ---
 title: "Validation"
-parent: "Case H — 1:1:2 building with a floor point source"
+parent: "Case H"
 grand_parent: "Cases"
 nav_order: 2
 has_children: false
@@ -27,6 +27,10 @@ Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> 
 ## Measurement locations
 
 {% include validation/case-h/layout.md %}
+
+## Explore the points
+
+{% include explorer.html case="H" %}
 
 ## OpenFOAM 12
 

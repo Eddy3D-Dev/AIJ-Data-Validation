@@ -1,6 +1,6 @@
 ---
 title: "Data"
-parent: "Case B — 1:4:4 slab"
+parent: "Case B"
 grand_parent: "Cases"
 nav_order: 1
 has_children: false

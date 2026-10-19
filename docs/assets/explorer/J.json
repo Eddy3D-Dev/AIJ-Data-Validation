@@ -1,0 +1,74 @@
+{
+ "H": 0.16,
+ "case": "J",
+ "coordinates": [
+  "x",
+  "y",
+  "z"
+ ],
+ "geometry": [
+  {
+   "bytes": 1702,
+   "configuration": "default",
+   "default": true,
+   "path": "api/cases/J/geometry.stl"
+  }
+ ],
+ "groups": [],
+ "quantities": [
+  {
+   "label": "U",
+   "meas": "U_meas",
+   "model": "U_model"
+  },
+  {
+   "label": "V",
+   "meas": "V_meas",
+   "model": "V_model"
+  },
+  {
+   "label": "W",
+   "meas": "W_meas",
+   "model": "W_model"
+  },
+  {
+   "label": "k",
+   "meas": "k_meas",
+   "model": "k_model"
+  },
+  {
+   "label": "θ",
+   "meas": "theta_meas",
+   "model": "theta_model"
+  },
+  {
+   "label": "c* (Sct 0.5)",
+   "meas": "cstar_meas",
+   "model": "cstar_sct05"
+  }
+ ],
+ "title": "Case J — 1:1:2 building, non-isothermal",
+ "units": "metres (model scale)",
+ "vector": [
+  "U_meas",
+  "V_meas",
+  "W_meas",
+  "U_model",
+  "V_model",
+  "W_model"
+ ],
+ "views": [
+  {
+   "colour": "#0072b2",
+   "id": "umf-realizableKE",
+   "label": "OpenFOAM 12 (UMF)",
+   "pairs": "api/cases/J/pairs/umf-realizableKE.csv"
+  },
+  {
+   "colour": "#56b4e9",
+   "id": "umf-buoyantKEpsilon",
+   "label": "OpenFOAM 12 (UMF) buoyantKEpsilon",
+   "pairs": "api/cases/J/pairs/umf-buoyantKEpsilon.csv"
+  }
+ ]
+}

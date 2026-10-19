@@ -1,0 +1,43 @@
+{
+ "H": 7.0,
+ "case": "G",
+ "coordinates": [
+  "x",
+  null,
+  "z"
+ ],
+ "geometry": [
+  {
+   "bytes": 1558,
+   "configuration": "default",
+   "default": true,
+   "path": "api/cases/G/geometry.stl"
+  }
+ ],
+ "groups": [
+  "arm"
+ ],
+ "quantities": [
+  {
+   "label": "U/U_H",
+   "meas": "U_meas",
+   "model": "U_model"
+  },
+  {
+   "label": "k",
+   "meas": "k_meas",
+   "model": "k_model"
+  }
+ ],
+ "title": "Case G — flow behind a tree belt",
+ "units": "metres (full scale)",
+ "vector": null,
+ "views": [
+  {
+   "colour": "#0072b2",
+   "id": "openfoam12-realizableKE",
+   "label": "OpenFOAM 12",
+   "pairs": "api/cases/G/pairs/openfoam12-realizableKE.csv"
+  }
+ ]
+}

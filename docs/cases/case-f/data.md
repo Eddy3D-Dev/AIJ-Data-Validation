@@ -1,6 +1,6 @@
 ---
 title: "Data"
-parent: "Case F — Shinjuku district"
+parent: "Case F"
 grand_parent: "Cases"
 nav_order: 1
 has_children: false

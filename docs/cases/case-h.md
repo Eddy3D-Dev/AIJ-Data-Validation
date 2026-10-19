@@ -1,11 +1,11 @@
 ---
-title: "Case H — 1:1:2 building with a floor point source"
+title: "Case H"
 parent: "Cases"
 nav_order: 8
 has_children: true
 has_toc: false
 generated: true
-description: "Isolated 1:1:2 building with an ethylene point source on the floor behind it: velocity (split-fibre hot wire) and concentration (hydrocarbon analyser) at 876 points."
+description: "Case H — 1:1:2 building with a floor point source: Isolated 1:1:2 building with an ethylene point source on the floor behind it: velocity (split-fibre hot wire) and concentration (hydrocarbon analyser) at 876 points."
 ---
 
 # Case H

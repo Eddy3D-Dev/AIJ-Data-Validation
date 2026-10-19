@@ -1,6 +1,6 @@
 ---
 title: "Validation"
-parent: "Case L — 9 x 14 cube array, line source, non-isothermal"
+parent: "Case L"
 grand_parent: "Cases"
 nav_order: 2
 has_children: false
@@ -25,6 +25,10 @@ Engine status: OpenFOAM 12 (UMF) <span class="label label-green status">scored</
 ## Measurement locations
 
 {% include validation/case-l/layout.md %}
+
+## Explore the points
+
+{% include explorer.html case="L" %}
 
 ## OpenFOAM 12
 

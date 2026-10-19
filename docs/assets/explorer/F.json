@@ -1,0 +1,45 @@
+{
+ "H": null,
+ "case": "F",
+ "coordinates": [
+  "x",
+  "y",
+  "z_probe"
+ ],
+ "geometry": [
+  {
+   "bytes": 9661421,
+   "configuration": "default",
+   "default": true,
+   "path": "api/cases/F/geometry.stl"
+  }
+ ],
+ "groups": [
+  "frame",
+  "source",
+  "plane_m"
+ ],
+ "quantities": [
+  {
+   "label": "U/U(500 m) vs √(|U|²+2k)",
+   "meas": "observed",
+   "model": "rms_model"
+  },
+  {
+   "label": "U/U(500 m) vs |U|",
+   "meas": "observed",
+   "model": "Umag_model"
+  }
+ ],
+ "title": "Case F — Shinjuku district",
+ "units": "metres (full scale)",
+ "vector": null,
+ "views": [
+  {
+   "colour": "#0072b2",
+   "id": "openfoam12-realizableKE",
+   "label": "OpenFOAM 12",
+   "pairs": "api/cases/F/pairs/openfoam12-realizableKE.csv"
+  }
+ ]
+}

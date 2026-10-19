@@ -1,11 +1,11 @@
 ---
-title: "Case F — Shinjuku district"
+title: "Case F"
 parent: "Cases"
 nav_order: 6
 has_children: true
 has_toc: false
 generated: true
-description: "Shinjuku sub-centre, Tokyo, November 1978: 1:800 tunnel (thermistor, 5 / 9 / 20 m) and a year of field cup anemometers; velocity ratio to the 500 m wind, 12 tunnel and 16 field directions."
+description: "Case F — Shinjuku district: Shinjuku sub-centre, Tokyo, November 1978: 1:800 tunnel (thermistor, 5 / 9 / 20 m) and a year of field cup anemometers; velocity ratio to the 500 m wind, 12 tunnel and 16 field directions."
 ---
 
 # Case F

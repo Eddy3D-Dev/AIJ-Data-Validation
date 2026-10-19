@@ -1,6 +1,6 @@
 ---
 title: "Validation"
-parent: "Case M — TPU Atsugi campus"
+parent: "Case M"
 grand_parent: "Cases"
 nav_order: 2
 has_children: false
@@ -25,6 +25,10 @@ Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> 
 ## Measurement locations
 
 {% include validation/case-m/layout.md %}
+
+## Explore the points
+
+{% include explorer.html case="M" %}
 
 ## OpenFOAM 12
 

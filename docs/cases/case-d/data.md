@@ -1,6 +1,6 @@
 ---
 title: "Data"
-parent: "Case D — high-rise among city blocks"
+parent: "Case D"
 grand_parent: "Cases"
 nav_order: 1
 has_children: false

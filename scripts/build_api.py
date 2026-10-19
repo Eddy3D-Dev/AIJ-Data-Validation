@@ -2288,7 +2288,7 @@ def _case_page(case, meta, p, shared):
     summ, results = p["summ"], p["results"]
     base, data_url, val_url = _page_url(meta["slug"]), _page_url(meta["slug"], "data"), _page_url(meta["slug"], "validation")
     n = D.CASE_IDS.index(case) + 1
-    L = _front(meta["title"], n, parent="Cases", has_children=True, has_toc=False, description=meta["short"])
+    L = _front(f"Case {case}", n, parent="Cases", has_children=True, has_toc=False, description=f"{meta['title']}: {meta['short']}")
     L += [f"# Case {case}", "", f"{_tex(meta['short'])}", "{: .fs-5 .fw-300 .lede }", "",
           f"{_link('Reference data', data_url)}{{: .btn .btn-primary }} {_link('Validation', val_url)}{{: .btn }} "
           f"{_link('Case as JSON', f'/api/cases/{case}.json')}{{: .btn }}", ""]
@@ -2347,7 +2347,7 @@ def _issue_list(issues):
 def _case_data_page(case, meta, p):
     summ, configs = p["summ"], p["configs"]
     n = D.CASE_IDS.index(case) + 1
-    L = _front("Data", 1, parent=meta["title"], grand_parent="Cases", has_children=False,
+    L = _front("Data", 1, parent=f"Case {case}", grand_parent="Cases", has_children=False,
                description=f"{meta['title']}: configuration, frame and units, reference data, inflow and known data issues.")
     L += [f"# Case {case}: reference data", "{: .no_toc }", ""] + _toc()
     sink = []
@@ -2573,7 +2573,7 @@ def _leaderboard(case):
 
 def _case_validation_page(case, meta, p, shared):
     results = p["results"]
-    L = _front("Validation", 2, parent=meta["title"], grand_parent="Cases", has_children=False,
+    L = _front("Validation", 2, parent=f"Case {case}", grand_parent="Cases", has_children=False,
                description=f"{meta['title']}: Eddy3D's scores against the measurements, engine by engine.",
                redirect_from=REDIRECT_FROM.get(case, ()))
     L += [f"# Case {case}: validation", "{: .no_toc }", ""] + _toc()
@@ -2583,6 +2583,7 @@ def _case_validation_page(case, meta, p, shared):
     inc, shown = _reading(meta, "layout")
     if inc:
         L += ["## Measurement locations", ""] + inc
+    L += ["## Explore the points", "", f'{{% include explorer.html case="{case}" %}}', ""]
     if not results:
         L += [f"**No validation has been run for this case yet.** {QUEUED}", ""]
         return L
@@ -2666,6 +2667,72 @@ def _case_validation_page(case, meta, p, shared):
     return L + _leaderboard(case)
 
 
+# ----------------------------------------------------------------------------- the point explorer
+# docs/assets/js/explorer.js draws, for one case, a measured-against-modelled scatter beside a 3D view of the same points (and, where the
+# case has the three velocity components, the measured and modelled vectors and the discrepancy at the hovered point). It reads the served
+# pairs files; this table says which columns of them to use. coordinates: the columns of the point's position (a missing one is 0);
+# groups: columns that separate runs sharing a file (a selector for each); quantities: (label, measured column, modelled column);
+# vector: the columns of the velocity (U, V, W) measured and modelled, where the case has them.
+_VEC = ("U_meas", "V_meas", "W_meas", "U_model", "V_model", "W_model")
+_UVW = [("U", "U_meas", "U_model"), ("V", "V_meas", "V_model"), ("W", "W_meas", "W_model")]
+_K = ("k", "k_meas", "k_model")
+_CSTAR = ("c* (Sct 0.5)", "cstar_meas", "cstar_sct05")
+_THETA = ("θ", "theta_meas", "theta_model")
+EXPLORER = {
+    "A": {"quantities": _UVW, "vector": _VEC},
+    "B": {"quantities": _UVW, "vector": _VEC},
+    "C": {"groups": ["config", "wind_direction_deg"], "quantities": [("Vs vs √(|U|²+2k)", "measured_over_UH", "scalar_over_UH"), ("Vs vs |U|", "measured_over_UH", "vector_over_UH")]},
+    "D": {"groups": ["instrument", "wind_direction_deg"], "vector": _VEC,
+          "quantities": [("Vs vs √(|U|²+2k)", "measured_over_UH", "scalar_over_UH"), ("Vs vs |U|", "measured_over_UH", "vector_over_UH")] + _UVW},
+    "E": {"groups": ["config", "wind_direction"], "quantities": [("Vs ratio vs √(|U|²+2k)", "measured_ratio", "scalar_ratio"), ("Vs ratio vs |U|", "measured_ratio", "vector_ratio")]},
+    "F": {"coordinates": ["x", "y", "z_probe"], "groups": ["frame", "source", "plane_m"],
+          "quantities": [("U/U(500 m) vs √(|U|²+2k)", "observed", "rms_model"), ("U/U(500 m) vs |U|", "observed", "Umag_model")]},
+    "G": {"coordinates": ["x", None, "z"], "groups": ["arm"], "quantities": [("U/U_H", "U_meas", "U_model"), ("k", "k_meas", "k_model")]},
+    "H": {"quantities": _UVW + [_K, _CSTAR], "vector": _VEC},
+    "I": {"groups": ["instrument"], "quantities": _UVW + [_K, _CSTAR], "vector": _VEC},
+    "J": {"quantities": _UVW + [_K, _THETA, _CSTAR], "vector": _VEC},
+    "K": {"quantities": _UVW + [_K, _CSTAR], "vector": _VEC},
+    "L": {"quantities": _UVW + [("|U| (scalar)", "S_meas", "S_model"), _K, _THETA, _CSTAR], "vector": _VEC},
+    "M": {"quantities": _UVW + [("|U|", "speed_meas", "speed_model"), _K, _CSTAR], "vector": _VEC},
+}
+ENGINE_COLOUR = {"openfoam12-realizableKE": "#0072b2", "openfoam12-kEpsilon": "#56b4e9", "openfoam12-kOmegaSST": "#009e73", "umf-realizableKE": "#0072b2",
+                 "umf-buoyantKEpsilon": "#56b4e9", "openlb": "#d55e00", "fluidx3d": "#cc79a7"}
+
+
+def build_explorer(percase):
+    """docs/assets/explorer/<case>.json: what the explorer needs to draw a case, from the served documents; stale ones are removed."""
+    out = os.path.join(ASSETS, "explorer")
+    os.makedirs(out, exist_ok=True)
+    keep = set()
+    for case in D.CASE_IDS:
+        spec = EXPLORER[case]
+        views, seen = [], set()
+        for e in percase[case]["results"]:
+            if e["engine"] == "ml-surrogate" or not e["pairs"] or e["pairs"]["path"] in seen:
+                continue
+            seen.add(e["pairs"]["path"])
+            views.append({"id": e["engine"], "label": _engine_name(e["engine"]), "pairs": "api/" + e["pairs"]["path"],
+                          "colour": ENGINE_COLOUR.get(e["engine"], "#0072b2")})
+        with io.open(os.path.join(API_ROOT, RELEASE, "cases", case, "geometry.json"), encoding="utf-8") as f:
+            geo = json.load(f)
+        conf = D.CASES[case]["configuration"]
+        doc = {"case": case, "title": D.CASES[case]["title"], "H": conf.get("H_m"), "units": geo["units"],
+               "coordinates": spec.get("coordinates", ["x", "y", "z"]), "groups": spec.get("groups", []),
+               "quantities": [{"label": lab, "meas": m, "model": mo} for lab, m, mo in spec["quantities"]],
+               "vector": spec.get("vector"), "views": views,
+               "geometry": [{"configuration": g["configuration"], "path": "api/" + g["path"], "bytes": g["bytes"], "default": g["configuration"] == geo["default_configuration"]}
+                            for g in geo["files"]]}
+        _write_json_asset(os.path.join(out, f"{case}.json"), doc)
+        keep.add(f"{case}.json")
+    for stale in set(os.listdir(out)) - keep:
+        os.remove(os.path.join(out, stale))
+
+
+def _write_json_asset(path, doc):
+    with io.open(path, "w", encoding="utf-8", newline="\n") as f:
+        f.write(json.dumps(doc, indent=1, ensure_ascii=False, sort_keys=True) + "\n")
+
+
 def build_pages(percase):
     """The site's generated pages, one set per case in D.CASE_IDS (any id the data has gets its pages): the case page
     (summary, render, status), its Data page and its Validation page, plus the includes the hand-written pages use."""
@@ -2677,6 +2744,7 @@ def build_pages(percase):
     build_known_issues()
     build_version_label()
     build_nomenclature()
+    build_explorer(percase)
     for case in D.CASE_IDS:
         meta, p = D.CASES[case], percase[case]
         _write(f"cases/{meta['slug']}.md", _case_page(case, meta, p, shared))

@@ -1,6 +1,6 @@
 ---
 title: "Data"
-parent: "Case K — 9 x 9 cube array, point source"
+parent: "Case K"
 grand_parent: "Cases"
 nav_order: 1
 has_children: false

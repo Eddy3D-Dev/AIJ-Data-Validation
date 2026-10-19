@@ -1,11 +1,11 @@
 ---
-title: "Case B — 1:4:4 slab"
+title: "Case B"
 parent: "Cases"
 nav_order: 2
 has_children: true
 has_toc: false
 generated: true
-description: "Isolated 1:4:4 slab, velocity field (split-fibre hot wire)."
+description: "Case B — 1:4:4 slab: Isolated 1:4:4 slab, velocity field (split-fibre hot wire)."
 ---
 
 # Case B

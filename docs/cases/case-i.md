@@ -1,11 +1,11 @@
 ---
-title: "Case I — cube with a roof point source"
+title: "Case I"
 parent: "Cases"
 nav_order: 9
 has_children: true
 has_toc: false
 generated: true
-description: "Isolated cube with an ethane point source at the centre of its roof: velocity (laser Doppler, 91 points) and concentration (hydrocarbon analyser, 539 points)."
+description: "Case I — cube with a roof point source: Isolated cube with an ethane point source at the centre of its roof: velocity (laser Doppler, 91 points) and concentration (hydrocarbon analyser, 539 points)."
 ---
 
 # Case I

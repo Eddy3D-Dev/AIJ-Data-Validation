@@ -1,11 +1,11 @@
 ---
-title: "Case E — Niigata district"
+title: "Case E"
 parent: "Cases"
 nav_order: 5
 has_children: true
 has_toc: false
 generated: true
-description: "Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 m mid-rises; pedestrian-height velocity ratio (thermistor), 16 wind directions."
+description: "Case E — Niigata district: Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 m mid-rises; pedestrian-height velocity ratio (thermistor), 16 wind directions."
 ---
 
 # Case E

@@ -1,11 +1,11 @@
 ---
-title: "Case G — flow behind a tree belt"
+title: "Case G"
 parent: "Cases"
 nav_order: 7
 has_children: true
 has_toc: false
 generated: true
-description: "Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m × 2 m × 7 m with a 1.2 m gap below): normalised mean speed and k at 28 points on the centre section (sonic anemometers)."
+description: "Case G — flow behind a tree belt: Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m × 2 m × 7 m with a 1.2 m gap below): normalised mean speed and k at 28 points on the centre section (sonic anemometers)."
 ---
 
 # Case G

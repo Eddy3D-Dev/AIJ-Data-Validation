@@ -1,6 +1,6 @@
 ---
 title: "Data"
-parent: "Case G — flow behind a tree belt"
+parent: "Case G"
 grand_parent: "Cases"
 nav_order: 1
 has_children: false

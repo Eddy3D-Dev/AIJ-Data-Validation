@@ -1,11 +1,11 @@
 ---
-title: "Case C — 3 × 3 block array"
+title: "Case C"
 parent: "Cases"
 nav_order: 3
 has_children: true
 has_toc: false
 generated: true
-description: "3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestrian-height scalar speed (thermistor), 3 wind directions."
+description: "Case C — 3 × 3 block array: 3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestrian-height scalar speed (thermistor), 3 wind directions."
 ---
 
 # Case C

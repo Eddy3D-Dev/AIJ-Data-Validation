@@ -1,11 +1,11 @@
 ---
-title: "Case A — 1:1:2 building"
+title: "Case A"
 parent: "Cases"
 nav_order: 1
 has_children: true
 has_toc: false
 generated: true
-description: "Isolated 1:1:2 building, velocity field (split-fibre hot wire)."
+description: "Case A — 1:1:2 building: Isolated 1:1:2 building, velocity field (split-fibre hot wire)."
 ---
 
 # Case A

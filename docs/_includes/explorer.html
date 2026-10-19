@@ -1,0 +1,7 @@
+<div class="explorer" data-case="{{ include.case }}" data-base="{{ '/' | relative_url }}" data-manifest="{{ '/assets/explorer/' | append: include.case | append: '.json' | relative_url }}">
+  <p class="explorer-note">Hover a point to see where it sits in 3D and how the model differs from the measurement; click to pin it. This needs JavaScript, and the figures on this page show the same scores.</p>
+</div>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+</script>
+<script type="module" src="{{ '/assets/js/explorer.js' | relative_url }}"></script>

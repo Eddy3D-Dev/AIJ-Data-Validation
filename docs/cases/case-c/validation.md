@@ -1,6 +1,6 @@
 ---
 title: "Validation"
-parent: "Case C — 3 × 3 block array"
+parent: "Case C"
 grand_parent: "Cases"
 nav_order: 2
 has_children: false
@@ -27,6 +27,10 @@ Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> 
 ## Measurement locations
 
 {% include validation/case-c/layout.md %}
+
+## Explore the points
+
+{% include explorer.html case="C" %}
 
 ## OpenFOAM 12
 

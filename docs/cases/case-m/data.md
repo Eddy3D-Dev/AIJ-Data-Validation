@@ -1,6 +1,6 @@
 ---
 title: "Data"
-parent: "Case M — TPU Atsugi campus"
+parent: "Case M"
 grand_parent: "Cases"
 nav_order: 1
 has_children: false

@@ -1,0 +1,50 @@
+{
+ "H": null,
+ "case": "E",
+ "coordinates": [
+  "x",
+  "y",
+  "z"
+ ],
+ "geometry": [
+  {
+   "bytes": 1210554,
+   "configuration": "ac",
+   "default": true,
+   "path": "api/cases/E/geometry.stl"
+  },
+  {
+   "bytes": 1205426,
+   "configuration": "bc",
+   "default": false,
+   "path": "api/cases/E/geometry_bc.stl"
+  }
+ ],
+ "groups": [
+  "config",
+  "wind_direction"
+ ],
+ "quantities": [
+  {
+   "label": "Vs ratio vs √(|U|²+2k)",
+   "meas": "measured_ratio",
+   "model": "scalar_ratio"
+  },
+  {
+   "label": "Vs ratio vs |U|",
+   "meas": "measured_ratio",
+   "model": "vector_ratio"
+  }
+ ],
+ "title": "Case E — Niigata district",
+ "units": "metres (full scale)",
+ "vector": null,
+ "views": [
+  {
+   "colour": "#0072b2",
+   "id": "openfoam12-realizableKE",
+   "label": "OpenFOAM 12",
+   "pairs": "api/cases/E/pairs/openfoam12-realizableKE.csv"
+  }
+ ]
+}
