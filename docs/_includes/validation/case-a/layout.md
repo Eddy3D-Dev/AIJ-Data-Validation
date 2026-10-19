@@ -1,0 +1,1 @@
+{% include figure.html name="case-a-layout.png" alt="Measurement lines and planes, Case A" caption="<strong>Figure 1.</strong> Case A, measurement lines and planes: A vertical profiles, $$y/b = 0$$; B plane $$z/b = 0.125$$; C plane $$z/b = 1.25$$. Positions in multiples of $$b$$." %}

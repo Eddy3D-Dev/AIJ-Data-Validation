@@ -1,0 +1,1 @@
+{% include figure.html name="case-k-layout.png" alt="Measurement lines and planes, Case K" caption="<strong>Figure 1.</strong> Case K, measurement lines and planes: A vertical profiles, $$y/H = 0$$; B vertical profiles, $$y/H = \pm 1$$; C vertical profiles, $$y/H = \pm 2$$; D vertical profiles, $$y/H = \pm 3$$. Positions in multiples of $$H$$." %}

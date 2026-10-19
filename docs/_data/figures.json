@@ -1,4 +1,14 @@
 {
+ "case-a-engine-comparison.png": {
+  "height": 2370,
+  "master": "/assets/figures/case-a-engine-comparison.png",
+  "master_bytes": 2389907,
+  "master_height": 10524,
+  "master_width": 7104,
+  "web": "/assets/web/case-a-engine-comparison.png",
+  "web_bytes": 692318,
+  "width": 1600
+ },
  "case-a-layout.png": {
   "height": 1764,
   "master": "/assets/figures/case-a-layout.png",
@@ -7,6 +17,16 @@
   "master_width": 9120,
   "web": "/assets/web/case-a-layout.png",
   "web_bytes": 311967,
+  "width": 1600
+ },
+ "case-a-ml-agreement.png": {
+  "height": 1067,
+  "master": "/assets/figures/case-a-ml-agreement.png",
+  "master_bytes": 801120,
+  "master_height": 5232,
+  "master_width": 7848,
+  "web": "/assets/web/case-a-ml-agreement.png",
+  "web_bytes": 185650,
   "width": 1600
  },
  "case-a-openfoam-agreement.png": {
@@ -39,6 +59,16 @@
   "web_bytes": 67550,
   "width": 1600
  },
+ "case-b-engine-comparison.png": {
+  "height": 2339,
+  "master": "/assets/figures/case-b-engine-comparison.png",
+  "master_bytes": 2692865,
+  "master_height": 10524,
+  "master_width": 7200,
+  "web": "/assets/web/case-b-engine-comparison.png",
+  "web_bytes": 753849,
+  "width": 1600
+ },
  "case-b-layout.png": {
   "height": 1766,
   "master": "/assets/figures/case-b-layout.png",
@@ -47,6 +77,16 @@
   "master_width": 9120,
   "web": "/assets/web/case-b-layout.png",
   "web_bytes": 283246,
+  "width": 1600
+ },
+ "case-b-ml-agreement.png": {
+  "height": 1097,
+  "master": "/assets/figures/case-b-ml-agreement.png",
+  "master_bytes": 939260,
+  "master_height": 5232,
+  "master_width": 7632,
+  "web": "/assets/web/case-b-ml-agreement.png",
+  "web_bytes": 212714,
   "width": 1600
  },
  "case-b-openfoam-agreement.png": {
@@ -119,6 +159,16 @@
   "web_bytes": 431925,
   "width": 1600
  },
+ "case-c-ml-agreement.png": {
+  "height": 985,
+  "master": "/assets/figures/case-c-ml-agreement.png",
+  "master_bytes": 2132643,
+  "master_height": 5232,
+  "master_width": 8496,
+  "web": "/assets/web/case-c-ml-agreement.png",
+  "web_bytes": 338228,
+  "width": 1600
+ },
  "case-c-openfoam-agreement.png": {
   "height": 1631,
   "master": "/assets/figures/case-c-openfoam-agreement.png",
@@ -147,6 +197,16 @@
   "master_width": 9120,
   "web": "/assets/web/case-d-layout.png",
   "web_bytes": 530777,
+  "width": 1600
+ },
+ "case-d-ml-agreement.png": {
+  "height": 1150,
+  "master": "/assets/figures/case-d-ml-agreement.png",
+  "master_bytes": 952099,
+  "master_height": 5280,
+  "master_width": 7344,
+  "web": "/assets/web/case-d-ml-agreement.png",
+  "web_bytes": 248843,
   "width": 1600
  },
  "case-d-openfoam-agreement.png": {
@@ -197,6 +257,16 @@
   "master_width": 9120,
   "web": "/assets/web/case-e-layout.png",
   "web_bytes": 533874,
+  "width": 1600
+ },
+ "case-e-ml-agreement.png": {
+  "height": 872,
+  "master": "/assets/figures/case-e-ml-agreement.png",
+  "master_bytes": 1945007,
+  "master_height": 5232,
+  "master_width": 9600,
+  "web": "/assets/web/case-e-ml-agreement.png",
+  "web_bytes": 244898,
   "width": 1600
  },
  "case-e-openfoam-agreement.png": {
@@ -269,6 +339,16 @@
   "web_bytes": 230726,
   "width": 1600
  },
+ "case-g-openfoam-profiles.png": {
+  "height": 1520,
+  "master": "/assets/figures/case-g-openfoam-profiles.png",
+  "master_bytes": 627813,
+  "master_height": 5916,
+  "master_width": 6228,
+  "web": "/assets/web/case-g-openfoam-profiles.png",
+  "web_bytes": 225118,
+  "width": 1600
+ },
  "case-g-openfoam-stations.png": {
   "height": 698,
   "master": "/assets/figures/case-g-openfoam-stations.png",
@@ -319,6 +399,16 @@
   "web_bytes": 312370,
   "width": 1600
  },
+ "case-h-openfoam-profiles.png": {
+  "height": 1406,
+  "master": "/assets/figures/case-h-openfoam-profiles.png",
+  "master_bytes": 748155,
+  "master_height": 5916,
+  "master_width": 6732,
+  "web": "/assets/web/case-h-openfoam-profiles.png",
+  "web_bytes": 255050,
+  "width": 1600
+ },
  "case-h.png": {
   "height": 800,
   "master": "/assets/geometry/case-h.png",
@@ -359,6 +449,16 @@
   "web_bytes": 709412,
   "width": 1600
  },
+ "case-i-openfoam-profiles.png": {
+  "height": 1426,
+  "master": "/assets/figures/case-i-openfoam-profiles.png",
+  "master_bytes": 718070,
+  "master_height": 5916,
+  "master_width": 6636,
+  "web": "/assets/web/case-i-openfoam-profiles.png",
+  "web_bytes": 246174,
+  "width": 1600
+ },
  "case-i.png": {
   "height": 800,
   "master": "/assets/geometry/case-i.png",
@@ -377,6 +477,16 @@
   "master_width": 9120,
   "web": "/assets/web/case-j-layout.png",
   "web_bytes": 369173,
+  "width": 1600
+ },
+ "case-j-openfoam-profiles.png": {
+  "height": 1414,
+  "master": "/assets/figures/case-j-openfoam-profiles.png",
+  "master_bytes": 778460,
+  "master_height": 5916,
+  "master_width": 6696,
+  "web": "/assets/web/case-j-openfoam-profiles.png",
+  "web_bytes": 267217,
   "width": 1600
  },
  "case-j-umf-agreement.png": {
@@ -429,6 +539,16 @@
   "web_bytes": 318683,
   "width": 1600
  },
+ "case-k-openfoam-profiles.png": {
+  "height": 1406,
+  "master": "/assets/figures/case-k-openfoam-profiles.png",
+  "master_bytes": 737521,
+  "master_height": 5916,
+  "master_width": 6732,
+  "web": "/assets/web/case-k-openfoam-profiles.png",
+  "web_bytes": 238758,
+  "width": 1600
+ },
  "case-k.png": {
   "height": 800,
   "master": "/assets/geometry/case-k.png",
@@ -447,6 +567,16 @@
   "master_width": 9120,
   "web": "/assets/web/case-l-layout.png",
   "web_bytes": 258008,
+  "width": 1600
+ },
+ "case-l-openfoam-profiles.png": {
+  "height": 1411,
+  "master": "/assets/figures/case-l-openfoam-profiles.png",
+  "master_bytes": 661248,
+  "master_height": 5916,
+  "master_width": 6708,
+  "web": "/assets/web/case-l-openfoam-profiles.png",
+  "web_bytes": 219705,
   "width": 1600
  },
  "case-l-umf-agreement.png": {
@@ -507,26 +637,6 @@
   "master_width": 9600,
   "web": "/assets/web/case-m.png",
   "web_bytes": 274959,
-  "width": 1600
- },
- "cases-ab-engine-comparison.png": {
-  "height": 1190,
-  "master": "/assets/figures/cases-ab-engine-comparison.png",
-  "master_bytes": 5097167,
-  "master_height": 9468,
-  "master_width": 12732,
-  "web": "/assets/web/cases-ab-engine-comparison.png",
-  "web_bytes": 626049,
-  "width": 1600
- },
- "ml-surrogate-agreement.png": {
-  "height": 1253,
-  "master": "/assets/figures/ml-surrogate-agreement.png",
-  "master_bytes": 5447035,
-  "master_height": 8232,
-  "master_width": 10512,
-  "web": "/assets/web/ml-surrogate-agreement.png",
-  "web_bytes": 656315,
   "width": 1600
  }
 }

@@ -1,8 +1,8 @@
 """Validation figure for the Eddy3D ML wind surrogate (Yel-2.0) against AIJ UWE Cases A-E.
 
-  figures/ml-surrogate-agreement.png
+  figures/case-{a..e}-ml-agreement.png
       Does the surrogate agree with the tunnel?  Measured against predicted pedestrian-height speed, one
-      panel per case, with the 1:1 line and the factor-of-two band.
+      figure per case, with the 1:1 line and the factor-of-two band.
 
 The model predicts |U_mean|/U_ref at one height (1.8 m), so each tunnel case was scaled until its
 measurement plane sits there (A x180, B x144, C x90, D x360, E x0.9) and the prediction was read at
@@ -78,9 +78,10 @@ if os.path.isdir(VAL):
     snapshot()
 
 style.apply()
-fig, axs = uplt.subplots([[1, 2, 3], [4, 5, 0]], refwidth=2.4, refaspect=1, share=False, wspace=3.0, hspace=5.0)
-for i, (case, title, key) in enumerate(PANELS):
-    ax = axs[i]
+# One figure per case, so each case's Validation page shows its own points only.
+for case, title, key in PANELS:
+    fig, axs = uplt.subplots(nrows=1, ncols=1, refwidth=2.8, refaspect=1, share=False)
+    ax = axs[0]
     o, p = pairs(case)
     m = metrics(o, p)
     if key:   # the fixture's own numbers must be what this figure says
@@ -94,11 +95,9 @@ for i, (case, title, key) in enumerate(PANELS):
     ax.scatter(o, p, s=10 if len(o) > 500 else 18, color=style.ML, edgecolor=style.SURFACE, linewidth=0.3,
                alpha=0.85, zorder=3)
     style.stats(ax, f"R {m['R']:+.2f}\nFAC2 {m['Fac2']:.2f}\nFB {m['Fb']:+.2f}\nn {m['Count']}")
-    ax.format(xlim=(lo, hi), ylim=(lo, hi), xlabel="Tunnel [–]", ylabel="ML surrogate [–]" if i in (0, 3) else None,
-              title=title)
+    ax.format(xlim=(lo, hi), ylim=(lo, hi), xlabel="Tunnel [–]", ylabel="ML surrogate [–]")
     print(f"{case}: n={m['Count']} FB={m['Fb']:+.3f} FAC2={m['Fac2']:.3f} R={m['R']:+.3f} q={m['HitRate']:.3f}")
-
-style.finish(fig, "AIJ UWE benchmark — Eddy3D ML wind surrogate (Yel-2.0) vs wind tunnel, pedestrian height",
-             handles=[style.marker(style.ML, "ML surrogate (Yel-2.0)"), style.line(style.REFERENCE, "1:1", lw=1.0),
-                      style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")])
-style.save(fig, "ml-surrogate-agreement.png")
+    style.finish(fig, f"AIJ UWE {title} — Eddy3D ML wind surrogate (Yel-2.0)",
+                 handles=[style.marker(style.ML, "ML surrogate (Yel-2.0)"), style.line(style.REFERENCE, "1:1", lw=1.0),
+                          style.line(style.REFERENCE, "factor of two", lw=0.8, ls=":")], ncols=1)
+    style.save(fig, f"case-{case.lower()}-ml-agreement.png")

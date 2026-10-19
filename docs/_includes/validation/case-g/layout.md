@@ -1,0 +1,1 @@
+{% include figure.html name="case-g-layout.png" alt="Measurement lines and planes, Case G" caption="<strong>Figure 1.</strong> Case G, measurement lines and planes: A to G vertical profiles, $$x/H = 0.25,\thinspace 0.5,\thinspace 1,\thinspace 2,\thinspace 3,\thinspace 4,\thinspace 5$$. Positions in multiples of $$H$$." %}

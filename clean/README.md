@@ -76,6 +76,7 @@ of a case before its numbers (section 4).
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -225,6 +226,7 @@ m.query("campaign == 'field' and abs(wind_direction_deg - 180) <= 5").groupby("p
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -267,7 +269,7 @@ m.query("campaign == 'field' and abs(wind_direction_deg - 180) <= 5").groupby("p
 **B**
 
 - Coordinates are **millimetres** in `RS_caseB.csv` (`x[mm]`) while velocities are m/s. Converted to metres here. Read as metres, every probe lands 1000× too far out.
-- **The published $$V$$ is positive toward $$-y$$** ($$V$$ = +3.630 just outside the $$y = -100\thinspace\mathrm{mm}$$ flank where the flow must deflect outward; Case A reads −2.893 there). Flipped here so $$V$$ is positive toward $$+y$$ like A and D. Scored without the flip, B's $$V$$ anti-correlates with a model at $$R \approx -0.9$$.
+- **The published $$V$$ is positive toward $$-y$$** ($$V$$ = +3.630 just outside the $$y = -100\thinspace\mathrm{mm}$$ side face where the flow must deflect outward; Case A reads −2.893 there). Flipped here so $$V$$ is positive toward $$+y$$ like A and D. Scored without the flip, B's $$V$$ anti-correlates with a model at $$R \approx -0.9$$.
 - **Seven locations were measured twice**: the foot of each vertical-section profile (points 12, 43, 56, 69, 82, 95, 108 at $$z = 12.5\thinspace\mathrm{mm}$$, $$y = 0$$) and the horizontal plane's centreline (110, 147, 160, 173, 186, 199, 212). Both rows are kept under their own point numbers; $$\lvert\Delta U\rvert$$ is 0.05–0.14 m/s (mean 0.105), a free repeatability estimate. Do not key on coordinates.
 
 **C**
@@ -354,7 +356,7 @@ m.query("campaign == 'field' and abs(wind_direction_deg - 180) <= 5").groupby("p
 **H**
 
 - **Two sources, one released.** The table carries the workbook's ratios × $$u_H$$ = 3.226 m/s, not `RS_caseH.csv`'s values: on the $$z/H = 1/2\text{ and }1/4$$ planes (and in the approach profile) the CSV's $$U$$, $$V$$, $$W$$ are the ratios rounded to 0.01 then scaled, a 0.032 m/s grid (632 values off by more than the 2 dp rounding, up to 0.021 m/s).
-- **$$V$$ on the vertical plane has the opposite sign** to the horizontal planes at all 40 shared points (exactly); 207 velocity rows of point numbers 1-220 are multiplied by -1 so $$V$$ is positive toward $$+y$$, the horizontal planes' convention (upwind flank check, r = +0.66 continuity with the neighbours). Case B's trap again.
+- **$$V$$ on the vertical plane has the opposite sign** to the horizontal planes at all 40 shared points (exactly); 207 velocity rows of point numbers 1-220 are multiplied by -1 so $$V$$ is positive toward $$+y$$, the horizontal planes' convention (upwind side face check, r = +0.66 continuity with the neighbours). Case B's trap again.
 - **-999.9 is not the building interior**: it marks the line a probe was not run on. Velocity was measured on $$x = 0.40\thinspace\mathrm{m}$$ and concentration on $$x = 0.38\thinspace\mathrm{m}$$ (50 points each way); no point is inside the body.
 - 29 workbook rows (the $$y = 0$$ centre-line repeats of two horizontal planes) are not in the CSV; the $$y = 0$$, $$z = 0.1\thinspace\mathrm{m}$$ line IS, twice, as exact copies once $$V$$ is aligned (13 + 13 values double-counted, not independent repeats).
 - Concentration carries the analyser's offset: upwind of the building it reads ±0.1 ppm and 97 of 826 values are negative (minimum -0.83 ppm). Geometric statistics of the concentration need a floor.
@@ -363,7 +365,6 @@ m.query("campaign == 'field' and abs(wind_direction_deg - 180) <= 5").groupby("p
 
 **I**
 
-- **Two files, two point sets, no numbers**: stacked, one row per instrument, wind rows 1-91, concentration rows 92-630. 17 locations have both.
 - **$$V$$ on the $$y = 0$$ plane is not a measurement**: 1e-9 ... 4e-6 m/s in the workbook (0 in the CSV) at 53 of 91 points, against 0.02-0.39 m/s elsewhere; NaN here.
 - **$$c_0$$ = 39.2 ppm needs the ethane flow** (10 % of 400 cc/min = 6.67e-7 m³/s); the paper's "6.67e-6 m³/s" is the mixture and would give 392 ppm. The release velocity gives M = 0.139 (stated 0.14). The far-field mass balance closes at 1.16 of the release at $$x = 2.7\thinspace\mathrm{m}$$ (the separable estimate overshoots; 3.6 at the first station).
 - The workbook uses $$U_H$$ = 1.7 m/s for the points and 1.697 m/s for the approach flow; the approach profile is within 4.6 % of the 1/7 power law but its best index is 0.115.
@@ -382,7 +383,7 @@ m.query("campaign == 'field' and abs(wind_direction_deg - 180) <= 5").groupby("p
 - **The empty-tunnel profile changes along the tunnel:** $$U$$ at $$z = 0.019\thinspace H$$ is 0.33 $$U_H$$ at $$x/H = -2.5$$ (the published `AF_caseJ.csv`), 0.58 at $$x/H = 0\text{ and }0.50$$ at +2.5; at $$z = H$$ it is 1.00, 1.03, 1.04. The workbook has all three (`cases/J/approach_flow_full.csv`).
 - The readme's Reynolds number 43,000 is Case H's (3.23 m/s × 0.2 m); $$U_H$$ H / ν = $$1.6 \cdot 10^{4}$$ as the data paper says.
 - The readme's `T_b = 285.32 K` is the approach-flow air temperature at $$z = H$$ (workbook $$\theta_H$$ = 12.17 °C), not the building, whose measured surface (121 points, `BD-ST_caseJ.csv`) averages 24.47 °C (22.0 – 28.9 °C).
-- No shear stresses at the points (only the approach flow has $$\overline{u'v'}$$, $$\overline{u'w'}$$); the lateral sign of $$V$$ is confirmed ($$V$$ < 0 on the windward y < 0 flank, > 0 behind).
+- No shear stresses at the points (only the approach flow has $$\overline{u'v'}$$, $$\overline{u'w'}$$); the lateral sign of $$V$$ is confirmed ($$V$$ < 0 on the windward y < 0 side face, > 0 behind).
 
 **K**
 
@@ -491,6 +492,7 @@ speed; steady RANS gives the magnitude of the *mean* vector. A RANS $$\lvert\mat
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component

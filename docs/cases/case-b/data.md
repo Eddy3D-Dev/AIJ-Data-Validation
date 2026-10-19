@@ -109,7 +109,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 ## Known data issues
 
 - The published coordinates are MILLIMETRES (x\[mm\]) while velocities are m/s. The API serves metres (coordinate\_scale\_applied = 0.001). Read as metres, every probe lands 1000x too far out.
-- The published lateral velocity $$V$$ is positive toward -y ($$V$$ = +3.630 m/s at (-0.025, -0.110, 0.013), just outside the $$y \lt 0$$ flank where the flow must deflect toward -y). The API multiplies $$V$$ by -1 (lateral\_sign\_applied = -1) so that $$V$$ is positive toward $$+y$$ as in Case A. Scored without this, Case B\'s $$V$$ comes out at $$R = -0.910$$ against $$R = +0.959$$ for $$U$$ on the same points.
+- The published lateral velocity $$V$$ is positive toward -y ($$V$$ = +3.630 m/s at (-0.025, -0.110, 0.013), just outside the $$y \lt 0$$ side face where the flow must deflect toward -y). The API multiplies $$V$$ by -1 (lateral\_sign\_applied = -1) so that $$V$$ is positive toward $$+y$$ as in Case A. Scored without this, Case B\'s $$V$$ comes out at $$R = -0.910$$ against $$R = +0.959$$ for $$U$$ on the same points.
 - The RANS solution is symmetric, so model $$V$$ = 0 on the centre plane while the tunnel measures small non-zero values there.
 
 ## API

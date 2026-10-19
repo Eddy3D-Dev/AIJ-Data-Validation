@@ -48,7 +48,7 @@ The cleaned tables served by the API apply the corrections (units, signs, frames
 
 ## Case A
 
-- $$V$$ is positive toward $$+y$$ ($$V$$ = −2.893 m/s at (−0.040, −0.050, 0.010), just outside the $$y \lt 0$$ flank).
+- $$V$$ is positive toward $$+y$$ ($$V$$ = −2.893 m/s at (−0.040, −0.050, 0.010), just outside the $$y \lt 0$$ side face).
 - Coordinates are metres; turbulence columns are rms values. The API serves variances ($$\overline{u'u'}$$ = $$u_{\mathrm{rms}}^2$$) so A and B share
   one column meaning.
 
@@ -63,7 +63,7 @@ The cleaned tables served by the API apply the corrections (units, signs, frames
 <details markdown="block">
 <summary>Data notes: Cases A and B, sign of V and geometry source</summary>
 
-Just outside the windward side face the flow must deflect away from the centreline, toward $$-y$$ on the $$y \lt 0$$ flank.
+Just outside the windward side face the flow must deflect away from the centreline, toward $$-y$$ on the $$y \lt 0$$ side face.
 
 - Case A: $$V$$ = **−2.893 m/s** at (−0.040, −0.050, 0.010), edge at $$y = -0.04$$.
 - Case B: $$V$$ = **+3.630 m/s** at (−0.025, −0.110, 0.013), edge at $$y = -0.100$$.

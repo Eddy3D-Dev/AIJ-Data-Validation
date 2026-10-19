@@ -14,7 +14,7 @@ cleaned data and served by GitHub Pages. Plain HTTP GET, no keys, CORS-open (`Ac
 
 - Base URL, always the newest release: `https://eddy3d-dev.github.io/AIJ-Data-Validation/api`
 - One release, frozen: `https://eddy3d-dev.github.io/AIJ-Data-Validation/api/<release>`, for
-  example `.../api/3.1.0`. The files and paths are the same; see [Versions and pinning](#versions-and-pinning).
+  example `.../api/3.2.1`. The files and paths are the same; see [Versions and pinning](#versions-and-pinning).
 - Fallback, the same files raw from the repository: `https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/main/docs/api`
 - Machine-readable: [`/api/openapi.json`]({{ '/api/openapi.json' | relative_url }}) (OpenAPI 3.1), a JSON Schema for every
   document under [`/api/schemas/`]({{ '/api/schemas/case.schema.json' | relative_url }}), and the agent entry point
@@ -37,7 +37,7 @@ Every release of the data and API is kept as a frozen copy of the whole API unde
 | Address | What it serves | When it changes |
 |---|---|---|
 | `/api/versions.json` | every release, newest first: version, date, status, `schema_version`, `data_version`, `base_url`, tag, changelog | with each release |
-| `/api/<release>/...`, for example `/api/3.1.0/index.json` | exactly the files of that release | never, once the release is tagged |
+| `/api/<release>/...`, for example `/api/3.2.1/index.json` | exactly the files of that release | never, once the release is tagged |
 | `/api/...`, for example `/api/index.json` | the newest release (the **latest alias**) | with each release |
 
 A release's copy and the alias hold the same files at the same relative paths. They differ only in the address a
@@ -52,10 +52,10 @@ equals in `release_base_url`.
 
 ```bash
 LIVE=https://eddy3d-dev.github.io/AIJ-Data-Validation/api
-BASE=$LIVE/3.1.0            # pinned to release 3.1.0; $LIVE alone follows the newest release
+BASE=$LIVE/3.2.1            # pinned to release 3.2.1; $LIVE alone follows the newest release
 
-curl -s -A "aij-client/1.0" $BASE/index.json | jq '.versions'          # release 3.1.0, whatever is newer
-curl -s -A "aij-client/1.0" $BASE/cases/B.json | jq '.points.csv.url'  # .../api/3.1.0/cases/B/points.csv?v=...
+curl -s -A "aij-client/1.0" $BASE/index.json | jq '.versions'          # release 3.2.1, whatever is newer
+curl -s -A "aij-client/1.0" $BASE/cases/B.json | jq '.points.csv.url'  # .../api/3.2.1/cases/B/points.csv?v=...
 ```
 
 Cite the API with `cite.api` in `index.json` or the [About page]({{ '/about/#cite' | relative_url }}).
@@ -84,14 +84,6 @@ An address that names a base is one of four, depending on whether it is pinned a
 |---|---|---|
 | **Pinned** (never changes) | `release_base_url`; `base_url` inside a release's copy | `release.base_url`; `fallback_base_url` inside a release's copy |
 | **Latest** | `base_url` in the alias | `fallback_base_url` in the alias |
-
-Two limits. First, release 2.0.0 predates the layout and was not regenerated. Its copy `/api/2.0.0/` is the files of
-tag `v2.0.0` byte for byte, except that each file's own addresses are rewritten into the copy (and the sizes and
-hashes that `index.json` lists for the files that changed). `scripts/host_release.py` derives it from the tag, and
-`scripts/release.py check` derives it again and compares every byte. The raw files at the tag are the originals
-(`release.base_url` in that copy's `index.json`). Second, a release's copy freezes the API's files, not everything a
-document links to: the figures and geometry renders under `/assets/` and the repository links (`source_url`,
-`files_in_repository`, which point at `main`) are not part of the copy and can change later.
 
 ## Conventions
 

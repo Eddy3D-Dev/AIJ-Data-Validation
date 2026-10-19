@@ -86,6 +86,7 @@ site API (`clean/manifest.json` → `cases.<id>.files.points_csv`).
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -183,6 +184,7 @@ All five: right-handed, $$+z$$ up from the ground plane, origin on the ground. L
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -207,10 +209,10 @@ All five: right-handed, $$+z$$ up from the ground plane, origin on the ground. L
 
 <!--/nomenclature-->
 
-Why the sign flip on B: just outside the $$y \lt 0$$ flank the flow must deflect away from the centreline,
+Why the sign flip on B: just outside the $$y \lt 0$$ side face the flow must deflect away from the centreline,
 i.e. toward $$-y$$. Case A reads $$V$$ = −2.893 m/s there ((−0.040, −0.050, 0.010)); Case B reads
 **+3.630** at the same place ((−0.025, −0.110, 0.0125)); Case D's split fibre reads +2.055 on its $$+y$$
-flank. So B's published $$V$$ is positive toward $$-y$$ and is flipped so that $$V$$ is positive toward $$+y$$
+side face. So B's published $$V$$ is positive toward $$-y$$ and is flipped so that $$V$$ is positive toward $$+y$$
 everywhere (`checks.json`: `lateral_sign_*`). For a y-symmetric building "flip V" and "flip y" are
 the same transform; $$V$$ is flipped so the coordinates stay the drawing's.
 
@@ -280,6 +282,7 @@ row and measured counts, and `sense_basis` / `status` saying what fixes the rota
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -449,6 +452,7 @@ reference speed `U_R`, tracer flow `q` and `c0` have no column; they are in `man
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -549,6 +553,7 @@ every point is 3 m above the local ground (verified against the STL to ±0.06 m)
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -629,6 +634,7 @@ every point is 3 m above the local ground (verified against the STL to ±0.06 m)
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -720,6 +726,7 @@ Added with schema 2.0.0; the columns are the 36 of section 1, nothing new.
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -806,6 +813,7 @@ for G (`unverified`: the field wind's angle to the belt is not published).
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -895,6 +903,7 @@ for G (`unverified`: the field wind's angle to the belt is not published).
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -991,6 +1000,7 @@ velocity probe; temperature was read with a cold wire and concentration with a h
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -1016,7 +1026,7 @@ velocity probe; temperature was read with a cold wire and concentration with a h
 <!--/nomenclature-->
 
 All three: right-handed, $$+z$$ up from the (model) floor, lengths in metres. $$V$$ is carried as published ($$+y$$ by the frame); in
-J it is verified ($$V$$ < 0 beside the upstream half of the y < 0 flank, V > 0 in the wake), in K and L it is not
+J it is verified ($$V$$ < 0 beside the upstream half of the y < 0 side face, V > 0 in the wake), in K and L it is not
 verifiable: a cross-flow offset of about 0.06 m/s is larger than the antisymmetric part (`checks.json`,
 `lateral_velocity_is_an_offset_not_an_antisymmetric_field`).
 
@@ -1084,6 +1094,7 @@ differ from the square of the rms by up to 3 % in single rows and reproduce $$k$
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -1175,6 +1186,7 @@ column. The expanded uncertainty of J's workbook has no column either; it is sum
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -1259,6 +1271,7 @@ streamwise station (J: $$x = -0.4\thinspace\mathrm{m}$$, K: −0.493 m, L: −0.
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component

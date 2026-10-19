@@ -17,17 +17,31 @@ CI fails a change to the served files that does not move it by at least the leve
 
 ## [3.2.1] - 2026-10-19
 
-One page per case. Each case's Validation page carries its whole reading; no page reads two cases together.
+One page per case. Each case's Validation page carries every engine's results; no page reads two cases together.
 
 ### Changed
 
-- `/api/cases/{A,B,H,I}/validation.json`: the OpenFOAM 12 figures are drawn one per case, `case-{a,b}-openfoam-agreement.png`,
-  `case-{a,b}-openfoam-profiles.png` and `case-{h,i}-openfoam-agreement.png`, in place of the figures that drew Cases A and B,
-  and Cases H and I, together. The earlier figures stay served at their URLs for the releases that name them.
-- Site: the measurement layout, the figures and the interpretation of each case are on its own Validation page
-  (`/cases/case-x/validation/`). The pages that read two cases together (Cases A and B, F and M, G and K, H and I, J and L) and
-  the separate pages of Cases C, D and E are gone; their addresses redirect to the case's page. The Validation section keeps the
-  pages that span cases: the method, the inflow, OpenLB and FluidX3D, and the ML surrogate.
+- `/api/cases/{A..E}/validation.json` and `/api/cases/{H,I}/validation.json`: the figures are drawn one per case. OpenFOAM 12:
+  `case-{a,b}-openfoam-agreement.png`, `case-{a,b}-openfoam-profiles.png`, `case-{h,i}-openfoam-agreement.png`; every engine on the same
+  points: `case-{a,b}-engine-comparison.png`; ML surrogate: `case-{a..e}-ml-agreement.png`. They replace the figures that drew several
+  cases together, which stay served at their URLs for the releases that name them.
+- Site: each case's Validation page (`/cases/case-x/validation/`) has a table of contents, its measurement locations, then one section
+  per engine (OpenFOAM 12 or UMF, OpenLB, FluidX3D, ML surrogate) with that engine's reading, figures and scores, and ends with a
+  leaderboard that ranks every run on the case, Eddy3D's and the community's. The pages that read two cases together (Cases A and B,
+  F and M, G and K, H and I, J and L) and the separate pages of Cases C, D and E are gone; their addresses redirect to the case's page.
+  The Validation overview lists the cases; the OpenLB and FluidX3D and the ML surrogate pages describe the engines and link the cases.
+- Figures: vertical profiles of $$U/U_H$$ for Cases G to L (`case-{g..l}-openfoam-profiles.png`, validation/plot_profiles.py), as Cases A and B
+  have; served with those cases' runs.
+- Site: every table of scores gives $$R^2$$ beside $$R$$. On the site, urbanMicroclimateFoam (Cases J and L) is shown as OpenFOAM 12, which
+  it is, not as an engine of its own; the engine ids in the API are unchanged.
+- Case I: the stacking of its two point sets is described in the table's schema and is no longer listed as a known data issue.
+- Wording: "side face" or "side" for "flank", in the notes and in the names of three checks of `clean/checks.json`.
+
+### Removed
+
+- The frozen copies of releases 2.0.0 to 3.2.0 under `/api/<release>/`, and `scripts/host_release.py`. Nobody had pinned to them yet;
+  copies are kept from this release on (`/api/3.2.1/`), and `/api/versions.json` lists the releases that have one. The unversioned `/api/`
+  serves every file it served before.
 
 ## [3.2.0] - 2026-10-18
 

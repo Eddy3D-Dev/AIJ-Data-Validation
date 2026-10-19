@@ -4,6 +4,7 @@
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component

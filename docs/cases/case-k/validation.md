@@ -5,36 +5,51 @@ grand_parent: "Cases"
 nav_order: 2
 has_children: false
 generated: true
-description: "Case K — 9 x 9 cube array, point source: Eddy3D's scores against the measurements, by engine."
+description: "Case K — 9 x 9 cube array, point source: Eddy3D's scores against the measurements, engine by engine."
 ---
 
 # Case K: validation
 {: .no_toc }
 
+<details open markdown="block">
+  <summary>
+    Contents
+  </summary>
+  {: .text-delta }
+1. TOC
+{:toc}
+</details>
+
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
-{% include validation/case-k.md %}
+## Measurement locations
 
-## Scores, run by run
+{% include validation/case-k/layout.md %}
 
-### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor)
+## OpenFOAM 12
+
+Status: <span class="label label-green status">scored</span>
+
+{% include validation/case-k/openfoam.md %}
+
+### Scores
 
 Quantity: $$U$$, $$V$$, $$W$$ over the stated $$U_H$$ = 2.33 m/s and $$k$$ over $$U_H^2$$ (split fibre, 203 points); $$c^\ast = C/c_0$$ ($$c_0 = \dfrac{q}{U_H H^2}$$ = 429.2 ppm) against the model\'s $$c\thinspace U_H H^2/Q$$ for turbulent Schmidt numbers 0.3, 0.5 and 0.7; the four points within one cube height of the source are scored with and without.
 
-| Score | R | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|
-| $$U$$ | +0.958 | 0.586 | +0.594 | 0.123 | 203 |
-| $$V$$ | -0.151 | 0.054 | — | 0.901 | 203 |
-| $$W$$ | +0.573 | 0.143 | — | 0.685 | 203 |
-| $$k$$ | +0.330 | 0.044 | +1.201 | 0.005 | 203 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.3 | +0.953 | 0.793 | -0.690 | 0.458 | 203 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.5 | +0.951 | 0.685 | -0.875 | 0.163 | 203 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7 | +0.950 | 0.394 | -0.983 | 0.099 | 203 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.3, without the 4 near-source points | +0.923 | 0.799 | -0.218 | 0.467 | 199 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.5, without the 4 near-source points | +0.941 | 0.698 | -0.430 | 0.161 | 199 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7, without the 4 near-source points | +0.923 | 0.402 | -0.561 | 0.101 | 199 |
-| $$U$$, y-symmetric ceiling (control) | +1.000 | 1.000 | +0.000 | 1.000 | 203 |
-| $$c^\ast$$, y-symmetric ceiling (control) | +0.997 | 0.995 | +0.000 | 0.793 | 203 |
+| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
+|---|---|---|---|---|---|---|
+| $$U$$ | +0.958 | 0.917 | 0.586 | +0.594 | 0.123 | 203 |
+| $$V$$ | -0.151 | 0.023 | 0.054 | — | 0.901 | 203 |
+| $$W$$ | +0.573 | 0.329 | 0.143 | — | 0.685 | 203 |
+| $$k$$ | +0.330 | 0.109 | 0.044 | +1.201 | 0.005 | 203 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.3 | +0.953 | 0.908 | 0.793 | -0.690 | 0.458 | 203 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.5 | +0.951 | 0.905 | 0.685 | -0.875 | 0.163 | 203 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7 | +0.950 | 0.903 | 0.394 | -0.983 | 0.099 | 203 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.3, without the 4 near-source points | +0.923 | 0.853 | 0.799 | -0.218 | 0.467 | 199 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.5, without the 4 near-source points | +0.941 | 0.886 | 0.698 | -0.430 | 0.161 | 199 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7, without the 4 near-source points | +0.923 | 0.851 | 0.402 | -0.561 | 0.101 | 199 |
+| $$U$$, y-symmetric ceiling (control) | +1.000 | 1.000 | 1.000 | +0.000 | 1.000 | 203 |
+| $$c^\ast$$, y-symmetric ceiling (control) | +0.997 | 0.994 | 0.995 | +0.000 | 0.793 | 203 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
@@ -61,9 +76,26 @@ The modelled velocity sits under the measured mean. The y-symmetric ceiling is t
 
 </details>
 
+## Not run
+
+{% include validation/case-k/not-run.md %}
+
 <details markdown="block">
   <summary>How the scores are computed</summary>
 
 - Scores recomputed from the pairs by validation/dispersion\_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`.
 
 </details>
+
+## Leaderboard
+
+| Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate, $$k$$ | Hit rate, $$c^\ast$$ | Hit rate | FAC2 | R | $$R^2$$ | Points scored |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.3 | Eddy3D | **0.123** | **0.901** | **0.685** | **0.084** | **0.005** | **0.458** | **0.376** | **0.363** | **+0.602** | **0.530** | 100 % |
+| 2 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | **0.123** | **0.901** | **0.685** | **0.084** | **0.005** | 0.163 | 0.327 | 0.345 | **+0.601** | **0.530** | 100 % |
+| 3 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | **0.123** | **0.901** | **0.685** | **0.084** | **0.005** | 0.099 | 0.316 | 0.296 | **+0.601** | 0.530 | 100 % |
+{: .scores }
+
+{% include nomenclature-scores.md %}
+
+Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. *Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

@@ -31,7 +31,7 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 
 {% include nomenclature.md %}
 
-## Case A: Case A — 1:1:2 building
+## Case A — 1:1:2 building
 
 | Score | R | FAC2 | FB | Hit rate | n | coverage |
 |---|---|---|---|---|---|---|

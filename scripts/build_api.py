@@ -29,9 +29,8 @@ The API is served twice, by the same code. Each release is a frozen copy of the 
 (<release> is VERSION), every URL inside it pointing back into it; docs/api/ itself is the latest alias, the same
 files addressed without the release. docs/api/versions.json, the one file that belongs to neither, lists every
 release. A build rewrites the copy of VERSION and the alias and never touches another release's copy (released
-copies are immutable: scripts/release.py check compares them with their tags). A release from before the layout
-(LEGACY_RELEASES) is not regenerated. verify() checks every tree on its own, that the alias is the newest release
-file for file, and the registry.
+copies are immutable: scripts/release.py check compares them with their tags). Copies are kept from release 3.2.1
+on. verify() checks every tree on its own, that the alias is the newest release file for file, and the registry.
 """
 from __future__ import annotations
 
@@ -92,13 +91,6 @@ RELEASE_DATE = R.release_date()
 PINNED_BASE = f"{LIVE_BASE}/{RELEASE}"   # this release, frozen: nothing under it changes once the release is tagged
 RELEASE_BASE = f"{RAW_BASE.replace('/main/', f'/v{RELEASE}/')}/{RELEASE}"   # the same frozen files, raw, at the tag
 
-# Releases that predate the versioned layout. They are never regenerated. Their tree under docs/api/<release>/ is
-# the tag's files with only their addresses rewritten (scripts/host_release.py); without one, the registry lists the
-# tag and its raw files instead. Both values are the ones the release's own docs/api/index.json carries
-# (git show v2.0.0:docs/api/index.json).
-LEGACY_RELEASES = {
-    "2.0.0": {"schema_version": "2.2.0", "data_version": "5af8c81571e452c1925b3efe58c698908066f64886eba5efd9b2f0348ecdc019"},
-}
 
 # State of the tree being written (see use_tree): build() writes the release tree, then the latest alias.
 TREE = None              # "release" | "latest"
@@ -266,7 +258,14 @@ def case_engines(case):
     return [e for e in ENGINES if e["id"] in ENGINE_STATUS[case]]
 
 
-MATRIX_ENGINES = [e for e in ENGINES if e["id"] not in CLOSURE_VARIANTS]
+MATRIX_ENGINES = [e for e in ENGINES if e["id"] not in CLOSURE_VARIANTS and not e["id"].startswith("umf-")]
+
+
+def site_status(case):
+    """ENGINE_STATUS as the site shows it: urbanMicroclimateFoam is an OpenFOAM 12 solver, so on J and L, where it is the
+    engine that ran, the isothermal OpenFOAM 12 solver it stands in for is not listed beside it."""
+    st = ENGINE_STATUS[case]
+    return {k: v for k, v in st.items() if not (k == "openfoam12-realizableKE" and any(i.startswith("umf-") for i in st))}
 
 # ----------------------------------------------------------------------------- runs
 # Every validation run snapshotted in validation/results/: its case, engine and configuration, the scores
@@ -315,7 +314,7 @@ RUNS = [
     *[run(c, "openlb", None, f"case{c}_openlb.json",
           {"U": "velocity.U", "U, points ≥ 2 dx": "velocity.U.aboveTwoCells", "V": "velocity.V", "W": "velocity.W",
            "k (resolved)": "k.resolved", "V, lateral sign flipped (control)": "control.V.lateralSignFlipped"},
-          ["cases-ab-engine-comparison.png"],
+          [f"case-{c.lower()}-engine-comparison.png"],
           f"Eddy3D fixture TestAijCase{c}OpenLbContainerE2E (OpenLB eddy3dWind, CPU image, dx = 1.6 m); "
           "figure validation/plot_cases_ab_engines.py", f"case{c}_openlb_pairs.csv", PAIRS_AB) for c in ("A", "B")],
     # FluidX3D is scored on the heights where its own empty-domain control holds the imposed log law within 5 %
@@ -326,7 +325,7 @@ RUNS = [
            **({"V, comparable heights": "velocity.V.comparable"} if c == "A" else {}),
            "W, comparable heights": "velocity.W.comparable", "U, all points": "velocity.U.all",
            "U, approach flow alone (control)": "negativeControl.noBuilding.components.U.control"},
-          ["cases-ab-engine-comparison.png"],
+          [f"case-{c.lower()}-engine-comparison.png"],
           f"Eddy3D fixture TestAijCase{c}FluidX3DE2E (Eddy3DCli.Tests/Validation/TestAijVelocityFluidX3DE2E; FluidX3D "
           f"GPU lattice Boltzmann, D3Q19 Smagorinsky LES, dx = H/64, {'40 + 200' if c == 'A' else '100 + 500'} H/U_H "
           "spin-up + averaging, with an empty-domain control on the same lattice); figure validation/plot_cases_ab_engines.py",
@@ -357,28 +356,28 @@ RUNS = [
     run("A", "ml-surrogate", None, "caseA_ml.json",
         {"|U| (z = 0.01 m plane)": "speed.vectorMagnitude", "|U|, lattice cut at ±250 m": "halfExtent250.forward",
          "wind reversed (control)": "negativeControl.reversedWind"},
-        ["ml-surrogate-agreement.png"], _ML_REPRO, "caseA_ml_pairs.csv", PAIRS_ML),
+        ["case-a-ml-agreement.png"], _ML_REPRO, "caseA_ml_pairs.csv", PAIRS_ML),
     run("B", "ml-surrogate", None, "caseB_ml.json",
         {"|U| (z = H/16 plane)": "speed.vectorMagnitude", "|U|, lattice cut at ±250 m": "halfExtent250.forward",
          "wind reversed (control)": "negativeControl.reversedWind"},
-        ["ml-surrogate-agreement.png"], _ML_REPRO, "caseB_ml_pairs.csv", PAIRS_ML),
+        ["case-b-ml-agreement.png"], _ML_REPRO, "caseB_ml_pairs.csv", PAIRS_ML),
     run("C", "ml-surrogate", None, "caseC_ml.json",
         {"Vs, 9 configurations": "speed.thermistor", "Vs, 2D WD 0, lattice cut at ±250 m": "halfExtent250.forward",
          "wind reversed (control)": "negativeControl.reversedWind"},
-        ["ml-surrogate-agreement.png"], _ML_REPRO, "caseC_ml_pairs.csv", PAIRS_ML),
+        ["case-c-ml-agreement.png"], _ML_REPRO, "caseC_ml_pairs.csv", PAIRS_ML),
     run("D", "ml-surrogate", None, "caseD_ml.json",
         {"Vs, thermistor, 3 WD": "speed.thermistor", "|U|, split fibre, WD 0": "speed.vectorMagnitude",
          "Vs, WD 0, lattice cut at ±250 m": "halfExtent250.forward", "wind reversed (control)": "negativeControl.reversedWind"},
-        ["ml-surrogate-agreement.png"], _ML_REPRO, "caseD_ml_pairs.csv", PAIRS_ML),
+        ["case-d-ml-agreement.png"], _ML_REPRO, "caseD_ml_pairs.csv", PAIRS_ML),
     run("E", "ml-surrogate", None, "caseE_ml.json",
         {"Vs/U(15.9 m), 16 WD, bc + ac": "speed.thermistor", "after construction": "speed.thermistor.after",
          "after − before": "delta.afterMinusBefore", "after, lattice cut at ±250 m": "halfExtent250.forward",
          "wind reversed (control)": "negativeControl.reversedWind"},
-        ["ml-surrogate-agreement.png"], _ML_REPRO, "caseE_ml_pairs.csv", PAIRS_ML),
+        ["case-e-ml-agreement.png"], _ML_REPRO, "caseE_ml_pairs.csv", PAIRS_ML),
     # Cases H and I (Eddy3D's solves, scored against the cleaned tables): the closures other than realizable k-epsilon are separate engine ids
-    run("H", "openfoam12-realizableKE", None, "caseH_openfoam12_realizableKE.json", _HI_HEADLINE, ["case-h-layout.png", "case-h-openfoam-agreement.png"],
+    run("H", "openfoam12-realizableKE", None, "caseH_openfoam12_realizableKE.json", _HI_HEADLINE, ["case-h-layout.png", "case-h-openfoam-agreement.png", "case-h-openfoam-profiles.png"],
         _HI_REPRO.format(fixture="TestAijCaseHContainerE2E (realizable k-ε, 1:100)"), "caseH_openfoam12_realizableKE_pairs.csv", PAIRS_H),
-    run("I", "openfoam12-realizableKE", None, "caseI_openfoam12_realizableKE.json", _HI_HEADLINE, ["case-i-layout.png", "case-i-openfoam-agreement.png", "case-i-openfoam-closures.png"],
+    run("I", "openfoam12-realizableKE", None, "caseI_openfoam12_realizableKE.json", _HI_HEADLINE, ["case-i-layout.png", "case-i-openfoam-agreement.png", "case-i-openfoam-profiles.png", "case-i-openfoam-closures.png"],
         _HI_REPRO.format(fixture="TestAijCubeContainerE2E (realizable k-ε, 1:60)"), "caseI_openfoam12_realizableKE_pairs.csv", PAIRS_I),
     run("I", "openfoam12-kEpsilon", None, "caseI_openfoam12_kEpsilon.json", _HI_HEADLINE, ["case-i-openfoam-closures.png"],
         _HI_REPRO.format(fixture="TestAijCubeContainerE2E (standard k-ε, 1:60)"), "caseI_openfoam12_kEpsilon_pairs.csv", PAIRS_I),
@@ -510,19 +509,19 @@ _L_NOTES = [
     "cools with height; the street flow is slower than the flow above the array; every species emits and its largest value is in the source street.",
 ]
 RUNS += [
-    run("K", "openfoam12-realizableKE", None, "caseK_openfoam12_realizableKE.json", _K_HEADLINE, ["case-k-layout.png", "case-k-openfoam-agreement.png"],
+    run("K", "openfoam12-realizableKE", None, "caseK_openfoam12_realizableKE.json", _K_HEADLINE, ["case-k-layout.png", "case-k-openfoam-agreement.png", "case-k-openfoam-profiles.png"],
         _KG_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseKContainerE2E", what="9 x 9 cubes, floor point source, 1:100", cells="972,637"), "caseK_openfoam12_realizableKE_pairs.csv", PAIRS_K,
         normalisation=_K_NORM, notes=_K_NOTES),
     *[run("G", "openfoam12-realizableKE", arm, f"caseG_openfoam12_realizableKE_{arm}.json",
           {f"|U|/U(7 m){sfx}": "score.U.ownApproach", f"√(|U|²+2k)/U(7 m){sfx}": "score.rms.ownApproach", f"k/U(7 m)²{sfx}": "score.k.ownApproach",
            f"|U|/U_H, imposed{sfx}": "score.U.imposedUH", f"√(|U|²+2k)/U_H, imposed{sfx}": "score.rms.imposedUH"},
-          ["case-g-layout.png", "case-g-openfoam-sweep.png", "case-g-openfoam-stations.png"],
+          ["case-g-layout.png", "case-g-openfoam-sweep.png", "case-g-openfoam-stations.png", "case-g-openfoam-profiles.png"],
           _KG_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseGContainerE2E", what=f"arm: {what}, full scale", cells=f"{cells:,}"), "caseG_openfoam12_realizableKE_pairs.csv", PAIRS_G,
           normalisation=_G_NORM, notes=_G_NOTES) for arm, what, cells, sfx in _G_ARMS],
-    *[run("J", f"umf-{closure}", None, f"caseJ_umf_{closure}.json", _J_HEADLINE, ["case-j-layout.png", "case-j-umf-agreement.png", "case-j-umf-tracer.png"],
+    *[run("J", f"umf-{closure}", None, f"caseJ_umf_{closure}.json", _J_HEADLINE, ["case-j-layout.png", "case-j-umf-agreement.png", "case-j-umf-tracer.png", "case-j-openfoam-profiles.png"],
           _JL_REPRO.format(fixture="MetaFOAM.Lib.Tests/TestAijCaseJUmfContainerE2E", what="1:1:2 building, heated floor, floor point source", closure=_J_CLOSURES[closure][0], cells="236,408", scale="62.5"),
           f"caseJ_umf_{closure}_pairs.csv", PAIRS_J, normalisation=_J_NORM, notes=_j_notes(closure)) for closure in _J_CLOSURES],
-    run("L", "umf-realizableKE", None, "caseL_umf_realizableKE.json", _L_HEADLINE, ["case-l-layout.png", "case-l-umf-agreement.png"],
+    run("L", "umf-realizableKE", None, "caseL_umf_realizableKE.json", _L_HEADLINE, ["case-l-layout.png", "case-l-umf-agreement.png", "case-l-openfoam-profiles.png"],
         _JL_REPRO.format(fixture="MetaFOAM.Lib.Tests/TestAijCaseLUmfContainerE2E", what="9 x 14 cubes, heated floor, floor line source", closure="realizable k-ε", cells="754,940", scale="100"),
         "caseL_umf_realizableKE_pairs.csv", PAIRS_L, normalisation=_L_NORM, notes=_L_NOTES),
 ]
@@ -666,6 +665,11 @@ RUNS += [
 FIGURE_CAPTIONS = {
     **{f"case-{c.lower()}-openfoam-agreement.png": (f"Case {c}, OpenFOAM 12 (realizable k-ε): measured against modelled U, V, W and k at "
                                                      "every measured point, normalised by U_H, with the 1:1 line and the factor-of-two band.") for c in "AB"},
+    **{f"case-{c.lower()}-openfoam-profiles.png": (f"Case {c}, OpenFOAM 12{m}: vertical profiles of U/U_H on the centre plane y = 0 at up to four "
+                                                    "stations along the measured lines, measured points against the modelled line, offset by 1 per station.")
+       for c, m in (("H", ""), ("I", ", realizable k-ε"), ("J", " (urbanMicroclimateFoam), realizable k-ε"), ("K", ""), ("L", " (urbanMicroclimateFoam)"))},
+    "case-g-openfoam-profiles.png": ("Case G, OpenFOAM 12, conifer crown of the drag sweep: the field's U/U_H against the modelled |U| over the model's own "
+                                     "U(7 m) at four of the seven masts behind the belt, offset by 1 per mast."),
     **{f"case-{c.lower()}-openfoam-profiles.png": (f"Case {c}, OpenFOAM 12: centre-plane vertical profiles of U/U_H at the measurement "
                                                     "stations, measured points against the modelled line.") for c in "AB"},
     "case-c-openfoam-agreement.png": ("Case C, OpenFOAM 12: measured Vs/U_H against the modelled √(|U|²+2k)/U_H (filled) and "
@@ -677,10 +681,10 @@ FIGURE_CAPTIONS = {
                                       "change the construction makes."),
     "case-e-openfoam-bias-map.png": ("Case E, OpenFOAM 12, wind from SW: log₂(model / tunnel) of the scalar speed at the 80 "
                                      "points on the plan of the district, before and after construction."),
-    "cases-ab-engine-comparison.png": ("Cases A and B, every engine on the same points: measured against modelled U/U_H and "
-                                       "V/U_H, one row per engine (OpenFOAM 12; OpenLB at dx = 1.6 m; FluidX3D at H/64). FluidX3D "
-                                       "is scored on the filled points, the heights where its empty-domain control holds the "
-                                       "imposed log law; the hollow points near the ground are excluded."),
+    **{f"case-{c.lower()}-engine-comparison.png": (f"Case {c}, every engine on the same points: measured against modelled U/U_H and "
+                                                     "V/U_H, one row per engine (OpenFOAM 12; OpenLB at dx = 1.6 m; FluidX3D at H/64). FluidX3D "
+                                                     "is scored on the filled points, the heights where its empty-domain control holds the "
+                                                     "imposed log law; the hollow points near the ground are excluded.") for c in "AB"},
     "case-d-openfoam-agreement.png": ("Case D, OpenFOAM 12, wind directions 0°, 22.5° and 45°: measured thermistor Vs/U_H against the "
                                       "modelled √(|U|²+2k)/U_H (filled) and |U|/U_H (hollow), and the split-fibre |U| against "
                                       "the modelled |U| at 0°. At 0° the 66 thermistor points are 33 mirror pairs."),
@@ -712,8 +716,8 @@ FIGURE_CAPTIONS = {
                                       "WD 175 and WD 185 against its WD 180, the noise floor of a single heading."),
     "case-m-openfoam-plan.png": ("Case M, OpenFOAM 12, WD 180: log₁₀ of c* at the 15 points on the plan of the campus (north up; the arrow is the wind), the tunnel and the three Schmidt numbers on one scale; "
                                  "a point below 10⁻³ (or zero) is open. The star is the gas source and the square the reference mast."),
-    "ml-surrogate-agreement.png": ("Eddy3D ML surrogate (Yel-2.0): measured against predicted pedestrian-height speed, one "
-                                   "panel per case, with the 1:1 line and the factor-of-two band."),
+    **{f"case-{c.lower()}-ml-agreement.png": (f"Case {c}, Eddy3D ML surrogate (Yel-2.0): measured against predicted pedestrian-height speed, "
+                                               "with the 1:1 line and the factor-of-two band.") for c in "ABCDE"},
 }
 # The layout figure of each case (validation/plot_layout.py): the caption is written by layout.py from the same groups that colour the agreement figures.
 FIGURE_CAPTIONS.update({f"case-{c.lower()}-layout.png": LAYOUT.caption(c) for c in LAYOUT.SPECS})
@@ -1690,42 +1694,24 @@ def remove_stale():
 # ----------------------------------------------------------------------------- the registry of releases
 
 def release_record(v):
-    """One entry of versions.json. A release with a tree under docs/api/ is described by that tree's own index.json;
-    one without (a release from before the layout) by its tag and what LEGACY_RELEASES records."""
+    """One entry of versions.json, described by that release's own tree under docs/api/<v>/."""
     date = R.release_date(v)
     if not date:
         raise SystemExit(f"CHANGELOG.md has no dated section for {v}, which versions.json lists")
     base = f"{LIVE_BASE}/{v}"
     raw_tag = RAW_BASE.replace("/main/", f"/v{v}/")
-    rec = {"version": v, "date": date, "status": None}
-    tree_index = os.path.join(API_ROOT, v, "index.json")
-    if os.path.isfile(tree_index):
-        with io.open(tree_index, encoding="utf-8") as f:
-            idx = json.load(f)
-        hosted_later = v in LEGACY_RELEASES   # put there by scripts/host_release.py, so the copy is on main, not in the tag; its fallback is the tag
-        if hosted_later and (idx["versions"]["schema"], idx["versions"]["data"]) != tuple(LEGACY_RELEASES[v].values()):
-            raise SystemExit(f"docs/api/{v}/index.json and LEGACY_RELEASES disagree on release {v}'s schema or data version")
-        rec.update({"schema_version": idx["versions"]["schema"], "data_version": idx["versions"]["data"],
-                    "base_url": base, "index_url": f"{base}/index.json",
-                    "fallback_base_url": raw_tag if hosted_later else f"{raw_tag}/{v}", "self_contained": True})
-        if hosted_later:
-            rec["note"] = (f"Released before the versioned layout and hosted here afterwards by scripts/host_release.py: the files of "
-                           f"tag v{v}, byte for byte, with only their own addresses rewritten into this copy. The raw files at the tag "
-                           f"(release.base_url in this copy's index.json) are the originals.")
-    else:
-        rec.update({**LEGACY_RELEASES[v], "base_url": raw_tag, "index_url": f"{raw_tag}/index.json", "fallback_base_url": None,
-                    "self_contained": False,
-                    "note": ("Released before the versioned layout and not regenerated: base_url is the raw files at the release "
-                             "tag. Its documents link to the live /api/ paths, not back into base_url, so fetch its files by the "
-                             "paths in its index.json instead of following those links.")})
-    rec.update({"tag": f"v{v}", "tag_url": f"{REPO_URL}/releases/tag/v{v}", "changelog_url": f"{REPO_URL}/blob/v{v}/CHANGELOG.md"})
-    return rec
+    with io.open(os.path.join(API_ROOT, v, "index.json"), encoding="utf-8") as f:
+        idx = json.load(f)
+    return {"version": v, "date": date, "status": None,
+            "schema_version": idx["versions"]["schema"], "data_version": idx["versions"]["data"],
+            "base_url": base, "index_url": f"{base}/index.json", "fallback_base_url": f"{raw_tag}/{v}", "self_contained": True,
+            "tag": f"v{v}", "tag_url": f"{REPO_URL}/releases/tag/v{v}", "changelog_url": f"{REPO_URL}/blob/v{v}/CHANGELOG.md"}
 
 
 def versions_document(data_version):
-    """versions.json: every release newest first. A pure function of docs/api/'s frozen trees, CHANGELOG.md and
-    LEGACY_RELEASES, so verify() can rebuild it and compare."""
-    found = sorted({*LEGACY_RELEASES, *release_dirs(), RELEASE}, key=R.parse, reverse=True)
+    """versions.json: every release that has a copy, newest first. A pure function of docs/api/'s frozen trees and
+    CHANGELOG.md, so verify() can rebuild it and compare."""
+    found = sorted({*release_dirs(), RELEASE}, key=R.parse, reverse=True)
     if found[0] != RELEASE:
         raise SystemExit(f"VERSION {RELEASE} is older than {found[0]}, which has a release tree: versions only move forward")
     records = [release_record(v) for v in found]
@@ -2042,19 +2028,13 @@ RENDER_GROUP_CAPTIONS = {
 }
 
 ENGINE_SHORT = {"openfoam12-realizableKE": "OpenFOAM 12", "openfoam12-kEpsilon": "OpenFOAM 12 k-ε", "openfoam12-kOmegaSST": "OpenFOAM 12 k-ω SST",
-                "umf-realizableKE": "UMF", "umf-buoyantKEpsilon": "UMF buoyantKEpsilon",
+                "umf-realizableKE": "OpenFOAM 12 (UMF)", "umf-buoyantKEpsilon": "OpenFOAM 12 (UMF) buoyantKEpsilon",
                 "openlb": "OpenLB", "fluidx3d": "FluidX3D", "ml-surrogate": "ML surrogate"}
 STATUS_CLASS = {"scored": "label-green", "running": "label-blue", "pending": "label-yellow", "not comparable": "label-grey"}
-# A case's Validation page opens with its hand-written reading, docs/_includes/validation/<slug>.md (measurement layout,
-# figures, what the scores say), when there is one; the figures the reading shows are not repeated below it. Figures
-# of the engine pages are shown there, and the case pages link to them instead of repeating them. A figure that is in
-# neither is shown on the case's Validation page, unless it illustrates runs of ALL_CASES_FIGURE_MIN or more cases:
-# then it is an all-cases figure, and the case pages link to the Validation overview instead of each repeating it.
+# A case's Validation page is assembled from its hand-written reading, docs/_includes/validation/<slug>/<part>.md (the
+# measurement layout, one part per engine, what was not run), and the scores of its runs; every figure of a run is shown
+# by some part of the reading, which numbers them.
 READINGS = os.path.join(DOCS, "_includes", "validation")
-FIGURE_HOME = {
-    "cases-ab-engine-comparison.png": ("/validation/engines/", "OpenLB and FluidX3D"),
-    "ml-surrogate-agreement.png": ("/validation/ml-surrogate/", "ML surrogate"),
-}
 # The pages that once read two cases together, or one case apart from its own page, now redirect to the case's page.
 REDIRECT_FROM = {"A": ["/validation/cases-ab/"], "C": ["/validation/case-c/"], "D": ["/validation/case-d/"], "E": ["/validation/case-e/"],
                  "F": ["/validation/cases-fm/"], "G": ["/validation/cases-gk/"], "H": ["/validation/cases-hi/"], "J": ["/validation/cases-jl/"]}
@@ -2112,7 +2092,7 @@ def _link(text, url, anchor=""):
     return f"[{text}]({_asset(url)}{anchor})"
 
 
-SCORE_COLUMN = re.compile(r"\|\s*(?:R|FAC2|FB|Hit rate|n)(?: \(range\))?\s*(?=\|)")
+SCORE_COLUMN = re.compile(r"\|\s*(?:R|\$\$R\^2\$\$|FAC2|FB|Hit rate|n)(?: \(range\))?\s*(?=\|)")
 
 
 def _legend(table):
@@ -2231,11 +2211,12 @@ def build_validation_matrix(percase):
         meta = D.CASES[case]
         cells = []
         for e in MATRIX_ENGINES:
-            if e["id"] not in ENGINE_STATUS[case]:       # UMF applies to the non-isothermal cases J and L only
+            eid = "umf-realizableKE" if e["id"] == "openfoam12-realizableKE" and "umf-realizableKE" in ENGINE_STATUS[case] else e["id"]
+            if eid not in ENGINE_STATUS[case]:
                 cells.append("—")
                 continue
-            status = ENGINE_STATUS[case][e["id"]]
-            entries = [r for r in percase[case]["results"] if r["engine"] == e["id"]]
+            status = ENGINE_STATUS[case][eid]
+            entries = [r for r in percase[case]["results"] if r["engine"] == eid]
             cell = status_label(status)
             ranges = _headline_ranges(entries) if entries else None
             if ranges:
@@ -2263,7 +2244,7 @@ def build_known_issues():
         if case in "ABCDE":
             continue
         meta = D.CASES[case]
-        L += [f"## Case {case}", "", f"{_esc(meta['title'])}.", ""] + _issue_list(meta["known_issues"])
+        L += [f"## Case {case}", ""] + _issue_list(meta["known_issues"])
     _write("_includes/known-issues-fm.md", L)
 
 
@@ -2330,7 +2311,7 @@ def _case_page(case, meta, p, shared):
     L += ["## At a glance", ""] + glance + _legend(glance) + ["", "## Validation", ""]
     if results:
         status = ["| Engine | Status | Compared with | R (range) | FAC2 (range) |", "|---|---|---|---|---|"]
-        for e in case_engines(case):
+        for e in [e for e in case_engines(case) if e["id"] in site_status(case)]:
             mine = [r for r in results if r["engine"] == e["id"]]
             head = f"| {_engine_name(e['id'])} | {status_label(ENGINE_STATUS[case][e['id']])} | "
             rows = [(source, _headline_ranges(mine, case, source)) for source in ("Wind tunnel", "Field")]
@@ -2342,7 +2323,7 @@ def _case_page(case, meta, p, shared):
             L += [CASE_CAVEATS[case], ""]
     else:
         L += [f"**No validation has been run for this case yet.** {QUEUED} Engine status: "
-              + " · ".join(f"{_engine_name(k)} {status_label(v)}" for k, v in ENGINE_STATUS[case].items()), ""]
+              + " · ".join(f"{_engine_name(k)} {status_label(v)}" for k, v in site_status(case).items()), ""]
     L += ["{: .warning-title }", "> Before you compare", ">",
           "> - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again."]
     for t in _frame_facts(meta):
@@ -2450,11 +2431,12 @@ def _collected_by(meta):
 
 def _score_table(e):
     """One run's headline scores: a row per score, the metrics across. A bare '|' in a label (|U|) is escaped."""
-    L = ["| Score | R | FAC2 | FB | Hit rate | n |", "|---|---|---|---|---|---|"]
+    L = ["| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |", "|---|---|---|---|---|---|---|"]
     for label, key in e["headline"].items():
         s = e["scores"][key]
         num = lambda m, f: "—" if s.get(m) is None else f"{s[m]:{f}}"  # noqa: E731
-        L.append(f"| {_cell(label, lead=True, bare=True)} | {num('R', '+.3f')} | {num('Fac2', '.3f')} | {num('Fb', '+.3f')} | "
+        r2 = "—" if s.get("R") is None else f"{s['R'] ** 2:.3f}"
+        L.append(f"| {_cell(label, lead=True, bare=True)} | {num('R', '+.3f')} | {r2} | {num('Fac2', '.3f')} | {num('Fb', '+.3f')} | "
                  f"{num('HitRate', '.3f')} | {num('Count', 'd')} |")
     L.append("{: .scores }")
     return L + _legend(L)
@@ -2475,74 +2457,195 @@ def _notes(notes):
     return L, collapsed
 
 
+# The engines of a case page, one section each, in this order: (slug of its reading, heading, engine ids).
+ENGINE_FAMILIES = [
+    ("openfoam", "OpenFOAM 12", ("openfoam12-realizableKE", "openfoam12-kEpsilon", "openfoam12-kOmegaSST", "umf-realizableKE", "umf-buoyantKEpsilon")),
+    ("openlb", "OpenLB", ("openlb",)),
+    ("fluidx3d", "FluidX3D", ("fluidx3d",)),
+    ("ml-surrogate", "ML surrogate", ("ml-surrogate",)),
+]
+
+
+def _reading(meta, part):
+    """The include of one part of a case's hand-written reading (docs/_includes/validation/<slug>/<part>.md) and the
+    figures it shows; ([], set()) when the case has no such part."""
+    path = os.path.join(READINGS, meta["slug"], f"{part}.md")
+    if not os.path.exists(path):
+        return [], set()
+    with io.open(path, encoding="utf-8") as f:
+        figs = set(re.findall(r'name="([\w.-]+\.png)"', f.read()))
+    return [f"{{% include validation/{meta['slug']}/{part}.md %}}", ""], figs
+
+
+# The leaderboard's quantities, in the scorer's order, and how a column names them.
+BOARD_QUANTITIES = [(k, lab) for k, lab, *_ in B.SC.QUANTITIES]
+# Cases whose configurations are different experiments (Case C's centre block), not variants of a model: one board row per engine.
+BOARD_MERGED_CONFIGS = {"C"}
+
+
+def _board_entries(case):
+    """[(run name, source, scores, coverage)]: every run on the case scored by one evaluator, validation/score_submissions.py,
+    as a submission is scored: Eddy3D's runs from their served pairs (as its --self-test reproduces them), the community's
+    from their values. The ML surrogate's pairs carry no point ids, so the evaluator cannot score it."""
+    points = B.SC.read_table_file(os.path.join(API, "cases", case, "points.csv"))
+    runs = {}
+    for rid, res, rows, _ in B.SC._served_runs(API):
+        if res["run_id"][0] != case:
+            continue
+        sct = rid.rsplit(".", 1)[1] if rid.count(".") and rid.rsplit(".", 1)[1].startswith("sct") else None
+        cfg = None if case in BOARD_MERGED_CONFIGS else res["configuration"]
+        if cfg and cfg.startswith("sct"):       # Case M's configurations are the turbulent Schmidt numbers
+            cfg, sct = None, cfg
+        name = _engine_name(res["engine"]) + (f" · {cfg}" if cfg else "") + (f" · $$\\mathrm{{Sc_t}}$$ 0.{sct[-1]}" if sct else "")
+        runs.setdefault(name, (res["engine"], []))[1].extend(rows)
+    out = []
+    for name, (engine, rows) in runs.items():
+        got = B.SC.score(case, points, rows, engine=engine)
+        out.append((name, "Eddy3D", got["scores"], got["coverage"]))
+    for slug, smeta, res in COMMUNITY or []:
+        if case in res:
+            out.append((f"{smeta['solver']} ({_link(slug, f'/community/{slug}/')})",
+                        "example submission" if smeta.get("example") else "community", res[case]["scores"], res[case]["coverage"]))
+    return out
+
+
+def _by_quantity(scores, coverage):
+    """{quantity: (mean hit rate, mean FAC2, mean R, scored, measured, mean R²)} over the groups (configuration, wind direction) a run has."""
+    out = {}
+    for q, _ in BOARD_QUANTITIES:
+        keys = [k for k in scores if k == q or k.endswith("/" + q)]
+        if not keys:
+            continue
+        mean = lambda m: (lambda v: sum(v) / len(v) if v else None)([scores[k][m] for k in keys if scores[k].get(m) is not None])  # noqa: E731
+        r2 = [scores[k]["R"] ** 2 for k in keys if scores[k].get("R") is not None]
+        out[q] = (mean("HitRate"), mean("Fac2"), mean("R"), sum(coverage[k]["scored"] for k in keys), sum(coverage[k]["measured"] for k in keys),
+                  sum(r2) / len(r2) if r2 else None)
+    return out
+
+
+def _leaderboard(case):
+    """Every run on the case ranked as ML benchmarks rank models: one evaluator for all, the same tasks (the quantities every
+    run on the board was scored on), one primary metric (the mean hit rate over those tasks), the best value of each column in bold."""
+    entries = [(n, src, _by_quantity(sc, cov)) for n, src, sc, cov in _board_entries(case)]
+    entries = [e for e in entries if e[2]]
+    if not entries:
+        return []
+    tasks = [q for q, _ in BOARD_QUANTITIES if all(q in e[2] for e in entries)]
+    if not tasks:
+        return []
+    label = dict(BOARD_QUANTITIES)
+    rows = []
+    for name, src, by in entries:
+        hr = [by[q][0] for q in tasks]
+        f2 = [by[q][1] for q in tasks if by[q][1] is not None]
+        r = [by[q][2] for q in tasks if by[q][2] is not None]
+        r2 = [by[q][5] for q in tasks if by[q][5] is not None]
+        cov = sum(by[q][3] for q in tasks) / max(1, sum(by[q][4] for q in tasks))
+        rows.append((name, src, hr, sum(hr) / len(hr), sum(f2) / len(f2) if f2 else None, sum(r) / len(r) if r else None,
+                     sum(r2) / len(r2) if r2 else None, cov))
+    rows.sort(key=lambda r: (-r[3], -(r[4] or 0)))
+    cols = [[r[2][i] for r in rows] for i in range(len(tasks))] + [[r[k] for r in rows] for k in (3, 4, 5, 6)]
+    best = [max(v for v in c if v is not None) for c in cols]
+
+    def cell(v, i, fmt):
+        if v is None:
+            return "—"
+        t = f"{v:{fmt}}"
+        return f"**{t}**" if len(rows) > 1 and abs(v - best[i]) < 5e-4 else t
+    head = ["Rank", "Run", "Source"] + [f"Hit rate, {_cell(label[q], bare=True)}" for q in tasks] + ["Hit rate", "FAC2", "R", "$$R^2$$", "Points scored"]
+    L = ["## Leaderboard", "", "| " + " | ".join(head) + " |", "|" + "---|" * len(head)]
+    for i, (name, src, hr, mhr, mf2, mr, mr2, cov) in enumerate(rows, 1):
+        n = len(tasks)
+        L.append("| " + " | ".join([str(i), name, src] + [cell(v, j, ".3f") for j, v in enumerate(hr)]
+                                   + [cell(mhr, n, ".3f"), cell(mf2, n + 1, ".3f"), cell(mr, n + 2, "+.3f"), cell(mr2, n + 3, ".3f"), f"{100 * cov:.0f} %"]) + " |")
+    L += ["{: .scores }"]
+    L += _legend(L[2:]) + ["",
+          "Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's "
+          "runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run "
+          "here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over "
+          "them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; "
+          "the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. "
+          "*Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its "
+          "values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are "
+          f"not runs and are left out. Community rows are self-reported values ({_link('Validate your own solver', '/byos/')}).", ""]
+    return L
+
+
 def _case_validation_page(case, meta, p, shared):
     results = p["results"]
-    n = D.CASE_IDS.index(case) + 1
     L = _front("Validation", 2, parent=meta["title"], grand_parent="Cases", has_children=False,
-               description=f"{meta['title']}: Eddy3D's scores against the measurements, by engine.",
+               description=f"{meta['title']}: Eddy3D's scores against the measurements, engine by engine.",
                redirect_from=REDIRECT_FROM.get(case, ()))
-    L += [f"# Case {case}: validation", "{: .no_toc }", ""]
-    L += ["Engine status: " + " · ".join(f"{_engine_name(k)} {status_label(v)}" for k, v in ENGINE_STATUS[case].items()), ""]
+    L += [f"# Case {case}: validation", "{: .no_toc }", ""] + _toc()
+    L += ["Engine status: " + " · ".join(f"{_engine_name(k)} {status_label(v)}" for k, v in site_status(case).items()), ""]
     if case in CASE_CAVEATS:
         L += [CASE_CAVEATS[case], ""]
-    reading = os.path.join(READINGS, f"{meta['slug']}.md")
-    in_reading = set()
-    if os.path.exists(reading):
-        with io.open(reading, encoding="utf-8") as f:
-            in_reading = set(re.findall(r'name="([\w.-]+\.png)"', f.read()))
-        L += [f"{{% include validation/{meta['slug']}.md %}}", ""]
-    # Under a reading, the runs' tables are one section of it.
-    h = "###" if in_reading else "##"
+    inc, shown = _reading(meta, "layout")
+    if inc:
+        L += ["## Measurement locations", ""] + inc
     if not results:
         L += [f"**No validation has been run for this case yet.** {QUEUED}", ""]
         return L
     names = {e["id"]: e["name"] for e in ENGINES}
-    # What every run of the page has in common is said once, after the runs.
+    # What every run of the page has in common is said once, after the engines.
     many = len(results) > 1
     all_quantity = many and len({e["quantity"] for e in results}) == 1 and bool(results[0]["quantity"])
     all_norm = many and len({e["normalisation"] for e in results}) == 1
     all_pairs = many and len({e["pairs"]["path"] for e in results}) == 1
     own_notes = lambda e: [n for n in e["notes"] if n not in CASE_CAVEATS.values()]   # the caveat is printed above  # noqa: E731
     all_notes = [n for n in own_notes(results[0]) if all(n in e["notes"] for e in results[1:])] if many else []
-    figures, fig_no, tails = [], 1, []
-    if in_reading:
-        L += ["## Scores, run by run", ""]
-    for e in results:
-        L += [f"{h} {_esc(names[e['engine']])}" + (f", configuration {_esc(e['configuration'])}" if e["configuration"] else ""), ""]
-        if e["quantity"] and not all_quantity:
-            L += [f"Quantity: {_tex(e['quantity'])}.", ""]
-        if e["recirculation_Lr_over_H"] is not None:
-            L += [f"Reattachment length {NM.m('L_r/H')} = {e['recirculation_Lr_over_H']:.2f}.", ""]
-        table = _score_table(e)
-        if len(e["headline"]) > OPEN_TABLE_ROWS:
-            L += ['<details markdown="block">', f"  <summary>All {len(e['headline'])} headline scores</summary>", ""] + table + ["", "</details>", ""]
-        else:
-            L += table + [""]
-        norm, norm_collapsed = [], []
-        if not all_norm:
-            shown, c = P.split(e["normalisation"])
-            norm = [f"- Normalisation: {_tex(shown)}"]
-            norm_collapsed = [c] if c else []
-        pairs_rel = e["pairs"]["path"]
-        head, sep, tail = e["reproduce"].partition(REPRODUCE_TAIL)
-        if sep and ("scores recomputed" + tail) not in tails:
-            tails.append("scores recomputed" + tail)
-        L += norm
-        if not all_pairs:
-            L.append(f"- Per-point values: {_link('`/api/' + pairs_rel + '`', '/api/' + pairs_rel)}")
-        L += [f"- Reproduce: {_tex(head)}", ""]
-        facts, collapsed = _notes([n for n in own_notes(e) if n not in all_notes])
-        if facts:
-            L += ["Notes:", ""] + facts + [""]
-        L += _sections(norm_collapsed + collapsed)
-        figures += [f for f in e["figures"] if f not in figures]
+    figures, tails = [], []
+    for slug, heading, ids in ENGINE_FAMILIES:
+        shown_ids = [i for i in ids if i in site_status(case)]
+        runs = [e for e in results if e["engine"] in ids]
+        inc, figs = _reading(meta, slug)
+        shown |= figs
+        if not shown_ids or not (runs or inc):
+            continue
+        L += [f"## {heading}", "", f"Status: {status_label(site_status(case)[shown_ids[0]])}", ""] + inc
+        for e in runs:
+            sub = (_esc(names[e["engine"]]) + (f", configuration {_esc(e['configuration'])}" if e["configuration"] else "")) if len(runs) > 1 else "Scores"
+            L += [f"### {sub}", ""]
+            if e["quantity"] and not all_quantity:
+                L += [f"Quantity: {_tex(e['quantity'])}.", ""]
+            if e["recirculation_Lr_over_H"] is not None:
+                L += [f"Reattachment length {NM.m('L_r/H')} = {e['recirculation_Lr_over_H']:.2f}.", ""]
+            table = _score_table(e)
+            if len(e["headline"]) > OPEN_TABLE_ROWS:
+                L += ['<details markdown="block">', f"  <summary>All {len(e['headline'])} headline scores</summary>", ""] + table + ["", "</details>", ""]
+            else:
+                L += table + [""]
+            norm, norm_collapsed = [], []
+            if not all_norm:
+                shown_n, c = P.split(e["normalisation"])
+                norm = [f"- Normalisation: {_tex(shown_n)}"]
+                norm_collapsed = [c] if c else []
+            pairs_rel = e["pairs"]["path"]
+            head, sep, tail = e["reproduce"].partition(REPRODUCE_TAIL)
+            if sep and ("scores recomputed" + tail) not in tails:
+                tails.append("scores recomputed" + tail)
+            L += norm
+            if not all_pairs:
+                L.append(f"- Per-point values: {_link('`/api/' + pairs_rel + '`', '/api/' + pairs_rel)}")
+            L += [f"- Reproduce: {_tex(head)}", ""]
+            facts, collapsed = _notes([n for n in own_notes(e) if n not in all_notes])
+            if facts:
+                L += ["Notes:", ""] + facts + [""]
+            L += _sections(norm_collapsed + collapsed)
+            figures += [f for f in e["figures"] if f not in figures]
+    unshown = [f["url"] for f in figures if f["url"].rsplit("/", 1)[-1] not in shown]
+    if unshown:
+        raise SystemExit(f"Case {case}: figures {unshown} are in no part of its reading (docs/_includes/validation/{meta['slug']}/), which numbers the figures")
+    inc, _ = _reading(meta, "not-run")
+    if inc:
+        L += ["## Not run", ""] + inc
     if many and (all_quantity or all_norm or all_pairs or all_notes):
-        L += [f"{h} All runs", ""]
+        L += ["## Notes on every run", ""]
         if all_quantity:
             L += [f"- Quantity: {_tex(results[0]['quantity'])}"]
         if all_norm:
-            shown, c = P.split(results[0]["normalisation"])
-            L += [f"- Normalisation: {_tex(shown)}"]
+            shown_n, c = P.split(results[0]["normalisation"])
+            L += [f"- Normalisation: {_tex(shown_n)}"]
             norm_collapsed = [c] if c else []
         else:
             norm_collapsed = []
@@ -2560,29 +2663,7 @@ def _case_validation_page(case, meta, p, shared):
             L += lines + [""]
         else:
             L += ['<details markdown="block">', "  <summary>How the scores are computed</summary>", ""] + lines + ["", "</details>", ""]
-    own, elsewhere = [], {}
-    for fig in figures:
-        name = fig["url"].rsplit("/", 1)[-1]
-        if name in in_reading:
-            continue
-        if name in FIGURE_HOME:
-            elsewhere.setdefault(FIGURE_HOME[name], []).append(fig)
-        elif name in shared:
-            elsewhere.setdefault(("/validation/", "Validation"), []).append(fig)
-        else:
-            own.append(fig)
-    if own and in_reading:
-        raise SystemExit(f"Case {case}: figures {[f['url'] for f in own]} are neither in its reading nor on an engine page; the reading numbers its figures")
-    if own:
-        L += ["## Figures", ""]
-    for fig in own:
-        name = fig["url"].rsplit("/", 1)[-1]
-        L += figure(f"/assets/figures/{name}", fig["caption"], f"<strong>Figure {fig_no}.</strong> {_tex(fig['caption'])}", markdown=True)
-        fig_no += 1
-    if elsewhere:
-        L += ["## Figures", ""] if not own else []
-        L += ["Figures: " + "; ".join(f"{_link(label, page)}" for (page, label) in elsewhere) + ".", ""]
-    return L
+    return L + _leaderboard(case)
 
 
 def build_pages(percase):
@@ -2684,7 +2765,7 @@ def build_community(community):
                 facts.append(f"| {_esc(k)} | {_cell(str(meta[k]))} |")
         P_ += facts + _legend(facts) + [""]
         for case, res in results.items():
-            P_ += [f"## Case {case}: {_esc(D.CASES[case]['title'])}", ""]
+            P_ += [f"## {_esc(D.CASES[case]['title'])}", ""]
             for g in res["groups"]:
                 if g["key"]:
                     P_ += [f"### {_esc(', '.join(f'{k} {v}' for k, v in g['group'].items() if v not in (None, '')))}", ""]
@@ -2944,7 +3025,7 @@ def verify_registry():
     except SystemExit as e:   # an unreleasable state (a tree newer than VERSION): a problem to report, not a crash
         return [str(e)]
     if text != expected:
-        problems.append("versions.json is not what the release trees, CHANGELOG.md and LEGACY_RELEASES give; rebuild it")
+        problems.append("versions.json is not what the release trees and CHANGELOG.md give; rebuild it")
     return problems
 
 
@@ -3061,8 +3142,6 @@ def build_tree():
 
 
 def build():
-    if RELEASE in LEGACY_RELEASES:
-        raise SystemExit(f"VERSION {RELEASE} predates the versioned layout and is not regenerated; set VERSION to the next release")
     os.makedirs(API_ROOT, exist_ok=True)
     check_runs_registry()
     copy_assets()

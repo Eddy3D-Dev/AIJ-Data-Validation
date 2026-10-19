@@ -139,6 +139,7 @@ Cases: each case's dataset DOI is on its Data page and in `/api/cases/{id}.json`
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -237,6 +238,7 @@ Data: Kikumoto et al. (2026), CC BY 4.0. Collectors per case on each Data page.
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -315,6 +317,7 @@ Reattachment length **$$L_r/H$$ = 1.49**. Mean measured $$W$$ is ~0.01 m/s.
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -334,7 +337,7 @@ prediction height: $$\lvert\mathbf{U}\rvert/U_H$$ FB +0.77, FAC2 0.26, R −0.13
 is reversed. Method: *ML surrogate* under *Validation method*.
 
 **OpenLB** at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ ($$H/10$$): $$U/U_H$$ R +0.76, FAC2 0.43 over all 186 points, FAC2 0.65 over the 121 at least two
-cells above its no-slip floor. $$L_r = 3.39\thinspace H$$. Method: *OpenLB and FluidX3D — every engine on Cases A and B*.
+cells above its no-slip floor. $$L_r = 3.39\thinspace H$$. Method: *OpenLB and FluidX3D* under *Validation method*.
 
 **FluidX3D** at $$\mathrm{d}x = H/64$$: $$U/U_H$$ R +0.84, FAC2 0.60 on the 116 points where its empty-domain control holds the
 log law.
@@ -349,6 +352,10 @@ log law.
 - FluidX3D: on those 116 points the approach flow alone scores better on every $$U$$ statistic except the correlation.
 
 </details>
+
+<!--fig name="case-a-engine-comparison.png" alt="Case A, measured vs modelled U and V, one row per engine" width="800"--><a href="validation/figures/case-a-engine-comparison.png"><img src="docs/assets/web/case-a-engine-comparison.png" width="800" height="1185" loading="lazy" alt="Case A, measured vs modelled U and V, one row per engine"></a><!--/fig-->
+
+<!--fig name="case-a-ml-agreement.png" alt="Case A, measured vs predicted, ML surrogate" width="800"--><a href="validation/figures/case-a-ml-agreement.png"><img src="docs/assets/web/case-a-ml-agreement.png" width="800" height="534" loading="lazy" alt="Case A, measured vs predicted, ML surrogate"></a><!--/fig-->
 
 **API.** [`cases/A.json`](docs/api/cases/A.json) · [`points.json`](docs/api/cases/A/points.json) /
 [`points.csv`](docs/api/cases/A/points.csv) (variances $$\overline{u'u'}$$ = $$u_{\mathrm{rms}}^2$$ so A and B share one column meaning) ·
@@ -400,6 +407,7 @@ Reattachment length **$$L_r/H$$ = 3.27**.
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -433,6 +441,10 @@ log law.
 - FluidX3D: beats its approach flow on every $$U$$ statistic.
 
 </details>
+
+<!--fig name="case-b-engine-comparison.png" alt="Case B, measured vs modelled U and V, one row per engine" width="800"--><a href="validation/figures/case-b-engine-comparison.png"><img src="docs/assets/web/case-b-engine-comparison.png" width="800" height="1170" loading="lazy" alt="Case B, measured vs modelled U and V, one row per engine"></a><!--/fig-->
+
+<!--fig name="case-b-ml-agreement.png" alt="Case B, measured vs predicted, ML surrogate" width="800"--><a href="validation/figures/case-b-ml-agreement.png"><img src="docs/assets/web/case-b-ml-agreement.png" width="800" height="548" loading="lazy" alt="Case B, measured vs predicted, ML surrogate"></a><!--/fig-->
 
 **API.** [`cases/B.json`](docs/api/cases/B.json) · [`points.json`](docs/api/cases/B/points.json) /
 [`points.csv`](docs/api/cases/B/points.csv) (metres, $$V$$ sign unified) · [`geometry.stl`](docs/api/cases/B/geometry.stl)
@@ -531,6 +543,7 @@ $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ (headline) and as $$\lvert\mathbf{U}\rv
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -573,6 +586,8 @@ Per-point pairs:
 
 **ML surrogate (Yel-2.0)**, scaled ×90 so $$z = 0.1\thinspace D$$ sits at its 1.8 m prediction height, all nine configurations:
 FB +0.67, FAC2 0.44, R +0.21, hit rate 0.18. Method: *ML surrogate* under *Validation method*.
+
+<!--fig name="case-c-ml-agreement.png" alt="Case C, measured vs predicted, ML surrogate" width="800"--><a href="validation/figures/case-c-ml-agreement.png"><img src="docs/assets/web/case-c-ml-agreement.png" width="800" height="492" loading="lazy" alt="Case C, measured vs predicted, ML surrogate"></a><!--/fig-->
 
 **API.** [`cases/C.json`](docs/api/cases/C.json) · [`points.json`](docs/api/cases/C/points.json) /
 [`points.csv`](docs/api/cases/C/points.csv) · [`geometry.json`](docs/api/cases/C/geometry.json) (box lists) ·
@@ -662,6 +677,7 @@ the array; shifting the cloud by 12.5 mm (5 m full scale) puts points 27 and 28 
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -702,6 +718,8 @@ the array; shifting the cloud by 12.5 mm (5 m full scale) puts points 27 and 28 
 The ML surrogate (Yel-2.0, scaled ×360 so $$z = 5\thinspace\mathrm{mm}$$ sits at 1.8 m) scores FB +0.67, FAC2 0.34, R +0.33, hit rate 0.17
 on the thermistor plane (198 points, 3 directions) and FB +0.23, FAC2 0.52, R +0.59 on the 33 split-fibre $$\lvert\mathbf{U}\rvert$$. Method:
 *ML surrogate* under *Validation method*.
+
+<!--fig name="case-d-ml-agreement.png" alt="Case D, measured vs predicted, ML surrogate" width="800"--><a href="validation/figures/case-d-ml-agreement.png"><img src="docs/assets/web/case-d-ml-agreement.png" width="800" height="575" loading="lazy" alt="Case D, measured vs predicted, ML surrogate"></a><!--/fig-->
 
 **API.** [`cases/D.json`](docs/api/cases/D.json) · [`points.json`](docs/api/cases/D/points.json) /
 [`points.csv`](docs/api/cases/D/points.csv) (267 rows: 234 thermistor + 33 split fibre, `instrument` column) ·
@@ -783,6 +801,7 @@ arrives at 0.998 of the imposed value in both states.
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -822,6 +841,8 @@ The ML surrogate (scaled ×0.9 so 2 m sits at 1.8 m) scores FB +1.00, FAC2 0.22,
 all 2560 values; on the change the construction makes (after − before, 1280 pairs) it has the sign right at 67 %
 of the 863 pairs the tunnel resolves ($$\lvert\Delta\rvert$$ > 0.05). Method: *ML surrogate* under *Validation method*.
 
+<!--fig name="case-e-ml-agreement.png" alt="Case E, measured vs predicted, ML surrogate" width="800"--><a href="validation/figures/case-e-ml-agreement.png"><img src="docs/assets/web/case-e-ml-agreement.png" width="800" height="436" loading="lazy" alt="Case E, measured vs predicted, ML surrogate"></a><!--/fig-->
+
 **API.** [`cases/E.json`](docs/api/cases/E.json) · [`points.json`](docs/api/cases/E/points.json) /
 [`points.csv`](docs/api/cases/E/points.csv) (2560 rows, `config` bc/ac, `wind_direction` N … NNW) ·
 [`geometry.stl`](docs/api/cases/E/geometry.stl) (after construction, 8432 triangles) /
@@ -859,6 +880,7 @@ of the 863 pairs the tunnel resolves ($$\lvert\Delta\rvert$$ > 0.05). Method: *M
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -926,6 +948,7 @@ Full reading: [Case F validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -961,6 +984,8 @@ Full reading: [Case G validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 **Known issues.** 6 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/G.json`](docs/api/cases/G.json).
 
+<!--fig name="case-g-openfoam-profiles.png" alt="Case G, vertical profiles" width="800"--><a href="validation/figures/case-g-openfoam-profiles.png"><img src="docs/assets/web/case-g-openfoam-profiles.png" width="800" height="760" loading="lazy" alt="Case G, vertical profiles"></a><!--/fig-->
+
 **API.** [`cases/G.json`](docs/api/cases/G.json) · [`points.json`](docs/api/cases/G/points.json) / [`points.csv`](docs/api/cases/G/points.csv) · [`geometry.stl`](docs/api/cases/G/geometry.stl) (1 box, 12 triangles) · [`validation.json`](docs/api/cases/G/validation.json)
 
 </details>
@@ -995,6 +1020,7 @@ Full reading: [Case G validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -1025,6 +1051,8 @@ Full reading: [Case H validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 <!--fig name="case-h-openfoam-agreement.png" alt="Case H, measured vs modelled" width="800"--><a href="validation/figures/case-h-openfoam-agreement.png"><img src="docs/assets/web/case-h-openfoam-agreement.png" width="800" height="282" loading="lazy" alt="Case H, measured vs modelled"></a><!--/fig-->
 
 **Known issues.** 7 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/H.json`](docs/api/cases/H.json).
+
+<!--fig name="case-h-openfoam-profiles.png" alt="Case H, vertical profiles" width="800"--><a href="validation/figures/case-h-openfoam-profiles.png"><img src="docs/assets/web/case-h-openfoam-profiles.png" width="800" height="703" loading="lazy" alt="Case H, vertical profiles"></a><!--/fig-->
 
 **API.** [`cases/H.json`](docs/api/cases/H.json) · [`points.json`](docs/api/cases/H/points.json) / [`points.csv`](docs/api/cases/H/points.csv) · [`geometry.stl`](docs/api/cases/H/geometry.stl) (1 box, 12 triangles) · [`validation.json`](docs/api/cases/H/validation.json)
 
@@ -1060,6 +1088,7 @@ Full reading: [Case H validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -1096,6 +1125,8 @@ Full reading: [Case I validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 **Known issues.** 8 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/I.json`](docs/api/cases/I.json).
 
+<!--fig name="case-i-openfoam-profiles.png" alt="Case I, vertical profiles" width="800"--><a href="validation/figures/case-i-openfoam-profiles.png"><img src="docs/assets/web/case-i-openfoam-profiles.png" width="800" height="713" loading="lazy" alt="Case I, vertical profiles"></a><!--/fig-->
+
 **API.** [`cases/I.json`](docs/api/cases/I.json) · [`points.json`](docs/api/cases/I/points.json) / [`points.csv`](docs/api/cases/I/points.csv) · [`geometry.stl`](docs/api/cases/I/geometry.stl) (1 box, 12 triangles) · [`validation.json`](docs/api/cases/I/validation.json)
 
 </details>
@@ -1129,6 +1160,7 @@ Full reading: [Case I validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -1166,6 +1198,8 @@ Full reading: [Case J validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 **Known issues.** 10 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/J.json`](docs/api/cases/J.json).
 
+<!--fig name="case-j-openfoam-profiles.png" alt="Case J, vertical profiles" width="800"--><a href="validation/figures/case-j-openfoam-profiles.png"><img src="docs/assets/web/case-j-openfoam-profiles.png" width="800" height="707" loading="lazy" alt="Case J, vertical profiles"></a><!--/fig-->
+
 **API.** [`cases/J.json`](docs/api/cases/J.json) · [`points.json`](docs/api/cases/J/points.json) / [`points.csv`](docs/api/cases/J/points.csv) · [`geometry.stl`](docs/api/cases/J/geometry.stl) (1 box, 12 triangles) · [`validation.json`](docs/api/cases/J/validation.json)
 
 </details>
@@ -1200,6 +1234,7 @@ Full reading: [Case J validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -1237,6 +1272,8 @@ Full reading: [Case K validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 **Known issues.** 9 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/K.json`](docs/api/cases/K.json).
 
+<!--fig name="case-k-openfoam-profiles.png" alt="Case K, vertical profiles" width="800"--><a href="validation/figures/case-k-openfoam-profiles.png"><img src="docs/assets/web/case-k-openfoam-profiles.png" width="800" height="703" loading="lazy" alt="Case K, vertical profiles"></a><!--/fig-->
+
 **API.** [`cases/K.json`](docs/api/cases/K.json) · [`points.json`](docs/api/cases/K/points.json) / [`points.csv`](docs/api/cases/K/points.csv) · [`geometry.stl`](docs/api/cases/K/geometry.stl) (1 box, 972 triangles) · [`validation.json`](docs/api/cases/K/validation.json)
 
 </details>
@@ -1272,6 +1309,7 @@ Full reading: [Case K validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -1306,6 +1344,8 @@ Full reading: [Case L validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 <!--fig name="case-l-umf-agreement.png" alt="Case L, measured vs modelled" width="800"--><a href="validation/figures/case-l-umf-agreement.png"><img src="docs/assets/web/case-l-umf-agreement.png" width="800" height="446" loading="lazy" alt="Case L, measured vs modelled"></a><!--/fig-->
 
 **Known issues.** 10 in the published files, listed on the [Known data issues](https://eddy3d-dev.github.io/AIJ-Data-Validation/known-data-issues/) page and in [`cases/L.json`](docs/api/cases/L.json).
+
+<!--fig name="case-l-openfoam-profiles.png" alt="Case L, vertical profiles" width="800"--><a href="validation/figures/case-l-openfoam-profiles.png"><img src="docs/assets/web/case-l-openfoam-profiles.png" width="800" height="706" loading="lazy" alt="Case L, vertical profiles"></a><!--/fig-->
 
 **API.** [`cases/L.json`](docs/api/cases/L.json) · [`points.json`](docs/api/cases/L/points.json) / [`points.csv`](docs/api/cases/L/points.csv) · [`geometry.stl`](docs/api/cases/L/geometry.stl) (1 box, 1,512 triangles) · [`validation.json`](docs/api/cases/L/validation.json)
 
@@ -1342,6 +1382,7 @@ Full reading: [Case L validation](https://eddy3d-dev.github.io/AIJ-Data-Validati
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -1394,9 +1435,7 @@ the tunnel's own measurement coordinates**, so no interpolation enters the compa
 omnidirectional *scalar* speed with thermistors, so the model is scored as $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ and as $$\lvert\mathbf{U}\rvert$$. Each case's figures
 are in its own section above.
 
-### OpenLB and FluidX3D — every engine on Cases A and B
-
-<!--fig name="cases-ab-engine-comparison.png" alt="Measured vs modelled U and V, Cases A and B, one row per engine" width="800"--><a href="validation/figures/cases-ab-engine-comparison.png"><img src="docs/assets/web/cases-ab-engine-comparison.png" width="800" height="595" loading="lazy" alt="Measured vs modelled U and V, Cases A and B, one row per engine"></a><!--/fig-->
+### OpenLB and FluidX3D
 
 OpenLB (Eddy3D's `eddy3dWind`: Smagorinsky, third-order regularised D3Q19, CPU image) solved the same two
 experiments with the same fitted inflow and probed the same measured points, at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ ($$H/10$$ for A, $$H/12.5$$ for B),
@@ -1419,6 +1458,7 @@ experiments with the same fitted inflow and probed the same measured points, at 
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -1475,6 +1515,7 @@ and 88 of Case B's 224.
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -1512,8 +1553,6 @@ and 88 of Case B's 224.
 
 ### ML surrogate
 
-<!--fig name="ml-surrogate-agreement.png" alt="Measured vs predicted, ML surrogate, Cases A–E" width="800"--><a href="validation/figures/ml-surrogate-agreement.png"><img src="docs/assets/web/ml-surrogate-agreement.png" width="800" height="626" loading="lazy" alt="Measured vs predicted, ML surrogate, Cases A–E"></a><!--/fig-->
-
 Eddy3D's Wind Predictor (the public `Yel-2.0` network) predicts $$\lvert\mathbf{U_{\mathrm{mean}}}\rvert/U_{\mathrm{ref}}$$ at one height, 1.8 m. Each case is
 therefore scaled so its measurement plane lands there (A ×180, B ×144, C ×90, D ×360, E ×0.9), its buildings are
 rasterised onto the model's 504 × 504 lattice of 2 m cells with the shipped grid code, the prediction is read at
@@ -1536,6 +1575,7 @@ $$U_H$$ with each case's approach-flow file.
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -1572,6 +1612,7 @@ geometry given to the model, and a model that cannot tell upwind from downwind c
 
 - $$n$$, the number of pairs scored: the points at which the measured and the modelled value both exist; a pair is the measured value $$o_i$$ and the modelled value $$p_i$$ at one point; $$\overline{o}$$ and $$\overline{p}$$ are the means over the pairs.
 - $$R = \dfrac{\sum_i (o_i-\overline{o})(p_i-\overline{p})}{\sqrt{\sum_i (o_i-\overline{o})^2 \sum_i (p_i-\overline{p})^2}}$$, Pearson's correlation coefficient of the pairs.
+- $$R^2$$, the square of $$R$$: the share of the variance of the measured values that a straight-line fit to the modelled values explains, between 0 and 1. It drops the sign of $$R$$, so an anti-correlated model can score a high $$R^2$$; read it beside $$R$$.
 - $$\mathrm{FAC2}$$, the fraction of pairs with $$0.5 \le p_i/o_i \le 2$$. The ratio keeps its sign, so a model of the other sign than the measurement is a miss; for a concentration, a pair with both values at or below the detection limit also counts.
 - $$\mathrm{FB} = \dfrac{\overline{o}-\overline{p}}{0.5\thinspace(\overline{o}+\overline{p})}$$, the fractional bias, positive when the model under-predicts. It is undefined (shown as —) for a signed component unless the measured and the modelled mean are both positive; $$R$$, $$\mathrm{FAC2}$$, the hit rate and $$n$$ stay.
 - $$\mathrm{HR}$$, the hit rate: the fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, with $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}}$$ equal to $$0.05\thinspace U_H$$ for a velocity component, to the detection limit for a concentration, and absent for $$k$$. VDI 3783-9 calls the hit rate $$q$$ and the tolerances $$D$$ and $$W$$; on this site those letters keep their other meanings.
@@ -1662,6 +1703,7 @@ Fitted to each case's own approach-flow file (Cases C–E in their sections abov
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -1778,6 +1820,7 @@ served unchanged by the API, so the figures rebuild from this repository alone, 
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -1861,6 +1904,7 @@ runs at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$, read in the undisturbed colum
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -1948,6 +1992,7 @@ imposed log law (mean across a span of $$\pm H$$):
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -2009,7 +2054,7 @@ the $$y \le 0$$ half by the tunnel's symmetry convention.
 <summary>Data notes: Cases A and B lateral velocity</summary>
 
 Just outside the windward side face the flow must deflect away from the centreline, toward $$-y$$ on the $$y \lt 0$$
-flank; the same flow feature has opposite sign in the two cases. The $$R = -0.910$$ of Case B's $$V$$ is an anti-correlation no
+side face; the same flow feature has opposite sign in the two cases. The $$R = -0.910$$ of Case B's $$V$$ is an anti-correlation no
 turbulence closure produces.
 
 </details>
@@ -2053,11 +2098,10 @@ now 2.4.0), `data_version` (a SHA-256 of the served data, which changes only whe
 `?v=<hash prefix>`, so no cache can serve a stale copy.
 
 **Versions.** `/api/…` always serves the newest release. Every release is also kept as a frozen copy of the whole API
-under `/api/<release>/` (for example `/api/3.1.0/index.json`; in the repository `docs/api/3.1.0/`): every URL inside it
-points back into it and its files never change, so pin a script to a release by using that base URL instead of `/api`.
-`GET /api/versions.json` lists the releases, each with the `base_url` of its copy. Release 2.0.0 predates the copies: its
-`/api/2.0.0/` is the files of its tag with only their addresses rewritten (`scripts/host_release.py`). Details and a pinned
-example are on the site's API page.
+under `/api/<release>/` (for example `/api/3.2.1/index.json`; in the repository `docs/api/3.2.1/`), from release 3.2.1
+on: every URL inside it points back into it and its files never change, so pin a script to a release by using that base
+URL instead of `/api`. `GET /api/versions.json` lists the releases, each with the `base_url` of its copy. Details and a
+pinned example are on the site's API page.
 
 | Endpoint | Returns |
 |---|---|
@@ -2125,6 +2169,7 @@ example are on the site's API page.
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
 - $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
 - $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
 - $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
@@ -2181,7 +2226,7 @@ unregistered snapshot stops the build). The changes from 1.0.0 are in `index.jso
 | `validation/` | Eddy3D's scores and per-point pairs (`results/`), the figures (`figures/`, geometry renders in `figures/geometry/`), and the scripts that draw them (`plot_*.py`, `render_geometry.py`; dependencies in `requirements.txt`) |
 | `docs/` | the Jekyll site; `docs/api/` is the static API (the latest alias, `versions.json`, and one frozen `docs/api/<release>/` per release), generated by `scripts/build_api.py`, as are `docs/cases/` and the generated includes |
 | `papers/` | `papers/README.md` only: the papers are cited and linked by DOI; no PDFs are stored in this repository |
-| `scripts/` | the API builder (`build_api.py`), its JSON Schemas (`api_schemas.py`), the shared data reader (`aijdata.py`), `host_release.py` (puts a pre-layout release under `docs/api/<release>/`), the check that every Markdown file renders the same on GitHub and in Jekyll (`check_markdown.py`) and the pinned build requirements |
+| `scripts/` | the API builder (`build_api.py`), its JSON Schemas (`api_schemas.py`), the shared data reader (`aijdata.py`), the check that every Markdown file renders the same on GitHub and in Jekyll (`check_markdown.py`) and the pinned build requirements |
 | `CITATION.cff` | the citation of this dataset, which GitHub's *Cite this repository* reads, with the data paper, the guidelines and each case's Zenodo dataset as references; generated from `scripts/citation.py` |
 | `.zenodo.json` | the metadata Zenodo's GitHub integration puts on the record of a release; generated from `scripts/citation.py` |
 

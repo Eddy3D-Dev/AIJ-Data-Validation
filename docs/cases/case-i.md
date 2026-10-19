@@ -52,4 +52,4 @@ Isolated cube with an ethane point source at the centre of its roof: velocity (l
 >
 > - The cleaned table is in SI units and one frame, with this case's corrections applied once. Do not apply them again.
 > - Origin: the centre of the cube on the ground plane. Length unit: m (model scale).
-> - 8 known issues in the published files are listed under [Known data issues]({{ '/cases/case-i/data/' | relative_url }}#known-data-issues).
+> - 7 known issues in the published files are listed under [Known data issues]({{ '/cases/case-i/data/' | relative_url }}#known-data-issues).

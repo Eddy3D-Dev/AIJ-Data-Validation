@@ -69,7 +69,7 @@
   },
   {
    "case": "A",
-   "check": "lateral_sign_V_negative_on_y_negative_flank",
+   "check": "lateral_sign_V_negative_on_y_negative_side",
    "pass": true,
    "severity": "info",
    "points": [
@@ -161,7 +161,7 @@
   },
   {
    "case": "B",
-   "check": "lateral_sign_V_negative_on_y_negative_flank_after_flip",
+   "check": "lateral_sign_V_negative_on_y_negative_side_after_flip",
    "pass": true,
    "severity": "info",
    "points": [
@@ -2628,10 +2628,10 @@
   },
   {
    "case": "J",
-   "check": "lateral_sign_V_negative_on_the_windward_y_negative_flank_and_positive_in_the_wake",
+   "check": "lateral_sign_V_negative_on_the_windward_y_negative_side_and_positive_in_the_wake",
    "pass": true,
    "severity": "info",
-   "flank_V": [
+   "side_V": [
     -0.1181475,
     -0.752645,
     -0.8217125,
@@ -2655,7 +2655,7 @@
     0.0493125,
     0.0413125
    ],
-   "note": "beside the upstream half of the y < 0 flank the flow turns away from the centreline (V < 0); behind the building it closes toward it (V > 0): V is positive toward +y as in Cases A and D"
+   "note": "beside the upstream half of the y < 0 side the flow turns away from the centreline (V < 0); behind the building it closes toward it (V > 0): V is positive toward +y as in Cases A and D"
   },
   {
    "case": "J",

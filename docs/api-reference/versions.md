@@ -22,7 +22,7 @@ that release's frozen copy at its tag, which never change. `release_base_url` is
 [Versions and pinning]({{ '/api-reference/' | relative_url }}#versions-and-pinning)):
 
 ```bash
-REL=$(curl -s -A "aij-client/1.0" $BASE/index.json | jq -r .release_base_url)   # .../api/3.1.0
+REL=$(curl -s -A "aij-client/1.0" $BASE/index.json | jq -r .release_base_url)   # .../api/3.2.1
 curl -s -A "aij-client/1.0" "$REL/cases/A/points.csv" | head -3
 ```
 
@@ -49,7 +49,7 @@ python scripts/build_api.py --check  # verify only
 The build writes the frozen copy of the release in `VERSION` (`docs/api/<VERSION>/`) and then the latest alias
 (`docs/api/`), from the same code, and writes `docs/api/versions.json`. It never touches another release's copy:
 once a release is tagged, `python scripts/release.py check` fails if its copy differs from the tag. A new release
-therefore adds one directory to `docs/api/` and moves the alias. Release 2.0.0 is not regenerated.
+therefore adds one directory to `docs/api/` and moves the alias. Copies are kept from release 3.2.1 on; the copies of earlier releases were withdrawn before anyone used them.
 
 The build is a pure function of the repository: no timestamps and no commit hashes, so rebuilding unchanged inputs
 gives byte-identical files. On every push and pull request, CI rebuilds everything in Python 3.12.12 (an image

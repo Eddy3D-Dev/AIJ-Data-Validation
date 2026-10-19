@@ -572,8 +572,8 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/cases-ab-engine-comparison.png",
-     "caption": "Cases A and B, every engine on the same points: measured against modelled U/U_H and V/U_H, one row per engine (OpenFOAM 12; OpenLB at dx = 1.6 m; FluidX3D at H/64). FluidX3D is scored on the filled points, the heights where its empty-domain control holds the imposed log law; the hollow points near the ground are excluded."
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-b-engine-comparison.png",
+     "caption": "Case B, every engine on the same points: measured against modelled U/U_H and V/U_H, one row per engine (OpenFOAM 12; OpenLB at dx = 1.6 m; FluidX3D at H/64). FluidX3D is scored on the filled points, the heights where its empty-domain control holds the imposed log law; the hollow points near the ground are excluded."
     }
    ],
    "pairs": {
@@ -1035,8 +1035,8 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/cases-ab-engine-comparison.png",
-     "caption": "Cases A and B, every engine on the same points: measured against modelled U/U_H and V/U_H, one row per engine (OpenFOAM 12; OpenLB at dx = 1.6 m; FluidX3D at H/64). FluidX3D is scored on the filled points, the heights where its empty-domain control holds the imposed log law; the hollow points near the ground are excluded."
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-b-engine-comparison.png",
+     "caption": "Case B, every engine on the same points: measured against modelled U/U_H and V/U_H, one row per engine (OpenFOAM 12; OpenLB at dx = 1.6 m; FluidX3D at H/64). FluidX3D is scored on the filled points, the heights where its empty-domain control holds the imposed log law; the hollow points near the ground are excluded."
     }
    ],
    "pairs": {
@@ -1175,8 +1175,8 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/ml-surrogate-agreement.png",
-     "caption": "Eddy3D ML surrogate (Yel-2.0): measured against predicted pedestrian-height speed, one panel per case, with the 1:1 line and the factor-of-two band."
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-b-ml-agreement.png",
+     "caption": "Case B, Eddy3D ML surrogate (Yel-2.0): measured against predicted pedestrian-height speed, with the 1:1 line and the factor-of-two band."
     }
    ],
    "pairs": {

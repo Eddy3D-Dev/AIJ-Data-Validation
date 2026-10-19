@@ -37,9 +37,8 @@ Isolated 1:1:2 building with a floor tracer source in an unstably stratified bou
 
 | Engine | Status | Compared with | R (range) | FAC2 (range) |
 |---|---|---|---|---|
-| OpenFOAM 12 | <span class="label label-yellow status">pending</span> | — | — | — |
-| UMF | <span class="label label-green status">scored</span> | Wind tunnel | +0.32 … +0.92 | 0.29 … 1.00 |
-| UMF buoyantKEpsilon | <span class="label label-green status">scored</span> | Wind tunnel | +0.36 … +0.92 | 0.29 … 1.00 |
+| OpenFOAM 12 (UMF) | <span class="label label-green status">scored</span> | Wind tunnel | +0.32 … +0.92 | 0.29 … 1.00 |
+| OpenFOAM 12 (UMF) buoyantKEpsilon | <span class="label label-green status">scored</span> | Wind tunnel | +0.36 … +0.92 | 0.29 … 1.00 |
 | OpenLB | <span class="label label-yellow status">pending</span> | — | — | — |
 | FluidX3D | <span class="label label-yellow status">pending</span> | — | — | — |
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |

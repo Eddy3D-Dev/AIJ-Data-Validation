@@ -1,0 +1,1 @@
+{% include figure.html name="case-l-layout.png" alt="Measurement lines and planes, Case L" caption="<strong>Figure 1.</strong> Case L, measurement lines and planes: A street profiles near the source, 8 heights; B profiles above the roofs, 4 heights; C street profiles around, 3 heights. Positions in multiples of $$H$$." %}

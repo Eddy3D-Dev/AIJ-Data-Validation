@@ -423,9 +423,9 @@ def build_A(prov):
     bb = [pts.x.min(), pts.x.max(), pts.y.min(), pts.y.max(), pts.z.min(), pts.z.max()]
     check(c, "extents_sane", bb[0] >= -0.1 and bb[1] <= 0.3 and bb[2] >= -0.2 and bb[3] <= 1e-9 and bb[4] > 0 and bb[5] <= 0.4, bbox=bb,
           note="points on the y <= 0 half, z = 0.01 .. 0.32 (MP drawings)")
-    # lateral sign: just outside the y<0 flank, upstream half of the side face, the flow deflects AWAY from the centreline => V < 0 when +y is positive
-    flank = pts[(np.isclose(pts.x, -0.04)) & (np.isclose(pts.y, -0.05)) & (pts.z < 0.1)]
-    check(c, "lateral_sign_V_negative_on_y_negative_flank", bool((flank.V < 0).all()), points=flank[["x", "y", "z", "V"]].to_dict("records"))
+    # lateral sign: just outside the y<0 side, upstream half of the side face, the flow deflects AWAY from the centreline => V < 0 when +y is positive
+    side = pts[(np.isclose(pts.x, -0.04)) & (np.isclose(pts.y, -0.05)) & (pts.z < 0.1)]
+    check(c, "lateral_sign_V_negative_on_y_negative_side", bool((side.V < 0).all()), points=side[["x", "y", "z", "V"]].to_dict("records"))
     # LF workbook cross-check (coordinates there are x/b, y/b, z/b)
     wb = xls(os.path.join(folder, "LF-caseA.xls"))
     sh = wb.sheet_by_name("Results (Ver. sec.)")
@@ -472,7 +472,7 @@ def build_B(prov):
                        x=g("x") / 1000.0, y=g("y") / 1000.0, z=g("z") / 1000.0, U=g("U"), V=-g("V"), W=g("W"),
                        uu=g("<u'2>"), vv=g("<v'2>"), ww=g("<w'2>"), k=g("k")))
     log("[B] transform: x, y, z millimetres -> metres (x 0.001)")
-    log("[B] transform: V -> -V. The published V is positive toward -y: at (-25, -110, 12.5) mm, just outside the y = -100 mm flank where the flow must deflect away from the centreline (toward -y), the file has V = +3.630 m/s; Case A at the same place has V = -2.893 and Case D's split fibre V = +2.055 on its +y flank. Flipping V makes V positive toward +y in every case. (For a y-symmetric building 'flip V' and 'flip y' are the same transform; V is flipped so the coordinates stay the drawing's.)")
+    log("[B] transform: V -> -V. The published V is positive toward -y: at (-25, -110, 12.5) mm, just outside the y = -100 mm side where the flow must deflect away from the centreline (toward -y), the file has V = +3.630 m/s; Case A at the same place has V = -2.893 and Case D's split fibre V = +2.055 on its +y side. Flipping V makes V positive toward +y in every case. (For a y-symmetric building 'flip V' and 'flip y' are the same transform; V is flipped so the coordinates stay the drawing's.)")
     pts = pd.DataFrame(out, columns=POINT_COLUMNS)
 
     h, ar = read_csv_rows(af)
@@ -495,8 +495,8 @@ def build_B(prov):
     bb = [pts.x.min(), pts.x.max(), pts.y.min(), pts.y.max(), pts.z.min(), pts.z.max()]
     check(c, "extents_sane_after_mm_to_m", bb[0] >= -0.1 and bb[1] <= 0.6 and bb[2] >= -0.4 and bb[3] <= 1e-9 and bb[4] > 0 and bb[5] <= 0.4, bbox=bb,
           note="MP drawings: x -0.075 .. 0.55 m, y -0.35 .. 0, z 0.0125 .. 0.35 m")
-    flank = pts[(np.isclose(pts.x, -0.025)) & (np.isclose(pts.y, -0.110)) & (pts.z < 0.05)]
-    check(c, "lateral_sign_V_negative_on_y_negative_flank_after_flip", bool((flank.V < 0).all()) and len(flank) > 0, points=flank[["x", "y", "z", "V"]].to_dict("records"))
+    side = pts[(np.isclose(pts.x, -0.025)) & (np.isclose(pts.y, -0.110)) & (pts.z < 0.05)]
+    check(c, "lateral_sign_V_negative_on_y_negative_side_after_flip", bool((side.V < 0).all()) and len(side) > 0, points=side[["x", "y", "z", "V"]].to_dict("records"))
     # seven locations were measured twice: the foot of each vertical-plane profile (z = 12.5 mm, y = 0) and the
     # horizontal plane's centreline row share coordinates but carry different values (two runs, two point numbers)
     dup = pts.groupby(["x", "y", "z"]).filter(lambda g: len(g) > 1).sort_values(["x", "point_id"])
@@ -778,10 +778,10 @@ def build_D(prov):
     up = S[S.x < -0.03125]
     check(c, "WD0_blows_toward_plus_x", bool((S.U > 0).sum() > 15) and bool((up.U < 0).any()), U_positive=int((S.U > 0).sum()), U_negative_upwind_of_tower=int((up.U < 0).sum()),
           note="split-fibre U > 0 at the stream-like points, < 0 in the windward horseshoe in front of the tower face at x = -0.03125")
-    flank = S[(np.isclose(S.y, 0.1125))]
-    up_, dn_ = flank[flank.x < 0], flank[flank.x > 0]
+    side = S[(np.isclose(S.y, 0.1125))]
+    up_, dn_ = side[side.x < 0], side[side.x > 0]
     check(c, "lateral_sign_V_diverges_upstream_and_converges_downstream_on_the_plus_y_side", bool((up_.V > 0).all()) and bool((dn_.V < 0).all()) and len(up_) > 0 and len(dn_) > 0,
-          points=flank[["x", "y", "V"]].to_dict("records"), note="on the +y side of the tower the flow is pushed toward +y ahead of it (V > 0 at x < 0) and returns toward the centreline behind it (V < 0 at x > 0): V positive toward +y, the same convention as Case A and as Case B after its flip")
+          points=side[["x", "y", "V"]].to_dict("records"), note="on the +y side of the tower the flow is pushed toward +y ahead of it (V > 0 at x < 0) and returns toward the centreline behind it (V < 0 at x > 0): V positive toward +y, the same convention as Case A and as Case B after its flip")
     # workbook cross-checks
     t = wb.sheet_by_name("Results (Exp_T)")
     mx, n = 0.0, 0

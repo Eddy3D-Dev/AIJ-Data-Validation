@@ -107,7 +107,7 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 
 ## Known data issues
 
-- Lateral velocity $$V$$ is positive toward $$+y$$ (checked: $$V$$ = -2.893 m/s at (-0.040, -0.050, 0.010), just outside the $$y \lt 0$$ flank, deflecting away from the centreline). Case B uses the OPPOSITE sign; the API flips Case B so both agree.
+- Lateral velocity $$V$$ is positive toward $$+y$$ (checked: $$V$$ = -2.893 m/s at (-0.040, -0.050, 0.010), just outside the $$y \lt 0$$ side face, deflecting away from the centreline). Case B uses the OPPOSITE sign; the API flips Case B so both agree.
 - Coordinates are metres (Case B\'s are millimetres in the published file).
 - Case A\'s turbulence columns are rms values ($$u_{\mathrm{rms}}$$, ...). The API serves VARIANCES ($$\overline{u'u'} = u_{\mathrm{rms}}^2$$) so A and B share one column meaning.
 

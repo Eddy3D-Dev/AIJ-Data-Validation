@@ -1,0 +1,1 @@
+{% include figure.html name="case-h-layout.png" alt="Measurement lines and planes, Case H" caption="<strong>Figure 1.</strong> Case H, measurement lines and planes: A vertical profiles, $$y/H = 0$$; B plane $$z/H = 0.0625$$; C plane $$z/H = 0.25$$; D plane $$z/H = 0.5$$. Positions in multiples of $$H$$." %}

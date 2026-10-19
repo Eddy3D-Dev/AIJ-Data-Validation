@@ -215,10 +215,10 @@ def build(B, prov):
     afU = float(np.interp(math.log(HEIGHT), np.log(afl.z), afl.U))
     check(B, c, "WD0_flow_is_along_x", bool((afl.U > 0).all()) and float(up.U.mean()) > 0 and float((pts.C * (pts.x - SOURCE_X)).sum()) > 0, approach_flow_U_positive_rows=int((afl.U > 0).sum()), mean_U_upwind_of_building=float(up.U.mean()),
           C_weighted_mean_x_minus_source=float((pts.C * (pts.x - SOURCE_X)).sum() / pts.C.sum()), note="U > 0 in the approach flow, and the plume is carried toward +x")
-    flank = pts[(np.isclose(pts.y, -0.05)) & (pts.x <= -0.08) & (pts.z <= 0.04)]
+    side = pts[(np.isclose(pts.y, -0.05)) & (pts.x <= -0.08) & (pts.z <= 0.04)]
     wake = pts[(np.isclose(pts.y, -0.05) | np.isclose(pts.y, -0.07)) & (pts.x >= 0.04) & np.isclose(pts.z, 0.04)]
-    check(B, c, "lateral_sign_V_negative_on_the_windward_y_negative_flank_and_positive_in_the_wake", bool((flank.V < 0).all()) and bool((wake.V > 0).all()) and len(flank) > 0 and len(wake) > 0,
-          flank_V=flank.V.tolist(), wake_V=wake.V.tolist(), note="beside the upstream half of the y < 0 flank the flow turns away from the centreline (V < 0); behind the building it closes toward it (V > 0): V is positive toward +y as in Cases A and D")
+    check(B, c, "lateral_sign_V_negative_on_the_windward_y_negative_side_and_positive_in_the_wake", bool((side.V < 0).all()) and bool((wake.V > 0).all()) and len(side) > 0 and len(wake) > 0,
+          side_V=side.V.tolist(), wake_V=wake.V.tolist(), note="beside the upstream half of the y < 0 side the flow turns away from the centreline (V < 0); behind the building it closes toward it (V > 0): V is positive toward +y as in Cases A and D")
     check(B, c, "building_surface_temperature_matches_workbook", bd_diff < 1e-9 and len(bd) == 121, points=len(bd), max_abs_diff_degC=bd_diff, mean_surface_degC=float(bd["T"].mean()), workbook_theta_build=K["<θbuild> (oC)"])
     check(B, c, "building_surface_temperature_mean_equals_workbook_theta_build", abs(float(bd["T"].mean()) - K["<θbuild> (oC)"]) < 1e-9,
           mean_surface_degC=float(bd["T"].mean()), workbook_theta_build=K["<θbuild> (oC)"], abs_difference_degC=abs(float(bd["T"].mean()) - K["<θbuild> (oC)"]), points=len(bd))

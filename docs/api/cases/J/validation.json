@@ -1240,6 +1240,10 @@
     {
      "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-j-umf-tracer.png",
      "caption": "Case J, urbanMicroclimateFoam: measured against modelled c* = C/c0 for turbulent Schmidt numbers 0.3, 0.5 and 0.7 under both closures (log axes show the positive pairs within seven decades only). The points within a quarter of a building height of the source are open. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
+    },
+    {
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-j-openfoam-profiles.png",
+     "caption": "Case J, OpenFOAM 12 (urbanMicroclimateFoam), realizable k-ε: vertical profiles of U/U_H on the centre plane y = 0 at up to four stations along the measured lines, measured points against the modelled line, offset by 1 per station."
     }
    ],
    "pairs": {
@@ -2456,6 +2460,10 @@
     {
      "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-j-umf-tracer.png",
      "caption": "Case J, urbanMicroclimateFoam: measured against modelled c* = C/c0 for turbulent Schmidt numbers 0.3, 0.5 and 0.7 under both closures (log axes show the positive pairs within seven decades only). The points within a quarter of a building height of the source are open. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
+    },
+    {
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-j-openfoam-profiles.png",
+     "caption": "Case J, OpenFOAM 12 (urbanMicroclimateFoam), realizable k-ε: vertical profiles of U/U_H on the centre plane y = 0 at up to four stations along the measured lines, measured points against the modelled line, offset by 1 per station."
     }
    ],
    "pairs": {

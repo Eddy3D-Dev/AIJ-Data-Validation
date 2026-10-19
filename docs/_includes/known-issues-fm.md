@@ -2,8 +2,6 @@
 
 ## Case F
 
-Case F — Shinjuku district.
-
 - The 16 field rows of point 14 in RS-FO\_caseF.csv hold the workbook\'s value of the NEXT wind direction clockwise (the series is shifted by one); the cleaned table follows the workbook (clean/QUESTIONS.md QF1).
 - Tunnel and STL coordinates are MODEL scale (1:800); the field\'s are full scale. The case frame is full scale; the tunnel\'s $$x$$, $$y$$, $$z$$ and the STL are multiplied by 800.
 - z is height above the tunnel floor. The readme\'s rule \'ground = z - 10 m\' gives the 5 / 9 / 20 m planes, but the STL\'s terrain under all 13 points is at $$z = 5\thinspace\mathrm{m}$$, so the planes stand 10 / 14 / 25 m above it.
@@ -18,8 +16,6 @@ Case F — Shinjuku district.
 
 ## Case G
 
-Case G — flow behind a tree belt.
-
 - FIELD data: full-scale metres, no model, and nothing in m/s. The table carries $$U/U_H$$ (`velocity_ratio`) and $$k/U_H^2$$ (`k_ratio`), $$U_H$$ = the mean speed at 7 m during each period; the approach-flow table carries $$U/U_b$$ and $$k/U_b^2$$ ($$U_b$$ = $$U$$ at 9 m) in its $$U$$ and $$k$$ columns, which are dimensionless here.
 - The readme lists the heights of the lee measurement as 1.5, 3.0, 6.0, 9.0 m; the table, the workbook, the drawing and the data paper have 1.5, 3, 4.5, 6 m.
 - The tree belt is a porous canopy (shading rate 81 % after pruning): the served geometry is its 2 m × 74 m × 7 m envelope with the 1.2 m gap, and a solver needs a canopy (drag) model.
@@ -28,8 +24,6 @@ Case G — flow behind a tree belt.
 - The wind direction relative to the belt normal during the measurement is not published; the case is two-dimensional by assumption.
 
 ## Case H
-
-Case H — 1:1:2 building with a floor point source.
 
 - The table carries the legacy workbook\'s values (ratios at full precision x $$u_H$$ = 3.226 m/s), not RS\_caseH.csv\'s: on the $$z/H = 1/2\text{ and }1/4$$ planes (and in the approach profile) the CSV\'s $$U$$, $$V$$, $$W$$ are the workbook ratios ROUNDED TO 0.01 before the scaling, a 0.032 m/s grid (+/-0.016 m/s).
 - One row per instrument and point: velocity rows (split fibre) and concentration rows (hydrocarbon analyser) with the same point\_id (the CSV\'s No.). The velocity line is $$x = 0.40\thinspace\mathrm{m}$$ and the concentration line $$x = 0.38\thinspace\mathrm{m}$$, so 50 points have no velocity and 50 no concentration (-999.9 in the CSV); none of them is inside the building.
@@ -41,9 +35,6 @@ Case H — 1:1:2 building with a floor point source.
 
 ## Case I
 
-Case I — cube with a roof point source.
-
-- Two point sets, no point numbers: the velocity file (91 points: $$y = 0$$ plane and $$z/H = 0.5$$ plane) and the concentration file (539 points: $$y = 0$$ plane and the ground). The table stacks them, one row per instrument and point: velocity rows (instrument ldv) are numbered 1-91 and concentration rows (hydrocarbon\_analyser) 92-630, in the files\' order. 17 locations have both a velocity and a concentration value.
 - $$V$$ on the $$y = 0$$ plane (53 of 91 points) is 0 in the CSV and 1e-9 ... 4e-6 m/s in the workbook, a symmetry value. It is NaN in the table; $$V$$ is measured only at the 38 off-plane points.
 - The table carries the legacy workbook\'s values; the CSVs round to 3 decimals (velocity, $$k$$) and 1 decimal (concentration, ppm). Every concentration is a multiple of 0.1 ppm: a 0.4 ppm value carries +/-12 % of quantisation.
 - The paper\'s $$c_0$$ = 39.2 ppm needs the ETHANE flow (10 % of the 400 cc/min, 6.67e-7 m³/s); its sentence \'ethane released at 6.67e-6 m³/s\' is the mixture. With the mixture flow $$c_0$$ would be 392 ppm.
@@ -53,8 +44,6 @@ Case I — cube with a roof point source.
 - Only the TKE is published, no variances and no concentration fluctuation: $$k$$ cannot be checked against the components.
 
 ## Case J
-
-Case J — 1:1:2 building, non-isothermal.
 
 - Temperature is in KELVIN in all three published CSVs; the API serves degrees Celsius (T) and kelvin differences ($$T_{\mathrm{rms}}$$, heat fluxes).
 - The published CSV is the legacy workbook\'s non-dimensional values rounded to 3-4 decimals and scaled back; the table is rebuilt from the workbook. The CSV\'s heat fluxes sit on a 0.0049 K m/s grid and $$k$$ on 0.00021 m²/s².
@@ -69,8 +58,6 @@ Case J — 1:1:2 building, non-isothermal.
 
 ## Case K
 
-Case K — 9 x 9 cube array, point source.
-
 - The legacy workbook normalises with $$H = 0.2\thinspace\mathrm{m}$$ (Case H\'s building), $$U_H$$ = 4.94009 m/s and $$C_0$$ = 18.218 ppm, not the cube\'s $$H = 0.06\thinspace\mathrm{m}$$ and $$U_H$$ = 2.33 m/s; its normalised columns are 23.6 times smaller in concentration. The API\'s `concentration_ratio` uses the cube\'s $$c_0$$ = 429.18 ppm.
 - RS\_caseK.csv has no point numbers; point\_id is the row order of the file.
 - The published CSV is the workbook rounded (3 decimals, concentrations 2), with $$k$$ recomputed from the rounded rms values; the table is rebuilt from the workbook.
@@ -82,8 +69,6 @@ Case K — 9 x 9 cube array, point source.
 - Workbook units: x and y in millimetres in both data sheets; z in millimetres in \'Measurement data\' but metres in \'Inflow\'.
 
 ## Case L
-
-Case L — 9 x 14 cube array, line source, non-isothermal.
 
 - RS\_caseL.csv\'s temperature column is headed \'T(K)\' but holds DEGREES CELSIUS (12.85 .. 29.86); AF\_caseL.csv\'s \'T(K)\' is kelvin (283 .. 295). The API serves degrees Celsius for both.
 - The published CSV is the workbook rounded to 2-4 decimals; the table is rebuilt from the workbook. Its \'tc\' column (temperature-concentration covariance, K ppm) and the workbook\'s \'Usc\' (the vector magnitude of the mean velocity) are not in the table.
@@ -97,8 +82,6 @@ Case L — 9 x 14 cube array, line source, non-isothermal.
 - The measured tracer flux through the cross-sections equals q / 1.2 m to 0.86 .. 1.0 (street and cube-column lines averaged), which fixes q and the unit ppm; the cube-column line alone carries only 0.2 .. 0.4 of it.
 
 ## Case M
-
-Case M — TPU Atsugi campus.
 
 - Field concentrations are in ppq (1e-15 volume fraction) and the tunnel\'s in ppm: 1 ppq = 1e-9 ppm. The cleaned table converts the field\'s to ppm and carries $$C/c_0$$ for both, with the run\'s own $$c_0$$ in the field.
 - Every field run has its own reference speed $$U_R$$, mean direction $$\mathrm{WD_R}$$ and tracer flow q (clean/manifest.json -\> cases.M.extra\_measurements.field\_runs); the row\'s wind\_direction\_deg is $$\mathrm{WD_R}$$.

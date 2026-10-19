@@ -140,6 +140,8 @@ _SCALES = [
 _SCORES = [
     m("n") + ", the number of pairs scored: the points at which the measured and the modelled value both exist; " + PAIR,
     m(rf"R = \dfrac{{\sum_i (o_i-{O})(p_i-{P})}}{{\sqrt{{\sum_i (o_i-{O})^2 \sum_i (p_i-{P})^2}}}}") + ", Pearson's correlation coefficient of the pairs",
+    m("R^2") + ", the square of " + m("R") + ": the share of the variance of the measured values that a straight-line fit to the modelled values "
+    "explains, between 0 and 1. It drops the sign of " + m("R") + ", so an anti-correlated model can score a high " + m("R^2") + "; read it beside " + m("R"),
     m(r"\mathrm{FAC2}") + ", the fraction of pairs with " + m(r"0.5 \le p_i/o_i \le 2") + ". The ratio keeps its sign, so a model of the other sign than the "
     "measurement is a miss; for a concentration, a pair with both values at or below the detection limit also counts",
     m(rf"\mathrm{{FB}} = \dfrac{{{O}-{P}}}{{0.5\thinspace({O}+{P})}}") + ", the fractional bias, positive when the model under-predicts. It is undefined (shown as —) "
@@ -175,6 +177,7 @@ _QUANTITIES = [
 _LEGEND = [
     m("n") + " — number of pairs of a measured value " + m("o_i") + " and a modelled value " + m("p_i") + " at one point",
     m("R") + " — Pearson correlation coefficient of the pairs",
+    m("R^2") + " — square of " + m("R") + ": share of the measured variance a linear fit to the model explains",
     m(r"\mathrm{FAC2}") + " — fraction of pairs with " + m(r"0.5 \le p_i/o_i \le 2"),
     m(r"\mathrm{FB}") + " — fractional bias " + m(FB) + ", positive when the model is low",
     m(r"\mathrm{HR}") + " (hit rate) — fraction of pairs with " + m(HIT_REL) + " or " + m(HIT_ABS) + ", where " + m(rf"{REL} = 0.25") + " and "

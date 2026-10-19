@@ -1,0 +1,1 @@
+{% include figure.html name="case-e-layout.png" alt="Measurement points, Case E" caption="<strong>Figure 1.</strong> Case E, measurement points: A within 30 m of the 60 m building; B within 30 m of the two 18 m buildings; C elsewhere. Positions in metres, full scale. Dark footprints: the three buildings added in the after state." %}

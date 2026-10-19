@@ -5,7 +5,7 @@ grand_parent: "Cases"
 nav_order: 2
 has_children: false
 generated: true
-description: "Case J — 1:1:2 building, non-isothermal: Eddy3D's scores against the measurements, by engine."
+description: "Case J — 1:1:2 building, non-isothermal: Eddy3D's scores against the measurements, engine by engine."
 redirect_from:
   - /validation/cases-jl/
 ---
@@ -13,28 +13,43 @@ redirect_from:
 # Case J: validation
 {: .no_toc }
 
-Engine status: OpenFOAM 12 <span class="label label-yellow status">pending</span> · UMF <span class="label label-green status">scored</span> · UMF buoyantKEpsilon <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
+<details open markdown="block">
+  <summary>
+    Contents
+  </summary>
+  {: .text-delta }
+1. TOC
+{:toc}
+</details>
 
-{% include validation/case-j.md %}
+Engine status: OpenFOAM 12 (UMF) <span class="label label-green status">scored</span> · OpenFOAM 12 (UMF) buoyantKEpsilon <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
-## Scores, run by run
+## Measurement locations
+
+{% include validation/case-j/layout.md %}
+
+## OpenFOAM 12
+
+Status: <span class="label label-green status">scored</span>
+
+{% include validation/case-j/openfoam.md %}
 
 ### urbanMicroclimateFoam, realizable k-epsilon (Eddy3D Outdoor+)
 
-| Score | R | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|
-| $$U$$ | +0.921 | 0.731 | +0.193 | 0.573 | 443 |
-| $$V$$ | +0.866 | 0.449 | — | 0.526 | 443 |
-| $$W$$ | +0.840 | 0.289 | — | 0.596 | 443 |
-| $$k$$ | +0.322 | 0.558 | -0.034 | 0.178 | 443 |
-| $$\theta$$, floor-referenced temperature | +0.922 | 1.000 | +0.120 | 0.817 | 443 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.3 | +0.919 | 0.858 | +0.065 | 0.716 | 443 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.5 | +0.905 | 0.847 | -0.162 | 0.709 | 443 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7 | +0.896 | 0.828 | -0.256 | 0.686 | 443 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.3, without the near-source points | +0.874 | 0.760 | +0.240 | 0.570 | 416 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.5, without the near-source points | +0.860 | 0.752 | +0.067 | 0.567 | 416 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7, without the near-source points | +0.848 | 0.728 | +0.025 | 0.565 | 416 |
-| $$U$$, y-symmetric ceiling (control) | +0.993 | 0.971 | +0.000 | 0.925 | 346 |
+| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
+|---|---|---|---|---|---|---|
+| $$U$$ | +0.921 | 0.847 | 0.731 | +0.193 | 0.573 | 443 |
+| $$V$$ | +0.866 | 0.750 | 0.449 | — | 0.526 | 443 |
+| $$W$$ | +0.840 | 0.706 | 0.289 | — | 0.596 | 443 |
+| $$k$$ | +0.322 | 0.104 | 0.558 | -0.034 | 0.178 | 443 |
+| $$\theta$$, floor-referenced temperature | +0.922 | 0.850 | 1.000 | +0.120 | 0.817 | 443 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.3 | +0.919 | 0.844 | 0.858 | +0.065 | 0.716 | 443 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.5 | +0.905 | 0.819 | 0.847 | -0.162 | 0.709 | 443 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7 | +0.896 | 0.803 | 0.828 | -0.256 | 0.686 | 443 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.3, without the near-source points | +0.874 | 0.764 | 0.760 | +0.240 | 0.570 | 416 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.5, without the near-source points | +0.860 | 0.740 | 0.752 | +0.067 | 0.567 | 416 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7, without the near-source points | +0.848 | 0.719 | 0.728 | +0.025 | 0.565 | 416 |
+| $$U$$, y-symmetric ceiling (control) | +0.993 | 0.987 | 0.971 | +0.000 | 0.925 | 346 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
@@ -50,20 +65,20 @@ Notes:
 
 ### urbanMicroclimateFoam, buoyantKEpsilon (Eddy3D Outdoor+)
 
-| Score | R | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|
-| $$U$$ | +0.924 | 0.761 | +0.167 | 0.607 | 443 |
-| $$V$$ | +0.901 | 0.442 | — | 0.540 | 443 |
-| $$W$$ | +0.849 | 0.289 | — | 0.587 | 443 |
-| $$k$$ | +0.360 | 0.582 | -0.088 | 0.208 | 443 |
-| $$\theta$$, floor-referenced temperature | +0.920 | 0.998 | +0.127 | 0.806 | 443 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.3 | +0.894 | 0.869 | -0.050 | 0.698 | 443 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.5 | +0.869 | 0.840 | -0.274 | 0.675 | 443 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7 | +0.852 | 0.806 | -0.380 | 0.641 | 443 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.3, without the near-source points | +0.829 | 0.757 | +0.052 | 0.541 | 416 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.5, without the near-source points | +0.788 | 0.731 | -0.193 | 0.538 | 416 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7, without the near-source points | +0.755 | 0.709 | -0.292 | 0.519 | 416 |
-| $$U$$, y-symmetric ceiling (control) | +0.993 | 0.971 | +0.000 | 0.925 | 346 |
+| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
+|---|---|---|---|---|---|---|
+| $$U$$ | +0.924 | 0.854 | 0.761 | +0.167 | 0.607 | 443 |
+| $$V$$ | +0.901 | 0.812 | 0.442 | — | 0.540 | 443 |
+| $$W$$ | +0.849 | 0.720 | 0.289 | — | 0.587 | 443 |
+| $$k$$ | +0.360 | 0.129 | 0.582 | -0.088 | 0.208 | 443 |
+| $$\theta$$, floor-referenced temperature | +0.920 | 0.846 | 0.998 | +0.127 | 0.806 | 443 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.3 | +0.894 | 0.798 | 0.869 | -0.050 | 0.698 | 443 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.5 | +0.869 | 0.755 | 0.840 | -0.274 | 0.675 | 443 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7 | +0.852 | 0.725 | 0.806 | -0.380 | 0.641 | 443 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.3, without the near-source points | +0.829 | 0.687 | 0.757 | +0.052 | 0.541 | 416 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.5, without the near-source points | +0.788 | 0.622 | 0.731 | -0.193 | 0.538 | 416 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7, without the near-source points | +0.755 | 0.570 | 0.709 | -0.292 | 0.519 | 416 |
+| $$U$$, y-symmetric ceiling (control) | +0.993 | 0.987 | 0.971 | +0.000 | 0.925 | 346 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
@@ -77,7 +92,11 @@ Notes:
 - The air region ended at its 1500-iteration cap with the residualControl unmet (no \'solution converged\' line); at the last iteration the initial residuals were 1.3e-2 ($$U_y$$), 1.1e-2 (`p_rgh`) and 1.2e-3 to 1.6e-3 (the tracers).
 - The steady closure gives a longer recirculation than the tunnel: reattachment at $$z/H = 0.25\text{ and }0.025$$ is $$1.35\thinspace H$$ and $$1.56\thinspace H$$, against the measured $$0.68\thinspace H$$ and $$0.80\thinspace H$$.
 
-### All runs
+## Not run
+
+{% include validation/case-j/not-run.md %}
+
+## Notes on every run
 
 - Quantity: $$U$$, $$V$$, $$W$$ over $$U_H$$ = 1.4581 m/s and $$k$$ over $$U_H^2$$ (the tunnel\'s units, 443 distinct points); theta = ($$T_f - T$$)/($$T_f - T_H$$) with $$T_f$$ = 318.95 K and $$T_H$$ = 285.32 K; $$c^\ast = C/c_0$$ ($$c_0$$ = 12.28 ppm) against the model\'s ethylene mass fraction as ppm over the same $$c_0$$, for turbulent Schmidt numbers 0.3, 0.5 and 0.7; the 27 points within a quarter of a building height of the source are scored with and without. The scene is the tunnel at Froude scale 62.5
 - Normalisation: the tunnel\'s units: velocities by $$U_H$$ (1.4581 m/s measured, the Froude-scaled 11.53 m/s modelled), $$k$$ by $$U_H^2$$, temperature as theta = ($$T_f - T$$)/($$T_f - T_H$$) ($$T_f$$ = 45.8 degC, $$T_f - T_H$$ = 33.63 K), $$c^\ast = C/c_0$$ ($$c_0$$ = 12.28 ppm) against the modelled ethylene mass fraction as ppm over the same $$c_0$$; hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units, concentration with one detection limit of $$10^{-3}$$ of the largest measured value; 443 points (point 153 repeats point 1)
@@ -103,3 +122,19 @@ At the model\'s Re, UMF\'s wall functions belong and the tunnel\'s laminar-subla
 - Scores recomputed from the pairs by validation/dispersion\_metrics.py; the SHA-256 of every file the snapshot was read from is in its results file, under `sources`.
 
 </details>
+
+## Leaderboard
+
+| Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate, $$k$$ | Hit rate, $$c^\ast$$ | Hit rate, $$\theta$$ | Hit rate | FAC2 | R | $$R^2$$ | Points scored |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | OpenFOAM 12 (UMF) buoyantKEpsilon · $$\mathrm{Sc_t}$$ 0.3 | Eddy3D | **0.607** | **0.540** | 0.587 | **0.637** | **0.208** | 0.698 | 0.806 | **0.583** | **0.684** | **+0.820** | **0.707** | 100 % |
+| 2 | OpenFOAM 12 (UMF) buoyantKEpsilon · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | **0.607** | **0.540** | 0.587 | **0.637** | **0.208** | 0.675 | 0.806 | 0.580 | 0.679 | +0.816 | 0.701 | 100 % |
+| 3 | OpenFOAM 12 (UMF) · $$\mathrm{Sc_t}$$ 0.3 | Eddy3D | 0.573 | 0.526 | **0.596** | **0.637** | 0.178 | **0.716** | **0.817** | 0.578 | 0.675 | +0.811 | 0.698 | 100 % |
+| 4 | OpenFOAM 12 (UMF) · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | 0.573 | 0.526 | **0.596** | **0.637** | 0.178 | 0.709 | **0.817** | 0.577 | 0.674 | +0.809 | 0.694 | 100 % |
+| 5 | OpenFOAM 12 (UMF) buoyantKEpsilon · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | **0.607** | **0.540** | 0.587 | **0.637** | **0.208** | 0.641 | 0.806 | 0.575 | 0.675 | +0.814 | 0.697 | 100 % |
+| 6 | OpenFOAM 12 (UMF) · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | 0.573 | 0.526 | **0.596** | **0.637** | 0.178 | 0.686 | **0.817** | 0.573 | 0.671 | +0.807 | 0.692 | 100 % |
+{: .scores }
+
+{% include nomenclature-scores.md %}
+
+Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. *Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

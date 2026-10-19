@@ -1083,8 +1083,8 @@
    },
    "figures": [
     {
-     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/ml-surrogate-agreement.png",
-     "caption": "Eddy3D ML surrogate (Yel-2.0): measured against predicted pedestrian-height speed, one panel per case, with the 1:1 line and the factor-of-two band."
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-c-ml-agreement.png",
+     "caption": "Case C, Eddy3D ML surrogate (Yel-2.0): measured against predicted pedestrian-height speed, with the 1:1 line and the factor-of-two band."
     }
    ],
    "pairs": {

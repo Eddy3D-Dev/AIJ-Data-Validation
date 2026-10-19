@@ -70,8 +70,8 @@ collector's own word, and for which half of the 0° plane was measured.
 ## Q4 — Case B: lateral sign and the seven repeated points (Tominaga)
 
 1. The published $$V$$ appears positive toward $$-y$$: $$V$$ = +3.630 m/s at (−25, −110, 12.5) mm, just outside
-   the $$y = -100\thinspace\mathrm{mm}$$ flank where the flow must deflect away from the centreline. Case A ($$V$$ = −2.893 at
-   the equivalent point) and Case D ($$V$$ = +2.055 on the $$+y$$ flank) both read positive toward $$+y$$. This
+   the $$y = -100\thinspace\mathrm{mm}$$ side face where the flow must deflect away from the centreline. Case A ($$V$$ = −2.893 at
+   the equivalent point) and Case D ($$V$$ = +2.055 on the $$+y$$ side face) both read positive toward $$+y$$. This
    release flips B's $$V$$. Please confirm the sign convention of $$V$$ in `RS_caseB.csv` (or whether the
    published points are on the $$+y$$ half rather than the $$-y$$ half of the drawing).
 2. Seven locations appear twice with different values: the foot of each vertical-section profile

@@ -125,6 +125,8 @@ def required_level(tag, changes):
     """The smallest bump that describes the changes, with the reason."""
     need, why = "patch", "served content changed"
     for status, path in changes:
+        if status.startswith("D") and RELEASE_TREE.match(path):
+            continue        # the copies of 2.0.0 to 3.2.0 were withdrawn at 3.2.1, before anyone used them; the alias still serves every file
         if status.startswith("D"):
             return "major", f"{path} was removed or renamed"
         if status.startswith("A") and LEVELS.index(need) < 1 and not RELEASE_TREE.match(path):
@@ -174,15 +176,10 @@ def check_frozen_trees(v, errors):
             errors.append(f"docs/api/{t}/ is newer than VERSION {v}")
         elif not git("rev-parse", "-q", "--verify", f"refs/tags/v{t}").stdout.strip():
             errors.append(f"docs/api/{t}/ is the frozen copy of {t}, which is not tagged v{t}; only VERSION's own copy may exist before its release")
-        elif git("ls-tree", "-d", f"v{t}", f"docs/api/{t}").stdout.strip():
-            # a copy made at the release itself must still be what the tag holds; one hosted later (see
-            # scripts/host_release.py) is not in the tag and is checked by the script that wrote it
+        else:
             moved = surface_diff(f"v{t}", [f"docs/api/{t}"])
             if moved:
                 errors.append(f"docs/api/{t}/ is frozen at v{t} but differs from the tag ({len(moved)} file(s), e.g. {moved[0][1]})")
-        else:
-            import host_release   # a release hosted afterwards: it must be exactly what the tag gives, addresses aside
-            errors += host_release.check(t)
 
 
 def surface_diff(tag, paths):

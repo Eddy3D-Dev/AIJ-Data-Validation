@@ -162,6 +162,10 @@
     {
      "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-stations.png",
      "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
+    },
+    {
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-profiles.png",
+     "caption": "Case G, OpenFOAM 12, conifer crown of the drag sweep: the field's U/U_H against the modelled |U| over the model's own U(7 m) at four of the seven masts behind the belt, offset by 1 per mast."
     }
    ],
    "pairs": {
@@ -308,6 +312,10 @@
     {
      "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-stations.png",
      "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
+    },
+    {
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-profiles.png",
+     "caption": "Case G, OpenFOAM 12, conifer crown of the drag sweep: the field's U/U_H against the modelled |U| over the model's own U(7 m) at four of the seven masts behind the belt, offset by 1 per mast."
     }
    ],
    "pairs": {
@@ -454,6 +462,10 @@
     {
      "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-stations.png",
      "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
+    },
+    {
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-profiles.png",
+     "caption": "Case G, OpenFOAM 12, conifer crown of the drag sweep: the field's U/U_H against the modelled |U| over the model's own U(7 m) at four of the seven masts behind the belt, offset by 1 per mast."
     }
    ],
    "pairs": {
@@ -600,6 +612,10 @@
     {
      "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-stations.png",
      "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
+    },
+    {
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-profiles.png",
+     "caption": "Case G, OpenFOAM 12, conifer crown of the drag sweep: the field's U/U_H against the modelled |U| over the model's own U(7 m) at four of the seven masts behind the belt, offset by 1 per mast."
     }
    ],
    "pairs": {
@@ -746,6 +762,10 @@
     {
      "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-stations.png",
      "caption": "Case G, OpenFOAM 12: the mean U/U_H and the mean k/U_H² over the four heights at each of the seven stations behind the belt (x/H = 0.25 to 5), the field against each arm of the drag sweep. The letters A to G mark the seven lines of the layout figure."
+    },
+    {
+     "url": "https://eddy3d-dev.github.io/AIJ-Data-Validation/assets/figures/case-g-openfoam-profiles.png",
+     "caption": "Case G, OpenFOAM 12, conifer crown of the drag sweep: the field's U/U_H against the modelled |U| over the model's own U(7 m) at four of the seven masts behind the belt, offset by 1 per mast."
     }
    ],
    "pairs": {

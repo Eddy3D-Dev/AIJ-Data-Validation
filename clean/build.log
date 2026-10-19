@@ -9,12 +9,12 @@
   [PASS] A no_sensor_inside_building  {"inside": 0}
   [PASS] A control_shifted_points_are_detected_inside  {"inside_after_shift": 20, "shift_m": [0.03, 0.04, 0]}
   [PASS] A extents_sane  {"bbox": [-0.06, 0.26, -0.16, 0.0, 0.01, 0.28], "note": "points on the y <= 0 half, z = 0.01 .. 0.32 (MP drawings)"}
-  [PASS] A lateral_sign_V_negative_on_y_negative_flank  {"points": [{"x": -0.04, "y": -0.05, "z": 0.01, "V": -2.893}]}
+  [PASS] A lateral_sign_V_negative_on_y_negative_side  {"points": [{"x": -0.04, "y": -0.05, "z": 0.01, "V": -2.893}]}
   [PASS] A legacy_workbook_agrees_with_csv  {"rows_compared": 66, "max_abs_diff": 0.0, "note": "LF-caseA.xls 'Results (Ver. sec.)' x/b*0.08 etc. vs RS-caseA.csv"}
   [PASS] A U_H_from_profile_matches_stated  {"U_H_profile": 4.491, "U_H_stated": 4.49}
 [B] RS_caseB.csv header (bare): ['No.', 'x', 'y', 'z', 'U', 'V', 'W', "<u'2>", "<v'2>", "<w'2>", 'k']; published units: x,y,z MILLIMETRES, velocities m/s, variances m2/s2
 [B] transform: x, y, z millimetres -> metres (x 0.001)
-[B] transform: V -> -V. The published V is positive toward -y: at (-25, -110, 12.5) mm, just outside the y = -100 mm flank where the flow must deflect away from the centreline (toward -y), the file has V = +3.630 m/s; Case A at the same place has V = -2.893 and Case D's split fibre V = +2.055 on its +y flank. Flipping V makes V positive toward +y in every case. (For a y-symmetric building 'flip V' and 'flip y' are the same transform; V is flipped so the coordinates stay the drawing's.)
+[B] transform: V -> -V. The published V is positive toward -y: at (-25, -110, 12.5) mm, just outside the y = -100 mm side where the flow must deflect away from the centreline (toward -y), the file has V = +3.630 m/s; Case A at the same place has V = -2.893 and Case D's split fibre V = +2.055 on its +y side. Flipping V makes V positive toward +y in every case. (For a y-symmetric building 'flip V' and 'flip y' are the same transform; V is flipped so the coordinates stay the drawing's.)
 [B] approach flow: AF_caseB.csv, 12 heights in metres; the '1/4 power' fit column is dropped (a fit, not a measurement)
   [PASS] B row_count_matches_readme  {"rows": 224, "expected": 224}
   [PASS] B point_ids_unique_and_contiguous
@@ -23,7 +23,7 @@
   [PASS] B no_sensor_inside_building  {"inside": 0}
   [PASS] B control_shifted_points_are_detected_inside  {"inside_after_shift": 2, "shift_m": [0.03, 0.05, 0]}
   [PASS] B extents_sane_after_mm_to_m  {"bbox": [-0.075, 0.55, -0.35, 0.0, 0.005, 0.35], "note": "MP drawings: x -0.075 .. 0.55 m, y -0.35 .. 0, z 0.0125 .. 0.35 m"}
-  [PASS] B lateral_sign_V_negative_on_y_negative_flank_after_flip  {"points": [{"x": -0.025, "y": -0.11, "z": 0.0125, "V": -3.63}]}
+  [PASS] B lateral_sign_V_negative_on_y_negative_side_after_flip  {"points": [{"x": -0.025, "y": -0.11, "z": 0.0125, "V": -3.63}]}
   [PASS] B seven_locations_measured_twice  {"pairs": [{"x": -0.075, "ids": [12, 110], "U": [-1.09, -0.983], "abs_dU": 0.107}, {"x": 0.05, "ids": [43, 147], "U": [-0.797, -0.698], "abs_dU": 0.099}, {"x": 0.1, "ids": [56, 160], "U": [-1.654, -1.603], "abs_dU": 0.051}, {"x": 0.2, "ids": [69, 173], "U": [-1.901, -1.815], "abs_dU": 0.086}, {"x": 0.3, "ids": [82, 186], "U": [-1.167, -1.025], "abs_dU": 0.142}, {"x": 0.4, "ids": [95, 199], "U": [-0.139, -0.02], "abs_dU": 0.119}, {"x": 0.55, "ids": [108, 212], "U": [1.05, 1.179], "abs_dU": 0.129}], "mean_abs_dU": 0.105, "note": "repeat measurements of the same location in two runs; both rows are kept (their point numbers differ). The spread is a free repeatability estimate."}
   [PASS] B legacy_workbook_agrees_with_csv  {"rows_compared": 224, "max_abs_diff": 0.0, "note": "LF_caseB.xls (mm, published V sign) vs the cleaned table (m, V flipped); the CSV numbers the vertical-section sheet 1..109 and the horizontal-section sheet 110..224"}
   [PASS] B U_H_from_profile_matches_stated  {"U_H_profile": 5.133, "U_H_stated": 5.1, "note": "profile has a row at exactly z = 0.2 m: 5.133"}
@@ -249,7 +249,7 @@
   [PASS] J points_lie_on_the_three_planes_of_the_data_paper  {"rows_per_plane": {"y=0": 153, "z=0.004": 109, "z=0.04": 205}, "note": "y/H = 0, z/H = 0.025 and 0.25 (data paper section 3.10); the planes share points on y = 0"}
   [PASS] J concentration_peaks_at_the_source  {"peak_point_id": 81, "peak_xyz": [0.04, 0.0, 0.004], "C_ppm": 5370.79362, "source_xy": [0.04, 0.0], "note": "the source is 0.25 H = 0.04 m beyond the leeward wall (readme); the highest mean concentration is the point 4 mm above it, where the flow is reversed (U < 0)"}
   [PASS] J WD0_flow_is_along_x  {"approach_flow_U_positive_rows": 20, "mean_U_upwind_of_building": 0.9450055, "C_weighted_mean_x_minus_source": 0.00574490396, "note": "U > 0 in the approach flow, and the plume is carried toward +x"}
-  [PASS] J lateral_sign_V_negative_on_the_windward_y_negative_flank_and_positive_in_the_wake  {"flank_V": [-0.1181475, -0.752645, -0.8217125, -0.7421775, -0.05856, -0.3111625, -0.46578, -0.5921625], "wake_V": [0.0672975, 0.08293, 0.139645, 0.104325, 0.1682925, 0.1390725, 0.1321925, 0.1132025, 0.08771, 0.0633275, 0.0493125, 0.0413125], "note": "beside the upstream half of the y < 0 flank the flow turns away from the centreline (V < 0); behind the building it closes toward it (V > 0): V is positive toward +y as in Cases A and D"}
+  [PASS] J lateral_sign_V_negative_on_the_windward_y_negative_side_and_positive_in_the_wake  {"side_V": [-0.1181475, -0.752645, -0.8217125, -0.7421775, -0.05856, -0.3111625, -0.46578, -0.5921625], "wake_V": [0.0672975, 0.08293, 0.139645, 0.104325, 0.1682925, 0.1390725, 0.1321925, 0.1132025, 0.08771, 0.0633275, 0.0493125, 0.0413125], "note": "beside the upstream half of the y < 0 side the flow turns away from the centreline (V < 0); behind the building it closes toward it (V > 0): V is positive toward +y as in Cases A and D"}
   [PASS] J building_surface_temperature_matches_workbook  {"points": 121, "max_abs_diff_degC": 4.61852778e-14, "mean_surface_degC": 24.472314, "workbook_theta_build": 24.472314}
   [PASS] J building_surface_temperature_mean_equals_workbook_theta_build  {"mean_surface_degC": 24.472314, "workbook_theta_build": 24.472314, "abs_difference_degC": 2.48689958e-14, "points": 121}
   [PASS] J building_surface_points_lie_on_the_building_faces  {"points": 121, "bbox_min": [-0.08, -0.04, 0.004], "bbox_max": [0.0, 0.04, 0.16]}
