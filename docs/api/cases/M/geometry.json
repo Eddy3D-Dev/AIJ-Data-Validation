@@ -1,7 +1,7 @@
 {
  "$schema": "https://aij.eddy3d.com/api/schemas/geometry.schema.json",
  "schema_version": "2.5.0",
- "data_version": "ecbbeee22eb3dfd27a94ee6813bff5e602ce79626b8a6309d0bf136a85e01e62",
+ "data_version": "09c282705a7e153c63516140123c12d3774b8968492cc004449a45c6ee2af89a",
  "license": "CC-BY-4.0",
  "case": "M",
  "title": "Case M — TPU Atsugi campus",

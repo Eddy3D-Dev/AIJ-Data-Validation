@@ -69,9 +69,10 @@ Reattachment length $$L_r/H$$ = 1.36.
 
 | Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate, $$k$$ | Hit rate, $$c^\ast$$ | Hit rate | FAC2 | R | $$R^2$$ | Points scored |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | **0.446** | **0.682** | **0.713** | **0.441** | **0.305** | **0.507** | **0.516** | 0.519 | **+0.777** | 0.694 | 100 % |
-| 2 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.3 | Eddy3D | **0.446** | **0.682** | **0.713** | **0.441** | **0.305** | 0.493 | 0.513 | **0.532** | **+0.778** | **0.695** | 100 % |
-| 3 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | **0.446** | **0.682** | **0.713** | **0.441** | **0.305** | 0.493 | 0.513 | 0.515 | +0.776 | 0.693 | 100 % |
+| 1 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-measured-inlet]({{ '/community/eddy3d-of12-measured-inlet/' | relative_url }})) | community | **0.447** | **0.684** | **0.713** | 0.435 | **0.311** | **0.508** | **0.516** | 0.520 | **+0.779** | 0.694 | 100 % |
+| 2 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | 0.446 | 0.682 | **0.713** | **0.441** | 0.305 | 0.507 | 0.516 | 0.519 | +0.777 | 0.694 | 100 % |
+| 3 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.3 | Eddy3D | 0.446 | 0.682 | **0.713** | **0.441** | 0.305 | 0.493 | 0.513 | **0.532** | +0.778 | **0.695** | 100 % |
+| 4 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | 0.446 | 0.682 | **0.713** | **0.441** | 0.305 | 0.493 | 0.513 | 0.515 | +0.776 | 0.693 | 100 % |
 {: .scores }
 
 {% include nomenclature-scores.md %}

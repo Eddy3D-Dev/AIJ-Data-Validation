@@ -1,0 +1,15 @@
+# Eddy3D's own sensitivity arm, 2026-10-20: the same solver and mesh as the served OpenFOAM 12 runs, with the
+# tunnel's MEASURED approach profile (U and k from AF_case*.csv, epsilon = Cmu^0.5 k |dU/dz|, omega = epsilon/(Cmu k))
+# imposed as fixedProfile tables instead of the fitted log law, and the rough-wall function kept on the floor.
+solver: OpenFOAM simpleFoam (Eddy3D Outdoor case writer)
+version: "12"
+url: https://openfoam.org
+author: Sustainable Urban Systems Lab
+licence: CC-BY-4.0
+contact: https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions
+inlet: the measured approach profile (U and k of AF_caseA/B/H.csv as fixedProfile tables, epsilon by local equilibrium), rough floor (nutkAtmRoughWallFunction, z0 of the log-law fit)
+mesh: snappyHexMesh, 1:100 scale, the served runs' mesh (Case A 280k cells, H/26 at the building), numerics level 3
+turbulence_model: realizable k-epsilon
+compute: 3000 iterations, steady, 5 ranks of an Apple M-series laptop; 38 min (A), 31 min (B), 50 min (H)
+units: normalised
+notes: Eddy3D fixtures TestAijCaseA/B/HContainerE2E with EDDY3D_VALIDATION_INLET=measured EDDY3D_VALIDATION_FLOOR=rough (Eddy3D docs/VALIDATION.md 3c-ii). Case H cstar is the Sct = 0.5 species.

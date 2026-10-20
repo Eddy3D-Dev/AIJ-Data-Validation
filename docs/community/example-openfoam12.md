@@ -1,7 +1,7 @@
 ---
 title: "OpenFOAM simpleFoam (Eddy3D Outdoor case writer) 12"
 parent: "Community results"
-nav_order: 1
+nav_order: 6
 has_children: false
 generated: true
 description: "OpenFOAM simpleFoam (Eddy3D Outdoor case writer) 12: a community submission scored against the AIJ cases by this repository's build."

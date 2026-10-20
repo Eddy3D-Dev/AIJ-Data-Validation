@@ -1,0 +1,323 @@
+{
+ "$schema": "https://aij.eddy3d.com/api/schemas/submission.schema.json",
+ "schema_version": "2.5.0",
+ "data_version": "09c282705a7e153c63516140123c12d3774b8968492cc004449a45c6ee2af89a",
+ "license": "CC-BY-4.0",
+ "slug": "eddy3d-of12-mesh2x-measured-inlet",
+ "submission": {
+  "solver": "OpenFOAM simpleFoam (Eddy3D Outdoor case writer)",
+  "version": "12",
+  "url": "https://openfoam.org",
+  "author": "Sustainable Urban Systems Lab",
+  "licence": "CC-BY-4.0",
+  "contact": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions",
+  "inlet": "the measured approach profile (U and k of AF_caseA.csv as fixedProfile tables, epsilon by local equilibrium), rough floor",
+  "mesh": "snappyHexMesh, 1:100 scale, one level finer than the served run on box, building and ground (1,113,756 cells), numerics level 3",
+  "turbulence_model": "realizable k-epsilon",
+  "compute": "3000 iterations, steady, 71 min on 5 ranks of an Apple M-series laptop",
+  "units": "normalised",
+  "notes": "the mesh alone (log-law inlet) moved U's agreement from 0.586 to 0.597 and nothing else; the combination is the sweep's best steady set-up. Eddy3D fixture TestAijCaseAContainerE2E with EDDY3D_VALIDATION_REFINE=1 EDDY3D_VALIDATION_INLET=measured EDDY3D_VALIDATION_FLOOR=rough."
+ },
+ "example": false,
+ "provenance": "self-reported inputs (the values in submissions/<slug>/cases/<id>/probes.csv), scored by this repository's build with validation/score_submissions.py; not an Eddy3D result and not checked by the maintainers beyond the scoring",
+ "scored_with": {
+  "script": "validation/score_submissions.py",
+  "release": "3.3.0",
+  "conventions": "velocities and the speed over U_ref, k over U_ref^2 (Cases E, F and G publish ratios already); U, V, W, |U| and the thermistor bracket scored as signed velocities (FAC2's ratio keeps the sign; hit rate D = 0.25, W = 0.05); k by the plain definitions (D = 0.25 only); a thermistor, cup or sonic reading (a mean scalar speed) scored against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar), the two ends of its bracket; c* = C/c0 with one detection limit per case, 1e-3 of the largest measured value; theta = (T_floor - T)/(T_floor - T_H) scored like a positive velocity. The same conventions score the served Eddy3D results (docs/validation/method.md).",
+  "metric_meaning": {
+   "Count": "number of measured points scored",
+   "MeanObserved": "mean of the measured, normalised quantity",
+   "MeanPredicted": "mean of the modelled, normalised quantity",
+   "Fb": "fractional bias, 2 (mean_obs - mean_pred) / (mean_obs + mean_pred); positive = model low",
+   "Nmse": "normalised mean square error",
+   "Nad": "normalised absolute difference",
+   "Fac2": "fraction of points within a factor of two (harsh near zero for sign-changing V and W)",
+   "HitRate": "fraction of points within D = 0.25 relative or W = 0.05 U_H absolute",
+   "Mg": "geometric mean bias",
+   "Vg": "geometric variance",
+   "GeometricPairs": "pairs with both values positive (used for Mg/Vg)",
+   "R": "Pearson correlation coefficient",
+   "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive; Fb, Nmse and Nad of a signed velocity component of Case H or I whose observed and predicted means are not both positive)"
+  }
+ },
+ "folder": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/tree/main/submissions/eddy3d-of12-mesh2x-measured-inlet",
+ "cases": [
+  {
+   "case": "A",
+   "title": "Case A — 1:1:2 building",
+   "status": "scored",
+   "headline": [
+    {
+     "label": "U",
+     "score": "velocity.U",
+     "Count": 186,
+     "R": 0.958099767877903,
+     "Fac2": 0.8118279569892473,
+     "Fb": 0.1502019262143651,
+     "HitRate": 0.6505376344086021,
+     "coverage": {
+      "scored": 186,
+      "measured": 186
+     }
+    },
+    {
+     "label": "V",
+     "score": "velocity.V",
+     "Count": 186,
+     "R": 0.9610470647668916,
+     "Fac2": 0.34946236559139787,
+     "Fb": null,
+     "HitRate": 0.8870967741935484,
+     "coverage": {
+      "scored": 186,
+      "measured": 186
+     }
+    },
+    {
+     "label": "W",
+     "score": "velocity.W",
+     "Count": 186,
+     "R": 0.7332849791694716,
+     "Fac2": 0.3763440860215054,
+     "Fb": -1.6192272321453243,
+     "HitRate": 0.8333333333333334,
+     "coverage": {
+      "scored": 186,
+      "measured": 186
+     }
+    },
+    {
+     "label": "|U|",
+     "score": "speed",
+     "Count": 186,
+     "R": 0.9460041874306894,
+     "Fac2": 0.8763440860215054,
+     "Fb": 0.11094795599074972,
+     "HitRate": 0.6774193548387096,
+     "coverage": {
+      "scored": 186,
+      "measured": 186
+     }
+    },
+    {
+     "label": "k",
+     "score": "k",
+     "Count": 186,
+     "R": 0.4602911593380412,
+     "Fac2": 0.6881720430107527,
+     "Fb": 0.37362456572835134,
+     "HitRate": 0.3172043010752688,
+     "coverage": {
+      "scored": 186,
+      "measured": 186
+     }
+    }
+   ],
+   "values": {
+    "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-mesh2x-measured-inlet/A.csv?v=d21d791d27b1",
+    "path": "submissions/eddy3d-of12-mesh2x-measured-inlet/A.csv",
+    "media_type": "text/csv",
+    "bytes": 23430,
+    "sha256": "d21d791d27b10777d5eca6cbaa4137e956292f2306673859b5ce277900e4b96b"
+   },
+   "scores": {
+    "velocity.U": {
+     "Count": 186,
+     "MeanObserved": 0.6348264031048957,
+     "MeanPredicted": 0.5461350598448989,
+     "Fb": 0.1502019262143651,
+     "Nmse": 0.06532239098962608,
+     "Nad": 0.09296469515946329,
+     "Fac2": 0.8118279569892473,
+     "HitRate": 0.6505376344086021,
+     "Mg": 1.2473264308062444,
+     "Vg": 1.7313480221009434,
+     "GeometricPairs": 158,
+     "R": 0.958099767877903
+    },
+    "velocity.V": {
+     "Count": 186,
+     "MeanObserved": -0.04043331585512722,
+     "MeanPredicted": -0.05120377027988354,
+     "Fb": null,
+     "Nmse": null,
+     "Nad": null,
+     "Fac2": 0.34946236559139787,
+     "HitRate": 0.8870967741935484,
+     "Mg": 2.1162334496803377,
+     "Vg": 66.46653022797888,
+     "GeometricPairs": 41,
+     "R": 0.9610470647668916
+    },
+    "velocity.W": {
+     "Count": 186,
+     "MeanObserved": 0.0013814965654127857,
+     "MeanPredicted": 0.013131059815090159,
+     "Fb": -1.6192272321453243,
+     "Nmse": 217.56158030132207,
+     "Nad": 2.5385730809858686,
+     "Fac2": 0.3763440860215054,
+     "HitRate": 0.8333333333333334,
+     "Mg": 0.961953116973561,
+     "Vg": 3.144384331284479,
+     "GeometricPairs": 71,
+     "R": 0.7332849791694716
+    },
+    "speed": {
+     "Count": 186,
+     "MeanObserved": 0.6738722238666145,
+     "MeanPredicted": 0.6030369902221623,
+     "Fb": 0.11094795599074972,
+     "Nmse": 0.04745507082538238,
+     "Nad": 0.07830007406993025,
+     "Fac2": 0.8763440860215054,
+     "HitRate": 0.6774193548387096,
+     "Mg": 1.2081879065612324,
+     "Vg": 1.3932337299710496,
+     "GeometricPairs": 186,
+     "R": 0.9460041874306894
+    },
+    "k": {
+     "Count": 186,
+     "MeanObserved": 0.05589626736518246,
+     "MeanPredicted": 0.0382993660508891,
+     "Fb": 0.37362456572835134,
+     "Nmse": 0.5418709196010763,
+     "Nad": 0.27398431063162804,
+     "Fac2": 0.6881720430107527,
+     "HitRate": 0.3172043010752688,
+     "Mg": 1.482602441150745,
+     "Vg": 1.5910200242746326,
+     "GeometricPairs": 186,
+     "R": 0.4602911593380412
+    }
+   },
+   "coverage": {
+    "velocity.U": {
+     "scored": 186,
+     "measured": 186
+    },
+    "velocity.V": {
+     "scored": 186,
+     "measured": 186
+    },
+    "velocity.W": {
+     "scored": 186,
+     "measured": 186
+    },
+    "speed": {
+     "scored": 186,
+     "measured": 186
+    },
+    "k": {
+     "scored": 186,
+     "measured": 186
+    }
+   },
+   "groups": [
+    {
+     "key": "",
+     "group": {},
+     "points_measured": 186,
+     "scores": {
+      "velocity.U": {
+       "Count": 186,
+       "MeanObserved": 0.6348264031048957,
+       "MeanPredicted": 0.5461350598448989,
+       "Fb": 0.1502019262143651,
+       "Nmse": 0.06532239098962608,
+       "Nad": 0.09296469515946329,
+       "Fac2": 0.8118279569892473,
+       "HitRate": 0.6505376344086021,
+       "Mg": 1.2473264308062444,
+       "Vg": 1.7313480221009434,
+       "GeometricPairs": 158,
+       "R": 0.958099767877903
+      },
+      "velocity.V": {
+       "Count": 186,
+       "MeanObserved": -0.04043331585512722,
+       "MeanPredicted": -0.05120377027988354,
+       "Fb": null,
+       "Nmse": null,
+       "Nad": null,
+       "Fac2": 0.34946236559139787,
+       "HitRate": 0.8870967741935484,
+       "Mg": 2.1162334496803377,
+       "Vg": 66.46653022797888,
+       "GeometricPairs": 41,
+       "R": 0.9610470647668916
+      },
+      "velocity.W": {
+       "Count": 186,
+       "MeanObserved": 0.0013814965654127857,
+       "MeanPredicted": 0.013131059815090159,
+       "Fb": -1.6192272321453243,
+       "Nmse": 217.56158030132207,
+       "Nad": 2.5385730809858686,
+       "Fac2": 0.3763440860215054,
+       "HitRate": 0.8333333333333334,
+       "Mg": 0.961953116973561,
+       "Vg": 3.144384331284479,
+       "GeometricPairs": 71,
+       "R": 0.7332849791694716
+      },
+      "speed": {
+       "Count": 186,
+       "MeanObserved": 0.6738722238666145,
+       "MeanPredicted": 0.6030369902221623,
+       "Fb": 0.11094795599074972,
+       "Nmse": 0.04745507082538238,
+       "Nad": 0.07830007406993025,
+       "Fac2": 0.8763440860215054,
+       "HitRate": 0.6774193548387096,
+       "Mg": 1.2081879065612324,
+       "Vg": 1.3932337299710496,
+       "GeometricPairs": 186,
+       "R": 0.9460041874306894
+      },
+      "k": {
+       "Count": 186,
+       "MeanObserved": 0.05589626736518246,
+       "MeanPredicted": 0.0382993660508891,
+       "Fb": 0.37362456572835134,
+       "Nmse": 0.5418709196010763,
+       "Nad": 0.27398431063162804,
+       "Fac2": 0.6881720430107527,
+       "HitRate": 0.3172043010752688,
+       "Mg": 1.482602441150745,
+       "Vg": 1.5910200242746326,
+       "GeometricPairs": 186,
+       "R": 0.4602911593380412
+      }
+     },
+     "coverage": {
+      "velocity.U": {
+       "scored": 186,
+       "measured": 186
+      },
+      "velocity.V": {
+       "scored": 186,
+       "measured": 186
+      },
+      "velocity.W": {
+       "scored": 186,
+       "measured": 186
+      },
+      "speed": {
+       "scored": 186,
+       "measured": 186
+      },
+      "k": {
+       "scored": 186,
+       "measured": 186
+      }
+     }
+    }
+   ],
+   "U_ref_m_s": 4.491,
+   "units_given": "normalised"
+  }
+ ],
+ "page": "https://aij.eddy3d.com/community/eddy3d-of12-mesh2x-measured-inlet/"
+}

@@ -95,9 +95,10 @@ The modelled velocity sits under the measured mean. The y-symmetric ceiling is t
 
 | Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate, $$k$$ | Hit rate, $$c^\ast$$ | Hit rate | FAC2 | R | $$R^2$$ | Points scored |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.3 | Eddy3D | **0.123** | **0.901** | **0.685** | **0.084** | **0.005** | **0.458** | **0.376** | **0.363** | **+0.602** | **0.530** | 100 % |
-| 2 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | **0.123** | **0.901** | **0.685** | **0.084** | **0.005** | 0.163 | 0.327 | 0.345 | **+0.601** | **0.530** | 100 % |
-| 3 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | **0.123** | **0.901** | **0.685** | **0.084** | **0.005** | 0.099 | 0.316 | 0.296 | **+0.601** | 0.530 | 100 % |
+| 1 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-casek-workbook-inflow]({{ '/community/eddy3d-of12-casek-workbook-inflow/' | relative_url }})) | community | **0.562** | 0.877 | 0.670 | **0.507** | **0.103** | 0.399 | **0.520** | **0.464** | +0.596 | 0.525 | 100 % |
+| 2 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.3 | Eddy3D | 0.123 | **0.901** | **0.685** | 0.084 | 0.005 | **0.458** | 0.376 | 0.363 | **+0.602** | **0.530** | 100 % |
+| 3 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | 0.123 | **0.901** | **0.685** | 0.084 | 0.005 | 0.163 | 0.327 | 0.345 | **+0.601** | **0.530** | 100 % |
+| 4 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | 0.123 | **0.901** | **0.685** | 0.084 | 0.005 | 0.099 | 0.316 | 0.296 | **+0.601** | 0.530 | 100 % |
 {: .scores }
 
 {% include nomenclature-scores.md %}

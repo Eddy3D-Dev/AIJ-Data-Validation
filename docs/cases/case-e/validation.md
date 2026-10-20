@@ -96,7 +96,8 @@ Status: <span class="label label-green status">scored</span>
 
 | Rank | Run | Source | Hit rate, $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate | FAC2 | R | $$R^2$$ | Points scored |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | OpenFOAM 12 · SW | Eddy3D | 0.544 | 0.356 | 0.450 | 0.841 | +0.765 | 0.591 | 100 % |
+| 1 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-casee-refined-mesh]({{ '/community/eddy3d-of12-casee-refined-mesh/' | relative_url }})) | community | **0.562** | **0.388** | **0.475** | **0.859** | **+0.789** | **0.629** | 100 % |
+| 2 | OpenFOAM 12 · SW | Eddy3D | 0.544 | 0.356 | 0.450 | 0.841 | +0.765 | 0.591 | 100 % |
 {: .scores }
 
 {% include nomenclature-scores.md %}

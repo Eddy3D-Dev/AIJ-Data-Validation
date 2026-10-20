@@ -15,6 +15,40 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [3.3.0] - 2026-10-20
+
+Five more Eddy3D runs, scored and served as submissions: what moves the OpenFOAM 12 scores, and what does not.
+
+### Added
+
+- `submissions/eddy3d-of12-measured-inlet` (Cases A, B, H): the served runs with the tunnel's MEASURED approach profile
+  ($$U$$ and $$k$$ of `AF_case*.csv` as fixedProfile tables, epsilon by local equilibrium) at the inlet and the rough floor kept —
+  Case A's $$U$$ hit rate 0.586 to 0.624 and $$k$$'s 0.177 to 0.344, Case B's 0.562 to 0.571, Case H unchanged (its log-law $$k$$ is
+  within 15 % of the tunnel's). The wake is where the $$U$$ error lives and the inlet does not move it.
+- `submissions/eddy3d-of12-sst-urans` (Case A): SST k-omega run transient on the measured inlet, scored on the time
+  means ($$k$$ = kMean + the resolved half-trace of UPrime2Mean): the best hit rates of any OpenFOAM run, $$U$$ 0.683 and $$k$$ 0.392,
+  with 27 % of the wake's $$k$$ resolved and the reattachment still at $$1.3\thinspace H$$ against the tunnel's $$0.4\text{–}0.75\thinspace H$$.
+- `submissions/eddy3d-of12-mesh2x-measured-inlet` (Case A): every snappy level one finer (1,113,756 cells) plus the measured
+  inlet, the best steady set-up ($$U$$ hit rate 0.651); the mesh alone changes nothing (grid-converged).
+- `submissions/eddy3d-of12-casek-workbook-inflow` (Case K): the served run re-solved at the inflow speed the dataset's
+  workbook states, $$U_H$$ = 4.94009 m/s at 0.2 m, instead of the shipped approach-flow file's 3.23 m/s (that file is Case H's,
+  cell for cell): $$U$$ hit rate 0.12 to 0.56, the above-roof plane matched to 4 %, $$c^\ast$$ at $$\mathrm{Sc_t}$$ 0.5 off the source FB -0.43 to -0.13.
+- `submissions/eddy3d-of12-casee-refined-mesh` (Case E, SW, both states): one snappy level more on the ground and the
+  buildings (1,414,688 cells): the thermistor quantity's FB +0.226 to +0.133 and hit rate 0.475 to 0.562 after construction,
+  +0.124 to +0.065 before; the construction change's R 0.831 to 0.853 and sign agreement 0.75 to 0.86.
+- `/api/submissions/eddy3d-of12-*.json` and `validation/results/submissions/eddy3d-of12-*/` for each.
+
+### Changed
+
+- `validation/dispersion_metrics.py` sums with `math.fsum` (exact, order-independent) instead of NumPy's pairwise SIMD
+  sum, whose rounding depends on the runner's CPU: the geometric mean of one submission flapped in its last digit
+  between two CI runs on the same inputs. The served scores are unchanged within the self-test's 1e-9; the
+  submissions' scores may move in their last digits.
+
+Every run is an Eddy3D fixture arm (`EDDY3D_VALIDATION_*` knobs; Eddy3D `docs/VALIDATION.md` 3c-ii, 8 and the Case K
+note), solved on one Apple M-series laptop on 2026-10-20; the scores here are the site's own evaluator on the submitted
+values and reproduce the fixtures' to the printed digit.
+
 ## [3.2.3] - 2026-10-19
 
 The site and the API move to <https://aij.eddy3d.com>.
@@ -82,7 +116,7 @@ the served results are scored, and submissions are scored by the build and serve
   re-scores every served run from its pairs and matches 224 headline scores to $$10^{-9}$$ (Case E to $$10^{-6}$$: its served scores came
   from the published CSV, which rounds the workbook).
 - `/api/cases/{id}/probes.csv`: the published points to probe, with the key columns a scored file carries, $$x$$ $$y$$ $$z$$ in the case frame and
-  `scored_as` (vector, k, thermistor_bracket, concentration, theta).
+  `scored_as` (vector, $$k$$, thermistor_bracket, concentration, theta).
 - `/api/cases/{id}.json` `scoring` (the reference speed, the constants of $$\theta$$, the conventions, the metric meanings) and `inflow` (the
   benchmark's approach-flow data; the inlet this repository recommends, a log law with $$k$$ and $$\varepsilon$$ from the neutral ABL relations or
   the tabulated profile where no log law fits; the flow-direction convention; what Eddy3D's runs used, quoted from their snapshots).
