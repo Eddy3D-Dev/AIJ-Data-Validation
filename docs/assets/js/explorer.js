@@ -406,7 +406,8 @@ async function start(root) {
         (${m.length() ? fmt((diff.length() / m.length()) * 100, 0) : "–"} % of the measured), direction apart by ${fmt(ang, 0)}°. The arrows in 3D are scaled to the longer of the two vectors at this point (a fifth of the view).</p>`;
     }
     readout.innerHTML = `<p><b>${view.label}</b>${grp ? ", " + grp : ""}${d.r.point_id ? `, point ${d.r.point_id}` : ""}<br>${where}${mf.units ? ` in ${mf.units.split(" (")[0]}` : ""}${along}</p>
-      <table><tr><th></th><th>measured</th><th>model</th><th>model − measured</th><th></th></tr>${rows}</table>${vec}`;
+      <table class="ex-table"><colgroup><col style="width:3.5rem"><col style="width:6.5rem"><col style="width:6.5rem"><col style="width:9.5rem"><col style="width:5rem"></colgroup>
+      <tr><th></th><th>measured</th><th>model</th><th>model − measured</th><th></th></tr>${rows}</table>${vec}`;
   }
 
   // ---- loop and size
