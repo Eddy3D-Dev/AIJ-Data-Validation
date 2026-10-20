@@ -10,11 +10,8 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 const LOW = [0x21, 0x66, 0xac], MID = [0xf7, 0xf7, 0xf7], HIGH = [0xb2, 0x18, 0x2b];   // model low | agrees | model high
 const HEAVY = 4e6;                                                                      // bytes of STL loaded only on request
 const ERROR_COLOUR = "#d62728";
-// The layout that sizes the two views is inline, not in a stylesheet: the canvases are drawn at their container's size, and a
-// stylesheet a browser still holds from before (the site's CSS is cached for weeks) must not be able to change that.
-const BODY = "display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));gap:.75rem";
-const PANEL = "position:relative;height:22rem;overflow:hidden;border:1px solid rgba(128,128,128,.4);border-radius:4px";
-const FILL = "display:block;position:absolute;inset:0;width:100%;height:100%";
+// The page carries the explorer's whole skeleton (docs/_includes/explorer.html) at its final size, with its styles: the script
+// fills it and never adds or removes anything that changes its height, so the page does not move under the reader.
 
 const num = (v) => (v === undefined || v === "" || v === "nan" || v === "NaN" ? NaN : Number(v));
 const fmt = (v, d = 3) => (Number.isFinite(v) ? (Math.abs(v) >= 1000 || (Math.abs(v) < 0.001 && v !== 0) ? v.toExponential(2) : v.toFixed(d)) : "–");
@@ -68,26 +65,11 @@ async function start(root) {
   const stamp = new URL(root.dataset.manifest, location.href).search;   // the build's ?v=, so a new release is not read from a cache
   const mf = await (await fetch(root.dataset.manifest)).json();
   if (!mf.views.length) return;
-  root.innerHTML = "";
-
-  const ui = document.createElement("div");
-  ui.innerHTML = `
-    <div class="ex-controls">
-      <label>Engine <select class="ex-view"></select></label>
-      <span class="ex-groups"></span>
-      <span class="ex-q"></span>
-      <button class="ex-reset" type="button" style="font:inherit;font-size:.78rem">Reset view</button>
-      <span class="ex-geo"></span>
-    </div>
-    <div class="ex-body" style="${BODY}">
-      <div class="ex-panel" style="${PANEL}"><canvas class="ex-scatter" style="${FILL}"></canvas><div class="ex-title"></div><div class="ex-legend">model low<span class="bar"></span>model high</div></div>
-      <div class="ex-panel" style="${PANEL}"><div class="ex-3d" style="${FILL}"></div><div class="ex-title">${mf.title}: drag to turn, scroll to zoom</div></div>
-    </div>
-    <div class="ex-readout"><span class="ex-hint">Hover a point in either view.</span></div>`;
-  root.appendChild(ui);
+  const ui = root;
   const $ = (s) => ui.querySelector(s);
   const viewSel = $(".ex-view"), groupsEl = $(".ex-groups"), qEl = $(".ex-q"), readout = $(".ex-readout"), geoEl = $(".ex-geo");
   const canvas = $(".ex-scatter"), host3d = $(".ex-3d"), title2d = canvas.parentElement.querySelector(".ex-title");
+  $(".ex-title3d").textContent = `${mf.title}: drag to turn, scroll to zoom`;
   mf.views.forEach((v, i) => viewSel.add(new Option(v.label, i)));
   if (mf.views.length === 1) viewSel.parentElement.style.display = "none";
   const textColour = getComputedStyle(root).color;
@@ -380,7 +362,7 @@ async function start(root) {
   // ---- readout
   function showReadout() {
     const d = items[sel()];
-    if (!d) { readout.innerHTML = `<span class="ex-hint">Hover a point in either view; click pins it. Points are coloured by how far the model is from the measurement.</span>`; return; }
+    if (!d) { readout.innerHTML = `<div class="ex-hint">Hover a point in either view; click pins it. Points are coloured by how far the model is from the measurement.</div>`; return; }
     const H = mf.H;
     const where = ["x", "y", "z"].map((a, k) => `${a} = ${fmt(d.pos[k], 3)}${H ? ` (${fmt(d.pos[k] / H, 2)} H)` : ""}`).join(", ");
     const grp = mf.groups.map((g) => `${g.replace(/_/g, " ")} ${d.r[g]}`).join(", ");
@@ -405,9 +387,9 @@ async function start(root) {
       vec = `<p>${key("#222")}measured |U| ${fmt(m.length())} ${key(view.colour)}model |U| ${fmt(p.length())} ${key(ERROR_COLOUR)}difference |ΔU| ${fmt(diff.length())}
         (${m.length() ? fmt((diff.length() / m.length()) * 100, 0) : "–"} % of the measured), direction apart by ${fmt(ang, 0)}°. The arrows in 3D are scaled to the longer of the two vectors at this point (a fifth of the view).</p>`;
     }
-    readout.innerHTML = `<p><b>${view.label}</b>${grp ? ", " + grp : ""}${d.r.point_id ? `, point ${d.r.point_id}` : ""}<br>${where}${mf.units ? ` in ${mf.units.split(" (")[0]}` : ""}${along}</p>
+    readout.innerHTML = `<div class="ex-text"><p><b>${view.label}</b>${grp ? ", " + grp : ""}${d.r.point_id ? `, point ${d.r.point_id}` : ""}<br>${where}${mf.units ? ` in ${mf.units.split(" (")[0]}` : ""}${along}</p>${vec}</div>
       <table class="ex-table"><colgroup><col style="width:3.5rem"><col style="width:6.5rem"><col style="width:6.5rem"><col style="width:9.5rem"><col style="width:5rem"></colgroup>
-      <tr><th></th><th>measured</th><th>model</th><th>model − measured</th><th></th></tr>${rows}</table>${vec}`;
+      <tr><th></th><th>measured</th><th>model</th><th>model − measured</th><th></th></tr>${rows}</table>`;
   }
 
   // ---- loop and size
@@ -429,4 +411,8 @@ async function start(root) {
   size();
 }
 
-document.querySelectorAll(".explorer").forEach((root) => start(root).catch((e) => { console.error(e); root.insertAdjacentHTML("beforeend", `<p class="explorer-note">The explorer could not start (${e.message}).</p>`); }));
+document.querySelectorAll(".explorer").forEach((root) => start(root).catch((e) => {
+  console.error(e);
+  const r = root.querySelector(".ex-readout");                 // into the reserved box, so the page does not move
+  if (r) r.innerHTML = `<div class="ex-hint">The explorer could not start (${e.message}). The figures on this page show the same points.</div>`;
+}));
