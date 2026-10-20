@@ -42,17 +42,34 @@ Status: <span class="label label-green status">scored</span>
 
 Reattachment length $$L_r/H$$ = 1.49.
 
-| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|---|
-| $$U$$ | +0.955 | 0.912 | 0.817 | +0.185 | 0.586 | 186 |
-| $$V$$ | +0.961 | 0.923 | 0.349 | -0.207 | 0.892 | 186 |
-| $$W$$ | +0.708 | 0.502 | 0.398 | -1.501 | 0.801 | 186 |
-| $$k$$ | +0.480 | 0.230 | 0.667 | +0.478 | 0.177 | 186 |
+| Score | RANS: realizable k-epsilon, log-law inlet (the served run) | URANS: SST k-omega run transient, measured inlet |
+|---|---|---|
+| $$U$$ R | +0.955 | +0.953 |
+| $$U$$ FAC2 | 0.817 | 0.763 |
+| $$U$$ FB | +0.185 | +0.181 |
+| $$U$$ Hit rate | 0.586 | 0.683 |
+| $$U$$ n | 186 | 186 |
+| $$V$$ R | +0.961 | +0.953 |
+| $$V$$ FAC2 | 0.349 | 0.360 |
+| $$V$$ FB | -0.207 | — |
+| $$V$$ Hit rate | 0.892 | 0.817 |
+| $$V$$ n | 186 | 186 |
+| $$W$$ R | +0.708 | +0.675 |
+| $$W$$ FAC2 | 0.398 | 0.414 |
+| $$W$$ FB | -1.501 | -1.352 |
+| $$W$$ Hit rate | 0.801 | 0.699 |
+| $$W$$ n | 186 | 186 |
+| $$k$$ R | +0.480 | +0.626 |
+| $$k$$ FAC2 | 0.667 | 0.694 |
+| $$k$$ FB | +0.478 | +0.453 |
+| $$k$$ Hit rate | 0.177 | 0.392 |
+| $$k$$ n | 186 | 186 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
 
 - Per-point values: [`/api/cases/A/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/A/pairs/openfoam12-realizableKE.csv' | relative_url }})
+- URANS column: the submission [`eddy3d-of12-sst-urans`]({{ '/community/eddy3d-of12-sst-urans/' | relative_url }}), scores [`/api/submissions/eddy3d-of12-sst-urans.json`]({{ '/api/submissions/eddy3d-of12-sst-urans.json' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCaseAContainerE2E; figures validation/plot\_cases\_ab\_openfoam.py
 
 ## OpenLB

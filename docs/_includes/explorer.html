@@ -11,9 +11,12 @@
 .explorer .ex-title { position: absolute; top: .3rem; left: .5rem; font-size: .72rem; opacity: .7; pointer-events: none; }
 .explorer .ex-legend { position: absolute; top: .3rem; right: .5rem; font-size: .7rem; opacity: .85; pointer-events: none; }
 .explorer .ex-legend .bar { display: inline-block; width: 5rem; height: .5rem; vertical-align: middle; margin: 0 .3rem; background: linear-gradient(90deg, #2166ac, #f7f7f7, #b2182b); border: 1px solid rgba(128,128,128,.5); }
-.explorer .ex-readout { margin-top: .6rem; font-size: .78rem; overflow-x: auto; min-height: 9rem; }
-.explorer .ex-readout table { border-collapse: collapse; width: auto; }
-.explorer .ex-readout th, .explorer .ex-readout td { padding: .1rem .6rem .1rem 0; text-align: right; font-variant-numeric: tabular-nums; border: none; }
+/* The readout keeps its height across points (its tallest shape, measured at 15.75 rem on Case B with three rows: title, position, line, four rows, the vector lines), and
+   its table keeps its columns: fixed widths, never the theme's min-width: 100 %, so a value's length (1.54e-5 against
+   0.028) or a longer % never moves a column. */
+.explorer .ex-readout { margin-top: .6rem; font-size: .78rem; overflow-x: auto; min-height: 18rem; }
+.explorer .ex-readout table.ex-table { display: table; table-layout: fixed; width: 31rem; max-width: 100%; min-width: 0; border-collapse: collapse; margin: .3rem 0; }
+.explorer .ex-readout th, .explorer .ex-readout td { min-width: 0; padding: .1rem .6rem .1rem 0; text-align: right; font-variant-numeric: tabular-nums; border: none; background: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .explorer .ex-readout th:first-child, .explorer .ex-readout td:first-child { text-align: left; }
 .explorer .ex-readout .key { display: inline-block; width: .7rem; height: .2rem; margin-right: .3rem; vertical-align: middle; }
 .explorer .ex-hint { font-size: .75rem; opacity: .7; }
