@@ -28,6 +28,7 @@ import io
 import json
 import math
 import os
+from math import fsum
 
 import numpy as np
 
@@ -43,7 +44,10 @@ def evaluate(obs, pred, d=D_HIT, w=0.0, threshold=0.0, signed=False):
     ok = np.isfinite(o) & np.isfinite(p)
     o, p = o[ok], p[ok]
     n = len(o)
-    mo, mp = float(o.mean()), float(p.mean())
+    # Every reduction is an exact math.fsum: NumPy's pairwise SIMD sum rounds differently per CPU width, and the last
+    # digit of a geometric mean once flapped between two CI runners on the same inputs (2026-10-20), which the
+    # byte-exact verify can never settle.
+    mo, mp = fsum(o) / n, fsum(p) / n
     with np.errstate(divide="ignore", invalid="ignore"):
         ratio = p / o
     both_below = (np.abs(o) <= threshold) & (np.abs(p) <= threshold)
@@ -55,18 +59,18 @@ def evaluate(obs, pred, d=D_HIT, w=0.0, threshold=0.0, signed=False):
     lp = np.maximum(p, threshold) if threshold > 0 else p
     both = (lo > 0) & (lp > 0)
     lg = np.log(lo[both]) - np.log(lp[both])
-    sxx, syy = float(((o - mo) ** 2).sum()), float(((p - mp) ** 2).sum())
+    sxx, syy = fsum((o - mo) ** 2), fsum((p - mp) ** 2)
     undefined = signed and not (mo > 0 and mp > 0)
     return {
         "Count": int(n), "MeanObserved": mo, "MeanPredicted": mp,
         "Fb": None if undefined else 0.0 if mo + mp == 0 else (mo - mp) / (0.5 * (mo + mp)),
-        "Nmse": None if undefined or mo * mp == 0 else float(((o - p) ** 2).sum() / n / (mo * mp)),
-        "Nad": None if undefined else 0.0 if mo + mp == 0 else float(diff.sum() / n / (mo + mp)),
+        "Nmse": None if undefined or mo * mp == 0 else fsum((o - p) ** 2) / n / (mo * mp),
+        "Nad": None if undefined else 0.0 if mo + mp == 0 else fsum(diff) / n / (mo + mp),
         "Fac2": float(fac2.sum() / n), "HitRate": float(hit.sum() / n),
-        "Mg": float(np.exp(lg.mean())) if both.any() else None,
-        "Vg": float(np.exp((lg ** 2).mean())) if both.any() else None,
+        "Mg": math.exp(fsum(lg) / len(lg)) if both.any() else None,
+        "Vg": math.exp(fsum(lg ** 2) / len(lg)) if both.any() else None,
         "GeometricPairs": int(both.sum()),
-        "R": None if sxx == 0 or syy == 0 else float(((o - mo) * (p - mp)).sum() / math.sqrt(sxx * syy)),
+        "R": None if sxx == 0 or syy == 0 else fsum((o - mo) * (p - mp)) / math.sqrt(sxx * syy),
     }
 
 

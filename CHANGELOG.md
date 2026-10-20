@@ -38,6 +38,13 @@ Five more Eddy3D runs, scored and served as submissions: what moves the OpenFOAM
   +0.124 to +0.065 before; the construction change's R 0.831 to 0.853 and sign agreement 0.75 to 0.86.
 - `/api/submissions/eddy3d-of12-*.json` and `validation/results/submissions/eddy3d-of12-*/` for each.
 
+### Changed
+
+- `validation/dispersion_metrics.py` sums with `math.fsum` (exact, order-independent) instead of NumPy's pairwise SIMD
+  sum, whose rounding depends on the runner's CPU: the geometric mean of one submission flapped in its last digit
+  between two CI runs on the same inputs. The served scores are unchanged within the self-test's 1e-9; the
+  submissions' scores may move in their last digits.
+
 Every run is an Eddy3D fixture arm (`EDDY3D_VALIDATION_*` knobs; Eddy3D `docs/VALIDATION.md` 3c-ii, 8 and the Case K
 note), solved on one Apple M-series laptop on 2026-10-20; the scores here are the site's own evaluator on the submitted
 values and reproduce the fixtures' to the printed digit.
