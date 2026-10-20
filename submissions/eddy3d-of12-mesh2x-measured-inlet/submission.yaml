@@ -1,0 +1,14 @@
+# Eddy3D's own sensitivity arm, 2026-10-20: the served run's set-up with every snappy level one finer (1,113,756 cells
+# against 280,000; 0.31 m at the building, 0.63 m in the wake) and the measured approach profile at the inlet.
+solver: OpenFOAM simpleFoam (Eddy3D Outdoor case writer)
+version: "12"
+url: https://openfoam.org
+author: Sustainable Urban Systems Lab
+licence: CC-BY-4.0
+contact: https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions
+inlet: the measured approach profile (U and k of AF_caseA.csv as fixedProfile tables, epsilon by local equilibrium), rough floor
+mesh: snappyHexMesh, 1:100 scale, one level finer than the served run on box, building and ground (1,113,756 cells), numerics level 3
+turbulence_model: realizable k-epsilon
+compute: 3000 iterations, steady, 71 min on 5 ranks of an Apple M-series laptop
+units: normalised
+notes: the mesh alone (log-law inlet) moved U's agreement from 0.586 to 0.597 and nothing else; the combination is the sweep's best steady set-up. Eddy3D fixture TestAijCaseAContainerE2E with EDDY3D_VALIDATION_REFINE=1 EDDY3D_VALIDATION_INLET=measured EDDY3D_VALIDATION_FLOOR=rough.

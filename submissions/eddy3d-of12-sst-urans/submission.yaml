@@ -1,0 +1,14 @@
+# Eddy3D's own sensitivity arm, 2026-10-20: SST k-omega run TRANSIENT (PIMPLE) on the measured inlet, scored on the
+# time means: U from UMean, k = kMean + the resolved half-trace of UPrime2Mean.
+solver: OpenFOAM pimpleFoam (Eddy3D Outdoor case writer)
+version: "12"
+url: https://openfoam.org
+author: Sustainable Urban Systems Lab
+licence: CC-BY-4.0
+contact: https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions
+inlet: the measured approach profile (U and k of AF_caseA.csv as fixedProfile tables, epsilon by local equilibrium, omega = epsilon/(Cmu k)), rough floor
+mesh: snappyHexMesh, 1:100 scale, the served run's mesh (280k cells), numerics level 3
+turbulence_model: SST k-omega, URANS
+compute: 1000 s of flow time (about 280 H/U_H) at max Co 2 (dt about 0.045 s), fieldAverage with an exponential window of 500 s; 3 h 20 min on 5 ranks of an Apple M-series laptop
+units: normalised
+notes: k is the modelled mean plus the resolved part; 27 % of the wake's k is resolved, 3 % upstream. Eddy3D fixture TestAijCaseAContainerE2E with EDDY3D_VALIDATION_TURB=kOmegaSST EDDY3D_VALIDATION_INLET=measured EDDY3D_VALIDATION_FLOOR=rough EDDY3D_VALIDATION_ALGO=PIMPLE EDDY3D_VALIDATION_DURATION=1000.

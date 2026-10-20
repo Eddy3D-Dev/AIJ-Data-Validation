@@ -1,0 +1,15 @@
+# Eddy3D's own re-solve of Case K, 2026-10-20, at the inflow speed the dataset's workbook states (LF_caseK.xlsx,
+# Measurement data R8: UH = 4.94009 m/s at H = 0.2 m) instead of the 3.23 m/s of the shipped approach-flow file, which
+# is Case H's file cell for cell. Same mesh, closure and roughness length as the served run; only the inlet speed differs.
+solver: OpenFOAM simpleFoam (Eddy3D Outdoor case writer)
+version: "12"
+url: https://openfoam.org
+author: Sustainable Urban Systems Lab
+licence: CC-BY-4.0
+contact: https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions
+inlet: log law with Uref = 4.94009 m/s at 0.2 m (the workbook's UH), z0 = 13.5 mm (the fit to the shipped profile), atmBoundaryLayer inlets
+mesh: snappyHexMesh, 1:100 scale, the served run's mesh (972,637 cells), numerics level 3
+turbulence_model: realizable k-epsilon
+compute: 3000 iterations, steady, 1 h 32 min on 5 ranks of an Apple M-series laptop
+units: normalised
+notes: cstar is the Sct = 0.5 species (0.3 and 0.7 were solved too). The three stated speeds of the package (readme 2.33 m/s at 0.06 m, workbook 4.94009 m/s at 0.2 m, the shipped profile's 3.23 m/s at 0.2 m) are not one log law; the measured above-roof plane runs 20 percent above the shipped profile. Eddy3D fixture TestAijCaseKContainerE2E with EDDY3D_AIJ_K_INFLOW=4.94009.

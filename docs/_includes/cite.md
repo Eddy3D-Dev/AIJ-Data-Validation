@@ -5,20 +5,20 @@
 **APA**
 
 ```text
-Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.2.3) [Data set]. Sustainable Urban Systems Lab. https://aij.eddy3d.com/api/3.2.3/index.json
+Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.3.0) [Data set]. Sustainable Urban Systems Lab. https://aij.eddy3d.com/api/3.3.0/index.json
 ```
 
 **BibTeX**
 
 ```bibtex
-@misc{aijuwe_api_3_2_3,
+@misc{aijuwe_api_3_3_0,
   author    = "Karadag, Ilker and Kastner, Patrick",
   title     = "{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}",
   year      = "2026",
-  version   = "3.2.3",
+  version   = "3.3.0",
   publisher = "Sustainable Urban Systems Lab",
-  url       = "https://aij.eddy3d.com/api/3.2.3/index.json",
-  note      = "Data set; data version ecbbeee22eb3"
+  url       = "https://aij.eddy3d.com/api/3.3.0/index.json",
+  note      = "Data set; data version 09c282705a7e"
 }
 ```
 

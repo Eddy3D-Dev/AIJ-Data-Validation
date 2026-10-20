@@ -1,0 +1,15 @@
+# Eddy3D's own sensitivity arm, 2026-10-20: Case E (Niigata), wind from SW, both construction states, with one snappy
+# level more on the ground and the buildings (2 m cells on the ground, 1 m at the buildings; 1,414,688 cells against
+# 1,006,090). The default mesh put the 2 m measurement height in 2-4 m cells; the AIJ guideline asks for the third cell.
+solver: OpenFOAM simpleFoam (Eddy3D Outdoor case writer)
+version: "12"
+url: https://openfoam.org
+author: Sustainable Urban Systems Lab
+licence: CC-BY-4.0
+contact: https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions
+inlet: the workbook's tabulated inflow (z/ZR, U/UR, k/UR^2 with ZR = 250 m, UR = 7.8 m/s) as fixedProfile tables, the served run's inlet
+mesh: snappyHexMesh at full scale, 504 m cylinder, 16 m background, 4 m box, 2 m ground and 1 m buildings (1,414,688 cells); numerics level 3 on the hardened preset the checkMesh verdict selects
+turbulence_model: realizable k-epsilon
+compute: 2000 iterations per state, steady, about 80 min per state on 5 ranks of an Apple M-series laptop
+units: normalised
+notes: ratios over the model's own solved U at 15.9 m, 400 m upwind, as the served run; SW only. Eddy3D fixture TestAijCaseEContainerE2E with EDDY3D_VALIDATION_REFINE=1, one state per run (EDDY3D_AIJ_E_STATES).
