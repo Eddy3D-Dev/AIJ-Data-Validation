@@ -5,6 +5,7 @@
 - Normalised by $$U_H$$. FB is positive when the model is low.
 - Reattachment length behind the building: $$L_r/H$$ = 1.49.
 - $$V$$ and $$W$$ change sign. The mean measured $$W$$ is ~0.01 m/s.
+- The scores table shows the served steady run (RANS) beside the same solver run transient (URANS: SST k-omega, PIMPLE, 1000 s of flow time on the measured inlet, scored on the time means with $$k$$ as the modelled mean plus the resolved part). The URANS run reattaches at $$L_r/H$$ = 1.29 and resolves 27 % of the wake's $$k$$ (3 % upstream); its inlet is the tunnel's measured profile, the RANS run's the fitted log law.
 
 {% include figure.html name="case-a-openfoam-profiles.png" alt="Centre-plane profiles, Case A" caption="<strong>Figure 3.</strong> Case A, vertical profiles of $$U/U_H$$ on the centre plane at the first three measured stations behind the building, offset per station." %}
 

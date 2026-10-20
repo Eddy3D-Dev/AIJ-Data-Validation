@@ -2429,6 +2429,40 @@ def _collected_by(meta):
     return f"Data collected by {_esc(_and_join(meta['people']['data_collectors']))}."
 
 
+# Case pages whose OpenFOAM 12 section shows the served steady run beside a transient one, a scored submission, one
+# column each: (submission slug, the RANS column's head, the URANS column's head).
+URANS_RUNS = {"A": ("eddy3d-of12-sst-urans", "RANS: realizable k-epsilon, log-law inlet (the served run)",
+                    "URANS: SST k-omega run transient, measured inlet")}
+
+
+def _urans_run(case):
+    """(slug, rans head, urans head, scores) of the transient run a case's OpenFOAM 12 table shows beside the served one; None without."""
+    if case not in URANS_RUNS:
+        return None
+    slug, rans, urans = URANS_RUNS[case]
+    path = os.path.join(REPO, "validation", "results", "submissions", slug, f"{case}.json")
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8") as f:
+        return slug, rans, urans, json.load(f)
+
+
+def _score_table_pair(e, u, rans, urans):
+    """The served steady run and the transient one side by side: a row per score and metric, one column each run."""
+    L = [f"| Score | {rans} | {urans} |", "|---|---|---|"]
+    num = lambda s, m, f: "—" if s.get(m) is None else f"{s[m]:{f}}"  # noqa: E731
+    for label, key in e["headline"].items():
+        a, b = e["scores"][key], u["scores"].get(u["headline"].get(label, key))
+        if b is None:
+            continue
+        lead = _cell(label, lead=True, bare=True)
+        for metric, name, f in (("R", "R", "+.3f"), ("Fac2", "FAC2", ".3f"), ("Fb", "FB", "+.3f"), ("HitRate", "Hit rate", ".3f")):
+            L.append(f"| {lead} {name} | {num(a, metric, f)} | {num(b, metric, f)} |")
+        L.append(f"| {lead} n | {num(a, 'Count', 'd')} | {num(b, 'Count', 'd')} |")
+    L.append("{: .scores }")
+    return L + ["", "{% include " + NM.INCLUDES["scores"] + " %}"]
+
+
 def _score_table(e):
     """One run's headline scores: a row per score, the metrics across. A bare '|' in a label (|U|) is escaped."""
     L = ["| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |", "|---|---|---|---|---|---|---|"]
@@ -2611,7 +2645,8 @@ def _case_validation_page(case, meta, p, shared):
                 L += [f"Quantity: {_tex(e['quantity'])}.", ""]
             if e["recirculation_Lr_over_H"] is not None:
                 L += [f"Reattachment length {NM.m('L_r/H')} = {e['recirculation_Lr_over_H']:.2f}.", ""]
-            table = _score_table(e)
+            pair = _urans_run(case) if e["engine"] == "openfoam12-realizableKE" else None
+            table = _score_table_pair(e, pair[3], pair[1], pair[2]) if pair else _score_table(e)
             if len(e["headline"]) > OPEN_TABLE_ROWS:
                 L += ['<details markdown="block">', f"  <summary>All {len(e['headline'])} headline scores</summary>", ""] + table + ["", "</details>", ""]
             else:
@@ -2628,6 +2663,9 @@ def _case_validation_page(case, meta, p, shared):
             L += norm
             if not all_pairs:
                 L.append(f"- Per-point values: {_link('`/api/' + pairs_rel + '`', '/api/' + pairs_rel)}")
+            if pair:
+                L.append(f"- URANS column: the submission {_link('`' + pair[0] + '`', '/community/' + pair[0] + '/')}, "
+                         f"scores {_link('`/api/submissions/' + pair[0] + '.json`', '/api/submissions/' + pair[0] + '.json')}")
             L += [f"- Reproduce: {_tex(head)}", ""]
             facts, collapsed = _notes([n for n in own_notes(e) if n not in all_notes])
             if facts:
