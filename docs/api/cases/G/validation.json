@@ -466,6 +466,10 @@
     {
      "url": "https://aij.eddy3d.com/assets/figures/case-g-openfoam-profiles.png",
      "caption": "Case G, OpenFOAM 12, conifer crown of the drag sweep: the field's U/U_H against the modelled |U| over the model's own U(7 m) at four of the seven masts behind the belt, offset by 1 per mast."
+    },
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-g-openfoam-field-section.png",
+     "caption": "Case G, OpenFOAM 12: the solved field on the vertical plane through the masts, conifer crown. a: u; b: u with iso-lines every 0.1 and the edge of the reversed flow (u = 0) dashed; c: the in-plane speed with streamlines. Each dot is a measured point, coloured by its measured value on the panel's scale."
     }
    ],
    "pairs": {

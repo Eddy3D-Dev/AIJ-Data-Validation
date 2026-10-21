@@ -40,15 +40,17 @@ Status: <span class="label label-green status">scored</span>
 
 Reattachment length $$L_r/H$$ = 3.27.
 
-| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|---|
-| $$U$$ | +0.959 | 0.920 | 0.701 | +0.240 | 0.562 | 224 |
-| $$V$$ | +0.910 | 0.828 | 0.281 | +0.370 | 0.612 | 224 |
-| $$W$$ | +0.929 | 0.863 | 0.536 | +0.263 | 0.808 | 224 |
-| $$k$$ | +0.399 | 0.159 | 0.562 | +0.463 | 0.223 | 224 |
+| Score | R | $$R^2$$ | FAC2 | FB | Hit rate |
+|---|---|---|---|---|---|
+| $$U$$ | +0.959 | 0.920 | 0.701 | +0.240 | 0.562 |
+| $$V$$ | +0.910 | 0.828 | 0.281 | +0.370 | 0.612 |
+| $$W$$ | +0.929 | 0.863 | 0.536 | +0.263 | 0.808 |
+| $$k$$ | +0.399 | 0.159 | 0.562 | +0.463 | 0.223 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
+
+Every score is over the same 224 points.
 
 - Per-point values: [`/api/cases/B/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/B/pairs/openfoam12-realizableKE.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCaseBContainerE2E; figures validation/plot\_cases\_ab\_openfoam.py
@@ -109,14 +111,16 @@ Status: <span class="label label-green status">scored</span>
 
 ### Scores
 
-| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|---|
-| $$\lvert\mathbf{U}\rvert$$ ($$z = H/16$$ plane) | -0.236 | 0.055 | 0.361 | +0.821 | 0.172 | 122 |
-| $$\lvert\mathbf{U}\rvert$$, lattice cut at ±250 m | +0.010 | 0.000 | 0.459 | +0.463 | 0.189 | 122 |
-| wind reversed (control) | -0.236 | 0.055 | 0.361 | +0.821 | 0.172 | 122 |
+| Score | R | $$R^2$$ | FAC2 | FB | Hit rate |
+|---|---|---|---|---|---|
+| $$\lvert\mathbf{U}\rvert$$ ($$z = H/16$$ plane) | -0.236 | 0.055 | 0.361 | +0.821 | 0.172 |
+| $$\lvert\mathbf{U}\rvert$$, lattice cut at ±250 m | +0.010 | 0.000 | 0.459 | +0.463 | 0.189 |
+| wind reversed (control) | -0.236 | 0.055 | 0.361 | +0.821 | 0.172 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
+
+Every score is over the same 122 points.
 
 - Per-point values: [`/api/cases/B/pairs/ml-surrogate.csv`]({{ '/api/cases/B/pairs/ml-surrogate.csv' | relative_url }})
 - Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot\_ml\_surrogate.py

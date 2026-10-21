@@ -329,6 +329,10 @@
     {
      "url": "https://aij.eddy3d.com/assets/figures/case-m-openfoam-plan.png",
      "caption": "Case M, OpenFOAM 12, WD 180: log₁₀ of c* at the 15 points on the plan of the campus (north up; the arrow is the wind), the tunnel and the three Schmidt numbers on one scale; a point below 10⁻³ (or zero) is open. The star is the gas source and the square the reference mast."
+    },
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-m-openfoam-field-plan.png",
+     "caption": "Case M, OpenFOAM 12: the solved field on pedestrian level of the campus (z = 35.5 m above the tunnel floor), tunnel WD 180. a: u; b: u with iso-lines every 0.1 and the edge of the reversed flow (u = 0) dashed; c: the in-plane speed with streamlines. Each dot is a measured point, coloured by its measured value on the panel's scale."
     }
    ],
    "pairs": {
@@ -642,6 +646,10 @@
     {
      "url": "https://aij.eddy3d.com/assets/figures/case-m-openfoam-plan.png",
      "caption": "Case M, OpenFOAM 12, WD 180: log₁₀ of c* at the 15 points on the plan of the campus (north up; the arrow is the wind), the tunnel and the three Schmidt numbers on one scale; a point below 10⁻³ (or zero) is open. The star is the gas source and the square the reference mast."
+    },
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-m-openfoam-field-plan.png",
+     "caption": "Case M, OpenFOAM 12: the solved field on pedestrian level of the campus (z = 35.5 m above the tunnel floor), tunnel WD 180. a: u; b: u with iso-lines every 0.1 and the edge of the reversed flow (u = 0) dashed; c: the in-plane speed with streamlines. Each dot is a measured point, coloured by its measured value on the panel's scale."
     }
    ],
    "pairs": {
@@ -955,6 +963,10 @@
     {
      "url": "https://aij.eddy3d.com/assets/figures/case-m-openfoam-plan.png",
      "caption": "Case M, OpenFOAM 12, WD 180: log₁₀ of c* at the 15 points on the plan of the campus (north up; the arrow is the wind), the tunnel and the three Schmidt numbers on one scale; a point below 10⁻³ (or zero) is open. The star is the gas source and the square the reference mast."
+    },
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-m-openfoam-field-plan.png",
+     "caption": "Case M, OpenFOAM 12: the solved field on pedestrian level of the campus (z = 35.5 m above the tunnel floor), tunnel WD 180. a: u; b: u with iso-lines every 0.1 and the edge of the reversed flow (u = 0) dashed; c: the in-plane speed with streamlines. Each dot is a measured point, coloured by its measured value on the panel's scale."
     }
    ],
    "pairs": {

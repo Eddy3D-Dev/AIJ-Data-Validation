@@ -39,6 +39,26 @@
   "web_bytes": 250384,
   "width": 1600
  },
+ "case-a-openfoam-field-plan.png": {
+  "height": 2138,
+  "master": "/assets/figures/case-a-openfoam-field-plan.png",
+  "master_bytes": 4973369,
+  "master_height": 9588,
+  "master_width": 7176,
+  "web": "/assets/web/case-a-openfoam-field-plan.png",
+  "web_bytes": 1026631,
+  "width": 1600
+ },
+ "case-a-openfoam-field-section.png": {
+  "height": 1893,
+  "master": "/assets/figures/case-a-openfoam-field-section.png",
+  "master_bytes": 5185399,
+  "master_height": 8376,
+  "master_width": 7080,
+  "web": "/assets/web/case-a-openfoam-field-section.png",
+  "web_bytes": 1024204,
+  "width": 1600
+ },
  "case-a-openfoam-profiles.png": {
   "height": 855,
   "master": "/assets/figures/case-a-openfoam-profiles.png",
@@ -47,6 +67,16 @@
   "master_width": 8868,
   "web": "/assets/web/case-a-openfoam-profiles.png",
   "web_bytes": 176430,
+  "width": 1600
+ },
+ "case-a-openfoam-rans-urans.png": {
+  "height": 548,
+  "master": "/assets/figures/case-a-openfoam-rans-urans.png",
+  "master_bytes": 504451,
+  "master_height": 3240,
+  "master_width": 9456,
+  "web": "/assets/web/case-a-openfoam-rans-urans.png",
+  "web_bytes": 127896,
   "width": 1600
  },
  "case-a.png": {
@@ -97,6 +127,26 @@
   "master_width": 12552,
   "web": "/assets/web/case-b-openfoam-agreement.png",
   "web_bytes": 269649,
+  "width": 1600
+ },
+ "case-b-openfoam-field-plan.png": {
+  "height": 600,
+  "master": "/assets/figures/case-b-openfoam-field-plan.png",
+  "master_bytes": 6184456,
+  "master_height": 4440,
+  "master_width": 11832,
+  "web": "/assets/web/case-b-openfoam-field-plan.png",
+  "web_bytes": 592281,
+  "width": 1600
+ },
+ "case-b-openfoam-field-section.png": {
+  "height": 1947,
+  "master": "/assets/figures/case-b-openfoam-field-section.png",
+  "master_bytes": 7036618,
+  "master_height": 8616,
+  "master_width": 7080,
+  "web": "/assets/web/case-b-openfoam-field-section.png",
+  "web_bytes": 1386159,
   "width": 1600
  },
  "case-b-openfoam-profiles.png": {
@@ -319,6 +369,16 @@
   "web_bytes": 573549,
   "width": 1600
  },
+ "case-f-openfoam-field-plan.png": {
+  "height": 603,
+  "master": "/assets/figures/case-f-openfoam-field-plan.png",
+  "master_bytes": 19845471,
+  "master_height": 5052,
+  "master_width": 13416,
+  "web": "/assets/web/case-f-openfoam-field-plan.png",
+  "web_bytes": 878802,
+  "width": 1600
+ },
  "case-f.png": {
   "height": 800,
   "master": "/assets/geometry/case-f.png",
@@ -337,6 +397,16 @@
   "master_width": 9120,
   "web": "/assets/web/case-g-layout.png",
   "web_bytes": 230726,
+  "width": 1600
+ },
+ "case-g-openfoam-field-section.png": {
+  "height": 1575,
+  "master": "/assets/figures/case-g-openfoam-field-section.png",
+  "master_bytes": 3054419,
+  "master_height": 6744,
+  "master_width": 6852,
+  "web": "/assets/web/case-g-openfoam-field-section.png",
+  "web_bytes": 638442,
   "width": 1600
  },
  "case-g-openfoam-profiles.png": {
@@ -399,6 +469,26 @@
   "web_bytes": 312370,
   "width": 1600
  },
+ "case-h-openfoam-field-plan.png": {
+  "height": 605,
+  "master": "/assets/figures/case-h-openfoam-field-plan.png",
+  "master_bytes": 5218553,
+  "master_height": 4476,
+  "master_width": 11844,
+  "web": "/assets/web/case-h-openfoam-field-plan.png",
+  "web_bytes": 622749,
+  "width": 1600
+ },
+ "case-h-openfoam-field-section.png": {
+  "height": 552,
+  "master": "/assets/figures/case-h-openfoam-field-section.png",
+  "master_bytes": 4663605,
+  "master_height": 4080,
+  "master_width": 11832,
+  "web": "/assets/web/case-h-openfoam-field-section.png",
+  "web_bytes": 488603,
+  "width": 1600
+ },
  "case-h-openfoam-profiles.png": {
   "height": 1406,
   "master": "/assets/figures/case-h-openfoam-profiles.png",
@@ -447,6 +537,16 @@
   "master_width": 10128,
   "web": "/assets/web/case-i-openfoam-closures.png",
   "web_bytes": 709412,
+  "width": 1600
+ },
+ "case-i-openfoam-field-section.png": {
+  "height": 1793,
+  "master": "/assets/figures/case-i-openfoam-field-section.png",
+  "master_bytes": 5545388,
+  "master_height": 7932,
+  "master_width": 7080,
+  "web": "/assets/web/case-i-openfoam-field-section.png",
+  "web_bytes": 1055123,
   "width": 1600
  },
  "case-i-openfoam-profiles.png": {
@@ -499,6 +599,26 @@
   "web_bytes": 540499,
   "width": 1600
  },
+ "case-j-umf-field-plan.png": {
+  "height": 501,
+  "master": "/assets/figures/case-j-umf-field-plan.png",
+  "master_bytes": 5993284,
+  "master_height": 4332,
+  "master_width": 13848,
+  "web": "/assets/web/case-j-umf-field-plan.png",
+  "web_bytes": 482645,
+  "width": 1600
+ },
+ "case-j-umf-field-section.png": {
+  "height": 2258,
+  "master": "/assets/figures/case-j-umf-field-section.png",
+  "master_bytes": 7602750,
+  "master_height": 10128,
+  "master_width": 7176,
+  "web": "/assets/web/case-j-umf-field-section.png",
+  "web_bytes": 1493457,
+  "width": 1600
+ },
  "case-j-umf-tracer.png": {
   "height": 907,
   "master": "/assets/figures/case-j-umf-tracer.png",
@@ -537,6 +657,26 @@
   "master_width": 14292,
   "web": "/assets/web/case-k-openfoam-agreement.png",
   "web_bytes": 318683,
+  "width": 1600
+ },
+ "case-k-openfoam-field-plan.png": {
+  "height": 634,
+  "master": "/assets/figures/case-k-openfoam-field-plan.png",
+  "master_bytes": 5040457,
+  "master_height": 4692,
+  "master_width": 11832,
+  "web": "/assets/web/case-k-openfoam-field-plan.png",
+  "web_bytes": 491226,
+  "width": 1600
+ },
+ "case-k-openfoam-field-section.png": {
+  "height": 1544,
+  "master": "/assets/figures/case-k-openfoam-field-section.png",
+  "master_bytes": 3420727,
+  "master_height": 6612,
+  "master_width": 6852,
+  "web": "/assets/web/case-k-openfoam-field-section.png",
+  "web_bytes": 688743,
   "width": 1600
  },
  "case-k-openfoam-profiles.png": {
@@ -589,6 +729,26 @@
   "web_bytes": 526318,
   "width": 1600
  },
+ "case-l-umf-field-plan.png": {
+  "height": 530,
+  "master": "/assets/figures/case-l-umf-field-plan.png",
+  "master_bytes": 6085628,
+  "master_height": 4584,
+  "master_width": 13848,
+  "web": "/assets/web/case-l-umf-field-plan.png",
+  "web_bytes": 428816,
+  "width": 1600
+ },
+ "case-l-umf-field-section.png": {
+  "height": 1492,
+  "master": "/assets/figures/case-l-umf-field-section.png",
+  "master_bytes": 3255714,
+  "master_height": 6600,
+  "master_width": 7080,
+  "web": "/assets/web/case-l-umf-field-section.png",
+  "web_bytes": 683535,
+  "width": 1600
+ },
  "case-l.png": {
   "height": 800,
   "master": "/assets/geometry/case-l.png",
@@ -617,6 +777,16 @@
   "master_width": 12888,
   "web": "/assets/web/case-m-openfoam-agreement.png",
   "web_bytes": 361540,
+  "width": 1600
+ },
+ "case-m-openfoam-field-plan.png": {
+  "height": 634,
+  "master": "/assets/figures/case-m-openfoam-field-plan.png",
+  "master_bytes": 11020335,
+  "master_height": 5196,
+  "master_width": 13116,
+  "web": "/assets/web/case-m-openfoam-field-plan.png",
+  "web_bytes": 736159,
   "width": 1600
  },
  "case-m-openfoam-plan.png": {

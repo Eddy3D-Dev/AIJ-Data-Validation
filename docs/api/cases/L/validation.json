@@ -795,6 +795,14 @@
     {
      "url": "https://aij.eddy3d.com/assets/figures/case-l-openfoam-profiles.png",
      "caption": "Case L, OpenFOAM 12 (urbanMicroclimateFoam): vertical profiles of U/U_H on the centre plane y = 0 at up to four stations along the measured lines, measured points against the modelled line, offset by 1 per station."
+    },
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-l-umf-field-plan.png",
+     "caption": "Case L, OpenFOAM 12 (urbanMicroclimateFoam): the solved field on z = 0.01 m. a: u; b: u with iso-lines every 0.1 and the edge of the reversed flow (u = 0) dashed; c: the in-plane speed with streamlines. Each dot is a measured point, coloured by its measured value on the panel's scale."
+    },
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-l-umf-field-section.png",
+     "caption": "Case L, OpenFOAM 12 (urbanMicroclimateFoam): the solved field on the centre plane y = 0. a: u; b: u with iso-lines every 0.1 and the edge of the reversed flow (u = 0) dashed; c: the in-plane speed with streamlines. Each dot is a measured point, coloured by its measured value on the panel's scale."
     }
    ],
    "pairs": {

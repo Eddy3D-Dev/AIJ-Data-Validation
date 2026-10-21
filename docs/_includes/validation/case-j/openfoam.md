@@ -66,3 +66,11 @@ n is 443 (416 without the 27 points within a quarter of a building height of the
 Where along the height the model meets the measurement, station by station.
 
 {% include figure.html name="case-j-openfoam-profiles.png" alt="Vertical profiles, Case J" caption="<strong>Figure 4.</strong> Case J, vertical profiles of $$U/U_H$$ on the centre plane $$y = 0$$ at four stations along the measured lines, measured points against the modelled line, offset by 1 per station; the dashed line is the roof height." %}
+
+### Field maps
+
+The solved velocity on the measured planes, every point drawn on it as a dot coloured by its measured value on the same scale: a dot that stands out from the colour around it is a point the model misses.
+
+{% include figure.html name="case-j-umf-field-plan.png" alt="Solved field and measured points, Case J, plan" caption="<strong>Figure 5.</strong> Case J, the horizontal plane $$z = 0.04\thinspace\mathrm{m}$$: (a) $$u$$ over $$U_H$$; (b) the same with iso-lines every 0.1 and the edge of the reversed flow, $$u = 0$$, dashed; (c) the in-plane speed with streamlines." %}
+
+{% include figure.html name="case-j-umf-field-section.png" alt="Solved field and measured points, Case J, section" caption="<strong>Figure 6.</strong> Case J, the centre plane $$y = 0$$: (a) $$u$$ over $$U_H$$; (b) the same with iso-lines every 0.1 and the edge of the reversed flow, $$u = 0$$, dashed; (c) the in-plane speed with streamlines." %}

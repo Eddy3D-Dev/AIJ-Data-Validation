@@ -42,34 +42,24 @@ Status: <span class="label label-green status">scored</span>
 
 Reattachment length $$L_r/H$$ = 1.49.
 
-| Score | RANS: realizable k-epsilon, log-law inlet (the served run) | URANS: SST k-omega run transient, measured inlet |
-|---|---|---|
-| $$U$$ R | +0.955 | +0.953 |
-| $$U$$ FAC2 | 0.817 | 0.763 |
-| $$U$$ FB | +0.185 | +0.181 |
-| $$U$$ Hit rate | 0.586 | 0.683 |
-| $$U$$ n | 186 | 186 |
-| $$V$$ R | +0.961 | +0.953 |
-| $$V$$ FAC2 | 0.349 | 0.360 |
-| $$V$$ FB | -0.207 | — |
-| $$V$$ Hit rate | 0.892 | 0.817 |
-| $$V$$ n | 186 | 186 |
-| $$W$$ R | +0.708 | +0.675 |
-| $$W$$ FAC2 | 0.398 | 0.414 |
-| $$W$$ FB | -1.501 | -1.352 |
-| $$W$$ Hit rate | 0.801 | 0.699 |
-| $$W$$ n | 186 | 186 |
-| $$k$$ R | +0.480 | +0.626 |
-| $$k$$ FAC2 | 0.667 | 0.694 |
-| $$k$$ FB | +0.478 | +0.453 |
-| $$k$$ Hit rate | 0.177 | 0.392 |
-| $$k$$ n | 186 | 186 |
+| Score | Run | R | $$R^2$$ | FAC2 | FB | Hit rate |
+|---|---|---|---|---|---|---|
+| $$U$$ | RANS | +0.955 | 0.912 | 0.817 | +0.185 | 0.586 |
+|  | URANS | +0.953 | 0.908 | 0.763 | +0.181 | 0.683 |
+| $$V$$ | RANS | +0.961 | 0.923 | 0.349 | -0.207 | 0.892 |
+|  | URANS | +0.953 | 0.909 | 0.360 | — | 0.817 |
+| $$W$$ | RANS | +0.708 | 0.502 | 0.398 | -1.501 | 0.801 |
+|  | URANS | +0.675 | 0.456 | 0.414 | -1.352 | 0.699 |
+| $$k$$ | RANS | +0.480 | 0.230 | 0.667 | +0.478 | 0.177 |
+|  | URANS | +0.626 | 0.392 | 0.694 | +0.453 | 0.392 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
 
+Every score is over the same 186 points.
+
 - Per-point values: [`/api/cases/A/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/A/pairs/openfoam12-realizableKE.csv' | relative_url }})
-- URANS column: the submission [`eddy3d-of12-sst-urans`]({{ '/community/eddy3d-of12-sst-urans/' | relative_url }}), scores [`/api/submissions/eddy3d-of12-sst-urans.json`]({{ '/api/submissions/eddy3d-of12-sst-urans.json' | relative_url }})
+- RANS: realizable k-ε, log-law inlet (the served run). URANS: SST k-ω run transient, measured inlet, the submission [`eddy3d-of12-sst-urans`]({{ '/community/eddy3d-of12-sst-urans/' | relative_url }}), scores [`/api/submissions/eddy3d-of12-sst-urans.json`]({{ '/api/submissions/eddy3d-of12-sst-urans.json' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCaseAContainerE2E; figures validation/plot\_cases\_ab\_openfoam.py
 
 ## OpenLB
@@ -129,14 +119,16 @@ Status: <span class="label label-green status">scored</span>
 
 ### Scores
 
-| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|---|
-| $$\lvert\mathbf{U}\rvert$$ ($$z = 0.01\thinspace\mathrm{m}$$ plane) | -0.125 | 0.016 | 0.262 | +0.772 | 0.092 | 65 |
-| $$\lvert\mathbf{U}\rvert$$, lattice cut at ±250 m | +0.434 | 0.188 | 0.615 | +0.401 | 0.338 | 65 |
-| wind reversed (control) | -0.125 | 0.016 | 0.262 | +0.772 | 0.092 | 65 |
+| Score | R | $$R^2$$ | FAC2 | FB | Hit rate |
+|---|---|---|---|---|---|
+| $$\lvert\mathbf{U}\rvert$$ ($$z = 0.01\thinspace\mathrm{m}$$ plane) | -0.125 | 0.016 | 0.262 | +0.772 | 0.092 |
+| $$\lvert\mathbf{U}\rvert$$, lattice cut at ±250 m | +0.434 | 0.188 | 0.615 | +0.401 | 0.338 |
+| wind reversed (control) | -0.125 | 0.016 | 0.262 | +0.772 | 0.092 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
+
+Every score is over the same 65 points.
 
 - Per-point values: [`/api/cases/A/pairs/ml-surrogate.csv`]({{ '/api/cases/A/pairs/ml-surrogate.csv' | relative_url }})
 - Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot\_ml\_surrogate.py

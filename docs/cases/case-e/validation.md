@@ -40,16 +40,18 @@ Status: <span class="label label-green status">scored</span>
 
 ### Scores
 
-| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|---|
-| before, $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.688 | 0.474 | 0.950 | +0.124 | 0.613 | 80 |
-| before, $$\lvert\mathbf{U}\rvert$$ | +0.692 | 0.478 | 0.787 | +0.266 | 0.412 | 80 |
-| after, $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.845 | 0.714 | 0.887 | +0.226 | 0.475 | 80 |
-| after, $$\lvert\mathbf{U}\rvert$$ | +0.835 | 0.698 | 0.738 | +0.341 | 0.300 | 80 |
-| no-construction ceiling control | +0.099 | 0.010 | 0.787 | +0.368 | 0.350 | 80 |
+| Score | R | $$R^2$$ | FAC2 | FB | Hit rate |
+|---|---|---|---|---|---|
+| before, $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.688 | 0.474 | 0.950 | +0.124 | 0.613 |
+| before, $$\lvert\mathbf{U}\rvert$$ | +0.692 | 0.478 | 0.787 | +0.266 | 0.412 |
+| after, $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.845 | 0.714 | 0.887 | +0.226 | 0.475 |
+| after, $$\lvert\mathbf{U}\rvert$$ | +0.835 | 0.698 | 0.738 | +0.341 | 0.300 |
+| no-construction ceiling control | +0.099 | 0.010 | 0.787 | +0.368 | 0.350 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
+
+Every score is over the same 80 points.
 
 - Per-point values: [`/api/cases/E/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/E/pairs/openfoam12-realizableKE.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCaseEContainerE2E (EDDY3D\_AIJ\_E\_DIRECTIONS=SW, tabulated inlet); figures validation/plot\_case\_e\_openfoam.py

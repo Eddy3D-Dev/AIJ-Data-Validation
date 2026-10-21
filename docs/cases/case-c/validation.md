@@ -42,17 +42,19 @@ Status: <span class="label label-green status">scored</span>
 
 Quantity: $$V_{\mathrm{s}}$$ (thermistor) scored against $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ \[scalar\] and $$\lvert\mathbf{U}\rvert$$ \[vector\]; both normalised by $$U_H$$ = $$U(z = D)$$ = 3.654 m/s.
 
-| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|---|
-| WD 0° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.824 | 0.679 | 0.908 | +0.266 | 0.567 | 120 |
-| WD 0° $$\lvert\mathbf{U}\rvert$$ | +0.804 | 0.647 | 0.658 | +0.466 | 0.308 | 120 |
-| WD 22.5° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.857 | 0.735 | 0.983 | +0.106 | 0.750 | 120 |
-| WD 22.5° $$\lvert\mathbf{U}\rvert$$ | +0.846 | 0.715 | 0.833 | +0.295 | 0.433 | 120 |
-| WD 45° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.831 | 0.690 | 0.942 | +0.121 | 0.783 | 120 |
-| WD 45° $$\lvert\mathbf{U}\rvert$$ | +0.801 | 0.642 | 0.800 | +0.307 | 0.533 | 120 |
+| Score | R | $$R^2$$ | FAC2 | FB | Hit rate |
+|---|---|---|---|---|---|
+| WD 0° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.824 | 0.679 | 0.908 | +0.266 | 0.567 |
+| WD 0° $$\lvert\mathbf{U}\rvert$$ | +0.804 | 0.647 | 0.658 | +0.466 | 0.308 |
+| WD 22.5° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.857 | 0.735 | 0.983 | +0.106 | 0.750 |
+| WD 22.5° $$\lvert\mathbf{U}\rvert$$ | +0.846 | 0.715 | 0.833 | +0.295 | 0.433 |
+| WD 45° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.831 | 0.690 | 0.942 | +0.121 | 0.783 |
+| WD 45° $$\lvert\mathbf{U}\rvert$$ | +0.801 | 0.642 | 0.800 | +0.307 | 0.533 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
+
+Every score is over the same 120 points.
 
 - Per-point values: [`/api/cases/C/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/C/pairs/openfoam12-realizableKE.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCaseC0DContainerE2E; figures validation/plot\_case\_c\_openfoam.py
@@ -61,17 +63,19 @@ Quantity: $$V_{\mathrm{s}}$$ (thermistor) scored against $$\sqrt{\lvert\mathbf{U
 
 Quantity: $$V_{\mathrm{s}}$$ (thermistor) scored against $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ \[scalar\] and $$\lvert\mathbf{U}\rvert$$ \[vector\]; both normalised by $$U_H$$ = $$U(z = D)$$ = 3.654 m/s.
 
-| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|---|
-| WD 0° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.801 | 0.642 | 0.858 | +0.341 | 0.433 | 120 |
-| WD 0° $$\lvert\mathbf{U}\rvert$$ | +0.741 | 0.549 | 0.550 | +0.551 | 0.292 | 120 |
-| WD 22.5° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.896 | 0.804 | 0.975 | +0.192 | 0.675 | 120 |
-| WD 22.5° $$\lvert\mathbf{U}\rvert$$ | +0.882 | 0.777 | 0.725 | +0.394 | 0.367 | 120 |
-| WD 45° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.872 | 0.760 | 0.942 | +0.198 | 0.733 | 120 |
-| WD 45° $$\lvert\mathbf{U}\rvert$$ | +0.873 | 0.761 | 0.850 | +0.353 | 0.433 | 120 |
+| Score | R | $$R^2$$ | FAC2 | FB | Hit rate |
+|---|---|---|---|---|---|
+| WD 0° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.801 | 0.642 | 0.858 | +0.341 | 0.433 |
+| WD 0° $$\lvert\mathbf{U}\rvert$$ | +0.741 | 0.549 | 0.550 | +0.551 | 0.292 |
+| WD 22.5° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.896 | 0.804 | 0.975 | +0.192 | 0.675 |
+| WD 22.5° $$\lvert\mathbf{U}\rvert$$ | +0.882 | 0.777 | 0.725 | +0.394 | 0.367 |
+| WD 45° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.872 | 0.760 | 0.942 | +0.198 | 0.733 |
+| WD 45° $$\lvert\mathbf{U}\rvert$$ | +0.873 | 0.761 | 0.850 | +0.353 | 0.433 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
+
+Every score is over the same 120 points.
 
 - Per-point values: [`/api/cases/C/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/C/pairs/openfoam12-realizableKE.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCaseC1DContainerE2E; figures validation/plot\_case\_c\_openfoam.py
@@ -80,17 +84,19 @@ Quantity: $$V_{\mathrm{s}}$$ (thermistor) scored against $$\sqrt{\lvert\mathbf{U
 
 Quantity: $$V_{\mathrm{s}}$$ (thermistor) scored against $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ \[scalar\] and $$\lvert\mathbf{U}\rvert$$ \[vector\]; both normalised by $$U_H$$ = $$U(z = D)$$ = 3.654 m/s.
 
-| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|---|
-| WD 0° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.857 | 0.734 | 0.850 | +0.251 | 0.492 | 120 |
-| WD 0° $$\lvert\mathbf{U}\rvert$$ | +0.848 | 0.720 | 0.692 | +0.443 | 0.317 | 120 |
-| WD 22.5° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.906 | 0.820 | 0.983 | +0.091 | 0.875 | 120 |
-| WD 22.5° $$\lvert\mathbf{U}\rvert$$ | +0.894 | 0.799 | 0.900 | +0.240 | 0.633 | 120 |
-| WD 45° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.909 | 0.826 | 0.958 | +0.103 | 0.883 | 120 |
-| WD 45° $$\lvert\mathbf{U}\rvert$$ | +0.912 | 0.832 | 0.900 | +0.243 | 0.608 | 120 |
+| Score | R | $$R^2$$ | FAC2 | FB | Hit rate |
+|---|---|---|---|---|---|
+| WD 0° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.857 | 0.734 | 0.850 | +0.251 | 0.492 |
+| WD 0° $$\lvert\mathbf{U}\rvert$$ | +0.848 | 0.720 | 0.692 | +0.443 | 0.317 |
+| WD 22.5° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.906 | 0.820 | 0.983 | +0.091 | 0.875 |
+| WD 22.5° $$\lvert\mathbf{U}\rvert$$ | +0.894 | 0.799 | 0.900 | +0.240 | 0.633 |
+| WD 45° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.909 | 0.826 | 0.958 | +0.103 | 0.883 |
+| WD 45° $$\lvert\mathbf{U}\rvert$$ | +0.912 | 0.832 | 0.900 | +0.243 | 0.608 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
+
+Every score is over the same 120 points.
 
 - Per-point values: [`/api/cases/C/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/C/pairs/openfoam12-realizableKE.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCaseC2DContainerE2E; figures validation/plot\_case\_c\_openfoam.py

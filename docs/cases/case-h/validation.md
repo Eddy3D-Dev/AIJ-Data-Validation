@@ -42,18 +42,20 @@ Status: <span class="label label-green status">scored</span>
 
 Reattachment length $$L_r/H$$ = 1.36.
 
-| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|---|
-| $$U$$ | +0.897 | 0.805 | 0.609 | +0.355 | 0.446 | 826 |
-| $$V$$ | +0.935 | 0.874 | 0.355 | -0.432 | 0.682 | 826 |
-| $$W$$ | +0.887 | 0.786 | 0.314 | — | 0.713 | 826 |
-| $$k$$ | +0.107 | 0.012 | 0.570 | +0.514 | 0.305 | 826 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.3 | +0.954 | 0.910 | 0.694 | -0.597 | 0.493 | 826 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.5 | +0.951 | 0.905 | 0.615 | -0.825 | 0.507 | 826 |
-| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7 | +0.946 | 0.895 | 0.588 | -0.934 | 0.493 | 826 |
+| Score | R | $$R^2$$ | FAC2 | FB | Hit rate |
+|---|---|---|---|---|---|
+| $$U$$ | +0.897 | 0.805 | 0.609 | +0.355 | 0.446 |
+| $$V$$ | +0.935 | 0.874 | 0.355 | -0.432 | 0.682 |
+| $$W$$ | +0.887 | 0.786 | 0.314 | — | 0.713 |
+| $$k$$ | +0.107 | 0.012 | 0.570 | +0.514 | 0.305 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.3 | +0.954 | 0.910 | 0.694 | -0.597 | 0.493 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.5 | +0.951 | 0.905 | 0.615 | -0.825 | 0.507 |
+| $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7 | +0.946 | 0.895 | 0.588 | -0.934 | 0.493 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
+
+Every score is over the same 826 points.
 
 - Normalisation: velocities by $$U_H$$, $$k$$ by $$U_H^2$$ (the benchmark\'s own convention; Case E by $$U$$ at 15.9 m, as it is published); hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units
 - Per-point values: [`/api/cases/H/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/H/pairs/openfoam12-realizableKE.csv' | relative_url }})

@@ -73,3 +73,9 @@ The concentration across the three Schmidt numbers:
 </details>
 
 {% include figure.html name="case-m-openfoam-plan.png" alt="Case M, the tracer on the plan of the campus" caption="<strong>Figure 3.</strong> Case M, WD 180: $$\log_{10}$$ of $$c^\ast$$ at the 15 points on the plan of the campus, the tunnel and the three Schmidt numbers on one scale (open: below $$10^{-3}$$ or zero). The star is the gas source and the square the reference mast; the arrow is the wind." %}
+
+### Field maps
+
+The solved velocity on the measured planes, every point drawn on it as a dot coloured by its measured value on the same scale: a dot that stands out from the colour around it is a point the model misses.
+
+{% include figure.html name="case-m-openfoam-field-plan.png" alt="Solved field and measured points, Case M, plan" caption="<strong>Figure 4.</strong> Case M, the pedestrian level of the campus ($$z = 35.5\thinspace\mathrm{m}$$ above the tunnel floor), tunnel WD 180: (a) $$u$$ over $$U_R$$; (b) the same with iso-lines every 0.1 and the edge of the reversed flow, $$u = 0$$, dashed; (c) the in-plane speed with streamlines." %}

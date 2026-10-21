@@ -283,6 +283,10 @@
     {
      "url": "https://aij.eddy3d.com/assets/figures/case-f-openfoam-bias-map.png",
      "caption": "Case F, OpenFOAM 12, wind from NNW: log₂(model / tunnel) of the scalar speed at the tunnel's 13 points of the 9 m plane on the plan of the district (full-scale metres, north up; the arrow is the wind), in the two vertical frames."
+    },
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-f-openfoam-field-plan.png",
+     "caption": "Case F, OpenFOAM 12: the solved field on 9 m above the ground (z = 14 m), wind from NNW; a and b show the component along the wind. a: u; b: u with iso-lines every 0.1 and the edge of the reversed flow (u = 0) dashed; c: the in-plane speed with streamlines. Each dot is a measured point, coloured by its measured value on the panel's scale."
     }
    ],
    "pairs": {
@@ -551,6 +555,10 @@
     {
      "url": "https://aij.eddy3d.com/assets/figures/case-f-openfoam-bias-map.png",
      "caption": "Case F, OpenFOAM 12, wind from NNW: log₂(model / tunnel) of the scalar speed at the tunnel's 13 points of the 9 m plane on the plan of the district (full-scale metres, north up; the arrow is the wind), in the two vertical frames."
+    },
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-f-openfoam-field-plan.png",
+     "caption": "Case F, OpenFOAM 12: the solved field on 9 m above the ground (z = 14 m), wind from NNW; a and b show the component along the wind. a: u; b: u with iso-lines every 0.1 and the edge of the reversed flow (u = 0) dashed; c: the in-plane speed with streamlines. Each dot is a measured point, coloured by its measured value on the panel's scale."
     }
    ],
    "pairs": {

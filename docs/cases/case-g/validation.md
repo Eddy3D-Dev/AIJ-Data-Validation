@@ -42,76 +42,86 @@ Status: <span class="label label-green status">scored</span>
 
 ### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration open-field
 
-| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|---|
-| $$\lvert\mathbf{U}\rvert/U(7\text{ m})$$ (control: no belt) | +0.300 | 0.090 | 0.464 | -0.659 | 0.000 | 28 |
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U(7\text{ m})$$ (control: no belt) | +0.278 | 0.077 | 0.357 | -0.681 | 0.000 | 28 |
-| $$k/U(7\text{ m})^2$$ (control: no belt) | -0.087 | 0.008 | 0.714 | +0.300 | 0.250 | 28 |
-| $$\lvert\mathbf{U}\rvert/U_H$$, imposed (control: no belt) | +0.300 | 0.090 | 0.571 | -0.645 | 0.000 | 28 |
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U_H$$, imposed (control: no belt) | +0.278 | 0.077 | 0.464 | -0.667 | 0.000 | 28 |
+| Score | R | $$R^2$$ | FAC2 | FB | Hit rate |
+|---|---|---|---|---|---|
+| $$\lvert\mathbf{U}\rvert/U(7\text{ m})$$ (control: no belt) | +0.300 | 0.090 | 0.464 | -0.659 | 0.000 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U(7\text{ m})$$ (control: no belt) | +0.278 | 0.077 | 0.357 | -0.681 | 0.000 |
+| $$k/U(7\text{ m})^2$$ (control: no belt) | -0.087 | 0.008 | 0.714 | +0.300 | 0.250 |
+| $$\lvert\mathbf{U}\rvert/U_H$$, imposed (control: no belt) | +0.300 | 0.090 | 0.571 | -0.645 | 0.000 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U_H$$, imposed (control: no belt) | +0.278 | 0.077 | 0.464 | -0.667 | 0.000 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
+
+Every score is over the same 28 points.
 
 - Reproduce: Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseGContainerE2E (arm: no belt, full scale; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 90,576 cells, solved 2026-10-18); figures validation/plot\_cases\_gk\_openfoam.py
 
 ### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration pine
 
-| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|---|
-| $$\lvert\mathbf{U}\rvert/U(7\text{ m})$$ | +0.503 | 0.253 | 1.000 | -0.425 | 0.036 | 28 |
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U(7\text{ m})$$ | +0.491 | 0.241 | 1.000 | -0.470 | 0.000 | 28 |
-| $$k/U(7\text{ m})^2$$ | +0.213 | 0.046 | 0.714 | +0.138 | 0.143 | 28 |
-| $$\lvert\mathbf{U}\rvert/U_H$$, imposed | +0.503 | 0.253 | 1.000 | -0.407 | 0.036 | 28 |
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U_H$$, imposed | +0.491 | 0.241 | 1.000 | -0.452 | 0.036 | 28 |
+| Score | R | $$R^2$$ | FAC2 | FB | Hit rate |
+|---|---|---|---|---|---|
+| $$\lvert\mathbf{U}\rvert/U(7\text{ m})$$ | +0.503 | 0.253 | 1.000 | -0.425 | 0.036 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U(7\text{ m})$$ | +0.491 | 0.241 | 1.000 | -0.470 | 0.000 |
+| $$k/U(7\text{ m})^2$$ | +0.213 | 0.046 | 0.714 | +0.138 | 0.143 |
+| $$\lvert\mathbf{U}\rvert/U_H$$, imposed | +0.503 | 0.253 | 1.000 | -0.407 | 0.036 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U_H$$, imposed | +0.491 | 0.241 | 1.000 | -0.452 | 0.036 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
+
+Every score is over the same 28 points.
 
 - Reproduce: Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseGContainerE2E (arm: pine, Cd·LAD 0.30 1/m, full scale; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 90,576 cells, solved 2026-10-18); figures validation/plot\_cases\_gk\_openfoam.py
 
 ### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration conifer
 
-| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|---|
-| $$\lvert\mathbf{U}\rvert/U(7\text{ m})$$ | +0.489 | 0.239 | 1.000 | -0.248 | 0.286 | 28 |
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U(7\text{ m})$$ | +0.504 | 0.254 | 1.000 | -0.329 | 0.071 | 28 |
-| $$k/U(7\text{ m})^2$$ | +0.278 | 0.077 | 0.750 | -0.090 | 0.179 | 28 |
-| $$\lvert\mathbf{U}\rvert/U_H$$, imposed | +0.489 | 0.239 | 1.000 | -0.227 | 0.464 | 28 |
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U_H$$, imposed | +0.504 | 0.254 | 1.000 | -0.309 | 0.143 | 28 |
+| Score | R | $$R^2$$ | FAC2 | FB | Hit rate |
+|---|---|---|---|---|---|
+| $$\lvert\mathbf{U}\rvert/U(7\text{ m})$$ | +0.489 | 0.239 | 1.000 | -0.248 | 0.286 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U(7\text{ m})$$ | +0.504 | 0.254 | 1.000 | -0.329 | 0.071 |
+| $$k/U(7\text{ m})^2$$ | +0.278 | 0.077 | 0.750 | -0.090 | 0.179 |
+| $$\lvert\mathbf{U}\rvert/U_H$$, imposed | +0.489 | 0.239 | 1.000 | -0.227 | 0.464 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U_H$$, imposed | +0.504 | 0.254 | 1.000 | -0.309 | 0.143 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
+
+Every score is over the same 28 points.
 
 - Reproduce: Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseGContainerE2E (arm: conifer, Cd·LAD 0.625 1/m, full scale; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 90,576 cells, solved 2026-10-18); figures validation/plot\_cases\_gk\_openfoam.py
 
 ### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration screen
 
-| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|---|
-| $$\lvert\mathbf{U}\rvert/U(7\text{ m})$$ | +0.459 | 0.211 | 1.000 | -0.148 | 0.857 | 28 |
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U(7\text{ m})$$ | +0.472 | 0.223 | 1.000 | -0.258 | 0.250 | 28 |
-| $$k/U(7\text{ m})^2$$ | +0.234 | 0.055 | 0.679 | -0.206 | 0.214 | 28 |
-| $$\lvert\mathbf{U}\rvert/U_H$$, imposed | +0.459 | 0.211 | 1.000 | -0.126 | 0.893 | 28 |
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U_H$$, imposed | +0.472 | 0.223 | 1.000 | -0.237 | 0.321 | 28 |
+| Score | R | $$R^2$$ | FAC2 | FB | Hit rate |
+|---|---|---|---|---|---|
+| $$\lvert\mathbf{U}\rvert/U(7\text{ m})$$ | +0.459 | 0.211 | 1.000 | -0.148 | 0.857 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U(7\text{ m})$$ | +0.472 | 0.223 | 1.000 | -0.258 | 0.250 |
+| $$k/U(7\text{ m})^2$$ | +0.234 | 0.055 | 0.679 | -0.206 | 0.214 |
+| $$\lvert\mathbf{U}\rvert/U_H$$, imposed | +0.459 | 0.211 | 1.000 | -0.126 | 0.893 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U_H$$, imposed | +0.472 | 0.223 | 1.000 | -0.237 | 0.321 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
+
+Every score is over the same 28 points.
 
 - Reproduce: Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseGContainerE2E (arm: screen, Cd·LAD 0.875 1/m, full scale; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 90,576 cells, solved 2026-10-18); figures validation/plot\_cases\_gk\_openfoam.py
 
 ### OpenFOAM 12, realizable k-epsilon (Eddy3D Outdoor), configuration half-belt-conifer
 
-| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|---|
-| $$\lvert\mathbf{U}\rvert/U(7\text{ m})$$ | +0.468 | 0.219 | 1.000 | -0.202 | 0.607 | 28 |
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U(7\text{ m})$$ | +0.469 | 0.220 | 1.000 | -0.290 | 0.179 | 28 |
-| $$k/U(7\text{ m})^2$$ | +0.228 | 0.052 | 0.750 | -0.081 | 0.179 | 28 |
-| $$\lvert\mathbf{U}\rvert/U_H$$, imposed | +0.468 | 0.219 | 1.000 | -0.178 | 0.750 | 28 |
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U_H$$, imposed | +0.469 | 0.220 | 1.000 | -0.266 | 0.286 | 28 |
+| Score | R | $$R^2$$ | FAC2 | FB | Hit rate |
+|---|---|---|---|---|---|
+| $$\lvert\mathbf{U}\rvert/U(7\text{ m})$$ | +0.468 | 0.219 | 1.000 | -0.202 | 0.607 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U(7\text{ m})$$ | +0.469 | 0.220 | 1.000 | -0.290 | 0.179 |
+| $$k/U(7\text{ m})^2$$ | +0.228 | 0.052 | 0.750 | -0.081 | 0.179 |
+| $$\lvert\mathbf{U}\rvert/U_H$$, imposed | +0.468 | 0.219 | 1.000 | -0.178 | 0.750 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}/U_H$$, imposed | +0.469 | 0.220 | 1.000 | -0.266 | 0.286 |
 {: .scores }
 
 {% include nomenclature-scores.md %}
+
+Every score is over the same 28 points.
 
 - Reproduce: Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseGContainerE2E (arm: the real 74 m belt as a half domain, conifer, Cd·LAD 0.625 1/m, full scale; OpenFOAM 12 realizable k-ε, numerics level 3, 3000 iterations, 625,252 cells, solved 2026-10-18); figures validation/plot\_cases\_gk\_openfoam.py
 

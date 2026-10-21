@@ -299,9 +299,30 @@ _FOAM_A_B = {"U": "velocity.U", "V": "velocity.V", "W": "velocity.W", "k": "k"}
 _FOAM_C = {f"WD {wd} {q}": f"vs.{lab}.{key}" for wd, lab in (("0°", "wd-0"), ("22.5°", "wd22_5"), ("45°", "wd45"))
            for q, key in (("√(|U|²+2k)", "scalar"), ("|U|", "vector"))}
 _ML_REPRO = "Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot_ml_surrogate.py"
+# The field maps of validation/plot_field_maps.py: case -> (engine in the file name, (kind, plane) for each map, solver)
+FIELD_MAPS = {
+    "A": ("openfoam", (("plan", "z = 0.01 m"), ("section", "the centre plane y = 0"))),
+    "B": ("openfoam", (("plan", "z = 0.0125 m"), ("section", "the centre plane y = 0"))),
+    "F": ("openfoam", (("plan", "9 m above the ground (z = 14 m), wind from NNW; a and b show the component along the wind"),)),
+    "G": ("openfoam", (("section", "the vertical plane through the masts, conifer crown"),)),
+    "H": ("openfoam", (("plan", "z = 0.0125 m"), ("section", "the centre plane y = 0"))),
+    "I": ("openfoam", (("section", "the centre plane y = 0, realizable k-ε"),)),
+    "J": ("umf", (("plan", "z = 0.04 m"), ("section", "the centre plane y = 0"))),
+    "K": ("openfoam", (("plan", "z = 0.01 m"), ("section", "the centre plane y = 0"))),
+    "L": ("umf", (("plan", "z = 0.01 m"), ("section", "the centre plane y = 0"))),
+    "M": ("openfoam", (("plan", "pedestrian level of the campus (z = 35.5 m above the tunnel floor), tunnel WD 180"),)),
+}
+
+
+def _field_maps(case):
+    engine, maps = FIELD_MAPS[case]
+    return [f"case-{case.lower()}-{engine}-field-{kind}.png" for kind, _ in maps]
+
+
 RUNS = [
     *[run(c, "openfoam12-realizableKE", None, f"case{c}_openfoam12_realizableKE.json", _FOAM_A_B,
-          [f"case-{c.lower()}-layout.png", f"case-{c.lower()}-openfoam-agreement.png", f"case-{c.lower()}-openfoam-profiles.png"],
+          [f"case-{c.lower()}-layout.png", f"case-{c.lower()}-openfoam-agreement.png", *(["case-a-openfoam-rans-urans.png"] if c == "A" else []),
+           f"case-{c.lower()}-openfoam-profiles.png", *_field_maps(c)],
           f"Eddy3D fixture TestAijCase{c}ContainerE2E; figures validation/plot_cases_ab_openfoam.py",
           f"case{c}_openfoam12_realizableKE_pairs.csv", PAIRS_AB) for c in ("A", "B")],
     *[run("C", "openfoam12-realizableKE", cb, f"caseC_openfoam12_realizableKE_{cb}.json", _FOAM_C,
@@ -375,9 +396,9 @@ RUNS = [
          "wind reversed (control)": "negativeControl.reversedWind"},
         ["case-e-ml-agreement.png"], _ML_REPRO, "caseE_ml_pairs.csv", PAIRS_ML),
     # Cases H and I (Eddy3D's solves, scored against the cleaned tables): the closures other than realizable k-epsilon are separate engine ids
-    run("H", "openfoam12-realizableKE", None, "caseH_openfoam12_realizableKE.json", _HI_HEADLINE, ["case-h-layout.png", "case-h-openfoam-agreement.png", "case-h-openfoam-profiles.png"],
+    run("H", "openfoam12-realizableKE", None, "caseH_openfoam12_realizableKE.json", _HI_HEADLINE, ["case-h-layout.png", "case-h-openfoam-agreement.png", "case-h-openfoam-profiles.png", *_field_maps("H")],
         _HI_REPRO.format(fixture="TestAijCaseHContainerE2E (realizable k-ε, 1:100)"), "caseH_openfoam12_realizableKE_pairs.csv", PAIRS_H),
-    run("I", "openfoam12-realizableKE", None, "caseI_openfoam12_realizableKE.json", _HI_HEADLINE, ["case-i-layout.png", "case-i-openfoam-agreement.png", "case-i-openfoam-profiles.png", "case-i-openfoam-closures.png"],
+    run("I", "openfoam12-realizableKE", None, "caseI_openfoam12_realizableKE.json", _HI_HEADLINE, ["case-i-layout.png", "case-i-openfoam-agreement.png", "case-i-openfoam-profiles.png", *_field_maps("I"), "case-i-openfoam-closures.png"],
         _HI_REPRO.format(fixture="TestAijCubeContainerE2E (realizable k-ε, 1:60)"), "caseI_openfoam12_realizableKE_pairs.csv", PAIRS_I),
     run("I", "openfoam12-kEpsilon", None, "caseI_openfoam12_kEpsilon.json", _HI_HEADLINE, ["case-i-openfoam-closures.png"],
         _HI_REPRO.format(fixture="TestAijCubeContainerE2E (standard k-ε, 1:60)"), "caseI_openfoam12_kEpsilon_pairs.csv", PAIRS_I),
@@ -509,19 +530,19 @@ _L_NOTES = [
     "cools with height; the street flow is slower than the flow above the array; every species emits and its largest value is in the source street.",
 ]
 RUNS += [
-    run("K", "openfoam12-realizableKE", None, "caseK_openfoam12_realizableKE.json", _K_HEADLINE, ["case-k-layout.png", "case-k-openfoam-agreement.png", "case-k-openfoam-profiles.png"],
+    run("K", "openfoam12-realizableKE", None, "caseK_openfoam12_realizableKE.json", _K_HEADLINE, ["case-k-layout.png", "case-k-openfoam-agreement.png", "case-k-openfoam-profiles.png", *_field_maps("K")],
         _KG_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseKContainerE2E", what="9 x 9 cubes, floor point source, 1:100", cells="972,637"), "caseK_openfoam12_realizableKE_pairs.csv", PAIRS_K,
         normalisation=_K_NORM, notes=_K_NOTES),
     *[run("G", "openfoam12-realizableKE", arm, f"caseG_openfoam12_realizableKE_{arm}.json",
           {f"|U|/U(7 m){sfx}": "score.U.ownApproach", f"√(|U|²+2k)/U(7 m){sfx}": "score.rms.ownApproach", f"k/U(7 m)²{sfx}": "score.k.ownApproach",
            f"|U|/U_H, imposed{sfx}": "score.U.imposedUH", f"√(|U|²+2k)/U_H, imposed{sfx}": "score.rms.imposedUH"},
-          ["case-g-layout.png", "case-g-openfoam-sweep.png", "case-g-openfoam-stations.png", "case-g-openfoam-profiles.png"],
+          ["case-g-layout.png", "case-g-openfoam-sweep.png", "case-g-openfoam-stations.png", "case-g-openfoam-profiles.png", *(_field_maps("G") if arm == "conifer" else [])],
           _KG_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseGContainerE2E", what=f"arm: {what}, full scale", cells=f"{cells:,}"), "caseG_openfoam12_realizableKE_pairs.csv", PAIRS_G,
           normalisation=_G_NORM, notes=_G_NOTES) for arm, what, cells, sfx in _G_ARMS],
-    *[run("J", f"umf-{closure}", None, f"caseJ_umf_{closure}.json", _J_HEADLINE, ["case-j-layout.png", "case-j-umf-agreement.png", "case-j-umf-tracer.png", "case-j-openfoam-profiles.png"],
+    *[run("J", f"umf-{closure}", None, f"caseJ_umf_{closure}.json", _J_HEADLINE, ["case-j-layout.png", "case-j-umf-agreement.png", "case-j-umf-tracer.png", "case-j-openfoam-profiles.png", *(_field_maps("J") if closure == "realizableKE" else [])],
           _JL_REPRO.format(fixture="MetaFOAM.Lib.Tests/TestAijCaseJUmfContainerE2E", what="1:1:2 building, heated floor, floor point source", closure=_J_CLOSURES[closure][0], cells="236,408", scale="62.5"),
           f"caseJ_umf_{closure}_pairs.csv", PAIRS_J, normalisation=_J_NORM, notes=_j_notes(closure)) for closure in _J_CLOSURES],
-    run("L", "umf-realizableKE", None, "caseL_umf_realizableKE.json", _L_HEADLINE, ["case-l-layout.png", "case-l-umf-agreement.png", "case-l-openfoam-profiles.png"],
+    run("L", "umf-realizableKE", None, "caseL_umf_realizableKE.json", _L_HEADLINE, ["case-l-layout.png", "case-l-umf-agreement.png", "case-l-openfoam-profiles.png", *_field_maps("L")],
         _JL_REPRO.format(fixture="MetaFOAM.Lib.Tests/TestAijCaseLUmfContainerE2E", what="9 x 14 cubes, heated floor, floor line source", closure="realizable k-ε", cells="754,940", scale="100"),
         "caseL_umf_realizableKE_pairs.csv", PAIRS_L, normalisation=_L_NORM, notes=_L_NOTES),
 ]
@@ -651,11 +672,11 @@ def _m_notes(sp):
 
 
 RUNS += [
-    *[run("F", "openfoam12-realizableKE", frame, f"caseF_openfoam12_realizableKE_{frame}.json", _F_HEADLINE, ["case-f-layout.png", "case-f-openfoam-agreement.png", "case-f-openfoam-bias-map.png"],
+    *[run("F", "openfoam12-realizableKE", frame, f"caseF_openfoam12_realizableKE_{frame}.json", _F_HEADLINE, ["case-f-layout.png", "case-f-openfoam-agreement.png", "case-f-openfoam-bias-map.png", *_field_maps("F")],
           _FM_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseFContainerE2E (EDDY3D_AIJ_F_DIRECTIONS=NNW, the default)", what=f"Shinjuku district, 1:800, wind from NNW, frame {frame}",
                            iterations="2000", cells="2,143,488"),
           "caseF_openfoam12_realizableKE_pairs.csv", PAIRS_F, normalisation=_F_NORM, notes=_f_notes(frame)) for frame in ("literal", "agl")],
-    *[run("M", "openfoam12-realizableKE", sp, f"caseM_openfoam12_realizableKE_{sp}.json", _M_HEADLINE, ["case-m-layout.png", "case-m-openfoam-agreement.png", "case-m-openfoam-plan.png"],
+    *[run("M", "openfoam12-realizableKE", sp, f"caseM_openfoam12_realizableKE_{sp}.json", _M_HEADLINE, ["case-m-layout.png", "case-m-openfoam-agreement.png", "case-m-openfoam-plan.png", *_field_maps("M")],
           _FM_REPRO.format(fixture="Eddy3DCli.Tests/Validation/TestAijCaseMContainerE2E (WD 180, the default)", what=f"TPU Atsugi campus, 1:600, tunnel WD 180, turbulent Schmidt number {sct}",
                            iterations="3000", cells="1,394,053"),
           "caseM_openfoam12_realizableKE_pairs.csv", PAIRS_M, normalisation=_M_NORM.format(sct=sct), notes=_m_notes(sp)) for sp, sct in (("sct03", "0.3"), ("sct05", "0.5"), ("sct07", "0.7"))],
@@ -663,6 +684,12 @@ RUNS += [
 
 # One caption per validation figure, used on the case pages and served with each result.
 FIGURE_CAPTIONS = {
+    "case-a-openfoam-rans-urans.png": ("Case A, OpenFOAM 12: the served steady run (RANS, realizable k-ε, log-law inlet) and the same solver run transient (URANS, "
+                                       "SST k-ω, measured inlet), R, FAC2, FB and hit rate of U, V, W and k, the dashed line where a perfect model scores."),
+    **{f"case-{c.lower()}-{engine}-field-{kind}.png": (f"Case {c}, OpenFOAM 12{' (urbanMicroclimateFoam)' if engine == 'umf' else ''}: the solved field on {where}. "
+                                                        "a: u; b: u with iso-lines every 0.1 and the edge of the reversed flow (u = 0) dashed; c: the in-plane speed "
+                                                        "with streamlines. Each dot is a measured point, coloured by its measured value on the panel's scale.")
+       for c, (engine, maps) in FIELD_MAPS.items() for kind, where in maps},
     **{f"case-{c.lower()}-openfoam-agreement.png": (f"Case {c}, OpenFOAM 12 (realizable k-ε): measured against modelled U, V, W and k at "
                                                      "every measured point, normalised by U_H, with the 1:1 line and the factor-of-two band.") for c in "AB"},
     **{f"case-{c.lower()}-openfoam-profiles.png": (f"Case {c}, OpenFOAM 12{m}: vertical profiles of U/U_H on the centre plane y = 0 at up to four "
@@ -2431,8 +2458,7 @@ def _collected_by(meta):
 
 # Case pages whose OpenFOAM 12 section shows the served steady run beside a transient one, a scored submission, one
 # column each: (submission slug, the RANS column's head, the URANS column's head).
-URANS_RUNS = {"A": ("eddy3d-of12-sst-urans", "RANS: realizable k-epsilon, log-law inlet (the served run)",
-                    "URANS: SST k-omega run transient, measured inlet")}
+URANS_RUNS = {"A": ("eddy3d-of12-sst-urans", "realizable k-ε, log-law inlet (the served run)", "SST k-ω run transient, measured inlet")}
 
 
 def _urans_run(case):
@@ -2447,33 +2473,52 @@ def _urans_run(case):
         return slug, rans, urans, json.load(f)
 
 
+_METRICS = (("R", "+.3f"), ("Fac2", ".3f"), ("Fb", "+.3f"), ("HitRate", ".3f"))
+
+
+def _metric_cells(s):
+    """R, R^2, FAC2, FB and hit rate of one score, '—' where not defined."""
+    num = lambda m, f: "—" if s.get(m) is None else f"{s[m]:{f}}"  # noqa: E731
+    r2 = "—" if s.get("R") is None else f"{s['R'] ** 2:.3f}"
+    return [num("R", "+.3f"), r2] + [num(m, f) for m, f in _METRICS[1:]]
+
+
+def _count_line(scores):
+    """The n column, or one line under the table when every score has the same n: ([head], cells per score, [line])."""
+    ns = [s.get("Count") for s in scores]
+    if len(set(ns)) == 1 and ns[0] is not None:
+        return [], [[] for _ in scores], [f"Every score is over the same {ns[0]} points."]
+    return ["n"], [["—" if n is None else f"{n:d}"] for n in ns], []
+
+
 def _score_table_pair(e, u, rans, urans):
-    """The served steady run and the transient one side by side: a row per score and metric, one column each run."""
-    L = [f"| Score | {rans} | {urans} |", "|---|---|---|"]
-    num = lambda s, m, f: "—" if s.get(m) is None else f"{s[m]:{f}}"  # noqa: E731
+    """The served steady run and the transient one: a row per score and run, the metrics across."""
+    rows = []
     for label, key in e["headline"].items():
-        a, b = e["scores"][key], u["scores"].get(u["headline"].get(label, key))
-        if b is None:
-            continue
-        lead = _cell(label, lead=True, bare=True)
-        for metric, name, f in (("R", "R", "+.3f"), ("Fac2", "FAC2", ".3f"), ("Fb", "FB", "+.3f"), ("HitRate", "Hit rate", ".3f")):
-            L.append(f"| {lead} {name} | {num(a, metric, f)} | {num(b, metric, f)} |")
-        L.append(f"| {lead} n | {num(a, 'Count', 'd')} | {num(b, 'Count', 'd')} |")
+        b = u["scores"].get(u["headline"].get(label, key))
+        if b is not None:
+            rows.append((label, e["scores"][key], b))
+    n_head, n_cells, n_line = _count_line([s for _, a, b in rows for s in (a, b)])
+    head = ["Score", "Run", "R", "$$R^2$$", "FAC2", "FB", "Hit rate"] + n_head
+    L = ["| " + " | ".join(head) + " |", "|" + "---|" * len(head)]
+    for i, (label, a, b) in enumerate(rows):
+        for j, (run, s) in enumerate(((rans, a), (urans, b))):
+            lead = _cell(label, lead=True, bare=True) if j == 0 else ""
+            L.append("| " + " | ".join([lead, run] + _metric_cells(s) + n_cells[2 * i + j]) + " |")
     L.append("{: .scores }")
-    return L + ["", "{% include " + NM.INCLUDES["scores"] + " %}"]
+    return L + _legend(L) + ([""] + n_line if n_line else [])
 
 
 def _score_table(e):
     """One run's headline scores: a row per score, the metrics across. A bare '|' in a label (|U|) is escaped."""
-    L = ["| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |", "|---|---|---|---|---|---|---|"]
-    for label, key in e["headline"].items():
-        s = e["scores"][key]
-        num = lambda m, f: "—" if s.get(m) is None else f"{s[m]:{f}}"  # noqa: E731
-        r2 = "—" if s.get("R") is None else f"{s['R'] ** 2:.3f}"
-        L.append(f"| {_cell(label, lead=True, bare=True)} | {num('R', '+.3f')} | {r2} | {num('Fac2', '.3f')} | {num('Fb', '+.3f')} | "
-                 f"{num('HitRate', '.3f')} | {num('Count', 'd')} |")
+    items = list(e["headline"].items())
+    n_head, n_cells, n_line = _count_line([e["scores"][k] for _, k in items])
+    head = ["Score", "R", "$$R^2$$", "FAC2", "FB", "Hit rate"] + n_head
+    L = ["| " + " | ".join(head) + " |", "|" + "---|" * len(head)]
+    for (label, key), nc in zip(items, n_cells):
+        L.append("| " + " | ".join([_cell(label, lead=True, bare=True)] + _metric_cells(e["scores"][key]) + nc) + " |")
     L.append("{: .scores }")
-    return L + _legend(L)
+    return L + _legend(L) + ([""] + n_line if n_line else [])
 
 
 REPRODUCE_TAIL = "; scores recomputed"       # in a run's `reproduce`: what comes after is how the scores were made, not how to run it
@@ -2646,7 +2691,7 @@ def _case_validation_page(case, meta, p, shared):
             if e["recirculation_Lr_over_H"] is not None:
                 L += [f"Reattachment length {NM.m('L_r/H')} = {e['recirculation_Lr_over_H']:.2f}.", ""]
             pair = _urans_run(case) if e["engine"] == "openfoam12-realizableKE" else None
-            table = _score_table_pair(e, pair[3], pair[1], pair[2]) if pair else _score_table(e)
+            table = _score_table_pair(e, pair[3], "RANS", "URANS") if pair else _score_table(e)
             if len(e["headline"]) > OPEN_TABLE_ROWS:
                 L += ['<details markdown="block">', f"  <summary>All {len(e['headline'])} headline scores</summary>", ""] + table + ["", "</details>", ""]
             else:
@@ -2664,7 +2709,7 @@ def _case_validation_page(case, meta, p, shared):
             if not all_pairs:
                 L.append(f"- Per-point values: {_link('`/api/' + pairs_rel + '`', '/api/' + pairs_rel)}")
             if pair:
-                L.append(f"- URANS column: the submission {_link('`' + pair[0] + '`', '/community/' + pair[0] + '/')}, "
+                L.append(f"- RANS: {pair[1]}. URANS: {pair[2]}, the submission {_link('`' + pair[0] + '`', '/community/' + pair[0] + '/')}, "
                          f"scores {_link('`/api/submissions/' + pair[0] + '.json`', '/api/submissions/' + pair[0] + '.json')}")
             L += [f"- Reproduce: {_tex(head)}", ""]
             facts, collapsed = _notes([n for n in own_notes(e) if n not in all_notes])

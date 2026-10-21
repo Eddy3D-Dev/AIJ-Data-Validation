@@ -15,6 +15,21 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [3.3.1] - 2026-10-20
+
+Field maps: the solved flow on the measurement planes, with the measured points drawn on it.
+
+### Added
+
+- `case-{a,b,h,j,k,l}-*-field-plan.png` and `-field-section.png`, `case-{i,g}-openfoam-field-section.png`,
+  `case-{f,m}-openfoam-field-plan.png`: for every Eddy3D run whose solve is at hand (Cases A, B, F, G, H, I, J, K, L, M),
+  three panels on one plane: $$u$$; $$u$$ with iso-lines every 0.1 and the edge of the reversed flow ($$u = 0$$) dashed; the
+  in-plane speed with streamlines. Each measured point is a dot coloured by its measured value on the same scale, so a dot
+  that stands out from the field is a point the model misses. They are listed with each run's figures and on the case pages.
+- `validation/extract_planes.py` samples the solves on those planes (`validation/results/planes/`, with the frame, the speed
+  and a check against the served pairs: $$r \gt 0.98$$ on every plane, 0.987 at the lowest); `validation/plot_field_maps.py` draws the maps from
+  those snapshots in the pinned build. Cases C, D and E have no maps yet: their solves are not on the machine that sampled these.
+
 ## [3.3.0] - 2026-10-20
 
 Five more Eddy3D runs, scored and served as submissions: what moves the OpenFOAM 12 scores, and what does not.

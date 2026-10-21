@@ -1,6 +1,6 @@
 OpenLB (Eddy3D's `eddy3dWind`: Smagorinsky, third-order regularised D3Q19, CPU image) solved the experiment with the same fitted inflow as OpenFOAM 12 and probed the same measured points, at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ ($$H/10$$), 1.3 million cells, 1.8 h on four threads. $$H/20$$ costs about 16 times the cell-steps on this image.
 
-{% include figure.html name="case-a-engine-comparison.png" alt="Measured vs modelled U and V, Case A, one row per engine" caption="<strong>Figure 4.</strong> Case A, measured vs modelled $$U$$ and $$V$$ on the same points, one row per engine: OpenFOAM 12, OpenLB and FluidX3D. FluidX3D's hollow points are the near-ground heights it is not scored on." %}
+{% include figure.html name="case-a-engine-comparison.png" alt="Measured vs modelled U and V, Case A, one row per engine" caption="<strong>Figure 7.</strong> Case A, measured vs modelled $$U$$ and $$V$$ on the same points, one row per engine: OpenFOAM 12, OpenLB and FluidX3D. FluidX3D's hollow points are the near-ground heights it is not scored on." %}
 
 | Quantity | n | FAC2 | FB | hit rate | R | OpenFOAM FAC2 / hit rate / R |
 |---|---|---|---|---|---|---|
@@ -19,7 +19,7 @@ OpenLB (Eddy3D's `eddy3dWind`: Smagorinsky, third-order regularised D3Q19, CPU i
 <details markdown="block">
 <summary>Interpretation: OpenLB on Case A</summary>
 
-- The flat band of near-zero model $$U$$ in the OpenLB row of Figure 4 is the floor; above two cells FAC2 rises to 0.65 and FB falls to +0.17.
+- The flat band of near-zero model $$U$$ in the OpenLB row of Figure 7 is the floor; above two cells FAC2 rises to 0.65 and FB falls to +0.17.
 - The solve is nearly steady: a steady log-law inflow at $$H/10$$ resolves almost no turbulence, so $$k$$ is not compared, and with nothing to entrain the wake runs long.
 - Its frame is right.
 

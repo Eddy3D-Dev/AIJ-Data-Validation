@@ -1,6 +1,6 @@
 OpenLB (Eddy3D's `eddy3dWind`: Smagorinsky, third-order regularised D3Q19, CPU image) solved the experiment with the same fitted inflow as OpenFOAM 12 and probed the same measured points, at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ ($$H/12.5$$), 2.6 million cells, 4.1 h on four threads. $$H/20$$ costs about 16 times the cell-steps on this image.
 
-{% include figure.html name="case-b-engine-comparison.png" alt="Measured vs modelled U and V, Case B, one row per engine" caption="<strong>Figure 4.</strong> Case B, measured vs modelled $$U$$ and $$V$$ on the same points, one row per engine: OpenFOAM 12, OpenLB and FluidX3D. FluidX3D's hollow points are the near-ground heights it is not scored on." %}
+{% include figure.html name="case-b-engine-comparison.png" alt="Measured vs modelled U and V, Case B, one row per engine" caption="<strong>Figure 6.</strong> Case B, measured vs modelled $$U$$ and $$V$$ on the same points, one row per engine: OpenFOAM 12, OpenLB and FluidX3D. FluidX3D's hollow points are the near-ground heights it is not scored on." %}
 
 | Quantity | n | FAC2 | FB | hit rate | R | OpenFOAM FAC2 / hit rate / R |
 |---|---|---|---|---|---|---|

@@ -135,8 +135,20 @@
      "caption": "Case A, OpenFOAM 12 (realizable k-ε): measured against modelled U, V, W and k at every measured point, normalised by U_H, with the 1:1 line and the factor-of-two band. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
     },
     {
+     "url": "https://aij.eddy3d.com/assets/figures/case-a-openfoam-rans-urans.png",
+     "caption": "Case A, OpenFOAM 12: the served steady run (RANS, realizable k-ε, log-law inlet) and the same solver run transient (URANS, SST k-ω, measured inlet), R, FAC2, FB and hit rate of U, V, W and k, the dashed line where a perfect model scores."
+    },
+    {
      "url": "https://aij.eddy3d.com/assets/figures/case-a-openfoam-profiles.png",
      "caption": "Case A, OpenFOAM 12: centre-plane vertical profiles of U/U_H at the measurement stations, measured points against the modelled line."
+    },
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-a-openfoam-field-plan.png",
+     "caption": "Case A, OpenFOAM 12: the solved field on z = 0.01 m. a: u; b: u with iso-lines every 0.1 and the edge of the reversed flow (u = 0) dashed; c: the in-plane speed with streamlines. Each dot is a measured point, coloured by its measured value on the panel's scale."
+    },
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-a-openfoam-field-section.png",
+     "caption": "Case A, OpenFOAM 12: the solved field on the centre plane y = 0. a: u; b: u with iso-lines every 0.1 and the edge of the reversed flow (u = 0) dashed; c: the in-plane speed with streamlines. Each dot is a measured point, coloured by its measured value on the panel's scale."
     }
    ],
    "pairs": {

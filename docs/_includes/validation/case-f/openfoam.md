@@ -84,3 +84,9 @@ FB is positive when the model is low.
 </details>
 
 {% include figure.html name="case-f-openfoam-bias-map.png" alt="Case F, where the model is slow or fast" caption="<strong>Figure 3.</strong> Case F, wind from NNW: $$\log_2(\text{model}/\text{tunnel})$$ of $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ at the 13 points of the 9 m plane on the plan of the district, in the two vertical frames; the arrow is the wind." %}
+
+### Field maps
+
+The solved velocity on the measured planes, every point drawn on it as a dot coloured by its measured value on the same scale: a dot that stands out from the colour around it is a point the model misses. The wind blows across the map, so (a) and (b) show the component along the wind.
+
+{% include figure.html name="case-f-openfoam-field-plan.png" alt="Solved field and measured points, Case F, plan" caption="<strong>Figure 4.</strong> Case F, the horizontal plane 9 m above the ground ($$z = 14\thinspace\mathrm{m}$$), wind from NNW: (a) $$u$$ over $$U(500\thinspace\mathrm{m})$$; (b) the same with iso-lines every 0.1 and the edge of the reversed flow, $$u = 0$$, dashed; (c) the in-plane speed with streamlines." %}

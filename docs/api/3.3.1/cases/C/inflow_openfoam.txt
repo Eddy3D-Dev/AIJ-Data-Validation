@@ -1,0 +1,1238 @@
+==== 0/U
+/*--------------------------------*- C++ -*----------------------------------*\
+  cases/C/inflow_openfoam.txt of the AIJ UWE API (release 3.3.1), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  RECOMMENDED inlet (this repository's choice, not the benchmark's): U(z) = u*/kappa ln((z + z0)/z0) with u* = 0.25598 m/s, z0 = 0.0004797 m fitted to the measured profile (log law, kappa = 0.41, least squares on AF_caseC.csv (16 points, z = 0.01 ... 1.2 m); two windows, because Case C scores at ONE height (z = 0.02 m) and the near-ground half of the fit matters; the first window, [0.02, 0.4]); k = u*^2/sqrt(Cmu); epsilon = u*^3/(kappa (z + z0)). flowDir is the case's wind direction 0 deg by the convention along_x (cases/C.json inflow.flow_direction); the case has 3 direction(s): rotate flowDir for another.
+  OpenFOAM 12 (openfoam.org) syntax. ESI OpenFOAM v2xxx: the three atmBoundaryLayerInlet* conditions and nutkAtmRoughWallFunction take the same entries there; fixedProfile is openfoam.org only (use timeVaryingMappedFixedValue or codedFixedValue).
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+dimensions      [0 1 -1 0 0 0 0];
+internalField   uniform (3.654 0 0);
+boundaryField
+{
+    inlet
+    {
+        type            atmBoundaryLayerInletVelocity;
+        flowDir         (1 0 0);
+        zDir            (0 0 1);
+        Uref            3.654;
+        Zref            0.2;
+        z0              uniform 0.0004797;
+        d               uniform 0;
+        kappa           0.41;
+        Cmu             0.09;
+        value           $internalField;
+    }
+    outlet          { type inletOutlet; inletValue uniform (0 0 0); value $internalField; }
+    ground          { type noSlip; }
+    buildings       { type noSlip; }
+    top             { type slip; }
+    sides           { type slip; }
+}
+
+==== 0/k
+/*--------------------------------*- C++ -*----------------------------------*\
+  cases/C/inflow_openfoam.txt of the AIJ UWE API (release 3.3.1), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  RECOMMENDED inlet (this repository's choice, not the benchmark's): U(z) = u*/kappa ln((z + z0)/z0) with u* = 0.25598 m/s, z0 = 0.0004797 m fitted to the measured profile (log law, kappa = 0.41, least squares on AF_caseC.csv (16 points, z = 0.01 ... 1.2 m); two windows, because Case C scores at ONE height (z = 0.02 m) and the near-ground half of the fit matters; the first window, [0.02, 0.4]); k = u*^2/sqrt(Cmu); epsilon = u*^3/(kappa (z + z0)). flowDir is the case's wind direction 0 deg by the convention along_x (cases/C.json inflow.flow_direction); the case has 3 direction(s): rotate flowDir for another.
+  OpenFOAM 12 (openfoam.org) syntax. ESI OpenFOAM v2xxx: the three atmBoundaryLayerInlet* conditions and nutkAtmRoughWallFunction take the same entries there; fixedProfile is openfoam.org only (use timeVaryingMappedFixedValue or codedFixedValue).
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       volScalarField;
+    object      k;
+}
+dimensions      [0 2 -2 0 0 0 0];
+internalField   uniform 0.218419;
+boundaryField
+{
+    inlet
+    {
+        type            atmBoundaryLayerInletK;
+        flowDir         (1 0 0);
+        zDir            (0 0 1);
+        Uref            3.654;
+        Zref            0.2;
+        z0              uniform 0.0004797;
+        d               uniform 0;
+        kappa           0.41;
+        Cmu             0.09;
+        value           $internalField;
+    }
+    outlet          { type inletOutlet; inletValue $internalField; value $internalField; }
+    ground          { type kqRWallFunction; value $internalField; }
+    buildings       { type kqRWallFunction; value $internalField; }
+    top             { type slip; }
+    sides           { type slip; }
+}
+
+==== 0/epsilon
+/*--------------------------------*- C++ -*----------------------------------*\
+  cases/C/inflow_openfoam.txt of the AIJ UWE API (release 3.3.1), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  RECOMMENDED inlet (this repository's choice, not the benchmark's): U(z) = u*/kappa ln((z + z0)/z0) with u* = 0.25598 m/s, z0 = 0.0004797 m fitted to the measured profile (log law, kappa = 0.41, least squares on AF_caseC.csv (16 points, z = 0.01 ... 1.2 m); two windows, because Case C scores at ONE height (z = 0.02 m) and the near-ground half of the fit matters; the first window, [0.02, 0.4]); k = u*^2/sqrt(Cmu); epsilon = u*^3/(kappa (z + z0)). flowDir is the case's wind direction 0 deg by the convention along_x (cases/C.json inflow.flow_direction); the case has 3 direction(s): rotate flowDir for another.
+  OpenFOAM 12 (openfoam.org) syntax. ESI OpenFOAM v2xxx: the three atmBoundaryLayerInlet* conditions and nutkAtmRoughWallFunction take the same entries there; fixedProfile is openfoam.org only (use timeVaryingMappedFixedValue or codedFixedValue).
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       volScalarField;
+    object      epsilon;
+}
+dimensions      [0 2 -3 0 0 0 0];
+internalField   uniform 0.204063;
+boundaryField
+{
+    inlet
+    {
+        type            atmBoundaryLayerInletEpsilon;
+        flowDir         (1 0 0);
+        zDir            (0 0 1);
+        Uref            3.654;
+        Zref            0.2;
+        z0              uniform 0.0004797;
+        d               uniform 0;
+        kappa           0.41;
+        Cmu             0.09;
+        value           $internalField;
+    }
+    outlet          { type inletOutlet; inletValue $internalField; value $internalField; }
+    ground          { type epsilonWallFunction; value $internalField; }
+    buildings       { type epsilonWallFunction; value $internalField; }
+    top             { type slip; }
+    sides           { type slip; }
+}
+
+==== 0/nut
+/*--------------------------------*- C++ -*----------------------------------*\
+  cases/C/inflow_openfoam.txt of the AIJ UWE API (release 3.3.1), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  RECOMMENDED ground roughness: the same z0 as the inlet, so the profile holds along an empty fetch
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       volScalarField;
+    object      nut;
+}
+dimensions      [0 2 -1 0 0 0 0];
+internalField   uniform 0;
+boundaryField
+{
+    inlet           { type calculated; value uniform 0; }
+    outlet          { type calculated; value uniform 0; }
+    ground
+    {
+        type            nutkAtmRoughWallFunction;
+        z0              uniform 0.0004797;
+        value           uniform 0;
+    }
+    buildings       { type nutkWallFunction; value uniform 0; }
+    top             { type calculated; value uniform 0; }
+    sides           { type calculated; value uniform 0; }
+}
+
+==== system/probes
+/*--------------------------------*- C++ -*----------------------------------*\
+  cases/C/inflow_openfoam.txt of the AIJ UWE API (release 3.3.1), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  the benchmark's measurement points (cases/C/probes.csv, the data), in the case frame and units: include from controlDict functions
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      probes;
+}
+probes
+{
+    type            probes;
+    libs            ("libsampling.so");
+    writeControl    writeTime;
+    fields          (U k epsilon);
+    probeLocations
+    (
+        (-0.15 -0.1 0.02)   // point_id 4, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.05 0.02)   // point_id 5, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0 0.02)   // point_id 6, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.05 0.02)   // point_id 7, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.1 0.02)   // point_id 8, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.15 0.02)   // point_id 9, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.2 0.02)   // point_id 10, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.25 0.02)   // point_id 11, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.3 0.02)   // point_id 12, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.1 0.02)   // point_id 13, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.05 0.02)   // point_id 14, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0 0.02)   // point_id 15, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.05 0.02)   // point_id 16, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.1 0.02)   // point_id 17, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.15 0.02)   // point_id 18, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.2 0.02)   // point_id 19, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.25 0.02)   // point_id 20, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.3 0.02)   // point_id 21, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.1 0.02)   // point_id 22, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.05 0.02)   // point_id 23, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0 0.02)   // point_id 24, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.05 0.02)   // point_id 25, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.1 0.02)   // point_id 26, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.15 0.02)   // point_id 27, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.2 0.02)   // point_id 28, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.25 0.02)   // point_id 29, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.3 0.02)   // point_id 30, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 0.15 0.02)   // point_id 31, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 0.2 0.02)   // point_id 32, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 0.25 0.02)   // point_id 33, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 -0.15 0.02)   // point_id 38, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 -0.15 0.02)   // point_id 39, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 -0.15 0.02)   // point_id 40, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 -0.15 0.02)   // point_id 41, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.15 0.02)   // point_id 42, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.15 0.02)   // point_id 43, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.15 0.02)   // point_id 44, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 -0.15 0.02)   // point_id 45, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 -0.2 0.02)   // point_id 47, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 -0.2 0.02)   // point_id 48, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 -0.2 0.02)   // point_id 49, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 -0.2 0.02)   // point_id 50, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.2 0.02)   // point_id 51, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.2 0.02)   // point_id 52, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.2 0.02)   // point_id 53, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 -0.2 0.02)   // point_id 54, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 -0.25 0.02)   // point_id 56, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 -0.25 0.02)   // point_id 57, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 -0.25 0.02)   // point_id 58, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 -0.25 0.02)   // point_id 59, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.25 0.02)   // point_id 60, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.25 0.02)   // point_id 61, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.25 0.02)   // point_id 62, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 -0.25 0.02)   // point_id 63, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.3 0.02)   // point_id 64, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.3 0.02)   // point_id 65, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.3 0.02)   // point_id 66, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 -0.15 0.02)   // point_id 67, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 -0.2 0.02)   // point_id 68, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 -0.25 0.02)   // point_id 69, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.1 0.02)   // point_id 70, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.05 0.02)   // point_id 71, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0 0.02)   // point_id 72, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.05 0.02)   // point_id 73, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.1 0.02)   // point_id 74, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.15 0.02)   // point_id 75, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.2 0.02)   // point_id 76, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.25 0.02)   // point_id 77, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.3 0.02)   // point_id 78, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.1 0.02)   // point_id 79, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.05 0.02)   // point_id 80, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0 0.02)   // point_id 81, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.05 0.02)   // point_id 82, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.1 0.02)   // point_id 83, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.15 0.02)   // point_id 84, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.2 0.02)   // point_id 85, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.25 0.02)   // point_id 86, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.3 0.02)   // point_id 87, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.1 0.02)   // point_id 88, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.05 0.02)   // point_id 89, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0 0.02)   // point_id 90, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.05 0.02)   // point_id 91, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.1 0.02)   // point_id 92, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.15 0.02)   // point_id 93, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.2 0.02)   // point_id 94, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.25 0.02)   // point_id 95, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.3 0.02)   // point_id 96, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 -0.15 0.02)   // point_id 97, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 -0.2 0.02)   // point_id 98, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 -0.25 0.02)   // point_id 99, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 0.15 0.02)   // point_id 103, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 0.15 0.02)   // point_id 104, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 0.15 0.02)   // point_id 105, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 0.15 0.02)   // point_id 106, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 0.15 0.02)   // point_id 107, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.15 0.02)   // point_id 108, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.15 0.02)   // point_id 109, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.15 0.02)   // point_id 110, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 0.15 0.02)   // point_id 111, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 0.2 0.02)   // point_id 112, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 0.2 0.02)   // point_id 113, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 0.2 0.02)   // point_id 114, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 0.2 0.02)   // point_id 115, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 0.2 0.02)   // point_id 116, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.2 0.02)   // point_id 117, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.2 0.02)   // point_id 118, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.2 0.02)   // point_id 119, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 0.2 0.02)   // point_id 120, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 0.25 0.02)   // point_id 121, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 0.25 0.02)   // point_id 122, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 0.25 0.02)   // point_id 123, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 0.25 0.02)   // point_id 124, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 0.25 0.02)   // point_id 125, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.25 0.02)   // point_id 126, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.25 0.02)   // point_id 127, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.25 0.02)   // point_id 128, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 0.25 0.02)   // point_id 129, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.3 0.02)   // point_id 130, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.3 0.02)   // point_id 131, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.3 0.02)   // point_id 132, config 0D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.1 0.02)   // point_id 4, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.05 0.02)   // point_id 5, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0 0.02)   // point_id 6, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.05 0.02)   // point_id 7, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.1 0.02)   // point_id 8, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.15 0.02)   // point_id 9, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.2 0.02)   // point_id 10, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.25 0.02)   // point_id 11, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.3 0.02)   // point_id 12, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.1 0.02)   // point_id 13, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.05 0.02)   // point_id 14, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0 0.02)   // point_id 15, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.05 0.02)   // point_id 16, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.1 0.02)   // point_id 17, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.15 0.02)   // point_id 18, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.2 0.02)   // point_id 19, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.25 0.02)   // point_id 20, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.3 0.02)   // point_id 21, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.1 0.02)   // point_id 22, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.05 0.02)   // point_id 23, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0 0.02)   // point_id 24, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.05 0.02)   // point_id 25, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.1 0.02)   // point_id 26, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.15 0.02)   // point_id 27, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.2 0.02)   // point_id 28, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.25 0.02)   // point_id 29, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.3 0.02)   // point_id 30, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 0.15 0.02)   // point_id 31, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 0.2 0.02)   // point_id 32, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 0.25 0.02)   // point_id 33, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 -0.15 0.02)   // point_id 38, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 -0.15 0.02)   // point_id 39, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 -0.15 0.02)   // point_id 40, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 -0.15 0.02)   // point_id 41, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.15 0.02)   // point_id 42, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.15 0.02)   // point_id 43, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.15 0.02)   // point_id 44, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 -0.15 0.02)   // point_id 45, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 -0.2 0.02)   // point_id 47, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 -0.2 0.02)   // point_id 48, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 -0.2 0.02)   // point_id 49, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 -0.2 0.02)   // point_id 50, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.2 0.02)   // point_id 51, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.2 0.02)   // point_id 52, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.2 0.02)   // point_id 53, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 -0.2 0.02)   // point_id 54, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 -0.25 0.02)   // point_id 56, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 -0.25 0.02)   // point_id 57, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 -0.25 0.02)   // point_id 58, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 -0.25 0.02)   // point_id 59, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.25 0.02)   // point_id 60, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.25 0.02)   // point_id 61, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.25 0.02)   // point_id 62, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 -0.25 0.02)   // point_id 63, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.3 0.02)   // point_id 64, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.3 0.02)   // point_id 65, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.3 0.02)   // point_id 66, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 -0.15 0.02)   // point_id 67, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 -0.2 0.02)   // point_id 68, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 -0.25 0.02)   // point_id 69, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.1 0.02)   // point_id 70, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.05 0.02)   // point_id 71, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0 0.02)   // point_id 72, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.05 0.02)   // point_id 73, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.1 0.02)   // point_id 74, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.15 0.02)   // point_id 75, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.2 0.02)   // point_id 76, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.25 0.02)   // point_id 77, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.3 0.02)   // point_id 78, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.1 0.02)   // point_id 79, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.05 0.02)   // point_id 80, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0 0.02)   // point_id 81, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.05 0.02)   // point_id 82, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.1 0.02)   // point_id 83, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.15 0.02)   // point_id 84, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.2 0.02)   // point_id 85, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.25 0.02)   // point_id 86, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.3 0.02)   // point_id 87, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.1 0.02)   // point_id 88, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.05 0.02)   // point_id 89, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0 0.02)   // point_id 90, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.05 0.02)   // point_id 91, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.1 0.02)   // point_id 92, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.15 0.02)   // point_id 93, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.2 0.02)   // point_id 94, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.25 0.02)   // point_id 95, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.3 0.02)   // point_id 96, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 -0.15 0.02)   // point_id 97, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 -0.2 0.02)   // point_id 98, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 -0.25 0.02)   // point_id 99, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 0.15 0.02)   // point_id 103, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 0.15 0.02)   // point_id 104, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 0.15 0.02)   // point_id 105, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 0.15 0.02)   // point_id 106, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 0.15 0.02)   // point_id 107, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.15 0.02)   // point_id 108, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.15 0.02)   // point_id 109, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.15 0.02)   // point_id 110, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 0.15 0.02)   // point_id 111, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 0.2 0.02)   // point_id 112, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 0.2 0.02)   // point_id 113, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 0.2 0.02)   // point_id 114, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 0.2 0.02)   // point_id 115, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 0.2 0.02)   // point_id 116, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.2 0.02)   // point_id 117, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.2 0.02)   // point_id 118, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.2 0.02)   // point_id 119, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 0.2 0.02)   // point_id 120, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 0.25 0.02)   // point_id 121, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 0.25 0.02)   // point_id 122, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 0.25 0.02)   // point_id 123, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 0.25 0.02)   // point_id 124, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 0.25 0.02)   // point_id 125, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.25 0.02)   // point_id 126, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.25 0.02)   // point_id 127, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.25 0.02)   // point_id 128, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 0.25 0.02)   // point_id 129, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.3 0.02)   // point_id 130, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.3 0.02)   // point_id 131, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.3 0.02)   // point_id 132, config 0D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.1 0.02)   // point_id 4, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 -0.05 0.02)   // point_id 5, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0 0.02)   // point_id 6, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.05 0.02)   // point_id 7, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.1 0.02)   // point_id 8, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.15 0.02)   // point_id 9, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.2 0.02)   // point_id 10, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.25 0.02)   // point_id 11, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.3 0.02)   // point_id 12, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.1 0.02)   // point_id 13, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.05 0.02)   // point_id 14, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0 0.02)   // point_id 15, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.05 0.02)   // point_id 16, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.1 0.02)   // point_id 17, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.15 0.02)   // point_id 18, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.2 0.02)   // point_id 19, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.25 0.02)   // point_id 20, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.3 0.02)   // point_id 21, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.1 0.02)   // point_id 22, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.05 0.02)   // point_id 23, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0 0.02)   // point_id 24, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.05 0.02)   // point_id 25, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.1 0.02)   // point_id 26, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.15 0.02)   // point_id 27, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.2 0.02)   // point_id 28, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.25 0.02)   // point_id 29, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.3 0.02)   // point_id 30, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 0.15 0.02)   // point_id 31, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 0.2 0.02)   // point_id 32, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 0.25 0.02)   // point_id 33, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 -0.15 0.02)   // point_id 38, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 -0.15 0.02)   // point_id 39, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 -0.15 0.02)   // point_id 40, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 -0.15 0.02)   // point_id 41, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 -0.15 0.02)   // point_id 42, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.15 0.02)   // point_id 43, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.15 0.02)   // point_id 44, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 -0.15 0.02)   // point_id 45, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 -0.2 0.02)   // point_id 47, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 -0.2 0.02)   // point_id 48, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 -0.2 0.02)   // point_id 49, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 -0.2 0.02)   // point_id 50, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 -0.2 0.02)   // point_id 51, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.2 0.02)   // point_id 52, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.2 0.02)   // point_id 53, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 -0.2 0.02)   // point_id 54, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 -0.25 0.02)   // point_id 56, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 -0.25 0.02)   // point_id 57, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 -0.25 0.02)   // point_id 58, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 -0.25 0.02)   // point_id 59, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 -0.25 0.02)   // point_id 60, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.25 0.02)   // point_id 61, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.25 0.02)   // point_id 62, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 -0.25 0.02)   // point_id 63, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 -0.3 0.02)   // point_id 64, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.3 0.02)   // point_id 65, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.3 0.02)   // point_id 66, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 -0.15 0.02)   // point_id 67, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 -0.2 0.02)   // point_id 68, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 -0.25 0.02)   // point_id 69, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.1 0.02)   // point_id 70, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.05 0.02)   // point_id 71, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0 0.02)   // point_id 72, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.05 0.02)   // point_id 73, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.1 0.02)   // point_id 74, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.15 0.02)   // point_id 75, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.2 0.02)   // point_id 76, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.25 0.02)   // point_id 77, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.3 0.02)   // point_id 78, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.1 0.02)   // point_id 79, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.05 0.02)   // point_id 80, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0 0.02)   // point_id 81, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.05 0.02)   // point_id 82, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.1 0.02)   // point_id 83, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.15 0.02)   // point_id 84, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.2 0.02)   // point_id 85, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.25 0.02)   // point_id 86, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.3 0.02)   // point_id 87, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.1 0.02)   // point_id 88, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.05 0.02)   // point_id 89, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0 0.02)   // point_id 90, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.05 0.02)   // point_id 91, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.1 0.02)   // point_id 92, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.15 0.02)   // point_id 93, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.2 0.02)   // point_id 94, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.25 0.02)   // point_id 95, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.3 0.02)   // point_id 96, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 -0.15 0.02)   // point_id 97, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 -0.2 0.02)   // point_id 98, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 -0.25 0.02)   // point_id 99, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 0.15 0.02)   // point_id 103, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 0.15 0.02)   // point_id 104, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 0.15 0.02)   // point_id 105, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 0.15 0.02)   // point_id 106, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 0.15 0.02)   // point_id 107, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.15 0.02)   // point_id 108, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.15 0.02)   // point_id 109, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.15 0.02)   // point_id 110, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 0.15 0.02)   // point_id 111, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 0.2 0.02)   // point_id 112, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 0.2 0.02)   // point_id 113, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 0.2 0.02)   // point_id 114, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 0.2 0.02)   // point_id 115, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 0.2 0.02)   // point_id 116, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.2 0.02)   // point_id 117, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.2 0.02)   // point_id 118, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.2 0.02)   // point_id 119, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 0.2 0.02)   // point_id 120, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 0.25 0.02)   // point_id 121, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 0.25 0.02)   // point_id 122, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 0.25 0.02)   // point_id 123, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 0.25 0.02)   // point_id 124, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 0.25 0.02)   // point_id 125, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.25 0.02)   // point_id 126, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.25 0.02)   // point_id 127, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.25 0.02)   // point_id 128, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 0.25 0.02)   // point_id 129, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.3 0.02)   // point_id 130, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.3 0.02)   // point_id 131, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.3 0.02)   // point_id 132, config 0D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 -0.1 0.02)   // point_id 4, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.05 0.02)   // point_id 5, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0 0.02)   // point_id 6, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.05 0.02)   // point_id 7, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.1 0.02)   // point_id 8, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.15 0.02)   // point_id 9, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.2 0.02)   // point_id 10, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.25 0.02)   // point_id 11, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.3 0.02)   // point_id 12, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.1 0.02)   // point_id 13, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.05 0.02)   // point_id 14, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0 0.02)   // point_id 15, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.05 0.02)   // point_id 16, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.1 0.02)   // point_id 17, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.15 0.02)   // point_id 18, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.2 0.02)   // point_id 19, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.25 0.02)   // point_id 20, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.3 0.02)   // point_id 21, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.1 0.02)   // point_id 22, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.05 0.02)   // point_id 23, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0 0.02)   // point_id 24, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.05 0.02)   // point_id 25, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.1 0.02)   // point_id 26, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.15 0.02)   // point_id 27, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.2 0.02)   // point_id 28, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.25 0.02)   // point_id 29, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.3 0.02)   // point_id 30, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 0.15 0.02)   // point_id 31, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 0.2 0.02)   // point_id 32, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 0.25 0.02)   // point_id 33, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 -0.15 0.02)   // point_id 38, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 -0.15 0.02)   // point_id 39, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 -0.15 0.02)   // point_id 40, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 -0.15 0.02)   // point_id 41, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.15 0.02)   // point_id 42, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.15 0.02)   // point_id 43, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.15 0.02)   // point_id 44, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 -0.15 0.02)   // point_id 45, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 -0.2 0.02)   // point_id 47, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 -0.2 0.02)   // point_id 48, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 -0.2 0.02)   // point_id 49, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 -0.2 0.02)   // point_id 50, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.2 0.02)   // point_id 51, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.2 0.02)   // point_id 52, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.2 0.02)   // point_id 53, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 -0.2 0.02)   // point_id 54, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 -0.25 0.02)   // point_id 56, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 -0.25 0.02)   // point_id 57, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 -0.25 0.02)   // point_id 58, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 -0.25 0.02)   // point_id 59, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.25 0.02)   // point_id 60, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.25 0.02)   // point_id 61, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.25 0.02)   // point_id 62, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 -0.25 0.02)   // point_id 63, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.3 0.02)   // point_id 64, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.3 0.02)   // point_id 65, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.3 0.02)   // point_id 66, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 -0.15 0.02)   // point_id 67, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 -0.2 0.02)   // point_id 68, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 -0.25 0.02)   // point_id 69, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.1 0.02)   // point_id 70, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.05 0.02)   // point_id 71, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0 0.02)   // point_id 72, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.05 0.02)   // point_id 73, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.1 0.02)   // point_id 74, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.15 0.02)   // point_id 75, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.2 0.02)   // point_id 76, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.25 0.02)   // point_id 77, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.3 0.02)   // point_id 78, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.1 0.02)   // point_id 79, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.05 0.02)   // point_id 80, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0 0.02)   // point_id 81, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.05 0.02)   // point_id 82, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.1 0.02)   // point_id 83, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.15 0.02)   // point_id 84, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.2 0.02)   // point_id 85, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.25 0.02)   // point_id 86, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.3 0.02)   // point_id 87, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.1 0.02)   // point_id 88, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.05 0.02)   // point_id 89, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0 0.02)   // point_id 90, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.05 0.02)   // point_id 91, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.1 0.02)   // point_id 92, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.15 0.02)   // point_id 93, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.2 0.02)   // point_id 94, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.25 0.02)   // point_id 95, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.3 0.02)   // point_id 96, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 -0.15 0.02)   // point_id 97, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 -0.2 0.02)   // point_id 98, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 -0.25 0.02)   // point_id 99, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 0.15 0.02)   // point_id 103, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 0.15 0.02)   // point_id 104, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 0.15 0.02)   // point_id 105, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 0.15 0.02)   // point_id 106, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 0.15 0.02)   // point_id 107, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.15 0.02)   // point_id 108, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.15 0.02)   // point_id 109, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.15 0.02)   // point_id 110, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 0.15 0.02)   // point_id 111, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 0.2 0.02)   // point_id 112, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 0.2 0.02)   // point_id 113, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 0.2 0.02)   // point_id 114, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 0.2 0.02)   // point_id 115, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 0.2 0.02)   // point_id 116, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.2 0.02)   // point_id 117, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.2 0.02)   // point_id 118, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.2 0.02)   // point_id 119, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 0.2 0.02)   // point_id 120, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 0.25 0.02)   // point_id 121, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 0.25 0.02)   // point_id 122, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 0.25 0.02)   // point_id 123, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 0.25 0.02)   // point_id 124, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 0.25 0.02)   // point_id 125, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.25 0.02)   // point_id 126, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.25 0.02)   // point_id 127, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.25 0.02)   // point_id 128, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 0.25 0.02)   // point_id 129, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.3 0.02)   // point_id 130, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.3 0.02)   // point_id 131, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.3 0.02)   // point_id 132, config 1D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.1 0.02)   // point_id 4, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.05 0.02)   // point_id 5, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0 0.02)   // point_id 6, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.05 0.02)   // point_id 7, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.1 0.02)   // point_id 8, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.15 0.02)   // point_id 9, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.2 0.02)   // point_id 10, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.25 0.02)   // point_id 11, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.3 0.02)   // point_id 12, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.1 0.02)   // point_id 13, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.05 0.02)   // point_id 14, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0 0.02)   // point_id 15, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.05 0.02)   // point_id 16, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.1 0.02)   // point_id 17, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.15 0.02)   // point_id 18, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.2 0.02)   // point_id 19, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.25 0.02)   // point_id 20, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.3 0.02)   // point_id 21, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.1 0.02)   // point_id 22, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.05 0.02)   // point_id 23, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0 0.02)   // point_id 24, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.05 0.02)   // point_id 25, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.1 0.02)   // point_id 26, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.15 0.02)   // point_id 27, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.2 0.02)   // point_id 28, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.25 0.02)   // point_id 29, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.3 0.02)   // point_id 30, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 0.15 0.02)   // point_id 31, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 0.2 0.02)   // point_id 32, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 0.25 0.02)   // point_id 33, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 -0.15 0.02)   // point_id 38, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 -0.15 0.02)   // point_id 39, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 -0.15 0.02)   // point_id 40, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 -0.15 0.02)   // point_id 41, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.15 0.02)   // point_id 42, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.15 0.02)   // point_id 43, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.15 0.02)   // point_id 44, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 -0.15 0.02)   // point_id 45, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 -0.2 0.02)   // point_id 47, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 -0.2 0.02)   // point_id 48, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 -0.2 0.02)   // point_id 49, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 -0.2 0.02)   // point_id 50, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.2 0.02)   // point_id 51, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.2 0.02)   // point_id 52, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.2 0.02)   // point_id 53, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 -0.2 0.02)   // point_id 54, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 -0.25 0.02)   // point_id 56, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 -0.25 0.02)   // point_id 57, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 -0.25 0.02)   // point_id 58, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 -0.25 0.02)   // point_id 59, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.25 0.02)   // point_id 60, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.25 0.02)   // point_id 61, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.25 0.02)   // point_id 62, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 -0.25 0.02)   // point_id 63, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.3 0.02)   // point_id 64, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.3 0.02)   // point_id 65, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.3 0.02)   // point_id 66, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 -0.15 0.02)   // point_id 67, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 -0.2 0.02)   // point_id 68, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 -0.25 0.02)   // point_id 69, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.1 0.02)   // point_id 70, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.05 0.02)   // point_id 71, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0 0.02)   // point_id 72, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.05 0.02)   // point_id 73, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.1 0.02)   // point_id 74, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.15 0.02)   // point_id 75, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.2 0.02)   // point_id 76, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.25 0.02)   // point_id 77, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.3 0.02)   // point_id 78, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.1 0.02)   // point_id 79, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.05 0.02)   // point_id 80, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0 0.02)   // point_id 81, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.05 0.02)   // point_id 82, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.1 0.02)   // point_id 83, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.15 0.02)   // point_id 84, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.2 0.02)   // point_id 85, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.25 0.02)   // point_id 86, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.3 0.02)   // point_id 87, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.1 0.02)   // point_id 88, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.05 0.02)   // point_id 89, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0 0.02)   // point_id 90, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.05 0.02)   // point_id 91, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.1 0.02)   // point_id 92, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.15 0.02)   // point_id 93, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.2 0.02)   // point_id 94, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.25 0.02)   // point_id 95, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.3 0.02)   // point_id 96, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 -0.15 0.02)   // point_id 97, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 -0.2 0.02)   // point_id 98, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 -0.25 0.02)   // point_id 99, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 0.15 0.02)   // point_id 103, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 0.15 0.02)   // point_id 104, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 0.15 0.02)   // point_id 105, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 0.15 0.02)   // point_id 106, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 0.15 0.02)   // point_id 107, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.15 0.02)   // point_id 108, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.15 0.02)   // point_id 109, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.15 0.02)   // point_id 110, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 0.15 0.02)   // point_id 111, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 0.2 0.02)   // point_id 112, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 0.2 0.02)   // point_id 113, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 0.2 0.02)   // point_id 114, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 0.2 0.02)   // point_id 115, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 0.2 0.02)   // point_id 116, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.2 0.02)   // point_id 117, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.2 0.02)   // point_id 118, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.2 0.02)   // point_id 119, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 0.2 0.02)   // point_id 120, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 0.25 0.02)   // point_id 121, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 0.25 0.02)   // point_id 122, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 0.25 0.02)   // point_id 123, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 0.25 0.02)   // point_id 124, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 0.25 0.02)   // point_id 125, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.25 0.02)   // point_id 126, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.25 0.02)   // point_id 127, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.25 0.02)   // point_id 128, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 0.25 0.02)   // point_id 129, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.3 0.02)   // point_id 130, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.3 0.02)   // point_id 131, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.3 0.02)   // point_id 132, config 1D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.1 0.02)   // point_id 4, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 -0.05 0.02)   // point_id 5, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0 0.02)   // point_id 6, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.05 0.02)   // point_id 7, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.1 0.02)   // point_id 8, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.15 0.02)   // point_id 9, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.2 0.02)   // point_id 10, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.25 0.02)   // point_id 11, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.3 0.02)   // point_id 12, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.1 0.02)   // point_id 13, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.05 0.02)   // point_id 14, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0 0.02)   // point_id 15, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.05 0.02)   // point_id 16, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.1 0.02)   // point_id 17, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.15 0.02)   // point_id 18, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.2 0.02)   // point_id 19, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.25 0.02)   // point_id 20, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.3 0.02)   // point_id 21, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.1 0.02)   // point_id 22, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.05 0.02)   // point_id 23, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0 0.02)   // point_id 24, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.05 0.02)   // point_id 25, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.1 0.02)   // point_id 26, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.15 0.02)   // point_id 27, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.2 0.02)   // point_id 28, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.25 0.02)   // point_id 29, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.3 0.02)   // point_id 30, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 0.15 0.02)   // point_id 31, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 0.2 0.02)   // point_id 32, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 0.25 0.02)   // point_id 33, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 -0.15 0.02)   // point_id 38, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 -0.15 0.02)   // point_id 39, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 -0.15 0.02)   // point_id 40, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 -0.15 0.02)   // point_id 41, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 -0.15 0.02)   // point_id 42, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.15 0.02)   // point_id 43, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.15 0.02)   // point_id 44, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 -0.15 0.02)   // point_id 45, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 -0.2 0.02)   // point_id 47, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 -0.2 0.02)   // point_id 48, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 -0.2 0.02)   // point_id 49, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 -0.2 0.02)   // point_id 50, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 -0.2 0.02)   // point_id 51, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.2 0.02)   // point_id 52, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.2 0.02)   // point_id 53, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 -0.2 0.02)   // point_id 54, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 -0.25 0.02)   // point_id 56, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 -0.25 0.02)   // point_id 57, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 -0.25 0.02)   // point_id 58, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 -0.25 0.02)   // point_id 59, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 -0.25 0.02)   // point_id 60, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.25 0.02)   // point_id 61, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.25 0.02)   // point_id 62, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 -0.25 0.02)   // point_id 63, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 -0.3 0.02)   // point_id 64, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.3 0.02)   // point_id 65, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.3 0.02)   // point_id 66, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 -0.15 0.02)   // point_id 67, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 -0.2 0.02)   // point_id 68, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 -0.25 0.02)   // point_id 69, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.1 0.02)   // point_id 70, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.05 0.02)   // point_id 71, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0 0.02)   // point_id 72, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.05 0.02)   // point_id 73, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.1 0.02)   // point_id 74, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.15 0.02)   // point_id 75, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.2 0.02)   // point_id 76, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.25 0.02)   // point_id 77, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.3 0.02)   // point_id 78, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.1 0.02)   // point_id 79, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.05 0.02)   // point_id 80, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0 0.02)   // point_id 81, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.05 0.02)   // point_id 82, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.1 0.02)   // point_id 83, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.15 0.02)   // point_id 84, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.2 0.02)   // point_id 85, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.25 0.02)   // point_id 86, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.3 0.02)   // point_id 87, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.1 0.02)   // point_id 88, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.05 0.02)   // point_id 89, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0 0.02)   // point_id 90, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.05 0.02)   // point_id 91, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.1 0.02)   // point_id 92, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.15 0.02)   // point_id 93, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.2 0.02)   // point_id 94, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.25 0.02)   // point_id 95, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.3 0.02)   // point_id 96, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 -0.15 0.02)   // point_id 97, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 -0.2 0.02)   // point_id 98, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 -0.25 0.02)   // point_id 99, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 0.15 0.02)   // point_id 103, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 0.15 0.02)   // point_id 104, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 0.15 0.02)   // point_id 105, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 0.15 0.02)   // point_id 106, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 0.15 0.02)   // point_id 107, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.15 0.02)   // point_id 108, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.15 0.02)   // point_id 109, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.15 0.02)   // point_id 110, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 0.15 0.02)   // point_id 111, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 0.2 0.02)   // point_id 112, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 0.2 0.02)   // point_id 113, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 0.2 0.02)   // point_id 114, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 0.2 0.02)   // point_id 115, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 0.2 0.02)   // point_id 116, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.2 0.02)   // point_id 117, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.2 0.02)   // point_id 118, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.2 0.02)   // point_id 119, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 0.2 0.02)   // point_id 120, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 0.25 0.02)   // point_id 121, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 0.25 0.02)   // point_id 122, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 0.25 0.02)   // point_id 123, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 0.25 0.02)   // point_id 124, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 0.25 0.02)   // point_id 125, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.25 0.02)   // point_id 126, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.25 0.02)   // point_id 127, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.25 0.02)   // point_id 128, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 0.25 0.02)   // point_id 129, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.3 0.02)   // point_id 130, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.3 0.02)   // point_id 131, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.3 0.02)   // point_id 132, config 1D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 -0.1 0.02)   // point_id 4, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.05 0.02)   // point_id 5, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0 0.02)   // point_id 6, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.05 0.02)   // point_id 7, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.1 0.02)   // point_id 8, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.15 0.02)   // point_id 9, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.2 0.02)   // point_id 10, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.25 0.02)   // point_id 11, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 0.3 0.02)   // point_id 12, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.1 0.02)   // point_id 13, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.05 0.02)   // point_id 14, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0 0.02)   // point_id 15, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.05 0.02)   // point_id 16, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.1 0.02)   // point_id 17, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.15 0.02)   // point_id 18, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.2 0.02)   // point_id 19, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.25 0.02)   // point_id 20, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 0.3 0.02)   // point_id 21, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.1 0.02)   // point_id 22, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.05 0.02)   // point_id 23, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0 0.02)   // point_id 24, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.05 0.02)   // point_id 25, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.1 0.02)   // point_id 26, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.15 0.02)   // point_id 27, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.2 0.02)   // point_id 28, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.25 0.02)   // point_id 29, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 0.3 0.02)   // point_id 30, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 0.15 0.02)   // point_id 31, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 0.2 0.02)   // point_id 32, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 0.25 0.02)   // point_id 33, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 -0.15 0.02)   // point_id 38, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 -0.15 0.02)   // point_id 39, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 -0.15 0.02)   // point_id 40, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 -0.15 0.02)   // point_id 41, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.15 0.02)   // point_id 42, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.15 0.02)   // point_id 43, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.15 0.02)   // point_id 44, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 -0.15 0.02)   // point_id 45, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 -0.2 0.02)   // point_id 47, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 -0.2 0.02)   // point_id 48, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 -0.2 0.02)   // point_id 49, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 -0.2 0.02)   // point_id 50, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.2 0.02)   // point_id 51, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.2 0.02)   // point_id 52, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.2 0.02)   // point_id 53, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 -0.2 0.02)   // point_id 54, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 -0.25 0.02)   // point_id 56, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 -0.25 0.02)   // point_id 57, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 -0.25 0.02)   // point_id 58, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 -0.25 0.02)   // point_id 59, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.25 0.02)   // point_id 60, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.25 0.02)   // point_id 61, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.25 0.02)   // point_id 62, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.3 -0.25 0.02)   // point_id 63, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.3 0.02)   // point_id 64, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.2 -0.3 0.02)   // point_id 65, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.25 -0.3 0.02)   // point_id 66, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 -0.15 0.02)   // point_id 67, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 -0.2 0.02)   // point_id 68, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 -0.25 0.02)   // point_id 69, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.1 0.02)   // point_id 70, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.05 0.02)   // point_id 71, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0 0.02)   // point_id 72, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.05 0.02)   // point_id 73, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.1 0.02)   // point_id 74, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.15 0.02)   // point_id 75, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.2 0.02)   // point_id 76, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.25 0.02)   // point_id 77, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 -0.3 0.02)   // point_id 78, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.1 0.02)   // point_id 79, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.05 0.02)   // point_id 80, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0 0.02)   // point_id 81, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.05 0.02)   // point_id 82, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.1 0.02)   // point_id 83, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.15 0.02)   // point_id 84, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.2 0.02)   // point_id 85, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.25 0.02)   // point_id 86, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 -0.3 0.02)   // point_id 87, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.1 0.02)   // point_id 88, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.05 0.02)   // point_id 89, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0 0.02)   // point_id 90, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.05 0.02)   // point_id 91, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.1 0.02)   // point_id 92, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.15 0.02)   // point_id 93, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.2 0.02)   // point_id 94, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.25 0.02)   // point_id 95, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 -0.3 0.02)   // point_id 96, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 -0.15 0.02)   // point_id 97, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 -0.2 0.02)   // point_id 98, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 -0.25 0.02)   // point_id 99, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 0.15 0.02)   // point_id 103, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 0.15 0.02)   // point_id 104, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 0.15 0.02)   // point_id 105, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 0.15 0.02)   // point_id 106, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 0.15 0.02)   // point_id 107, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.15 0.02)   // point_id 108, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.15 0.02)   // point_id 109, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.15 0.02)   // point_id 110, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 0.15 0.02)   // point_id 111, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 0.2 0.02)   // point_id 112, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 0.2 0.02)   // point_id 113, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 0.2 0.02)   // point_id 114, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 0.2 0.02)   // point_id 115, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 0.2 0.02)   // point_id 116, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.2 0.02)   // point_id 117, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.2 0.02)   // point_id 118, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.2 0.02)   // point_id 119, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 0.2 0.02)   // point_id 120, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.1 0.25 0.02)   // point_id 121, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.05 0.25 0.02)   // point_id 122, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0 0.25 0.02)   // point_id 123, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.05 0.25 0.02)   // point_id 124, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.1 0.25 0.02)   // point_id 125, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.25 0.02)   // point_id 126, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.25 0.02)   // point_id 127, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.25 0.02)   // point_id 128, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.3 0.25 0.02)   // point_id 129, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.15 0.3 0.02)   // point_id 130, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.2 0.3 0.02)   // point_id 131, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (0.25 0.3 0.02)   // point_id 132, config 2D, campaign wind_tunnel, instrument thermistor, WD 0
+        (-0.15 -0.1 0.02)   // point_id 4, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.05 0.02)   // point_id 5, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0 0.02)   // point_id 6, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.05 0.02)   // point_id 7, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.1 0.02)   // point_id 8, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.15 0.02)   // point_id 9, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.2 0.02)   // point_id 10, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.25 0.02)   // point_id 11, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 0.3 0.02)   // point_id 12, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.1 0.02)   // point_id 13, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.05 0.02)   // point_id 14, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0 0.02)   // point_id 15, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.05 0.02)   // point_id 16, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.1 0.02)   // point_id 17, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.15 0.02)   // point_id 18, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.2 0.02)   // point_id 19, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.25 0.02)   // point_id 20, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 0.3 0.02)   // point_id 21, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.1 0.02)   // point_id 22, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.05 0.02)   // point_id 23, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0 0.02)   // point_id 24, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.05 0.02)   // point_id 25, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.1 0.02)   // point_id 26, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.15 0.02)   // point_id 27, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.2 0.02)   // point_id 28, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.25 0.02)   // point_id 29, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 0.3 0.02)   // point_id 30, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 0.15 0.02)   // point_id 31, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 0.2 0.02)   // point_id 32, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 0.25 0.02)   // point_id 33, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 -0.15 0.02)   // point_id 38, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 -0.15 0.02)   // point_id 39, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 -0.15 0.02)   // point_id 40, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 -0.15 0.02)   // point_id 41, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.15 0.02)   // point_id 42, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.15 0.02)   // point_id 43, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.15 0.02)   // point_id 44, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 -0.15 0.02)   // point_id 45, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 -0.2 0.02)   // point_id 47, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 -0.2 0.02)   // point_id 48, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 -0.2 0.02)   // point_id 49, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 -0.2 0.02)   // point_id 50, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.2 0.02)   // point_id 51, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.2 0.02)   // point_id 52, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.2 0.02)   // point_id 53, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 -0.2 0.02)   // point_id 54, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 -0.25 0.02)   // point_id 56, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 -0.25 0.02)   // point_id 57, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 -0.25 0.02)   // point_id 58, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 -0.25 0.02)   // point_id 59, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.25 0.02)   // point_id 60, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.25 0.02)   // point_id 61, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.25 0.02)   // point_id 62, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.3 -0.25 0.02)   // point_id 63, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.3 0.02)   // point_id 64, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.2 -0.3 0.02)   // point_id 65, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.25 -0.3 0.02)   // point_id 66, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 -0.15 0.02)   // point_id 67, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 -0.2 0.02)   // point_id 68, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 -0.25 0.02)   // point_id 69, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.1 0.02)   // point_id 70, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.05 0.02)   // point_id 71, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0 0.02)   // point_id 72, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.05 0.02)   // point_id 73, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.1 0.02)   // point_id 74, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.15 0.02)   // point_id 75, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.2 0.02)   // point_id 76, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.25 0.02)   // point_id 77, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 -0.3 0.02)   // point_id 78, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.1 0.02)   // point_id 79, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.05 0.02)   // point_id 80, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0 0.02)   // point_id 81, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.05 0.02)   // point_id 82, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.1 0.02)   // point_id 83, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.15 0.02)   // point_id 84, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.2 0.02)   // point_id 85, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.25 0.02)   // point_id 86, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 -0.3 0.02)   // point_id 87, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.1 0.02)   // point_id 88, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.05 0.02)   // point_id 89, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0 0.02)   // point_id 90, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.05 0.02)   // point_id 91, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.1 0.02)   // point_id 92, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.15 0.02)   // point_id 93, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.2 0.02)   // point_id 94, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.25 0.02)   // point_id 95, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 -0.3 0.02)   // point_id 96, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 -0.15 0.02)   // point_id 97, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 -0.2 0.02)   // point_id 98, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 -0.25 0.02)   // point_id 99, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 0.15 0.02)   // point_id 103, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 0.15 0.02)   // point_id 104, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 0.15 0.02)   // point_id 105, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 0.15 0.02)   // point_id 106, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 0.15 0.02)   // point_id 107, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.15 0.02)   // point_id 108, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.15 0.02)   // point_id 109, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.15 0.02)   // point_id 110, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 0.15 0.02)   // point_id 111, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 0.2 0.02)   // point_id 112, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 0.2 0.02)   // point_id 113, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 0.2 0.02)   // point_id 114, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 0.2 0.02)   // point_id 115, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 0.2 0.02)   // point_id 116, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.2 0.02)   // point_id 117, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.2 0.02)   // point_id 118, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.2 0.02)   // point_id 119, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 0.2 0.02)   // point_id 120, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.1 0.25 0.02)   // point_id 121, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.05 0.25 0.02)   // point_id 122, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0 0.25 0.02)   // point_id 123, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.05 0.25 0.02)   // point_id 124, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.1 0.25 0.02)   // point_id 125, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.25 0.02)   // point_id 126, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.25 0.02)   // point_id 127, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.25 0.02)   // point_id 128, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.3 0.25 0.02)   // point_id 129, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.15 0.3 0.02)   // point_id 130, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.2 0.3 0.02)   // point_id 131, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (0.25 0.3 0.02)   // point_id 132, config 2D, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-0.15 -0.1 0.02)   // point_id 4, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 -0.05 0.02)   // point_id 5, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0 0.02)   // point_id 6, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.05 0.02)   // point_id 7, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.1 0.02)   // point_id 8, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.15 0.02)   // point_id 9, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.2 0.02)   // point_id 10, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.25 0.02)   // point_id 11, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 0.3 0.02)   // point_id 12, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.1 0.02)   // point_id 13, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.05 0.02)   // point_id 14, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0 0.02)   // point_id 15, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.05 0.02)   // point_id 16, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.1 0.02)   // point_id 17, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.15 0.02)   // point_id 18, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.2 0.02)   // point_id 19, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.25 0.02)   // point_id 20, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 0.3 0.02)   // point_id 21, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.1 0.02)   // point_id 22, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.05 0.02)   // point_id 23, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0 0.02)   // point_id 24, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.05 0.02)   // point_id 25, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.1 0.02)   // point_id 26, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.15 0.02)   // point_id 27, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.2 0.02)   // point_id 28, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.25 0.02)   // point_id 29, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 0.3 0.02)   // point_id 30, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 0.15 0.02)   // point_id 31, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 0.2 0.02)   // point_id 32, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 0.25 0.02)   // point_id 33, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 -0.15 0.02)   // point_id 38, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 -0.15 0.02)   // point_id 39, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 -0.15 0.02)   // point_id 40, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 -0.15 0.02)   // point_id 41, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 -0.15 0.02)   // point_id 42, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.15 0.02)   // point_id 43, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.15 0.02)   // point_id 44, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 -0.15 0.02)   // point_id 45, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 -0.2 0.02)   // point_id 47, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 -0.2 0.02)   // point_id 48, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 -0.2 0.02)   // point_id 49, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 -0.2 0.02)   // point_id 50, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 -0.2 0.02)   // point_id 51, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.2 0.02)   // point_id 52, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.2 0.02)   // point_id 53, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 -0.2 0.02)   // point_id 54, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 -0.25 0.02)   // point_id 56, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 -0.25 0.02)   // point_id 57, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 -0.25 0.02)   // point_id 58, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 -0.25 0.02)   // point_id 59, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 -0.25 0.02)   // point_id 60, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.25 0.02)   // point_id 61, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.25 0.02)   // point_id 62, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.3 -0.25 0.02)   // point_id 63, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.15 -0.3 0.02)   // point_id 64, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.2 -0.3 0.02)   // point_id 65, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.25 -0.3 0.02)   // point_id 66, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 -0.15 0.02)   // point_id 67, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 -0.2 0.02)   // point_id 68, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 -0.25 0.02)   // point_id 69, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.1 0.02)   // point_id 70, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.05 0.02)   // point_id 71, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0 0.02)   // point_id 72, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.05 0.02)   // point_id 73, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.1 0.02)   // point_id 74, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.15 0.02)   // point_id 75, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.2 0.02)   // point_id 76, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.25 0.02)   // point_id 77, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 -0.3 0.02)   // point_id 78, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.1 0.02)   // point_id 79, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.05 0.02)   // point_id 80, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0 0.02)   // point_id 81, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.05 0.02)   // point_id 82, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.1 0.02)   // point_id 83, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.15 0.02)   // point_id 84, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.2 0.02)   // point_id 85, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.25 0.02)   // point_id 86, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 -0.3 0.02)   // point_id 87, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.1 0.02)   // point_id 88, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.05 0.02)   // point_id 89, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0 0.02)   // point_id 90, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.05 0.02)   // point_id 91, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.1 0.02)   // point_id 92, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.15 0.02)   // point_id 93, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.2 0.02)   // point_id 94, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.25 0.02)   // point_id 95, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 -0.3 0.02)   // point_id 96, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 -0.15 0.02)   // point_id 97, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 -0.2 0.02)   // point_id 98, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 -0.25 0.02)   // point_id 99, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 0.15 0.02)   // point_id 103, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 0.15 0.02)   // point_id 104, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 0.15 0.02)   // point_id 105, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 0.15 0.02)   // point_id 106, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 0.15 0.02)   // point_id 107, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.15 0.02)   // point_id 108, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.15 0.02)   // point_id 109, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.15 0.02)   // point_id 110, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 0.15 0.02)   // point_id 111, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 0.2 0.02)   // point_id 112, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 0.2 0.02)   // point_id 113, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 0.2 0.02)   // point_id 114, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 0.2 0.02)   // point_id 115, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 0.2 0.02)   // point_id 116, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.2 0.02)   // point_id 117, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.2 0.02)   // point_id 118, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.2 0.02)   // point_id 119, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 0.2 0.02)   // point_id 120, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.1 0.25 0.02)   // point_id 121, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (-0.05 0.25 0.02)   // point_id 122, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0 0.25 0.02)   // point_id 123, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.05 0.25 0.02)   // point_id 124, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.1 0.25 0.02)   // point_id 125, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.25 0.02)   // point_id 126, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.25 0.02)   // point_id 127, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.25 0.02)   // point_id 128, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.3 0.25 0.02)   // point_id 129, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.15 0.3 0.02)   // point_id 130, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.2 0.3 0.02)   // point_id 131, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+        (0.25 0.3 0.02)   // point_id 132, config 2D, campaign wind_tunnel, instrument thermistor, WD 45
+    );
+}
+

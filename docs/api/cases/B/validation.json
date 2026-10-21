@@ -137,6 +137,14 @@
     {
      "url": "https://aij.eddy3d.com/assets/figures/case-b-openfoam-profiles.png",
      "caption": "Case B, OpenFOAM 12: centre-plane vertical profiles of U/U_H at the measurement stations, measured points against the modelled line."
+    },
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-b-openfoam-field-plan.png",
+     "caption": "Case B, OpenFOAM 12: the solved field on z = 0.0125 m. a: u; b: u with iso-lines every 0.1 and the edge of the reversed flow (u = 0) dashed; c: the in-plane speed with streamlines. Each dot is a measured point, coloured by its measured value on the panel's scale."
+    },
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-b-openfoam-field-section.png",
+     "caption": "Case B, OpenFOAM 12: the solved field on the centre plane y = 0. a: u; b: u with iso-lines every 0.1 and the edge of the reversed flow (u = 0) dashed; c: the in-plane speed with streamlines. Each dot is a measured point, coloured by its measured value on the panel's scale."
     }
    ],
    "pairs": {
