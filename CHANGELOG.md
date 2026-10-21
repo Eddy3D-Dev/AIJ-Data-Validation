@@ -21,10 +21,10 @@ OpenFOAM's eddy-viscosity cap, lifted.
 
 ### Added
 
-- `submissions/eddy3d-of12-nutcap-lifted` (Cases A, B, H): the served solves re-run with `nutMaxCoeff` 1e8 instead of OpenFOAM 12's
+- `submissions/eddy3d-of12-nutcap-lifted` (Cases A, B, H, K): the served solves re-run with `nutMaxCoeff` 1e8 instead of OpenFOAM 12's
   default 1e5, which holds $$\nu_t$$ at 1.5 m²/s and bounds $$\varepsilon$$ in 2–10 % of the cells of most of these solves. The
   hit rate of $$k$$ moves 0.177 to 0.247 (A) and 0.305 to 0.339 (H), its bias falls in A, B and H, and its correlation falls too;
-  Case B is the measured-inlet run (the baseline is `eddy3d-of12-measured-inlet`). Case G, solved alike, scores worse with the cap
+  Case K's $$k$$ hit rate moves 0.005 to 0.039 and $$U$$'s 0.123 to 0.232; Case B is the measured-inlet run (the baseline is `eddy3d-of12-measured-inlet`). Case G, solved alike, scores worse with the cap
   lifted ($$U$$ hit rate 0.29 to 0.07) and is not submitted.
 
 ## [3.3.2] - 2026-10-21

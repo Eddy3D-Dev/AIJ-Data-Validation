@@ -19,7 +19,7 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | author | Sustainable Urban Systems Lab |
 | licence | CC-BY-4.0 |
 | contact | <https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions> |
-| inlet | Case A and H, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved) |
+| inlet | Case A, H and K, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved) |
 | mesh | snappyHexMesh, 1:100 scale, the served runs\' mesh and numerics level 3 |
 | turbulence\_model | realizable k-epsilon, nutMaxCoeff 1e8 |
 | compute | 3000 iterations, steady, 5-6 ranks (Case A on an Apple M-series laptop, B and H on PACE Phoenix) |
@@ -60,4 +60,16 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | $$\lvert\mathbf{U}\rvert$$ | +0.875 | 0.683 | +0.318 | 0.471 | 826 | 826/826 |
 | $$k$$ | -0.011 | 0.608 | +0.302 | 0.339 | 826 | 826/826 |
 | $$c^\ast$$ | +0.947 | 0.636 | -0.739 | 0.489 | 826 | 826/826 |
+{: .scores }
+
+## Case K — 9 x 9 cube array, point source
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$U$$ | +0.960 | 0.631 | +0.527 | 0.232 | 203 | 203/203 |
+| $$V$$ | -0.142 | 0.049 | — | 0.901 | 203 | 203/203 |
+| $$W$$ | +0.629 | 0.133 | — | 0.680 | 203 | 203/203 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.945 | 0.606 | +0.506 | 0.192 | 203 | 203/203 |
+| $$k$$ | +0.357 | 0.261 | +0.955 | 0.039 | 203 | 203/203 |
+| $$c^\ast$$ | +0.949 | 0.808 | -0.751 | 0.478 | 203 | 203/203 |
 {: .scores }

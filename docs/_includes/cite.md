@@ -18,7 +18,7 @@ Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A
   version   = "3.4.0",
   publisher = "Sustainable Urban Systems Lab",
   url       = "https://aij.eddy3d.com/api/3.4.0/index.json",
-  note      = "Data set; data version 2ad04a58d580"
+  note      = "Data set; data version 249fe518ae28"
 }
 ```
 
