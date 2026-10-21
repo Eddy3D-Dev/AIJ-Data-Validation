@@ -1,0 +1,78 @@
+{
+ "$schema": "https://aij.eddy3d.com/api/3.3.2/schemas/geometry.schema.json",
+ "schema_version": "2.5.0",
+ "data_version": "09c282705a7e153c63516140123c12d3774b8968492cc004449a45c6ee2af89a",
+ "license": "CC-BY-4.0",
+ "case": "G",
+ "title": "Case G — flow behind a tree belt",
+ "units": "metres (full scale)",
+ "frame": {
+  "origin": "the leeward face of the tree belt at ground level, on the vertical section through the belt's centre",
+  "x": "+x downwind: the belt occupies x in [-2, 0] m, the measurement lines lie behind it at x = 1.75 ... 35 m",
+  "y": "+y along the belt (y in [-37, 37] m); every point is on y = 0",
+  "z": "+z up; the belt spans z in [1.2, 7] m; points at z = 1.5, 3, 4.5, 6 m",
+  "wind_direction_rotation": "one direction, toward +x (perpendicular to the belt); the field wind's angle to the belt normal is not published",
+  "lateral_sign_applied": 1,
+  "coordinate_scale_applied": 1.0
+ },
+ "default_configuration": "default",
+ "configurations": [
+  "default"
+ ],
+ "is_boxes": true,
+ "files": [
+  {
+   "configuration": "default",
+   "url": "https://aij.eddy3d.com/api/3.3.2/cases/G/geometry.stl?v=09d23c794155",
+   "path": "cases/G/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1558,
+   "sha256": "09d23c79415538941986395e14fc0da1cae5326d2bcd53a773c811dedf9b5692",
+   "format": "ASCII STL, LF line endings, outward normals, every body closed and consistently wound",
+   "source": "generated from the stated dimensions (2 m deep, 74 m long, 7 m tall, 1.2 m bottom gap), centred on y = 0 with its leeward face at x = 0; a porous canopy drawn as its envelope",
+   "stats": {
+    "triangles": 12,
+    "bbox_min": [
+     -2.0,
+     -37.0,
+     1.2
+    ],
+    "bbox_max": [
+     0.0,
+     37.0,
+     7.0
+    ],
+    "signed_volume": 858.4,
+    "edges": 18,
+    "edges_shared_by_two_faces": 18,
+    "edges_boundary": 0,
+    "edges_non_manifold": 0,
+    "bodies": 1,
+    "body_contacts": 0,
+    "inconsistent_triangles": 0,
+    "min_body_volume": 858.4,
+    "watertight": true
+   },
+   "bbox_matches_stated_dimensions": true,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-g.png",
+   "render_caption": "The Tsuiji-matsu tree belt, 2 m × 74 m × 7 m with a 1.2 m gap below (full scale; shown as its envelope, a porous canopy); the wind blows along +x and the measurements are behind the belt.",
+   "boxes": [
+    {
+     "min": [
+      -2.0,
+      -37.0,
+      1.2
+     ],
+     "max": [
+      0.0,
+      37.0,
+      7.0
+     ]
+    }
+   ],
+   "box_count": 1,
+   "analytic_volume": 858.4
+  }
+ ],
+ "render": "https://aij.eddy3d.com/assets/geometry/case-g.png"
+}

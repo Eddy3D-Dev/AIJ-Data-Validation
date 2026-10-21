@@ -15,6 +15,15 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [3.3.2] - 2026-10-21
+
+### Removed
+
+- `case-b-openfoam-field-plan.png` and `case-b-openfoam-field-section.png`: they were sampled from the measured-inlet solve
+  (the submission `eddy3d-of12-measured-inlet`), not from the served run, whose solve is not on the machine that samples the
+  planes; the two agree at $$r = 0.998$$ on the served points, which is why the check passed. Case B joins C, D and E in waiting
+  for its served solve. The figures after them on the Case B page are renumbered.
+
 ## [3.3.1] - 2026-10-20
 
 Field maps: the solved flow on the measurement planes, with the measured points drawn on it.

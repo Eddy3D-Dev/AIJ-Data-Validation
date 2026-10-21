@@ -45,8 +45,6 @@ NX = 320          # grid points along x; the other axis keeps the cells square
 CASES = {
     "A": dict(study="aij_A_realizableKE_L3", stem="caseA_openfoam12_realizableKE", scale=100.0, frame="quarter", L=0.16, Lname="H",
               planes=[("z0p01", "z", 0.01, (-0.24, 0.80, -0.24, 0.24), 1e-6), ("y0", "y", 0.0, (-0.24, 0.80, 0.0, 0.40), 1e-6)]),
-    "B": dict(study="aij_B_realizableKE_L3_measRough", stem="caseB_openfoam12_realizableKE", scale=100.0, frame="quarter", L=0.20, Lname="H",
-              planes=[("z0p0125", "z", 0.0125, (-0.30, 0.70, -0.35, 0.35), 1e-6), ("y0", "y", 0.0, (-0.30, 0.70, 0.0, 0.40), 1e-6)]),
     "F": dict(study="aij_F_realizableKE_L3", stem="caseF_openfoam12_realizableKE", scale=1.0, frame="same", L=1.0, Lname="1 m",
               keep=lambda r: r["frame"] == "agl" and r["source"] == "tunnel", zcol="z_probe", scalar="Umag_model",
               planes=[("z14", "z", 14.0, (-450.0, 450.0, -350.0, 450.0), 1e-6)]),

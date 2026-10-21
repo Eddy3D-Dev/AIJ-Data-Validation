@@ -45,8 +45,6 @@ UMF = "Eddy3D (OpenFOAM 12, urbanMicroclimateFoam, realizable k-ε)"
 CASES = {
     "A": ("openfoam", OF12, None, ("U_meas", "V_meas", "W_meas", None), (0.0, 1.5, 1.0), "U_\\mathrm{H}",
           [("z0p01", "plan", "z = 0.01 m (z/H = 0.06)"), ("y0", "section", "centre plane y = 0")]),
-    "B": ("openfoam", OF12, None, ("U_meas", "V_meas", "W_meas", None), (0.0, 1.5, 1.0), "U_\\mathrm{H}",
-          [("z0p0125", "plan", "z = 0.0125 m (z/H = 0.06)"), ("y0", "section", "centre plane y = 0")]),
     "F": ("openfoam", OF12 + ", wind from NNW", lambda r: r["frame"] == "agl" and r["source"] == "tunnel", (None, None, None, "observed"),
           (0.0, 0.6, 0.3), "U_{500}", [("z14", "plan", "9 m above the ground (z = 14 m)")]),
     "G": ("openfoam", OF12 + ", conifer crown", lambda r: r["arm"] == "conifer", ("U_meas", None, None, None), (0.0, 1.5, 1.0), "U_\\mathrm{H}",

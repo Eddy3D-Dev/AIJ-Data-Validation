@@ -1,0 +1,750 @@
+{
+ "$schema": "https://aij.eddy3d.com/api/3.3.2/schemas/submissions.schema.json",
+ "schema_version": "2.5.0",
+ "data_version": "09c282705a7e153c63516140123c12d3774b8968492cc004449a45c6ee2af89a",
+ "license": "CC-BY-4.0",
+ "description": "Every solver submitted under submissions/ in the repository, scored by this build from the values it gave at the published points (cases/{id}/probes.csv). The inputs are self-reported; the scoring is this repository's, the same metrics and conventions as Eddy3D's results in validation.json. A submission scores the points it gave: `coverage` says how many of the measured points that is.",
+ "how_to_submit": "https://aij.eddy3d.com/byos/",
+ "status_meaning": {
+  "scored": "the submission gave values for this case and they were scored"
+ },
+ "metric_meaning": {
+  "Count": "number of measured points scored",
+  "MeanObserved": "mean of the measured, normalised quantity",
+  "MeanPredicted": "mean of the modelled, normalised quantity",
+  "Fb": "fractional bias, 2 (mean_obs - mean_pred) / (mean_obs + mean_pred); positive = model low",
+  "Nmse": "normalised mean square error",
+  "Nad": "normalised absolute difference",
+  "Fac2": "fraction of points within a factor of two (harsh near zero for sign-changing V and W)",
+  "HitRate": "fraction of points within D = 0.25 relative or W = 0.05 U_H absolute",
+  "Mg": "geometric mean bias",
+  "Vg": "geometric variance",
+  "GeometricPairs": "pairs with both values positive (used for Mg/Vg)",
+  "R": "Pearson correlation coefficient",
+  "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive; Fb, Nmse and Nad of a signed velocity component of Case H or I whose observed and predicted means are not both positive)"
+ },
+ "submissions": [
+  {
+   "slug": "eddy3d-of12-casee-refined-mesh",
+   "solver": "OpenFOAM simpleFoam (Eddy3D Outdoor case writer)",
+   "version": "12",
+   "author": "Sustainable Urban Systems Lab",
+   "url": "https://openfoam.org",
+   "example": false,
+   "inlet": "the workbook's tabulated inflow (z/ZR, U/UR, k/UR^2 with ZR = 250 m, UR = 7.8 m/s) as fixedProfile tables, the served run's inlet",
+   "turbulence_model": "realizable k-epsilon",
+   "ml_description": null,
+   "cases": [
+    {
+     "case": "E",
+     "title": "Case E — Niigata district",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "ac.wd225: √(|U|²+2k)",
+       "score": "ac.wd225/vs.scalar",
+       "Count": 80,
+       "R": 0.8766506312394059,
+       "Fac2": 0.9125,
+       "Fb": 0.1326522736712347,
+       "HitRate": 0.5625,
+       "coverage": {
+        "scored": 80,
+        "measured": 80
+       }
+      },
+      {
+       "label": "ac.wd225: |U|",
+       "score": "ac.wd225/vs.vector",
+       "Count": 80,
+       "R": 0.8693871345105303,
+       "Fac2": 0.7625,
+       "Fb": 0.2371024944557379,
+       "HitRate": 0.3875,
+       "coverage": {
+        "scored": 80,
+        "measured": 80
+       }
+      },
+      {
+       "label": "bc.wd225: √(|U|²+2k)",
+       "score": "bc.wd225/vs.scalar",
+       "Count": 80,
+       "R": 0.7002210031976128,
+       "Fac2": 0.95,
+       "Fb": 0.0654160568363957,
+       "HitRate": 0.5625,
+       "coverage": {
+        "scored": 80,
+        "measured": 80
+       }
+      },
+      {
+       "label": "bc.wd225: |U|",
+       "score": "bc.wd225/vs.vector",
+       "Count": 80,
+       "R": 0.7078291505675129,
+       "Fac2": 0.8125,
+       "Fb": 0.2081822315109365,
+       "HitRate": 0.3875,
+       "coverage": {
+        "scored": 80,
+        "measured": 80
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/3.3.2/submissions/eddy3d-of12-casee-refined-mesh/E.csv?v=c302ea867647",
+      "path": "submissions/eddy3d-of12-casee-refined-mesh/E.csv",
+      "media_type": "text/csv",
+      "bytes": 12888,
+      "sha256": "c302ea8676479022f91292db92cc90a2d0088c81d032576ee4494eb0752f4c55"
+     }
+    }
+   ],
+   "submission_url": "https://aij.eddy3d.com/api/3.3.2/submissions/eddy3d-of12-casee-refined-mesh.json",
+   "page": "https://aij.eddy3d.com/community/eddy3d-of12-casee-refined-mesh/"
+  },
+  {
+   "slug": "eddy3d-of12-casek-workbook-inflow",
+   "solver": "OpenFOAM simpleFoam (Eddy3D Outdoor case writer)",
+   "version": "12",
+   "author": "Sustainable Urban Systems Lab",
+   "url": "https://openfoam.org",
+   "example": false,
+   "inlet": "log law with Uref = 4.94009 m/s at 0.2 m (the workbook's UH), z0 = 13.5 mm (the fit to the shipped profile), atmBoundaryLayer inlets",
+   "turbulence_model": "realizable k-epsilon",
+   "ml_description": null,
+   "cases": [
+    {
+     "case": "K",
+     "title": "Case K — 9 x 9 cube array, point source",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "U",
+       "score": "velocity.U",
+       "Count": 203,
+       "R": 0.9556142586638977,
+       "Fac2": 0.6502463054187192,
+       "Fb": 0.22811865048605728,
+       "HitRate": 0.5615763546798029,
+       "coverage": {
+        "scored": 203,
+        "measured": 203
+       }
+      },
+      {
+       "label": "V",
+       "score": "velocity.V",
+       "Count": 203,
+       "R": -0.1505582349986593,
+       "Fac2": 0.04926108374384237,
+       "Fb": null,
+       "HitRate": 0.8768472906403941,
+       "coverage": {
+        "scored": 203,
+        "measured": 203
+       }
+      },
+      {
+       "label": "W",
+       "score": "velocity.W",
+       "Count": 203,
+       "R": 0.5571932530886524,
+       "Fac2": 0.21674876847290642,
+       "Fb": null,
+       "HitRate": 0.6699507389162561,
+       "coverage": {
+        "scored": 203,
+        "measured": 203
+       }
+      },
+      {
+       "label": "|U|",
+       "score": "speed",
+       "Count": 203,
+       "R": 0.9470354941354919,
+       "Fac2": 0.6206896551724138,
+       "Fb": 0.22183098155850456,
+       "HitRate": 0.5073891625615764,
+       "coverage": {
+        "scored": 203,
+        "measured": 203
+       }
+      },
+      {
+       "label": "k",
+       "score": "k",
+       "Count": 203,
+       "R": 0.31382344612618535,
+       "Fac2": 0.4876847290640394,
+       "Fb": 0.6703586607045087,
+       "HitRate": 0.10344827586206896,
+       "coverage": {
+        "scored": 203,
+        "measured": 203
+       }
+      },
+      {
+       "label": "c*",
+       "score": "cstar",
+       "Count": 203,
+       "R": 0.9523026942411452,
+       "Fac2": 0.7586206896551724,
+       "Fb": -0.5766305460647168,
+       "HitRate": 0.39901477832512317,
+       "coverage": {
+        "scored": 203,
+        "measured": 203
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/3.3.2/submissions/eddy3d-of12-casek-workbook-inflow/K.csv?v=fd83799198fb",
+      "path": "submissions/eddy3d-of12-casek-workbook-inflow/K.csv",
+      "media_type": "text/csv",
+      "bytes": 28971,
+      "sha256": "fd83799198fbb8dbb6701b53cad31e6e70f615876748a4b9fb12fd2e7122fed4"
+     }
+    }
+   ],
+   "submission_url": "https://aij.eddy3d.com/api/3.3.2/submissions/eddy3d-of12-casek-workbook-inflow.json",
+   "page": "https://aij.eddy3d.com/community/eddy3d-of12-casek-workbook-inflow/"
+  },
+  {
+   "slug": "eddy3d-of12-measured-inlet",
+   "solver": "OpenFOAM simpleFoam (Eddy3D Outdoor case writer)",
+   "version": "12",
+   "author": "Sustainable Urban Systems Lab",
+   "url": "https://openfoam.org",
+   "example": false,
+   "inlet": "the measured approach profile (U and k of AF_caseA/B/H.csv as fixedProfile tables, epsilon by local equilibrium), rough floor (nutkAtmRoughWallFunction, z0 of the log-law fit)",
+   "turbulence_model": "realizable k-epsilon",
+   "ml_description": null,
+   "cases": [
+    {
+     "case": "A",
+     "title": "Case A — 1:1:2 building",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "U",
+       "score": "velocity.U",
+       "Count": 186,
+       "R": 0.9558205275892592,
+       "Fac2": 0.8118279569892473,
+       "Fb": 0.15191166023352548,
+       "HitRate": 0.6236559139784946,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "V",
+       "score": "velocity.V",
+       "Count": 186,
+       "R": 0.9612630678227915,
+       "Fac2": 0.34408602150537637,
+       "Fb": null,
+       "HitRate": 0.8763440860215054,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "W",
+       "score": "velocity.W",
+       "Count": 186,
+       "R": 0.7170673972884936,
+       "Fac2": 0.41397849462365593,
+       "Fb": -1.5430719371394868,
+       "HitRate": 0.8279569892473119,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "|U|",
+       "score": "speed",
+       "Count": 186,
+       "R": 0.9420542567110977,
+       "Fac2": 0.8709677419354839,
+       "Fb": 0.11358565448754825,
+       "HitRate": 0.6666666666666666,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "k",
+       "score": "k",
+       "Count": 186,
+       "R": 0.4136032219741902,
+       "Fac2": 0.6881720430107527,
+       "Fb": 0.3797352512756547,
+       "HitRate": 0.34408602150537637,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/3.3.2/submissions/eddy3d-of12-measured-inlet/A.csv?v=cdc0dad39c20",
+      "path": "submissions/eddy3d-of12-measured-inlet/A.csv",
+      "media_type": "text/csv",
+      "bytes": 23414,
+      "sha256": "cdc0dad39c206359ad5a53ae8b07f71c3e2a69839ff7541d1ee824b3c884e8f6"
+     }
+    },
+    {
+     "case": "B",
+     "title": "Case B — 1:4:4 slab",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "U",
+       "score": "velocity.U",
+       "Count": 224,
+       "R": 0.958188990977557,
+       "Fac2": 0.6875,
+       "Fb": 0.21476691345262372,
+       "HitRate": 0.5714285714285714,
+       "coverage": {
+        "scored": 224,
+        "measured": 224
+       }
+      },
+      {
+       "label": "V",
+       "score": "velocity.V",
+       "Count": 224,
+       "R": 0.9082337063802648,
+       "Fac2": 0.2857142857142857,
+       "Fb": null,
+       "HitRate": 0.6071428571428571,
+       "coverage": {
+        "scored": 224,
+        "measured": 224
+       }
+      },
+      {
+       "label": "W",
+       "score": "velocity.W",
+       "Count": 224,
+       "R": 0.9309546215211453,
+       "Fac2": 0.5223214285714286,
+       "Fb": 0.2519746972309097,
+       "HitRate": 0.8214285714285714,
+       "coverage": {
+        "scored": 224,
+        "measured": 224
+       }
+      },
+      {
+       "label": "|U|",
+       "score": "speed",
+       "Count": 224,
+       "R": 0.9450255836748358,
+       "Fac2": 0.8169642857142857,
+       "Fb": 0.0814962965503867,
+       "HitRate": 0.625,
+       "coverage": {
+        "scored": 224,
+        "measured": 224
+       }
+      },
+      {
+       "label": "k",
+       "score": "k",
+       "Count": 224,
+       "R": 0.40463178154503654,
+       "Fac2": 0.5714285714285714,
+       "Fb": 0.44030914258988424,
+       "HitRate": 0.26339285714285715,
+       "coverage": {
+        "scored": 224,
+        "measured": 224
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/3.3.2/submissions/eddy3d-of12-measured-inlet/B.csv?v=0f5b2d79329b",
+      "path": "submissions/eddy3d-of12-measured-inlet/B.csv",
+      "media_type": "text/csv",
+      "bytes": 28588,
+      "sha256": "0f5b2d79329b4c4633e08088f7ebb74de6c8dc1c3ff31ca1da8049e4e4844103"
+     }
+    },
+    {
+     "case": "H",
+     "title": "Case H — 1:1:2 building with a floor point source",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "U",
+       "score": "velocity.U",
+       "Count": 826,
+       "R": 0.8965116139322009,
+       "Fac2": 0.6077481840193705,
+       "Fb": 0.3567948973024717,
+       "HitRate": 0.4467312348668281,
+       "coverage": {
+        "scored": 826,
+        "measured": 826
+       }
+      },
+      {
+       "label": "V",
+       "score": "velocity.V",
+       "Count": 826,
+       "R": 0.935164572848344,
+       "Fac2": 0.3619854721549637,
+       "Fb": -0.42506850628784365,
+       "HitRate": 0.6840193704600485,
+       "coverage": {
+        "scored": 826,
+        "measured": 826
+       }
+      },
+      {
+       "label": "W",
+       "score": "velocity.W",
+       "Count": 826,
+       "R": 0.8869557131608348,
+       "Fac2": 0.3075060532687651,
+       "Fb": null,
+       "HitRate": 0.7130750605326877,
+       "coverage": {
+        "scored": 826,
+        "measured": 826
+       }
+      },
+      {
+       "label": "|U|",
+       "score": "speed",
+       "Count": 826,
+       "R": 0.8844797013814234,
+       "Fac2": 0.6501210653753027,
+       "Fb": 0.3583222620394254,
+       "HitRate": 0.4346246973365617,
+       "coverage": {
+        "scored": 826,
+        "measured": 826
+       }
+      },
+      {
+       "label": "k",
+       "score": "k",
+       "Count": 826,
+       "R": 0.11841655169837777,
+       "Fac2": 0.576271186440678,
+       "Fb": 0.5217346649102312,
+       "HitRate": 0.31113801452784506,
+       "coverage": {
+        "scored": 826,
+        "measured": 826
+       }
+      },
+      {
+       "label": "c*",
+       "score": "cstar",
+       "Count": 826,
+       "R": 0.9505092738974605,
+       "Fac2": 0.6186440677966102,
+       "Fb": -0.8250178052203262,
+       "HitRate": 0.5084745762711864,
+       "coverage": {
+        "scored": 826,
+        "measured": 826
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/3.3.2/submissions/eddy3d-of12-measured-inlet/H.csv?v=222411bc15a1",
+      "path": "submissions/eddy3d-of12-measured-inlet/H.csv",
+      "media_type": "text/csv",
+      "bytes": 124802,
+      "sha256": "222411bc15a19741ed7ee1fe16eef27bd0f1564f4a6933105c6a44d64936a2d0"
+     }
+    }
+   ],
+   "submission_url": "https://aij.eddy3d.com/api/3.3.2/submissions/eddy3d-of12-measured-inlet.json",
+   "page": "https://aij.eddy3d.com/community/eddy3d-of12-measured-inlet/"
+  },
+  {
+   "slug": "eddy3d-of12-mesh2x-measured-inlet",
+   "solver": "OpenFOAM simpleFoam (Eddy3D Outdoor case writer)",
+   "version": "12",
+   "author": "Sustainable Urban Systems Lab",
+   "url": "https://openfoam.org",
+   "example": false,
+   "inlet": "the measured approach profile (U and k of AF_caseA.csv as fixedProfile tables, epsilon by local equilibrium), rough floor",
+   "turbulence_model": "realizable k-epsilon",
+   "ml_description": null,
+   "cases": [
+    {
+     "case": "A",
+     "title": "Case A — 1:1:2 building",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "U",
+       "score": "velocity.U",
+       "Count": 186,
+       "R": 0.958099767877903,
+       "Fac2": 0.8118279569892473,
+       "Fb": 0.1502019262143651,
+       "HitRate": 0.6505376344086021,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "V",
+       "score": "velocity.V",
+       "Count": 186,
+       "R": 0.9610470647668916,
+       "Fac2": 0.34946236559139787,
+       "Fb": null,
+       "HitRate": 0.8870967741935484,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "W",
+       "score": "velocity.W",
+       "Count": 186,
+       "R": 0.7332849791694716,
+       "Fac2": 0.3763440860215054,
+       "Fb": -1.6192272321453243,
+       "HitRate": 0.8333333333333334,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "|U|",
+       "score": "speed",
+       "Count": 186,
+       "R": 0.9460041874306894,
+       "Fac2": 0.8763440860215054,
+       "Fb": 0.11094795599074972,
+       "HitRate": 0.6774193548387096,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "k",
+       "score": "k",
+       "Count": 186,
+       "R": 0.4602911593380412,
+       "Fac2": 0.6881720430107527,
+       "Fb": 0.37362456572835134,
+       "HitRate": 0.3172043010752688,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/3.3.2/submissions/eddy3d-of12-mesh2x-measured-inlet/A.csv?v=d21d791d27b1",
+      "path": "submissions/eddy3d-of12-mesh2x-measured-inlet/A.csv",
+      "media_type": "text/csv",
+      "bytes": 23430,
+      "sha256": "d21d791d27b10777d5eca6cbaa4137e956292f2306673859b5ce277900e4b96b"
+     }
+    }
+   ],
+   "submission_url": "https://aij.eddy3d.com/api/3.3.2/submissions/eddy3d-of12-mesh2x-measured-inlet.json",
+   "page": "https://aij.eddy3d.com/community/eddy3d-of12-mesh2x-measured-inlet/"
+  },
+  {
+   "slug": "eddy3d-of12-sst-urans",
+   "solver": "OpenFOAM pimpleFoam (Eddy3D Outdoor case writer)",
+   "version": "12",
+   "author": "Sustainable Urban Systems Lab",
+   "url": "https://openfoam.org",
+   "example": false,
+   "inlet": "the measured approach profile (U and k of AF_caseA.csv as fixedProfile tables, epsilon by local equilibrium, omega = epsilon/(Cmu k)), rough floor",
+   "turbulence_model": "SST k-omega, URANS",
+   "ml_description": null,
+   "cases": [
+    {
+     "case": "A",
+     "title": "Case A — 1:1:2 building",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "U",
+       "score": "velocity.U",
+       "Count": 186,
+       "R": 0.9530488387208105,
+       "Fac2": 0.7634408602150538,
+       "Fb": 0.18133421313913364,
+       "HitRate": 0.6827956989247311,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "V",
+       "score": "velocity.V",
+       "Count": 186,
+       "R": 0.9534513066948932,
+       "Fac2": 0.3602150537634409,
+       "Fb": null,
+       "HitRate": 0.8172043010752689,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "W",
+       "score": "velocity.W",
+       "Count": 186,
+       "R": 0.6752098237940594,
+       "Fac2": 0.41397849462365593,
+       "Fb": -1.352266188074855,
+       "HitRate": 0.6989247311827957,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "|U|",
+       "score": "speed",
+       "Count": 186,
+       "R": 0.9244788192452508,
+       "Fac2": 0.8225806451612904,
+       "Fb": 0.09894141550906514,
+       "HitRate": 0.7204301075268817,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "k",
+       "score": "k",
+       "Count": 186,
+       "R": 0.6263527603778766,
+       "Fac2": 0.6935483870967742,
+       "Fb": 0.45328387417819815,
+       "HitRate": 0.3924731182795699,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/3.3.2/submissions/eddy3d-of12-sst-urans/A.csv?v=98a4d275b3f2",
+      "path": "submissions/eddy3d-of12-sst-urans/A.csv",
+      "media_type": "text/csv",
+      "bytes": 23416,
+      "sha256": "98a4d275b3f24a3c3579b18f2dfff08685c77f558987b79768a1fae48728787d"
+     }
+    }
+   ],
+   "submission_url": "https://aij.eddy3d.com/api/3.3.2/submissions/eddy3d-of12-sst-urans.json",
+   "page": "https://aij.eddy3d.com/community/eddy3d-of12-sst-urans/"
+  },
+  {
+   "slug": "example-openfoam12",
+   "solver": "OpenFOAM simpleFoam (Eddy3D Outdoor case writer)",
+   "version": "12",
+   "author": "Sustainable Urban Systems Lab",
+   "url": "https://openfoam.org",
+   "example": true,
+   "inlet": "log law fitted to AF_caseA.csv (u* = 0.343 m/s, z0 = 0.668 mm, kappa 0.41), the inlet cases/A.json recommends",
+   "turbulence_model": "realizable k-epsilon",
+   "ml_description": null,
+   "cases": [
+    {
+     "case": "A",
+     "title": "Case A — 1:1:2 building",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "U",
+       "score": "velocity.U",
+       "Count": 186,
+       "R": 0.9548412675647306,
+       "Fac2": 0.8172043010752689,
+       "Fb": 0.1849501728346507,
+       "HitRate": 0.5860215053763441,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "V",
+       "score": "velocity.V",
+       "Count": 186,
+       "R": 0.9609755519503334,
+       "Fac2": 0.34946236559139787,
+       "Fb": null,
+       "HitRate": 0.8924731182795699,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "W",
+       "score": "velocity.W",
+       "Count": 186,
+       "R": 0.7082287378700073,
+       "Fac2": 0.3978494623655914,
+       "Fb": -1.5011776249635957,
+       "HitRate": 0.8010752688172043,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "|U|",
+       "score": "speed",
+       "Count": 186,
+       "R": 0.9402059410514126,
+       "Fac2": 0.8763440860215054,
+       "Fb": 0.1439352706779555,
+       "HitRate": 0.6344086021505376,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/3.3.2/submissions/example-openfoam12/A.csv?v=4eec5b1fe73a",
+      "path": "submissions/example-openfoam12/A.csv",
+      "media_type": "text/csv",
+      "bytes": 21480,
+      "sha256": "4eec5b1fe73a82f78f5312644aa06f5af0e41f958ebe23c07839d0d67299dd76"
+     }
+    }
+   ],
+   "submission_url": "https://aij.eddy3d.com/api/3.3.2/submissions/example-openfoam12.json",
+   "page": "https://aij.eddy3d.com/community/example-openfoam12/"
+  }
+ ]
+}

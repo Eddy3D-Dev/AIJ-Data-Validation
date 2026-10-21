@@ -302,7 +302,6 @@ _ML_REPRO = "Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validat
 # The field maps of validation/plot_field_maps.py: case -> (engine in the file name, (kind, plane) for each map, solver)
 FIELD_MAPS = {
     "A": ("openfoam", (("plan", "z = 0.01 m"), ("section", "the centre plane y = 0"))),
-    "B": ("openfoam", (("plan", "z = 0.0125 m"), ("section", "the centre plane y = 0"))),
     "F": ("openfoam", (("plan", "9 m above the ground (z = 14 m), wind from NNW; a and b show the component along the wind"),)),
     "G": ("openfoam", (("section", "the vertical plane through the masts, conifer crown"),)),
     "H": ("openfoam", (("plan", "z = 0.0125 m"), ("section", "the centre plane y = 0"))),
@@ -322,7 +321,7 @@ def _field_maps(case):
 RUNS = [
     *[run(c, "openfoam12-realizableKE", None, f"case{c}_openfoam12_realizableKE.json", _FOAM_A_B,
           [f"case-{c.lower()}-layout.png", f"case-{c.lower()}-openfoam-agreement.png", *(["case-a-openfoam-rans-urans.png"] if c == "A" else []),
-           f"case-{c.lower()}-openfoam-profiles.png", *_field_maps(c)],
+           f"case-{c.lower()}-openfoam-profiles.png", *(_field_maps(c) if c in FIELD_MAPS else [])],
           f"Eddy3D fixture TestAijCase{c}ContainerE2E; figures validation/plot_cases_ab_openfoam.py",
           f"case{c}_openfoam12_realizableKE_pairs.csv", PAIRS_AB) for c in ("A", "B")],
     *[run("C", "openfoam12-realizableKE", cb, f"caseC_openfoam12_realizableKE_{cb}.json", _FOAM_C,

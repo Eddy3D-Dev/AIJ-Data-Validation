@@ -129,26 +129,6 @@
   "web_bytes": 269649,
   "width": 1600
  },
- "case-b-openfoam-field-plan.png": {
-  "height": 600,
-  "master": "/assets/figures/case-b-openfoam-field-plan.png",
-  "master_bytes": 6184456,
-  "master_height": 4440,
-  "master_width": 11832,
-  "web": "/assets/web/case-b-openfoam-field-plan.png",
-  "web_bytes": 592281,
-  "width": 1600
- },
- "case-b-openfoam-field-section.png": {
-  "height": 1947,
-  "master": "/assets/figures/case-b-openfoam-field-section.png",
-  "master_bytes": 7036618,
-  "master_height": 8616,
-  "master_width": 7080,
-  "web": "/assets/web/case-b-openfoam-field-section.png",
-  "web_bytes": 1386159,
-  "width": 1600
- },
  "case-b-openfoam-profiles.png": {
   "height": 896,
   "master": "/assets/figures/case-b-openfoam-profiles.png",
