@@ -2303,7 +2303,7 @@ number. The API's JSON contract has its own version, `schema_version` (see the A
 **Reproduce a release.** Every generated file (the cleaned tables, the figures and geometry renders, the API and the
 generated pages) is committed, and one script regenerates all of them in one pinned environment: Python 3.12.12
 in a container image pinned by digest ([`scripts/BUILD_IMAGE`](scripts/BUILD_IMAGE)) and every package pinned by hash
-([`uv.lock`](uv.lock), locked by uv from [`pyproject.toml`](pyproject.toml)):
+([`uv.lock`](uv.lock), locked by `uv` from [`pyproject.toml`](pyproject.toml)):
 
 ```bash
 git clone https://github.com/Eddy3D-Dev/AIJ-Data-Validation

@@ -403,7 +403,7 @@
    "point_id"
   ],
   "conventions": "velocities and the speed over U_ref, k over U_ref^2 (Cases E, F and G publish ratios already); U, V, W, |U| and the thermistor bracket scored as signed velocities (FAC2's ratio keeps the sign; hit rate D = 0.25, W = 0.05); k by the plain definitions (D = 0.25 only); a thermistor, cup or sonic reading (a mean scalar speed) scored against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar), the two ends of its bracket; c* = C/c0 with one detection limit per case, 1e-3 of the largest measured value; theta = (T_floor - T)/(T_floor - T_H) scored like a positive velocity. The same conventions score the served Eddy3D results (docs/validation/method.md).",
-  "tool": "python validation/score_submissions.py <folder>, from a checkout of the repository (requirements.txt)",
+  "tool": "uv run python validation/score_submissions.py <folder>, from a checkout of the repository (pyproject.toml)",
   "metric_meaning": {
    "Count": "number of measured points scored",
    "MeanObserved": "mean of the measured, normalised quantity",

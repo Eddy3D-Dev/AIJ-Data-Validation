@@ -37,7 +37,7 @@ Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and reques
    every URL to an API file inside its documents points back into it. Quote the release number with any number you report.
 11. To score YOUR OWN solver or model: GET cases/{id}/probes.csv (the points to probe and what each is scored as), probe your
    field there, add your values as columns (U V W speed k cstar theta T), and score with validation/score_submissions.py from a
-   checkout of the repository (python validation/score_submissions.py <folder>; nothing beyond requirements.txt), which applies
+   checkout of the repository (uv run python validation/score_submissions.py <folder>; nothing beyond pyproject.toml), which applies
    cases/{id}.json `scoring` (reference speed, conventions) with the metrics that score the served results.
    cases/{id}.json `inflow` is the inlet contract: `benchmark_data` is the measured profile, `recommended` is this repository's
    choice (a log law from the fit, k and epsilon from the ABL relations); cases/{id}/inflow_openfoam.txt is it as OpenFOAM files. The walk is https://aij.eddy3d.com/byos/.
