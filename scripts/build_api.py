@@ -3,7 +3,7 @@
     python scripts/build_api.py            # build, then verify
     python scripts/build_api.py --check    # verify what is on disk; build nothing
 
-Requirements: requirements.lock at the repository root (one pinned environment for every build here).
+Requirements: uv.lock at the repository root (one pinned environment for every build here).
 
 GitHub Pages serves docs/ at <site>/; every API file is a plain GET of a static file. The build is a pure
 function of the repository: the same inputs give byte-identical outputs (no timestamps, no commit hashes),
@@ -1505,7 +1505,7 @@ def llms_text(percase):
         "   every URL to an API file inside its documents points back into it. Quote the release number with any number you report.",
         "11. To score YOUR OWN solver or model: GET cases/{id}/probes.csv (the points to probe and what each is scored as), probe your",
         "   field there, add your values as columns (U V W speed k cstar theta T), and score with validation/score_submissions.py from a",
-        "   checkout of the repository (python validation/score_submissions.py <folder>; nothing beyond requirements.txt), which applies",
+        "   checkout of the repository (uv run python validation/score_submissions.py <folder>; nothing beyond pyproject.toml), which applies",
         "   cases/{id}.json `scoring` (reference speed, conventions) with the metrics that score the served results.",
         "   cases/{id}.json `inflow` is the inlet contract: `benchmark_data` is the measured profile, `recommended` is this repository's",
         f"   choice (a log law from the fit, k and epsilon from the ABL relations); cases/{{id}}/inflow_openfoam.txt is it as OpenFOAM files. The walk is {SITE}/byos/.",
@@ -3237,7 +3237,7 @@ def verify():
         import jsonschema  # noqa: F401
         from openapi_spec_validator import validate as validate_openapi  # noqa: F401
     except ImportError as e:  # the contract is not optional
-        return [f"{e.name} is not installed: pip install --require-hashes -r requirements.lock"]
+        return [f"{e.name} is not installed: uv sync --frozen"]
     problems = []
     dirs = release_dirs()
     if RELEASE not in dirs:

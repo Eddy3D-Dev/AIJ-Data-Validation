@@ -41,9 +41,9 @@ serves the same changelog as `changelog`; the releases are in [`CHANGELOG.md`](h
 docker run --rm -v "$PWD:/w" -w /w "$(cat scripts/BUILD_IMAGE)" bash scripts/build_all.sh
 
 # the API alone
-pip install --require-hashes -r requirements.lock
-python scripts/build_api.py          # builds docs/api/<VERSION>/ and docs/api/, the case pages and the site includes, then verifies
-python scripts/build_api.py --check  # verify only
+uv sync --frozen
+uv run python scripts/build_api.py          # builds docs/api/<VERSION>/ and docs/api/, the case pages and the site includes, then verifies
+uv run python scripts/build_api.py --check  # verify only
 ```
 
 The build writes the frozen copy of the release in `VERSION` (`docs/api/<VERSION>/`) and then the latest alias

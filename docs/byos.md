@@ -28,7 +28,7 @@ scores every case. Your result can then be submitted and shown on the [Community
 git clone https://github.com/Eddy3D-Dev/AIJ-Data-Validation
 ```
 
-Nothing to install beyond `requirements.txt` (NumPy is all the scorer needs; Python 3.10 or newer). The scorer,
+Nothing to install beyond [uv](https://docs.astral.sh/uv/) (`uv sync` reads `pyproject.toml` and `uv.lock`; NumPy is all the scorer needs). The scorer,
 `validation/score_submissions.py`, uses `validation/dispersion_metrics.py`, the transcription of Eddy3D's metrics that
 scores every served result; its self-test re-scores every served run from its pairs and matches the headline scores to
 $$10^{-9}$$. The API itself needs no checkout: every file below is a plain GET.
@@ -86,7 +86,7 @@ Put the file in a submission folder (step 10 shows the layout; `submission.yaml`
 from the checkout:
 
 ```bash
-python validation/score_submissions.py submissions/my-solver
+uv run python validation/score_submissions.py submissions/my-solver
 ```
 
 It checks the folder, prints one line per score, and with `--out results/` writes `<case>.json` (the same shape as the
