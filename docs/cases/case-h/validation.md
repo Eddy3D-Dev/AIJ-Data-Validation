@@ -71,10 +71,11 @@ Every score is over the same 826 points.
 
 | Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate, $$k$$ | Hit rate, $$c^\ast$$ | Hit rate | FAC2 | R | $$R^2$$ |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-measured-inlet]({{ '/community/eddy3d-of12-measured-inlet/' | relative_url }})) | community | **0.447** | **0.684** | **0.713** | 0.435 | **0.311** | **0.508** | **0.516** | 0.520 | **+0.779** | 0.694 |
-| 2 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | 0.446 | 0.682 | **0.713** | **0.441** | 0.305 | 0.507 | 0.516 | 0.519 | +0.777 | 0.694 |
-| 3 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.3 | Eddy3D | 0.446 | 0.682 | **0.713** | **0.441** | 0.305 | 0.493 | 0.513 | **0.532** | +0.778 | **0.695** |
-| 4 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | 0.446 | 0.682 | **0.713** | **0.441** | 0.305 | 0.493 | 0.513 | 0.515 | +0.776 | 0.693 |
+| 1 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-nutcap-lifted]({{ '/community/eddy3d-of12-nutcap-lifted/' | relative_url }})) | community | **0.476** | **0.702** | **0.714** | **0.471** | **0.339** | 0.489 | **0.532** | **0.538** | +0.752 | 0.682 |
+| 2 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-measured-inlet]({{ '/community/eddy3d-of12-measured-inlet/' | relative_url }})) | community | 0.447 | 0.684 | 0.713 | 0.435 | 0.311 | **0.508** | 0.516 | 0.520 | **+0.779** | 0.694 |
+| 3 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | 0.446 | 0.682 | 0.713 | 0.441 | 0.305 | 0.507 | 0.516 | 0.519 | +0.777 | 0.694 |
+| 4 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.3 | Eddy3D | 0.446 | 0.682 | 0.713 | 0.441 | 0.305 | 0.493 | 0.513 | 0.532 | +0.778 | **0.695** |
+| 5 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | 0.446 | 0.682 | 0.713 | 0.441 | 0.305 | 0.493 | 0.513 | 0.515 | +0.776 | 0.693 |
 {: .scores }
 
 Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. Every run gave values at every measured point. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

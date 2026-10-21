@@ -50,20 +50,20 @@ Validation data from the AIJ (Architectural Institute of Japan) benchmark casesâ
 **API, APA**
 
 ```text
-Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.3.2) [Data set]. Sustainable Urban Systems Lab. https://aij.eddy3d.com/api/3.3.2/index.json
+Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.4.0) [Data set]. Sustainable Urban Systems Lab. https://aij.eddy3d.com/api/3.4.0/index.json
 ```
 
 **API, BibTeX**
 
 ```bibtex
-@misc{aijuwe_api_3_3_2,
+@misc{aijuwe_api_3_4_0,
   author    = "Karadag, Ilker and Kastner, Patrick",
   title     = "{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}",
   year      = "2026",
-  version   = "3.3.2",
+  version   = "3.4.0",
   publisher = "Sustainable Urban Systems Lab",
-  url       = "https://aij.eddy3d.com/api/3.3.2/index.json",
-  note      = "Data set; data version 09c282705a7e"
+  url       = "https://aij.eddy3d.com/api/3.4.0/index.json",
+  note      = "Data set; data version 2ad04a58d580"
 }
 ```
 

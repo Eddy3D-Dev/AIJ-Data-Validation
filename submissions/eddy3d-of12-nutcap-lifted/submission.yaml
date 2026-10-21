@@ -1,0 +1,14 @@
+# Eddy3D's own sensitivity arm, 2026-10-21: the served OpenFOAM 12 runs re-solved with OpenFOAM's eddy-viscosity cap lifted
+# (RAS nutMaxCoeff 1e8 instead of the default 1e5, which holds nut at 1.5 m^2/s and bounds epsilon in 2-10 % of the cells; Eddy3D#1064).
+solver: OpenFOAM simpleFoam (Eddy3D Outdoor case writer)
+version: "12"
+url: https://openfoam.org
+author: Sustainable Urban Systems Lab
+licence: CC-BY-4.0
+contact: https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions
+inlet: Case A and H, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved)
+mesh: snappyHexMesh, 1:100 scale, the served runs' mesh and numerics level 3
+turbulence_model: realizable k-epsilon, nutMaxCoeff 1e8
+compute: 3000 iterations, steady, 5-6 ranks (Case A on an Apple M-series laptop, B and H on PACE Phoenix)
+units: normalised
+notes: Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the Sct = 0.5 species. Case B's baseline is therefore the measured-inlet submission, not the served run.
