@@ -36,8 +36,6 @@ Case J is non-isothermal: a floor held at 45.8 °C under a cooler approach flow 
 | $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7, without the near-source points | +0.848 | 0.728 | +0.025 | +0.755 | 0.709 | −0.292 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 n is 443 (416 without the 27 points within a quarter of a building height of the source); rk-ε is realizable k-ε and bKε is buoyantKEpsilon.
 
 - **Flow.** $$U$$: $$R = 0.92$$ under both closures, FAC2 0.73 and 0.76; the mean $$U/U_H$$ is 0.465 and 0.477 modelled against 0.564 measured. FB in the wake (rk-ε and bKε): +0.36 and +0.29 in the near wake, +0.48 and +0.43 in the far wake. Reattachment at $$z/H = 0.25\text{ and }0.025$$ is $$1.35\thinspace H$$ and $$1.35\thinspace H$$ (rk-ε) or $$1.35\thinspace H$$ and $$1.56\thinspace H$$ (bKε), against the measured $$0.68\thinspace H$$ and $$0.80\thinspace H$$. Scored against the mean of each mirror pair, the measurement has $$R = 0.99$$ for $$U$$; the $$+y$$ half of the $$z/H = 0.25$$ plane is 11 % slower than the $$-y$$ half (97 pairs, R 0.955).

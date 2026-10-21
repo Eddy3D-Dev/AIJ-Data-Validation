@@ -43,8 +43,6 @@ Case L is non-isothermal: a floor held at 45.0 °C under a cooler approach flow 
 | $$U$$, y-symmetric ceiling (control) | +0.984 | 0.986 | +0.000 | 0.860 | 292 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 The 51 points at $$z = 4\thinspace\mathrm{mm}$$ lie inside the model's first fine cell (0.75 m, 0.4 m at 1:100), a wall-function cell; the 242 points at or above 30 mm are scored separately.
 
 - **Flow.** $$U$$: $$R = 0.92$$, and the mean $$U/U_H$$ is 0.499 modelled against 0.654 measured; at or above 30 mm R is 0.90 and FAC2 0.80. Against the undisturbed approach column, the model's R is higher ($$U$$: 0.918 against 0.861; $$\theta$$: 0.936 against 0.925). The model's mean $$U/U_H$$ in the streets is 0.045 below 30 mm and 1.11 above 110 mm, against the tunnel's 0.297 and 1.068. $$V$$ and $$W$$: R is −0.04 and −0.03, and with the sign of $$V$$ flipped it is +0.04.

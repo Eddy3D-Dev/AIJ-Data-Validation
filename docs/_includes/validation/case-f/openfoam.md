@@ -30,8 +30,6 @@ $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ over $$U(500\text{ m})$$:
 | Field | agl | +0.889 | 1.000 | +0.147 | 0.692 | 13 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 $$\lvert\mathbf{U}\rvert$$ alone:
 
 | Points | Frame | R | FAC2 | FB | Hit rate | n |
@@ -48,8 +46,6 @@ $$\lvert\mathbf{U}\rvert$$ alone:
 | Field | agl | +0.866 | 0.846 | +0.266 | 0.308 | 13 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 Controls:
 
 | Control | Frame | R | FAC2 | FB | Hit rate | n |
@@ -61,8 +57,6 @@ Controls:
 | Tunnel's 9 m column as a model of the field | literal | +0.933 | 1.000 | −0.015 | 0.692 | 13 |
 | Tunnel's 9 m column as a model of the field | agl | +0.933 | 1.000 | −0.015 | 0.692 | 13 |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 FB is positive when the model is low.
 

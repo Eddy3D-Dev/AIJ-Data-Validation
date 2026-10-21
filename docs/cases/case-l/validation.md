@@ -22,6 +22,8 @@ description: "Case L — 9 x 14 cube array, line source, non-isothermal: Eddy3D'
 
 Engine status: OpenFOAM 12 (UMF) <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
+{% include nomenclature.md %}
+
 ## Measurement locations
 
 {% include validation/case-l/layout.md %}
@@ -66,8 +68,6 @@ Quantity: $$U$$, $$V$$, $$W$$, the speed $$\lvert\mathbf{U}\rvert$$ over $$U_H$$
 | $$U$$, y-symmetric ceiling (control) | +0.984 | 0.968 | 0.986 | +0.000 | 0.860 | 292 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 </details>
 
 - Normalisation: the tunnel\'s units: velocities by $$U_H$$ (1.3394 m/s measured, the Froude-scaled 13.39 m/s modelled), $$k$$ by $$U_H^2$$, temperature as theta = ($$T_f - T$$)/($$T_f - T_H$$) ($$T_f$$ = 45.01 degC, $$T_f - T_H$$ = 30.26 K), $$c^\ast = C/c_0$$ ($$c_0$$ = 1728 ppm) against the modelled ethylene mass fraction as ppm over the same $$c_0$$; hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units, concentration with one detection limit of $$10^{-3}$$ of the largest measured value
@@ -98,11 +98,11 @@ Notes:
 
 ## Leaderboard
 
-| Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate, $$k$$ | Hit rate, $$c^\ast$$ | Hit rate, $$\theta$$ | Hit rate | FAC2 | R | $$R^2$$ | Points scored |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | OpenFOAM 12 (UMF) · $$\mathrm{Sc_t}$$ 0.3 | Eddy3D | **0.506** | **0.747** | **0.762** | **0.515** | **0.244** | **0.468** | **0.985** | **0.604** | **0.586** | **+0.519** | **0.455** | 100 % |
-| 2 | OpenFOAM 12 (UMF) · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | **0.506** | **0.747** | **0.762** | **0.515** | **0.244** | 0.387 | **0.985** | 0.592 | 0.575 | +0.514 | 0.448 | 100 % |
-| 3 | OpenFOAM 12 (UMF) · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | **0.506** | **0.747** | **0.762** | **0.515** | **0.244** | 0.358 | **0.985** | 0.588 | 0.563 | +0.511 | 0.444 | 100 % |
+| Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate, $$k$$ | Hit rate, $$c^\ast$$ | Hit rate, $$\theta$$ | Hit rate | FAC2 | R | $$R^2$$ |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | OpenFOAM 12 (UMF) · $$\mathrm{Sc_t}$$ 0.3 | Eddy3D | **0.506** | **0.747** | **0.762** | **0.515** | **0.244** | **0.468** | **0.985** | **0.604** | **0.586** | **+0.519** | **0.455** |
+| 2 | OpenFOAM 12 (UMF) · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | **0.506** | **0.747** | **0.762** | **0.515** | **0.244** | 0.387 | **0.985** | 0.592 | 0.575 | +0.514 | 0.448 |
+| 3 | OpenFOAM 12 (UMF) · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | **0.506** | **0.747** | **0.762** | **0.515** | **0.244** | 0.358 | **0.985** | 0.588 | 0.563 | +0.511 | 0.444 |
 {: .scores }
 
-Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. *Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).
+Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. Every run gave values at every measured point. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

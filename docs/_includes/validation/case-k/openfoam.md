@@ -23,8 +23,6 @@ An Eddy3D production run solved on 2026-10-18, realizable k-ε at numerics level
 | $$c^\ast$$, y-symmetric ceiling (control) | +0.997 | 0.995 | +0.000 | 0.793 | 203 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 FB is positive when the model is low, and is left out (—) for a signed component whose measured and modelled means are not both positive.
 
 - **Velocity.** $$U$$: $$R = 0.96$$, FAC2 0.59; the mean $$U/U_H$$ is 0.272 modelled against 0.502 measured (FB +0.59). FB by region: +0.35 over the roofs (31 points, FAC2 1.00, R +0.06), +0.79 in the streets along the wind (44 points, R +0.997, FAC2 0.34) and +0.78 in the streets across it (128 points, R +0.95, FAC2 0.57). Both sides are divided by 2.33 m/s; the solved $$U$$ at $$z = H$$ is 0.85 of that.

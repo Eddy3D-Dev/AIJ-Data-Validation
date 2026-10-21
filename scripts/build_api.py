@@ -2648,12 +2648,13 @@ def _leaderboard(case):
             return "—"
         t = f"{v:{fmt}}"
         return f"**{t}**" if len(rows) > 1 and abs(v - best[i]) < 5e-4 else t
-    head = ["Rank", "Run", "Source"] + [f"Hit rate, {_cell(label[q], bare=True)}" for q in tasks] + ["Hit rate", "FAC2", "R", "$$R^2$$", "Points scored"]
+    partial = any(r[7] < 1 - 1e-9 for r in rows)        # the coverage column only where some run leaves points out
+    head = ["Rank", "Run", "Source"] + [f"Hit rate, {_cell(label[q], bare=True)}" for q in tasks] + ["Hit rate", "FAC2", "R", "$$R^2$$"] + (["Points scored"] if partial else [])
     L = ["## Leaderboard", "", "| " + " | ".join(head) + " |", "|" + "---|" * len(head)]
     for i, (name, src, hr, mhr, mf2, mr, mr2, cov) in enumerate(rows, 1):
         n = len(tasks)
         L.append("| " + " | ".join([str(i), name, src] + [cell(v, j, ".3f") for j, v in enumerate(hr)]
-                                   + [cell(mhr, n, ".3f"), cell(mf2, n + 1, ".3f"), cell(mr, n + 2, "+.3f"), cell(mr2, n + 3, ".3f"), f"{100 * cov:.0f} %"]) + " |")
+                                   + [cell(mhr, n, ".3f"), cell(mf2, n + 1, ".3f"), cell(mr, n + 2, "+.3f"), cell(mr2, n + 3, ".3f")] + ([f"{100 * cov:.0f} %"] if partial else [])) + " |")
     L += ["{: .scores }"]
     L += _legend(L[2:]) + ["",
           "Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's "
@@ -2661,7 +2662,8 @@ def _leaderboard(case):
           "here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over "
           "them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; "
           "the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. "
-          "*Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its "
+          + ("*Points scored* is the share of the measured points a run gave values at. " if partial else "Every run gave values at every measured point. ")
+          + "The ML surrogate is not on the board: its "
           "values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are "
           f"not runs and are left out. Community rows are self-reported values ({_link('Validate your own solver', '/byos/')}).", ""]
     return L
@@ -2674,6 +2676,7 @@ def _case_validation_page(case, meta, p, shared):
                redirect_from=REDIRECT_FROM.get(case, ()))
     L += [f"# Case {case}: validation", "{: .no_toc }", ""] + _toc()
     L += ["Engine status: " + " · ".join(f"{_engine_name(k)} {status_label(v)}" for k, v in site_status(case).items()), ""]
+    L += ["{% include " + NM.INCLUDES["full"] + " %}", ""]        # the symbols and scores once, closed, for every table below
     if case in CASE_CAVEATS:
         L += [CASE_CAVEATS[case], ""]
     inc, shown = _reading(meta, "layout")

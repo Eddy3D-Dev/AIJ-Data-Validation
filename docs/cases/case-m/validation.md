@@ -22,6 +22,8 @@ description: "Case M — TPU Atsugi campus: Eddy3D's scores against the measurem
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
+{% include nomenclature.md %}
+
 ## Measurement locations
 
 {% include validation/case-m/layout.md %}
@@ -62,8 +64,6 @@ Quantity: $$U$$, $$V$$, $$W$$ and $$k$$ at the 15 points of the tunnel\'s WD 180
 | $$\lvert\mathbf{U}\rvert$$ | +0.601 | 0.362 | 0.733 | +0.185 | 0.400 | 15 |
 | $$k$$ | +0.446 | 0.199 | 0.133 | +1.131 | 0.067 | 15 |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 </details>
 
@@ -192,11 +192,11 @@ The tracer goes downwind: the model\'s mean over the points turned 180° about t
 
 ## Leaderboard
 
-| Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate, $$k$$ | Hit rate, $$c^\ast$$ | Hit rate | FAC2 | R | $$R^2$$ | Points scored |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.3 | Eddy3D | **0.267** | **0.133** | **0.733** | **0.400** | **0.067** | **0.133** | **0.289** | **0.322** | **+0.513** | **0.300** | 100 % |
-| 2 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | **0.267** | **0.133** | **0.733** | **0.400** | **0.067** | **0.133** | **0.289** | **0.322** | +0.487 | 0.282 | 100 % |
-| 3 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | **0.267** | **0.133** | **0.733** | **0.400** | **0.067** | **0.133** | **0.289** | 0.311 | +0.478 | 0.278 | 100 % |
+| Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate, $$k$$ | Hit rate, $$c^\ast$$ | Hit rate | FAC2 | R | $$R^2$$ |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.3 | Eddy3D | **0.267** | **0.133** | **0.733** | **0.400** | **0.067** | **0.133** | **0.289** | **0.322** | **+0.513** | **0.300** |
+| 2 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | **0.267** | **0.133** | **0.733** | **0.400** | **0.067** | **0.133** | **0.289** | **0.322** | +0.487 | 0.282 |
+| 3 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | **0.267** | **0.133** | **0.733** | **0.400** | **0.067** | **0.133** | **0.289** | 0.311 | +0.478 | 0.278 |
 {: .scores }
 
-Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. *Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).
+Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. Every run gave values at every measured point. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

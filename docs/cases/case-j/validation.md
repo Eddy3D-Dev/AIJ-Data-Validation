@@ -24,6 +24,8 @@ redirect_from:
 
 Engine status: OpenFOAM 12 (UMF) <span class="label label-green status">scored</span> · OpenFOAM 12 (UMF) buoyantKEpsilon <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
+{% include nomenclature.md %}
+
 ## Measurement locations
 
 {% include validation/case-j/layout.md %}
@@ -55,8 +57,6 @@ Status: <span class="label label-green status">scored</span>
 | $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7, without the near-source points | +0.848 | 0.719 | 0.728 | +0.025 | 0.565 | 416 |
 | $$U$$, y-symmetric ceiling (control) | +0.993 | 0.987 | 0.971 | +0.000 | 0.925 | 346 |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 - Per-point values: [`/api/cases/J/pairs/umf-realizableKE.csv`]({{ '/api/cases/J/pairs/umf-realizableKE.csv' | relative_url }})
 - Reproduce: Eddy3D fixture MetaFOAM.Lib.Tests/TestAijCaseJUmfContainerE2E (1:1:2 building, heated floor, floor point source; urbanMicroclimateFoam, realizable k-ε, 236,408 air cells at Froude scale 62.5, 1500 air iterations, solved 2026-10-18); figures validation/plot\_cases\_jl\_umf.py

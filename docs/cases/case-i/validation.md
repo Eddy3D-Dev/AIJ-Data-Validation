@@ -22,6 +22,8 @@ description: "Case I — cube with a roof point source: Eddy3D's scores against 
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenFOAM 12 k-ε <span class="label label-green status">scored</span> · OpenFOAM 12 k-ω SST <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
+{% include nomenclature.md %}
+
 ## Measurement locations
 
 {% include validation/case-i/layout.md %}
@@ -50,8 +52,6 @@ Reattachment length $$L_r/H$$ = 2.51.
 | $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.5 | +0.940 | 0.884 | 0.475 | +0.083 | 0.284 | 539 |
 | $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7 | +0.946 | 0.896 | 0.477 | -0.100 | 0.291 | 539 |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 - Per-point values: [`/api/cases/I/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/I/pairs/openfoam12-realizableKE.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCubeContainerE2E (realizable k-ε, 1:60) (numerics level 3, 3000 iterations); figures validation/plot\_cases\_hi\_openfoam.py

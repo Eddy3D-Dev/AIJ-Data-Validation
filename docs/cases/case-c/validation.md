@@ -24,6 +24,8 @@ redirect_from:
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-grey status">not comparable</span> · FluidX3D <span class="label label-grey status">not comparable</span> · ML surrogate <span class="label label-green status">scored</span>
 
+{% include nomenclature.md %}
+
 ## Measurement locations
 
 {% include validation/case-c/layout.md %}
@@ -51,8 +53,6 @@ Quantity: $$V_{\mathrm{s}}$$ (thermistor) scored against $$\sqrt{\lvert\mathbf{U
 | WD 45° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.831 | 0.690 | 0.942 | +0.121 | 0.783 |
 | WD 45° $$\lvert\mathbf{U}\rvert$$ | +0.801 | 0.642 | 0.800 | +0.307 | 0.533 |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 Every score is over the same 120 points.
 
@@ -133,9 +133,9 @@ Status: <span class="label label-green status">scored</span>
 
 ## Leaderboard
 
-| Rank | Run | Source | Hit rate, $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate | FAC2 | R | $$R^2$$ | Points scored |
-|---|---|---|---|---|---|---|---|---|---|
-| 1 | OpenFOAM 12 | Eddy3D | 0.688 | 0.436 | 0.562 | 0.850 | +0.853 | 0.730 | 100 % |
+| Rank | Run | Source | Hit rate, $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate | FAC2 | R | $$R^2$$ |
+|---|---|---|---|---|---|---|---|---|
+| 1 | OpenFOAM 12 | Eddy3D | 0.688 | 0.436 | 0.562 | 0.850 | +0.853 | 0.730 |
 {: .scores }
 
-Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. *Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).
+Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. Every run gave values at every measured point. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

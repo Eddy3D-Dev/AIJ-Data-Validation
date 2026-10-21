@@ -9,8 +9,6 @@ OpenLB (Eddy3D's `eddy3dWind`: Smagorinsky, third-order regularised D3Q19, CPU i
 | $$V/U_H$$ | 186 | 0.17 | — | 0.62 | 0.65 | 0.35 / 0.89 / 0.96 |
 | $$W/U_H$$ | 186 | 0.12 | — | 0.59 | 0.54 | 0.40 / 0.80 / 0.71 |
 
-{% include nomenclature-scores.md %}
-
 - OpenLB meets the ground with a plain no-slip (bounce-back) wall and carries the roughness only in the inlet profile. In the undisturbed column at the windward face its $$U$$ is 0.29 of the inlet log law one cell up, 0.69 at two, 0.95 at three and 1.02–1.07 from four. Case A's lowest plane sits 0.6 cells up.
 - The resolved $$k$$ is 0.7 % of the measured one; $$k$$ is not compared.
 - Reattachment length: $$L_r = 3.39\thinspace H$$ against OpenFOAM's 1.49.

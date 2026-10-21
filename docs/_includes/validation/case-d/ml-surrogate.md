@@ -7,6 +7,4 @@ Eddy3D's Wind Predictor (the public `Yel-2.0` network) predicts $$\lvert\mathbf{
 | $$V_{\mathrm{s}}/U_H$$, thermistor, 3 WD | 198 | +0.67 | 0.34 | +0.33 | 0.17 | WD 0°, 22.5° and 45° (66 points each): $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ FB +0.21 / +0.05 / +0.09, FAC2 0.73 / 0.92 / 0.89, R +0.80 / +0.80 / +0.85 |
 | $$\lvert\mathbf{U}\rvert/U_H$$, split fibre, WD 0 | 33 | +0.23 | 0.52 | +0.59 | 0.24 | FB +0.07, FAC2 0.76, R +0.85, hit rate 0.52 |
 
-{% include nomenclature-scores.md %}
-
 - FB is positive when the model is low. Reversing the wind changes the predicted field by at most $$1 \times 10^{-4}$$ $$U_{\mathrm{ref}}$$: the prediction does not depend on the wind direction.

@@ -12,8 +12,6 @@ Before and after the construction of a 60 m tower and two 18 m blocks, each stat
 | after · $$\lvert\mathbf{U}\rvert$$ | 0.74 | +0.34 | 0.30 | 0.84 |
 | ceiling control: the tunnel's *before*, scored as a model of its *after* | 0.79 | +0.37 | 0.35 | 0.10 |
 
-{% include nomenclature-scores.md %}
-
 {% include figure.html name="case-e-openfoam-bias-map.png" alt="Case E, where the model is slow or fast" caption="<strong>Figure 3.</strong> Case E, where the model is slow or fast." %}
 
 - Construction change (after − before): $$R = 0.84$$; the sign is right at 75 % of the points where the tunnel resolved a change; the modelled change is about 60 % of the measured size.

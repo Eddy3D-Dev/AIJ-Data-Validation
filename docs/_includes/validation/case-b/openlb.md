@@ -9,8 +9,6 @@ OpenLB (Eddy3D's `eddy3dWind`: Smagorinsky, third-order regularised D3Q19, CPU i
 | $$V/U_H$$ | 224 | 0.13 | — | 0.55 | 0.83 | 0.28 / 0.61 / 0.91 |
 | $$W/U_H$$ | 224 | 0.24 | — | 0.65 | 0.77 | 0.54 / 0.81 / 0.93 |
 
-{% include nomenclature-scores.md %}
-
 - OpenLB meets the ground with a plain no-slip (bounce-back) wall and carries the roughness only in the inlet profile. In the undisturbed column at the windward face its $$U$$ is 0.29 of the inlet log law one cell up, 0.69 at two, 0.95 at three and 1.02–1.07 from four. 
 - The resolved $$k$$ is 10 % of the measured one; $$k$$ is not compared.
 - The wake is displaced: the field fits best sampled $$H/2$$ downstream.

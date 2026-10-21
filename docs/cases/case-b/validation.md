@@ -22,6 +22,8 @@ description: "Case B — 1:4:4 slab: Eddy3D's scores against the measurements, e
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-green status">scored</span> · FluidX3D <span class="label label-green status">scored</span> · ML surrogate <span class="label label-green status">scored</span>
 
+{% include nomenclature.md %}
+
 ## Measurement locations
 
 {% include validation/case-b/layout.md %}
@@ -47,8 +49,6 @@ Reattachment length $$L_r/H$$ = 3.27.
 | $$W$$ | +0.929 | 0.863 | 0.536 | +0.263 | 0.808 |
 | $$k$$ | +0.399 | 0.159 | 0.562 | +0.463 | 0.223 |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 Every score is over the same 224 points.
 
@@ -125,12 +125,12 @@ Every score is over the same 122 points.
 
 ## Leaderboard
 
-| Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate | FAC2 | R | $$R^2$$ | Points scored |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-measured-inlet]({{ '/community/eddy3d-of12-measured-inlet/' | relative_url }})) | community | **0.571** | 0.607 | **0.821** | **0.625** | **0.656** | 0.578 | **+0.936** | **0.876** | 100 % |
-| 2 | OpenFOAM 12 | Eddy3D | 0.562 | **0.612** | 0.808 | **0.625** | 0.652 | **0.585** | **+0.936** | **0.876** | 100 % |
-| 3 | FluidX3D | Eddy3D | 0.411 | 0.545 | 0.527 | 0.424 | 0.477 | 0.491 | +0.875 | 0.766 | 100 % |
-| 4 | OpenLB | Eddy3D | 0.290 | 0.549 | 0.652 | 0.317 | 0.452 | 0.297 | +0.792 | 0.628 | 100 % |
+| Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate | FAC2 | R | $$R^2$$ |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-measured-inlet]({{ '/community/eddy3d-of12-measured-inlet/' | relative_url }})) | community | **0.571** | 0.607 | **0.821** | **0.625** | **0.656** | 0.578 | **+0.936** | **0.876** |
+| 2 | OpenFOAM 12 | Eddy3D | 0.562 | **0.612** | 0.808 | **0.625** | 0.652 | **0.585** | **+0.936** | **0.876** |
+| 3 | FluidX3D | Eddy3D | 0.411 | 0.545 | 0.527 | 0.424 | 0.477 | 0.491 | +0.875 | 0.766 |
+| 4 | OpenLB | Eddy3D | 0.290 | 0.549 | 0.652 | 0.317 | 0.452 | 0.297 | +0.792 | 0.628 |
 {: .scores }
 
-Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. *Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).
+Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. Every run gave values at every measured point. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

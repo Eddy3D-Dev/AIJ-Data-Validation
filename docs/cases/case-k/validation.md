@@ -22,6 +22,8 @@ description: "Case K — 9 x 9 cube array, point source: Eddy3D's scores against
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
+{% include nomenclature.md %}
+
 ## Measurement locations
 
 {% include validation/case-k/layout.md %}
@@ -55,8 +57,6 @@ Quantity: $$U$$, $$V$$, $$W$$ over the stated $$U_H$$ = 2.33 m/s and $$k$$ over 
 | $$U$$, y-symmetric ceiling (control) | +1.000 | 1.000 | 1.000 | +0.000 | 1.000 | 203 |
 | $$c^\ast$$, y-symmetric ceiling (control) | +0.997 | 0.994 | 0.995 | +0.000 | 0.793 | 203 |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 - Normalisation: $$U$$, $$V$$, $$W$$ by the stated $$U_H$$ = 2.33 m/s and $$k$$ by $$U_H^2$$, the same divisor on both sides; $$c^\ast$$ is the measured $$C/c_0$$ ($$c_0 = \dfrac{q}{U_H H^2}$$ = 429.2 ppm) against the modelled $$c\thinspace U_H H^2/Q$$ (full scale, $$Q = 1\thinspace\mathrm{kg/s}$$) for turbulent Schmidt numbers 0.3, 0.5 and 0.7, with one detection limit of $$10^{-3}$$ of the largest measured value; hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in $$U_H$$
 - Per-point values: [`/api/cases/K/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/K/pairs/openfoam12-realizableKE.csv' | relative_url }})
@@ -93,12 +93,12 @@ The modelled velocity sits under the measured mean. The y-symmetric ceiling is t
 
 ## Leaderboard
 
-| Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate, $$k$$ | Hit rate, $$c^\ast$$ | Hit rate | FAC2 | R | $$R^2$$ | Points scored |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-casek-workbook-inflow]({{ '/community/eddy3d-of12-casek-workbook-inflow/' | relative_url }})) | community | **0.562** | 0.877 | 0.670 | **0.507** | **0.103** | 0.399 | **0.520** | **0.464** | +0.596 | 0.525 | 100 % |
-| 2 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.3 | Eddy3D | 0.123 | **0.901** | **0.685** | 0.084 | 0.005 | **0.458** | 0.376 | 0.363 | **+0.602** | **0.530** | 100 % |
-| 3 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | 0.123 | **0.901** | **0.685** | 0.084 | 0.005 | 0.163 | 0.327 | 0.345 | **+0.601** | **0.530** | 100 % |
-| 4 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | 0.123 | **0.901** | **0.685** | 0.084 | 0.005 | 0.099 | 0.316 | 0.296 | **+0.601** | 0.530 | 100 % |
+| Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate, $$k$$ | Hit rate, $$c^\ast$$ | Hit rate | FAC2 | R | $$R^2$$ |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-casek-workbook-inflow]({{ '/community/eddy3d-of12-casek-workbook-inflow/' | relative_url }})) | community | **0.562** | 0.877 | 0.670 | **0.507** | **0.103** | 0.399 | **0.520** | **0.464** | +0.596 | 0.525 |
+| 2 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.3 | Eddy3D | 0.123 | **0.901** | **0.685** | 0.084 | 0.005 | **0.458** | 0.376 | 0.363 | **+0.602** | **0.530** |
+| 3 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | 0.123 | **0.901** | **0.685** | 0.084 | 0.005 | 0.163 | 0.327 | 0.345 | **+0.601** | **0.530** |
+| 4 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | 0.123 | **0.901** | **0.685** | 0.084 | 0.005 | 0.099 | 0.316 | 0.296 | **+0.601** | 0.530 |
 {: .scores }
 
-Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. *Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).
+Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. Every run gave values at every measured point. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

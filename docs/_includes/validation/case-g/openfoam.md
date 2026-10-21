@@ -18,8 +18,6 @@ Eddy3D production runs solved on 2026-10-18, realizable k-ε at numerics level 3
 | conifer, real belt (half domain) | 0.625 | +0.468 | 1.000 | −0.202 | 0.607 | 0.585 | 0.120 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 The field's mean $$U/U_H$$ over the 28 points is 0.478. The model is $$\lvert\mathbf{U}\rvert$$ over its own $$U(7\text{ m})$$; the same scores over the imposed $$U_H$$, and for $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$, are in the files. The same arms for $$k$$:
 
 | Arm | $$k$$ R | $$k$$ FAC2 | $$k$$ FB | mean $$k/U_H^2$$ |
@@ -30,8 +28,6 @@ The field's mean $$U/U_H$$ over the 28 points is 0.478. The model is $$\lvert\ma
 | screen | +0.234 | 0.679 | −0.206 | 0.038 |
 | conifer, real belt (half domain) | +0.228 | 0.750 | −0.081 | 0.034 |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 The field's mean $$k/U_H^2$$ is 0.031.
 

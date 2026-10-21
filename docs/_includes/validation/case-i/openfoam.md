@@ -31,8 +31,6 @@ FB is positive when the model is low.
 | k-ω SST | +0.992 | 0.879 | +0.880 | 0.396 | +0.495 | +0.466 | 0.403 | −0.153 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 - $$U$$: R is 0.99 to 1.00 and FAC2 0.85 to 0.88 under all three.
 - The two k-ε closures keep $$k$$ within a factor of two at more than 90 % of the points (FAC2 0.912 and 0.923) and give a concentration with R of 0.94 to 0.96. Under k-ω SST, $$k$$ FAC2 is 0.40 (FB +0.49, model low) and the concentration's R is 0.47.
 - Mean $$k/U_H^2$$ of the approach profile: 0.0006 under k-ω SST, 0.0075 under both k-ε closures.
