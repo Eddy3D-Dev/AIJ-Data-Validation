@@ -44,8 +44,6 @@ Isolated 1:1:2 building with a floor tracer source in an unstably stratified bou
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 {: .warning-title }
 > Before you compare
 >

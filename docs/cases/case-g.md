@@ -40,8 +40,6 @@ Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m ×
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 LAD and Cd are not in the dataset (only the shading rate, 81 %). The drag values are crowns of the Eddy3D vegetation library.
 
 {: .warning-title }

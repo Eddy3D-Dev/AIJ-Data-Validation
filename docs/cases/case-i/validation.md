@@ -71,8 +71,6 @@ Reattachment length $$L_r/H$$ = 2.23.
 | $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7 | +0.954 | 0.909 | 0.519 | -0.248 | 0.288 | 539 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 - Per-point values: [`/api/cases/I/pairs/openfoam12-kEpsilon.csv`]({{ '/api/cases/I/pairs/openfoam12-kEpsilon.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCubeContainerE2E (standard k-ε, 1:60) (numerics level 3, 3000 iterations); figures validation/plot\_cases\_hi\_openfoam.py
 
@@ -90,8 +88,6 @@ Reattachment length $$L_r/H$$ = 2.68.
 | $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.5 | +0.466 | 0.217 | 0.403 | -0.153 | 0.202 | 539 |
 | $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7 | +0.439 | 0.193 | 0.380 | -0.221 | 0.195 | 539 |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 - Per-point values: [`/api/cases/I/pairs/openfoam12-kOmegaSST.csv`]({{ '/api/cases/I/pairs/openfoam12-kOmegaSST.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCubeContainerE2E (k-ω SST, 1:60) (numerics level 3, 3000 iterations); figures validation/plot\_cases\_hi\_openfoam.py
@@ -120,7 +116,5 @@ Reattachment length $$L_r/H$$ = 2.68.
 | 8 | OpenFOAM 12 k-ω SST · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | 0.802 | 0.921 | 0.868 | **0.816** | 0.264 | 0.202 | 0.646 | 0.680 | +0.870 | 0.791 | 89 % |
 | 9 | OpenFOAM 12 k-ω SST · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | 0.802 | 0.921 | 0.868 | **0.816** | 0.264 | 0.195 | 0.644 | 0.677 | +0.865 | 0.787 | 89 % |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. *Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

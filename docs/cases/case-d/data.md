@@ -55,8 +55,6 @@ description: "Case D — high-rise among city blocks: configuration, frame and u
 | Unit of variance | m²/s² |
 | Unit of $$k$$ | m²/s² |
 
-{% include nomenclature.md %}
-
 <details markdown="block">
 <summary>Data notes: Frame and wind direction</summary>
 
@@ -105,8 +103,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `Vs` | $$V_{\mathrm{s}}$$ | m/s, mean omnidirectional scalar wind speed (thermistor); Case D also lists $$\lvert\mathbf{U}\rvert$$ of the split-fibre probe under $$V_{\mathrm{s}}$$ for its 33 vector points |
 | `campaign` |  | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
 
-{% include nomenclature.md %}
-
 </details>
 
 ## Inflow
@@ -119,8 +115,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | Power-law exponent, fitted | 0.189 |
 | Power-law exponent, data paper | 0.25 |
 | Note | derived during scoping, not published by AIJ |
-
-{% include nomenclature.md %}
 
 <details markdown="block">
 <summary>Interpretation: Inflow fit</summary>

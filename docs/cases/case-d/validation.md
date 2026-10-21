@@ -87,8 +87,6 @@ Status: <span class="label label-green status">scored</span>
 | wind reversed (control) | +0.492 | 0.242 | 0.470 | +0.555 | 0.197 | 66 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 - Per-point values: [`/api/cases/D/pairs/ml-surrogate.csv`]({{ '/api/cases/D/pairs/ml-surrogate.csv' | relative_url }})
 - Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot\_ml\_surrogate.py
 
@@ -102,7 +100,5 @@ Status: <span class="label label-green status">scored</span>
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | OpenFOAM 12 | Eddy3D | 0.515 | 0.424 | 0.939 | 0.515 | 0.621 | 0.576 | 0.598 | 0.638 | +0.840 | 0.713 | 100 % |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. *Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

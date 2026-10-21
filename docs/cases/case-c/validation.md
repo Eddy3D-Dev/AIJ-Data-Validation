@@ -73,8 +73,6 @@ Quantity: $$V_{\mathrm{s}}$$ (thermistor) scored against $$\sqrt{\lvert\mathbf{U
 | WD 45° $$\lvert\mathbf{U}\rvert$$ | +0.873 | 0.761 | 0.850 | +0.353 | 0.433 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 Every score is over the same 120 points.
 
 - Per-point values: [`/api/cases/C/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/C/pairs/openfoam12-realizableKE.csv' | relative_url }})
@@ -93,8 +91,6 @@ Quantity: $$V_{\mathrm{s}}$$ (thermistor) scored against $$\sqrt{\lvert\mathbf{U
 | WD 45° $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.909 | 0.826 | 0.958 | +0.103 | 0.883 |
 | WD 45° $$\lvert\mathbf{U}\rvert$$ | +0.912 | 0.832 | 0.900 | +0.243 | 0.608 |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 Every score is over the same 120 points.
 
@@ -128,8 +124,6 @@ Status: <span class="label label-green status">scored</span>
 | wind reversed (control) | -0.441 | 0.194 | 0.725 | +0.367 | 0.392 | 120 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 - Per-point values: [`/api/cases/C/pairs/ml-surrogate.csv`]({{ '/api/cases/C/pairs/ml-surrogate.csv' | relative_url }})
 - Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot\_ml\_surrogate.py
 
@@ -143,7 +137,5 @@ Status: <span class="label label-green status">scored</span>
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | OpenFOAM 12 | Eddy3D | 0.688 | 0.436 | 0.562 | 0.850 | +0.853 | 0.730 | 100 % |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. *Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

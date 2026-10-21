@@ -235,7 +235,7 @@ def full():
 
 def scores():
     """The scores as bullet points, and the quantities they are computed on: under a table of scores."""
-    return (["**Nomenclature**", ""] + [f"- {t}" for t in _LEGEND] + ["", "**Quantities scored**", ""] + [f"- {t}" for t in _QUANTITIES])
+    return _details("Nomenclature: scores", ["**Scores**", ""] + [f"- {t}" for t in _LEGEND] + ["", "**Quantities scored**", ""] + [f"- {t}" for t in _QUANTITIES])
 
 
 KINDS = {"full": full, "scores": scores, "metrics": metrics}

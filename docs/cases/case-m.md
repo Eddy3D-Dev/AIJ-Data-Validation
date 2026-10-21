@@ -43,8 +43,6 @@ Tracer-gas release on the Tokyo Polytechnic University Atsugi campus: 1:600 tunn
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 {: .warning-title }
 > Before you compare
 >

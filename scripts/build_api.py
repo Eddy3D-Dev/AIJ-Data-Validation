@@ -2103,7 +2103,25 @@ def _front(title, nav_order, parent=None, grand_parent=None, has_children=None, 
     return L + ["---", ""]
 
 
+def _once(lines):
+    """A page's nomenclature once, under the first table that needs it: a later include of a kind already on the page (or of the
+    scores after the whole nomenclature) is dropped with the blank line before it."""
+    out, seen = [], set()
+    for line in lines:
+        m = re.match(r"^\{% include (nomenclature(?:-scores)?\.md) %\}$", line.strip())
+        if m:
+            kind = "full" if m.group(1) == NM.INCLUDES["full"] else "scores"
+            if kind in seen or "full" in seen:
+                while out and not out[-1].strip():
+                    out.pop()
+                continue
+            seen.add(kind)
+        out.append(line)
+    return out
+
+
 def _write(rel, lines):
+    lines = _once(lines) if rel.endswith(".md") and not rel.startswith("_includes/") else lines
     path = os.path.join(DOCS, rel)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with io.open(path, "w", encoding="utf-8", newline="\n") as f:

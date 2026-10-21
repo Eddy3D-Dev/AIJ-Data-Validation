@@ -85,8 +85,6 @@ Status: <span class="label label-green status">scored</span>
 | wind reversed (control) | +0.425 | 0.181 | 0.284 | +0.853 | 0.105 | 1280 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 - Per-point values: [`/api/cases/E/pairs/ml-surrogate.csv`]({{ '/api/cases/E/pairs/ml-surrogate.csv' | relative_url }})
 - Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot\_ml\_surrogate.py
 
@@ -101,7 +99,5 @@ Status: <span class="label label-green status">scored</span>
 | 1 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-casee-refined-mesh]({{ '/community/eddy3d-of12-casee-refined-mesh/' | relative_url }})) | community | **0.562** | **0.388** | **0.475** | **0.859** | **+0.789** | **0.629** | 100 % |
 | 2 | OpenFOAM 12 · SW | Eddy3D | 0.544 | 0.356 | 0.450 | 0.841 | +0.765 | 0.591 | 100 % |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. *Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

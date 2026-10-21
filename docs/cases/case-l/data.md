@@ -59,8 +59,6 @@ description: "Case L — 9 x 14 cube array, line source, non-isothermal: configu
 | Unit of concentration | ppm of the released ethylene |
 | Unit of temperature | degC (T); K ($$T_{\mathrm{rms}}$$); heat fluxes K m/s; concentration fluxes ppm m/s |
 
-{% include nomenclature.md %}
-
 ## Reference data
 
 Source in this repository: [`raw/cases/case-l/RS_caseL.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-l/RS_caseL.csv) (approach flow: [`raw/cases/case-l/AF_caseL.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-l/AF_caseL.csv)).
@@ -109,8 +107,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `vT` | $$\overline{v'\theta'}$$ | K m/s, turbulent heat flux \<v\'theta\'\> |
 | `wT` | $$\overline{w'\theta'}$$ | K m/s, turbulent heat flux \<w\'theta\'\> |
 
-{% include nomenclature.md %}
-
 </details>
 
 ## Inflow
@@ -124,8 +120,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | Log-law error at H | -1.6 % |
 | log law rms residual | 2.2 % |
 | Note | derived during scoping, not published by AIJ; the boundary layer is unstably stratified, so a neutral log law is only a rough description |
-
-{% include nomenclature.md %}
 
 ## Known data issues
 

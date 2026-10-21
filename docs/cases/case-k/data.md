@@ -58,8 +58,6 @@ description: "Case K — 9 x 9 cube array, point source: configuration, frame an
 | Unit of $$k$$ | m²/s² |
 | Unit of concentration | ppm of the released ethylene |
 
-{% include nomenclature.md %}
-
 ## Reference data
 
 Source in this repository: [`raw/cases/case-k/RS_caseK.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-k/RS_caseK.csv) (approach flow: [`raw/cases/case-k/AF_caseK.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-k/AF_caseK.csv)).
@@ -98,8 +96,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `c_rms` | $$c_{\mathrm{rms}}$$ | ppm, rms of the concentration fluctuation |
 | `concentration_ratio` | $$c^\ast$$ | $$C/c_0$$, $$c_0 = \dfrac{q}{U_{\mathrm{ref}} L_{\mathrm{ref}}^2}$$ as the benchmark defines it for the case (manifest cases.\<id\>.normalisation) |
 
-{% include nomenclature.md %}
-
 </details>
 
 ## Inflow
@@ -114,8 +110,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | Log-law error at H | -7.4 % |
 | log law rms residual | 2.5 % |
 | Note | the file is the approach flow of Case H (identical rows); the workbook normalises it with $$u_H$$ = $$U(0.2\text{ m})$$ = 3.23 m/s and $$H = 0.2\thinspace\mathrm{m}$$ |
-
-{% include nomenclature.md %}
 
 ## Known data issues
 

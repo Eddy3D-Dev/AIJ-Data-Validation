@@ -43,8 +43,6 @@ description: "Case L — 9 x 14 cube array, line source, non-isothermal: 14 rows
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 {: .warning-title }
 > Before you compare
 >

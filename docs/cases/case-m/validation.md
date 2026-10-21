@@ -103,8 +103,6 @@ Quantity: $$U$$, $$V$$, $$W$$ and $$k$$ at the 15 points of the tunnel\'s WD 180
 | $$k$$ | +0.446 | 0.199 | 0.133 | +1.131 | 0.067 | 15 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 </details>
 
 - Normalisation: $$U$$, $$V$$, $$W$$ and $$k$$ at the 15 points over the tunnel\'s $$U_R$$ = 4.08 m/s on the measurement and over the solved speed at the reference mast on the model ($$U_R$$ is defined at the mast), $$k$$ over $$U_R^2$$; $$c^\ast = C/c_0$$ ($$c_0 = \dfrac{q}{U_R H_R^2}$$ = 132.5 ppm) against the model\'s $$c\thinspace U_R H_R^2/Q$$ ($$H_R$$ = 0.068 m x 600, $$Q = 1\thinspace\mathrm{kg/s}$$) for turbulent Schmidt number 0.5, with one detection limit of $$10^{-3}$$ of the largest measured value; hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units; the Schmidt numbers are three runs on one flow
@@ -142,8 +140,6 @@ Quantity: $$U$$, $$V$$, $$W$$ and $$k$$ at the 15 points of the tunnel\'s WD 180
 | $$\lvert\mathbf{U}\rvert$$ | +0.601 | 0.362 | 0.733 | +0.185 | 0.400 | 15 |
 | $$k$$ | +0.446 | 0.199 | 0.133 | +1.131 | 0.067 | 15 |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 </details>
 
@@ -202,7 +198,5 @@ The tracer goes downwind: the model\'s mean over the points turned 180° about t
 | 2 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | **0.267** | **0.133** | **0.733** | **0.400** | **0.067** | **0.133** | **0.289** | **0.322** | +0.487 | 0.282 | 100 % |
 | 3 | OpenFOAM 12 · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | **0.267** | **0.133** | **0.733** | **0.400** | **0.067** | **0.133** | **0.289** | 0.311 | +0.478 | 0.278 | 100 % |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. *Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

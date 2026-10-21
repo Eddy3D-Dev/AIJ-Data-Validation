@@ -58,8 +58,6 @@ description: "Case H — 1:1:2 building with a floor point source: configuration
 | Unit of $$C$$ | ppm |
 | Unit of $$c^\ast$$ | dimensionless, $$C/c_0$$ |
 
-{% include nomenclature.md %}
-
 ## Reference data
 
 Source in this repository: [`raw/cases/case-h/RS_caseH.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-h/RS_caseH.csv) (approach flow: [`raw/cases/case-h/AF_caseH.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-h/AF_caseH.csv)).
@@ -101,8 +99,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `c_rms` | $$c_{\mathrm{rms}}$$ | ppm, rms of the concentration fluctuation |
 | `concentration_ratio` | $$c^\ast$$ | $$C/c_0$$, $$c_0 = \dfrac{q}{U_{\mathrm{ref}} L_{\mathrm{ref}}^2}$$ as the benchmark defines it for the case (manifest cases.\<id\>.normalisation) |
 
-{% include nomenclature.md %}
-
 </details>
 
 ## Inflow
@@ -116,8 +112,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | Log-law error at H | +1.1 % |
 | turbulence intensity at H | 0.2165 |
 | Note | derived during cleaning, not published by AIJ |
-
-{% include nomenclature.md %}
 
 ## Known data issues
 

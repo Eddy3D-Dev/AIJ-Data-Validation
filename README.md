@@ -313,7 +313,10 @@ Reattachment length **$$L_r/H$$ = 1.49**. Mean measured $$W$$ is ~0.01 m/s.
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -329,6 +332,8 @@ Reattachment length **$$L_r/H$$ = 1.49**. Mean measured $$W$$ is ~0.01 m/s.
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -403,7 +408,10 @@ Reattachment length **$$L_r/H$$ = 3.27**.
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -419,6 +427,8 @@ Reattachment length **$$L_r/H$$ = 3.27**.
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -539,7 +549,10 @@ $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ (headline) and as $$\lvert\mathbf{U}\rv
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -555,6 +568,8 @@ $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ (headline) and as $$\lvert\mathbf{U}\rv
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -673,7 +688,10 @@ the array; shifting the cloud by 12.5 mm (5 m full scale) puts points 27 and 28 
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -689,6 +707,8 @@ the array; shifting the cloud by 12.5 mm (5 m full scale) puts points 27 and 28 
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -797,7 +817,10 @@ arrives at 0.998 of the imposed value in both states.
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -813,6 +836,8 @@ arrives at 0.998 of the imposed value in both states.
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -876,7 +901,10 @@ of the 863 pairs the tunnel resolves ($$\lvert\Delta\rvert$$ > 0.05). Method: *M
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -892,6 +920,8 @@ of the 863 pairs the tunnel resolves ($$\lvert\Delta\rvert$$ > 0.05). Method: *M
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -944,7 +974,10 @@ Full reading: [Case F validation](https://aij.eddy3d.com/cases/case-f/validation
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -960,6 +993,8 @@ Full reading: [Case F validation](https://aij.eddy3d.com/cases/case-f/validation
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1016,7 +1051,10 @@ Full reading: [Case G validation](https://aij.eddy3d.com/cases/case-g/validation
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1032,6 +1070,8 @@ Full reading: [Case G validation](https://aij.eddy3d.com/cases/case-g/validation
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1084,7 +1124,10 @@ Full reading: [Case H validation](https://aij.eddy3d.com/cases/case-h/validation
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1100,6 +1143,8 @@ Full reading: [Case H validation](https://aij.eddy3d.com/cases/case-h/validation
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1156,7 +1201,10 @@ Full reading: [Case I validation](https://aij.eddy3d.com/cases/case-i/validation
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1172,6 +1220,8 @@ Full reading: [Case I validation](https://aij.eddy3d.com/cases/case-i/validation
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1230,7 +1280,10 @@ Full reading: [Case J validation](https://aij.eddy3d.com/cases/case-j/validation
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1246,6 +1299,8 @@ Full reading: [Case J validation](https://aij.eddy3d.com/cases/case-j/validation
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1305,7 +1360,10 @@ Full reading: [Case K validation](https://aij.eddy3d.com/cases/case-k/validation
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1321,6 +1379,8 @@ Full reading: [Case K validation](https://aij.eddy3d.com/cases/case-k/validation
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1378,7 +1438,10 @@ Full reading: [Case L validation](https://aij.eddy3d.com/cases/case-l/validation
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1394,6 +1457,8 @@ Full reading: [Case L validation](https://aij.eddy3d.com/cases/case-l/validation
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1454,7 +1519,10 @@ experiments with the same fitted inflow and probed the same measured points, at 
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1470,6 +1538,8 @@ experiments with the same fitted inflow and probed the same measured points, at 
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1511,7 +1581,10 @@ and 88 of Case B's 224.
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1527,6 +1600,8 @@ and 88 of Case B's 224.
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1571,7 +1646,10 @@ $$U_H$$ with each case's approach-flow file.
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1587,6 +1665,8 @@ $$U_H$$ with each case's approach-flow file.
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 

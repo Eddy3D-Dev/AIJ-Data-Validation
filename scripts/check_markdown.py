@@ -38,7 +38,8 @@ one such disagreement, or a mistake neither renderer forgives:
   stray-dollar     a single $ in running text (GitHub may pair it with another and read math)
   plain-math       a symbol or formula written as plain text (U_H, c0, c*, |U|, sqrt(...)); scripts/mathtext.py writes the LaTeX
   nomenclature     a table of scores without the scores' nomenclature under it, a table of symbols without the nomenclature
-                   (scripts/nomenclature.py): an include in docs pages, a <!--nomenclature ...--> block elsewhere
+                   (scripts/nomenclature.py): an include in docs pages, a <!--nomenclature ...--> block elsewhere; once per
+                   page, under the first table that needs it (a later table is covered by it)
 
 Files under docs/ are Jekyll pages (kramdown with GFM input, as GitHub Pages builds them); every other file is
 rendered by GitHub alone, so only the rules that concern GitHub apply to it.
@@ -484,7 +485,11 @@ def check_legends(raw, path, jekyll):
     rel = os.path.relpath(path, REPO).replace(os.sep, "/") if os.path.isabs(path) else path
     if rel.startswith("docs/_includes/") or rel.startswith("docs/api/"):
         return []
-    errors, in_fence, in_block, i = [], False, False, 0
+    errors, in_fence, in_block, i, shown = [], False, False, 0, set()
+
+    def covered(need):
+        """The page showed this nomenclature (or the whole one) above: a later table needs no second copy."""
+        return need in shown or "full" in shown
 
     def legend_after(k):
         while k < len(raw) and (not raw[k][1].strip() or IAL.match(raw[k][1])):
@@ -505,14 +510,18 @@ def check_legends(raw, path, jekyll):
         mt = re.match(r"^<!--nomenclature (full|scores|metrics)-->$", line.strip())
         if mt:
             in_block = True
+            if mt.group(1) != "metrics":
+                shown.add(mt.group(1))
         elif line.strip() == "<!--/nomenclature-->":
             in_block = False
         if in_fence or in_block:
             i += 1
             continue
         inc = re.match(r"^\{%-?\s*include\s+([\w.-]+)", line.strip()) if jekyll else None
+        if inc and inc.group(1) in INCLUDE_KIND and INCLUDE_KIND[inc.group(1)] != "metrics":
+            shown.add(INCLUDE_KIND[inc.group(1)])
         if inc and inc.group(1) in GENERATED_TABLES:
-            if legend_after(i + 1) != GENERATED_TABLES[inc.group(1)]:
+            if not covered(GENERATED_TABLES[inc.group(1)]) and legend_after(i + 1) != GENERATED_TABLES[inc.group(1)]:
                 errors.append((n, f"nomenclature: the table of {inc.group(1)} needs the {GENERATED_TABLES[inc.group(1)]} nomenclature under it: {where}"))
         elif "|" in line and i + 1 < len(raw) and TABLE_DELIM.match(raw[i + 1][1]):
             j = i + 2
@@ -520,7 +529,7 @@ def check_legends(raw, path, jekyll):
                 j += 1
             text = "\n".join(x for _, x in raw[i:j])
             need = "scores" if SCORE_WORDS.search(text) else "full" if "$$" in text else None
-            if need and legend_after(j) != need:
+            if need and not covered(need) and legend_after(j) != need:
                 errors.append((n, f"nomenclature: this table shows {'scores' if need == 'scores' else 'a symbol'}; the {need} nomenclature goes under it: {where}"))
             i = j
             continue
@@ -651,6 +660,8 @@ def self_test():
         ("| R | FAC2 |\n|---|---|\n| 1 | 2 |\n\n{% include nomenclature-scores.md %}\n\ntext\n", []),
         ("| R | FAC2 |\n|---|---|\n| 1 | 2 |\n{: .scores }\n\n{% include nomenclature-scores.md %}\n\ntext\n", []),
         ("| R | FAC2 |\n|---|---|\n| 1 | 2 |\n\ntext\n", ["nomenclature"]),
+        ("| R | FAC2 |\n|---|---|\n| 1 | 2 |\n\n{% include nomenclature-scores.md %}\n\n| R | FB |\n|---|---|\n| 1 | 2 |\n\ntext\n", []),
+        ("| R | FAC2 |\n|---|---|\n| 1 | 2 |\n\ntext\n\n| R | FB |\n|---|---|\n| 1 | 2 |\n\n{% include nomenclature-scores.md %}\n", ["nomenclature"]),
         ("| Symbol |\n|---|\n| $$U_H$$ |\n\n{% include nomenclature.md %}\n\ntext\n", []),
         ("text\n\n{% include validation-matrix.md %}\n\ntext\n", ["nomenclature"]),
         ("text\n\n{% include validation-matrix.md %}\n\n{% include nomenclature-scores.md %}\n\ntext\n", []),

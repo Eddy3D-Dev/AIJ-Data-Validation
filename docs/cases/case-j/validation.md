@@ -85,8 +85,6 @@ Notes:
 | $$U$$, y-symmetric ceiling (control) | +0.993 | 0.987 | 0.971 | +0.000 | 0.925 | 346 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 - Per-point values: [`/api/cases/J/pairs/umf-buoyantKEpsilon.csv`]({{ '/api/cases/J/pairs/umf-buoyantKEpsilon.csv' | relative_url }})
 - Reproduce: Eddy3D fixture MetaFOAM.Lib.Tests/TestAijCaseJUmfContainerE2E (1:1:2 building, heated floor, floor point source; urbanMicroclimateFoam, buoyantKEpsilon, 236,408 air cells at Froude scale 62.5, 1500 air iterations, solved 2026-10-18); figures validation/plot\_cases\_jl\_umf.py
 
@@ -138,7 +136,5 @@ At the model\'s Re, UMF\'s wall functions belong and the tunnel\'s laminar-subla
 | 5 | OpenFOAM 12 (UMF) buoyantKEpsilon · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | **0.607** | **0.540** | 0.587 | **0.637** | **0.208** | 0.641 | 0.806 | 0.575 | 0.675 | +0.814 | 0.697 | 100 % |
 | 6 | OpenFOAM 12 (UMF) · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | 0.573 | 0.526 | **0.596** | **0.637** | 0.178 | 0.686 | **0.817** | 0.573 | 0.671 | +0.807 | 0.692 | 100 % |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. *Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

@@ -38,5 +38,3 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | $$\lvert\mathbf{U}\rvert$$ | +0.924 | 0.823 | +0.099 | 0.720 | 186 | 186/186 |
 | $$k$$ | +0.626 | 0.694 | +0.453 | 0.392 | 186 | 186/186 |
 {: .scores }
-
-{% include nomenclature-scores.md %}

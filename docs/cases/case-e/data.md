@@ -55,8 +55,6 @@ description: "Case E — Niigata district: configuration, frame and units, refer
 | Unit of length | m (FULL scale) |
 | Unit of $$U/U_{\mathrm{ref}}$$ | dimensionless |
 
-{% include nomenclature.md %}
-
 ## Reference data
 
 Source in this repository: [`raw/cases/case-e/LF_caseE.xls`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-e/LF_caseE.xls) (approach flow: [`raw/cases/case-e/LF_caseE.xls [sheet Inflow]`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-e/LF_caseE.xls [sheet Inflow])).
@@ -88,8 +86,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `velocity_ratio` | $$U/U_{\mathrm{ref}}$$ | dimensionless, mean speed over the case\'s reference speed (Case E: $$V_{\mathrm{s}}/U(15.9\text{ m})$$, $$U(15.9\text{ m})$$ = 3.935 m/s; see the case\'s normalisation) |
 | `campaign` |  | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
 
-{% include nomenclature.md %}
-
 </details>
 
 ## Inflow
@@ -101,8 +97,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | Log law | does not fit: $$\kappa$$ = 0.41 fits reach 5.3-9.4 % max error over the relevant height range and overshoot $$U(15.9\text{ m})$$ by 4-7 % |
 | Power-law exponent | **ground to 60m**: 0.158<br>**whole profile**: 0.201 |
 | Note | derived during scoping, not published by AIJ |
-
-{% include nomenclature.md %}
 
 ## Known data issues
 

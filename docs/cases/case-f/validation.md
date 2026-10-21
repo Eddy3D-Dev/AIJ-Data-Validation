@@ -97,8 +97,6 @@ Quantity: the thermistor\'s (tunnel) and the cup anemometer\'s (field) mean spee
 | Tunnel\'s SSE column, the opposite wind, against the solved NNW field (compass control) | +0.102 | 0.010 | 0.385 | +0.413 | 0.000 | 13 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 </details>
 
 - Reproduce: Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseFContainerE2E (EDDY3D\_AIJ\_F\_DIRECTIONS=NNW, the default) (Shinjuku district, 1:800, wind from NNW, frame agl; OpenFOAM 12 realizable k-ε, numerics level 3, 2000 iterations, 2,143,488 cells, solved 2026-10-18); figures validation/plot\_cases\_fm\_openfoam.py
@@ -150,7 +148,5 @@ The modelled $$\lvert\mathbf{U}\rvert$$ is the lower bound. $$\sqrt{\lvert\mathb
 | 1 | OpenFOAM 12 · literal | Eddy3D | **0.846** | **0.547** | **0.696** | **0.963** | **+0.895** | **0.807** | 100 % |
 | 2 | OpenFOAM 12 · agl | Eddy3D | 0.624 | 0.431 | 0.527 | 0.934 | +0.886 | 0.787 | 100 % |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. *Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).
