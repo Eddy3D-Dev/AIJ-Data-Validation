@@ -3,7 +3,7 @@
 #
 #   docker run --rm -v "$PWD:/w" -w /w "$(cat scripts/BUILD_IMAGE)" bash scripts/build_all.sh
 #
-# The image is Python 3.12.12 pinned by digest (scripts/BUILD_IMAGE); requirements.lock pins every package by hash.
+# The image is Python 3.12.12 pinned by digest (scripts/BUILD_IMAGE); uv.lock pins every package by hash.
 # Run from a checkout of any release tag, the outputs are byte-identical to what that tag committed; CI runs exactly
 # this and fails on any difference. Outputs: clean/ (the cleaned tables), validation/figures/ (the figures and
 # geometry renders, drawn from the snapshots in validation/results/), and docs/ (the API, the generated pages, and a 1600 px web copy of every figure under docs/assets/web/).
@@ -15,19 +15,22 @@ set -euo pipefail
 # two layouts, a pixel apart, from run to run on the same machine, and a build that is a pure function must not.
 export PYTHONHASHSEED=0 PYTHONIOENCODING=utf-8 PYTHONDONTWRITEBYTECODE=1 MPLBACKEND=Agg OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
 
-pip install --quiet --disable-pip-version-check --root-user-action=ignore --no-deps --require-hashes -r requirements.lock
+# uv builds the one environment from uv.lock (pyproject.toml lists the direct pins), outside the checkout so the tree stays clean.
+export UV_PROJECT_ENVIRONMENT=/opt/venv UV_FROZEN=1 UV_PYTHON_DOWNLOADS=never UV_LINK_MODE=copy UV_NO_CACHE=1
+pip install --quiet --disable-pip-version-check --root-user-action=ignore uv==0.11.32
+uv sync --quiet
 
-python clean/build.py
-(cd validation && python -m unittest test_layout)   # the measurement groups: every point in one group, the sizes the tunnel and the data paper give
-(cd validation && python render_geometry.py && for f in plot_*.py; do python "$f"; done)
-(cd validation && python plotstyle.py)   # the palette checks, and every PNG under validation/figures at 1200 dpi
-python scripts/build_api.py
-python validation/score_submissions.py --self-test   # the scorer of submissions re-scores every served run from its pairs: 1e-9
-python scripts/check_geometry.py   # every served and cleaned STL, parsed again from the files: closed, consistently wound, outward bodies
-python scripts/test_geometry.py
-python scripts/test_citation.py
-python scripts/check_citation.py --self-test
-python scripts/check_citation.py
-python scripts/mathtext.py --self-test   # plain-text math -> LaTeX: the rules that the generator and the checker share
-python scripts/check_markdown.py --self-test
-python scripts/check_markdown.py
+uv run python clean/build.py
+(cd validation && uv run python -m unittest test_layout)   # the measurement groups: every point in one group, the sizes the tunnel and the data paper give
+(cd validation && uv run python render_geometry.py && for f in plot_*.py; do uv run python "$f"; done)
+(cd validation && uv run python plotstyle.py)   # the palette checks, and every PNG under validation/figures at 1200 dpi
+uv run python scripts/build_api.py
+uv run python validation/score_submissions.py --self-test   # the scorer of submissions re-scores every served run from its pairs: 1e-9
+uv run python scripts/check_geometry.py   # every served and cleaned STL, parsed again from the files: closed, consistently wound, outward bodies
+uv run python scripts/test_geometry.py
+uv run python scripts/test_citation.py
+uv run python scripts/check_citation.py --self-test
+uv run python scripts/check_citation.py
+uv run python scripts/mathtext.py --self-test   # plain-text math -> LaTeX: the rules that the generator and the checker share
+uv run python scripts/check_markdown.py --self-test
+uv run python scripts/check_markdown.py
