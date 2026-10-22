@@ -1,7 +1,7 @@
 {
  "$schema": "https://aij.eddy3d.com/api/schemas/submission.schema.json",
  "schema_version": "2.5.0",
- "data_version": "5f6aed75699e744e5e0a2dcaba19b00cc97d31c89f217d3e5d9f136377a4bf6e",
+ "data_version": "a0288de21f377e4a5c9d21f1ae0c75ea99f881571013116d738a451d76e0205c",
  "license": "CC-BY-4.0",
  "slug": "eddy3d-of12-nutcap-lifted",
  "submission": {
@@ -11,18 +11,18 @@
   "author": "Sustainable Urban Systems Lab",
   "licence": "CC-BY-4.0",
   "contact": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions",
-  "inlet": "Case A, H, K, C, F, G (conifer crown) and M, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved)",
+  "inlet": "Case A, H, K, C, F, G (conifer crown), D (wind direction 0 only) and M, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved)",
   "mesh": "snappyHexMesh, 1:100 scale, the served runs' mesh and numerics level 3",
   "turbulence_model": "realizable k-epsilon, nutMaxCoeff 1e8",
   "compute": "3000 iterations, steady, 5-6 ranks (Case A on an Apple M-series laptop, B and H on PACE Phoenix)",
   "units": "normalised",
-  "notes": "Case G is the conifer crown of the drag sweep, where lifting the cap makes the result worse (a worse score, submitted all the same). Case C (all nine configurations, scalar speed sampled from the solved fields of the ICE re-solves), Cases F (wind from NNW) and M (WD 180, Sct 0.5) are the Eddy3D fixtures re-solved by another session on PACE ICE with the same cap change, scored here from their probe files. Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the Sct = 0.5 species. Case B's baseline is therefore the measured-inlet submission, not the served run."
+  "notes": "Case D is the 0 degree heading only (the fixture stopped at its mirrored-plane probe before the other headings; PACE ICE job 6465404). Case G is the conifer crown of the drag sweep, where lifting the cap makes the result worse (a worse score, submitted all the same). Case C (all nine configurations, scalar speed sampled from the solved fields of the ICE re-solves), Cases F (wind from NNW) and M (WD 180, Sct 0.5) are the Eddy3D fixtures re-solved by another session on PACE ICE with the same cap change, scored here from their probe files. Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the Sct = 0.5 species. Case B's baseline is therefore the measured-inlet submission, not the served run."
  },
  "example": false,
  "provenance": "self-reported inputs (the values in submissions/<slug>/cases/<id>/probes.csv), scored by this repository's build with validation/score_submissions.py; not an Eddy3D result and not checked by the maintainers beyond the scoring",
  "scored_with": {
   "script": "validation/score_submissions.py",
-  "release": "3.8.0",
+  "release": "3.9.0",
   "conventions": "velocities and the speed over U_ref, k over U_ref^2 (Cases E, F and G publish ratios already); U, V, W, |U| and the thermistor bracket scored as signed velocities (FAC2's ratio keeps the sign; hit rate D = 0.25, W = 0.05); k by the plain definitions (D = 0.25 only); a thermistor, cup or sonic reading (a mean scalar speed) scored against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar), the two ends of its bracket; c* = C/c0 with one detection limit per case, 1e-3 of the largest measured value; theta = (T_floor - T)/(T_floor - T_H) scored like a positive velocity. The same conventions score the served Eddy3D results (docs/validation/method.md).",
   "metric_meaning": {
    "Count": "number of measured points scored",
@@ -1604,6 +1604,222 @@
     }
    ],
    "U_ref_m_s": 3.654,
+   "units_given": "normalised"
+  },
+  {
+   "case": "D",
+   "title": "Case D — high-rise among city blocks",
+   "status": "scored",
+   "headline": [
+    {
+     "label": "wd0: |U|",
+     "score": "wd0/vs.vector",
+     "Count": 66,
+     "R": 0.805149589168162,
+     "Fac2": 0.6818181818181818,
+     "Fb": 0.35458674526616735,
+     "HitRate": 0.4090909090909091,
+     "coverage": {
+      "scored": 66,
+      "measured": 66
+     }
+    },
+    {
+     "label": "wd0: k",
+     "score": "wd0/k",
+     "Count": 33,
+     "R": -0.1940603006518269,
+     "Fac2": 0.2727272727272727,
+     "Fb": 0.45228909553936664,
+     "HitRate": 0.09090909090909091,
+     "coverage": {
+      "scored": 33,
+      "measured": 33
+     }
+    },
+    {
+     "label": "wd0: √(|U|²+2k)",
+     "score": "wd0/vs.scalar",
+     "Count": 66,
+     "R": 0.7892323572751982,
+     "Fac2": 0.7878787878787878,
+     "Fb": 0.20161155125091498,
+     "HitRate": 0.5303030303030303,
+     "coverage": {
+      "scored": 66,
+      "measured": 66
+     }
+    }
+   ],
+   "values": {
+    "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/D.csv?v=c9c91fdd77a2",
+    "path": "submissions/eddy3d-of12-nutcap-lifted/D.csv",
+    "media_type": "text/csv",
+    "bytes": 5954,
+    "sha256": "c9c91fdd77a2a204a69a36773a0037ad92f47ec0cbed601bb7521bfe6531c040"
+   },
+   "scores": {
+    "wd0/speed": {
+     "Count": 33,
+     "MeanObserved": 0.29685489256671577,
+     "MeanPredicted": 0.2778832171337435,
+     "Fb": 0.06601850516876254,
+     "Nmse": 0.09316112602595052,
+     "Nad": 0.12339624835122368,
+     "Fac2": 0.8181818181818182,
+     "HitRate": 0.48484848484848486,
+     "Mg": 1.2317780869187371,
+     "Vg": 1.5080079567757387,
+     "GeometricPairs": 33,
+     "R": 0.8695153872216116
+    },
+    "wd0/k": {
+     "Count": 33,
+     "MeanObserved": 0.02363564413425909,
+     "MeanPredicted": 0.014917141795020702,
+     "Fb": 0.45228909553936664,
+     "Nmse": 1.5173847132189173,
+     "Nad": 0.4557261216991966,
+     "Fac2": 0.2727272727272727,
+     "HitRate": 0.09090909090909091,
+     "Mg": 1.8925923848243422,
+     "Vg": 3.951512014866922,
+     "GeometricPairs": 33,
+     "R": -0.1940603006518269
+    },
+    "wd0/vs.scalar": {
+     "Count": 66,
+     "MeanObserved": 0.39845522898154473,
+     "MeanPredicted": 0.3254785253724417,
+     "Fb": 0.20161155125091498,
+     "Nmse": 0.13142112485012106,
+     "Nad": 0.13821488237409124,
+     "Fac2": 0.7878787878787878,
+     "HitRate": 0.5303030303030303,
+     "Mg": 1.3540129199733182,
+     "Vg": 1.3065607392763514,
+     "GeometricPairs": 66,
+     "R": 0.7892323572751982
+    },
+    "wd0/vs.vector": {
+     "Count": 66,
+     "MeanObserved": 0.39845522898154473,
+     "MeanPredicted": 0.2784452586010481,
+     "Fb": 0.35458674526616735,
+     "Nmse": 0.223670355434998,
+     "Nad": 0.19072382195467077,
+     "Fac2": 0.6818181818181818,
+     "HitRate": 0.4090909090909091,
+     "Mg": 1.717825244867089,
+     "Vg": 1.8729034628560772,
+     "GeometricPairs": 66,
+     "R": 0.805149589168162
+    }
+   },
+   "coverage": {
+    "wd0/speed": {
+     "scored": 33,
+     "measured": 33
+    },
+    "wd0/k": {
+     "scored": 33,
+     "measured": 33
+    },
+    "wd0/vs.scalar": {
+     "scored": 66,
+     "measured": 66
+    },
+    "wd0/vs.vector": {
+     "scored": 66,
+     "measured": 66
+    }
+   },
+   "groups": [
+    {
+     "key": "wd0",
+     "group": {
+      "wind_direction_deg": 0.0
+     },
+     "points_measured": 111,
+     "scores": {
+      "speed": {
+       "Count": 33,
+       "MeanObserved": 0.29685489256671577,
+       "MeanPredicted": 0.2778832171337435,
+       "Fb": 0.06601850516876254,
+       "Nmse": 0.09316112602595052,
+       "Nad": 0.12339624835122368,
+       "Fac2": 0.8181818181818182,
+       "HitRate": 0.48484848484848486,
+       "Mg": 1.2317780869187371,
+       "Vg": 1.5080079567757387,
+       "GeometricPairs": 33,
+       "R": 0.8695153872216116
+      },
+      "k": {
+       "Count": 33,
+       "MeanObserved": 0.02363564413425909,
+       "MeanPredicted": 0.014917141795020702,
+       "Fb": 0.45228909553936664,
+       "Nmse": 1.5173847132189173,
+       "Nad": 0.4557261216991966,
+       "Fac2": 0.2727272727272727,
+       "HitRate": 0.09090909090909091,
+       "Mg": 1.8925923848243422,
+       "Vg": 3.951512014866922,
+       "GeometricPairs": 33,
+       "R": -0.1940603006518269
+      },
+      "vs.scalar": {
+       "Count": 66,
+       "MeanObserved": 0.39845522898154473,
+       "MeanPredicted": 0.3254785253724417,
+       "Fb": 0.20161155125091498,
+       "Nmse": 0.13142112485012106,
+       "Nad": 0.13821488237409124,
+       "Fac2": 0.7878787878787878,
+       "HitRate": 0.5303030303030303,
+       "Mg": 1.3540129199733182,
+       "Vg": 1.3065607392763514,
+       "GeometricPairs": 66,
+       "R": 0.7892323572751982
+      },
+      "vs.vector": {
+       "Count": 66,
+       "MeanObserved": 0.39845522898154473,
+       "MeanPredicted": 0.2784452586010481,
+       "Fb": 0.35458674526616735,
+       "Nmse": 0.223670355434998,
+       "Nad": 0.19072382195467077,
+       "Fac2": 0.6818181818181818,
+       "HitRate": 0.4090909090909091,
+       "Mg": 1.717825244867089,
+       "Vg": 1.8729034628560772,
+       "GeometricPairs": 66,
+       "R": 0.805149589168162
+      }
+     },
+     "coverage": {
+      "speed": {
+       "scored": 33,
+       "measured": 33
+      },
+      "k": {
+       "scored": 33,
+       "measured": 33
+      },
+      "vs.scalar": {
+       "scored": 66,
+       "measured": 66
+      },
+      "vs.vector": {
+       "scored": 66,
+       "measured": 66
+      }
+     }
+    }
+   ],
+   "U_ref_m_s": 6.65,
    "units_given": "normalised"
   },
   {

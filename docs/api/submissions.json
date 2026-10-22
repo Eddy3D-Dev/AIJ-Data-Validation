@@ -1,7 +1,7 @@
 {
  "$schema": "https://aij.eddy3d.com/api/schemas/submissions.schema.json",
  "schema_version": "2.5.0",
- "data_version": "5f6aed75699e744e5e0a2dcaba19b00cc97d31c89f217d3e5d9f136377a4bf6e",
+ "data_version": "a0288de21f377e4a5c9d21f1ae0c75ea99f881571013116d738a451d76e0205c",
  "license": "CC-BY-4.0",
  "description": "Every solver submitted under submissions/ in the repository, scored by this build from the values it gave at the published points (cases/{id}/probes.csv). The inputs are self-reported; the scoring is this repository's, the same metrics and conventions as Eddy3D's results in validation.json. A submission scores the points it gave: `coverage` says how many of the measured points that is.",
  "how_to_submit": "https://aij.eddy3d.com/byos/",
@@ -578,7 +578,7 @@
    "author": "Sustainable Urban Systems Lab",
    "url": "https://openfoam.org",
    "example": false,
-   "inlet": "Case A, H, K, C, F, G (conifer crown) and M, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved)",
+   "inlet": "Case A, H, K, C, F, G (conifer crown), D (wind direction 0 only) and M, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved)",
    "turbulence_model": "realizable k-epsilon, nutMaxCoeff 1e8",
    "ml_description": null,
    "cases": [
@@ -986,6 +986,59 @@
       "media_type": "text/csv",
       "bytes": 85254,
       "sha256": "c4b32ff802bec53d364e855772058af9c4b9b9d53a4405ab3176ae31c981dbf0"
+     }
+    },
+    {
+     "case": "D",
+     "title": "Case D — high-rise among city blocks",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "wd0: |U|",
+       "score": "wd0/vs.vector",
+       "Count": 66,
+       "R": 0.805149589168162,
+       "Fac2": 0.6818181818181818,
+       "Fb": 0.35458674526616735,
+       "HitRate": 0.4090909090909091,
+       "coverage": {
+        "scored": 66,
+        "measured": 66
+       }
+      },
+      {
+       "label": "wd0: k",
+       "score": "wd0/k",
+       "Count": 33,
+       "R": -0.1940603006518269,
+       "Fac2": 0.2727272727272727,
+       "Fb": 0.45228909553936664,
+       "HitRate": 0.09090909090909091,
+       "coverage": {
+        "scored": 33,
+        "measured": 33
+       }
+      },
+      {
+       "label": "wd0: √(|U|²+2k)",
+       "score": "wd0/vs.scalar",
+       "Count": 66,
+       "R": 0.7892323572751982,
+       "Fac2": 0.7878787878787878,
+       "Fb": 0.20161155125091498,
+       "HitRate": 0.5303030303030303,
+       "coverage": {
+        "scored": 66,
+        "measured": 66
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/D.csv?v=c9c91fdd77a2",
+      "path": "submissions/eddy3d-of12-nutcap-lifted/D.csv",
+      "media_type": "text/csv",
+      "bytes": 5954,
+      "sha256": "c9c91fdd77a2a204a69a36773a0037ad92f47ec0cbed601bb7521bfe6531c040"
      }
     },
     {

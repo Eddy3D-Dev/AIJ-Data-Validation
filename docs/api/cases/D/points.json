@@ -1,7 +1,7 @@
 {
  "$schema": "https://aij.eddy3d.com/api/schemas/points.schema.json",
  "schema_version": "2.5.0",
- "data_version": "5f6aed75699e744e5e0a2dcaba19b00cc97d31c89f217d3e5d9f136377a4bf6e",
+ "data_version": "a0288de21f377e4a5c9d21f1ae0c75ea99f881571013116d738a451d76e0205c",
  "license": "CC-BY-4.0",
  "case": "D",
  "title": "Case D — high-rise among city blocks",

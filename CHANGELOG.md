@@ -15,6 +15,14 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [3.9.0] - 2026-10-22
+
+### Added
+
+- Case D (wind direction 0° only) in `submissions/eddy3d-of12-nutcap-lifted`, from a re-solve of the Eddy3D fixture on PACE ICE with the cap lifted:
+  the thermistor's scalar-speed hit rate moves 0.394 to 0.530, its bias 0.362 to 0.202. The 22.5° and 45° headings did not run (the fixture
+  stopped at an identifier it rejects). Case E's re-solve timed out after 240 minutes and Case L's probe tables were not kept by the job.
+
 ## [3.8.0] - 2026-10-21
 
 ### Added

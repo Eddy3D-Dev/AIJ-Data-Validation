@@ -1,0 +1,397 @@
+{
+ "$schema": "https://aij.eddy3d.com/api/3.9.0/schemas/case.schema.json",
+ "schema_version": "2.5.0",
+ "data_version": "a0288de21f377e4a5c9d21f1ae0c75ea99f881571013116d738a451d76e0205c",
+ "license": "CC-BY-4.0",
+ "id": "B",
+ "slug": "case-b",
+ "title": "Case B — 1:4:4 slab",
+ "summary": "Isolated 1:4:4 slab, velocity field (split-fibre hot wire).",
+ "configuration": {
+  "building": "1:4:4 (depth : width : height) slab",
+  "depth_m": 0.05,
+  "width_m": 0.2,
+  "H_m": 0.2,
+  "Re_H": 72000,
+  "U_H_m_s": 5.133,
+  "wind_directions_deg": [
+   0
+  ],
+  "measurement_planes": [
+   "vertical centre plane y/H = 0",
+   "horizontal z/H = 1/16"
+  ],
+  "instrument": "hot-wire anemometer, split-fibre probe, 100 Hz, 60 s per point",
+  "tunnel": "Niigata Institute of Technology, Kashiwazaki",
+  "scale_note": "model scale; Eddy3D solves it at 1:100 (H = 20 m) with the tunnel velocities"
+ },
+ "configurations": [
+  {
+   "config": "default",
+   "wind_direction_deg": 0.0,
+   "points": 224
+  }
+ ],
+ "quantities": [
+  "U",
+  "V",
+  "W",
+  "uu",
+  "vv",
+  "ww",
+  "k"
+ ],
+ "units": {
+  "length": "m (model scale; converted from the published millimetres)",
+  "velocity": "m/s",
+  "variance": "m^2/s^2",
+  "k": "m^2/s^2"
+ },
+ "frame": {
+  "origin": "building centre on the ground plane",
+  "x": "+x streamwise (the wind at WD = 0 blows toward +x); slab spans x in [-0.025, 0.025]",
+  "y": "+y lateral; slab spans y in [-0.10, 0.10]; points published on the y <= 0 half by the tunnel's symmetry convention",
+  "z": "+z up from the ground; roof at z = 0.20",
+  "lateral_sign_applied": -1,
+  "coordinate_scale_applied": 0.001
+ },
+ "inflow_fit": {
+  "method": "log law, kappa = 0.41, least squares over z = 0.02 ... 2H on the case's own approach-flow file",
+  "u_star_m_s": 0.399,
+  "z0_mm": 0.882,
+  "U_H_measured_m_s": 5.133,
+  "log_law_error_at_H": "+2.9 %"
+ },
+ "approach_flow": {
+  "source": "raw/cases/case-b/AF_caseB.csv",
+  "units": {
+   "z": "m",
+   "U": "m/s",
+   "k": "m^2/s^2"
+  },
+  "rows": [
+   {
+    "z": 0.005,
+    "U": 2.865,
+    "k": 0.376
+   },
+   {
+    "z": 0.01,
+    "U": 3.059,
+    "k": 0.41
+   },
+   {
+    "z": 0.02,
+    "U": 3.28,
+    "k": 0.428
+   },
+   {
+    "z": 0.03,
+    "U": 3.427,
+    "k": 0.486
+   },
+   {
+    "z": 0.05,
+    "U": 3.784,
+    "k": 0.537
+   },
+   {
+    "z": 0.1,
+    "U": 4.381,
+    "k": 0.624
+   },
+   {
+    "z": 0.2,
+    "U": 5.133,
+    "k": 0.556
+   },
+   {
+    "z": 0.3,
+    "U": 5.724,
+    "k": 0.512
+   },
+   {
+    "z": 0.4,
+    "U": 6.191,
+    "k": 0.45
+   },
+   {
+    "z": 0.6,
+    "U": 7.004,
+    "k": 0.378
+   },
+   {
+    "z": 0.8,
+    "U": 7.433,
+    "k": 0.274
+   },
+   {
+    "z": 1.0,
+    "U": 7.84,
+    "k": 0.106
+   }
+  ],
+  "csv": {
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/B/approach_flow.csv?v=126a620f5698",
+   "path": "cases/B/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 200,
+   "sha256": "126a620f56983e720ad25d3678369754477837fcc8d04bfdba2c5eaffc93f200"
+  }
+ },
+ "inflow": {
+  "benchmark_data": {
+   "approach_flow_csv": {
+    "url": "https://aij.eddy3d.com/api/3.9.0/cases/B/approach_flow.csv?v=126a620f5698",
+    "path": "cases/B/approach_flow.csv",
+    "media_type": "text/csv",
+    "bytes": 200,
+    "sha256": "126a620f56983e720ad25d3678369754477837fcc8d04bfdba2c5eaffc93f200"
+   },
+   "columns": [
+    "z",
+    "U",
+    "k"
+   ],
+   "units": {
+    "z": "m",
+    "U": "m/s",
+    "k": "m^2/s^2"
+   },
+   "rows": 12,
+   "fit": {
+    "method": "log law, kappa = 0.41, least squares over z = 0.02 ... 2H on the case's own approach-flow file",
+    "u_star_m_s": 0.399,
+    "z0_mm": 0.882,
+    "U_H_measured_m_s": 5.133,
+    "log_law_error_at_H": "+2.9 %"
+   },
+   "note": "the measured profile and the fit of it are the benchmark's data as cleaned here; everything under `recommended` is a choice"
+  },
+  "recommended": {
+   "status": "RECOMMENDED by this repository (not part of the benchmark): a log-law inlet fitted to the case's own approach-flow file, with k and epsilon from the standard neutral ABL relations. Any inlet may be submitted; say which in submission.yaml",
+   "profile": "U(z) = u*/kappa ln((z + z0)/z0); k = u*^2 / sqrt(Cmu); epsilon = u*^3 / (kappa (z + z0))",
+   "u_star_m_s": 0.399,
+   "z0_m": 0.000882,
+   "kappa": 0.41,
+   "Cmu": 0.09,
+   "k_m2_s2": 0.5306700000000001,
+   "fit": "log law, kappa = 0.41, least squares over z = 0.02 ... 2H on the case's own approach-flow file",
+   "U_ref_m_s": 5.133,
+   "z_ref_m": 0.2,
+   "openfoam": "atmBoundaryLayerInletVelocity / atmBoundaryLayerInletK / atmBoundaryLayerInletEpsilon with Uref, Zref, z0 and d = 0; nutkAtmRoughWallFunction with the same z0 on the ground: cases/{id}/inflow_openfoam.txt holds them"
+  },
+  "flow_direction": {
+   "convention": "along_x",
+   "meaning": "+x is along the wind at WD = 0: flowDir (1 0 0); another WD rotates it about +z by the case's rotation sense (frame.wind_direction_rotation)",
+   "wind_directions_deg": [
+    0.0
+   ]
+  },
+  "eddy3d_runs": [
+   {
+    "run_id": "B.openfoam12-realizableKE",
+    "engine": "openfoam12-realizableKE",
+    "scale": 100
+   },
+   {
+    "run_id": "B.openlb",
+    "engine": "openlb",
+    "inflow": "log law U_H = 5.133 m/s at 20 m, z0 = 0.0882 m (the OpenFOAM fixtures' fit of AF_caseB.csv)",
+    "scale": 100,
+    "latticeCells": 2628900,
+    "cellsPerHeight": 12.5
+   },
+   {
+    "run_id": "B.fluidx3d",
+    "engine": "fluidx3d",
+    "inflow": {
+     "Uh": 5.133,
+     "z0": 0.000882,
+     "uStar": 0.38801186074506355,
+     "fit": "AF_caseB.csv, z = 0.02-0.40 m (7 points): u* = 0.3991 m/s, z0 = 0.882 mm; profile anchored through the measured U_H"
+    },
+    "scale": "model (1:1), H = 0.2 m, identity frame: U=U_x, V=U_y, W=U_z"
+   },
+   {
+    "run_id": "B.ml-surrogate",
+    "engine": "ml-surrogate",
+    "scale": 144
+   }
+  ],
+  "domain": "the extents, blockage and cell sizes of Eddy3D's domains are not in its snapshots and are not stated here; mesh.cells and the scale are, where the snapshot has them"
+ },
+ "points": {
+  "url": "https://aij.eddy3d.com/api/3.9.0/cases/B/points.json",
+  "csv": {
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/B/points.csv?v=dec97c21217a",
+   "path": "cases/B/points.csv",
+   "media_type": "text/csv",
+   "bytes": 22093,
+   "sha256": "dec97c21217ae3886005264dca7096205c23bf80fb07320c80f66e238716f390"
+  },
+  "source": "clean/cases/B/points.csv",
+  "rows": 224,
+  "distinct_points": 224,
+  "columns": [
+   "point_id",
+   "config",
+   "instrument",
+   "wind_direction_deg",
+   "x",
+   "y",
+   "z",
+   "U",
+   "V",
+   "W",
+   "uu",
+   "vv",
+   "ww",
+   "k",
+   "campaign"
+  ],
+  "counts": {
+   "config": {
+    "default": 224
+   },
+   "instrument": {
+    "split_fibre": 224
+   },
+   "wind_direction_deg": {
+    "0.0": 224
+   }
+  },
+  "nulls": {},
+  "bbox_min": [
+   -0.075,
+   -0.35,
+   0.005
+  ],
+  "bbox_max": [
+   0.55,
+   0.0,
+   0.35
+  ]
+ },
+ "probes": {
+  "csv": {
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/B/probes.csv?v=025b8113dcde",
+   "path": "cases/B/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 14325,
+   "sha256": "025b8113dcde572a3fac4c99296bcca965642290ca62e7ba0bd94b0e74dd5d9e"
+  },
+  "rows": 224,
+  "columns": [
+   "point_id",
+   "config",
+   "campaign",
+   "instrument",
+   "run",
+   "wind_direction_deg",
+   "x",
+   "y",
+   "z",
+   "scored_as"
+  ],
+  "columns_meaning": "the key columns of a scored file (point_id with config, campaign, instrument, run and wind_direction_deg as the case has them), x, y, z in m (case frame), and scored_as: the families the row is scored in (vector, k, thermistor_bracket, concentration, theta, joined by +)"
+ },
+ "scoring": {
+  "U_ref_m_s": 5.133,
+  "U_ref_meaning": "U_H, the approach speed at the slab height H = 0.20 m",
+  "theta": null,
+  "scored_as": {
+   "vector": "U, V, W and the speed |U| against the split-fibre, LDV or hot-wire components (velocity.U, velocity.V, velocity.W, speed)",
+   "k": "the turbulent kinetic energy (k)",
+   "thermistor_bracket": "a mean scalar speed (thermistor, cup or sonic anemometer) against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar)",
+   "concentration": "the dimensionless concentration c* = C/c0 (cstar)",
+   "theta": "the floor-referenced temperature fraction (theta)"
+  },
+  "value_columns": [
+   "U",
+   "V",
+   "W",
+   "speed",
+   "k",
+   "cstar",
+   "theta",
+   "T"
+  ],
+  "key_columns": [
+   "config",
+   "campaign",
+   "instrument",
+   "run",
+   "wind_direction_deg",
+   "point_id"
+  ],
+  "conventions": "velocities and the speed over U_ref, k over U_ref^2 (Cases E, F and G publish ratios already); U, V, W, |U| and the thermistor bracket scored as signed velocities (FAC2's ratio keeps the sign; hit rate D = 0.25, W = 0.05); k by the plain definitions (D = 0.25 only); a thermistor, cup or sonic reading (a mean scalar speed) scored against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar), the two ends of its bracket; c* = C/c0 with one detection limit per case, 1e-3 of the largest measured value; theta = (T_floor - T)/(T_floor - T_H) scored like a positive velocity. The same conventions score the served Eddy3D results (docs/validation/method.md).",
+  "tool": "uv run python validation/score_submissions.py <folder>, from a checkout of the repository (pyproject.toml)",
+  "metric_meaning": {
+   "Count": "number of measured points scored",
+   "MeanObserved": "mean of the measured, normalised quantity",
+   "MeanPredicted": "mean of the modelled, normalised quantity",
+   "Fb": "fractional bias, 2 (mean_obs - mean_pred) / (mean_obs + mean_pred); positive = model low",
+   "Nmse": "normalised mean square error",
+   "Nad": "normalised absolute difference",
+   "Fac2": "fraction of points within a factor of two (harsh near zero for sign-changing V and W)",
+   "HitRate": "fraction of points within D = 0.25 relative or W = 0.05 U_H absolute",
+   "Mg": "geometric mean bias",
+   "Vg": "geometric variance",
+   "GeometricPairs": "pairs with both values positive (used for Mg/Vg)",
+   "R": "Pearson correlation coefficient",
+   "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive; Fb, Nmse and Nad of a signed velocity component of Case H or I whose observed and predicted means are not both positive)"
+  }
+ },
+ "geometry": {
+  "url": "https://aij.eddy3d.com/api/3.9.0/cases/B/geometry.json",
+  "files": [
+   {
+    "configuration": "default",
+    "url": "https://aij.eddy3d.com/api/3.9.0/cases/B/geometry.stl?v=e6de70eeb17d",
+    "triangles": 12,
+    "watertight": true
+   }
+  ]
+ },
+ "validation": {
+  "url": "https://aij.eddy3d.com/api/3.9.0/cases/B/validation.json",
+  "status": "scored",
+  "engines": {
+   "openfoam12-realizableKE": "scored",
+   "openlb": "scored",
+   "fluidx3d": "scored",
+   "ml-surrogate": "scored"
+  }
+ },
+ "known_issues": [
+  "The published coordinates are MILLIMETRES (x[mm]) while velocities are m/s. The API serves metres (coordinate_scale_applied = 0.001). Read as metres, every probe lands 1000x too far out.",
+  "The published lateral velocity V is positive toward -y (V = +3.630 m/s at (-0.025, -0.110, 0.013), just outside the y < 0 side face where the flow must deflect toward -y). The API multiplies V by -1 (lateral_sign_applied = -1) so that V is positive toward +y as in Case A. Scored without this, Case B's V comes out at R = -0.910 against R = +0.959 for U on the same points.",
+  "The RANS solution is symmetric, so model V = 0 on the centre plane while the tunnel measures small non-zero values there."
+ ],
+ "people": {
+  "data_collectors": [
+   "Yoshihide Tominaga (Niigata Institute of Technology)"
+  ],
+  "editors_distributors": [
+   "Hideki Kikumoto (The University of Tokyo)",
+   "Tsubasa Okaze (Institute of Science Tokyo)"
+  ],
+  "contact": "Yoshihide Tominaga <tominaga@abe.niit.ac.jp>"
+ },
+ "doi": "10.5281/zenodo.15401455",
+ "doi_note": null,
+ "citation_requested": "Miyazaki, T., Tominaga, Y. (2003). Wind tunnel experiment on flow field around a building model with a scale ratio of 4:4:1 placed within the surface boundary layer. Proc. Annual Meeting of Hokuriku Chapter, AIJ, 201-204 (in Japanese). https://www.aij.or.jp/paper/detail.html?productId=313933",
+ "citation": {
+  "apa": "Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case B (144): Wind Tunnel Experiment for Flow around a 1:4:4 Shape Building Model [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15401455",
+  "bibtex": "@misc{aijuwe_case_b,\n  author    = \"Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa\",\n  title     = \"{AIJ UWE Benchmark Dataset -- Case B (144): Wind Tunnel Experiment for Flow around a 1:4:4 Shape Building Model}\",\n  year      = \"2025\",\n  publisher = \"Zenodo\",\n  doi       = \"10.5281/zenodo.15401455\",\n  url       = \"https://doi.org/10.5281/zenodo.15401455\",\n  note      = \"Data set\"\n}"
+ },
+ "files_in_repository": {
+  "folder": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/tree/main/raw/cases/case-b",
+  "reference": "raw/cases/case-b/RS_caseB.csv",
+  "approach_flow": "raw/cases/case-b/AF_caseB.csv",
+  "readme": "raw/cases/case-b/readme_caseB.md"
+ },
+ "render": "https://aij.eddy3d.com/assets/geometry/case-b.png",
+ "page": "https://aij.eddy3d.com/cases/case-b/"
+}

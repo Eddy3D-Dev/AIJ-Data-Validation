@@ -1,0 +1,576 @@
+{
+ "$schema": "https://aij.eddy3d.com/api/3.9.0/schemas/geometry-index.schema.json",
+ "schema_version": "2.5.0",
+ "data_version": "a0288de21f377e4a5c9d21f1ae0c75ea99f881571013116d738a451d76e0205c",
+ "license": "CC-BY-4.0",
+ "description": "Every cleaned STL, one entry per case and configuration. Each file is in its own case's frame and units — points.json of the same case lives in that frame — so they are not one scene: overlaid, the cases would stack at the origin, and Cases E, F, G and M are full scale while the others are model scale. geometry.zip holds the same files under archive_name.",
+ "archive": {
+  "url": "https://aij.eddy3d.com/api/3.9.0/geometry.zip?v=9ed663e1d97c",
+  "path": "geometry.zip",
+  "media_type": "application/zip",
+  "bytes": 3091670,
+  "sha256": "9ed663e1d97cd167b478dd1ec8cb96689362b39b4efecb95cdd00b9b3dbcae40"
+ },
+ "files": [
+  {
+   "case": "A",
+   "configuration": "default",
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/A/geometry.stl?v=89acdfbbff84",
+   "path": "cases/A/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1756,
+   "sha256": "89acdfbbff84039fd8ef98ca472cdb4953e63b01504740b0fc0b57259005ea12",
+   "archive_name": "AIJ_caseA_default.stl",
+   "units": "metres (model scale)",
+   "frame": {
+    "origin": "building centre on the ground plane",
+    "x": "+x streamwise (the wind at WD = 0 blows toward +x); building spans x in [-0.04, 0.04]",
+    "y": "+y lateral; building spans y in [-0.04, 0.04]; points published on the y <= 0 half by the tunnel's symmetry convention",
+    "z": "+z up from the ground; roof at z = 0.16"
+   },
+   "bbox_min": [
+    -0.04,
+    -0.04,
+    0.0
+   ],
+   "bbox_max": [
+    0.04,
+    0.04,
+    0.16
+   ],
+   "triangles": 12,
+   "watertight": true,
+   "bodies": 1,
+   "edges_boundary": 0,
+   "body_contacts": 0,
+   "inconsistent_triangles": 0,
+   "min_body_volume": 0.001024,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-a.png"
+  },
+  {
+   "case": "B",
+   "configuration": "default",
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/B/geometry.stl?v=e6de70eeb17d",
+   "path": "cases/B/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1738,
+   "sha256": "e6de70eeb17dfa4d7312223dc3dcc58e996e2573b37fb77d7820b52b7bca354b",
+   "archive_name": "AIJ_caseB_default.stl",
+   "units": "metres (model scale)",
+   "frame": {
+    "origin": "building centre on the ground plane",
+    "x": "+x streamwise (the wind at WD = 0 blows toward +x); slab spans x in [-0.025, 0.025]",
+    "y": "+y lateral; slab spans y in [-0.10, 0.10]; points published on the y <= 0 half by the tunnel's symmetry convention",
+    "z": "+z up from the ground; roof at z = 0.20"
+   },
+   "bbox_min": [
+    -0.025,
+    -0.1,
+    0.0
+   ],
+   "bbox_max": [
+    0.025,
+    0.1,
+    0.2
+   ],
+   "triangles": 12,
+   "watertight": true,
+   "bodies": 1,
+   "edges_boundary": 0,
+   "body_contacts": 0,
+   "inconsistent_triangles": 0,
+   "min_body_volume": 0.002,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-b.png"
+  },
+  {
+   "case": "C",
+   "configuration": "2D",
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/C/geometry.stl?v=b8c31c57c453",
+   "path": "cases/C/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 14576,
+   "sha256": "b8c31c57c453a6cfc97023ad274c1f36b5250bff6662c5fb1d97d7129e52f751",
+   "archive_name": "AIJ_caseC_2D.stl",
+   "units": "metres (model scale)",
+   "frame": {
+    "origin": "array centre on the ground plane (centre of the middle block)",
+    "x": "+x streamwise at WD = 0 (checked three ways on the data: y -> -y is a symmetry, the x <= -0.25 band is faster than x >= +0.25 in every configuration, and the regression slope of Vs is most negative within 0.8-4.3 deg of +x)",
+    "y": "+y lateral",
+    "z": "+z up; all points at z = 0.02"
+   },
+   "bbox_min": [
+    -0.5,
+    -0.5,
+    0.0
+   ],
+   "bbox_max": [
+    0.5,
+    0.5,
+    0.4
+   ],
+   "triangles": 108,
+   "watertight": true,
+   "bodies": 9,
+   "edges_boundary": 0,
+   "body_contacts": 0,
+   "inconsistent_triangles": 0,
+   "min_body_volume": 0.008,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-c-2d.png"
+  },
+  {
+   "case": "C",
+   "configuration": "0D",
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/C/geometry_0D.stl?v=0f08bcd4dd6b",
+   "path": "cases/C/geometry_0D.stl",
+   "media_type": "model/stl",
+   "bytes": 12961,
+   "sha256": "0f08bcd4dd6bd11414a66f1d8d4f80986864e80e72043019e855f04041d2db4a",
+   "archive_name": "AIJ_caseC_0D.stl",
+   "units": "metres (model scale)",
+   "frame": {
+    "origin": "array centre on the ground plane (centre of the middle block)",
+    "x": "+x streamwise at WD = 0 (checked three ways on the data: y -> -y is a symmetry, the x <= -0.25 band is faster than x >= +0.25 in every configuration, and the regression slope of Vs is most negative within 0.8-4.3 deg of +x)",
+    "y": "+y lateral",
+    "z": "+z up; all points at z = 0.02"
+   },
+   "bbox_min": [
+    -0.5,
+    -0.5,
+    0.0
+   ],
+   "bbox_max": [
+    0.5,
+    0.5,
+    0.2
+   ],
+   "triangles": 96,
+   "watertight": true,
+   "bodies": 8,
+   "edges_boundary": 0,
+   "body_contacts": 0,
+   "inconsistent_triangles": 0,
+   "min_body_volume": 0.008,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-c-0d.png"
+  },
+  {
+   "case": "C",
+   "configuration": "1D",
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/C/geometry_1D.stl?v=ac92c8ed427c",
+   "path": "cases/C/geometry_1D.stl",
+   "media_type": "model/stl",
+   "bytes": 14576,
+   "sha256": "ac92c8ed427cf8f16d5ce9839449dad4bc5cc96c6690e90586b7a7f703652d13",
+   "archive_name": "AIJ_caseC_1D.stl",
+   "units": "metres (model scale)",
+   "frame": {
+    "origin": "array centre on the ground plane (centre of the middle block)",
+    "x": "+x streamwise at WD = 0 (checked three ways on the data: y -> -y is a symmetry, the x <= -0.25 band is faster than x >= +0.25 in every configuration, and the regression slope of Vs is most negative within 0.8-4.3 deg of +x)",
+    "y": "+y lateral",
+    "z": "+z up; all points at z = 0.02"
+   },
+   "bbox_min": [
+    -0.5,
+    -0.5,
+    0.0
+   ],
+   "bbox_max": [
+    0.5,
+    0.5,
+    0.2
+   ],
+   "triangles": 108,
+   "watertight": true,
+   "bodies": 9,
+   "edges_boundary": 0,
+   "body_contacts": 0,
+   "inconsistent_triangles": 0,
+   "min_body_volume": 0.008,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-c-1d.png"
+  },
+  {
+   "case": "D",
+   "configuration": "default",
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/D/geometry.stl?v=531895531271",
+   "path": "cases/D/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 144878,
+   "sha256": "5318955312711ea5419c67d2a8fe6c28868f9bce02ce9e3661e9a79228d6f257",
+   "archive_name": "AIJ_caseD_default.stl",
+   "units": "metres (model scale)",
+   "frame": {
+    "origin": "tower centre on the ground plane (the array's bounding box is centred on it)",
+    "x": "+x streamwise at WD = 0 (the 0 deg thermistor field is exactly y-mirror symmetric; the split-fibre U is positive at the stream-like points and negative in the tower's windward horseshoe)",
+    "y": "+y lateral",
+    "z": "+z up; all points at z = 0.005"
+   },
+   "bbox_min": [
+    -0.7,
+    -0.675,
+    0.0
+   ],
+   "bbox_max": [
+    0.7,
+    0.675,
+    0.25
+   ],
+   "triangles": 996,
+   "watertight": true,
+   "bodies": 83,
+   "edges_boundary": 0,
+   "body_contacts": 0,
+   "inconsistent_triangles": 0,
+   "min_body_volume": 0.00025,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-d.png"
+  },
+  {
+   "case": "E",
+   "configuration": "ac",
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/E/geometry.stl?v=c29624fdae6d",
+   "path": "cases/E/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1210554,
+   "sha256": "c29624fdae6dbebecbb666ca1bf7b64a0c4c5f0d73cbf947d5c80d6427e96c06",
+   "archive_name": "AIJ_caseE_ac.stl",
+   "units": "metres (full scale)",
+   "frame": {
+    "origin": "centre of the reproduced area, ground plane",
+    "x": "+x EAST (full-scale metres)",
+    "y": "+y NORTH (compass rose in MP_caseE.png)",
+    "z": "+z up; all points at z = 2.0"
+   },
+   "bbox_min": [
+    -201.5,
+    -201.0,
+    0.0
+   ],
+   "bbox_max": [
+    203.0,
+    197.3,
+    60.0
+   ],
+   "triangles": 8432,
+   "watertight": true,
+   "bodies": 545,
+   "edges_boundary": 0,
+   "body_contacts": 11,
+   "inconsistent_triangles": 0,
+   "min_body_volume": 4.125,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-e-after.png"
+  },
+  {
+   "case": "E",
+   "configuration": "bc",
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/E/geometry_bc.stl?v=9b944d97a817",
+   "path": "cases/E/geometry_bc.stl",
+   "media_type": "model/stl",
+   "bytes": 1205426,
+   "sha256": "9b944d97a8171394cd6440873f6250436ca11c7264a62f715bcb8e785e241ba2",
+   "archive_name": "AIJ_caseE_bc.stl",
+   "units": "metres (full scale)",
+   "frame": {
+    "origin": "centre of the reproduced area, ground plane",
+    "x": "+x EAST (full-scale metres)",
+    "y": "+y NORTH (compass rose in MP_caseE.png)",
+    "z": "+z up; all points at z = 2.0"
+   },
+   "bbox_min": [
+    -201.5,
+    -201.0,
+    0.0
+   ],
+   "bbox_max": [
+    203.0,
+    197.3,
+    30.0
+   ],
+   "triangles": 8396,
+   "watertight": true,
+   "bodies": 542,
+   "edges_boundary": 0,
+   "body_contacts": 11,
+   "inconsistent_triangles": 0,
+   "min_body_volume": 4.125,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-e-before.png"
+  },
+  {
+   "case": "F",
+   "configuration": "default",
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/F/geometry.stl?v=8799740aa324",
+   "path": "cases/F/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 9661421,
+   "sha256": "8799740aa324b9494a3962197ebaa82bc3f3f8ddce138e9d2777bc9cd7660c0c",
+   "archive_name": "AIJ_caseF_default.stl",
+   "units": "metres (full scale)",
+   "frame": {
+    "origin": "centre of the reproduced district, tunnel floor plane",
+    "x": "+x EAST (full-scale metres)",
+    "y": "+y NORTH (compass rose in MP_caseF.png)",
+    "z": "+z up from the TUNNEL FLOOR; the readme's rule is ground = z - 10 m (the STL's terrain under the points is at z = 5 m)"
+   },
+   "bbox_min": [
+    -725.0,
+    -724.998,
+    -1.0
+   ],
+   "bbox_max": [
+    725.0,
+    724.998,
+    225.0
+   ],
+   "triangles": 56250,
+   "watertight": true,
+   "bodies": 1,
+   "edges_boundary": 0,
+   "body_contacts": 0,
+   "inconsistent_triangles": 0,
+   "min_body_volume": 13344850.393472837,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-f.png"
+  },
+  {
+   "case": "G",
+   "configuration": "default",
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/G/geometry.stl?v=09d23c794155",
+   "path": "cases/G/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1558,
+   "sha256": "09d23c79415538941986395e14fc0da1cae5326d2bcd53a773c811dedf9b5692",
+   "archive_name": "AIJ_caseG_default.stl",
+   "units": "metres (full scale)",
+   "frame": {
+    "origin": "the leeward face of the tree belt at ground level, on the vertical section through the belt's centre",
+    "x": "+x downwind: the belt occupies x in [-2, 0] m, the measurement lines lie behind it at x = 1.75 ... 35 m",
+    "y": "+y along the belt (y in [-37, 37] m); every point is on y = 0",
+    "z": "+z up; the belt spans z in [1.2, 7] m; points at z = 1.5, 3, 4.5, 6 m"
+   },
+   "bbox_min": [
+    -2.0,
+    -37.0,
+    1.2
+   ],
+   "bbox_max": [
+    0.0,
+    37.0,
+    7.0
+   ],
+   "triangles": 12,
+   "watertight": true,
+   "bodies": 1,
+   "edges_boundary": 0,
+   "body_contacts": 0,
+   "inconsistent_triangles": 0,
+   "min_body_volume": 858.4,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-g.png"
+  },
+  {
+   "case": "H",
+   "configuration": "default",
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/H/geometry.stl?v=4836687efff9",
+   "path": "cases/H/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1666,
+   "sha256": "4836687efff9d49c4c80e540dcec255ba78e3aef7a90679bee6a9945b0eea9e7",
+   "archive_name": "AIJ_caseH_default.stl",
+   "units": "metres (model scale)",
+   "frame": {
+    "origin": "the centre of the building's leeward face on the ground plane",
+    "x": "+x streamwise (the wind blows toward +x); the building spans x in [-0.1, 0]; points at x = -0.2 ... 0.4 m",
+    "y": "+y lateral; the building spans y in [-0.05, 0.05]; the z = 1/16 H plane covers y in [-0.2, 0.2]",
+    "z": "+z up; roof at z = 0.2 m; points at z = 0.01 ... 0.3 m"
+   },
+   "bbox_min": [
+    -0.1,
+    -0.05,
+    0.0
+   ],
+   "bbox_max": [
+    0.0,
+    0.05,
+    0.2
+   ],
+   "triangles": 12,
+   "watertight": true,
+   "bodies": 1,
+   "edges_boundary": 0,
+   "body_contacts": 0,
+   "inconsistent_triangles": 0,
+   "min_body_volume": 0.002,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-h.png"
+  },
+  {
+   "case": "I",
+   "configuration": "default",
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/I/geometry.stl?v=ff61cbb22798",
+   "path": "cases/I/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1738,
+   "sha256": "ff61cbb22798b0a8e10ed47f20da3cb2c7fa489e4483414cf9789364c47b659c",
+   "archive_name": "AIJ_caseI_default.stl",
+   "units": "metres (model scale)",
+   "frame": {
+    "origin": "the centre of the cube on the ground plane",
+    "x": "+x streamwise (the wind blows toward +x); the cube spans x in [-0.05, 0.05]; wind points x = -0.15 ... 0.25 m, concentration points x = 0.065 ... 2.7 m",
+    "y": "+y lateral; the cube spans y in [-0.05, 0.05]; concentration points reach |y| = 0.44 m on the ground",
+    "z": "+z up; roof at z = 0.1 m; the outlet at (0, 0, 0.1)"
+   },
+   "bbox_min": [
+    -0.05,
+    -0.05,
+    0.0
+   ],
+   "bbox_max": [
+    0.05,
+    0.05,
+    0.1
+   ],
+   "triangles": 12,
+   "watertight": true,
+   "bodies": 1,
+   "edges_boundary": 0,
+   "body_contacts": 0,
+   "inconsistent_triangles": 0,
+   "min_body_volume": 0.001,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-i.png"
+  },
+  {
+   "case": "J",
+   "configuration": "default",
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/J/geometry.stl?v=1bd33d8d3531",
+   "path": "cases/J/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1702,
+   "sha256": "1bd33d8d3531e7c9637e1b0bffa697a9193b502ec30333a59229afb75b09d5ef",
+   "archive_name": "AIJ_caseJ_default.stl",
+   "units": "metres (model scale)",
+   "frame": {
+    "origin": "the building's leeward (downwind) wall centre on the ground; x = 0 is the leeward wall",
+    "x": "+x streamwise (the wind blows toward +x); the building spans x in [-0.08, 0]; the floor source is at x = +0.04",
+    "y": "+y lateral; the building spans y in [-0.04, 0.04]; the z/H = 0.025 plane is measured on the y <= 0 side only",
+    "z": "+z up; roof at z = 0.16; heated floor at z = 0"
+   },
+   "bbox_min": [
+    -0.08,
+    -0.04,
+    0.0
+   ],
+   "bbox_max": [
+    0.0,
+    0.04,
+    0.16
+   ],
+   "triangles": 12,
+   "watertight": true,
+   "bodies": 1,
+   "edges_boundary": 0,
+   "body_contacts": 0,
+   "inconsistent_triangles": 0,
+   "min_body_volume": 0.001024,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-j.png"
+  },
+  {
+   "case": "K",
+   "configuration": "default",
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/K/geometry.stl?v=f0f8a3adfa29",
+   "path": "cases/K/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 136698,
+   "sha256": "f0f8a3adfa290e86df4bf4f8efb5466cb1d8d3fd7424a24be80f39fd3370ce41",
+   "archive_name": "AIJ_caseK_default.stl",
+   "units": "metres (model scale)",
+   "frame": {
+    "origin": "bottom centre of the windward wall of the 4th row of the central column: x = 0 is that wall, y = 0 the centre line of the central column",
+    "x": "+x streamwise (the wind blows toward +x); row k spans x in [0.12 (k-4), 0.12 (k-4) + 0.06], so the array spans x in [-0.36, 0.66]",
+    "y": "+y lateral; column centres at y = 0, +-0.12, ... +-0.48 (the array spans y in [-0.51, 0.51])",
+    "z": "+z up; cube tops at z = 0.06"
+   },
+   "bbox_min": [
+    -0.36,
+    -0.51,
+    0.0
+   ],
+   "bbox_max": [
+    0.66,
+    0.51,
+    0.06
+   ],
+   "triangles": 972,
+   "watertight": true,
+   "bodies": 81,
+   "edges_boundary": 0,
+   "body_contacts": 0,
+   "inconsistent_triangles": 0,
+   "min_body_volume": 0.000216,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-k.png"
+  },
+  {
+   "case": "L",
+   "configuration": "default",
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/L/geometry.stl?v=20864bc75187",
+   "path": "cases/L/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 213909,
+   "sha256": "20864bc7518792c737eb094c784508f259788d5835badf908edd2fe6ad044a3f",
+   "archive_name": "AIJ_caseL_default.stl",
+   "units": "metres (model scale)",
+   "frame": {
+    "origin": "bottom centre of the windward wall of the 9th row (of 14) of the central column: x = 0 is that wall, y = 0 the centre line of the central column",
+    "x": "+x streamwise (the wind blows toward +x); row k spans x in [0.12 (k-9), 0.12 (k-9) + 0.06], so the array spans x in [-0.96, 0.66]",
+    "y": "+y lateral; column centres at y = 0, +-0.12, ... +-0.48 (the array spans y in [-0.51, 0.51])",
+    "z": "+z up from the model floor; cube tops at z = 0.06; heated floor at z = 0"
+   },
+   "bbox_min": [
+    -0.96,
+    -0.51,
+    0.0
+   ],
+   "bbox_max": [
+    0.66,
+    0.51,
+    0.06
+   ],
+   "triangles": 1512,
+   "watertight": true,
+   "bodies": 126,
+   "edges_boundary": 0,
+   "body_contacts": 0,
+   "inconsistent_triangles": 0,
+   "min_body_volume": 0.000216,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-l.png"
+  },
+  {
+   "case": "M",
+   "configuration": "default",
+   "url": "https://aij.eddy3d.com/api/3.9.0/cases/M/geometry.stl?v=e4e0a2044536",
+   "path": "cases/M/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 8475730,
+   "sha256": "e4e0a2044536248881898be3bf926b0c0da18b125b29403d2c260c95a5931525",
+   "archive_name": "AIJ_caseM_default.stl",
+   "units": "metres (full scale)",
+   "frame": {
+    "origin": "centre of the tunnel turntable on the floor plane (ground surface there at z = 33.07 m)",
+    "x": "+x NORTH (full-scale metres)",
+    "y": "+y WEST (compass rose of MP_caseM.png: N at +x, W at +y); the frame is right-handed",
+    "z": "+z up from the TUNNEL FLOOR; the campus ground lies at z ~ 32 m"
+   },
+   "bbox_min": [
+    -540.0,
+    -360.0,
+    -1.0
+   ],
+   "bbox_max": [
+    540.0,
+    360.0,
+    64.9152
+   ],
+   "triangles": 43950,
+   "watertight": true,
+   "bodies": 1,
+   "edges_boundary": 0,
+   "body_contacts": 0,
+   "inconsistent_triangles": 0,
+   "min_body_volume": 11524435.200124165,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-m.png"
+  }
+ ]
+}

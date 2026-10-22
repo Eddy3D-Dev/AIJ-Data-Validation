@@ -96,9 +96,10 @@ Status: <span class="label label-green status">scored</span>
 
 ## Leaderboard
 
-| Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate, $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate | FAC2 | R | $$R^2$$ |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | OpenFOAM 12 | Eddy3D | 0.515 | 0.424 | 0.939 | 0.515 | 0.621 | 0.576 | 0.598 | 0.638 | +0.840 | 0.713 |
+| Rank | Run | Source | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate, $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate | FAC2 | R | $$R^2$$ |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | OpenFOAM 12 | Eddy3D | **0.515** | **0.621** | **0.576** | **0.571** | **0.791** | **+0.829** | **0.687** |
+| 2 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-nutcap-lifted]({{ '/community/eddy3d-of12-nutcap-lifted/' | relative_url }})) | community | 0.485 | 0.530 | 0.409 | 0.475 | 0.763 | +0.821 | 0.676 |
 {: .scores }
 
 Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. Every run gave values at every measured point. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).
