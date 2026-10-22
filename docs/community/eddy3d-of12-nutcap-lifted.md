@@ -24,7 +24,7 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | turbulence\_model | realizable k-epsilon, nutMaxCoeff 1e8 |
 | compute | 3000 iterations, steady, 5-6 ranks (Case A on an Apple M-series laptop, B and H on PACE Phoenix) |
 | units | normalised |
-| notes | Case D is the 0 degree heading only (the fixture stopped at its mirrored-plane probe before the other headings; PACE ICE job 6465404). Case G is the conifer crown of the drag sweep, where lifting the cap makes the result worse (a worse score, submitted all the same). Case C (all nine configurations, scalar speed sampled from the solved fields of the ICE re-solves), Cases F (wind from NNW) and M (WD 180, $$\mathrm{Sc_t}$$ 0.5) are the Eddy3D fixtures re-solved by another session on PACE ICE with the same cap change, scored here from their probe files. Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the $$\mathrm{Sc_t}$$ = 0.5 species. Case B is the served set-up with the cap lifted (the capped control of the same fixture reproduces the served B scores to the third digit). |
+| notes | Cases D, E and L are re-solves of the Eddy3D fixtures on PACE ICE with the cap lifted (E: the SW direction before and after construction; L: urbanMicroclimateFoam, $$\mathrm{Sc_t}$$ 0.5). Case G is the conifer crown of the drag sweep, where lifting the cap makes the result worse (a worse score, submitted all the same). Case C (all nine configurations, scalar speed sampled from the solved fields of the ICE re-solves), Cases F (wind from NNW) and M (WD 180, $$\mathrm{Sc_t}$$ 0.5) are the Eddy3D fixtures re-solved by another session on PACE ICE with the same cap change, scored here from their probe files. Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the $$\mathrm{Sc_t}$$ = 0.5 species. Case B is the served set-up with the cap lifted (the capped control of the same fixture reproduces the served B scores to the third digit). |
 
 {% include nomenclature.md %}
 
@@ -136,6 +136,40 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | $$\lvert\mathbf{U}\rvert$$ | +0.805 | 0.682 | +0.355 | 0.409 | 66 | 66/66 |
 {: .scores }
 
+### wind\_direction\_deg 22.5
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.812 | 0.909 | +0.040 | 0.652 | 66 | 66/66 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.810 | 0.818 | +0.148 | 0.591 | 66 | 66/66 |
+{: .scores }
+
+### wind\_direction\_deg 45.0
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.853 | 0.924 | +0.057 | 0.652 | 66 | 66/66 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.848 | 0.848 | +0.145 | 0.697 | 66 | 66/66 |
+{: .scores }
+
+## Case E — Niigata district
+
+### config ac, wind\_direction\_deg 225.0
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.865 | 0.863 | +0.216 | 0.525 | 80 | 80/80 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.848 | 0.688 | +0.350 | 0.438 | 80 | 80/80 |
+{: .scores }
+
+### config bc, wind\_direction\_deg 225.0
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.717 | 0.950 | +0.023 | 0.675 | 80 | 80/80 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.712 | 0.838 | +0.176 | 0.550 | 80 | 80/80 |
+{: .scores }
+
 ## Case F — Shinjuku district
 
 ### config default, campaign field, wind\_direction\_deg 337.5
@@ -201,6 +235,19 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | $$\lvert\mathbf{U}\rvert$$ | +0.945 | 0.606 | +0.506 | 0.192 | 203 | 203/203 |
 | $$k$$ | +0.357 | 0.261 | +0.955 | 0.039 | 203 | 203/203 |
 | $$c^\ast$$ | +0.949 | 0.808 | -0.751 | 0.478 | 203 | 203/203 |
+{: .scores }
+
+## Case L — 9 x 14 cube array, line source, non-isothermal
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$U$$ | +0.937 | 0.619 | +0.225 | 0.532 | 344 | 344/344 |
+| $$V$$ | +0.185 | 0.198 | -0.077 | 0.814 | 344 | 344/344 |
+| $$W$$ | +0.084 | 0.262 | — | 0.762 | 344 | 344/344 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.917 | 0.669 | +0.160 | 0.547 | 344 | 344/344 |
+| $$k$$ | +0.001 | 0.573 | +0.455 | 0.285 | 344 | 344/344 |
+| $$c^\ast$$ | +0.758 | 0.701 | -0.547 | 0.445 | 344 | 344/344 |
+| $$\theta$$ | +0.935 | 1.000 | +0.027 | 0.994 | 344 | 344/344 |
 {: .scores }
 
 ## Case M — TPU Atsugi campus

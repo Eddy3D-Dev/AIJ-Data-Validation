@@ -96,8 +96,9 @@ Status: <span class="label label-green status">scored</span>
 
 | Rank | Run | Source | Hit rate, $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate | FAC2 | R | $$R^2$$ |
 |---|---|---|---|---|---|---|---|---|
-| 1 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-casee-refined-mesh]({{ '/community/eddy3d-of12-casee-refined-mesh/' | relative_url }})) | community | **0.562** | **0.388** | **0.475** | **0.859** | **+0.789** | **0.629** |
-| 2 | OpenFOAM 12 · SW | Eddy3D | 0.544 | 0.356 | 0.450 | 0.841 | +0.765 | 0.591 |
+| 1 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-nutcap-lifted]({{ '/community/eddy3d-of12-nutcap-lifted/' | relative_url }})) | community | **0.600** | **0.494** | **0.547** | 0.834 | +0.785 | 0.622 |
+| 2 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-casee-refined-mesh]({{ '/community/eddy3d-of12-casee-refined-mesh/' | relative_url }})) | community | 0.562 | 0.388 | 0.475 | **0.859** | **+0.789** | **0.629** |
+| 3 | OpenFOAM 12 · SW | Eddy3D | 0.544 | 0.356 | 0.450 | 0.841 | +0.765 | 0.591 |
 {: .scores }
 
 Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. Every run gave values at every measured point. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

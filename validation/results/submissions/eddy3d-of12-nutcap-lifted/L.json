@@ -1,0 +1,302 @@
+{
+ "case": "L",
+ "engine": "eddy3d-of12-nutcap-lifted",
+ "units_given": "normalised",
+ "U_ref_m_s": 1.339415,
+ "U_ref_meaning": "U_H, the approach speed at the cube height (the tunnel's units)",
+ "conventions": "velocities and the speed over U_ref, k over U_ref^2 (Cases E, F and G publish ratios already); U, V, W, |U| and the thermistor bracket scored as signed velocities (FAC2's ratio keeps the sign; hit rate D = 0.25, W = 0.05); k by the plain definitions (D = 0.25 only); a thermistor, cup or sonic reading (a mean scalar speed) scored against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar), the two ends of its bracket; c* = C/c0 with one detection limit per case, 1e-3 of the largest measured value; theta = (T_floor - T)/(T_floor - T_H) scored like a positive velocity. The same conventions score the served Eddy3D results (docs/validation/method.md).",
+ "value_columns_given": [
+  "U",
+  "V",
+  "W",
+  "speed",
+  "k",
+  "cstar",
+  "theta"
+ ],
+ "key_columns_given": [
+  "config",
+  "campaign",
+  "run",
+  "wind_direction_deg",
+  "point_id"
+ ],
+ "model_rows": 344,
+ "model_rows_unmatched": 0,
+ "groups": [
+  {
+   "key": "",
+   "group": {},
+   "points_measured": 344,
+   "scores": {
+    "velocity.U": {
+     "Count": 344,
+     "MeanObserved": 0.6540003077402153,
+     "MeanPredicted": 0.521678016076352,
+     "Fb": 0.22509948339322897,
+     "Nmse": 0.15888788011213995,
+     "Nad": 0.1506658879011731,
+     "Fac2": 0.6191860465116279,
+     "HitRate": 0.5319767441860465,
+     "Mg": 1.7453601071278129,
+     "Vg": 2.9399646461053592,
+     "GeometricPairs": 277,
+     "R": 0.9367704769108918
+    },
+    "velocity.V": {
+     "Count": 344,
+     "MeanObserved": 0.012119727975068774,
+     "MeanPredicted": 0.01308757701125856,
+     "Fb": -0.07679115531904385,
+     "Nmse": 21.14570070657573,
+     "Nad": 1.3427240185904736,
+     "Fac2": 0.19767441860465115,
+     "HitRate": 0.813953488372093,
+     "Mg": 0.7968748400767993,
+     "Vg": 8.436741197372498,
+     "GeometricPairs": 173,
+     "R": 0.18507544437089898
+    },
+    "velocity.W": {
+     "Count": 344,
+     "MeanObserved": -0.022713024490299435,
+     "MeanPredicted": 0.0034473852189158593,
+     "Fb": null,
+     "Nmse": null,
+     "Nad": null,
+     "Fac2": 0.2616279069767442,
+     "HitRate": 0.7616279069767442,
+     "Mg": 1.0563039216404284,
+     "Vg": 2.8766833510774545,
+     "GeometricPairs": 20,
+     "R": 0.08375185461142037
+    },
+    "speed": {
+     "Count": 344,
+     "MeanObserved": 0.6762023513344424,
+     "MeanPredicted": 0.5763020683975735,
+     "Fb": 0.15952084697352756,
+     "Nmse": 0.11159207933214435,
+     "Nad": 0.1254727697441671,
+     "Fac2": 0.6686046511627907,
+     "HitRate": 0.5465116279069767,
+     "Mg": 1.5256880119392966,
+     "Vg": 2.1254839975511732,
+     "GeometricPairs": 344,
+     "R": 0.9168515185266449
+    },
+    "k": {
+     "Count": 344,
+     "MeanObserved": 0.0239300176658134,
+     "MeanPredicted": 0.015054779983477038,
+     "Fb": 0.4553178786345656,
+     "Nmse": 0.6495710203268911,
+     "Nad": 0.3073998030683918,
+     "Fac2": 0.5726744186046512,
+     "HitRate": 0.28488372093023256,
+     "Mg": 1.6847009387898073,
+     "Vg": 2.49076374132727,
+     "GeometricPairs": 344,
+     "R": 0.0009894549135173111
+    },
+    "cstar": {
+     "Count": 344,
+     "MeanObserved": 0.12729875197806917,
+     "MeanPredicted": 0.22305136238820172,
+     "Fb": -0.5466109841769808,
+     "Nmse": 3.0956057884362607,
+     "Nad": 0.3193499392062027,
+     "Fac2": 0.7005813953488372,
+     "HitRate": 0.44476744186046513,
+     "Mg": 0.8352041806730165,
+     "Vg": 2.2920445355955255,
+     "GeometricPairs": 344,
+     "R": 0.7575589603563944
+    },
+    "theta": {
+     "Count": 344,
+     "MeanObserved": 0.814518860260462,
+     "MeanPredicted": 0.7932015530054352,
+     "Fb": 0.02651867461423005,
+     "Nmse": 0.006546110637418986,
+     "Nad": 0.0296626411456786,
+     "Fac2": 1.0,
+     "HitRate": 0.9941860465116279,
+     "Mg": 1.0330505726550319,
+     "Vg": 1.009210795004421,
+     "GeometricPairs": 344,
+     "R": 0.9345680726495269
+    }
+   },
+   "coverage": {
+    "velocity.U": {
+     "scored": 344,
+     "measured": 344
+    },
+    "velocity.V": {
+     "scored": 344,
+     "measured": 344
+    },
+    "velocity.W": {
+     "scored": 344,
+     "measured": 344
+    },
+    "speed": {
+     "scored": 344,
+     "measured": 344
+    },
+    "k": {
+     "scored": 344,
+     "measured": 344
+    },
+    "cstar": {
+     "scored": 344,
+     "measured": 344
+    },
+    "theta": {
+     "scored": 344,
+     "measured": 344
+    }
+   }
+  }
+ ],
+ "headline": {
+  "U": "velocity.U",
+  "V": "velocity.V",
+  "W": "velocity.W",
+  "|U|": "speed",
+  "k": "k",
+  "c*": "cstar",
+  "θ": "theta"
+ },
+ "scores": {
+  "velocity.U": {
+   "Count": 344,
+   "MeanObserved": 0.6540003077402153,
+   "MeanPredicted": 0.521678016076352,
+   "Fb": 0.22509948339322897,
+   "Nmse": 0.15888788011213995,
+   "Nad": 0.1506658879011731,
+   "Fac2": 0.6191860465116279,
+   "HitRate": 0.5319767441860465,
+   "Mg": 1.7453601071278129,
+   "Vg": 2.9399646461053592,
+   "GeometricPairs": 277,
+   "R": 0.9367704769108918
+  },
+  "velocity.V": {
+   "Count": 344,
+   "MeanObserved": 0.012119727975068774,
+   "MeanPredicted": 0.01308757701125856,
+   "Fb": -0.07679115531904385,
+   "Nmse": 21.14570070657573,
+   "Nad": 1.3427240185904736,
+   "Fac2": 0.19767441860465115,
+   "HitRate": 0.813953488372093,
+   "Mg": 0.7968748400767993,
+   "Vg": 8.436741197372498,
+   "GeometricPairs": 173,
+   "R": 0.18507544437089898
+  },
+  "velocity.W": {
+   "Count": 344,
+   "MeanObserved": -0.022713024490299435,
+   "MeanPredicted": 0.0034473852189158593,
+   "Fb": null,
+   "Nmse": null,
+   "Nad": null,
+   "Fac2": 0.2616279069767442,
+   "HitRate": 0.7616279069767442,
+   "Mg": 1.0563039216404284,
+   "Vg": 2.8766833510774545,
+   "GeometricPairs": 20,
+   "R": 0.08375185461142037
+  },
+  "speed": {
+   "Count": 344,
+   "MeanObserved": 0.6762023513344424,
+   "MeanPredicted": 0.5763020683975735,
+   "Fb": 0.15952084697352756,
+   "Nmse": 0.11159207933214435,
+   "Nad": 0.1254727697441671,
+   "Fac2": 0.6686046511627907,
+   "HitRate": 0.5465116279069767,
+   "Mg": 1.5256880119392966,
+   "Vg": 2.1254839975511732,
+   "GeometricPairs": 344,
+   "R": 0.9168515185266449
+  },
+  "k": {
+   "Count": 344,
+   "MeanObserved": 0.0239300176658134,
+   "MeanPredicted": 0.015054779983477038,
+   "Fb": 0.4553178786345656,
+   "Nmse": 0.6495710203268911,
+   "Nad": 0.3073998030683918,
+   "Fac2": 0.5726744186046512,
+   "HitRate": 0.28488372093023256,
+   "Mg": 1.6847009387898073,
+   "Vg": 2.49076374132727,
+   "GeometricPairs": 344,
+   "R": 0.0009894549135173111
+  },
+  "cstar": {
+   "Count": 344,
+   "MeanObserved": 0.12729875197806917,
+   "MeanPredicted": 0.22305136238820172,
+   "Fb": -0.5466109841769808,
+   "Nmse": 3.0956057884362607,
+   "Nad": 0.3193499392062027,
+   "Fac2": 0.7005813953488372,
+   "HitRate": 0.44476744186046513,
+   "Mg": 0.8352041806730165,
+   "Vg": 2.2920445355955255,
+   "GeometricPairs": 344,
+   "R": 0.7575589603563944
+  },
+  "theta": {
+   "Count": 344,
+   "MeanObserved": 0.814518860260462,
+   "MeanPredicted": 0.7932015530054352,
+   "Fb": 0.02651867461423005,
+   "Nmse": 0.006546110637418986,
+   "Nad": 0.0296626411456786,
+   "Fac2": 1.0,
+   "HitRate": 0.9941860465116279,
+   "Mg": 1.0330505726550319,
+   "Vg": 1.009210795004421,
+   "GeometricPairs": 344,
+   "R": 0.9345680726495269
+  }
+ },
+ "coverage": {
+  "velocity.U": {
+   "scored": 344,
+   "measured": 344
+  },
+  "velocity.V": {
+   "scored": 344,
+   "measured": 344
+  },
+  "velocity.W": {
+   "scored": 344,
+   "measured": 344
+  },
+  "speed": {
+   "scored": 344,
+   "measured": 344
+  },
+  "k": {
+   "scored": 344,
+   "measured": 344
+  },
+  "cstar": {
+   "scored": 344,
+   "measured": 344
+  },
+  "theta": {
+   "scored": 344,
+   "measured": 344
+  }
+ }
+}

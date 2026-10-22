@@ -100,9 +100,10 @@ Notes:
 
 | Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate, $$k$$ | Hit rate, $$c^\ast$$ | Hit rate, $$\theta$$ | Hit rate | FAC2 | R | $$R^2$$ |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | OpenFOAM 12 (UMF) · $$\mathrm{Sc_t}$$ 0.3 | Eddy3D | **0.506** | **0.747** | **0.762** | **0.515** | **0.244** | **0.468** | **0.985** | **0.604** | **0.586** | **+0.519** | **0.455** |
-| 2 | OpenFOAM 12 (UMF) · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | **0.506** | **0.747** | **0.762** | **0.515** | **0.244** | 0.387 | **0.985** | 0.592 | 0.575 | +0.514 | 0.448 |
-| 3 | OpenFOAM 12 (UMF) · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | **0.506** | **0.747** | **0.762** | **0.515** | **0.244** | 0.358 | **0.985** | 0.588 | 0.563 | +0.511 | 0.444 |
+| 1 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-nutcap-lifted]({{ '/community/eddy3d-of12-nutcap-lifted/' | relative_url }})) | community | **0.532** | **0.814** | **0.762** | **0.547** | **0.285** | 0.445 | **0.994** | **0.625** | 0.574 | **+0.545** | **0.458** |
+| 2 | OpenFOAM 12 (UMF) · $$\mathrm{Sc_t}$$ 0.3 | Eddy3D | 0.506 | 0.747 | **0.762** | 0.515 | 0.244 | **0.468** | 0.985 | 0.604 | **0.586** | +0.519 | 0.455 |
+| 3 | OpenFOAM 12 (UMF) · $$\mathrm{Sc_t}$$ 0.5 | Eddy3D | 0.506 | 0.747 | **0.762** | 0.515 | 0.244 | 0.387 | 0.985 | 0.592 | 0.575 | +0.514 | 0.448 |
+| 4 | OpenFOAM 12 (UMF) · $$\mathrm{Sc_t}$$ 0.7 | Eddy3D | 0.506 | 0.747 | **0.762** | 0.515 | 0.244 | 0.358 | 0.985 | 0.588 | 0.563 | +0.511 | 0.444 |
 {: .scores }
 
 Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. Every run gave values at every measured point. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

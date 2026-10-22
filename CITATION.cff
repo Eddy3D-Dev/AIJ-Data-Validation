@@ -3,7 +3,7 @@ cff-version: 1.2.0
 message: "If you use this dataset, please cite it using the metadata from this file."
 type: dataset
 title: "AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API"
-version: "3.9.1"
+version: "3.10.0"
 date-released: "2026-10-22"
 authors:
       - family-names: "Karadag"
@@ -11,7 +11,7 @@ authors:
       - family-names: "Kastner"
         given-names: "Patrick"
 repository-code: "https://github.com/Eddy3D-Dev/AIJ-Data-Validation"
-url: "https://aij.eddy3d.com/api/3.9.1/index.json"
+url: "https://aij.eddy3d.com/api/3.10.0/index.json"
 license: CC-BY-4.0
 abstract: "Cleaned wind-tunnel and field data of the AIJ Urban Wind Environment benchmark, Cases A-M, with their geometry and Eddy3D's validation scores, served as static JSON, CSV and STL files."
 keywords:
