@@ -127,9 +127,9 @@ Every score is over the same 122 points.
 
 | Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate | FAC2 | R | $$R^2$$ |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-nutcap-lifted]({{ '/community/eddy3d-of12-nutcap-lifted/' | relative_url }})) | community | 0.554 | **0.629** | 0.772 | **0.670** | **0.656** | 0.579 | **+0.936** | **0.877** |
-| 2 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-measured-inlet]({{ '/community/eddy3d-of12-measured-inlet/' | relative_url }})) | community | **0.571** | 0.607 | **0.821** | 0.625 | **0.656** | 0.578 | +0.936 | 0.876 |
-| 3 | OpenFOAM 12 | Eddy3D | 0.562 | 0.612 | 0.808 | 0.625 | 0.652 | **0.585** | **+0.936** | 0.876 |
+| 1 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-measured-inlet]({{ '/community/eddy3d-of12-measured-inlet/' | relative_url }})) | community | **0.571** | 0.607 | **0.821** | 0.625 | **0.656** | 0.578 | **+0.936** | **0.876** |
+| 2 | OpenFOAM 12 | Eddy3D | 0.562 | 0.612 | 0.808 | 0.625 | 0.652 | **0.585** | **+0.936** | **0.876** |
+| 3 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-nutcap-lifted]({{ '/community/eddy3d-of12-nutcap-lifted/' | relative_url }})) | community | 0.540 | **0.638** | 0.723 | **0.634** | 0.634 | 0.580 | +0.934 | 0.872 |
 | 4 | FluidX3D | Eddy3D | 0.411 | 0.545 | 0.527 | 0.424 | 0.477 | 0.491 | +0.875 | 0.766 |
 | 5 | OpenLB | Eddy3D | 0.290 | 0.549 | 0.652 | 0.317 | 0.452 | 0.297 | +0.792 | 0.628 |
 {: .scores }

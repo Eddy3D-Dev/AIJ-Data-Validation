@@ -19,12 +19,12 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | author | Sustainable Urban Systems Lab |
 | licence | CC-BY-4.0 |
 | contact | <https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions> |
-| inlet | Case A, H, K, C, F, G (conifer crown), D (wind direction 0 only) and M, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved) |
+| inlet | the served fitted log law |
 | mesh | snappyHexMesh, 1:100 scale, the served runs\' mesh and numerics level 3 |
 | turbulence\_model | realizable k-epsilon, nutMaxCoeff 1e8 |
 | compute | 3000 iterations, steady, 5-6 ranks (Case A on an Apple M-series laptop, B and H on PACE Phoenix) |
 | units | normalised |
-| notes | Case D is the 0 degree heading only (the fixture stopped at its mirrored-plane probe before the other headings; PACE ICE job 6465404). Case G is the conifer crown of the drag sweep, where lifting the cap makes the result worse (a worse score, submitted all the same). Case C (all nine configurations, scalar speed sampled from the solved fields of the ICE re-solves), Cases F (wind from NNW) and M (WD 180, $$\mathrm{Sc_t}$$ 0.5) are the Eddy3D fixtures re-solved by another session on PACE ICE with the same cap change, scored here from their probe files. Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the $$\mathrm{Sc_t}$$ = 0.5 species. Case B\'s baseline is therefore the measured-inlet submission, not the served run. |
+| notes | Case D is the 0 degree heading only (the fixture stopped at its mirrored-plane probe before the other headings; PACE ICE job 6465404). Case G is the conifer crown of the drag sweep, where lifting the cap makes the result worse (a worse score, submitted all the same). Case C (all nine configurations, scalar speed sampled from the solved fields of the ICE re-solves), Cases F (wind from NNW) and M (WD 180, $$\mathrm{Sc_t}$$ 0.5) are the Eddy3D fixtures re-solved by another session on PACE ICE with the same cap change, scored here from their probe files. Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the $$\mathrm{Sc_t}$$ = 0.5 species. Case B is the served set-up with the cap lifted (the capped control of the same fixture reproduces the served B scores to the third digit). |
 
 {% include nomenclature.md %}
 
@@ -43,11 +43,11 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 
 | Score | R | FAC2 | FB | Hit rate | n | coverage |
 |---|---|---|---|---|---|---|
-| $$U$$ | +0.959 | 0.710 | +0.113 | 0.554 | 224 | 224/224 |
-| $$V$$ | +0.915 | 0.272 | — | 0.629 | 224 | 224/224 |
-| $$W$$ | +0.923 | 0.478 | +0.430 | 0.772 | 224 | 224/224 |
-| $$\lvert\mathbf{U}\rvert$$ | +0.948 | 0.857 | +0.059 | 0.670 | 224 | 224/224 |
-| $$k$$ | +0.312 | 0.562 | +0.282 | 0.254 | 224 | 224/224 |
+| $$U$$ | +0.957 | 0.719 | +0.113 | 0.540 | 224 | 224/224 |
+| $$V$$ | +0.919 | 0.272 | — | 0.638 | 224 | 224/224 |
+| $$W$$ | +0.916 | 0.473 | +0.549 | 0.723 | 224 | 224/224 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.943 | 0.857 | +0.063 | 0.634 | 224 | 224/224 |
+| $$k$$ | +0.291 | 0.554 | +0.305 | 0.201 | 224 | 224/224 |
 {: .scores }
 
 ## Case C — 3 × 3 block array
