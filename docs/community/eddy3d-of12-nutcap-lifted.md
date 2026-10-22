@@ -19,12 +19,12 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | author | Sustainable Urban Systems Lab |
 | licence | CC-BY-4.0 |
 | contact | <https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions> |
-| inlet | Case A, H, K, F and M, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved) |
+| inlet | Case A, H, K, C, F and M, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved) |
 | mesh | snappyHexMesh, 1:100 scale, the served runs\' mesh and numerics level 3 |
 | turbulence\_model | realizable k-epsilon, nutMaxCoeff 1e8 |
 | compute | 3000 iterations, steady, 5-6 ranks (Case A on an Apple M-series laptop, B and H on PACE Phoenix) |
 | units | normalised |
-| notes | Cases F (wind from NNW) and M (WD 180, $$\mathrm{Sc_t}$$ 0.5) are the Eddy3D fixtures re-solved by another session on PACE ICE with the same cap change, scored here from their probe files. Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the $$\mathrm{Sc_t}$$ = 0.5 species. Case B\'s baseline is therefore the measured-inlet submission, not the served run. |
+| notes | Case C (all nine configurations, scalar speed sampled from the solved fields of the ICE re-solves), Cases F (wind from NNW) and M (WD 180, $$\mathrm{Sc_t}$$ 0.5) are the Eddy3D fixtures re-solved by another session on PACE ICE with the same cap change, scored here from their probe files. Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the $$\mathrm{Sc_t}$$ = 0.5 species. Case B\'s baseline is therefore the measured-inlet submission, not the served run. |
 
 {% include nomenclature.md %}
 
@@ -48,6 +48,80 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | $$W$$ | +0.923 | 0.478 | +0.430 | 0.772 | 224 | 224/224 |
 | $$\lvert\mathbf{U}\rvert$$ | +0.948 | 0.857 | +0.059 | 0.670 | 224 | 224/224 |
 | $$k$$ | +0.312 | 0.562 | +0.282 | 0.254 | 224 | 224/224 |
+{: .scores }
+
+## Case C — 3 × 3 block array
+
+### config 0D, wind\_direction\_deg 0.0
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.839 | 0.917 | +0.270 | 0.583 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.816 | 0.658 | +0.476 | 0.292 | 120 | 120/120 |
+{: .scores }
+
+### config 0D, wind\_direction\_deg 22.5
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.860 | 0.983 | +0.119 | 0.733 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.848 | 0.808 | +0.320 | 0.425 | 120 | 120/120 |
+{: .scores }
+
+### config 0D, wind\_direction\_deg 45.0
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.840 | 0.933 | +0.130 | 0.800 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.808 | 0.783 | +0.323 | 0.533 | 120 | 120/120 |
+{: .scores }
+
+### config 1D, wind\_direction\_deg 0.0
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.794 | 0.867 | +0.340 | 0.408 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.729 | 0.558 | +0.553 | 0.317 | 120 | 120/120 |
+{: .scores }
+
+### config 1D, wind\_direction\_deg 22.5
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.904 | 0.967 | +0.198 | 0.667 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.888 | 0.692 | +0.408 | 0.342 | 120 | 120/120 |
+{: .scores }
+
+### config 1D, wind\_direction\_deg 45.0
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.879 | 0.925 | +0.212 | 0.725 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.879 | 0.800 | +0.374 | 0.392 | 120 | 120/120 |
+{: .scores }
+
+### config 2D, wind\_direction\_deg 0.0
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.863 | 0.867 | +0.238 | 0.558 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.855 | 0.692 | +0.432 | 0.317 | 120 | 120/120 |
+{: .scores }
+
+### config 2D, wind\_direction\_deg 22.5
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.907 | 0.983 | +0.111 | 0.842 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.893 | 0.867 | +0.271 | 0.575 | 120 | 120/120 |
+{: .scores }
+
+### config 2D, wind\_direction\_deg 45.0
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.926 | 1.000 | +0.104 | 0.908 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.927 | 0.900 | +0.248 | 0.633 | 120 | 120/120 |
 {: .scores }
 
 ## Case F — Shinjuku district

@@ -1,6 +1,6 @@
 ==== 0/U
 /*--------------------------------*- C++ -*----------------------------------*\
-  cases/F/inflow_openfoam.txt of the AIJ UWE API (release 3.6.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  cases/F/inflow_openfoam.txt of the AIJ UWE API (release 3.7.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
   RECOMMENDED inlet (this repository's choice, not the benchmark's): the measured approach-flow profile (approach_flow.csv, the benchmark's data) as a table; U is m/s, z is m. flowDir is the case's wind direction by the convention geographic_x_east_y_north (cases/F.json inflow.flow_direction).
   OpenFOAM 12 (openfoam.org) syntax. ESI OpenFOAM v2xxx: the three atmBoundaryLayerInlet* conditions and nutkAtmRoughWallFunction take the same entries there; fixedProfile is openfoam.org only (use timeVaryingMappedFixedValue or codedFixedValue).
 \*---------------------------------------------------------------------------*/
@@ -50,7 +50,7 @@ boundaryField
 
 ==== 0/k
 /*--------------------------------*- C++ -*----------------------------------*\
-  cases/F/inflow_openfoam.txt of the AIJ UWE API (release 3.6.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  cases/F/inflow_openfoam.txt of the AIJ UWE API (release 3.7.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
   the profile publishes no k: set k and epsilon from your own closure (no recommendation)
 \*---------------------------------------------------------------------------*/
 FoamFile
@@ -63,7 +63,7 @@ FoamFile
 
 ==== system/probes
 /*--------------------------------*- C++ -*----------------------------------*\
-  cases/F/inflow_openfoam.txt of the AIJ UWE API (release 3.6.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  cases/F/inflow_openfoam.txt of the AIJ UWE API (release 3.7.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
   the benchmark's measurement points (cases/F/probes.csv, the data), in the case frame and units: include from controlDict functions
 \*---------------------------------------------------------------------------*/
 FoamFile

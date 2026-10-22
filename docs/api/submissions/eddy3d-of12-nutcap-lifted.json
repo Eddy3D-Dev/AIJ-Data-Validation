@@ -1,7 +1,7 @@
 {
  "$schema": "https://aij.eddy3d.com/api/schemas/submission.schema.json",
  "schema_version": "2.5.0",
- "data_version": "1346aa83352325ea02157757ed98a73bd25e7f98615646d480c0c3e38359ea15",
+ "data_version": "0393ae0d0d6e467339e02f9bf628c1c913f10064c1fbc63b1d2e8fcb1298659e",
  "license": "CC-BY-4.0",
  "slug": "eddy3d-of12-nutcap-lifted",
  "submission": {
@@ -11,18 +11,18 @@
   "author": "Sustainable Urban Systems Lab",
   "licence": "CC-BY-4.0",
   "contact": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions",
-  "inlet": "Case A, H, K, F and M, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved)",
+  "inlet": "Case A, H, K, C, F and M, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved)",
   "mesh": "snappyHexMesh, 1:100 scale, the served runs' mesh and numerics level 3",
   "turbulence_model": "realizable k-epsilon, nutMaxCoeff 1e8",
   "compute": "3000 iterations, steady, 5-6 ranks (Case A on an Apple M-series laptop, B and H on PACE Phoenix)",
   "units": "normalised",
-  "notes": "Cases F (wind from NNW) and M (WD 180, Sct 0.5) are the Eddy3D fixtures re-solved by another session on PACE ICE with the same cap change, scored here from their probe files. Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the Sct = 0.5 species. Case B's baseline is therefore the measured-inlet submission, not the served run."
+  "notes": "Case C (all nine configurations, scalar speed sampled from the solved fields of the ICE re-solves), Cases F (wind from NNW) and M (WD 180, Sct 0.5) are the Eddy3D fixtures re-solved by another session on PACE ICE with the same cap change, scored here from their probe files. Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the Sct = 0.5 species. Case B's baseline is therefore the measured-inlet submission, not the served run."
  },
  "example": false,
  "provenance": "self-reported inputs (the values in submissions/<slug>/cases/<id>/probes.csv), scored by this repository's build with validation/score_submissions.py; not an Eddy3D result and not checked by the maintainers beyond the scoring",
  "scored_with": {
   "script": "validation/score_submissions.py",
-  "release": "3.6.0",
+  "release": "3.7.0",
   "conventions": "velocities and the speed over U_ref, k over U_ref^2 (Cases E, F and G publish ratios already); U, V, W, |U| and the thermistor bracket scored as signed velocities (FAC2's ratio keeps the sign; hit rate D = 0.25, W = 0.05); k by the plain definitions (D = 0.25 only); a thermistor, cup or sonic reading (a mean scalar speed) scored against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar), the two ends of its bracket; c* = C/c0 with one detection limit per case, 1e-3 of the largest measured value; theta = (T_floor - T)/(T_floor - T_H) scored like a positive velocity. The same conventions score the served Eddy3D results (docs/validation/method.md).",
   "metric_meaning": {
    "Count": "number of measured points scored",
@@ -592,6 +592,1018 @@
     }
    ],
    "U_ref_m_s": 5.133,
+   "units_given": "normalised"
+  },
+  {
+   "case": "C",
+   "title": "Case C — 3 × 3 block array",
+   "status": "scored",
+   "headline": [
+    {
+     "label": "0D.wd0: √(|U|²+2k)",
+     "score": "0D.wd0/vs.scalar",
+     "Count": 120,
+     "R": 0.8389045864398776,
+     "Fac2": 0.9166666666666666,
+     "Fb": 0.27042288592543834,
+     "HitRate": 0.5833333333333334,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    },
+    {
+     "label": "0D.wd0: |U|",
+     "score": "0D.wd0/vs.vector",
+     "Count": 120,
+     "R": 0.8160961938498685,
+     "Fac2": 0.6583333333333333,
+     "Fb": 0.47615975199534644,
+     "HitRate": 0.2916666666666667,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    },
+    {
+     "label": "0D.wd22.5: √(|U|²+2k)",
+     "score": "0D.wd22.5/vs.scalar",
+     "Count": 120,
+     "R": 0.8599591569962093,
+     "Fac2": 0.9833333333333333,
+     "Fb": 0.1189785987389789,
+     "HitRate": 0.7333333333333333,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    },
+    {
+     "label": "0D.wd22.5: |U|",
+     "score": "0D.wd22.5/vs.vector",
+     "Count": 120,
+     "R": 0.8480198298631314,
+     "Fac2": 0.8083333333333333,
+     "Fb": 0.32025190578609936,
+     "HitRate": 0.425,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    },
+    {
+     "label": "0D.wd45: √(|U|²+2k)",
+     "score": "0D.wd45/vs.scalar",
+     "Count": 120,
+     "R": 0.8400142992363452,
+     "Fac2": 0.9333333333333333,
+     "Fb": 0.1301842081208494,
+     "HitRate": 0.8,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    },
+    {
+     "label": "0D.wd45: |U|",
+     "score": "0D.wd45/vs.vector",
+     "Count": 120,
+     "R": 0.808095906128549,
+     "Fac2": 0.7833333333333333,
+     "Fb": 0.3227902675317206,
+     "HitRate": 0.5333333333333333,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    },
+    {
+     "label": "1D.wd0: √(|U|²+2k)",
+     "score": "1D.wd0/vs.scalar",
+     "Count": 120,
+     "R": 0.7936504399397474,
+     "Fac2": 0.8666666666666667,
+     "Fb": 0.3399648749278922,
+     "HitRate": 0.4083333333333333,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    },
+    {
+     "label": "1D.wd0: |U|",
+     "score": "1D.wd0/vs.vector",
+     "Count": 120,
+     "R": 0.7288639593873986,
+     "Fac2": 0.5583333333333333,
+     "Fb": 0.5530202991086871,
+     "HitRate": 0.31666666666666665,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    },
+    {
+     "label": "1D.wd22.5: √(|U|²+2k)",
+     "score": "1D.wd22.5/vs.scalar",
+     "Count": 120,
+     "R": 0.9040771103112457,
+     "Fac2": 0.9666666666666667,
+     "Fb": 0.19795906713355454,
+     "HitRate": 0.6666666666666666,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    },
+    {
+     "label": "1D.wd22.5: |U|",
+     "score": "1D.wd22.5/vs.vector",
+     "Count": 120,
+     "R": 0.8883322601049066,
+     "Fac2": 0.6916666666666667,
+     "Fb": 0.4076587017201156,
+     "HitRate": 0.3416666666666667,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    },
+    {
+     "label": "1D.wd45: √(|U|²+2k)",
+     "score": "1D.wd45/vs.scalar",
+     "Count": 120,
+     "R": 0.8788345339946634,
+     "Fac2": 0.925,
+     "Fb": 0.21195215620790572,
+     "HitRate": 0.725,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    },
+    {
+     "label": "1D.wd45: |U|",
+     "score": "1D.wd45/vs.vector",
+     "Count": 120,
+     "R": 0.8785595140908607,
+     "Fac2": 0.8,
+     "Fb": 0.37357765904636875,
+     "HitRate": 0.39166666666666666,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    },
+    {
+     "label": "2D.wd0: √(|U|²+2k)",
+     "score": "2D.wd0/vs.scalar",
+     "Count": 120,
+     "R": 0.8629150082385112,
+     "Fac2": 0.8666666666666667,
+     "Fb": 0.2377460019045367,
+     "HitRate": 0.5583333333333333,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    },
+    {
+     "label": "2D.wd0: |U|",
+     "score": "2D.wd0/vs.vector",
+     "Count": 120,
+     "R": 0.8548703549946113,
+     "Fac2": 0.6916666666666667,
+     "Fb": 0.4324450166179635,
+     "HitRate": 0.31666666666666665,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    },
+    {
+     "label": "2D.wd22.5: √(|U|²+2k)",
+     "score": "2D.wd22.5/vs.scalar",
+     "Count": 120,
+     "R": 0.9070449269719939,
+     "Fac2": 0.9833333333333333,
+     "Fb": 0.11069128564710974,
+     "HitRate": 0.8416666666666667,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    },
+    {
+     "label": "2D.wd22.5: |U|",
+     "score": "2D.wd22.5/vs.vector",
+     "Count": 120,
+     "R": 0.8927275612078488,
+     "Fac2": 0.8666666666666667,
+     "Fb": 0.2712331418235542,
+     "HitRate": 0.575,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    },
+    {
+     "label": "2D.wd45: √(|U|²+2k)",
+     "score": "2D.wd45/vs.scalar",
+     "Count": 120,
+     "R": 0.9258357934765804,
+     "Fac2": 1.0,
+     "Fb": 0.10424164668953122,
+     "HitRate": 0.9083333333333333,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    },
+    {
+     "label": "2D.wd45: |U|",
+     "score": "2D.wd45/vs.vector",
+     "Count": 120,
+     "R": 0.9270513013884142,
+     "Fac2": 0.9,
+     "Fb": 0.24763869995241805,
+     "HitRate": 0.6333333333333333,
+     "coverage": {
+      "scored": 120,
+      "measured": 120
+     }
+    }
+   ],
+   "values": {
+    "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/C.csv?v=c4b32ff802be",
+    "path": "submissions/eddy3d-of12-nutcap-lifted/C.csv",
+    "media_type": "text/csv",
+    "bytes": 85254,
+    "sha256": "c4b32ff802bec53d364e855772058af9c4b9b9d53a4405ab3176ae31c981dbf0"
+   },
+   "scores": {
+    "0D.wd0/vs.scalar": {
+     "Count": 120,
+     "MeanObserved": 0.43737456668491154,
+     "MeanPredicted": 0.33318596526926664,
+     "Fb": 0.27042288592543834,
+     "Nmse": 0.11873531374961312,
+     "Nad": 0.14373231906892772,
+     "Fac2": 0.9166666666666666,
+     "HitRate": 0.5833333333333334,
+     "Mg": 1.3484003358674843,
+     "Vg": 1.1821918047744164,
+     "GeometricPairs": 120,
+     "R": 0.8389045864398776
+    },
+    "0D.wd0/vs.vector": {
+     "Count": 120,
+     "MeanObserved": 0.43737456668491154,
+     "MeanPredicted": 0.2691623461010508,
+     "Fb": 0.47615975199534644,
+     "Nmse": 0.31037174597422723,
+     "Nad": 0.2388407713632672,
+     "Fac2": 0.6583333333333333,
+     "HitRate": 0.2916666666666667,
+     "Mg": 1.8499434992060297,
+     "Vg": 1.8990351242616725,
+     "GeometricPairs": 120,
+     "R": 0.8160961938498685
+    },
+    "0D.wd22.5/vs.scalar": {
+     "Count": 120,
+     "MeanObserved": 0.4659277504105091,
+     "MeanPredicted": 0.4136049653758352,
+     "Fb": 0.1189785987389789,
+     "Nmse": 0.05222882510796915,
+     "Nad": 0.09276126307114554,
+     "Fac2": 0.9833333333333333,
+     "HitRate": 0.7333333333333333,
+     "Mg": 1.1369300321319158,
+     "Vg": 1.0619742222797517,
+     "GeometricPairs": 120,
+     "R": 0.8599591569962093
+    },
+    "0D.wd22.5/vs.vector": {
+     "Count": 120,
+     "MeanObserved": 0.4659277504105091,
+     "MeanPredicted": 0.33730874171107056,
+     "Fb": 0.32025190578609936,
+     "Nmse": 0.16879723918351042,
+     "Nad": 0.17079867758705056,
+     "Fac2": 0.8083333333333333,
+     "HitRate": 0.425,
+     "Mg": 1.5564425063812246,
+     "Vg": 1.5273561015640076,
+     "GeometricPairs": 120,
+     "R": 0.8480198298631314
+    },
+    "0D.wd45/vs.scalar": {
+     "Count": 120,
+     "MeanObserved": 0.49856321839080464,
+     "MeanPredicted": 0.4376247722818221,
+     "Fb": 0.1301842081208494,
+     "Nmse": 0.058830845034577854,
+     "Nad": 0.08948173058163204,
+     "Fac2": 0.9333333333333333,
+     "HitRate": 0.8,
+     "Mg": 1.1641262562376247,
+     "Vg": 1.0853915955894589,
+     "GeometricPairs": 120,
+     "R": 0.8400142992363452
+    },
+    "0D.wd45/vs.vector": {
+     "Count": 120,
+     "MeanObserved": 0.49856321839080464,
+     "MeanPredicted": 0.3599959470401675,
+     "Fb": 0.3227902675317206,
+     "Nmse": 0.18899488179345705,
+     "Nad": 0.16917786976592233,
+     "Fac2": 0.7833333333333333,
+     "HitRate": 0.5333333333333333,
+     "Mg": 1.6571459878958894,
+     "Vg": 2.0426037216537707,
+     "GeometricPairs": 120,
+     "R": 0.808095906128549
+    },
+    "1D.wd0/vs.scalar": {
+     "Count": 120,
+     "MeanObserved": 0.43557288815909506,
+     "MeanPredicted": 0.309007328110207,
+     "Fb": 0.3399648749278922,
+     "Nmse": 0.17366466248927434,
+     "Nad": 0.17814965527499171,
+     "Fac2": 0.8666666666666667,
+     "HitRate": 0.4083333333333333,
+     "Mg": 1.4728719488750104,
+     "Vg": 1.2860603675678683,
+     "GeometricPairs": 120,
+     "R": 0.7936504399397474
+    },
+    "1D.wd0/vs.vector": {
+     "Count": 120,
+     "MeanObserved": 0.43557288815909506,
+     "MeanPredicted": 0.24687039411510023,
+     "Fb": 0.5530202991086871,
+     "Nmse": 0.4376880984161056,
+     "Nad": 0.2783986736344838,
+     "Fac2": 0.5583333333333333,
+     "HitRate": 0.31666666666666665,
+     "Mg": 2.1430126392784024,
+     "Vg": 2.9121294500053936,
+     "GeometricPairs": 120,
+     "R": 0.7288639593873986
+    },
+    "1D.wd22.5/vs.scalar": {
+     "Count": 120,
+     "MeanObserved": 0.46948549534756434,
+     "MeanPredicted": 0.3849171227318323,
+     "Fb": 0.19795906713355454,
+     "Nmse": 0.06635761130765395,
+     "Nad": 0.1050912820429703,
+     "Fac2": 0.9666666666666667,
+     "HitRate": 0.6666666666666666,
+     "Mg": 1.246180671653269,
+     "Vg": 1.0968775477657184,
+     "GeometricPairs": 120,
+     "R": 0.9040771103112457
+    },
+    "1D.wd22.5/vs.vector": {
+     "Count": 120,
+     "MeanObserved": 0.46948549534756434,
+     "MeanPredicted": 0.3105012943284765,
+     "Fb": 0.4076587017201156,
+     "Nmse": 0.22033542620640745,
+     "Nad": 0.20382935086005777,
+     "Fac2": 0.6916666666666667,
+     "HitRate": 0.3416666666666667,
+     "Mg": 1.7078546442295777,
+     "Vg": 1.5755440794468234,
+     "GeometricPairs": 120,
+     "R": 0.8883322601049066
+    },
+    "1D.wd45/vs.scalar": {
+     "Count": 120,
+     "MeanObserved": 0.5353950009122423,
+     "MeanPredicted": 0.43279049877795894,
+     "Fb": 0.21195215620790572,
+     "Nmse": 0.07832657405606995,
+     "Nad": 0.11308014893070825,
+     "Fac2": 0.925,
+     "HitRate": 0.725,
+     "Mg": 1.2872754340396844,
+     "Vg": 1.137841449492914,
+     "GeometricPairs": 120,
+     "R": 0.8788345339946634
+    },
+    "1D.wd45/vs.vector": {
+     "Count": 120,
+     "MeanObserved": 0.5353950009122423,
+     "MeanPredicted": 0.3668632401386913,
+     "Fb": 0.37357765904636875,
+     "Nmse": 0.18882085141987054,
+     "Nad": 0.18825132015048862,
+     "Fac2": 0.8,
+     "HitRate": 0.39166666666666666,
+     "Mg": 1.6880593245178068,
+     "Vg": 1.780935656747,
+     "GeometricPairs": 120,
+     "R": 0.8785595140908607
+    },
+    "2D.wd0/vs.scalar": {
+     "Count": 120,
+     "MeanObserved": 0.4789272030651341,
+     "MeanPredicted": 0.37716138367799235,
+     "Fb": 0.2377460019045367,
+     "Nmse": 0.09637586068930262,
+     "Nad": 0.1261486458059817,
+     "Fac2": 0.8666666666666667,
+     "HitRate": 0.5583333333333333,
+     "Mg": 1.3614363921696822,
+     "Vg": 1.2059527284905058,
+     "GeometricPairs": 120,
+     "R": 0.8629150082385112
+    },
+    "2D.wd0/vs.vector": {
+     "Count": 120,
+     "MeanObserved": 0.4789272030651341,
+     "MeanPredicted": 0.30863790084176135,
+     "Fb": 0.4324450166179635,
+     "Nmse": 0.2416560781307536,
+     "Nad": 0.2163479111284685,
+     "Fac2": 0.6916666666666667,
+     "HitRate": 0.31666666666666665,
+     "Mg": 1.763245998228713,
+     "Vg": 1.7176825360178227,
+     "GeometricPairs": 120,
+     "R": 0.8548703549946113
+    },
+    "2D.wd22.5/vs.scalar": {
+     "Count": 120,
+     "MeanObserved": 0.5919768290457945,
+     "MeanPredicted": 0.5298865776424125,
+     "Fb": 0.11069128564710974,
+     "Nmse": 0.029142105491303947,
+     "Nad": 0.07105702364153388,
+     "Fac2": 0.9833333333333333,
+     "HitRate": 0.8416666666666667,
+     "Mg": 1.144882792218656,
+     "Vg": 1.0615734186806163,
+     "GeometricPairs": 120,
+     "R": 0.9070449269719939
+    },
+    "2D.wd22.5/vs.vector": {
+     "Count": 120,
+     "MeanObserved": 0.5919768290457945,
+     "MeanPredicted": 0.45058779040230185,
+     "Fb": 0.2712331418235542,
+     "Nmse": 0.10178986228739517,
+     "Nad": 0.13873452499744596,
+     "Fac2": 0.8666666666666667,
+     "HitRate": 0.575,
+     "Mg": 1.455968044800405,
+     "Vg": 1.3896998937600737,
+     "GeometricPairs": 120,
+     "R": 0.8927275612078488
+    },
+    "2D.wd45/vs.scalar": {
+     "Count": 120,
+     "MeanObserved": 0.6135285531837256,
+     "MeanPredicted": 0.5527415929260633,
+     "Fb": 0.10424164668953122,
+     "Nmse": 0.024664710490791577,
+     "Nad": 0.06282975954924966,
+     "Fac2": 1.0,
+     "HitRate": 0.9083333333333333,
+     "Mg": 1.1259556689251216,
+     "Vg": 1.0415196292370759,
+     "GeometricPairs": 120,
+     "R": 0.9258357934765804
+    },
+    "2D.wd45/vs.vector": {
+     "Count": 120,
+     "MeanObserved": 0.6135285531837256,
+     "MeanPredicted": 0.4783347488615966,
+     "Fb": 0.24763869995241805,
+     "Nmse": 0.08110809566586273,
+     "Nad": 0.12467810119178337,
+     "Fac2": 0.9,
+     "HitRate": 0.6333333333333333,
+     "Mg": 1.3881580135814227,
+     "Vg": 1.2531922550350254,
+     "GeometricPairs": 120,
+     "R": 0.9270513013884142
+    }
+   },
+   "coverage": {
+    "0D.wd0/vs.scalar": {
+     "scored": 120,
+     "measured": 120
+    },
+    "0D.wd0/vs.vector": {
+     "scored": 120,
+     "measured": 120
+    },
+    "0D.wd22.5/vs.scalar": {
+     "scored": 120,
+     "measured": 120
+    },
+    "0D.wd22.5/vs.vector": {
+     "scored": 120,
+     "measured": 120
+    },
+    "0D.wd45/vs.scalar": {
+     "scored": 120,
+     "measured": 120
+    },
+    "0D.wd45/vs.vector": {
+     "scored": 120,
+     "measured": 120
+    },
+    "1D.wd0/vs.scalar": {
+     "scored": 120,
+     "measured": 120
+    },
+    "1D.wd0/vs.vector": {
+     "scored": 120,
+     "measured": 120
+    },
+    "1D.wd22.5/vs.scalar": {
+     "scored": 120,
+     "measured": 120
+    },
+    "1D.wd22.5/vs.vector": {
+     "scored": 120,
+     "measured": 120
+    },
+    "1D.wd45/vs.scalar": {
+     "scored": 120,
+     "measured": 120
+    },
+    "1D.wd45/vs.vector": {
+     "scored": 120,
+     "measured": 120
+    },
+    "2D.wd0/vs.scalar": {
+     "scored": 120,
+     "measured": 120
+    },
+    "2D.wd0/vs.vector": {
+     "scored": 120,
+     "measured": 120
+    },
+    "2D.wd22.5/vs.scalar": {
+     "scored": 120,
+     "measured": 120
+    },
+    "2D.wd22.5/vs.vector": {
+     "scored": 120,
+     "measured": 120
+    },
+    "2D.wd45/vs.scalar": {
+     "scored": 120,
+     "measured": 120
+    },
+    "2D.wd45/vs.vector": {
+     "scored": 120,
+     "measured": 120
+    }
+   },
+   "groups": [
+    {
+     "key": "0D.wd0",
+     "group": {
+      "config": "0D",
+      "wind_direction_deg": 0.0
+     },
+     "points_measured": 120,
+     "scores": {
+      "vs.scalar": {
+       "Count": 120,
+       "MeanObserved": 0.43737456668491154,
+       "MeanPredicted": 0.33318596526926664,
+       "Fb": 0.27042288592543834,
+       "Nmse": 0.11873531374961312,
+       "Nad": 0.14373231906892772,
+       "Fac2": 0.9166666666666666,
+       "HitRate": 0.5833333333333334,
+       "Mg": 1.3484003358674843,
+       "Vg": 1.1821918047744164,
+       "GeometricPairs": 120,
+       "R": 0.8389045864398776
+      },
+      "vs.vector": {
+       "Count": 120,
+       "MeanObserved": 0.43737456668491154,
+       "MeanPredicted": 0.2691623461010508,
+       "Fb": 0.47615975199534644,
+       "Nmse": 0.31037174597422723,
+       "Nad": 0.2388407713632672,
+       "Fac2": 0.6583333333333333,
+       "HitRate": 0.2916666666666667,
+       "Mg": 1.8499434992060297,
+       "Vg": 1.8990351242616725,
+       "GeometricPairs": 120,
+       "R": 0.8160961938498685
+      }
+     },
+     "coverage": {
+      "vs.scalar": {
+       "scored": 120,
+       "measured": 120
+      },
+      "vs.vector": {
+       "scored": 120,
+       "measured": 120
+      }
+     }
+    },
+    {
+     "key": "0D.wd22.5",
+     "group": {
+      "config": "0D",
+      "wind_direction_deg": 22.5
+     },
+     "points_measured": 120,
+     "scores": {
+      "vs.scalar": {
+       "Count": 120,
+       "MeanObserved": 0.4659277504105091,
+       "MeanPredicted": 0.4136049653758352,
+       "Fb": 0.1189785987389789,
+       "Nmse": 0.05222882510796915,
+       "Nad": 0.09276126307114554,
+       "Fac2": 0.9833333333333333,
+       "HitRate": 0.7333333333333333,
+       "Mg": 1.1369300321319158,
+       "Vg": 1.0619742222797517,
+       "GeometricPairs": 120,
+       "R": 0.8599591569962093
+      },
+      "vs.vector": {
+       "Count": 120,
+       "MeanObserved": 0.4659277504105091,
+       "MeanPredicted": 0.33730874171107056,
+       "Fb": 0.32025190578609936,
+       "Nmse": 0.16879723918351042,
+       "Nad": 0.17079867758705056,
+       "Fac2": 0.8083333333333333,
+       "HitRate": 0.425,
+       "Mg": 1.5564425063812246,
+       "Vg": 1.5273561015640076,
+       "GeometricPairs": 120,
+       "R": 0.8480198298631314
+      }
+     },
+     "coverage": {
+      "vs.scalar": {
+       "scored": 120,
+       "measured": 120
+      },
+      "vs.vector": {
+       "scored": 120,
+       "measured": 120
+      }
+     }
+    },
+    {
+     "key": "0D.wd45",
+     "group": {
+      "config": "0D",
+      "wind_direction_deg": 45.0
+     },
+     "points_measured": 120,
+     "scores": {
+      "vs.scalar": {
+       "Count": 120,
+       "MeanObserved": 0.49856321839080464,
+       "MeanPredicted": 0.4376247722818221,
+       "Fb": 0.1301842081208494,
+       "Nmse": 0.058830845034577854,
+       "Nad": 0.08948173058163204,
+       "Fac2": 0.9333333333333333,
+       "HitRate": 0.8,
+       "Mg": 1.1641262562376247,
+       "Vg": 1.0853915955894589,
+       "GeometricPairs": 120,
+       "R": 0.8400142992363452
+      },
+      "vs.vector": {
+       "Count": 120,
+       "MeanObserved": 0.49856321839080464,
+       "MeanPredicted": 0.3599959470401675,
+       "Fb": 0.3227902675317206,
+       "Nmse": 0.18899488179345705,
+       "Nad": 0.16917786976592233,
+       "Fac2": 0.7833333333333333,
+       "HitRate": 0.5333333333333333,
+       "Mg": 1.6571459878958894,
+       "Vg": 2.0426037216537707,
+       "GeometricPairs": 120,
+       "R": 0.808095906128549
+      }
+     },
+     "coverage": {
+      "vs.scalar": {
+       "scored": 120,
+       "measured": 120
+      },
+      "vs.vector": {
+       "scored": 120,
+       "measured": 120
+      }
+     }
+    },
+    {
+     "key": "1D.wd0",
+     "group": {
+      "config": "1D",
+      "wind_direction_deg": 0.0
+     },
+     "points_measured": 120,
+     "scores": {
+      "vs.scalar": {
+       "Count": 120,
+       "MeanObserved": 0.43557288815909506,
+       "MeanPredicted": 0.309007328110207,
+       "Fb": 0.3399648749278922,
+       "Nmse": 0.17366466248927434,
+       "Nad": 0.17814965527499171,
+       "Fac2": 0.8666666666666667,
+       "HitRate": 0.4083333333333333,
+       "Mg": 1.4728719488750104,
+       "Vg": 1.2860603675678683,
+       "GeometricPairs": 120,
+       "R": 0.7936504399397474
+      },
+      "vs.vector": {
+       "Count": 120,
+       "MeanObserved": 0.43557288815909506,
+       "MeanPredicted": 0.24687039411510023,
+       "Fb": 0.5530202991086871,
+       "Nmse": 0.4376880984161056,
+       "Nad": 0.2783986736344838,
+       "Fac2": 0.5583333333333333,
+       "HitRate": 0.31666666666666665,
+       "Mg": 2.1430126392784024,
+       "Vg": 2.9121294500053936,
+       "GeometricPairs": 120,
+       "R": 0.7288639593873986
+      }
+     },
+     "coverage": {
+      "vs.scalar": {
+       "scored": 120,
+       "measured": 120
+      },
+      "vs.vector": {
+       "scored": 120,
+       "measured": 120
+      }
+     }
+    },
+    {
+     "key": "1D.wd22.5",
+     "group": {
+      "config": "1D",
+      "wind_direction_deg": 22.5
+     },
+     "points_measured": 120,
+     "scores": {
+      "vs.scalar": {
+       "Count": 120,
+       "MeanObserved": 0.46948549534756434,
+       "MeanPredicted": 0.3849171227318323,
+       "Fb": 0.19795906713355454,
+       "Nmse": 0.06635761130765395,
+       "Nad": 0.1050912820429703,
+       "Fac2": 0.9666666666666667,
+       "HitRate": 0.6666666666666666,
+       "Mg": 1.246180671653269,
+       "Vg": 1.0968775477657184,
+       "GeometricPairs": 120,
+       "R": 0.9040771103112457
+      },
+      "vs.vector": {
+       "Count": 120,
+       "MeanObserved": 0.46948549534756434,
+       "MeanPredicted": 0.3105012943284765,
+       "Fb": 0.4076587017201156,
+       "Nmse": 0.22033542620640745,
+       "Nad": 0.20382935086005777,
+       "Fac2": 0.6916666666666667,
+       "HitRate": 0.3416666666666667,
+       "Mg": 1.7078546442295777,
+       "Vg": 1.5755440794468234,
+       "GeometricPairs": 120,
+       "R": 0.8883322601049066
+      }
+     },
+     "coverage": {
+      "vs.scalar": {
+       "scored": 120,
+       "measured": 120
+      },
+      "vs.vector": {
+       "scored": 120,
+       "measured": 120
+      }
+     }
+    },
+    {
+     "key": "1D.wd45",
+     "group": {
+      "config": "1D",
+      "wind_direction_deg": 45.0
+     },
+     "points_measured": 120,
+     "scores": {
+      "vs.scalar": {
+       "Count": 120,
+       "MeanObserved": 0.5353950009122423,
+       "MeanPredicted": 0.43279049877795894,
+       "Fb": 0.21195215620790572,
+       "Nmse": 0.07832657405606995,
+       "Nad": 0.11308014893070825,
+       "Fac2": 0.925,
+       "HitRate": 0.725,
+       "Mg": 1.2872754340396844,
+       "Vg": 1.137841449492914,
+       "GeometricPairs": 120,
+       "R": 0.8788345339946634
+      },
+      "vs.vector": {
+       "Count": 120,
+       "MeanObserved": 0.5353950009122423,
+       "MeanPredicted": 0.3668632401386913,
+       "Fb": 0.37357765904636875,
+       "Nmse": 0.18882085141987054,
+       "Nad": 0.18825132015048862,
+       "Fac2": 0.8,
+       "HitRate": 0.39166666666666666,
+       "Mg": 1.6880593245178068,
+       "Vg": 1.780935656747,
+       "GeometricPairs": 120,
+       "R": 0.8785595140908607
+      }
+     },
+     "coverage": {
+      "vs.scalar": {
+       "scored": 120,
+       "measured": 120
+      },
+      "vs.vector": {
+       "scored": 120,
+       "measured": 120
+      }
+     }
+    },
+    {
+     "key": "2D.wd0",
+     "group": {
+      "config": "2D",
+      "wind_direction_deg": 0.0
+     },
+     "points_measured": 120,
+     "scores": {
+      "vs.scalar": {
+       "Count": 120,
+       "MeanObserved": 0.4789272030651341,
+       "MeanPredicted": 0.37716138367799235,
+       "Fb": 0.2377460019045367,
+       "Nmse": 0.09637586068930262,
+       "Nad": 0.1261486458059817,
+       "Fac2": 0.8666666666666667,
+       "HitRate": 0.5583333333333333,
+       "Mg": 1.3614363921696822,
+       "Vg": 1.2059527284905058,
+       "GeometricPairs": 120,
+       "R": 0.8629150082385112
+      },
+      "vs.vector": {
+       "Count": 120,
+       "MeanObserved": 0.4789272030651341,
+       "MeanPredicted": 0.30863790084176135,
+       "Fb": 0.4324450166179635,
+       "Nmse": 0.2416560781307536,
+       "Nad": 0.2163479111284685,
+       "Fac2": 0.6916666666666667,
+       "HitRate": 0.31666666666666665,
+       "Mg": 1.763245998228713,
+       "Vg": 1.7176825360178227,
+       "GeometricPairs": 120,
+       "R": 0.8548703549946113
+      }
+     },
+     "coverage": {
+      "vs.scalar": {
+       "scored": 120,
+       "measured": 120
+      },
+      "vs.vector": {
+       "scored": 120,
+       "measured": 120
+      }
+     }
+    },
+    {
+     "key": "2D.wd22.5",
+     "group": {
+      "config": "2D",
+      "wind_direction_deg": 22.5
+     },
+     "points_measured": 120,
+     "scores": {
+      "vs.scalar": {
+       "Count": 120,
+       "MeanObserved": 0.5919768290457945,
+       "MeanPredicted": 0.5298865776424125,
+       "Fb": 0.11069128564710974,
+       "Nmse": 0.029142105491303947,
+       "Nad": 0.07105702364153388,
+       "Fac2": 0.9833333333333333,
+       "HitRate": 0.8416666666666667,
+       "Mg": 1.144882792218656,
+       "Vg": 1.0615734186806163,
+       "GeometricPairs": 120,
+       "R": 0.9070449269719939
+      },
+      "vs.vector": {
+       "Count": 120,
+       "MeanObserved": 0.5919768290457945,
+       "MeanPredicted": 0.45058779040230185,
+       "Fb": 0.2712331418235542,
+       "Nmse": 0.10178986228739517,
+       "Nad": 0.13873452499744596,
+       "Fac2": 0.8666666666666667,
+       "HitRate": 0.575,
+       "Mg": 1.455968044800405,
+       "Vg": 1.3896998937600737,
+       "GeometricPairs": 120,
+       "R": 0.8927275612078488
+      }
+     },
+     "coverage": {
+      "vs.scalar": {
+       "scored": 120,
+       "measured": 120
+      },
+      "vs.vector": {
+       "scored": 120,
+       "measured": 120
+      }
+     }
+    },
+    {
+     "key": "2D.wd45",
+     "group": {
+      "config": "2D",
+      "wind_direction_deg": 45.0
+     },
+     "points_measured": 120,
+     "scores": {
+      "vs.scalar": {
+       "Count": 120,
+       "MeanObserved": 0.6135285531837256,
+       "MeanPredicted": 0.5527415929260633,
+       "Fb": 0.10424164668953122,
+       "Nmse": 0.024664710490791577,
+       "Nad": 0.06282975954924966,
+       "Fac2": 1.0,
+       "HitRate": 0.9083333333333333,
+       "Mg": 1.1259556689251216,
+       "Vg": 1.0415196292370759,
+       "GeometricPairs": 120,
+       "R": 0.9258357934765804
+      },
+      "vs.vector": {
+       "Count": 120,
+       "MeanObserved": 0.6135285531837256,
+       "MeanPredicted": 0.4783347488615966,
+       "Fb": 0.24763869995241805,
+       "Nmse": 0.08110809566586273,
+       "Nad": 0.12467810119178337,
+       "Fac2": 0.9,
+       "HitRate": 0.6333333333333333,
+       "Mg": 1.3881580135814227,
+       "Vg": 1.2531922550350254,
+       "GeometricPairs": 120,
+       "R": 0.9270513013884142
+      }
+     },
+     "coverage": {
+      "vs.scalar": {
+       "scored": 120,
+       "measured": 120
+      },
+      "vs.vector": {
+       "scored": 120,
+       "measured": 120
+      }
+     }
+    }
+   ],
+   "U_ref_m_s": 3.654,
    "units_given": "normalised"
   },
   {

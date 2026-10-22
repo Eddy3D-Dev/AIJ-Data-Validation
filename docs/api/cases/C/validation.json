@@ -1,7 +1,7 @@
 {
  "$schema": "https://aij.eddy3d.com/api/schemas/validation.schema.json",
  "schema_version": "2.5.0",
- "data_version": "1346aa83352325ea02157757ed98a73bd25e7f98615646d480c0c3e38359ea15",
+ "data_version": "0393ae0d0d6e467339e02f9bf628c1c913f10064c1fbc63b1d2e8fcb1298659e",
  "license": "CC-BY-4.0",
  "case": "C",
  "title": "Case C — 3 × 3 block array",

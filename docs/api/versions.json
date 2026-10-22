@@ -1,16 +1,30 @@
 {
  "$schema": "https://aij.eddy3d.com/api/schemas/versions.schema.json",
  "schema_version": "2.5.0",
- "data_version": "1346aa83352325ea02157757ed98a73bd25e7f98615646d480c0c3e38359ea15",
+ "data_version": "0393ae0d0d6e467339e02f9bf628c1c913f10064c1fbc63b1d2e8fcb1298659e",
  "license": "CC-BY-4.0",
  "description": "Every release of the data and API, newest first. The unversioned /api/ paths serve `latest`. To pin an analysis to a release, fetch its files from its `base_url` instead (the paths are those of its index.json): a release's files never change. `data_version` is the latest release's.",
- "latest": "3.6.0",
+ "latest": "3.7.0",
  "latest_base_url": "https://aij.eddy3d.com/api",
  "versions": [
   {
-   "version": "3.6.0",
+   "version": "3.7.0",
    "date": "2026-10-21",
    "status": "latest",
+   "schema_version": "2.5.0",
+   "data_version": "0393ae0d0d6e467339e02f9bf628c1c913f10064c1fbc63b1d2e8fcb1298659e",
+   "base_url": "https://aij.eddy3d.com/api/3.7.0",
+   "index_url": "https://aij.eddy3d.com/api/3.7.0/index.json",
+   "fallback_base_url": "https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/v3.7.0/docs/api/3.7.0",
+   "self_contained": true,
+   "tag": "v3.7.0",
+   "tag_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/releases/tag/v3.7.0",
+   "changelog_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/v3.7.0/CHANGELOG.md"
+  },
+  {
+   "version": "3.6.0",
+   "date": "2026-10-21",
+   "status": "superseded",
    "schema_version": "2.5.0",
    "data_version": "1346aa83352325ea02157757ed98a73bd25e7f98615646d480c0c3e38359ea15",
    "base_url": "https://aij.eddy3d.com/api/3.6.0",

@@ -1,6 +1,6 @@
 ==== 0/U
 /*--------------------------------*- C++ -*----------------------------------*\
-  cases/K/inflow_openfoam.txt of the AIJ UWE API (release 3.6.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  cases/K/inflow_openfoam.txt of the AIJ UWE API (release 3.7.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
   RECOMMENDED inlet (this repository's choice, not the benchmark's): U(z) = u*/kappa ln((z + z0)/z0) with u* = 0.40706 m/s, z0 = 0.0074385 m fitted to the measured profile (least squares, kappa = 0.41, z = 0.02 .. 0.6 m (10 H) on AF_caseK.csv: the profile is Case H's, tabulated for a 0.2 m building, so the window is a choice); k = u*^2/sqrt(Cmu); epsilon = u*^3/(kappa (z + z0)). flowDir is the case's wind direction by the convention along_x (cases/K.json inflow.flow_direction).
   OpenFOAM 12 (openfoam.org) syntax. ESI OpenFOAM v2xxx: the three atmBoundaryLayerInlet* conditions and nutkAtmRoughWallFunction take the same entries there; fixedProfile is openfoam.org only (use timeVaryingMappedFixedValue or codedFixedValue).
 \*---------------------------------------------------------------------------*/
@@ -36,7 +36,7 @@ boundaryField
 
 ==== 0/k
 /*--------------------------------*- C++ -*----------------------------------*\
-  cases/K/inflow_openfoam.txt of the AIJ UWE API (release 3.6.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  cases/K/inflow_openfoam.txt of the AIJ UWE API (release 3.7.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
   RECOMMENDED inlet (this repository's choice, not the benchmark's): U(z) = u*/kappa ln((z + z0)/z0) with u* = 0.40706 m/s, z0 = 0.0074385 m fitted to the measured profile (least squares, kappa = 0.41, z = 0.02 .. 0.6 m (10 H) on AF_caseK.csv: the profile is Case H's, tabulated for a 0.2 m building, so the window is a choice); k = u*^2/sqrt(Cmu); epsilon = u*^3/(kappa (z + z0)). flowDir is the case's wind direction by the convention along_x (cases/K.json inflow.flow_direction).
   OpenFOAM 12 (openfoam.org) syntax. ESI OpenFOAM v2xxx: the three atmBoundaryLayerInlet* conditions and nutkAtmRoughWallFunction take the same entries there; fixedProfile is openfoam.org only (use timeVaryingMappedFixedValue or codedFixedValue).
 \*---------------------------------------------------------------------------*/
@@ -72,7 +72,7 @@ boundaryField
 
 ==== 0/epsilon
 /*--------------------------------*- C++ -*----------------------------------*\
-  cases/K/inflow_openfoam.txt of the AIJ UWE API (release 3.6.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  cases/K/inflow_openfoam.txt of the AIJ UWE API (release 3.7.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
   RECOMMENDED inlet (this repository's choice, not the benchmark's): U(z) = u*/kappa ln((z + z0)/z0) with u* = 0.40706 m/s, z0 = 0.0074385 m fitted to the measured profile (least squares, kappa = 0.41, z = 0.02 .. 0.6 m (10 H) on AF_caseK.csv: the profile is Case H's, tabulated for a 0.2 m building, so the window is a choice); k = u*^2/sqrt(Cmu); epsilon = u*^3/(kappa (z + z0)). flowDir is the case's wind direction by the convention along_x (cases/K.json inflow.flow_direction).
   OpenFOAM 12 (openfoam.org) syntax. ESI OpenFOAM v2xxx: the three atmBoundaryLayerInlet* conditions and nutkAtmRoughWallFunction take the same entries there; fixedProfile is openfoam.org only (use timeVaryingMappedFixedValue or codedFixedValue).
 \*---------------------------------------------------------------------------*/
@@ -108,7 +108,7 @@ boundaryField
 
 ==== 0/nut
 /*--------------------------------*- C++ -*----------------------------------*\
-  cases/K/inflow_openfoam.txt of the AIJ UWE API (release 3.6.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  cases/K/inflow_openfoam.txt of the AIJ UWE API (release 3.7.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
   RECOMMENDED ground roughness: the same z0 as the inlet, so the profile holds along an empty fetch
 \*---------------------------------------------------------------------------*/
 FoamFile
@@ -136,7 +136,7 @@ boundaryField
 
 ==== system/probes
 /*--------------------------------*- C++ -*----------------------------------*\
-  cases/K/inflow_openfoam.txt of the AIJ UWE API (release 3.6.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  cases/K/inflow_openfoam.txt of the AIJ UWE API (release 3.7.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
   the benchmark's measurement points (cases/K/probes.csv, the data), in the case frame and units: include from controlDict functions
 \*---------------------------------------------------------------------------*/
 FoamFile
