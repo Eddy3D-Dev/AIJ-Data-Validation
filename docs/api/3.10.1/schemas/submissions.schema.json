@@ -1,0 +1,243 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://aij.eddy3d.com/api/3.10.1/schemas/submissions.schema.json",
+ "title": "Community results",
+ "description": "Every submitted solver with its headline scores per case, scored by this build from the values it gave at the published points.",
+ "type": "object",
+ "required": [
+  "$schema",
+  "schema_version",
+  "data_version",
+  "license",
+  "submissions"
+ ],
+ "properties": {
+  "$schema": {
+   "type": "string",
+   "format": "uri"
+  },
+  "schema_version": {
+   "type": "string",
+   "pattern": "^\\d+\\.\\d+\\.\\d+$",
+   "description": "the API's version (semantic versioning); see index.json changelog"
+  },
+  "data_version": {
+   "type": "string",
+   "pattern": "^[0-9a-f]{64}$",
+   "description": "SHA-256 over every served measurement, geometry and score file; changes when, and only when, the data does"
+  },
+  "license": {
+   "const": "CC-BY-4.0",
+   "description": "SPDX identifier of the data's licence"
+  },
+  "description": {
+   "type": "string"
+  },
+  "how_to_submit": {
+   "type": "string",
+   "format": "uri"
+  },
+  "status_meaning": {
+   "type": "object"
+  },
+  "metric_meaning": {
+   "type": "object"
+  },
+  "submissions": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "slug",
+     "solver",
+     "version",
+     "author",
+     "example",
+     "cases",
+     "submission_url"
+    ],
+    "properties": {
+     "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,63}$",
+      "description": "a submission: the name of its folder under submissions/ in the repository"
+     },
+     "solver": {
+      "type": "string"
+     },
+     "version": {
+      "type": "string"
+     },
+     "author": {
+      "type": "string"
+     },
+     "url": {
+      "type": "string"
+     },
+     "example": {
+      "type": "boolean",
+      "description": "true for the repository's own worked example, which is not a community result"
+     },
+     "inlet": {
+      "type": "string"
+     },
+     "turbulence_model": {
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "ml_description": {
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "cases": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "case",
+        "status",
+        "headline",
+        "values"
+       ],
+       "properties": {
+        "case": {
+         "enum": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J",
+          "K",
+          "L",
+          "M"
+         ]
+        },
+        "title": {
+         "type": "string"
+        },
+        "status": {
+         "const": "scored"
+        },
+        "headline": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "required": [
+           "label",
+           "score",
+           "Count",
+           "R",
+           "Fac2",
+           "Fb",
+           "HitRate",
+           "coverage"
+          ],
+          "properties": {
+           "label": {
+            "type": "string"
+           },
+           "score": {
+            "type": "string"
+           },
+           "Count": {
+            "type": "integer"
+           },
+           "R": {
+            "type": [
+             "number",
+             "null"
+            ]
+           },
+           "Fac2": {
+            "type": [
+             "number",
+             "null"
+            ]
+           },
+           "Fb": {
+            "type": [
+             "number",
+             "null"
+            ]
+           },
+           "HitRate": {
+            "type": [
+             "number",
+             "null"
+            ]
+           },
+           "coverage": {
+            "type": "object",
+            "required": [
+             "scored",
+             "measured"
+            ],
+            "properties": {
+             "scored": {
+              "type": "integer"
+             },
+             "measured": {
+              "type": "integer"
+             }
+            }
+           }
+          }
+         }
+        },
+        "values": {
+         "type": "object",
+         "required": [
+          "url",
+          "path",
+          "media_type",
+          "bytes",
+          "sha256"
+         ],
+         "properties": {
+          "url": {
+           "type": "string",
+           "format": "uri",
+           "description": "absolute URL; the ?v= query is the file's SHA-256 prefix, so a changed file has a new URL"
+          },
+          "path": {
+           "type": "string",
+           "description": "path below the API base"
+          },
+          "media_type": {
+           "type": "string"
+          },
+          "bytes": {
+           "type": "integer",
+           "minimum": 0
+          },
+          "sha256": {
+           "type": "string",
+           "pattern": "^[0-9a-f]{64}$"
+          }
+         }
+        }
+       }
+      }
+     },
+     "submission_url": {
+      "type": "string",
+      "format": "uri"
+     },
+     "page": {
+      "type": "string",
+      "format": "uri"
+     }
+    }
+   }
+  }
+ }
+}

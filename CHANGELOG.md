@@ -15,6 +15,13 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [3.10.1] - 2026-10-22
+
+### Fixed
+
+- Case C of `submissions/eddy3d-of12-nutcap-lifted` is now the fixture's own probes (a re-solve of `TestAijCaseC{0D,1D,2D}ContainerE2E` on
+  PACE ICE) instead of values sampled from solved fields; the scores move by at most 0.02 (hit rate) and 0.03 (bias).
+
 ## [3.10.0] - 2026-10-22
 
 ### Added

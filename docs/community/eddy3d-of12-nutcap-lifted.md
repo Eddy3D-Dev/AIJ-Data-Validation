@@ -24,7 +24,7 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | turbulence\_model | realizable k-epsilon, nutMaxCoeff 1e8 |
 | compute | 3000 iterations, steady, 5-6 ranks (Case A on an Apple M-series laptop, B and H on PACE Phoenix) |
 | units | normalised |
-| notes | Cases D, E and L are re-solves of the Eddy3D fixtures on PACE ICE with the cap lifted (E: the SW direction before and after construction; L: urbanMicroclimateFoam, $$\mathrm{Sc_t}$$ 0.5). Case G is the conifer crown of the drag sweep, where lifting the cap makes the result worse (a worse score, submitted all the same). Case C (all nine configurations, scalar speed sampled from the solved fields of the ICE re-solves), Cases F (wind from NNW) and M (WD 180, $$\mathrm{Sc_t}$$ 0.5) are the Eddy3D fixtures re-solved by another session on PACE ICE with the same cap change, scored here from their probe files. Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the $$\mathrm{Sc_t}$$ = 0.5 species. Case B is the served set-up with the cap lifted (the capped control of the same fixture reproduces the served B scores to the third digit). |
+| notes | Cases D, E and L are re-solves of the Eddy3D fixtures on PACE ICE with the cap lifted (E: the SW direction before and after construction; L: urbanMicroclimateFoam, $$\mathrm{Sc_t}$$ 0.5). Case G is the conifer crown of the drag sweep, where lifting the cap makes the result worse (a worse score, submitted all the same). Case C (all nine configurations, from the fixture probes of an ICE re-solve), Cases F (wind from NNW) and M (WD 180, $$\mathrm{Sc_t}$$ 0.5) are the Eddy3D fixtures re-solved by another session on PACE ICE with the same cap change, scored here from their probe files. Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the $$\mathrm{Sc_t}$$ = 0.5 species. Case B is the served set-up with the cap lifted (the capped control of the same fixture reproduces the served B scores to the third digit). |
 
 {% include nomenclature.md %}
 
@@ -56,72 +56,72 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 
 | Score | R | FAC2 | FB | Hit rate | n | coverage |
 |---|---|---|---|---|---|---|
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.839 | 0.917 | +0.270 | 0.583 | 120 | 120/120 |
-| $$\lvert\mathbf{U}\rvert$$ | +0.816 | 0.658 | +0.476 | 0.292 | 120 | 120/120 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.839 | 0.917 | +0.265 | 0.583 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.818 | 0.658 | +0.468 | 0.292 | 120 | 120/120 |
 {: .scores }
 
 ### config 0D, wind\_direction\_deg 22.5
 
 | Score | R | FAC2 | FB | Hit rate | n | coverage |
 |---|---|---|---|---|---|---|
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.860 | 0.983 | +0.119 | 0.733 | 120 | 120/120 |
-| $$\lvert\mathbf{U}\rvert$$ | +0.848 | 0.808 | +0.320 | 0.425 | 120 | 120/120 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.859 | 0.983 | +0.111 | 0.742 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.847 | 0.817 | +0.310 | 0.425 | 120 | 120/120 |
 {: .scores }
 
 ### config 0D, wind\_direction\_deg 45.0
 
 | Score | R | FAC2 | FB | Hit rate | n | coverage |
 |---|---|---|---|---|---|---|
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.840 | 0.933 | +0.130 | 0.800 | 120 | 120/120 |
-| $$\lvert\mathbf{U}\rvert$$ | +0.808 | 0.783 | +0.323 | 0.533 | 120 | 120/120 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.841 | 0.933 | +0.122 | 0.800 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.810 | 0.792 | +0.312 | 0.533 | 120 | 120/120 |
 {: .scores }
 
 ### config 1D, wind\_direction\_deg 0.0
 
 | Score | R | FAC2 | FB | Hit rate | n | coverage |
 |---|---|---|---|---|---|---|
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.794 | 0.867 | +0.340 | 0.408 | 120 | 120/120 |
-| $$\lvert\mathbf{U}\rvert$$ | +0.729 | 0.558 | +0.553 | 0.317 | 120 | 120/120 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.794 | 0.850 | +0.335 | 0.408 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.731 | 0.567 | +0.546 | 0.325 | 120 | 120/120 |
 {: .scores }
 
 ### config 1D, wind\_direction\_deg 22.5
 
 | Score | R | FAC2 | FB | Hit rate | n | coverage |
 |---|---|---|---|---|---|---|
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.904 | 0.967 | +0.198 | 0.667 | 120 | 120/120 |
-| $$\lvert\mathbf{U}\rvert$$ | +0.888 | 0.692 | +0.408 | 0.342 | 120 | 120/120 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.905 | 0.967 | +0.191 | 0.675 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.888 | 0.708 | +0.399 | 0.333 | 120 | 120/120 |
 {: .scores }
 
 ### config 1D, wind\_direction\_deg 45.0
 
 | Score | R | FAC2 | FB | Hit rate | n | coverage |
 |---|---|---|---|---|---|---|
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.879 | 0.925 | +0.212 | 0.725 | 120 | 120/120 |
-| $$\lvert\mathbf{U}\rvert$$ | +0.879 | 0.800 | +0.374 | 0.392 | 120 | 120/120 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.877 | 0.925 | +0.205 | 0.733 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.877 | 0.817 | +0.365 | 0.417 | 120 | 120/120 |
 {: .scores }
 
 ### config 2D, wind\_direction\_deg 0.0
 
 | Score | R | FAC2 | FB | Hit rate | n | coverage |
 |---|---|---|---|---|---|---|
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.863 | 0.867 | +0.238 | 0.558 | 120 | 120/120 |
-| $$\lvert\mathbf{U}\rvert$$ | +0.855 | 0.692 | +0.432 | 0.317 | 120 | 120/120 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.862 | 0.875 | +0.234 | 0.575 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.854 | 0.700 | +0.428 | 0.317 | 120 | 120/120 |
 {: .scores }
 
 ### config 2D, wind\_direction\_deg 22.5
 
 | Score | R | FAC2 | FB | Hit rate | n | coverage |
 |---|---|---|---|---|---|---|
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.907 | 0.983 | +0.111 | 0.842 | 120 | 120/120 |
-| $$\lvert\mathbf{U}\rvert$$ | +0.893 | 0.867 | +0.271 | 0.575 | 120 | 120/120 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.907 | 0.983 | +0.104 | 0.875 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.893 | 0.867 | +0.264 | 0.592 | 120 | 120/120 |
 {: .scores }
 
 ### config 2D, wind\_direction\_deg 45.0
 
 | Score | R | FAC2 | FB | Hit rate | n | coverage |
 |---|---|---|---|---|---|---|
-| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.926 | 1.000 | +0.104 | 0.908 | 120 | 120/120 |
-| $$\lvert\mathbf{U}\rvert$$ | +0.927 | 0.900 | +0.248 | 0.633 | 120 | 120/120 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.923 | 0.992 | +0.098 | 0.908 | 120 | 120/120 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.925 | 0.900 | +0.241 | 0.642 | 120 | 120/120 |
 {: .scores }
 
 ## Case D — high-rise among city blocks

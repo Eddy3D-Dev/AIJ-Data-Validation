@@ -6,9 +6,9 @@
 Base URL: https://aij.eddy3d.com/api
 Fallback (raw files from the repository): https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/main/docs/api
 Repository: https://github.com/Eddy3D-Dev/AIJ-Data-Validation
-Release: 3.10.0 (2026-10-22). This is the latest alias, which always equals the newest release; the frozen copy of 3.10.0 is https://aij.eddy3d.com/api/3.10.0.
+Release: 3.10.1 (2026-10-22). This is the latest alias, which always equals the newest release; the frozen copy of 3.10.1 is https://aij.eddy3d.com/api/3.10.1.
 All releases: https://aij.eddy3d.com/api/versions.json
-API schema version: 2.5.0. Data version (SHA-256 of the served data): ff26b37f519b0772aa3cf05b22eac9265697548a1f687d60ac677f810c0c48aa.
+API schema version: 2.5.0. Data version (SHA-256 of the served data): 5abd0adb307e7f87ec6e886d2133f2f0eab9fc5f3c6a36bb3b9d80d07c1d9ce2.
 Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and requested citation of each case are in cases/{id}.json.
 
 ## How to use this
@@ -153,19 +153,19 @@ Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and reques
   - https://aij.eddy3d.com/api/cases/L/probes.csv?v=abee3cd8c088
   - https://aij.eddy3d.com/api/cases/M/probes.csv?v=877ae498c348
 - cases/{id}/inflow_openfoam.txt (base URL + path, one file per value) — the recommended inlet as OpenFOAM 12 files in one text (0/U, 0/k, 0/epsilon, 0/nut, system/probes with the case's points); the benchmark's data is the measured profile, the inlet is this repository's choice:
-  - https://aij.eddy3d.com/api/cases/A/inflow_openfoam.txt?v=a4b256fbbdd3
-  - https://aij.eddy3d.com/api/cases/B/inflow_openfoam.txt?v=248bb0056f8f
-  - https://aij.eddy3d.com/api/cases/C/inflow_openfoam.txt?v=b3afa495f504
-  - https://aij.eddy3d.com/api/cases/D/inflow_openfoam.txt?v=b280c373f153
-  - https://aij.eddy3d.com/api/cases/E/inflow_openfoam.txt?v=7dc7647e3eed
-  - https://aij.eddy3d.com/api/cases/F/inflow_openfoam.txt?v=f4ea3a21b462
-  - https://aij.eddy3d.com/api/cases/G/inflow_openfoam.txt?v=5f257222d462
-  - https://aij.eddy3d.com/api/cases/H/inflow_openfoam.txt?v=f3ee4ff61c95
-  - https://aij.eddy3d.com/api/cases/I/inflow_openfoam.txt?v=a2503794f166
-  - https://aij.eddy3d.com/api/cases/J/inflow_openfoam.txt?v=f51ea6105290
-  - https://aij.eddy3d.com/api/cases/K/inflow_openfoam.txt?v=da90016e38e0
-  - https://aij.eddy3d.com/api/cases/L/inflow_openfoam.txt?v=8e9827257b50
-  - https://aij.eddy3d.com/api/cases/M/inflow_openfoam.txt?v=3e71dcbaadac
+  - https://aij.eddy3d.com/api/cases/A/inflow_openfoam.txt?v=546c67d2bf76
+  - https://aij.eddy3d.com/api/cases/B/inflow_openfoam.txt?v=6f27045dc0fb
+  - https://aij.eddy3d.com/api/cases/C/inflow_openfoam.txt?v=230c7ae0625e
+  - https://aij.eddy3d.com/api/cases/D/inflow_openfoam.txt?v=8d92d68202d2
+  - https://aij.eddy3d.com/api/cases/E/inflow_openfoam.txt?v=f0ebca2fa911
+  - https://aij.eddy3d.com/api/cases/F/inflow_openfoam.txt?v=0d60900586f8
+  - https://aij.eddy3d.com/api/cases/G/inflow_openfoam.txt?v=8fe00dee5e7d
+  - https://aij.eddy3d.com/api/cases/H/inflow_openfoam.txt?v=8e5277e91fcd
+  - https://aij.eddy3d.com/api/cases/I/inflow_openfoam.txt?v=c77718fa7e11
+  - https://aij.eddy3d.com/api/cases/J/inflow_openfoam.txt?v=5d44d1bd1d86
+  - https://aij.eddy3d.com/api/cases/K/inflow_openfoam.txt?v=239e2730dedb
+  - https://aij.eddy3d.com/api/cases/L/inflow_openfoam.txt?v=6221e66bcc80
+  - https://aij.eddy3d.com/api/cases/M/inflow_openfoam.txt?v=4a72c94763b1
 - cases/{id}/validation.json (base URL + path, one file per value) — Eddy3D's scores per engine and run, with figures and the per-point pairs:
   - https://aij.eddy3d.com/api/cases/A/validation.json
   - https://aij.eddy3d.com/api/cases/B/validation.json
@@ -227,7 +227,7 @@ Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and reques
   - https://aij.eddy3d.com/api/submissions/eddy3d-of12-mesh2x-measured-inlet/A.csv?v=d21d791d27b1
   - https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/A.csv?v=d55ee1f8ca3c
   - https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/B.csv?v=d35fb0a6cd1b
-  - https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/C.csv?v=c4b32ff802be
+  - https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/C.csv?v=35838affb859
   - https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/D.csv?v=2dfde16debe1
   - https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/E.csv?v=7adb9c8af800
   - https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/F.csv?v=529a40fd2c5b
