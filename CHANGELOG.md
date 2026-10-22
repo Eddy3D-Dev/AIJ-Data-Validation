@@ -15,6 +15,14 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [3.8.0] - 2026-10-21
+
+### Added
+
+- Case G (conifer crown) in `submissions/eddy3d-of12-nutcap-lifted`, the one case the cap lift makes worse: the $$U$$ hit rate over the
+  solve's own approach speed falls 0.286 to 0.071 and $$k$$'s bias goes from −0.09 to −0.83, which suggests the drag values of the sweep
+  were calibrated with the cap on.
+
 ## [3.7.0] - 2026-10-21
 
 ### Added

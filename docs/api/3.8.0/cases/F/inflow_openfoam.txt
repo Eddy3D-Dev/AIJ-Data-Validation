@@ -1,0 +1,557 @@
+==== 0/U
+/*--------------------------------*- C++ -*----------------------------------*\
+  cases/F/inflow_openfoam.txt of the AIJ UWE API (release 3.8.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  RECOMMENDED inlet (this repository's choice, not the benchmark's): the measured approach-flow profile (approach_flow.csv, the benchmark's data) as a table; U is m/s, z is m. flowDir is the case's wind direction by the convention geographic_x_east_y_north (cases/F.json inflow.flow_direction).
+  OpenFOAM 12 (openfoam.org) syntax. ESI OpenFOAM v2xxx: the three atmBoundaryLayerInlet* conditions and nutkAtmRoughWallFunction take the same entries there; fixedProfile is openfoam.org only (use timeVaryingMappedFixedValue or codedFixedValue).
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+dimensions      [0 1 -1 0 0 0 0];
+internalField   uniform (0 0 0);
+boundaryField
+{
+    inlet
+    {
+        type            fixedProfile;
+        direction       (0 0 1);
+        origin          0;
+        profile         table
+        (
+            (10 (0 -3.4 0))
+            (20 (0 -4.5 0))
+            (35 (0 -4.9 0))
+            (40 (0 -5.3 0))
+            (50 (0 -5.9 0))
+            (60 (0 -6.2 0))
+            (65 (0 -6.4 0))
+            (80 (0 -6.6 0))
+            (100 (0 -6.7 0))
+            (120 (0 -6.9 0))
+            (140 (0 -7.2 0))
+            (160 (0 -7.8 0))
+            (200 (0 -8.2 0))
+            (240 (0 -8.6 0))
+            (280 (0 -8.9 0))
+            (320 (0 -9.5 0))
+            (360 (0 -9.8 0))
+            (400 (0 -10 0))
+        );
+    }
+    outlet          { type inletOutlet; inletValue uniform (0 0 0); value $internalField; }
+    ground          { type noSlip; }
+    buildings       { type noSlip; }
+    top             { type slip; }
+    sides           { type slip; }
+}
+
+==== 0/k
+/*--------------------------------*- C++ -*----------------------------------*\
+  cases/F/inflow_openfoam.txt of the AIJ UWE API (release 3.8.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  the profile publishes no k: set k and epsilon from your own closure (no recommendation)
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       volScalarField;
+    object      k;
+}
+// no measured k for this case: see cases/{case}.json inflow
+
+==== system/probes
+/*--------------------------------*- C++ -*----------------------------------*\
+  cases/F/inflow_openfoam.txt of the AIJ UWE API (release 3.8.0), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  the benchmark's measurement points (cases/F/probes.csv, the data), in the case frame and units: include from controlDict functions
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      probes;
+}
+probes
+{
+    type            probes;
+    libs            ("libsampling.so");
+    writeControl    writeTime;
+    fields          (U k epsilon);
+    probeLocations
+    (
+        (268.6 364.1 19)   // point_id 1, config default, campaign field, instrument cup_anemometer, WD 0
+        (165.4 299.3 19)   // point_id 2, config default, campaign field, instrument cup_anemometer, WD 0
+        (20.7 343.4 19)   // point_id 3, config default, campaign field, instrument cup_anemometer, WD 0
+        (40.5 304.1 19)   // point_id 5, config default, campaign field, instrument cup_anemometer, WD 0
+        (1.2 220.3 19)   // point_id 6, config default, campaign field, instrument cup_anemometer, WD 0
+        (-81.9 164.7 19)   // point_id 7, config default, campaign field, instrument cup_anemometer, WD 0
+        (-128.7 194.6 17)   // point_id 8, config default, campaign field, instrument cup_anemometer, WD 0
+        (-195.4 181 19)   // point_id 9, config default, campaign field, instrument cup_anemometer, WD 0
+        (-263.7 293.8 19)   // point_id 10, config default, campaign field, instrument cup_anemometer, WD 0
+        (-93.6 -493.6 18)   // point_id 11, config default, campaign field, instrument cup_anemometer, WD 0
+        (51.4 143 21)   // point_id 13, config default, campaign field, instrument cup_anemometer, WD 0
+        (81.3 284.7 21)   // point_id 14, config default, campaign field, instrument cup_anemometer, WD 0
+        (-50.2 87.5 13)   // point_id 15, config default, campaign field, instrument cup_anemometer, WD 0
+        (268.6 364.1 19)   // point_id 1, config default, campaign field, instrument cup_anemometer, WD 22.5
+        (165.4 299.3 19)   // point_id 2, config default, campaign field, instrument cup_anemometer, WD 22.5
+        (20.7 343.4 19)   // point_id 3, config default, campaign field, instrument cup_anemometer, WD 22.5
+        (40.5 304.1 19)   // point_id 5, config default, campaign field, instrument cup_anemometer, WD 22.5
+        (1.2 220.3 19)   // point_id 6, config default, campaign field, instrument cup_anemometer, WD 22.5
+        (-81.9 164.7 19)   // point_id 7, config default, campaign field, instrument cup_anemometer, WD 22.5
+        (-128.7 194.6 17)   // point_id 8, config default, campaign field, instrument cup_anemometer, WD 22.5
+        (-195.4 181 19)   // point_id 9, config default, campaign field, instrument cup_anemometer, WD 22.5
+        (-263.7 293.8 19)   // point_id 10, config default, campaign field, instrument cup_anemometer, WD 22.5
+        (-93.6 -493.6 18)   // point_id 11, config default, campaign field, instrument cup_anemometer, WD 22.5
+        (51.4 143 21)   // point_id 13, config default, campaign field, instrument cup_anemometer, WD 22.5
+        (81.3 284.7 21)   // point_id 14, config default, campaign field, instrument cup_anemometer, WD 22.5
+        (-50.2 87.5 13)   // point_id 15, config default, campaign field, instrument cup_anemometer, WD 22.5
+        (268.6 364.1 19)   // point_id 1, config default, campaign field, instrument cup_anemometer, WD 45
+        (165.4 299.3 19)   // point_id 2, config default, campaign field, instrument cup_anemometer, WD 45
+        (20.7 343.4 19)   // point_id 3, config default, campaign field, instrument cup_anemometer, WD 45
+        (40.5 304.1 19)   // point_id 5, config default, campaign field, instrument cup_anemometer, WD 45
+        (1.2 220.3 19)   // point_id 6, config default, campaign field, instrument cup_anemometer, WD 45
+        (-81.9 164.7 19)   // point_id 7, config default, campaign field, instrument cup_anemometer, WD 45
+        (-128.7 194.6 17)   // point_id 8, config default, campaign field, instrument cup_anemometer, WD 45
+        (-195.4 181 19)   // point_id 9, config default, campaign field, instrument cup_anemometer, WD 45
+        (-263.7 293.8 19)   // point_id 10, config default, campaign field, instrument cup_anemometer, WD 45
+        (-93.6 -493.6 18)   // point_id 11, config default, campaign field, instrument cup_anemometer, WD 45
+        (51.4 143 21)   // point_id 13, config default, campaign field, instrument cup_anemometer, WD 45
+        (81.3 284.7 21)   // point_id 14, config default, campaign field, instrument cup_anemometer, WD 45
+        (-50.2 87.5 13)   // point_id 15, config default, campaign field, instrument cup_anemometer, WD 45
+        (268.6 364.1 19)   // point_id 1, config default, campaign field, instrument cup_anemometer, WD 67.5
+        (165.4 299.3 19)   // point_id 2, config default, campaign field, instrument cup_anemometer, WD 67.5
+        (20.7 343.4 19)   // point_id 3, config default, campaign field, instrument cup_anemometer, WD 67.5
+        (40.5 304.1 19)   // point_id 5, config default, campaign field, instrument cup_anemometer, WD 67.5
+        (1.2 220.3 19)   // point_id 6, config default, campaign field, instrument cup_anemometer, WD 67.5
+        (-81.9 164.7 19)   // point_id 7, config default, campaign field, instrument cup_anemometer, WD 67.5
+        (-128.7 194.6 17)   // point_id 8, config default, campaign field, instrument cup_anemometer, WD 67.5
+        (-195.4 181 19)   // point_id 9, config default, campaign field, instrument cup_anemometer, WD 67.5
+        (-263.7 293.8 19)   // point_id 10, config default, campaign field, instrument cup_anemometer, WD 67.5
+        (-93.6 -493.6 18)   // point_id 11, config default, campaign field, instrument cup_anemometer, WD 67.5
+        (51.4 143 21)   // point_id 13, config default, campaign field, instrument cup_anemometer, WD 67.5
+        (81.3 284.7 21)   // point_id 14, config default, campaign field, instrument cup_anemometer, WD 67.5
+        (-50.2 87.5 13)   // point_id 15, config default, campaign field, instrument cup_anemometer, WD 67.5
+        (268.6 364.1 19)   // point_id 1, config default, campaign field, instrument cup_anemometer, WD 90
+        (165.4 299.3 19)   // point_id 2, config default, campaign field, instrument cup_anemometer, WD 90
+        (20.7 343.4 19)   // point_id 3, config default, campaign field, instrument cup_anemometer, WD 90
+        (40.5 304.1 19)   // point_id 5, config default, campaign field, instrument cup_anemometer, WD 90
+        (1.2 220.3 19)   // point_id 6, config default, campaign field, instrument cup_anemometer, WD 90
+        (-81.9 164.7 19)   // point_id 7, config default, campaign field, instrument cup_anemometer, WD 90
+        (-128.7 194.6 17)   // point_id 8, config default, campaign field, instrument cup_anemometer, WD 90
+        (-195.4 181 19)   // point_id 9, config default, campaign field, instrument cup_anemometer, WD 90
+        (-263.7 293.8 19)   // point_id 10, config default, campaign field, instrument cup_anemometer, WD 90
+        (-93.6 -493.6 18)   // point_id 11, config default, campaign field, instrument cup_anemometer, WD 90
+        (51.4 143 21)   // point_id 13, config default, campaign field, instrument cup_anemometer, WD 90
+        (81.3 284.7 21)   // point_id 14, config default, campaign field, instrument cup_anemometer, WD 90
+        (-50.2 87.5 13)   // point_id 15, config default, campaign field, instrument cup_anemometer, WD 90
+        (268.6 364.1 19)   // point_id 1, config default, campaign field, instrument cup_anemometer, WD 112.5
+        (165.4 299.3 19)   // point_id 2, config default, campaign field, instrument cup_anemometer, WD 112.5
+        (20.7 343.4 19)   // point_id 3, config default, campaign field, instrument cup_anemometer, WD 112.5
+        (40.5 304.1 19)   // point_id 5, config default, campaign field, instrument cup_anemometer, WD 112.5
+        (1.2 220.3 19)   // point_id 6, config default, campaign field, instrument cup_anemometer, WD 112.5
+        (-81.9 164.7 19)   // point_id 7, config default, campaign field, instrument cup_anemometer, WD 112.5
+        (-128.7 194.6 17)   // point_id 8, config default, campaign field, instrument cup_anemometer, WD 112.5
+        (-195.4 181 19)   // point_id 9, config default, campaign field, instrument cup_anemometer, WD 112.5
+        (-263.7 293.8 19)   // point_id 10, config default, campaign field, instrument cup_anemometer, WD 112.5
+        (-93.6 -493.6 18)   // point_id 11, config default, campaign field, instrument cup_anemometer, WD 112.5
+        (51.4 143 21)   // point_id 13, config default, campaign field, instrument cup_anemometer, WD 112.5
+        (81.3 284.7 21)   // point_id 14, config default, campaign field, instrument cup_anemometer, WD 112.5
+        (-50.2 87.5 13)   // point_id 15, config default, campaign field, instrument cup_anemometer, WD 112.5
+        (268.6 364.1 19)   // point_id 1, config default, campaign field, instrument cup_anemometer, WD 135
+        (165.4 299.3 19)   // point_id 2, config default, campaign field, instrument cup_anemometer, WD 135
+        (20.7 343.4 19)   // point_id 3, config default, campaign field, instrument cup_anemometer, WD 135
+        (40.5 304.1 19)   // point_id 5, config default, campaign field, instrument cup_anemometer, WD 135
+        (1.2 220.3 19)   // point_id 6, config default, campaign field, instrument cup_anemometer, WD 135
+        (-81.9 164.7 19)   // point_id 7, config default, campaign field, instrument cup_anemometer, WD 135
+        (-128.7 194.6 17)   // point_id 8, config default, campaign field, instrument cup_anemometer, WD 135
+        (-195.4 181 19)   // point_id 9, config default, campaign field, instrument cup_anemometer, WD 135
+        (-263.7 293.8 19)   // point_id 10, config default, campaign field, instrument cup_anemometer, WD 135
+        (-93.6 -493.6 18)   // point_id 11, config default, campaign field, instrument cup_anemometer, WD 135
+        (51.4 143 21)   // point_id 13, config default, campaign field, instrument cup_anemometer, WD 135
+        (81.3 284.7 21)   // point_id 14, config default, campaign field, instrument cup_anemometer, WD 135
+        (-50.2 87.5 13)   // point_id 15, config default, campaign field, instrument cup_anemometer, WD 135
+        (268.6 364.1 19)   // point_id 1, config default, campaign field, instrument cup_anemometer, WD 157.5
+        (165.4 299.3 19)   // point_id 2, config default, campaign field, instrument cup_anemometer, WD 157.5
+        (20.7 343.4 19)   // point_id 3, config default, campaign field, instrument cup_anemometer, WD 157.5
+        (40.5 304.1 19)   // point_id 5, config default, campaign field, instrument cup_anemometer, WD 157.5
+        (1.2 220.3 19)   // point_id 6, config default, campaign field, instrument cup_anemometer, WD 157.5
+        (-81.9 164.7 19)   // point_id 7, config default, campaign field, instrument cup_anemometer, WD 157.5
+        (-128.7 194.6 17)   // point_id 8, config default, campaign field, instrument cup_anemometer, WD 157.5
+        (-195.4 181 19)   // point_id 9, config default, campaign field, instrument cup_anemometer, WD 157.5
+        (-263.7 293.8 19)   // point_id 10, config default, campaign field, instrument cup_anemometer, WD 157.5
+        (-93.6 -493.6 18)   // point_id 11, config default, campaign field, instrument cup_anemometer, WD 157.5
+        (51.4 143 21)   // point_id 13, config default, campaign field, instrument cup_anemometer, WD 157.5
+        (81.3 284.7 21)   // point_id 14, config default, campaign field, instrument cup_anemometer, WD 157.5
+        (-50.2 87.5 13)   // point_id 15, config default, campaign field, instrument cup_anemometer, WD 157.5
+        (268.6 364.1 19)   // point_id 1, config default, campaign field, instrument cup_anemometer, WD 180
+        (165.4 299.3 19)   // point_id 2, config default, campaign field, instrument cup_anemometer, WD 180
+        (20.7 343.4 19)   // point_id 3, config default, campaign field, instrument cup_anemometer, WD 180
+        (40.5 304.1 19)   // point_id 5, config default, campaign field, instrument cup_anemometer, WD 180
+        (1.2 220.3 19)   // point_id 6, config default, campaign field, instrument cup_anemometer, WD 180
+        (-81.9 164.7 19)   // point_id 7, config default, campaign field, instrument cup_anemometer, WD 180
+        (-128.7 194.6 17)   // point_id 8, config default, campaign field, instrument cup_anemometer, WD 180
+        (-195.4 181 19)   // point_id 9, config default, campaign field, instrument cup_anemometer, WD 180
+        (-263.7 293.8 19)   // point_id 10, config default, campaign field, instrument cup_anemometer, WD 180
+        (-93.6 -493.6 18)   // point_id 11, config default, campaign field, instrument cup_anemometer, WD 180
+        (51.4 143 21)   // point_id 13, config default, campaign field, instrument cup_anemometer, WD 180
+        (81.3 284.7 21)   // point_id 14, config default, campaign field, instrument cup_anemometer, WD 180
+        (-50.2 87.5 13)   // point_id 15, config default, campaign field, instrument cup_anemometer, WD 180
+        (268.6 364.1 19)   // point_id 1, config default, campaign field, instrument cup_anemometer, WD 202.5
+        (165.4 299.3 19)   // point_id 2, config default, campaign field, instrument cup_anemometer, WD 202.5
+        (20.7 343.4 19)   // point_id 3, config default, campaign field, instrument cup_anemometer, WD 202.5
+        (40.5 304.1 19)   // point_id 5, config default, campaign field, instrument cup_anemometer, WD 202.5
+        (1.2 220.3 19)   // point_id 6, config default, campaign field, instrument cup_anemometer, WD 202.5
+        (-81.9 164.7 19)   // point_id 7, config default, campaign field, instrument cup_anemometer, WD 202.5
+        (-128.7 194.6 17)   // point_id 8, config default, campaign field, instrument cup_anemometer, WD 202.5
+        (-195.4 181 19)   // point_id 9, config default, campaign field, instrument cup_anemometer, WD 202.5
+        (-263.7 293.8 19)   // point_id 10, config default, campaign field, instrument cup_anemometer, WD 202.5
+        (-93.6 -493.6 18)   // point_id 11, config default, campaign field, instrument cup_anemometer, WD 202.5
+        (51.4 143 21)   // point_id 13, config default, campaign field, instrument cup_anemometer, WD 202.5
+        (81.3 284.7 21)   // point_id 14, config default, campaign field, instrument cup_anemometer, WD 202.5
+        (-50.2 87.5 13)   // point_id 15, config default, campaign field, instrument cup_anemometer, WD 202.5
+        (268.6 364.1 19)   // point_id 1, config default, campaign field, instrument cup_anemometer, WD 225
+        (165.4 299.3 19)   // point_id 2, config default, campaign field, instrument cup_anemometer, WD 225
+        (20.7 343.4 19)   // point_id 3, config default, campaign field, instrument cup_anemometer, WD 225
+        (40.5 304.1 19)   // point_id 5, config default, campaign field, instrument cup_anemometer, WD 225
+        (1.2 220.3 19)   // point_id 6, config default, campaign field, instrument cup_anemometer, WD 225
+        (-81.9 164.7 19)   // point_id 7, config default, campaign field, instrument cup_anemometer, WD 225
+        (-128.7 194.6 17)   // point_id 8, config default, campaign field, instrument cup_anemometer, WD 225
+        (-195.4 181 19)   // point_id 9, config default, campaign field, instrument cup_anemometer, WD 225
+        (-263.7 293.8 19)   // point_id 10, config default, campaign field, instrument cup_anemometer, WD 225
+        (-93.6 -493.6 18)   // point_id 11, config default, campaign field, instrument cup_anemometer, WD 225
+        (51.4 143 21)   // point_id 13, config default, campaign field, instrument cup_anemometer, WD 225
+        (81.3 284.7 21)   // point_id 14, config default, campaign field, instrument cup_anemometer, WD 225
+        (-50.2 87.5 13)   // point_id 15, config default, campaign field, instrument cup_anemometer, WD 225
+        (268.6 364.1 19)   // point_id 1, config default, campaign field, instrument cup_anemometer, WD 247.5
+        (165.4 299.3 19)   // point_id 2, config default, campaign field, instrument cup_anemometer, WD 247.5
+        (20.7 343.4 19)   // point_id 3, config default, campaign field, instrument cup_anemometer, WD 247.5
+        (40.5 304.1 19)   // point_id 5, config default, campaign field, instrument cup_anemometer, WD 247.5
+        (1.2 220.3 19)   // point_id 6, config default, campaign field, instrument cup_anemometer, WD 247.5
+        (-81.9 164.7 19)   // point_id 7, config default, campaign field, instrument cup_anemometer, WD 247.5
+        (-128.7 194.6 17)   // point_id 8, config default, campaign field, instrument cup_anemometer, WD 247.5
+        (-195.4 181 19)   // point_id 9, config default, campaign field, instrument cup_anemometer, WD 247.5
+        (-263.7 293.8 19)   // point_id 10, config default, campaign field, instrument cup_anemometer, WD 247.5
+        (-93.6 -493.6 18)   // point_id 11, config default, campaign field, instrument cup_anemometer, WD 247.5
+        (51.4 143 21)   // point_id 13, config default, campaign field, instrument cup_anemometer, WD 247.5
+        (81.3 284.7 21)   // point_id 14, config default, campaign field, instrument cup_anemometer, WD 247.5
+        (-50.2 87.5 13)   // point_id 15, config default, campaign field, instrument cup_anemometer, WD 247.5
+        (268.6 364.1 19)   // point_id 1, config default, campaign field, instrument cup_anemometer, WD 270
+        (165.4 299.3 19)   // point_id 2, config default, campaign field, instrument cup_anemometer, WD 270
+        (20.7 343.4 19)   // point_id 3, config default, campaign field, instrument cup_anemometer, WD 270
+        (40.5 304.1 19)   // point_id 5, config default, campaign field, instrument cup_anemometer, WD 270
+        (1.2 220.3 19)   // point_id 6, config default, campaign field, instrument cup_anemometer, WD 270
+        (-81.9 164.7 19)   // point_id 7, config default, campaign field, instrument cup_anemometer, WD 270
+        (-128.7 194.6 17)   // point_id 8, config default, campaign field, instrument cup_anemometer, WD 270
+        (-195.4 181 19)   // point_id 9, config default, campaign field, instrument cup_anemometer, WD 270
+        (-263.7 293.8 19)   // point_id 10, config default, campaign field, instrument cup_anemometer, WD 270
+        (-93.6 -493.6 18)   // point_id 11, config default, campaign field, instrument cup_anemometer, WD 270
+        (51.4 143 21)   // point_id 13, config default, campaign field, instrument cup_anemometer, WD 270
+        (81.3 284.7 21)   // point_id 14, config default, campaign field, instrument cup_anemometer, WD 270
+        (-50.2 87.5 13)   // point_id 15, config default, campaign field, instrument cup_anemometer, WD 270
+        (268.6 364.1 19)   // point_id 1, config default, campaign field, instrument cup_anemometer, WD 292.5
+        (165.4 299.3 19)   // point_id 2, config default, campaign field, instrument cup_anemometer, WD 292.5
+        (20.7 343.4 19)   // point_id 3, config default, campaign field, instrument cup_anemometer, WD 292.5
+        (40.5 304.1 19)   // point_id 5, config default, campaign field, instrument cup_anemometer, WD 292.5
+        (1.2 220.3 19)   // point_id 6, config default, campaign field, instrument cup_anemometer, WD 292.5
+        (-81.9 164.7 19)   // point_id 7, config default, campaign field, instrument cup_anemometer, WD 292.5
+        (-128.7 194.6 17)   // point_id 8, config default, campaign field, instrument cup_anemometer, WD 292.5
+        (-195.4 181 19)   // point_id 9, config default, campaign field, instrument cup_anemometer, WD 292.5
+        (-263.7 293.8 19)   // point_id 10, config default, campaign field, instrument cup_anemometer, WD 292.5
+        (-93.6 -493.6 18)   // point_id 11, config default, campaign field, instrument cup_anemometer, WD 292.5
+        (51.4 143 21)   // point_id 13, config default, campaign field, instrument cup_anemometer, WD 292.5
+        (81.3 284.7 21)   // point_id 14, config default, campaign field, instrument cup_anemometer, WD 292.5
+        (-50.2 87.5 13)   // point_id 15, config default, campaign field, instrument cup_anemometer, WD 292.5
+        (268.6 364.1 19)   // point_id 1, config default, campaign field, instrument cup_anemometer, WD 315
+        (165.4 299.3 19)   // point_id 2, config default, campaign field, instrument cup_anemometer, WD 315
+        (20.7 343.4 19)   // point_id 3, config default, campaign field, instrument cup_anemometer, WD 315
+        (40.5 304.1 19)   // point_id 5, config default, campaign field, instrument cup_anemometer, WD 315
+        (1.2 220.3 19)   // point_id 6, config default, campaign field, instrument cup_anemometer, WD 315
+        (-81.9 164.7 19)   // point_id 7, config default, campaign field, instrument cup_anemometer, WD 315
+        (-128.7 194.6 17)   // point_id 8, config default, campaign field, instrument cup_anemometer, WD 315
+        (-195.4 181 19)   // point_id 9, config default, campaign field, instrument cup_anemometer, WD 315
+        (-263.7 293.8 19)   // point_id 10, config default, campaign field, instrument cup_anemometer, WD 315
+        (-93.6 -493.6 18)   // point_id 11, config default, campaign field, instrument cup_anemometer, WD 315
+        (51.4 143 21)   // point_id 13, config default, campaign field, instrument cup_anemometer, WD 315
+        (81.3 284.7 21)   // point_id 14, config default, campaign field, instrument cup_anemometer, WD 315
+        (-50.2 87.5 13)   // point_id 15, config default, campaign field, instrument cup_anemometer, WD 315
+        (268.6 364.1 19)   // point_id 1, config default, campaign field, instrument cup_anemometer, WD 337.5
+        (165.4 299.3 19)   // point_id 2, config default, campaign field, instrument cup_anemometer, WD 337.5
+        (20.7 343.4 19)   // point_id 3, config default, campaign field, instrument cup_anemometer, WD 337.5
+        (40.5 304.1 19)   // point_id 5, config default, campaign field, instrument cup_anemometer, WD 337.5
+        (1.2 220.3 19)   // point_id 6, config default, campaign field, instrument cup_anemometer, WD 337.5
+        (-81.9 164.7 19)   // point_id 7, config default, campaign field, instrument cup_anemometer, WD 337.5
+        (-128.7 194.6 17)   // point_id 8, config default, campaign field, instrument cup_anemometer, WD 337.5
+        (-195.4 181 19)   // point_id 9, config default, campaign field, instrument cup_anemometer, WD 337.5
+        (-263.7 293.8 19)   // point_id 10, config default, campaign field, instrument cup_anemometer, WD 337.5
+        (-93.6 -493.6 18)   // point_id 11, config default, campaign field, instrument cup_anemometer, WD 337.5
+        (51.4 143 21)   // point_id 13, config default, campaign field, instrument cup_anemometer, WD 337.5
+        (81.3 284.7 21)   // point_id 14, config default, campaign field, instrument cup_anemometer, WD 337.5
+        (-50.2 87.5 13)   // point_id 15, config default, campaign field, instrument cup_anemometer, WD 337.5
+        (268.6 364.1 19)   // point_id 1, config default, campaign wind_tunnel, instrument thermistor, WD 0
+        (165.4 299.3 19)   // point_id 2, config default, campaign wind_tunnel, instrument thermistor, WD 0
+        (20.7 343.4 19)   // point_id 3, config default, campaign wind_tunnel, instrument thermistor, WD 0
+        (40.5 304.1 19)   // point_id 5, config default, campaign wind_tunnel, instrument thermistor, WD 0
+        (1.2 220.3 19)   // point_id 6, config default, campaign wind_tunnel, instrument thermistor, WD 0
+        (-81.9 164.7 19)   // point_id 7, config default, campaign wind_tunnel, instrument thermistor, WD 0
+        (-128.7 194.6 19)   // point_id 8, config default, campaign wind_tunnel, instrument thermistor, WD 0
+        (-195.4 181 19)   // point_id 9, config default, campaign wind_tunnel, instrument thermistor, WD 0
+        (-263.7 293.8 19)   // point_id 10, config default, campaign wind_tunnel, instrument thermistor, WD 0
+        (-93.6 -493.6 19)   // point_id 11, config default, campaign wind_tunnel, instrument thermistor, WD 0
+        (51.4 143 19)   // point_id 13, config default, campaign wind_tunnel, instrument thermistor, WD 0
+        (81.3 284.7 19)   // point_id 14, config default, campaign wind_tunnel, instrument thermistor, WD 0
+        (-50.2 87.5 19)   // point_id 15, config default, campaign wind_tunnel, instrument thermistor, WD 0
+        (268.6 364.1 19)   // point_id 1, config default, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (165.4 299.3 19)   // point_id 2, config default, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (20.7 343.4 19)   // point_id 3, config default, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (40.5 304.1 19)   // point_id 5, config default, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (1.2 220.3 19)   // point_id 6, config default, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-81.9 164.7 19)   // point_id 7, config default, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-128.7 194.6 19)   // point_id 8, config default, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-195.4 181 19)   // point_id 9, config default, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-263.7 293.8 19)   // point_id 10, config default, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-93.6 -493.6 19)   // point_id 11, config default, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (51.4 143 19)   // point_id 13, config default, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (81.3 284.7 19)   // point_id 14, config default, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-50.2 87.5 19)   // point_id 15, config default, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (268.6 364.1 19)   // point_id 1, config default, campaign wind_tunnel, instrument thermistor, WD 45
+        (165.4 299.3 19)   // point_id 2, config default, campaign wind_tunnel, instrument thermistor, WD 45
+        (20.7 343.4 19)   // point_id 3, config default, campaign wind_tunnel, instrument thermistor, WD 45
+        (40.5 304.1 19)   // point_id 5, config default, campaign wind_tunnel, instrument thermistor, WD 45
+        (1.2 220.3 19)   // point_id 6, config default, campaign wind_tunnel, instrument thermistor, WD 45
+        (-81.9 164.7 19)   // point_id 7, config default, campaign wind_tunnel, instrument thermistor, WD 45
+        (-128.7 194.6 19)   // point_id 8, config default, campaign wind_tunnel, instrument thermistor, WD 45
+        (-195.4 181 19)   // point_id 9, config default, campaign wind_tunnel, instrument thermistor, WD 45
+        (-263.7 293.8 19)   // point_id 10, config default, campaign wind_tunnel, instrument thermistor, WD 45
+        (-93.6 -493.6 19)   // point_id 11, config default, campaign wind_tunnel, instrument thermistor, WD 45
+        (51.4 143 19)   // point_id 13, config default, campaign wind_tunnel, instrument thermistor, WD 45
+        (81.3 284.7 19)   // point_id 14, config default, campaign wind_tunnel, instrument thermistor, WD 45
+        (-50.2 87.5 19)   // point_id 15, config default, campaign wind_tunnel, instrument thermistor, WD 45
+        (268.6 364.1 19)   // point_id 1, config default, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (165.4 299.3 19)   // point_id 2, config default, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (20.7 343.4 19)   // point_id 3, config default, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (40.5 304.1 19)   // point_id 5, config default, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (1.2 220.3 19)   // point_id 6, config default, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (-81.9 164.7 19)   // point_id 7, config default, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (-128.7 194.6 19)   // point_id 8, config default, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (-195.4 181 19)   // point_id 9, config default, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (-263.7 293.8 19)   // point_id 10, config default, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (-93.6 -493.6 19)   // point_id 11, config default, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (51.4 143 19)   // point_id 13, config default, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (81.3 284.7 19)   // point_id 14, config default, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (-50.2 87.5 19)   // point_id 15, config default, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (268.6 364.1 19)   // point_id 1, config default, campaign wind_tunnel, instrument thermistor, WD 135
+        (165.4 299.3 19)   // point_id 2, config default, campaign wind_tunnel, instrument thermistor, WD 135
+        (20.7 343.4 19)   // point_id 3, config default, campaign wind_tunnel, instrument thermistor, WD 135
+        (40.5 304.1 19)   // point_id 5, config default, campaign wind_tunnel, instrument thermistor, WD 135
+        (1.2 220.3 19)   // point_id 6, config default, campaign wind_tunnel, instrument thermistor, WD 135
+        (-81.9 164.7 19)   // point_id 7, config default, campaign wind_tunnel, instrument thermistor, WD 135
+        (-128.7 194.6 19)   // point_id 8, config default, campaign wind_tunnel, instrument thermistor, WD 135
+        (-195.4 181 19)   // point_id 9, config default, campaign wind_tunnel, instrument thermistor, WD 135
+        (-263.7 293.8 19)   // point_id 10, config default, campaign wind_tunnel, instrument thermistor, WD 135
+        (-93.6 -493.6 19)   // point_id 11, config default, campaign wind_tunnel, instrument thermistor, WD 135
+        (51.4 143 19)   // point_id 13, config default, campaign wind_tunnel, instrument thermistor, WD 135
+        (81.3 284.7 19)   // point_id 14, config default, campaign wind_tunnel, instrument thermistor, WD 135
+        (-50.2 87.5 19)   // point_id 15, config default, campaign wind_tunnel, instrument thermistor, WD 135
+        (268.6 364.1 19)   // point_id 1, config default, campaign wind_tunnel, instrument thermistor, WD 157.5
+        (165.4 299.3 19)   // point_id 2, config default, campaign wind_tunnel, instrument thermistor, WD 157.5
+        (20.7 343.4 19)   // point_id 3, config default, campaign wind_tunnel, instrument thermistor, WD 157.5
+        (40.5 304.1 19)   // point_id 5, config default, campaign wind_tunnel, instrument thermistor, WD 157.5
+        (1.2 220.3 19)   // point_id 6, config default, campaign wind_tunnel, instrument thermistor, WD 157.5
+        (-81.9 164.7 19)   // point_id 7, config default, campaign wind_tunnel, instrument thermistor, WD 157.5
+        (-128.7 194.6 19)   // point_id 8, config default, campaign wind_tunnel, instrument thermistor, WD 157.5
+        (-195.4 181 19)   // point_id 9, config default, campaign wind_tunnel, instrument thermistor, WD 157.5
+        (-263.7 293.8 19)   // point_id 10, config default, campaign wind_tunnel, instrument thermistor, WD 157.5
+        (-93.6 -493.6 19)   // point_id 11, config default, campaign wind_tunnel, instrument thermistor, WD 157.5
+        (51.4 143 19)   // point_id 13, config default, campaign wind_tunnel, instrument thermistor, WD 157.5
+        (81.3 284.7 19)   // point_id 14, config default, campaign wind_tunnel, instrument thermistor, WD 157.5
+        (-50.2 87.5 19)   // point_id 15, config default, campaign wind_tunnel, instrument thermistor, WD 157.5
+        (268.6 364.1 19)   // point_id 1, config default, campaign wind_tunnel, instrument thermistor, WD 180
+        (165.4 299.3 19)   // point_id 2, config default, campaign wind_tunnel, instrument thermistor, WD 180
+        (20.7 343.4 19)   // point_id 3, config default, campaign wind_tunnel, instrument thermistor, WD 180
+        (40.5 304.1 19)   // point_id 5, config default, campaign wind_tunnel, instrument thermistor, WD 180
+        (1.2 220.3 19)   // point_id 6, config default, campaign wind_tunnel, instrument thermistor, WD 180
+        (-81.9 164.7 19)   // point_id 7, config default, campaign wind_tunnel, instrument thermistor, WD 180
+        (-128.7 194.6 19)   // point_id 8, config default, campaign wind_tunnel, instrument thermistor, WD 180
+        (-195.4 181 19)   // point_id 9, config default, campaign wind_tunnel, instrument thermistor, WD 180
+        (-263.7 293.8 19)   // point_id 10, config default, campaign wind_tunnel, instrument thermistor, WD 180
+        (-93.6 -493.6 19)   // point_id 11, config default, campaign wind_tunnel, instrument thermistor, WD 180
+        (51.4 143 19)   // point_id 13, config default, campaign wind_tunnel, instrument thermistor, WD 180
+        (81.3 284.7 19)   // point_id 14, config default, campaign wind_tunnel, instrument thermistor, WD 180
+        (-50.2 87.5 19)   // point_id 15, config default, campaign wind_tunnel, instrument thermistor, WD 180
+        (268.6 364.1 19)   // point_id 1, config default, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (165.4 299.3 19)   // point_id 2, config default, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (20.7 343.4 19)   // point_id 3, config default, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (40.5 304.1 19)   // point_id 5, config default, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (1.2 220.3 19)   // point_id 6, config default, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (-81.9 164.7 19)   // point_id 7, config default, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (-128.7 194.6 19)   // point_id 8, config default, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (-195.4 181 19)   // point_id 9, config default, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (-263.7 293.8 19)   // point_id 10, config default, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (-93.6 -493.6 19)   // point_id 11, config default, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (51.4 143 19)   // point_id 13, config default, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (81.3 284.7 19)   // point_id 14, config default, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (-50.2 87.5 19)   // point_id 15, config default, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (268.6 364.1 19)   // point_id 1, config default, campaign wind_tunnel, instrument thermistor, WD 225
+        (165.4 299.3 19)   // point_id 2, config default, campaign wind_tunnel, instrument thermistor, WD 225
+        (20.7 343.4 19)   // point_id 3, config default, campaign wind_tunnel, instrument thermistor, WD 225
+        (40.5 304.1 19)   // point_id 5, config default, campaign wind_tunnel, instrument thermistor, WD 225
+        (1.2 220.3 19)   // point_id 6, config default, campaign wind_tunnel, instrument thermistor, WD 225
+        (-81.9 164.7 19)   // point_id 7, config default, campaign wind_tunnel, instrument thermistor, WD 225
+        (-128.7 194.6 19)   // point_id 8, config default, campaign wind_tunnel, instrument thermistor, WD 225
+        (-195.4 181 19)   // point_id 9, config default, campaign wind_tunnel, instrument thermistor, WD 225
+        (-263.7 293.8 19)   // point_id 10, config default, campaign wind_tunnel, instrument thermistor, WD 225
+        (-93.6 -493.6 19)   // point_id 11, config default, campaign wind_tunnel, instrument thermistor, WD 225
+        (51.4 143 19)   // point_id 13, config default, campaign wind_tunnel, instrument thermistor, WD 225
+        (81.3 284.7 19)   // point_id 14, config default, campaign wind_tunnel, instrument thermistor, WD 225
+        (-50.2 87.5 19)   // point_id 15, config default, campaign wind_tunnel, instrument thermistor, WD 225
+        (268.6 364.1 19)   // point_id 1, config default, campaign wind_tunnel, instrument thermistor, WD 292.5
+        (165.4 299.3 19)   // point_id 2, config default, campaign wind_tunnel, instrument thermistor, WD 292.5
+        (20.7 343.4 19)   // point_id 3, config default, campaign wind_tunnel, instrument thermistor, WD 292.5
+        (40.5 304.1 19)   // point_id 5, config default, campaign wind_tunnel, instrument thermistor, WD 292.5
+        (1.2 220.3 19)   // point_id 6, config default, campaign wind_tunnel, instrument thermistor, WD 292.5
+        (-81.9 164.7 19)   // point_id 7, config default, campaign wind_tunnel, instrument thermistor, WD 292.5
+        (-128.7 194.6 19)   // point_id 8, config default, campaign wind_tunnel, instrument thermistor, WD 292.5
+        (-195.4 181 19)   // point_id 9, config default, campaign wind_tunnel, instrument thermistor, WD 292.5
+        (-263.7 293.8 19)   // point_id 10, config default, campaign wind_tunnel, instrument thermistor, WD 292.5
+        (-93.6 -493.6 19)   // point_id 11, config default, campaign wind_tunnel, instrument thermistor, WD 292.5
+        (51.4 143 19)   // point_id 13, config default, campaign wind_tunnel, instrument thermistor, WD 292.5
+        (81.3 284.7 19)   // point_id 14, config default, campaign wind_tunnel, instrument thermistor, WD 292.5
+        (-50.2 87.5 19)   // point_id 15, config default, campaign wind_tunnel, instrument thermistor, WD 292.5
+        (268.6 364.1 19)   // point_id 1, config default, campaign wind_tunnel, instrument thermistor, WD 315
+        (165.4 299.3 19)   // point_id 2, config default, campaign wind_tunnel, instrument thermistor, WD 315
+        (20.7 343.4 19)   // point_id 3, config default, campaign wind_tunnel, instrument thermistor, WD 315
+        (40.5 304.1 19)   // point_id 5, config default, campaign wind_tunnel, instrument thermistor, WD 315
+        (1.2 220.3 19)   // point_id 6, config default, campaign wind_tunnel, instrument thermistor, WD 315
+        (-81.9 164.7 19)   // point_id 7, config default, campaign wind_tunnel, instrument thermistor, WD 315
+        (-128.7 194.6 19)   // point_id 8, config default, campaign wind_tunnel, instrument thermistor, WD 315
+        (-195.4 181 19)   // point_id 9, config default, campaign wind_tunnel, instrument thermistor, WD 315
+        (-263.7 293.8 19)   // point_id 10, config default, campaign wind_tunnel, instrument thermistor, WD 315
+        (-93.6 -493.6 19)   // point_id 11, config default, campaign wind_tunnel, instrument thermistor, WD 315
+        (51.4 143 19)   // point_id 13, config default, campaign wind_tunnel, instrument thermistor, WD 315
+        (81.3 284.7 19)   // point_id 14, config default, campaign wind_tunnel, instrument thermistor, WD 315
+        (-50.2 87.5 19)   // point_id 15, config default, campaign wind_tunnel, instrument thermistor, WD 315
+        (268.6 364.1 19)   // point_id 1, config default, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (165.4 299.3 19)   // point_id 2, config default, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (20.7 343.4 19)   // point_id 3, config default, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (40.5 304.1 19)   // point_id 5, config default, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (1.2 220.3 19)   // point_id 6, config default, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (-81.9 164.7 19)   // point_id 7, config default, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (-128.7 194.6 19)   // point_id 8, config default, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (-195.4 181 19)   // point_id 9, config default, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (-263.7 293.8 19)   // point_id 10, config default, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (-93.6 -493.6 19)   // point_id 11, config default, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (51.4 143 19)   // point_id 13, config default, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (81.3 284.7 19)   // point_id 14, config default, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (-50.2 87.5 19)   // point_id 15, config default, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (40.5 304.1 30)   // point_id 5, config h20, campaign wind_tunnel, instrument thermistor, WD 0
+        (1.2 220.3 30)   // point_id 6, config h20, campaign wind_tunnel, instrument thermistor, WD 0
+        (-81.9 164.7 30)   // point_id 7, config h20, campaign wind_tunnel, instrument thermistor, WD 0
+        (-128.7 194.6 30)   // point_id 8, config h20, campaign wind_tunnel, instrument thermistor, WD 0
+        (-195.4 181 30)   // point_id 9, config h20, campaign wind_tunnel, instrument thermistor, WD 0
+        (-93.6 -493.6 30)   // point_id 11, config h20, campaign wind_tunnel, instrument thermistor, WD 0
+        (51.4 143 30)   // point_id 13, config h20, campaign wind_tunnel, instrument thermistor, WD 0
+        (81.3 284.7 30)   // point_id 14, config h20, campaign wind_tunnel, instrument thermistor, WD 0
+        (-50.2 87.5 30)   // point_id 15, config h20, campaign wind_tunnel, instrument thermistor, WD 0
+        (268.6 364.1 30)   // point_id 1, config h20, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (165.4 299.3 30)   // point_id 2, config h20, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (20.7 343.4 30)   // point_id 3, config h20, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (40.5 304.1 30)   // point_id 5, config h20, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (1.2 220.3 30)   // point_id 6, config h20, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-81.9 164.7 30)   // point_id 7, config h20, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-128.7 194.6 30)   // point_id 8, config h20, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-195.4 181 30)   // point_id 9, config h20, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-263.7 293.8 30)   // point_id 10, config h20, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-93.6 -493.6 30)   // point_id 11, config h20, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (51.4 143 30)   // point_id 13, config h20, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (81.3 284.7 30)   // point_id 14, config h20, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-50.2 87.5 30)   // point_id 15, config h20, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (268.6 364.1 30)   // point_id 1, config h20, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (165.4 299.3 30)   // point_id 2, config h20, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (20.7 343.4 30)   // point_id 3, config h20, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (40.5 304.1 30)   // point_id 5, config h20, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (1.2 220.3 30)   // point_id 6, config h20, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (-81.9 164.7 30)   // point_id 7, config h20, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (-128.7 194.6 30)   // point_id 8, config h20, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (-195.4 181 30)   // point_id 9, config h20, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (-263.7 293.8 30)   // point_id 10, config h20, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (-93.6 -493.6 30)   // point_id 11, config h20, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (51.4 143 30)   // point_id 13, config h20, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (81.3 284.7 30)   // point_id 14, config h20, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (268.6 364.1 30)   // point_id 1, config h20, campaign wind_tunnel, instrument thermistor, WD 180
+        (165.4 299.3 30)   // point_id 2, config h20, campaign wind_tunnel, instrument thermistor, WD 180
+        (20.7 343.4 30)   // point_id 3, config h20, campaign wind_tunnel, instrument thermistor, WD 180
+        (40.5 304.1 30)   // point_id 5, config h20, campaign wind_tunnel, instrument thermistor, WD 180
+        (1.2 220.3 30)   // point_id 6, config h20, campaign wind_tunnel, instrument thermistor, WD 180
+        (-81.9 164.7 30)   // point_id 7, config h20, campaign wind_tunnel, instrument thermistor, WD 180
+        (-128.7 194.6 30)   // point_id 8, config h20, campaign wind_tunnel, instrument thermistor, WD 180
+        (-263.7 293.8 30)   // point_id 10, config h20, campaign wind_tunnel, instrument thermistor, WD 180
+        (-93.6 -493.6 30)   // point_id 11, config h20, campaign wind_tunnel, instrument thermistor, WD 180
+        (81.3 284.7 30)   // point_id 14, config h20, campaign wind_tunnel, instrument thermistor, WD 180
+        (-50.2 87.5 30)   // point_id 15, config h20, campaign wind_tunnel, instrument thermistor, WD 180
+        (268.6 364.1 30)   // point_id 1, config h20, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (165.4 299.3 30)   // point_id 2, config h20, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (20.7 343.4 30)   // point_id 3, config h20, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (40.5 304.1 30)   // point_id 5, config h20, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (1.2 220.3 30)   // point_id 6, config h20, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (-81.9 164.7 30)   // point_id 7, config h20, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (-128.7 194.6 30)   // point_id 8, config h20, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (-195.4 181 30)   // point_id 9, config h20, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (-263.7 293.8 30)   // point_id 10, config h20, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (-93.6 -493.6 30)   // point_id 11, config h20, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (51.4 143 30)   // point_id 13, config h20, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (81.3 284.7 30)   // point_id 14, config h20, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (268.6 364.1 30)   // point_id 1, config h20, campaign wind_tunnel, instrument thermistor, WD 225
+        (165.4 299.3 30)   // point_id 2, config h20, campaign wind_tunnel, instrument thermistor, WD 225
+        (20.7 343.4 30)   // point_id 3, config h20, campaign wind_tunnel, instrument thermistor, WD 225
+        (40.5 304.1 30)   // point_id 5, config h20, campaign wind_tunnel, instrument thermistor, WD 225
+        (1.2 220.3 30)   // point_id 6, config h20, campaign wind_tunnel, instrument thermistor, WD 225
+        (-81.9 164.7 30)   // point_id 7, config h20, campaign wind_tunnel, instrument thermistor, WD 225
+        (-128.7 194.6 30)   // point_id 8, config h20, campaign wind_tunnel, instrument thermistor, WD 225
+        (-195.4 181 30)   // point_id 9, config h20, campaign wind_tunnel, instrument thermistor, WD 225
+        (-263.7 293.8 30)   // point_id 10, config h20, campaign wind_tunnel, instrument thermistor, WD 225
+        (268.6 364.1 30)   // point_id 1, config h20, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (165.4 299.3 30)   // point_id 2, config h20, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (20.7 343.4 30)   // point_id 3, config h20, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (40.5 304.1 30)   // point_id 5, config h20, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (1.2 220.3 30)   // point_id 6, config h20, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (-81.9 164.7 30)   // point_id 7, config h20, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (-128.7 194.6 30)   // point_id 8, config h20, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (-195.4 181 30)   // point_id 9, config h20, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (-263.7 293.8 30)   // point_id 10, config h20, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (-93.6 -493.6 30)   // point_id 11, config h20, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (51.4 143 30)   // point_id 13, config h20, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (81.3 284.7 30)   // point_id 14, config h20, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (-50.2 87.5 30)   // point_id 15, config h20, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (1.2 220.3 15)   // point_id 6, config h5, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-81.9 164.7 15)   // point_id 7, config h5, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-128.7 194.6 15)   // point_id 8, config h5, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (-195.4 181 15)   // point_id 9, config h5, campaign wind_tunnel, instrument thermistor, WD 22.5
+        (268.6 364.1 15)   // point_id 1, config h5, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (1.2 220.3 15)   // point_id 6, config h5, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (-81.9 164.7 15)   // point_id 7, config h5, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (-128.7 194.6 15)   // point_id 8, config h5, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (-195.4 181 15)   // point_id 9, config h5, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (51.4 143 15)   // point_id 13, config h5, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (81.3 284.7 15)   // point_id 14, config h5, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (-50.2 87.5 15)   // point_id 15, config h5, campaign wind_tunnel, instrument thermistor, WD 67.5
+        (40.5 304.1 15)   // point_id 5, config h5, campaign wind_tunnel, instrument thermistor, WD 180
+        (1.2 220.3 15)   // point_id 6, config h5, campaign wind_tunnel, instrument thermistor, WD 180
+        (-81.9 164.7 15)   // point_id 7, config h5, campaign wind_tunnel, instrument thermistor, WD 180
+        (-128.7 194.6 15)   // point_id 8, config h5, campaign wind_tunnel, instrument thermistor, WD 180
+        (-195.4 181 15)   // point_id 9, config h5, campaign wind_tunnel, instrument thermistor, WD 180
+        (40.5 304.1 15)   // point_id 5, config h5, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (1.2 220.3 15)   // point_id 6, config h5, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (-81.9 164.7 15)   // point_id 7, config h5, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (-128.7 194.6 15)   // point_id 8, config h5, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (-195.4 181 15)   // point_id 9, config h5, campaign wind_tunnel, instrument thermistor, WD 202.5
+        (268.6 364.1 15)   // point_id 1, config h5, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (1.2 220.3 15)   // point_id 6, config h5, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (-81.9 164.7 15)   // point_id 7, config h5, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (-128.7 194.6 15)   // point_id 8, config h5, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (-195.4 181 15)   // point_id 9, config h5, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (51.4 143 15)   // point_id 13, config h5, campaign wind_tunnel, instrument thermistor, WD 337.5
+        (81.3 284.7 15)   // point_id 14, config h5, campaign wind_tunnel, instrument thermistor, WD 337.5
+    );
+}
+

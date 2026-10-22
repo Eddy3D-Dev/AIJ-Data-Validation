@@ -161,6 +161,7 @@ The arm nearest the 28 values says which library crown the belt resembles. The m
 | 3 | OpenFOAM 12 · conifer | Eddy3D | 0.179 | 0.071 | 0.286 | 0.179 | **0.917** | **+0.423** | **0.190** |
 | 4 | OpenFOAM 12 · open-field | Eddy3D | **0.250** | 0.000 | 0.000 | 0.083 | 0.512 | +0.164 | 0.058 |
 | 5 | OpenFOAM 12 · pine | Eddy3D | 0.143 | 0.000 | 0.036 | 0.060 | 0.905 | +0.403 | 0.180 |
+| 6 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-nutcap-lifted]({{ '/community/eddy3d-of12-nutcap-lifted/' | relative_url }})) | community | 0.071 | 0.036 | 0.071 | 0.060 | 0.762 | +0.332 | 0.110 |
 {: .scores }
 
 Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. Every run gave values at every measured point. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

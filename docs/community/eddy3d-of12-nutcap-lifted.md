@@ -19,12 +19,12 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | author | Sustainable Urban Systems Lab |
 | licence | CC-BY-4.0 |
 | contact | <https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions> |
-| inlet | Case A, H, K, C, F and M, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved) |
+| inlet | Case A, H, K, C, F, G (conifer crown) and M, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved) |
 | mesh | snappyHexMesh, 1:100 scale, the served runs\' mesh and numerics level 3 |
 | turbulence\_model | realizable k-epsilon, nutMaxCoeff 1e8 |
 | compute | 3000 iterations, steady, 5-6 ranks (Case A on an Apple M-series laptop, B and H on PACE Phoenix) |
 | units | normalised |
-| notes | Case C (all nine configurations, scalar speed sampled from the solved fields of the ICE re-solves), Cases F (wind from NNW) and M (WD 180, $$\mathrm{Sc_t}$$ 0.5) are the Eddy3D fixtures re-solved by another session on PACE ICE with the same cap change, scored here from their probe files. Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the $$\mathrm{Sc_t}$$ = 0.5 species. Case B\'s baseline is therefore the measured-inlet submission, not the served run. |
+| notes | Case G is the conifer crown of the drag sweep, where lifting the cap makes the result worse (a worse score, submitted all the same). Case C (all nine configurations, scalar speed sampled from the solved fields of the ICE re-solves), Cases F (wind from NNW) and M (WD 180, $$\mathrm{Sc_t}$$ 0.5) are the Eddy3D fixtures re-solved by another session on PACE ICE with the same cap change, scored here from their probe files. Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the $$\mathrm{Sc_t}$$ = 0.5 species. Case B\'s baseline is therefore the measured-inlet submission, not the served run. |
 
 {% include nomenclature.md %}
 
@@ -156,6 +156,15 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 |---|---|---|---|---|---|---|
 | $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.954 | 1.000 | +0.017 | 0.714 | 7 | 7/7 |
 | $$\lvert\mathbf{U}\rvert$$ | +0.936 | 0.857 | +0.201 | 0.714 | 7 | 7/7 |
+{: .scores }
+
+## Case G — flow behind a tree belt
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$k$$ | +0.344 | 0.357 | -0.827 | 0.071 | 28 | 28/28 |
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.325 | 0.929 | -0.526 | 0.036 | 28 | 28/28 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.327 | 1.000 | -0.407 | 0.071 | 28 | 28/28 |
 {: .scores }
 
 ## Case H — 1:1:2 building with a floor point source
