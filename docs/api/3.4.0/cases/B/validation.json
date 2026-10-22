@@ -1,7 +1,7 @@
 {
  "$schema": "https://aij.eddy3d.com/api/3.4.0/schemas/validation.schema.json",
  "schema_version": "2.5.0",
- "data_version": "249fe518ae281d3b62ab76162a59a358bd385e88e01e94305f4ab90414920c75",
+ "data_version": "2ad04a58d5808675c1db13eb498dadb8fedd828f9e6ef16904bc8f3c520ac987",
  "license": "CC-BY-4.0",
  "case": "B",
  "title": "Case B — 1:4:4 slab",

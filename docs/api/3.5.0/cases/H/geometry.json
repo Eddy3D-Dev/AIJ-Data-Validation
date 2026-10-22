@@ -1,0 +1,77 @@
+{
+ "$schema": "https://aij.eddy3d.com/api/3.5.0/schemas/geometry.schema.json",
+ "schema_version": "2.5.0",
+ "data_version": "249fe518ae281d3b62ab76162a59a358bd385e88e01e94305f4ab90414920c75",
+ "license": "CC-BY-4.0",
+ "case": "H",
+ "title": "Case H — 1:1:2 building with a floor point source",
+ "units": "metres (model scale)",
+ "frame": {
+  "origin": "the centre of the building's leeward face on the ground plane",
+  "x": "+x streamwise (the wind blows toward +x); the building spans x in [-0.1, 0]; points at x = -0.2 ... 0.4 m",
+  "y": "+y lateral; the building spans y in [-0.05, 0.05]; the z = 1/16 H plane covers y in [-0.2, 0.2]",
+  "z": "+z up; roof at z = 0.2 m; points at z = 0.01 ... 0.3 m",
+  "lateral_sign_applied": "-1 for point numbers 1-220 (the vertical-plane sheet of the workbook), +1 elsewhere",
+  "coordinate_scale_applied": 1.0
+ },
+ "default_configuration": "default",
+ "configurations": [
+  "default"
+ ],
+ "is_boxes": true,
+ "files": [
+  {
+   "configuration": "default",
+   "url": "https://aij.eddy3d.com/api/3.5.0/cases/H/geometry.stl?v=4836687efff9",
+   "path": "cases/H/geometry.stl",
+   "media_type": "model/stl",
+   "bytes": 1666,
+   "sha256": "4836687efff9d49c4c80e540dcec255ba78e3aef7a90679bee6a9945b0eea9e7",
+   "format": "ASCII STL, LF line endings, outward normals, every body closed and consistently wound",
+   "source": "generated from the stated dimensions 0.10 × 0.10 × 0.20 m (MP-y_caseH.png, MP-z_caseH.png); leeward face at x = 0",
+   "stats": {
+    "triangles": 12,
+    "bbox_min": [
+     -0.1,
+     -0.05,
+     0.0
+    ],
+    "bbox_max": [
+     0.0,
+     0.05,
+     0.2
+    ],
+    "signed_volume": 0.002,
+    "edges": 18,
+    "edges_shared_by_two_faces": 18,
+    "edges_boundary": 0,
+    "edges_non_manifold": 0,
+    "bodies": 1,
+    "body_contacts": 0,
+    "inconsistent_triangles": 0,
+    "min_body_volume": 0.002,
+    "watertight": true
+   },
+   "bbox_matches_stated_dimensions": true,
+   "render": "https://aij.eddy3d.com/assets/geometry/case-h.png",
+   "render_caption": "Isolated 1:1:2 building, 0.10 m × 0.10 m × 0.20 m (model scale); the wind blows along +x. The tracer comes from a 4 mm floor hole 0.25 H behind the leeward face (not drawn).",
+   "boxes": [
+    {
+     "min": [
+      -0.1,
+      -0.05,
+      0.0
+     ],
+     "max": [
+      0.0,
+      0.05,
+      0.2
+     ]
+    }
+   ],
+   "box_count": 1,
+   "analytic_volume": 0.002
+  }
+ ],
+ "render": "https://aij.eddy3d.com/assets/geometry/case-h.png"
+}

@@ -8,7 +8,7 @@ Fallback (raw files from the repository): https://raw.githubusercontent.com/Eddy
 Repository: https://github.com/Eddy3D-Dev/AIJ-Data-Validation
 Release: 3.4.0 (2026-10-21). This is the frozen copy of that release: its files never change and every URL below stays inside it.
 All releases: https://aij.eddy3d.com/api/versions.json
-API schema version: 2.5.0. Data version (SHA-256 of the served data): 249fe518ae281d3b62ab76162a59a358bd385e88e01e94305f4ab90414920c75.
+API schema version: 2.5.0. Data version (SHA-256 of the served data): 2ad04a58d5808675c1db13eb498dadb8fedd828f9e6ef16904bc8f3c520ac987.
 Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and requested citation of each case are in cases/{id}.json.
 
 ## How to use this
@@ -228,7 +228,6 @@ Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and reques
   - https://aij.eddy3d.com/api/3.4.0/submissions/eddy3d-of12-nutcap-lifted/A.csv?v=d55ee1f8ca3c
   - https://aij.eddy3d.com/api/3.4.0/submissions/eddy3d-of12-nutcap-lifted/B.csv?v=e516ab47e393
   - https://aij.eddy3d.com/api/3.4.0/submissions/eddy3d-of12-nutcap-lifted/H.csv?v=976a8b51df69
-  - https://aij.eddy3d.com/api/3.4.0/submissions/eddy3d-of12-nutcap-lifted/K.csv?v=e26fa1b76a4e
   - https://aij.eddy3d.com/api/3.4.0/submissions/eddy3d-of12-sst-urans/A.csv?v=98a4d275b3f2
   - https://aij.eddy3d.com/api/3.4.0/submissions/example-openfoam12/A.csv?v=4eec5b1fe73a
 - schemas/{name}.schema.json (base URL + path, one file per value) — the JSON Schema (draft 2020-12) of each JSON document:
