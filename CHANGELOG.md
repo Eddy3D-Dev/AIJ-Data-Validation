@@ -15,6 +15,13 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [3.6.0] - 2026-10-21
+
+### Added
+
+- Cases F and M in `submissions/eddy3d-of12-nutcap-lifted` (probes from the cap-lifted ICE re-solves): Case F's 9 m scalar-speed hit
+  rate moves 0.769 to 0.615 with its bias 0.126 to −0.013; Case M's $$c^\ast$$ hit rate 0.133 to 0.067, its bias 1.52 to 1.08.
+
 ## [3.5.0] - 2026-10-21
 
 ### Added

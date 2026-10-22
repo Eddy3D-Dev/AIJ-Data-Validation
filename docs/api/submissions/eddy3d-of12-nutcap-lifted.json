@@ -1,7 +1,7 @@
 {
  "$schema": "https://aij.eddy3d.com/api/schemas/submission.schema.json",
  "schema_version": "2.5.0",
- "data_version": "249fe518ae281d3b62ab76162a59a358bd385e88e01e94305f4ab90414920c75",
+ "data_version": "1346aa83352325ea02157757ed98a73bd25e7f98615646d480c0c3e38359ea15",
  "license": "CC-BY-4.0",
  "slug": "eddy3d-of12-nutcap-lifted",
  "submission": {
@@ -11,18 +11,18 @@
   "author": "Sustainable Urban Systems Lab",
   "licence": "CC-BY-4.0",
   "contact": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions",
-  "inlet": "Case A, H and K, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved)",
+  "inlet": "Case A, H, K, F and M, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved)",
   "mesh": "snappyHexMesh, 1:100 scale, the served runs' mesh and numerics level 3",
   "turbulence_model": "realizable k-epsilon, nutMaxCoeff 1e8",
   "compute": "3000 iterations, steady, 5-6 ranks (Case A on an Apple M-series laptop, B and H on PACE Phoenix)",
   "units": "normalised",
-  "notes": "Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the Sct = 0.5 species. Case B's baseline is therefore the measured-inlet submission, not the served run."
+  "notes": "Cases F (wind from NNW) and M (WD 180, Sct 0.5) are the Eddy3D fixtures re-solved by another session on PACE ICE with the same cap change, scored here from their probe files. Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the Sct = 0.5 species. Case B's baseline is therefore the measured-inlet submission, not the served run."
  },
  "example": false,
  "provenance": "self-reported inputs (the values in submissions/<slug>/cases/<id>/probes.csv), scored by this repository's build with validation/score_submissions.py; not an Eddy3D result and not checked by the maintainers beyond the scoring",
  "scored_with": {
   "script": "validation/score_submissions.py",
-  "release": "3.5.0",
+  "release": "3.6.0",
   "conventions": "velocities and the speed over U_ref, k over U_ref^2 (Cases E, F and G publish ratios already); U, V, W, |U| and the thermistor bracket scored as signed velocities (FAC2's ratio keeps the sign; hit rate D = 0.25, W = 0.05); k by the plain definitions (D = 0.25 only); a thermistor, cup or sonic reading (a mean scalar speed) scored against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar), the two ends of its bracket; c* = C/c0 with one detection limit per case, 1e-3 of the largest measured value; theta = (T_floor - T)/(T_floor - T_H) scored like a positive velocity. The same conventions score the served Eddy3D results (docs/validation/method.md).",
   "metric_meaning": {
    "Count": "number of measured points scored",
@@ -592,6 +592,472 @@
     }
    ],
    "U_ref_m_s": 5.133,
+   "units_given": "normalised"
+  },
+  {
+   "case": "F",
+   "title": "Case F — Shinjuku district",
+   "status": "scored",
+   "headline": [
+    {
+     "label": "default.field.wd337.5: √(|U|²+2k)",
+     "score": "default.field.wd337.5/vs.scalar",
+     "Count": 13,
+     "R": 0.8529991337882592,
+     "Fac2": 1.0,
+     "Fb": 0.008004220945741313,
+     "HitRate": 0.5384615384615384,
+     "coverage": {
+      "scored": 13,
+      "measured": 13
+     }
+    },
+    {
+     "label": "default.field.wd337.5: |U|",
+     "score": "default.field.wd337.5/vs.vector",
+     "Count": 13,
+     "R": 0.8306519837032573,
+     "Fac2": 0.8461538461538461,
+     "Fb": 0.16944090571649847,
+     "HitRate": 0.46153846153846156,
+     "coverage": {
+      "scored": 13,
+      "measured": 13
+     }
+    },
+    {
+     "label": "default.wind_tunnel.wd337.5: √(|U|²+2k)",
+     "score": "default.wind_tunnel.wd337.5/vs.scalar",
+     "Count": 13,
+     "R": 0.9278551397334758,
+     "Fac2": 1.0,
+     "Fb": -0.013287038021234316,
+     "HitRate": 0.6153846153846154,
+     "coverage": {
+      "scored": 13,
+      "measured": 13
+     }
+    },
+    {
+     "label": "default.wind_tunnel.wd337.5: |U|",
+     "score": "default.wind_tunnel.wd337.5/vs.vector",
+     "Count": 13,
+     "R": 0.9197694511489479,
+     "Fac2": 0.9230769230769231,
+     "Fb": 0.14663015011850936,
+     "HitRate": 0.46153846153846156,
+     "coverage": {
+      "scored": 13,
+      "measured": 13
+     }
+    },
+    {
+     "label": "h20.wind_tunnel.wd337.5: √(|U|²+2k)",
+     "score": "h20.wind_tunnel.wd337.5/vs.scalar",
+     "Count": 13,
+     "R": 0.7536514156124126,
+     "Fac2": 0.9230769230769231,
+     "Fb": -0.002269996562197457,
+     "HitRate": 0.7692307692307693,
+     "coverage": {
+      "scored": 13,
+      "measured": 13
+     }
+    },
+    {
+     "label": "h20.wind_tunnel.wd337.5: |U|",
+     "score": "h20.wind_tunnel.wd337.5/vs.vector",
+     "Count": 13,
+     "R": 0.7513861874135328,
+     "Fac2": 0.9230769230769231,
+     "Fb": 0.09167780928078324,
+     "HitRate": 0.6923076923076923,
+     "coverage": {
+      "scored": 13,
+      "measured": 13
+     }
+    },
+    {
+     "label": "h5.wind_tunnel.wd337.5: √(|U|²+2k)",
+     "score": "h5.wind_tunnel.wd337.5/vs.scalar",
+     "Count": 7,
+     "R": 0.953727331994296,
+     "Fac2": 1.0,
+     "Fb": 0.017495059100595088,
+     "HitRate": 0.7142857142857143,
+     "coverage": {
+      "scored": 7,
+      "measured": 7
+     }
+    },
+    {
+     "label": "h5.wind_tunnel.wd337.5: |U|",
+     "score": "h5.wind_tunnel.wd337.5/vs.vector",
+     "Count": 7,
+     "R": 0.9356450723854389,
+     "Fac2": 0.8571428571428571,
+     "Fb": 0.20081740210433746,
+     "HitRate": 0.7142857142857143,
+     "coverage": {
+      "scored": 7,
+      "measured": 7
+     }
+    }
+   ],
+   "values": {
+    "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/F.csv?v=529a40fd2c5b",
+    "path": "submissions/eddy3d-of12-nutcap-lifted/F.csv",
+    "media_type": "text/csv",
+    "bytes": 3882,
+    "sha256": "529a40fd2c5b78c8afae9972a0834f6c00cc076ee977b114f6a9791f45083279"
+   },
+   "scores": {
+    "default.field.wd337.5/vs.scalar": {
+     "Count": 13,
+     "MeanObserved": 0.2569230769230769,
+     "MeanPredicted": 0.2548748052588038,
+     "Fb": 0.008004220945741313,
+     "Nmse": 0.08914490783176202,
+     "Nad": 0.11915700568316444,
+     "Fac2": 1.0,
+     "HitRate": 0.5384615384615384,
+     "Mg": 0.9907863282783199,
+     "Vg": 1.0926875519413848,
+     "GeometricPairs": 13,
+     "R": 0.8529991337882592
+    },
+    "default.field.wd337.5/vs.vector": {
+     "Count": 13,
+     "MeanObserved": 0.2569230769230769,
+     "MeanPredicted": 0.21678989907194934,
+     "Fb": 0.16944090571649847,
+     "Nmse": 0.15041367420511095,
+     "Nad": 0.17603270881071123,
+     "Fac2": 0.8461538461538461,
+     "HitRate": 0.46153846153846156,
+     "Mg": 1.265211903599659,
+     "Vg": 1.2589551804934593,
+     "GeometricPairs": 13,
+     "R": 0.8306519837032573
+    },
+    "default.wind_tunnel.wd337.5/vs.scalar": {
+     "Count": 13,
+     "MeanObserved": 0.26069230769230767,
+     "MeanPredicted": 0.2641793022108324,
+     "Fb": -0.013287038021234316,
+     "Nmse": 0.04252018390595481,
+     "Nad": 0.08411124959544393,
+     "Fac2": 1.0,
+     "HitRate": 0.6153846153846154,
+     "Mg": 0.9742273861037257,
+     "Vg": 1.0660126813535553,
+     "GeometricPairs": 13,
+     "R": 0.9278551397334758
+    },
+    "default.wind_tunnel.wd337.5/vs.vector": {
+     "Count": 13,
+     "MeanObserved": 0.26069230769230767,
+     "MeanPredicted": 0.2250780196794859,
+     "Fb": 0.14663015011850936,
+     "Nmse": 0.08069630932969751,
+     "Nad": 0.1224920562898739,
+     "Fac2": 0.9230769230769231,
+     "HitRate": 0.46153846153846156,
+     "Mg": 1.2508676706593325,
+     "Vg": 1.1831475684102168,
+     "GeometricPairs": 13,
+     "R": 0.9197694511489479
+    },
+    "h20.wind_tunnel.wd337.5/vs.scalar": {
+     "Count": 13,
+     "MeanObserved": 0.3545384615384615,
+     "MeanPredicted": 0.3553441771131129,
+     "Fb": -0.002269996562197457,
+     "Nmse": 0.061843621951395374,
+     "Nad": 0.10030235252236103,
+     "Fac2": 0.9230769230769231,
+     "HitRate": 0.7692307692307693,
+     "Mg": 0.9957549644559753,
+     "Vg": 1.1005900763945153,
+     "GeometricPairs": 13,
+     "R": 0.7536514156124126
+    },
+    "h20.wind_tunnel.wd337.5/vs.vector": {
+     "Count": 13,
+     "MeanObserved": 0.3545384615384615,
+     "MeanPredicted": 0.3234597654645174,
+     "Fb": 0.09167780928078324,
+     "Nmse": 0.08196911209943107,
+     "Nad": 0.11944555701689177,
+     "Fac2": 0.9230769230769231,
+     "HitRate": 0.6923076923076923,
+     "Mg": 1.12373720416691,
+     "Vg": 1.1449659034022492,
+     "GeometricPairs": 13,
+     "R": 0.7513861874135328
+    },
+    "h5.wind_tunnel.wd337.5/vs.scalar": {
+     "Count": 7,
+     "MeanObserved": 0.21757142857142858,
+     "MeanPredicted": 0.21379801164603104,
+     "Fb": 0.017495059100595088,
+     "Nmse": 0.04234615782946146,
+     "Nad": 0.07523189469774806,
+     "Fac2": 1.0,
+     "HitRate": 0.7142857142857143,
+     "Mg": 0.978455281001408,
+     "Vg": 1.0479349305459449,
+     "GeometricPairs": 7,
+     "R": 0.953727331994296
+    },
+    "h5.wind_tunnel.wd337.5/vs.vector": {
+     "Count": 7,
+     "MeanObserved": 0.21757142857142858,
+     "MeanPredicted": 0.1778660636319593,
+     "Fb": 0.20081740210433746,
+     "Nmse": 0.10607986912490504,
+     "Nad": 0.12848077642334788,
+     "Fac2": 0.8571428571428571,
+     "HitRate": 0.7142857142857143,
+     "Mg": 1.3371817163017705,
+     "Vg": 1.3036017990402482,
+     "GeometricPairs": 7,
+     "R": 0.9356450723854389
+    }
+   },
+   "coverage": {
+    "default.field.wd337.5/vs.scalar": {
+     "scored": 13,
+     "measured": 13
+    },
+    "default.field.wd337.5/vs.vector": {
+     "scored": 13,
+     "measured": 13
+    },
+    "default.wind_tunnel.wd337.5/vs.scalar": {
+     "scored": 13,
+     "measured": 13
+    },
+    "default.wind_tunnel.wd337.5/vs.vector": {
+     "scored": 13,
+     "measured": 13
+    },
+    "h20.wind_tunnel.wd337.5/vs.scalar": {
+     "scored": 13,
+     "measured": 13
+    },
+    "h20.wind_tunnel.wd337.5/vs.vector": {
+     "scored": 13,
+     "measured": 13
+    },
+    "h5.wind_tunnel.wd337.5/vs.scalar": {
+     "scored": 7,
+     "measured": 7
+    },
+    "h5.wind_tunnel.wd337.5/vs.vector": {
+     "scored": 7,
+     "measured": 7
+    }
+   },
+   "groups": [
+    {
+     "key": "default.field.wd337.5",
+     "group": {
+      "config": "default",
+      "campaign": "field",
+      "wind_direction_deg": 337.5
+     },
+     "points_measured": 13,
+     "scores": {
+      "vs.scalar": {
+       "Count": 13,
+       "MeanObserved": 0.2569230769230769,
+       "MeanPredicted": 0.2548748052588038,
+       "Fb": 0.008004220945741313,
+       "Nmse": 0.08914490783176202,
+       "Nad": 0.11915700568316444,
+       "Fac2": 1.0,
+       "HitRate": 0.5384615384615384,
+       "Mg": 0.9907863282783199,
+       "Vg": 1.0926875519413848,
+       "GeometricPairs": 13,
+       "R": 0.8529991337882592
+      },
+      "vs.vector": {
+       "Count": 13,
+       "MeanObserved": 0.2569230769230769,
+       "MeanPredicted": 0.21678989907194934,
+       "Fb": 0.16944090571649847,
+       "Nmse": 0.15041367420511095,
+       "Nad": 0.17603270881071123,
+       "Fac2": 0.8461538461538461,
+       "HitRate": 0.46153846153846156,
+       "Mg": 1.265211903599659,
+       "Vg": 1.2589551804934593,
+       "GeometricPairs": 13,
+       "R": 0.8306519837032573
+      }
+     },
+     "coverage": {
+      "vs.scalar": {
+       "scored": 13,
+       "measured": 13
+      },
+      "vs.vector": {
+       "scored": 13,
+       "measured": 13
+      }
+     }
+    },
+    {
+     "key": "default.wind_tunnel.wd337.5",
+     "group": {
+      "config": "default",
+      "campaign": "wind_tunnel",
+      "wind_direction_deg": 337.5
+     },
+     "points_measured": 13,
+     "scores": {
+      "vs.scalar": {
+       "Count": 13,
+       "MeanObserved": 0.26069230769230767,
+       "MeanPredicted": 0.2641793022108324,
+       "Fb": -0.013287038021234316,
+       "Nmse": 0.04252018390595481,
+       "Nad": 0.08411124959544393,
+       "Fac2": 1.0,
+       "HitRate": 0.6153846153846154,
+       "Mg": 0.9742273861037257,
+       "Vg": 1.0660126813535553,
+       "GeometricPairs": 13,
+       "R": 0.9278551397334758
+      },
+      "vs.vector": {
+       "Count": 13,
+       "MeanObserved": 0.26069230769230767,
+       "MeanPredicted": 0.2250780196794859,
+       "Fb": 0.14663015011850936,
+       "Nmse": 0.08069630932969751,
+       "Nad": 0.1224920562898739,
+       "Fac2": 0.9230769230769231,
+       "HitRate": 0.46153846153846156,
+       "Mg": 1.2508676706593325,
+       "Vg": 1.1831475684102168,
+       "GeometricPairs": 13,
+       "R": 0.9197694511489479
+      }
+     },
+     "coverage": {
+      "vs.scalar": {
+       "scored": 13,
+       "measured": 13
+      },
+      "vs.vector": {
+       "scored": 13,
+       "measured": 13
+      }
+     }
+    },
+    {
+     "key": "h20.wind_tunnel.wd337.5",
+     "group": {
+      "config": "h20",
+      "campaign": "wind_tunnel",
+      "wind_direction_deg": 337.5
+     },
+     "points_measured": 13,
+     "scores": {
+      "vs.scalar": {
+       "Count": 13,
+       "MeanObserved": 0.3545384615384615,
+       "MeanPredicted": 0.3553441771131129,
+       "Fb": -0.002269996562197457,
+       "Nmse": 0.061843621951395374,
+       "Nad": 0.10030235252236103,
+       "Fac2": 0.9230769230769231,
+       "HitRate": 0.7692307692307693,
+       "Mg": 0.9957549644559753,
+       "Vg": 1.1005900763945153,
+       "GeometricPairs": 13,
+       "R": 0.7536514156124126
+      },
+      "vs.vector": {
+       "Count": 13,
+       "MeanObserved": 0.3545384615384615,
+       "MeanPredicted": 0.3234597654645174,
+       "Fb": 0.09167780928078324,
+       "Nmse": 0.08196911209943107,
+       "Nad": 0.11944555701689177,
+       "Fac2": 0.9230769230769231,
+       "HitRate": 0.6923076923076923,
+       "Mg": 1.12373720416691,
+       "Vg": 1.1449659034022492,
+       "GeometricPairs": 13,
+       "R": 0.7513861874135328
+      }
+     },
+     "coverage": {
+      "vs.scalar": {
+       "scored": 13,
+       "measured": 13
+      },
+      "vs.vector": {
+       "scored": 13,
+       "measured": 13
+      }
+     }
+    },
+    {
+     "key": "h5.wind_tunnel.wd337.5",
+     "group": {
+      "config": "h5",
+      "campaign": "wind_tunnel",
+      "wind_direction_deg": 337.5
+     },
+     "points_measured": 7,
+     "scores": {
+      "vs.scalar": {
+       "Count": 7,
+       "MeanObserved": 0.21757142857142858,
+       "MeanPredicted": 0.21379801164603104,
+       "Fb": 0.017495059100595088,
+       "Nmse": 0.04234615782946146,
+       "Nad": 0.07523189469774806,
+       "Fac2": 1.0,
+       "HitRate": 0.7142857142857143,
+       "Mg": 0.978455281001408,
+       "Vg": 1.0479349305459449,
+       "GeometricPairs": 7,
+       "R": 0.953727331994296
+      },
+      "vs.vector": {
+       "Count": 7,
+       "MeanObserved": 0.21757142857142858,
+       "MeanPredicted": 0.1778660636319593,
+       "Fb": 0.20081740210433746,
+       "Nmse": 0.10607986912490504,
+       "Nad": 0.12848077642334788,
+       "Fac2": 0.8571428571428571,
+       "HitRate": 0.7142857142857143,
+       "Mg": 1.3371817163017705,
+       "Vg": 1.3036017990402482,
+       "GeometricPairs": 7,
+       "R": 0.9356450723854389
+      }
+     },
+     "coverage": {
+      "vs.scalar": {
+       "scored": 7,
+       "measured": 7
+      },
+      "vs.vector": {
+       "scored": 7,
+       "measured": 7
+      }
+     }
+    }
+   ],
+   "U_ref_m_s": null,
    "units_given": "normalised"
   },
   {
@@ -1242,6 +1708,335 @@
     }
    ],
    "U_ref_m_s": 2.33,
+   "units_given": "normalised"
+  },
+  {
+   "case": "M",
+   "title": "Case M — TPU Atsugi campus",
+   "status": "scored",
+   "headline": [
+    {
+     "label": "wind_tunnel.wd180: U",
+     "score": "wind_tunnel.wd180/velocity.U",
+     "Count": 15,
+     "R": 0.6273970620028672,
+     "Fac2": 0.2,
+     "Fb": 1.0638140896789674,
+     "HitRate": 0.13333333333333333,
+     "coverage": {
+      "scored": 15,
+      "measured": 15
+     }
+    },
+    {
+     "label": "wind_tunnel.wd180: V",
+     "score": "wind_tunnel.wd180/velocity.V",
+     "Count": 15,
+     "R": 0.7014186559113077,
+     "Fac2": 0.26666666666666666,
+     "Fb": null,
+     "HitRate": 0.13333333333333333,
+     "coverage": {
+      "scored": 15,
+      "measured": 15
+     }
+    },
+    {
+     "label": "wind_tunnel.wd180: W",
+     "score": "wind_tunnel.wd180/velocity.W",
+     "Count": 15,
+     "R": 0.11659121491009262,
+     "Fac2": 0.3333333333333333,
+     "Fb": 1.9380589502841845,
+     "HitRate": 0.6666666666666666,
+     "coverage": {
+      "scored": 15,
+      "measured": 15
+     }
+    },
+    {
+     "label": "wind_tunnel.wd180: |U|",
+     "score": "wind_tunnel.wd180/speed",
+     "Count": 15,
+     "R": 0.5396484413543094,
+     "Fac2": 0.6666666666666666,
+     "Fb": 0.16854470588079346,
+     "HitRate": 0.5333333333333333,
+     "coverage": {
+      "scored": 15,
+      "measured": 15
+     }
+    },
+    {
+     "label": "wind_tunnel.wd180: k",
+     "score": "wind_tunnel.wd180/k",
+     "Count": 15,
+     "R": 0.46324218888867214,
+     "Fac2": 0.26666666666666666,
+     "Fb": 0.8747483341181013,
+     "HitRate": 0.13333333333333333,
+     "coverage": {
+      "scored": 15,
+      "measured": 15
+     }
+    },
+    {
+     "label": "wind_tunnel.wd180: c*",
+     "score": "wind_tunnel.wd180/cstar",
+     "Count": 15,
+     "R": 0.35419060981789885,
+     "Fac2": 0.13333333333333333,
+     "Fb": 1.0832762529352788,
+     "HitRate": 0.06666666666666667,
+     "coverage": {
+      "scored": 15,
+      "measured": 15
+     }
+    }
+   ],
+   "values": {
+    "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/M.csv?v=6fd56831269c",
+    "path": "submissions/eddy3d-of12-nutcap-lifted/M.csv",
+    "media_type": "text/csv",
+    "bytes": 2487,
+    "sha256": "6fd56831269cb64f37b6bd4a186ea7c4eb206a2d7e1fe96d5b1bd30c90e7e604"
+   },
+   "scores": {
+    "wind_tunnel.wd180/velocity.U": {
+     "Count": 15,
+     "MeanObserved": 0.16435677939379084,
+     "MeanPredicted": 0.05022122642902653,
+     "Fb": 1.0638140896789674,
+     "Nmse": 4.159771125724017,
+     "Nad": 0.7346045190537523,
+     "Fac2": 0.2,
+     "HitRate": 0.13333333333333333,
+     "Mg": 1.952695867895042,
+     "Vg": 3.4954212225664896,
+     "GeometricPairs": 9,
+     "R": 0.6273970620028672
+    },
+    "wind_tunnel.wd180/velocity.V": {
+     "Count": 15,
+     "MeanObserved": 0.006453212889869281,
+     "MeanPredicted": -7.70614536611589e-05,
+     "Fb": null,
+     "Nmse": null,
+     "Nad": null,
+     "Fac2": 0.26666666666666666,
+     "HitRate": 0.13333333333333333,
+     "Mg": 0.43875478699118026,
+     "Vg": 5.020459782635414,
+     "GeometricPairs": 5,
+     "R": 0.7014186559113077
+    },
+    "wind_tunnel.wd180/velocity.W": {
+     "Count": 15,
+     "MeanObserved": 0.024957402611111113,
+     "MeanPredicted": 0.00039255067926317004,
+     "Fb": 1.9380589502841845,
+     "Nmse": 483.2352634449413,
+     "Nad": 1.7760808340358956,
+     "Fac2": 0.3333333333333333,
+     "HitRate": 0.6666666666666666,
+     "Mg": 1.4658631630387924,
+     "Vg": 5.3671207255123585,
+     "GeometricPairs": 6,
+     "R": 0.11659121491009262
+    },
+    "wind_tunnel.wd180/speed": {
+     "Count": 15,
+     "MeanObserved": 0.24741907952072792,
+     "MeanPredicted": 0.2089590229915451,
+     "Fb": 0.16854470588079346,
+     "Nmse": 0.4113988782361511,
+     "Nad": 0.24646384559898593,
+     "Fac2": 0.6666666666666666,
+     "HitRate": 0.5333333333333333,
+     "Mg": 1.0312733901610798,
+     "Vg": 1.4149800931195287,
+     "GeometricPairs": 15,
+     "R": 0.5396484413543094
+    },
+    "wind_tunnel.wd180/k": {
+     "Count": 15,
+     "MeanObserved": 0.02932589866037101,
+     "MeanPredicted": 0.011478923538950228,
+     "Fb": 0.8747483341181013,
+     "Nmse": 1.2470326313411522,
+     "Nad": 0.43737416705905063,
+     "Fac2": 0.26666666666666666,
+     "HitRate": 0.13333333333333333,
+     "Mg": 2.827949276201793,
+     "Vg": 4.056926084116411,
+     "GeometricPairs": 15,
+     "R": 0.46324218888867214
+    },
+    "wind_tunnel.wd180/cstar": {
+     "Count": 15,
+     "MeanObserved": 0.9980685278503266,
+     "MeanPredicted": 0.2967470462003805,
+     "Fb": 1.0832762529352788,
+     "Nmse": 4.699528647927951,
+     "Nad": 0.6699321567949296,
+     "Fac2": 0.13333333333333333,
+     "HitRate": 0.06666666666666667,
+     "Mg": 7.776488054885628,
+     "Vg": 368.1393421557172,
+     "GeometricPairs": 15,
+     "R": 0.35419060981789885
+    }
+   },
+   "coverage": {
+    "wind_tunnel.wd180/velocity.U": {
+     "scored": 15,
+     "measured": 15
+    },
+    "wind_tunnel.wd180/velocity.V": {
+     "scored": 15,
+     "measured": 15
+    },
+    "wind_tunnel.wd180/velocity.W": {
+     "scored": 15,
+     "measured": 15
+    },
+    "wind_tunnel.wd180/speed": {
+     "scored": 15,
+     "measured": 15
+    },
+    "wind_tunnel.wd180/k": {
+     "scored": 15,
+     "measured": 15
+    },
+    "wind_tunnel.wd180/cstar": {
+     "scored": 15,
+     "measured": 15
+    }
+   },
+   "groups": [
+    {
+     "key": "wind_tunnel.wd180",
+     "group": {
+      "campaign": "wind_tunnel",
+      "run": "",
+      "wind_direction_deg": 180.0
+     },
+     "points_measured": 30,
+     "scores": {
+      "velocity.U": {
+       "Count": 15,
+       "MeanObserved": 0.16435677939379084,
+       "MeanPredicted": 0.05022122642902653,
+       "Fb": 1.0638140896789674,
+       "Nmse": 4.159771125724017,
+       "Nad": 0.7346045190537523,
+       "Fac2": 0.2,
+       "HitRate": 0.13333333333333333,
+       "Mg": 1.952695867895042,
+       "Vg": 3.4954212225664896,
+       "GeometricPairs": 9,
+       "R": 0.6273970620028672
+      },
+      "velocity.V": {
+       "Count": 15,
+       "MeanObserved": 0.006453212889869281,
+       "MeanPredicted": -7.70614536611589e-05,
+       "Fb": null,
+       "Nmse": null,
+       "Nad": null,
+       "Fac2": 0.26666666666666666,
+       "HitRate": 0.13333333333333333,
+       "Mg": 0.43875478699118026,
+       "Vg": 5.020459782635414,
+       "GeometricPairs": 5,
+       "R": 0.7014186559113077
+      },
+      "velocity.W": {
+       "Count": 15,
+       "MeanObserved": 0.024957402611111113,
+       "MeanPredicted": 0.00039255067926317004,
+       "Fb": 1.9380589502841845,
+       "Nmse": 483.2352634449413,
+       "Nad": 1.7760808340358956,
+       "Fac2": 0.3333333333333333,
+       "HitRate": 0.6666666666666666,
+       "Mg": 1.4658631630387924,
+       "Vg": 5.3671207255123585,
+       "GeometricPairs": 6,
+       "R": 0.11659121491009262
+      },
+      "speed": {
+       "Count": 15,
+       "MeanObserved": 0.24741907952072792,
+       "MeanPredicted": 0.2089590229915451,
+       "Fb": 0.16854470588079346,
+       "Nmse": 0.4113988782361511,
+       "Nad": 0.24646384559898593,
+       "Fac2": 0.6666666666666666,
+       "HitRate": 0.5333333333333333,
+       "Mg": 1.0312733901610798,
+       "Vg": 1.4149800931195287,
+       "GeometricPairs": 15,
+       "R": 0.5396484413543094
+      },
+      "k": {
+       "Count": 15,
+       "MeanObserved": 0.02932589866037101,
+       "MeanPredicted": 0.011478923538950228,
+       "Fb": 0.8747483341181013,
+       "Nmse": 1.2470326313411522,
+       "Nad": 0.43737416705905063,
+       "Fac2": 0.26666666666666666,
+       "HitRate": 0.13333333333333333,
+       "Mg": 2.827949276201793,
+       "Vg": 4.056926084116411,
+       "GeometricPairs": 15,
+       "R": 0.46324218888867214
+      },
+      "cstar": {
+       "Count": 15,
+       "MeanObserved": 0.9980685278503266,
+       "MeanPredicted": 0.2967470462003805,
+       "Fb": 1.0832762529352788,
+       "Nmse": 4.699528647927951,
+       "Nad": 0.6699321567949296,
+       "Fac2": 0.13333333333333333,
+       "HitRate": 0.06666666666666667,
+       "Mg": 7.776488054885628,
+       "Vg": 368.1393421557172,
+       "GeometricPairs": 15,
+       "R": 0.35419060981789885
+      }
+     },
+     "coverage": {
+      "velocity.U": {
+       "scored": 15,
+       "measured": 15
+      },
+      "velocity.V": {
+       "scored": 15,
+       "measured": 15
+      },
+      "velocity.W": {
+       "scored": 15,
+       "measured": 15
+      },
+      "speed": {
+       "scored": 15,
+       "measured": 15
+      },
+      "k": {
+       "scored": 15,
+       "measured": 15
+      },
+      "cstar": {
+       "scored": 15,
+       "measured": 15
+      }
+     }
+    }
+   ],
+   "U_ref_m_s": 4.08,
    "units_given": "normalised"
   }
  ],

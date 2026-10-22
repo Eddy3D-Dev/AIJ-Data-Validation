@@ -19,12 +19,12 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | author | Sustainable Urban Systems Lab |
 | licence | CC-BY-4.0 |
 | contact | <https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions> |
-| inlet | Case A, H and K, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved) |
+| inlet | Case A, H, K, F and M, the served fitted log law; Case B, the measured approach profile with the rough floor (the measured-inlet run, the only Case B study re-solved) |
 | mesh | snappyHexMesh, 1:100 scale, the served runs\' mesh and numerics level 3 |
 | turbulence\_model | realizable k-epsilon, nutMaxCoeff 1e8 |
 | compute | 3000 iterations, steady, 5-6 ranks (Case A on an Apple M-series laptop, B and H on PACE Phoenix) |
 | units | normalised |
-| notes | Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the $$\mathrm{Sc_t}$$ = 0.5 species. Case B\'s baseline is therefore the measured-inlet submission, not the served run. |
+| notes | Cases F (wind from NNW) and M (WD 180, $$\mathrm{Sc_t}$$ 0.5) are the Eddy3D fixtures re-solved by another session on PACE ICE with the same cap change, scored here from their probe files. Same fixtures as the served runs (Eddy3D docs/VALIDATION.md) with only the cap changed. Case H cstar is the $$\mathrm{Sc_t}$$ = 0.5 species. Case B\'s baseline is therefore the measured-inlet submission, not the served run. |
 
 {% include nomenclature.md %}
 
@@ -50,6 +50,40 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | $$k$$ | +0.312 | 0.562 | +0.282 | 0.254 | 224 | 224/224 |
 {: .scores }
 
+## Case F — Shinjuku district
+
+### config default, campaign field, wind\_direction\_deg 337.5
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.853 | 1.000 | +0.008 | 0.538 | 13 | 13/13 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.831 | 0.846 | +0.169 | 0.462 | 13 | 13/13 |
+{: .scores }
+
+### config default, campaign wind\_tunnel, wind\_direction\_deg 337.5
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.928 | 1.000 | -0.013 | 0.615 | 13 | 13/13 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.920 | 0.923 | +0.147 | 0.462 | 13 | 13/13 |
+{: .scores }
+
+### config h20, campaign wind\_tunnel, wind\_direction\_deg 337.5
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.754 | 0.923 | -0.002 | 0.769 | 13 | 13/13 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.751 | 0.923 | +0.092 | 0.692 | 13 | 13/13 |
+{: .scores }
+
+### config h5, campaign wind\_tunnel, wind\_direction\_deg 337.5
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.954 | 1.000 | +0.017 | 0.714 | 7 | 7/7 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.936 | 0.857 | +0.201 | 0.714 | 7 | 7/7 |
+{: .scores }
+
 ## Case H — 1:1:2 building with a floor point source
 
 | Score | R | FAC2 | FB | Hit rate | n | coverage |
@@ -72,4 +106,18 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | $$\lvert\mathbf{U}\rvert$$ | +0.945 | 0.606 | +0.506 | 0.192 | 203 | 203/203 |
 | $$k$$ | +0.357 | 0.261 | +0.955 | 0.039 | 203 | 203/203 |
 | $$c^\ast$$ | +0.949 | 0.808 | -0.751 | 0.478 | 203 | 203/203 |
+{: .scores }
+
+## Case M — TPU Atsugi campus
+
+### campaign wind\_tunnel, wind\_direction\_deg 180.0
+
+| Score | R | FAC2 | FB | Hit rate | n | coverage |
+|---|---|---|---|---|---|---|
+| $$U$$ | +0.627 | 0.200 | +1.064 | 0.133 | 15 | 15/15 |
+| $$V$$ | +0.701 | 0.267 | — | 0.133 | 15 | 15/15 |
+| $$W$$ | +0.117 | 0.333 | +1.938 | 0.667 | 15 | 15/15 |
+| $$\lvert\mathbf{U}\rvert$$ | +0.540 | 0.667 | +0.169 | 0.533 | 15 | 15/15 |
+| $$k$$ | +0.463 | 0.267 | +0.875 | 0.133 | 15 | 15/15 |
+| $$c^\ast$$ | +0.354 | 0.133 | +1.083 | 0.067 | 15 | 15/15 |
 {: .scores }
