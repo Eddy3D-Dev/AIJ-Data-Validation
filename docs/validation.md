@@ -28,6 +28,10 @@ Each case's Validation page has its measurement locations, every engine's result
 - [Case L]({{ '/cases/case-l/validation/' | relative_url }}): 9 x 14 cube array, line source, non-isothermal
 - [Case M]({{ '/cases/case-m/validation/' | relative_url }}): TPU Atsugi campus
 
+## Cases C and D by configuration
+
+{% include figure.html name="cases-cd-scores.png" alt="Correlation and error against the wind tunnel for every configuration of Cases C and D, OpenFOAM and ML surrogate" caption="<strong>Figure 1.</strong> Cases C and D, one row per configuration: the correlation coefficient C.C. (higher is better) and the root-mean-square difference S.E. (lower is better) between the tunnel and each model, over the points of the row, in $$U_H$$ units. OpenFOAM is the scalar speed $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ against the thermistor's $$V_{\mathrm{s}}$$; the split-fibre row compares $$\lvert\mathbf{U}\rvert$$ with the measured $$\lvert\mathbf{U}\rvert$$. The ML surrogate is $$\lvert\mathbf{U}\rvert$$. Rows: Case C, the centre block (0D absent, 1D, 2D) and the wind direction; Case D, the wind direction." %}
+
 ## Every case and engine
 
 {% include validation-matrix.md %}

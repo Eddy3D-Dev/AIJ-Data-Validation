@@ -638,5 +638,15 @@
   "web": "/assets/web/case-m.png",
   "web_bytes": 274959,
   "width": 1600
+ },
+ "cases-cd-scores.png": {
+  "height": 1344,
+  "master": "/assets/figures/cases-cd-scores.png",
+  "master_bytes": 1245700,
+  "master_height": 8520,
+  "master_width": 10140,
+  "web": "/assets/web/cases-cd-scores.png",
+  "web_bytes": 243821,
+  "width": 1600
  }
 }
