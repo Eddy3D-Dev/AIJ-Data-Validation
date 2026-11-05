@@ -640,13 +640,13 @@
   "width": 1600
  },
  "cases-cd-scores.png": {
-  "height": 1344,
+  "height": 1429,
   "master": "/assets/figures/cases-cd-scores.png",
-  "master_bytes": 1245700,
-  "master_height": 8520,
-  "master_width": 10140,
+  "master_bytes": 1491385,
+  "master_height": 9048,
+  "master_width": 10128,
   "web": "/assets/web/cases-cd-scores.png",
-  "web_bytes": 243821,
+  "web_bytes": 286885,
   "width": 1600
  }
 }
