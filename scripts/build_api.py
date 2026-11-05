@@ -682,6 +682,7 @@ RUNS += [
 ]
 
 # One caption per validation figure, used on the case pages and served with each result.
+PAGE_FIGURES = {"cases-cd-scores.png"}   # figures of a hand-written page that belong to no one run (docs/validation.md)
 FIGURE_CAPTIONS = {
     "case-a-openfoam-rans-urans.png": ("Case A, OpenFOAM 12: the served steady run (RANS, realizable k-ε, log-law inlet) and the same solver run transient (URANS, "
                                        "SST k-ω, measured inlet), R, FAC2, FB and hit rate of U, V, W and k, the dashed line where a perfect model scores."),
@@ -1810,7 +1811,7 @@ def copy_assets():
     copy of each (same file name), docs/_data/figures.json = what a page needs to embed them; nothing else."""
     wanted = {
         "geometry": {D.render_file(c, cfg) for (c, cfg) in D.RENDER_CAPTIONS},
-        "figures": {fig for r in RUNS for fig in r["figures"]},
+        "figures": {fig for r in RUNS for fig in r["figures"]} | PAGE_FIGURES,
     }
     clash = wanted["geometry"] & wanted["figures"]
     if clash:
