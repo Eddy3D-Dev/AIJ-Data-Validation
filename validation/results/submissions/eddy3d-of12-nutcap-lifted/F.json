@@ -1,0 +1,377 @@
+{
+ "case": "F",
+ "engine": "eddy3d-of12-nutcap-lifted",
+ "units_given": "normalised",
+ "U_ref_m_s": null,
+ "U_ref_meaning": "the table holds the mean speed over U(500 m); give ratios over your own U(500 m) of the approach flow",
+ "conventions": "velocities and the speed over U_ref, k over U_ref^2 (Cases E, F and G publish ratios already); U, V, W, |U| and the thermistor bracket scored as signed velocities (FAC2's ratio keeps the sign; hit rate D = 0.25, W = 0.05); k by the plain definitions (D = 0.25 only); a thermistor, cup or sonic reading (a mean scalar speed) scored against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar), the two ends of its bracket; c* = C/c0 with one detection limit per case, 1e-3 of the largest measured value; theta = (T_floor - T)/(T_floor - T_H) scored like a positive velocity. The same conventions score the served Eddy3D results (docs/validation/method.md).",
+ "value_columns_given": [
+  "speed",
+  "k"
+ ],
+ "key_columns_given": [
+  "config",
+  "campaign",
+  "run",
+  "wind_direction_deg",
+  "point_id"
+ ],
+ "model_rows": 46,
+ "model_rows_unmatched": 0,
+ "groups": [
+  {
+   "key": "default.field.wd337.5",
+   "group": {
+    "config": "default",
+    "campaign": "field",
+    "wind_direction_deg": 337.5
+   },
+   "points_measured": 13,
+   "scores": {
+    "vs.scalar": {
+     "Count": 13,
+     "MeanObserved": 0.2569230769230769,
+     "MeanPredicted": 0.2548748052588038,
+     "Fb": 0.008004220945741313,
+     "Nmse": 0.08914490783176202,
+     "Nad": 0.11915700568316444,
+     "Fac2": 1.0,
+     "HitRate": 0.5384615384615384,
+     "Mg": 0.9907863282783199,
+     "Vg": 1.0926875519413848,
+     "GeometricPairs": 13,
+     "R": 0.8529991337882592
+    },
+    "vs.vector": {
+     "Count": 13,
+     "MeanObserved": 0.2569230769230769,
+     "MeanPredicted": 0.21678989907194934,
+     "Fb": 0.16944090571649847,
+     "Nmse": 0.15041367420511095,
+     "Nad": 0.17603270881071123,
+     "Fac2": 0.8461538461538461,
+     "HitRate": 0.46153846153846156,
+     "Mg": 1.265211903599659,
+     "Vg": 1.2589551804934593,
+     "GeometricPairs": 13,
+     "R": 0.8306519837032573
+    }
+   },
+   "coverage": {
+    "vs.scalar": {
+     "scored": 13,
+     "measured": 13
+    },
+    "vs.vector": {
+     "scored": 13,
+     "measured": 13
+    }
+   }
+  },
+  {
+   "key": "default.wind_tunnel.wd337.5",
+   "group": {
+    "config": "default",
+    "campaign": "wind_tunnel",
+    "wind_direction_deg": 337.5
+   },
+   "points_measured": 13,
+   "scores": {
+    "vs.scalar": {
+     "Count": 13,
+     "MeanObserved": 0.26069230769230767,
+     "MeanPredicted": 0.2641793022108324,
+     "Fb": -0.013287038021234316,
+     "Nmse": 0.04252018390595481,
+     "Nad": 0.08411124959544393,
+     "Fac2": 1.0,
+     "HitRate": 0.6153846153846154,
+     "Mg": 0.9742273861037257,
+     "Vg": 1.0660126813535553,
+     "GeometricPairs": 13,
+     "R": 0.9278551397334758
+    },
+    "vs.vector": {
+     "Count": 13,
+     "MeanObserved": 0.26069230769230767,
+     "MeanPredicted": 0.2250780196794859,
+     "Fb": 0.14663015011850936,
+     "Nmse": 0.08069630932969751,
+     "Nad": 0.1224920562898739,
+     "Fac2": 0.9230769230769231,
+     "HitRate": 0.46153846153846156,
+     "Mg": 1.2508676706593325,
+     "Vg": 1.1831475684102168,
+     "GeometricPairs": 13,
+     "R": 0.9197694511489479
+    }
+   },
+   "coverage": {
+    "vs.scalar": {
+     "scored": 13,
+     "measured": 13
+    },
+    "vs.vector": {
+     "scored": 13,
+     "measured": 13
+    }
+   }
+  },
+  {
+   "key": "h20.wind_tunnel.wd337.5",
+   "group": {
+    "config": "h20",
+    "campaign": "wind_tunnel",
+    "wind_direction_deg": 337.5
+   },
+   "points_measured": 13,
+   "scores": {
+    "vs.scalar": {
+     "Count": 13,
+     "MeanObserved": 0.3545384615384615,
+     "MeanPredicted": 0.3553441771131129,
+     "Fb": -0.002269996562197457,
+     "Nmse": 0.061843621951395374,
+     "Nad": 0.10030235252236103,
+     "Fac2": 0.9230769230769231,
+     "HitRate": 0.7692307692307693,
+     "Mg": 0.9957549644559753,
+     "Vg": 1.1005900763945153,
+     "GeometricPairs": 13,
+     "R": 0.7536514156124126
+    },
+    "vs.vector": {
+     "Count": 13,
+     "MeanObserved": 0.3545384615384615,
+     "MeanPredicted": 0.3234597654645174,
+     "Fb": 0.09167780928078324,
+     "Nmse": 0.08196911209943107,
+     "Nad": 0.11944555701689177,
+     "Fac2": 0.9230769230769231,
+     "HitRate": 0.6923076923076923,
+     "Mg": 1.12373720416691,
+     "Vg": 1.1449659034022492,
+     "GeometricPairs": 13,
+     "R": 0.7513861874135328
+    }
+   },
+   "coverage": {
+    "vs.scalar": {
+     "scored": 13,
+     "measured": 13
+    },
+    "vs.vector": {
+     "scored": 13,
+     "measured": 13
+    }
+   }
+  },
+  {
+   "key": "h5.wind_tunnel.wd337.5",
+   "group": {
+    "config": "h5",
+    "campaign": "wind_tunnel",
+    "wind_direction_deg": 337.5
+   },
+   "points_measured": 7,
+   "scores": {
+    "vs.scalar": {
+     "Count": 7,
+     "MeanObserved": 0.21757142857142858,
+     "MeanPredicted": 0.21379801164603104,
+     "Fb": 0.017495059100595088,
+     "Nmse": 0.04234615782946146,
+     "Nad": 0.07523189469774806,
+     "Fac2": 1.0,
+     "HitRate": 0.7142857142857143,
+     "Mg": 0.978455281001408,
+     "Vg": 1.0479349305459449,
+     "GeometricPairs": 7,
+     "R": 0.953727331994296
+    },
+    "vs.vector": {
+     "Count": 7,
+     "MeanObserved": 0.21757142857142858,
+     "MeanPredicted": 0.1778660636319593,
+     "Fb": 0.20081740210433746,
+     "Nmse": 0.10607986912490504,
+     "Nad": 0.12848077642334788,
+     "Fac2": 0.8571428571428571,
+     "HitRate": 0.7142857142857143,
+     "Mg": 1.3371817163017705,
+     "Vg": 1.3036017990402482,
+     "GeometricPairs": 7,
+     "R": 0.9356450723854389
+    }
+   },
+   "coverage": {
+    "vs.scalar": {
+     "scored": 7,
+     "measured": 7
+    },
+    "vs.vector": {
+     "scored": 7,
+     "measured": 7
+    }
+   }
+  }
+ ],
+ "headline": {
+  "default.field.wd337.5: √(|U|²+2k)": "default.field.wd337.5/vs.scalar",
+  "default.field.wd337.5: |U|": "default.field.wd337.5/vs.vector",
+  "default.wind_tunnel.wd337.5: √(|U|²+2k)": "default.wind_tunnel.wd337.5/vs.scalar",
+  "default.wind_tunnel.wd337.5: |U|": "default.wind_tunnel.wd337.5/vs.vector",
+  "h20.wind_tunnel.wd337.5: √(|U|²+2k)": "h20.wind_tunnel.wd337.5/vs.scalar",
+  "h20.wind_tunnel.wd337.5: |U|": "h20.wind_tunnel.wd337.5/vs.vector",
+  "h5.wind_tunnel.wd337.5: √(|U|²+2k)": "h5.wind_tunnel.wd337.5/vs.scalar",
+  "h5.wind_tunnel.wd337.5: |U|": "h5.wind_tunnel.wd337.5/vs.vector"
+ },
+ "scores": {
+  "default.field.wd337.5/vs.scalar": {
+   "Count": 13,
+   "MeanObserved": 0.2569230769230769,
+   "MeanPredicted": 0.2548748052588038,
+   "Fb": 0.008004220945741313,
+   "Nmse": 0.08914490783176202,
+   "Nad": 0.11915700568316444,
+   "Fac2": 1.0,
+   "HitRate": 0.5384615384615384,
+   "Mg": 0.9907863282783199,
+   "Vg": 1.0926875519413848,
+   "GeometricPairs": 13,
+   "R": 0.8529991337882592
+  },
+  "default.field.wd337.5/vs.vector": {
+   "Count": 13,
+   "MeanObserved": 0.2569230769230769,
+   "MeanPredicted": 0.21678989907194934,
+   "Fb": 0.16944090571649847,
+   "Nmse": 0.15041367420511095,
+   "Nad": 0.17603270881071123,
+   "Fac2": 0.8461538461538461,
+   "HitRate": 0.46153846153846156,
+   "Mg": 1.265211903599659,
+   "Vg": 1.2589551804934593,
+   "GeometricPairs": 13,
+   "R": 0.8306519837032573
+  },
+  "default.wind_tunnel.wd337.5/vs.scalar": {
+   "Count": 13,
+   "MeanObserved": 0.26069230769230767,
+   "MeanPredicted": 0.2641793022108324,
+   "Fb": -0.013287038021234316,
+   "Nmse": 0.04252018390595481,
+   "Nad": 0.08411124959544393,
+   "Fac2": 1.0,
+   "HitRate": 0.6153846153846154,
+   "Mg": 0.9742273861037257,
+   "Vg": 1.0660126813535553,
+   "GeometricPairs": 13,
+   "R": 0.9278551397334758
+  },
+  "default.wind_tunnel.wd337.5/vs.vector": {
+   "Count": 13,
+   "MeanObserved": 0.26069230769230767,
+   "MeanPredicted": 0.2250780196794859,
+   "Fb": 0.14663015011850936,
+   "Nmse": 0.08069630932969751,
+   "Nad": 0.1224920562898739,
+   "Fac2": 0.9230769230769231,
+   "HitRate": 0.46153846153846156,
+   "Mg": 1.2508676706593325,
+   "Vg": 1.1831475684102168,
+   "GeometricPairs": 13,
+   "R": 0.9197694511489479
+  },
+  "h20.wind_tunnel.wd337.5/vs.scalar": {
+   "Count": 13,
+   "MeanObserved": 0.3545384615384615,
+   "MeanPredicted": 0.3553441771131129,
+   "Fb": -0.002269996562197457,
+   "Nmse": 0.061843621951395374,
+   "Nad": 0.10030235252236103,
+   "Fac2": 0.9230769230769231,
+   "HitRate": 0.7692307692307693,
+   "Mg": 0.9957549644559753,
+   "Vg": 1.1005900763945153,
+   "GeometricPairs": 13,
+   "R": 0.7536514156124126
+  },
+  "h20.wind_tunnel.wd337.5/vs.vector": {
+   "Count": 13,
+   "MeanObserved": 0.3545384615384615,
+   "MeanPredicted": 0.3234597654645174,
+   "Fb": 0.09167780928078324,
+   "Nmse": 0.08196911209943107,
+   "Nad": 0.11944555701689177,
+   "Fac2": 0.9230769230769231,
+   "HitRate": 0.6923076923076923,
+   "Mg": 1.12373720416691,
+   "Vg": 1.1449659034022492,
+   "GeometricPairs": 13,
+   "R": 0.7513861874135328
+  },
+  "h5.wind_tunnel.wd337.5/vs.scalar": {
+   "Count": 7,
+   "MeanObserved": 0.21757142857142858,
+   "MeanPredicted": 0.21379801164603104,
+   "Fb": 0.017495059100595088,
+   "Nmse": 0.04234615782946146,
+   "Nad": 0.07523189469774806,
+   "Fac2": 1.0,
+   "HitRate": 0.7142857142857143,
+   "Mg": 0.978455281001408,
+   "Vg": 1.0479349305459449,
+   "GeometricPairs": 7,
+   "R": 0.953727331994296
+  },
+  "h5.wind_tunnel.wd337.5/vs.vector": {
+   "Count": 7,
+   "MeanObserved": 0.21757142857142858,
+   "MeanPredicted": 0.1778660636319593,
+   "Fb": 0.20081740210433746,
+   "Nmse": 0.10607986912490504,
+   "Nad": 0.12848077642334788,
+   "Fac2": 0.8571428571428571,
+   "HitRate": 0.7142857142857143,
+   "Mg": 1.3371817163017705,
+   "Vg": 1.3036017990402482,
+   "GeometricPairs": 7,
+   "R": 0.9356450723854389
+  }
+ },
+ "coverage": {
+  "default.field.wd337.5/vs.scalar": {
+   "scored": 13,
+   "measured": 13
+  },
+  "default.field.wd337.5/vs.vector": {
+   "scored": 13,
+   "measured": 13
+  },
+  "default.wind_tunnel.wd337.5/vs.scalar": {
+   "scored": 13,
+   "measured": 13
+  },
+  "default.wind_tunnel.wd337.5/vs.vector": {
+   "scored": 13,
+   "measured": 13
+  },
+  "h20.wind_tunnel.wd337.5/vs.scalar": {
+   "scored": 13,
+   "measured": 13
+  },
+  "h20.wind_tunnel.wd337.5/vs.vector": {
+   "scored": 13,
+   "measured": 13
+  },
+  "h5.wind_tunnel.wd337.5/vs.scalar": {
+   "scored": 7,
+   "measured": 7
+  },
+  "h5.wind_tunnel.wd337.5/vs.vector": {
+   "scored": 7,
+   "measured": 7
+  }
+ }
+}

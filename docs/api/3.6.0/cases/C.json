@@ -1,0 +1,520 @@
+{
+ "$schema": "https://aij.eddy3d.com/api/3.6.0/schemas/case.schema.json",
+ "schema_version": "2.5.0",
+ "data_version": "1346aa83352325ea02157757ed98a73bd25e7f98615646d480c0c3e38359ea15",
+ "license": "CC-BY-4.0",
+ "id": "C",
+ "slug": "case-c",
+ "title": "Case C — 3 × 3 block array",
+ "summary": "3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestrian-height scalar speed (thermistor), 3 wind directions.",
+ "configuration": {
+  "array": "3 x 3 cubes, D = 0.20 m, block centres at x, y in {-0.4, 0, +0.4} m (pitch 0.40 m = 2D, street width D)",
+  "D_m": 0.2,
+  "centre_building": {
+   "0D": "no centre building",
+   "1D": "0.2 x 0.2 x 0.2 m (same as the surroundings)",
+   "2D": "0.2 x 0.2 x 0.4 m"
+  },
+  "wind_directions_deg": [
+   0,
+   22.5,
+   45
+  ],
+  "configurations": 9,
+  "configurations_note": "3 centre-building heights x 3 wind directions; all nine share the identical 120-point set",
+  "measurement_height_m": 0.02,
+  "measurement_height_note": "z = 0.1 D for every point (2.0 m at the 1:100 scale Eddy3D solves it at)",
+  "Re_D": 52000,
+  "U_H_m_s": 3.654,
+  "U_H_note": "U at z = D = 0.20 m from AF_caseC.csv; the data paper states U_H = 3.65 m/s",
+  "instrument": "thermistor anemometer (omnidirectional scalar speed), 1 Hz, 30 s per point; approach flow by I-type hot wire, 500 Hz, 30 s",
+  "tunnel": "Technology Development Division, Fujita Corporation, Tokyo",
+  "pitch_note": "The 0.40 m pitch is read from MP-z-caseC.png and Figure 3 of the data paper (street = D); the 120-point grid alone bounds the pitch to (0.35, 0.40] m (the 49 absent nodes of the 13 x 13 grid are exactly the nine footprints for 0.375 m as well as 0.40 m)."
+ },
+ "configurations": [
+  {
+   "config": "0D",
+   "wind_direction_deg": 0.0,
+   "points": 120
+  },
+  {
+   "config": "0D",
+   "wind_direction_deg": 22.5,
+   "points": 120
+  },
+  {
+   "config": "0D",
+   "wind_direction_deg": 45.0,
+   "points": 120
+  },
+  {
+   "config": "1D",
+   "wind_direction_deg": 0.0,
+   "points": 120
+  },
+  {
+   "config": "1D",
+   "wind_direction_deg": 22.5,
+   "points": 120
+  },
+  {
+   "config": "1D",
+   "wind_direction_deg": 45.0,
+   "points": 120
+  },
+  {
+   "config": "2D",
+   "wind_direction_deg": 0.0,
+   "points": 120
+  },
+  {
+   "config": "2D",
+   "wind_direction_deg": 22.5,
+   "points": 120
+  },
+  {
+   "config": "2D",
+   "wind_direction_deg": 45.0,
+   "points": 120
+  }
+ ],
+ "quantities": [
+  "Vs"
+ ],
+ "units": {
+  "length": "m (model scale)",
+  "velocity": "m/s"
+ },
+ "frame": {
+  "origin": "array centre on the ground plane (centre of the middle block)",
+  "x": "+x streamwise at WD = 0 (checked three ways on the data: y -> -y is a symmetry, the x <= -0.25 band is faster than x >= +0.25 in every configuration, and the regression slope of Vs is most negative within 0.8-4.3 deg of +x)",
+  "y": "+y lateral",
+  "z": "+z up; all points at z = 0.02",
+  "wind_direction_rotation": "In the CSV's own frame WD rotates the wind from +x TOWARD -y (the WD = 45 field is mirror-symmetric about y = -x to within the experiment's repeatability, 0.10-0.13 m/s, and not about y = +x, 0.5-0.8 m/s). Figure 3 of the data paper draws the fan rotating toward +y. The two disagree by a y-sign flip; this release keeps the CSV frame, which is the frame the point coordinates live in. The disagreement is invisible at WD = 0.",
+  "lateral_sign_applied": 1,
+  "coordinate_scale_applied": 1.0
+ },
+ "inflow_fit": {
+  "method": "log law, kappa = 0.41, least squares on AF_caseC.csv (16 points, z = 0.01 ... 1.2 m); two windows, because Case C scores at ONE height (z = 0.02 m) and the near-ground half of the fit matters",
+  "windows": [
+   {
+    "z_range_m": [
+     0.02,
+     0.4
+    ],
+    "u_star_m_s": 0.25598,
+    "z0_mm": 0.4797,
+    "error_at_U_D": "+3.08 %",
+    "error_at_z_0.02": "-4.31 %",
+    "scored_ratio_bias": "-7.17 %"
+   },
+   {
+    "z_range_m": [
+     0.01,
+     0.4
+    ],
+    "u_star_m_s": 0.22853,
+    "z0_mm": 0.2362,
+    "error_at_U_D": "+2.83 %",
+    "error_at_z_0.02": "+1.65 %",
+    "scored_ratio_bias": "-1.15 %"
+   }
+  ],
+  "power_law_exponent_fitted": 0.19,
+  "power_law_exponent_paper": 0.28,
+  "turbulence_intensity_at_D": 0.219,
+  "note": "derived during scoping, not published by AIJ; the tunnel profile is closer to a power law than a log law, so a log-law inlet carries a ~2.3 % rms residual over the fitted range"
+ },
+ "approach_flow": {
+  "source": "raw/cases/case-c/AF_caseC.csv",
+  "units": {
+   "z": "m",
+   "U": "m/s",
+   "u_rms": "m/s"
+  },
+  "rows": [
+   {
+    "z": 0.01,
+    "U": 2.372,
+    "u_rms": 0.56
+   },
+   {
+    "z": 0.02,
+    "U": 2.434,
+    "u_rms": 0.564
+   },
+   {
+    "z": 0.03,
+    "U": 2.548,
+    "u_rms": 0.563
+   },
+   {
+    "z": 0.05,
+    "U": 2.912,
+    "u_rms": 0.695
+   },
+   {
+    "z": 0.07,
+    "U": 3.042,
+    "u_rms": 0.71
+   },
+   {
+    "z": 0.1,
+    "U": 3.392,
+    "u_rms": 0.743
+   },
+   {
+    "z": 0.15,
+    "U": 3.483,
+    "u_rms": 0.78
+   },
+   {
+    "z": 0.2,
+    "U": 3.654,
+    "u_rms": 0.801
+   },
+   {
+    "z": 0.25,
+    "U": 3.82,
+    "u_rms": 0.812
+   },
+   {
+    "z": 0.3,
+    "U": 4.019,
+    "u_rms": 0.786
+   },
+   {
+    "z": 0.35,
+    "U": 4.205,
+    "u_rms": 0.83
+   },
+   {
+    "z": 0.4,
+    "U": 4.343,
+    "u_rms": 0.809
+   },
+   {
+    "z": 0.6,
+    "U": 4.985,
+    "u_rms": 0.796
+   },
+   {
+    "z": 0.8,
+    "U": 5.713,
+    "u_rms": 0.587
+   },
+   {
+    "z": 1.0,
+    "U": 6.12,
+    "u_rms": 0.283
+   },
+   {
+    "z": 1.2,
+    "U": 6.201,
+    "u_rms": 0.148
+   }
+  ],
+  "csv": {
+   "url": "https://aij.eddy3d.com/api/3.6.0/cases/C/approach_flow.csv?v=98849731e877",
+   "path": "cases/C/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 268,
+   "sha256": "98849731e877fe940be821a1aa18469c8d4b94a5e54fd1e23c19f9337c39ea2a"
+  }
+ },
+ "inflow": {
+  "benchmark_data": {
+   "approach_flow_csv": {
+    "url": "https://aij.eddy3d.com/api/3.6.0/cases/C/approach_flow.csv?v=98849731e877",
+    "path": "cases/C/approach_flow.csv",
+    "media_type": "text/csv",
+    "bytes": 268,
+    "sha256": "98849731e877fe940be821a1aa18469c8d4b94a5e54fd1e23c19f9337c39ea2a"
+   },
+   "columns": [
+    "z",
+    "U",
+    "u_rms"
+   ],
+   "units": {
+    "z": "m",
+    "U": "m/s",
+    "u_rms": "m/s"
+   },
+   "rows": 16,
+   "fit": {
+    "method": "log law, kappa = 0.41, least squares on AF_caseC.csv (16 points, z = 0.01 ... 1.2 m); two windows, because Case C scores at ONE height (z = 0.02 m) and the near-ground half of the fit matters",
+    "windows": [
+     {
+      "z_range_m": [
+       0.02,
+       0.4
+      ],
+      "u_star_m_s": 0.25598,
+      "z0_mm": 0.4797,
+      "error_at_U_D": "+3.08 %",
+      "error_at_z_0.02": "-4.31 %",
+      "scored_ratio_bias": "-7.17 %"
+     },
+     {
+      "z_range_m": [
+       0.01,
+       0.4
+      ],
+      "u_star_m_s": 0.22853,
+      "z0_mm": 0.2362,
+      "error_at_U_D": "+2.83 %",
+      "error_at_z_0.02": "+1.65 %",
+      "scored_ratio_bias": "-1.15 %"
+     }
+    ],
+    "power_law_exponent_fitted": 0.19,
+    "power_law_exponent_paper": 0.28,
+    "turbulence_intensity_at_D": 0.219,
+    "note": "derived during scoping, not published by AIJ; the tunnel profile is closer to a power law than a log law, so a log-law inlet carries a ~2.3 % rms residual over the fitted range"
+   },
+   "note": "the measured profile and the fit of it are the benchmark's data as cleaned here; everything under `recommended` is a choice"
+  },
+  "recommended": {
+   "status": "RECOMMENDED by this repository (not part of the benchmark): a log-law inlet fitted to the case's own approach-flow file, with k and epsilon from the standard neutral ABL relations. Any inlet may be submitted; say which in submission.yaml",
+   "profile": "U(z) = u*/kappa ln((z + z0)/z0); k = u*^2 / sqrt(Cmu); epsilon = u*^3 / (kappa (z + z0))",
+   "u_star_m_s": 0.25598,
+   "z0_m": 0.0004797,
+   "kappa": 0.41,
+   "Cmu": 0.09,
+   "k_m2_s2": 0.2184192013333333,
+   "fit": "log law, kappa = 0.41, least squares on AF_caseC.csv (16 points, z = 0.01 ... 1.2 m); two windows, because Case C scores at ONE height (z = 0.02 m) and the near-ground half of the fit matters; the first window, [0.02, 0.4]",
+   "U_ref_m_s": 3.654,
+   "z_ref_m": 0.2,
+   "openfoam": "atmBoundaryLayerInletVelocity / atmBoundaryLayerInletK / atmBoundaryLayerInletEpsilon with Uref, Zref, z0 and d = 0; nutkAtmRoughWallFunction with the same z0 on the ground: cases/{id}/inflow_openfoam.txt holds them"
+  },
+  "flow_direction": {
+   "convention": "along_x",
+   "meaning": "+x is along the wind at WD = 0: flowDir (1 0 0); another WD rotates it about +z by the case's rotation sense (frame.wind_direction_rotation)",
+   "wind_directions_deg": [
+    0.0,
+    22.5,
+    45.0
+   ]
+  },
+  "eddy3d_runs": [
+   {
+    "run_id": "C.openfoam12-realizableKE.0D",
+    "engine": "openfoam12-realizableKE",
+    "scale": 100,
+    "z0.model.m": 0.0002362,
+    "z0.full.m": 0.02362,
+    "mesh.cells": 313539
+   },
+   {
+    "run_id": "C.openfoam12-realizableKE.1D",
+    "engine": "openfoam12-realizableKE",
+    "scale": 100,
+    "z0.model.m": 0.0002362,
+    "z0.full.m": 0.02362,
+    "mesh.cells": 310091
+   },
+   {
+    "run_id": "C.openfoam12-realizableKE.2D",
+    "engine": "openfoam12-realizableKE",
+    "scale": 100,
+    "z0.model.m": 0.0002362,
+    "z0.full.m": 0.02362,
+    "mesh.cells": 313255
+   },
+   {
+    "run_id": "C.ml-surrogate",
+    "engine": "ml-surrogate",
+    "scale": 90
+   }
+  ],
+  "domain": "the extents, blockage and cell sizes of Eddy3D's domains are not in its snapshots and are not stated here; mesh.cells and the scale are, where the snapshot has them"
+ },
+ "points": {
+  "url": "https://aij.eddy3d.com/api/3.6.0/cases/C/points.json",
+  "csv": {
+   "url": "https://aij.eddy3d.com/api/3.6.0/cases/C/points.csv?v=7448f0ceae37",
+   "path": "cases/C/points.csv",
+   "media_type": "text/csv",
+   "bytes": 58159,
+   "sha256": "7448f0ceae37f076ba00da6b542797d81e9edd92fdecc7b49dd6813577550a80"
+  },
+  "source": "clean/cases/C/points.csv",
+  "rows": 1080,
+  "distinct_points": 120,
+  "columns": [
+   "point_id",
+   "config",
+   "instrument",
+   "wind_direction_deg",
+   "x",
+   "y",
+   "z",
+   "Vs",
+   "campaign"
+  ],
+  "counts": {
+   "config": {
+    "0D": 360,
+    "1D": 360,
+    "2D": 360
+   },
+   "instrument": {
+    "thermistor": 1080
+   },
+   "wind_direction_deg": {
+    "0.0": 360,
+    "22.5": 360,
+    "45.0": 360
+   }
+  },
+  "nulls": {},
+  "bbox_min": [
+   -0.3,
+   -0.3,
+   0.02
+  ],
+  "bbox_max": [
+   0.3,
+   0.3,
+   0.02
+  ]
+ },
+ "probes": {
+  "csv": {
+   "url": "https://aij.eddy3d.com/api/3.6.0/cases/C/probes.csv?v=5b794e8356f0",
+   "path": "cases/C/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 74469,
+   "sha256": "5b794e8356f0d8fd97f30098f7ff04105ad5685d12bd3a816be0fce58204fb2c"
+  },
+  "rows": 1080,
+  "columns": [
+   "point_id",
+   "config",
+   "campaign",
+   "instrument",
+   "run",
+   "wind_direction_deg",
+   "x",
+   "y",
+   "z",
+   "scored_as"
+  ],
+  "columns_meaning": "the key columns of a scored file (point_id with config, campaign, instrument, run and wind_direction_deg as the case has them), x, y, z in m (case frame), and scored_as: the families the row is scored in (vector, k, thermistor_bracket, concentration, theta, joined by +)"
+ },
+ "scoring": {
+  "U_ref_m_s": 3.654,
+  "U_ref_meaning": "U_H = U(z = D = 0.20 m) of the approach flow",
+  "theta": null,
+  "scored_as": {
+   "vector": "U, V, W and the speed |U| against the split-fibre, LDV or hot-wire components (velocity.U, velocity.V, velocity.W, speed)",
+   "k": "the turbulent kinetic energy (k)",
+   "thermistor_bracket": "a mean scalar speed (thermistor, cup or sonic anemometer) against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar)",
+   "concentration": "the dimensionless concentration c* = C/c0 (cstar)",
+   "theta": "the floor-referenced temperature fraction (theta)"
+  },
+  "value_columns": [
+   "U",
+   "V",
+   "W",
+   "speed",
+   "k",
+   "cstar",
+   "theta",
+   "T"
+  ],
+  "key_columns": [
+   "config",
+   "campaign",
+   "instrument",
+   "run",
+   "wind_direction_deg",
+   "point_id"
+  ],
+  "conventions": "velocities and the speed over U_ref, k over U_ref^2 (Cases E, F and G publish ratios already); U, V, W, |U| and the thermistor bracket scored as signed velocities (FAC2's ratio keeps the sign; hit rate D = 0.25, W = 0.05); k by the plain definitions (D = 0.25 only); a thermistor, cup or sonic reading (a mean scalar speed) scored against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar), the two ends of its bracket; c* = C/c0 with one detection limit per case, 1e-3 of the largest measured value; theta = (T_floor - T)/(T_floor - T_H) scored like a positive velocity. The same conventions score the served Eddy3D results (docs/validation/method.md).",
+  "tool": "uv run python validation/score_submissions.py <folder>, from a checkout of the repository (pyproject.toml)",
+  "metric_meaning": {
+   "Count": "number of measured points scored",
+   "MeanObserved": "mean of the measured, normalised quantity",
+   "MeanPredicted": "mean of the modelled, normalised quantity",
+   "Fb": "fractional bias, 2 (mean_obs - mean_pred) / (mean_obs + mean_pred); positive = model low",
+   "Nmse": "normalised mean square error",
+   "Nad": "normalised absolute difference",
+   "Fac2": "fraction of points within a factor of two (harsh near zero for sign-changing V and W)",
+   "HitRate": "fraction of points within D = 0.25 relative or W = 0.05 U_H absolute",
+   "Mg": "geometric mean bias",
+   "Vg": "geometric variance",
+   "GeometricPairs": "pairs with both values positive (used for Mg/Vg)",
+   "R": "Pearson correlation coefficient",
+   "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive; Fb, Nmse and Nad of a signed velocity component of Case H or I whose observed and predicted means are not both positive)"
+  }
+ },
+ "geometry": {
+  "url": "https://aij.eddy3d.com/api/3.6.0/cases/C/geometry.json",
+  "files": [
+   {
+    "configuration": "2D",
+    "url": "https://aij.eddy3d.com/api/3.6.0/cases/C/geometry.stl?v=b8c31c57c453",
+    "triangles": 108,
+    "watertight": true
+   },
+   {
+    "configuration": "0D",
+    "url": "https://aij.eddy3d.com/api/3.6.0/cases/C/geometry_0D.stl?v=0f08bcd4dd6b",
+    "triangles": 96,
+    "watertight": true
+   },
+   {
+    "configuration": "1D",
+    "url": "https://aij.eddy3d.com/api/3.6.0/cases/C/geometry_1D.stl?v=ac92c8ed427c",
+    "triangles": 108,
+    "watertight": true
+   }
+  ]
+ },
+ "validation": {
+  "url": "https://aij.eddy3d.com/api/3.6.0/cases/C/validation.json",
+  "status": "scored",
+  "engines": {
+   "openfoam12-realizableKE": "scored",
+   "openlb": "not comparable",
+   "fluidx3d": "not comparable",
+   "ml-surrogate": "scored"
+  }
+ },
+ "known_issues": [
+  "The measured quantity Vs is the MEAN OMNIDIRECTIONAL SCALAR speed from a thermistor, not |mean velocity vector|. A RANS |U| is biased low against it; the data paper suggests comparing sqrt(|U|^2 + 2k) as a conservative correction (over all 1080 rows no Vs is below 0.13 U_H).",
+  "The 'CB' column is TEXT ('0D', '1D', '2D'); a reader that parses every field as a number gets NaN for it. The header ends with a trailing comma (an empty 8th column).",
+  "1080 rows = 3 wind directions x 3 centre buildings x 120 points, not 3 configurations. In the 0D configuration the 25 centre grid nodes are still absent although the ground there is free: the grid is held constant across configurations.",
+  "24 of the 120 points sit exactly on a building face plane (|x| = 0.30 or |y| = 0.30) in the open gap between two blocks: legitimate fluid points, but a probe's cell lookup is delicate there.",
+  "Point numbers 1, 2, 3, 34, 35, 36, 37, 46, 55, 100, 101, 102 do not occur (No. runs 4 ... 132 with nine interior gaps).",
+  "Experimental repeatability, from the mirror-symmetric point pairs: mean |dVs| 0.088-0.137 m/s (0.024-0.038 U_H)."
+ ],
+ "people": {
+  "data_collectors": [
+   "Yoshitami Nonomura (Yamato University)"
+  ],
+  "editors_distributors": [
+   "Yoshihide Tominaga (Niigata Institute of Technology)",
+   "Hideki Kikumoto (The University of Tokyo)",
+   "Tsubasa Okaze (Institute of Science Tokyo)"
+  ],
+  "contact": "Yoshitami Nonomura <nonomura.yoshitami@yamato-u.ac.jp>"
+ },
+ "doi": "10.5281/zenodo.15401791",
+ "doi_note": null,
+ "citation_requested": "Nonomura, Y., Kobayashi, N., Tominaga, Y., Mochida, A. (2003). The cross comparison of CFD results for flow field around building models (part 3). Japan Association for Wind Engineering, 95, 83-84 (in Japanese). https://doi.org/10.14887/jaweam.2003.0.41.0",
+ "citation": {
+  "apa": "Nonomura, Y., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case C (Blocks): Wind Tunnel Experiment for Flow within Simple Building Blocks [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15401791",
+  "bibtex": "@misc{aijuwe_case_c,\n  author    = \"Nonomura, Yoshitami and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa\",\n  title     = \"{AIJ UWE Benchmark Dataset -- Case C (Blocks): Wind Tunnel Experiment for Flow within Simple Building Blocks}\",\n  year      = \"2025\",\n  publisher = \"Zenodo\",\n  doi       = \"10.5281/zenodo.15401791\",\n  url       = \"https://doi.org/10.5281/zenodo.15401791\",\n  note      = \"Data set\"\n}"
+ },
+ "files_in_repository": {
+  "folder": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/tree/main/raw/cases/case-c",
+  "reference": "raw/cases/case-c/RS_caseC.csv",
+  "approach_flow": "raw/cases/case-c/AF_caseC.csv",
+  "readme": "raw/cases/case-c/readme_caseC.md"
+ },
+ "render": "https://aij.eddy3d.com/assets/geometry/case-c-2d.png",
+ "page": "https://aij.eddy3d.com/cases/case-c/"
+}

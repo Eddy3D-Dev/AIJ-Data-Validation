@@ -5,7 +5,7 @@
     python validation/score_submissions.py --check submissions/my-solver    # the folder's layout only
     python validation/score_submissions.py --self-test                      # every served run re-scored from its pairs: 1e-9
 
-Run from a checkout of the repository; nothing to install beyond requirements.txt (NumPy). The measured side is the
+Run from a checkout of the repository; nothing to install beyond pyproject.toml (NumPy; uv sync). The measured side is the
 cleaned table (clean/cases/<id>/points.csv), the scores are validation/dispersion_metrics.py, the transcription of
 Eddy3D's MetaFOAM.DispersionMetrics that scores every served result, so a score from here agrees with a served score
 to 1e-9 (--self-test proves it on every served run; scripts/build_all.sh runs it). scripts/build_api.py imports this
@@ -104,7 +104,7 @@ def scoring_block(case):
                       "concentration": "the dimensionless concentration c* = C/c0 (cstar)",
                       "theta": "the floor-referenced temperature fraction (theta)"},
         "value_columns": VALUE_COLUMNS, "key_columns": KEY_COLUMNS, "conventions": CONVENTIONS,
-        "tool": "python validation/score_submissions.py <folder>, from a checkout of the repository (requirements.txt)",
+        "tool": "uv run python validation/score_submissions.py <folder>, from a checkout of the repository (pyproject.toml)",
     }
 
 
@@ -312,7 +312,7 @@ CASE = re.compile(r"^[A-M]$")
 
 
 def read_yaml(text):
-    """shortcut: flat key: value only (no nesting, no lists); upgrade to PyYAML (pin it in requirements.txt) if a submission ever needs structure."""
+    """shortcut: flat key: value only (no nesting, no lists); upgrade to PyYAML (pin it in pyproject.toml) if a submission ever needs structure."""
     out = {}
     for n, line in enumerate(text.replace("\r\n", "\n").split("\n"), 1):
         s = line.strip()

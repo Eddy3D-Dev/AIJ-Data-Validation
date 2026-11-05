@@ -46,8 +46,6 @@ Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 
 | ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | +0.23 … +0.43 | 0.22 … 0.84 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 {: .warning-title }
 > Before you compare
 >

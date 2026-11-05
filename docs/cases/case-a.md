@@ -43,8 +43,6 @@ Isolated 1:1:2 building, velocity field (split-fibre hot wire).
 | ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | -0.13 … +0.43 | 0.26 … 0.62 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 {: .warning-title }
 > Before you compare
 >

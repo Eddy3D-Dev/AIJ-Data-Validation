@@ -56,8 +56,6 @@ description: "Case F — Shinjuku district: configuration, frame and units, refe
 | Unit of $$U/U_{\mathrm{ref}}$$ | dimensionless |
 | Unit of $$\sigma_{U/U_{\mathrm{ref}}}$$ | dimensionless |
 
-{% include nomenclature.md %}
-
 ## Reference data
 
 Source in this repository: [`raw/cases/case-f/RS-WT_caseF.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-f/RS-WT_caseF.csv) (approach flow: [`raw/cases/case-f/AF_caseF.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-f/AF_caseF.csv)).
@@ -135,8 +133,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `campaign` |  | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
 | `velocity_ratio_sd` | $$\sigma_{U/U_{\mathrm{ref}}}$$ | standard deviation of `velocity_ratio` over the observations behind a field value (Case F) |
 
-{% include nomenclature.md %}
-
 </details>
 
 ## Inflow
@@ -148,8 +144,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | Power-law exponent, data paper | 0.25 |
 | $$U$$ 500m m s | **data paper**: 10.0<br>**implied by profile**: 10.65 |
 | Note | AF\_caseF.csv stops at 400 m ($$U$$ = 10.0 m/s); the workbook\'s $$U/U_R$$ profile (0.94 at 400 m) puts the 500 m speed at 10.65 m/s |
-
-{% include nomenclature.md %}
 
 ## Known data issues
 

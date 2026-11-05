@@ -58,8 +58,6 @@ description: "Case M — TPU Atsugi campus: configuration, frame and units, refe
 | Unit of concentration | ppm (the field\'s ppq converted) |
 | Unit of $$c^\ast$$ | dimensionless |
 
-{% include nomenclature.md %}
-
 ## Reference data
 
 Source in this repository: [`raw/cases/case-m/RS-WT_caseM.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-m/RS-WT_caseM.csv) (approach flow: [`raw/cases/case-m/AF_caseM.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-m/AF_caseM.csv)).
@@ -127,8 +125,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `c_rms` | $$c_{\mathrm{rms}}$$ | ppm, rms of the concentration fluctuation |
 | `concentration_ratio` | $$c^\ast$$ | $$C/c_0$$, $$c_0 = \dfrac{q}{U_{\mathrm{ref}} L_{\mathrm{ref}}^2}$$ as the benchmark defines it for the case (manifest cases.\<id\>.normalisation) |
 
-{% include nomenclature.md %}
-
 </details>
 
 ## Inflow
@@ -141,8 +137,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | $$U$$ at R height m s | 3.94 |
 | $$U$$ R m s | 4.08 |
 | Note | z is height above the empty tunnel floor; at the profile station the model\'s taper is already 0.052 m high, so the 10 lowest heights lie below it |
-
-{% include nomenclature.md %}
 
 ## Known data issues
 

@@ -44,8 +44,6 @@ description: "Case D — high-rise among city blocks: 1:1:4 tower in a regular a
 | ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | +0.22 … +0.59 | 0.34 … 0.64 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 {: .warning-title }
 > Before you compare
 >

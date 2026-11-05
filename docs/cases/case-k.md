@@ -43,8 +43,6 @@ description: "Case K — 9 x 9 cube array, point source: 9 x 9 array of 0.06 m c
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 {: .warning-title }
 > Before you compare
 >

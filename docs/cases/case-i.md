@@ -45,8 +45,6 @@ Isolated cube with an ethane point source at the centre of its roof: velocity (l
 | ML surrogate | <span class="label label-yellow status">pending</span> | — | — | — |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 {: .warning-title }
 > Before you compare
 >

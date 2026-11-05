@@ -18,8 +18,6 @@ Eddy3D production runs solved on 2026-10-18, realizable k-ε at numerics level 3
 | conifer, real belt (half domain) | 0.625 | +0.468 | 1.000 | −0.202 | 0.607 | 0.585 | 0.120 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 The field's mean $$U/U_H$$ over the 28 points is 0.478. The model is $$\lvert\mathbf{U}\rvert$$ over its own $$U(7\text{ m})$$; the same scores over the imposed $$U_H$$, and for $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$, are in the files. The same arms for $$k$$:
 
 | Arm | $$k$$ R | $$k$$ FAC2 | $$k$$ FB | mean $$k/U_H^2$$ |
@@ -30,8 +28,6 @@ The field's mean $$U/U_H$$ over the 28 points is 0.478. The model is $$\lvert\ma
 | screen | +0.234 | 0.679 | −0.206 | 0.038 |
 | conifer, real belt (half domain) | +0.228 | 0.750 | −0.081 | 0.034 |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 The field's mean $$k/U_H^2$$ is 0.031.
 
@@ -58,3 +54,9 @@ The field's mean $$k/U_H^2$$ is 0.031.
 The field and the model at four of the masts, from the belt to $$5\thinspace H$$ behind it.
 
 {% include figure.html name="case-g-openfoam-profiles.png" alt="Vertical profiles, Case G" caption="<strong>Figure 4.</strong> Case G, the field's $$U/U_H$$ (dots) and the conifer crown's modelled $$\lvert\mathbf{U}\rvert/U(7\text{ m})$$ (line) at four of the seven masts behind the belt, offset by 1 per mast; the dashed line is the tree height." %}
+
+### Field maps
+
+The solved velocity on the measured planes, every point drawn on it as a dot coloured by its measured value on the same scale: a dot that stands out from the colour around it is a point the model misses.
+
+{% include figure.html name="case-g-openfoam-field-section.png" alt="Solved field and measured points, Case G, section" caption="<strong>Figure 5.</strong> Case G, the vertical plane through the masts, conifer crown: (a) $$u$$ over $$U_H$$; (b) the same with iso-lines every 0.1 and the edge of the reversed flow, $$u = 0$$, dashed; (c) the in-plane speed with streamlines." %}

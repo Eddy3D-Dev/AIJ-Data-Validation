@@ -1,0 +1,323 @@
+{
+ "$schema": "https://aij.eddy3d.com/api/3.4.0/schemas/submission.schema.json",
+ "schema_version": "2.5.0",
+ "data_version": "2ad04a58d5808675c1db13eb498dadb8fedd828f9e6ef16904bc8f3c520ac987",
+ "license": "CC-BY-4.0",
+ "slug": "eddy3d-of12-sst-urans",
+ "submission": {
+  "solver": "OpenFOAM pimpleFoam (Eddy3D Outdoor case writer)",
+  "version": "12",
+  "url": "https://openfoam.org",
+  "author": "Sustainable Urban Systems Lab",
+  "licence": "CC-BY-4.0",
+  "contact": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions",
+  "inlet": "the measured approach profile (U and k of AF_caseA.csv as fixedProfile tables, epsilon by local equilibrium, omega = epsilon/(Cmu k)), rough floor",
+  "mesh": "snappyHexMesh, 1:100 scale, the served run's mesh (280k cells), numerics level 3",
+  "turbulence_model": "SST k-omega, URANS",
+  "compute": "1000 s of flow time (about 280 H/U_H) at max Co 2 (dt about 0.045 s), fieldAverage with an exponential window of 500 s; 3 h 20 min on 5 ranks of an Apple M-series laptop",
+  "units": "normalised",
+  "notes": "k is the modelled mean plus the resolved part; 27 % of the wake's k is resolved, 3 % upstream. Eddy3D fixture TestAijCaseAContainerE2E with EDDY3D_VALIDATION_TURB=kOmegaSST EDDY3D_VALIDATION_INLET=measured EDDY3D_VALIDATION_FLOOR=rough EDDY3D_VALIDATION_ALGO=PIMPLE EDDY3D_VALIDATION_DURATION=1000."
+ },
+ "example": false,
+ "provenance": "self-reported inputs (the values in submissions/<slug>/cases/<id>/probes.csv), scored by this repository's build with validation/score_submissions.py; not an Eddy3D result and not checked by the maintainers beyond the scoring",
+ "scored_with": {
+  "script": "validation/score_submissions.py",
+  "release": "3.4.0",
+  "conventions": "velocities and the speed over U_ref, k over U_ref^2 (Cases E, F and G publish ratios already); U, V, W, |U| and the thermistor bracket scored as signed velocities (FAC2's ratio keeps the sign; hit rate D = 0.25, W = 0.05); k by the plain definitions (D = 0.25 only); a thermistor, cup or sonic reading (a mean scalar speed) scored against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar), the two ends of its bracket; c* = C/c0 with one detection limit per case, 1e-3 of the largest measured value; theta = (T_floor - T)/(T_floor - T_H) scored like a positive velocity. The same conventions score the served Eddy3D results (docs/validation/method.md).",
+  "metric_meaning": {
+   "Count": "number of measured points scored",
+   "MeanObserved": "mean of the measured, normalised quantity",
+   "MeanPredicted": "mean of the modelled, normalised quantity",
+   "Fb": "fractional bias, 2 (mean_obs - mean_pred) / (mean_obs + mean_pred); positive = model low",
+   "Nmse": "normalised mean square error",
+   "Nad": "normalised absolute difference",
+   "Fac2": "fraction of points within a factor of two (harsh near zero for sign-changing V and W)",
+   "HitRate": "fraction of points within D = 0.25 relative or W = 0.05 U_H absolute",
+   "Mg": "geometric mean bias",
+   "Vg": "geometric variance",
+   "GeometricPairs": "pairs with both values positive (used for Mg/Vg)",
+   "R": "Pearson correlation coefficient",
+   "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive; Fb, Nmse and Nad of a signed velocity component of Case H or I whose observed and predicted means are not both positive)"
+  }
+ },
+ "folder": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/tree/main/submissions/eddy3d-of12-sst-urans",
+ "cases": [
+  {
+   "case": "A",
+   "title": "Case A — 1:1:2 building",
+   "status": "scored",
+   "headline": [
+    {
+     "label": "U",
+     "score": "velocity.U",
+     "Count": 186,
+     "R": 0.9530488387208105,
+     "Fac2": 0.7634408602150538,
+     "Fb": 0.18133421313913364,
+     "HitRate": 0.6827956989247311,
+     "coverage": {
+      "scored": 186,
+      "measured": 186
+     }
+    },
+    {
+     "label": "V",
+     "score": "velocity.V",
+     "Count": 186,
+     "R": 0.9534513066948932,
+     "Fac2": 0.3602150537634409,
+     "Fb": null,
+     "HitRate": 0.8172043010752689,
+     "coverage": {
+      "scored": 186,
+      "measured": 186
+     }
+    },
+    {
+     "label": "W",
+     "score": "velocity.W",
+     "Count": 186,
+     "R": 0.6752098237940594,
+     "Fac2": 0.41397849462365593,
+     "Fb": -1.352266188074855,
+     "HitRate": 0.6989247311827957,
+     "coverage": {
+      "scored": 186,
+      "measured": 186
+     }
+    },
+    {
+     "label": "|U|",
+     "score": "speed",
+     "Count": 186,
+     "R": 0.9244788192452508,
+     "Fac2": 0.8225806451612904,
+     "Fb": 0.09894141550906514,
+     "HitRate": 0.7204301075268817,
+     "coverage": {
+      "scored": 186,
+      "measured": 186
+     }
+    },
+    {
+     "label": "k",
+     "score": "k",
+     "Count": 186,
+     "R": 0.6263527603778766,
+     "Fac2": 0.6935483870967742,
+     "Fb": 0.45328387417819815,
+     "HitRate": 0.3924731182795699,
+     "coverage": {
+      "scored": 186,
+      "measured": 186
+     }
+    }
+   ],
+   "values": {
+    "url": "https://aij.eddy3d.com/api/3.4.0/submissions/eddy3d-of12-sst-urans/A.csv?v=98a4d275b3f2",
+    "path": "submissions/eddy3d-of12-sst-urans/A.csv",
+    "media_type": "text/csv",
+    "bytes": 23416,
+    "sha256": "98a4d275b3f24a3c3579b18f2dfff08685c77f558987b79768a1fae48728787d"
+   },
+   "scores": {
+    "velocity.U": {
+     "Count": 186,
+     "MeanObserved": 0.6348264031048957,
+     "MeanPredicted": 0.5292802235294963,
+     "Fb": 0.18133421313913364,
+     "Nmse": 0.08953378049384937,
+     "Nad": 0.10418140181435595,
+     "Fac2": 0.7634408602150538,
+     "HitRate": 0.6827956989247311,
+     "Mg": 1.3392988445894083,
+     "Vg": 1.7171275687271363,
+     "GeometricPairs": 154,
+     "R": 0.9530488387208105
+    },
+    "velocity.V": {
+     "Count": 186,
+     "MeanObserved": -0.04043331585512722,
+     "MeanPredicted": -0.05958713904923587,
+     "Fb": null,
+     "Nmse": null,
+     "Nad": null,
+     "Fac2": 0.3602150537634409,
+     "HitRate": 0.8172043010752689,
+     "Mg": 1.0493606026981868,
+     "Vg": 13.06539438502107,
+     "GeometricPairs": 35,
+     "R": 0.9534513066948932
+    },
+    "velocity.W": {
+     "Count": 186,
+     "MeanObserved": 0.0013814965654127857,
+     "MeanPredicted": 0.00714976451732617,
+     "Fb": -1.352266188074855,
+     "Nmse": 581.005242802018,
+     "Nad": 5.259200341800847,
+     "Fac2": 0.41397849462365593,
+     "HitRate": 0.6989247311827957,
+     "Mg": 0.7539138413747213,
+     "Vg": 3.7985975763965034,
+     "GeometricPairs": 63,
+     "R": 0.6752098237940594
+    },
+    "speed": {
+     "Count": 186,
+     "MeanObserved": 0.6738722238666145,
+     "MeanPredicted": 0.6103412732560337,
+     "Fb": 0.09894141550906514,
+     "Nmse": 0.057299524905698195,
+     "Nad": 0.0806251117096482,
+     "Fac2": 0.8225806451612904,
+     "HitRate": 0.7204301075268817,
+     "Mg": 1.1625275249601381,
+     "Vg": 1.4760989937788724,
+     "GeometricPairs": 186,
+     "R": 0.9244788192452508
+    },
+    "k": {
+     "Count": 186,
+     "MeanObserved": 0.05589626736518246,
+     "MeanPredicted": 0.03524078848638565,
+     "Fb": 0.45328387417819815,
+     "Nmse": 0.5267874494674306,
+     "Nad": 0.2463040347642469,
+     "Fac2": 0.6935483870967742,
+     "HitRate": 0.3924731182795699,
+     "Mg": 1.559894163449508,
+     "Vg": 1.431359262487961,
+     "GeometricPairs": 186,
+     "R": 0.6263527603778766
+    }
+   },
+   "coverage": {
+    "velocity.U": {
+     "scored": 186,
+     "measured": 186
+    },
+    "velocity.V": {
+     "scored": 186,
+     "measured": 186
+    },
+    "velocity.W": {
+     "scored": 186,
+     "measured": 186
+    },
+    "speed": {
+     "scored": 186,
+     "measured": 186
+    },
+    "k": {
+     "scored": 186,
+     "measured": 186
+    }
+   },
+   "groups": [
+    {
+     "key": "",
+     "group": {},
+     "points_measured": 186,
+     "scores": {
+      "velocity.U": {
+       "Count": 186,
+       "MeanObserved": 0.6348264031048957,
+       "MeanPredicted": 0.5292802235294963,
+       "Fb": 0.18133421313913364,
+       "Nmse": 0.08953378049384937,
+       "Nad": 0.10418140181435595,
+       "Fac2": 0.7634408602150538,
+       "HitRate": 0.6827956989247311,
+       "Mg": 1.3392988445894083,
+       "Vg": 1.7171275687271363,
+       "GeometricPairs": 154,
+       "R": 0.9530488387208105
+      },
+      "velocity.V": {
+       "Count": 186,
+       "MeanObserved": -0.04043331585512722,
+       "MeanPredicted": -0.05958713904923587,
+       "Fb": null,
+       "Nmse": null,
+       "Nad": null,
+       "Fac2": 0.3602150537634409,
+       "HitRate": 0.8172043010752689,
+       "Mg": 1.0493606026981868,
+       "Vg": 13.06539438502107,
+       "GeometricPairs": 35,
+       "R": 0.9534513066948932
+      },
+      "velocity.W": {
+       "Count": 186,
+       "MeanObserved": 0.0013814965654127857,
+       "MeanPredicted": 0.00714976451732617,
+       "Fb": -1.352266188074855,
+       "Nmse": 581.005242802018,
+       "Nad": 5.259200341800847,
+       "Fac2": 0.41397849462365593,
+       "HitRate": 0.6989247311827957,
+       "Mg": 0.7539138413747213,
+       "Vg": 3.7985975763965034,
+       "GeometricPairs": 63,
+       "R": 0.6752098237940594
+      },
+      "speed": {
+       "Count": 186,
+       "MeanObserved": 0.6738722238666145,
+       "MeanPredicted": 0.6103412732560337,
+       "Fb": 0.09894141550906514,
+       "Nmse": 0.057299524905698195,
+       "Nad": 0.0806251117096482,
+       "Fac2": 0.8225806451612904,
+       "HitRate": 0.7204301075268817,
+       "Mg": 1.1625275249601381,
+       "Vg": 1.4760989937788724,
+       "GeometricPairs": 186,
+       "R": 0.9244788192452508
+      },
+      "k": {
+       "Count": 186,
+       "MeanObserved": 0.05589626736518246,
+       "MeanPredicted": 0.03524078848638565,
+       "Fb": 0.45328387417819815,
+       "Nmse": 0.5267874494674306,
+       "Nad": 0.2463040347642469,
+       "Fac2": 0.6935483870967742,
+       "HitRate": 0.3924731182795699,
+       "Mg": 1.559894163449508,
+       "Vg": 1.431359262487961,
+       "GeometricPairs": 186,
+       "R": 0.6263527603778766
+      }
+     },
+     "coverage": {
+      "velocity.U": {
+       "scored": 186,
+       "measured": 186
+      },
+      "velocity.V": {
+       "scored": 186,
+       "measured": 186
+      },
+      "velocity.W": {
+       "scored": 186,
+       "measured": 186
+      },
+      "speed": {
+       "scored": 186,
+       "measured": 186
+      },
+      "k": {
+       "scored": 186,
+       "measured": 186
+      }
+     }
+    }
+   ],
+   "U_ref_m_s": 4.491,
+   "units_given": "normalised"
+  }
+ ],
+ "page": "https://aij.eddy3d.com/community/eddy3d-of12-sst-urans/"
+}

@@ -20,8 +20,6 @@ All three headings: 3.6 million cells at 1:400 on a cylinder domain, 3000 iterat
 | WD 0° · split fibre $$\lvert\mathbf{U}\rvert$$ · $$\lvert\mathbf{U}\rvert$$ | 33 | 0.76 | +0.07 | 0.52 | 0.85 |
 | WD 0° · split fibre $$U$$ · $$U$$ | 33 | 0.48 | +0.67 | 0.52 | 0.95 |
 
-{% include nomenclature-scores.md %}
-
 </details>
 
 - Thermistor plane: R 0.80–0.85 at all three headings. Split-fibre $$\lvert\mathbf{U}\rvert$$: R 0.85.

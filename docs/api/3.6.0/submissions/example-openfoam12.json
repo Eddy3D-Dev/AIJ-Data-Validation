@@ -1,0 +1,275 @@
+{
+ "$schema": "https://aij.eddy3d.com/api/3.6.0/schemas/submission.schema.json",
+ "schema_version": "2.5.0",
+ "data_version": "1346aa83352325ea02157757ed98a73bd25e7f98615646d480c0c3e38359ea15",
+ "license": "CC-BY-4.0",
+ "slug": "example-openfoam12",
+ "submission": {
+  "example": true,
+  "solver": "OpenFOAM simpleFoam (Eddy3D Outdoor case writer)",
+  "version": "12",
+  "url": "https://openfoam.org",
+  "author": "Sustainable Urban Systems Lab",
+  "licence": "CC-BY-4.0",
+  "contact": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/discussions",
+  "inlet": "log law fitted to AF_caseA.csv (u* = 0.343 m/s, z0 = 0.668 mm, kappa 0.41), the inlet cases/A.json recommends",
+  "mesh": "snappyHexMesh, 1:100 scale, numerics level 3 (Eddy3D fixture TestAijCaseAContainerE2E)",
+  "turbulence_model": "realizable k-epsilon",
+  "compute": "3000 iterations, steady, one workstation",
+  "units": "normalised",
+  "notes": "the values are the served pairs of Eddy3D's run, so the scores equal validation.json's for Case A"
+ },
+ "example": true,
+ "provenance": "self-reported inputs (the values in submissions/<slug>/cases/<id>/probes.csv), scored by this repository's build with validation/score_submissions.py; not an Eddy3D result and not checked by the maintainers beyond the scoring",
+ "scored_with": {
+  "script": "validation/score_submissions.py",
+  "release": "3.6.0",
+  "conventions": "velocities and the speed over U_ref, k over U_ref^2 (Cases E, F and G publish ratios already); U, V, W, |U| and the thermistor bracket scored as signed velocities (FAC2's ratio keeps the sign; hit rate D = 0.25, W = 0.05); k by the plain definitions (D = 0.25 only); a thermistor, cup or sonic reading (a mean scalar speed) scored against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar), the two ends of its bracket; c* = C/c0 with one detection limit per case, 1e-3 of the largest measured value; theta = (T_floor - T)/(T_floor - T_H) scored like a positive velocity. The same conventions score the served Eddy3D results (docs/validation/method.md).",
+  "metric_meaning": {
+   "Count": "number of measured points scored",
+   "MeanObserved": "mean of the measured, normalised quantity",
+   "MeanPredicted": "mean of the modelled, normalised quantity",
+   "Fb": "fractional bias, 2 (mean_obs - mean_pred) / (mean_obs + mean_pred); positive = model low",
+   "Nmse": "normalised mean square error",
+   "Nad": "normalised absolute difference",
+   "Fac2": "fraction of points within a factor of two (harsh near zero for sign-changing V and W)",
+   "HitRate": "fraction of points within D = 0.25 relative or W = 0.05 U_H absolute",
+   "Mg": "geometric mean bias",
+   "Vg": "geometric variance",
+   "GeometricPairs": "pairs with both values positive (used for Mg/Vg)",
+   "R": "Pearson correlation coefficient",
+   "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive; Fb, Nmse and Nad of a signed velocity component of Case H or I whose observed and predicted means are not both positive)"
+  }
+ },
+ "folder": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/tree/main/submissions/example-openfoam12",
+ "cases": [
+  {
+   "case": "A",
+   "title": "Case A — 1:1:2 building",
+   "status": "scored",
+   "headline": [
+    {
+     "label": "U",
+     "score": "velocity.U",
+     "Count": 186,
+     "R": 0.9548412675647306,
+     "Fac2": 0.8172043010752689,
+     "Fb": 0.1849501728346507,
+     "HitRate": 0.5860215053763441,
+     "coverage": {
+      "scored": 186,
+      "measured": 186
+     }
+    },
+    {
+     "label": "V",
+     "score": "velocity.V",
+     "Count": 186,
+     "R": 0.9609755519503334,
+     "Fac2": 0.34946236559139787,
+     "Fb": null,
+     "HitRate": 0.8924731182795699,
+     "coverage": {
+      "scored": 186,
+      "measured": 186
+     }
+    },
+    {
+     "label": "W",
+     "score": "velocity.W",
+     "Count": 186,
+     "R": 0.7082287378700073,
+     "Fac2": 0.3978494623655914,
+     "Fb": -1.5011776249635957,
+     "HitRate": 0.8010752688172043,
+     "coverage": {
+      "scored": 186,
+      "measured": 186
+     }
+    },
+    {
+     "label": "|U|",
+     "score": "speed",
+     "Count": 186,
+     "R": 0.9402059410514126,
+     "Fac2": 0.8763440860215054,
+     "Fb": 0.1439352706779555,
+     "HitRate": 0.6344086021505376,
+     "coverage": {
+      "scored": 186,
+      "measured": 186
+     }
+    }
+   ],
+   "values": {
+    "url": "https://aij.eddy3d.com/api/3.6.0/submissions/example-openfoam12/A.csv?v=4eec5b1fe73a",
+    "path": "submissions/example-openfoam12/A.csv",
+    "media_type": "text/csv",
+    "bytes": 21480,
+    "sha256": "4eec5b1fe73a82f78f5312644aa06f5af0e41f958ebe23c07839d0d67299dd76"
+   },
+   "scores": {
+    "velocity.U": {
+     "Count": 186,
+     "MeanObserved": 0.6348264031048957,
+     "MeanPredicted": 0.5273536978377305,
+     "Fb": 0.1849501728346507,
+     "Nmse": 0.07800835684057231,
+     "Nad": 0.10891773191564719,
+     "Fac2": 0.8172043010752689,
+     "HitRate": 0.5860215053763441,
+     "Mg": 1.2758313559148735,
+     "Vg": 1.7376005317453767,
+     "GeometricPairs": 158,
+     "R": 0.9548412675647306
+    },
+    "velocity.V": {
+     "Count": 186,
+     "MeanObserved": -0.04043331585512722,
+     "MeanPredicted": -0.049759690228725076,
+     "Fb": null,
+     "Nmse": null,
+     "Nad": null,
+     "Fac2": 0.34946236559139787,
+     "HitRate": 0.8924731182795699,
+     "Mg": 6.204495097304645,
+     "Vg": 31996.757808134254,
+     "GeometricPairs": 51,
+     "R": 0.9609755519503334
+    },
+    "velocity.W": {
+     "Count": 186,
+     "MeanObserved": 0.0013814965654127857,
+     "MeanPredicted": 0.009696567567632278,
+     "Fb": -1.5011776249635957,
+     "Nmse": 318.23623106215155,
+     "Nad": 3.39833560177203,
+     "Fac2": 0.3978494623655914,
+     "HitRate": 0.8010752688172043,
+     "Mg": 0.9450322342366085,
+     "Vg": 3.0149459855402783,
+     "GeometricPairs": 67,
+     "R": 0.7082287378700073
+    },
+    "speed": {
+     "Count": 186,
+     "MeanObserved": 0.6738722238666145,
+     "MeanPredicted": 0.5833900322900698,
+     "Fb": 0.1439352706779555,
+     "Nmse": 0.058683647368248694,
+     "Nad": 0.0924936305080478,
+     "Fac2": 0.8763440860215054,
+     "HitRate": 0.6344086021505376,
+     "Mg": 1.2338433977280352,
+     "Vg": 1.3911090653766376,
+     "GeometricPairs": 186,
+     "R": 0.9402059410514126
+    }
+   },
+   "coverage": {
+    "velocity.U": {
+     "scored": 186,
+     "measured": 186
+    },
+    "velocity.V": {
+     "scored": 186,
+     "measured": 186
+    },
+    "velocity.W": {
+     "scored": 186,
+     "measured": 186
+    },
+    "speed": {
+     "scored": 186,
+     "measured": 186
+    }
+   },
+   "groups": [
+    {
+     "key": "",
+     "group": {},
+     "points_measured": 186,
+     "scores": {
+      "velocity.U": {
+       "Count": 186,
+       "MeanObserved": 0.6348264031048957,
+       "MeanPredicted": 0.5273536978377305,
+       "Fb": 0.1849501728346507,
+       "Nmse": 0.07800835684057231,
+       "Nad": 0.10891773191564719,
+       "Fac2": 0.8172043010752689,
+       "HitRate": 0.5860215053763441,
+       "Mg": 1.2758313559148735,
+       "Vg": 1.7376005317453767,
+       "GeometricPairs": 158,
+       "R": 0.9548412675647306
+      },
+      "velocity.V": {
+       "Count": 186,
+       "MeanObserved": -0.04043331585512722,
+       "MeanPredicted": -0.049759690228725076,
+       "Fb": null,
+       "Nmse": null,
+       "Nad": null,
+       "Fac2": 0.34946236559139787,
+       "HitRate": 0.8924731182795699,
+       "Mg": 6.204495097304645,
+       "Vg": 31996.757808134254,
+       "GeometricPairs": 51,
+       "R": 0.9609755519503334
+      },
+      "velocity.W": {
+       "Count": 186,
+       "MeanObserved": 0.0013814965654127857,
+       "MeanPredicted": 0.009696567567632278,
+       "Fb": -1.5011776249635957,
+       "Nmse": 318.23623106215155,
+       "Nad": 3.39833560177203,
+       "Fac2": 0.3978494623655914,
+       "HitRate": 0.8010752688172043,
+       "Mg": 0.9450322342366085,
+       "Vg": 3.0149459855402783,
+       "GeometricPairs": 67,
+       "R": 0.7082287378700073
+      },
+      "speed": {
+       "Count": 186,
+       "MeanObserved": 0.6738722238666145,
+       "MeanPredicted": 0.5833900322900698,
+       "Fb": 0.1439352706779555,
+       "Nmse": 0.058683647368248694,
+       "Nad": 0.0924936305080478,
+       "Fac2": 0.8763440860215054,
+       "HitRate": 0.6344086021505376,
+       "Mg": 1.2338433977280352,
+       "Vg": 1.3911090653766376,
+       "GeometricPairs": 186,
+       "R": 0.9402059410514126
+      }
+     },
+     "coverage": {
+      "velocity.U": {
+       "scored": 186,
+       "measured": 186
+      },
+      "velocity.V": {
+       "scored": 186,
+       "measured": 186
+      },
+      "velocity.W": {
+       "scored": 186,
+       "measured": 186
+      },
+      "speed": {
+       "scored": 186,
+       "measured": 186
+      }
+     }
+    }
+   ],
+   "U_ref_m_s": 4.491,
+   "units_given": "normalised"
+  }
+ ],
+ "page": "https://aij.eddy3d.com/community/example-openfoam12/"
+}

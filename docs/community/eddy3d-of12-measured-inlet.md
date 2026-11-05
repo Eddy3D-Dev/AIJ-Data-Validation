@@ -39,8 +39,6 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | $$k$$ | +0.414 | 0.688 | +0.380 | 0.344 | 186 | 186/186 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 ## Case B — 1:4:4 slab
 
 | Score | R | FAC2 | FB | Hit rate | n | coverage |
@@ -51,8 +49,6 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | $$\lvert\mathbf{U}\rvert$$ | +0.945 | 0.817 | +0.081 | 0.625 | 224 | 224/224 |
 | $$k$$ | +0.405 | 0.571 | +0.440 | 0.263 | 224 | 224/224 |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 ## Case H — 1:1:2 building with a floor point source
 
@@ -65,5 +61,3 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | $$k$$ | +0.118 | 0.576 | +0.522 | 0.311 | 826 | 826/826 |
 | $$c^\ast$$ | +0.951 | 0.619 | -0.825 | 0.508 | 826 | 826/826 |
 {: .scores }
-
-{% include nomenclature-scores.md %}

@@ -38,8 +38,8 @@ file, and CI fails on a single byte of difference. The rules:
   do not commit regenerated renders; if CI reports a difference, take its `rebuilt-files` artifact.
 - **Markdown renders on GitHub and on the site.** `scripts/check_markdown.py` (run by the build) enforces the rules; math
   is LaTeX between `$$ ... $$`.
-- **Dependencies are pinned twice.** A new package goes into `requirements.txt` and the lock is regenerated:
-  `uv pip compile requirements.txt --universal --generate-hashes --python-version 3.12 -o requirements.lock`.
+- **Dependencies are pinned twice, with uv.** A new package goes into `pyproject.toml` (`uv add pkg==X.Y.Z`) and `uv.lock`
+  is regenerated (`uv lock`); there is no `requirements.txt`. Run anything with `uv run python ...`.
 - **No PDFs in the repository.**
 - **`validation/score_submissions.py`** is the one scorer: the build scores the submissions with it, and its `--self-test` (the build
   runs it) re-scores every served run from its pairs and must match to 1e-9.

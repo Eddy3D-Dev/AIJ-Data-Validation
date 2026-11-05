@@ -1,7 +1,7 @@
 {
  "$schema": "https://aij.eddy3d.com/api/schemas/submissions.schema.json",
  "schema_version": "2.5.0",
- "data_version": "09c282705a7e153c63516140123c12d3774b8968492cc004449a45c6ee2af89a",
+ "data_version": "5abd0adb307e7f87ec6e886d2133f2f0eab9fc5f3c6a36bb3b9d80d07c1d9ce2",
  "license": "CC-BY-4.0",
  "description": "Every solver submitted under submissions/ in the repository, scored by this build from the values it gave at the published points (cases/{id}/probes.csv). The inputs are self-reported; the scoring is this repository's, the same metrics and conventions as Eddy3D's results in validation.json. A submission scores the points it gave: `coverage` says how many of the measured points that is.",
  "how_to_submit": "https://aij.eddy3d.com/byos/",
@@ -570,6 +570,1150 @@
    ],
    "submission_url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-mesh2x-measured-inlet.json",
    "page": "https://aij.eddy3d.com/community/eddy3d-of12-mesh2x-measured-inlet/"
+  },
+  {
+   "slug": "eddy3d-of12-nutcap-lifted",
+   "solver": "OpenFOAM simpleFoam (Eddy3D Outdoor case writer)",
+   "version": "12",
+   "author": "Sustainable Urban Systems Lab",
+   "url": "https://openfoam.org",
+   "example": false,
+   "inlet": "the served fitted log law",
+   "turbulence_model": "realizable k-epsilon, nutMaxCoeff 1e8",
+   "ml_description": null,
+   "cases": [
+    {
+     "case": "A",
+     "title": "Case A — 1:1:2 building",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "U",
+       "score": "velocity.U",
+       "Count": 186,
+       "R": 0.9535278045093767,
+       "Fac2": 0.8225806451612904,
+       "Fb": 0.16627220895995706,
+       "HitRate": 0.6129032258064516,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "V",
+       "score": "velocity.V",
+       "Count": 186,
+       "R": 0.9621359539198044,
+       "Fac2": 0.3602150537634409,
+       "Fb": null,
+       "HitRate": 0.9032258064516129,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "W",
+       "score": "velocity.W",
+       "Count": 186,
+       "R": 0.7091597829771744,
+       "Fac2": 0.4032258064516129,
+       "Fb": -1.362295020090697,
+       "HitRate": 0.8333333333333334,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "|U|",
+       "score": "speed",
+       "Count": 186,
+       "R": 0.939760267128119,
+       "Fac2": 0.8655913978494624,
+       "Fb": 0.12973666003550258,
+       "HitRate": 0.6666666666666666,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      },
+      {
+       "label": "k",
+       "score": "k",
+       "Count": 186,
+       "R": 0.38965019455280847,
+       "Fac2": 0.6774193548387096,
+       "Fb": 0.3937542841804471,
+       "HitRate": 0.24731182795698925,
+       "coverage": {
+        "scored": 186,
+        "measured": 186
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/A.csv?v=d55ee1f8ca3c",
+      "path": "submissions/eddy3d-of12-nutcap-lifted/A.csv",
+      "media_type": "text/csv",
+      "bytes": 23456,
+      "sha256": "d55ee1f8ca3c9f868661028c27e5b4a4a6a6b2b69967217fd6c92645c8ca3afb"
+     }
+    },
+    {
+     "case": "B",
+     "title": "Case B — 1:4:4 slab",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "U",
+       "score": "velocity.U",
+       "Count": 224,
+       "R": 0.9566146298714757,
+       "Fac2": 0.71875,
+       "Fb": 0.11306033384630809,
+       "HitRate": 0.5401785714285714,
+       "coverage": {
+        "scored": 224,
+        "measured": 224
+       }
+      },
+      {
+       "label": "V",
+       "score": "velocity.V",
+       "Count": 224,
+       "R": 0.9186429258930232,
+       "Fac2": 0.27232142857142855,
+       "Fb": null,
+       "HitRate": 0.6383928571428571,
+       "coverage": {
+        "scored": 224,
+        "measured": 224
+       }
+      },
+      {
+       "label": "W",
+       "score": "velocity.W",
+       "Count": 224,
+       "R": 0.9160896949796138,
+       "Fac2": 0.4732142857142857,
+       "Fb": 0.5488246816344083,
+       "HitRate": 0.7232142857142857,
+       "coverage": {
+        "scored": 224,
+        "measured": 224
+       }
+      },
+      {
+       "label": "|U|",
+       "score": "speed",
+       "Count": 224,
+       "R": 0.9430667986113295,
+       "Fac2": 0.8571428571428571,
+       "Fb": 0.06337694589163542,
+       "HitRate": 0.6339285714285714,
+       "coverage": {
+        "scored": 224,
+        "measured": 224
+       }
+      },
+      {
+       "label": "k",
+       "score": "k",
+       "Count": 224,
+       "R": 0.29137279371154706,
+       "Fac2": 0.5535714285714286,
+       "Fb": 0.3054932097657868,
+       "HitRate": 0.20089285714285715,
+       "coverage": {
+        "scored": 224,
+        "measured": 224
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/B.csv?v=d35fb0a6cd1b",
+      "path": "submissions/eddy3d-of12-nutcap-lifted/B.csv",
+      "media_type": "text/csv",
+      "bytes": 28613,
+      "sha256": "d35fb0a6cd1b6d6fe4a863967fc807a6e203fe332d940a2657b281c0dc1b4a2d"
+     }
+    },
+    {
+     "case": "C",
+     "title": "Case C — 3 × 3 block array",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "0D.wd0: √(|U|²+2k)",
+       "score": "0D.wd0/vs.scalar",
+       "Count": 120,
+       "R": 0.8394360299963659,
+       "Fac2": 0.9166666666666666,
+       "Fb": 0.2648897690608728,
+       "HitRate": 0.5833333333333334,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      },
+      {
+       "label": "0D.wd0: |U|",
+       "score": "0D.wd0/vs.vector",
+       "Count": 120,
+       "R": 0.817777789849372,
+       "Fac2": 0.6583333333333333,
+       "Fb": 0.46838925605324583,
+       "HitRate": 0.2916666666666667,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      },
+      {
+       "label": "0D.wd22.5: √(|U|²+2k)",
+       "score": "0D.wd22.5/vs.scalar",
+       "Count": 120,
+       "R": 0.8585448561337616,
+       "Fac2": 0.9833333333333333,
+       "Fb": 0.11071219034029879,
+       "HitRate": 0.7416666666666667,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      },
+      {
+       "label": "0D.wd22.5: |U|",
+       "score": "0D.wd22.5/vs.vector",
+       "Count": 120,
+       "R": 0.8466578956454459,
+       "Fac2": 0.8166666666666667,
+       "Fb": 0.30974691406068533,
+       "HitRate": 0.425,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      },
+      {
+       "label": "0D.wd45: √(|U|²+2k)",
+       "score": "0D.wd45/vs.scalar",
+       "Count": 120,
+       "R": 0.8411930253803003,
+       "Fac2": 0.9333333333333333,
+       "Fb": 0.12193701287336596,
+       "HitRate": 0.8,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      },
+      {
+       "label": "0D.wd45: |U|",
+       "score": "0D.wd45/vs.vector",
+       "Count": 120,
+       "R": 0.8101021792274211,
+       "Fac2": 0.7916666666666666,
+       "Fb": 0.31163420269370634,
+       "HitRate": 0.5333333333333333,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      },
+      {
+       "label": "1D.wd0: √(|U|²+2k)",
+       "score": "1D.wd0/vs.scalar",
+       "Count": 120,
+       "R": 0.7942109876474946,
+       "Fac2": 0.85,
+       "Fb": 0.3351411065363758,
+       "HitRate": 0.4083333333333333,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      },
+      {
+       "label": "1D.wd0: |U|",
+       "score": "1D.wd0/vs.vector",
+       "Count": 120,
+       "R": 0.7306171704009258,
+       "Fac2": 0.5666666666666667,
+       "Fb": 0.5456354368020645,
+       "HitRate": 0.325,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      },
+      {
+       "label": "1D.wd22.5: √(|U|²+2k)",
+       "score": "1D.wd22.5/vs.scalar",
+       "Count": 120,
+       "R": 0.9045192752260075,
+       "Fac2": 0.9666666666666667,
+       "Fb": 0.19069051708550747,
+       "HitRate": 0.675,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      },
+      {
+       "label": "1D.wd22.5: |U|",
+       "score": "1D.wd22.5/vs.vector",
+       "Count": 120,
+       "R": 0.8884641030930863,
+       "Fac2": 0.7083333333333334,
+       "Fb": 0.39935291598755673,
+       "HitRate": 0.3333333333333333,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      },
+      {
+       "label": "1D.wd45: √(|U|²+2k)",
+       "score": "1D.wd45/vs.scalar",
+       "Count": 120,
+       "R": 0.8769850015604158,
+       "Fac2": 0.925,
+       "Fb": 0.20517080354983647,
+       "HitRate": 0.7333333333333333,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      },
+      {
+       "label": "1D.wd45: |U|",
+       "score": "1D.wd45/vs.vector",
+       "Count": 120,
+       "R": 0.8774479653795979,
+       "Fac2": 0.8166666666666667,
+       "Fb": 0.36474468271907534,
+       "HitRate": 0.4166666666666667,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      },
+      {
+       "label": "2D.wd0: √(|U|²+2k)",
+       "score": "2D.wd0/vs.scalar",
+       "Count": 120,
+       "R": 0.8620999743247605,
+       "Fac2": 0.875,
+       "Fb": 0.23379645907734692,
+       "HitRate": 0.575,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      },
+      {
+       "label": "2D.wd0: |U|",
+       "score": "2D.wd0/vs.vector",
+       "Count": 120,
+       "R": 0.8536302023657047,
+       "Fac2": 0.7,
+       "Fb": 0.4276776055700171,
+       "HitRate": 0.31666666666666665,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      },
+      {
+       "label": "2D.wd22.5: √(|U|²+2k)",
+       "score": "2D.wd22.5/vs.scalar",
+       "Count": 120,
+       "R": 0.90676827220588,
+       "Fac2": 0.9833333333333333,
+       "Fb": 0.10412424877187217,
+       "HitRate": 0.875,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      },
+      {
+       "label": "2D.wd22.5: |U|",
+       "score": "2D.wd22.5/vs.vector",
+       "Count": 120,
+       "R": 0.8925052554972075,
+       "Fac2": 0.8666666666666667,
+       "Fb": 0.26374020184744984,
+       "HitRate": 0.5916666666666667,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      },
+      {
+       "label": "2D.wd45: √(|U|²+2k)",
+       "score": "2D.wd45/vs.scalar",
+       "Count": 120,
+       "R": 0.9230088605328468,
+       "Fac2": 0.9916666666666667,
+       "Fb": 0.09848049017596941,
+       "HitRate": 0.9083333333333333,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      },
+      {
+       "label": "2D.wd45: |U|",
+       "score": "2D.wd45/vs.vector",
+       "Count": 120,
+       "R": 0.9246181923220959,
+       "Fac2": 0.9,
+       "Fb": 0.24090948571791607,
+       "HitRate": 0.6416666666666667,
+       "coverage": {
+        "scored": 120,
+        "measured": 120
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/C.csv?v=35838affb859",
+      "path": "submissions/eddy3d-of12-nutcap-lifted/C.csv",
+      "media_type": "text/csv",
+      "bytes": 85289,
+      "sha256": "35838affb859c77efdc79b17deb750daf7e5bc82e2c277a1fb0f7af0abd607b5"
+     }
+    },
+    {
+     "case": "D",
+     "title": "Case D — high-rise among city blocks",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "wd0: |U|",
+       "score": "wd0/vs.vector",
+       "Count": 66,
+       "R": 0.805149589168162,
+       "Fac2": 0.6818181818181818,
+       "Fb": 0.35458674526616735,
+       "HitRate": 0.4090909090909091,
+       "coverage": {
+        "scored": 66,
+        "measured": 66
+       }
+      },
+      {
+       "label": "wd0: k",
+       "score": "wd0/k",
+       "Count": 33,
+       "R": -0.1940603006518269,
+       "Fac2": 0.2727272727272727,
+       "Fb": 0.45228909553936664,
+       "HitRate": 0.09090909090909091,
+       "coverage": {
+        "scored": 33,
+        "measured": 33
+       }
+      },
+      {
+       "label": "wd0: √(|U|²+2k)",
+       "score": "wd0/vs.scalar",
+       "Count": 66,
+       "R": 0.7892323572751982,
+       "Fac2": 0.7878787878787878,
+       "Fb": 0.20161155125091498,
+       "HitRate": 0.5303030303030303,
+       "coverage": {
+        "scored": 66,
+        "measured": 66
+       }
+      },
+      {
+       "label": "wd22.5: √(|U|²+2k)",
+       "score": "wd22.5/vs.scalar",
+       "Count": 66,
+       "R": 0.8124129610843754,
+       "Fac2": 0.9090909090909091,
+       "Fb": 0.03960971106224774,
+       "HitRate": 0.6515151515151515,
+       "coverage": {
+        "scored": 66,
+        "measured": 66
+       }
+      },
+      {
+       "label": "wd22.5: |U|",
+       "score": "wd22.5/vs.vector",
+       "Count": 66,
+       "R": 0.809707606700245,
+       "Fac2": 0.8181818181818182,
+       "Fb": 0.14802519975451722,
+       "HitRate": 0.5909090909090909,
+       "coverage": {
+        "scored": 66,
+        "measured": 66
+       }
+      },
+      {
+       "label": "wd45: √(|U|²+2k)",
+       "score": "wd45/vs.scalar",
+       "Count": 66,
+       "R": 0.8528931105955276,
+       "Fac2": 0.9242424242424242,
+       "Fb": 0.056636172331234316,
+       "HitRate": 0.6515151515151515,
+       "coverage": {
+        "scored": 66,
+        "measured": 66
+       }
+      },
+      {
+       "label": "wd45: |U|",
+       "score": "wd45/vs.vector",
+       "Count": 66,
+       "R": 0.8484162375155567,
+       "Fac2": 0.8484848484848485,
+       "Fb": 0.14541043555633273,
+       "HitRate": 0.696969696969697,
+       "coverage": {
+        "scored": 66,
+        "measured": 66
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/D.csv?v=2dfde16debe1",
+      "path": "submissions/eddy3d-of12-nutcap-lifted/D.csv",
+      "media_type": "text/csv",
+      "bytes": 17823,
+      "sha256": "2dfde16debe17439d0e184a5fb8bcd76a8e875d945928465e383dfb274b8e94b"
+     }
+    },
+    {
+     "case": "E",
+     "title": "Case E — Niigata district",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "ac.wd225: √(|U|²+2k)",
+       "score": "ac.wd225/vs.scalar",
+       "Count": 80,
+       "R": 0.8645974348349083,
+       "Fac2": 0.8625,
+       "Fb": 0.21594592928265807,
+       "HitRate": 0.525,
+       "coverage": {
+        "scored": 80,
+        "measured": 80
+       }
+      },
+      {
+       "label": "ac.wd225: |U|",
+       "score": "ac.wd225/vs.vector",
+       "Count": 80,
+       "R": 0.8475500810540862,
+       "Fac2": 0.6875,
+       "Fb": 0.3496426154613389,
+       "HitRate": 0.4375,
+       "coverage": {
+        "scored": 80,
+        "measured": 80
+       }
+      },
+      {
+       "label": "bc.wd225: √(|U|²+2k)",
+       "score": "bc.wd225/vs.scalar",
+       "Count": 80,
+       "R": 0.7170978109799897,
+       "Fac2": 0.95,
+       "Fb": 0.02333956542124223,
+       "HitRate": 0.675,
+       "coverage": {
+        "scored": 80,
+        "measured": 80
+       }
+      },
+      {
+       "label": "bc.wd225: |U|",
+       "score": "bc.wd225/vs.vector",
+       "Count": 80,
+       "R": 0.7115591242667907,
+       "Fac2": 0.8375,
+       "Fb": 0.17592558654029994,
+       "HitRate": 0.55,
+       "coverage": {
+        "scored": 80,
+        "measured": 80
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/E.csv?v=7adb9c8af800",
+      "path": "submissions/eddy3d-of12-nutcap-lifted/E.csv",
+      "media_type": "text/csv",
+      "bytes": 12876,
+      "sha256": "7adb9c8af800341f94ae736bf125d29e84850e37e2528b1e1a63cae89c57c106"
+     }
+    },
+    {
+     "case": "F",
+     "title": "Case F — Shinjuku district",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "default.field.wd337.5: √(|U|²+2k)",
+       "score": "default.field.wd337.5/vs.scalar",
+       "Count": 13,
+       "R": 0.8529991337882592,
+       "Fac2": 1.0,
+       "Fb": 0.008004220945741313,
+       "HitRate": 0.5384615384615384,
+       "coverage": {
+        "scored": 13,
+        "measured": 13
+       }
+      },
+      {
+       "label": "default.field.wd337.5: |U|",
+       "score": "default.field.wd337.5/vs.vector",
+       "Count": 13,
+       "R": 0.8306519837032573,
+       "Fac2": 0.8461538461538461,
+       "Fb": 0.16944090571649847,
+       "HitRate": 0.46153846153846156,
+       "coverage": {
+        "scored": 13,
+        "measured": 13
+       }
+      },
+      {
+       "label": "default.wind_tunnel.wd337.5: √(|U|²+2k)",
+       "score": "default.wind_tunnel.wd337.5/vs.scalar",
+       "Count": 13,
+       "R": 0.9278551397334758,
+       "Fac2": 1.0,
+       "Fb": -0.013287038021234316,
+       "HitRate": 0.6153846153846154,
+       "coverage": {
+        "scored": 13,
+        "measured": 13
+       }
+      },
+      {
+       "label": "default.wind_tunnel.wd337.5: |U|",
+       "score": "default.wind_tunnel.wd337.5/vs.vector",
+       "Count": 13,
+       "R": 0.9197694511489479,
+       "Fac2": 0.9230769230769231,
+       "Fb": 0.14663015011850936,
+       "HitRate": 0.46153846153846156,
+       "coverage": {
+        "scored": 13,
+        "measured": 13
+       }
+      },
+      {
+       "label": "h20.wind_tunnel.wd337.5: √(|U|²+2k)",
+       "score": "h20.wind_tunnel.wd337.5/vs.scalar",
+       "Count": 13,
+       "R": 0.7536514156124126,
+       "Fac2": 0.9230769230769231,
+       "Fb": -0.002269996562197457,
+       "HitRate": 0.7692307692307693,
+       "coverage": {
+        "scored": 13,
+        "measured": 13
+       }
+      },
+      {
+       "label": "h20.wind_tunnel.wd337.5: |U|",
+       "score": "h20.wind_tunnel.wd337.5/vs.vector",
+       "Count": 13,
+       "R": 0.7513861874135328,
+       "Fac2": 0.9230769230769231,
+       "Fb": 0.09167780928078324,
+       "HitRate": 0.6923076923076923,
+       "coverage": {
+        "scored": 13,
+        "measured": 13
+       }
+      },
+      {
+       "label": "h5.wind_tunnel.wd337.5: √(|U|²+2k)",
+       "score": "h5.wind_tunnel.wd337.5/vs.scalar",
+       "Count": 7,
+       "R": 0.953727331994296,
+       "Fac2": 1.0,
+       "Fb": 0.017495059100595088,
+       "HitRate": 0.7142857142857143,
+       "coverage": {
+        "scored": 7,
+        "measured": 7
+       }
+      },
+      {
+       "label": "h5.wind_tunnel.wd337.5: |U|",
+       "score": "h5.wind_tunnel.wd337.5/vs.vector",
+       "Count": 7,
+       "R": 0.9356450723854389,
+       "Fac2": 0.8571428571428571,
+       "Fb": 0.20081740210433746,
+       "HitRate": 0.7142857142857143,
+       "coverage": {
+        "scored": 7,
+        "measured": 7
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/F.csv?v=529a40fd2c5b",
+      "path": "submissions/eddy3d-of12-nutcap-lifted/F.csv",
+      "media_type": "text/csv",
+      "bytes": 3882,
+      "sha256": "529a40fd2c5b78c8afae9972a0834f6c00cc076ee977b114f6a9791f45083279"
+     }
+    },
+    {
+     "case": "G",
+     "title": "Case G — flow behind a tree belt",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "k",
+       "score": "k",
+       "Count": 28,
+       "R": 0.34357744439708776,
+       "Fac2": 0.35714285714285715,
+       "Fb": -0.8273701174181617,
+       "HitRate": 0.07142857142857142,
+       "coverage": {
+        "scored": 28,
+        "measured": 28
+       }
+      },
+      {
+       "label": "√(|U|²+2k)",
+       "score": "vs.scalar",
+       "Count": 28,
+       "R": 0.32465044764392503,
+       "Fac2": 0.9285714285714286,
+       "Fb": -0.5264704631027963,
+       "HitRate": 0.03571428571428571,
+       "coverage": {
+        "scored": 28,
+        "measured": 28
+       }
+      },
+      {
+       "label": "|U|",
+       "score": "vs.vector",
+       "Count": 28,
+       "R": 0.32664474041166336,
+       "Fac2": 1.0,
+       "Fb": -0.4073933973247317,
+       "HitRate": 0.07142857142857142,
+       "coverage": {
+        "scored": 28,
+        "measured": 28
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/G.csv?v=bc0ad9ed02d5",
+      "path": "submissions/eddy3d-of12-nutcap-lifted/G.csv",
+      "media_type": "text/csv",
+      "bytes": 2111,
+      "sha256": "bc0ad9ed02d5dcae96cb49668ef78150a5a3bfc3d646aaca7365a0b50649ed1b"
+     }
+    },
+    {
+     "case": "H",
+     "title": "Case H — 1:1:2 building with a floor point source",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "U",
+       "score": "velocity.U",
+       "Count": 826,
+       "R": 0.8903760209008239,
+       "Fac2": 0.6343825665859564,
+       "Fb": 0.31289194184250807,
+       "HitRate": 0.47578692493946734,
+       "coverage": {
+        "scored": 826,
+        "measured": 826
+       }
+      },
+      {
+       "label": "V",
+       "score": "velocity.V",
+       "Count": 826,
+       "R": 0.937698244550062,
+       "Fac2": 0.3692493946731235,
+       "Fb": -0.39958013740302006,
+       "HitRate": 0.7021791767554479,
+       "coverage": {
+        "scored": 826,
+        "measured": 826
+       }
+      },
+      {
+       "label": "W",
+       "score": "velocity.W",
+       "Count": 826,
+       "R": 0.870150327457997,
+       "Fac2": 0.2966101694915254,
+       "Fb": null,
+       "HitRate": 0.7142857142857143,
+       "coverage": {
+        "scored": 826,
+        "measured": 826
+       }
+      },
+      {
+       "label": "|U|",
+       "score": "speed",
+       "Count": 826,
+       "R": 0.8752794413043505,
+       "Fac2": 0.6828087167070218,
+       "Fb": 0.31789243011843665,
+       "HitRate": 0.47094430992736075,
+       "coverage": {
+        "scored": 826,
+        "measured": 826
+       }
+      },
+      {
+       "label": "k",
+       "score": "k",
+       "Count": 826,
+       "R": -0.010814538673590815,
+       "Fac2": 0.6077481840193705,
+       "Fb": 0.3023297812544165,
+       "HitRate": 0.3389830508474576,
+       "coverage": {
+        "scored": 826,
+        "measured": 826
+       }
+      },
+      {
+       "label": "c*",
+       "score": "cstar",
+       "Count": 826,
+       "R": 0.946590971145444,
+       "Fac2": 0.635593220338983,
+       "Fb": -0.7386062391141464,
+       "HitRate": 0.4891041162227603,
+       "coverage": {
+        "scored": 826,
+        "measured": 826
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/H.csv?v=976a8b51df69",
+      "path": "submissions/eddy3d-of12-nutcap-lifted/H.csv",
+      "media_type": "text/csv",
+      "bytes": 126058,
+      "sha256": "976a8b51df6921da39beffb2547146188b618d00e0a9aa57185f9f235ba33a14"
+     }
+    },
+    {
+     "case": "K",
+     "title": "Case K — 9 x 9 cube array, point source",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "U",
+       "score": "velocity.U",
+       "Count": 203,
+       "R": 0.96030222788267,
+       "Fac2": 0.6305418719211823,
+       "Fb": 0.5267181440926565,
+       "HitRate": 0.2315270935960591,
+       "coverage": {
+        "scored": 203,
+        "measured": 203
+       }
+      },
+      {
+       "label": "V",
+       "score": "velocity.V",
+       "Count": 203,
+       "R": -0.1416511077331737,
+       "Fac2": 0.04926108374384237,
+       "Fb": null,
+       "HitRate": 0.9014778325123153,
+       "coverage": {
+        "scored": 203,
+        "measured": 203
+       }
+      },
+      {
+       "label": "W",
+       "score": "velocity.W",
+       "Count": 203,
+       "R": 0.6290987070272491,
+       "Fac2": 0.1330049261083744,
+       "Fb": null,
+       "HitRate": 0.6798029556650246,
+       "coverage": {
+        "scored": 203,
+        "measured": 203
+       }
+      },
+      {
+       "label": "|U|",
+       "score": "speed",
+       "Count": 203,
+       "R": 0.9449955940395853,
+       "Fac2": 0.6059113300492611,
+       "Fb": 0.506265730159064,
+       "HitRate": 0.1921182266009852,
+       "coverage": {
+        "scored": 203,
+        "measured": 203
+       }
+      },
+      {
+       "label": "k",
+       "score": "k",
+       "Count": 203,
+       "R": 0.3566485509718073,
+       "Fac2": 0.26108374384236455,
+       "Fb": 0.9550632587557862,
+       "HitRate": 0.03940886699507389,
+       "coverage": {
+        "scored": 203,
+        "measured": 203
+       }
+      },
+      {
+       "label": "c*",
+       "score": "cstar",
+       "Count": 203,
+       "R": 0.9489183870226044,
+       "Fac2": 0.8078817733990148,
+       "Fb": -0.750640748776701,
+       "HitRate": 0.47783251231527096,
+       "coverage": {
+        "scored": 203,
+        "measured": 203
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/K.csv?v=e26fa1b76a4e",
+      "path": "submissions/eddy3d-of12-nutcap-lifted/K.csv",
+      "media_type": "text/csv",
+      "bytes": 29447,
+      "sha256": "e26fa1b76a4ef05f256964a7b998a5db35937bbdbc663bac07e1886eb657104d"
+     }
+    },
+    {
+     "case": "L",
+     "title": "Case L — 9 x 14 cube array, line source, non-isothermal",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "U",
+       "score": "velocity.U",
+       "Count": 344,
+       "R": 0.9367704769108918,
+       "Fac2": 0.6191860465116279,
+       "Fb": 0.22509948339322897,
+       "HitRate": 0.5319767441860465,
+       "coverage": {
+        "scored": 344,
+        "measured": 344
+       }
+      },
+      {
+       "label": "V",
+       "score": "velocity.V",
+       "Count": 344,
+       "R": 0.18507544437089898,
+       "Fac2": 0.19767441860465115,
+       "Fb": -0.07679115531904385,
+       "HitRate": 0.813953488372093,
+       "coverage": {
+        "scored": 344,
+        "measured": 344
+       }
+      },
+      {
+       "label": "W",
+       "score": "velocity.W",
+       "Count": 344,
+       "R": 0.08375185461142037,
+       "Fac2": 0.2616279069767442,
+       "Fb": null,
+       "HitRate": 0.7616279069767442,
+       "coverage": {
+        "scored": 344,
+        "measured": 344
+       }
+      },
+      {
+       "label": "|U|",
+       "score": "speed",
+       "Count": 344,
+       "R": 0.9168515185266449,
+       "Fac2": 0.6686046511627907,
+       "Fb": 0.15952084697352756,
+       "HitRate": 0.5465116279069767,
+       "coverage": {
+        "scored": 344,
+        "measured": 344
+       }
+      },
+      {
+       "label": "k",
+       "score": "k",
+       "Count": 344,
+       "R": 0.0009894549135173111,
+       "Fac2": 0.5726744186046512,
+       "Fb": 0.4553178786345656,
+       "HitRate": 0.28488372093023256,
+       "coverage": {
+        "scored": 344,
+        "measured": 344
+       }
+      },
+      {
+       "label": "c*",
+       "score": "cstar",
+       "Count": 344,
+       "R": 0.7575589603563944,
+       "Fac2": 0.7005813953488372,
+       "Fb": -0.5466109841769808,
+       "HitRate": 0.44476744186046513,
+       "coverage": {
+        "scored": 344,
+        "measured": 344
+       }
+      },
+      {
+       "label": "θ",
+       "score": "theta",
+       "Count": 344,
+       "R": 0.9345680726495269,
+       "Fac2": 1.0,
+       "Fb": 0.02651867461423005,
+       "HitRate": 0.9941860465116279,
+       "coverage": {
+        "scored": 344,
+        "measured": 344
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/L.csv?v=56a0918b8c4b",
+      "path": "submissions/eddy3d-of12-nutcap-lifted/L.csv",
+      "media_type": "text/csv",
+      "bytes": 64026,
+      "sha256": "56a0918b8c4b6a55c7dd4bf853ff3b81a9267223b98432b0a83a2aaff9eaaae0"
+     }
+    },
+    {
+     "case": "M",
+     "title": "Case M — TPU Atsugi campus",
+     "status": "scored",
+     "headline": [
+      {
+       "label": "wind_tunnel.wd180: U",
+       "score": "wind_tunnel.wd180/velocity.U",
+       "Count": 15,
+       "R": 0.6273970620028672,
+       "Fac2": 0.2,
+       "Fb": 1.0638140896789674,
+       "HitRate": 0.13333333333333333,
+       "coverage": {
+        "scored": 15,
+        "measured": 15
+       }
+      },
+      {
+       "label": "wind_tunnel.wd180: V",
+       "score": "wind_tunnel.wd180/velocity.V",
+       "Count": 15,
+       "R": 0.7014186559113077,
+       "Fac2": 0.26666666666666666,
+       "Fb": null,
+       "HitRate": 0.13333333333333333,
+       "coverage": {
+        "scored": 15,
+        "measured": 15
+       }
+      },
+      {
+       "label": "wind_tunnel.wd180: W",
+       "score": "wind_tunnel.wd180/velocity.W",
+       "Count": 15,
+       "R": 0.11659121491009262,
+       "Fac2": 0.3333333333333333,
+       "Fb": 1.9380589502841845,
+       "HitRate": 0.6666666666666666,
+       "coverage": {
+        "scored": 15,
+        "measured": 15
+       }
+      },
+      {
+       "label": "wind_tunnel.wd180: |U|",
+       "score": "wind_tunnel.wd180/speed",
+       "Count": 15,
+       "R": 0.5396484413543094,
+       "Fac2": 0.6666666666666666,
+       "Fb": 0.16854470588079346,
+       "HitRate": 0.5333333333333333,
+       "coverage": {
+        "scored": 15,
+        "measured": 15
+       }
+      },
+      {
+       "label": "wind_tunnel.wd180: k",
+       "score": "wind_tunnel.wd180/k",
+       "Count": 15,
+       "R": 0.46324218888867214,
+       "Fac2": 0.26666666666666666,
+       "Fb": 0.8747483341181013,
+       "HitRate": 0.13333333333333333,
+       "coverage": {
+        "scored": 15,
+        "measured": 15
+       }
+      },
+      {
+       "label": "wind_tunnel.wd180: c*",
+       "score": "wind_tunnel.wd180/cstar",
+       "Count": 15,
+       "R": 0.35419060981789885,
+       "Fac2": 0.13333333333333333,
+       "Fb": 1.0832762529352788,
+       "HitRate": 0.06666666666666667,
+       "coverage": {
+        "scored": 15,
+        "measured": 15
+       }
+      }
+     ],
+     "values": {
+      "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/M.csv?v=6fd56831269c",
+      "path": "submissions/eddy3d-of12-nutcap-lifted/M.csv",
+      "media_type": "text/csv",
+      "bytes": 2487,
+      "sha256": "6fd56831269cb64f37b6bd4a186ea7c4eb206a2d7e1fe96d5b1bd30c90e7e604"
+     }
+    }
+   ],
+   "submission_url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted.json",
+   "page": "https://aij.eddy3d.com/community/eddy3d-of12-nutcap-lifted/"
   },
   {
    "slug": "eddy3d-of12-sst-urans",

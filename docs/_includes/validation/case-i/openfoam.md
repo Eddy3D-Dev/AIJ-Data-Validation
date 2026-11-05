@@ -31,8 +31,6 @@ FB is positive when the model is low.
 | k-ω SST | +0.992 | 0.879 | +0.880 | 0.396 | +0.495 | +0.466 | 0.403 | −0.153 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 - $$U$$: R is 0.99 to 1.00 and FAC2 0.85 to 0.88 under all three.
 - The two k-ε closures keep $$k$$ within a factor of two at more than 90 % of the points (FAC2 0.912 and 0.923) and give a concentration with R of 0.94 to 0.96. Under k-ω SST, $$k$$ FAC2 is 0.40 (FB +0.49, model low) and the concentration's R is 0.47.
 - Mean $$k/U_H^2$$ of the approach profile: 0.0006 under k-ω SST, 0.0075 under both k-ε closures.
@@ -52,3 +50,9 @@ FB is positive when the model is low.
 Where along the height the model meets the measurement, station by station.
 
 {% include figure.html name="case-i-openfoam-profiles.png" alt="Vertical profiles, Case I" caption="<strong>Figure 4.</strong> Case I, vertical profiles of $$U/U_H$$ on the centre plane $$y = 0$$ at four stations along the measured lines, measured points against the modelled line, offset by 1 per station; the dashed line is the roof height." %}
+
+### Field maps
+
+The solved velocity on the measured planes, every point drawn on it as a dot coloured by its measured value on the same scale: a dot that stands out from the colour around it is a point the model misses.
+
+{% include figure.html name="case-i-openfoam-field-section.png" alt="Solved field and measured points, Case I, section" caption="<strong>Figure 5.</strong> Case I, the centre plane $$y = 0$$, realizable k-ε: (a) $$u$$ over $$U_H$$; (b) the same with iso-lines every 0.1 and the edge of the reversed flow, $$u = 0$$, dashed; (c) the in-plane speed with streamlines." %}

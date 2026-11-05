@@ -56,8 +56,6 @@ description: "Case I — cube with a roof point source: configuration, frame and
 | Unit of $$C$$ | ppm |
 | Unit of $$c^\ast$$ | dimensionless, $$C/c_0$$ |
 
-{% include nomenclature.md %}
-
 ## Reference data
 
 Source in this repository: [`raw/cases/case-i/RS-w_caseI.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-i/RS-w_caseI.csv) (approach flow: [`raw/cases/case-i/AF_caseI.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-i/AF_caseI.csv)).
@@ -95,8 +93,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `C` | $$C$$ | ppm, mean tracer-gas concentration as published (volume fraction x 1e6 of the released gas diluted in air) |
 | `concentration_ratio` | $$c^\ast$$ | $$C/c_0$$, $$c_0 = \dfrac{q}{U_{\mathrm{ref}} L_{\mathrm{ref}}^2}$$ as the benchmark defines it for the case (manifest cases.\<id\>.normalisation) |
 
-{% include nomenclature.md %}
-
 </details>
 
 ## Inflow
@@ -111,8 +107,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | power law index fitted | 0.115 |
 | power law index paper | 1/7 |
 | Note | derived during cleaning, not published by AIJ; the workbook\'s own $$(z/H)^{1/7}$$ column is within 4.6 % of the measured profile over $$z = 0.02\thinspace\ldots\thinspace 0.7\thinspace\mathrm{m}$$ |
-
-{% include nomenclature.md %}
 
 ## Known data issues
 

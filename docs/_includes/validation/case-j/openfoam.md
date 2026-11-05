@@ -36,8 +36,6 @@ Case J is non-isothermal: a floor held at 45.8 °C under a cooler approach flow 
 | $$c^\ast$$, $$\mathrm{Sc_t}$$ 0.7, without the near-source points | +0.848 | 0.728 | +0.025 | +0.755 | 0.709 | −0.292 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 n is 443 (416 without the 27 points within a quarter of a building height of the source); rk-ε is realizable k-ε and bKε is buoyantKEpsilon.
 
 - **Flow.** $$U$$: $$R = 0.92$$ under both closures, FAC2 0.73 and 0.76; the mean $$U/U_H$$ is 0.465 and 0.477 modelled against 0.564 measured. FB in the wake (rk-ε and bKε): +0.36 and +0.29 in the near wake, +0.48 and +0.43 in the far wake. Reattachment at $$z/H = 0.25\text{ and }0.025$$ is $$1.35\thinspace H$$ and $$1.35\thinspace H$$ (rk-ε) or $$1.35\thinspace H$$ and $$1.56\thinspace H$$ (bKε), against the measured $$0.68\thinspace H$$ and $$0.80\thinspace H$$. Scored against the mean of each mirror pair, the measurement has $$R = 0.99$$ for $$U$$; the $$+y$$ half of the $$z/H = 0.25$$ plane is 11 % slower than the $$-y$$ half (97 pairs, R 0.955).
@@ -66,3 +64,11 @@ n is 443 (416 without the 27 points within a quarter of a building height of the
 Where along the height the model meets the measurement, station by station.
 
 {% include figure.html name="case-j-openfoam-profiles.png" alt="Vertical profiles, Case J" caption="<strong>Figure 4.</strong> Case J, vertical profiles of $$U/U_H$$ on the centre plane $$y = 0$$ at four stations along the measured lines, measured points against the modelled line, offset by 1 per station; the dashed line is the roof height." %}
+
+### Field maps
+
+The solved velocity on the measured planes, every point drawn on it as a dot coloured by its measured value on the same scale: a dot that stands out from the colour around it is a point the model misses.
+
+{% include figure.html name="case-j-umf-field-plan.png" alt="Solved field and measured points, Case J, plan" caption="<strong>Figure 5.</strong> Case J, the horizontal plane $$z = 0.04\thinspace\mathrm{m}$$: (a) $$u$$ over $$U_H$$; (b) the same with iso-lines every 0.1 and the edge of the reversed flow, $$u = 0$$, dashed; (c) the in-plane speed with streamlines." %}
+
+{% include figure.html name="case-j-umf-field-section.png" alt="Solved field and measured points, Case J, section" caption="<strong>Figure 6.</strong> Case J, the centre plane $$y = 0$$: (a) $$u$$ over $$U_H$$; (b) the same with iso-lines every 0.1 and the edge of the reversed flow, $$u = 0$$, dashed; (c) the in-plane speed with streamlines." %}

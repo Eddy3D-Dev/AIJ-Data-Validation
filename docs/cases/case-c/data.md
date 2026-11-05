@@ -55,8 +55,6 @@ description: "Case C — 3 × 3 block array: configuration, frame and units, ref
 | Unit of length | m (model scale) |
 | Unit of velocity | m/s |
 
-{% include nomenclature.md %}
-
 <details markdown="block">
 <summary>Data notes: Frame and wind direction</summary>
 
@@ -106,8 +104,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `Vs` | $$V_{\mathrm{s}}$$ | m/s, mean omnidirectional scalar wind speed (thermistor); Case D also lists $$\lvert\mathbf{U}\rvert$$ of the split-fibre probe under $$V_{\mathrm{s}}$$ for its 33 vector points |
 | `campaign` |  | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
 
-{% include nomenclature.md %}
-
 </details>
 
 ## Inflow
@@ -121,8 +117,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | Power-law exponent, data paper | 0.28 |
 | Turbulence intensity at D | 0.219 |
 | Note | derived during scoping, not published by AIJ |
-
-{% include nomenclature.md %}
 
 <details markdown="block">
 <summary>Interpretation: Inflow fit</summary>

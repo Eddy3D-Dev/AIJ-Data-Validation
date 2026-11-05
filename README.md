@@ -50,20 +50,20 @@ Validation data from the AIJ (Architectural Institute of Japan) benchmark cases�
 **API, APA**
 
 ```text
-Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.3.0) [Data set]. Sustainable Urban Systems Lab. https://aij.eddy3d.com/api/3.3.0/index.json
+Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.10.1) [Data set]. Sustainable Urban Systems Lab. https://aij.eddy3d.com/api/3.10.1/index.json
 ```
 
 **API, BibTeX**
 
 ```bibtex
-@misc{aijuwe_api_3_3_0,
+@misc{aijuwe_api_3_10_1,
   author    = "Karadag, Ilker and Kastner, Patrick",
   title     = "{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}",
   year      = "2026",
-  version   = "3.3.0",
+  version   = "3.10.1",
   publisher = "Sustainable Urban Systems Lab",
-  url       = "https://aij.eddy3d.com/api/3.3.0/index.json",
-  note      = "Data set; data version 09c282705a7e"
+  url       = "https://aij.eddy3d.com/api/3.10.1/index.json",
+  note      = "Data set; data version 5abd0adb307e"
 }
 ```
 
@@ -313,7 +313,10 @@ Reattachment length **$$L_r/H$$ = 1.49**. Mean measured $$W$$ is ~0.01 m/s.
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -329,6 +332,8 @@ Reattachment length **$$L_r/H$$ = 1.49**. Mean measured $$W$$ is ~0.01 m/s.
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -403,7 +408,10 @@ Reattachment length **$$L_r/H$$ = 3.27**.
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -419,6 +427,8 @@ Reattachment length **$$L_r/H$$ = 3.27**.
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -539,7 +549,10 @@ $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ (headline) and as $$\lvert\mathbf{U}\rv
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -555,6 +568,8 @@ $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ (headline) and as $$\lvert\mathbf{U}\rv
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -673,7 +688,10 @@ the array; shifting the cloud by 12.5 mm (5 m full scale) puts points 27 and 28 
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -689,6 +707,8 @@ the array; shifting the cloud by 12.5 mm (5 m full scale) puts points 27 and 28 
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -797,7 +817,10 @@ arrives at 0.998 of the imposed value in both states.
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -813,6 +836,8 @@ arrives at 0.998 of the imposed value in both states.
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -876,7 +901,10 @@ of the 863 pairs the tunnel resolves ($$\lvert\Delta\rvert$$ > 0.05). Method: *M
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -892,6 +920,8 @@ of the 863 pairs the tunnel resolves ($$\lvert\Delta\rvert$$ > 0.05). Method: *M
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -944,7 +974,10 @@ Full reading: [Case F validation](https://aij.eddy3d.com/cases/case-f/validation
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -960,6 +993,8 @@ Full reading: [Case F validation](https://aij.eddy3d.com/cases/case-f/validation
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1016,7 +1051,10 @@ Full reading: [Case G validation](https://aij.eddy3d.com/cases/case-g/validation
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1032,6 +1070,8 @@ Full reading: [Case G validation](https://aij.eddy3d.com/cases/case-g/validation
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1084,7 +1124,10 @@ Full reading: [Case H validation](https://aij.eddy3d.com/cases/case-h/validation
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1100,6 +1143,8 @@ Full reading: [Case H validation](https://aij.eddy3d.com/cases/case-h/validation
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1156,7 +1201,10 @@ Full reading: [Case I validation](https://aij.eddy3d.com/cases/case-i/validation
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1172,6 +1220,8 @@ Full reading: [Case I validation](https://aij.eddy3d.com/cases/case-i/validation
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1230,7 +1280,10 @@ Full reading: [Case J validation](https://aij.eddy3d.com/cases/case-j/validation
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1246,6 +1299,8 @@ Full reading: [Case J validation](https://aij.eddy3d.com/cases/case-j/validation
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1305,7 +1360,10 @@ Full reading: [Case K validation](https://aij.eddy3d.com/cases/case-k/validation
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1321,6 +1379,8 @@ Full reading: [Case K validation](https://aij.eddy3d.com/cases/case-k/validation
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1378,7 +1438,10 @@ Full reading: [Case L validation](https://aij.eddy3d.com/cases/case-l/validation
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1394,6 +1457,8 @@ Full reading: [Case L validation](https://aij.eddy3d.com/cases/case-l/validation
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1454,7 +1519,10 @@ experiments with the same fitted inflow and probed the same measured points, at 
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1470,6 +1538,8 @@ experiments with the same fitted inflow and probed the same measured points, at 
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1511,7 +1581,10 @@ and 88 of Case B's 224.
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1527,6 +1600,8 @@ and 88 of Case B's 224.
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -1571,7 +1646,10 @@ $$U_H$$ with each case's approach-flow file.
 
 <!--nomenclature scores-->
 
-**Nomenclature**
+<details markdown="block">
+  <summary>Nomenclature: scores</summary>
+
+**Scores**
 
 - $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
 - $$R$$ — Pearson correlation coefficient of the pairs
@@ -1587,6 +1665,8 @@ $$U_H$$ with each case's approach-flow file.
 - the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
 - $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
 - $$\theta$$ (floor-referenced temperature)
+
+</details>
 
 <!--/nomenclature-->
 
@@ -2208,7 +2288,7 @@ engine whose status is not `scored` has no result for that case. Quote the `head
 a published score from its pairs.
 
 Regenerate everything with `scripts/build_all.sh` in the pinned image (see *Versions, releases and reproducing
-them*), or the API alone with `pip install --require-hashes -r requirements.lock && python scripts/build_api.py`.
+them*), or the API alone with `uv sync --frozen && uv run python scripts/build_api.py`.
 The build is reproducible byte for byte; CI rebuilds on every push, fails on any difference from what is
 committed, and deploys the site only when the check passes. The point tables come from `clean/`, and the scores
 and pairs from the snapshots in `validation/results/`, each registered in `RUNS` in `scripts/build_api.py` (an
@@ -2223,10 +2303,10 @@ unregistered snapshot stops the build). The changes from 1.0.0 are in `index.jso
 |---|---|
 | [`raw/cases/case-a/`](raw/cases/case-a/) … `case-m/` | each case as published on Zenodo, plus the repository's own working files for it (`raw/` is what was published, `clean/` what this repository re-releases) |
 | `clean/` | the cleaned re-release of all thirteen cases in one schema, rebuilt by [`clean/build.py`](clean/build.py); [`clean/sources/`](clean/sources/) mirrors the Zenodo files the case folders lack |
-| `validation/` | Eddy3D's scores and per-point pairs (`results/`), the figures (`figures/`, geometry renders in `figures/geometry/`), and the scripts that draw them (`plot_*.py`, `render_geometry.py`; dependencies in `requirements.txt`) |
+| `validation/` | Eddy3D's scores and per-point pairs (`results/`), the figures (`figures/`, geometry renders in `figures/geometry/`), and the scripts that draw them (`plot_*.py`, `render_geometry.py`; dependencies in `pyproject.toml`) |
 | `docs/` | the Jekyll site; `docs/api/` is the static API (the latest alias, `versions.json`, and one frozen `docs/api/<release>/` per release), generated by `scripts/build_api.py`, as are `docs/cases/` and the generated includes |
 | `papers/` | `papers/README.md` only: the papers are cited and linked by DOI; no PDFs are stored in this repository |
-| `scripts/` | the API builder (`build_api.py`), its JSON Schemas (`api_schemas.py`), the shared data reader (`aijdata.py`), the check that every Markdown file renders the same on GitHub and in Jekyll (`check_markdown.py`) and the pinned build requirements |
+| `scripts/` | the API builder (`build_api.py`), its JSON Schemas (`api_schemas.py`), the shared data reader (`aijdata.py`), the check that every Markdown file renders the same on GitHub and in Jekyll (`check_markdown.py`) and the pinned build requirements (`pyproject.toml`, `uv.lock`) |
 | `CITATION.cff` | the citation of this dataset, which GitHub's *Cite this repository* reads, with the data paper, the guidelines and each case's Zenodo dataset as references; generated from `scripts/citation.py` |
 | `.zenodo.json` | the metadata Zenodo's GitHub integration puts on the record of a release; generated from `scripts/citation.py` |
 
@@ -2303,7 +2383,7 @@ number. The API's JSON contract has its own version, `schema_version` (see the A
 **Reproduce a release.** Every generated file (the cleaned tables, the figures and geometry renders, the API and the
 generated pages) is committed, and one script regenerates all of them in one pinned environment: Python 3.12.12
 in a container image pinned by digest ([`scripts/BUILD_IMAGE`](scripts/BUILD_IMAGE)) and every package pinned by hash
-([`requirements.lock`](requirements.lock), compiled from [`requirements.txt`](requirements.txt)):
+([`uv.lock`](uv.lock), locked by `uv` from [`pyproject.toml`](pyproject.toml)):
 
 ```bash
 git clone https://github.com/Eddy3D-Dev/AIJ-Data-Validation

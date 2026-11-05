@@ -3,7 +3,7 @@
 The reference is the house style for publication figures: a bold title, panels lettered a, b, c in bold at
 the upper left, a full black frame with minor ticks, major grid lines strong enough to read values off,
 units in square brackets, the MEASUREMENT drawn in black and each model in its own fixed colour, and one
-frameless legend centred under the panels. It is built on ultraplot 2.7.1 (requirements.txt), and what
+frameless legend centred under the panels. It is built on ultraplot 2.7.1 (pyproject.toml), and what
 "ultraplot standard" means below was MEASURED from that version in the pinned container, not recalled:
 
   ultraplot's defaults    font TeX Gyre Heros (a Helvetica clone shipped inside the package) at 9 pt; frame

@@ -1,0 +1,389 @@
+{
+ "$schema": "https://aij.eddy3d.com/api/3.4.0/schemas/case.schema.json",
+ "schema_version": "2.5.0",
+ "data_version": "2ad04a58d5808675c1db13eb498dadb8fedd828f9e6ef16904bc8f3c520ac987",
+ "license": "CC-BY-4.0",
+ "id": "G",
+ "slug": "case-g",
+ "title": "Case G — flow behind a tree belt",
+ "summary": "Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m × 2 m × 7 m with a 1.2 m gap below): normalised mean speed and k at 28 points on the centre section (sonic anemometers).",
+ "configuration": {
+  "belt": "Tsuiji-matsu (Japanese black pine), trimmed to a rectangle; 74 m long (y), 2 m deep (x), 7 m tall, 1.2 m bottom gap; shading rate 81 % after pruning (data paper section 3.7)",
+  "H_m": 7.0,
+  "depth_m": 2.0,
+  "width_m": 74.0,
+  "gap_m": 1.2,
+  "campaign": "field (full scale)",
+  "location": "Taisha-machi, Hikawa-gun, Shimane, Japan; west end of an elementary-school playground",
+  "wind_directions_deg": [
+   0
+  ],
+  "measurement_lines": "0.25 H, 0.5 H, 1 H, 2 H, 3 H, 4 H, 5 H behind the belt = x 1.75, 3.5, 7, 14, 21, 28, 35 m (H = 7 m)",
+  "measurement_heights_m": [
+   1.5,
+   3.0,
+   4.5,
+   6.0
+  ],
+  "points": 28,
+  "instrument": "3-D ultrasonic anemometers (KAIJO DA-600 with TR-90Tx) at four heights on a movable tower, 5 Hz, 10 min or more per line (26 Dec 2000); approach flow 120 min (28 Dec 2000) at 1.5, 3, 6, 9 m",
+  "normalisation": "velocity_ratio = U/UH and k_ratio = k/UH^2, UH = the mean wind speed at 7 m during each measurement period (interpolated with the approach flow's power law, index 0.22); nothing is published in m/s",
+  "approach_flow_normalisation": "AF_caseG.csv is U/Ub and k/Ub^2 with Ub = U at 9 m; divide by UH/Ub = 0.946 (power law 0.22) for the table's normalisation",
+  "scale_note": "full scale: a field observation, there is no model"
+ },
+ "configurations": [
+  {
+   "config": "default",
+   "campaign": "field",
+   "instrument": "sonic_anemometer",
+   "wind_direction_deg": 0.0,
+   "points": 28
+  }
+ ],
+ "quantities": [
+  "velocity_ratio",
+  "k_ratio"
+ ],
+ "units": {
+  "length": "m (full scale)",
+  "velocity_ratio": "dimensionless, U/UH",
+  "k_ratio": "dimensionless, k/UH^2"
+ },
+ "frame": {
+  "origin": "the leeward face of the tree belt at ground level, on the vertical section through the belt's centre",
+  "x": "+x downwind: the belt occupies x in [-2, 0] m, the measurement lines lie behind it at x = 1.75 ... 35 m",
+  "y": "+y along the belt (y in [-37, 37] m); every point is on y = 0",
+  "z": "+z up; the belt spans z in [1.2, 7] m; points at z = 1.5, 3, 4.5, 6 m",
+  "wind_direction_rotation": "one direction, toward +x (perpendicular to the belt); the field wind's angle to the belt normal is not published",
+  "lateral_sign_applied": 1,
+  "coordinate_scale_applied": 1.0
+ },
+ "inflow_fit": {
+  "method": "power law on the four published heights (1.5, 3, 6, 9 m) of U/Ub; the readme states the index 0.22",
+  "power_law_index_fitted": 0.2073,
+  "power_law_index_stated": 0.22,
+  "UH_over_Ub_power_law_0.22": 0.9462,
+  "UH_over_Ub_log_interpolation": 0.938,
+  "note": "derived during cleaning, not published as a fit; the profile carries 2 decimals, so the fitted index is good to about +/-0.01"
+ },
+ "approach_flow": {
+  "source": "clean/cases/G/approach_flow.csv",
+  "units": {
+   "z": "m",
+   "U": "dimensionless, U/Ub (Ub = mean speed at 9 m, not published in m/s)",
+   "k": "dimensionless, k/Ub^2"
+  },
+  "rows": [
+   {
+    "z": 1.5,
+    "U": 0.69,
+    "k": 0.28
+   },
+   {
+    "z": 3.0,
+    "U": 0.77,
+    "k": 0.24
+   },
+   {
+    "z": 6.0,
+    "U": 0.9,
+    "k": 0.23
+   },
+   {
+    "z": 9.0,
+    "U": 1.0,
+    "k": 0.2
+   }
+  ],
+  "csv": {
+   "url": "https://aij.eddy3d.com/api/3.4.0/cases/G/approach_flow.csv?v=45a11857cdf9",
+   "path": "cases/G/approach_flow.csv",
+   "media_type": "text/csv",
+   "bytes": 59,
+   "sha256": "45a11857cdf9f7b02d4bf81103178099cebe416b53d20741255da7064f97ff40"
+  }
+ },
+ "inflow": {
+  "benchmark_data": {
+   "approach_flow_csv": {
+    "url": "https://aij.eddy3d.com/api/3.4.0/cases/G/approach_flow.csv?v=45a11857cdf9",
+    "path": "cases/G/approach_flow.csv",
+    "media_type": "text/csv",
+    "bytes": 59,
+    "sha256": "45a11857cdf9f7b02d4bf81103178099cebe416b53d20741255da7064f97ff40"
+   },
+   "columns": [
+    "z",
+    "U",
+    "k"
+   ],
+   "units": {
+    "z": "m",
+    "U": "dimensionless, U/Ub (Ub = mean speed at 9 m, not published in m/s)",
+    "k": "dimensionless, k/Ub^2"
+   },
+   "rows": 4,
+   "fit": {
+    "method": "power law on the four published heights (1.5, 3, 6, 9 m) of U/Ub; the readme states the index 0.22",
+    "power_law_index_fitted": 0.2073,
+    "power_law_index_stated": 0.22,
+    "UH_over_Ub_power_law_0.22": 0.9462,
+    "UH_over_Ub_log_interpolation": 0.938,
+    "note": "derived during cleaning, not published as a fit; the profile carries 2 decimals, so the fitted index is good to about +/-0.01"
+   },
+   "note": "the measured profile and the fit of it are the benchmark's data as cleaned here; everything under `recommended` is a choice"
+  },
+  "recommended": {
+   "status": "RECOMMENDED by this repository (not part of the benchmark): no log law fits this case (inflow_fit says why); use the measured approach-flow profile as a tabulated inlet (approach_flow.csv). Any inlet may be submitted; say which in submission.yaml",
+   "profile": "U(z) and, where published, k(z) tabulated from approach_flow.csv; epsilon = Cmu^0.5 k dU/dz where k is published, else from your own closure",
+   "kappa": 0.41,
+   "Cmu": 0.09,
+   "U_ref_m_s": null,
+   "z_ref_m": 7.0,
+   "openfoam": "fixedProfile (OpenFOAM.org) with the table, or timeVaryingMappedFixedValue: cases/{id}/inflow_openfoam.txt holds the table"
+  },
+  "flow_direction": {
+   "convention": "along_x",
+   "meaning": "+x is along the wind at WD = 0: flowDir (1 0 0); another WD rotates it about +z by the case's rotation sense (frame.wind_direction_rotation)",
+   "wind_directions_deg": [
+    0.0
+   ]
+  },
+  "eddy3d_runs": [
+   {
+    "run_id": "G.openfoam12-realizableKE.open-field",
+    "engine": "openfoam12-realizableKE",
+    "inflow": {
+     "kind": "wind.inlet = manual: the workbook's own inflow (LF_caseG.xls, Geometry sheet, Fig. 1 and the CFD note)",
+     "profile": "U = 5.6 (z/9)^0.22 m/s, k = 3.02 m2/s2 at every height, epsilon = Cmu^0.5 k |dU/dz| (Pk = epsilon)",
+     "uH": 5.298784335134799,
+     "floor": "smooth (nutkWallFunction): the tabulated inlet's floor; the site's z0 (0.030 m from a log-law fit of AF_caseG.csv) is not represented"
+    },
+    "mesh.cells": 90576,
+    "UhImposed": 5.298784335134799
+   },
+   {
+    "run_id": "G.openfoam12-realizableKE.pine",
+    "engine": "openfoam12-realizableKE",
+    "inflow": {
+     "kind": "wind.inlet = manual: the workbook's own inflow (LF_caseG.xls, Geometry sheet, Fig. 1 and the CFD note)",
+     "profile": "U = 5.6 (z/9)^0.22 m/s, k = 3.02 m2/s2 at every height, epsilon = Cmu^0.5 k |dU/dz| (Pk = epsilon)",
+     "uH": 5.298784335134799,
+     "floor": "smooth (nutkWallFunction): the tabulated inlet's floor; the site's z0 (0.030 m from a log-law fit of AF_caseG.csv) is not represented"
+    },
+    "mesh.cells": 90576,
+    "UhImposed": 5.298784335134799
+   },
+   {
+    "run_id": "G.openfoam12-realizableKE.conifer",
+    "engine": "openfoam12-realizableKE",
+    "inflow": {
+     "kind": "wind.inlet = manual: the workbook's own inflow (LF_caseG.xls, Geometry sheet, Fig. 1 and the CFD note)",
+     "profile": "U = 5.6 (z/9)^0.22 m/s, k = 3.02 m2/s2 at every height, epsilon = Cmu^0.5 k |dU/dz| (Pk = epsilon)",
+     "uH": 5.298784335134799,
+     "floor": "smooth (nutkWallFunction): the tabulated inlet's floor; the site's z0 (0.030 m from a log-law fit of AF_caseG.csv) is not represented"
+    },
+    "mesh.cells": 90576,
+    "UhImposed": 5.298784335134799
+   },
+   {
+    "run_id": "G.openfoam12-realizableKE.screen",
+    "engine": "openfoam12-realizableKE",
+    "inflow": {
+     "kind": "wind.inlet = manual: the workbook's own inflow (LF_caseG.xls, Geometry sheet, Fig. 1 and the CFD note)",
+     "profile": "U = 5.6 (z/9)^0.22 m/s, k = 3.02 m2/s2 at every height, epsilon = Cmu^0.5 k |dU/dz| (Pk = epsilon)",
+     "uH": 5.298784335134799,
+     "floor": "smooth (nutkWallFunction): the tabulated inlet's floor; the site's z0 (0.030 m from a log-law fit of AF_caseG.csv) is not represented"
+    },
+    "mesh.cells": 90576,
+    "UhImposed": 5.298784335134799
+   },
+   {
+    "run_id": "G.openfoam12-realizableKE.half-belt-conifer",
+    "engine": "openfoam12-realizableKE",
+    "inflow": {
+     "kind": "wind.inlet = manual: the workbook's own inflow (LF_caseG.xls, Geometry sheet, Fig. 1 and the CFD note)",
+     "profile": "U = 5.6 (z/9)^0.22 m/s, k = 3.02 m2/s2 at every height, epsilon = Cmu^0.5 k |dU/dz| (Pk = epsilon)",
+     "uH": 5.298784335134799,
+     "floor": "smooth (nutkWallFunction): the tabulated inlet's floor; the site's z0 (0.030 m from a log-law fit of AF_caseG.csv) is not represented"
+    },
+    "mesh.cells": 625252,
+    "UhImposed": 5.298784335134799
+   }
+  ],
+  "domain": "the extents, blockage and cell sizes of Eddy3D's domains are not in its snapshots and are not stated here; mesh.cells and the scale are, where the snapshot has them"
+ },
+ "points": {
+  "url": "https://aij.eddy3d.com/api/3.4.0/cases/G/points.json",
+  "csv": {
+   "url": "https://aij.eddy3d.com/api/3.4.0/cases/G/points.csv?v=914883bf7fec",
+   "path": "cases/G/points.csv",
+   "media_type": "text/csv",
+   "bytes": 2246,
+   "sha256": "914883bf7fec7e7c3a0345a57694b2b14edf34e6d2786e9083b9459fe4737e19"
+  },
+  "source": "clean/cases/G/points.csv",
+  "rows": 28,
+  "distinct_points": 28,
+  "columns": [
+   "point_id",
+   "config",
+   "instrument",
+   "wind_direction_deg",
+   "x",
+   "y",
+   "z",
+   "velocity_ratio",
+   "campaign",
+   "k_ratio"
+  ],
+  "counts": {
+   "config": {
+    "default": 28
+   },
+   "instrument": {
+    "sonic_anemometer": 28
+   },
+   "wind_direction_deg": {
+    "0.0": 28
+   }
+  },
+  "nulls": {},
+  "bbox_min": [
+   1.75,
+   0.0,
+   1.5
+  ],
+  "bbox_max": [
+   35.0,
+   0.0,
+   6.0
+  ]
+ },
+ "probes": {
+  "csv": {
+   "url": "https://aij.eddy3d.com/api/3.4.0/cases/G/probes.csv?v=219c5a86d3e8",
+   "path": "cases/G/probes.csv",
+   "media_type": "text/csv",
+   "bytes": 2046,
+   "sha256": "219c5a86d3e86e1de0e05c9b45caf999ca7345a1a6c78bbf24be3fac681b1b74"
+  },
+  "rows": 28,
+  "columns": [
+   "point_id",
+   "config",
+   "campaign",
+   "instrument",
+   "run",
+   "wind_direction_deg",
+   "x",
+   "y",
+   "z",
+   "scored_as"
+  ],
+  "columns_meaning": "the key columns of a scored file (point_id with config, campaign, instrument, run and wind_direction_deg as the case has them), x, y, z in m (case frame), and scored_as: the families the row is scored in (vector, k, thermistor_bracket, concentration, theta, joined by +)"
+ },
+ "scoring": {
+  "U_ref_m_s": null,
+  "U_ref_meaning": "the table holds U/U_H and k/U_H^2 with U_H the wind at the tree height (7 m); give ratios over your own U(7 m) upwind",
+  "theta": null,
+  "scored_as": {
+   "vector": "U, V, W and the speed |U| against the split-fibre, LDV or hot-wire components (velocity.U, velocity.V, velocity.W, speed)",
+   "k": "the turbulent kinetic energy (k)",
+   "thermistor_bracket": "a mean scalar speed (thermistor, cup or sonic anemometer) against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar)",
+   "concentration": "the dimensionless concentration c* = C/c0 (cstar)",
+   "theta": "the floor-referenced temperature fraction (theta)"
+  },
+  "value_columns": [
+   "U",
+   "V",
+   "W",
+   "speed",
+   "k",
+   "cstar",
+   "theta",
+   "T"
+  ],
+  "key_columns": [
+   "config",
+   "campaign",
+   "instrument",
+   "run",
+   "wind_direction_deg",
+   "point_id"
+  ],
+  "conventions": "velocities and the speed over U_ref, k over U_ref^2 (Cases E, F and G publish ratios already); U, V, W, |U| and the thermistor bracket scored as signed velocities (FAC2's ratio keeps the sign; hit rate D = 0.25, W = 0.05); k by the plain definitions (D = 0.25 only); a thermistor, cup or sonic reading (a mean scalar speed) scored against |U| (vs.vector) and sqrt(|U|^2 + 2k) (vs.scalar), the two ends of its bracket; c* = C/c0 with one detection limit per case, 1e-3 of the largest measured value; theta = (T_floor - T)/(T_floor - T_H) scored like a positive velocity. The same conventions score the served Eddy3D results (docs/validation/method.md).",
+  "tool": "uv run python validation/score_submissions.py <folder>, from a checkout of the repository (pyproject.toml)",
+  "metric_meaning": {
+   "Count": "number of measured points scored",
+   "MeanObserved": "mean of the measured, normalised quantity",
+   "MeanPredicted": "mean of the modelled, normalised quantity",
+   "Fb": "fractional bias, 2 (mean_obs - mean_pred) / (mean_obs + mean_pred); positive = model low",
+   "Nmse": "normalised mean square error",
+   "Nad": "normalised absolute difference",
+   "Fac2": "fraction of points within a factor of two (harsh near zero for sign-changing V and W)",
+   "HitRate": "fraction of points within D = 0.25 relative or W = 0.05 U_H absolute",
+   "Mg": "geometric mean bias",
+   "Vg": "geometric variance",
+   "GeometricPairs": "pairs with both values positive (used for Mg/Vg)",
+   "R": "Pearson correlation coefficient",
+   "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive; Fb, Nmse and Nad of a signed velocity component of Case H or I whose observed and predicted means are not both positive)"
+  }
+ },
+ "geometry": {
+  "url": "https://aij.eddy3d.com/api/3.4.0/cases/G/geometry.json",
+  "files": [
+   {
+    "configuration": "default",
+    "url": "https://aij.eddy3d.com/api/3.4.0/cases/G/geometry.stl?v=09d23c794155",
+    "triangles": 12,
+    "watertight": true
+   }
+  ]
+ },
+ "validation": {
+  "url": "https://aij.eddy3d.com/api/3.4.0/cases/G/validation.json",
+  "status": "scored",
+  "engines": {
+   "openfoam12-realizableKE": "scored",
+   "openlb": "pending",
+   "fluidx3d": "pending",
+   "ml-surrogate": "pending"
+  }
+ },
+ "known_issues": [
+  "FIELD data: full-scale metres, no model, and nothing in m/s. The table carries U/UH (velocity_ratio) and k/UH^2 (k_ratio), UH = the mean speed at 7 m during each period; the approach-flow table carries U/Ub and k/Ub^2 (Ub = U at 9 m) in its U and k columns, which are dimensionless here.",
+  "The readme lists the heights of the lee measurement as 1.5, 3.0, 6.0, 9.0 m; the table, the workbook, the drawing and the data paper have 1.5, 3, 4.5, 6 m.",
+  "The tree belt is a porous canopy (shading rate 81 % after pruning): the served geometry is its 2 m × 74 m × 7 m envelope with the 1.2 m gap, and a solver needs a canopy (drag) model.",
+  "The approach profile (28 Dec 2000, 120 min) and the lee measurements (26 Dec 2000, 10 min or more) are from different days. Behind the belt k/UH^2 is 0.040-0.072 at 5 H, 3-8 times below the approach flow's 0.26-0.31 at the same heights; the files do not say why.",
+  "Only 28 numbers per quantity exist, on one centre section, one time-average each, with no repeats and no uncertainty.",
+  "The wind direction relative to the belt normal during the measurement is not published; the case is two-dimensional by assumption."
+ ],
+ "people": {
+  "data_collectors": [
+   "Yasuo Kurotani (Shimane University)",
+   "Nobuyoshi Kiyota (Hiroshima Institute of Technology)"
+  ],
+  "editors_distributors": [
+   "Yoshihide Tominaga (Niigata Institute of Technology)",
+   "Hideki Kikumoto (The University of Tokyo)",
+   "Tsubasa Okaze (Institute of Science Tokyo)"
+  ],
+  "contact": "Yoshihide Tominaga <tominaga@abe.niit.ac.jp>"
+ },
+ "doi": "10.5281/zenodo.15589666",
+ "doi_note": "The readme and the data paper name this one DOI; no separate version DOI is stated.",
+ "citation_requested": "Kurotani, Y., Kiyota, N., Kobayashi, S. (2001). Windbreak effect of Tsuijimatsu in Izumo Part. 2. Summaries of technical papers of Annual Meeting, Architectural Institute of Japan, D-2 Environmental engineering II, 745-746 (in Japanese).",
+ "citation": {
+  "apa": "Kurotani, Y., Kiyota, N., Tominaga, Y., Kikumoto, H., & Okaze, T. (2025). AIJ UWE Benchmark Dataset – Case G (Tree): Field Observation for Flow behind Tree Belt [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15589666",
+  "bibtex": "@misc{aijuwe_case_g,\n  author    = \"Kurotani, Yasuo and Kiyota, Nobuyoshi and Tominaga, Yoshihide and Kikumoto, Hideki and Okaze, Tsubasa\",\n  title     = \"{AIJ UWE Benchmark Dataset -- Case G (Tree): Field Observation for Flow behind Tree Belt}\",\n  year      = \"2025\",\n  publisher = \"Zenodo\",\n  doi       = \"10.5281/zenodo.15589666\",\n  url       = \"https://doi.org/10.5281/zenodo.15589666\",\n  note      = \"Data set\"\n}"
+ },
+ "files_in_repository": {
+  "folder": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/tree/main/raw/cases/case-g",
+  "reference": "raw/cases/case-g/RS_caseG.csv",
+  "approach_flow": "raw/cases/case-g/AF_caseG.csv",
+  "readme": "raw/cases/case-g/readme_caseG.md"
+ },
+ "render": "https://aij.eddy3d.com/assets/geometry/case-g.png",
+ "page": "https://aij.eddy3d.com/cases/case-g/"
+}

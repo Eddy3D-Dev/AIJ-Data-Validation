@@ -43,8 +43,6 @@ Isolated 1:4:4 slab, velocity field (split-fibre hot wire).
 | ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | -0.24 … +0.01 | 0.36 … 0.46 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 {: .warning-title }
 > Before you compare
 >

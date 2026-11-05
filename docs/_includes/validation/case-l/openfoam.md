@@ -43,8 +43,6 @@ Case L is non-isothermal: a floor held at 45.0 °C under a cooler approach flow 
 | $$U$$, y-symmetric ceiling (control) | +0.984 | 0.986 | +0.000 | 0.860 | 292 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 The 51 points at $$z = 4\thinspace\mathrm{mm}$$ lie inside the model's first fine cell (0.75 m, 0.4 m at 1:100), a wall-function cell; the 242 points at or above 30 mm are scored separately.
 
 - **Flow.** $$U$$: $$R = 0.92$$, and the mean $$U/U_H$$ is 0.499 modelled against 0.654 measured; at or above 30 mm R is 0.90 and FAC2 0.80. Against the undisturbed approach column, the model's R is higher ($$U$$: 0.918 against 0.861; $$\theta$$: 0.936 against 0.925). The model's mean $$U/U_H$$ in the streets is 0.045 below 30 mm and 1.11 above 110 mm, against the tunnel's 0.297 and 1.068. $$V$$ and $$W$$: R is −0.04 and −0.03, and with the sign of $$V$$ flipped it is +0.04.
@@ -67,3 +65,11 @@ The 51 points at $$z = 4\thinspace\mathrm{mm}$$ lie inside the model's first fin
 Where along the height the model meets the measurement, station by station.
 
 {% include figure.html name="case-l-openfoam-profiles.png" alt="Vertical profiles, Case L" caption="<strong>Figure 3.</strong> Case L, vertical profiles of $$U/U_H$$ on the centre plane $$y = 0$$ at four stations along the measured lines, measured points against the modelled line, offset by 1 per station; the dashed line is the roof height." %}
+
+### Field maps
+
+The solved velocity on the measured planes, every point drawn on it as a dot coloured by its measured value on the same scale: a dot that stands out from the colour around it is a point the model misses.
+
+{% include figure.html name="case-l-umf-field-plan.png" alt="Solved field and measured points, Case L, plan" caption="<strong>Figure 4.</strong> Case L, the horizontal plane $$z = 0.01\thinspace\mathrm{m}$$: (a) $$u$$ over $$U_H$$; (b) the same with iso-lines every 0.1 and the edge of the reversed flow, $$u = 0$$, dashed; (c) the in-plane speed with streamlines." %}
+
+{% include figure.html name="case-l-umf-field-section.png" alt="Solved field and measured points, Case L, section" caption="<strong>Figure 5.</strong> Case L, the centre plane $$y = 0$$: (a) $$u$$ over $$U_H$$; (b) the same with iso-lines every 0.1 and the edge of the reversed flow, $$u = 0$$, dashed; (c) the in-plane speed with streamlines." %}

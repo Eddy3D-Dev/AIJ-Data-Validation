@@ -1,7 +1,7 @@
 ---
 title: "OpenFOAM pimpleFoam (Eddy3D Outdoor case writer) 12"
 parent: "Community results"
-nav_order: 5
+nav_order: 6
 has_children: false
 generated: true
 description: "OpenFOAM pimpleFoam (Eddy3D Outdoor case writer) 12: a community submission scored against the AIJ cases by this repository's build."
@@ -38,5 +38,3 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | $$\lvert\mathbf{U}\rvert$$ | +0.924 | 0.823 | +0.099 | 0.720 | 186 | 186/186 |
 | $$k$$ | +0.626 | 0.694 | +0.453 | 0.392 | 186 | 186/186 |
 {: .scores }
-
-{% include nomenclature-scores.md %}

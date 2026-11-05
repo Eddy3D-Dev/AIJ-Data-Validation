@@ -23,8 +23,6 @@ An Eddy3D production run solved on 2026-10-18, realizable k-ε at numerics level
 | $$c^\ast$$, y-symmetric ceiling (control) | +0.997 | 0.995 | +0.000 | 0.793 | 203 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 FB is positive when the model is low, and is left out (—) for a signed component whose measured and modelled means are not both positive.
 
 - **Velocity.** $$U$$: $$R = 0.96$$, FAC2 0.59; the mean $$U/U_H$$ is 0.272 modelled against 0.502 measured (FB +0.59). FB by region: +0.35 over the roofs (31 points, FAC2 1.00, R +0.06), +0.79 in the streets along the wind (44 points, R +0.997, FAC2 0.34) and +0.78 in the streets across it (128 points, R +0.95, FAC2 0.57). Both sides are divided by 2.33 m/s; the solved $$U$$ at $$z = H$$ is 0.85 of that.
@@ -51,3 +49,11 @@ FB is positive when the model is low, and is left out (—) for a signed compone
 Where along the height the model meets the measurement, station by station.
 
 {% include figure.html name="case-k-openfoam-profiles.png" alt="Vertical profiles, Case K" caption="<strong>Figure 3.</strong> Case K, vertical profiles of $$U/U_H$$ on the centre plane $$y = 0$$ at four stations along the measured lines, measured points against the modelled line, offset by 1 per station; the dashed line is the roof height." %}
+
+### Field maps
+
+The solved velocity on the measured planes, every point drawn on it as a dot coloured by its measured value on the same scale: a dot that stands out from the colour around it is a point the model misses.
+
+{% include figure.html name="case-k-openfoam-field-plan.png" alt="Solved field and measured points, Case K, plan" caption="<strong>Figure 4.</strong> Case K, the horizontal plane $$z = 0.01\thinspace\mathrm{m}$$: (a) $$u$$ over $$U_H$$; (b) the same with iso-lines every 0.1 and the edge of the reversed flow, $$u = 0$$, dashed; (c) the in-plane speed with streamlines." %}
+
+{% include figure.html name="case-k-openfoam-field-section.png" alt="Solved field and measured points, Case K, section" caption="<strong>Figure 5.</strong> Case K, the centre plane $$y = 0$$: (a) $$u$$ over $$U_H$$; (b) the same with iso-lines every 0.1 and the edge of the reversed flow, $$u = 0$$, dashed; (c) the in-plane speed with streamlines." %}

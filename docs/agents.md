@@ -66,7 +66,7 @@ names in `$schema`.
 
 `GET /api/cases/{id}/probes.csv` is the list of points to probe, and `scoring` and `inflow` in `/api/cases/{id}.json` are
 the constants and the inlet contract. `/api/cases/{id}/inflow_openfoam.txt` is that inlet as OpenFOAM
-files. `python validation/score_submissions.py <folder>`, from a checkout, scores a folder of your values. The walk is [Validate your own solver]({{ '/byos/' | relative_url }});
+files. `uv run python validation/score_submissions.py <folder>`, from a checkout, scores a folder of your values. The walk is [Validate your own solver]({{ '/byos/' | relative_url }});
 submitted results are served at `/api/submissions.json` and shown on [Community results]({{ '/community/' | relative_url }}),
 apart from Eddy3D's own.
 

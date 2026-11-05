@@ -1,7 +1,7 @@
 ---
 title: "OpenFOAM simpleFoam (Eddy3D Outdoor case writer) 12"
 parent: "Community results"
-nav_order: 6
+nav_order: 7
 has_children: false
 generated: true
 description: "OpenFOAM simpleFoam (Eddy3D Outdoor case writer) 12: a community submission scored against the AIJ cases by this repository's build."
@@ -40,5 +40,3 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | $$W$$ | +0.708 | 0.398 | -1.501 | 0.801 | 186 | 186/186 |
 | $$\lvert\mathbf{U}\rvert$$ | +0.940 | 0.876 | +0.144 | 0.634 | 186 | 186/186 |
 {: .scores }
-
-{% include nomenclature-scores.md %}

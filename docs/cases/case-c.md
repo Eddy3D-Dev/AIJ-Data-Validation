@@ -45,8 +45,6 @@ description: "Case C — 3 × 3 block array: 3 x 3 array of 0.20 m cubes, centre
 | ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | +0.07 … +0.21 | 0.44 … 0.88 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 {: .warning-title }
 > Before you compare
 >

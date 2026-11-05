@@ -57,8 +57,6 @@ description: "Case G — flow behind a tree belt: configuration, frame and units
 | Unit of $$U/U_{\mathrm{ref}}$$ | dimensionless, $$U/U_H$$ |
 | Unit of $$k/U_{\mathrm{ref}}^2$$ | dimensionless, $$k/U_H^2$$ |
 
-{% include nomenclature.md %}
-
 ## Reference data
 
 Source in this repository: [`raw/cases/case-g/RS_caseG.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-g/RS_caseG.csv) (approach flow: [`raw/cases/case-g/AF_caseG.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-g/AF_caseG.csv)).
@@ -89,8 +87,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `campaign` |  | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
 | `k_ratio` | $$k/U_{\mathrm{ref}}^2$$ | $$k/U_{\mathrm{ref}}^2$$ where the dataset publishes only normalised values (Case G; $$U_{\mathrm{ref}}$$ = $$U$$ at the tree height) |
 
-{% include nomenclature.md %}
-
 </details>
 
 ## Inflow
@@ -103,8 +99,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | $$U_H$$ over $$U_b$$ power law 0.22 | 0.9462 |
 | $$U_H$$ over $$U_b$$ log interpolation | 0.938 |
 | Note | derived during cleaning, not published as a fit; the profile carries 2 decimals, so the fitted index is good to about +/-0.01 |
-
-{% include nomenclature.md %}
 
 ## Known data issues
 

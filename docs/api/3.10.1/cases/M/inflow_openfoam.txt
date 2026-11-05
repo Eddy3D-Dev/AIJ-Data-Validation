@@ -1,0 +1,566 @@
+==== 0/U
+/*--------------------------------*- C++ -*----------------------------------*\
+  cases/M/inflow_openfoam.txt of the AIJ UWE API (release 3.10.1), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  RECOMMENDED inlet (this repository's choice, not the benchmark's): the measured approach-flow profile (approach_flow.csv, the benchmark's data) as a table; U is m/s, z is m. flowDir is the case's wind direction 175 deg by the convention x_north_y_west (cases/M.json inflow.flow_direction); the case has 3 direction(s): rotate flowDir for another.
+  OpenFOAM 12 (openfoam.org) syntax. ESI OpenFOAM v2xxx: the three atmBoundaryLayerInlet* conditions and nutkAtmRoughWallFunction take the same entries there; fixedProfile is openfoam.org only (use timeVaryingMappedFixedValue or codedFixedValue).
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+dimensions      [0 1 -1 0 0 0 0];
+internalField   uniform (0 0 0);
+boundaryField
+{
+    inlet
+    {
+        type            fixedProfile;
+        direction       (0 0 1);
+        origin          0;
+        profile         table
+        (
+            (3 (1.22532 0.107202 0))
+            (6 (1.40463 0.12289 0))
+            (9 (1.67361 0.146422 0))
+            (12 (1.99239 0.174311 0))
+            (15 (2.3311 0.203944 0))
+            (18 (2.6698 0.233577 0))
+            (21 (2.82919 0.247522 0))
+            (24 (3.07824 0.269311 0))
+            (27 (3.13801 0.274541 0))
+            (30 (3.10813 0.271926 0))
+            (36 (3.30737 0.289357 0))
+            (42 (3.52653 0.308531 0))
+            (48 (3.666 0.320733 0))
+            (54 (3.72577 0.325962 0))
+            (60 (3.81543 0.333806 0))
+            (72 (3.90508 0.341651 0))
+            (84 (4.09436 0.35821 0))
+            (96 (4.23383 0.370412 0))
+            (108 (4.34341 0.379999 0))
+            (120 (4.37329 0.382614 0))
+            (132 (4.47291 0.391329 0))
+            (144 (4.65223 0.407017 0))
+            (156 (4.68212 0.409632 0))
+            (168 (4.89132 0.427935 0))
+            (180 (4.86143 0.42532 0))
+            (192 (4.96105 0.434036 0))
+            (204 (5.07063 0.443623 0))
+            (216 (5.22006 0.456696 0))
+            (228 (5.26987 0.461054 0))
+            (240 (5.35953 0.468898 0))
+            (252 (5.40934 0.473256 0))
+            (264 (5.42926 0.474999 0))
+            (276 (5.55877 0.486329 0))
+            (288 (5.58865 0.488944 0))
+            (300 (5.58865 0.488944 0))
+            (312 (5.69823 0.498531 0))
+            (324 (5.64842 0.494173 0))
+            (336 (5.65839 0.495045 0))
+            (348 (5.63846 0.493302 0))
+            (360 (5.6285 0.49243 0))
+        );
+    }
+    outlet          { type inletOutlet; inletValue uniform (0 0 0); value $internalField; }
+    ground          { type noSlip; }
+    buildings       { type noSlip; }
+    top             { type slip; }
+    sides           { type slip; }
+}
+
+==== 0/k
+/*--------------------------------*- C++ -*----------------------------------*\
+  cases/M/inflow_openfoam.txt of the AIJ UWE API (release 3.10.1), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  RECOMMENDED: the measured k as a table; k is m^2/s^2
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       volScalarField;
+    object      k;
+}
+dimensions      [0 2 -2 0 0 0 0];
+internalField   uniform 0.49;
+boundaryField
+{
+    inlet
+    {
+        type            fixedProfile;
+        direction       (0 0 1);
+        origin          0;
+        profile         table
+        (
+            (3 0.49)
+            (6 0.6)
+            (9 0.69)
+            (12 0.74)
+            (15 0.79)
+            (18 0.79)
+            (21 0.72)
+            (24 0.71)
+            (27 0.67)
+            (30 0.63)
+            (36 0.63)
+            (42 0.69)
+            (48 0.66)
+            (54 0.68)
+            (60 0.64)
+            (72 0.68)
+            (84 0.68)
+            (96 0.67)
+            (108 0.69)
+            (120 0.69)
+            (132 0.69)
+            (144 0.65)
+            (156 0.66)
+            (168 0.63)
+            (180 0.63)
+            (192 0.61)
+            (204 0.62)
+            (216 0.54)
+            (228 0.52)
+            (240 0.5)
+            (252 0.49)
+            (264 0.46)
+            (276 0.43)
+            (288 0.39)
+            (300 0.38)
+            (312 0.34)
+            (324 0.36)
+            (336 0.34)
+            (348 0.32)
+            (360 0.33)
+        );
+    }
+    outlet          { type inletOutlet; inletValue $internalField; value $internalField; }
+    ground          { type kqRWallFunction; value $internalField; }
+    buildings       { type kqRWallFunction; value $internalField; }
+    top             { type slip; }
+    sides           { type slip; }
+}
+
+==== 0/epsilon
+/*--------------------------------*- C++ -*----------------------------------*\
+  cases/M/inflow_openfoam.txt of the AIJ UWE API (release 3.10.1), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  RECOMMENDED: epsilon = Cmu^0.5 k dU/dz from the tabulated U and k (central differences)
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       volScalarField;
+    object      epsilon;
+}
+dimensions      [0 2 -3 0 0 0 0];
+internalField   uniform 0.00882;
+boundaryField
+{
+    inlet
+    {
+        type            fixedProfile;
+        direction       (0 0 1);
+        origin          0;
+        profile         table
+        (
+            (3 0.00882)
+            (6 0.0135)
+            (9 0.020355)
+            (12 0.02442)
+            (15 0.02686)
+            (18 0.01975)
+            (21 0.01476)
+            (24 0.011005)
+            (27 0.001005)
+            (30 0.00357)
+            (36 0.006615)
+            (42 0.00621)
+            (48 0.0033)
+            (54 0.00255)
+            (60 0.00192)
+            (72 0.00238)
+            (84 0.002805)
+            (96 0.00209375)
+            (108 0.0012075)
+            (120 0.00112125)
+            (132 0.002415)
+            (144 0.00170625)
+            (156 0.00198)
+            (168 0.0014175)
+            (180 0.00055125)
+            (192 0.00160125)
+            (204 0.002015)
+            (216 0.00135)
+            (228 0.00091)
+            (240 0.000875)
+            (252 0.00042875)
+            (264 0.0008625)
+            (276 0.00086)
+            (288 0.00014625)
+            (300 0.0005225)
+            (312 0.000255)
+            (324 0.00018)
+            (336 4.25e-05)
+            (348 0.00012)
+            (360 8.25e-05)
+        );
+    }
+    outlet          { type inletOutlet; inletValue $internalField; value $internalField; }
+    ground          { type epsilonWallFunction; value $internalField; }
+    buildings       { type epsilonWallFunction; value $internalField; }
+    top             { type slip; }
+    sides           { type slip; }
+}
+
+==== system/probes
+/*--------------------------------*- C++ -*----------------------------------*\
+  cases/M/inflow_openfoam.txt of the AIJ UWE API (release 3.10.1), written by scripts/build_api.py; the walk: https://aij.eddy3d.com/byos/
+  the benchmark's measurement points (cases/M/probes.csv, the data), in the case frame and units: include from controlDict functions
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      probes;
+}
+probes
+{
+    type            probes;
+    libs            ("libsampling.so");
+    writeControl    writeTime;
+    fields          (U k epsilon);
+    probeLocations
+    (
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 175
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 175
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 175
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 175
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 175
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 175
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 175
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 175
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 175
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 175
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 175
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 175
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 175
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 175
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 175
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 180
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 180
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 180
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 180
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 180
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 180
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 180
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 180
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 180
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 180
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 180
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 180
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 180
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 180
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 180
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 185
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 185
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 185
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 185
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 185
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 185
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 185
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 185
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 185
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 185
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 185
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 185
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 185
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 185
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign wind_tunnel, instrument hydrocarbon_analyser, WD 185
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 9, WD 78
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 9, WD 78
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 9, WD 78
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 9, WD 78
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 9, WD 78
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 9, WD 78
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 9, WD 78
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 9, WD 78
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 9, WD 78
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 9, WD 78
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 9, WD 78
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 9, WD 78
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 9, WD 78
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 9, WD 78
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 9, WD 78
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 10, WD 115.667
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 10, WD 115.667
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 10, WD 115.667
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 10, WD 115.667
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 10, WD 115.667
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 10, WD 115.667
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 10, WD 115.667
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 10, WD 115.667
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 10, WD 115.667
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 10, WD 115.667
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 10, WD 115.667
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 10, WD 115.667
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 10, WD 115.667
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 10, WD 115.667
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 10, WD 115.667
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 1, WD 132.6
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 1, WD 132.6
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 1, WD 132.6
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 1, WD 132.6
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 1, WD 132.6
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 1, WD 132.6
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 1, WD 132.6
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 1, WD 132.6
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 1, WD 132.6
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 1, WD 132.6
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 1, WD 132.6
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 1, WD 132.6
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 1, WD 132.6
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 1, WD 132.6
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 1, WD 132.6
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 2, WD 144
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 2, WD 144
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 2, WD 144
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 2, WD 144
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 2, WD 144
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 2, WD 144
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 2, WD 144
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 2, WD 144
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 2, WD 144
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 2, WD 144
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 2, WD 144
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 2, WD 144
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 2, WD 144
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 2, WD 144
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 2, WD 144
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 11, WD 173.667
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 11, WD 173.667
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 11, WD 173.667
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 11, WD 173.667
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 11, WD 173.667
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 11, WD 173.667
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 11, WD 173.667
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 11, WD 173.667
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 11, WD 173.667
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 11, WD 173.667
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 11, WD 173.667
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 11, WD 173.667
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 11, WD 173.667
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 11, WD 173.667
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 11, WD 173.667
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 3, WD 175
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 3, WD 175
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 3, WD 175
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 3, WD 175
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 3, WD 175
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 3, WD 175
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 3, WD 175
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 3, WD 175
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 3, WD 175
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 3, WD 175
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 3, WD 175
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 3, WD 175
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 3, WD 175
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 3, WD 175
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 3, WD 175
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 13, WD 175.9
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 13, WD 175.9
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 13, WD 175.9
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 13, WD 175.9
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 13, WD 175.9
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 13, WD 175.9
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 13, WD 175.9
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 13, WD 175.9
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 13, WD 175.9
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 13, WD 175.9
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 13, WD 175.9
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 13, WD 175.9
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 13, WD 175.9
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 13, WD 175.9
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 13, WD 175.9
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 12, WD 176.7
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 12, WD 176.7
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 12, WD 176.7
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 12, WD 176.7
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 12, WD 176.7
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 12, WD 176.7
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 12, WD 176.7
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 12, WD 176.7
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 12, WD 176.7
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 12, WD 176.7
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 12, WD 176.7
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 12, WD 176.7
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 12, WD 176.7
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 12, WD 176.7
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 12, WD 176.7
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 15, WD 178.6
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 15, WD 178.6
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 15, WD 178.6
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 15, WD 178.6
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 15, WD 178.6
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 15, WD 178.6
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 15, WD 178.6
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 15, WD 178.6
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 15, WD 178.6
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 15, WD 178.6
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 15, WD 178.6
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 15, WD 178.6
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 15, WD 178.6
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 15, WD 178.6
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 15, WD 178.6
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 5, WD 179.6
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 5, WD 179.6
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 5, WD 179.6
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 5, WD 179.6
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 5, WD 179.6
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 5, WD 179.6
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 5, WD 179.6
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 5, WD 179.6
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 5, WD 179.6
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 5, WD 179.6
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 5, WD 179.6
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 5, WD 179.6
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 5, WD 179.6
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 5, WD 179.6
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 5, WD 179.6
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 14, WD 179.7
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 14, WD 179.7
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 14, WD 179.7
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 14, WD 179.7
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 14, WD 179.7
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 14, WD 179.7
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 14, WD 179.7
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 14, WD 179.7
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 14, WD 179.7
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 14, WD 179.7
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 14, WD 179.7
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 14, WD 179.7
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 14, WD 179.7
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 14, WD 179.7
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 14, WD 179.7
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 8, WD 180.3
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 8, WD 180.3
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 8, WD 180.3
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 8, WD 180.3
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 8, WD 180.3
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 8, WD 180.3
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 8, WD 180.3
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 8, WD 180.3
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 8, WD 180.3
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 8, WD 180.3
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 8, WD 180.3
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 8, WD 180.3
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 8, WD 180.3
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 8, WD 180.3
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 8, WD 180.3
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 4, WD 181.3
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 4, WD 181.3
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 4, WD 181.3
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 4, WD 181.3
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 4, WD 181.3
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 4, WD 181.3
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 4, WD 181.3
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 4, WD 181.3
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 4, WD 181.3
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 4, WD 181.3
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 4, WD 181.3
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 4, WD 181.3
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 4, WD 181.3
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 4, WD 181.3
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 4, WD 181.3
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 16, WD 181.9
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 16, WD 181.9
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 16, WD 181.9
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 16, WD 181.9
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 16, WD 181.9
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 16, WD 181.9
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 16, WD 181.9
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 16, WD 181.9
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 16, WD 181.9
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 16, WD 181.9
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 16, WD 181.9
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 16, WD 181.9
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 16, WD 181.9
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 16, WD 181.9
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 16, WD 181.9
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 7, WD 183.3
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 7, WD 183.3
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 7, WD 183.3
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 7, WD 183.3
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 7, WD 183.3
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 7, WD 183.3
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 7, WD 183.3
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 7, WD 183.3
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 7, WD 183.3
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 7, WD 183.3
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 7, WD 183.3
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 7, WD 183.3
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 7, WD 183.3
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 7, WD 183.3
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 7, WD 183.3
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 6, WD 184.3
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 6, WD 184.3
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 6, WD 184.3
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 6, WD 184.3
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 6, WD 184.3
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 6, WD 184.3
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 6, WD 184.3
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 6, WD 184.3
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 6, WD 184.3
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 6, WD 184.3
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 6, WD 184.3
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 6, WD 184.3
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 6, WD 184.3
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 6, WD 184.3
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 6, WD 184.3
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 17, WD 194.2
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 17, WD 194.2
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 17, WD 194.2
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 17, WD 194.2
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 17, WD 194.2
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 17, WD 194.2
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 17, WD 194.2
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 17, WD 194.2
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 17, WD 194.2
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 17, WD 194.2
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 17, WD 194.2
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 17, WD 194.2
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 17, WD 194.2
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 17, WD 194.2
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 17, WD 194.2
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign field, instrument sorbent_gc_ecd, run 18, WD 200.7
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign field, instrument sorbent_gc_ecd, run 18, WD 200.7
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign field, instrument sorbent_gc_ecd, run 18, WD 200.7
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign field, instrument sorbent_gc_ecd, run 18, WD 200.7
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign field, instrument sorbent_gc_ecd, run 18, WD 200.7
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign field, instrument sorbent_gc_ecd, run 18, WD 200.7
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign field, instrument sorbent_gc_ecd, run 18, WD 200.7
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign field, instrument sorbent_gc_ecd, run 18, WD 200.7
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign field, instrument sorbent_gc_ecd, run 18, WD 200.7
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign field, instrument sorbent_gc_ecd, run 18, WD 200.7
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign field, instrument sorbent_gc_ecd, run 18, WD 200.7
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign field, instrument sorbent_gc_ecd, run 18, WD 200.7
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign field, instrument sorbent_gc_ecd, run 18, WD 200.7
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign field, instrument sorbent_gc_ecd, run 18, WD 200.7
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign field, instrument sorbent_gc_ecd, run 18, WD 200.7
+        (-34.2043 30.5368 35.523)   // point_id 1, config default, campaign wind_tunnel, instrument split_fibre, WD 180
+        (-23.8443 71.2664 35.7156)   // point_id 2, config default, campaign wind_tunnel, instrument split_fibre, WD 180
+        (-38.5259 0.581642 35.3384)   // point_id 3, config default, campaign wind_tunnel, instrument split_fibre, WD 180
+        (3.80206 18.5784 35.5166)   // point_id 4, config default, campaign wind_tunnel, instrument split_fibre, WD 180
+        (25.8836 15.9144 35.5222)   // point_id 5, config default, campaign wind_tunnel, instrument split_fibre, WD 180
+        (32.3956 59.012 35.9286)   // point_id 6, config default, campaign wind_tunnel, instrument split_fibre, WD 180
+        (32.81 96.3079 35.7794)   // point_id 7, config default, campaign wind_tunnel, instrument split_fibre, WD 180
+        (46.13 13.0728 35.5477)   // point_id 8, config default, campaign wind_tunnel, instrument split_fibre, WD 180
+        (27.3636 -26.9463 35.7889)   // point_id 9, config default, campaign wind_tunnel, instrument split_fibre, WD 180
+        (-26.4491 -28.1895 34.8951)   // point_id 10, config default, campaign wind_tunnel, instrument split_fibre, WD 180
+        (-6.49873 -75.7863 35.3391)   // point_id 11, config default, campaign wind_tunnel, instrument split_fibre, WD 180
+        (-94.2922 -113.141 33.8614)   // point_id 12, config default, campaign wind_tunnel, instrument split_fibre, WD 180
+        (76.6772 -89.2838 35.9132)   // point_id 13, config default, campaign wind_tunnel, instrument split_fibre, WD 180
+        (250.547 -71.2279 6.6)   // point_id 14, config default, campaign wind_tunnel, instrument split_fibre, WD 180
+        (278.608 8.45524 6.89075)   // point_id 15, config default, campaign wind_tunnel, instrument split_fibre, WD 180
+    );
+}
+

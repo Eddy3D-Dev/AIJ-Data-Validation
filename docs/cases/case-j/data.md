@@ -58,8 +58,6 @@ description: "Case J — 1:1:2 building, non-isothermal: configuration, frame an
 | Unit of concentration | ppm of the released ethylene |
 | Unit of temperature | degC (T); K ($$T_{\mathrm{rms}}$$); heat fluxes K m/s |
 
-{% include nomenclature.md %}
-
 ## Reference data
 
 Source in this repository: [`raw/cases/case-j/RS_caseJ.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-j/RS_caseJ.csv) (approach flow: [`raw/cases/case-j/AF_caseJ.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-j/AF_caseJ.csv)).
@@ -103,8 +101,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `vT` | $$\overline{v'\theta'}$$ | K m/s, turbulent heat flux \<v\'theta\'\> |
 | `wT` | $$\overline{w'\theta'}$$ | K m/s, turbulent heat flux \<w\'theta\'\> |
 
-{% include nomenclature.md %}
-
 </details>
 
 ## Inflow
@@ -118,8 +114,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | Log-law error at H | -2.0 % |
 | log law rms residual | 2.1 % |
 | Note | derived during scoping, not published by AIJ; the boundary layer is unstably stratified, so a neutral log law is only a rough description |
-
-{% include nomenclature.md %}
 
 ## Known data issues
 

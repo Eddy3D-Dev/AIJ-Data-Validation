@@ -24,6 +24,8 @@ redirect_from:
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-green status">scored</span> · FluidX3D <span class="label label-green status">scored</span> · ML surrogate <span class="label label-green status">scored</span>
 
+{% include nomenclature.md %}
+
 ## Measurement locations
 
 {% include validation/case-a/layout.md %}
@@ -42,17 +44,22 @@ Status: <span class="label label-green status">scored</span>
 
 Reattachment length $$L_r/H$$ = 1.49.
 
-| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
+| Score | Run | R | $$R^2$$ | FAC2 | FB | Hit rate |
 |---|---|---|---|---|---|---|
-| $$U$$ | +0.955 | 0.912 | 0.817 | +0.185 | 0.586 | 186 |
-| $$V$$ | +0.961 | 0.923 | 0.349 | -0.207 | 0.892 | 186 |
-| $$W$$ | +0.708 | 0.502 | 0.398 | -1.501 | 0.801 | 186 |
-| $$k$$ | +0.480 | 0.230 | 0.667 | +0.478 | 0.177 | 186 |
+| $$U$$ | RANS | +0.955 | 0.912 | 0.817 | +0.185 | 0.586 |
+|  | URANS | +0.953 | 0.908 | 0.763 | +0.181 | 0.683 |
+| $$V$$ | RANS | +0.961 | 0.923 | 0.349 | -0.207 | 0.892 |
+|  | URANS | +0.953 | 0.909 | 0.360 | — | 0.817 |
+| $$W$$ | RANS | +0.708 | 0.502 | 0.398 | -1.501 | 0.801 |
+|  | URANS | +0.675 | 0.456 | 0.414 | -1.352 | 0.699 |
+| $$k$$ | RANS | +0.480 | 0.230 | 0.667 | +0.478 | 0.177 |
+|  | URANS | +0.626 | 0.392 | 0.694 | +0.453 | 0.392 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
+Every score is over the same 186 points.
 
 - Per-point values: [`/api/cases/A/pairs/openfoam12-realizableKE.csv`]({{ '/api/cases/A/pairs/openfoam12-realizableKE.csv' | relative_url }})
+- RANS: realizable k-ε, log-law inlet (the served run). URANS: SST k-ω run transient, measured inlet, the submission [`eddy3d-of12-sst-urans`]({{ '/community/eddy3d-of12-sst-urans/' | relative_url }}), scores [`/api/submissions/eddy3d-of12-sst-urans.json`]({{ '/api/submissions/eddy3d-of12-sst-urans.json' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCaseAContainerE2E; figures validation/plot\_cases\_ab\_openfoam.py
 
 ## OpenLB
@@ -74,8 +81,6 @@ Reattachment length $$L_r/H$$ = 3.39.
 | $$k$$ (resolved) | +0.200 | 0.040 | 0.000 | +1.971 | 0.000 | 186 |
 | $$V$$, lateral sign flipped (control) | -0.646 | 0.418 | 0.118 | +98.234 | 0.570 | 186 |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 - Per-point values: [`/api/cases/A/pairs/openlb.csv`]({{ '/api/cases/A/pairs/openlb.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCaseAOpenLbContainerE2E (OpenLB eddy3dWind, CPU image, $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$); figure validation/plot\_cases\_ab\_engines.py
@@ -99,8 +104,6 @@ Reattachment length $$L_r/H$$ = 0.05.
 | $$U$$, approach flow alone (control) | +0.510 | 0.260 | 0.767 | -0.256 | 0.586 | 116 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 - Per-point values: [`/api/cases/A/pairs/fluidx3d.csv`]({{ '/api/cases/A/pairs/fluidx3d.csv' | relative_url }})
 - Reproduce: Eddy3D fixture TestAijCaseAFluidX3DE2E (Eddy3DCli.Tests/Validation/TestAijVelocityFluidX3DE2E; FluidX3D GPU lattice Boltzmann, D3Q19 Smagorinsky LES, $$\mathrm{d}x = H/64$$, 40 + 200 $$H/U_H$$ spin-up + averaging, with an empty-domain control on the same lattice); figure validation/plot\_cases\_ab\_engines.py
 
@@ -112,14 +115,14 @@ Status: <span class="label label-green status">scored</span>
 
 ### Scores
 
-| Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
-|---|---|---|---|---|---|---|
-| $$\lvert\mathbf{U}\rvert$$ ($$z = 0.01\thinspace\mathrm{m}$$ plane) | -0.125 | 0.016 | 0.262 | +0.772 | 0.092 | 65 |
-| $$\lvert\mathbf{U}\rvert$$, lattice cut at ±250 m | +0.434 | 0.188 | 0.615 | +0.401 | 0.338 | 65 |
-| wind reversed (control) | -0.125 | 0.016 | 0.262 | +0.772 | 0.092 | 65 |
+| Score | R | $$R^2$$ | FAC2 | FB | Hit rate |
+|---|---|---|---|---|---|
+| $$\lvert\mathbf{U}\rvert$$ ($$z = 0.01\thinspace\mathrm{m}$$ plane) | -0.125 | 0.016 | 0.262 | +0.772 | 0.092 |
+| $$\lvert\mathbf{U}\rvert$$, lattice cut at ±250 m | +0.434 | 0.188 | 0.615 | +0.401 | 0.338 |
+| wind reversed (control) | -0.125 | 0.016 | 0.262 | +0.772 | 0.092 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
+Every score is over the same 65 points.
 
 - Per-point values: [`/api/cases/A/pairs/ml-surrogate.csv`]({{ '/api/cases/A/pairs/ml-surrogate.csv' | relative_url }})
 - Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot\_ml\_surrogate.py
@@ -130,17 +133,16 @@ Status: <span class="label label-green status">scored</span>
 
 ## Leaderboard
 
-| Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate | FAC2 | R | $$R^2$$ | Points scored |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-mesh2x-measured-inlet]({{ '/community/eddy3d-of12-mesh2x-measured-inlet/' | relative_url }})) | community | 0.651 | 0.887 | **0.833** | 0.677 | **0.762** | 0.603 | **+0.900** | **0.819** | 100 % |
-| 2 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-measured-inlet]({{ '/community/eddy3d-of12-measured-inlet/' | relative_url }})) | community | 0.624 | 0.876 | 0.828 | 0.667 | 0.749 | **0.610** | +0.894 | 0.810 | 100 % |
-| 3 | OpenFOAM pimpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-sst-urans]({{ '/community/eddy3d-of12-sst-urans/' | relative_url }})) | community | **0.683** | 0.817 | 0.699 | **0.720** | 0.730 | 0.590 | +0.877 | 0.782 | 100 % |
-| 4 | OpenFOAM 12 | Eddy3D | 0.586 | **0.892** | 0.801 | 0.634 | 0.728 | **0.610** | +0.891 | 0.805 | 100 % |
-| 5 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([example-openfoam12]({{ '/community/example-openfoam12/' | relative_url }})) | example submission | 0.586 | **0.892** | 0.801 | 0.634 | 0.728 | **0.610** | +0.891 | 0.805 | 100 % |
-| 6 | FluidX3D | Eddy3D | 0.452 | 0.618 | 0.441 | 0.554 | 0.516 | 0.462 | +0.717 | 0.546 | 100 % |
-| 7 | OpenLB | Eddy3D | 0.371 | 0.624 | 0.586 | 0.382 | 0.491 | 0.293 | +0.677 | 0.467 | 100 % |
+| Rank | Run | Source | Hit rate, $$U$$ | Hit rate, $$V$$ | Hit rate, $$W$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate | FAC2 | R | $$R^2$$ |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-mesh2x-measured-inlet]({{ '/community/eddy3d-of12-mesh2x-measured-inlet/' | relative_url }})) | community | 0.651 | 0.887 | **0.833** | 0.677 | **0.762** | 0.603 | **+0.900** | **0.819** |
+| 2 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-nutcap-lifted]({{ '/community/eddy3d-of12-nutcap-lifted/' | relative_url }})) | community | 0.613 | **0.903** | **0.833** | 0.667 | 0.754 | **0.613** | +0.891 | 0.805 |
+| 3 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-measured-inlet]({{ '/community/eddy3d-of12-measured-inlet/' | relative_url }})) | community | 0.624 | 0.876 | 0.828 | 0.667 | 0.749 | 0.610 | +0.894 | 0.810 |
+| 4 | OpenFOAM pimpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-sst-urans]({{ '/community/eddy3d-of12-sst-urans/' | relative_url }})) | community | **0.683** | 0.817 | 0.699 | **0.720** | 0.730 | 0.590 | +0.877 | 0.782 |
+| 5 | OpenFOAM 12 | Eddy3D | 0.586 | 0.892 | 0.801 | 0.634 | 0.728 | 0.610 | +0.891 | 0.805 |
+| 6 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([example-openfoam12]({{ '/community/example-openfoam12/' | relative_url }})) | example submission | 0.586 | 0.892 | 0.801 | 0.634 | 0.728 | 0.610 | +0.891 | 0.805 |
+| 7 | FluidX3D | Eddy3D | 0.452 | 0.618 | 0.441 | 0.554 | 0.516 | 0.462 | +0.717 | 0.546 |
+| 8 | OpenLB | Eddy3D | 0.371 | 0.624 | 0.586 | 0.382 | 0.491 | 0.293 | +0.677 | 0.467 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
-Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. *Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).
+Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. Every run gave values at every measured point. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

@@ -24,6 +24,8 @@ redirect_from:
 
 Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-yellow status">pending</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-yellow status">pending</span>
 
+{% include nomenclature.md %}
+
 ## Measurement locations
 
 {% include validation/case-f/layout.md %}
@@ -62,8 +64,6 @@ Quantity: the thermistor\'s (tunnel) and the cup anemometer\'s (field) mean spee
 | Tunnel\'s SSE column, the opposite wind, against the solved NNW field (compass control) | +0.077 | 0.006 | 0.615 | +0.327 | 0.077 | 13 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 </details>
 
 - Reproduce: Eddy3D fixture Eddy3DCli.Tests/Validation/TestAijCaseFContainerE2E (EDDY3D\_AIJ\_F\_DIRECTIONS=NNW, the default) (Shinjuku district, 1:800, wind from NNW, frame literal; OpenFOAM 12 realizable k-ε, numerics level 3, 2000 iterations, 2,143,488 cells, solved 2026-10-18); figures validation/plot\_cases\_fm\_openfoam.py
@@ -96,8 +96,6 @@ Quantity: the thermistor\'s (tunnel) and the cup anemometer\'s (field) mean spee
 | Tunnel\'s 9 m column as a model of the field (ceiling control) | +0.933 | 0.870 | 1.000 | -0.015 | 0.692 | 13 |
 | Tunnel\'s SSE column, the opposite wind, against the solved NNW field (compass control) | +0.102 | 0.010 | 0.385 | +0.413 | 0.000 | 13 |
 {: .scores }
-
-{% include nomenclature-scores.md %}
 
 </details>
 
@@ -145,12 +143,11 @@ The modelled $$\lvert\mathbf{U}\rvert$$ is the lower bound. $$\sqrt{\lvert\mathb
 
 ## Leaderboard
 
-| Rank | Run | Source | Hit rate, $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate | FAC2 | R | $$R^2$$ | Points scored |
-|---|---|---|---|---|---|---|---|---|---|
-| 1 | OpenFOAM 12 · literal | Eddy3D | **0.846** | **0.547** | **0.696** | **0.963** | **+0.895** | **0.807** | 100 % |
-| 2 | OpenFOAM 12 · agl | Eddy3D | 0.624 | 0.431 | 0.527 | 0.934 | +0.886 | 0.787 | 100 % |
+| Rank | Run | Source | Hit rate, $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | Hit rate, $$\lvert\mathbf{U}\rvert$$ | Hit rate | FAC2 | R | $$R^2$$ |
+|---|---|---|---|---|---|---|---|---|
+| 1 | OpenFOAM 12 · literal | Eddy3D | **0.846** | 0.547 | **0.696** | **0.963** | **+0.895** | **0.807** |
+| 2 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([eddy3d-of12-nutcap-lifted]({{ '/community/eddy3d-of12-nutcap-lifted/' | relative_url }})) | community | 0.659 | **0.582** | 0.621 | 0.934 | +0.866 | 0.755 |
+| 3 | OpenFOAM 12 · agl | Eddy3D | 0.624 | 0.431 | 0.527 | 0.934 | +0.886 | 0.787 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
-Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. *Points scored* is the share of the measured points a run gave values at. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).
+Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. Every run gave values at every measured point. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).

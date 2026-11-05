@@ -1,0 +1,534 @@
+{
+ "$schema": "https://aij.eddy3d.com/api/3.10.1/schemas/validation.schema.json",
+ "schema_version": "2.5.0",
+ "data_version": "5abd0adb307e7f87ec6e886d2133f2f0eab9fc5f3c6a36bb3b9d80d07c1d9ce2",
+ "license": "CC-BY-4.0",
+ "case": "I",
+ "title": "Case I — cube with a roof point source",
+ "status": "scored",
+ "status_meaning": {
+  "scored": "a validation run exists and its scores are in cases/{id}/validation.json",
+  "running": "the solve is in progress; no scores yet",
+  "pending": "not run yet",
+  "not comparable": "the engine cannot produce the measured quantity at the measured location: OpenLB at the resolution this hardware runs, FluidX3D without a ground wall function; the measurement behind each is on the Validation page"
+ },
+ "engines": [
+  {
+   "engine": "openfoam12-realizableKE",
+   "status": "scored"
+  },
+  {
+   "engine": "openfoam12-kEpsilon",
+   "status": "scored"
+  },
+  {
+   "engine": "openfoam12-kOmegaSST",
+   "status": "scored"
+  },
+  {
+   "engine": "openlb",
+   "status": "pending"
+  },
+  {
+   "engine": "fluidx3d",
+   "status": "pending"
+  },
+  {
+   "engine": "ml-surrogate",
+   "status": "pending"
+  }
+ ],
+ "results": [
+  {
+   "run_id": "I.openfoam12-realizableKE",
+   "engine": "openfoam12-realizableKE",
+   "configuration": null,
+   "solver": "realizableKE",
+   "numerics_level": 3,
+   "scale": 60,
+   "solved_time": 3000,
+   "iterations": null,
+   "points_measured": null,
+   "lateral_sign_applied_in_fixture": null,
+   "recirculation_Lr_over_H": 2.5067717362752826,
+   "quantity": null,
+   "normalisation": "velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units",
+   "notes": [],
+   "metric_meaning": {
+    "Count": "number of measured points scored",
+    "MeanObserved": "mean of the measured, normalised quantity",
+    "MeanPredicted": "mean of the modelled, normalised quantity",
+    "Fb": "fractional bias, 2 (mean_obs - mean_pred) / (mean_obs + mean_pred); positive = model low",
+    "Nmse": "normalised mean square error",
+    "Nad": "normalised absolute difference",
+    "Fac2": "fraction of points within a factor of two (harsh near zero for sign-changing V and W)",
+    "HitRate": "fraction of points within D = 0.25 relative or W = 0.05 U_H absolute",
+    "Mg": "geometric mean bias",
+    "Vg": "geometric variance",
+    "GeometricPairs": "pairs with both values positive (used for Mg/Vg)",
+    "R": "Pearson correlation coefficient",
+    "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive; Fb, Nmse and Nad of a signed velocity component of Case H or I whose observed and predicted means are not both positive)"
+   },
+   "headline": {
+    "U": "velocity.U",
+    "V": "velocity.V",
+    "W": "velocity.W",
+    "k": "k",
+    "c*, Sct 0.3": "cstar.c_sct03",
+    "c*, Sct 0.5": "cstar.c_sct05",
+    "c*, Sct 0.7": "cstar.c_sct07"
+   },
+   "scores": {
+    "velocity.U": {
+     "Count": 91,
+     "MeanObserved": 0.790751581521784,
+     "MeanPredicted": 0.774992611506141,
+     "Fb": 0.020129686682940833,
+     "Nmse": 0.007186935362287701,
+     "Nad": 0.03884660914420259,
+     "Fac2": 0.8791208791208791,
+     "HitRate": 0.8131868131868132,
+     "Mg": 0.9722245727619597,
+     "Vg": 1.0634254601178148,
+     "GeometricPairs": 76,
+     "R": 0.9984868695512156
+    },
+    "velocity.V": {
+     "Count": 38,
+     "MeanObserved": 6.481489164091975e-07,
+     "MeanPredicted": -0.00015873065015479973,
+     "Fb": null,
+     "Nmse": null,
+     "Nad": null,
+     "Fac2": 0.8947368421052632,
+     "HitRate": 1.0,
+     "Mg": 1.4644627124620233,
+     "Vg": 1.6729552729413089,
+     "GeometricPairs": 19,
+     "R": 0.9851271140402716
+    },
+    "velocity.W": {
+     "Count": 91,
+     "MeanObserved": 0.014062942495613446,
+     "MeanPredicted": 0.01476916612798966,
+     "Fb": -0.04898869115650264,
+     "Nmse": 1.7101156917719502,
+     "Nad": 0.46949832831857813,
+     "Fac2": 0.6593406593406593,
+     "HitRate": 0.967032967032967,
+     "Mg": 1.4890655997362674,
+     "Vg": 3.335850758505207,
+     "GeometricPairs": 47,
+     "R": 0.9721592227422619
+    },
+    "k": {
+     "Count": 91,
+     "MeanObserved": 0.022301570347298377,
+     "MeanPredicted": 0.020056325335564097,
+     "Fb": 0.10601305733148972,
+     "Nmse": 0.16520020264365504,
+     "Nad": 0.12916347436725234,
+     "Fac2": 0.9230769230769231,
+     "HitRate": 0.5824175824175825,
+     "Mg": 0.8973196129601526,
+     "Vg": 1.9422218162530662,
+     "GeometricPairs": 91,
+     "R": 0.904703277584547
+    },
+    "cstar.c_sct03": {
+     "Count": 539,
+     "MeanObserved": 0.4176102627337366,
+     "MeanPredicted": 0.27895050834879404,
+     "Fb": 0.39812679709036825,
+     "Nmse": 1.1830823975851994,
+     "Nad": 0.2960989537050304,
+     "Fac2": 0.35992578849721707,
+     "HitRate": 0.10575139146567718,
+     "Mg": 1.3666329352167246,
+     "Vg": 3.660530673604352,
+     "GeometricPairs": 539,
+     "R": 0.9217997205024153
+    },
+    "cstar.c_sct05": {
+     "Count": 539,
+     "MeanObserved": 0.4176102627337366,
+     "MeanPredicted": 0.3843698359925789,
+     "Fb": 0.08289588929687729,
+     "Nmse": 0.39528645988257716,
+     "Nad": 0.17788550142901124,
+     "Fac2": 0.4749536178107607,
+     "HitRate": 0.28385899814471244,
+     "Mg": 1.2344655975559997,
+     "Vg": 3.619550039396675,
+     "GeometricPairs": 539,
+     "R": 0.9401587140933699
+    },
+    "cstar.c_sct07": {
+     "Count": 539,
+     "MeanObserved": 0.4176102627337366,
+     "MeanPredicted": 0.4617604719851577,
+     "Fb": -0.10041318754037104,
+     "Nmse": 0.43306956082009707,
+     "Nad": 0.16739385455205494,
+     "Fac2": 0.47680890538033394,
+     "HitRate": 0.2912801484230056,
+     "Mg": 1.1988916630700241,
+     "Vg": 3.6577307961341647,
+     "GeometricPairs": 539,
+     "R": 0.9464657005792699
+    }
+   },
+   "figures": [
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-i-layout.png",
+     "caption": "Case I, measurement lines and planes: A concentration, vertical profiles, y/H = 0; B concentration, plane z/H = 0; C velocity, vertical profiles, y/H = 0; D velocity, plane z/H = 0.5. Positions in multiples of H; panels c and d: x/H = -2 to 5."
+    },
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-i-openfoam-agreement.png",
+     "caption": "Case I, OpenFOAM 12 (realizable k-ε): measured against modelled U, W, k and the dimensionless concentration c* = C/c0 (turbulent Schmidt number 0.5; log axes show the positive pairs only), with the 1:1 line and the factor-of-two band where the values do not change sign. Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
+    },
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-i-openfoam-profiles.png",
+     "caption": "Case I, OpenFOAM 12, realizable k-ε: vertical profiles of U/U_H on the centre plane y = 0 at up to four stations along the measured lines, measured points against the modelled line, offset by 1 per station."
+    },
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-i-openfoam-field-section.png",
+     "caption": "Case I, OpenFOAM 12: the solved field on the centre plane y = 0, realizable k-ε. a: u; b: u with iso-lines every 0.1 and the edge of the reversed flow (u = 0) dashed; c: the in-plane speed with streamlines. Each dot is a measured point, coloured by its measured value on the panel's scale."
+    },
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-i-openfoam-closures.png",
+     "caption": "Case I, OpenFOAM 12 under standard k-ε, realizable k-ε and k-ω SST on one mesh: measured against modelled U, k and c* (Sct 0.5). Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
+    }
+   ],
+   "pairs": {
+    "url": "https://aij.eddy3d.com/api/3.10.1/cases/I/pairs/openfoam12-realizableKE.csv?v=d1bafd9c68e2",
+    "path": "cases/I/pairs/openfoam12-realizableKE.csv",
+    "media_type": "text/csv",
+    "bytes": 114311,
+    "sha256": "d1bafd9c68e224012f10c18859f7c88101b37543d739b801815120ec586487d1"
+   },
+   "pairs_columns": "instrument (ldv or hydrocarbon_analyser), point_id (the table's: wind points 1-91, concentration points 92-630); x, y, z in m (case frame); U, V, W and k measured (_meas: the cleaned workbook values; V is empty on the y = 0 plane) and modelled (_model), velocities by U_H = 1.7 m/s, k by U_H^2; cstar_meas, the measured C/c0 (c0 = 39.22 ppm), and cstar_sct03 / _sct05 / _sct07, the modelled c* for turbulent Schmidt numbers 0.3, 0.5 and 0.7 (a wind row has no concentration columns and a concentration row no velocity columns)",
+   "reproduce": "Eddy3D fixture TestAijCubeContainerE2E (realizable k-ε, 1:60) (numerics level 3, 3000 iterations); figures validation/plot_cases_hi_openfoam.py; scores recomputed from the pairs by validation/dispersion_metrics.py",
+   "source_file": "validation/results/caseI_openfoam12_realizableKE.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseI_openfoam12_realizableKE.json",
+   "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
+  },
+  {
+   "run_id": "I.openfoam12-kEpsilon",
+   "engine": "openfoam12-kEpsilon",
+   "configuration": null,
+   "solver": "kEpsilon",
+   "numerics_level": 3,
+   "scale": 60,
+   "solved_time": 3000,
+   "iterations": null,
+   "points_measured": null,
+   "lateral_sign_applied_in_fixture": null,
+   "recirculation_Lr_over_H": 2.228860331416977,
+   "quantity": null,
+   "normalisation": "velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units",
+   "notes": [],
+   "metric_meaning": {
+    "Count": "number of measured points scored",
+    "MeanObserved": "mean of the measured, normalised quantity",
+    "MeanPredicted": "mean of the modelled, normalised quantity",
+    "Fb": "fractional bias, 2 (mean_obs - mean_pred) / (mean_obs + mean_pred); positive = model low",
+    "Nmse": "normalised mean square error",
+    "Nad": "normalised absolute difference",
+    "Fac2": "fraction of points within a factor of two (harsh near zero for sign-changing V and W)",
+    "HitRate": "fraction of points within D = 0.25 relative or W = 0.05 U_H absolute",
+    "Mg": "geometric mean bias",
+    "Vg": "geometric variance",
+    "GeometricPairs": "pairs with both values positive (used for Mg/Vg)",
+    "R": "Pearson correlation coefficient",
+    "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive; Fb, Nmse and Nad of a signed velocity component of Case H or I whose observed and predicted means are not both positive)"
+   },
+   "headline": {
+    "U": "velocity.U",
+    "V": "velocity.V",
+    "W": "velocity.W",
+    "k": "k",
+    "c*, Sct 0.3": "cstar.c_sct03",
+    "c*, Sct 0.5": "cstar.c_sct05",
+    "c*, Sct 0.7": "cstar.c_sct07"
+   },
+   "scores": {
+    "velocity.U": {
+     "Count": 91,
+     "MeanObserved": 0.790751581521784,
+     "MeanPredicted": 0.7932715707821592,
+     "Fb": -0.0031817581159843725,
+     "Nmse": 0.01913180441673397,
+     "Nad": 0.05322654630954244,
+     "Fac2": 0.8461538461538461,
+     "HitRate": 0.7692307692307693,
+     "Mg": 0.9298873088887135,
+     "Vg": 1.1636879150673878,
+     "GeometricPairs": 76,
+     "R": 0.9903513310804983
+    },
+    "velocity.V": {
+     "Count": 38,
+     "MeanObserved": 6.481489164091975e-07,
+     "MeanPredicted": -0.0005224458204334363,
+     "Fb": null,
+     "Nmse": null,
+     "Nad": null,
+     "Fac2": 0.7894736842105263,
+     "HitRate": 0.8947368421052632,
+     "Mg": 1.55946469419027,
+     "Vg": 1.845905995603135,
+     "GeometricPairs": 18,
+     "R": 0.966416247478164
+    },
+    "velocity.W": {
+     "Count": 91,
+     "MeanObserved": 0.014062942495613446,
+     "MeanPredicted": 0.012984434389140272,
+     "Fb": 0.0797495528729898,
+     "Nmse": 4.257853201427962,
+     "Nad": 0.6847455308379204,
+     "Fac2": 0.6153846153846154,
+     "HitRate": 0.9010989010989011,
+     "Mg": 1.256923108939886,
+     "Vg": 1.696264063564113,
+     "GeometricPairs": 45,
+     "R": 0.9430921235170846
+    },
+    "k": {
+     "Count": 91,
+     "MeanObserved": 0.022301570347298377,
+     "MeanPredicted": 0.023147374424883075,
+     "Fb": -0.0372199654722193,
+     "Nmse": 0.22509723243359406,
+     "Nad": 0.1217505872280722,
+     "Fac2": 0.9120879120879121,
+     "HitRate": 0.6373626373626373,
+     "Mg": 0.8077104403297943,
+     "Vg": 1.9275441989119517,
+     "GeometricPairs": 91,
+     "R": 0.8703080010948288
+    },
+    "cstar.c_sct03": {
+     "Count": 539,
+     "MeanObserved": 0.4176102627337366,
+     "MeanPredicted": 0.3060472341372913,
+     "Fb": 0.30833102421746444,
+     "Nmse": 0.7162507591065652,
+     "Nad": 0.24465098480009087,
+     "Fac2": 0.44155844155844154,
+     "HitRate": 0.13358070500927643,
+     "Mg": 1.300811781892004,
+     "Vg": 3.106453476080123,
+     "GeometricPairs": 539,
+     "R": 0.9375852419052121
+    },
+    "cstar.c_sct05": {
+     "Count": 539,
+     "MeanObserved": 0.4176102627337366,
+     "MeanPredicted": 0.43259827458256034,
+     "Fb": -0.03525726028612643,
+     "Nmse": 0.46346156463208155,
+     "Nad": 0.14106329214071375,
+     "Fac2": 0.5194805194805194,
+     "HitRate": 0.3784786641929499,
+     "Mg": 1.207468782874007,
+     "Vg": 2.798827707401543,
+     "GeometricPairs": 539,
+     "R": 0.955336360337149
+    },
+    "cstar.c_sct07": {
+     "Count": 539,
+     "MeanObserved": 0.4176102627337366,
+     "MeanPredicted": 0.5360862256029685,
+     "Fb": -0.24845632613340116,
+     "Nmse": 1.3403467901024977,
+     "Nad": 0.1800087116589099,
+     "Fac2": 0.5194805194805194,
+     "HitRate": 0.287569573283859,
+     "Mg": 1.1934040916593742,
+     "Vg": 2.7153434066615256,
+     "GeometricPairs": 539,
+     "R": 0.9535769617702943
+    }
+   },
+   "figures": [
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-i-openfoam-closures.png",
+     "caption": "Case I, OpenFOAM 12 under standard k-ε, realizable k-ε and k-ω SST on one mesh: measured against modelled U, k and c* (Sct 0.5). Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
+    }
+   ],
+   "pairs": {
+    "url": "https://aij.eddy3d.com/api/3.10.1/cases/I/pairs/openfoam12-kEpsilon.csv?v=6e6ba0f446e8",
+    "path": "cases/I/pairs/openfoam12-kEpsilon.csv",
+    "media_type": "text/csv",
+    "bytes": 114105,
+    "sha256": "6e6ba0f446e82cd3764f4974c8c198c013b70cc1fc813b59168d5f969b95d5c1"
+   },
+   "pairs_columns": "instrument (ldv or hydrocarbon_analyser), point_id (the table's: wind points 1-91, concentration points 92-630); x, y, z in m (case frame); U, V, W and k measured (_meas: the cleaned workbook values; V is empty on the y = 0 plane) and modelled (_model), velocities by U_H = 1.7 m/s, k by U_H^2; cstar_meas, the measured C/c0 (c0 = 39.22 ppm), and cstar_sct03 / _sct05 / _sct07, the modelled c* for turbulent Schmidt numbers 0.3, 0.5 and 0.7 (a wind row has no concentration columns and a concentration row no velocity columns)",
+   "reproduce": "Eddy3D fixture TestAijCubeContainerE2E (standard k-ε, 1:60) (numerics level 3, 3000 iterations); figures validation/plot_cases_hi_openfoam.py; scores recomputed from the pairs by validation/dispersion_metrics.py",
+   "source_file": "validation/results/caseI_openfoam12_kEpsilon.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseI_openfoam12_kEpsilon.json",
+   "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
+  },
+  {
+   "run_id": "I.openfoam12-kOmegaSST",
+   "engine": "openfoam12-kOmegaSST",
+   "configuration": null,
+   "solver": "kOmegaSST",
+   "numerics_level": 3,
+   "scale": 60,
+   "solved_time": 3000,
+   "iterations": null,
+   "points_measured": null,
+   "lateral_sign_applied_in_fixture": null,
+   "recirculation_Lr_over_H": 2.6755808383233535,
+   "quantity": null,
+   "normalisation": "velocities by U_H, k by U_H^2 (the benchmark's own convention; Case E by U at 15.9 m, as it is published); hit rate D = 0.25, W = 0.05 in those units",
+   "notes": [],
+   "metric_meaning": {
+    "Count": "number of measured points scored",
+    "MeanObserved": "mean of the measured, normalised quantity",
+    "MeanPredicted": "mean of the modelled, normalised quantity",
+    "Fb": "fractional bias, 2 (mean_obs - mean_pred) / (mean_obs + mean_pred); positive = model low",
+    "Nmse": "normalised mean square error",
+    "Nad": "normalised absolute difference",
+    "Fac2": "fraction of points within a factor of two (harsh near zero for sign-changing V and W)",
+    "HitRate": "fraction of points within D = 0.25 relative or W = 0.05 U_H absolute",
+    "Mg": "geometric mean bias",
+    "Vg": "geometric variance",
+    "GeometricPairs": "pairs with both values positive (used for Mg/Vg)",
+    "R": "Pearson correlation coefficient",
+    "null": "a metric that is undefined for the data (for example Mg and Vg when no pair has both values positive; Fb, Nmse and Nad of a signed velocity component of Case H or I whose observed and predicted means are not both positive)"
+   },
+   "headline": {
+    "U": "velocity.U",
+    "V": "velocity.V",
+    "W": "velocity.W",
+    "k": "k",
+    "c*, Sct 0.3": "cstar.c_sct03",
+    "c*, Sct 0.5": "cstar.c_sct05",
+    "c*, Sct 0.7": "cstar.c_sct07"
+   },
+   "scores": {
+    "velocity.U": {
+     "Count": 91,
+     "MeanObserved": 0.790751581521784,
+     "MeanPredicted": 0.7218678474466711,
+     "Fb": 0.09107873765986048,
+     "Nmse": 0.017672507890149926,
+     "Nad": 0.048461155629468136,
+     "Fac2": 0.8791208791208791,
+     "HitRate": 0.8021978021978022,
+     "Mg": 1.0837552803019552,
+     "Vg": 1.0398154846112386,
+     "GeometricPairs": 69,
+     "R": 0.9915701399809963
+    },
+    "velocity.V": {
+     "Count": 38,
+     "MeanObserved": 6.481489164091975e-07,
+     "MeanPredicted": 0.005901377708978327,
+     "Fb": -1.9995607278368377,
+     "Nmse": 266353.2374046699,
+     "Nad": 4.487406003441306,
+     "Fac2": 0.7894736842105263,
+     "HitRate": 0.9210526315789473,
+     "Mg": 0.8186512598892798,
+     "Vg": 1.193334101626686,
+     "GeometricPairs": 17,
+     "R": 0.9680953631385582
+    },
+    "velocity.W": {
+     "Count": 91,
+     "MeanObserved": 0.014062942495613446,
+     "MeanPredicted": 0.017438403361344536,
+     "Fb": -0.21430581925346667,
+     "Nmse": 5.688300803183542,
+     "Nad": 0.8398002687359016,
+     "Fac2": 0.6153846153846154,
+     "HitRate": 0.8681318681318682,
+     "Mg": 0.7798511626056084,
+     "Vg": 1.527609341180733,
+     "GeometricPairs": 41,
+     "R": 0.9217770144325877
+    },
+    "k": {
+     "Count": 91,
+     "MeanObserved": 0.022301570347298377,
+     "MeanPredicted": 0.013459165747747063,
+     "Fb": 0.49453146467957676,
+     "Nmse": 0.5377739303056779,
+     "Nad": 0.26720942213610666,
+     "Fac2": 0.3956043956043956,
+     "HitRate": 0.26373626373626374,
+     "Mg": 19.947436164594553,
+     "Vg": 4932060.666821542,
+     "GeometricPairs": 91,
+     "R": 0.88027265288418
+    },
+    "cstar.c_sct03": {
+     "Count": 539,
+     "MeanObserved": 0.4176102627337366,
+     "MeanPredicted": 0.4375115332096474,
+     "Fb": -0.046546048926177676,
+     "Nmse": 3.0891301929427977,
+     "Nad": 0.35420782199532064,
+     "Fac2": 0.4322820037105751,
+     "HitRate": 0.23562152133580705,
+     "Mg": 1.3339800631048238,
+     "Vg": 6.1808958947806065,
+     "GeometricPairs": 539,
+     "R": 0.5144804453831074
+    },
+    "cstar.c_sct05": {
+     "Count": 539,
+     "MeanObserved": 0.4176102627337366,
+     "MeanPredicted": 0.48674823896103897,
+     "Fb": -0.15289948863805058,
+     "Nmse": 3.9634271114250064,
+     "Nad": 0.3848060137746137,
+     "Fac2": 0.4025974025974026,
+     "HitRate": 0.20222634508348794,
+     "Mg": 1.3554119754514764,
+     "Vg": 7.580833456625044,
+     "GeometricPairs": 539,
+     "R": 0.46619380800851146
+    },
+    "cstar.c_sct07": {
+     "Count": 539,
+     "MeanObserved": 0.4176102627337366,
+     "MeanPredicted": 0.5214976897959184,
+     "Fb": -0.22124703934695145,
+     "Nmse": 4.6937962555420265,
+     "Nad": 0.4078766808640716,
+     "Fac2": 0.3803339517625232,
+     "HitRate": 0.19480519480519481,
+     "Mg": 1.3725202816644335,
+     "Vg": 8.664730848126219,
+     "GeometricPairs": 539,
+     "R": 0.43878721107437274
+    }
+   },
+   "figures": [
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-i-openfoam-closures.png",
+     "caption": "Case I, OpenFOAM 12 under standard k-ε, realizable k-ε and k-ω SST on one mesh: measured against modelled U, k and c* (Sct 0.5). Dots take the colour of the line or plane they were measured on: the letters and colours of the layout figure of the case."
+    }
+   ],
+   "pairs": {
+    "url": "https://aij.eddy3d.com/api/3.10.1/cases/I/pairs/openfoam12-kOmegaSST.csv?v=549a7aa4117e",
+    "path": "cases/I/pairs/openfoam12-kOmegaSST.csv",
+    "media_type": "text/csv",
+    "bytes": 113367,
+    "sha256": "549a7aa4117e2bb58e0811e90b6e2d344f49528a2f635ee9cd17757884ff0ce4"
+   },
+   "pairs_columns": "instrument (ldv or hydrocarbon_analyser), point_id (the table's: wind points 1-91, concentration points 92-630); x, y, z in m (case frame); U, V, W and k measured (_meas: the cleaned workbook values; V is empty on the y = 0 plane) and modelled (_model), velocities by U_H = 1.7 m/s, k by U_H^2; cstar_meas, the measured C/c0 (c0 = 39.22 ppm), and cstar_sct03 / _sct05 / _sct07, the modelled c* for turbulent Schmidt numbers 0.3, 0.5 and 0.7 (a wind row has no concentration columns and a concentration row no velocity columns)",
+   "reproduce": "Eddy3D fixture TestAijCubeContainerE2E (k-ω SST, 1:60) (numerics level 3, 3000 iterations); figures validation/plot_cases_hi_openfoam.py; scores recomputed from the pairs by validation/dispersion_metrics.py",
+   "source_file": "validation/results/caseI_openfoam12_kOmegaSST.json",
+   "source_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/validation/results/caseI_openfoam12_kOmegaSST.json",
+   "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
+  }
+ ],
+ "note": null
+}

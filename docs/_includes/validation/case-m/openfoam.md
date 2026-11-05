@@ -41,8 +41,6 @@ The tracer release over the Atsugi campus of Tokyo Polytechnic University: ethyl
 | $$k$$ | +0.446 | 0.133 | +1.131 | 0.067 | 15 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 FB is positive when the model is low, and left out (—) for a signed component whose measured and modelled means are not both positive.
 
 The concentration across the three Schmidt numbers:
@@ -52,8 +50,6 @@ The concentration across the three Schmidt numbers:
 | $$\mathrm{Sc_t}$$ 0.3 | +1.480 | +1.464 | 0.998 | 0.177 | 3.04 | 1.27 | 3 of 5 | 2.52 | 0.26 | 0.21 | 0.11 |
 | $$\mathrm{Sc_t}$$ 0.5 | +1.592 | +1.579 | 0.998 | 0.135 | 3.04 | 1.37 | 3 of 5 | 2.52 | 0.11 | 0.21 | 0.10 |
 | $$\mathrm{Sc_t}$$ 0.7 | +1.640 | +1.628 | 0.998 | 0.117 | 3.04 | 1.38 | 3 of 5 | 2.52 | 0.05 | 0.21 | 0.09 |
-
-{% include nomenclature-scores.md %}
 
 - **Tracer.** R is 0.41, 0.25 and 0.20 and FAC2 0.20, 0.20 and 0.13 from $$\mathrm{Sc_t}$$ 0.3 to 0.7; the mean $$c^\ast$$ is 0.18, 0.13 and 0.12 against the tunnel's 1.00 (FB +1.40 to +1.58), the peak 1.27 to 1.38 against 3.04, and three of the five highest points are shared. Over the imposed speed at the mast's height (3.934 m/s) FB is +1.48 and over the tunnel's 4.08 m/s +1.46 at $$\mathrm{Sc_t}$$ 0.3 (the solved speed at the mast is 4.686 m/s, 1.19 of the imposed one).
 - **Near and far points.** The three points nearest the source carry $$c^\ast$$ 2.52 in the tunnel and 0.26, 0.11 and 0.05 in the model; the two far downwind ones 0.21 in the tunnel and 0.11, 0.10 and 0.09 in the model. The tunnel's near points exceed its far ones by a factor of about twelve; the model's by 2.3 and 1.1 at $$\mathrm{Sc_t}$$ 0.3 and 0.5, and at $$\mathrm{Sc_t}$$ 0.7 they carry *less* (0.055 against 0.087).
@@ -73,3 +69,9 @@ The concentration across the three Schmidt numbers:
 </details>
 
 {% include figure.html name="case-m-openfoam-plan.png" alt="Case M, the tracer on the plan of the campus" caption="<strong>Figure 3.</strong> Case M, WD 180: $$\log_{10}$$ of $$c^\ast$$ at the 15 points on the plan of the campus, the tunnel and the three Schmidt numbers on one scale (open: below $$10^{-3}$$ or zero). The star is the gas source and the square the reference mast; the arrow is the wind." %}
+
+### Field maps
+
+The solved velocity on the measured planes, every point drawn on it as a dot coloured by its measured value on the same scale: a dot that stands out from the colour around it is a point the model misses.
+
+{% include figure.html name="case-m-openfoam-field-plan.png" alt="Solved field and measured points, Case M, plan" caption="<strong>Figure 4.</strong> Case M, the pedestrian level of the campus ($$z = 35.5\thinspace\mathrm{m}$$ above the tunnel floor), tunnel WD 180: (a) $$u$$ over $$U_R$$; (b) the same with iso-lines every 0.1 and the edge of the reversed flow, $$u = 0$$, dashed; (c) the in-plane speed with streamlines." %}

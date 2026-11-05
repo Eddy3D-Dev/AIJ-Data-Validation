@@ -53,8 +53,6 @@ description: "Case B — 1:4:4 slab: configuration, frame and units, reference d
 | Unit of variance | m²/s² |
 | Unit of $$k$$ | m²/s² |
 
-{% include nomenclature.md %}
-
 ## Reference data
 
 Source in this repository: [`raw/cases/case-b/RS_caseB.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-b/RS_caseB.csv) (approach flow: [`raw/cases/case-b/AF_caseB.csv`](https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/main/raw/cases/case-b/AF_caseB.csv)).
@@ -90,8 +88,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | `k` | $$k$$ | m²/s², turbulent kinetic energy |
 | `campaign` |  | \'wind\_tunnel\' (model scale) or \'field\' (a full-scale observation: Cases F, G, M) |
 
-{% include nomenclature.md %}
-
 </details>
 
 ## Inflow
@@ -103,8 +99,6 @@ The columns of the cleaned table (`points.csv`, `points.json`), in order.
 | Roughness length $$z_0$$ (mm) | 0.882 |
 | $$U_H$$, measured (m/s) | 5.133 |
 | Log-law error at H | +2.9 % |
-
-{% include nomenclature.md %}
 
 ## Known data issues
 

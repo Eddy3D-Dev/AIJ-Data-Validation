@@ -6,6 +6,4 @@ Eddy3D's Wind Predictor (the public `Yel-2.0` network) predicts $$\lvert\mathbf{
 |---|---|---|---|---|---|---|
 | $$V_{\mathrm{s}}/U_H$$, 9 configurations | 1080 | +0.67 | 0.44 | +0.21 | 0.18 | $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$: FB +0.18, FAC2 0.93, R +0.87, hit rate 0.69 |
 
-{% include nomenclature-scores.md %}
-
 - FB is positive when the model is low. Reversing the wind changes the predicted field by at most $$1 \times 10^{-4}$$ $$U_{\mathrm{ref}}$$: the prediction does not depend on the wind direction.

@@ -15,6 +15,103 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [3.10.1] - 2026-10-22
+
+### Fixed
+
+- Case C of `submissions/eddy3d-of12-nutcap-lifted` is now the fixture's own probes (a re-solve of `TestAijCaseC{0D,1D,2D}ContainerE2E` on
+  PACE ICE) instead of values sampled from solved fields; the scores move by at most 0.02 (hit rate) and 0.03 (bias).
+
+## [3.10.0] - 2026-10-22
+
+### Added
+
+- Cases E and L in `submissions/eddy3d-of12-nutcap-lifted`, and Case D's 22.5° and 45° headings, from fresh re-solves of the Eddy3D fixtures on
+  PACE ICE with the cap lifted (a dot in D's probe names, E's 240-minute step limit and L's uncollected probe tables had stopped the first round).
+  Case E's thermistor-vector hit rate moves 0.412 to 0.550 (before) and 0.300 to 0.438 (after construction); Case L's $$U$$ 0.506 to 0.532,
+  $$k$$ 0.244 to 0.285 (bias 0.635 to 0.455), $$\theta$$ 0.985 to 0.994; Case D's scalar speed at 22.5° 0.667 to 0.652 and at 45° 0.712 to 0.652.
+
+## [3.9.1] - 2026-10-22
+
+### Fixed
+
+- `submissions/eddy3d-of12-nutcap-lifted` Case B is the served set-up with the cap lifted (it was the measured-inlet run): $$U$$ hit rate
+  0.562 to 0.540, bias 0.24 to 0.11; $$k$$ hit rate 0.223 to 0.201, bias 0.46 to 0.31.
+
+## [3.9.0] - 2026-10-22
+
+### Added
+
+- Case D (wind direction 0° only) in `submissions/eddy3d-of12-nutcap-lifted`, from a re-solve of the Eddy3D fixture on PACE ICE with the cap lifted:
+  the thermistor's scalar-speed hit rate moves 0.394 to 0.530, its bias 0.362 to 0.202. The 22.5° and 45° headings did not run (the fixture
+  stopped at an identifier it rejects). Case E's re-solve timed out after 240 minutes and Case L's probe tables were not kept by the job.
+
+## [3.8.0] - 2026-10-21
+
+### Added
+
+- Case G (conifer crown) in `submissions/eddy3d-of12-nutcap-lifted`, the one case the cap lift makes worse: the $$U$$ hit rate over the
+  solve's own approach speed falls 0.286 to 0.071 and $$k$$'s bias goes from −0.09 to −0.83, which suggests the drag values of the sweep
+  were calibrated with the cap on.
+
+## [3.7.0] - 2026-10-21
+
+### Added
+
+- Case C in `submissions/eddy3d-of12-nutcap-lifted` (nine configurations, from the solved fields of the cap-lifted ICE re-solves): the
+  thermistor's scalar-speed hit rate moves 0.567 to 0.583 (0D, wind 0), 0.492 to 0.558 (2D, wind 0), 0.875 to 0.842 (2D, 22.5°) and
+  0.883 to 0.908 (2D, 45°).
+
+## [3.6.0] - 2026-10-21
+
+### Added
+
+- Cases F and M in `submissions/eddy3d-of12-nutcap-lifted` (probes from the cap-lifted ICE re-solves): Case F's 9 m scalar-speed hit
+  rate moves 0.769 to 0.615 with its bias 0.126 to −0.013; Case M's $$c^\ast$$ hit rate 0.133 to 0.067, its bias 1.52 to 1.08.
+
+## [3.5.0] - 2026-10-21
+
+### Added
+
+- Case K in `submissions/eddy3d-of12-nutcap-lifted`: the $$k$$ hit rate moves 0.005 to 0.039 and $$U$$'s 0.123 to 0.232 with the cap lifted,
+  $$c^\ast$$ (Sc_t 0.5) 0.163 to 0.478.
+
+## [3.4.0] - 2026-10-21
+
+OpenFOAM's eddy-viscosity cap, lifted.
+
+### Added
+
+- `submissions/eddy3d-of12-nutcap-lifted` (Cases A, B, H): the served solves re-run with `nutMaxCoeff` 1e8 instead of OpenFOAM 12's
+  default 1e5, which holds $$\nu_t$$ at 1.5 m²/s and bounds $$\varepsilon$$ in 2–10 % of the cells of most of these solves. The
+  hit rate of $$k$$ moves 0.177 to 0.247 (A) and 0.305 to 0.339 (H), its bias falls in A, B and H, and its correlation falls too;
+  Case B is the measured-inlet run (the baseline is `eddy3d-of12-measured-inlet`). Case G, solved alike, scores worse with the cap
+  lifted ($$U$$ hit rate 0.29 to 0.07) and is not submitted.
+
+## [3.3.2] - 2026-10-21
+
+### Removed
+
+- `case-b-openfoam-field-plan.png` and `case-b-openfoam-field-section.png`: they were sampled from the measured-inlet solve
+  (the submission `eddy3d-of12-measured-inlet`), not from the served run, whose solve is not on the machine that samples the
+  planes; the two agree at $$r = 0.998$$ on the served points, which is why the check passed. Case B joins C, D and E in waiting
+  for its served solve. The figures after them on the Case B page are renumbered.
+
+## [3.3.1] - 2026-10-20
+
+Field maps: the solved flow on the measurement planes, with the measured points drawn on it.
+
+### Added
+
+- `case-{a,b,h,j,k,l}-*-field-plan.png` and `-field-section.png`, `case-{i,g}-openfoam-field-section.png`,
+  `case-{f,m}-openfoam-field-plan.png`: for every Eddy3D run whose solve is at hand (Cases A, B, F, G, H, I, J, K, L, M),
+  three panels on one plane: $$u$$; $$u$$ with iso-lines every 0.1 and the edge of the reversed flow ($$u = 0$$) dashed; the
+  in-plane speed with streamlines. Each measured point is a dot coloured by its measured value on the same scale, so a dot
+  that stands out from the field is a point the model misses. They are listed with each run's figures and on the case pages.
+- `validation/extract_planes.py` samples the solves on those planes (`validation/results/planes/`, with the frame, the speed
+  and a check against the served pairs: $$r \gt 0.98$$ on every plane, 0.987 at the lowest); `validation/plot_field_maps.py` draws the maps from
+  those snapshots in the pinned build. Cases C, D and E have no maps yet: their solves are not on the machine that sampled these.
+
 ## [3.3.0] - 2026-10-20
 
 Five more Eddy3D runs, scored and served as submissions: what moves the OpenFOAM 12 scores, and what does not.

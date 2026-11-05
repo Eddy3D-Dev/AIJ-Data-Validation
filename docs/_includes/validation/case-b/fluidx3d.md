@@ -5,8 +5,6 @@ FluidX3D (Eddy3D's GPU lattice-Boltzmann engine: D3Q19 with Smagorinsky LES) sol
 | $$U/U_H$$ | 88 | 0.64 | +0.26 | 0.57 | 0.95 | 0.78 / 0.68 / 0.97 |
 | $$W/U_H$$ | 88 | 0.48 | — | 0.32 | 0.85 | 0.78 / 0.69 / 0.95 |
 
-{% include nomenclature-scores.md %}
-
 - FluidX3D meets the ground with a bounce-back wall and no roughness wall function. In the empty domain the three lowest heights read 0.77, 0.58 and 0.93 of the imposed log law. Those points are scored separately (`velocity.*.excluded`) and drawn hollow in Figure 4.
 - Empty-domain control, $$U$$: FAC2 0.56, R 0.81. The solved field: FAC2 0.64, R 0.95.
 - $$V$$ is not a headline score: all 88 comparable points lie on the centre plane, where the mean $$V$$ is zero by symmetry.

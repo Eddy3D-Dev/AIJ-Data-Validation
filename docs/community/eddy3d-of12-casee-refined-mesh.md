@@ -38,8 +38,6 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | $$\lvert\mathbf{U}\rvert$$ | +0.869 | 0.762 | +0.237 | 0.388 | 80 | 80/80 |
 {: .scores }
 
-{% include nomenclature-scores.md %}
-
 ### config bc, wind\_direction\_deg 225.0
 
 | Score | R | FAC2 | FB | Hit rate | n | coverage |
@@ -47,5 +45,3 @@ Self-reported inputs, scored by this repository's build ([method]({{ '/validatio
 | $$\sqrt{\lvert\mathbf{U}\rvert^2 + 2k}$$ | +0.700 | 0.950 | +0.065 | 0.562 | 80 | 80/80 |
 | $$\lvert\mathbf{U}\rvert$$ | +0.708 | 0.812 | +0.208 | 0.388 | 80 | 80/80 |
 {: .scores }
-
-{% include nomenclature-scores.md %}

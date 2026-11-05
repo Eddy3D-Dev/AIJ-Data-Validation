@@ -19,8 +19,6 @@ All nine configurations (centre block 0D / 1D / 2D × WD 0°, 22.5°, 45°), sol
 | 2D | 22.5° | +0.906 | 0.983 | +0.091 | 0.875 | +0.240 / +0.894 |
 | 2D | 45° | +0.909 | 0.958 | +0.103 | 0.883 | +0.243 / +0.912 |
 
-{% include nomenclature-scores.md %}
-
 </details>
 
 {% include figure.html name="case-c-openfoam-bias-map.png" alt="Case C, where the model is slow or fast" caption="<strong>Figure 3.</strong> Case C, where the model is slow or fast." %}
