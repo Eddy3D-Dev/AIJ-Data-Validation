@@ -45,7 +45,7 @@ R, FAC2: range over the engine's headline scores, negative controls excluded. Th
 | <span class="label label-green status">scored</span> | A validation run exists and its scores are in `cases/{id}/validation.json`. |
 | <span class="label label-blue status">running</span> | The solve is in progress; no scores yet. |
 | <span class="label label-yellow status">pending</span> | Not run yet. |
-| <span class="label label-grey status">not comparable</span> | The engine cannot produce the measured quantity at the measured location: OpenLB at the resolution this hardware runs, on Cases C to E. The measurement behind it is on the [OpenLB and FluidX3D]({{ '/validation/engines/' | relative_url }}) page. |
+| <span class="label label-grey status">not comparable</span> | The engine cannot produce the measured quantity at the measured location: OpenLB at 2 m on Cases C to E, where its empty-domain control misses the bar. The measurement behind it is on the [OpenLB and FluidX3D]({{ '/validation/engines/' | relative_url }}) page. |
 
 - A dash in the matrix: the engine does not apply to the case.
 - **OpenFOAM 12** on Cases J and L is urbanMicroclimateFoam (UMF), the OpenFOAM 12 solver Eddy3D uses for non-isothermal flow; the isothermal solver was not run on them.
