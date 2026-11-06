@@ -59,6 +59,16 @@
   "web_bytes": 1024204,
   "width": 1600
  },
+ "case-a-openfoam-grid.png": {
+  "height": 581,
+  "master": "/assets/figures/case-a-openfoam-grid.png",
+  "master_bytes": 2145669,
+  "master_height": 4596,
+  "master_width": 12648,
+  "web": "/assets/web/case-a-openfoam-grid.png",
+  "web_bytes": 293408,
+  "width": 1600
+ },
  "case-a-openfoam-profiles.png": {
   "height": 855,
   "master": "/assets/figures/case-a-openfoam-profiles.png",
@@ -317,6 +327,16 @@
   "master_width": 9948,
   "web": "/assets/web/case-e-openfoam-bias-map.png",
   "web_bytes": 507044,
+  "width": 1600
+ },
+ "case-e-openfoam-grid.png": {
+  "height": 983,
+  "master": "/assets/figures/case-e-openfoam-grid.png",
+  "master_bytes": 1487988,
+  "master_height": 4956,
+  "master_width": 8064,
+  "web": "/assets/web/case-e-openfoam-grid.png",
+  "web_bytes": 392638,
   "width": 1600
  },
  "case-f-layout.png": {

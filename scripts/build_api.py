@@ -43,6 +43,7 @@ import json
 import os
 import re
 import shutil
+import statistics
 import struct
 import sys
 import zipfile
@@ -85,7 +86,7 @@ REPO_URL = C.REPO_URL
 SITE = C.SITE
 LIVE_BASE = SITE + "/api"         # the unversioned alias: always the newest release
 RAW_BASE = "https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/main/docs/api"
-SCHEMA_VERSION = "2.5.0"
+SCHEMA_VERSION = "2.6.0"
 RELEASE = R.version()             # the repository's release (VERSION); the API names it, it does not set it
 RELEASE_DATE = R.release_date()
 PINNED_BASE = f"{LIVE_BASE}/{RELEASE}"   # this release, frozen: nothing under it changes once the release is tagged
@@ -99,6 +100,13 @@ API_BASE = None          # the URL every document in the tree uses for its own f
 FALLBACK_BASE = None     # the same tree, raw from the repository
 
 CHANGELOG = [
+    {"version": "2.6.0", "date": "2026-11-06", "changes": [
+        "Added to cases/{id}/validation.json: `grid_study`, the grid-convergence study of the OpenFOAM fixture (Cases A and E; null "
+        "elsewhere): four meshes with every cell edge shrinking by sqrt(2), the scores on each mesh, the method (Roache's grid convergence "
+        "index by the Celik et al. 2008 procedure, computed by foamgci), and `bands`, cases/{id}/grid/openfoam12-realizableKE.csv: per point "
+        "the measured value, the value on the second mesh (cell scale 1.00) and that mesh's band. The study ran the fixture with the "
+        "eddy-viscosity cap lifted, so its values are its own, not the served run's.",
+    ]},
     {"version": "2.5.0", "date": "2026-10-18", "changes": [
         "Added: cases/{id}/probes.csv, the published points to probe, one row per measured row of the point table: the key columns a scored "
         "file carries (point_id, config, campaign, instrument, run, wind_direction_deg), x y z in the case frame, and `scored_as`, the families "
@@ -318,10 +326,25 @@ def _field_maps(case):
     return [f"case-{case.lower()}-{engine}-field-{kind}.png" for kind, _ in maps]
 
 
+# The grid-convergence studies validation/snapshot_grid.py snapshots under validation/results/grid/ (a .csv of per-point bands and a
+# .json of the meshes and the method each): case -> the file stem. Served as validation.json `grid_study`; every other case has none.
+GRID_STUDIES = {"A": "caseA_openfoam12_realizableKE", "E": "caseE_openfoam12_realizableKE"}
+GRID_ENGINE = "openfoam12-realizableKE"
+GRID_COLUMNS = {
+    "A": ("point_id (the measured table's, as in the pairs); x, y, z in m (case frame); for U, V, W and k: _meas, the measured value "
+          "(velocities by U_H, k by U_H^2, V in the unified sign); _model, the value on the 1.00 mesh of the study; _band, that mesh's band "
+          "(empty where there is none); _regime, monotonic / oscillatory / divergent / degenerate"),
+    "E": ("config (bc before / ac after construction), wind_direction, point_id; x, y, z in full-scale m (+x east, +y north); measured_ratio, "
+          "the tunnel's velocity ratio; scalar_ratio and vector_ratio, the modelled sqrt(|U|^2 + 2k) and |U| over the model's own U at 15.9 m "
+          "on the 1.00 mesh of the study; _band, that mesh's band (empty where there is none); _regime, monotonic / oscillatory / divergent / "
+          "degenerate, or `lost on the coarsest mesh` (point 74, inside a building on the 1.41 mesh)"),
+}
+
 RUNS = [
     *[run(c, "openfoam12-realizableKE", None, f"case{c}_openfoam12_realizableKE.json", _FOAM_A_B,
           [f"case-{c.lower()}-layout.png", f"case-{c.lower()}-openfoam-agreement.png", *(["case-a-openfoam-rans-urans.png"] if c == "A" else []),
-           f"case-{c.lower()}-openfoam-profiles.png", *(_field_maps(c) if c in FIELD_MAPS else [])],
+           f"case-{c.lower()}-openfoam-profiles.png", *(["case-a-openfoam-grid.png"] if c == "A" else []),
+           *(_field_maps(c) if c in FIELD_MAPS else [])],
           f"Eddy3D fixture TestAijCase{c}ContainerE2E; figures validation/plot_cases_ab_openfoam.py",
           f"case{c}_openfoam12_realizableKE_pairs.csv", PAIRS_AB) for c in ("A", "B")],
     *[run("C", "openfoam12-realizableKE", cb, f"caseC_openfoam12_realizableKE_{cb}.json", _FOAM_C,
@@ -367,7 +390,7 @@ RUNS = [
     run("E", "openfoam12-realizableKE", "SW", "caseE_openfoam12_realizableKE.json",
         {"before, √(|U|²+2k)": "vr.bc.SW.rms", "before, |U|": "vr.bc.SW.Umag", "after, √(|U|²+2k)": "vr.ac.SW.rms",
          "after, |U|": "vr.ac.SW.Umag", "no-construction ceiling control": "noConstruction.SW"},
-        ["case-e-layout.png", "case-e-openfoam-agreement.png", "case-e-openfoam-bias-map.png"],
+        ["case-e-layout.png", "case-e-openfoam-agreement.png", "case-e-openfoam-bias-map.png", "case-e-openfoam-grid.png"],
         "Eddy3D fixture TestAijCaseEContainerE2E (EDDY3D_AIJ_E_DIRECTIONS=SW, tabulated inlet); figures "
         "validation/plot_case_e_openfoam.py", "caseE_openfoam12_realizableKE_pairs.csv",
         "config (bc before / ac after construction), wind_direction, point_id; x, y, z in full-scale m (+x east, +y north); "
@@ -684,6 +707,13 @@ RUNS += [
 # One caption per validation figure, used on the case pages and served with each result.
 PAGE_FIGURES = {"cases-cd-scores.png"}   # figures of a hand-written page that belong to no one run (docs/validation.md)
 FIGURE_CAPTIONS = {
+    "case-a-openfoam-grid.png": ("Case A, OpenFOAM 12 (realizable k-ε) with the eddy-viscosity cap lifted, on the second of four meshes (cell scale 1.00): "
+                                 "measured against modelled U, V, W and k, each point with that mesh's grid uncertainty (Roache's GCI where the "
+                                 "four-mesh ladder converges monotonically at the point, half the spread of three meshes where it oscillates); "
+                                 "hollow where the change grows under refinement and there is no band."),
+    "case-e-openfoam-grid.png": ("Case E, OpenFOAM 12 (realizable k-ε) with the eddy-viscosity cap lifted, on the second of four meshes (cell scale 1.00): "
+                                 "measured velocity ratio against the modelled sqrt(|U|^2 + 2k)/U_ref before and after construction, each point "
+                                 "with that mesh's grid uncertainty; hollow where there is no band."),
     "case-a-openfoam-rans-urans.png": ("Case A, OpenFOAM 12: the served steady run (RANS, realizable k-ε, log-law inlet) and the same solver run transient (URANS, "
                                        "SST k-ω, measured inlet), R, FAC2, FB and hit rate of U, V, W and k, the dashed line where a perfect model scores."),
     **{f"case-{c.lower()}-{engine}-field-{kind}.png": (f"Case {c}, OpenFOAM 12{' (urbanMicroclimateFoam)' if engine == 'umf' else ''}: the solved field on {where}. "
@@ -1042,6 +1072,8 @@ def write_data(case):
     for r in RUNS:
         if r["case"] == case:
             copy_file(os.path.join(RESULTS_DIR, r["pairs"]), f"cases/{case}/pairs/{r['engine']}.csv")
+    if case in GRID_STUDIES:
+        copy_file(os.path.join(RESULTS_DIR, "grid", GRID_STUDIES[case] + ".csv"), f"cases/{case}/grid/{GRID_ENGINE}.csv")
     probes = B.probes_rows(case, rows, B.scoring_block(case, METRIC_MEANING))
     write_csv(f"cases/{case}/probes.csv", B.PROBES_COLUMNS, probes)
     write_text(f"cases/{case}/inflow_openfoam.txt", B.inflow_openfoam_text(case, D.CASES[case], af, af_cols, probes, SITE, RELEASE))
@@ -1096,7 +1128,7 @@ def compute_data_version():
     for rel in sorted(WRITTEN):
         if rel.endswith((".csv", ".stl")):
             entries.append(f"api/{rel}\t{_sha256(rel)[0]}")
-    for r in sorted({r["results"] for r in RUNS}):
+    for r in sorted({r["results"] for r in RUNS} | {f"grid/{stem}.json" for stem in GRID_STUDIES.values()}):
         with io.open(os.path.join(RESULTS_DIR, r), encoding="utf-8") as f:
             canonical = json.dumps(json.load(f), sort_keys=True, separators=(",", ":"), ensure_ascii=False)
         entries.append(f"validation/results/{r}\t{hashlib.sha256(canonical.encode('utf-8')).hexdigest()}")
@@ -1115,6 +1147,41 @@ def check_runs_registry():
     missing = sorted({r["pairs"] for r in RUNS if not os.path.isfile(os.path.join(RESULTS_DIR, r["pairs"]))})
     if missing:
         raise SystemExit(f"RUNS names pairs files that are not in validation/results/: {missing}")
+    grid_dir = os.path.join(RESULTS_DIR, "grid")
+    on_disk = set(os.listdir(grid_dir)) if os.path.isdir(grid_dir) else set()
+    listed = {f"{stem}{ext}" for stem in GRID_STUDIES.values() for ext in (".csv", ".json")}
+    if on_disk != listed:
+        raise SystemExit(f"validation/results/grid/ and GRID_STUDIES disagree: unregistered {sorted(on_disk - listed)}, missing {sorted(listed - on_disk)}")
+
+
+def grid_study(case):
+    """validation.json `grid_study`: the study's meshes, scores and method from its .json, its bands' statistics from its .csv."""
+    if case not in GRID_STUDIES:
+        return None
+    base = os.path.join(RESULTS_DIR, "grid", GRID_STUDIES[case])
+    with io.open(base + ".json", encoding="utf-8") as f:
+        study = json.load(f)
+    with io.open(base + ".csv", encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+    quantities = ("U", "V", "W", "k") if case == "A" else ("scalar", "vector")
+    bands = {}
+    for q in quantities:
+        for cfg in sorted({r.get("config", "") for r in rows}):
+            sel = [r for r in rows if r.get("config", "") == cfg]
+            b = sorted(float(r[f"{q}_band"]) for r in sel if r[f"{q}_band"])
+            regimes = {}
+            for r in sel:
+                regimes[r[f"{q}_regime"]] = regimes.get(r[f"{q}_regime"], 0) + 1
+            bands[f"{cfg}.{q}" if cfg else q] = {
+                "points": len(sel), "with_band": len(b), "regimes": dict(sorted(regimes.items())),
+                "band_median": round(statistics.median(b), 6), "band_p90": round(b[min(len(b) - 1, round(0.9 * (len(b) - 1)))], 6),
+                "within_hit_rate_tolerance": sum(1 for v in b if v <= 0.05)}
+    keep = ("configuration", "method", "band_meaning", "grids", "refinement_ratios", "scores_on_each_grid", "recirculation_Lr_over_H",
+            "recirculation_Lr_over_H_extrapolated", "note", "source")
+    return {"engine": GRID_ENGINE, "served_cell_scale": 1.0, **{k: study[k] for k in keep if k in study},
+            "bands_summary": bands, "bands": download(f"cases/{case}/grid/{GRID_ENGINE}.csv"), "bands_columns": GRID_COLUMNS[case],
+            "figure": {"url": f"{SITE}/assets/figures/case-{case.lower()}-openfoam-grid.png",
+                       "caption": FIGURE_CAPTIONS[f"case-{case.lower()}-openfoam-grid.png"]}}
 
 
 def is_metric(v):
@@ -1271,6 +1338,7 @@ def write_case_documents(case, d):
         "status_meaning": STATUS_MEANING,
         "engines": [{"engine": e["id"], "status": ENGINE_STATUS[case][e["id"]]} for e in case_engines(case)],
         "results": results,
+        "grid_study": grid_study(case),
         "note": (None if results else "No validation has been run for this case yet; results is an empty list. "
                  f"{QUEUED}"),
     })
@@ -2658,15 +2726,10 @@ def _leaderboard(case):
                                    + [cell(mhr, n, ".3f"), cell(mf2, n + 1, ".3f"), cell(mr, n + 2, "+.3f"), cell(mr2, n + 3, ".3f")] + ([f"{100 * cov:.0f} %"] if partial else [])) + " |")
     L += ["{: .scores }"]
     L += _legend(L[2:]) + ["",
-          "Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's "
-          "runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run "
-          "here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over "
-          "them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; "
-          "the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. "
-          + ("*Points scored* is the share of the measured points a run gave values at. " if partial else "Every run gave values at every measured point. ")
-          + "The ML surrogate is not on the board: its "
-          "values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are "
-          f"not runs and are left out. Community rows are self-reported values ({_link('Validate your own solver', '/byos/')}).", ""]
+          "All runs scored by `validation/score_submissions.py`. Ranked by mean hit rate (VDI 3783) over the tasks; bold: best per column. "
+          + ("*Points scored*: share of measured points with values. " if partial else "")
+          + "Not ranked: the ML surrogate (no point ids) and negative controls. "
+          f"Community rows are self-reported ({_link('Validate your own solver', '/byos/')}).", ""]
     return L
 
 
@@ -2738,6 +2801,10 @@ def _case_validation_page(case, meta, p, shared):
                 L += ["Notes:", ""] + facts + [""]
             L += _sections(norm_collapsed + collapsed)
             figures += [f for f in e["figures"] if f not in figures]
+    inc, figs = _reading(meta, "grid")        # the grid-convergence study (validation.json grid_study), after every engine
+    shown |= figs
+    if inc:
+        L += ["## Grid uncertainty", ""] + inc
     unshown = [f["url"] for f in figures if f["url"].rsplit("/", 1)[-1] not in shown]
     if unshown:
         raise SystemExit(f"Case {case}: figures {unshown} are in no part of its reading (docs/_includes/validation/{meta['slug']}/), which numbers the figures")

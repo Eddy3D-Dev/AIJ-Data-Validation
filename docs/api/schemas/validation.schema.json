@@ -316,6 +316,169 @@
      }
     }
    }
+  },
+  "grid_study": {
+   "description": "the grid-convergence study of the OpenFOAM fixture; null where none was run",
+   "anyOf": [
+    {
+     "type": "null"
+    },
+    {
+     "type": "object",
+     "required": [
+      "engine",
+      "configuration",
+      "method",
+      "band_meaning",
+      "grids",
+      "scores_on_each_grid",
+      "bands_summary",
+      "bands",
+      "bands_columns",
+      "figure",
+      "source"
+     ],
+     "properties": {
+      "engine": {
+       "enum": [
+        "openfoam12-realizableKE",
+        "openfoam12-kEpsilon",
+        "openfoam12-kOmegaSST",
+        "umf-realizableKE",
+        "umf-buoyantKEpsilon",
+        "openlb",
+        "fluidx3d",
+        "ml-surrogate"
+       ]
+      },
+      "served_cell_scale": {
+       "type": "number"
+      },
+      "configuration": {
+       "type": "string",
+       "description": "what was solved: the served fixture with the eddy-viscosity cap lifted"
+      },
+      "method": {
+       "type": "string"
+      },
+      "band_meaning": {
+       "type": "string"
+      },
+      "grids": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "description": "cell_scale, cells (per state for Case E) and iterations of each mesh, coarse first"
+       }
+      },
+      "refinement_ratios": {
+       "description": "(N_fine/N_coarse)^(1/3) of each consecutive pair, per state for Case E"
+      },
+      "scores_on_each_grid": {
+       "type": "object",
+       "description": "headline label -> per mesh, coarse first: Fac2, Fb, HitRate and R, or null where that mesh was not scored",
+       "additionalProperties": {
+        "type": "array",
+        "items": {
+         "type": [
+          "object",
+          "null"
+         ]
+        }
+       }
+      },
+      "recirculation_Lr_over_H": {
+       "type": "array",
+       "items": {
+        "type": "number"
+       }
+      },
+      "recirculation_Lr_over_H_extrapolated": {
+       "type": "object"
+      },
+      "note": {
+       "type": "string"
+      },
+      "bands_summary": {
+       "type": "object",
+       "description": "per quantity (and state): points, with_band, regimes, band_median, band_p90 and within_hit_rate_tolerance (bands at or below W = 0.05)"
+      },
+      "bands": {
+       "type": "object",
+       "required": [
+        "url",
+        "path",
+        "media_type",
+        "bytes",
+        "sha256"
+       ],
+       "properties": {
+        "url": {
+         "type": "string",
+         "format": "uri",
+         "description": "absolute URL; the ?v= query is the file's SHA-256 prefix, so a changed file has a new URL"
+        },
+        "path": {
+         "type": "string",
+         "description": "path below the API base"
+        },
+        "media_type": {
+         "type": "string"
+        },
+        "bytes": {
+         "type": "integer",
+         "minimum": 0
+        },
+        "sha256": {
+         "type": "string",
+         "pattern": "^[0-9a-f]{64}$"
+        }
+       }
+      },
+      "bands_columns": {
+       "type": "string"
+      },
+      "figure": {
+       "type": "object",
+       "required": [
+        "url",
+        "caption"
+       ],
+       "properties": {
+        "url": {
+         "type": "string",
+         "format": "uri"
+        },
+        "caption": {
+         "type": "string"
+        }
+       }
+      },
+      "source": {
+       "type": "object",
+       "required": [
+        "repository",
+        "commit"
+       ],
+       "properties": {
+        "repository": {
+         "type": "string",
+         "format": "uri"
+        },
+        "folder": {
+         "type": "string"
+        },
+        "commit": {
+         "type": "string"
+        },
+        "documentation": {
+         "type": "string"
+        }
+       }
+      }
+     }
+    }
+   ]
   }
  }
 }
