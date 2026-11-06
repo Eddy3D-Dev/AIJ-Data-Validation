@@ -232,8 +232,8 @@ STATUS_MEANING = {
     "scored": "a validation run exists and its scores are in cases/{id}/validation.json",
     "running": "the solve is in progress; no scores yet",
     "pending": "not run yet",
-    "not comparable": ("the engine cannot produce the measured quantity at the measured location: OpenLB at the resolution "
-                       "this hardware runs, on Cases C to E; the measurement behind it is on the "
+    "not comparable": ("the engine cannot produce the measured quantity at the measured location: OpenLB at 2 m on "
+                       "Cases C to E, where its empty-domain control misses the bar; the measurement behind it is on the "
                        "Validation page"),
 }
 # The closures other than realizable k-epsilon were solved for Case I alone (simpleFoam) and Case J (UMF): they are listed for the cases they apply to

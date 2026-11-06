@@ -15,6 +15,19 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [3.11.1] - 2026-11-06
+
+### Changed
+
+- OpenLB stays `not comparable` on Cases C to E, now on new empty-domain controls. With Eddy3D's OpenLB ground wall model
+  and the rough law, in a domain 256 m wide and 320 m tall at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$, the mean at the
+  cases' 2 m height is within 4 % of the imposed log law (0.23–0.26 with the bounce-back ground), but not every point is
+  within 5 %: Case C 1.02–1.07 (the 9 points over 5 % all within 144 m of the inlet); Case E 1.012–1.046 averaged over half
+  the time the 2 m layer takes to cross the domain, 0.985–1.0504 over two crossings and 0.94–1.06 over the second alone;
+  Case D 0.949–1.055 (a pattern across the span: the centre line 0.956, the lines 64 m either side 1.027). The meaning of
+  `not comparable` in `validation.json` now names the control. The controls ran on `openlb-wind:1.9.3-r4` and `-r5`, before
+  Eddy3D's `1.9.3-r6` moved the lattice's ground row half a cell down.
+
 ## [3.11.0] - 2026-11-06
 
 ### Added
