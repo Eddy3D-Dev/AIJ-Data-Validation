@@ -22,7 +22,7 @@ redirect_from:
 {:toc}
 </details>
 
-Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-grey status">not comparable</span> · FluidX3D <span class="label label-grey status">not comparable</span> · ML surrogate <span class="label label-green status">scored</span>
+Engine status: OpenFOAM 12 <span class="label label-green status">scored</span> · OpenLB <span class="label label-grey status">not comparable</span> · FluidX3D <span class="label label-yellow status">pending</span> · ML surrogate <span class="label label-green status">scored</span>
 
 {% include nomenclature.md %}
 
@@ -64,7 +64,7 @@ Status: <span class="label label-grey status">not comparable</span>
 
 ## FluidX3D
 
-Status: <span class="label label-grey status">not comparable</span>
+Status: <span class="label label-yellow status">pending</span>
 
 {% include validation/case-e/fluidx3d.md %}
 

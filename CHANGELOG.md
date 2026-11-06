@@ -15,6 +15,16 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [3.10.2] - 2026-11-05
+
+### Changed
+
+- FluidX3D's status on Cases C, D and E is `pending`, not `not comparable`. Eddy3D's FluidX3D has had an opt-in ground wall
+  function since 2026-11-05, and in an empty-domain control 96 m wide at each case's own inflow, $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$
+  and a steady log-law inflow, every point at the cases' 2 m height is within 5 % of the imposed log law (C 0.99–1.01, D 0.954–0.969,
+  E 0.98–0.99; 0.20–0.74 with the bounce-back ground). FluidX3D has not been run on these cases. The meaning of `not comparable`
+  in `validation.json` now names OpenLB alone.
+
 ## [3.10.1] - 2026-10-22
 
 ### Fixed

@@ -50,19 +50,19 @@ Validation data from the AIJ (Architectural Institute of Japan) benchmark cases�
 **API, APA**
 
 ```text
-Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.10.1) [Data set]. Sustainable Urban Systems Lab. https://aij.eddy3d.com/api/3.10.1/index.json
+Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.10.2) [Data set]. Sustainable Urban Systems Lab. https://aij.eddy3d.com/api/3.10.2/index.json
 ```
 
 **API, BibTeX**
 
 ```bibtex
-@misc{aijuwe_api_3_10_1,
+@misc{aijuwe_api_3_10_2,
   author    = "Karadag, Ilker and Kastner, Patrick",
   title     = "{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}",
   year      = "2026",
-  version   = "3.10.1",
+  version   = "3.10.2",
   publisher = "Sustainable Urban Systems Lab",
-  url       = "https://aij.eddy3d.com/api/3.10.1/index.json",
+  url       = "https://aij.eddy3d.com/api/3.10.2/index.json",
   note      = "Data set; data version 5abd0adb307e"
 }
 ```
@@ -177,9 +177,9 @@ Data: Kikumoto et al. (2026), CC BY 4.0. Collectors per case on each Data page.
 |---|---|---|---|---|---|
 | A | scored | — | scored | scored | scored |
 | B | scored | — | scored | scored | scored |
-| C | scored, 9 configurations | — | not comparable at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ | not comparable (no ground wall function) | scored |
-| D | scored, WD 0°, 22.5° and 45° | — | not comparable at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ | not comparable (no ground wall function) | scored |
-| E | scored, SW | — | not comparable at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ | not comparable (no ground wall function) | scored |
+| C | scored, 9 configurations | — | not comparable at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ | pending (its ground wall function holds 2 m at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$) | scored |
+| D | scored, WD 0°, 22.5° and 45° | — | not comparable at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ | pending (its ground wall function holds 2 m at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$) | scored |
+| E | scored, SW | — | not comparable at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ | pending (its ground wall function holds 2 m at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$) | scored |
 | F | scored, wind from NNW in two vertical frames | — | pending | pending | pending |
 | G | scored, a drag sweep of four arms and a half belt | — | pending | pending | pending |
 | H | scored | — | pending | pending | pending |
@@ -1605,7 +1605,8 @@ and 88 of Case B's 224.
 
 <!--/nomenclature-->
 
-- FluidX3D meets the ground with a bounce-back wall and no roughness wall function. In the empty domain the flow at
+- The A and B runs meet the ground with FluidX3D's bounce-back wall; they predate Eddy3D's opt-in ground wall function. In
+  the empty domain the flow at
   Case A's lowest plane ($$z = 0.01\thinspace\mathrm{m}$$, 4 cells up) reads 0.52 of the imposed log law on average, and 0.86 at $$z = 0.04\thinspace\mathrm{m}$$;
   Case B's three lowest heights read 0.77, 0.58 and 0.93. The excluded points are scored separately
   (`velocity.*.excluded`) and drawn hollow in the figure.
@@ -1845,9 +1846,9 @@ served unchanged by the API, so the figures rebuild from this repository alone, 
 |---|---|---|---|---|---|
 | A | scored | — | scored | scored | scored |
 | B | scored | — | scored | scored | scored |
-| C | scored | — | not comparable at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ | not comparable (no ground wall function) | scored |
-| D | scored, WD 0°, 22.5° and 45° | — | not comparable at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ | not comparable (no ground wall function) | scored |
-| E | scored, SW | — | not comparable at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ | not comparable (no ground wall function) | scored |
+| C | scored | — | not comparable at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ | pending (its ground wall function holds 2 m at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$) | scored |
+| D | scored, WD 0°, 22.5° and 45° | — | not comparable at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ | pending (its ground wall function holds 2 m at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$) | scored |
+| E | scored, SW | — | not comparable at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ | pending (its ground wall function holds 2 m at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$) | scored |
 | F, G, H, I, K, M | scored (F in two vertical frames; G as a drag sweep; I also under standard k-ε and k-ω SST; M at three Schmidt numbers) | — | pending | pending | pending |
 | J, L | pending | scored (J also under buoyantKEpsilon) | pending | pending | pending |
 
@@ -1925,103 +1926,22 @@ served unchanged by the API, so the figures rebuild from this repository alone, 
 
 <!--/nomenclature-->
 
-**OpenLB on C–E: not comparable at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$.** Cases C, D and E measure only at pedestrian height,
-and a point is scoreable on OpenLB only once it sits three to four cells above its no-slip floor. On the A and B
-runs at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$, read in the undisturbed column at the heights the other cases measure at:
+**OpenLB on C–E: not comparable at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$.** Cases C, D and E measure only at 2 m full scale
+($$z = 0.1\thinspace D$$ at 1:100, $$z/H = 0.02$$ at 1:400, 2 m in the Niigata district): 1.25 cells above the ground at the A and B runs'
+$$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$. A point is scored only where every point at its height in an empty-domain control is within 5 % of
+the imposed log law, the bar FluidX3D's points meet. The control: an empty domain 32 m wide and 80 m tall, $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$,
+each case's own inflow at full scale (Case E: a log law fitted to its approach-flow profile below 60 m), the CPU image
+`openlb-wind:1.9.3-r4`, read on three lines every 16 m where the case's points would sit. $$U$$ at 2 m over the imposed log law,
+mean (range over the points), and the lowest height at which every point is within 5 %:
 
-| the other case's height | cells above the floor | $$U$$ / inlet log law (A run, B run) |
-|---|---|---|
-| Case D, $$z/H = 0.02$$ | below the first fluid node | 0.11, 0.13 — no prediction |
-| Case C, $$z = 0.1\thinspace D$$ | 1–1.25 | 0.29, 0.40 |
-| Case E, 2 m among ~6 m buildings ($$z/H \approx 0.33$$) | 3.3–4.1 | 1.00, 1.06 |
-
-<!--nomenclature full-->
-
-<details markdown="block">
-  <summary>Nomenclature: symbols, columns and scores</summary>
-
-**Geometry, reference scales and release**
-
-- $$H$$, $$b$$, $$D$$ (m) — height of the building, cube, tower or tree belt; width of the building; edge of the cubes of Case C: the lengths the cases are drawn and normalised by
-- $$U_H$$ (m/s) — reference speed: the mean approach-flow speed at the height $$H$$ (each Data page gives the value used)
-- $$U_R$$, $$H_R$$, $$Z_R$$ (m/s, m) — reference speed and height of a workbook: Case E, $$U_R$$ at $$Z_R$$ = 250 m full scale (1 m in the model); Case M, $$U_R$$ and $$H_R$$ at the reference point of the tunnel and of each field run
-- $$U_{\mathrm{ref}}$$, $$L_{\mathrm{ref}}$$ (m/s, m) — reference speed and length of a case's normalisation: $$U_H$$ and $$H$$ ($$U_R$$ and $$H_R$$ in Case M); for the velocity ratios the approach speed at 15.9 m (Case E) or at 500 m (Case F)
-- $$U_b$$ (m/s) — Case G: mean approach-flow speed at 9 m, the normalisation of its approach-flow table
-- $$q$$, $$c_{\mathrm{gas}}$$ (m³/s, ppm) — tracer release of the experiment: volume flow of the released gas, and its tracer content ($$10^6$$ ppm when pure); $$Q$$ is the source strength given to a solve
-- $$R_b$$ (dimensionless) — bulk Richardson number of the heated-floor cases J and L (negative: unstable stratification)
-- $$\mathrm{Re_H}$$, $$\mathrm{Re_D}$$ (dimensionless) — Reynolds numbers $$U_H H/\nu$$ and $$U_H D/\nu$$ ($$\nu$$: kinematic viscosity of air)
-- $$u_\ast$$, $$z_0$$, $$\kappa$$ (m/s, mm, dimensionless) — friction velocity and roughness length of the log law fitted to the approach flow, and the von Kármán constant (0.41)
-- $$\mathrm{WD}$$ (column `wind_direction_deg`; °) — wind direction (each frame says how it is counted); $$\mathrm{WD_R}$$ is the mean direction of a field run at its reference point (Case M)
-- $$x$$, $$y$$, $$z$$ (columns `x`, `y`, `z`; m) — coordinates in the case's frame ($$+x$$, $$+y$$ and $$+z$$ are the positive directions; each Data page says which way $$+x$$ points), $$z$$ up from the floor of the tunnel or from the ground
-- $$\mathrm{d}x$$ (m) — lattice spacing of the OpenLB and FluidX3D runs, in metres or as a fraction of $$H$$ ($$H/64$$)
-- $$L_r$$ (m) — reattachment length behind the building, read from a wake line at ground level; reported as $$L_r/H$$
-
-**Velocity and turbulence**
-
-- $$U$$, $$V$$, $$W$$ (columns `U`, `V`, `W`; m/s) — mean velocity along $$+x$$, $$+y$$, $$+z$$; $$V$$ is positive toward $$+y$$ in every case
-- $$\lvert\mathbf{U}\rvert$$ (m/s) — magnitude of the mean velocity vector, $$\sqrt{U^2+V^2+W^2}$$
-- $$V_{\mathrm{s}}$$ (column `Vs`; m/s) — mean omnidirectional scalar speed of a thermistor (never a vector magnitude)
-- $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$ (columns `uu`, `vv`, `ww`; m²/s²) — velocity variances (overbar: time average, prime: fluctuation about it)
-- $$\overline{u'v'}$$, $$\overline{u'w'}$$, $$\overline{v'w'}$$ (columns `uv`, `uw`, `vw`; m²/s²) — Reynolds shear stresses
-- $$k = \tfrac{1}{2}\left(\overline{u'u'}+\overline{v'v'}+\overline{w'w'}\right)$$ (column `k`; m²/s²) — turbulent kinetic energy
-- $$U/U_{\mathrm{ref}}$$ (column `velocity_ratio`; dimensionless) — mean speed over the case's reference speed ($$V_{\mathrm{s}}/U_{\mathrm{ref}}$$ for a thermistor)
-- $$\sigma_{U/U_{\mathrm{ref}}}$$ (column `velocity_ratio_sd`; dimensionless) — standard deviation of `velocity_ratio` over the observations behind a field value (Case F)
-- $$k/U_{\mathrm{ref}}^2$$ (column `k_ratio`; dimensionless) — turbulent kinetic energy over the square of the reference speed, where only normalised values are published (Case G)
-
-**Concentration and temperature**
-
-- $$C$$ (column `C`; ppm) — mean tracer-gas concentration as published (volume fraction $$\times 10^6$$ of the released gas diluted in air)
-- $$c_{\mathrm{rms}}$$ (column `c_rms`; ppm) — root mean square of the concentration fluctuation
-- $$c_0$$ (ppm) — reference concentration, defined for each case on its Data page: $$c_0 = \dfrac{c_{\mathrm{gas}}\thinspace q}{U_H H^2}$$ ($$U_R H_R^2$$ in the denominator in Case M)
-- $$c^\ast$$ (column `concentration_ratio`; dimensionless) — dimensionless concentration $$c^\ast = C/c_0$$; the value of a solve is $$c\thinspace U_H H^2/Q$$ for its mean concentration $$c$$ and its source strength $$Q$$
-- $$\mathrm{Sc_t}$$ (dimensionless) — turbulent Schmidt number of a solve (0.3, 0.5 and 0.7)
-- $$T$$, $$T_{\mathrm{rms}}$$ (columns `T`, `T_rms`; °C, K) — mean air temperature as published (Cases J and L) and the root mean square of its fluctuation
-- $$\overline{u'c'}$$, $$\overline{v'c'}$$, $$\overline{w'c'}$$ (columns `uc`, `vc`, `wc`; ppm·m/s) — turbulent concentration fluxes
-- $$\overline{u'\theta'}$$, $$\overline{v'\theta'}$$, $$\overline{w'\theta'}$$ (columns `uT`, `vT`, `wT`; K·m/s) — turbulent heat fluxes ($$\theta'$$: the temperature fluctuation)
-- $$\theta = \dfrac{T_f - T}{T_f - T_H}$$ (dimensionless) — floor-referenced temperature the solves of Cases J and L are scored on: 0 at the floor, 1 in the approach air at $$H$$; $$T_f$$ is the floor temperature and $$T_H$$ the temperature of the approach flow at $$H$$
-
-**Scores**
-
-- $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
-- $$R$$ — Pearson correlation coefficient of the pairs
-- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
-- $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
-- $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
-- $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
-- $$\mathrm{NMSE} = \dfrac{\overline{(o-p)^2}}{\overline{o}\thinspace \overline{p}}$$ — normalised mean square error
-- $$\mathrm{NAD} = \dfrac{\overline{\lvert o-p\rvert}}{\overline{o}+\overline{p}}$$ — normalised absolute difference
-- $$\mathrm{MG} = \exp\overline{(\ln o-\ln p)}$$ — geometric mean bias
-- $$\mathrm{VG} = \exp\overline{(\ln o-\ln p)^2}$$ — geometric variance
-- The ratio of $$\mathrm{FAC2}$$ keeps its sign, so a model of the other sign than the measurement is a miss; $$\mathrm{FB}$$, $$\mathrm{NMSE}$$ and $$\mathrm{NAD}$$ divide by the means, so they are undefined (shown as —) for a signed component unless the measured and the modelled mean are both positive
-- VDI 3783-9 calls the hit rate $$q$$ and the tolerances $$D$$ and $$W$$; on this site those letters keep their other meanings ($$q$$ the tracer release rate, $$D$$ the block size of Case C, $$W$$ the vertical velocity)
-- The detection limit of a concentration is one value per case, $$10^{-3}$$ of the largest measured value. It sets $$\delta_{\mathrm{abs}}$$ of the hit rate and the both-below rule of $$\mathrm{FAC2}$$, and floors the values in $$\mathrm{MG}$$ and $$\mathrm{VG}$$.
-- The scores $$\mathrm{FB}$$, $$\mathrm{FAC2}$$, $$\mathrm{NMSE}$$, $$\mathrm{NAD}$$, $$\mathrm{MG}$$ and $$\mathrm{VG}$$ follow Chang & Hanna (2004); the hit rate follows VDI 3783-9.
-
-**Quantities scored**
-
-- $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$U_H$$
-- $$k$$ (turbulent kinetic energy) over $$U_H^2$$
-- the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
-- $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
-- $$\theta$$ (floor-referenced temperature)
-
-</details>
-
-<!--/nomenclature-->
-
-A 2 m pedestrian plane needs $$\mathrm{d}x \le 0.5\thinspace\mathrm{m}$$: 3.2 times finer in every direction, about 33 times the cells and 105 times
-the cell-steps over the same domain. The Case C array and the Niigata district are larger domains than Case A's. This CPU
-image does not run that in useful time; a GPU run at $$\mathrm{d}x \le 0.5\thinspace\mathrm{m}$$ would decide it.
-
-**FluidX3D on C–E: not comparable (no ground wall function).** In the empty-domain run at $$H/64$$, $$4\text{–}6\thinspace H$$ downstream of the
-inlet (where the buildings stand), the flow at the heights the other cases measure at reads, as a fraction of the
-imposed log law (mean across a span of $$\pm H$$):
-
-| the other case's height | cells above the floor at $$H/64$$ | $$U$$ / log law |
-|---|---|---|
-| Case D, $$z/H = 0.02$$ | 1.3 | 0.37–0.53 |
-| Case C, $$z/H = 0.10$$ | 6.4 | 0.58–0.68 |
-| Case E, 2 m among ~6 m buildings ($$z/H \approx 0.33$$) | 21 | 0.91–0.99 |
+| | Case C | Case D | Case E |
+|---|---|---|---|
+| distance from the inlet | 80–320 m | 770–1010 m | 350–650 m |
+| bounce-back | 0.30 (0.23–0.39) | 0.26 (0.10–0.41) | 0.23 (0.16–0.35) |
+| wall model, power law | 1.00 (0.92–1.06) | 1.03 (0.95–1.11) | 0.87 (0.80–1.04) |
+| wall model, rough law | 0.99 (0.91–1.05) | 1.01 (0.93–1.08) | 0.94 (0.87–1.07) |
+| lowest height with every point within 5 %, bounce-back | 19.2 m (12 cells) | 64 m (40 cells) | 48 m (30 cells) |
+| lowest height with every point within 5 %, either wall law | 12.8 m (8 cells) | none | 32 m (20 cells) |
 
 <!--nomenclature full-->
 
@@ -2097,19 +2017,133 @@ imposed log law (mean across a span of $$\pm H$$):
 
 <!--/nomenclature-->
 
-At $$H/32$$ the $$z/H = 0.10$$ height reads 0.74–0.80 (3.2 cells up); at $$H/64$$ the near-wall flow forms stationary streaks, and
-across the span the ratio at $$z/H = 0.10$$ runs from 0.24 to 0.88 ($$4\thinspace H$$ downstream). Case E's height comes closest
-(0.91–0.99 at Case A's lattice); the Niigata district fits on this GPU only at about 1.6 cells per 2 m (an estimate from
-the lattice sizes).
+- With either wall law the 2 m layer runs up to 6 % over the log law in the first 100 m and 7–14 % under it 300–600 m in, in all
+  three cases; in Case D the rough law is back within 4 % beyond 750 m.
+- Beyond about 450 m from the inlet the control varies across its span at every height: at 12.8 m in Case D, 0.69–1.07 with
+  bounce-back and 0.84–1.09 with the rough law.
+- On 24 threads the wall model takes 6.7–6.9 times the bounce-back run's wall time. The CUDA build carries it.
+- Scripts, probes and run times: Eddy3D, `testing/aij-openlb-ground-wall/`.
 
-FluidX3D has no ground wall function; scoring Cases C to E needs one in the engine.
+<details markdown="block">
+<summary>Interpretation: OpenLB on Cases C to E</summary>
+
+- The wall model removes the collapsed floor: the 2 m mean goes from a quarter of the log law to within 1 % of it in Cases C and D.
+- What keeps the cases unscored is the wall-modelled layer's adjustment along the fetch, about ±10 % at 1.25 cells.
+- In Case C every point clears the bar from 8 cells up. If the layer behaves the same in cells at a finer lattice, a 2 m plane
+  needs $$\mathrm{d}x \le 0.25\thinspace\mathrm{m}$$, a GPU lattice for these domains.
+- The Case D and E controls do not isolate the ground at their distance from the inlet; a control as wide and tall as the case's
+  own domain would.
+
+</details>
+
+**FluidX3D on C–E: pending.** FluidX3D has not been run on Cases C to E, and its ground wall function (Eddy3D, opt-in since
+2026-11-05; the A and B runs predate it) holds the 2 m plane in the control above: the same set-up on FluidX3D (Eddy3D's pinned
+commit 8986874e, FP16S, an Apple M2 Max), with open faces (slip sides and top, a pressure outlet) and a steady log-law inflow, the
+kind the A and B runs use, in the 32 m wide domain and in one 96 m wide. $$U$$ at 2 m over the imposed log law, mean (range over
+the points):
+
+| | Case C | Case D | Case E |
+|---|---|---|---|
+| distance from the inlet | 80–320 m | 770–1010 m | 350–650 m |
+| bounce-back, 32 m wide | 0.48 (0.38–0.60) | 0.53 (0.47–0.60) | 0.42 (0.30–0.52) |
+| ground wall function, 32 m wide | 1.00 (0.98–1.01) | 1.02 (0.95–1.06) | 0.98 (0.92–1.01) |
+| bounce-back, 96 m wide | 0.44 (0.38–0.55) | 0.46 (0.20–0.74) | 0.36 (0.20–0.56) |
+| ground wall function, 96 m wide | 1.00 (0.99–1.01) | 0.96 (0.954–0.969) | 0.99 (0.98–0.99) |
+
+<!--nomenclature full-->
+
+<details markdown="block">
+  <summary>Nomenclature: symbols, columns and scores</summary>
+
+**Geometry, reference scales and release**
+
+- $$H$$, $$b$$, $$D$$ (m) — height of the building, cube, tower or tree belt; width of the building; edge of the cubes of Case C: the lengths the cases are drawn and normalised by
+- $$U_H$$ (m/s) — reference speed: the mean approach-flow speed at the height $$H$$ (each Data page gives the value used)
+- $$U_R$$, $$H_R$$, $$Z_R$$ (m/s, m) — reference speed and height of a workbook: Case E, $$U_R$$ at $$Z_R$$ = 250 m full scale (1 m in the model); Case M, $$U_R$$ and $$H_R$$ at the reference point of the tunnel and of each field run
+- $$U_{\mathrm{ref}}$$, $$L_{\mathrm{ref}}$$ (m/s, m) — reference speed and length of a case's normalisation: $$U_H$$ and $$H$$ ($$U_R$$ and $$H_R$$ in Case M); for the velocity ratios the approach speed at 15.9 m (Case E) or at 500 m (Case F)
+- $$U_b$$ (m/s) — Case G: mean approach-flow speed at 9 m, the normalisation of its approach-flow table
+- $$q$$, $$c_{\mathrm{gas}}$$ (m³/s, ppm) — tracer release of the experiment: volume flow of the released gas, and its tracer content ($$10^6$$ ppm when pure); $$Q$$ is the source strength given to a solve
+- $$R_b$$ (dimensionless) — bulk Richardson number of the heated-floor cases J and L (negative: unstable stratification)
+- $$\mathrm{Re_H}$$, $$\mathrm{Re_D}$$ (dimensionless) — Reynolds numbers $$U_H H/\nu$$ and $$U_H D/\nu$$ ($$\nu$$: kinematic viscosity of air)
+- $$u_\ast$$, $$z_0$$, $$\kappa$$ (m/s, mm, dimensionless) — friction velocity and roughness length of the log law fitted to the approach flow, and the von Kármán constant (0.41)
+- $$\mathrm{WD}$$ (column `wind_direction_deg`; °) — wind direction (each frame says how it is counted); $$\mathrm{WD_R}$$ is the mean direction of a field run at its reference point (Case M)
+- $$x$$, $$y$$, $$z$$ (columns `x`, `y`, `z`; m) — coordinates in the case's frame ($$+x$$, $$+y$$ and $$+z$$ are the positive directions; each Data page says which way $$+x$$ points), $$z$$ up from the floor of the tunnel or from the ground
+- $$\mathrm{d}x$$ (m) — lattice spacing of the OpenLB and FluidX3D runs, in metres or as a fraction of $$H$$ ($$H/64$$)
+- $$L_r$$ (m) — reattachment length behind the building, read from a wake line at ground level; reported as $$L_r/H$$
+
+**Velocity and turbulence**
+
+- $$U$$, $$V$$, $$W$$ (columns `U`, `V`, `W`; m/s) — mean velocity along $$+x$$, $$+y$$, $$+z$$; $$V$$ is positive toward $$+y$$ in every case
+- $$\lvert\mathbf{U}\rvert$$ (m/s) — magnitude of the mean velocity vector, $$\sqrt{U^2+V^2+W^2}$$
+- $$V_{\mathrm{s}}$$ (column `Vs`; m/s) — mean omnidirectional scalar speed of a thermistor (never a vector magnitude)
+- $$\overline{u'u'}$$, $$\overline{v'v'}$$, $$\overline{w'w'}$$ (columns `uu`, `vv`, `ww`; m²/s²) — velocity variances (overbar: time average, prime: fluctuation about it)
+- $$\overline{u'v'}$$, $$\overline{u'w'}$$, $$\overline{v'w'}$$ (columns `uv`, `uw`, `vw`; m²/s²) — Reynolds shear stresses
+- $$k = \tfrac{1}{2}\left(\overline{u'u'}+\overline{v'v'}+\overline{w'w'}\right)$$ (column `k`; m²/s²) — turbulent kinetic energy
+- $$U/U_{\mathrm{ref}}$$ (column `velocity_ratio`; dimensionless) — mean speed over the case's reference speed ($$V_{\mathrm{s}}/U_{\mathrm{ref}}$$ for a thermistor)
+- $$\sigma_{U/U_{\mathrm{ref}}}$$ (column `velocity_ratio_sd`; dimensionless) — standard deviation of `velocity_ratio` over the observations behind a field value (Case F)
+- $$k/U_{\mathrm{ref}}^2$$ (column `k_ratio`; dimensionless) — turbulent kinetic energy over the square of the reference speed, where only normalised values are published (Case G)
+
+**Concentration and temperature**
+
+- $$C$$ (column `C`; ppm) — mean tracer-gas concentration as published (volume fraction $$\times 10^6$$ of the released gas diluted in air)
+- $$c_{\mathrm{rms}}$$ (column `c_rms`; ppm) — root mean square of the concentration fluctuation
+- $$c_0$$ (ppm) — reference concentration, defined for each case on its Data page: $$c_0 = \dfrac{c_{\mathrm{gas}}\thinspace q}{U_H H^2}$$ ($$U_R H_R^2$$ in the denominator in Case M)
+- $$c^\ast$$ (column `concentration_ratio`; dimensionless) — dimensionless concentration $$c^\ast = C/c_0$$; the value of a solve is $$c\thinspace U_H H^2/Q$$ for its mean concentration $$c$$ and its source strength $$Q$$
+- $$\mathrm{Sc_t}$$ (dimensionless) — turbulent Schmidt number of a solve (0.3, 0.5 and 0.7)
+- $$T$$, $$T_{\mathrm{rms}}$$ (columns `T`, `T_rms`; °C, K) — mean air temperature as published (Cases J and L) and the root mean square of its fluctuation
+- $$\overline{u'c'}$$, $$\overline{v'c'}$$, $$\overline{w'c'}$$ (columns `uc`, `vc`, `wc`; ppm·m/s) — turbulent concentration fluxes
+- $$\overline{u'\theta'}$$, $$\overline{v'\theta'}$$, $$\overline{w'\theta'}$$ (columns `uT`, `vT`, `wT`; K·m/s) — turbulent heat fluxes ($$\theta'$$: the temperature fluctuation)
+- $$\theta = \dfrac{T_f - T}{T_f - T_H}$$ (dimensionless) — floor-referenced temperature the solves of Cases J and L are scored on: 0 at the floor, 1 in the approach air at $$H$$; $$T_f$$ is the floor temperature and $$T_H$$ the temperature of the approach flow at $$H$$
+
+**Scores**
+
+- $$n$$ — number of pairs of a measured value $$o_i$$ and a modelled value $$p_i$$ at one point
+- $$R$$ — Pearson correlation coefficient of the pairs
+- $$R^2$$ — square of $$R$$: share of the measured variance a linear fit to the model explains
+- $$\mathrm{FAC2}$$ — fraction of pairs with $$0.5 \le p_i/o_i \le 2$$
+- $$\mathrm{FB}$$ — fractional bias $$2(\overline{o}-\overline{p})/(\overline{o}+\overline{p})$$, positive when the model is low
+- $$\mathrm{HR}$$ (hit rate) — fraction of pairs with $$\lvert p_i-o_i\rvert/\lvert o_i\rvert \le \delta_{\mathrm{rel}}$$ or $$\lvert p_i-o_i\rvert \le \delta_{\mathrm{abs}}$$, where $$\delta_{\mathrm{rel}} = 0.25$$ and $$\delta_{\mathrm{abs}} = 0.05\thinspace U_H$$ for a velocity component
+- $$\mathrm{NMSE} = \dfrac{\overline{(o-p)^2}}{\overline{o}\thinspace \overline{p}}$$ — normalised mean square error
+- $$\mathrm{NAD} = \dfrac{\overline{\lvert o-p\rvert}}{\overline{o}+\overline{p}}$$ — normalised absolute difference
+- $$\mathrm{MG} = \exp\overline{(\ln o-\ln p)}$$ — geometric mean bias
+- $$\mathrm{VG} = \exp\overline{(\ln o-\ln p)^2}$$ — geometric variance
+- The ratio of $$\mathrm{FAC2}$$ keeps its sign, so a model of the other sign than the measurement is a miss; $$\mathrm{FB}$$, $$\mathrm{NMSE}$$ and $$\mathrm{NAD}$$ divide by the means, so they are undefined (shown as —) for a signed component unless the measured and the modelled mean are both positive
+- VDI 3783-9 calls the hit rate $$q$$ and the tolerances $$D$$ and $$W$$; on this site those letters keep their other meanings ($$q$$ the tracer release rate, $$D$$ the block size of Case C, $$W$$ the vertical velocity)
+- The detection limit of a concentration is one value per case, $$10^{-3}$$ of the largest measured value. It sets $$\delta_{\mathrm{abs}}$$ of the hit rate and the both-below rule of $$\mathrm{FAC2}$$, and floors the values in $$\mathrm{MG}$$ and $$\mathrm{VG}$$.
+- The scores $$\mathrm{FB}$$, $$\mathrm{FAC2}$$, $$\mathrm{NMSE}$$, $$\mathrm{NAD}$$, $$\mathrm{MG}$$ and $$\mathrm{VG}$$ follow Chang & Hanna (2004); the hit rate follows VDI 3783-9.
+
+**Quantities scored**
+
+- $$U$$, $$V$$ and $$W$$ (mean velocity components) over $$U_H$$
+- $$k$$ (turbulent kinetic energy) over $$U_H^2$$
+- the speed $$\lvert\mathbf{U}\rvert$$ and $$\sqrt{\lvert\mathbf{U}\rvert^2+2k}$$, against a thermistor's $$V_{\mathrm{s}}$$
+- $$c^\ast = C/c_0$$ (dimensionless concentration) at turbulent Schmidt numbers $$\mathrm{Sc_t}$$ of 0.3, 0.5 and 0.7
+- $$\theta$$ (floor-referenced temperature)
+
+</details>
+
+<!--/nomenclature-->
+
+- With the ground wall function every 2 m point is within 5 % of the log law in all three cases in the 96 m wide domain. In the
+  32 m wide one only Case C's are: the D and E points stray beyond about 450 m from the inlet, where the three lines drift apart, as
+  OpenLB's do in that domain.
+- With synthetic turbulence at the inlet, Eddy3D's default for FluidX3D, the 2 m layer runs fast: 1.14 (1.12–1.18) and 1.18
+  (1.13–1.24) in Case D's two domains, 1.05 (0.99–1.10) in Case C's narrow one. Only Case E's wide domain holds every point
+  within 5 % (0.96–1.03).
+- The 2 m means at the averaging's halfway point and at its end agree within 0.003 in every steady run. With the steady inflow
+  the wall-function runs took 2–6 % longer than their bounce-back twins (whole runs of 17–76 s, the compile included).
+- The Niigata district fits on the GPU of the A and B runs at up to about 1.6 cells per 2 m (an estimate from the lattice sizes);
+  $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ is 1.25.
+- Scripts, probes and run times: Eddy3D, `testing/aij-fluidx3d-ground-wall/`.
 
 <details markdown="block">
 <summary>Interpretation: FluidX3D at pedestrian height</summary>
 
-- The ground causes the low ratios, and refining the lattice lowers them: the ratio at $$z/H = 0.10$$ is 0.74–0.80 at $$H/32$$
-  and 0.58–0.68 at $$H/64$$.
-- Case E's height comes closest (0.91–0.99).
+- The ground wall function removes the collapsed floor: with the steady inflow the 2 m mean goes from 0.36–0.53 of the log law to
+  0.96–1.02.
+- With the steady inflow the ground no longer keeps these cases unscored; a run at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ with the
+  wall function is scored wherever its own control holds the bar.
+- The 32 m domain's drift in Cases D and E is the domain, not the ground: 96 m wide, the same ground holds.
 
 </details>
 
