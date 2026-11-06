@@ -42,21 +42,21 @@
  "case-a-openfoam-field-plan.png": {
   "height": 2138,
   "master": "/assets/figures/case-a-openfoam-field-plan.png",
-  "master_bytes": 4973393,
+  "master_bytes": 4973369,
   "master_height": 9588,
   "master_width": 7176,
   "web": "/assets/web/case-a-openfoam-field-plan.png",
-  "web_bytes": 1026625,
+  "web_bytes": 1026631,
   "width": 1600
  },
  "case-a-openfoam-field-section.png": {
   "height": 1893,
   "master": "/assets/figures/case-a-openfoam-field-section.png",
-  "master_bytes": 5185415,
+  "master_bytes": 5185399,
   "master_height": 8376,
   "master_width": 7080,
   "web": "/assets/web/case-a-openfoam-field-section.png",
-  "web_bytes": 1024203,
+  "web_bytes": 1024204,
   "width": 1600
  },
  "case-a-openfoam-grid.png": {
@@ -372,17 +372,17 @@
  "case-f-openfoam-field-plan.png": {
   "height": 603,
   "master": "/assets/figures/case-f-openfoam-field-plan.png",
-  "master_bytes": 19845475,
+  "master_bytes": 19845471,
   "master_height": 5052,
   "master_width": 13416,
   "web": "/assets/web/case-f-openfoam-field-plan.png",
-  "web_bytes": 878805,
+  "web_bytes": 878802,
   "width": 1600
  },
  "case-f.png": {
   "height": 800,
   "master": "/assets/geometry/case-f.png",
-  "master_bytes": 2041676,
+  "master_bytes": 2041671,
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-f.png",
@@ -402,11 +402,11 @@
  "case-g-openfoam-field-section.png": {
   "height": 1575,
   "master": "/assets/figures/case-g-openfoam-field-section.png",
-  "master_bytes": 3054439,
+  "master_bytes": 3054419,
   "master_height": 6744,
   "master_width": 6852,
   "web": "/assets/web/case-g-openfoam-field-section.png",
-  "web_bytes": 638446,
+  "web_bytes": 638442,
   "width": 1600
  },
  "case-g-openfoam-profiles.png": {
@@ -472,21 +472,21 @@
  "case-h-openfoam-field-plan.png": {
   "height": 605,
   "master": "/assets/figures/case-h-openfoam-field-plan.png",
-  "master_bytes": 5218580,
+  "master_bytes": 5218553,
   "master_height": 4476,
   "master_width": 11844,
   "web": "/assets/web/case-h-openfoam-field-plan.png",
-  "web_bytes": 622733,
+  "web_bytes": 622749,
   "width": 1600
  },
  "case-h-openfoam-field-section.png": {
   "height": 552,
   "master": "/assets/figures/case-h-openfoam-field-section.png",
-  "master_bytes": 4663636,
+  "master_bytes": 4663605,
   "master_height": 4080,
   "master_width": 11832,
   "web": "/assets/web/case-h-openfoam-field-section.png",
-  "web_bytes": 488607,
+  "web_bytes": 488603,
   "width": 1600
  },
  "case-h-openfoam-profiles.png": {
@@ -542,11 +542,11 @@
  "case-i-openfoam-field-section.png": {
   "height": 1793,
   "master": "/assets/figures/case-i-openfoam-field-section.png",
-  "master_bytes": 5545551,
+  "master_bytes": 5545388,
   "master_height": 7932,
   "master_width": 7080,
   "web": "/assets/web/case-i-openfoam-field-section.png",
-  "web_bytes": 1055132,
+  "web_bytes": 1055123,
   "width": 1600
  },
  "case-i-openfoam-profiles.png": {
@@ -602,21 +602,21 @@
  "case-j-umf-field-plan.png": {
   "height": 501,
   "master": "/assets/figures/case-j-umf-field-plan.png",
-  "master_bytes": 5993393,
+  "master_bytes": 5993284,
   "master_height": 4332,
   "master_width": 13848,
   "web": "/assets/web/case-j-umf-field-plan.png",
-  "web_bytes": 482647,
+  "web_bytes": 482645,
   "width": 1600
  },
  "case-j-umf-field-section.png": {
   "height": 2258,
   "master": "/assets/figures/case-j-umf-field-section.png",
-  "master_bytes": 7602859,
+  "master_bytes": 7602750,
   "master_height": 10128,
   "master_width": 7176,
   "web": "/assets/web/case-j-umf-field-section.png",
-  "web_bytes": 1493460,
+  "web_bytes": 1493457,
   "width": 1600
  },
  "case-j-umf-tracer.png": {
@@ -662,21 +662,21 @@
  "case-k-openfoam-field-plan.png": {
   "height": 634,
   "master": "/assets/figures/case-k-openfoam-field-plan.png",
-  "master_bytes": 5040609,
+  "master_bytes": 5040457,
   "master_height": 4692,
   "master_width": 11832,
   "web": "/assets/web/case-k-openfoam-field-plan.png",
-  "web_bytes": 491220,
+  "web_bytes": 491226,
   "width": 1600
  },
  "case-k-openfoam-field-section.png": {
   "height": 1544,
   "master": "/assets/figures/case-k-openfoam-field-section.png",
-  "master_bytes": 3420792,
+  "master_bytes": 3420727,
   "master_height": 6612,
   "master_width": 6852,
   "web": "/assets/web/case-k-openfoam-field-section.png",
-  "web_bytes": 688736,
+  "web_bytes": 688743,
   "width": 1600
  },
  "case-k-openfoam-profiles.png": {
@@ -732,31 +732,31 @@
  "case-l-umf-field-plan.png": {
   "height": 530,
   "master": "/assets/figures/case-l-umf-field-plan.png",
-  "master_bytes": 6086120,
+  "master_bytes": 6085628,
   "master_height": 4584,
   "master_width": 13848,
   "web": "/assets/web/case-l-umf-field-plan.png",
-  "web_bytes": 428782,
+  "web_bytes": 428816,
   "width": 1600
  },
  "case-l-umf-field-section.png": {
   "height": 1492,
   "master": "/assets/figures/case-l-umf-field-section.png",
-  "master_bytes": 3255685,
+  "master_bytes": 3255714,
   "master_height": 6600,
   "master_width": 7080,
   "web": "/assets/web/case-l-umf-field-section.png",
-  "web_bytes": 683541,
+  "web_bytes": 683535,
   "width": 1600
  },
  "case-l.png": {
   "height": 800,
   "master": "/assets/geometry/case-l.png",
-  "master_bytes": 2263616,
+  "master_bytes": 2263625,
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-l.png",
-  "web_bytes": 302559,
+  "web_bytes": 302555,
   "width": 1600
  },
  "case-m-layout.png": {
@@ -782,11 +782,11 @@
  "case-m-openfoam-field-plan.png": {
   "height": 634,
   "master": "/assets/figures/case-m-openfoam-field-plan.png",
-  "master_bytes": 11020703,
+  "master_bytes": 11020335,
   "master_height": 5196,
   "master_width": 13116,
   "web": "/assets/web/case-m-openfoam-field-plan.png",
-  "web_bytes": 736192,
+  "web_bytes": 736159,
   "width": 1600
  },
  "case-m-openfoam-plan.png": {
@@ -802,11 +802,11 @@
  "case-m.png": {
   "height": 800,
   "master": "/assets/geometry/case-m.png",
-  "master_bytes": 2276258,
+  "master_bytes": 2276265,
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-m.png",
-  "web_bytes": 274958,
+  "web_bytes": 274959,
   "width": 1600
  },
  "cases-cd-scores.png": {
