@@ -46,8 +46,8 @@ The control: an empty domain 32 m wide and 80 m tall, $$\mathrm{d}x = 1.6\thinsp
 | bounce-back | 0.30 (0.23–0.39) | 0.26 (0.10–0.41) | 0.23 (0.16–0.35) |
 | wall model, power law | 1.00 (0.92–1.06) | 1.03 (0.95–1.11) | 0.87 (0.80–1.04) |
 | wall model, rough law | 0.99 (0.91–1.05) | 1.01 (0.93–1.08) | 0.94 (0.87–1.07) |
-| every point within 5 % from: bounce-back | 19.2 m (12 cells) | 64 m (40 cells) | 48 m (30 cells) |
-| every point within 5 % from: either wall law | 12.8 m (8 cells) | no height | 32 m (20 cells) |
+| lowest height with every point within 5 %, bounce-back | 19.2 m (12 cells) | 64 m (40 cells) | 48 m (30 cells) |
+| lowest height with every point within 5 %, either wall law | 12.8 m (8 cells) | none | 32 m (20 cells) |
 
 {% include nomenclature.md %}
 
