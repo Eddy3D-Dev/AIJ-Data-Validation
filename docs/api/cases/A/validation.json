@@ -1,7 +1,7 @@
 {
  "$schema": "https://aij.eddy3d.com/api/schemas/validation.schema.json",
- "schema_version": "2.5.0",
- "data_version": "5abd0adb307e7f87ec6e886d2133f2f0eab9fc5f3c6a36bb3b9d80d07c1d9ce2",
+ "schema_version": "2.6.0",
+ "data_version": "f85c050e1ee39c783400bb29aa3039a6666749266d602089dd42f18c307e05b5",
  "license": "CC-BY-4.0",
  "case": "A",
  "title": "Case A — 1:1:2 building",
@@ -141,6 +141,10 @@
     {
      "url": "https://aij.eddy3d.com/assets/figures/case-a-openfoam-profiles.png",
      "caption": "Case A, OpenFOAM 12: centre-plane vertical profiles of U/U_H at the measurement stations, measured points against the modelled line."
+    },
+    {
+     "url": "https://aij.eddy3d.com/assets/figures/case-a-openfoam-grid.png",
+     "caption": "Case A, OpenFOAM 12 (realizable k-ε) with the eddy-viscosity cap lifted, on the second of four meshes (cell scale 1.00): measured against modelled U, V, W and k, each point with that mesh's grid uncertainty (Roache's GCI where the four-mesh ladder converges monotonically at the point, half the spread of three meshes where it oscillates); hollow where the change grows under refinement and there is no band."
     },
     {
      "url": "https://aij.eddy3d.com/assets/figures/case-a-openfoam-field-plan.png",
@@ -1290,5 +1294,224 @@
    "cite": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083"
   }
  ],
+ "grid_study": {
+  "engine": "openfoam12-realizableKE",
+  "served_cell_scale": 1.0,
+  "configuration": "the served fixture with the eddy-viscosity cap lifted (nutMaxCoeff above any value the solve reaches), as Eddy3D ships it: the configuration of the community submission eddy3d-of12-nutcap-lifted; the served run keeps OpenFOAM's cap",
+  "method": "Roache's grid convergence index by the procedure of Celik et al. (2008), safety factor 1.25, on three consecutive meshes of a four-mesh ladder; computed by foamgci 3.5.0 (https://github.com/rithikrn/foamgci at 3b7274cb88421f90b3d783ad822f157d26849536); representative cell size h = N^(-1/3)",
+  "band_meaning": "per point, the uncertainty of the 1.00 mesh (the medium mesh of the triplet 1.41, 1.00, 0.71): GCI_32 where the three values converge monotonically, half the spread of the three values (Celik's oscillatory estimate) where they oscillate, and no band where the change grows under refinement (divergent) or vanishes (degenerate)",
+  "grids": [
+   {
+    "cell_scale": 1.41421356,
+    "cells": 151210,
+    "iterations": 3000
+   },
+   {
+    "cell_scale": 1.0,
+    "cells": 307807,
+    "iterations": 3000
+   },
+   {
+    "cell_scale": 0.70710678,
+    "cells": 615281,
+    "iterations": 4500
+   },
+   {
+    "cell_scale": 0.5,
+    "cells": 1411566,
+    "iterations": 6000
+   }
+  ],
+  "refinement_ratios": [
+   1.2673580456734095,
+   1.2596938353409703,
+   1.318891982780677
+  ],
+  "scores_on_each_grid": {
+   "U": [
+    {
+     "Fac2": 0.7903225806451613,
+     "Fb": 0.19450517959526414,
+     "HitRate": 0.5752688172043011,
+     "R": 0.9351468064085252
+    },
+    {
+     "Fac2": 0.8225806451612904,
+     "Fb": 0.1664865271824647,
+     "HitRate": 0.6129032258064516,
+     "R": 0.9534178605693311
+    },
+    {
+     "Fac2": 0.8118279569892473,
+     "Fb": 0.1738446975577594,
+     "HitRate": 0.6021505376344086,
+     "R": 0.9564931867916362
+    },
+    {
+     "Fac2": 0.8118279569892473,
+     "Fb": 0.16895518845803725,
+     "HitRate": 0.6290322580645161,
+     "R": 0.9573662002067173
+    }
+   ],
+   "V": [
+    {
+     "Fac2": 0.3333333333333333,
+     "Fb": -0.1899948953865131,
+     "HitRate": 0.8548387096774194,
+     "R": 0.9481559849382981
+    },
+    {
+     "Fac2": 0.3602150537634409,
+     "Fb": -0.18472996585059884,
+     "HitRate": 0.9032258064516129,
+     "R": 0.9620922575637595
+    },
+    {
+     "Fac2": 0.3548387096774194,
+     "Fb": -0.19310221921421078,
+     "HitRate": 0.8978494623655914,
+     "R": 0.9650887799394968
+    },
+    {
+     "Fac2": 0.34946236559139787,
+     "Fb": -0.1893840304491881,
+     "HitRate": 0.9086021505376344,
+     "R": 0.9656340869485998
+    }
+   ],
+   "W": [
+    {
+     "Fac2": 0.41397849462365593,
+     "Fb": -1.40956690914161,
+     "HitRate": 0.8172043010752689,
+     "R": 0.7009268191150563
+    },
+    {
+     "Fac2": 0.3978494623655914,
+     "Fb": -1.3602033156326643,
+     "HitRate": 0.8333333333333334,
+     "R": 0.7089596876479598
+    },
+    {
+     "Fac2": 0.4032258064516129,
+     "Fb": -1.4323051355716836,
+     "HitRate": 0.8118279569892473,
+     "R": 0.7218513441301293
+    },
+    {
+     "Fac2": 0.4032258064516129,
+     "Fb": -1.474583129633752,
+     "HitRate": 0.8279569892473119,
+     "R": 0.7248597393502267
+    }
+   ],
+   "k": [
+    {
+     "Fac2": 0.6182795698924731,
+     "Fb": 0.45617999517459973,
+     "HitRate": 0.23118279569892472,
+     "R": 0.28234069290551506
+    },
+    {
+     "Fac2": 0.6774193548387096,
+     "Fb": 0.39497478571831696,
+     "HitRate": 0.24731182795698925,
+     "R": 0.3893597607499058
+    },
+    {
+     "Fac2": 0.6881720430107527,
+     "Fb": 0.36450484156192675,
+     "HitRate": 0.24193548387096775,
+     "R": 0.4295601016748868
+    },
+    {
+     "Fac2": 0.6881720430107527,
+     "Fb": 0.3566539686554018,
+     "HitRate": 0.24193548387096775,
+     "R": 0.440141675282505
+    }
+   ]
+  },
+  "recirculation_Lr_over_H": [
+   1.4906077913221376,
+   1.4417290367290365,
+   1.5028454046069333,
+   1.5115783171371988
+  ],
+  "recirculation_Lr_over_H_extrapolated": {
+   "value": 1.513626725863936,
+   "observed_order": 6.0,
+   "note": "from the three finest meshes, whose observed order sits at foamgci's clip of 6; the triplet with the 1.00 mesh oscillates"
+  },
+  "source": {
+   "repository": "https://github.com/Eddy3D-Dev/Eddy3D",
+   "folder": "testing/aij-openfoam-gci",
+   "commit": "5ac075b4950ab497aa6b4a1c01310d0eed3c2798",
+   "documentation": "docs/VALIDATION.md, section 22"
+  },
+  "bands_summary": {
+   "U": {
+    "points": 186,
+    "with_band": 156,
+    "regimes": {
+     "divergent": 30,
+     "monotonic": 85,
+     "oscillatory": 71
+    },
+    "band_median": 0.011044,
+    "band_p90": 0.050771,
+    "within_hit_rate_tolerance": 140
+   },
+   "V": {
+    "points": 186,
+    "with_band": 159,
+    "regimes": {
+     "divergent": 27,
+     "monotonic": 81,
+     "oscillatory": 78
+    },
+    "band_median": 0.001285,
+    "band_p90": 0.012591,
+    "within_hit_rate_tolerance": 156
+   },
+   "W": {
+    "points": 186,
+    "with_band": 159,
+    "regimes": {
+     "divergent": 27,
+     "monotonic": 52,
+     "oscillatory": 107
+    },
+    "band_median": 0.001522,
+    "band_p90": 0.012054,
+    "within_hit_rate_tolerance": 152
+   },
+   "k": {
+    "points": 186,
+    "with_band": 158,
+    "regimes": {
+     "divergent": 28,
+     "monotonic": 100,
+     "oscillatory": 58
+    },
+    "band_median": 0.001313,
+    "band_p90": 0.008776,
+    "within_hit_rate_tolerance": 155
+   }
+  },
+  "bands": {
+   "url": "https://aij.eddy3d.com/api/cases/A/grid/openfoam12-realizableKE.csv?v=1f12524ea1b3",
+   "path": "cases/A/grid/openfoam12-realizableKE.csv",
+   "media_type": "text/csv",
+   "bytes": 55661,
+   "sha256": "1f12524ea1b3f0395f8b22dd1bdaeebf62dc437e9756de28c5340e63c1447179"
+  },
+  "bands_columns": "point_id (the measured table's, as in the pairs); x, y, z in m (case frame); for U, V, W and k: _meas, the measured value (velocities by U_H, k by U_H^2, V in the unified sign); _model, the value on the 1.00 mesh of the study; _band, that mesh's band (empty where there is none); _regime, monotonic / oscillatory / divergent / degenerate",
+  "figure": {
+   "url": "https://aij.eddy3d.com/assets/figures/case-a-openfoam-grid.png",
+   "caption": "Case A, OpenFOAM 12 (realizable k-ε) with the eddy-viscosity cap lifted, on the second of four meshes (cell scale 1.00): measured against modelled U, V, W and k, each point with that mesh's grid uncertainty (Roache's GCI where the four-mesh ladder converges monotonically at the point, half the spread of three meshes where it oscillates); hollow where the change grows under refinement and there is no band."
+  }
+ },
  "note": null
 }

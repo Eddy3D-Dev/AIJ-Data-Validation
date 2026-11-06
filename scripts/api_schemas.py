@@ -236,6 +236,26 @@ DOCUMENTS = {
             "pairs": {"anyOf": [DOWNLOAD, {"type": "null"}]}, "pairs_columns": STR_OR_NULL,
             "reproduce": {"type": "string"}, "source_file": {"type": "string"}, "source_url": URL, "cite": {"type": "string"},
         })),
+        "grid_study": {"description": "the grid-convergence study of the OpenFOAM fixture; null where none was run",
+                       "anyOf": [{"type": "null"}, obj(
+            ["engine", "configuration", "method", "band_meaning", "grids", "scores_on_each_grid", "bands_summary", "bands", "bands_columns",
+             "figure", "source"], {
+                "engine": ENGINE_ID, "served_cell_scale": {"type": "number"},
+                "configuration": {"type": "string", "description": "what was solved: the served fixture with the eddy-viscosity cap lifted"},
+                "method": {"type": "string"}, "band_meaning": {"type": "string"},
+                "grids": arr({"type": "object", "description": "cell_scale, cells (per state for Case E) and iterations of each mesh, coarse first"}),
+                "refinement_ratios": {"description": "(N_fine/N_coarse)^(1/3) of each consecutive pair, per state for Case E"},
+                "scores_on_each_grid": {"type": "object", "description": "headline label -> per mesh, coarse first: Fac2, Fb, HitRate and R, "
+                                        "or null where that mesh was not scored", "additionalProperties": arr({"type": ["object", "null"]})},
+                "recirculation_Lr_over_H": arr({"type": "number"}), "recirculation_Lr_over_H_extrapolated": {"type": "object"},
+                "note": {"type": "string"},
+                "bands_summary": {"type": "object", "description": "per quantity (and state): points, with_band, regimes, band_median, band_p90 "
+                                  "and within_hit_rate_tolerance (bands at or below W = 0.05)"},
+                "bands": DOWNLOAD, "bands_columns": {"type": "string"},
+                "figure": obj(["url", "caption"], {"url": URL, "caption": {"type": "string"}}),
+                "source": obj(["repository", "commit"], {"repository": URL, "folder": {"type": "string"}, "commit": {"type": "string"},
+                                                         "documentation": {"type": "string"}}),
+            })]},
     }),
     "geometry-index": _doc("geometry-index", "All geometry", "Every STL of every case in one list, and the archive that holds them.",
                            ["files", "archive"], {

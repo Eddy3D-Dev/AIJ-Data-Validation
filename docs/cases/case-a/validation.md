@@ -127,6 +127,10 @@ Every score is over the same 65 points.
 - Per-point values: [`/api/cases/A/pairs/ml-surrogate.csv`]({{ '/api/cases/A/pairs/ml-surrogate.csv' | relative_url }})
 - Reproduce: Eddy3D fixture Outdoor.ML.Tests/TestAijSurrogateE2E; figure validation/plot\_ml\_surrogate.py
 
+## Grid uncertainty
+
+{% include validation/case-a/grid.md %}
+
 ## Notes on every run
 
 - Normalisation: velocities by $$U_H$$, $$k$$ by $$U_H^2$$ (the benchmark\'s own convention; Case E by $$U$$ at 15.9 m, as it is published); hit rate $$\delta_{\mathrm{rel}} = 0.25$$, $$\delta_{\mathrm{abs}} = 0.05$$ in those units
@@ -145,4 +149,4 @@ Every score is over the same 65 points.
 | 8 | OpenLB | Eddy3D | 0.371 | 0.624 | 0.586 | 0.382 | 0.491 | 0.293 | +0.677 | 0.467 |
 {: .scores }
 
-Every run on the case, scored by one evaluator, `validation/score_submissions.py`, the way a submission is scored: Eddy3D's runs from their served values at the measured points, the community's from theirs. The tasks are the quantities every run here was scored on, averaged over the case's configurations and wind directions; runs are ranked by the mean hit rate over them, the measure the VDI 3783 guideline validates wind models with, and the best value of each column is in bold; the hit rate, FAC2, R and $$R^2$$ columns are means over the tasks. Every run gave values at every measured point. The ML surrogate is not on the board: its values carry no point ids, so this evaluator cannot score them; its scores are in its section. Negative controls are not runs and are left out. Community rows are self-reported values ([Validate your own solver]({{ '/byos/' | relative_url }})).
+All runs scored by `validation/score_submissions.py`. Ranked by mean hit rate (VDI 3783) over the tasks; bold: best per column. Not ranked: the ML surrogate (no point ids) and negative controls. Community rows are self-reported ([Validate your own solver]({{ '/byos/' | relative_url }})).

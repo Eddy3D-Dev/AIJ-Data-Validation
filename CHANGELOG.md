@@ -15,6 +15,19 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [3.11.0] - 2026-11-06
+
+### Added
+
+- Grid uncertainty of the OpenFOAM runs of Cases A and E: four meshes, per-point band of the second (Roache's GCI via foamgci; half
+  the spread where values oscillate). `grid_study` in `/api/cases/{A,E}/validation.json` (null elsewhere), bands in
+  `/api/cases/{A,E}/grid/openfoam12-realizableKE.csv`, one figure per page. Run with the eddy-viscosity cap lifted, as
+  `eddy3d-of12-nutcap-lifted`; served runs unchanged. API schema 2.6.0.
+
+### Changed
+
+- The leaderboard's note on each case page is shorter.
+
 ## [3.10.2] - 2026-11-05
 
 ### Changed
