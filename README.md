@@ -358,7 +358,7 @@ log law.
 
 </details>
 
-<!--fig name="case-a-engine-comparison.png" alt="Case A, measured vs modelled U and V, one row per engine" width="800"--><a href="validation/figures/case-a-engine-comparison.png"><img src="docs/assets/web/case-a-engine-comparison.png" width="800" height="1208" loading="lazy" alt="Case A, measured vs modelled U and V, one row per engine"></a><!--/fig-->
+<!--fig name="case-a-engine-comparison.png" alt="Case A, measured vs modelled U and V, one row per engine" width="800"--><a href="validation/figures/case-a-engine-comparison.png"><img src="docs/assets/web/case-a-engine-comparison.png" width="800" height="1185" loading="lazy" alt="Case A, measured vs modelled U and V, one row per engine"></a><!--/fig-->
 
 <!--fig name="case-a-ml-agreement.png" alt="Case A, measured vs predicted, ML surrogate" width="800"--><a href="validation/figures/case-a-ml-agreement.png"><img src="docs/assets/web/case-a-ml-agreement.png" width="800" height="534" loading="lazy" alt="Case A, measured vs predicted, ML surrogate"></a><!--/fig-->
 
@@ -452,7 +452,7 @@ log law.
 
 </details>
 
-<!--fig name="case-b-engine-comparison.png" alt="Case B, measured vs modelled U and V, one row per engine" width="800"--><a href="validation/figures/case-b-engine-comparison.png"><img src="docs/assets/web/case-b-engine-comparison.png" width="800" height="1191" loading="lazy" alt="Case B, measured vs modelled U and V, one row per engine"></a><!--/fig-->
+<!--fig name="case-b-engine-comparison.png" alt="Case B, measured vs modelled U and V, one row per engine" width="800"--><a href="validation/figures/case-b-engine-comparison.png"><img src="docs/assets/web/case-b-engine-comparison.png" width="800" height="1170" loading="lazy" alt="Case B, measured vs modelled U and V, one row per engine"></a><!--/fig-->
 
 <!--fig name="case-b-ml-agreement.png" alt="Case B, measured vs predicted, ML surrogate" width="800"--><a href="validation/figures/case-b-ml-agreement.png"><img src="docs/assets/web/case-b-ml-agreement.png" width="800" height="548" loading="lazy" alt="Case B, measured vs predicted, ML surrogate"></a><!--/fig-->
 
