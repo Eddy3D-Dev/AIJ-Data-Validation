@@ -1,12 +1,12 @@
 {
  "case-a-engine-comparison.png": {
-  "height": 2370,
+  "height": 2415,
   "master": "/assets/figures/case-a-engine-comparison.png",
-  "master_bytes": 2389907,
+  "master_bytes": 2374498,
   "master_height": 10524,
-  "master_width": 7104,
+  "master_width": 6972,
   "web": "/assets/web/case-a-engine-comparison.png",
-  "web_bytes": 692318,
+  "web_bytes": 705861,
   "width": 1600
  },
  "case-a-layout.png": {
@@ -16,7 +16,7 @@
   "master_height": 10053,
   "master_width": 9120,
   "web": "/assets/web/case-a-layout.png",
-  "web_bytes": 311967,
+  "web_bytes": 309522,
   "width": 1600
  },
  "case-a-ml-agreement.png": {
@@ -26,7 +26,7 @@
   "master_height": 5232,
   "master_width": 7848,
   "web": "/assets/web/case-a-ml-agreement.png",
-  "web_bytes": 185650,
+  "web_bytes": 183390,
   "width": 1600
  },
  "case-a-openfoam-agreement.png": {
@@ -36,7 +36,7 @@
   "master_height": 4332,
   "master_width": 12648,
   "web": "/assets/web/case-a-openfoam-agreement.png",
-  "web_bytes": 250384,
+  "web_bytes": 248206,
   "width": 1600
  },
  "case-a-openfoam-field-plan.png": {
@@ -46,7 +46,7 @@
   "master_height": 9588,
   "master_width": 7176,
   "web": "/assets/web/case-a-openfoam-field-plan.png",
-  "web_bytes": 1026631,
+  "web_bytes": 1013286,
   "width": 1600
  },
  "case-a-openfoam-field-section.png": {
@@ -56,7 +56,7 @@
   "master_height": 8376,
   "master_width": 7080,
   "web": "/assets/web/case-a-openfoam-field-section.png",
-  "web_bytes": 1024204,
+  "web_bytes": 1013629,
   "width": 1600
  },
  "case-a-openfoam-grid.png": {
@@ -66,7 +66,7 @@
   "master_height": 4596,
   "master_width": 12648,
   "web": "/assets/web/case-a-openfoam-grid.png",
-  "web_bytes": 293408,
+  "web_bytes": 291185,
   "width": 1600
  },
  "case-a-openfoam-profiles.png": {
@@ -76,7 +76,7 @@
   "master_height": 4740,
   "master_width": 8868,
   "web": "/assets/web/case-a-openfoam-profiles.png",
-  "web_bytes": 176430,
+  "web_bytes": 174854,
   "width": 1600
  },
  "case-a-openfoam-rans-urans.png": {
@@ -86,7 +86,7 @@
   "master_height": 3240,
   "master_width": 9456,
   "web": "/assets/web/case-a-openfoam-rans-urans.png",
-  "web_bytes": 127896,
+  "web_bytes": 127005,
   "width": 1600
  },
  "case-a.png": {
@@ -96,17 +96,17 @@
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-a.png",
-  "web_bytes": 67550,
+  "web_bytes": 64573,
   "width": 1600
  },
  "case-b-engine-comparison.png": {
-  "height": 2339,
+  "height": 2382,
   "master": "/assets/figures/case-b-engine-comparison.png",
-  "master_bytes": 2692865,
+  "master_bytes": 2661475,
   "master_height": 10524,
-  "master_width": 7200,
+  "master_width": 7068,
   "web": "/assets/web/case-b-engine-comparison.png",
-  "web_bytes": 753849,
+  "web_bytes": 782731,
   "width": 1600
  },
  "case-b-layout.png": {
@@ -116,7 +116,7 @@
   "master_height": 10068,
   "master_width": 9120,
   "web": "/assets/web/case-b-layout.png",
-  "web_bytes": 283246,
+  "web_bytes": 281089,
   "width": 1600
  },
  "case-b-ml-agreement.png": {
@@ -126,7 +126,7 @@
   "master_height": 5232,
   "master_width": 7632,
   "web": "/assets/web/case-b-ml-agreement.png",
-  "web_bytes": 212714,
+  "web_bytes": 210213,
   "width": 1600
  },
  "case-b-openfoam-agreement.png": {
@@ -136,7 +136,7 @@
   "master_height": 4332,
   "master_width": 12552,
   "web": "/assets/web/case-b-openfoam-agreement.png",
-  "web_bytes": 269649,
+  "web_bytes": 267674,
   "width": 1600
  },
  "case-b-openfoam-profiles.png": {
@@ -146,7 +146,7 @@
   "master_height": 4740,
   "master_width": 8460,
   "web": "/assets/web/case-b-openfoam-profiles.png",
-  "web_bytes": 190431,
+  "web_bytes": 188826,
   "width": 1600
  },
  "case-b.png": {
@@ -156,7 +156,7 @@
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-b.png",
-  "web_bytes": 74888,
+  "web_bytes": 72584,
   "width": 1600
  },
  "case-c-0d.png": {
@@ -166,7 +166,7 @@
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-c-0d.png",
-  "web_bytes": 114767,
+  "web_bytes": 110558,
   "width": 1600
  },
  "case-c-1d.png": {
@@ -176,7 +176,7 @@
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-c-1d.png",
-  "web_bytes": 120011,
+  "web_bytes": 115209,
   "width": 1600
  },
  "case-c-2d.png": {
@@ -186,7 +186,7 @@
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-c-2d.png",
-  "web_bytes": 115636,
+  "web_bytes": 110951,
   "width": 1600
  },
  "case-c-layout.png": {
@@ -196,7 +196,7 @@
   "master_height": 13188,
   "master_width": 9120,
   "web": "/assets/web/case-c-layout.png",
-  "web_bytes": 431925,
+  "web_bytes": 428725,
   "width": 1600
  },
  "case-c-ml-agreement.png": {
@@ -206,7 +206,7 @@
   "master_height": 5232,
   "master_width": 8496,
   "web": "/assets/web/case-c-ml-agreement.png",
-  "web_bytes": 338228,
+  "web_bytes": 335643,
   "width": 1600
  },
  "case-c-openfoam-agreement.png": {
@@ -216,7 +216,7 @@
   "master_height": 9984,
   "master_width": 9792,
   "web": "/assets/web/case-c-openfoam-agreement.png",
-  "web_bytes": 862222,
+  "web_bytes": 854824,
   "width": 1600
  },
  "case-c-openfoam-bias-map.png": {
@@ -226,7 +226,7 @@
   "master_height": 10272,
   "master_width": 9324,
   "web": "/assets/web/case-c-openfoam-bias-map.png",
-  "web_bytes": 858798,
+  "web_bytes": 855355,
   "width": 1600
  },
  "case-d-layout.png": {
@@ -236,7 +236,7 @@
   "master_height": 13776,
   "master_width": 9120,
   "web": "/assets/web/case-d-layout.png",
-  "web_bytes": 530777,
+  "web_bytes": 527103,
   "width": 1600
  },
  "case-d-ml-agreement.png": {
@@ -246,7 +246,7 @@
   "master_height": 5280,
   "master_width": 7344,
   "web": "/assets/web/case-d-ml-agreement.png",
-  "web_bytes": 248843,
+  "web_bytes": 245795,
   "width": 1600
  },
  "case-d-openfoam-agreement.png": {
@@ -256,7 +256,7 @@
   "master_height": 4860,
   "master_width": 13944,
   "web": "/assets/web/case-d-openfoam-agreement.png",
-  "web_bytes": 304587,
+  "web_bytes": 302297,
   "width": 1600
  },
  "case-d.png": {
@@ -266,7 +266,7 @@
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-d.png",
-  "web_bytes": 263638,
+  "web_bytes": 258688,
   "width": 1600
  },
  "case-e-after.png": {
@@ -276,7 +276,7 @@
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-e-after.png",
-  "web_bytes": 286338,
+  "web_bytes": 283298,
   "width": 1600
  },
  "case-e-before.png": {
@@ -286,7 +286,7 @@
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-e-before.png",
-  "web_bytes": 285083,
+  "web_bytes": 282008,
   "width": 1600
  },
  "case-e-layout.png": {
@@ -296,7 +296,7 @@
   "master_height": 9804,
   "master_width": 9120,
   "web": "/assets/web/case-e-layout.png",
-  "web_bytes": 533874,
+  "web_bytes": 523432,
   "width": 1600
  },
  "case-e-ml-agreement.png": {
@@ -306,7 +306,7 @@
   "master_height": 5232,
   "master_width": 9600,
   "web": "/assets/web/case-e-ml-agreement.png",
-  "web_bytes": 244898,
+  "web_bytes": 243490,
   "width": 1600
  },
  "case-e-openfoam-agreement.png": {
@@ -316,7 +316,7 @@
   "master_height": 4860,
   "master_width": 10980,
   "web": "/assets/web/case-e-openfoam-agreement.png",
-  "web_bytes": 374041,
+  "web_bytes": 371488,
   "width": 1600
  },
  "case-e-openfoam-bias-map.png": {
@@ -326,7 +326,7 @@
   "master_height": 5808,
   "master_width": 9948,
   "web": "/assets/web/case-e-openfoam-bias-map.png",
-  "web_bytes": 507044,
+  "web_bytes": 500372,
   "width": 1600
  },
  "case-e-openfoam-grid.png": {
@@ -336,7 +336,7 @@
   "master_height": 4956,
   "master_width": 8064,
   "web": "/assets/web/case-e-openfoam-grid.png",
-  "web_bytes": 392638,
+  "web_bytes": 389215,
   "width": 1600
  },
  "case-f-layout.png": {
@@ -346,7 +346,7 @@
   "master_height": 9332,
   "master_width": 9120,
   "web": "/assets/web/case-f-layout.png",
-  "web_bytes": 767869,
+  "web_bytes": 760376,
   "width": 1600
  },
  "case-f-openfoam-agreement.png": {
@@ -356,7 +356,7 @@
   "master_height": 7704,
   "master_width": 12972,
   "web": "/assets/web/case-f-openfoam-agreement.png",
-  "web_bytes": 408542,
+  "web_bytes": 404375,
   "width": 1600
  },
  "case-f-openfoam-bias-map.png": {
@@ -366,7 +366,7 @@
   "master_height": 6516,
   "master_width": 10140,
   "web": "/assets/web/case-f-openfoam-bias-map.png",
-  "web_bytes": 573549,
+  "web_bytes": 569829,
   "width": 1600
  },
  "case-f-openfoam-field-plan.png": {
@@ -376,7 +376,7 @@
   "master_height": 5052,
   "master_width": 13416,
   "web": "/assets/web/case-f-openfoam-field-plan.png",
-  "web_bytes": 878802,
+  "web_bytes": 877543,
   "width": 1600
  },
  "case-f.png": {
@@ -386,7 +386,7 @@
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-f.png",
-  "web_bytes": 280192,
+  "web_bytes": 276621,
   "width": 1600
  },
  "case-g-layout.png": {
@@ -396,7 +396,7 @@
   "master_height": 8561,
   "master_width": 9120,
   "web": "/assets/web/case-g-layout.png",
-  "web_bytes": 230726,
+  "web_bytes": 228029,
   "width": 1600
  },
  "case-g-openfoam-field-section.png": {
@@ -406,7 +406,7 @@
   "master_height": 6744,
   "master_width": 6852,
   "web": "/assets/web/case-g-openfoam-field-section.png",
-  "web_bytes": 638442,
+  "web_bytes": 629593,
   "width": 1600
  },
  "case-g-openfoam-profiles.png": {
@@ -416,7 +416,7 @@
   "master_height": 5916,
   "master_width": 6228,
   "web": "/assets/web/case-g-openfoam-profiles.png",
-  "web_bytes": 225118,
+  "web_bytes": 222502,
   "width": 1600
  },
  "case-g-openfoam-stations.png": {
@@ -426,7 +426,7 @@
   "master_height": 4824,
   "master_width": 11064,
   "web": "/assets/web/case-g-openfoam-stations.png",
-  "web_bytes": 244455,
+  "web_bytes": 242655,
   "width": 1600
  },
  "case-g-openfoam-sweep.png": {
@@ -436,7 +436,7 @@
   "master_height": 6252,
   "master_width": 13152,
   "web": "/assets/web/case-g-openfoam-sweep.png",
-  "web_bytes": 407810,
+  "web_bytes": 405173,
   "width": 1600
  },
  "case-g.png": {
@@ -446,7 +446,7 @@
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-g.png",
-  "web_bytes": 85245,
+  "web_bytes": 81055,
   "width": 1600
  },
  "case-h-layout.png": {
@@ -456,7 +456,7 @@
   "master_height": 10286,
   "master_width": 9120,
   "web": "/assets/web/case-h-layout.png",
-  "web_bytes": 477382,
+  "web_bytes": 474946,
   "width": 1600
  },
  "case-h-openfoam-agreement.png": {
@@ -466,7 +466,7 @@
   "master_height": 4392,
   "master_width": 12456,
   "web": "/assets/web/case-h-openfoam-agreement.png",
-  "web_bytes": 312370,
+  "web_bytes": 310047,
   "width": 1600
  },
  "case-h-openfoam-field-plan.png": {
@@ -476,7 +476,7 @@
   "master_height": 4476,
   "master_width": 11844,
   "web": "/assets/web/case-h-openfoam-field-plan.png",
-  "web_bytes": 622749,
+  "web_bytes": 620723,
   "width": 1600
  },
  "case-h-openfoam-field-section.png": {
@@ -486,7 +486,7 @@
   "master_height": 4080,
   "master_width": 11832,
   "web": "/assets/web/case-h-openfoam-field-section.png",
-  "web_bytes": 488603,
+  "web_bytes": 486805,
   "width": 1600
  },
  "case-h-openfoam-profiles.png": {
@@ -496,7 +496,7 @@
   "master_height": 5916,
   "master_width": 6732,
   "web": "/assets/web/case-h-openfoam-profiles.png",
-  "web_bytes": 255050,
+  "web_bytes": 251735,
   "width": 1600
  },
  "case-h.png": {
@@ -506,7 +506,7 @@
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-h.png",
-  "web_bytes": 84096,
+  "web_bytes": 80688,
   "width": 1600
  },
  "case-i-layout.png": {
@@ -516,7 +516,7 @@
   "master_height": 16805,
   "master_width": 9120,
   "web": "/assets/web/case-i-layout.png",
-  "web_bytes": 642897,
+  "web_bytes": 638180,
   "width": 1600
  },
  "case-i-openfoam-agreement.png": {
@@ -526,7 +526,7 @@
   "master_height": 4392,
   "master_width": 12552,
   "web": "/assets/web/case-i-openfoam-agreement.png",
-  "web_bytes": 258013,
+  "web_bytes": 255682,
   "width": 1600
  },
  "case-i-openfoam-closures.png": {
@@ -536,7 +536,7 @@
   "master_height": 10068,
   "master_width": 10128,
   "web": "/assets/web/case-i-openfoam-closures.png",
-  "web_bytes": 709412,
+  "web_bytes": 702085,
   "width": 1600
  },
  "case-i-openfoam-field-section.png": {
@@ -546,7 +546,7 @@
   "master_height": 7932,
   "master_width": 7080,
   "web": "/assets/web/case-i-openfoam-field-section.png",
-  "web_bytes": 1055123,
+  "web_bytes": 1044006,
   "width": 1600
  },
  "case-i-openfoam-profiles.png": {
@@ -556,7 +556,7 @@
   "master_height": 5916,
   "master_width": 6636,
   "web": "/assets/web/case-i-openfoam-profiles.png",
-  "web_bytes": 246174,
+  "web_bytes": 243091,
   "width": 1600
  },
  "case-i.png": {
@@ -566,7 +566,7 @@
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-i.png",
-  "web_bytes": 82635,
+  "web_bytes": 78146,
   "width": 1600
  },
  "case-j-layout.png": {
@@ -576,7 +576,7 @@
   "master_height": 10535,
   "master_width": 9120,
   "web": "/assets/web/case-j-layout.png",
-  "web_bytes": 369173,
+  "web_bytes": 367247,
   "width": 1600
  },
  "case-j-openfoam-profiles.png": {
@@ -586,7 +586,7 @@
   "master_height": 5916,
   "master_width": 6696,
   "web": "/assets/web/case-j-openfoam-profiles.png",
-  "web_bytes": 267217,
+  "web_bytes": 263408,
   "width": 1600
  },
  "case-j-umf-agreement.png": {
@@ -596,7 +596,7 @@
   "master_height": 6864,
   "master_width": 12252,
   "web": "/assets/web/case-j-umf-agreement.png",
-  "web_bytes": 540499,
+  "web_bytes": 535823,
   "width": 1600
  },
  "case-j-umf-field-plan.png": {
@@ -606,7 +606,7 @@
   "master_height": 4332,
   "master_width": 13848,
   "web": "/assets/web/case-j-umf-field-plan.png",
-  "web_bytes": 482645,
+  "web_bytes": 480966,
   "width": 1600
  },
  "case-j-umf-field-section.png": {
@@ -616,7 +616,7 @@
   "master_height": 10128,
   "master_width": 7176,
   "web": "/assets/web/case-j-umf-field-section.png",
-  "web_bytes": 1493457,
+  "web_bytes": 1479254,
   "width": 1600
  },
  "case-j-umf-tracer.png": {
@@ -626,7 +626,7 @@
   "master_height": 6864,
   "master_width": 12108,
   "web": "/assets/web/case-j-umf-tracer.png",
-  "web_bytes": 462717,
+  "web_bytes": 460172,
   "width": 1600
  },
  "case-j.png": {
@@ -636,7 +636,7 @@
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-j.png",
-  "web_bytes": 93686,
+  "web_bytes": 89944,
   "width": 1600
  },
  "case-k-layout.png": {
@@ -646,7 +646,7 @@
   "master_height": 8820,
   "master_width": 9120,
   "web": "/assets/web/case-k-layout.png",
-  "web_bytes": 277146,
+  "web_bytes": 275320,
   "width": 1600
  },
  "case-k-openfoam-agreement.png": {
@@ -656,7 +656,7 @@
   "master_height": 7272,
   "master_width": 14292,
   "web": "/assets/web/case-k-openfoam-agreement.png",
-  "web_bytes": 318683,
+  "web_bytes": 315334,
   "width": 1600
  },
  "case-k-openfoam-field-plan.png": {
@@ -666,7 +666,7 @@
   "master_height": 4692,
   "master_width": 11832,
   "web": "/assets/web/case-k-openfoam-field-plan.png",
-  "web_bytes": 491226,
+  "web_bytes": 488454,
   "width": 1600
  },
  "case-k-openfoam-field-section.png": {
@@ -676,7 +676,7 @@
   "master_height": 6612,
   "master_width": 6852,
   "web": "/assets/web/case-k-openfoam-field-section.png",
-  "web_bytes": 688743,
+  "web_bytes": 683173,
   "width": 1600
  },
  "case-k-openfoam-profiles.png": {
@@ -686,7 +686,7 @@
   "master_height": 5916,
   "master_width": 6732,
   "web": "/assets/web/case-k-openfoam-profiles.png",
-  "web_bytes": 238758,
+  "web_bytes": 235337,
   "width": 1600
  },
  "case-k.png": {
@@ -696,7 +696,7 @@
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-k.png",
-  "web_bytes": 230302,
+  "web_bytes": 225676,
   "width": 1600
  },
  "case-l-layout.png": {
@@ -706,7 +706,7 @@
   "master_height": 9140,
   "master_width": 9120,
   "web": "/assets/web/case-l-layout.png",
-  "web_bytes": 258008,
+  "web_bytes": 255822,
   "width": 1600
  },
  "case-l-openfoam-profiles.png": {
@@ -716,7 +716,7 @@
   "master_height": 5916,
   "master_width": 6708,
   "web": "/assets/web/case-l-openfoam-profiles.png",
-  "web_bytes": 219705,
+  "web_bytes": 217011,
   "width": 1600
  },
  "case-l-umf-agreement.png": {
@@ -726,7 +726,7 @@
   "master_height": 6792,
   "master_width": 12168,
   "web": "/assets/web/case-l-umf-agreement.png",
-  "web_bytes": 526318,
+  "web_bytes": 522211,
   "width": 1600
  },
  "case-l-umf-field-plan.png": {
@@ -736,7 +736,7 @@
   "master_height": 4584,
   "master_width": 13848,
   "web": "/assets/web/case-l-umf-field-plan.png",
-  "web_bytes": 428816,
+  "web_bytes": 426968,
   "width": 1600
  },
  "case-l-umf-field-section.png": {
@@ -746,7 +746,7 @@
   "master_height": 6600,
   "master_width": 7080,
   "web": "/assets/web/case-l-umf-field-section.png",
-  "web_bytes": 683535,
+  "web_bytes": 677435,
   "width": 1600
  },
  "case-l.png": {
@@ -756,7 +756,7 @@
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-l.png",
-  "web_bytes": 302555,
+  "web_bytes": 298872,
   "width": 1600
  },
  "case-m-layout.png": {
@@ -766,7 +766,7 @@
   "master_height": 11195,
   "master_width": 9120,
   "web": "/assets/web/case-m-layout.png",
-  "web_bytes": 453262,
+  "web_bytes": 446525,
   "width": 1600
  },
  "case-m-openfoam-agreement.png": {
@@ -776,7 +776,7 @@
   "master_height": 6996,
   "master_width": 12888,
   "web": "/assets/web/case-m-openfoam-agreement.png",
-  "web_bytes": 361540,
+  "web_bytes": 357936,
   "width": 1600
  },
  "case-m-openfoam-field-plan.png": {
@@ -786,7 +786,7 @@
   "master_height": 5196,
   "master_width": 13116,
   "web": "/assets/web/case-m-openfoam-field-plan.png",
-  "web_bytes": 736159,
+  "web_bytes": 734541,
   "width": 1600
  },
  "case-m-openfoam-plan.png": {
@@ -796,7 +796,7 @@
   "master_height": 4800,
   "master_width": 12612,
   "web": "/assets/web/case-m-openfoam-plan.png",
-  "web_bytes": 344311,
+  "web_bytes": 342862,
   "width": 1600
  },
  "case-m.png": {
@@ -806,7 +806,7 @@
   "master_height": 4800,
   "master_width": 9600,
   "web": "/assets/web/case-m.png",
-  "web_bytes": 274959,
+  "web_bytes": 268970,
   "width": 1600
  },
  "cases-cd-scores.png": {
@@ -816,7 +816,7 @@
   "master_height": 9048,
   "master_width": 10140,
   "web": "/assets/web/cases-cd-scores.png",
-  "web_bytes": 290868,
+  "web_bytes": 288047,
   "width": 1600
  }
 }

@@ -1,31 +1,31 @@
 {
  "$schema": "https://aij.eddy3d.com/api/schemas/index.schema.json",
  "schema_version": "2.6.0",
- "data_version": "f85c050e1ee39c783400bb29aa3039a6666749266d602089dd42f18c307e05b5",
+ "data_version": "7ee0afb7cec8197e7edde0e7c282c8e6e9670b7cef003e6aa218c5a536817f48",
  "license": "CC-BY-4.0",
  "name": "AIJ UWE — cleaned data API",
  "description": "Static JSON/CSV/STL endpoints for the Architectural Institute of Japan Urban Wind Environment benchmark (Cases A-M) and Eddy3D's validation against it. Every file is a plain HTTP GET; nothing is computed on request.",
  "base_url": "https://aij.eddy3d.com/api",
  "tree": "latest",
- "release_base_url": "https://aij.eddy3d.com/api/3.11.0",
+ "release_base_url": "https://aij.eddy3d.com/api/3.11.1",
  "versions_url": "https://aij.eddy3d.com/api/versions.json",
  "fallback_base_url": "https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/main/docs/api",
  "fallback_note": "the same files, served raw from the repository's main branch (use when the Pages site is not reachable)",
  "repository": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation",
  "site": "https://aij.eddy3d.com",
  "versions": {
-  "release": "3.11.0",
+  "release": "3.11.1",
   "schema": "2.6.0",
-  "data": "f85c050e1ee39c783400bb29aa3039a6666749266d602089dd42f18c307e05b5",
+  "data": "7ee0afb7cec8197e7edde0e7c282c8e6e9670b7cef003e6aa218c5a536817f48",
   "clean_manifest": "3.11.0"
  },
  "release": {
-  "version": "3.11.0",
+  "version": "3.11.1",
   "date": "2026-11-06",
-  "tag": "v3.11.0",
-  "url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/releases/tag/v3.11.0",
-  "base_url": "https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/v3.11.0/docs/api/3.11.0",
-  "changelog": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/v3.11.0/CHANGELOG.md"
+  "tag": "v3.11.1",
+  "url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/releases/tag/v3.11.1",
+  "base_url": "https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/v3.11.1/docs/api/3.11.1",
+  "changelog": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/blob/v3.11.1/CHANGELOG.md"
  },
  "compatibility": "Semantic versioning, twice. `versions.release` versions what is served (MAJOR: a file, field or column renamed or removed, or a unit or frame changed; MINOR: something added; PATCH: a value corrected). Every release is also a frozen copy of the whole API under `/api/<release>/` whose files never change (`release_base_url`; all releases in versions.json), and the unversioned /api/ paths always equal the newest release: pin an analysis to a release by using that release's base URL. `schema_version` versions this JSON contract: within a major version it only adds new fields, endpoints and runs, clients must ignore fields they do not know, and a field is renamed or removed only in a new major version, which the changelog names. `data_version` is a fingerprint: the SHA-256 of the served data.",
  "caching": "GitHub Pages sends JSON with a 10-minute max-age and CSV and ZIP files with a 186-day max-age. Every download URL therefore carries ?v=<first 12 hex digits of the file's SHA-256>: the server ignores the query, and a changed file gets a new URL. Fetch the JSON documents for the current URLs; check downloads against `sha256`.",
@@ -322,19 +322,19 @@
    "schema": null,
    "templated": true,
    "urls": [
-    "https://aij.eddy3d.com/api/cases/A/inflow_openfoam.txt?v=c636e8998e35",
-    "https://aij.eddy3d.com/api/cases/B/inflow_openfoam.txt?v=ad79c23ecc00",
-    "https://aij.eddy3d.com/api/cases/C/inflow_openfoam.txt?v=b3f9160123cc",
-    "https://aij.eddy3d.com/api/cases/D/inflow_openfoam.txt?v=51ef1f15c593",
-    "https://aij.eddy3d.com/api/cases/E/inflow_openfoam.txt?v=e0b9c5a294e4",
-    "https://aij.eddy3d.com/api/cases/F/inflow_openfoam.txt?v=9e117d46f479",
-    "https://aij.eddy3d.com/api/cases/G/inflow_openfoam.txt?v=3b54e6a7fc91",
-    "https://aij.eddy3d.com/api/cases/H/inflow_openfoam.txt?v=5816d3f18d79",
-    "https://aij.eddy3d.com/api/cases/I/inflow_openfoam.txt?v=d5554530541d",
-    "https://aij.eddy3d.com/api/cases/J/inflow_openfoam.txt?v=b4eb46f0a1e5",
-    "https://aij.eddy3d.com/api/cases/K/inflow_openfoam.txt?v=0a7e6e69a75a",
-    "https://aij.eddy3d.com/api/cases/L/inflow_openfoam.txt?v=9b67a5d1fe6e",
-    "https://aij.eddy3d.com/api/cases/M/inflow_openfoam.txt?v=79a43c07470a"
+    "https://aij.eddy3d.com/api/cases/A/inflow_openfoam.txt?v=a17497e4d806",
+    "https://aij.eddy3d.com/api/cases/B/inflow_openfoam.txt?v=c85691404683",
+    "https://aij.eddy3d.com/api/cases/C/inflow_openfoam.txt?v=34e5921723e5",
+    "https://aij.eddy3d.com/api/cases/D/inflow_openfoam.txt?v=ff145983f7c8",
+    "https://aij.eddy3d.com/api/cases/E/inflow_openfoam.txt?v=7d847c118a73",
+    "https://aij.eddy3d.com/api/cases/F/inflow_openfoam.txt?v=e6e592eda8a1",
+    "https://aij.eddy3d.com/api/cases/G/inflow_openfoam.txt?v=33e8a05bb690",
+    "https://aij.eddy3d.com/api/cases/H/inflow_openfoam.txt?v=c94c9bd904b7",
+    "https://aij.eddy3d.com/api/cases/I/inflow_openfoam.txt?v=cea7b7be724f",
+    "https://aij.eddy3d.com/api/cases/J/inflow_openfoam.txt?v=95dd5f627e6e",
+    "https://aij.eddy3d.com/api/cases/K/inflow_openfoam.txt?v=9400833e256a",
+    "https://aij.eddy3d.com/api/cases/L/inflow_openfoam.txt?v=1cc9dc5523ee",
+    "https://aij.eddy3d.com/api/cases/M/inflow_openfoam.txt?v=8953bd7deeba"
    ]
   },
   {
@@ -371,11 +371,11 @@
     "https://aij.eddy3d.com/api/cases/A/pairs/fluidx3d.csv?v=fb16be8c5800",
     "https://aij.eddy3d.com/api/cases/A/pairs/ml-surrogate.csv?v=6177f32a94f4",
     "https://aij.eddy3d.com/api/cases/A/pairs/openfoam12-realizableKE.csv?v=0695411d68cf",
-    "https://aij.eddy3d.com/api/cases/A/pairs/openlb.csv?v=974bf65cfd71",
+    "https://aij.eddy3d.com/api/cases/A/pairs/openlb.csv?v=7376660704bd",
     "https://aij.eddy3d.com/api/cases/B/pairs/fluidx3d.csv?v=c4af803fd09e",
     "https://aij.eddy3d.com/api/cases/B/pairs/ml-surrogate.csv?v=eb9a9c3970e7",
     "https://aij.eddy3d.com/api/cases/B/pairs/openfoam12-realizableKE.csv?v=9f7c10ff5544",
-    "https://aij.eddy3d.com/api/cases/B/pairs/openlb.csv?v=9b2950d76b99",
+    "https://aij.eddy3d.com/api/cases/B/pairs/openlb.csv?v=bdd88dbe936b",
     "https://aij.eddy3d.com/api/cases/C/pairs/ml-surrogate.csv?v=6a2b60658913",
     "https://aij.eddy3d.com/api/cases/C/pairs/openfoam12-realizableKE.csv?v=f3d2b649b543",
     "https://aij.eddy3d.com/api/cases/D/pairs/ml-surrogate.csv?v=9dd71c9ce66b",
@@ -534,18 +534,18 @@
  ],
  "files": [
   {
-   "url": "https://aij.eddy3d.com/api/cases.json?v=30b98472a8c7",
+   "url": "https://aij.eddy3d.com/api/cases.json?v=69c817bec2f4",
    "path": "cases.json",
    "media_type": "application/json",
    "bytes": 39894,
-   "sha256": "30b98472a8c7edc229ae5d76f8e25351f9659c9f1629f5200a82cc208ecae109"
+   "sha256": "69c817bec2f41ed54d83380d23d39beec2cae7dade440b4fedad8938b602317f"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/A.json?v=71716cffb272",
+   "url": "https://aij.eddy3d.com/api/cases/A.json?v=7fefa4164941",
    "path": "cases/A.json",
    "media_type": "application/json",
    "bytes": 14195,
-   "sha256": "71716cffb2722a0c4ef8fb1b87a98d70c047b2cb51e31f2c5597b7421e44c2a0"
+   "sha256": "7fefa416494107d97050841b059348401789ee93396bfa59eb586d050d162f8d"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/A/approach_flow.csv?v=2f3b37fa8e43",
@@ -555,11 +555,11 @@
    "sha256": "2f3b37fa8e43e307e807a5114bf2a8b2ad3ea6396cb17d6adc112663b69ea19f"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/A/geometry.json?v=81fe6a362791",
+   "url": "https://aij.eddy3d.com/api/cases/A/geometry.json?v=40da7a42be41",
    "path": "cases/A/geometry.json",
    "media_type": "application/json",
    "bytes": 2153,
-   "sha256": "81fe6a36279134785cae7d10c90ea8b91d695988aa76b67bc7dcc6d0edf45418"
+   "sha256": "40da7a42be4125b91b103173dc24d6f6c2f85499c17c35da32b1198f529bc4c4"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/A/geometry.stl?v=89acdfbbff84",
@@ -576,11 +576,11 @@
    "sha256": "1f12524ea1b3f0395f8b22dd1bdaeebf62dc437e9756de28c5340e63c1447179"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/A/inflow_openfoam.txt?v=c636e8998e35",
+   "url": "https://aij.eddy3d.com/api/cases/A/inflow_openfoam.txt?v=a17497e4d806",
    "path": "cases/A/inflow_openfoam.txt",
    "media_type": "text/plain",
    "bytes": 27526,
-   "sha256": "c636e8998e359961c38d95b90b8e10e11fbacaef1ba2b60bc619328d349f51a1"
+   "sha256": "a17497e4d8062796ff4f8cc82eaa113d005cea2314d45fb32095e38323766a86"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/A/pairs/fluidx3d.csv?v=fb16be8c5800",
@@ -604,11 +604,11 @@
    "sha256": "0695411d68cf99235b19c7f48b3224f6f947e673e5a9b80181d6064ee02e9d24"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/A/pairs/openlb.csv?v=974bf65cfd71",
+   "url": "https://aij.eddy3d.com/api/cases/A/pairs/openlb.csv?v=7376660704bd",
    "path": "cases/A/pairs/openlb.csv",
    "media_type": "text/csv",
-   "bytes": 26424,
-   "sha256": "974bf65cfd7138a87d48e15eb8c44005849a6538e42016e5dc98a7d5c4e9d641"
+   "bytes": 26403,
+   "sha256": "7376660704bda10f85f3e55008bccf8c9398901482778fb6e7cb69198376a9a2"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/A/points.csv?v=a46201996b22",
@@ -618,11 +618,11 @@
    "sha256": "a46201996b22620e9ceae7ac558d8bafc44f3ac3ed7073c2efca70bc57ad5239"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/A/points.json?v=6b3b80dbfc4e",
+   "url": "https://aij.eddy3d.com/api/cases/A/points.json?v=f4c269b282db",
    "path": "cases/A/points.json",
    "media_type": "application/json",
    "bytes": 58464,
-   "sha256": "6b3b80dbfc4eeed68398e786687796b312b0995fa1d9b33ce881ec87f9fc8691"
+   "sha256": "f4c269b282dbb27ac874ef56c00fa9aae61e18400fec2bec3992e5f207311e6d"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/A/probes.csv?v=b2a57394ad1d",
@@ -632,18 +632,18 @@
    "sha256": "b2a57394ad1dbf36499f3248c3348ce666434bbb3715675b6ed0e1d5db81f3d6"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/A/validation.json?v=5355df700c9e",
+   "url": "https://aij.eddy3d.com/api/cases/A/validation.json?v=9898861eab51",
    "path": "cases/A/validation.json",
    "media_type": "application/json",
-   "bytes": 54362,
-   "sha256": "5355df700c9ecda378921347c81d1f45d027c550cf277bee7a22e25ecf16d215"
+   "bytes": 58149,
+   "sha256": "9898861eab519ca14cd524c5cf0c02ca7a4102e512bafa593db69e190b780537"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/B.json?v=4fca3fc42381",
+   "url": "https://aij.eddy3d.com/api/cases/B.json?v=aeb2b13b1b8a",
    "path": "cases/B.json",
    "media_type": "application/json",
    "bytes": 13083,
-   "sha256": "4fca3fc42381934066be2f797291ae0fd3620082c9c26e91e3005d0395a8347a"
+   "sha256": "aeb2b13b1b8ac6a07592c4404e7e98c76530bc13e54c705105d294be13c862f0"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/B/approach_flow.csv?v=126a620f5698",
@@ -653,11 +653,11 @@
    "sha256": "126a620f56983e720ad25d3678369754477837fcc8d04bfdba2c5eaffc93f200"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/B/geometry.json?v=0a01ce22c917",
+   "url": "https://aij.eddy3d.com/api/cases/B/geometry.json?v=4532e4c9eb6a",
    "path": "cases/B/geometry.json",
    "media_type": "application/json",
    "bytes": 2158,
-   "sha256": "0a01ce22c91761815993ca7e8c8a89993f95b37417c916f1a91c9efead2a8013"
+   "sha256": "4532e4c9eb6a370b88696a96c68bac45cbd4fd07ad1e49bab182165270d68141"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/B/geometry.stl?v=e6de70eeb17d",
@@ -667,11 +667,11 @@
    "sha256": "e6de70eeb17dfa4d7312223dc3dcc58e996e2573b37fb77d7820b52b7bca354b"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/B/inflow_openfoam.txt?v=ad79c23ecc00",
+   "url": "https://aij.eddy3d.com/api/cases/B/inflow_openfoam.txt?v=c85691404683",
    "path": "cases/B/inflow_openfoam.txt",
    "media_type": "text/plain",
    "bytes": 31918,
-   "sha256": "ad79c23ecc008bc9336f7656ac60e87a584de4143dfcb9622aec745f08621213"
+   "sha256": "c85691404683d4c0d673a48eeb5c4f8ffcddaf1bcffa12bdd4a1d2db1ba8efee"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/B/pairs/fluidx3d.csv?v=c4af803fd09e",
@@ -695,11 +695,11 @@
    "sha256": "9f7c10ff554477ffcfdc7e5717b2c7afbe2c0eb58cf0883d79bd202ce96126d7"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/B/pairs/openlb.csv?v=9b2950d76b99",
+   "url": "https://aij.eddy3d.com/api/cases/B/pairs/openlb.csv?v=bdd88dbe936b",
    "path": "cases/B/pairs/openlb.csv",
    "media_type": "text/csv",
-   "bytes": 32181,
-   "sha256": "9b2950d76b99f88e93633602b758e802e309ba3616c5284603fd35ee8d8260ff"
+   "bytes": 32036,
+   "sha256": "bdd88dbe936b600682bc1a2f25e9b363993d3f8f088551697de5e7ab4ee89b98"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/B/points.csv?v=dec97c21217a",
@@ -709,11 +709,11 @@
    "sha256": "dec97c21217ae3886005264dca7096205c23bf80fb07320c80f66e238716f390"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/B/points.json?v=924168630fc4",
+   "url": "https://aij.eddy3d.com/api/cases/B/points.json?v=bc800deced81",
    "path": "cases/B/points.json",
    "media_type": "application/json",
    "bytes": 68349,
-   "sha256": "924168630fc466769808378d2db6e14b62b5f89072e6e91a44e2c1522c576cf4"
+   "sha256": "bc800deced81b9f66c913b0af0fae3d42f11301ebc19214a7143c21959286de7"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/B/probes.csv?v=025b8113dcde",
@@ -723,18 +723,18 @@
    "sha256": "025b8113dcde572a3fac4c99296bcca965642290ca62e7ba0bd94b0e74dd5d9e"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/B/validation.json?v=ee31dba64829",
+   "url": "https://aij.eddy3d.com/api/cases/B/validation.json?v=f7fba5e792a3",
    "path": "cases/B/validation.json",
    "media_type": "application/json",
-   "bytes": 43705,
-   "sha256": "ee31dba64829bc1312002a691c6ee5427b1d160f83039423ad2ed83166ff3db6"
+   "bytes": 45747,
+   "sha256": "f7fba5e792a3ecee50996d748417b4ce641f6ada31ed448f71f857ae476fc87f"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/C.json?v=7e82a3078376",
+   "url": "https://aij.eddy3d.com/api/cases/C.json?v=6cb86f59acaa",
    "path": "cases/C.json",
    "media_type": "application/json",
    "bytes": 17469,
-   "sha256": "7e82a307837632d08cfa299b4a49f1c5c534ee09f7a141f81e07e89c454d4437"
+   "sha256": "6cb86f59acaad4e53aca81b62073c766159d81fa2cebac22432a29778a234b4b"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/C/approach_flow.csv?v=98849731e877",
@@ -744,11 +744,11 @@
    "sha256": "98849731e877fe940be821a1aa18469c8d4b94a5e54fd1e23c19f9337c39ea2a"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/C/geometry.json?v=5c6283aa83be",
+   "url": "https://aij.eddy3d.com/api/cases/C/geometry.json?v=9884cbfcb7ba",
    "path": "cases/C/geometry.json",
    "media_type": "application/json",
    "bytes": 7864,
-   "sha256": "5c6283aa83be542480d2bad243e287eece4c45b1f59ff679eaa0a64d5297b1a3"
+   "sha256": "9884cbfcb7ba97b9109a09eff537eac1413c0ee274e1e013e4447836afdbb110"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/C/geometry.stl?v=b8c31c57c453",
@@ -772,11 +772,11 @@
    "sha256": "ac92c8ed427cf8f16d5ce9839449dad4bc5cc96c6690e90586b7a7f703652d13"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/C/inflow_openfoam.txt?v=b3f9160123cc",
+   "url": "https://aij.eddy3d.com/api/cases/C/inflow_openfoam.txt?v=34e5921723e5",
    "path": "cases/C/inflow_openfoam.txt",
    "media_type": "text/plain",
    "bytes": 121541,
-   "sha256": "b3f9160123ccdb29defed4c1f524446011045dd6b5de47e220035376ac8d6d5f"
+   "sha256": "34e5921723e50f4a3a56cdd77e894bd3f5d08e04842d8fa1fcdfaf1438fff810"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/C/pairs/ml-surrogate.csv?v=6a2b60658913",
@@ -800,11 +800,11 @@
    "sha256": "7448f0ceae37f076ba00da6b542797d81e9edd92fdecc7b49dd6813577550a80"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/C/points.json?v=4013d379df75",
+   "url": "https://aij.eddy3d.com/api/cases/C/points.json?v=0545c74fb0d8",
    "path": "cases/C/points.json",
    "media_type": "application/json",
    "bytes": 212824,
-   "sha256": "4013d379df7585e4fa5c9db0a8fa9dedb3b548479e813a17a588c36343b51362"
+   "sha256": "0545c74fb0d865babfc89ea37d86765344f89c41da95bd96e68d699ffcae2955"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/C/probes.csv?v=5b794e8356f0",
@@ -814,18 +814,18 @@
    "sha256": "5b794e8356f0d8fd97f30098f7ff04105ad5685d12bd3a816be0fce58204fb2c"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/C/validation.json?v=c92e33bcc48f",
+   "url": "https://aij.eddy3d.com/api/cases/C/validation.json?v=064f9864de20",
    "path": "cases/C/validation.json",
    "media_type": "application/json",
    "bytes": 41780,
-   "sha256": "c92e33bcc48f25f382f200603b5587df0b85b245d2989ccbd70cac2361531485"
+   "sha256": "064f9864de206d5df2ab6c73957ec78a880bf19fc3342a8dabb64fabff49e06b"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/D.json?v=5f37c7ea4589",
+   "url": "https://aij.eddy3d.com/api/cases/D.json?v=931e59df9f66",
    "path": "cases/D.json",
    "media_type": "application/json",
    "bytes": 16613,
-   "sha256": "5f37c7ea4589bad644fe0950f42a11a400968c27e351d0fe2c12f8075b4acb3e"
+   "sha256": "931e59df9f6614c89d274b29e420fb745b72fec55d9efc41fd5c93cd56c38b46"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/D/approach_flow.csv?v=c8239428b9b9",
@@ -835,11 +835,11 @@
    "sha256": "c8239428b9b9ae37e33a2b35226b2519ebf6ae9fa5d1f3b3f8ea0733ae6da5dc"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/D/geometry.json?v=6fab641fa77a",
+   "url": "https://aij.eddy3d.com/api/cases/D/geometry.json?v=cfeb3c416c21",
    "path": "cases/D/geometry.json",
    "media_type": "application/json",
    "bytes": 13254,
-   "sha256": "6fab641fa77a716e77be1fbc17f545e1e65d4d3e793090988447df0b939bfdd7"
+   "sha256": "cfeb3c416c21c8a4f2066b959c0886950a399e3b85e1c05a995af92479b77d81"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/D/geometry.stl?v=531895531271",
@@ -849,11 +849,11 @@
    "sha256": "5318955312711ea5419c67d2a8fe6c28868f9bce02ce9e3661e9a79228d6f257"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/D/inflow_openfoam.txt?v=51ef1f15c593",
+   "url": "https://aij.eddy3d.com/api/cases/D/inflow_openfoam.txt?v=ff145983f7c8",
    "path": "cases/D/inflow_openfoam.txt",
    "media_type": "text/plain",
    "bytes": 34585,
-   "sha256": "51ef1f15c5938c082c0e4d905703be9a54220976630654aa55a704894943bf64"
+   "sha256": "ff145983f7c87e06f4ab8b2a11680262ff4902a07397e1fecb56eb17d0f025f9"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/D/pairs/ml-surrogate.csv?v=9dd71c9ce66b",
@@ -877,11 +877,11 @@
    "sha256": "596246341e73398b75fb76c9eebfab38d34e4c2dcf161a8c6e3f7c7d5e1ee570"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/D/points.json?v=d46c5d0b8407",
+   "url": "https://aij.eddy3d.com/api/cases/D/points.json?v=2d5efc01e012",
    "path": "cases/D/points.json",
    "media_type": "application/json",
    "bytes": 85032,
-   "sha256": "d46c5d0b8407f76cdc6321a0230d346d920ef4ce3751d1a1bb2fc46c5eae57ed"
+   "sha256": "2d5efc01e012e201c984c66eafb92ca910d7f621fcf1d882c8d80972ddb96b12"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/D/probes.csv?v=4617e9e0d4e1",
@@ -891,18 +891,18 @@
    "sha256": "4617e9e0d4e1d18a4a2fe2f1b5c5c0c9b2c6ba5605932fd4315864b4ea70dc46"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/D/validation.json?v=b86cb23d6c4e",
+   "url": "https://aij.eddy3d.com/api/cases/D/validation.json?v=d21bbe694aa8",
    "path": "cases/D/validation.json",
    "media_type": "application/json",
    "bytes": 23012,
-   "sha256": "b86cb23d6c4e8f6063edd662a66b0c8059a0efb3d86858a287f5293861f45625"
+   "sha256": "d21bbe694aa894b42bef8437cec0061a3ee54920d543e973b17327e0009dd94c"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/E.json?v=0e5ac9fc1d28",
+   "url": "https://aij.eddy3d.com/api/cases/E.json?v=869e8ebb1150",
    "path": "cases/E.json",
    "media_type": "application/json",
    "bytes": 15869,
-   "sha256": "0e5ac9fc1d28987d7010e28cd31fafd2f0bab6696329bc8fb166c201d0c1c901"
+   "sha256": "869e8ebb11507cb7e0ce7a1f8f9cfcad05af7fe7c3604f9a816904f1b742e655"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/E/approach_flow.csv?v=4971944cd8e9",
@@ -912,11 +912,11 @@
    "sha256": "4971944cd8e9e09965961f6fd54627806708c04899f49b96df2f0efa229c4170"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/E/geometry.json?v=ccade13f31ba",
+   "url": "https://aij.eddy3d.com/api/cases/E/geometry.json?v=4522f6a7fabd",
    "path": "cases/E/geometry.json",
    "media_type": "application/json",
    "bytes": 3932,
-   "sha256": "ccade13f31badd3a90a34d36437028f72261522a3e24aea6f6e331f15c3c1cd6"
+   "sha256": "4522f6a7fabd9df550807826f248de32fcb0a6a3a62895ac3b77456e00999103"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/E/geometry.stl?v=c29624fdae6d",
@@ -940,11 +940,11 @@
    "sha256": "86803f6aa566697b75728d97b42f89d4c2d95bfda73a89974ee70802662d566a"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/E/inflow_openfoam.txt?v=e0b9c5a294e4",
+   "url": "https://aij.eddy3d.com/api/cases/E/inflow_openfoam.txt?v=7d847c118a73",
    "path": "cases/E/inflow_openfoam.txt",
    "media_type": "text/plain",
    "bytes": 267345,
-   "sha256": "e0b9c5a294e43c57e30a7942684597383cf3279d07cd36e498f1ffcde26430dc"
+   "sha256": "7d847c118a73c702ebcc4c34113969c0720938a2e1e93c9b9d68d01541aaff64"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/E/pairs/ml-surrogate.csv?v=90b71f5762aa",
@@ -968,11 +968,11 @@
    "sha256": "e6e89432e706de1b807258178150dfa0376f19caa558d2c7f8106778422c11d8"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/E/points.json?v=22a9d7b9ec6b",
+   "url": "https://aij.eddy3d.com/api/cases/E/points.json?v=50cbda4458fe",
    "path": "cases/E/points.json",
    "media_type": "application/json",
    "bytes": 619525,
-   "sha256": "22a9d7b9ec6b3014f1e7f55bb27d7aa9ffb49e4a46eb656c3785b4c46dbcb26c"
+   "sha256": "50cbda4458fe5bb4ad8230ff8134308f234f19a2656196b8a3d79560002265df"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/E/probes.csv?v=e248607ca6fe",
@@ -982,18 +982,18 @@
    "sha256": "e248607ca6fe771edd8b9f4366b22d483f6383540cc6d220a162ad159ffe3669"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/E/validation.json?v=648fc1172637",
+   "url": "https://aij.eddy3d.com/api/cases/E/validation.json?v=c44376fea0d5",
    "path": "cases/E/validation.json",
    "media_type": "application/json",
    "bytes": 40065,
-   "sha256": "648fc1172637137938876c57ac8fc0d0546895ce2155b801641f9c04afe1d2ec"
+   "sha256": "c44376fea0d56909808007c127a8109914f2cc5a739377602345b552f0ae1fc1"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/F.json?v=c0cc3186b9a0",
+   "url": "https://aij.eddy3d.com/api/cases/F.json?v=50ff9fff4a35",
    "path": "cases/F.json",
    "media_type": "application/json",
    "bytes": 23537,
-   "sha256": "c0cc3186b9a0f213b4f181858a2791d6fb4d71b5d8750c93a11be039e870ace3"
+   "sha256": "50ff9fff4a35556a680ae935a35f27bfe0a6148805bf5055031803300d0379ee"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/F/approach_flow.csv?v=66aefe558a82",
@@ -1003,11 +1003,11 @@
    "sha256": "66aefe558a82a5e35b569f68bef7411d360266a82fdce773367458d0a6ef0f5f"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/F/geometry.json?v=2894ee82caee",
+   "url": "https://aij.eddy3d.com/api/cases/F/geometry.json?v=f1417b02734d",
    "path": "cases/F/geometry.json",
    "media_type": "application/json",
    "bytes": 2858,
-   "sha256": "2894ee82caee5205c7b128544783d2d719b476211efeed846590c810be789abc"
+   "sha256": "f1417b02734d3bc67adb5808a112ffc35ea90b9caa4a686008ad36169c85dfdc"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/F/geometry.stl?v=8799740aa324",
@@ -1017,11 +1017,11 @@
    "sha256": "8799740aa324b9494a3962197ebaa82bc3f3f8ddce138e9d2777bc9cd7660c0c"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/F/inflow_openfoam.txt?v=9e117d46f479",
+   "url": "https://aij.eddy3d.com/api/cases/F/inflow_openfoam.txt?v=e6e592eda8a1",
    "path": "cases/F/inflow_openfoam.txt",
    "media_type": "text/plain",
    "bytes": 54480,
-   "sha256": "9e117d46f479f1c00e0fde19bba227dd470382b8f7908779348999eab58a65fe"
+   "sha256": "e6e592eda8a19e1fb32a385689d395cc678075770b4395995ffad8c4790c3c00"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/F/pairs/openfoam12-realizableKE.csv?v=e81e010859e6",
@@ -1038,11 +1038,11 @@
    "sha256": "09b109e58dd39fb744e69de7adab7df216762c2bfa49fbabe4b94b2a7fbe543a"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/F/points.json?v=11650bbe191d",
+   "url": "https://aij.eddy3d.com/api/cases/F/points.json?v=e2fac3af05e0",
    "path": "cases/F/points.json",
    "media_type": "application/json",
    "bytes": 130024,
-   "sha256": "11650bbe191dac761863a866cb0930cd95cdd799de7f87b0a9600a31b5842ebf"
+   "sha256": "e2fac3af05e0fe5d0967063d0e3fd33ff21941706c4504a7a448e4f7624cc68f"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/F/probes.csv?v=d7dbd73343b9",
@@ -1052,18 +1052,18 @@
    "sha256": "d7dbd73343b936559b85391887158c5b9fcd9555967742dd1a8185b005404cc2"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/F/validation.json?v=ac0b202707c1",
+   "url": "https://aij.eddy3d.com/api/cases/F/validation.json?v=3c4ee30e0939",
    "path": "cases/F/validation.json",
    "media_type": "application/json",
    "bytes": 33732,
-   "sha256": "ac0b202707c1632c3d334eb4dacd6ed58a433479742e4434383b9bc391076d90"
+   "sha256": "3c4ee30e09390f7054d5fef26e6e53e29b37135066ea7e79e2b83ea7bbd12df4"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/G.json?v=f717d52011a6",
+   "url": "https://aij.eddy3d.com/api/cases/G.json?v=18b72f9d392f",
    "path": "cases/G.json",
    "media_type": "application/json",
    "bytes": 16959,
-   "sha256": "f717d52011a6efa606e41727a844dac682401c546ecd22755464c177a94f928a"
+   "sha256": "18b72f9d392fec3bfb530c1b61949811ff7b58e76898b41a0d5014759bf3f883"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/G/approach_flow.csv?v=45a11857cdf9",
@@ -1073,11 +1073,11 @@
    "sha256": "45a11857cdf9f7b02d4bf81103178099cebe416b53d20741255da7064f97ff40"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/G/geometry.json?v=a3a4d8d2bc16",
+   "url": "https://aij.eddy3d.com/api/cases/G/geometry.json?v=6981a0cafe1b",
    "path": "cases/G/geometry.json",
    "media_type": "application/json",
    "bytes": 2587,
-   "sha256": "a3a4d8d2bc164c8e00ea198a2609528968e6974fb0b8fb983033ec664caf9242"
+   "sha256": "6981a0cafe1b9155e384dd3230ce9f939ac207ec5b69c2c9627c1e7f91266578"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/G/geometry.stl?v=09d23c794155",
@@ -1087,11 +1087,11 @@
    "sha256": "09d23c79415538941986395e14fc0da1cae5326d2bcd53a773c811dedf9b5692"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/G/inflow_openfoam.txt?v=3b54e6a7fc91",
+   "url": "https://aij.eddy3d.com/api/cases/G/inflow_openfoam.txt?v=33e8a05bb690",
    "path": "cases/G/inflow_openfoam.txt",
    "media_type": "text/plain",
    "bytes": 7409,
-   "sha256": "3b54e6a7fc917e97b9bf8e60cd772981e4399f8fcc1e3e7f4812d441277bf370"
+   "sha256": "33e8a05bb69093515db3abb0b9bde34a6bfb3407699600748b8684c3c8336268"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/G/pairs/openfoam12-realizableKE.csv?v=fda9fe2f217e",
@@ -1108,11 +1108,11 @@
    "sha256": "914883bf7fec7e7c3a0345a57694b2b14edf34e6d2786e9083b9459fe4737e19"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/G/points.json?v=900366a32045",
+   "url": "https://aij.eddy3d.com/api/cases/G/points.json?v=b77fc6da39e7",
    "path": "cases/G/points.json",
    "media_type": "application/json",
    "bytes": 9224,
-   "sha256": "900366a32045e00c8ec12488be7f561e76b09aacaf445d39431e8f7f767b9ff4"
+   "sha256": "b77fc6da39e7da488ff7c81f4efd3595828904d15ea4280fa841a251481501f2"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/G/probes.csv?v=219c5a86d3e8",
@@ -1122,18 +1122,18 @@
    "sha256": "219c5a86d3e86e1de0e05c9b45caf999ca7345a1a6c78bbf24be3fac681b1b74"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/G/validation.json?v=92c4cf954688",
+   "url": "https://aij.eddy3d.com/api/cases/G/validation.json?v=eef6186638de",
    "path": "cases/G/validation.json",
    "media_type": "application/json",
    "bytes": 50969,
-   "sha256": "92c4cf954688944df545d768dce529b2e221fa5bfe36427b07e68de4947bfd3a"
+   "sha256": "eef6186638de6475daded2eb309381857866447cf8f2ab03669dbf714b45cd69"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/H.json?v=49d637100464",
+   "url": "https://aij.eddy3d.com/api/cases/H.json?v=456dd97865ec",
    "path": "cases/H.json",
    "media_type": "application/json",
    "bytes": 16269,
-   "sha256": "49d637100464c0643e886def9a9442367f6728c90550e60d62facc3a5c69ce32"
+   "sha256": "456dd97865ecc461c14828dad1ec4858f8d39ea9f4981346649ee3eed2644367"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/H/approach_flow.csv?v=ce516d4054a5",
@@ -1143,11 +1143,11 @@
    "sha256": "ce516d4054a526799b327372e30e954b2adf59658c9b6eb25b2f76cf792225b0"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/H/geometry.json?v=0b1e6f58c3ba",
+   "url": "https://aij.eddy3d.com/api/cases/H/geometry.json?v=12e8bde0ba8b",
    "path": "cases/H/geometry.json",
    "media_type": "application/json",
    "bytes": 2453,
-   "sha256": "0b1e6f58c3ba212974e47eda7908787b8cd8bb8c998a06b733da56c1e58946a9"
+   "sha256": "12e8bde0ba8b840370f045e7411314621521828755fadde1664f05cb0e31035c"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/H/geometry.stl?v=4836687efff9",
@@ -1157,11 +1157,11 @@
    "sha256": "4836687efff9d49c4c80e540dcec255ba78e3aef7a90679bee6a9945b0eea9e7"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/H/inflow_openfoam.txt?v=5816d3f18d79",
+   "url": "https://aij.eddy3d.com/api/cases/H/inflow_openfoam.txt?v=c94c9bd904b7",
    "path": "cases/H/inflow_openfoam.txt",
    "media_type": "text/plain",
    "bytes": 198296,
-   "sha256": "5816d3f18d793938812fd23c2ea398d3d5031134a3bf8102b6ba439b8089890c"
+   "sha256": "c94c9bd904b7996c787c4667c82f5be68324df20928f69c2ace0b5d51d366ab2"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/H/pairs/openfoam12-realizableKE.csv?v=915d369f503f",
@@ -1178,11 +1178,11 @@
    "sha256": "ef5fafc61b8ea8defdec24cf23252edd1d3acdbce1daeda2295da2a31d60f06a"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/H/points.json?v=6585dc3f2999",
+   "url": "https://aij.eddy3d.com/api/cases/H/points.json?v=e46bc1b8867a",
    "path": "cases/H/points.json",
    "media_type": "application/json",
    "bytes": 646283,
-   "sha256": "6585dc3f2999937083927978262fc366ddf22787206c14df4ed22c98791ade03"
+   "sha256": "e46bc1b8867adb8c539bdfcaa0e373e5f42e89c73fb1a494ccd5decfb6fa9669"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/H/probes.csv?v=450e304dc11d",
@@ -1192,18 +1192,18 @@
    "sha256": "450e304dc11dcebbaf627bea576b2c1850097e8ddf768d1f843f0d95fd1ecb1d"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/H/validation.json?v=7c9aa45571fe",
+   "url": "https://aij.eddy3d.com/api/cases/H/validation.json?v=3bafe74e4a3b",
    "path": "cases/H/validation.json",
    "media_type": "application/json",
    "bytes": 13495,
-   "sha256": "7c9aa45571fee9089bd9bfae1219e0f97b3299c7fc81cc279ccd9f0cb33b9142"
+   "sha256": "3bafe74e4a3bc4dfc215fc39f988da4514d626cd17b5a012da09f0be6f4764f9"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/I.json?v=1bdefc9d0422",
+   "url": "https://aij.eddy3d.com/api/cases/I.json?v=88e0c149199c",
    "path": "cases/I.json",
    "media_type": "application/json",
    "bytes": 15592,
-   "sha256": "1bdefc9d0422001f01d6ec5f7c5719bcc79ba5fb0de5719ab88031a9abe1ce20"
+   "sha256": "88e0c149199c787023bfec5f93324e5c191dc3421fc70cbae9dce56c1a02e241"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/I/approach_flow.csv?v=8c9a2fa1669a",
@@ -1213,11 +1213,11 @@
    "sha256": "8c9a2fa1669ad55cfb86b2b158a9fd8556e6edcc0184c8baf85ccaba94defa43"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/I/geometry.json?v=70d3d78abb5b",
+   "url": "https://aij.eddy3d.com/api/cases/I/geometry.json?v=b8aafa4d9a1d",
    "path": "cases/I/geometry.json",
    "media_type": "application/json",
    "bytes": 2348,
-   "sha256": "70d3d78abb5b5594ac4c83d176a6a62a3a20de8d1b54112b86713a6c8a62b2c4"
+   "sha256": "b8aafa4d9a1d869edaa31032ec047d5c5c302e413bd56db2ade7ff282fd23867"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/I/geometry.stl?v=ff61cbb22798",
@@ -1227,11 +1227,11 @@
    "sha256": "ff61cbb22798b0a8e10ed47f20da3cb2c7fa489e4483414cf9789364c47b659c"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/I/inflow_openfoam.txt?v=d5554530541d",
+   "url": "https://aij.eddy3d.com/api/cases/I/inflow_openfoam.txt?v=cea7b7be724f",
    "path": "cases/I/inflow_openfoam.txt",
    "media_type": "text/plain",
    "bytes": 78968,
-   "sha256": "d5554530541d470dd9680f843a2efc0cb044ad2c2aaa19e84f6ad495de6bfdd1"
+   "sha256": "cea7b7be724fe1fb1e3bfa05d8726c28bc5564c96628c7b541949194f0a8ce3f"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/I/pairs/openfoam12-kEpsilon.csv?v=6e6ba0f446e8",
@@ -1262,11 +1262,11 @@
    "sha256": "2864fee9eb1972e691babaf0f7a9cc61019cfbb9697c5b11ab7e1cae789751a1"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/I/points.json?v=84c9f2da622f",
+   "url": "https://aij.eddy3d.com/api/cases/I/points.json?v=5bc36f6fa3fb",
    "path": "cases/I/points.json",
    "media_type": "application/json",
    "bytes": 193858,
-   "sha256": "84c9f2da622f480bf3cdb36b14bc018e354c800fe3f28c017f19e6343016f69c"
+   "sha256": "5bc36f6fa3fbd029b9024ed98165175601cc52ed932e47c9cd971749d7e7e0b4"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/I/probes.csv?v=67f76ec18f93",
@@ -1276,18 +1276,18 @@
    "sha256": "67f76ec18f932368acaafde40dbdc3cffb1018cfd7360c5a3cf72e14dff3b1ee"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/I/validation.json?v=8a0eab35150c",
+   "url": "https://aij.eddy3d.com/api/cases/I/validation.json?v=79af36e755bc",
    "path": "cases/I/validation.json",
    "media_type": "application/json",
    "bytes": 22969,
-   "sha256": "8a0eab35150c8b78b93eda00199d383de177eeb74d1f80d6dfd5bd32cf4e3d23"
+   "sha256": "79af36e755bc076c39b3b61b58306d201077c040077bd1c707fdbcf60c8d5456"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/J.json?v=5d70588e08e8",
+   "url": "https://aij.eddy3d.com/api/cases/J.json?v=27c42897f4a5",
    "path": "cases/J.json",
    "media_type": "application/json",
    "bytes": 16810,
-   "sha256": "5d70588e08e83ce6ea0df67592973c6c3dddec54dfd016096649101e63597d5a"
+   "sha256": "27c42897f4a525ea23fc52039872790fe3492218eff9e529a6c6a81d3fa96803"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/J/approach_flow.csv?v=076668c06f1c",
@@ -1297,11 +1297,11 @@
    "sha256": "076668c06f1c98252006e9d9aaa100ca106ab3a4766565012e12ee4948dd5198"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/J/geometry.json?v=3f7578c341c7",
+   "url": "https://aij.eddy3d.com/api/cases/J/geometry.json?v=317cdd071a5c",
    "path": "cases/J/geometry.json",
    "media_type": "application/json",
    "bytes": 2430,
-   "sha256": "3f7578c341c78109ae5d8d8fb4060a5477e51794e7c94169dbd8a2bd42ae983f"
+   "sha256": "317cdd071a5c8089d0d37403985e1e4c749a7b6d1ef77e2e34def9e2089667ee"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/J/geometry.stl?v=1bd33d8d3531",
@@ -1311,11 +1311,11 @@
    "sha256": "1bd33d8d3531e7c9637e1b0bffa697a9193b502ec30333a59229afb75b09d5ef"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/J/inflow_openfoam.txt?v=b4eb46f0a1e5",
+   "url": "https://aij.eddy3d.com/api/cases/J/inflow_openfoam.txt?v=95dd5f627e6e",
    "path": "cases/J/inflow_openfoam.txt",
    "media_type": "text/plain",
    "bytes": 56163,
-   "sha256": "b4eb46f0a1e5c88992109753ff699b0964205538a03e04a2d3d34c9a6933c2c8"
+   "sha256": "95dd5f627e6e0f30c7744ca21ef665404c4dbd39bb6b37ff5957e7162cf48452"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/J/pairs/umf-buoyantKEpsilon.csv?v=87ba413bfa96",
@@ -1339,11 +1339,11 @@
    "sha256": "444b7aaa179115570e89110e2da80564c0469437de7be787adee53c3047aef6c"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/J/points.json?v=fc07b87fd68b",
+   "url": "https://aij.eddy3d.com/api/cases/J/points.json?v=9aa5c8120c1e",
    "path": "cases/J/points.json",
    "media_type": "application/json",
    "bytes": 234277,
-   "sha256": "fc07b87fd68b32d73f74d90f620fb7e0e0a80a195fe336f29f4c2cff5a6e1bd8"
+   "sha256": "9aa5c8120c1e6f266e6736ba8dcbf0b9eeccd9ee3c9f491aded3f8c1fd05e854"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/J/probes.csv?v=da4854c6791c",
@@ -1353,18 +1353,18 @@
    "sha256": "da4854c6791c40676d7851fc1f091d57323bf99a17f60c4c9841fcdc2f680224"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/J/validation.json?v=2ceb9bb41795",
+   "url": "https://aij.eddy3d.com/api/cases/J/validation.json?v=eb8c8c34e747",
    "path": "cases/J/validation.json",
    "media_type": "application/json",
    "bytes": 87315,
-   "sha256": "2ceb9bb41795cd62824d612c4bf7091fead890f9ae521f9466d4b92f0c10cd6a"
+   "sha256": "eb8c8c34e747d6efd4c08189db20a3ada2610e9d5dca717691fa236938468aa6"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/K.json?v=4f6af08611ce",
+   "url": "https://aij.eddy3d.com/api/cases/K.json?v=616ac9021182",
    "path": "cases/K.json",
    "media_type": "application/json",
    "bytes": 15802,
-   "sha256": "4f6af08611cece05d28d833b95033260454d58fd158497d00cd606aae8fc263c"
+   "sha256": "616ac90211821e9628ad33d0c8fd254418548623e881122462176a36dbacec2d"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/K/approach_flow.csv?v=5d197b5001ba",
@@ -1374,11 +1374,11 @@
    "sha256": "5d197b5001ba9c13e463c3dbf809945b1f8194eab418d9307cf73f1f2d33ad88"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/K/geometry.json?v=95e0755c77e9",
+   "url": "https://aij.eddy3d.com/api/cases/K/geometry.json?v=93b0237a8684",
    "path": "cases/K/geometry.json",
    "media_type": "application/json",
    "bytes": 12617,
-   "sha256": "95e0755c77e9f1adff4376cb95284531ac40f6fb9084a9705bdc6832f18a1852"
+   "sha256": "93b0237a86840cabaf5f6e64b004edd8548ec8776a398d3496aa1fbb4cda293b"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/K/geometry.stl?v=f0f8a3adfa29",
@@ -1388,11 +1388,11 @@
    "sha256": "f0f8a3adfa290e86df4bf4f8efb5466cb1d8d3fd7424a24be80f39fd3370ce41"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/K/inflow_openfoam.txt?v=0a7e6e69a75a",
+   "url": "https://aij.eddy3d.com/api/cases/K/inflow_openfoam.txt?v=9400833e256a",
    "path": "cases/K/inflow_openfoam.txt",
    "media_type": "text/plain",
    "bytes": 29827,
-   "sha256": "0a7e6e69a75a0449a8f11b620e725ef5fcf83d491dcd149bb3f0b582c95a544a"
+   "sha256": "9400833e256ac14337120572690f83787c753719287483bcf57efddb1237f8cc"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/K/pairs/openfoam12-realizableKE.csv?v=746a236c4635",
@@ -1409,11 +1409,11 @@
    "sha256": "8708f3251861d675fcfe23d03d238885bae813003f65372430b5ee0cfd60f3d6"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/K/points.json?v=eca6ed5d0c99",
+   "url": "https://aij.eddy3d.com/api/cases/K/points.json?v=c70755504a7b",
    "path": "cases/K/points.json",
    "media_type": "application/json",
    "bytes": 85510,
-   "sha256": "eca6ed5d0c9945e5393f281e80861d23eb91533e194d29ab667242f311ad7c5c"
+   "sha256": "c70755504a7b4d5ba1384d49922038d18798a6c9d8c556e8074352752d607578"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/K/probes.csv?v=16f8836953ce",
@@ -1423,18 +1423,18 @@
    "sha256": "16f8836953ceb02eeb32a05b16bfa4d0d37c2d5f2b5d9ac957a17e057ba83b2f"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/K/validation.json?v=7b6a4893f2b6",
+   "url": "https://aij.eddy3d.com/api/cases/K/validation.json?v=ac302423e693",
    "path": "cases/K/validation.json",
    "media_type": "application/json",
    "bytes": 22743,
-   "sha256": "7b6a4893f2b6673f06ad48ed8be0ca00d98f6917aa6e6fc67f36cfd3cada60b7"
+   "sha256": "ac302423e693a88b44dd71295440e8e84369bbf9b697bce69203c05629f96de9"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/L.json?v=1fcf208c142d",
+   "url": "https://aij.eddy3d.com/api/cases/L.json?v=a6402a6a693d",
    "path": "cases/L.json",
    "media_type": "application/json",
    "bytes": 17202,
-   "sha256": "1fcf208c142d0cf59dbed88b23adf96b2cabc80184b26dbcb63c79dc5754b007"
+   "sha256": "a6402a6a693dac415b3e40835dea62dfdeddba8172cab65e5d55f297942628cf"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/L/approach_flow.csv?v=c428993827d4",
@@ -1444,11 +1444,11 @@
    "sha256": "c428993827d4593111756048f761c0d8c1308bc5d35f33130a8676c34a80b077"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/L/geometry.json?v=df06c7552c24",
+   "url": "https://aij.eddy3d.com/api/cases/L/geometry.json?v=a35d2373147b",
    "path": "cases/L/geometry.json",
    "media_type": "application/json",
    "bytes": 18497,
-   "sha256": "df06c7552c24295acb9a366acaebda0648f6d88e6b4d2e8ec7b903e1646d48af"
+   "sha256": "a35d2373147b0260b05e8810b109ee180316a8e98a22bb960dc544be3913720a"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/L/geometry.stl?v=20864bc75187",
@@ -1458,11 +1458,11 @@
    "sha256": "20864bc7518792c737eb094c784508f259788d5835badf908edd2fe6ad044a3f"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/L/inflow_openfoam.txt?v=9b67a5d1fe6e",
+   "url": "https://aij.eddy3d.com/api/cases/L/inflow_openfoam.txt?v=1cc9dc5523ee",
    "path": "cases/L/inflow_openfoam.txt",
    "media_type": "text/plain",
    "bytes": 45485,
-   "sha256": "9b67a5d1fe6ef8b741418c7cbb513bcad2e8c43b7913f664840f3ffab1d81da2"
+   "sha256": "1cc9dc5523ee8d108d7065fcb9aea052f2a0e4285b5f72688821c99fcda524dd"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/L/pairs/umf-realizableKE.csv?v=a0aedc557c46",
@@ -1479,11 +1479,11 @@
    "sha256": "b575fe11d107f31aacb2052bb31783d90964d5f90068fc5d8a8566f1004ef1f7"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/L/points.json?v=6f70ddfda98c",
+   "url": "https://aij.eddy3d.com/api/cases/L/points.json?v=45a3aa65c226",
    "path": "cases/L/points.json",
    "media_type": "application/json",
    "bytes": 217229,
-   "sha256": "6f70ddfda98c2bf4011b9900e9c285318b4927335b5f5af650327b4f5d2662c5"
+   "sha256": "45a3aa65c226d01439d6b36bbf1fa45689d622b48be9e2da6129edc1028243d3"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/L/probes.csv?v=abee3cd8c088",
@@ -1493,18 +1493,18 @@
    "sha256": "abee3cd8c0886634b6b733d8fc95aceb84045d4aba2b6faa9e7a8435bc4dfef2"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/L/validation.json?v=d2c8c4dd6bb5",
+   "url": "https://aij.eddy3d.com/api/cases/L/validation.json?v=068a7a50cd87",
    "path": "cases/L/validation.json",
    "media_type": "application/json",
    "bytes": 31115,
-   "sha256": "d2c8c4dd6bb598fce8c261e9353658769b52e1f92346d50e08a66ae817a4504a"
+   "sha256": "068a7a50cd87f5fec76d237d480b4416e9dba681664ee604e9903032fe8a5047"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/M.json?v=2bf1791df49c",
+   "url": "https://aij.eddy3d.com/api/cases/M.json?v=079d44532af5",
    "path": "cases/M.json",
    "media_type": "application/json",
    "bytes": 22437,
-   "sha256": "2bf1791df49c4f6dd1f7fe8b143fde5794cc1374f077feee0b340c5e9263d6f4"
+   "sha256": "079d44532af5b616e0e76cd26fd82bad8b9ca7423ad862d616a6f585ac7e56c3"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/M/approach_flow.csv?v=0042caa39493",
@@ -1514,11 +1514,11 @@
    "sha256": "0042caa394930c19454a0b2667dbda1e2a762641d7d57f443329e1088eb376ee"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/M/geometry.json?v=cf52d1da5bc5",
+   "url": "https://aij.eddy3d.com/api/cases/M/geometry.json?v=6498ba2f630f",
    "path": "cases/M/geometry.json",
    "media_type": "application/json",
    "bytes": 2725,
-   "sha256": "cf52d1da5bc5649bf05e4525b5886cc5d5717fcaadd19ff86fabc74fff62be99"
+   "sha256": "6498ba2f630f7dac6dcdf56f865302fb26c64174f87014aae5c5f849b88d4b95"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/M/geometry.stl?v=e4e0a2044536",
@@ -1528,11 +1528,11 @@
    "sha256": "e4e0a2044536248881898be3bf926b0c0da18b125b29403d2c260c95a5931525"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/M/inflow_openfoam.txt?v=79a43c07470a",
+   "url": "https://aij.eddy3d.com/api/cases/M/inflow_openfoam.txt?v=8953bd7deeba",
    "path": "cases/M/inflow_openfoam.txt",
    "media_type": "text/plain",
    "bytes": 49658,
-   "sha256": "79a43c07470a37bec3e908e39f2c64eb18d8d16985aea8149f7feb64ab581fbf"
+   "sha256": "8953bd7deeba9151517329b8ef18ab39152fa5148322f2ecd6be4600aeccc35f"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/M/pairs/openfoam12-realizableKE.csv?v=9ea7d94ddd27",
@@ -1549,11 +1549,11 @@
    "sha256": "8d32dc8f762bb8ae49e0b2252121df12bf2f94c98e724f252e887a368b18bb20"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/M/points.json?v=8493bf0be2cd",
+   "url": "https://aij.eddy3d.com/api/cases/M/points.json?v=e38461c1fdb1",
    "path": "cases/M/points.json",
    "media_type": "application/json",
    "bytes": 133323,
-   "sha256": "8493bf0be2cde36e2f5f018fa40f64bd15b95ef2d4c29ec01771bc0c85c9f1e0"
+   "sha256": "e38461c1fdb118fc3becb9590f9159788465fd4cecdbb492d02d9db72e7f6421"
   },
   {
    "url": "https://aij.eddy3d.com/api/cases/M/probes.csv?v=877ae498c348",
@@ -1563,18 +1563,18 @@
    "sha256": "877ae498c348fb598f1ba06c88cb4152ac9240c29b746ab9e62cc532eff56de8"
   },
   {
-   "url": "https://aij.eddy3d.com/api/cases/M/validation.json?v=09f50bfca5b4",
+   "url": "https://aij.eddy3d.com/api/cases/M/validation.json?v=b4cbe6cec34c",
    "path": "cases/M/validation.json",
    "media_type": "application/json",
    "bytes": 54812,
-   "sha256": "09f50bfca5b4ab4289b25066b511812f48fb005af971d2dbf67c0bf5000c5282"
+   "sha256": "b4cbe6cec34c0a2625c655a4df4957048ed3b781e6fd60db54c2ef2a23802767"
   },
   {
-   "url": "https://aij.eddy3d.com/api/geometry.json?v=d0b3b32b1bb3",
+   "url": "https://aij.eddy3d.com/api/geometry.json?v=c6f098d87450",
    "path": "geometry.json",
    "media_type": "application/json",
    "bytes": 18312,
-   "sha256": "d0b3b32b1bb34bf3b617749631232a0316caf4a3976d8688400e6698db4cbf3d"
+   "sha256": "c6f098d8745044b9054ae8bc4d315b5a64642eded2ca2226c4f98769d17e5bba"
   },
   {
    "url": "https://aij.eddy3d.com/api/geometry.zip?v=9ed663e1d97c",
@@ -1584,11 +1584,11 @@
    "sha256": "9ed663e1d97cd167b478dd1ec8cb96689362b39b4efecb95cdd00b9b3dbcae40"
   },
   {
-   "url": "https://aij.eddy3d.com/api/llms.txt?v=d38c0893e317",
+   "url": "https://aij.eddy3d.com/api/llms.txt?v=669241dd83b0",
    "path": "llms.txt",
    "media_type": "text/plain",
    "bytes": 48145,
-   "sha256": "d38c0893e3177fdb6c6b8535096a1352b05073a144d4e74b5f4b49ace6111ac7"
+   "sha256": "669241dd83b093a5d271c70884ea364b23fea9da9be5607c37f30c436aba79bf"
   },
   {
    "url": "https://aij.eddy3d.com/api/openapi.json?v=c5c97f2c41d5",
@@ -1675,18 +1675,18 @@
    "sha256": "0aae4d98bffe29d63346264a3d5b2fe1c5e899cadbeda303591f736b167cda82"
   },
   {
-   "url": "https://aij.eddy3d.com/api/submissions.json?v=75a0ee32bb65",
+   "url": "https://aij.eddy3d.com/api/submissions.json?v=6dcfb5cbde0f",
    "path": "submissions.json",
    "media_type": "application/json",
    "bytes": 50449,
-   "sha256": "75a0ee32bb65fed02ed3ce31ac7e68101efeb5abc22a84fe57044866abd3e62d"
+   "sha256": "6dcfb5cbde0f3bce0a0f38814fafb948ed727ab3be449b1afdc812f028f7f8fb"
   },
   {
-   "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-casee-refined-mesh.json?v=23988bae14a2",
+   "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-casee-refined-mesh.json?v=d05739127dbe",
    "path": "submissions/eddy3d-of12-casee-refined-mesh.json",
    "media_type": "application/json",
    "bytes": 9373,
-   "sha256": "23988bae14a29882686f2d13088c94a7afc3dc8d5e2ef592f4c92e9b159cc7ea"
+   "sha256": "d05739127dbe30aa8f99e4881c0f88ea875a5d82e14b081dd8c7b477bf3468cc"
   },
   {
    "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-casee-refined-mesh/E.csv?v=c302ea867647",
@@ -1696,11 +1696,11 @@
    "sha256": "c302ea8676479022f91292db92cc90a2d0088c81d032576ee4494eb0752f4c55"
   },
   {
-   "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-casek-workbook-inflow.json?v=706b4fc279e5",
+   "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-casek-workbook-inflow.json?v=88c5e9ac0f9c",
    "path": "submissions/eddy3d-of12-casek-workbook-inflow.json",
    "media_type": "application/json",
    "bytes": 11679,
-   "sha256": "706b4fc279e563e11f6debabbb9997ec643afe8257025ba7fa185c9978a578c5"
+   "sha256": "88c5e9ac0f9c54e140d73b249a74be9f32cd1fa9555b02086104d9eec301ff05"
   },
   {
    "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-casek-workbook-inflow/K.csv?v=fd83799198fb",
@@ -1710,11 +1710,11 @@
    "sha256": "fd83799198fbb8dbb6701b53cad31e6e70f615876748a4b9fb12fd2e7122fed4"
   },
   {
-   "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-measured-inlet.json?v=73c0cb2f52ce",
+   "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-measured-inlet.json?v=66a26b3b901b",
    "path": "submissions/eddy3d-of12-measured-inlet.json",
    "media_type": "application/json",
    "bytes": 25388,
-   "sha256": "73c0cb2f52ce39640320a7aa32776396c4755b60be6219562a98e6a6c12ebc36"
+   "sha256": "66a26b3b901be715dfcba41422270addac334eddd00d110cb1988db264747e60"
   },
   {
    "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-measured-inlet/A.csv?v=cdc0dad39c20",
@@ -1738,11 +1738,11 @@
    "sha256": "222411bc15a19741ed7ee1fe16eef27bd0f1564f4a6933105c6a44d64936a2d0"
   },
   {
-   "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-mesh2x-measured-inlet.json?v=8fe18415178e",
+   "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-mesh2x-measured-inlet.json?v=857531dcff47",
    "path": "submissions/eddy3d-of12-mesh2x-measured-inlet.json",
    "media_type": "application/json",
    "bytes": 10424,
-   "sha256": "8fe18415178e96f1ed48b4a20a8025794aea70db5ad4929069f97425eb795641"
+   "sha256": "857531dcff47500509c20b20de941b3b340d8efcad51c062382c91437a80e597"
   },
   {
    "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-mesh2x-measured-inlet/A.csv?v=d21d791d27b1",
@@ -1752,11 +1752,11 @@
    "sha256": "d21d791d27b10777d5eca6cbaa4137e956292f2306673859b5ce277900e4b96b"
   },
   {
-   "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted.json?v=f8bb3530fa98",
+   "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted.json?v=8e4dc52e054b",
    "path": "submissions/eddy3d-of12-nutcap-lifted.json",
    "media_type": "application/json",
    "bytes": 111212,
-   "sha256": "f8bb3530fa9819afd6efa66f326438eac36fae53b2478be51572e0cdec763ab7"
+   "sha256": "8e4dc52e054bdc7510fc2eefffb07028bea517c7802e7a2430899fbd89a79328"
   },
   {
    "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-nutcap-lifted/A.csv?v=d55ee1f8ca3c",
@@ -1836,11 +1836,11 @@
    "sha256": "6fd56831269cb64f37b6bd4a186ea7c4eb206a2d7e1fe96d5b1bd30c90e7e604"
   },
   {
-   "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-sst-urans.json?v=4145b41741f5",
+   "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-sst-urans.json?v=94cb71df2b18",
    "path": "submissions/eddy3d-of12-sst-urans.json",
    "media_type": "application/json",
    "bytes": 10459,
-   "sha256": "4145b41741f5e781f822ee69ab049d886e27889fa91cfc47e31becdbd3908fc0"
+   "sha256": "94cb71df2b18009c2a9596c9dbea60be2a5e865b6f09ab26cf2582afbd8850ad"
   },
   {
    "url": "https://aij.eddy3d.com/api/submissions/eddy3d-of12-sst-urans/A.csv?v=98a4d275b3f2",
@@ -1850,11 +1850,11 @@
    "sha256": "98a4d275b3f24a3c3579b18f2dfff08685c77f558987b79768a1fae48728787d"
   },
   {
-   "url": "https://aij.eddy3d.com/api/submissions/example-openfoam12.json?v=d9725dad5ead",
+   "url": "https://aij.eddy3d.com/api/submissions/example-openfoam12.json?v=9b9dbe236358",
    "path": "submissions/example-openfoam12.json",
    "media_type": "application/json",
    "bytes": 8872,
-   "sha256": "d9725dad5ead15b752dc66c167b18faf787fa62c2e6b3c2ddaa81d7f4ed97e04"
+   "sha256": "9b9dbe236358b15677c6501ae4fa531f6d7a2c99f0059623bd72ba8bef9b3841"
   },
   {
    "url": "https://aij.eddy3d.com/api/submissions/example-openfoam12/A.csv?v=4eec5b1fe73a",
@@ -1864,11 +1864,11 @@
    "sha256": "4eec5b1fe73a82f78f5312644aa06f5af0e41f958ebe23c07839d0d67299dd76"
   },
   {
-   "url": "https://aij.eddy3d.com/api/validation.json?v=c124175dcf9e",
+   "url": "https://aij.eddy3d.com/api/validation.json?v=7891560be500",
    "path": "validation.json",
    "media_type": "application/json",
-   "bytes": 83500,
-   "sha256": "c124175dcf9ed6b5e861b6721164f67d453cd2fc35824e31855ebd35b2d2f7d1"
+   "bytes": 83502,
+   "sha256": "7891560be50061ff485a7141b7bf27765475dcbc486fd0fdf152d6e788f2da60"
   }
  ],
  "license_detail": {
@@ -1880,14 +1880,14 @@
  "cite": {
   "api": {
    "title": "AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API",
-   "version": "3.11.0",
-   "url": "https://aij.eddy3d.com/api/3.11.0/index.json",
-   "release_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/releases/tag/v3.11.0",
+   "version": "3.11.1",
+   "url": "https://aij.eddy3d.com/api/3.11.1/index.json",
+   "release_url": "https://github.com/Eddy3D-Dev/AIJ-Data-Validation/releases/tag/v3.11.1",
    "doi": null,
-   "apa": "Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.11.0) [Data set]. Sustainable Urban Systems Lab. https://aij.eddy3d.com/api/3.11.0/index.json",
-   "bibtex": "@misc{aijuwe_api_3_11_0,\n  author    = \"Karadag, Ilker and Kastner, Patrick\",\n  title     = \"{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}\",\n  year      = \"2026\",\n  version   = \"3.11.0\",\n  publisher = \"Sustainable Urban Systems Lab\",\n  url       = \"https://aij.eddy3d.com/api/3.11.0/index.json\",\n  note      = \"Data set; data version f85c050e1ee3\"\n}",
+   "apa": "Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.11.1) [Data set]. Sustainable Urban Systems Lab. https://aij.eddy3d.com/api/3.11.1/index.json",
+   "bibtex": "@misc{aijuwe_api_3_11_1,\n  author    = \"Karadag, Ilker and Kastner, Patrick\",\n  title     = \"{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}\",\n  year      = \"2026\",\n  version   = \"3.11.1\",\n  publisher = \"Sustainable Urban Systems Lab\",\n  url       = \"https://aij.eddy3d.com/api/3.11.1/index.json\",\n  note      = \"Data set; data version 7ee0afb7cec8\"\n}",
    "csl_json": {
-    "id": "aijuwe-api-3.11.0",
+    "id": "aijuwe-api-3.11.1",
     "type": "dataset",
     "title": "AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API",
     "author": [
@@ -1909,10 +1909,10 @@
       ]
      ]
     },
-    "version": "3.11.0",
+    "version": "3.11.1",
     "publisher": "Sustainable Urban Systems Lab",
-    "URL": "https://aij.eddy3d.com/api/3.11.0/index.json",
-    "note": "Data version f85c050e1ee3"
+    "URL": "https://aij.eddy3d.com/api/3.11.1/index.json",
+    "note": "Data version 7ee0afb7cec8"
    }
   },
   "benchmark": "Kikumoto, H., Okaze, T., Yoshie, R., Tachibana, T., Ishihara, T., Nonomura, Y., Kiyota, N., Kondo, H., Mochida, A., Tominaga, Y. (2026). Comprehensive Experimental Database for Validating CFD Simulations in Urban Wind Environment: Benchmark Cases Curated by the Architectural Institute of Japan. Japan Architectural Review 9(1), e70083. https://doi.org/10.1002/2475-8876.70083",

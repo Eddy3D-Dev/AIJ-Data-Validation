@@ -38,7 +38,7 @@ Isolated 1:4:4 slab, velocity field (split-fibre hot wire).
 | Engine | Status | Compared with | R (range) | FAC2 (range) |
 |---|---|---|---|---|
 | OpenFOAM 12 | <span class="label label-green status">scored</span> | Wind tunnel | +0.40 … +0.96 | 0.28 … 0.70 |
-| OpenLB | <span class="label label-green status">scored</span> | Wind tunnel | +0.49 … +0.90 | 0.04 … 0.64 |
+| OpenLB | <span class="label label-green status">scored</span> | Wind tunnel | +0.45 … +0.93 | 0.05 … 0.61 |
 | FluidX3D | <span class="label label-green status">scored</span> | Wind tunnel | +0.85 … +0.95 | 0.48 … 0.64 |
 | ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | -0.24 … +0.01 | 0.36 … 0.46 |
 {: .scores }
