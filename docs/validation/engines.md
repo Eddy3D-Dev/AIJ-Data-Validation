@@ -3,13 +3,13 @@ title: "OpenLB and FluidX3D"
 parent: Validation
 nav_order: 3
 summary: "the two lattice-Boltzmann engines: how they are run, and why they are not scored on C to E"
-description: "How Eddy3D runs OpenLB and FluidX3D, what limits them near the ground, and the measurements that make them not comparable on Cases C to E."
+description: "How Eddy3D runs OpenLB and FluidX3D, what limits them near the ground, and the measurements behind their status on Cases C to E."
 ---
 
 # OpenLB and FluidX3D
 {: .no_toc }
 
-Eddy3D's two lattice-Boltzmann engines were scored on Cases A and B, on the same points as OpenFOAM 12; their scores and figures are on the [Case A]({{ '/cases/case-a/validation/' | relative_url }}) and [Case B]({{ '/cases/case-b/validation/' | relative_url }}) Validation pages. They are not scored on Cases C to E; the measurements behind that are below, and each case's page says it for its own height. They have not been run on Cases F to M.
+Eddy3D's two lattice-Boltzmann engines were scored on Cases A and B, on the same points as OpenFOAM 12; their scores and figures are on the [Case A]({{ '/cases/case-a/validation/' | relative_url }}) and [Case B]({{ '/cases/case-b/validation/' | relative_url }}) Validation pages. They are not scored on Cases C to E: OpenLB is not comparable at the 2 m these cases measure at, and FluidX3D, whose ground wall function holds that height in an empty-domain control, has not been run on them. The measurements are below, and each case's page says it for its own height. They have not been run on Cases F to M.
 
 <details open markdown="block">
   <summary>
@@ -32,7 +32,8 @@ OpenLB (Eddy3D's `eddy3dWind`: Smagorinsky, third-order regularised D3Q19, CPU i
 
 FluidX3D (Eddy3D's GPU lattice-Boltzmann engine: D3Q19 with Smagorinsky LES) solved both experiments at $$\mathrm{d}x = H/64$$ (2.5 mm and 3.125 mm; 117 and 121 million cells) with the same fitted log-law inflow, averaging over 200 $$H/U_H$$ after 40 of spin-up (A) and over 500 after 100 (B). Each run has an empty-domain control on the same lattice, and a point is scored only at a height where that control holds the imposed log law within 5 %: 116 of Case A's 186 points and 88 of Case B's 224.
 
-- FluidX3D meets the ground with a bounce-back wall and no roughness wall function. In the empty domain the flow at Case A's lowest plane ($$z = 0.01\thinspace\mathrm{m}$$, 4 cells up) reads 0.52 of the imposed log law on average, and 0.86 at $$z = 0.04\thinspace\mathrm{m}$$; Case B's three lowest heights read 0.77, 0.58 and 0.93. Those points are scored separately (`velocity.*.excluded`).
+- In these runs FluidX3D meets the ground with a bounce-back wall and no roughness wall function. In the empty domain the flow at Case A's lowest plane ($$z = 0.01\thinspace\mathrm{m}$$, 4 cells up) reads 0.52 of the imposed log law on average, and 0.86 at $$z = 0.04\thinspace\mathrm{m}$$; Case B's three lowest heights read 0.77, 0.58 and 0.93. Those points are scored separately (`velocity.*.excluded`).
+- Eddy3D's FluidX3D has had an opt-in ground wall function since 2026-11-05: the velocity three cells up gives, through the rough log law with the inflow's $$z_0$$, the shear stress the floor takes and the velocity the first fluid node is relaxed toward. The A and B runs predate it.
 
 ## Why OpenLB is not scored on C to E
 
@@ -66,28 +67,32 @@ The control: an empty domain 32 m wide and 80 m tall, $$\mathrm{d}x = 1.6\thinsp
 
 </details>
 
-## Why FluidX3D is not scored on C to E
+## Why FluidX3D is not yet scored on C to E
 
-In the empty-domain run at $$H/64$$, $$4\text{–}6\thinspace H$$ downstream of the inlet (where the buildings stand), the flow at the heights the other cases measure at reads, as a fraction of the imposed log law (mean across a span of $$\pm H$$):
+The OpenLB control above, on FluidX3D (Eddy3D's pinned commit 8986874e, FP16S, an Apple M2 Max): open faces (slip sides and top, a pressure outlet) and a steady log-law inflow, the kind the A and B runs use, in the 32 m wide domain and in one 96 m wide. $$U$$ at 2 m over the imposed log law, mean (range over the points):
 
-| the other case's height | cells above the floor at $$H/64$$ | $$U$$ / log law |
-|---|---|---|
-| Case D, $$z/H = 0.02$$ | 1.3 | 0.37–0.53 |
-| Case C, $$z/H = 0.10$$ | 6.4 | 0.58–0.68 |
-| Case E, 2 m among ~6 m buildings ($$z/H \approx 0.33$$) | 21 | 0.91–0.99 |
+| | Case C | Case D | Case E |
+|---|---|---|---|
+| distance from the inlet | 80–320 m | 770–1010 m | 350–650 m |
+| bounce-back, 32 m wide | 0.48 (0.38–0.60) | 0.53 (0.47–0.60) | 0.42 (0.30–0.52) |
+| ground wall function, 32 m wide | 1.00 (0.98–1.01) | 1.02 (0.95–1.06) | 0.98 (0.92–1.01) |
+| bounce-back, 96 m wide | 0.44 (0.38–0.55) | 0.46 (0.20–0.74) | 0.36 (0.20–0.56) |
+| ground wall function, 96 m wide | 1.00 (0.99–1.01) | 0.96 (0.954–0.969) | 0.99 (0.98–0.99) |
 
 {% include nomenclature.md %}
 
-- At $$H/32$$ the same height reads 0.74–0.80 (3.2 cells up).
-- At $$H/64$$ the near-wall flow forms stationary streaks, and across the span the ratio at $$z/H = 0.10$$ runs from 0.24 to 0.88 ($$4\thinspace H$$ downstream).
-- Case E's height reads 0.91–0.99 at Case A's lattice. The Niigata district fits on this GPU only at about 1.6 cells per 2 m (an estimate from the lattice sizes).
-
-FluidX3D has no ground wall function; scoring Cases C to E needs one in the engine.
+- With the ground wall function every 2 m point is within 5 % of the log law in all three cases in the 96 m wide domain. In the 32 m wide one only Case C's are: the D and E points stray beyond about 450 m from the inlet, where the three lines drift apart, as OpenLB's do in that domain.
+- With synthetic turbulence at the inlet, Eddy3D's default for FluidX3D, the 2 m layer runs fast: 1.14 (1.12–1.18) and 1.18 (1.13–1.24) in Case D's two domains, 1.05 (0.99–1.10) in Case C's narrow one. Only Case E's wide domain holds every point within 5 % (0.96–1.03).
+- The 2 m means at the averaging's halfway point and at its end agree within 0.003 in every steady run. With the steady inflow the wall-function runs took 2–6 % longer than their bounce-back twins (whole runs of 17–76 s, the compile included).
+- The Niigata district fits on the GPU of the A and B runs at up to about 1.6 cells per 2 m (an estimate from the lattice sizes); $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ is 1.25.
+- FluidX3D has not been run on Cases C to E.
+- Scripts, probes and run times: Eddy3D, `testing/aij-fluidx3d-ground-wall/`.
 
 <details markdown="block">
 <summary>Interpretation: FluidX3D on Cases C to E</summary>
 
-- The ground causes the low ratios, and refining the lattice lowers them: the ratio at $$z/H = 0.10$$ is 0.74–0.80 at $$H/32$$ and 0.58–0.68 at $$H/64$$.
-- Case E's height comes closest (0.91–0.99).
+- The ground wall function removes the collapsed floor: with the steady inflow the 2 m mean goes from 0.36–0.53 of the log law to 0.96–1.02.
+- With the steady inflow the ground no longer keeps these cases unscored; a run at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ with the wall function is scored wherever its own control holds the bar.
+- The 32 m domain's drift in Cases D and E is the domain, not the ground: 96 m wide, the same ground holds.
 
 </details>

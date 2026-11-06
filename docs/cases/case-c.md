@@ -41,7 +41,7 @@ description: "Case C — 3 × 3 block array: 3 x 3 array of 0.20 m cubes, centre
 |---|---|---|---|---|
 | OpenFOAM 12 | <span class="label label-green status">scored</span> | Wind tunnel | +0.74 … +0.91 | 0.55 … 0.98 |
 | OpenLB | <span class="label label-grey status">not comparable</span> | — | — | — |
-| FluidX3D | <span class="label label-grey status">not comparable</span> | — | — | — |
+| FluidX3D | <span class="label label-yellow status">pending</span> | — | — | — |
 | ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | +0.07 … +0.21 | 0.44 … 0.88 |
 {: .scores }
 

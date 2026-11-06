@@ -479,7 +479,7 @@
   "engines": {
    "openfoam12-realizableKE": "scored",
    "openlb": "not comparable",
-   "fluidx3d": "not comparable",
+   "fluidx3d": "pending",
    "ml-surrogate": "scored"
   }
  },

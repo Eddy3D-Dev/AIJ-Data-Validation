@@ -42,7 +42,7 @@ Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 
 |---|---|---|---|---|
 | OpenFOAM 12 | <span class="label label-green status">scored</span> | Wind tunnel | +0.69 … +0.85 | 0.74 … 0.95 |
 | OpenLB | <span class="label label-grey status">not comparable</span> | — | — | — |
-| FluidX3D | <span class="label label-grey status">not comparable</span> | — | — | — |
+| FluidX3D | <span class="label label-yellow status">pending</span> | — | — | — |
 | ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | +0.23 … +0.43 | 0.22 … 0.84 |
 {: .scores }
 

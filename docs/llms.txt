@@ -6,7 +6,7 @@
 Base URL: https://aij.eddy3d.com/api
 Fallback (raw files from the repository): https://raw.githubusercontent.com/Eddy3D-Dev/AIJ-Data-Validation/main/docs/api
 Repository: https://github.com/Eddy3D-Dev/AIJ-Data-Validation
-Release: 3.10.1 (2026-10-22). This is the latest alias, which always equals the newest release; the frozen copy of 3.10.1 is https://aij.eddy3d.com/api/3.10.1.
+Release: 3.10.2 (2026-11-05). This is the latest alias, which always equals the newest release; the frozen copy of 3.10.2 is https://aij.eddy3d.com/api/3.10.2.
 All releases: https://aij.eddy3d.com/api/versions.json
 API schema version: 2.5.0. Data version (SHA-256 of the served data): 5abd0adb307e7f87ec6e886d2133f2f0eab9fc5f3c6a36bb3b9d80d07c1d9ce2.
 Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and requested citation of each case are in cases/{id}.json.
@@ -25,7 +25,7 @@ Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and reques
    geometry.json lists the boxes where the geometry IS boxes (A, B, C, D, G, H, I, J, K, L), so you need not parse the STL at all.
 6. GET validation.json for every case and engine at once, or cases/{id}/validation.json for one case in full.
    Quote the `headline` scores. An engine whose status is not "scored" has NO result for that case: do not
-   infer one. Each result's `pairs` is the per-point measured and modelled values, so any score can be recomputed. Status: A: openfoam12-realizableKE scored, openlb scored, fluidx3d scored, ml-surrogate scored; B: openfoam12-realizableKE scored, openlb scored, fluidx3d scored, ml-surrogate scored; C: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored; D: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored; E: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored; F: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; G: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; H: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; I: openfoam12-realizableKE scored, openfoam12-kEpsilon scored, openfoam12-kOmegaSST scored, openlb pending, fluidx3d pending, ml-surrogate pending; J: openfoam12-realizableKE pending, umf-realizableKE scored, umf-buoyantKEpsilon scored, openlb pending, fluidx3d pending, ml-surrogate pending; K: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; L: openfoam12-realizableKE pending, umf-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; M: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending.
+   infer one. Each result's `pairs` is the per-point measured and modelled values, so any score can be recomputed. Status: A: openfoam12-realizableKE scored, openlb scored, fluidx3d scored, ml-surrogate scored; B: openfoam12-realizableKE scored, openlb scored, fluidx3d scored, ml-surrogate scored; C: openfoam12-realizableKE scored, openlb not comparable, fluidx3d pending, ml-surrogate scored; D: openfoam12-realizableKE scored, openlb not comparable, fluidx3d pending, ml-surrogate scored; E: openfoam12-realizableKE scored, openlb not comparable, fluidx3d pending, ml-surrogate scored; F: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; G: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; H: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; I: openfoam12-realizableKE scored, openfoam12-kEpsilon scored, openfoam12-kOmegaSST scored, openlb pending, fluidx3d pending, ml-surrogate pending; J: openfoam12-realizableKE pending, umf-realizableKE scored, umf-buoyantKEpsilon scored, openlb pending, fluidx3d pending, ml-surrogate pending; K: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; L: openfoam12-realizableKE pending, umf-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending; M: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending.
 7. All geometry at once: GET geometry.json (every STL with its case, configuration, units, frame and SHA-256)
    or geometry.zip. Each STL stays in its own case's frame and units; they are NOT one scene.
 8. Every JSON document names its JSON Schema in `$schema` (schemas/{name}.schema.json); openapi.json describes
@@ -153,19 +153,19 @@ Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and reques
   - https://aij.eddy3d.com/api/cases/L/probes.csv?v=abee3cd8c088
   - https://aij.eddy3d.com/api/cases/M/probes.csv?v=877ae498c348
 - cases/{id}/inflow_openfoam.txt (base URL + path, one file per value) — the recommended inlet as OpenFOAM 12 files in one text (0/U, 0/k, 0/epsilon, 0/nut, system/probes with the case's points); the benchmark's data is the measured profile, the inlet is this repository's choice:
-  - https://aij.eddy3d.com/api/cases/A/inflow_openfoam.txt?v=546c67d2bf76
-  - https://aij.eddy3d.com/api/cases/B/inflow_openfoam.txt?v=6f27045dc0fb
-  - https://aij.eddy3d.com/api/cases/C/inflow_openfoam.txt?v=230c7ae0625e
-  - https://aij.eddy3d.com/api/cases/D/inflow_openfoam.txt?v=8d92d68202d2
-  - https://aij.eddy3d.com/api/cases/E/inflow_openfoam.txt?v=f0ebca2fa911
-  - https://aij.eddy3d.com/api/cases/F/inflow_openfoam.txt?v=0d60900586f8
-  - https://aij.eddy3d.com/api/cases/G/inflow_openfoam.txt?v=8fe00dee5e7d
-  - https://aij.eddy3d.com/api/cases/H/inflow_openfoam.txt?v=8e5277e91fcd
-  - https://aij.eddy3d.com/api/cases/I/inflow_openfoam.txt?v=c77718fa7e11
-  - https://aij.eddy3d.com/api/cases/J/inflow_openfoam.txt?v=5d44d1bd1d86
-  - https://aij.eddy3d.com/api/cases/K/inflow_openfoam.txt?v=239e2730dedb
-  - https://aij.eddy3d.com/api/cases/L/inflow_openfoam.txt?v=6221e66bcc80
-  - https://aij.eddy3d.com/api/cases/M/inflow_openfoam.txt?v=4a72c94763b1
+  - https://aij.eddy3d.com/api/cases/A/inflow_openfoam.txt?v=d458dab484c8
+  - https://aij.eddy3d.com/api/cases/B/inflow_openfoam.txt?v=a6e8293e5c6e
+  - https://aij.eddy3d.com/api/cases/C/inflow_openfoam.txt?v=9f6a18d2dd8c
+  - https://aij.eddy3d.com/api/cases/D/inflow_openfoam.txt?v=8a2ee8b152e8
+  - https://aij.eddy3d.com/api/cases/E/inflow_openfoam.txt?v=1733a2d18da0
+  - https://aij.eddy3d.com/api/cases/F/inflow_openfoam.txt?v=28ceabed507d
+  - https://aij.eddy3d.com/api/cases/G/inflow_openfoam.txt?v=a52f5d02043e
+  - https://aij.eddy3d.com/api/cases/H/inflow_openfoam.txt?v=552e108b8518
+  - https://aij.eddy3d.com/api/cases/I/inflow_openfoam.txt?v=782d8dc8cac1
+  - https://aij.eddy3d.com/api/cases/J/inflow_openfoam.txt?v=f5449ad7add8
+  - https://aij.eddy3d.com/api/cases/K/inflow_openfoam.txt?v=e2e5709cee32
+  - https://aij.eddy3d.com/api/cases/L/inflow_openfoam.txt?v=e05fcf3409ac
+  - https://aij.eddy3d.com/api/cases/M/inflow_openfoam.txt?v=784ceaf00318
 - cases/{id}/validation.json (base URL + path, one file per value) — Eddy3D's scores per engine and run, with figures and the per-point pairs:
   - https://aij.eddy3d.com/api/cases/A/validation.json
   - https://aij.eddy3d.com/api/cases/B/validation.json
@@ -257,9 +257,9 @@ Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and reques
 
 - A: Case A — 1:1:2 building. Isolated 1:1:2 building, velocity field (split-fibre hot wire). 186 rows, 186 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, campaign. Engines: openfoam12-realizableKE scored, openlb scored, fluidx3d scored, ml-surrogate scored.
 - B: Case B — 1:4:4 slab. Isolated 1:4:4 slab, velocity field (split-fibre hot wire). 224 rows, 224 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, campaign. Engines: openfoam12-realizableKE scored, openlb scored, fluidx3d scored, ml-surrogate scored.
-- C: Case C — 3 × 3 block array. 3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestrian-height scalar speed (thermistor), 3 wind directions. 1080 rows, 120 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, Vs, campaign. Engines: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored.
-- D: Case D — high-rise among city blocks. 1:1:4 tower in a regular array of 82 low blocks, pedestrian-height scalar speed (thermistor, 3 wind directions) plus a 33-point split-fibre velocity field at WD = 0. 267 rows, 78 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, Vs, campaign. Engines: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored.
-- E: Case E — Niigata district. Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 m mid-rises; pedestrian-height velocity ratio (thermistor), 16 wind directions. 2560 rows, 80 points, columns point_id, config, instrument, wind_direction, wind_direction_deg, x, y, z, velocity_ratio, campaign. Engines: openfoam12-realizableKE scored, openlb not comparable, fluidx3d not comparable, ml-surrogate scored.
+- C: Case C — 3 × 3 block array. 3 x 3 array of 0.20 m cubes, centre block at 0D / 1D / 2D, pedestrian-height scalar speed (thermistor), 3 wind directions. 1080 rows, 120 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, Vs, campaign. Engines: openfoam12-realizableKE scored, openlb not comparable, fluidx3d pending, ml-surrogate scored.
+- D: Case D — high-rise among city blocks. 1:1:4 tower in a regular array of 82 low blocks, pedestrian-height scalar speed (thermistor, 3 wind directions) plus a 33-point split-fibre velocity field at WD = 0. 267 rows, 78 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, Vs, campaign. Engines: openfoam12-realizableKE scored, openlb not comparable, fluidx3d pending, ml-surrogate scored.
+- E: Case E — Niigata district. Real district in Niigata at 1:250, before and after a 60 m high-rise and two 18 m mid-rises; pedestrian-height velocity ratio (thermistor), 16 wind directions. 2560 rows, 80 points, columns point_id, config, instrument, wind_direction, wind_direction_deg, x, y, z, velocity_ratio, campaign. Engines: openfoam12-realizableKE scored, openlb not comparable, fluidx3d pending, ml-surrogate scored.
 - F: Case F — Shinjuku district. Shinjuku sub-centre, Tokyo, November 1978: 1:800 tunnel (thermistor, 5 / 9 / 20 m) and a year of field cup anemometers; velocity ratio to the 500 m wind, 12 tunnel and 16 field directions. 472 rows, 13 points, columns point_id, config, instrument, wind_direction, wind_direction_deg, x, y, z, velocity_ratio, campaign, velocity_ratio_sd. Engines: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending.
 - G: Case G — flow behind a tree belt. Field observation behind the Tsuiji-matsu tree belt (a porous windbreak, 74 m × 2 m × 7 m with a 1.2 m gap below): normalised mean speed and k at 28 points on the centre section (sonic anemometers). 28 rows, 28 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, velocity_ratio, campaign, k_ratio. Engines: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending.
 - H: Case H — 1:1:2 building with a floor point source. Isolated 1:1:2 building with an ethylene point source on the floor behind it: velocity (split-fibre hot wire) and concentration (hydrocarbon analyser) at 876 points. 1652 rows, 876 points, columns point_id, config, instrument, wind_direction_deg, x, y, z, U, V, W, uu, vv, ww, k, campaign, C, c_rms, concentration_ratio. Engines: openfoam12-realizableKE scored, openlb pending, fluidx3d pending, ml-surrogate pending.

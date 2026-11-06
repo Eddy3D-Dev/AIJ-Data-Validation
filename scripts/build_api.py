@@ -225,7 +225,7 @@ STATUS_MEANING = {
     "running": "the solve is in progress; no scores yet",
     "pending": "not run yet",
     "not comparable": ("the engine cannot produce the measured quantity at the measured location: OpenLB at the resolution "
-                       "this hardware runs, FluidX3D without a ground wall function; the measurement behind each is on the "
+                       "this hardware runs, on Cases C to E; the measurement behind it is on the "
                        "Validation page"),
 }
 # The closures other than realizable k-epsilon were solved for Case I alone (simpleFoam) and Case J (UMF): they are listed for the cases they apply to
@@ -235,9 +235,9 @@ _NOT_RUN = {"openfoam12-realizableKE": "pending", "openlb": "pending", "fluidx3d
 ENGINE_STATUS = {
     "A": {"openfoam12-realizableKE": "scored", "openlb": "scored", "fluidx3d": "scored", "ml-surrogate": "scored"},
     "B": {"openfoam12-realizableKE": "scored", "openlb": "scored", "fluidx3d": "scored", "ml-surrogate": "scored"},
-    "C": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "not comparable", "ml-surrogate": "scored"},
-    "D": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "not comparable", "ml-surrogate": "scored"},
-    "E": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "not comparable", "ml-surrogate": "scored"},
+    "C": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "pending", "ml-surrogate": "scored"},
+    "D": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "pending", "ml-surrogate": "scored"},
+    "E": {"openfoam12-realizableKE": "scored", "openlb": "not comparable", "fluidx3d": "pending", "ml-surrogate": "scored"},
     # Cases F to M: F, G, H, I, K and M have OpenFOAM 12 runs (I under three closures, G as a drag sweep, F in two vertical frames, M at three Schmidt
     # numbers); J and L, which are non-isothermal, have runs on UMF (J under two closures) and none on the isothermal solver. Nothing else has been run on F to M.
     "F": {**_NOT_RUN, "openfoam12-realizableKE": "scored"},

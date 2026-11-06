@@ -188,7 +188,7 @@
    "engines": {
     "openfoam12-realizableKE": "scored",
     "openlb": "not comparable",
-    "fluidx3d": "not comparable",
+    "fluidx3d": "pending",
     "ml-surrogate": "scored"
    },
    "doi": "10.5281/zenodo.15401791",
@@ -269,7 +269,7 @@
    "engines": {
     "openfoam12-realizableKE": "scored",
     "openlb": "not comparable",
-    "fluidx3d": "not comparable",
+    "fluidx3d": "pending",
     "ml-surrogate": "scored"
    },
    "doi": "10.5281/zenodo.15402668",
@@ -367,7 +367,7 @@
    "engines": {
     "openfoam12-realizableKE": "scored",
     "openlb": "not comparable",
-    "fluidx3d": "not comparable",
+    "fluidx3d": "pending",
     "ml-surrogate": "scored"
    },
    "doi": "10.5281/zenodo.15429017",
