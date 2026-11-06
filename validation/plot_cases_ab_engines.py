@@ -36,7 +36,7 @@ import plotstyle as style
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
-VAL = r"C:/Eddy3DVal"
+VAL = os.environ.get("EDDY3D_VALIDATION_DIR") or r"C:/Eddy3DVal"
 RESULTS = os.path.join(HERE, "results")
 
 UH = {"A": 4.491, "B": 5.133}

@@ -335,7 +335,7 @@ RUNS = [
           {"U": "velocity.U", "U, points ≥ 2 dx": "velocity.U.aboveTwoCells", "V": "velocity.V", "W": "velocity.W",
            "k (resolved)": "k.resolved", "V, lateral sign flipped (control)": "control.V.lateralSignFlipped"},
           [f"case-{c.lower()}-engine-comparison.png"],
-          f"Eddy3D fixture TestAijCase{c}OpenLbContainerE2E (OpenLB eddy3dWind, CPU image, dx = 1.6 m); "
+          f"Eddy3D fixture TestAijCase{c}OpenLbContainerE2E (OpenLB eddy3dWind, image 1.9.3-r6, CPU build, dx = 1.6 m); "
           "figure validation/plot_cases_ab_engines.py", f"case{c}_openlb_pairs.csv", PAIRS_AB) for c in ("A", "B")],
     # FluidX3D is scored on the heights where its own empty-domain control holds the imposed log law within 5 %
     # (its bounce-back ground has no roughness wall function); the approach flow alone is the control to beat.
