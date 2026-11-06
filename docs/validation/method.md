@@ -83,11 +83,19 @@ Fitted to each case's own approach-flow file over $$z = 0.02\thinspace\ldots\thi
 - Cases C, D and E carry their own fitted profiles on their pages. All three score at a single near-ground height.
 - The fits are in `/api/cases/{id}.json` under `inflow_fit`.
 
+## Grid uncertainty
+
+Cases A and E, OpenFOAM: four meshes, edge ratio $$\sqrt{2}$$. Band per point, second mesh: Roache's GCI (Celik et al. 2008, safety
+factor 1.25, [foamgci](https://github.com/rithikrn/foamgci)) where the meshes converge monotonically, half the spread where they
+oscillate, none where they diverge. Run with the eddy-viscosity cap lifted, so shown in its own section, not on the served run. No other
+run has a grid study.
+
 ## Reproducing the figures
 
 `validation/plot_cases_ab_openfoam.py` (Cases A and B), `validation/plot_case_c_openfoam.py`, `validation/plot_cases_hi_openfoam.py`
 (Cases H and I), `validation/plot_cases_gk_openfoam.py` (Cases G and K), `validation/plot_cases_jl_umf.py` (Cases J and L), `validation/plot_cases_fm_openfoam.py` (Cases F and M) and
-`validation/plot_ml_surrogate.py` (UltraPlot) build the figures; `validation/plot_layout.py` draws where each case was measured, from the groups of lines and planes in `validation/layout.py`, which also colour the dots of the agreement figures (`validation/test_layout.py` pins them). The Eddy3D fixtures are
+`validation/plot_ml_surrogate.py` (UltraPlot) build the figures, `validation/plot_grid_openfoam.py` the grid figures (snapshot:
+`validation/snapshot_grid.py`); `validation/plot_layout.py` draws where each case was measured, from the groups of lines and planes in `validation/layout.py`, which also colour the dots of the agreement figures (`validation/test_layout.py` pins them). The Eddy3D fixtures are
 `TestAijCaseAContainerE2E`, `TestAijCaseBContainerE2E`, `TestAijCaseC{0D,1D,2D}ContainerE2E`, `TestAijCaseFContainerE2E`, `TestAijCaseGContainerE2E`, `TestAijCaseHContainerE2E`,
 `TestAijCubeContainerE2E`, `TestAijCaseKContainerE2E`, `TestAijCaseJUmfContainerE2E`, `TestAijCaseLUmfContainerE2E`, `TestAijCaseMContainerE2E` and `Outdoor.ML.Tests/TestAijSurrogateE2E`. The scores they wrote are
 snapshotted in `validation/results/` with the per-point pairs beside them, and served unchanged by
