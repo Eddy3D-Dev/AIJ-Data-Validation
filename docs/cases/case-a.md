@@ -38,7 +38,7 @@ Isolated 1:1:2 building, velocity field (split-fibre hot wire).
 | Engine | Status | Compared with | R (range) | FAC2 (range) |
 |---|---|---|---|---|
 | OpenFOAM 12 | <span class="label label-green status">scored</span> | Wind tunnel | +0.48 … +0.96 | 0.35 … 0.82 |
-| OpenLB | <span class="label label-green status">scored</span> | Wind tunnel | +0.20 … +0.81 | 0.00 … 0.64 |
+| OpenLB | <span class="label label-green status">scored</span> | Wind tunnel | +0.16 … +0.80 | 0.00 … 0.65 |
 | FluidX3D | <span class="label label-green status">scored</span> | Wind tunnel | +0.59 … +0.85 | 0.22 … 0.60 |
 | ML surrogate | <span class="label label-green status">scored</span> | Wind tunnel | -0.13 … +0.43 | 0.26 … 0.62 |
 {: .scores }

@@ -15,18 +15,32 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [3.11.2] - 2026-11-07
+
+### Changed
+
+- OpenLB stays `not comparable` on Cases C to E, now also on wider, taller and longer empty-domain controls. With Eddy3D's
+  OpenLB ground wall model and the rough law, in a domain 256 m wide and 320 m tall at
+  $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$, the mean at the cases' 2 m height is within 4 % of the imposed log law (0.23–0.26
+  with the bounce-back ground), but not every point is within 5 %: Case C 1.02–1.07 (the 9 points over 5 % all within 144 m of
+  the inlet); Case E 1.012–1.046 averaged over half the time the 2 m layer takes to cross the domain, 0.985–1.0504 over two
+  crossings and 0.94–1.06 over the second alone; Case D 0.949–1.055 (a pattern across the span: the centre line 0.956, the lines
+  64 m either side 1.027). These ran on `openlb-wind:1.9.3-r4` and `-r5`, before `1.9.3-r6` moved the lattice's ground row half
+  a cell down, and are not re-run on it. The engines page and the README now give the 32 m wide control's `1.9.3-r6` numbers
+  too, as the case pages have since 3.11.1 (rough law 0.82–0.86 at 2 m). The meaning of `not comparable` in `validation.json`
+  now names the control.
+
 ## [3.11.1] - 2026-11-06
 
 ### Changed
 
-- OpenLB stays `not comparable` on Cases C to E, now on new empty-domain controls. With Eddy3D's OpenLB ground wall model
-  and the rough law, in a domain 256 m wide and 320 m tall at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$, the mean at the
-  cases' 2 m height is within 4 % of the imposed log law (0.23–0.26 with the bounce-back ground), but not every point is
-  within 5 %: Case C 1.02–1.07 (the 9 points over 5 % all within 144 m of the inlet); Case E 1.012–1.046 averaged over half
-  the time the 2 m layer takes to cross the domain, 0.985–1.0504 over two crossings and 0.94–1.06 over the second alone;
-  Case D 0.949–1.055 (a pattern across the span: the centre line 0.956, the lines 64 m either side 1.027). The meaning of
-  `not comparable` in `validation.json` now names the control. The controls ran on `openlb-wind:1.9.3-r4` and `-r5`, before
-  Eddy3D's `1.9.3-r6` moved the lattice's ground row half a cell down.
+- The OpenLB runs of Cases A and B are re-run on Eddy3D's `openlb-wind:1.9.3-r6`, whose lattice puts its ground row half a cell
+  under the domain: the bounce-back wall is $$z = 0$$, where the STL, the inflow and the measured points start. Until then the wall
+  sat half a cell (0.8 m) up and every building a row short (A's 16 m roof at 15.2 m; B's slab 18.4 m); "2 m" read 1.2 m above
+  the wall. A: $$U/U_H$$ R +0.76 → +0.78, FAC2 0.43 → 0.47; $$V$$ R 0.65 → 0.77; $$L_r$$ 3.39 → 2.80 $$H$$. B: $$U/U_H$$ R +0.79 → +0.85,
+  FAC2 0.38 → 0.42; $$V$$ R 0.83 → 0.87. Solved on 24 CPU threads (fp64; 13 and 33 min), re-scored by the same fixtures; pairs and
+  figures regenerated. The empty-domain controls of Cases C to E are re-run on the same image (their 2 m ratios change: the rough
+  wall model's first node is the half-cell node now).
 
 ## [3.11.0] - 2026-11-06
 

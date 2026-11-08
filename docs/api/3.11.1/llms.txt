@@ -8,7 +8,7 @@ Fallback (raw files from the repository): https://raw.githubusercontent.com/Eddy
 Repository: https://github.com/Eddy3D-Dev/AIJ-Data-Validation
 Release: 3.11.1 (2026-11-06). This is the frozen copy of that release: its files never change and every URL below stays inside it.
 All releases: https://aij.eddy3d.com/api/versions.json
-API schema version: 2.6.0. Data version (SHA-256 of the served data): f85c050e1ee39c783400bb29aa3039a6666749266d602089dd42f18c307e05b5.
+API schema version: 2.6.0. Data version (SHA-256 of the served data): 7ee0afb7cec8197e7edde0e7c282c8e6e9670b7cef003e6aa218c5a536817f48.
 Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and requested citation of each case are in cases/{id}.json.
 
 ## How to use this
@@ -184,11 +184,11 @@ Licence: CC-BY-4.0. Data: Kikumoto et al. (2026); the collectors, DOI and reques
   - https://aij.eddy3d.com/api/3.11.1/cases/A/pairs/fluidx3d.csv?v=fb16be8c5800
   - https://aij.eddy3d.com/api/3.11.1/cases/A/pairs/ml-surrogate.csv?v=6177f32a94f4
   - https://aij.eddy3d.com/api/3.11.1/cases/A/pairs/openfoam12-realizableKE.csv?v=0695411d68cf
-  - https://aij.eddy3d.com/api/3.11.1/cases/A/pairs/openlb.csv?v=974bf65cfd71
+  - https://aij.eddy3d.com/api/3.11.1/cases/A/pairs/openlb.csv?v=7376660704bd
   - https://aij.eddy3d.com/api/3.11.1/cases/B/pairs/fluidx3d.csv?v=c4af803fd09e
   - https://aij.eddy3d.com/api/3.11.1/cases/B/pairs/ml-surrogate.csv?v=eb9a9c3970e7
   - https://aij.eddy3d.com/api/3.11.1/cases/B/pairs/openfoam12-realizableKE.csv?v=9f7c10ff5544
-  - https://aij.eddy3d.com/api/3.11.1/cases/B/pairs/openlb.csv?v=9b2950d76b99
+  - https://aij.eddy3d.com/api/3.11.1/cases/B/pairs/openlb.csv?v=bdd88dbe936b
   - https://aij.eddy3d.com/api/3.11.1/cases/C/pairs/ml-surrogate.csv?v=6a2b60658913
   - https://aij.eddy3d.com/api/3.11.1/cases/C/pairs/openfoam12-realizableKE.csv?v=f3d2b649b543
   - https://aij.eddy3d.com/api/3.11.1/cases/D/pairs/ml-surrogate.csv?v=9dd71c9ce66b

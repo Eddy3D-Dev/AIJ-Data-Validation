@@ -70,20 +70,20 @@ Status: <span class="label label-green status">scored</span>
 
 ### Scores
 
-Reattachment length $$L_r/H$$ = 3.39.
+Reattachment length $$L_r/H$$ = 2.80.
 
 | Score | R | $$R^2$$ | FAC2 | FB | Hit rate | n |
 |---|---|---|---|---|---|---|
-| $$U$$ | +0.758 | 0.575 | 0.425 | +0.395 | 0.371 | 186 |
-| $$U$$, points ≥ 2 dx | +0.812 | 0.660 | 0.645 | +0.169 | 0.562 | 121 |
-| $$V$$ | +0.646 | 0.418 | 0.172 | +0.041 | 0.624 | 186 |
-| $$W$$ | +0.540 | 0.291 | 0.124 | -1.759 | 0.586 | 186 |
-| $$k$$ (resolved) | +0.200 | 0.040 | 0.000 | +1.971 | 0.000 | 186 |
-| $$V$$, lateral sign flipped (control) | -0.646 | 0.418 | 0.118 | +98.234 | 0.570 | 186 |
+| $$U$$ | +0.782 | 0.611 | 0.468 | +0.378 | 0.376 | 186 |
+| $$U$$, points ≥ 2 dx | +0.800 | 0.640 | 0.653 | +0.219 | 0.562 | 121 |
+| $$V$$ | +0.767 | 0.588 | 0.253 | -0.162 | 0.661 | 186 |
+| $$W$$ | +0.574 | 0.329 | 0.177 | -1.711 | 0.559 | 186 |
+| $$k$$ (resolved) | +0.162 | 0.026 | 0.000 | +1.958 | 0.000 | 186 |
+| $$V$$, lateral sign flipped (control) | -0.767 | 0.588 | 0.124 | -24.677 | 0.554 | 186 |
 {: .scores }
 
 - Per-point values: [`/api/cases/A/pairs/openlb.csv`]({{ '/api/cases/A/pairs/openlb.csv' | relative_url }})
-- Reproduce: Eddy3D fixture TestAijCaseAOpenLbContainerE2E (OpenLB eddy3dWind, CPU image, $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$); figure validation/plot\_cases\_ab\_engines.py
+- Reproduce: Eddy3D fixture TestAijCaseAOpenLbContainerE2E (OpenLB eddy3dWind, image 1.9.3-r6, CPU build, $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$); figure validation/plot\_cases\_ab\_engines.py
 
 ## FluidX3D
 
@@ -146,7 +146,7 @@ Every score is over the same 65 points.
 | 5 | OpenFOAM 12 | Eddy3D | 0.586 | 0.892 | 0.801 | 0.634 | 0.728 | 0.610 | +0.891 | 0.805 |
 | 6 | OpenFOAM simpleFoam (Eddy3D Outdoor case writer) ([example-openfoam12]({{ '/community/example-openfoam12/' | relative_url }})) | example submission | 0.586 | 0.892 | 0.801 | 0.634 | 0.728 | 0.610 | +0.891 | 0.805 |
 | 7 | FluidX3D | Eddy3D | 0.452 | 0.618 | 0.441 | 0.554 | 0.516 | 0.462 | +0.717 | 0.546 |
-| 8 | OpenLB | Eddy3D | 0.371 | 0.624 | 0.586 | 0.382 | 0.491 | 0.293 | +0.677 | 0.467 |
+| 8 | OpenLB | Eddy3D | 0.376 | 0.661 | 0.559 | 0.409 | 0.501 | 0.353 | +0.728 | 0.538 |
 {: .scores }
 
 All runs scored by `validation/score_submissions.py`. Ranked by mean hit rate (VDI 3783) over the tasks; bold: best per column. Not ranked: the ML surrogate (no point ids) and negative controls. Community rows are self-reported ([Validate your own solver]({{ '/byos/' | relative_url }})).

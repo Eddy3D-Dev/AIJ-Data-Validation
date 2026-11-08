@@ -2,11 +2,11 @@
  "case-a-engine-comparison.png": {
   "height": 2370,
   "master": "/assets/figures/case-a-engine-comparison.png",
-  "master_bytes": 2389907,
+  "master_bytes": 2407678,
   "master_height": 10524,
   "master_width": 7104,
   "web": "/assets/web/case-a-engine-comparison.png",
-  "web_bytes": 692318,
+  "web_bytes": 699125,
   "width": 1600
  },
  "case-a-layout.png": {
@@ -102,11 +102,11 @@
  "case-b-engine-comparison.png": {
   "height": 2339,
   "master": "/assets/figures/case-b-engine-comparison.png",
-  "master_bytes": 2692865,
+  "master_bytes": 2708268,
   "master_height": 10524,
   "master_width": 7200,
   "web": "/assets/web/case-b-engine-comparison.png",
-  "web_bytes": 753849,
+  "web_bytes": 761655,
   "width": 1600
  },
  "case-b-layout.png": {

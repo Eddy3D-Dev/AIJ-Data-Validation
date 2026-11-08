@@ -50,20 +50,20 @@ Validation data from the AIJ (Architectural Institute of Japan) benchmark cases�
 **API, APA**
 
 ```text
-Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.11.1) [Data set]. Sustainable Urban Systems Lab. https://aij.eddy3d.com/api/3.11.1/index.json
+Karadag, I., & Kastner, P. (2026). AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API (Version 3.11.2) [Data set]. Sustainable Urban Systems Lab. https://aij.eddy3d.com/api/3.11.2/index.json
 ```
 
 **API, BibTeX**
 
 ```bibtex
-@misc{aijuwe_api_3_11_1,
+@misc{aijuwe_api_3_11_2,
   author    = "Karadag, Ilker and Kastner, Patrick",
   title     = "{AIJ Urban Wind Environment benchmark, Cases A-M: cleaned wind-tunnel and field data, geometry and validation API}",
   year      = "2026",
-  version   = "3.11.1",
+  version   = "3.11.2",
   publisher = "Sustainable Urban Systems Lab",
-  url       = "https://aij.eddy3d.com/api/3.11.1/index.json",
-  note      = "Data set; data version f85c050e1ee3"
+  url       = "https://aij.eddy3d.com/api/3.11.2/index.json",
+  note      = "Data set; data version 7ee0afb7cec8"
 }
 ```
 
@@ -341,8 +341,8 @@ Reattachment length **$$L_r/H$$ = 1.49**. Mean measured $$W$$ is ~0.01 m/s.
 prediction height: $$\lvert\mathbf{U}\rvert/U_H$$ FB +0.77, FAC2 0.26, R −0.13, hit rate 0.09. Its prediction does not change when the wind
 is reversed. Method: *ML surrogate* under *Validation method*.
 
-**OpenLB** at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ ($$H/10$$): $$U/U_H$$ R +0.76, FAC2 0.43 over all 186 points, FAC2 0.65 over the 121 at least two
-cells above its no-slip floor. $$L_r = 3.39\thinspace H$$. Method: *OpenLB and FluidX3D* under *Validation method*.
+**OpenLB** at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ ($$H/10$$): $$U/U_H$$ R +0.78, FAC2 0.47 over all 186 points, FAC2 0.65 and R +0.80 over the 121 at least two
+cells above its no-slip floor. $$L_r = 2.80\thinspace H$$. Method: *OpenLB and FluidX3D* under *Validation method*.
 
 **FluidX3D** at $$\mathrm{d}x = H/64$$: $$U/U_H$$ R +0.84, FAC2 0.60 on the 116 points where its empty-domain control holds the
 log law.
@@ -435,7 +435,7 @@ Reattachment length **$$L_r/H$$ = 3.27**.
 **ML surrogate (Yel-2.0)** on the 122 points of the $$z = H/16$$ plane, scaled ×144: $$\lvert\mathbf{U}\rvert/U_H$$ FB +0.82, FAC2 0.36,
 R −0.24, hit rate 0.17. Method: *ML surrogate* under *Validation method*.
 
-**OpenLB** at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ ($$H/12.5$$): $$U/U_H$$ R +0.79, FAC2 0.38 over all 224 points, FAC2 0.64 and R +0.90 over the 95
+**OpenLB** at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ ($$H/12.5$$): $$U/U_H$$ R +0.85, FAC2 0.42 over all 224 points, FAC2 0.61 and R +0.93 over the 95
 at least two cells above its floor.
 
 **FluidX3D** at $$\mathrm{d}x = H/64$$: $$U/U_H$$ R +0.95, FAC2 0.64 on the 88 points where its empty-domain control holds the
@@ -447,7 +447,7 @@ log law.
 - OpenFOAM 12: the streamwise field is right ($$R \approx 0.96$$, FAC2 0.70); $$k$$ is under-predicted (FB +0.46, R 0.40).
 - The flat row of model $$V$$ ≈ 0 in the agreement panel is the symmetry plane: a RANS solution is symmetric, so $$V$$ ≡ 0 at
   $$y = 0$$, while the tunnel measures small non-zero values.
-- OpenLB: its wake sits about $$H/2$$ downstream of the tunnel's.
+- OpenLB: its wake sits about $$H/4$$ downstream of the tunnel's.
 - FluidX3D: beats its approach flow on every $$U$$ statistic.
 
 </details>
@@ -1502,20 +1502,20 @@ are in its own section above.
 
 ### OpenLB and FluidX3D
 
-OpenLB (Eddy3D's `eddy3dWind`: Smagorinsky, third-order regularised D3Q19, CPU image) solved the same two
+OpenLB (Eddy3D's `eddy3dWind`: Smagorinsky, third-order regularised D3Q19, image `1.9.3-r6`, CPU build) solved the same two
 experiments with the same fitted inflow and probed the same measured points, at $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$ ($$H/10$$ for A, $$H/12.5$$ for B),
-1.3 and 2.6 million cells, 1.8 h and 4.1 h on four threads. $$H/20$$ costs about 16 times the cell-steps on this image.
+1.3 and 2.6 million cells, 13 and 33 min on 24 threads of one node. $$H/20$$ costs about 16 times the cell-steps.
 
 | case · quantity | n | FAC2 | FB | hit rate | R | OpenFOAM FAC2 / hit rate / R |
 |---|---|---|---|---|---|---|
-| A · $$U/U_H$$, all points | 186 | 0.43 | +0.40 | 0.37 | 0.76 | 0.82 / 0.59 / 0.96 |
-| A · $$U/U_H$$, points ≥ 2 cells above the floor | 121 | 0.65 | +0.17 | 0.56 | 0.81 | — |
-| A · $$V/U_H$$ | 186 | 0.17 | — | 0.62 | 0.65 | 0.35 / 0.89 / 0.96 |
-| A · $$W/U_H$$ | 186 | 0.12 | — | 0.59 | 0.54 | 0.40 / 0.80 / 0.71 |
-| B · $$U/U_H$$, all points | 224 | 0.38 | +0.28 | 0.29 | 0.79 | 0.70 / 0.56 / 0.96 |
-| B · $$U/U_H$$, points ≥ 2 cells above the floor | 95 | 0.64 | −0.07 | 0.52 | 0.90 | — |
-| B · $$V/U_H$$ | 224 | 0.13 | — | 0.55 | 0.83 | 0.28 / 0.61 / 0.91 |
-| B · $$W/U_H$$ | 224 | 0.24 | — | 0.65 | 0.77 | 0.54 / 0.81 / 0.93 |
+| A · $$U/U_H$$, all points | 186 | 0.47 | +0.38 | 0.38 | 0.78 | 0.82 / 0.59 / 0.96 |
+| A · $$U/U_H$$, points ≥ 2 cells above the floor | 121 | 0.65 | +0.22 | 0.56 | 0.80 | — |
+| A · $$V/U_H$$ | 186 | 0.25 | — | 0.66 | 0.77 | 0.35 / 0.89 / 0.96 |
+| A · $$W/U_H$$ | 186 | 0.18 | — | 0.56 | 0.57 | 0.40 / 0.80 / 0.71 |
+| B · $$U/U_H$$, all points | 224 | 0.42 | +0.22 | 0.28 | 0.85 | 0.70 / 0.56 / 0.96 |
+| B · $$U/U_H$$, points ≥ 2 cells above the floor | 95 | 0.61 | −0.00 | 0.53 | 0.93 | — |
+| B · $$V/U_H$$ | 224 | 0.21 | — | 0.59 | 0.87 | 0.28 / 0.61 / 0.91 |
+| B · $$W/U_H$$ | 224 | 0.32 | — | 0.70 | 0.80 | 0.54 / 0.81 / 0.93 |
 
 <!--nomenclature scores-->
 
@@ -1543,16 +1543,20 @@ experiments with the same fitted inflow and probed the same measured points, at 
 
 <!--/nomenclature-->
 
-- OpenLB meets the ground with a plain no-slip (bounce-back) wall and carries the roughness only in the inlet profile.
-  In the undisturbed column at the windward face its $$U$$ is 0.29 of the inlet log law one cell up, 0.69 at two, 0.95 at
-  three and 1.02–1.07 from four. Case A's lowest plane sits 0.6 cells up; above two cells FAC2 rises to 0.65 and FB
-  falls to +0.17.
-- The resolved $$k$$ is 0.7 % (A) and 10 % (B) of the measured one; $$k$$ is not compared.
-- Wakes: A $$L_r = 3.39\thinspace H$$ against OpenFOAM's 1.49; B's field fits best sampled $$H/2$$ downstream.
-- With the lateral sign flipped $$V$$'s R becomes −0.65 (A) and −0.83 (B); with $$U$$ scrambled across the points R drops to
-  0.10.
-- OpenLB's STL reader segfaults when lattice nodes sit exactly on its octree planes, as in Case B at this spacing;
-  Eddy3D moves such a lattice by $$10^{-4}\thinspace\mathrm{d}x$$ (`LBMCaseXml`).
+- OpenLB meets the ground with a plain no-slip (bounce-back) wall at $$z = 0$$ and carries the roughness only in the inlet
+  profile. In the undisturbed column at the windward face its $$U$$ is 0.60 of the inlet log law at the first node (half a
+  cell up), 0.88 one cell up, 1.14 at 1.5, 1.10 at 2, 1.04 at 3 and 1.01 from 4. Case A's lowest plane sits 0.6 cells up;
+  above two cells FAC2 rises to 0.65 and FB falls to +0.22.
+- The buildings' wall faces sit at $$z = 0$$ and at 16 m (A) and 19.2 m (B, the 20 m slab quantised to whole cells).
+  Until image `1.9.3-r6` (2026-11-06) the solver's lattice started at the domain's floor, which put the wall half a cell
+  up and the roof a row short; these runs replace the ones made with that lattice.
+- The resolved $$k$$ is 1 % (A) and 13 % (B) of the measured one; $$k$$ is not compared.
+- Wakes: A $$L_r = 2.80\thinspace H$$ against OpenFOAM's 1.49, B $$L_r = 2.63\thinspace H$$; the fields fit best sampled $$H/2$$ (A) and
+  $$H/4$$ (B) downstream.
+- With the lateral sign flipped $$V$$'s R becomes −0.77 (A) and −0.87 (B); with $$U$$ scrambled across the points R drops to
+  0.10 (A) and 0.08 (B).
+- OpenLB's STL reader segfaults when lattice nodes sit on its octree planes; Eddy3D moves such a lattice by
+  $$10^{-4}\thinspace\mathrm{d}x$$ (`LBMCaseXml`). With the ground row half a cell under the floor, Case B is clear of them as configured.
 
 <details markdown="block">
 <summary>Interpretation: OpenLB on Cases A and B</summary>
@@ -1926,23 +1930,25 @@ served unchanged by the API, so the figures rebuild from this repository alone, 
 
 <!--/nomenclature-->
 
-**OpenLB on C–E: not comparable.** Cases C, D and E measure only at 2 m full scale
-($$z = 0.1\thinspace D$$ at 1:100, $$z/H = 0.02$$ at 1:400, 2 m in the Niigata district): 1.25 cells above the ground at the A and
-B runs' $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$. A point is scored only where every point at its height in an empty-domain
-control is within 5 % of the imposed log law, the bar FluidX3D's points meet. The first control: an empty domain 32 m wide and
-80 m tall, $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$, each case's own inflow at full scale (Case E: a log law fitted to its
-approach-flow profile below 60 m), the CPU image `openlb-wind:1.9.3-r4`, read on three lines every 16 m where the case's points
-would sit, after twice the time the 2 m layer takes to cross the domain and averaged over half of it. $$U$$ at 2 m over the
-imposed log law, mean (range over the points), and the lowest height at which every point is within 5 %:
+**OpenLB on C–E: not comparable.** Cases C, D and E measure only at 2 m full scale ($$z = 0.1\thinspace D$$ at 1:100,
+$$z/H = 0.02$$ at 1:400, 2 m in the Niigata district): 1.25 cells above the ground at the A and B runs'
+$$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$. A point is scored only where every point at its height in an empty-domain control is
+within 5 % of the imposed log law, the bar FluidX3D's points meet. The first control: an empty domain 32 m wide and 80 m tall,
+$$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$, each case's own inflow at full scale (Case E: a log law fitted to its approach-flow
+profile below 60 m), the CPU image `openlb-wind:1.9.3-r6`, whose lattice puts its ground row half a cell under the domain so that
+2 m is 2 m above the wall, read on three lines every 16 m where the case's points would sit, after twice the time the 2 m layer
+takes to cross the domain and averaged over half of it. $$U$$ at 2 m over the imposed log law, mean (range over the points), and
+the lowest height at which every point is within 5 %:
 
 | | Case C | Case D | Case E |
 |---|---|---|---|
 | distance from the inlet | 80–320 m | 770–1010 m | 350–650 m |
-| bounce-back | 0.30 (0.23–0.39) | 0.26 (0.10–0.41) | 0.23 (0.16–0.35) |
-| wall model, power law | 1.00 (0.92–1.06) | 1.03 (0.95–1.11) | 0.87 (0.80–1.04) |
-| wall model, rough law | 0.99 (0.91–1.05) | 1.01 (0.93–1.08) | 0.94 (0.87–1.07) |
+| bounce-back | 0.48 (0.37–0.64) | 0.43 (0.16–0.66) | 0.39 (0.26–0.58) |
+| wall model, power law | 0.93 (0.86–1.00) | 1.01 (0.86–1.08) | 0.83 (0.72–1.09) |
+| wall model, rough law | 0.85 (0.75–0.94) | 0.86 (0.57–1.02) | 0.82 (0.70–1.09) |
 | lowest height with every point within 5 %, bounce-back | 19.2 m (12 cells) | 64 m (40 cells) | 48 m (30 cells) |
-| lowest height with every point within 5 %, either wall law | 12.8 m (8 cells) | none | 32 m (20 cells) |
+| lowest height with every point within 5 %, power law | 12.8 m (8 cells) | none | 32 m (20 cells) |
+| lowest height with every point within 5 %, rough law | 12.8 m (8 cells) | none | 48 m (30 cells) |
 
 <!--nomenclature full-->
 
@@ -2018,13 +2024,17 @@ imposed log law, mean (range over the points), and the lowest height at which ev
 
 <!--/nomenclature-->
 
-- With either wall law the 2 m layer runs up to 6 % over the log law in the first 100 m and 7–14 % under it 300–600 m in, in all
-  three cases; in Case D the rough law is back within 4 % beyond 750 m.
-- Beyond about 450 m from the inlet the control varies across its span at every height: at 12.8 m in Case D, 0.69–1.07 with
-  bounce-back and 0.84–1.09 with the rough law.
+- On `1.9.3-r4`, whose bounce-back wall sat half a cell (0.8 m) above $$z = 0$$ and whose wall model's first node a full cell up,
+  the same control read 0.30, 0.26 and 0.23 with bounce-back, 1.00, 1.03 and 0.87 with the power law and 0.99, 1.01 and 0.94 with
+  the rough law (Cases C, D, E); the lowest heights were the same, except Case E's with the rough law, 32 m.
+- On `1.9.3-r4` the 2 m layer ran up to 6 % over the log law in the first 100 m with either wall law and 7–14 % under it 300–600 m
+  in, in all three cases (in Case D the rough law was back within 4 % beyond 750 m), and beyond about 450 m from the inlet the
+  control varied across its span at every height: at 12.8 m in Case D, 0.69–1.07 with bounce-back and 0.84–1.09 with the rough
+  law.
 
-The second control: the same on the image's CUDA build, in a domain 256 m wide and 320 m tall read on seven lines, 1100 m long for
-Cases C and E and 1600 m for Case D (warmed up for 1.5 crossings), so that the outlet stays clear of the points:
+The second control, on the CUDA build of `1.9.3-r4` (Case E also on `-r5`) and not re-run on `1.9.3-r6`: the same in a domain 256
+m wide and 320 m tall read on seven lines, 1100 m long for Cases C and E and 1600 m for Case D (warmed up for 1.5 crossings), so
+that the outlet stays clear of the points:
 
 | | Case C | Case D | Case E |
 |---|---|---|---|
@@ -2051,10 +2061,10 @@ Cases C and E and 1600 m for Case D (warmed up for 1.5 crossings), so that the o
 - The CUDA build (fp32) reproduces the CPU's fp64 run of Case C's narrow domain within $$2.1 \times 10^{-4}$$ in $$U$$ at all 1080
   points.
 - On `1.9.3-r4` and `-r5` OpenLB's bounce-back wall sat half a cell (0.8 m) above $$z = 0$$, where the inflow and the probes
-  start, and the wall model's wall at $$z = 0$$; the bounce-back rows above are read at $$z = 2\thinspace\mathrm{m}$$, 1.2 m above
-  their wall. `1.9.3-r6` (2026-11-06) moves the lattice's ground row half a cell down, so both walls are at $$z = 0$$: on Case C's
-  first control, 200–400 m from the inlet, the 2 m mean goes from 0.30 to 0.48 with bounce-back and from 0.955 to 0.80 with the
-  rough law (Eddy3D, `docs/domain/lbm-gpu-ml.md`). The controls above predate it.
+  start, and the wall model's wall at $$z = 0$$ with its first node a full cell up; the bounce-back row of this table is read 1.2
+  m above its wall. `1.9.3-r6` (2026-11-06) moves the lattice's ground row half a cell down, so both walls are at $$z = 0$$ and
+  the wall model's first node is the half-cell node: in the first control the rough law's 2 m mean goes from 0.94–1.01 to
+  0.82–0.86.
 - With `1.9.3-r4` the wall model took 6.7–6.9 times the bounce-back run's wall time on 24 CPU threads and 3.6–4.3 times on one
   GPU; `1.9.3-r5` (2026-11-06) keeps its collision on the boundary row, and Case E's wide control took 2.6 times on the same GPU
   (4268 s against 1611 s).
@@ -2063,9 +2073,10 @@ Cases C and E and 1600 m for Case D (warmed up for 1.5 crossings), so that the o
 <details markdown="block">
 <summary>Interpretation: OpenLB on Cases C to E</summary>
 
-- The wall model removes the collapsed floor: in the wide domain the 2 m mean goes from a quarter of the log law to within 4 % of
-  it.
-- The narrow domain's ±10 % along the fetch was the domain's, not the ground's.
+- On `1.9.3-r4` and `-r5` the wall model removes the collapsed floor: in the wide domain the 2 m mean goes from a quarter of the
+  log law to within 4 % of it. On `1.9.3-r6` the narrow domain's rough law falls to 0.82–0.86; the wide control is not re-run on
+  it, so whether the wall model still holds the mean there is not measured.
+- On `1.9.3-r4` the narrow domain's ±10 % along the fetch was the domain's, not the ground's.
 - An OpenLB run of these cases ends at least 1.2 domain heights past its last scored point, and its own control is the one that
   counts.
 - Case E: the half-crossing average met the bar, and nothing in it warned of the change: no point moved more than 0.003 over its

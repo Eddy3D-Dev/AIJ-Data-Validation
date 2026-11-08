@@ -9,7 +9,7 @@ description: "How Eddy3D runs OpenLB and FluidX3D, what limits them near the gro
 # OpenLB and FluidX3D
 {: .no_toc }
 
-Eddy3D's two lattice-Boltzmann engines were scored on Cases A and B, on the same points as OpenFOAM 12; their scores and figures are on the [Case A]({{ '/cases/case-a/validation/' | relative_url }}) and [Case B]({{ '/cases/case-b/validation/' | relative_url }}) Validation pages. They are not scored on Cases C to E, which measure at 2 m. In empty-domain controls on `openlb-wind:1.9.3-r4` and `-r5`, OpenLB's ground wall model brings the mean at that height to within 4 % of the log law but holds every point within 5 % in none of the three, and FluidX3D's ground wall function holds every point in all three; neither engine has been run on these cases. The measurements are below, and each case's page says it for its own height. They have not been run on Cases F to M.
+Eddy3D's two lattice-Boltzmann engines were scored on Cases A and B, on the same points as OpenFOAM 12; their scores and figures are on the [Case A]({{ '/cases/case-a/validation/' | relative_url }}) and [Case B]({{ '/cases/case-b/validation/' | relative_url }}) Validation pages. They are not scored on Cases C to E, which measure at 2 m. In empty-domain controls OpenLB's ground wall model holds every point at that height within 5 % of the log law in none of the three: on `openlb-wind:1.9.3-r6`, whose ground wall is at $$z = 0$$, its 2 m mean reads 0.82–0.86 of the log law in a narrow domain, and on the earlier `1.9.3-r4` and `-r5` it was within 4 % in a wide one. FluidX3D's ground wall function holds every point in all three; neither engine has been run on these cases. The measurements are below, and each case's page says it for its own height. They have not been run on Cases F to M.
 
 <details open markdown="block">
   <summary>
@@ -39,23 +39,24 @@ FluidX3D (Eddy3D's GPU lattice-Boltzmann engine: D3Q19 with Smagorinsky LES) sol
 
 Cases C, D and E measure only at 2 m full scale ($$z = 0.1\thinspace D$$ at 1:100, $$z/H = 0.02$$ at 1:400, 2 m in the Niigata district): 1.25 cells above the ground at the A and B runs' $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$. A point is scored only where every point at its height in an empty-domain control is within 5 % of the imposed log law, the bar FluidX3D's points meet.
 
-The first control: an empty domain 32 m wide and 80 m tall, $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$, each case's own inflow at full scale (Case E: a log law fitted to its approach-flow profile below 60 m), the CPU image `openlb-wind:1.9.3-r4`, read on three lines every 16 m where the case's points would sit, after twice the time the 2 m layer takes to cross the domain and averaged over half of it. $$U$$ at 2 m over the imposed log law, mean (range over the points), and the lowest height at which every point is within 5 %:
+The first control: an empty domain 32 m wide and 80 m tall, $$\mathrm{d}x = 1.6\thinspace\mathrm{m}$$, each case's own inflow at full scale (Case E: a log law fitted to its approach-flow profile below 60 m), the CPU image `openlb-wind:1.9.3-r6`, whose lattice puts its ground row half a cell under the domain so that 2 m is 2 m above the wall, read on three lines every 16 m where the case's points would sit, after twice the time the 2 m layer takes to cross the domain and averaged over half of it. $$U$$ at 2 m over the imposed log law, mean (range over the points), and the lowest height at which every point is within 5 %:
 
 | | Case C | Case D | Case E |
 |---|---|---|---|
 | distance from the inlet | 80–320 m | 770–1010 m | 350–650 m |
-| bounce-back | 0.30 (0.23–0.39) | 0.26 (0.10–0.41) | 0.23 (0.16–0.35) |
-| wall model, power law | 1.00 (0.92–1.06) | 1.03 (0.95–1.11) | 0.87 (0.80–1.04) |
-| wall model, rough law | 0.99 (0.91–1.05) | 1.01 (0.93–1.08) | 0.94 (0.87–1.07) |
+| bounce-back | 0.48 (0.37–0.64) | 0.43 (0.16–0.66) | 0.39 (0.26–0.58) |
+| wall model, power law | 0.93 (0.86–1.00) | 1.01 (0.86–1.08) | 0.83 (0.72–1.09) |
+| wall model, rough law | 0.85 (0.75–0.94) | 0.86 (0.57–1.02) | 0.82 (0.70–1.09) |
 | lowest height with every point within 5 %, bounce-back | 19.2 m (12 cells) | 64 m (40 cells) | 48 m (30 cells) |
-| lowest height with every point within 5 %, either wall law | 12.8 m (8 cells) | none | 32 m (20 cells) |
+| lowest height with every point within 5 %, power law | 12.8 m (8 cells) | none | 32 m (20 cells) |
+| lowest height with every point within 5 %, rough law | 12.8 m (8 cells) | none | 48 m (30 cells) |
 
 {% include nomenclature.md %}
 
-- With either wall law the 2 m layer runs up to 6 % over the log law in the first 100 m and 7–14 % under it 300–600 m in, in all three cases; in Case D the rough law is back within 4 % beyond 750 m.
-- Beyond about 450 m from the inlet the control varies across its span at every height: at 12.8 m in Case D, 0.69–1.07 with bounce-back and 0.84–1.09 with the rough law.
+- On `1.9.3-r4`, whose bounce-back wall sat half a cell (0.8 m) above $$z = 0$$ and whose wall model's first node a full cell up, the same control read 0.30, 0.26 and 0.23 with bounce-back, 1.00, 1.03 and 0.87 with the power law and 0.99, 1.01 and 0.94 with the rough law (Cases C, D, E); the lowest heights were the same, except Case E's with the rough law, 32 m.
+- On `1.9.3-r4` the 2 m layer ran up to 6 % over the log law in the first 100 m with either wall law and 7–14 % under it 300–600 m in, in all three cases (in Case D the rough law was back within 4 % beyond 750 m), and beyond about 450 m from the inlet the control varied across its span at every height: at 12.8 m in Case D, 0.69–1.07 with bounce-back and 0.84–1.09 with the rough law.
 
-The second control: the same on the image's CUDA build, in a domain 256 m wide and 320 m tall read on seven lines, 1100 m long for Cases C and E and 1600 m for Case D (warmed up for 1.5 crossings), so that the outlet stays clear of the points:
+The second control, on the CUDA build of `1.9.3-r4` (Case E also on `-r5`) and not re-run on `1.9.3-r6`: the same in a domain 256 m wide and 320 m tall read on seven lines, 1100 m long for Cases C and E and 1600 m for Case D (warmed up for 1.5 crossings), so that the outlet stays clear of the points:
 
 | | Case C | Case D | Case E |
 |---|---|---|---|
@@ -72,15 +73,15 @@ The second control: the same on the image's CUDA build, in a domain 256 m wide a
 - A pressure outlet speeds the 2 m layer up over its last 260–380 m (0.8–1.2 domain heights): 400 m and 720 m long, as in the first control, this domain read up to 1.43 at Case C's points and 1.25 at Case E's.
 - Across the span the flow is symmetric about the centre line; at any distance in Case C's and Case E's windows the seven lines span at most 2.1 %.
 - The CUDA build (fp32) reproduces the CPU's fp64 run of Case C's narrow domain within $$2.1 \times 10^{-4}$$ in $$U$$ at all 1080 points.
-- On `1.9.3-r4` and `-r5` OpenLB's bounce-back wall sat half a cell (0.8 m) above $$z = 0$$, where the inflow and the probes start, and the wall model's wall at $$z = 0$$; the bounce-back rows above are read at $$z = 2\thinspace\mathrm{m}$$, 1.2 m above their wall. `1.9.3-r6` (2026-11-06) moves the lattice's ground row half a cell down, so both walls are at $$z = 0$$: on Case C's first control, 200–400 m from the inlet, the 2 m mean goes from 0.30 to 0.48 with bounce-back and from 0.955 to 0.80 with the rough law (Eddy3D, `docs/domain/lbm-gpu-ml.md`). The controls above predate it.
+- On `1.9.3-r4` and `-r5` OpenLB's bounce-back wall sat half a cell (0.8 m) above $$z = 0$$, where the inflow and the probes start, and the wall model's wall at $$z = 0$$ with its first node a full cell up; the bounce-back row of this table is read 1.2 m above its wall. `1.9.3-r6` (2026-11-06) moves the lattice's ground row half a cell down, so both walls are at $$z = 0$$ and the wall model's first node is the half-cell node: in the first control the rough law's 2 m mean goes from 0.94–1.01 to 0.82–0.86.
 - With `1.9.3-r4` the wall model took 6.7–6.9 times the bounce-back run's wall time on 24 CPU threads and 3.6–4.3 times on one GPU; `1.9.3-r5` (2026-11-06) keeps its collision on the boundary row, and Case E's wide control took 2.6 times on the same GPU (4268 s against 1611 s).
 - Scripts, probes, figures and run times: Eddy3D, `testing/aij-openlb-ground-wall/`.
 
 <details markdown="block">
 <summary>Interpretation: OpenLB on Cases C to E</summary>
 
-- The wall model removes the collapsed floor: in the wide domain the 2 m mean goes from a quarter of the log law to within 4 % of it.
-- The narrow domain's ±10 % along the fetch was the domain's, not the ground's.
+- On `1.9.3-r4` and `-r5` the wall model removes the collapsed floor: in the wide domain the 2 m mean goes from a quarter of the log law to within 4 % of it. On `1.9.3-r6` the narrow domain's rough law falls to 0.82–0.86; the wide control is not re-run on it, so whether the wall model still holds the mean there is not measured.
+- On `1.9.3-r4` the narrow domain's ±10 % along the fetch was the domain's, not the ground's.
 - An OpenLB run of these cases ends at least 1.2 domain heights past its last scored point, and its own control is the one that counts.
 - Case E: the half-crossing average met the bar, and nothing in it warned of the change: no point moved more than 0.003 over its second half. The layer changed after three crossings, so a control that can admit a 2 m point averages over several crossings after that, and so does the case run it admits.
 - Case C: over half a crossing, what keeps it unscored is the first 64 m of its window, where the wall-modelled layer is still settling from the inlet; whether the rest of the window holds over several crossings is not measured.

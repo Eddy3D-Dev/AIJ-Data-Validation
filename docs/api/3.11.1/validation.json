@@ -1,7 +1,7 @@
 {
  "$schema": "https://aij.eddy3d.com/api/3.11.1/schemas/validation-summary.schema.json",
  "schema_version": "2.6.0",
- "data_version": "f85c050e1ee39c783400bb29aa3039a6666749266d602089dd42f18c307e05b5",
+ "data_version": "7ee0afb7cec8197e7edde0e7c282c8e6e9670b7cef003e6aa218c5a536817f48",
  "license": "CC-BY-4.0",
  "description": "Every case and engine in one table. Headline scores are the ones to quote; every score, the figures and the per-point pairs are in each case's validation.json.",
  "engines": [
@@ -50,7 +50,7 @@
   "scored": "a validation run exists and its scores are in cases/{id}/validation.json",
   "running": "the solve is in progress; no scores yet",
   "pending": "not run yet",
-  "not comparable": "the engine cannot produce the measured quantity at the measured location: OpenLB at 2 m on Cases C to E, where its empty-domain control misses the bar; the measurement behind it is on the Validation page"
+  "not comparable": "the engine cannot produce the measured quantity at the measured location: OpenLB at the resolution this hardware runs, on Cases C to E; the measurement behind it is on the Validation page"
  },
  "metric_meaning": {
   "Count": "number of measured points scored",
@@ -133,55 +133,55 @@
          "label": "U",
          "score": "velocity.U",
          "Count": 186,
-         "R": 0.7583970986232789,
-         "Fac2": 0.42473118279569894,
-         "Fb": 0.39547591914137653,
-         "HitRate": 0.3709677419354839
+         "R": 0.781721828860156,
+         "Fac2": 0.46774193548387094,
+         "Fb": 0.37752773624557484,
+         "HitRate": 0.3763440860215054
         },
         {
          "label": "U, points ≥ 2 dx",
          "score": "velocity.U.aboveTwoCells",
          "Count": 121,
-         "R": 0.8122928699200334,
-         "Fac2": 0.6446280991735537,
-         "Fb": 0.16874394508099494,
+         "R": 0.7999988070917426,
+         "Fac2": 0.6528925619834711,
+         "Fb": 0.21934246501428806,
          "HitRate": 0.5619834710743802
         },
         {
          "label": "V",
          "score": "velocity.V",
          "Count": 186,
-         "R": 0.6463606336884147,
-         "Fac2": 0.17204301075268819,
-         "Fb": 0.04071893467680309,
-         "HitRate": 0.6236559139784946
+         "R": 0.7668672981470361,
+         "Fac2": 0.25268817204301075,
+         "Fb": -0.1620965062925386,
+         "HitRate": 0.6612903225806451
         },
         {
          "label": "W",
          "score": "velocity.W",
          "Count": 186,
-         "R": 0.5396763008509257,
-         "Fac2": 0.12365591397849462,
-         "Fb": -1.758666954984517,
-         "HitRate": 0.5860215053763441
+         "R": 0.5739969245860813,
+         "Fac2": 0.1774193548387097,
+         "Fb": -1.7111896893090346,
+         "HitRate": 0.5591397849462365
         },
         {
          "label": "k (resolved)",
          "score": "k.resolved",
          "Count": 186,
-         "R": 0.19989851051928828,
+         "R": 0.16180645253381673,
          "Fac2": 0,
-         "Fb": 1.9706331448115753,
+         "Fb": 1.958020914279674,
          "HitRate": 0
         },
         {
          "label": "V, lateral sign flipped (control)",
          "score": "control.V.lateralSignFlipped",
          "Count": 186,
-         "R": -0.6463606336884147,
-         "Fac2": 0.11827956989247312,
-         "Fb": 98.23439713610028,
-         "HitRate": 0.5698924731182796
+         "R": -0.7668672981470361,
+         "Fac2": 0.12365591397849462,
+         "Fb": -24.67665769909393,
+         "HitRate": 0.553763440860215
         }
        ]
       }
@@ -350,55 +350,55 @@
          "label": "U",
          "score": "velocity.U",
          "Count": 224,
-         "R": 0.7903621527054822,
-         "Fac2": 0.375,
-         "Fb": 0.2797426560473676,
-         "HitRate": 0.29017857142857145
+         "R": 0.8488393598070382,
+         "Fac2": 0.42410714285714285,
+         "Fb": 0.22004600560184803,
+         "HitRate": 0.2767857142857143
         },
         {
          "label": "U, points ≥ 2 dx",
          "score": "velocity.U.aboveTwoCells",
          "Count": 95,
-         "R": 0.8998046593051311,
-         "Fac2": 0.6421052631578947,
-         "Fb": -0.07219550722617396,
-         "HitRate": 0.5157894736842106
+         "R": 0.9294982497160469,
+         "Fac2": 0.6105263157894737,
+         "Fb": -0.0011249441775584331,
+         "HitRate": 0.5263157894736842
         },
         {
          "label": "V",
          "score": "velocity.V",
          "Count": 224,
-         "R": 0.8314266609213513,
-         "Fac2": 0.12946428571428573,
-         "Fb": 1.3923468570758184,
-         "HitRate": 0.5491071428571429
+         "R": 0.8690462851081936,
+         "Fac2": 0.21428571428571427,
+         "Fb": 1.0462271856860639,
+         "HitRate": 0.59375
         },
         {
          "label": "W",
          "score": "velocity.W",
          "Count": 224,
-         "R": 0.7741518569255104,
-         "Fac2": 0.23660714285714285,
-         "Fb": 0.37551783964545393,
-         "HitRate": 0.6517857142857143
+         "R": 0.7960357059619825,
+         "Fac2": 0.32142857142857145,
+         "Fb": 0.5490581670575934,
+         "HitRate": 0.7008928571428571
         },
         {
          "label": "k (resolved)",
          "score": "k.resolved",
          "Count": 224,
-         "R": 0.486104098279362,
-         "Fac2": 0.044642857142857144,
-         "Fb": 1.6412235101404349,
-         "HitRate": 0.004464285714285714
+         "R": 0.4488915842600138,
+         "Fac2": 0.049107142857142856,
+         "Fb": 1.5328000765260426,
+         "HitRate": 0.017857142857142856
         },
         {
          "label": "V, lateral sign flipped (control)",
          "score": "control.V.lateralSignFlipped",
          "Count": 224,
-         "R": -0.8314266609213513,
-         "Fac2": 0.13839285714285715,
-         "Fb": 2.8728473653474014,
-         "HitRate": 0.49107142857142855
+         "R": -0.8690462851081936,
+         "Fac2": 0.17857142857142858,
+         "Fb": 3.8232613859837703,
+         "HitRate": 0.5089285714285714
         }
        ]
       }
