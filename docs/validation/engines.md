@@ -56,16 +56,21 @@ The first control: an empty domain 32 m wide and 80 m tall, $$\mathrm{d}x = 1.6\
 - On `1.9.3-r4`, whose bounce-back wall sat half a cell (0.8 m) above $$z = 0$$ and whose wall model's first node a full cell up, the same control read 0.30, 0.26 and 0.23 with bounce-back, 1.00, 1.03 and 0.87 with the power law and 0.99, 1.01 and 0.94 with the rough law (Cases C, D, E); the lowest heights were the same, except Case E's with the rough law, 32 m.
 - On `1.9.3-r4` the 2 m layer ran up to 6 % over the log law in the first 100 m with either wall law and 7–14 % under it 300–600 m in, in all three cases (in Case D the rough law was back within 4 % beyond 750 m), and beyond about 450 m from the inlet the control varied across its span at every height: at 12.8 m in Case D, 0.69–1.07 with bounce-back and 0.84–1.09 with the rough law.
 
-The second control, on the CUDA build of `1.9.3-r4` (Case E also on `-r5`) and not re-run on `1.9.3-r6`: the same in a domain 256 m wide and 320 m tall read on seven lines, 1100 m long for Cases C and E and 1600 m for Case D (warmed up for 1.5 crossings), so that the outlet stays clear of the points:
+The second control, on the CUDA builds of `1.9.3-r4` (Case E also on `-r5`), averaged over half a crossing, and of `1.9.3-r6`, averaged over two: the same in a domain 256 m wide and 320 m tall read on seven lines, 1100 m long for Cases C and E and 1600 m for Case D (warmed up for 1.5 crossings), so that the outlet stays clear of the points:
 
 | | Case C | Case D | Case E |
 |---|---|---|---|
 | distance from the inlet | 80–320 m | 770–1010 m | 350–650 m |
-| bounce-back | 0.26 (0.05–0.44) | 0.25 (0.18–0.32) | 0.23 (0.11–0.34) |
-| wall model, rough law | 1.04 (1.02–1.07) | 1.00 (0.949–1.055) | 1.03 (1.012–1.046) |
-| lowest height with every point within 5 %, bounce-back | 19.2 m (12 cells) | 19.2 m (12 cells) | 32 m (20 cells) |
-| lowest height with every point within 5 %, rough law | 2.4 m (1.5 cells) | 8 m (5 cells) | 2 m (1.25 cells) |
+| `1.9.3-r4`, bounce-back | 0.26 (0.05–0.44) | 0.25 (0.18–0.32) | 0.23 (0.11–0.34) |
+| `1.9.3-r4`, wall model, rough law | 1.04 (1.02–1.07) | 1.00 (0.949–1.055) | 1.03 (1.012–1.046) |
+| `1.9.3-r4`, lowest height with every point within 5 %, bounce-back | 19.2 m (12 cells) | 19.2 m (12 cells) | 32 m (20 cells) |
+| `1.9.3-r4`, lowest height with every point within 5 %, rough law | 2.4 m (1.5 cells) | 8 m (5 cells) | 2 m (1.25 cells) |
+| `1.9.3-r6`, bounce-back | 0.52 (0.05–0.77) | 0.44 (0.38–0.51) | 0.41 (0.31–0.51) |
+| `1.9.3-r6`, wall model, rough law | 0.88 (0.78–0.95) | 0.86 (0.79–0.91) | 0.90 (0.85–0.94) |
+| `1.9.3-r6`, wall model, power law | 0.96 (0.886–0.999) | 0.98 (0.928–1.022) | 0.90 (0.86–0.95) |
+| `1.9.3-r6`, lowest height above 2 m with every point within 5 %, rough / power law | 8 / 8 m | 19.2 / 4.8 m | 6.4 / 6.4 m |
 
+- On `1.9.3-r6` (2026-11-09) no arm holds every 2 m point within 5 % over two crossings in any case. Case C's power law does over the first half crossing (0.954–1.004) and not over two: its running mean falls from 0.980 to 0.961 as the averaging goes on. The bullets below are the `1.9.3-r4` and `-r5` runs.
 - In this domain the rough law's 2 m layer does not sink under the log law along the fetch: Case C's reads 1.06 at the inlet and 0.99 at 750 m. Width and height changed together, so which of the two does it is not measured.
 - Case C: the 9 points over 5 % (of 112) all sit within 144 m of the inlet, where the layer is still coming down from its overshoot at the inlet (1.068 at 80 m); 160–400 m from the inlet every point is within 5 % (1.014–1.047).
 - Case E: every point is within 5 %, the highest (1.046) at the window's upstream end, and `1.9.3-r5` reproduces that within 0.0004. Averaged over two crossings instead of half of one, five points are just over 5 % (0.985–1.0504): over the second crossing the 2 m mean was 1.008 against 1.028 over the first, and the points spread from 0.94 to 1.06 (32 of 133 over 5 %, 14 under).
@@ -80,7 +85,7 @@ The second control, on the CUDA build of `1.9.3-r4` (Case E also on `-r5`) and n
 <details markdown="block">
 <summary>Interpretation: OpenLB on Cases C to E</summary>
 
-- On `1.9.3-r4` and `-r5` the wall model removes the collapsed floor: in the wide domain the 2 m mean goes from a quarter of the log law to within 4 % of it. On `1.9.3-r6` the narrow domain's rough law falls to 0.82–0.86; the wide control is not re-run on it, so whether the wall model still holds the mean there is not measured.
+- On `1.9.3-r4` and `-r5` the wall model removes the collapsed floor: in the wide domain the 2 m mean goes from a quarter of the log law to within 4 % of it. On `1.9.3-r6`, with the wall model's first node half a cell up, it no longer does: over two crossings the wide domain's 2 m mean reads 0.86–0.90 of the log law with the rough law and 0.90–0.98 with the power law.
 - On `1.9.3-r4` the narrow domain's ±10 % along the fetch was the domain's, not the ground's.
 - An OpenLB run of these cases ends at least 1.2 domain heights past its last scored point, and its own control is the one that counts.
 - Case E: the half-crossing average met the bar, and nothing in it warned of the change: no point moved more than 0.003 over its second half. The layer changed after three crossings, so a control that can admit a 2 m point averages over several crossings after that, and so does the case run it admits.
