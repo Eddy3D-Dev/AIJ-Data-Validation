@@ -15,6 +15,17 @@ CI fails a change to the served files that does not move it by at least the leve
 `vX.Y.Z` with a GitHub Release when it moves on `main`. The API's own contract has a separate version,
 `schema_version`, with its changelog in `index.json` and on the [API page](https://eddy3d-dev.github.io/AIJ-Data-Validation/api-reference/#versioning-and-changes).
 
+## [3.11.3] - 2026-11-09
+
+### Changed
+
+- OpenLB stays `not comparable` on Cases C to E, now with the wide empty-domain control re-run on `openlb-wind:1.9.3-r6`
+  (the lattice's ground row half a cell under the domain), averaged over two crossings of the 2 m layer. Neither wall law
+  holds every 2 m point within 5 %: rough law Case C 0.88 (0.78–0.95), D 0.86 (0.79–0.91), E 0.90 (0.85–0.94); power law
+  C 0.96 (0.886–0.999), D 0.98 (0.928–1.022), E 0.90 (0.86–0.95). Case C's power law does over the first half crossing
+  (0.954–1.004), not over two. The case pages, the engines page and the README give the `1.9.3-r6` numbers; the
+  `1.9.3-r4` and `-r5` ones stay beside them.
+
 ## [3.11.2] - 2026-11-07
 
 ### Changed
